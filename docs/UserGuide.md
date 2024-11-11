@@ -270,7 +270,7 @@ A person can have any number of tags (including 0).
 Eg. `t/friend t/family`
 
 </box>
-
+{{ newPageBetween }}
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 <md>**Telegram username restrictions**</md>
@@ -281,7 +281,7 @@ Eg. `t/friend t/family`
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 <md>**GitHub username restrictions**</md>
-* Length of username must between 1 and 39 characters.
+* Length of username must be between 1 and 39 characters.
 * Can contain only English alphanumeric characters and hyphens ('-').
 * Hyphens cannot appear at the start or end, nor consecutively within the username.
 
@@ -879,6 +879,8 @@ as the assignment is not specified `assignment.json`
 
 Calling `addGrade` without any fields will show the list of assignments in `assignment.json`.
 </box>
+
+{{ newPageBetween }}
 
 <box type="success" icon=":fa-solid-book:" light>
 
