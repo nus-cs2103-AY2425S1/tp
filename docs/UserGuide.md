@@ -320,7 +320,7 @@ Shows a list of all groups in the Goon Book.
 
 Format: `listGroups`
 
-![ListGroup](images/ListGroup.png)
+![ListGroup](images/ListGroups.png)
 
 <div style="page-break-after: always"></div>
 
@@ -391,7 +391,7 @@ Format: `deleteGroup GROUPNAME`
 ![DeleteGroup](images/DeleteGroup.png)
 Examples:
 
-- `groups` followed by `deleteGroup StudyGroup 1` deletes StudyGroup1
+- `groups` followed by `deleteGroup StudyGroup1` deletes StudyGroup1
 
 **Warning:** Deleting a group using deleteGroup will permanently remove the group. The students in the group will not be deleted.
 
@@ -432,7 +432,7 @@ Format: `untag INDEX t/TAG [t/TAG]…​`
 - `INDEX` **must be a positive integer** 1, 2, 3, …​
 - `TAG` letters must match exactly (case-insensitive)
 
-![UnTag](images/UnTag.png)
+![UnTag](images/untag.png)
 
 Examples:
 
