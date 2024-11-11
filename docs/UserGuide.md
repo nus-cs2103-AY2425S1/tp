@@ -432,13 +432,17 @@ Examples:
 
 ### Displaying eligible schemes: `scheme`
 
-Displays the schemes that person from SocialBook is eligible for.
+Displays the schemes that a person in SocialBook is eligible for.
 
 Format: `scheme INDEX`
 
 * Displays schemes eligible for the person at the specified `INDEX`.
 * The index refer to the index numbers shown in the **last viewed person list**.
 * The index **must be a positive integer** not exceeding the last index number in the last viewed person list.
+
+<box type="info">
+Currently only 2 schemes are available in the current version of SocialBook.
+</box>
 
 Examples:
 * `scheme 1` shows schemes that the 1st person in SocialBook is eligible for.
@@ -454,12 +458,17 @@ Format: `addscheme PERSON_INDEX i/SCHEME_INDEX`
 * The `SCHEME_INDEX` refers to the index number shown in the displayed scheme list from the `scheme PERSON_INDEX` command.
 * Both index **must be positive integers** not exceeding the last index number in the last viewed person list.​
 
+<box type="tip" seamless>
+
+**Tip:** Use the `scheme` command to check the schemes available to a person before adding them.
+</box>
+
 Examples:
 * `addscheme 1 i/1` adds the 1st scheme from the list of eligible schemes to the 1st person in last viewed person list.
 
 ### Viewing schemes attached to a person: `viewscheme`
 
-Displays the schemes attatched to the specified person in SocialBook.
+Displays the schemes attached to the specified person in SocialBook.
 
 Format: `viewscheme INDEX`
 * Displays the schemes that the person at the specified `INDEX` is attached to.
@@ -483,6 +492,11 @@ Format: `deletescheme PERSON_INDEX i/SCHEME_INDEXS`
   * The indexes in `SCHEME_INDEXES` **must be positive integers** not exceeding the last index number in the displayed scheme list from the `viewscheme PERSON_INDEX` command.​
   * The indexes in `SCHEME_INDEXES` can be in **any order**.
   * Duplicated valid scheme index inputs would be treated as unique scheme index inputs.
+
+<box type="tip" seamless>
+
+**Tip:** Use the `viewscheme` command to check the schemes attached to a person before deleting them.
+</box>
 
 Examples:
 * `deletescheme 1 i/1` deletes the 1st scheme from the 1st person in the last viewed person list.
@@ -628,27 +642,28 @@ The current time marker (denoted by the red line on the right side of the calend
 
 ## Command summary
 
-| Command          | Format, Examples                                                                                                                                                                                    |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **help**         | `help [COMMAND]`                                                                                                                                                                                    |
-| **add**          | `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY_SIZE = 1] [t/TAG]...​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 123456 dob/1990-12-19 pri/HIGH income/2000 famsize/3 t/father`|
-| **list**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`                                                                                                                            |
-| **edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
-| **find**         | `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [income/INCOME]...`<br> e.g.,`find n/A n/B a/clementi pri/High`                                                                 |
-| **sort**         | `sort [name] [address] [priority] [income] [updated]`<br> e.g.,`sort name`                                                                                                                          |
-| **delete**       | `delete INDEXES`<br> e.g., `delete 2,3`                                                                                                                                                             |
-| **get**          | `get [name] [phone] [email] [address]`<br> e.g.,`get email phone`                                                                                                                                   |
-| **clear**        | `clear`                                                                                                                                                                                             |
-| **addappt**      | `addappt INDEX date/yyyy-MM-dd from/HH:mm to/HH:mm`<br> e.g., `addappt 1 date/2024-11-08 from/16:00 to/17:00`                                                                                       |
-| **listappt**     | `listappt`                                                                                                                                                                                          |
-| **editappt**     | `editappt INDEX [date/yyyy-MM-dd] [from/HH:mm] [to/HH:mm]`<br> e.g., `editappt 2 from/10:00 to/11:30`                                                                                               |
-| **deleteappt**   | `deleteappt INDEX`                                                                                                                                                                                  |
-| **statistics**   | `statistic`                                                                                                                                                                                         |
-| **scheme**       | `scheme INDEX` <br> e.g., `scheme 1`                                                                                                                                                                |
-| **addscheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`                                                                                                                                |
-| **viewscheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`                                                                                                                                                        |
-| **deletescheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `deletescheme 1 i/1`                                                                                                                          |
-| **archive**      | `archive INDEX` <br> e.g., `archive 1`                                                                                                                                                              |
-| **unarchive**    | `unarchive INDEX` <br> e.g., `unarchive 1`                                                                                                                                                          |
-| **undo**         | `undo`                                                                                                                                                                                              |
-| **exit**         | `exit`                                                                                                                                                                                              |
+| Command          | Format, Examples                                                                                                                                                                                                                                                                       |
+|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **help**         | `help [COMMAND]`                                                                                                                                                                                                                                                                       |
+| **add**          | `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY_SIZE = 1] [t/TAG]...​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 123456 dob/1990-12-19 pri/HIGH income/2000 famsize/3 t/father` |
+| **list**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`                                                                                                                                                                                                               |
+| **edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                    |
+| **find**         | `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [income/INCOME]...`<br> e.g.,`find n/A n/B a/clementi pri/High`                                                                                                                                                    |
+| **sort**         | `sort [name] [address] [priority] [income] [updated]`<br> e.g.,`sort name`                                                                                                                                                                                                             |
+| **delete**       | `delete INDEXES`<br> e.g., `delete 2,3`                                                                                                                                                                                                                                                |
+| **get**          | `get [name] [phone] [email] [address]`<br> e.g.,`get email phone`                                                                                                                                                                                                                      |
+| **clear**        | `clear`                                                                                                                                                                                                                                                                                |
+| **addappt**      | `addappt INDEX date/yyyy-MM-dd from/HH:mm to/HH:mm`<br> e.g., `addappt 1 date/2024-11-08 from/16:00 to/17:00`                                                                                                                                                                          |
+| **listappt**     | `listappt`                                                                                                                                                                                                                                                                             |
+| **editappt**     | `editappt INDEX [date/yyyy-MM-dd] [from/HH:mm] [to/HH:mm]`<br> e.g., `editappt 2 from/10:00 to/11:30`                                                                                                                                                                                  |
+| **deleteappt**   | `deleteappt INDEX`                                                                                                                                                                                                                                                                     |
+| **statistics**   | `statistics`                                                                                                                                                                                                                                                                           |
+| **scheme**       | `scheme INDEX` <br> e.g., `scheme 1`                                                                                                                                                                                                                                                   |
+| **addscheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`                                                                                                                                                                                                                   |
+| **viewscheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`                                                                                                                                                                                                                                           |
+| **deletescheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEXES` <br> e.g., `deletescheme 1 i/1, 2`                                                                                                                                                                                                        |
+| **archive**      | `archive INDEX` <br> e.g., `archive 1`                                                                                                                                                                                                                                                 |
+| **unarchive**    | `unarchive INDEX` <br> e.g., `unarchive 1`                                                                                                                                                                                                                                             |
+| **undo**         | `undo`                                                                                                                                                                                                                                                                                 |
+| **exit**         | `exit`                                                                                                                                                                                                                                                                                 |
+
