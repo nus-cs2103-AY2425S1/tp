@@ -1072,7 +1072,7 @@ Team size: 5
 2. **Fix inconsistencies and improve clarity of error messages**: Currently, the `withdraw` command gives an error message of "Index is not a non-zero unsigned integer." when an incorrect company or application index is supplied. 
 We plan to make this message clearer by changing it to "Index is not a positive integer". When an empty string is passed into the text field, the current error message is "Invalid command format!", this can be made clearer by displaying "Please input a command" instead.
 For any invalid or unknown commands, a suggestion to view help will also be displayed to improve user experience. When "0" is passed as an index, the currently displayed generic error message "Invalid command format" will also be modified to "Please provide a valid positive integer as company index!" for improved clarity.
-When an excessively large number is passed as an index, the currently displayed generic error message "Invalid command format" will also be modified to "Index is too large! Should not exceed [list size]." for improved clarity.
+When an excessively large number is passed as an index, the currently displayed generic error message "Invalid command format" will also be modified to "Index is too large! Should not exceed list size.", with the actual list size specified for improved clarity.
 
 3. **Improved `edit` command**: Currently, the `edit` command does not check if the user is trying to do a redundant edit (eg: changing the email to the same email),
 which may result in error-prone users (when trying do a minor update like `PHONE: 98765432 -> 98675432`) mistakenly thinking that they have edited the selected company correctly. In addition, after
