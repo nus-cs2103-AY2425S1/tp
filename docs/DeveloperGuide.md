@@ -170,6 +170,8 @@ The `Model` component,
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">
 
 :information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -238,6 +240,8 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#revertAddressBookVersion()`, which remove the item at the `currentStatePointer` and add it into the `redoStateList`. In the process the `currentStatePointer` moves left, points to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
@@ -250,6 +254,8 @@ than attempting to perform the undo.
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -289,6 +295,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Planned Enhancements**
 
 Team Size: 5
@@ -311,14 +319,18 @@ Team Size: 5
 5. **Dynamic message box sizing**<br/>
    The message box should increase in height and wrap the text within it as needed so that the user can view the error
    message or other command messages easily.
+   <br/><br/>
 6. **International phone numbers**<br/>
    Allow the application to accept international phone numbers on top of Singapore phone numbers.
+   <br/><br/>
 7. **Email validation**<br/>
    Update the email validation of the `Email` model to be more strict and check for a period in the domain. Currently,
    the validation permits `abc@aa`.
+   <br/><br/>
 8. **Long note content support**<br/>
    Update the UI elements of notes to support text wrapping so extra long notes do not trail off with `...` but display
    hidden content in the next line.
+   <br/><br/>
 
 <div style="page-break-after: always;"></div>
 
@@ -507,6 +519,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC7 - Add note to a person contact**
 
 **MSS**
@@ -530,8 +544,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2b1. System shows an error message.
 
     Use case ends.
-
-<div style="page-break-after: always;"></div>
 
 **Use case: UC8 - Edit a note of a person contact**
 
@@ -563,6 +575,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC9 - Delete note from a person contact**
 
 **MSS**
@@ -587,8 +601,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-<div style="page-break-after: always;"></div>
-
 **Use case: UC10 - Pin a person**
 
 **MSS**
@@ -610,6 +622,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2b1. System shows duplicated pin message.
 
     Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC11 - Unpin a person**
 
@@ -634,8 +648,6 @@ _Similar to UC10 except without extension 2b._
 
     Use case ends.
 
-<div style="page-break-after: always;"></div>
-
 **Use case: UC13 - Redo a command**
 
 **MSS**
@@ -653,6 +665,8 @@ _Similar to UC10 except without extension 2b._
   - 2a1. System shows an error message.
 
     Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC14 - Export contact list**
 
