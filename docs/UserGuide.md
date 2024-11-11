@@ -101,7 +101,7 @@ When you first use AcademyAssist, some sample student contacts have been added t
 our features. Once you are ready to manage your tuition center's students, simply use the clear command
 to clear all existing contacts and reset the StudentID. 
 
-<div markdown="span" class="alert alert-primary">::exclamation: **Caution:**
+<div markdown="span" class="alert alert-primary">:exclamation: **Caution:**
 Please note that clear action is <span style="color:red;font-weight:bold">IRREVERSIBLE!</span> All student entries will be deleted permanently. 
 </div>
 
@@ -134,7 +134,7 @@ You may refer to the [Command Summary](#command-summary) section for a quick ove
     * **Exit**: Click on this to exit the application.
 2. **Command Box**: Enter your commands here to interact with the application.
 3. **Message Box**: Displays messages to the user. Which includes success messages, error messages, and help messages.
-4**Student List**: Displays the list of students in the system.
+4. **Student List**: Displays the list of students in the system.
 
 ### Using AcademyAssist 
 To interact with AcademyAssist, type your commands into the command box and press Enter.
@@ -168,8 +168,8 @@ Where:
 - `COMMAND` refers to the action you want to perform (e.g., `add`, `delete`, `edit`).
 - `PARAMETERS` are the inputs required for the command to execute successfully.
 
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:** Not all commands require parameters. Some commands are standalone and do not require any additional inputs.
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+Not all commands require parameters. Some commands are standalone and do not require any additional inputs.
 Refer to the tables below or the [Features](#features) section for more details on each command.
 </div>
 
@@ -376,14 +376,17 @@ Examples:
 ![Edit Success Message](images/edit.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To more efficiently add a subject to a person, see the [addsubject feature] (#adding-a-subject-to-a-student--addsubject)
-
+To more efficiently add a subject to a person, you can use the `addsubject` command. You may refer to the section
+"Adding subject(s) to a student" under "Subject Management" for more details. 
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To delete a subject, you can use the edit command. e.g. student S00120 takes the subjects English and Math, but wishes to 
-drop the subject English, you can use the command 'edit S00120 s\Math'.
+drop the subject English, you can use the command 'edit S00120 s\Math'.<br><br>
 
+:exclamation: But note that the subject will be replaced entirely by the new subject.
+For example, if the student is taking English and Math and you use the command 'edit S00120 s\Science', the student will
+only be taking Science.
 </div>
 
 ### Listing all students : `list`
@@ -528,8 +531,13 @@ Format: `tracksubject`
 Track subject displays the number of students based on the filtered list. For example,
 filtering by year 2 students followed by a `tracksubject` command will only show how many year 2 students 
 are taking each of the subjects.
-
 </div> 
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:** 
+The subject tracker must be closed and reopened to refresh the data. If you filter the list and then run the 
+`tracksubject` command without closing the pop-up, subsequent commands like `list` will not update the subject tracker. 
+Please ensure to close the tracker to view the most current information. 
+</div>
 
 ![TrackSubject Success Message](images/tracksubject.png)
 
@@ -591,6 +599,13 @@ why not copy your AcademyAssist file to a USB drive or cloud storage?
 2. **Be Careful with Editing**: While it's possible to open and edit the data file directly, we don't recommend
 it unless you're an expert in CLI applications. It's safer to make changes through the AcademyAssist program.
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:** 
+Be aware that if your modifications to the data file create an invalid format, Academy Assist will erase all existing
+data and start with a blank data file the next time it runs. To prevent data loss, it is advisable to back up the file 
+before making any changes.<br><br>
+Additionally, certain alterations may cause Academy Assist to function improperly (for instance, if a value entered is
+outside the permissible range). Only edit the data file if you are sure you can do so accurately.
+</div>
 
 ## What If Something Goes Wrong?
 
@@ -610,12 +625,25 @@ If you ever have questions about your data, just ask - we're always happy to hel
 --------------------------------------------------------------------------------------------------------------------
 
 # FAQ
+This section provides answers to frequently asked questions about AcademyAssist. If you have any other questions or
+encounter issues while using the application, please feel free to reach out to us via our email (academyassist@gmail.com).
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous AcademyAssist folder.<br><br>
+
 **Q**: Why is there a gap in the studentID after I deleted a student?<br>
-**A**: This is an intentional design, kindly refer to the note under [Features](#features) for more details.
+**A**: This is an intentional design, kindly refer to the note under [Features](#features) for more details.<br><br>
+
+**Q**: Why do the system doesn't replace the studentID of a deleted student?<br>
+**A**: This is an intentional design. Setting the studentID as irreplacable ensures data consistency and integrity,
+similar to a primary key in a database, by preventing duplicate or erroneous entries. <br><br>
+
+**Q**: Why is the maximum number of students capped at 99999?<br>
+**A**: The maximum number of students is capped at 99,999 to accommodate the needs of small and medium-sized tuition 
+centers in Singapore, as this limit is sufficient for hundreds of students while providing a safe buffer for growth 
+over several years without overwhelming the system.<br><br>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
