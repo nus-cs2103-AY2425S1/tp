@@ -111,7 +111,7 @@ With MindMap, therapists can quickly record and access detailed patient informat
 
 <box type="warning" seamless>
 
-Our application uses Singapore’s NRIC system extensively for the Identity Number field `i/`. To ensure NRICs are valid, we’ve included a simple verification feature. You can test this feature with sample NRIC number/FIN from the [provided list](#sample-nric). 
+Our application uses Singapore’s NRIC system extensively for the Identity Number field `i/`. To ensure NRICs are valid, we’ve included a simple verification feature. You can test this feature with sample NRIC number/FIN from the [provided list](#sample-nrics). 
 
 </box>
 <br>
