@@ -435,7 +435,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Launch the jar using the java -jar command Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Launch the jar using the java -jar command Expected: Shows the GUI with no contacts currently. The window size may not be optimum.
 
 1. Saving window preferences
 
