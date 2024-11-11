@@ -1,0 +1,96 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":AddFCommandParser" as AddFCommandParser LOGIC_COLOR
+participant "<<class>>\nArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant "argMultimap:ArgumentMultiMap" as ArgumentMultiMap LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+AddFCommandParser -> ParserUtil : parseName(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parseNric(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parseSex(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parseBirthDate(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parseEmail(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parsePhone(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parseAddress(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parseBloodType(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parseExistingCondition(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parseNote(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parseHealthRisk(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parseNokName(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parseNokPhone(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+AddFCommandParser -> ParserUtil : parseAllergies(...)
+activate ParserUtil
+
+ParserUtil --> AddFCommandParser
+deactivate ParserUtil
+
+@enduml
