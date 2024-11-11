@@ -122,7 +122,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 - When called upon to parse a user command, the `HallPointerParser` class creates an `XYZCommandParser` (where `XYZCommandParser` is a placeholder for the specific command name that matches the API call e.g. `AddMemberCommandParser`). This newly created `Parser` then uses the other classes shown above to parse the user command, creating a `XYZCommand` object (e.g. `AddMemberCommand`) which the `Parser` returns back as a `Command` object.
-- All `XYZCommandParser` classes (e.g., `AddMemberCommandParser`, `DeleteSessionCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible, making adding more commands and further testing easier.
+- All `XYZCommandParser` classes (e.g. `AddMemberCommandParser`, `DeleteSessionCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible, making adding more commands and further testing easier.
 
 ### Model component
 
@@ -188,29 +188,29 @@ Classes used by multiple components are in the `hallpointer.address.commons` pac
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                                     | So that I can …​                                                                                 | Remarks/Notes                                          |
-| -------- | --------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
-| `* * *`  | First-time user | Explore the application using sample data                        | I can understand its features without manually entering data                                     |                                                        |
-| `* * *`  | First-time user | See a guide on how to use the application                        | I can better understand its functionalities                                                      |                                                        |
-| `* * *`  | First-time user | Save the changes I made                                          | I won’t have to redo my work after reopening the application                                     |                                                        |
-| `* * *`  | First-time user | See sample data with a predefined structure                      | I have a format to follow when inputting my own data                                             |                                                        |
-| `* * *`  | First-time user | Delete all data in the application                               | I can start over when I make a mistake and remove sample data                                    |                                                        |
-| `* * *`  | User            | Add new Hall members to the application                          | I can track points for new Hall members                                                          |                                                        |
-| `* * *`  | User            | Delete ex-Hall members from the application                      | I can stop tracking points for ex-Hall members                                                   |                                                        |
-| `* * *`  | User            | Customize point allocation criteria between sessions             | I can reward members based on different participation weightage criteria                         | E.g., different point weights for different activities |
-| `* * *`  | Frequent user   | Adjust attendance records if there are any errors                | I can fix mistakes and maintain accurate records                                                 |                                                        |
-| `* * *`  | User            | Update member details (e.g., name, contact)                      | I can keep the member database up to date and fix any mistakes                                   |                                                        |
-| `* *`    | Frequent user   | Automatically track attendance at each session                   | I don't need to manually mark attendance for each session                                        | Perhaps by QR code generation and integration          |
-| `* *`    | Frequent user   | See a breakdown of points for each member quickly                | I can monitor attendance records without having to navigate through multiple screens or commands |                                                        |
-| `* *`    | Frequent user   | Export attendance data                                           | I can share participation reports with other stakeholders if needed                              |                                                        |
-| `* *`    | User            | Bulk update attendance or points for multiple members            | I can efficiently manage large groups                                                            |                                                        |
-| `* *`    | User            | Set up custom attendance categories (e.g. Excused, Late)         | I can categorize different types of attendance                                                   |                                                        |
-| `*`      | User            | View analytics or visual reports of attendance and participation | I can see trends and member engagement at a glance                                               | Through charts or graphs to visualize data             |
-| `*`      | User            | Sort members by name                                             | I can locate a member easily                                                                     |                                                        |
-| `*`      | Frequent user   | Automatically save changes as changes are made                   | I don’t lose progress if I forget to click save                                                  | Auto-save feature                                      |
-| `*`      | Expert user     | Perform all actions using the CLI                                | I can interact with the application more efficiently than with just a GUI                        | Command Line Interface (CLI)                           |
-| `*`      | User            | Add notes for each member                                        | I can track special situations or reasons for absences                                           | Member notes feature                                   |
-| `*`      | First-time user | Import data from an existing Google Sheets document or CSV file  | I can quickly upload my data without manual entry                                                | Data import feature                                    |
+| Priority | As a …​         | I want to …​                                                     | So that I can …​                                                                                 | Remarks/Notes                                         |
+| -------- | --------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
+| `* * *`  | First-time user | Explore the application using sample data                        | I can understand its features without manually entering data                                     |                                                       |
+| `* * *`  | First-time user | See a guide on how to use the application                        | I can better understand its functionalities                                                      |                                                       |
+| `* * *`  | First-time user | Save the changes I made                                          | I won’t have to redo my work after reopening the application                                     |                                                       |
+| `* * *`  | First-time user | See sample data with a predefined structure                      | I have a format to follow when inputting my own data                                             |                                                       |
+| `* * *`  | First-time user | Delete all data in the application                               | I can start over when I make a mistake and remove sample data                                    |                                                       |
+| `* * *`  | User            | Add new Hall members to the application                          | I can track points for new Hall members                                                          |                                                       |
+| `* * *`  | User            | Delete ex-Hall members from the application                      | I can stop tracking points for ex-Hall members                                                   |                                                       |
+| `* * *`  | User            | Customize point allocation criteria between sessions             | I can reward members based on different participation weightage criteria                         | E.g. different point weights for different activities |
+| `* * *`  | Frequent user   | Adjust attendance records if there are any errors                | I can fix mistakes and maintain accurate records                                                 |                                                       |
+| `* * *`  | User            | Update member details (e.g. name, contact)                       | I can keep the member database up to date and fix any mistakes                                   |                                                       |
+| `* *`    | Frequent user   | Automatically track attendance at each session                   | I don't need to manually mark attendance for each session                                        | Perhaps by QR code generation and integration         |
+| `* *`    | Frequent user   | See a breakdown of points for each member quickly                | I can monitor attendance records without having to navigate through multiple screens or commands |                                                       |
+| `* *`    | Frequent user   | Export attendance data                                           | I can share participation reports with other stakeholders if needed                              |                                                       |
+| `* *`    | User            | Bulk update attendance or points for multiple members            | I can efficiently manage large groups                                                            |                                                       |
+| `* *`    | User            | Set up custom attendance categories (e.g. Excused, Late)         | I can categorize different types of attendance                                                   |                                                       |
+| `*`      | User            | View analytics or visual reports of attendance and participation | I can see trends and member engagement at a glance                                               | Through charts or graphs to visualize data            |
+| `*`      | User            | Sort members by name                                             | I can locate a member easily                                                                     |                                                       |
+| `*`      | Frequent user   | Automatically save changes as changes are made                   | I don’t lose progress if I forget to click save                                                  | Auto-save feature                                     |
+| `*`      | Expert user     | Perform all actions using the CLI                                | I can interact with the application more efficiently than with just a GUI                        | Command Line Interface (CLI)                          |
+| `*`      | User            | Add notes for each member                                        | I can track special situations or reasons for absences                                           | Member notes feature                                  |
+| `*`      | First-time user | Import data from an existing Google Sheets document or CSV file  | I can quickly upload my data without manual entry                                                | Data import feature                                   |
 
 ### Use cases
 
@@ -354,16 +354,16 @@ None.
    Points allocated to members based on attendance and participation in CCA sessions, stored as part of each member's record.
 
 2. **Member:**\
-   A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in Hall Pointer (e.g., name, telegram, points, and attendance).
+   A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in Hall Pointer (e.g. name, telegram, points, and attendance).
 
 3. **Session:**\
    A data model representing an event or activity within a CCA, where attendance is tracked and points are awarded to associated members.
 
 4. **Tag:**\
-   Labels or categories assigned to members in Hall Pointer (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
+   Labels or categories assigned to members in Hall Pointer (e.g. `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
 
 5. **Command:**\
-   A user-entered instruction (e.g., `add_member`) in the CLI, enabling various operations within HallPointer. Commands are processed by the `Logic` component.
+   A user-entered instruction (e.g. `add_member`) in the CLI, enabling various operations within HallPointer. Commands are processed by the `Logic` component.
 
 6. **Model Component:**\
    Manages data and business logic within HallPointer, including members, sessions, and hall points. The Model component keeps data in memory for efficient access.
@@ -495,7 +495,7 @@ testers are expected to do more _exploratory_ testing.
 Team Size: 5
 
 1. **Support Non-Numeric Room Identifiers**
-   Currently, room identifiers must follow the format `block-floor-room number` (e.g., `10-3-100`), and only numeric values are supported for each component. We plan to enhance this feature by allowing non-numeric values for the `block`,`floor` and `room number`.
+   Currently, room identifiers must follow the format `block-floor-room number` (e.g. `10-3-100`), and only numeric values are supported for each component. We plan to enhance this feature by allowing non-numeric values for the `block`,`floor` and `room number`.
 
    **Example Requirement**:
 
@@ -529,7 +529,7 @@ Team Size: 5
    These enhancements will improve the usability of the `find_members` command, making it easier to locate members efficiently by various identifiers or by partial names.
 
 4. **Command Aliases for Improved Usability**
-   The current command names (e.g., `add_session`, `add_member`) are lengthy and require the use of underscores, which can be cumbersome for users to type frequently.
+   The current command names (e.g. `add_session`, `add_member`) are lengthy and require the use of underscores, which can be cumbersome for users to type frequently.
 
    **Example Requirement**:
 
