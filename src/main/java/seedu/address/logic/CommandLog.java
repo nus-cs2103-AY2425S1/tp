@@ -29,7 +29,7 @@ public class CommandLog {
     /**
      * Adds a user input to the stack
      */
-    public void addinput(String input) {
+    public void addInput(String input) {
         inputLog.push(input);
     }
 
