@@ -8,16 +8,17 @@
 
 # Tuteez User Guide
 
+![Tuteez logo](images/TUTEEZ.png)
 <br>
 
 ## Welcome aboard Tuteez
 
 Welcome to Tuteez – a **powerful desktop address book application** designed specifically for **private tutors** to **manage student contacts and lesson schedules**.
-With Tuteez, you can effortlessly keep all your student information organized and accessible in one place, so every information you need is right at your fingertips.
+Tuteez empowers you to effortlessly keep all your student information organized and accessible in one place, putting any information you need right at your fingertips.
 
-Tuteez provides both a Command Line Interface (CLI), allowing quick, keyboard-based commands for speed, and a Graphical User Interface (GUI) with intuitive buttons, menus, and displays for easy navigation.
+Tuteez offers both a _Command Line Interface (CLI)_ for fast, keyboard-driven commands and a _Graphical User Interface (GUI)_ with clear buttons and menus designed for intuitive navigation, catering to both speed and ease of use.
 
-By letting Tuteez handle your organizational tasks, you can focus on what matters most: teaching. 
+By letting Tuteez handle your organizational tasks, you can focus on what matters most—_teaching_.
 
 In this guide, we will walk you through Tuteez’s key features and demonstrate how it can transform your tutoring experience.
 <br>
@@ -49,14 +50,14 @@ In this guide, we will walk you through Tuteez’s key features and demonstrate 
 5. [Features](#features)<br>
     5.1 [Viewing Help : `help`](#viewing-help-help)<br>
     5.2 [Adding a Student: `add`](#adding-a-student-add)<br>
-    5.3 [Listing All Students : `list`](#listing-all-students-list)<br>
+    5.3 [Deleting a student : `delete`](#deleting-a-student-delete-or-del)<br>
     5.4 [Editing a Student : `edit`](#editing-a-student-edit)<br>
-    5.5 [Adding a Remark: `addremark` or `addrmk`](#adding-a-remark-addremark-or-addrmk)<br>
-    5.6 [Deleting a Remark: `deleteremark` or `delrmk`](#deleting-a-remark-deleteremark-or-delrmk)<br>
-    5.7 [Adding Lessons: `addlesson` or `addlsn`](#adding-lessons-addlesson-or-addlsn)<br>
-    5.8 [Deleting Lessons: `deletelesson` or `dellsn`](#deleting-lessons-deletelesson-or-dellsn)<br>
-    5.9 [Searching for Students: `find`](#searching-for-students-find)<br>
-    5.10 [Deleting a student : `delete` or `del`](#deleting-a-student-delete-or-del)<br>
+    5.5 [Listing All Students : `list`](#listing-all-students-list)<br>
+    5.6 [Adding a Remark: `addremark`](#adding-a-remark-addremark-or-addrmk)<br>
+    5.7 [Deleting a Remark: `deleteremark` ](#deleting-a-remark-deleteremark-or-delrmk)<br>
+    5.8 [Adding Lessons: `addlesson`](#adding-lessons-addlesson-or-addlsn)<br>
+    5.9 [Deleting Lessons: `deletelesson`](#deleting-lessons-deletelesson-or-dellsn)<br>
+    5.10 [Searching for Students: `find`](#searching-for-students-find)<br>
     5.11 [Displaying Student Information: `display`](#displaying-student-information-display)<br>
     5.12 [Navigating command history: `↑` or `↓`](#navigating-command-history-or)<br>
     5.13 [Clearing all entries : `clear`](#clearing-all-entries-clear)<br>
@@ -66,11 +67,12 @@ In this guide, we will walk you through Tuteez’s key features and demonstrate 
     6.2 [Current Limitations](#current-limitations)<br>
     6.3 [Saving the Data](#saving-the-data)<br>
     6.4 [Editing the Data File](#editing-the-data-file)<br>
-7. [Future Features](#future-features)
-8. [FAQ](#faq)
+7. [Exciting Features in the Future](#exciting-features-in-the-future)
+8. [FAQ](#frequently-asked-questions)
 9. [Known Issues](#known-issues)
 10. [Glossary](#glossary)
 11. [Command Summary](#command-summary)
+12. [Command Parameters](#command-parameters)
 <!-- TOC end -->
 
 <br>
@@ -111,11 +113,11 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 | **Bold text**                | Highlights important keywords.               |
 | [Hyperlink](#notations-used) | Provides clickable links for your reference. |
 
-| **Call-outs**                                                                                    | **Description**                          |
-|--------------------------------------------------------------------------------------------------|------------------------------------------|
-| <div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">ℹ️ **Info**</div>    | For additional information.             |
-| <div style="background-color: #FFA07A; padding: 4px; border-radius: 4px;">⚠️ **Warning**</div> | A caution or important warning.         |
-| <div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**</div>   | Helpful tips to make your experience smoother. |
+| **Call-outs**                                                                                   | **Description**                          |
+|-------------------------------------------------------------------------------------------------|------------------------------------------|
+| <div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">ℹ️ **Info**</div>     | For additional information.             |
+| <div style="background-color: #FFA07A; padding: 4px; border-radius: 4px;">❗️️ **Warning**</div> | A caution or important warning.         |
+| <div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**</div>  | Helpful tips to make your experience smoother. |
 
 <br>
 
@@ -159,8 +161,9 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 
 4. Run the application by entering the following command: `java -jar tuteez.jar`<br>
    A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data for your reference.<br>
-
+    <br>
    ![Ui](images/Ui.png)
+    <br>
 
 5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.<br>
    Some example commands you can try:
@@ -189,13 +192,13 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 
 ![annotated_ui](images/annotated_ui.png)
 
-| Component      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Menu Bar** | - Located at the top of the application. <br> - Contains essential functions including File and Help menus.                                                                                                                                                                                                                                                                                                                                                         |
-| **Left Panel** | - Prioritizes important information such as student's phone number, address, and next lesson based on your computer's current time.  <br> - If a lesson is currently ongoing, it will show that lesson as the next lesson on the left panel. <br><br> <div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">ℹ️ **Info**:  If your computer's time has been changed, please restart the app to sync our internal clock to your new time!</div> |
-| **Right Panel** | - Provides the full view of a student's information when you use the `display` command. <br> - Shows all the student's lesson details and remarks you have left them. <br><br><div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">ℹ️ **Info**:  Refer to the [Displaying Student Information](#displaying-student-information-display) section for more details on the `display` command. </div>                                            |
-| **Results Box** | - Displays the results of the commands you have entered.                                                                                                                                                                                                                                                                                                                                                                                                            |
-| **Command Box** | - The area where you can enter commands to interact with the application.                                                                                                                                                                                                                                                                                                                                                                                           |
+| Component      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Menu Bar** | <ul><li>Located at the top of the application. </li><li>Contains essential functions including File and Help menus.</li></ul>                                                                                                                                                                                                                                                                                                                                                  |
+| **Left Panel** | <ul><li>Prioritizes important information such as student's phone number, address, and next lesson based on your computer's current time.  </li><li>If a lesson is currently ongoing, it will show that lesson as the next lesson on the left panel. <br><br> <div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">ℹ️ **Info**:  If your computer's time has been changed, please restart the app to sync our internal clock to your new time!</div></ul> |
+| **Right Panel** | <ul><li>Provides the full view of a student's information when you use the `display` command. </li><li> Shows all the student's lesson details and remarks you have left them. </li><br><div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">ℹ️ **Info**:  Refer to the [Displaying Student Information](#displaying-student-information-display) section for more details on the `display` command. </div></ul>                                          |
+| **Results Box** | <ul><li>Displays the results of the commands you have entered.</li><li>If the command was successfully executed, the corresponding message will be shown.</li><li>If the command failed to execute, an error message will be shown.</li></ul>                                                                                                                                                                                                                                  |
+| **Command Box** | <ul><li>The area where you can enter commands to interact with the application. </li></ul>                                                                                                                                                                                                                                                                                                                                                                                     |
 
 <br>
 
@@ -212,7 +215,7 @@ steps with the application, which will allow you to get comfortable with managin
 
 ### Before You Begin
 Make sure you have:
-- Successfully installed Tuteez and launched the application (Refer to the [Quick Start](#quick-start) section if you have not)
+- Successfully installed Tuteez and launched the application (Refer to the [Quick Start](#quick-start) section if you have not).
 
 <br>
 
@@ -221,8 +224,11 @@ Upon launching the application, you should see a window similar to the one below
 
 ![Ui](images/Ui.png)
 
-The *left panel* displays the list of students you have added. Separated from the left panel by a divider is the *right panel* displays the details of the selected student.
+The *Left Panel* displays the list of students you have added. 
+Separated from the left panel by a divider is the *Right Panel* displays the details of the selected student.
+
 The *Command Box* at the bottom of the window is where you can enter commands to interact with the application.
+
 Above the *Command Box*, you will find the *Results Box*, which displays the results of the commands you have entered.
 
 <br>
@@ -250,7 +256,7 @@ If everything went well, you'll be greeted by this view:
 
 ![add_command](images/add_command_tutorial.png)
 
-<div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">
+<div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
 
 ℹ️ **Info**: For more details on the `add` command, please refer to the [Add Command](#adding-a-student-add) section.
 </div>
@@ -281,7 +287,7 @@ If everything went well, you'll be greeted by this view:
 
 ![edit_command](images/edit_command_tutorial.png)
 
-<div markdown="block" style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">
+<div markdown="block" style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
 
 ℹ️ **Info**: For more details on the `edit` command, please refer to the [Edit Command](#editing-a-student-edit) section.
 </div>
@@ -302,7 +308,7 @@ If everything went well, you'll be greeted by this view:
 <br>
 
 ### Wrapping Up
-Congratulations! 😁 You've successfully completed the beginner's tutorial for Tuteez.
+Congratulations! You've successfully completed the beginner's tutorial for Tuteez.
 You're now ready to move on to more advanced features and commands that Tuteez has to offer.
 Simply visit the [Features](#features) section to learn more about the various commands available to you.
 
@@ -340,44 +346,34 @@ Simply visit the [Features](#features) section to learn more about the various c
 
 <br>
 
-### Viewing help: `help`
+### Viewing Help: `help`
 
-If you are confused while using the app any point in time, you may use this command to view the help message which explains how to access the web-based user guide.
+If you are in doubt, type this command to access the online user guide tailored to your needs.
 
 **Format**: `help`
 
 ![help message](images/helpMessage.png)
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Adding a student: `add`
+### Adding a Student: `add`
 
-This command will allow you to add a new student and their personal details to your list of students on the left panel.
+You can add a new student and their personal details to your list of students.
 
 **Format**: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`
 
-<div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">
+<div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
 
 ℹ️ **Info**: Only the **name** and **phone number** are required fields. The other fields are optional.
 </div>
 <br>
-<div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">
+<div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
 
 ℹ️ **Info**:  You cannot add lessons that clash, meaning lessons cannot be scheduled on the same day and overlap in timing. If a clash is detected, the app will notify you with an error message. To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)
 </div>
 
-
-Acceptable values for each parameter:  
-
-| Parameter    | Format                                                                                                                                                                     | Example            |
-|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
-| NAME         | Start the name with a letter, and you’re welcome to include letters, numbers, spaces, and these special characters: `-`, `'`, `.`, `,`, `(`, `)`, `&`, `/`                 | John Doe           |
-| PHONE_NUMBER | Enter a phone number with numbers only, that is at least 3 digits long                                                                                                     | 912345678          |
-| EMAIL        | Email should follow the format local-part@domain                                                                                                                           | johndoe@gmail.com  |
-| ADDRESS      | Addresses can contain any characters                                                                                                                                       | Jurong West #09-11 |
-| TAG          | Tag names can include letters, numbers, and spaces                                                                                                                         | Primary 4          |
-| lesson       | The **`l/` (lesson)** field should include the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space | monday 1500-1700   |
-
+<br>
 <div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
 
 💡 **Tip**: You can add any number of tags and lessons to a student (or you could also omit them)
@@ -387,19 +383,36 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/Math l/monday 0900-1100`
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Listing all students: `list`
+### Deleting a Student: `delete`
 
-This command will help you view the list of all your students in Tuteez on the left panel.
+You can delete a specified student from Tuteez.
 
-**Format**: `list`
+**Format**: `delete INDEX` or `delete NAME`
 
+* Deletes the student at the specified `INDEX` or by their full `NAME` (case-insensitive).
+    - When using the `NAME` option, the full name of the student must be provided.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** such as 1, 2, 3, …​
+
+<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
+
+💡 **Tip**: You can also use the abbreviated command `del` as a shortcut for `delete`.
+</div>
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `find Betsy` followed by `delete 1` deletes the first student in the results of the `find` command.
+* `delete John Doe` deletes the student with the full name "John Doe" from the address book, ignoring case sensitivity.
+
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Editing a student: `edit`
+### Editing a Student: `edit`
 
-This command will allow you to edit an existing student's details in Tuteez, allowing you to easily update outdated information on the fly.
+You can edit an existing student's details in Tuteez to update outdated information on the fly.
 
 **Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -414,11 +427,21 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Adding a Remark: `addremark` or `addrmk`
+### Listing All Students: `list`
 
-This simple command will allow you to add a remark for a specific student in Tuteez.
+You can easily view the list of all your students in Tuteez on the left panel.
+
+**Format**: `list`
+
+[Take me back to Table of Contents](#table-of-contents)
+<br>
+
+### Adding a Remark: `addremark`
+
+You can easily keep track of student details by adding a remark for a specific student in Tuteez.
 
 **Format**: `addremark INDEX r/REMARK` to add a remark to the student at the specified `INDEX`.
 
@@ -432,26 +455,35 @@ This simple command will allow you to add a remark for a specific student in Tut
 
 Examples:
 * `addremark 1 r/Great progress in Math` Adds the remark "Great progress in Math" to the first student.
+* `addrmk 2 r/Needs more practice in Permutations and Combinations` Adds the remark "Needs more practice in Permutations and Combinations".
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Deleting a Remark: `deleteremark` or `delrmk`
+### Deleting a Remark: `deleteremark`
 
-This command will allow you to delete a remark for a specific student in Tuteez.
+You can delete a remark for a specific student in Tuteez.
 
 **Format**: `deleteremark INDEX ri/REMARK_INDEX` to add a remark to the student at the specified `INDEX`.
 
 * Deletes an existing remark from the student at the specified `REMARK_INDEX`. The remark index refers to the order in which the remarks were added.
 * When deleting, if the `REMARK_INDEX` is not valid, an error will be shown on your screen.
 
+<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
+
+💡 **Tip**: You can also use the abbreviated command `delrmk` as a shortcut for `deleteremark`.
+</div>
+
 Examples:
 * `deleteremark 1 ri/2` Deletes the second remark of the first student in the displayed student list.
+* `delrmk 2 ri/1` Deletes the first remark of the second student in the displayed student list.
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Adding Lessons: `addlesson` or `addlsn`
+### Adding Lessons: `addlesson`
 
-This command will allow you to add lesson(s) to a specific student in Tuteez.
+You can efficiently manage your schedule by adding lesson(s) to a specific student in Tuteez.
 
 **Format**: `addlesson INDEX l/LESSON [l/LESSON]…​`
 
@@ -460,25 +492,31 @@ This command will allow you to add lesson(s) to a specific student in Tuteez.
 * You can add multiple lessons to a student at once.
 * Lessons have to start with the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space.
 
-<div markdown="block" style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
+<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
 
-⚠️ **Warning**: Lessons added must not clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown on your screen.
+💡 **Tip**: You can also use the abbreviated command `addlsn` as a shortcut for `addlesson`.
 </div>
 <br>
-<div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">
+<div markdown="block" style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
+
+️❗️ **Warning**: Lessons added must not clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown on your screen.
+</div>
+<br>
+<div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
 
 ℹ️ **Info**: To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)
 </div>
 
 Examples:
 * `addlesson 1 l/Monday 0900-1100` Adds a lesson on Monday from 9 am to 11 am to the first student.
-* `addlesson 2 l/Tuesday 1400-1600 l/Thursday 1400-1600` Adds lessons on Tuesday and Thursday from 2 pm to 4 pm to the second student.
+* `addlsn 2 l/tue 1400-1600 l/thu 1400-1600` Adds lessons on Tuesday and Thursday from 2 pm to 4 pm to the second student.
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Deleting Lessons: `deletelesson` or `dellsn`
+### Deleting Lessons: `deletelesson`
 
-This command will help you in deleting lesson(s) from a specific student in Tuteez.
+You can remove lesson(s) from a specific student in Tuteez.
 
 **Format**: `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
 
@@ -486,6 +524,11 @@ This command will help you in deleting lesson(s) from a specific student in Tute
 * Deletes lesson(s) from the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** such as 1, 2, 3, …​
 * Lessons are indexed starting from 1 and sorted in ascending order based on their day and time.
 * If the `LESSON_INDEX` is not valid, an error will be shown on your screen.
+
+<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
+
+💡 **Tip**: You can also use the abbreviated command `dellsn` as a shortcut for `deletelesson`.
+</div>
 
 Examples:
 * `deletelesson 1 li/1` Deletes the first lesson of the first student.
@@ -496,12 +539,13 @@ Examples:
 💡 **Tip**: Want to delete multiple lessons at once? Simply specify multiple different lesson indices in the parameters.
 </div>
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
 ### Searching for Students: `find`
 
-This command will assist you in finding students whose names, addresses, tags or lessons contain any of the given keywords. 
-Lessons are split into lesson day and lesson time.
+You can find students whose names, addresses, tags or lessons contain any of the given keywords. 
+When you are searching for lessons, you can search for lesson day and/or lesson time.
 
 **Format**: `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON_DAY_KEYWORDS] [lt/LESSON_TIME_KEYWORDS]`
 
@@ -521,48 +565,27 @@ Examples:
 * `find a/jurong` returns students with address `Jurong Lake #09-11` and `jurong west #13-21`
 * `find ld/monday lt/1000-1100` returns students with lessons `monday 0800-0900` and `tuesday 0900-1030`
 
-<br>
-
-### Deleting a student: `delete` or `del`
-
-This simple command allows you to delete the specified student from Tuteez.
-
-**Format**: `delete INDEX` or `delete NAME`
-
-* Deletes the student at the specified `INDEX` or by their full `NAME` (case-insensitive).
-    - When using the `NAME` option, the full name of the student must be provided.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** such as 1, 2, 3, …​
-
-<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
-
-💡 **Tip**: You can also use the abbreviated command `del` as a shortcut for `delete`.
-</div>
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find Betsy` followed by `delete 1` deletes the first student in the results of the `find` command.
-* `delete John Doe` deletes the student with the full name "John Doe" from the address book, ignoring case sensitivity.
-
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
 ### Displaying Student Information: `display`
 
-This helpful command will help you view comprehensive personal information of a student in Tuteez on the right panel.
+You can view all the details of a student you recorded in Tuteez on the right panel.
 
 **Format**: `display INDEX` or `display NAME`
 
 * This displays the details of the student at the specified `INDEX` or with the specified `NAME`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** such as 1, 2, 3, …​
-* The displayed information includes the student's name, phone number, email, address, tags, lessons, and any remarks associated with the student.
+* The displayed information includes the student's name, phone number, email, address, telegram handle, tags, lessons, and any remarks associated with the student.
 
 Examples:
 * `display 1` Shows the details of the first student in the list.
 * `display 3` Shows the details of the third student in the list.
 * `display john doe` Shows the details of student John Doe in the list, if they were to be found.
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Navigating command history: <kbd>&uarr;</kbd> or <kbd>&darr;</kbd>
+### Navigating Command History: <kbd>&uarr;</kbd> or <kbd>&darr;</kbd>
 
 These keyboard shortcuts will allow you to navigate through your command history in the command box, making it easy to access and reuse previously executed commands.
 
@@ -576,37 +599,40 @@ These keyboard shortcuts will allow you to navigate through your command history
 💡 **Tip**: Use these shortcuts to quickly access and reuse previous commands without having to retype them.
 </div>
 <br>
-<div style="background-color: #ADD8E6; padding: 4px; border-radius: 4px;">
+<div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
 
-ℹ️ **Info**: Only correctly executed commands are saved. Commands that result in errors will not be added to the history.
+ℹ️ **Info**: Only correctly executed commands will be saved. Erroneous commands will not be added to the command history.
 </div>
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Clearing all entries: `clear`
+### Clearing All Entries: `clear`
 
-This will allow you clears all student entries from Tuteez.
+You can clear all student entries from Tuteez.
 
 **Format**: `clear`
 
 <div style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
 
-⚠️ **Warning**:  This action is irreversible and will wipe your existing data from the application. Make backups of your data if you need to, and use this command with caution!
+️❗️ **Warning**:  This action is **irreversible** and will remove all your existing data from the application. Make backups of your data if you need to, and use this command with caution!
 </div>
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Exiting the program: `exit`
+### Exiting the Program: `exit`
 
-This command will allow you to shut down and exit the program.
+This command allows you to shut down and exit the program.
 
 **Format**: `exit`
 
 <div markdown="block" style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
 
-⚠️ **Warning**: This action will close the application. You will need to relaunch the application to use it again.
+❗ **Warning**: This action will close the application. You will need to relaunch the application to use it again.
 </div>
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
 <div style="page-break-after: always;"></div>
@@ -615,11 +641,11 @@ This command will allow you to shut down and exit the program.
 
 <br>
 
-## Things you should definitely know
+## Things You Should Definitely Know
 
 <br>
 
-### Constraints on adding a lesson
+### Constraints on Adding a Lesson
 
 Unfortunately, as of `V1.5` there are a few important constraints regarding lessons:  
 
@@ -633,75 +659,84 @@ This means the following constraints apply:
   1. The latest lesson start time is `2358`.
   1. The latest lesson end time is `2359`, `0000` is treated as the start of a new day.
 
-Look forward to [future updates](#future-features) for group tuition support!
+You can forward to [future updates](#future-features) for group tuition support!
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
 ### Current Limitations
 
 As of `V1.5`, our app has a few limitations outlined below. Rest assured, we plan to resolve them in [future updates](#future-features)
 
-1. Remarks can only be added one at a time.
-1. If you wish to edit a remark, first delete the incorrect one, then add the updated version.
-1. After using the find command to locate student(s), running most other commands will reset the left panel to the default view, similar to calling `list`.
-1. Tags that are too long are cut off on the left panel.
+1. Remarks can only be added and deleted one at a time.
+2. If you wish to edit a remark, first delete the incorrect one, then add the updated version.
+3. After using the find command to locate student(s), running most other commands will reset the left panel to the default view, similar to calling `list`.
+4. Tags that are too long are cut off on the _Left Panel_.
 
+We appreciate your understanding and patience!
+
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Saving the data
+### Saving the Data
 
-Tuteez data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Tuteez data are saved in your hard disk automatically after any command that changes the data. There is no need to save manually.
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
-### Editing the data file
+### Editing the Data File
 
 Tuteez data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<div markdown="block" style="background-color: #FFE4E1; padding: 4px; border-radius: 4px;">
 
-**Caution:**
-If your changes to the data file makes its format invalid, Tuteez will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause Tuteez to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
+❗ **Warning**: If your changes to the data file makes its format invalid, Tuteez will **discard all data and start with an empty data file** at the next run.  Hence, it is recommended to take a backup of the data file before editing it.<br>
 
+Furthermore, certain edits can cause Tuteez to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file **only** if you are confident that you can update it correctly.
+</div>
+
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
 <br>
 
-## Future Features
+## Exciting Features in the Future
 
-With the ever-changing responsibilities of tutors, Tuteez evolves right alongside you, adding new features to support your journey. Here’s what’s in store for future updates!
+With the ever-changing responsibilities of tutors, Tuteez evolves right alongside you, adding new features to support your journey. Here’s what’s in store for future updates.
 
-1. Group Lessons: Tuteez will soon support overlapping lessons and student grouping for group tuition! And as always, it will alert you in advance if there are any scheduling conflicts. 😉
-1. Document Management: Upload and associate PDFs or other documents directly with specific students for easy access and organization.
-1. Quick Messaging: Instantly open WhatsApp or Telegram chats with students directly from Tuteez with a single click, making it easy to reach out right away.
-1. Data Export: Enable seamless exporting of student information and lesson data into files for easy sharing, backup, or analysis outside of Tuteez.
+1. **Group Lessons**: Tuteez will soon support overlapping lessons and student grouping for group tuition! And as always, it will alert you in advance if there are any scheduling conflicts. 😉
+1. **Document Management**: Upload and associate PDFs or other documents directly with specific students for easy access and organization.
+1. **Quick Messaging**: Instantly open WhatsApp or Telegram chats with students directly from Tuteez with a single click, making it easy to reach out right away.
+1. **Data Export**: Enable seamless exporting of student information and lesson data into files for easy sharing, backup, or analysis outside of Tuteez.
 1. Of course, addressing all the limitations stated [above](#current-limitations).
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 --------------------------------------------------------------------------------------------------------------------
 
 <br>
 
-## FAQ
+## Frequently Asked Questions
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tuteez home folder.
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
 <br>
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -715,30 +750,52 @@ These are the key terms used throughout the user guide:
 - **GUI**: Graphical User Interface, a type of visual user interface that allows users to interact with the application through graphical elements like buttons and menus.
 - **CLI**: Command Line Interface, a type of text-based user interface that allows users to interact with the application by typing commands.
 
+[Take me back to Table of Contents](#table-of-contents)
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
 <br>
 
-## Command summary
+## Command Summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 tg/jamesho123 t/Math l/monday 0900-1100`
-**Clear**  | `clear`
-**Delete** | `delete INDEX` or `delete NAME`<br> e.g., `delete 3` or `delete James Ho`
-**Display**| `display INDEX` or display `NAME` <br> e.g., `display 1` or display `John Doe`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t/Math`
-**Add Remark** | `addremark INDEX r/REMARK` to add a remark to your student at `INDEX`<br> e.g., `addremark 1 r/Great progress in Math`
-**Delete Remark** |  `deleteremark INDEX ri/REMARK_INDEX` to delete the remark at `REMARK_INDEX` from your student at `INDEX`<br> e.g., `deleteremark 1 ri/2` to delete the second remark of student 1.
-**Add Lesson** | `addlesson INDEX l/LESSON [l/LESSON]…​`<br> e.g., `addlesson 1 l/Monday 0900-1100`
-**Delete Lesson** | `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`<br> e.g., `deletelesson 1 li/1`
-**Find**   | `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON_DAY_KEYWORDS] [lt/LESSON_TIME_KEYWORDS]`<br> e.g., `find n/James jake t/science`
-**List**   | `list`
-**Help**   | `help`
-**<kbd>&uarr;</kbd>** | Press the <kbd>&uarr;</kbd> key to navigate to your previous command in the command history.
-**<kbd>&darr;</kbd>** | Press the <kbd>&darr;</kbd> key to navigate to your next command in the command history.
-**Exit**   | `exit`
+Action              | Format                                                                                                                                                   | Examples
+--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help**            | `help`                                                                                                                                                   |
+**Add**             | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`                                                          | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 tg/jamesho123 t/Math l/monday 0900-1100`
+**Delete**          | <ul><li>`delete INDEX` or </li><li> `delete NAME`</li></ul>                                                                                              | <ul><li>`delete 3` </li><li>or `delete James Ho`</li></ul>  
+**Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​`                                                            |`edit 2 n/James Lee e/jameslee@example.com t/Math`
+**List**            | `list`                                                                                                                                                   
+**Add Remark**      | `addremark INDEX r/REMARK` to add a remark to your student at `INDEX`                                                                                    | `addremark 1 r/Great progress in Math`                                                             
+**Delete Remark**   | `deleteremark INDEX ri/REMARK_INDEX` to delete the remark at `REMARK_INDEX` from your student at `INDEX`                                                 | `deleteremark 1 ri/2` to delete the second remark of student 1. 
+**Add Lesson**      | `addlesson INDEX l/LESSON [l/LESSON]…​`                                                                                                                  | `addlesson 1 l/Monday 0900-1100`                                                                                                 
+**Delete Lesson**   | `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`| `deletelesson 1 li/1`                                                                 
+**Find**            | `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON_DAY_KEYWORDS] [lt/LESSON_TIME_KEYWORDS]`|`find n/James jake t/science` 
+**Display**         | <ul><li>`display INDEX` </li><li> `display NAME` </li></ul>               | <ul><li>`display 1` or </li><li> `display John Doe` </li></ul>                                                                                                    
+**<kbd>&uarr;</kbd>** | Press the <kbd>&uarr;</kbd> key to navigate to your previous command in the command history.                                                             
+**<kbd>&darr;</kbd>** | Press the <kbd>&darr;</kbd> key to navigate to your next command in the command history.                                                                 
+**Clear**           | `clear`                                                                                                                                                  
+**Exit**            | `exit`                                                                                                                                                   
 
+[Take me back to Table of Contents](#table-of-contents)
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<br>
+
+## Command Parameters
+To assist you in navigating Tuteez and _CLI_ with ease, here are the acceptable values for each parameter:
+
+| Parameter    | Format                                                                                                                                                   | Example            |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| NAME         | Start the name with a letter, and you’re welcome to include letters, numbers, spaces, and these special characters: -, ', ., ,, (, ), &, /               | John Doe           |
+| PHONE_NUMBER | Enter a phone number with numbers only, that is at least 3 digits long                                                                                   | 912345678          |
+| EMAIL        | Email should follow the format local-part@domain                                                                                                         | johndoe@gmail.com  |
+| ADDRESS      | Addresses can contain any characters                                                                                                                     | Jurong West #09-11 |
+| TAG          | Tag names can include letters, numbers, and spaces                                                                                                       | Primary 4          |
+| REMARK       | The `r/` (remark) field can include all texts (including emojis), but cannot include "r/" in the text                                                    | Doing well! 💯     |
+| LESSON       | The `l/` (lesson) field should include the day of the week (case-insensitive) followed by the time in the 24-hour format HHMM-HHMM, separated by a space | monday 1500-1700   |
+
+[Take me back to Table of Contents](#table-of-contents)
 <br>
