@@ -31,7 +31,7 @@
   * [Prerequisites]({{ baseUrl }}/UserGuide.html#2-prerequisites)
   * [Getting Started]({{ baseUrl }}/UserGuide.html#3-getting-started)
   * [Command Structure]({{ baseUrl }}/UserGuide.html#4-command-structure)
-  * [Commands Overview]({{ baseUrl }}/UserGuide.html#5-commands-overview)
+  * [Command Overview]({{ baseUrl }}/UserGuide.html#5-command-overview)
   * [FAQ]({{ baseUrl }}/UserGuide.html#6-faq)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
