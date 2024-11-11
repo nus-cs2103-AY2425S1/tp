@@ -27,12 +27,24 @@
 
 3. Copy the file to the folder you want to use as the _home folder_ for CFG.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar contactsforgood.jar` command to run the application.<br>
-   
-5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+4. Open a command terminal, `cd` into the folder you put the jar file in.
+
+<box type="tip" seamless>
+
+* `cd` is the command to change directories.
+* e.g. `cd Documents/contactsforgood`
+
+</box> 
+
+5. Use the `java -jar contactsforgood.jar` command to run the application.
+
+6. Your command terminal should look like this after steps 4 and 5.
+   ![CommandTerminal](images/commandTerminal.png)<br>
+
+7. A GUI similar to the below should appear in a few seconds after running the `java -jar contactsforgood.jar` command. Note how the app contains some sample data.
    ![Ui](images/Ui.png)<br>
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+8. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -46,7 +58,7 @@
 
    * `exit` : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
+9. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
