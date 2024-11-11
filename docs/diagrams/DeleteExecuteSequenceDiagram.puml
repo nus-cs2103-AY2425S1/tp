@@ -4,13 +4,14 @@ skinparam ArrowFontStyle plain
 
 box "Logic Layer" LOGIC_COLOR_T1
     participant "e:DeleteCommand" as DeleteCommand LOGIC_COLOR
+    participant ":CommandException" as CommandException LOGIC_COLOR
     participant "<<class>>\nDeleteCommand" as DeleteCommandClass LOGIC_COLOR
     participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box "Model Layer" MODEL_COLOR_T1
     participant ":Model" as Model MODEL_COLOR
-    participant "List<Person>" as LastShownList MODEL_COLOR
+    participant ":List<Person>" as LastShownList MODEL_COLOR
 end box
 
 [-> DeleteCommand : execute(Model model)
@@ -25,7 +26,7 @@ deactivate Model
 loop For each target index
     DeleteCommand -> DeleteCommand : Validate index
     alt Index out of bounds
-        DeleteCommand -> DeleteCommand : throw CommandException (invalid index)
+        DeleteCommand -> CommandException : throw CommandException (invalid index)
     end
 
     DeleteCommand -> LastShownList : get(index)
@@ -53,12 +54,12 @@ end
 DeleteCommand -> DeleteCommand : assert resultMessages.size() == targetIndices.size()
 
 alt Single result message
-    DeleteCommand -> CommandResult : new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS))
+    DeleteCommand -> CommandResult
     activate CommandResult
     CommandResult --> DeleteCommand : result
     deactivate CommandResult
 else Multiple result messages
-    DeleteCommand -> CommandResult : new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS))
+    DeleteCommand -> CommandResult
     activate CommandResult
     CommandResult --> DeleteCommand : result
     deactivate CommandResult

@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Parser LOGIC_COLOR_T1
+participant ":LinkCommandParser" as LinkCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "l:LinkCommand" as LinkCommand LOGIC_COLOR
+participant ":ParseException" as ParseException LOGIC_COLOR
+end box
+
+[-> LinkCommandParser : parse(args)
+activate LinkCommandParser
+
+
+
+alt Invalid format (missing or extra prefixes)
+    LinkCommandParser -> ParseException : throw ParseException()
+    deactivate LinkCommandParser
+else Valid format
+
+    LinkCommandParser -> ParserUtil : parseName(student name)
+    activate ParserUtil
+    deactivate ParserUtil
+
+    LinkCommandParser -> ParserUtil : parseName(parent name)
+    activate ParserUtil
+    deactivate ParserUtil
+
+    LinkCommandParser -> LinkCommand : new LinkCommand(child, parent)
+    activate LinkCommand
+    LinkCommand --> LinkCommandParser : l
+    deactivate LinkCommand
+end
+
+<-- LinkCommandParser : l
+deactivate LinkCommandParser
+
+@enduml

@@ -7,6 +7,8 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":ParseException" as ParseException LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
 end box
 
 [-> LogicManager : execute("delete 1")
@@ -25,12 +27,29 @@ deactivate DeleteCommandParser
 AddressBookParser -> DeleteCommandParser : parse(arg)
 activate DeleteCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand : new DeleteCommand("CS3230")
-activate DeleteCommand
+create ParserUtil
+DeleteCommandParser -> ParserUtil : parseIndexes(arg)
+activate ParserUtil
+ParserUtil --> DeleteCommandParser : List<Index> (indices)
+deactivate ParserUtil
 
-DeleteCommand --> DeleteCommandParser
-deactivate DeleteCommand
+alt Single index in list
+    DeleteCommandParser -> DeleteCommand : new DeleteCommand(indices)
+    activate DeleteCommand
+    DeleteCommand --> DeleteCommandParser : d
+    deactivate DeleteCommand
+else Multiple indices
+    loop For each index starting from second
+        alt Indices are duplicate
+            DeleteCommandParser -> ParseException : throw ParseException("Indices must be unique")
+            deactivate DeleteCommandParser
+        end
+    end
+    DeleteCommandParser -> DeleteCommand : new DeleteCommand(indices)
+    activate DeleteCommand
+    DeleteCommand --> DeleteCommandParser : d
+    deactivate DeleteCommand
+end
 
 DeleteCommandParser --> AddressBookParser : d
 deactivate DeleteCommandParser
@@ -51,6 +70,6 @@ deactivate DeleteCommand
 DeleteCommand -[hidden]-> LogicManager
 destroy DeleteCommand
 
-[<--LogicManager : result
+[<-- LogicManager : result
 deactivate LogicManager
 @enduml

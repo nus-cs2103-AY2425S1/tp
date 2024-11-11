@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Parser LOGIC_COLOR_T1
+participant ":PinCommandParser" as PinCommandParser LOGIC_COLOR
+participant "ParserUtil" as ParserUtil LOGIC_COLOR
+participant "p:PinCommand" as PinCommand LOGIC_COLOR
+participant ":ParseException" as ParseException LOGIC_COLOR
+end box
+
+[-> PinCommandParser : parse(args)
+activate PinCommandParser
+
+alt Successful Parsing
+    PinCommandParser -> ParserUtil : parseIndexes(args)
+    activate ParserUtil
+    ParserUtil --> PinCommandParser : List<Index> indices
+    deactivate ParserUtil
+
+    PinCommandParser -> PinCommand : new PinCommand(indices)
+    activate PinCommand
+    PinCommand --> PinCommandParser : p
+    deactivate PinCommand
+
+else Parsing Failure
+    PinCommandParser -> ParseException : throw ParseException()
+end
+
+[<-- PinCommandParser : p
+deactivate PinCommandParser
+
+@enduml
