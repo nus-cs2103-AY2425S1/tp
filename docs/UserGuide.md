@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-<img src="images/wardwatch_banner.png" alt="wardwatch-logo" style="pointer-events: none;">
+<img src="images/wardwatch_banner.png" alt="wardwatch-logo" style="pointer-events: none; width: 100%; height: auto;">
 
 # WardWatch User Guide
 
@@ -52,7 +52,7 @@ WardWatch (WW) is a **desktop app targeted towards doctors and nurses for managi
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wardwatch.jar` command to run the application.<br>
 
 A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
-<img src="images/Ui.png" alt="Ui" style="pointer-events: none;">
+<img src="images/Ui.png" alt="Ui" style="pointer-events: none; width: 100%; height: auto;">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -185,7 +185,7 @@ Symbol     | Parameter   | Constraints
 
 Shows a pop-up message explaining how to access the help page.
 
-<img src="images/helpMessage.png" alt="help message" style="pointer-events: none;">
+<img src="images/helpMessage.png" alt="help message" style="pointer-events: none; width: 100%; height: auto;">
 
 Format: `help`
 
@@ -209,7 +209,7 @@ Format: `exit`
 
 ### Adding a patient: `add`
 
-<img src="images/add.png" alt="add patient result" style="pointer-events: none;">
+<img src="images/add.png" alt="add patient result" style="pointer-events: none; width: 100%; height: auto;">
 
 Adds a patient to WardWatch.
 
@@ -228,7 +228,7 @@ Examples:
 
 ### Editing a patient : `edit`
 
-<img src="images/edit.png" alt="edit patient result" style="pointer-events: none;">
+<img src="images/edit.png" alt="edit patient result" style="pointer-events: none; width: 100%; height: auto;">
 
 Edits an existing person in WardWatch.
 
@@ -247,7 +247,7 @@ Examples:
 
 ### Deleting a patient : `delete`
 
-<img src="images/delete.png" alt="delete patient result" style="pointer-events: none;">
+<img src="images/delete.png" alt="delete patient result" style="pointer-events: none; width: 100%; height: auto;">
 
 Deletes the specified person from WardWatch.
 
@@ -303,7 +303,7 @@ Examples:
 * `find w/ B1` returns all patients in ward B1
 * `find m/ Dave` returns an empty list
 * `find n/ alice benson` returns `Alice Pauline`, `Benson Meier`<br>
-  <img src="images/findAliceBensonResult.png" alt="find n/ alice benson" style="pointer-events: none;">
+  <img src="images/findAliceBensonResult.png" alt="find n/ alice benson" style="pointer-events: none; width: 100%; height: auto;">
 
 
 [Back to Table of Contents](#table-of-contents)
@@ -320,7 +320,7 @@ Format: `view INDEX`
 Examples:
 
 * `view 1` to view the 1st patient's details.
-<img src="images/viewResult.png" alt="result for 'view 1'" style="pointer-events: none;">
+<img src="images/viewResult.png" alt="result for 'view 1'" style="pointer-events: none; width: 100%; height: auto;">
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -358,7 +358,7 @@ Examples:
 
 ### Adding an Appointment to a patient: `makeappt`
 
-<img src="images/makeappt.png" alt="makeappt for patient result" style="pointer-events: none;">
+<img src="images/makeappt.png" alt="makeappt for patient result" style="pointer-events: none; width: 100%; height: auto;">
 
 Makes an appointment for a person.
 
@@ -398,7 +398,7 @@ Format: `delappt INDEX`
 
 ### Show appointments on a specific date: `scheduledate`
 
-<img src="images/scheduledate.png" alt="scheduledate result" style="pointer-events: none;">
+<img src="images/scheduledate.png" alt="scheduledate result" style="pointer-events: none; width: 100%; height: auto;">
 
 Lists all the appointments on a specific date.
 
