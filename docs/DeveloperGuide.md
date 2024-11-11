@@ -458,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. **Make the GUI wrap large addresses to the next line:** With the current implementation, if you type in an address which is longer than the width of the screen, it stretches the person card (for all contacts), forcing the user to scroll to the right to see the rest of the address, the project status and deadline. In future updates, we plan to enable `textWrap` and set a `maxWidth` for the address label to enhance the UI and improve readability.
 2. **Add support for patronymics, like 's/o' or 'd/o', in the name field:** The current implementation only allows alphanumeric characters, spaces, and dashes, and so users have to work around this restriction by using "s o" or "son of". In the future, we will adjust the regex to allow special strings like "s/o" and "d/o".
 3. **Allow users to clear current sorting scheme:** Currently, users cannot 'undo' a sort command. In the future, we plan to add an undo and redo feature, which will complete this enhancement as well. Do refer to [the proposed undo and redo feature](#proposed-undoredo-feature).
-4. **Adjust sorting function to maintain order for identical names/deadlines:** Currently, when multiple entries share the same name or deadline, sorting them may cause reordering if a different field (i.e project status) is changed afterward. The reason for this is due to a bug with the way SortedList is implemented. For details on this bug, and how we plan to enhance it in the future, refer to Appendix ...
+4. **Adjust sorting function to maintain order for identical names/deadlines:** Currently, when multiple entries share the same name or deadline, sorting them may cause reordering if a different field (i.e project status) is changed afterward. The reason for this is due to a bug with the way SortedList is implemented. For details on this bug, and how we plan to enhance it in the future, refer to [Appendix: Sorted List Bug](#appendix-sorted-list-bug)
 5. **Make add and edit command accept blacklisted client status:** The current implementation throws an error of invalid command format for the parameter cs/blacklisted. Users can work around this by using the blacklist command implemented. In the future, we plan to remove the restriction on blacklisted client status from both AddCommandParser and EditCommandParser.
 6. **Make rejection of blacklisted client status for add and edit command more specific:** This is in relation to point 5. The current error message thrown is that of **Invalid command format!** which does not accurately explain to the user that the issue lies with the blacklisted parameter. We plan to make the error message mention this `cs/blacklisted cannot be used for this command` **It is important to note that this enhancement will be deemed redundant once point 5. has been implemented, where cs/blacklisted is indeed accepted.
 7. **Reject email inputs without a period between alphanumeric characters for the domain portion** Currently, an input like `e/john@example` is accepted, however, this should not be the case a valid domain format would require at least 1 period for the top level domain (ie.john@example.com). We plan to adjust the regex for the domain portion of the email to reject such an input.
@@ -473,11 +473,11 @@ Reported [here](https://bugs.openjdk.org/browse/JDK-8301761)
 
 Description of SortedList bug:
 
-An issue in SortedList.sourceChanged() arises when an element in the source list is replaced using set(index, element). Normally, ObservableList creates a ListChangeEvent with a remove and an add event, but SortedList may misplace elements with a comparator result of 0(i.e if they're being sorted by name and have the same name), adding the new element in the wrong position. This becomes problematic in tables(such as how our clients are displayed).
+An issue in `SortedList.sourceChanged()` arises when an element in the source list is replaced using set(index, element). Normally, `ObservableList` creates a `ListChangeEvent` with a remove and an add event, but `SortedList` may misplace elements with a comparator result of 0(i.e if they're being sorted by name and have the same name), adding the new element in the wrong position. This becomes problematic in tables(such as how our clients are displayed).
 
 Example Steps to Reproduce(can replace name with deadline):
 
-1. Add multiple people with the same name(i.e `John`) and make the phone numbers 987654321, 987654322, 98765433, ...
+1. Add multiple (at least 3) people with the same name(i.e `John`) and make the phone numbers `1111 1111`, `2222 2222`, `3333 3333`, ...
 2. Observe the initial order
 3. Do a sort command (`sort name ascending`)
 4. Start editing other fields of these John's (i.e edit their project status)
@@ -487,20 +487,20 @@ In the future, we will firstly modify the program, such that it no longer uses S
 
 1. In ModelManager, delete the sortedPersons variable
 2. This will include modifying the getFilteredPersonList() method, to return filteredPersons, instead of sortedPersons.
-3. Replace the sortByComparator method to use the FXCollections.sort() method. This is sample code you can use:
+3. Replace the sortByComparator method to use the FXCollections.sort() method. This is sample code that can be used (modification may be necessary)
 
 ```
 @Override
-    public void sortByComparator(Comparator<Person> comparator) {
-        currentComparator = comparator;
-        int initialSize = addressBook.getPersonList().size();
+public void sortByComparator(Comparator<Person> comparator) {
+    currentComparator = comparator;
+    int initialSize = addressBook.getPersonList().size();
 
-        ObservableList<Person> sortedList = FXCollections.observableArrayList(addressBook.getPersonList());
-        FXCollections.sort(sortedList, comparator);
+    ObservableList<Person> sortedList = FXCollections.observableArrayList(addressBook.getPersonList());
+    FXCollections.sort(sortedList, comparator);
 
-        addressBook.setPersons(sortedList);
-        assert addressBook.getPersonList().size() == initialSize;
-    }
+    addressBook.setPersons(sortedList);
+    assert addressBook.getPersonList().size() == initialSize;
+}
 ```
 
 **Note:** This will make the current implementation such that the list only sorts when a sort command is executed, i.e if you do a sort by name command, and the names become A, J, J, Z, then you add a B, the list will become A, J, J, Z, B.
