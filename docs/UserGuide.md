@@ -560,9 +560,9 @@ Creates a pie chart of the distribution of students in each class, by `CLASS_ID`
 **[Command Format](#command-format):** `pie`
 
 For example, given the following currently displayed student with 7 students:
-- 2 student in class MA1522
+- 2 students in class MA1522
 - 2 students in class CS2103T
-- 2 student in class CS2100
+- 2 students in class CS2100
 - 1 student in class MA1521
 
 <div style="display: flex; align-items: flex-start; justify-content: space-around;">
@@ -685,12 +685,12 @@ Displaying the detailed information window can be done in two ways:
 
   <!-- Input Section -->
   <div style="width: 45%; margin-bottom: 20px;">
-    <p style="margin-top: 30px;"><b>Input:</b> Double-click on the student’s entry in the GUI to display detailed information in a pop-up window.</p>
+    <p style="margin-top: 10px;"><b>Input:</b> Double-click on the student’s entry in the GUI to display detailed information in a pop-up window.</p>
     <img src="images/infocommandoutput2.png" alt="Info Command Input 2" style="width: 100%;" />
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%; margin-bottom: 30px; margin-top: 35px;">
+  <div style="width: 45%; margin-bottom: 20px;">
     <p><b>Output:</b> A window pops up with the detailed information of the student.</p>
     <img src="images/infocommandoutput3.png" alt="Info Command Output 2" style="width: 100%;" />
   </div>
