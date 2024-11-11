@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This application was forked from [SE-EDU's AB3](https://github.com/nus-cs2103-AY2425S1/tp)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103-F13-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103-F13-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,7 +68,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103-F13-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -85,7 +85,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103-F13-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -145,9 +145,9 @@ they should make sense on their own without depending on other components)
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103-F13-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="600" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -306,14 +306,14 @@ and the **Actor** is the `user`, unless specified otherwise)
 1.  User requests to list contacts
 2.  TalentConnect shows a list of contacts
 3.  User requests to delete a specific contact in the list
-4.  TalentConnect deletes the contacts
-5.  TalentConnect returns an updated list of contacts along with success message.
+4.  TalentConnect deletes the contact
+5.  TalentConnect returns an updated list of contacts along with a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The contact list is empty.
 
   Use case ends.
 
@@ -323,14 +323,60 @@ and the **Actor** is the `user`, unless specified otherwise)
 
       Use case resumes at step 2.
 
+**Use case: Delete job**
+
+**MSS**
+
+1. User requests to list jobs
+2. TalentConnect shows a list of jobs
+3. User requests to delete a specific job in the list
+4. TalentConnect deletes the job and unmatches all contacts matched to the job
+5. TalentConnect returns an updated list of jobs and contacts along with a success message
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The job list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+     * 3a1. TalentConnect shows an error message.
+
+       Use case resumes at step 2
+
+**Use case: Delete company**
+
+**MSS**
+
+1. User requests to list companies
+2. TalentConnect shows a list of companies
+3. User requests to delete a specific company in the list
+4. TalentConnect deletes the company, deletes all jobs associated with the company, and unmatches all contacts matched with the aforementioned jobs.
+5. TalentConnect returns an updated list of companies, jobs, and contacts along with a success message
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The company list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. TalentConnect shows an error message.
+
+      Use case resumes at step 2
+
 **Use case: Screen a job listing**
 
 **MSS**
 
 1.  User requests to list job listings
 2.  TalentConnect shows a list of job listings
-3.  User requests to screen all contact based on the requirements of a job listing
-4.  TalentConnect return a list of contacts that fits the job requirements
+3.  User requests to screen all contacts based on the name of a job listing
+4.  TalentConnect returns a list of contacts that fits the job's name
 
     Use case ends.
 
@@ -354,7 +400,7 @@ and the **Actor** is the `user`, unless specified otherwise)
 
 **MSS**
 
-1. User requests to add contact.
+1. User requests to add a contact.
 2. TalentConnect returns an updated list of contacts with a success message.
    Use case ends.
 
@@ -365,6 +411,22 @@ and the **Actor** is the `user`, unless specified otherwise)
     * 1a1. TalentConnect shows an error message.
   
       Use case ends. 
+
+**Use case: Add job**
+
+**MSS**
+
+1. User requests to add a job.
+2. TalentConnect returns an updated list of jobs with a success message.
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given parameters are invalid.
+
+    * 1a1. TalentConnect shows an error message.
+
+      Use case ends.
 
 **Use case: Add a company**
 
@@ -402,9 +464,8 @@ and the **Actor** is the `user`, unless specified otherwise)
 **MSS**
 
 1. User requests to list companies.
-2. User requests to view a company.
-3. TalentConnect selects the targeted company.
-4. TalentConnect filters the contact and job lists to show those associated with company.
+2. User requests to view all jobs and contacts associated with a company.
+3. TalentConnect filters the contact and job lists to show those associated with company.
 
     Use case ends.
 
@@ -417,10 +478,6 @@ and the **Actor** is the `user`, unless specified otherwise)
     * 2a1. TalentConnect shows an error message.
     
         Use case resumes at step 2.
-
-* 4a. The list is empty.
-    
-    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -462,14 +519,14 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a contact
 
-1. Deleting a person while all persons are being shown
+1. Deleting a contact while all contacts are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete contact 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete contact 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -500,3 +557,4 @@ screen by how well the contact's skill match up to the job's requirements or to 
 * **Enable support for `find company`**  
 * **Enable support for `edit job`**  
 * **Enable support for `edit company`**  
+* **Enable support for more billing date formats (from end of month)**
