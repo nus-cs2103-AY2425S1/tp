@@ -99,20 +99,20 @@ any traditional point-and-click management app.
 
 ## Command summary
 
-|                                     Action                                      |                                                        Format, Examples                                                         |
-|:-------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------:|
-|                         **[Add](#adding-a-person-add)**                         | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate` |
-|                    **[Clear](#clearing-all-entries-clear)**                     |                                                             `clear`                                                             |
-|                     **[Delete](#deleting-a-person-delete)**                     |                                               `delete INDEX`<br> e.g., `delete 3`                                               |
-|                       **[Edit](#editing-a-person-edit)**                        |         `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`         |
-| **[Find by contact information](#finding-persons-by-contact-information-find)** |                       `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`                       |
-|             **[Add tag](#adding-tags-to-a-specific-person-addtag)**             |                       `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`                        |
-|                **[Delete tag](#deleting-a-person-s-tag-deltag)**                |                                     `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`                                      |
-|                **[Categorize tag](#categorizing-a-tag-cattag)**                 |                    `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`                    |
-|                     **[Undo action](#undo-a-command-undo)**                     |                                                             `undo`                                                              |
-|                     **[Redo action](#redo-a-command-redo)**                     |                                                             `redo`                                                              |
-|                      **[List](#listing-all-persons-list)**                      |                                                             `list`                                                              |
-|                         **[Help](#viewing-help-help)**                          |                                                             `help`                                                              |
+|                                        Action                                         |                                                        Format, Examples                                                         |
+|:-------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------------:|
+|                         **[Add:link:](#adding-a-person-add)**                         | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate` |
+|                    **[Clear:link:](#clearing-all-entries-clear)**                     |                                                             `clear`                                                             |
+|                     **[Delete:link:](#deleting-a-person-delete)**                     |                                               `delete INDEX`<br> e.g., `delete 3`                                               |
+|                       **[Edit:link:](#editing-a-person-edit)**                        |         `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`         |
+| **[Find by contact information:link:](#finding-persons-by-contact-information-find)** |                       `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`                       |
+|             **[Add tag:link:](#adding-tags-to-a-specific-person-addtag)**             |                       `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`                        |
+|                **[Delete tag:link:](#deleting-a-person-s-tag-deltag)**                |                                     `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`                                      |
+|                **[Categorize tag:link:](#categorizing-a-tag-cattag)**                 |                    `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`                    |
+|                     **[Undo action:link:](#undo-a-command-undo)**                     |                                                             `undo`                                                              |
+|                     **[Redo action:link:](#redo-a-command-redo)**                     |                                                             `redo`                                                              |
+|                      **[List:link:](#listing-all-persons-list)**                      |                                                             `list`                                                              |
+|                         **[Help:link:](#viewing-help-help)**                          |                                                             `help`                                                              |
 
 --------------------------------------------------------------------------------------------------------------------
 ## Commands
@@ -173,17 +173,18 @@ Examples:
 
 ### Finding persons by contact information : `find`
 
-Finds persons whose names, email address, contact number, or tag contain any of the given keywords.
+Finds persons whose name, email address, contact number, or tags contain any of the given keywords, even if the keyword is only a part of the information stored.
 
 Format: 
 
 `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`
 
 * Only the specified fields are searched.
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
+* The order of the keywords does not matter, e.g. `find n/Hans n/Bo` is equivalent to `find n/Bo n/Hans`.
+* Persons matching at least one keyword will be returned (i.e. `OR` search),
+  e.g. `find n/Hans n/Bo` will match persons with names `Hans Gruber` or `Bo Yang`.
+* Keywords do not need to fully match the field, a partial match is sufficient, e.g. `bern` can match names like `Bernice` or `Bernard`
 
 How `find` works with multiple parameters:
 * If multiple keywords for a field are present, `find` will display contacts that satisfy *any* keyword for that field.
@@ -191,12 +192,12 @@ How `find` works with multiple parameters:
 
 Examples:
 * `find n/bernice t/is1108` returns `Bernice Yu`<br>
-  ![result for 'find n/bernice t/is1108'](images/findBerniceIS1108Result.png){ width="750px" }
+  ![result for 'find n/bernice t/is1108'](images/findBerniceIS1108Result.png){ width="675px" }
 
 * `find t/floor t/run` returns all contacts with any tag containing `floor` or `run` <br>
-  ![result for 'find t/floor t/run'](images/findFloorRunResult.png){ width="750px" }
+  ![result for 'find t/floor t/run'](images/findFloorRunResult.png){ width="675px" }
 
-<div style="page-break-after: always;"></div>
+* `find n/alex n/bernice t/floor t/neighbour` returns all contacts that have names containing either `alex` or `bernice` **with** tags containing either `floor` or `neighbour`
 
 ### Deleting a person : `delete`
 
@@ -218,10 +219,10 @@ Adds the specified person's tag.
 
 Format: `addtag INDEX t/TAG [t/MORE_TAGS]…​`
 
-* Adds the tags with the specified name `TAG` of the person at the specified `INDEX`.
+* Adds the tags with the specified value `TAG` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Multiple tags can be added at a time.
+* Multiple tags can be added to a person per command.
 * Attempt to add duplicate tags to a person will cause an error message to be thrown.
 
 Examples:
@@ -234,15 +235,15 @@ Deletes the specified person's tag.
 
 Format: `deltag INDEX t/TAG`
 
-* Deletes the tag with the specified name `TAG` of the person at the specified `INDEX`.
+* Deletes the tag with the specified value `TAG` of the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Only one tag can be deleted at a time.
-* The list of the tag will be updated accordingly.
+* Only one tag can be deleted per command.
+* The list of tags will be updated accordingly.
 
 Examples:
 * `deltag 1 t/friend` 
-deletes the friend tag of the first person in the list.
+deletes the `friend` tag of the first person in the list.
 
 <div style="page-break-after: always;"></div>
 
@@ -252,7 +253,7 @@ Categorizes a tag under a defined category.
 
 Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
 
-* Sets the tag(s) in CampusConnect with the specified name `TAG` to fall under the specified `CATEGORY`.
+* Sets the tag(s) in CampusConnect with the specified value `TAG` to fall under the specified `CATEGORY`.
 * Currently available categories with their respective keywords and colours are:
 
     Category      | Keyword (case sensitive) | Colour
@@ -263,19 +264,17 @@ Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
     **Networking**| `network`                | <span style="color:LimeGreen"> Green </span>          
     **Mentorship**| `mentor`                 | <span style="color:HotPink"> Pink </span>
 
-* Multiple tags can be categorized to the same category at a time.
+* Multiple tags can be categorized to the same category using a single command.
 * All tags specified must be valid existing tags.
 * Attempts to set a tag to its current category will cause the whole command to be rejected.
 * Only one category is allowed to be entered per command, i.e. `cattag t/tag1 acads t/tag2 general` is not allowed.
+* Note: Newly created tags (by [`add`:link:](#adding-a-person-add) or [`addtag`:link:](#adding-tags-to-a-specific-person-addtag)) will have category `General` and colour `Grey` by default.
 
 Examples:
 * `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics` and display colour of the tag`CS2100` becomes `Gold`.
 * `cattag t/floorball t/mahjong activity` categorizes both tags `floorball` and `mahjong` under `Activities` with colour `Blue`. 
-* Newly created tags (by [`add`](#adding-a-person-add) or [`addtag`](#adds-tags-to-a-specific-person--addtag)) will have category `General` and colour `Grey` by default.
 
 ![cattag response image](images/cattagResponse.png)
-
-<div style="page-break-after: always;"></div>
 
 ### Undo a command : `undo`
 
@@ -303,11 +302,11 @@ Clears all entries from CampusConnect.
 
 Format: `clear`
 
-<box type="warning" seamless>
+<box type="warning">
 <strong>Caution:</strong>
-There will not be any confirmation message shown. </br>
 
-If you have unintentionally executed the `clear` command, you can use the [`undo`](#undo-a-command-undo) command to restore your data.
+* There will not be any confirmation message shown. </br>
+* If you have unintentionally executed the `clear` command, you can use the [`undo`:link:](#undo-a-command-undo) command to restore your data.
 </box>
 
 ### Exiting the program : `exit`
@@ -324,10 +323,11 @@ CampusConnect data is saved in the hard disk automatically after any command tha
 
 CampusConnect data is saved automatically as a JSON file `[JAR file location]/data/CampusConnect.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning">
 <strong>Caution:</strong>
-If your changes to the data file makes its format invalid, CampusConnect will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause CampusConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+* If your changes to the data file makes its format invalid, CampusConnect will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+* Furthermore, certain edits can cause CampusConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
