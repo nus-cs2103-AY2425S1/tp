@@ -119,9 +119,6 @@ A person can have any number of tags (including 0)
 * Priority defaults to low if not specified
 * Remark defaults to "No remarks added yet" if not specified
 
-> [!IMPORTANT]
-> NetBook does not allow adding 2 or more persons with the same email.
-
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com o/nus` 
 * `add n/Betsy Crowe p/99423374 t/friend e/betsycrowe@example.com o/nus t/criminal`
