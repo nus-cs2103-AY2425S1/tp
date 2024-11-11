@@ -211,157 +211,194 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### System: Grub Address Book (GAB)
 
-**Use Case:** UC1 - Search by Vendor Name
-
-**Actor:** User
+**Use Case:** UC1 - Add a new vendor
 
 **MSS:**
-1. User opens the application.
-2. GAB opens up to the home page.
-3. User enters the vendor name.
-4. GAB returns a list of vendors matching the name.
-5. Use case ends.
+1. User enters the add command.
+2. GAB displays the added vendor.
+   <br> Use case ends.
 
 **Extensions:**
-* 3a. GAB detects an error in entered user input.
-  * 3a1. GAB responds with a command error message and requests correct data.
-  * 3a2. User enters new data.
-  * Steps 3a1-3a2 are repeated until the data entered is correct.
-  * Use case resumes at step 4.
-
-* 4a. No matches found.
-  * 4a1. GAB responds that there are no matching vendors.
-  * 4a2. User enters new data.
-  * Steps 4a1-4a2 are repeated until the data entered can be found.
-  * Use case resumes at step 5.
+* 1a. Wrong add command format.
+    * 1a1. GAB shows an error message.
+    * 1a2. User enters new data.
+    * Steps 1a1-1a2 are repeated until the right add vendor command format is recognised.
+      Use case resumes at step 2.
 
 ---
 
-**Use Case:** UC2 - Filter by Tag Names
-
-**Actor:** User
+**Use Case:** UC2 - List all saved vendors
 
 **MSS:**
-1. User opens the application.
-2. GAB opens up to the home page.
-3. User enters the tag name.
-4. GAB returns a list of vendors matching the tag name.
-5. Use case ends.
+1. User enters the list command.
+2. GAB displays all vendors.
+   <br> Use case ends.
 
 **Extensions:**
-* 3a. GAB detects an error in entered user command.
-   * 3a1. GAB responds with a command error message and requests correct data. 
-   * 3a2. User enters new data.
-   * Steps 3a1-3a2 are repeated until the data entered is correct.
-   * Use case resumes at step 4.
-
-* 3b. GAB detects an error in entered user tag.
-   * 3b1. GAB responds with a command error message and requests correct data.
-   * 3b2. User enters new data.
-   * Steps 3b1-3b2 are repeated until the data entered is correct.
-   * Use case resumes at step 4.
+* 1a. The list is empty. 
+    * 1a1. GAB populate the list with vendors.
+      <br> Use case resumes at step 2.
 
 ---
 
-**Use Case:** UC3 - Filter by Price Label
-
-**Actor:** User
+**Use Case:** UC3 - Search by vendor name
 
 **MSS:**
-1. User opens the application.
-2. GAB opens up to the home page.
-3. User enters a price label.
-4. GAB returns a list of vendors within the price label.
-5. Use case ends.
+1. User enters the find command with vendor name.
+2. GAB returns a list of vendors matching the name.
+   <br> Use case ends.
 
 **Extensions:**
-* 4a. No vendor found.
-   * 4a1. GAB responds that there are no vendors within the price label.
-   * 4a2. User enters new data.
-   * Steps 4a1-4a2 are repeated until a vendor can be found.
-   * Use case resumes at step 5.
+* 1a. Wrong find command format.
+  * 1a1. GAB responds with a command error message and requests correct data.
+  * 1a2. User enters new data.
+  * Steps 1a1-1a2 are repeated until the data entered is correct.
+    <br> Use case resumes at step 2.
+* 2a. No matches found.
+  * 2a1. GAB responds that there are no matching vendors.
+    <br> Use case ends.
 
-**Use Case:** UC4 - Create new vendor
+---
 
-**Actor:** User
+**Use Case:** UC4 - Filter by tag names
 
 **MSS:**
-1. User opens the application.
-2. GAB opens up to the home page.
-3. User enters the add command
-4. GAB displays the added vendor
-5. Use case ends.
+1. User enters the tags command with tag name.
+2. GAB returns a list of vendors matching the tag name.
+   <br> Use case ends.
 
 **Extensions:**
-* 3a. Wrong add command
-    * 3a1. GAB responds with wrong command format error message
-    * 3a2. User enters new data
-    * Steps 3a1-3a2 are repeated until the right add vendor command format is recognised
-    * Use case resumes at step 4.
-* 3b. Adding tags
-    * 3b1. User enters the add command along with the tag
-    * 3b2. GAB returns added vendor
-    * Steps 3b1-3b2 are repeated until the right add vendor command format is recognised
-    * Use case resumes at step 4.
+* 1a. Wrong tag command format.
+  * 1a1. GAB responds with a command error message and requests correct data.
+  * 1a2. User enters new data.
+  * Steps 1a1-1a2 are repeated until the command format entered is correct.
+    <br> Use case resumes at step 2.
+* 2a. No matches found.
+  * 2a1. GAB responds that there are no matching vendors.
+    <br> Use case ends.
 
-**Use Case:** UC5 - Update vendor
+---
 
-**Actor:** User
+**Use Case:** UC5 - Filter by price label
 
 **MSS:**
-1. User opens the application.
-2. GAB opens up to the home page.
-3. User enters the update command
-4. GAB displays the updated vendor
-5. Use case ends.
+1. User enters the price command with price label.
+2. GAB returns a list of vendors within the price label.
+   <br> Use case ends.
 
 **Extensions:**
-* 3a. Wrong edit command format
-    * 3a1. GAB responds with wrong command format error message
-    * 3a2. User enters new data
-    * Steps 3a1-3a2 are repeated until the right update vendor command format is recognised
-    * Use case resumes at step 4.
-* 3b. Multiple saved vendors with the same name
-    * 3b1. User first <u>searches for vendors name (UC1).</u>
-    * 3b2. GAB returns search result
-    * 3b3. User identifies the index of the right vendor to be updated
-    * Steps 3b1-3b3 are repeated until user identifies the right vendor
-    * Use case resumes at step 4.
+* 1a. Wrong price command format.
+  * 1a1. GAB responds with a command error message and requests correct data.
+  * 1a2. User enters new data.
+  * Steps 1a1-1a2 are repeated until the command format entered is correct.
+    <br> Use case resumes at step 2.
+* 2a. No matches found.
+  * 2a1. GAB responds that there are no matching vendors.
+    <br> Use case ends.
 
-**Use Case:** UC6 - Adding tags
+---
 
-**Actor:** User
+**Use Case:** UC6 - Update vendor
 
 **MSS:**
-1. User opens the application.
-2. GAB opens up to the home page.
-3. User adds tag after <u>initiating the update command (UC5)</u>
-4. GAB displays the updated vendor
-5. Use case ends.
+1. User requests to <u>list all vendors (UC2)</u> or <u>search a vendor (UC3).</u>
+2. User enters the edit command with the restaurant index.
+3. GAB displays the edited vendor.
+   <br> Use case ends.
 
 **Extensions:**
-* 3a. Wrong edit command format
-    * 3a1. GAB responds with wrong command format error message
-    * 3a2. User enters new data
-    * Steps 3a1-3a2 are repeated until the right update vendor command format is recognised
-    * Use case resumes at step 4.
-* 3b. Multiple saved vendors with the same name
-    * 3b1. User first <u>searches for vendors name (UC1).</u>
-    * 3b2. GAB returns search result
-    * 3b3. User identifies the index of the right vendor to be updated
-    * Steps 3b1-3b3 are repeated until user identifies the right vendor
-    * Use case resumes at step 4.
+* 2a. Wrong edit command format.
+  * 2a1. GAB responds with wrong command format error message.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the right edit vendor command format is recognised.
+    <br> Use case resumes at step 3.
+* 2b. Multiple saved vendors with the same name.
+  * 2b1. User first <u>searches for vendors name (UC3).</u>
+  * 2b2. GAB returns search result.
+  * 2b3. User identifies the index of the right vendor to be updated.
+  * Steps 2b1-2b3 are repeated until user identifies the right vendor.
+    <br> Use case resumes at step 3.
 
-**Use Case:** UC7 - Getting Help
+---
 
-**Actor:** User
+**Use Case:** UC7 - Adding tags
 
 **MSS:**
-1. User opens the application.
-2. User enters a command for help.
-3. GAB displays a window with a link to the user guide.
-4. Use case ends.
+1. User adds tag after <u>initiating the update command (UC6).</u>
+2. GAB displays the updated vendor.
+   <br> Use case ends.
 
+---
+
+**Use Case:** UC8 - Favourite a Vendor
+
+**MSS:**
+1. User requests to <u>list all vendors (UC2)</u> or <u>search a vendor (UC3).</u>
+2. User enters the favourite command with the restaurant index.
+3. GAB marks the selected restaurant as a favourite.
+   <br> Use case ends.
+
+**Extensions:**
+* 2a. Wrong favourite command format.
+    * 2a1. GAB responds with wrong command format error message.
+    * 2a2. User enters new data.
+    * Steps 2a1-2a2 are repeated until the right favourite command format is recognised.
+      <br> Use case resumes at step 3.
+* 2b. Restaurant is already marked as favourite.
+    * 2b1. GAB responds that the restaurant is already marked as favourite.
+    * 2b2. User enters new data.
+    * Steps 2b1-2b2 are repeated until the right restaurant is indicated.
+      <br> Use case resumes at step 3.
+
+---
+
+**Use Case:** UC9 - Un-favourite a Vendor
+
+**MSS:**
+1. User requests to <u>list all vendors (UC2)</u> or <u>search a vendor (UC3).</u> 
+2. User enters the un-favourite command with the restaurant index.
+3. GAB remove the selected restaurant from favourites.
+   <br> Use case ends.
+
+**Extensions:**
+* 2a. Wrong un-favourite command format.
+    * 2a1. GAB responds with wrong command format error message.
+    * 2a2. User enters new data.
+    * Steps 2a1-2a2 are repeated until the right un-favourite command format is recognised.
+      <br> Use case resumes at step 3.
+* 2b. Restaurant was not previously marked as favourite.
+    * 2b1. GAB responds that the restaurant was not previously marked as favourite.
+    * 2b2. User enters new data.
+    * Steps 2b1-2b2 are repeated until the right restaurant is indicated.
+      <br> Use case resumes at step 3.
+
+---
+
+**Use Case:** UC10 - Rate a vendor
+
+**MSS:**
+1. User requests to <u>list all vendors (UC2)</u> or <u>search a vendor (UC3).</u>
+2. User enters the rate command with the restaurant index.
+3. GAB adds the rating to the restaurant.
+   <br> Use case ends.
+
+**Extensions:**
+* 2a. Wrong rate command format.
+  * 2a1. GAB responds with wrong command format error message.
+  * 2a2. User enters new data.
+  * Steps 2a1-2a2 are repeated until the right rate command format is recognised
+    <br> Use case resumes at step 3.
+
+---
+
+**Use Case:** UC11 - Getting Help
+
+**MSS:**
+1. User enters a command for help.
+2. GAB displays a window with a link to the user guide.
+   <br> Use case ends.
+
+---
 
 ### Non-Functional Requirements
 
