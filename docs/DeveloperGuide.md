@@ -1164,15 +1164,21 @@ We plan to make this message clearer by changing it to "Index is not a positive 
 For any invalid or unknown commands, a suggestion to view help will also be displayed to improve user experience. When "0" is passed as an index, the currently displayed generic error message "Invalid command format" will also be modified to "Please provide a valid positive integer as company index!" for improved clarity.
 When an excessively large number is passed as an index, the currently displayed generic error message "Invalid command format" will also be modified to "Index is too large! Should not exceed list size.", with the actual list size specified for improved clarity.
 
-3. **Improved `edit` command**: Currently, the `edit` command does not check if the user is trying to do a redundant edit (eg: changing the email to the same email),
-which may result in error-prone users (when trying do a minor update like `PHONE: 98765432 -> 98675432`) mistakenly thinking that they have edited the selected company correctly. In addition, after
-each edit operation is executed successfully, the application view returns to the full list of companies view (regardless of any existing filtered view by `find` command).
-This inconveniences users who are aiming to execute consecutive updates to the same company that has been filtered using the `find` command. We plan to fix this by <ins>1) preventing users from doing redundant edits</ins> and <ins>2) keeping the existing filtered list view instead of automatically returning to the full list of companies view after each successful edit operation</ins>.
-Currently, the only way to set the status of a company from `closed` to `interested` is to add a new application. This 
+3. **Improved `edit` command**:
+
+   1. Currently, the `edit` command does not check if the user is trying to do a redundant edit (eg: changing the email to the same email), which may result in error-prone users (when trying do a minor update like `PHONE: 98765432 -> 98675432`) mistakenly thinking that they have edited the selected company correctly.
+
+   2. After each edit operation is executed successfully, the application view returns to the full list of companies view (regardless of any existing filtered view by `find` command). This inconveniences users who are aiming to execute consecutive updates to the same company that has been filtered using the `find` command. We plan to fix this by <ins>1) preventing users from doing redundant edits</ins> and <ins>2) keeping the existing filtered list view instead of automatically returning to the full list of companies view after each successful edit operation</ins>.
 
 4. **Support for country codes in the `PHONE_NUMBER` field**: Currently, only numeric phone numbers without country codes are accepted, making it difficult to record numbers for international companies. We plan to enhance the AddressBook to accommodate country codes, enabling support for a broader range of company phone numbers.
 
 5. **Ability to remove optional fields for companies**: Currently, once an optional field is added to a company, it cannot be removed. We plan to enhance the `edit` command to allow users to clear optional fields, providing greater flexibility in managing company information.
 
-6. **Better handling of extreme inputs**: Currently, when an input field is excessively long, it can lead to faulty behaviour or incorrect error messages being displayed.
-Phone numbers will be capped at 15 digits as per the international limit, tags will be truncated to prevent interference with the GUI layout.
+6. **Better handling of extreme inputs**:
+
+   1. Currently, when an input field is excessively long, it can lead to faulty behaviour or incorrect error messages being displayed.
+
+   2. Phone numbers will be capped at 15 digits as per the international limit, tags will be truncated to prevent interference with the GUI layout.
+
+7. **New `close` command**: Currently, the only way to set the status of a company from `interested` to `closed` is when all applications are withdrawn or closed. 
+This can inconvenience users who decide not to consider a company under certain circumstances or after reopening it, and we will fix this by creating a `close` command to allow users to set company status to `closed` for greater control and flexibility.

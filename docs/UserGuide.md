@@ -571,6 +571,9 @@ However, parameters with no prefix (eg: `INDEX`) must appear as the first parame
 **Q**: Can I delete all contacts at once? <br>
 **A**: Yes, use the `clear` command to delete all contacts in your address book. Be cautious, as this action is <span style="color:red">irreversible</span>.
 
+**Q**: Can I add multiple identical applications to the same company?
+**A**: Yes, of course you can! This is not unlike a real-life scenario, where you could possibly apply for the same role multiple times, to the same company. However many times you apply to the same company, **InternBuddy** is here for you! 
+
 [back to top](#internbuddy-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
