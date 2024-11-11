@@ -157,7 +157,13 @@ public class Person implements Appointmentable {
     @Override
     public boolean addAppointment(LocalDateTime dateTime, int patientId, int doctorId, String remarks) {
         requireAllNonNull(dateTime, patientId, doctorId, remarks);
+        // Check for duplicates before adding
+        boolean appointmentExists = appointments.stream()
+                .anyMatch(appointment -> appointment.equals(new Appointment(dateTime, patientId, doctorId, remarks)));
 
+        if (appointmentExists) {
+            return false; // Appointment already exists, do not add
+        }
         return appointments.add(new Appointment(dateTime, patientId, doctorId, remarks));
     }
 
@@ -221,13 +227,14 @@ public class Person implements Appointmentable {
 
     }
 
-    public String getOneHistory(LocalDateTime dateTime, int patientId) {
-        requireAllNonNull(dateTime, patientId);
+    public String getOneHistory(LocalDateTime dateTime, int personId) {
+        requireAllNonNull(dateTime, personId);
         List<Appointment> apts = appointments.stream()
-                .filter(apt -> apt.getDateTime().toString().equals(dateTime.toString()))
-                .filter(apt -> apt.getPatientId() == patientId)
+                .filter(apt -> apt.getDateTime().equals(dateTime))
+                .filter(apt -> (this.role.equals("PATIENT") && apt.getPatientId() == personId)
+                        || (this.role.equals("DOCTOR") && apt.getDoctorId() == personId))
                 .collect(Collectors.toList());
-        if (apts.isEmpty() || apts.size() == 0) {
+        if (apts.isEmpty()) {
             return null;
         }
         return apts.get(0).toString();

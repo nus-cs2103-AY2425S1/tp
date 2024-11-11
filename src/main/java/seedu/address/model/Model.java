@@ -68,6 +68,7 @@ public interface Model {
      */
     void deletePerson(Person target);
 
+
     /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
@@ -83,6 +84,8 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    ObservableList<Person> getAllPersons();
 
     /** Returns an unmodifiable view of the filtered person list by Id search*/
     ObservableList<Person> getFilteredPersonById(int id);

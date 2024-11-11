@@ -31,6 +31,9 @@ public class ParserUtil {
         if (!Id.isValidId(trimmedId)) {
             throw new InvalidIdException(Id.MESSAGE_CONSTRAINTS);
         }
+        if (trimmedId.length() > 9) {
+            throw new InvalidIdException(Id.MESSAGE_ID_TOO_LARGE);
+        }
         return Integer.parseInt(trimmedId);
     }
 

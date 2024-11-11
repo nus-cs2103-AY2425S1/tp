@@ -73,7 +73,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ObservableList<Person> allPersons = model.getFilteredPersonList();
+        ObservableList<Person> allPersons = model.getAllPersons();
         Person personToEdit = model.getFilteredPatientById(allPersons, idToEdit);
         if (personToEdit == null) {
             throw new CommandException(MESSAGE_EDIT_FAILURE);

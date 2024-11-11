@@ -52,7 +52,7 @@ public class DeleteAppointmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ObservableList<Person> allPersons = model.getFilteredPersonList();
+        ObservableList<Person> allPersons = model.getAllPersons();
         Person patientToAddAppointment = model.getFilteredPatientById(allPersons, patientId);
         Person doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
 

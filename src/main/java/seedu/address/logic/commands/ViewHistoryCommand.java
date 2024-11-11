@@ -44,7 +44,7 @@ public class ViewHistoryCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ObservableList<Person> allPersons = model.getFilteredPersonList();
+        ObservableList<Person> allPersons = model.getAllPersons();
         Person personToView = model.getFilteredPersonById(allPersons, personId);
         if (personToView == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_ID);

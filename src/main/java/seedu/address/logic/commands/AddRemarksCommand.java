@@ -53,7 +53,7 @@ public class AddRemarksCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
 
         requireNonNull(model);
-        ObservableList<Person> allPersons = model.getFilteredPersonList();
+        ObservableList<Person> allPersons = model.getAllPersons();
         Person patientToAddRemarks = model.getFilteredPatientById(allPersons, patientId);
 
         checkForCorrectPatient(patientToAddRemarks);
