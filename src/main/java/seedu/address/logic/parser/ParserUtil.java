@@ -140,7 +140,7 @@ public class ParserUtil {
         if (!Tag.isWithinLengthLimit(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_LENGTH_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Tag(trimmedTag.toLowerCase());
     }
 
     /**
@@ -150,7 +150,7 @@ public class ParserUtil {
         requireNonNull(tags);
         final Tags tagSet = new Tags();
         for (String tagName : tags) {
-            Tag tag = parseTag(tagName);
+            Tag tag = parseTag(tagName.toLowerCase());
             Tags tagsToAdd = new Tags(Set.of(tag));
             tagSet.addAllTags(tagsToAdd);
         }
