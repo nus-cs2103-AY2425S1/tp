@@ -965,3 +965,4 @@ Expected: Attendance cleared. Success message shown.
 
 ## **Appendix: Planned Enhancements**
 1. Add a `course-list` command to list all courses so that user can view courses in the system.
+2. Add support for more Course Codes and Tutorial IDs by changing the regular expressions (i.e:`VALIDATION_REGEX`) used to accommodate other valid course codes and tutorial ids.
