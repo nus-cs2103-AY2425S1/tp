@@ -37,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -69,7 +69,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -87,7 +87,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -121,7 +121,7 @@ How the parsing works:
 
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="700" />
 
@@ -138,7 +138,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T10-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="700" />
 
@@ -840,13 +840,46 @@ The reuse of these components allowed us to focus more on the unique aspects of 
 
 ### Team size: 5
 
-1. Ritvi
-2. Ritvi
-3. Lynette
-4. Lynette
-5. Nasya
-6. Nasya
-7. Kelly
-8. Kelly
-9. Otto
-10. Otto
+1. **Improve handling of name inputs (`add` and `edit` commands)**: Currently names accepted are only alphanumeric. 
+To improve inclusivity, we plan to accept special characters (e.g. "s/o", "d/o"), accents (e.g. é, è) as well as other
+languages. However, we will restrict names from including numbers, due to their lack of use.<br><br>
+An example of a newly accepted command will be:`edit Javier n/Javiér`<br><br>
+An example of a command that will trigger an invalid error will be: `edit Javier n/J4vier`<br>
+
+2. **Improve our date package (Used by all commands that require a date)**: Currently, it is possible to input invalid
+dates such as `29/02/2025 1200` (Invalid leap year) or `31/06/2025 2400` (31st of June does not exist). With our intended
+improvement, an error message will be displayed if any instance of an invalid date is inputted.<br><br>
+A few examples of commands that will throw invalid date errors will be:<br>
+`edit Javier ap/31/06/2025 2400`<br>
+`filter ap/31/06/2025 - 29/02/2026`<br>
+
+3. **Introduce stricter constraints for `age`**: Currently our Age field accepts any value ranging from 0-999, which seems
+a tad too high. We plan to decrease the upper limit of the range to a more reasonable 150<br><br>
+An example of a command that will trigger invalid date errors will be:`edit Javier b/151`<br>
+
+4. **Set age boundaries for `filter age`**: Currently, the `filter` command allows any age range to be inputted, which 
+can lead to invalid or nonsensical ranges. We plan to set boundaries for the age filter to ensure that only valid age 
+ranges are accepted. The valid age range will be from 0 to 150. We will also check for string length to prevent any 
+overflow issues.<br><br>
+An example of a command that will trigger an invalid age range error will be: `filter b/151-200`
+
+5. **Introduce verification of phone numbers**: Currently, the application does not properly 
+verify the format of phone numbers and email addresses. We plan to introduce validation checks to ensure that phone 
+numbers exists.<br><br>
+An examples of an invalid input that will trigger an error: `edit Javier p/00000000` (phone number should exist)<br>
+
+6. **Introduce verification of emails**: Currently, the application does not properly verify the format email addresses 
+as invalid emails such as `example@example` are still accepted, which is missing the TLD portion of the email. We plan 
+to improve validation checks to ensure that email addresses are in the correct format.<br><br>
+An examples of an invalid input that will trigger an error: `edit Javier e/example@example` (should follow the format `local-part@domain.tld`)<br>
+
+7. **View any patient’s note without needing to return to the patient list view**: Currently, to view the details or 
+notes of a different patient after viewing a specific patient, users must first input the list command to return to the 
+full patient list before specifying another patient (e.g. `view SECONDPATIENT`).<br><br>
+The enhanced view command will allow the user to switch directly to another patient’s information without the need to 
+re-list all patients first.
+
+8. **Introduce stricter constraints for `sex`**: Currently, we accept any alphanumerical input. However, this may not be reflective of 
+real-life behavior, despite the freedom it provides the user. Therefore, we plan to restrict the input for the sex field 
+to predefined values such as "Male", "Female", and "Other".<br><br>
+An example of a command that will trigger an invalid sex error will be: `edit Javier s/Unknown`
