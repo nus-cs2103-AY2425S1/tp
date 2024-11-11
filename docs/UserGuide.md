@@ -73,8 +73,8 @@ The user guide contains formatting to highlight important info. The standards us
   - [Summary of assignment commands](#summary-of-assignment-commands)
   - [Summary of other commands](#summary-of-other-commands)
 - [Glossary](#glossary)
-  - [Command word](#command-word)
   - [Alphanumeric](#alphanumeric)
+  - [Command word](#command-word)
   - [Graphical User Interface](#graphical-user-interface)
   - [Java](#java)
   - [JSON](#json)
@@ -184,7 +184,7 @@ Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [
   - Employee IDs are compared numerically. `0001` is treated the same as `1`.
 
 - Name must be: [*Alphanumeric*](#alphanumeric), spaces allowed
-  - Names which require special characters can be spelt out in full. e.g. `Nagaratnam s/o Suppiah` can be spelt out as `Nagaratnam son of Suppiah`
+  - Names which require special characters should be spelt out in full. e.g. `Nagaratnam s/o Suppiah` should be spelt out as `Nagaratnam son of Suppiah`
 
 - Phone Number must be: [*Numeric*](#numeric), no spaces, at least 3 digits long
 - Email must be: of the format `local-part@domain` and follow these constraints:
@@ -299,17 +299,18 @@ Examples:
 
 - `find John` returns `john` and `John Doe`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 Expected output:
 - System message noting success
 - Employees matching criteria above shown in the displayed employee list
+- Result for `find alex david` with sample data:
+![result for 'find alex david'](images/findAlexDavidResult.png)
 
 [Return to Top](#table-of-contents)
 
 #### Deleting an employee : `delete`
 
-**Deletes the specified employee** from the address book.
+**Deletes the specified employee <span style="color:red">and all its assignments</span>** from the address book.
 
 Format: `delete INDEX`
 
@@ -333,7 +334,7 @@ Expected output:
 **Clears all employee entries** from the address book.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-This deletes all employee data!
+This deletes all employee data AND their assignments!
 </div>
 
 Format: `clear`
@@ -594,7 +595,7 @@ If you decide to edit employee and project IDs directly in the data file, take e
 
 ### Editing the command history save file
 
-Similar to [Editing the data file](#editing-the-data-file), advanced users are welcome to update their command history directly by editing `[JAR file location]/data/hrconnect.json`.
+Similar to [Editing the data file](#editing-the-data-file), advanced users are welcome to update their command history directly by editing `[JAR file location]/data/commandtexthistory.json`.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to this file makes its format invalid, HRConnect will discard all data and start with an empty file at the next run. Hence, it is recommended to backup the file before editing it.<br>
@@ -615,7 +616,7 @@ Like the data file, certain edits to this file can cause HRConnect to behave in 
 ![rootFileStructure.png](images/rootFileStructure.png)
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HRConnect home folder.
+**A**: Install the app in the other computer and overwrite the data file it creates with the file that contains the data of your previous HRConnect home folder.
 
 **Q**: I don't see the data files anywhere.<br>
 **A**: You may need to run the app for the first time and run any command (such as `exit`) to generate these files.
@@ -674,7 +675,7 @@ Like the data file, certain edits to this file can cause HRConnect to behave in 
 
 [Return to Top](#table-of-contents)
 
-### Summary of assignment commands
+### Summary of other commands
 
 | Action                          | Format, Examples                                                                                                                                                                                                         |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -689,11 +690,11 @@ Like the data file, certain edits to this file can cause HRConnect to behave in 
 
 List of certain technical terms / uncommon words used in this user guide.
 
-### Command word
-- Word used at the beginning of each command denoting the action performed. Examples: `add`, `listemployees`, `filter`.
-
 ### Alphanumeric
 - Consisting of the letters A to Z (upper/lowercase) and the digits 0 to 9.
+
+### Command word
+- Word used at the beginning of each command denoting the action performed. Examples: `add`, `listemployees`, `filter`.
 
 ### Graphical User Interface
 - A digital interface in which a user interacts with graphical components such as icons, buttons, and menus. Example: Windows 11, most websites
