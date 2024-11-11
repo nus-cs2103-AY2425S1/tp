@@ -106,7 +106,7 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 
 * For all commands involving tags, take note that tags can only be **one word** containing alphanumeric characters (i.e **no spaces**).
 
-* For all commands, the command word **should not** be _capitalised_.
+* For all commands, the command word is **_case-sensitive_**.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
