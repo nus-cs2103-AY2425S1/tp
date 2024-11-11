@@ -325,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - Patient details are saved only if the input data is valid.
@@ -355,7 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - The person's details are successfully retrieved and displayed.
@@ -382,7 +382,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - The caregiver is correctly linked to the specified patient, and vice versa.
@@ -412,7 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - The patient’s details are successfully updated in the system.
@@ -441,7 +441,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The patient exists in the system.
 
 #### Guarantees
@@ -467,7 +466,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - Data is successfully found by the specified condition and displayed.
@@ -498,7 +497,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
+- None
 
 #### Guarantees
 - Data is successfully found by the specified patient(s) and displayed.
@@ -529,7 +528,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The person exists in the system.
 
 #### Guarantees
@@ -575,7 +573,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The person exists in the system.
 - The appointment for that person exists in the system.
 
@@ -623,7 +620,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The person exists in the system.
 - The appointment exists in the system.
 
@@ -665,7 +661,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The person exists in the system.
 
 #### Guarantees
@@ -699,7 +694,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Actor**: Geriatrician (Fred)
 
 #### Preconditions
-- Fred is logged into CareLink.
 - The address book contains patient data.
 
 #### Guarantees
