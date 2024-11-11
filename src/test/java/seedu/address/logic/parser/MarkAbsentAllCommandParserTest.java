@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.MarkAbsentAllCommand;
 import seedu.address.model.student.TutorialGroup;
 
-public class UnmarkPresentAllCommandParserTest {
+public class MarkAbsentAllCommandParserTest {
 
     private MarkAbsentAllCommandParser parser = new MarkAbsentAllCommandParser();
 
@@ -23,10 +23,10 @@ public class UnmarkPresentAllCommandParserTest {
     public void parse_allFieldsPresent_success() {
         // no leading and trailing whitespaces
         LocalDate date = LocalDate.of(2024, 10, 23);
-        MarkAbsentAllCommand expectedUnmarkPresentAllCommand = new MarkAbsentAllCommand(
+        MarkAbsentAllCommand expectedMarkAbsentAllCommand = new MarkAbsentAllCommand(
                 DIDDY.getTutorialGroup(), date);
         assertParseSuccess(parser, " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_DIDDY + " " + PREFIX_DATE + date,
-                expectedUnmarkPresentAllCommand);
+                expectedMarkAbsentAllCommand);
     }
 
     @Test

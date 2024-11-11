@@ -22,7 +22,7 @@ import seedu.address.testutil.StudentBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code UnmarkPresentAllCommand}.
  */
-public class UnmarkPresentAllCommandTest {
+public class MarkAbsentAllCommandTest {
 
     private final TutorialGroup validTutorialGroup = new TutorialGroup("A01");
     private final TutorialGroup emptyTutorialGroup = new TutorialGroup("B01");
@@ -44,27 +44,27 @@ public class UnmarkPresentAllCommandTest {
         LocalDate date1 = LocalDate.of(2024, 10, 23);
         LocalDate date2 = LocalDate.of(2024, 10, 24);
 
-        MarkAbsentAllCommand standardUnmarkPresentAllCommand = new MarkAbsentAllCommand(tutorialGroup1, date1);
+        MarkAbsentAllCommand standardMarkAbsentAllCommand = new MarkAbsentAllCommand(tutorialGroup1, date1);
 
         // same object -> returns true
-        assertTrue(standardUnmarkPresentAllCommand.equals(standardUnmarkPresentAllCommand));
+        assertTrue(standardMarkAbsentAllCommand.equals(standardMarkAbsentAllCommand));
 
         // same values -> returns true
-        MarkAbsentAllCommand standardUnmarkPresentAllCommandCopy = new MarkAbsentAllCommand(
+        MarkAbsentAllCommand standardMarkAbsentAllCommandCopy = new MarkAbsentAllCommand(
                 tutorialGroup1, date1);
-        assertTrue(standardUnmarkPresentAllCommand.equals(standardUnmarkPresentAllCommandCopy));
+        assertTrue(standardMarkAbsentAllCommand.equals(standardMarkAbsentAllCommandCopy));
 
         // different types -> returns false
-        assertFalse(standardUnmarkPresentAllCommand.equals(1));
+        assertFalse(standardMarkAbsentAllCommand.equals(1));
 
         // null -> returns false
-        assertFalse(standardUnmarkPresentAllCommand.equals(null));
+        assertFalse(standardMarkAbsentAllCommand.equals(null));
 
         // different tutorial group -> returns false
-        assertFalse(standardUnmarkPresentAllCommand.equals(new MarkAbsentAllCommand(tutorialGroup2, date1)));
+        assertFalse(standardMarkAbsentAllCommand.equals(new MarkAbsentAllCommand(tutorialGroup2, date1)));
 
         // different date -> returns false
-        assertFalse(standardUnmarkPresentAllCommand.equals(new MarkAbsentAllCommand(tutorialGroup1, date2)));
+        assertFalse(standardMarkAbsentAllCommand.equals(new MarkAbsentAllCommand(tutorialGroup1, date2)));
     }
 
     @Test
@@ -107,14 +107,14 @@ public class UnmarkPresentAllCommandTest {
     public void toStringMethod() {
         TutorialGroup tutorialGroup = new TutorialGroup("A01");
         LocalDate date = LocalDate.of(2024, 10, 23);
-        MarkAbsentAllCommand unmarkPresentAllCommand = new MarkAbsentAllCommand(tutorialGroup, date);
+        MarkAbsentAllCommand markAbsentAllCommand = new MarkAbsentAllCommand(tutorialGroup, date);
         String expectedString = MarkAbsentAllCommand.class.getCanonicalName() + "{tutorialGroup=" + tutorialGroup
                 + ", date=" + date + "}";
-        assertEquals(expectedString, unmarkPresentAllCommand.toString());
+        assertEquals(expectedString, markAbsentAllCommand.toString());
     }
 
     @Test
-    public void execute_undoUnmarkPresentAllCommand_success() throws Exception {
+    public void execute_undoMarkAbsentAllCommand_success() throws Exception {
         Model model = new ModelManager();
         model.addStudent(student1);
         model.addStudent(student2);
