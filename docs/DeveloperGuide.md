@@ -823,54 +823,79 @@ A patient will be added to the system if the patient is not already in the syste
 
       Use case ends.
 
-#### Use case: UC05 - Filter
+#### Use case: UC05 - Filters appointments with only end date.
 **Guarantees:**<br>
-* A patient will be added to the system
+Displays all appointments that lies from today's date and specified end date, if any.
 
 **MSS:**
 
-1.  User types command to add patient and inputs details for the new patient
-2.  ClinicConnect adds the patient to the system
+1.  User types command to filter appointments and inputs the end date.
+2.  ClinicConnect parses the inputs, filters all appointments based on the conditions specified by the user and displays them.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User does not input all the required parameters
-    * 1a1. ClinicConnect shows an error message saying 'Invalid command format!'.<br>
-      Step 1a1 is repeated until the input entered is valid containing all the required parameters<br>
+* 1a. User inputs invalid end date that doesn't follow the format YYYY-MM-DD.
+    * 1a1. ClinicConnect prompts the user to fix the date field that it should follow the specific format.<br>
+      Step 1a1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
       Use case resumes from step 2.
       <br>
 
 
-* 1b. User inputs an invalid prefix
-    * 1b1. ClinicConnect shows an error message saying the prefix is invalid.<br>
-      Step 1b1 is repeated until the input entered only contains valid prefixes<br>
+* 1b. User inputs an end date that is earlier than today's date.
+    * 1b1. ClinicConnect prompts the user to fix the end date by stating that end date should be after today's date.<br>
+      Step 1b1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
+      Use case resumes from step 2.
+      <br>
+
+#### Use case: UC06 - Filters appointments with start date and end date
+**Guarantees:**<br>
+Displays all appointments that lies in the date range, if any.
+
+**MSS:**
+
+1.  User types command to filter appointments and inputs the start date, end date.
+2.  ClinicConnect parses the inputs, filters all appointments based on the conditions specified by the user and displays them.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User inputs invalid start or end date that doesn't follow the format YYYY-MM-DD.
+    * 1a1. ClinicConnect prompts the user to fix the date field that it should follow the specific format.<br>
+      Step 1d1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
       Use case resumes from step 2.
       <br>
 
 
-* 1c. User inputs a field in the wrong format
-    * 1c1. ClinicConnect prompts the user to fix the field that is wrong and shows the correct format.<br>
-      Step 1c1 is repeated until the field is in the correct format<br>
+* 1b. User inputs an end date that is earlier than the start date.
+    * 1b1. ClinicConnect prompts the user to fix the start and end date by stating that end date should be after start date.<br>
+      Step 1g1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
       Use case resumes from step 2.
       <br>
 
 
-* 1d. User inputs duplicate prefixes (except for `al`)
-    * 1d1. ClinicConnect prompts the user to fix the field that is has a duplicate prefix.<br>
-      Step 1d1 is repeated until the input entered has distinct prefixes<br>
+#### Use case: UC07 - Filters appointments with an additional `HealthService` parameter
+**Guarantees:**<br>
+
+Displays appointments that matches with the specified `HealthService`.
+
+**MSS:**
+
+1.  User inputs the start and end date [UC06](#use-case-uc06---filters-appointments-with-start-date-and-end-date)
+2.  User adds the parameter `HealthService`.
+3.  ClinicConnect parses the inputs, filters all appointments based on the conditions specified by the user and displays them.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User inputs an invalid `HealthService` that does not belong to the present enum.
+    * 2a1. ClinicConnect prompts the user to choose a `HealthService` that is provided by the clinic.<br>
+      Step 2a1 is repeated until the user inputs a valid `HealthService` that is offered by the clinic.<br>
       Use case resumes from step 2.
       <br>
-
-
-* 1e. User inputs an NRIC that already exists in the system
-    * 1e1. ClinicConnect shows an error message saying the patient already exists in the system.<br>
-      Step 1e1 is repeated until a new NRIC that is not in the system is inputted<br>
-      Use case resumes from step 2.
-
-
-
 
 ### Non-Functional Requirements
 
