@@ -38,8 +38,9 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 3. **Set Up Your GamerBook Folder**: Copy the file to the folder you want to use as the _home folder_ for your
    GamerBook.
 
-4. **Run the App**: Open a command terminal, use `cd` to navigate into the folder you put the jar file in, and use
+4. **Run the App**: Open a command terminal, use [`cd`](https://owlcation.com/stem/how-to-open-files-in-terminal) to navigate into the folder you put the jar file in, and use
    the `java -jar gamerbook.jar` command to run the application.<br>
+   **Alternative**: Click on the gamerbook.jar application icon as you would any normal app.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
 ![Ui](images/Ui.png)
