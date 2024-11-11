@@ -11,7 +11,7 @@ public class Room {
 
     public static final String MESSAGE_CONSTRAINTS = "Room must be in the format block-floor-room number.\n"
             + "Example: 10-3-100\n"
-            + "Unfortunately, non-numeric block or room numbers are currently unsupported.";
+            + "Unfortunately, non-numeric block, room or floor numbers are currently unsupported.";
 
     public static final String VALIDATION_REGEX = "^[0-9]+-[0-9]+-[0-9]+$";
 
