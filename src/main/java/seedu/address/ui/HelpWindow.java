@@ -23,7 +23,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String LIST_HELP_HEADER = "List all contacts in ClientHub: ";
     public static final String LIST_HELP = "list";
     public static final String EDIT_HELP_HEADER = "Edit contacts: ";
-    public static final String EDIT_HELP = "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS d/DESCRIPTION c/CLIENT_TYPE";
+    public static final String EDIT_HELP = "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS d/DESCRIPTION c/CLIENT_TYPE...";
     public static final String DELETE_HELP_HEADER = "Delete contacts by name: ";
     public static final String DELETE_HELP_1 = "delete NAME";
     public static final String DELETE_HELP_2 = "d NAME";
