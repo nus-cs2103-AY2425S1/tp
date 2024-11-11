@@ -390,6 +390,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 4a. An appointment already exists on patient profile.
+
+    * 4a1. The system overwrites the existing appointment with the new appointment details.
+
+      Use case ends.
+
 ---
 
 ### **Use case: Add a remark to a patient's profile**
@@ -411,9 +417,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. The system shows an error message that no person with the given NRIC is found.
 
       Use case ends.
+  
 * 3a. User provides an empty remark.
 
     * 3a1. The system shows an error message indicating that the remark cannot be empty.
+
+      Use case ends.
+
+* 3b. User provides an invalid remark (containing non-alpha-numeric characters).
+
+    * 3b1. The system shows an error message indicating invalid input.
+
+      Use case ends.
+
+* 4a. The remark already exists on the patient's profile.
+
+    * 4a1. The system overwrites the existing remark with the new remark.
 
       Use case ends.
 
