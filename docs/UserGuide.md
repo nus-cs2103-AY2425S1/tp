@@ -177,14 +177,14 @@ Adds a student to AdmiNUS.
 student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 ```
 
-| Parameter Name   | Description                        | Constraint                                                                                                                                                                                                                                                                                                                                                                                          | Required  |
-|------------------|------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| `n/NAME`         | Name of the student                | Can include alphanumeric characters, spaces, and the `/` character for common name formats like s/o or d/o, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`).                                                                                                                                                                                                 | Compulsory |
-| `id/STUDENT_ID`  | Student ID issued by NUS           | Must be 7 digits enclosed with two **capital** letters, e.g., A1234567Z                                                                                                                                                                                                                                                                                                                             | Compulsory |
-| `p/PHONE_NUMBER` | Contact number                     | Must be at least 3 digits                                                                                                                                                                                                                                                                                                                                                                           | Compulsory                                                                                                                                                                                       |
+| Parameter Name   | Description                        | Constraint                                                                                                                                                                                                                                                                                                                                                                                         | Required  |
+|------------------|------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+| `n/NAME`         | Name of the student                | Can include alphanumeric characters, spaces, and the `/` character for common name formats like s/o or d/o, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`)                                                                                                                                                                                                 | Compulsory |
+| `id/STUDENT_ID`  | Student ID issued by NUS           | Must be 7 digits enclosed with two **capital** letters, e.g., A1234567Z                                                                                                                                                                                                                                                                                                                            | Compulsory |
+| `p/PHONE_NUMBER` | Contact number                     | Must be at least 3 digits                                                                                                                                                                                                                                                                                                                                                                          | Compulsory                                                                                                                                                                                       |
 | `e/EMAIL`        | Email address                      | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens (e.g., example.com) | Compulsory                                                                                                                                                                                       |
-| `a/ADDRESS`      | Physical address                   | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                         | Compulsory                                                                                                                                                                                                                                                                                                                                                                       |
-| `t/TAG`          | [Tags](#tag) to categorize contact | Must be alphanumeric characters and no spaces (case sensitive)                                                                                                                                                                                                                                                                                                                                      | Optional                                                                                                                                                                                                                                                                                                                                                                         |
+| `a/ADDRESS`      | Physical address                   | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                        | Compulsory                                                                                                                                                                                                                                                                                                                                                                       |
+| `t/TAG`          | [Tags](#tag) to categorize contact | Must be alphanumeric characters and no spaces (case sensitive)                                                                                                                                                                                                                                                                                                                                     | Optional                                                                                                                                                                                                                                                                                                                                                                         |
 
 <div markdown="span" class="alert alert-info"> 🔔 **Note**: Each student is uniquely identified by their Student ID, meaning you cannot add multiple students with the same Student ID. </div>
 
@@ -406,16 +406,14 @@ Tracks and lists all contacts who are in the [category](#category) of the specif
 Listed all persons under category: CATEGORY 
 (tracked list size number) persons listed!
 ```
-| Parameter Name | Description                         | Required   |
-|----------------|-------------------------------------| ---------- |
-| `CATEGORY`     | Either student or company to filter | Compulsory |
+| Parameter Name | Description                         | Constraint                                                          | Required   |
+|----------------|-------------------------------------|---------------------------------------------------------------------|------------|
+| `CATEGORY`     | Either student or company to filter | Must be from the predefined list of categories (student or company) | Compulsory |
 
 
 <div markdown="block" class="alert alert-info">
 
 🔔 **Notes**: <br>
-
-- `CATEGORY` must be from the predefined list of categories (student or company).
 
 - `CATEGORY` is case-insensitive. For example, `student` will match `Student`.
 
@@ -433,35 +431,32 @@ Listed all persons under category: CATEGORY
 #### Adding tag(s) to contact: `tag`
 Adds additional specified tag(s) to the specified contact or all contacts without overwriting existing tags.
 
-**Format 1**: `tag INDEX t/TAG [t/MORE_TAG]…​`
+**Format 1**: `tag INDEX t/TAG [t/MORE_TAG]…​`<br>
+Tagging operation applies to specified contact in the list
 
 **Expected message**:
 ```
 Added tag(s): [TAG], [MORE_TAG(if present)]
 to Person: (details of the person)
 ```
-| Parameter Name | Description                                                       | Required   |
-|----------------|-------------------------------------------------------------------|------------|
-| `INDEX`        | Index number of the contact to tag from the displayed person list | Compulsory |
-| `t/TAG`        | [Tag](#tag) to add to the specified contact                       | Compulsory |
-| `t/MORE_TAG` | More tags to add                                                  | Optional|
+| Parameter Name | Description                                                       | Constraint                                                            | Required   |
+|----------------|-------------------------------------------------------------------|-----------------------------------------------------------------------|------------|
+| `INDEX`        | Index number of the contact to tag from the displayed person list | Must be a positive integer 1, 2, 3, …                                 | Compulsory |
+| `t/TAG`        | [Tag](#tag) to add to the specified contact                       | Must be alphanumeric characters, non-empty, and cannot contain spaces | Compulsory |
+| `t/MORE_TAG`   | More tags to add                                                  | Must be alphanumeric characters, non-empty, and cannot contain spaces | Optional   |
+* Adds specified `TAG` (and `MORE_TAG` if present) to all contacts in the list provided
+  no duplicate tag(s) are found in all contacts.
 
 
 
-**Format 2**: `tag all t/TAG [t/MORE_TAG]…​`
+**Format 2**: `tag all t/TAG [t/MORE_TAG]…​`<br>
+Tagging operation applies to **all contacts currently shown in the list**, not all contacts in the database.
 
 **Expected message**:
 ```
 Added tag(s): [TAG], [MORE_TAG(if present)] to all contacts.
 ```
-| Parameter Name | Description                                                              | Required   |
-|----------------|--------------------------------------------------------------------------|------------|
-| `all`          | Indicates that the tagging operation applies to all contacts in the list | Compulsory |
-| `t/TAG`        | [Tag](#tag) to add to every contact in the list                          | Compulsory |
-| `t/MORE_TAG`   | More tags to add                                                         | Optional|
 
-* Adds specified `TAG` (and `MORE_TAG` if present) to all contacts in the list provided
-  no duplicate tag(s) are found in all contacts.
 
 
 
