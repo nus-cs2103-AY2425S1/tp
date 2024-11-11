@@ -2,6 +2,9 @@ package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.Model;
@@ -38,6 +41,7 @@ public class DeleteLessonCommand extends LessonCommand {
         if (targetIndex == null) {
             throw new NullPointerException("Index cannot be null");
         }
+        assert targetIndex != null: "targetIndex cannot be null";
         this.targetIndex = targetIndex;
     }
 
@@ -51,6 +55,7 @@ public class DeleteLessonCommand extends LessonCommand {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
 
+        assert listIndex < model.getFilteredLessonListSize(): "listIndex cannot be out of range";
         Lesson lesson = model.getFilteredLesson(listIndex);
         model.deleteLesson(lesson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, lesson));

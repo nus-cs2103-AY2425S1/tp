@@ -46,12 +46,13 @@ public class FindLessonCommand extends LessonCommand {
         logger.info("Executing FindLessonCommand with predicate: " + predicate);
 
         model.updateFilteredLessonList(predicate);
-        if (model.getFilteredLessonList().isEmpty()) {
+        if (model.filteredLessonListIsEmpty()) {
             // Log that no lessons are found at INFO level
             logger.info("No lessons found for the given predicate.");
             return new CommandResult(Messages.MESSAGE_NO_LESSONS_FOUND);
         }
 
+        assert !model.filteredLessonListIsEmpty();
         // Log the number of lessons found at INFO level
         logger.info("Found " + model.getFilteredLessonList().size() + " lessons.");
 
