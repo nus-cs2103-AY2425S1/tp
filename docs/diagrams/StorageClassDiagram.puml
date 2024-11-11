@@ -14,10 +14,10 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "SocialBook Storage" #F4F6F6{
-Class "<<interface>>\nSocialBookStorage" as SocialBookStorage
-Class JsonSocialBookStorage
-Class JsonSerializableSocialBook
+package "AddressBook Storage" #F4F6F6{
+Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
+Class JsonAddressBookStorage
+Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
 Class JsonAdaptedScheme
@@ -37,17 +37,17 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" SocialBookStorage
+StorageManager -up-> "1" AddressBookStorage
 StorageManager -up-> "1" AppointmentStorage
 
 Storage -left-|> UserPrefsStorage
 Storage -left-|> AppointmentStorage
-Storage -right-|> SocialBookStorage
+Storage -right-|> AddressBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonSocialBookStorage .up.|> SocialBookStorage
-JsonSocialBookStorage ..> JsonSerializableSocialBook
-JsonSerializableSocialBook --> "*" JsonAdaptedPerson
+JsonAddressBookStorage .up.|> AddressBookStorage
+JsonAddressBookStorage ..> JsonSerializableAddressBook
+JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 JsonAdaptedPerson --> "*" JsonAdaptedScheme
 
