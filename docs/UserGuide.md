@@ -85,7 +85,7 @@ Overview of key features:
 
 4. Open the command terminal (same as step 1a), type `cd [path-to-your-folder]` (path to the folder you placed the jar file in step 3) and use the `java -jar vendorvault.jar` command in the terminal to run the application.<br>
    ![Starting up application](images/intro/startingApp.png). If you are unsure how to do this step follow these guides below:
-    * Windows users follow this [guide](https://wiki.communitydata.science/Windows_terminal_navigation).
+    * Windows users follow this [guide](https://www.geeksforgeeks.org/change-directories-in-command-prompt/).
     * Mac users follow this [guide](https://darkroomphotos.com/mac-terminal-navigate-folders/).
     * Linux users follow this [guide](https://www.redhat.com/en/blog/Linux-file-navigation-commands).
 
