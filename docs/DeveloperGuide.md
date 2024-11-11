@@ -22,6 +22,7 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -317,7 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. SocialBook detects missing or invalid input.
 
-    * 1a1. SocialBook displays an error message that suggest what a correct input should look like.
+    * 1a1. SocialBook informs user that the index is invalid.
 
     * 1a2. User corrects the input and enters the command again.
 
@@ -325,18 +326,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-* 1b. SocialBook detects person indicated by input does not exist. 
-  
-    * 1b1. SocialBook informs user that at least one such person indicated to be deleted does not exist in the list.
-	    
-    * 1b2. User corrects the input and enters the command again.
+* 1b. User chooses to delete more than 1 person at a time.
 
-      Steps 1b1-1b2 are repeated until the user enters a correct input.
+    * 1b1. SocialBook deletes the specified persons.
 
-      Use case resumes from step 2.
+      Use case ends.
 
 
-**Use case: UC04 - Display help manual** 
+**Use case: UC04 - Display help window** 
 
 **MSS:**
 
@@ -348,9 +345,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 1a. User chooses more detailed manual for specific command.
+* 1a. User chooses help manual for specific command.
 
-    * 1a1. SocialBook displays detailed command instructions.
+    * 1a1. SocialBook displays detailed instructions for that command.
 
       Use case ends.
 
@@ -378,21 +375,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC06 - Check eligibility for assistance**
+**Use case: UC06 - Check eligibility for schemes**
 
 **MSS:**
 
-1. User chooses which person to check eligibility for assistance.
-2. SocialBook displays what schemes the person is eligible for.
+1. User chooses which person to check eligibility for schemes.
+2. SocialBook displays which schemes the person is eligible for.
 
     Use case ends.
 
 **Extensions:**
 
 * 1a. SocialBook detects missing or invalid input.
+
     * 1a1. SocialBook informs user that the index is invalid.
+
     * 1a2. User corrects the input and enters the command again.
-    * Steps 1a1-1a2 are repeated until the user enters a correct input.
+  
+      Steps 1a1-1a2 are repeated until the user enters a correct input.
     
       Use case resumes from step 2.
 
@@ -408,11 +408,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 * 2a. SocialBook detects missing or invalid input.
-    * 2a1. SocialBook informs user that the index is invalid.
-    * 2a2. User corrects the input and enters the command again.
-    * Steps 2a1-2a2 are repeated until the user enters a correct input.
 
-        Use case resumes from step 3.
+    * 2a1. SocialBook informs user that the index is invalid.
+
+    * 2a2. User corrects the input and enters the command again.
+  
+      Steps 2a1-2a2 are repeated until the user enters a correct input.
+
+      Use case resumes from step 3.
   
 * 2b.  The scheme is already added to the person.
     * 2b1. SocialBook informs user that the scheme is already added to the person.
@@ -420,17 +423,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 **Use case: UC08 - View what schemes a person is under**
-1. User chooses which person to check .
-2. SocialBook displays what schemes the current person is under.
+1. User chooses which person to check.
+2. SocialBook displays what schemes the person is currently under.
 
     Use case ends.
 
 **Extensions:**
 
 * 1a. SocialBook detects missing or invalid input.
+
     * 1a1. SocialBook informs user that the index is invalid.
+  
     * 1a2. User corrects the input and enters the command again.
-    * Steps 1a1-1a2 are repeated until the user enters a correct input.
+  
+      Steps 1a1-1a2 are repeated until the user enters a correct input.
 
       Use case resumes from step 2.
 
@@ -445,13 +451,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 * 2a. SocialBook detects missing or invalid input.
+
     * 2a1. SocialBook informs user that the index is invalid.
+  
     * 2a2. User corrects the input and enters the command again.
-    * Steps 2a1-2a2 are repeated until the user enters a correct input.
+  
+      Steps 2a1-2a2 are repeated until the user enters a correct input.
 
       Use case resumes from step 3.
 
 * 2b. User chooses to delete more than 1 scheme at a time.
+
     * 2b1. SocialBook deletes the schemes from the person and displays the updated information.
       
       Use case ends.
@@ -463,7 +473,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The system should be usable by a novice and does not require prior training.
 5.  Data that is to be deleted from the system is removed completely and not stored elsewhere.
-6.  Each command should take at most 10 seconds to executed.
+6.  Each command should take at most 10 seconds to execute.
 
 ### Glossary
 
@@ -552,7 +562,7 @@ testers are expected to do more *exploratory* testing.
     6. Test case: `deletescheme`<br>
        Expected: No scheme is deleted from person. Error details about invalid format shown in the display message.
 
-### Adding appointment to a person
+### Adding an appointment to a person
 
 1. Adding appointment to the specified person in the list
 
