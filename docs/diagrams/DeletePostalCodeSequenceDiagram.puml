@@ -27,20 +27,26 @@ create DeletePostalCodeCommandParser
 AddressBookParser -> DeletePostalCodeCommandParser : parse("deletePC 540123")
 activate DeletePostalCodeCommandParser
 
-create PostalCode
-DeletePostalCodeCommandParser -> PostalCode : new PostalCode("540123")
-activate PostalCode
-PostalCode --> DeletePostalCodeCommandParser : c
-deactivate PostalCode
+DeletePostalCodeCommandParser -> DeletePostalCodeCommandParser : validate postal code format
+alt invalid format
+    DeletePostalCodeCommandParser -> LogicManager : ParseException (Invalid format)
+    deactivate DeletePostalCodeCommandParser
+else
+    create PostalCode
+    DeletePostalCodeCommandParser -> PostalCode : new PostalCode("540123")
+    activate PostalCode
+    PostalCode --> DeletePostalCodeCommandParser : c
+    deactivate PostalCode
 
-create DeletePostalCodeCommand
-DeletePostalCodeCommandParser -> DeletePostalCodeCommand : new DeletePostalCodeCommand(c)
-activate DeletePostalCodeCommand
-DeletePostalCodeCommand --> DeletePostalCodeCommandParser
-deactivate DeletePostalCodeCommand
+    create DeletePostalCodeCommand
+    DeletePostalCodeCommandParser -> DeletePostalCodeCommand : new DeletePostalCodeCommand(c)
+    activate DeletePostalCodeCommand
+    DeletePostalCodeCommand --> DeletePostalCodeCommandParser
+    deactivate DeletePostalCodeCommand
 
-DeletePostalCodeCommandParser --> AddressBookParser : d
-deactivate DeletePostalCodeCommandParser
+    DeletePostalCodeCommandParser --> AddressBookParser : d
+    deactivate DeletePostalCodeCommandParser
+end
 
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
