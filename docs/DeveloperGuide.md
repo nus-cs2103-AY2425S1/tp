@@ -458,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **API**: Application programming interfaces, which defines the standards and protocols that allow different software components to communicate with one another.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **CLI**: Command line interface
+* **CLI**: A text-based interface that allows users to interact with software or operating systems by typing commands, offering precise control over tasks.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
