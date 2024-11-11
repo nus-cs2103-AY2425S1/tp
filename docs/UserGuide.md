@@ -130,7 +130,7 @@ Shows a list of all persons in TalentHub.
 
 Format: `list person`
 
-Example: Calling `list person` would yield the following output
+Example:
 
 <figure style="text-align: center;">
   <img src="images/add_person.png" alt="list person" style="display: block; margin: 0 auto; border-radius: 10px;">
@@ -317,7 +317,7 @@ Shows a list of all events in TalentHub.
 
 Format: `list event`
 
-Example: Calling `list event` would yield the following output
+Example:
 
 <figure style="text-align: center;">
   <img src="images/list_event.png" alt="result for 'list event'" style="display: block; margin: 0 auto; border-radius: 10px;">
