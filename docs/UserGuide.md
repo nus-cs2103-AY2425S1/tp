@@ -754,7 +754,7 @@ Example: apt 1 d/ 201224 fr/ 0800 to/ 1000
 >
 > ---
 > 
-> **User Error #4**: Index out-of-bounds
+> **User Error #4**: Client index out of bounds
 >
 > **Input**: `apt 100 d/20-10-24 fr/0800 to/1000`
 >
