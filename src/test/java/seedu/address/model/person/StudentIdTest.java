@@ -27,14 +27,14 @@ public class StudentIdTest {
 
         // invalid studentId
         assertFalse(StudentId.isValidStudentId("")); // empty string
-        assertFalse(StudentId.isValidStudentId(" ")); // spaces only
+        assertFalse(StudentId.isValidStudentId("   ")); // spaces only
         assertFalse(StudentId.isValidStudentId("91B51")); // less than 9 characters
         assertFalse(StudentId.isValidStudentId("123456789")); // all numbers
         assertFalse(StudentId.isValidStudentId("abcdefghi")); // all alphabets
         assertFalse(StudentId.isValidStudentId("A312 1534L")); // spaces inside
 
         // valid studentIds
-        assertTrue(StudentId.isValidStudentId("A1234567L")); // exactly 7 digits between 2 letters
+        assertTrue(StudentId.isValidStudentId("A1234567L")); // correct format
         assertTrue(StudentId.isValidStudentId("a5555555e"));
     }
 
