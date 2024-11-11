@@ -5,20 +5,19 @@ top to bottom direction
 skinparam arrowThickness 1.1
 skinparam classBackgroundColor UI_COLOR
 skinparam classAttributeIconSize 0
-
-skinparam defaultFontColor White
-
+skinparam CardFontColor White
+skinparam CardBackgroundColor UI_COLOR
 package "UI" <<Rectangle>> {
     Class Ui <<interface>>
 
     class UiManager {
-        -Logic logic
+        <color:#FFFFFF>-Logic logic
     }
 
     class MainWindow {
-        +handleHelpWindow()
-        +showPatientInfo(Patient patient)
-        +showAppts(TreeSet<FilteredAppointment> appts)
+        <color:#FFFFFF>+handleHelpWindow()
+        <color:#FFFFFF>+showPatientInfo(Patient patient)
+        <color:#FFFFFF>+showAppts(TreeSet<FilteredAppointment> appts)
     }
 
     Class HelpWindow
@@ -52,16 +51,15 @@ package "UI" <<Rectangle>> {
     }
 }
 
-package Model <<Rectangle>> {
-    skinparam classBackgroundColor UI_COLOR
+package Model <<Card>> {
 }
 
-package Logic <<Rectangle>> {
-    skinparam classBackgroundColor UI_COLOR
+package Logic <<Card>> {
+
+
 }
 
-package ExternalComponents <<Rectangle>> {
-   Class HiddenLogic #FFFFFF
+package ExternalComponents <<Card>> {
 }
 
 
