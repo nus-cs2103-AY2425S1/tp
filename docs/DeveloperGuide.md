@@ -10,6 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * The feature to filter file format for the Upload Command was adapted from this [StackOverflow post.](https://stackoverflow.com/questions/19302029/filter-file-types-with-jfilechooser) 
+* Github Copilot / ChatGPT 4.0 was used to autocomplete parts of code
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -142,6 +143,8 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="550" />
@@ -173,6 +176,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Upload Command
+
 #### Implementation
 The upload mechanism is facilitated by `JFileChooser` by the Java Swing toolkit. It extends ``Command`` and allows users to upload PNG images via saving
 the file path of the picture.
@@ -418,10 +422,14 @@ Use case ends.
 * **Financial Advisor**: A professional who provides expertise for clients' decisions around money matters, personal finances, and investments
 * **Client**: A financial advisor's contact
 * **GUI**: Graphical User Interface, a type of user interface through which users interact with electronic devices via visual indicator representations
+* * **Paid**: A client has the status paid when they have paid for their current policy and the current policy is active
+* **Unpaid**: A client has the status unpaid when they have not paid for their current policy and the current policy is expired
 * **Payment frequency**: The frequency of which a Financial Advisor receives payments from their clients. Typically, every 1, 3, 6 or 12 months
 * **Policy**: An agreement between the Financial Advisor and their client on the financial advisory services provided
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -598,6 +606,8 @@ testers are expected to do more *exploratory* testing.
    7. Perform any command to create a new addressbook.json
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Future**
 

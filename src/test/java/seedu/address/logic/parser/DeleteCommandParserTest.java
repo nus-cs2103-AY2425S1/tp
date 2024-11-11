@@ -26,11 +26,11 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", "Index is not a non-zero unsigned integer.");
+        assertParseFailure(parser, "a", "The person index provided is invalid");
     }
 
     @Test
     public void parse_noIndex_throwsParseException() {
-        assertParseFailure(parser, "", "Please enter a valid index.");
+        assertParseFailure(parser, "", "The person index provided is invalid");
     }
 }
