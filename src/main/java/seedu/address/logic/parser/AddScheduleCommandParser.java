@@ -47,7 +47,6 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
                             throw new RuntimeException(e); // Wrap ParseException to unchecked exception
                         }
                     }).collect(Collectors.toList());
-            
             for (int i = 0; i < contactIndexes.size(); i++) {
                 for (int j = i + 1; j < contactIndexes.size(); j++) {
                     if (contactIndexes.get(i).equals(contactIndexes.get(j))) {
