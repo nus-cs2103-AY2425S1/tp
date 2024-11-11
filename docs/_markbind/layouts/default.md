@@ -27,6 +27,7 @@
     <div class="nav-component slim-scroll">
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
+        
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
   * [Features]({{ baseUrl }}/UserGuide.html#features)
@@ -47,7 +48,7 @@
   * [Contact Fields Constraints]({{ baseUrl }}/UserGuide.html#contact-fields-constraints)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
   * [Known Issues]({{ baseUrl }}/UserGuide.html#known-issues)
-
+    
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
@@ -64,6 +65,7 @@
     * [Glossary]({{ baseUrl }}/DeveloperGuide.html#glossary)
   * [Appendix: Instructions for Manual Testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
   * [Appendix: Planned Enhancements]({{ baseUrl }}/DeveloperGuide.html#appendix-planned-enhancements)
+    
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>
