@@ -739,7 +739,7 @@ Examples:
 
 <br>
 
-### Unmarking a task  : `unmark-task` or `untask`
+#### Unmarking a task  : `unmark-task` or `untask`
 
 You can mark one or more `Tasks` as not completed by using the `unmark-task` command.
 
@@ -757,7 +757,7 @@ Examples:
 
 <br>
 
-### Deleting a Task : `delete-task` or `dtask`
+#### Deleting a Task : `delete-task` or `dtask`
 
 You can delete a specific Task from WedLinker by using the `delete-task` command.
 
@@ -778,7 +778,7 @@ Examples:
 
 <h3 class="features">Vendor Features</h3>
 
-### Assigning a Vendor : `assign-vendor` or `asv`
+#### Assigning a Vendor : `assign-vendor` or `asv`
 
 You can use the `assign-vendor` command to designate a contact to be a Vendor.
 
@@ -795,7 +795,7 @@ Examples:
     * `assign-vendor 1`.
 <br>
 
-### Unassigning a Vendor : `unassign-vendor` or `uv`
+#### Unassigning a Vendor : `unassign-vendor` or `uv`
 
 You can use the `unassign-vendor` command to remove a `Vendor` designation from a contact, making them a regular non-vendor contact in WedLinker.
 
