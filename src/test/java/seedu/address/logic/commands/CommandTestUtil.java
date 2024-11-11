@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -55,6 +57,8 @@ public class CommandTestUtil {
     public static final String VALID_SCHEDULE_NAME_BOB = "appointment";
     public static final String VALID_SCHEDULE_DATE_BOB = "2024-10-22";
     public static final String VALID_SCHEDULE_TIME_BOB = "08:00";
+    public static final String VALID_DATETIME_BEGIN = "2024-10-10 00:00";
+    public static final String VALID_DATETIME_END = "2024-10-12 00:00";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -74,7 +78,16 @@ public class CommandTestUtil {
     public static final String SOCIALMEDIA_IG_SC = " " + PREFIX_IG + VALID_HANDLE_SC;
     public static final String SOCIALMEDIA_FB_SC = " " + PREFIX_FB + VALID_HANDLE_SC;
     public static final String SOCIALMEDIA_CS_SC = " " + PREFIX_CS + VALID_HANDLE_SC;
+    public static final String BEGIN_DATETIME_INPUT = " " + PREFIX_BEGIN + VALID_DATETIME_BEGIN;
+    public static final String END_DATETIME_INPUT = " " + PREFIX_END + VALID_DATETIME_END;
 
+    public static final String INVALID_BEGIN_DATETIME = "10-10-2024 00:00";
+    public static final String INVALID_END_DATETIME = "10-10-2024 01:00";
+    public static final String INVALID_END_EARLIER_DATETIME = "2024-10-08 00:00";
+    public static final String INVALID_BEGIN_INPUT = " " + PREFIX_BEGIN + INVALID_BEGIN_DATETIME;
+    public static final String INVALID_END_INPUT = " " + PREFIX_END + INVALID_END_DATETIME;
+    public static final String INVALID_END_EARLIER_INPUT = " " + PREFIX_BEGIN + VALID_DATETIME_BEGIN
+            + " " + PREFIX_END + INVALID_END_EARLIER_DATETIME;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_LENGTH_NAME_DESC = " " + PREFIX_NAME
             + "Maximiliano Alberto de la Cruz Gonzalez de la Torre y Mendoza"; // longer than 50 characters
