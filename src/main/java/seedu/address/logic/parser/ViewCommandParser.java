@@ -10,7 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import java.util.logging.Logger;
 
 /**
- * Parses input arguments and creates a new ViewCommand object
+ * Parses input arguments and creates a new ViewCommand object.
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
 
