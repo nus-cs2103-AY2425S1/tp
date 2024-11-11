@@ -248,13 +248,10 @@ Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turn
 `setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword.
 
 ### Update the Status of an Internship Application
-The `StatusCommand` updates the status of an internship application to `PENDING`, `ACCEPTED`, or `REJECTED`, triggered by commands `/pending`, `/accept`, or `/reject` respectively. `AddressBookParser` parses the command input, creating a `StatusCommandParser` to interpret the request.
+The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`. 
+For clarity, some implementation details are omitted to avoid low-level specifics, focusing only on the high-level process of updating the internship application status.
 
-<puml src="diagrams/StatusSequenceDiagram.puml" alt="StatusSequenceDiagram" />
-
-The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`.
-
-`AddressBookParser`:
+AddressBookParser:
 1. Parses the command (e.g., `/accept 1`) and creates a `StatusCommandParser`.
 2. `StatusCommandParser` extracts the index and maps the command to the appropriate `Status` enum value (`PENDING`, `ACCEPTED`, or `REJECTED`). If either the index or status is invalid, a `ParseException` is thrown.
 3. If parsing succeeds, a `StatusCommand` is created with `targetIndex` and the specified `Status`.
@@ -373,7 +370,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | CS Undergraduate              | load the internship from a saved file                            | I can get back my data when I open the application                       |
 | `* * *`  | CS Undergraduate              | clear the list of internship application I have saved            | I can restart a new list in the next internship application cycle        |
 | `* * *`  | CS Undergraduate              | find internship applications by company name                     | I can quickly locate specific applications for review or updates         |
-| `* * *`  | CS Undergraduate              | update the status of an internship application to accepted, pending, or rejected | I can keep track of the progress of each application accurately |
+| `* * *`  | CS Undergraduate              | update the status of an internship application to accepted, pending, or rejected | I can update the status of each application accurately                   |
 | `* *`    | Meticulous CS Undergraduate   | sort the list of internship applications by date of application  | I can prioritize follow-ups with older applications                      |
 | `*`      | Organised CS Undergraduate    | view the interview dates for different internships applications  | I can update my schedule accordingly                                     |
 | `*`      | Efficient CS Undergraduate    | view my most desired internship applications by favouriting them | I can prioritize my time on checking up on these internship applications |
@@ -510,7 +507,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The user provides an empty search pattern.
-    * 1a1. HireMe displays an error message indicating that the search pattern cannot be empty.
+    * 1a1. HireMe displays an error message that explains how to use the find command and what parameters are valid.
 
       Use case ends.
 
@@ -530,16 +527,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS (Main Success Scenario)**
 
 1. The user requests to change the status of an internship application by specifying an index and the desired status (e.g., `/accept 2`, `/reject 3`, `/pending 4`).
-2. HireMe validates the provided index to ensure it is within the range of the current list.
-3. HireMe updates the status of the specified internship application to `ACCEPTED`, `REJECTED`, or `PENDING`.
-4. HireMe displays a confirmation message indicating that the status has been successfully updated.
+2. HireMe updates the status of the specified internship application to `ACCEPTED`, `REJECTED`, or `PENDING`.
+3. HireMe displays a confirmation message indicating that the status has been successfully updated.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The user provides an invalid index (e.g., non-positive or non-integer value).
-    * 1a1. HireMe displays an error message indicating that the index is invalid.
+* 1a. The user provides an invalid index (e.g., non-positive or non-integer value or integer out of range).
+    * 1a1. HireMe displays an error message that explains how to use the status command and what parameters are valid.
 
       Use case ends.
 
@@ -923,7 +919,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: The list should have applications with company names like "Google" and "Yahoo".
    
-    2. Test case: `/find goo`<br>
+    2. Test case: `/find google`<br>
        Expected: The application with the company name "Google" is displayed, showing that the search is case-insensitive.
    
     3. Test case: `/find YAHOO`<br>
@@ -941,7 +937,7 @@ testers are expected to do more *exploratory* testing.
 
 4. Find when no matches exist
 
-    1. Prerequisites: The list should not have any applications that match the given pattern.
+    1. Prerequisites: The list contains only 2 applications, with company names "Google" and "Yahoo".
    
     2. Test case: `/find Microsoft`<br>
        Expected: A message stating that no matching internship applications were found is shown.
@@ -951,29 +947,29 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: The application should be running.
    
     2. Test case: `/find`<br>
-       Expected: An error message stating that the search pattern cannot be empty is displayed.
+       Expected: An error message should be shown which explains how to use the find command and what parameters are valid.
 
 ### Updating the status of an internship application
 1. Update status to `ACCEPTED`
 
-    1. Prerequisites: List all internship applications using the `/list` command. Ensure that at least the "Google" and "Yahoo" applications exist.
+    1. Prerequisites: Display all internship applications using the `/list` command. Ensure that applications for "Google" and "Yahoo" are present in the list.
    
     2. Test case: `/accept 1`<br>
        Expected: The status of the 1st application (e.g., "Google") is updated to `ACCEPTED`.
    
     3. Test case: `/accept 0`<br>
-       Expected: An error message indicating that the index is invalid.
+       Expected: An error message should be shown which explains how to use the status command and what parameters are valid.
 
 2. Update status to `PENDING`
 
-    1. Prerequisites: List all internship applications using the `/list` command. Ensure that at least the "Google" and "Yahoo" applications exist.
+    1. Prerequisites: Display all internship applications using the `/list` command. Ensure that applications for "Google" and "Yahoo" are present in the list.
    
     2. Test case: `/pending 2`<br>
        Expected: The status of the 2nd application (e.g., "Yahoo") is updated to `PENDING`.
 
 3. Update status to `REJECTED`
 
-    1. Prerequisites: List all internship applications using the `/list` command. Ensure that at least the "Google" and "Yahoo" applications exist.
+    1. Prerequisites: Display all internship applications using the `/list` command. Ensure that applications for "Google" and "Yahoo" are present in the list.
    
     2. Test case: `/reject 1`<br>
        Expected: The status of the 1st application (e.g., "Google") is updated to `REJECTED`.
