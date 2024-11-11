@@ -199,7 +199,7 @@ When executed, this command parses user input and creates an internal representa
 
 #### Sequence Diagram
 
-When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` generates the a new `AddApptCommand` with the arguments `AppointmnetName`, `AppointmentTime`, `AppointmentDate`, and `Nric` retrieved from the user command string. This diagram shows a high-level sequence of what happens when a valid `AddApptCommand` is executed:
+When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` generates the a new `AddApptCommand` with the arguments `AppointmentName`, `AppointmentTime`, `AppointmentDate`, and `Nric` retrieved from the user command string. This diagram shows a high-level sequence of what happens when a valid `AddApptCommand` is executed:
 
 ![AddApptCommandSequence](images/AddApptCommandSequenceDiagram.png)
 
