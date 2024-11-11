@@ -430,7 +430,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case: UC07 - Find Guests and Vendor with a particular field**
 
 **MSS**
-1. User requests to find Guest and Vendor entries with a specified field (e.g., by category, name, RSVP status).
+1. User requests to find Guest and Vendor entries with a specified field (e.g., by name).
 2. System displays the matching Guest and Vendor entries.
 
    Use case ends.
