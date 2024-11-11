@@ -462,8 +462,13 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 * **1b**. No contacts were found with the entered keyword.
     * **1b1**. TutorEase displays an error message, showing no contacts have been found with the given keyword.
-    * **1b2**. Tutor enters a new keyword or cancels the search.  
-      Use case resumes from Step 2 or ends if cancelled.  
+    * **1b2**. Tutor enters a new valid keyword.  
+      Use case resumes from Step 2.  
+
+* **1c**. No contacts were found with the entered keyword.
+    * **1c1**. TutorEase displays an error message, showing no contacts have been found with the given keyword.
+    * **1c2**. Tutor cancels the search.  
+      Use case ends.
 
 **Use Case: UC06 - Add lesson for student**  
 
