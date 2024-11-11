@@ -1001,3 +1001,17 @@ This section outlines proposed improvements to address known feature flaws ident
         * :white_check_mark: `editemergency 3 p/91234567`
         * :x: `editemergency 1 n/` (Error: Name cannot be empty)
         * :x: `editemergency 3` (Error: Command requires at least one field to edit)<br></br>
+9. **Implement Grammar Adjustment for `list`, `listtask`, and `find` Commands:**
+    * Currently, NovaCare displays messages that are grammatically incorrect if only a single patient or task is in the result.
+        * For `list` or `listtask` commands, the output currently displays "Listed all patients" or "Listed all tasks", regardless of the number of results.
+        * For `find` commands, if there is only one result, the output displays "1 patients listed!" or "1 tasks listed!", which is grammatically incorrect.
+    * We propose implementing dynamic grammar adjustment based on the count of listed or found patients or tasks, improving the user experience by ensuring correct grammar in the displayed messages.
+        * When only one patient or task is listed, the output should display "Listed 1 patient" or "Listed 1 task."
+        * When multiple patients or tasks are listed, the output should display "Listed X patients" or "Listed X tasks," where `X` is the count.
+    * For example:
+        * :white_check_mark: `list` with 1 patient - Output: `Listed 1 patient`
+        * :white_check_mark: `listtask` with multiple tasks - Output: `Listed 3 tasks`
+        * :white_check_mark: `find John` with 1 result - Output: `Listed 1 patient`
+        * :white_check_mark: `findtask 1` with 4 results - Output: `Listed 4 tasks`
+        * :x: `list` with 1 patient - Current Output: `Listed all patients` (incorrect grammar)
+        * :x: `find` with 1 result - Current Output: `1 patients listed!` (incorrect grammar)
