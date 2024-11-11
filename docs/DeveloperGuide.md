@@ -577,3 +577,11 @@ testers are expected to do more *exploratory* testing.
 
        1. Test case: `view n/Adib j/Developer`<br>
           Expected: No candidate displayed on display panel. Error details shown in the result panel.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+### Area Code For Phone Numbers
+   - Support area codes in phone numbers (e.g. +6598765432)
