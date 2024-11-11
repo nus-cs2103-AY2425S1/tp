@@ -220,6 +220,10 @@ The mechanism functions as follows:
 
 3. **Redo**: The redo operation moves the `currentStatePointer` forward and restores the next state that was undone. If there are no undone states, the operation fails and returns an error.
 
+The activity diagram below illustrates how the state list changes according to the user's commands.
+
+<img src="images/CommitActivityDiagram.png" width="1000" />
+
 ---
 
 ### Example Flow
