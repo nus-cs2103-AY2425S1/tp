@@ -6,7 +6,7 @@ pageNav: 3
 
 # HiredFiredPro User Guide
 
-HiredFiredPro is a **desktop app for managing interviews, optimized for use via a Command  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HiredFiredPro can get your interview management tasks done faster than traditional GUI apps.
+HiredFiredPro is a desktop app to help hiring managers like you **streamline your hiring process** by simplifying interview management. It is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HiredFiredPro can get your interview management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 * [About This Document](#about-this-document)
@@ -49,9 +49,9 @@ The image below shows the different components of HiredFiredPro.
 ![HiredFiredPro_layout](images/UI-Layout.png)
 
 * **Command Input Line:** You can type your commands here and execute them by pressing Enter.
-* **Result panel:** Displays the results of the command that has been executed.
-* **Candidate panel:** Displays the complete or filtered list of candidates.
-* **Display panel:** Displays the details of a candidate.
+* **Result Panel:** Displays the results of the command that has been executed.
+* **Candidate Panel:** Displays the complete or filtered list of candidates.
+* **Display Panel:** Displays the details of a candidate.
 <br><br>
 
 ### Command Format
@@ -88,13 +88,13 @@ The image below shows the different components of HiredFiredPro.
 
 Parameter     | Notes
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**`NAME`**   | should contain only English alphabets and should not be blank
-**`JOB`**    | should be alphanumeric
+**`NAME`**   | should be alphanumeric and should not be blank
+**`JOB`**    | should be alphanumeric and should not be blank
 **`PHONE_NUMBER`**   | should only contain digits `0-9`, and it should be at least 3 digits long
 **`EMAIL`** | should be a valid email of the format `local-part@domain`
 **`SKILL`**   | should be alphanumeric 
 **`INTERVIEW_SCORE`**   | should be a number ranging from `0.0` to `10.0` with a maximum of a single decimal place, e.g. `5.5`, `8`, `10.0` are valid but `5.`, `6.55`, `11`, `.5` are invalid
-**`TAG`**   | should be alphanumeric and should not contain any spaces. `Hired`, `Rejected` or `Pending` also should not be manually added as tags
+**`TAG`**   | should be alphanumeric and should not contain any spaces. `hired`, `rejected` or `pending` also should not be manually added as tags
 **`INDEX`**   | refers to the index number shown in the displayed candidate list and **must be a positive integer**, i.e. 1, 2, 3, ...
 **`ORDER`**   | should be either `a` (ascending) or `d` (descending)
 
@@ -102,13 +102,13 @@ Parameter     | Notes
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have [`Java 17`](https://www.oracle.com/java/technologies/downloads/#java17) or above installed in your Computer.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for HiredFiredPro.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HiredFiredPro.jar` command to run the application. Alternatively, you can double-click the jar file to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HiredFiredPro.jar` command to run the application. <br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
    ![Ui](images/Ui.png) 
 
@@ -182,6 +182,11 @@ Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVI
 * Existing values will be updated to the input values.
 * When editing tags/skills, the existing tags/skills of the candidate will be removed i.e. adding of tags/skills is not cumulative.
 
+<box type="info">
+
+**Note:** Details of the candidate who has been edited will be displayed in the display panel.
+</box>
+
 <box type="tip">
 
 **Tip:** You can remove all the candidate’s tags by typing `t/` without specifying any tags after it. This does not change the candidate's status.
@@ -199,33 +204,33 @@ Examples:
 
 ### Hiring a candidate: `hire`
 
-Changes an existing candidate's status to "Hired" in HiredFiredPro.
+Changes an existing candidate's status to "hired" in HiredFiredPro.
 
 Format: `hire n/NAME j/JOB`
 
-* Changes the candidate's status to `Hired`.
+* Changes the candidate's status to `hired`.
 * Both the name of the candidate and the job that he/she is applying for must be provided.
-* Existing status will be updated to the `Hired` status.
+* Existing status will be updated to the `hired` status.
 
 <box type="tip">
 
-**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `hire n/Hans j/Software Engineer` and `hire n/hans j/SOFTWARE engineer` will mark the candidate as hired.
+**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `hire n/Alex Yeoh j/Software Engineer` and `hire n/alex yeoh j/SOFTWARE engineer` will mark the candidate as hired.
 </box>
 <br><br>
 
 ### Rejecting a candidate: `reject`
 
-Changes an existing candidate's status to "Rejected" in HiredFiredPro.
+Changes an existing candidate's status to "rejected" in HiredFiredPro.
 
 Format: `reject n/NAME j/JOB`
 
-* Changes the candidate's status to `Rejected`.
+* Changes the candidate's status to `rejected`.
 * Both the name of the candidate and the job that he/she is applying for must be provided.
-* Existing status will be updated to the `Rejected` status.
+* Existing status will be updated to the `rejected` status.
 
 <box type="tip">
 
-**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `reject n/Hans j/Software Engineer` and `reject n/hans j/SOFTWARE engineer` will mark the candidate as rejected.
+**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `reject n/Alex Yeoh j/Software Engineer` and `reject n/alex yeoh j/SOFTWARE engineer` will mark the candidate as rejected.
 </box>
 <br><br>
 
@@ -235,13 +240,13 @@ Shows a candidate's status and details in HiredFiredPro.
 
 Format: `view n/NAME j/JOB`
 
-* Views the candidate's status (Hired / Rejected / Pending) and full details.
+* Views the candidate's status (hired / rejected / pending) and full details.
 * Both the name of the candidate and the job that he/she is applying for must be provided.
 * Details of the candidate being viewed will be displayed in the display panel.
 
 <box type="tip">
 
-**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `view n/Hans j/Software Engineer` and `view n/hans j/SOFTWARE engineer` will show the candidate's status and details.
+**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `view n/Alex Yeoh j/Software Engineer` and `view n/alex yeoh j/SOFTWARE engineer` will show the candidate's status and details.
 </box>
 
 Examples:
@@ -256,11 +261,11 @@ Finds candidates whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is **case-insensitive**. e.g. `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
+* The search is **case-insensitive**. e.g. `bernice` will match `Bernice`.
+* The order of the keywords does not matter. e.g. `Yu Bernice` will match `Bernice Yu`.
+* Only full words will be matched e.g. `Bern` will not match `Bernice`.
 * Candidates matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+  e.g. `Bernice Yeoh` will return `Alex Yeoh`, `Bernice Yu`.
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -287,7 +292,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd candidate in HiredFiredPro.
-* `find Betsy` followed by `delete 1` deletes the 1st candidate in the results of the `find` command.
+* `find bernice` followed by `delete 1` deletes the 1st candidate in the results of the `find` command.
 <br><br>
 
 ### Sorting candidates by interview scores: `sort`
