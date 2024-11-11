@@ -527,11 +527,7 @@ Assuming there's at least one person that is unarchived.
 2. `archive 1`
 
 ---
-<<<<<<< HEAD
-### **List archived users: `listarchive`**
-=======
 ### **List archived customer: `listarchive`**
->>>>>>> master
 
 Shows all archived customers only in contact list
 
