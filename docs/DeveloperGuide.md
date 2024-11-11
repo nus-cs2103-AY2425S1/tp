@@ -332,14 +332,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The given name is invalid (i.e. name is empty or does not start with an alphabet).
     * 1a1. App shows an error message to tell the user that the given name is invalid.  
       Use case ends.
-* 1b. The given phone number is invalid (i.e. phone number is not a number or is not at least 3 digits long).
+* 1b. The given phone number is invalid (i.e., Phone numbers should only contain numbers, and it should be at least 3 digits long).
     * 1b1. App shows an error message to tell the user that the given phone number is invalid.  
       Use case ends.
-* 1c. The given email is invalid (i.e. email does not follow normal email address format).
-    * 1c1. App shows an error message to tell the user that the given email is invalid.  
-      Use case ends.
-* 1d. The given contact is a duplicate of another contact in the list (i.e. same name).
-    * 1d1. App shows an error message to tell the user that the contact already exists in the list.  
+* 1c. The given contact is a duplicate of another contact in the list.
+    * 1c1. App shows an error message to tell the user that the contact already exists in the list.  
       Use case ends.
 
 ---
@@ -462,8 +459,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions:**
-* 2a. No contact indices provided.
-    * 1a1. App shows an error message to tell the user that the command format is invalid. 
+* 2a. No contact IDs provided.
+    * 2a1. App shows an error message to tell the user that the given name does not exist.  
       Use case ends.
 * 2b. Invalid contact index(s) provided.
     * 2b1. App shows an error message to tell the user that the contact index(s) is invalid and ask the user to provide valid contact indices.  
@@ -517,43 +514,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC10 - Delete event by index**
+**Use case: UC10 - Edit event**
 
 **MSS:**
-1. User requests to list events.
-2. App shows a list of events.
-3. User requests to delete a specific event by index in the displayed list.
-4. App deletes the event at the specified index.  
+
+1. User requests to edit an existing event by providing the index of the event in the list and optionally providing new details such as an event name, event description, event start date, and event end date.
+2. App updates the event with the provided details.
    Use case ends.
 
 **Extensions:**
-* 3a. The given index is invalid (i.e. non-positive index or index exceeding size of list).
-    * 3a1. App shows an error message to tell the user that the given index is invalid.  
+* 1a. The given index is invalid (i.e., index is out of bounds).
+    * 1a1. App shows an error message to tell the user that the specified event index is invalid. 
       Use case ends.
-* 3b. No index is provided.
-    * 3b1. App shows an error message to tell the user that the command format is invalid.  
-      Use case ends.  
-
----
-
-**Use case: UC11 - Delete event by name**
-
-**MSS:**
-1. User requests to delete a specific event by name in the list.
-2. App deletes the event with the specified event name.  
-   Use case ends.
-
-**Extensions:**
-* 1a. The given event name does not exist.
-    * 1a1. App shows an error message to tell the user that the given event name does not exist.  
+* 1b. No changes are specified for the event. 
+    * 1b1. App shows an error message to tell the user that no changes were made to the event. 
       Use case ends.
-* 1b. No event name is provided.
-    * 1b1. App shows an error message to tell the user that the command format is invalid.  
+* 1c. The updated event name is invalid (i.e., name is empty or does not start with an alphabet). 
+    * 1c1. App shows an error message to tell the user that the given name is invalid. 
+      Use case ends.
+* 1d. The updated event description is invalid (i.e., description is empty or consists of only whitespaces). 
+    * 1d1. App shows an error message to tell the user that the given description is invalid. 
+      Use case ends.
+* 1e. The updated event duration is invalid (i.e., dates are not in the correct format YYYY-MM-DD or dates are not valid, e.g. 30 Feb 2024 or event end date is earlier than the start date). 
+    * 1e1. App shows an error message to tell the user that the given event dates are not valid. 
+      Use case ends.
+* 1f. The updated event has the same name as another event in the list. 
+    * 1f1. App shows an error message to tell the user that an event with the same name already exists in the list. 
       Use case ends.
 
----
+**Use case: UC11 - Unassign event from person**
 
-**Use case: UC12 - Unassign event from person**
 
 **MSS:**
 1. User requests to unassign an event from a person by providing an event name or an event index, and a person name or a person index.
@@ -658,28 +648,37 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)  
       Expected: Similar to previous.
 
-2. Deleting a person while all persons are being shown using the sample address book given.
-    
-    1. Prerequisites: No `clubconnect.json` file in the data folder (To populate the app with a sample address book).
+### Deleting multiple persons
+1. Deleting multiple valid contacts by indices.
 
-    2. Test case: `delete David Li`  
-       Expected: Contact with name `David Li` is deleted from the list. Details of the deleted contact shown in the status message. This contact is provided by the sample address book when you first open the app.
+   1. Test case: mass_delete 1 3 5 
+      Expected: Contacts at indices 1, 3, and 5 are deleted from the address book. A success message is shown indicating that contacts with these indices have been successfully deleted.
 
-    3. Test case: `delete irfan ibrahim`  
-       Expected: Contact with name `Irfan Ibrahim` is deleted from the list. Details of the deleted contact shown in the status message. This contact is provided by the sample address book when you first open the app.
+1. Deleting contacts with a mix of valid and invalid indices.
 
-    4. Test case: `delete roy`  
-       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: mass_delete 1 10 2 
+      Expected: Contacts at indices 1 and 2 are deleted. Index 10 is invalid (assuming the list has fewer than 10 contacts). A success message is shown, indicating deletion of valid indices, followed by a message listing the invalid input 10.
 
-3. Deleting a person while in a filtered displayed list.
+1. Deleting contacts with all invalid indices.
 
-    1. Prerequisites: Start with the sample address book and use a command that filters the current displayed contact list (Eg `search n/charlotte`).
+   1. Test case: mass_delete 10 20 30 
+      Expected: No contacts are deleted. An error message is shown indicating that no valid contact indices were provided for deletion.
 
-    2. Test case: `delete 2`  
-       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+1. Deleting contacts with non-integer inputs.
 
-    3. Test case: `delete 1`  
-       Expected: Contact with name `Charlotte Oliveiro` is deleted from the list. Details of the deleted contact shown in the status message. This contact is provided by the sample address book when you first open the app.
+   1. Test case: mass_delete 1 two 3 
+      Expected: Contacts at indices 1 and 3 are deleted. The input two is invalid. A success message is shown for valid deletions, followed by a message listing the invalid input two.
+
+1. Deleting contacts with duplicate indices.
+
+   1. Test case: mass_delete 2 2 4 
+      Expected: Contacts at indices 2 and 4 are deleted. A success message is shown indicating successful deletion of contacts at these indices. Duplicate indices do not affect the operation beyond the first valid occurrence.
+
+1. Deleting contacts with no indices provided.
+
+   1. Test case: mass_delete 
+      Expected: No contacts are deleted. An error message is shown indicating that no valid contact indices were provided for deletion.
+
 
 ### Adding an event
 
@@ -711,33 +710,43 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add_event n/Meeting d/Duplicate Meeting f/2024-01-01 t/2024-01-01`  
       Expected: No event is added. Error details (Duplicate Event) shown in the status message.
 
-### Deleting an event
+### Editing an event
 
-1. Deleting an event while all events are being shown
+1. Editing an existing event.
 
-    1. Prerequisites: List all events using the `list_events` command. Multiple events in the list.
+   1. Test case: edit_event 1 n/Updated Meeting d/Updated description f/2024-10-02 t/2024-10-11 
+      Expected: The event at index 1 is updated with the new name Updated Meeting, description Updated description, start date 2024-10-02, and end date 2024-10-11. Details of the edited event are shown in the status message. 
+   
+   1. Test case: edit_event 1 n/ d/Updated description f/2024-10-02 t/2024-10-11 
+      Expected: No changes are made. Error details (Invalid Name) shown in the status message.
 
-    2. Test case: `delete_event 1`  
-       Expected: First event is deleted from the list. Details of the deleted event shown in the status message.
+   1. Test case: edit_event 1 d/ f/2024-10-02 t/2024-10-11 
+      Expected: No changes are made. Error details (Invalid Description) shown in the status message.
 
-    3. Test case: `delete_event 0`  
-       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: edit_event 1 n/Updated Meeting d/Updated description f/2024-1002 t/2024-10-11 
+      Expected: No changes are made. Error details (Invalid Date Format) shown in the status message.
 
-    4. Other incorrect `delete_event` commands to try: `delete_event`, `delete_event x` (where x is larger than the list size)  
-       Expected: Similar to previous.
+   1. Test case: edit_event 1 n/Updated Meeting d/Updated description f/2024-10-11 t/2024-10-02 
+      Expected: No changes are made. Error details (End date cannot be earlier than start date) shown in the status message.
 
-2. Deleting an event while all events are being shown using the sample address book given.
+   1. Test case: edit_event 1 n/Updated Meeting d/Updated description f/2024-10-02 t/2024-02-30 
+   Expected: No changes are made. Error details (Invalid Date Format) shown in the status message.
 
-    1. Prerequisites: No `clubconnect.json` file in the data folder (To populate the app with a sample address book). List all events using the `list_events` command.
+1. Editing an event with an invalid index.
 
-    2. Test case: `delete_event CS2103T Project Meeting`  
-       Expected: Event with name `CS2103T Project Meeting` is deleted from the list. Details of the deleted event shown in the status message. This event is provided by the sample address book when you first open the app.
+   1. Test case: edit_event 10 n/Updated Meeting d/Updated description f/2024-10-02 t/2024-10-11 
+      Expected: No changes are made. Error details (Invalid Event Index) shown in the status message.
 
-    3. Test case: `delete_event orbital`  
-       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+1. Editing an event without specifying any changes. 
 
-    4. Test case: `delete_event orbital workshop`  
-       Expected: Event with name `Orbital Workshop` is deleted from the list. Details of the deleted event shown in the status message. This event is provided by the sample address book when you first open the app.
+   1. Test case: edit_event 1 
+      Expected: No changes are made. Error details (No changes specified for the event) shown in the status message.
+
+1. Editing an event to have the same name as another existing event. 
+
+   1. Test case: edit_event 1 n/Existing Event Name d/Updated description f/2024-10-02 t/2024-10-11 
+      Expected: No changes are made. Error details (Duplicate Event) shown in the status message.
+
 
 ### Unassigning an event from a person
 

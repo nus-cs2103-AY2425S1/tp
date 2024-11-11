@@ -138,11 +138,6 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 **Tip:** Displayed contact list refers to the contact list that is displayed on screen, and does not include contacts that are not shown on screen.
 </box>
 
-<box type="tip" seamless>
-
-**Tip:** Displayed contact list refers to the contact list that is displayed on screen, and does not include contacts that are not shown on screen.
-</box>
-
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.<br>
@@ -255,9 +250,9 @@ Examples:
 ### Exporting persons: `export`
 
 Exports all persons in ClubConnect into a csv file `[JAR file location]/data/ExportedContacts.csv`.
-![result for 'export contacts'](images/exportContactsResult.png)
 
-Format: `export`
+Format: `export`<br>
+![result for 'export contacts'](images/exportContactsResult.png)
 
 
 ### Importing persons: `import`
@@ -282,10 +277,15 @@ Avoid editing or modifying the exported file. Any changes to its structure, form
 </box>
 
 Examples:
+<<<<<<< HEAD
+* `import contacts.csv` adds persons stored in `contacts.csv` to ClubConnect.
+
+=======
 * `import contacts.csv` adds persons stored in `contacts.csv` to ClubConnect.<br>
   ![result for 'import contacts'](images/importContactsResult.png)
 
   
+>>>>>>> 135d339ef8512f92f5c8802ef6130462a13c589a
 --------------------------------------------------------------------------------------------------------------------
 
 ## Event Commands
@@ -294,7 +294,7 @@ Examples:
 
 Shows a list of all events stored in ClubConnect's event list.
 
-Format: `list_events`
+Format: `list_events`<br>
 ![result for 'list events'](images/listEventsResult.png)
 
 
@@ -422,16 +422,16 @@ Examples:
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
-![help message](images/helpMessage.png)
 
-Format: `help`
+Format: `help`<br>
+![help message](images/helpMessage.png)
 
 
 ### Clearing all entries : `clear`
 
 Clears all entries from ClubConnect.
 
-Format: `clear`
+Format: `clear`<br>
 ![clear message](images/clearMessage.png)
 
 
