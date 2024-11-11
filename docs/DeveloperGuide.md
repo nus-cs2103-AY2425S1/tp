@@ -723,13 +723,13 @@ Saving window preferences
       Expected: No contact is deleted. Error details shown in the status message.
 
    - Test case: `delete UNIQUE_FULL_NAME`<br>
-      Expected: If UNIQUE_FULL_NAME is in the addressbook and there is only one FULL_NAME, deletes that contact.
+      Expected: If UNIQUE_FULL_NAME is in the Address Book and there is only one FULL_NAME, deletes that contact.
 
    - Test case: `delete NOT_UNIQUE_FULL_NAME`<br>
-      Expected: If NOT_UNIQUE_FULL_NAME is in the addressbook but not unique, no contact is deleted and error details shown in the status message for user to delete via index.
+      Expected: If NOT_UNIQUE_FULL_NAME is in the Address Book but not unique, no contact is deleted and error details shown in the status message for user to delete via index.
 
    - Test case: `delete FULL_NAME_NOT_IN_LIST`<br>
-      Expected: If FULL_NAME_NOT_IN_LIST is not in addressbook, no contact is deleted even if the name is present in the addressbook and error details shown in the status message.
+      Expected: If FULL_NAME_NOT_IN_LIST is not in Address Book, no contact is deleted and error details shown in the status message.
 
    - Test case: `delete NOT_FULL_NAME`<br>
       Expected: No contact is deleted and error details shown to delete by the full name of delete by index.
@@ -748,13 +748,13 @@ Saving window preferences
       Expected: Similar to above.
       
    - Test case: `delete UNIQUE_FULL_NAME`<br>
-      Expected: If UNIQUE_FULL_NAME is in the filtered list and there is only one FULL_NAME, deletes that contact.
+      Expected: If UNIQUE_FULL_NAME is in the filtered Address Book and there is only one FULL_NAME, deletes that contact.
 
    - Test case: `delete NOT_UNIQUE_FULL_NAME`<br>
-      Expected: If NOT_UNIQUE_FULL_NAME is in the filtered list but not unique, no contact is deleted and error details shown in the status message for user to delete via index.
+      Expected: If NOT_UNIQUE_FULL_NAME is in the filtered Address Book but not unique, no contact is deleted and error details shown in the status message for user to delete via index.
 
    - Test case: `delete FULL_NAME_NOT_IN_LIST`<br>
-      Expected: If FULL_NAME_NOT_IN_LIST is not in filtered list, no contact is deleted even if the name is present in the addressbook and error details shown in the status message.
+      Expected: If FULL_NAME_NOT_IN_LIST is not in filtered Address Book, no contact is deleted even if the name is present in the unfiltered Address Book and error details shown in the status message.
 
    - Test case: `delete NOT_FULL_NAME`<br>
       Expected: No contact is deleted and error details shown to delete by the full name of delete by index.
