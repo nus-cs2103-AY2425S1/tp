@@ -741,15 +741,16 @@ Exiting the program can be done in two ways:
     <img src="images/exitcommand.png" alt="Exit Command Step 1" style="width: 100%;" />
   </div>
 
-  <!-- Step 2 -->
-  <div style="width: 45%; margin-bottom: 20px;">
+  <!-- Step 2 with added top margin -->
+  <div style="width: 45%; margin-bottom: 20px; margin-top: 20px;">
     <p>2. Click on the Exit button.</p>
     <img src="images/exitcommand2.png" alt="Exit Command Step 2" style="width: 100%;" />
   </div>
 
 </div>
 
-3. The program will close.
+<p>3. The program will close.</p>
+
 
 Method 2:
 1. Type the command [exit](#exit) in the command box and press Enter.
