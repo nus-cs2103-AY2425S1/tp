@@ -666,6 +666,20 @@ Team Size: 5
    1. Currently, `find` command does not check for invalid input (e.g `find eth1/`), unlike our `find-doctor` and `find-patient` commands.
    2. We plan to update the `find` command to check for invalid input and display an error message if the input has an invalid characters (e.g special characters or numbers).
 
+6. **Implement Maximum Word Count for Fields**
+   1. There are no restrictions on the length of fields like name and address, which can lead to excessively long inputs that affect display and usability.
+   2. We plan to implement a maximum character count for specific fields:
+      1. Name field: Limit to 50 characters to ensure readability and prevent display issues. 
+      2. Address field: Limit to 100 characters, allowing detailed addresses without causing layout overflow.
+   3. These restrictions will be enforced at both the command parsing level (to provide immediate feedback) and the model level (to ensure consistency).
+   4. If the input exceeds the maximum length, the user will receive an error message explaining the character limit.
+7. **Ensure Minimum Window Size for Improved Layout** 
+   1. There is currently no restriction on the window size, which can result in an overly compact layout that cuts off important information in smaller windows, leading to ellipticals showing rather than Doctor or Patient. 
+   2. We plan to set a minimum window size for the application to ensure that all components are displayed without truncation.
+8. **Sort Appointment by Date** 
+   1. Currently, the application displays appointments in an unsorted order, which may reduce the usability and effectiveness of the application. To enhance user experience, appointments will be automatically sorted by date. This enhancement will help receptionist view upcoming appointments more easily. 
+   2. Sorting of appointments will be in ascending order (earliest to latest).
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
