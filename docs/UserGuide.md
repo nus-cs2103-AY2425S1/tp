@@ -481,7 +481,7 @@ Format: `addAsg n/ASSIGNMENT_TITLE d/yyyy-MM-dd HHmm`
 Command Details & Constraints:
 * Create a new assignment with title ASSIGNMENT_TITLE and the specified due date.
 * Due date is in the format yyyy-MM-dd HHmm.
-* Duplicate assignment titles are not allowed.
+* Duplicate assignment titles are not allowed.fa
 
 Example:
 1. `addAsg n/CS2103T Assignment 2 d/2024-10-25 2359`
@@ -656,6 +656,7 @@ Furthermore, certain edits can cause the TrackMate to behave in unexpected ways 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. FAQ
+
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TrackMate home folder.
