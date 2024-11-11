@@ -43,7 +43,6 @@
                     <HBox spacing="4" VBox.vgrow="ALWAYS">
                         <TextFlow VBox.vgrow="ALWAYS">
                             <Text fx:id="address" styleClass="label-content" text="\$address"/>
-                            <Label fx:id="addressLink" styleClass="link" text=" (click to view map)"/>
                         </TextFlow>
                     </HBox>
                 </VBox>
