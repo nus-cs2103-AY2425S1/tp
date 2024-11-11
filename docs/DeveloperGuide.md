@@ -586,10 +586,26 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 1. Unlike AB3, which deals primarily with single entity type (Person), our project involves multiple entity types, such as
-   entity types such as Persons, and Reminders, each with their own attributes and functionality. This added complexity required 
-   us to design different classes and interfaces to handle each entity type effectively, as well as implementing additional
-   features to support interactions between them. Hence, this increased the overall difficulty and effort required, as it 
-   demanded additional design consideration and testing.
+entity types such as Persons, and Reminders, each with their own attributes and functionality. This added complexity required 
+us to design different classes and interfaces to handle each entity type effectively, as well as implementing additional
+features to support interactions between them. Hence, this increased the overall difficulty and effort required, as it 
+demanded additional design consideration and testing.
+2. The UI design also required substantial effort. Unlike AB3, where data was primarily displayed as a list of persons, our project 
+needed to display multiple types of information (e.g., Persons, Reminders). Designing an intuitive UI that could handle these features
+without overwhelming the user took significant planning and iterative refinement.
+3. One key challenge was using JavaFX for the UI, as it was a new technology for our team. Despite we had briefly touched on JavaFX in 
+IP, we still had more to learn in TP. The steep learning curve of JavaFx added to the overall effort and required us to invest 
+large amount of time learning it.
+4. A significant portion of effort was dedicated to implementing a variety of commands that allow users to perform tasks such as adding
+, editing, deleting, sorting, and finding persons, as well as adding and removing reminders. We had to ensure that these commands worked
+seamlessly together, along with proper error handling, and testing added to the overall complexity of the project.
+   1. Fortunately, we were able to save efforts by leveraging on the underlying structure of AB3, such as the command patterns.
+   The Reminder field was built using similar structure as the addressBookStorage implemented by the existing AB3.
+5. In terms of achievements, we successfully delivered a fully functional product that was close to what we had envision from 
+the start, including complex features like the reminder feature that seemed daunting at first. We also gained valuable insights to Java,
+learning about new classes like the `ObservableList` class, which was essential for dynamically updating the UI when changes occured in the
+underlying data. Additionally, working with JavaFX expanded our understanding of building graphical user interfaces.
+
 
 ## **Appendix: Planned Enhancements**
 Team Size: 5
