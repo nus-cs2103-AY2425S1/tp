@@ -25,44 +25,46 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
       * Windows: Open Windows PowerShell or open the start menu and enter `cmd`.
       * MacOS: Open the Terminal app or press Cmd and spacebar together and enter `terminal`.
       * Linux: Open the Terminal app or press the "Ctrl + Alt + T" keys simultaneously.
-   2. In the terminal, type `java -version`.
-   3. Look for a line that starts with `java version`. You should see a number, like `17.0.2`. Ensure that this version number is 17 or higher.
-   4. If Java is not installed or the version is below 17, visit the [official Java download page](https://www.oracle.com/java/technologies/downloads/#java17) and install the latest version. Choose the appropriate download link for your operating system (Linux, or Windows).
+   1. In the terminal, type `java -version`.
+   1. Look for a line that starts with `java version`. You should see a number, like `17.0.2`. Ensure that this version number is 17 or higher.
+   1. If Java is not installed or the version is below 17, visit the [official Java download page](https://www.oracle.com/java/technologies/downloads/#java17) and install the latest version. Choose the appropriate download link for your operating system (Linux, or Windows).
 
-    [//]: # (
-    @@author CS2103T-F12-4-reused
-    Reused from https://ay2425s1-cs2103t-f12-4.github.io/tp/UserGuide.html
-    )
-   5. For Mac users, you should install this specific `Azul JDK 17` distribution by following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+       [//]: # (
+        @@author CS2103T-F12-4-reused
+        Reused from https://ay2425s1-cs2103t-f12-4.github.io/tp/UserGuide.html
+        )
+   1. For Mac users, you should install this specific `Azul JDK 17` distribution by following this [guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest `.jar` File:
+1. Download the latest `.jar` File:
     * Download the `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-1/tp/releases).
     * By default, the jar file would be saved in the Downloads folder.
 
-3. Copy the file to the folder you want to use as the _home folder_ for your address book.
+1. Copy the file to the folder you want to use as the _home folder_ for UGTeach.
 
-4. Open a command terminal, `cd` into the folder that you put the jar file in.
+1. Before you run the application for the **first time**, ensure that your _home folder_ **does not contain** a `config.json` and `preferences.json` file. If it does, delete them.
+
+1. Open a command terminal, `cd` into the folder that you put the jar file in.
    * For example, if the jar file is still in the Downloads folder, type `cd Downloads`
 
-5. Use the `java -jar ugteach.jar` command to run the application.<br><br>
+1. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
    <br>
    ![Ui](images/Ui.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br><br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography r/100 paid/100 owed/0`: Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography r/100 paid/100 owed/0`: Adds a contact named `John Doe` to the UGTeach data file.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app. 
+   * `exit` : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -71,19 +73,19 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Help**   | `help`
-**List**   | `list`
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID] [owed/OWED]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP r/300 paid/300`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 paid/1200.00 owed/0`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Find**   | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
-**Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
-**Owe**    | `owe INDEX hr/HOURS_OWED`<br> e.g., `owe 1 hr/1.5`
-**Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
-**Income**  | `income`
-**Remind**   | `remind`
-**Clear**  | `clear`
-**Exit**   | `exit`
+**Help** : opens up the Help window | `help`
+**List** : lists all students in UGTeach | `list`
+**Add**  : adds a student to UGTeach  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP r/300 paid/300`
+**Edit** : edits a student in UGTeach | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/SCHEDULE] [s/SUBJECT] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`<br> e.g.,`edit 2 paid/1200.00 owed/0`
+**Delete** : deletes a student in UGTeach | `delete INDEX`<br> e.g., `delete 3`
+**Find** : finds a student in UGTeach with part of name matching one of keywords, **and** their schedule falling on one of the days specified | `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`<br> e.g., `find n/Alex d/Friday`
+**Pay** : updates amount paid by a student | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
+**Owe** : updates amount owed by a student | `owe INDEX hr/HOURS_OWED`<br> e.g., `owe 1 hr/1.5`
+**Settle** : updates amount paid and owed by student (used when the student repays an amount owed to you) | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
+**Income** : shows total amount paid and owed by all students in UGTeach | `income`
+**Remind** : reminds you of all your lessons scheduled for today  | `remind`
+**Clear** : clears all students from UGTeach | `clear`
+**Exit** : exits from UGTeach  | `exit`
 
 <box type="warning" header="##### Notes">
 
@@ -104,7 +106,7 @@ Action     | Format, Examples
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [owe/OWED_AMOUNT]` can be used as `n/John Doe owe/100.00` or as `n/John Doe`.
+  e.g `n/NAME [owed/OWED_AMOUNT]` can be used as `n/John Doe owed/100.00` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -114,7 +116,7 @@ Action     | Format, Examples
 
 * No two students can have both same **NAME** and **PHONE_NUMBER**, but different students may share a **PHONE_NUMBER**.
 
-  > Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**. 
+  > Reason: Siblings can use a parent's phone number as their **PHONE_NUMBER**.
 
 * For commands that do not take in parameters (such as `help`, `list`, `remind`, `income`, `exit` and `clear`), any extra text that comes after the command word will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.<br>
@@ -134,7 +136,7 @@ Shows a message explaining how to access the help page.
 
 ### Listing all students: `list`
 
-Shows a list of all students in the address book.
+Shows a list of all students in UGTeach.
 
 **Format:** `list`
 
@@ -145,7 +147,7 @@ Shows a list of all students in the address book.
 
 ### Adding a student: `add`
 
-Adds a student to the address book.
+Adds a student to UGTeach.
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
@@ -183,22 +185,27 @@ Adds a student to the address book.
 `Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
 `English`  `Chinese`  `Malay` `Tamil`  `Mathematics`  `History`  `Geography`  `Physics` or `GP`.
   * **SUBJECT** is case-insensitive.
+* You cannot add a duplicated student into UGTeach. Refer to [Glossary](#glossary) for more details on a duplicated student.
 
 </box>
 
 <box type="tip" header="##### Tips">
+<markdown>
 
+* If your student's **NAME** contains special character, you should exclude the special character.
+    <i>Example: </i> If your student's name is `S/O John`, you may work around it by replacing it with `S O John` or `Son Of John`, or any alternatives if you deem suitable.
 * **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the students's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 * UGTeach will inform you of clashing schedules. You can modify them using the [`edit` command](#editing-a-student-edit).
   ![clashingSchedule.png](images/clashingSchedule.png)
 
+</markdown>
 </box>
 
 <div style="page-break-after: always;"></div>
 
 ### Editing a student: `edit`
 
-Edits an existing student in the address book.
+Edits an existing student in UGTeach.
 
 **Format:** `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/RATE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
@@ -225,8 +232,10 @@ Edits an existing student in the address book.
 <box type="tip" header="##### Tips">
 
 * You may refer to [`pay` command](#receiving-payment-from-a-student-pay), 
-[`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settling-outstanding-fees-from-students-settle)
+[`owe` command](#recording-unpaid-tuition-fee-of-a-student-owe) and [`settle` command](#settling-outstanding-fees-from-a-student-settle)
 for convenient ways to update the paid amount and owed amount.
+* If your student's **NAME** contains special character, you should exclude the special character.
+    <i>Example: </i> If your student's name is `S/O John`, you may work around it by replacing it with `S O John` or `Son Of John`, or any alternatives if you deem suitable.
 * **ADDRESS** can be used to record the location of tuition sessions. For example, you might enter the student's address if the tuition takes place at their home, or use "My Place" or your own address if the sessions are held at your location.
 </box>
 
@@ -234,7 +243,7 @@ for convenient ways to update the paid amount and owed amount.
 
 ### Deleting a student : `delete`
 
-Deletes the specified student from the address book.
+Deletes the specified student from UGTeach.
 
 **Format:** `delete INDEX`
 
@@ -279,7 +288,8 @@ Finds students whose names contain any of the given keywords *and* their tuition
 <box type="tip" header="##### Tips">
 <markdown>
 
-* The search will always be done on the full list of students (The list of students seen when you type [`list`](#listing-all-students-list).
+
+* The search will always be done on the full list of students (The list of students seen when you type [`list`](#listing-all-students-list)).
 <br> i.e. The `find` command will not be affected by the previous `find` command.
 * The search result list will be ordered based on the students' index in the full list.
 * The search is case-insensitive. e.g. `alex` will match `Alex`
@@ -297,44 +307,15 @@ Finds students whose names contain any of the given keywords *and* their tuition
 
 <div style="page-break-after: always;"></div>
 
-### Receiving payment from a student: `pay`
-
-Updates the amount of tuition fee paid by the specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pays for the outstanding fees.
-
-**Format:** `pay INDEX hr/HOURS_PAID`
-
-**Example:**
-* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
-  
-**Before:**
-![payBefore.png](images/payBefore.png)
-
-**After:**
-![payAfter.png](images/payAfter.png)
-
-<box type="important" header="##### Constraints">
-
-* The **INDEX** refers to the index number shown in the displayed student list.
-* The **INDEX must be a positive integer** 1, 2, 3, …​
-* **HOURS_PAID** should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
-
-</box>
-
-<box type="tip" header="##### Tips">
-
-* In case you made a mistake using the <md>`pay`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the PAID_AMOUNT to your preference.
-
-</box>
-
-<div style="page-break-after: always;"></div>
-
 ### Recording unpaid tuition fee of a student: `owe`
 
-Updates the amount of tuition fee owed by a specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pay for the outstanding fees.
+Records the tuition fee that the student is unable to pay immediately after the lesson. 
+
+When he/she pays the outstanding fees at a later time, you should use the [`settle` command](#settling-outstanding-fees-from-a-student-settle) to settle the tuition fee owed by the student 
 
 **Format:** `owe INDEX hr/HOURS_OWED`
 
-**Example:** 
+**Example:**
 * `owe 1 hr/1.5` updates the tuition fee owed by the 1st student in the list.
 
 **Before:**
@@ -359,9 +340,9 @@ Updates the amount of tuition fee owed by a specified student after a lesson. Yo
 
 <div style="page-break-after: always;"></div>
 
-### Settling outstanding fees from students: `settle`
+### Settling outstanding fees from a student: `settle`
 
-Updates the amount of tuition fee paid and the amount of tuition fee owed by the student after the student pays for his/her outstanding tuition fees.
+Settles the amount owed by the student and adds it to the paid amount. To record payment which is not related to the owed amount, you may use the [`pay` command](#receiving-payment-from-a-student-pay).
 
 **Format:** `settle INDEX amount/AMOUNT`
 
@@ -381,6 +362,38 @@ Updates the amount of tuition fee paid and the amount of tuition fee owed by the
 * **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
 
 </box>
+
+### Receiving payment from a student: `pay`
+
+Updates the amount of tuition fee paid by the specified student after a lesson. 
+
+Recording payment using the `pay` command does not update the owed amount. You should use the [`settle` command](#settling-outstanding-fees-from-a-student-settle) to settle the tuition fee owed by the student after he/she pays the outstanding fees.
+
+**Format:** `pay INDEX hr/HOURS_PAID`
+
+**Example:**
+* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in UGTeach.
+
+**Before:**
+![payBefore.png](images/payBefore.png)
+
+**After:**
+![payAfter.png](images/payAfter.png)
+
+<box type="important" header="##### Constraints">
+
+* The **INDEX** refers to the index number shown in the displayed student list.
+* The **INDEX must be a positive integer** 1, 2, 3, …​
+* **HOURS_PAID** should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
+
+</box>
+
+<box type="tip" header="##### Tips">
+
+* In case you made a mistake using the <md>`pay`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the PAID_AMOUNT to your preference.
+
+</box>
+
 
 ### Showing income data: `income`
 
@@ -420,7 +433,7 @@ Clears all data from the data file of UGTeach.
 
 <box type="warning" header ="##### Caution">
 
-This action is irreversible and your deleted data cannot be recovered. 
+This action is irreversible and your deleted data cannot be recovered. Do not use this command unless you are sure you want to delete **all data**.
 
 </box>
 
@@ -438,31 +451,49 @@ UGTeach data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-UGTeach data are saved automatically as a JSON file `[JAR file location]/data/ugteach.json`. Advanced users are welcome to update data directly by editing that data file.
+UGTeach data are saved automatically as a JSON file `[JAR file location]/data/ugteach.json`. Advanced users can update data directly by editing that data file, although **not recommended**.
 
 <box type="warning" header="##### Caution">
-If your changes to the data file makes its format invalid, UGTeach will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the application to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+<markdown>
+If you are **not fully comfortable with JSON formatting** or **unsure about the data constraints specified in this guide**, we **strongly advise** against directly editing the data file.
+
+However, if you choose to proceed, we recommend creating a backup (e.g., by copying the file to another location) to safeguard against potential errors.
+
+Please note:
+* **Invalid format**: If your edits render the file format invalid, UGTeach will reset to an empty data file on the next run.
+* **Unexpected behavior**: Certain edits—such as entering values outside the acceptable range or causing duplicate entries—can result in unpredictable application behavior, such as complete wipe out of data. Only proceed if you are confident in making accurate updates.
+
+</markdown>
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ## Glossary
 * **CLI**: Command-line interface, where you interact with the system using your keyboard.
+* **Duplicated student:** Two students are duplicates if they have the exact same **NAME** and the same **PHONE NUMBER** at the same time.
+    * You can add 2 students with _different names_ but the _same phone number_ (e.g., siblings using a parent's phone number to register).
+    * You can add 2 students with the _exact same name_ but _different phone numbers_ (e.g., you may have 2 students with the same name).
+    * You cannot add a duplicated student or edit an existing student to make it a duplicate in UGTeach.
 * **GUI**: allows you to interact with your computer through text-based commands. It provides a way to run programs, navigate through files and directories, manage processes, and perform various other tasks.
 * **JSON**: is a lightweight data-interchange format. Click [here](https://www.json.org/json-en.html) to find out more.
+
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
-
+ 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous UGTeach home folder.
 
 --------------------------------------------------------------------------------------------------------------------
-
+ 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 1. **owed/ and paid/ do not accept negative `0` values** (e.g. `-0`, `-0.0`, `-0.00`). UGTeach behaves weirdly if you enter these values, which is unlikely in daily use case. Be assured that UGTeach will behave normally if you enter `0`, `0.0` or `0.00`.
+1. **n/ only accepts alphanumeric characters and spaces**, which might not be suitable for names with special characters, e.g. `Ravi S/O Ramasamy, Devi D/O Rajaratnam`. The workaround is to exclude the special characters. E.g. replace the `S/O` with `s o` or `son of`, likewise for `D/O`.
+1. **a/ might not recognise addresses that contains prefixes**, unless the prefix is not separated by a space from `a/`.<br>
+e.g. `edit 1 a/n/Next Door` will edit the first student's address to be `n/Next Door`, but `edit 1 a/ at n/Next Door` will edit the first student's address to be  `at`, and edit the student's name to be `Next Door`.<br>
+The remedy is to avoid using prefixes in the address field. Rest assured that this issue is unlikely to affect daily use cases as it is unlikely for Singapore addresses to contain prefixes.
 --------------------------------------------------------------------------------------------------------------------
