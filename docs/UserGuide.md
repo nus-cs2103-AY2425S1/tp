@@ -203,8 +203,8 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 
 * `INDEX`: Positive integer (1, 2, 3, ...)
 * `NAME`: Name of person/item (Only alphanumerical characters)
-* `PHONE_NUMBER`: Phone number (Unique in the contacts list and more than 3 digits)
-* `EMAIL`: Email address
+* `PHONE_NUMBER`: Phone number (Unique in the contacts list and be between 3 and 15 digits)
+* `EMAIL`: Email address 
 * `ADDRESS`: Physical address
 * `INFORMATION`: Additional customer details (Only alphanumerical characters)
 * `INGREDIENTS_SUPPLIED`: List of ingredients' name (comma-separated)
@@ -356,6 +356,8 @@ Best practices for remarks:
 addCustomerOrder n/John p/98765432 o/1 1 1
 ```
 This would add three units of product ID 1 to the order.
+### Q5: How do I add orders for customers/suppliers with a large order?
+**A:** For now, you can use the "remarks" to specify the order quantity instead 
 
 ## **Q5: How are orders sorted in the list?**
 **A:** Orders are automatically sorted in this priority:
@@ -450,6 +452,7 @@ addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]...
 ```bash
 addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 03-04 
 ```
+**Note:** Contact must be unique for each user (i.e. if you run the above command, but the number "81234567" already exists in the address book, the add contact command will throw an error)
 ![screenshot](images/Screenshot-2.png)
 
 ## **Add Customer Command**
@@ -722,6 +725,8 @@ help
 ![helpcommandui.png](images/helpcommandui.png)
 
 ## **Mark Customer Order Command**
+
+**Note:** Orders are arranged from top (pending orders) to bottom (completed orders), hence marking an order will cause it to go the bottom of the customer order list.
 Mark the customer order status as done.
 
 ```bash
@@ -737,6 +742,7 @@ markCustomerOrder 1
 ![markcustomerorderui.png](images/markcustomerorderui.png)
 
 ## **Mark Supply Order Command**
+**Note:** Orders are arranged from top (pending orders) to bottom (completed orders), hence marking an order will cause it to go the bottom of the supply order list.
 Mark the supplier order status as done.
 
 ```bash
