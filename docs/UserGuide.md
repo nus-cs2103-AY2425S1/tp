@@ -498,10 +498,6 @@ Assuming that `Vendor` `Bruce Banner` has an `INDEX` of 1 on the existing vendor
 
 ### **Other Useful Features**
 
-Other additional features of BridalBuddy that are good to know.
-
-[_Back to Top_](#table-of-contents)
-
 
 ### Saving the data
 
