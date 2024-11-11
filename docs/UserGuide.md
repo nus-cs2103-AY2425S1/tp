@@ -73,7 +73,7 @@ This user guide is tailored for new and existing users of NovaCare.
 
 If you are new to NovaCare, we recommend you to start with the [Quick Start](#3-quick-start) section.
 
-If you are an existing user looking for a specific feature, you can jump to the [Features](#6-features) section or [Command Summary](#9-command-summary) section.
+If you are an existing user looking for a specific feature, you can jump ahead to the [Features](#6-features) section or [Command Summary](#9-command-summary) section.
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
@@ -105,24 +105,24 @@ This section provides a quick overview of how to set up and run NovaCare on your
 
 ### Step 1. Ensure you have Java `17` or above installed in your Computer. You can download Java [here](https://www.oracle.com/java/technologies/downloads/#java17).
 
-For **Windows** users, you can type **Command Prompt** in the search bar.
-Type `java -version` to check if you have Java installed.
+For **Windows** users, you can type **Command Prompt** in the search bar.<br></br>
+Type `java -version` to check if you have Java installed. <br></br>
 Upon successful installation, you should see something like this:<br></br>
 ![Windows Java](images/windows-java.png)
 
-For **Mac/Linux** users, you can type **Terminal** in the search bar.
-Type `java -version` to check if you have Java installed.
+For **Mac/Linux** users, you can type **Terminal** in the search bar.<br></br>
+Type `java -version` to check if you have Java installed.<br></br>
 Upon successful installation, you should see something like this:<br></br>
 ![Mac Java](images/mac-java.png)
 
 ### Step 2. Download NovaCare [here](https://github.com/AY2425S1-CS2103T-F15-1/tp/releases).
 1. Download the NovaCare [JAR](#10-glossary) file `NovaCareApp.jar` from the link provided by scrolling down to Assets as shown below.<br></br>
    ![Assets](images/assets.png)<br></br>
-2. Click on the `NovaCareApp.jar` file to download it.
+2. Click on the `NovaCareApp.jar` file to download it.<br></br>
 3. Upon downloading save the app to your preferred location. (e.g. `Desktop`)
 
 ### Step 3. Run the application
-1. Open `Command Prompt` for Windows users or `Terminal` for Mac/Linux users.
+1. Open `Command Prompt` for Windows users or `Terminal` for Mac/Linux users.<br></br>
 2. Navigate to the preferred location where you saved the `NovaCareApp.jar` file. <br>
 > e.g. `cd Desktop`
 3. Run the application by typing <br>
@@ -137,7 +137,7 @@ Upon successful execution, you should see the GUI of NovaCare covered in the nex
 The GUI is broken down into different **sections** as shown in the image below:
 
 ![GUI Overview](images/GUIOverview.png)
-1. **Command Box:** This is where you can type your commands to interact with the application.
+1. **Command Box:** Type your commands here to interact with the application.
 2. **Result Display Box:** Displays the result of commands.
 3. **Patient List:** Displays all the patients in the application.
 4. **Task List:** Displays all the task for all patients.
@@ -148,45 +148,47 @@ The GUI is broken down into different **sections** as shown in the image below:
 ## 5. Get started with NovaCare
 Here will be a basic guide on how to use the application.
 1. **Launch help guide**:
-   * Type the following command in the command box and press Enter to **view help window**:
+   * Type the following command in the command box and press `Enter` to **view help window**:
       > `help`
 
 2. **Clear all entries**:
-   * Type the following command in the command box and press Enter to **clear all entries**:
+   * Type the following command in the command box and press `Enter` to **clear all entries**:
       > `clear`
 
 3. **Add a patient**:
-   * Type the following command in the command box and press Enter to **add a patient**:
+   * Type the following command in the command box and press `Enter` to **add a patient**:
       > `add n/Johnson p/11111111 e/johnson123@gmail.com a/123 Clementi Rd, 1234665 t/Diabetic`
    * This example command adds a new patient named `Johnson` with phone number `11111111`, email `johnson123@gmail.com`, address `123 Clementi Rd, 1234665` and tagged as `Diabetic` to NovaCare!
 <br></br>
 
 4. **Edit patient information**:
-   * Type the following command in the command box and press Enter to **edit a patient's information**:
+   * Type the following command in the command box and press `Enter` to **edit a patient's information**:
       > `edit 1 p/91234567`
-   * This example command edits the phone number of patient at [index](#10-glossary) 1 of NovaCare, in this case being the patient `Johnson` who was just added!
+   * This example command edits the phone number of patient at [index](#10-glossary) 1 of NovaCare.
+   * In this case, the patient is `Johnson`, who was just added!
 <br></br>
 
 5. **Delete a patient**:
-   * Type the following command in the command box and press Enter to **delete a patient**:
-      > `delete 1
+   * Type the following command in the command box and press `Enter` to **delete a patient**:
+      > `delete 1`
    * This example command deletes the patient at [index](#10-glossary) 1 of NovaCare!
 <br></br>
 
 6. **Add another patient**:
-    * Type the following command in the command box and press Enter to **add a patient**:
+    * Type the following command in the command box and press `Enter` to **add a patient**:
       > `add n/Lily p/22222222 e/lily@gmail.com a/456 Bishan St, 222222 t/Asthmatic`
-    * This example command adds a new patient named `Lily` with phone number `22222222`, email `lily@gmail.com@gmail.com a/123`, address `456 Bishan St, 222222` and tagged as `Asthmatic` to NovaCare!
+    * This example command adds a new patient named `Lily` with phone number `22222222`, email `lily@gmail.com@gmail.com a/123`, address `456 Bishan St, 222222` and tags the patient as `Asthmatic` to NovaCare!
 <br></br>
 
 7. **Add a task**:
-    * Type the following command in the command box and press Enter to **add a task to the patient**:
+    * Type the following command in the command box and press `Enter` to **add a task to the patient**:
        > `addtask 1 d/Eat paracetamol 1000mg`
-    * This example command adds a new task `Eat paracetamol 1000mg` for the patient at [index](#10-glossary) 1 of NovaCare, in this case being the patient `Lily` who was just added!
+    * This example command adds a new task, `Eat paracetamol 1000mg`, for the patient at [index](#10-glossary) 1 of NovaCare.
+    * In this case, the patient is `Lily`, who was just added!
 <br></br>
 
 8. **Exit**:
-    * Type the following command in the command box and press Enter to **exit the program**:
+    * Type the following command in the command box and press `Enter` to **exit the program**:
        > `exit`
 
 Refer to the [Features](#6-features) below for details of each command.
@@ -203,58 +205,69 @@ This section provides a detailed explanation of the features available in NovaCa
 
 **Notes about the command format:**<br>
 
-* All command in NovaCare follows a specific structure. The command structure is as follows:
-  `COMMAND prefix/PARAMETERS…​`
-  e.g. `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `add` is the `COMMAND`, `n/`, `p/` and `e/` are `prefixes` and `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS` are `PARAMETERS`.
+* All commands in NovaCare follow a specific structure. The command structure is as follows:
 
-* Words in `UPPER_CASE` are the [parameters](#10-glossary) to be supplied by the user.<br>
+  `COMMAND prefix/PARAMETERS…​`
+
+  e.g. `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, 
+  * `add` is the `COMMAND`, 
+  * `n/`, `p/` and `e/` are `prefixes` and 
+  * `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS` are `PARAMETERS`.
+
+* Words in `UPPER_CASE` are the [parameters](#10-glossary) **to be supplied by the user**.<br>
   e.g. in `add n/NAME`, `NAME` is a [parameter](#10-glossary) which can be used as `add n/John Doe`.
 
-* [Items in square brackets](#10-glossary) `[]` are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/Diabetic` or as `n/John Doe`.
+* [Items in square brackets](#10-glossary) `[]` are **optional**.<br>
+  e.g. `n/NAME [t/TAG]` can be used as:
+  * `n/John Doe t/Diabetic` , or as 
+  * `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Diabetic`, `t/Diabetic t/Allergic to shellfish` etc.
+* Items with `…`​ after them **can be used multiple times**, including zero times.<br>
+  e.g. `[t/TAG]…​` can be used as:
+  * ` ` (i.e. 0 times), 
+  * `t/Diabetic`, 
+  * `t/Diabetic t/Allergic to shellfish` etc.
 
-* Parameters can be in any order.<br>
+* Parameters can be in **any order**.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, `listincomplete` and `listtask`) will be ignored.<br>
+* **Extraneous parameters** for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, `listincomplete` and `listtask`) **will be ignored**.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* All commands are case-sensitive.<br>
+* All commands are **case-sensitive**.<br>
   e.g. `addtask 1 d/Eat medication at noon` is valid while `addTask 1 d/Eat medication at noon` is invalid, as command `addtask` is case-sensitive.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* **If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.**
 </box>
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
 ### 6.1 Parameter Information
-The table below explains each of the [parameters](#10-glossary) available in NovaCare.
+The table below explains each of the [parameters](#10-glossary) available in NovaCare. <br></br>
 It will provide the limitations and examples of each parameter.
 
 <box type = "warning" seamless>
 
 **Warning:**<br>
 
-The parameters must follow the limitations as shown below.
-Otherwise, the command will not be executed and display an error message in Result Display Box providing hints as shown below:<br></br>
+The parameters must follow the limitations as shown below.<br></br>
+Else, the command will not be executed and an error message will be displayed in the Result Display Box.<br></br>
+However, the error message will serve to provide hints for the correct input parameters, as shown below:<br></br>
 ![failCommand](images/failAdd.png)
 </box>
 
-| Parameter                          | Description                       | Limitations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Example                                                                                      |
-|------------------------------------|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| **NAME**                           | Name of patient                   | * Names should only contain alphanumeric characters and spaces.<br/>* It should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                     | :white_check_mark: `Thomas Ho`<br/>:x: `Th@mas`                                              |
-| **EMERGENCY_CONTACT_NAME**         | Name of emergency contact         | * Names should only contain alphanumeric characters and spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `Thomas Ho`<br/>:x: `Th@mas`                                              |
-| **PHONE_NUMBER**                   | Phone number of patient           | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Should not be blank.<br/>* Allow international numbers.<br/>* In the event where phone number is unknown, please key in `000` as phone number, you can edit this later. This serves as a temporary field, and does not mean anything.                                                                                                                                                                                                          | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x: `9123 4567`       |
-| **EMERGENCY_CONTACT_NUMBER**       | Phone number of emergency contact | * Phone numbers should only contain numbers no spaces allowed.<br/>* At least 3 digits long.<br/>* Allow international numbers.                                                                                                                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x: `9123 4567`       |
-| **EMAIL**                          | Email of patient                  | * Format must be in `LOCAL-PART@DOMAIN`.<br/> * No space allowed.<br/> * `LOCAL-PART` contains alphanumeric characters and these special characters, excluding the parentheses, (+_.-).<br/> * `LOCAL-PART` local-part may not start or end with any special character.<br/> * `DOMAIN` must be at least 2 characters long, start and end with alphanumeric characters.<br/>* In the event where email is unknown, please key in `unknown@x.com` as email, you can edit this later. This serves as a temporary field, and does not mean anything. | :white_check_mark: `thomasho@gmail.com`<br/>:x: `$thomas@gmail.com`<br/>(`LOCAL-PART` error) |
-| **ADDRESS**                        | Address of patient                | * Address should not be blank.<br/> * Address can take any values.<br/>* In the event where address is unknown, please key in `unknown address` as address, you can edit this later. This serves as a temporary field, and does not mean anything.                                                                                                                                                                                                                                                                                                | :white_check_mark: `123, Clementi Rd, 1234665`<br/>                                          |
-| **[TAG](#10-glossary)**            | Tag of patient                    | * Tags take alphanumeric and spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | :white_check_mark: `high blood pressure`<br/>:x:`low income $`                               |
-| **[INDEX](#10-glossary)**          | Index of patient on GUI           | * Index should be a positive integer.<br/> * Index should not be blank, and will be auto incremented by NovaCare.                                                                                                                                                                                                                                                                                                                                                                                                                                 | :white_check_mark: `1`<br/>:x: `0`                                                           |
-| **DESCRIPTION**                    | Description of task               | * Description should not be blank.<br/> * Description can take any values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | :white_check_mark: `Eat paracetamol 1000mg`<br/>                                             |
-| **[PRIORITY_LEVEL](#10-glossary)** | Priority level of patient         | * Priority level should be either 1, 2, 3 or reset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | :white_check_mark: `1`<br/>:x: `4`                                                           |
+| Parameter                          | Description                       | Limitations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Example                                                                                      |
+|------------------------------------|-----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| **NAME**                           | Name of patient                   | - Names should only contain alphanumeric characters and spaces.<br/>- It should not be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | :white_check_mark: `Thomas Ho`<br/>:x: `Th@mas`                                              |
+| **EMERGENCY_CONTACT_NAME**         | Name of emergency contact         | - Names should only contain alphanumeric characters and spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | :white_check_mark: `Thomas Ho`<br/>:x: `Th@mas`                                              |
+| **PHONE_NUMBER**                   | Phone number of patient           | - Phone numbers should only contain numbers without any spaces.<br/>- At least 3 digits long.<br/>- Should not be blank.<br/>- Allow international numbers.<br/>- In the event where the phone number is unknown, please key in `000` as phone number. You can edit this later. This serves as a temporary field and does not mean anything.                                                                                                                                                                                                                       | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x: `9123 4567`       |
+| **EMERGENCY_CONTACT_NUMBER**       | Phone number of emergency contact | - Phone numbers should only contain numbers without any spaces.<br/>- At least 3 digits long.<br/>- Allow international numbers.                                                                                                                                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `91234567`<br/>:white_check_mark: `60194723537`<br/>:x: `9123 4567`       |
+| **EMAIL**                          | Email of patient                  | - Format must be in `LOCAL-PART@DOMAIN`.<br/> - No space allowed.<br/> - `LOCAL-PART` contains alphanumeric characters and these special characters, excluding the parentheses, (+_.-).<br/> - `LOCAL-PART` local-part may not start or end with any special character.<br/> - `DOMAIN` must be at least 2 characters long, and must start and end with alphanumeric characters.<br/>- In the event where the email is unknown, please key in `unknown@x.com` as the email. You can edit this later. This serves as a temporary field, and does not mean anything. | :white_check_mark: `thomasho@gmail.com`<br/>:x: `$thomas@gmail.com`<br/>(`LOCAL-PART` error) |
+| **ADDRESS**                        | Address of patient                | - Address should not be blank.<br/> - Address can take any values.<br/>- In the event where the address is unknown, please key in `unknown address` as the address. You can edit this later. This serves as a temporary field, and does not mean anything.                                                                                                                                                                                                                                                                                                         | :white_check_mark: `123, Clementi Rd, 1234665`<br/>                                          |
+| **[TAG](#10-glossary)**            | Tag of patient                    | - Tags take alphanumeric and spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | :white_check_mark: `high blood pressure`<br/>:x:`low income $`                               |
+| **[INDEX](#10-glossary)**          | Index of patient on GUI           | - Index should be a positive integer.<br/> - Index should not be blank, and will be auto incremented by NovaCare.                                                                                                                                                                                                                                                                                                                                                                                                                                                  | :white_check_mark: `1`<br/>:x: `0`                                                           |
+| **DESCRIPTION**                    | Description of task               | - Description should not be blank.<br/> - Description can take any values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | :white_check_mark: `Eat paracetamol 1000mg`<br/>                                             |
+| **[PRIORITY_LEVEL](#10-glossary)** | Priority level of patient         | - Priority level should be either 1, 2, 3 or reset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | :white_check_mark: `1`<br/>:x: `4`                                                           |
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
@@ -264,14 +277,14 @@ In NovaCare, these commands will allow you to modify your list of patients to su
 <box type="info" seamless>
 
 **Note:**
-* For all commands, parts of the command in square brackets are optional parameters that can be included in or omitted from the command.
-  * For example: `[t/TAG]`
-* Conversely, parts of the command not in square brackets are compulsory fields.
+* For all commands, the parts of the command in square brackets are optional parameters that can be included in, or omitted from the command.
+  * e.g. `[t/TAG]`
+* Conversely, the parts of the command not in square brackets are compulsory fields.
 </box>
 
 #### 6.2.1 Adding a patient: `add`
 
-Adds a patient's details to NovaCare.
+**Adds a patient's details to NovaCare.**
 
 :pencil: Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -318,7 +331,7 @@ New patient added: Jarell; Phone: 000; Email: unknown@x.com; Address: unknown ad
 
 #### 6.2.2 Listing all patients: `list`
 
-Shows a list of all patients in NovaCare.
+**Shows a list of all patients in NovaCare.**
 
 :pencil: Format: `list`
 
@@ -333,7 +346,7 @@ Listed all patients
 
 #### 6.2.3 Editing a patient: `edit`
 
-Edits an existing patient's details in NovaCare.
+**Edits an existing patient's details in NovaCare.**
 
 :pencil: Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -365,7 +378,7 @@ Edited patient: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address
 
 #### 6.2.4 Locating patients by name: `find`
 
-Finds patients whose name contains any of the given keywords.
+**Finds patients whose name contains any of the given keywords.**
 
 :pencil: Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -381,7 +394,8 @@ Finds patients whose name contains any of the given keywords.
 </box>
 
 Example:
-* `find John Tim` returns any patient with names containing either "John" or "Tim". This means it will return any patient whose name includes either "John" or "Tim" as part of their name, for instance, `John Doe` or `Tim Cook`<br>
+* `find John Tim` returns any patient with names containing either "John" or "Tim". 
+* This means it will return any patient whose name includes either "John" or "Tim" as part of their name, for instance, `John Doe` or `Tim Cook`<br>
 
 Expected output:
 ```
@@ -393,7 +407,7 @@ You should see something like this:<br></br>
 
 #### 6.2.5 Deleting a patient: `delete`
 
-Deletes the specified patient and tasks associated to that patient from NovaCare.
+**Deletes the specified patient and the tasks associated to that patient from NovaCare.**
 
 :pencil: Format: `delete INDEX`
 
@@ -423,7 +437,7 @@ Deleted Patient: John Doe; Phone: 91245555; Email: johnd@example.com; Address: 3
 
 #### 6.2.6 Adding emergency contact: `emergency`
 
-Adds an emergency contact and details to a patient in NovaCare.
+**Adds an emergency contact and details to a patient in NovaCare.**
 
 :pencil: Format: `emergency INDEX n/EMERGENCY_CONTACT_NAME p/EMERGENCY_CONTACT_NUMBER`
 
@@ -453,7 +467,7 @@ Added emergency contact to John Doe: Tom Tan, 91237171
 
 #### 6.2.7 Deleting emergency contact: `deleteemergency`
 
-Deletes an emergency contact and its details from a patient in NovaCare.
+**Deletes an emergency contact and its details from a patient in NovaCare.**
 
 :pencil: Format: `deleteemergency INDEX`
 
@@ -476,7 +490,7 @@ Removed emergency contact (Tom Tan, 91237171) from John Doe
 
 #### 6.2.8 Adding priority level: `priority`
 
-Adds a priority level to a patient in NovaCare.
+**Adds a priority level to a patient in NovaCare.**
 
 :pencil: Format: `priority INDEX l/PRIORITY_LEVEL`
 
@@ -487,7 +501,7 @@ Adds a priority level to a patient in NovaCare.
 * The `l/` prefix refers to the lowercase letter `l`, not the uppercase letter `I`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The priority level **must be a positive integer** and only from **1, 2, 3**
+* The priority level **must be a positive integer** and must be **either 1, 2, or 3**
 </box>
 
 Example:
@@ -501,14 +515,14 @@ Priority level 2 successfully set for John Doe
 
 #### 6.2.9 Deleting priority level: `deletelevel`
 
-Delete a priority level to a patient in NovaCare, resetting it to the default value **3**.
+**Deletes a priority level to a patient in NovaCare, which resets it to the default value **3**.**
 
 :pencil: Format: `deletelevel INDEX` or `priority INDEX l/reset`
 
 <box type="info" seamless>
 
 **Note:**
-* Delete the current priority level at the specified `INDEX`, resetting it to level 3.
+* Deletes the current priority level at the specified `INDEX`, resetting it to level 3.
 * The `l/` prefix refers to the lowercase letter `l`, not the uppercase letter `I`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​.
@@ -518,7 +532,11 @@ Examples:
 * `deletelevel 1` deletes priority level of the 1st-indexed patient in the patient list.
 * `priority 1 l/reset` resets the priority level of the 1st-indexed patient in the patient list to level 3.
 
-Expected output (First and second examples):
+Expected output (First example):
+```
+Priority level reset to default for John Doe
+```
+Expected output (Second example):
 ```
 Priority level reset to default for John Doe
 ```
@@ -531,7 +549,7 @@ In NovaCare, these commands will allow you to modify your list of tasks, with ea
 
 #### 6.3.1 Adding a task: `addtask`
 
-Adds a task to a patient in NovaCare.
+**Adds a task to a patient in NovaCare.**
 
 :pencil: Format: `addtask INDEX d/DESCRIPTION`
 
@@ -541,12 +559,14 @@ Adds a task to a patient in NovaCare.
 * Adds a task at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Task description is case-insensitive, e.g. `addtask 1 d/Clear diapers` and `addtask 1 d/clEar Diapers` are considered the same task for the same patient.
-</box>
+* Task description is case-insensitive, 
+  * e.g. `addtask 1 d/Clear diapers` and `addtask 1 d/clEar Diapers` are considered the same task for the same patient.
+  </box>
 
 **Warning:**
-* As mentioned in the note above, task description is case-insensitive. However, NovaCare does not check for the logic of the task. 2 task of same behaviour will be treated as different if they have different formats apart from casing.<br/> E.g. `addtask 1 d/Clear diapers` and `addtask 1 d/Clear the diapers` could be viewed as the same task, but will be classified as different and hence able to be added to NovaCare task list.
-* **Please proceed with caution when describing tasks to be added to avoid conflict.**
+* As mentioned in the note above, task description is **case-insensitive**. However, NovaCare does not check for the logic of the task. 
+* 2 tasks that have the same intention will be treated as different tasks if they have different formats, apart from casing.<br/> E.g. `addtask 1 d/Clear diapers` and `addtask 1 d/Clear the diapers` could be viewed as the same task, but will be classified as different and hence able to be added to NovaCare's task list.
+* **Please proceed with caution when describing the added tasks so as to avoid conflict.**
 
 Examples:
 * `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd-indexed patient in NovaCare.
@@ -571,7 +591,7 @@ You should see something like this:<br></br>
 
 #### 6.3.2 Deleting a task: `deletetask`
 
-Deletes a task for a patient in NovaCare.
+**Deletes a task for a patient in NovaCare.**
 
 :pencil: Format: `deletetask INDEX`
 
@@ -594,7 +614,7 @@ Deleted Task: Eat paracetamol 1000mg for Betsy Crower
 
 #### 6.3.3 Marking a Task: `marktask`
 
-Marks a task at a specific index.
+**Marks a task at a specific index.**
 
 :pencil: Format: `marktask INDEX`
 
@@ -617,7 +637,7 @@ Marked task as complete: Clear diapers for John Doe
 
 #### 6.3.4 Unmarking a Task: `unmarktask`
 
-Unmarks a task at a specific index.
+**Unmarks a task at a specific index.**
 
 :pencil: Format: `unmarktask INDEX`
 
@@ -640,22 +660,22 @@ Marked task as incomplete: Clear diapers for John Doe
 
 #### 6.3.5 Finding a Task: `findtask`
 
-Finds all task for a particular patient specific index.
+**Finds all task(s) for a particular patient specific index.**
 
 :pencil: Format: `findtask INDEX`
 
 Example:
-* `findtask 1` finds and displays all tasks for the 1st-indexed patient in the patient list.
+* `findtask 1` finds and displays all task(s) for the 1st-indexed patient in the patient list.
 
 Expected output:
 ```
-1 tasks listed!
+2 tasks listed!
 ```
 <br>
 
 #### 6.3.6 Listing Tasks: `listtask`
 
-List all tasks for all patients in NovaCare.
+**Lists all tasks for all patients in NovaCare.**
 
 :pencil: Format: `listtask`
 
@@ -670,7 +690,7 @@ Listed all tasks
 
 #### 6.3.7 Listing Incomplete Tasks: `listincomplete`
 
-List all incomplete tasks for all patients in NovaCare.
+**Lists all incomplete tasks for all patients in NovaCare.**
 
 :pencil: Format: `listincomplete`
 
@@ -691,39 +711,39 @@ In NovaCare, these are the default commands for getting help, clearing and savin
 
 #### 6.4.1 Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+**Shows a message explaining how to access the help page.**
 
 :pencil: Format: `help`
 
 <box type="info" seamless>
 
 **Note:**
-* Due to the amount of commands, the Help Window is made such that it will still be displayed at foreground despite clicking back to NovaCare.
-* To hide it, click the `minimize button` on the top right hand corner of the Help Window as shown below.
-* To close it, click the `close button` on the top right hand corner of the Help Window as shown below.
+* Due to the number of commands, the Help Window is made such that it will still be displayed at the foreground despite clicking back to NovaCare.
+* To hide it, click the `minimize button` on the top right hand corner of the Help Window, as shown below.
+* To close it, click the `close button` on the top right hand corner of the Help Window, as shown below.
 </box>
 
 ![helpWindow](images/helpWindow.png)
 
 Example:
-* `help` shows the help window which displays all commands available in NovaCare.
+* `help` shows the help window which displays all the commands available in NovaCare.
 <br></br>
 
 #### 6.4.2 Clearing all entries: `clear`
 
-Clears all patient and tasks entry from NovaCare.
+**Clears all patient and task entries from NovaCare.**
 
 :pencil: Format: `clear`
 
 <box type="warning" seamless>
 
 **Warning:**
-Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare.
+Using this command will **clear all patient and task entries** in NovaCare. <br></br>
 **This action is irreversible!**
 </box>
 
 Example:
-* `clear` clears all available data in NovaCare, both patients and tasks.
+* `clear` clears all patient and task entries from NovaCare.
 
 Expected output:
 ```
@@ -733,7 +753,7 @@ NovaCare has been cleared!
 
 #### 6.4.3 Exiting the program: `exit`
 
-Exits the program.
+**Exits the program.**
 
 :pencil: Format: `exit`
 
@@ -749,7 +769,8 @@ Expected output: NovaCare will automatically close the window.
 
 #### 6.5.1 Saving the data
 
-NovaCare data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+NovaCare's data is saved in the hard disk automatically after any command changes the data. <br></br>
+There is no need to save data manually.
 <br></br>
 
 #### 6.5.2 Editing the data file
@@ -759,8 +780,10 @@ NovaCare's data is saved automatically as a JSON file `[JAR file location]/data/
 <box type="warning" seamless>
 
 **Warning:**
-If your changes to the data file makes its format invalid, NovaCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause NovaCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range, NovaCare will skip and delete the data related to that invalid patient or task). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, NovaCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to backup the file before editing it.<br>
+Furthermore, certain edits can cause NovaCare to have unexpected behavior 
+* e.g., if a value entered is outside the acceptable range, NovaCare will skip and delete the data related to that invalid patient or task. 
+* Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 [⬆️ Back to Table of Contents](#table-of-contents)
@@ -776,7 +799,7 @@ Furthermore, certain edits can cause NovaCare to behave in unexpected ways (e.g.
 **A**: Ensure Java is correctly installed by typing `[java -version]` in your command prompt or terminal. If Java is not recognized, install it from Oracle's official site.
 
 **Q**: Can I run NovaCare without internet connection?<br>
-**A**: NovaCare is able to run without internet connection.
+**A**: Yes, NovaCare is able to run without internet connection.
 
 **Q**: What is the difference between INDEX and ID?<br>
 **A**: Both are referring to the same thing as shown in the [glossary](#10-glossary).
