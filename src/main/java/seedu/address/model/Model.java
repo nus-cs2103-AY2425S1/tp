@@ -223,9 +223,14 @@ public interface Model {
     boolean checkTagFilterAlreadyExists(Tag tagToCheck);
 
     /**
-     * Checks whether the RSVP status filter already exists in the list of filters.
+     * Checks whether any RSVP status filter already exists in the list of filters.
      */
-    boolean checkStatusFilterAlreadyExists(RsvpStatus statusToCheck);
+    boolean checkStatusFilterAlreadyExists();
+
+    /**
+     * Checks whether a specific RSVP status filter already exists in the list of filters.
+     */
+    boolean checkSpecificStatusFilterAlreadyExists(RsvpStatus statusToCheck);
 
     /**
      * Removes the tag and RSVP status filters in the sets from the model.

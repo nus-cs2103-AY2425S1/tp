@@ -131,6 +131,7 @@ public class FilterCommandTest {
         assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
 
         expectedMessage = "Tag [family] must be created before being used to filter.";
+
         tagSet.add(FAMILY);
         FilterCommand newFilterCommand = new FilterCommand(tagSet, new HashSet<>());
         assertCommandFailure(newFilterCommand, model, expectedMessage);

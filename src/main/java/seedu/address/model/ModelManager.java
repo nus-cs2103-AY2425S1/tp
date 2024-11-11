@@ -236,7 +236,7 @@ public class ModelManager implements Model {
                     person.getEmail(), person.getRsvpStatus(), newTags);
             setPerson(person, updatedPerson);
             updatedPersons.add(updatedPerson);
-            tagFilters.remove(tag);
+            tagFilters.clear();
         }
         return updatedPersons;
     }
@@ -337,13 +337,18 @@ public class ModelManager implements Model {
         }
 
         return false;
+
+    }
+
+    @Override
+    public boolean checkSpecificStatusFilterAlreadyExists(RsvpStatus rsvpStatus) {
+        return statusFilters.contains(rsvpStatus);
     }
 
     @Override
     public void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters) {
         this.tagFilters.removeAll(tagFilters);
         this.statusFilters.removeAll(statusFilters);
-
     }
 
     @Override

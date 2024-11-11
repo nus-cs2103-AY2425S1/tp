@@ -28,10 +28,12 @@ public class FilterCommand extends UndoableCommand {
     public static final String MESSAGE_TAG_NOT_CREATED = "must be created before being used to filter.";
     public static final String MESSAGE_FILTER_ALREADY_EXISTS = "is already being filtered.";
 
+
     private final Set<Tag> tagSet;
     private final Set<RsvpStatus> statusSet;
     private final Set<Predicate<Person>> predicateSet = new HashSet<>();
     private Predicate<Person> previousPredicate;
+
 
     private Predicate<Person> predicate = new Predicate<Person>() {
         @Override
@@ -68,6 +70,7 @@ public class FilterCommand extends UndoableCommand {
         for (RsvpStatus status: statusSet) {
             if (model.checkStatusFilterAlreadyExists(status)) {
                 throw new CommandException("[" + status + "] " + MESSAGE_FILTER_ALREADY_EXISTS);
+
             }
         }
 
