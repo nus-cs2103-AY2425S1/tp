@@ -192,6 +192,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 - `NAME` is case-sensitive (e.g., `John Doe` is different from `john doe`).
 
+- `NAME` can be entered in any format, as there is no standard format implemented. The way the name is entered is how it is displayed on the app.
+    For example, `JohN DoE` is a valid entry, and it will appear as `JohN DoE` in the UI as well.
+
 - Two contacts are considered duplicate if they have the same name (case-sensitive).
 
 - The phone number can have any number of digits, not just limited to 8 digits as in Singapore.

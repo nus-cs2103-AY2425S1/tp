@@ -303,7 +303,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Real Estate Agent                                                        | easily update contact details                                      | keep my address book up to date and accurate                                                       |
 | `* *`    | Real Estate Agent                                                        | filter contacts based on names                                     | find contacts I am familiar with via name                                                          |
 | `* *`    | Real Estate Agent                                                        | store multiple contacts for each client                            | contact them via their most comfortable means                                                      |
-| `*`      | Forgetful Real Estate Agent                                              | keep track of the client birthdays                                 | send them well wishes to maintain relations                                                        |
 | `*`      | Forgetful Real Estate Agent                                              | remember what my clients preferences are                           | contact them when a new property matching their criteria is available                              |
 | `*`      | Busy Real Estate Agent                                                   | be able to mass delete clients                                     | avoid having to do it individually                                                                 |
 | `*`      | Forgetful Real Estate Agent who wish to deal with more important clients | categorize different clients/contacts under different priority     | remember which contacts are more important                                                         |
@@ -318,11 +317,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Real Estate Agent                                                        | hide/archive client details                                        | hide completed transactions and past client details, keeping my contact list updated and organized |
 | `*`      | Busy Real Estate Agent                                                   | be able to see a list of my most recently added client contacts    | quickly find and access them                                                                       |
 | `*`      | Real Estate Agent                                                        | sort the client list                                               | organize the client list based on my preference                                                    |
-| `*`      | Real Estate Agent                                                        | view the history of interactions with each contact                 | remember past conversations and follow-up                                                          |
 | `*`      | Real Estate Agent                                                        | filter contacts based on their preferred location or address       | find contacts which are in a specific area or region quickly                                       |
 | `*`      | Strategic Real Estate Agent                                              | add custom notes to each contact profile                           | record specific details or preferences that they have so that I can personalize my service         |
 | `*`      | Real Estate Agent                                                        | set priority levels for different contacts                         | focus more attention on the more urgent/important clients                                          |
-| `*`      | Real Estate Agent                                                        | categorize contacts by their preferred language                    | communicate with the client with their preferred language of choice                                |
 | `*`      | Real Estate Agent                                                        | tag contacts based on the type of property they are interested in  | quickly match properties to the right clients                                                      |
 | `*`      | Real Estate Agent                                                        | segment my contact list by geographic region                       | target my outreach based on specific property locations or markets                                 |
 
@@ -787,6 +784,11 @@ The following activity diagram summarizes the steps involved in adding a contact
 * **L Order**: A sorting method where elements are arranged in ascending order, from the smallest to the largest value.
 * **H Order**: A sorting method where elements are arranged in descending order, from the largest to the smallest value.
 
+### Planned Enhancements
+
+1. Currently, the app allows contacts with the same name but in different cases. The future version will not permit this.
+2. Currently, the app allows names to be entered in any format, with no standardization. The future version will implement a standardized format for name entries.
+3. 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
