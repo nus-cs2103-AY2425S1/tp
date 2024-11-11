@@ -266,7 +266,7 @@ at the specified `JOB_INDEX` together.
 * The contact index refers to the index number shown in the displayed contact list.
 * The job index refers to the index number shown in the displayed job list.
 * Both indices **must be positive integers** 1, 2, 3, …​
-* Both the contact and job specified **cannot already be matched**.
+* The contact **must not already be matched**.
 
 Examples:
 * `match 1 2` will match the contact at index 1 and job at index 2 together.
