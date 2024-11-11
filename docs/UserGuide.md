@@ -742,6 +742,7 @@ markCustomerOrder 1
 ![markcustomerorderui.png](images/markcustomerorderui.png)
 
 ## **Mark Supply Order Command**
+
 **Note:** Orders are arranged from top (pending orders) to bottom (completed orders), hence marking an order will cause it to go the bottom of the supply order list.
 Mark the supplier order status as done.
 
