@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -14,7 +12,8 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXMLEmployee = "PersonListCardEmployee.fxml";
+    private static final String FXMLPotential = "PersonListCardPotential.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -39,21 +38,35 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label department;
+    @FXML
+    private Label role;
+    @FXML
+    private Label contractEndDate;
+    @FXML
     private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
-        super(FXML);
+        super(person.isEmployee() ? FXMLEmployee : FXMLPotential);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (person.isEmployee()) {
+            name.setText("(Employee) " + person.getName().fullName);
+        } else {
+            name.setText("(Potential Hire) " + person.getName().fullName);
+        }
+        phone.setText("Phone: " + person.getPhone().value);
+        address.setText("Address: " + person.getAddress().value);
+        email.setText("Email: " + person.getEmail().value);
+        department.setText("Department: " + person.getDepartment().value);
+        role.setText("Role: " + person.getRole().value);
+        contractEndDate.setText("Contract End Date: " + person.getContractEndDate().getValue());
+        if (person.isPotentialHire()) {
+            contractEndDate.managedProperty().set(false);
+            contractEndDate.visibleProperty().set(false);
+        }
     }
 }

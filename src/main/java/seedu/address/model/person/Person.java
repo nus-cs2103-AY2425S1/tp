@@ -2,13 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -23,18 +19,30 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Department department;
+    private final Role role;
+    private final ContractEndDate contractEndDate;
+    private final boolean isEmployee;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Department department, Role role,
+                  ContractEndDate contractEndDate, boolean isEmployee) {
+        requireAllNonNull(name, phone, email, address, department, role, contractEndDate, isEmployee);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.department = department;
+        this.role = role;
+        this.isEmployee = isEmployee;
+        if (isEmployee) {
+            assert !contractEndDate.equals(ContractEndDate.empty());
+            this.contractEndDate = contractEndDate;
+        } else {
+            this.contractEndDate = ContractEndDate.empty();
+        }
     }
 
     public Name getName() {
@@ -53,12 +61,30 @@ public class Person {
         return address;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public ContractEndDate getContractEndDate() {
+        return contractEndDate;
+    }
+
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns true if the person is an employee.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public boolean isEmployee() {
+        return isEmployee;
+    }
+
+    /**
+     * Returns true if the person is a potential hire.
+     */
+    public boolean isPotentialHire() {
+        return !isEmployee();
     }
 
     /**
@@ -94,24 +120,34 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && department.equals(otherPerson.department)
+                && role.equals(otherPerson.role)
+                && isEmployee == otherPerson.isEmployee()
+                && (contractEndDate.equals(otherPerson.contractEndDate) || !isEmployee);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return isEmployee
+                ? Objects.hash(name, phone, email, address, department, role, contractEndDate, isEmployee)
+                : Objects.hash(name, phone, email, address, department, role, isEmployee);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder builder = new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
-                .toString();
+                .add("department", department)
+                .add("role", role)
+                .add("employee", isEmployee);
+        if (isEmployee()) {
+            return builder.add("contractEndDate", contractEndDate).toString();
+        }
+        return builder.toString();
     }
 
 }

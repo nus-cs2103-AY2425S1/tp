@@ -18,7 +18,9 @@ Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Department
+Class Role
+Class ContractEndDate
 
 Class I #FFFFFF
 }
@@ -41,7 +43,9 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
+Person *--> Department
+Person *--> Role
+Person *--> "0..1" ContractEndDate
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

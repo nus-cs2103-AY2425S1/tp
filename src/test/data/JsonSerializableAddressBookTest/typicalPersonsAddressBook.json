@@ -5,42 +5,126 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2024-10-09",
+    "isEmployee": false
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2024-10-09",
+    "isEmployee": false
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2024-10-09",
+    "isEmployee": false
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2024-10-09",
+    "isEmployee": false
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2024-10-09",
+    "isEmployee": false
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2024-10-09",
+    "isEmployee": false
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2024-10-09",
+    "isEmployee": false
+  }, {
+    "name" : "Hoon Meier",
+    "phone" : "8482424",
+    "email" : "stefan@example.com",
+    "address" : "little india",
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2024-10-09",
+    "isEmployee": false
+  }, {
+    "name" : "Ida Mueller",
+    "phone" : "8482131",
+    "email" : "hans@example.com",
+    "address" : "chicago ave",
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2024-10-09",
+    "isEmployee": false
+  }, {
+    "name" : "Amy Bee",
+    "phone" : "11111111",
+    "email" : "amy@example.com",
+    "address" : "Block 312, Amy Street 1",
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2024-10-09",
+    "isEmployee": true
+  }, {
+    "name" : "Bob Choo",
+    "phone" : "22222222",
+    "email" : "bob@example.com",
+    "address" : "Block 123, Bobby Street 3",
+    "department": "MARKETING",
+    "role": "ACCOUNTANT",
+    "contractEndDate": "2024-10-08",
+    "isEmployee": true
+  }, {
+    "name" : "Jevan Lim",
+    "phone" : "12345678",
+    "email" : "jevan@example.com",
+    "address" : "hougang ave",
+    "department": "IT",
+    "role": "SWE",
+    "contractEndDate": "2020-01-01",
+    "isEmployee": true
+  }, {
+    "name" : "Kevin Lee",
+    "phone" : "87654321",
+    "email" : "kevin@example.com",
+    "address" : "sengkang street",
+    "department": "IT2",
+    "role": "SWE2",
+    "contractEndDate": "2020-01-02",
+    "isEmployee": true
+  }, {
+    "name" : "Lily B",
+    "phone" : "12348765",
+    "email" : "lily@example.com",
+    "address" : "punggol cove",
+    "department": "IT3",
+    "role": "SWE3",
+    "contractEndDate": "2020-01-03",
+    "isEmployee": true
   } ]
 }

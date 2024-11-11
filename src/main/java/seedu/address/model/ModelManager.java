@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -22,6 +24,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private SortedList<Person> sortredPersons;
+    private boolean isSorted = false;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -119,13 +123,32 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        if (isSorted) {
+            return sortredPersons;
+        } else {
+            return filteredPersons;
+        }
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        sortredPersons = null;
+        isSorted = false;
+    }
+
+    @Override
+    public void updateSortedPersonList(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        sortredPersons = new SortedList<>(filteredPersons);
+        sortredPersons.setComparator(comparator);
+        isSorted = true;
+    }
+
+    @Override
+    public void setIsSorted(boolean isSorted) {
+        this.isSorted = isSorted;
     }
 
     @Override
@@ -140,9 +163,24 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
+
+        // Check if both models are sorted or not
+        if (isSorted != otherModelManager.isSorted) {
+            return false;
+        }
+
+        // If sorted, compare sortedList, otherwise only compare filteredList
+        boolean sortedListEquals;
+        if (isSorted) {
+            sortedListEquals = sortredPersons.equals(otherModelManager.sortredPersons);
+        } else {
+            sortedListEquals = true;
+        }
+
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && sortedListEquals;
     }
 
 }

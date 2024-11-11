@@ -94,6 +94,13 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void ifSorted_returnsNull() {
+        modelManager.setIsSorted(true);
+        assertTrue(modelManager.getFilteredPersonList() == null);
+        modelManager.setIsSorted(false);
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -112,6 +119,11 @@ public class ModelManagerTest {
 
         // different types -> returns false
         assertFalse(modelManager.equals(5));
+
+        //different isSorted -> returns false
+        ModelManager sortedModelManager = new ModelManager(addressBook, userPrefs);
+        sortedModelManager.setIsSorted(true);
+        assertFalse(modelManager.equals(sortedModelManager));
 
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));

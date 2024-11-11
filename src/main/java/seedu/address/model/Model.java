@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -13,6 +14,12 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that shows all employees */
+    Predicate<Person> PREDICATE_SHOW_ALL_EMPLOYEES = person -> person.isEmployee();
+
+    /** {@code Predicate} that shows all potential hires */
+    Predicate<Person> PREDICATE_SHOW_ALL_POTENTIAL_HIRES = person -> person.isPotentialHire();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +91,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the comparator of the sorted person list to sort by the given {@code comparator}.
+     * @param comparator
+     */
+    void updateSortedPersonList(Comparator<Person> comparator);
+
+    /**
+     * Utility function for testing.
+     */
+    void setIsSorted(boolean isSorted);
 }

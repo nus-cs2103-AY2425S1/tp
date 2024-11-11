@@ -1,5 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -74,5 +80,52 @@ public class ArgumentMultimap {
         if (duplicatedPrefixes.length > 0) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
+    }
+
+    /**
+     * Checks if the {@code argumentMultimap} contains none of the prefixes required for FindCommand.
+     * Prefixes required for FindCommand includes "n/", "p/", "e/", "d/", "/r".
+     * @return True if it contains none of the prefixes, False otherwise.
+     */
+    public boolean hasNoFindCommandPrefix() {
+        return getValue(PREFIX_NAME).isEmpty() && getValue(PREFIX_PHONE).isEmpty()
+                && getValue(PREFIX_EMAIL).isEmpty() && getValue(PREFIX_DEPARTMENT).isEmpty()
+                && getValue(PREFIX_ROLE).isEmpty();
+    }
+
+    /**
+     * Checks if the {@code argumentMultimap} contains any empty string mapped to any of the prefixes
+     * required for FindCommand.
+     * Prefix required for FindCommand includes "n/", "p/", "e/", "d/", "/r".
+     *
+     * @return True if at least one empty string is mapped to a prefix.
+     */
+    public boolean hasEmptyCommandPrefix() {
+        List<String> listOfNameKeywords = getAllValues(PREFIX_NAME);
+        if (!listOfNameKeywords.isEmpty()) {
+            String firstNameKeyword = listOfNameKeywords.get(0);
+            return firstNameKeyword.trim().isEmpty();
+        }
+        List<String> listOfPhoneKeywords = getAllValues(PREFIX_PHONE);
+        if (!listOfPhoneKeywords.isEmpty()) {
+            String firstPhoneKeyword = listOfPhoneKeywords.get(0);
+            return firstPhoneKeyword.trim().isEmpty();
+        }
+        List<String> listOfEmailKeywords = getAllValues(PREFIX_EMAIL);
+        if (!listOfEmailKeywords.isEmpty()) {
+            String firstEmailKeyword = listOfEmailKeywords.get(0);
+            return firstEmailKeyword.trim().isEmpty();
+        }
+        List<String> listOfDepartmentKeywords = getAllValues(PREFIX_DEPARTMENT);
+        if (!listOfDepartmentKeywords.isEmpty()) {
+            String firstDepartmentKeyword = listOfDepartmentKeywords.get(0);
+            return firstDepartmentKeyword.trim().isEmpty();
+        }
+        List<String> listOfRoleKeywords = getAllValues(PREFIX_ROLE);
+        if (!listOfRoleKeywords.isEmpty()) {
+            String firstRoleKeyword = listOfRoleKeywords.get(0);
+            return firstRoleKeyword.trim().isEmpty();
+        }
+        return false;
     }
 }
