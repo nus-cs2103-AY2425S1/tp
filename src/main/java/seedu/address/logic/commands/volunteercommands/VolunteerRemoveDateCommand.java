@@ -34,7 +34,7 @@ public class VolunteerRemoveDateCommand extends Command {
     static final String MESSAGE_REMOVE_DATE_VOLUNTEER_SUCCESS =
             "Removed dates from %s's list of available dates.";
 
-    private static final String MESSAGE_REMOVE_DATE_FAIL_NO_REMAINING_DATES = "Volunteers must be free on"
+    static final String MESSAGE_REMOVE_DATE_FAIL_NO_REMAINING_DATES = "Volunteers must be free on"
             + " at least 1 day!\n This remove command will leave them with no available days."
             + " \nPlease add at least 1 more day to proceed.";
 
