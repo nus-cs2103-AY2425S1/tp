@@ -22,15 +22,15 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
         * [Add Order: `order`](#adding-an-order-order)
         * [Delete Order: `deleteOrder`](#deleting-an-order-deleteorder)
         * [List Orders: `listOrder`](#listing-all-orders-listorder)
-        * [Assign Order to Customer: `put`](#adding-an-order-to-a-customer-put)
-        * [View Order History for Customer: `history`](#listing-all-order-histories-for-a-customer-history)
+        * [Assign Order to Customer: `put`](#adding-an-order-history-to-a-customer-put)
+        * [View Order History for Customer: `history`](#listing-all-order-histories-of-a-customer-history)
         * [Create Shortcut for Tags: `addShortCut`](#creating-shortcuts-for-tags-addshortcut)
         * [Delete Shortcut for Tags: `delShortCut`](#deleting-shortcuts-for-tags-delshortcut)
         * [List All Shortcuts: `listShortCut`](#listing-existing-shortcuts-listshortcut)
         * [Using Shortcuts for Tagging](#using-shortcuts-for-tagging)
         * [Filter Customers by Tags: `filter`](#filtering-by-tags-filter)
         * [Archive Customer: `archive`](#archive-customer-archive)
-        * [View Archived Customers: `listarchive`](#list-archived-customers-listarchive)
+        * [View Archived Customers: `listarchive`](#list-archived-customer-listarchive)
         * [Unarchive Customer: `unarchive`](#unarchive-customer-unarchive)
         * [Download Customer Data: `download`](#downloading-customer-data-download)
         * [Exit Command: `exit`](#exiting-the-program--exit)
@@ -427,7 +427,7 @@ Tag shortcuts allow you to create aliases for commonly used tags, saving you tim
 
 ---
 
-### Deleting Shortcuts for Tags:`DelShortCut`
+### Deleting Shortcuts for Tags: `DelShortCut`
 
 You can delete an existing shortcut by specifying its alias and tag name.
 
@@ -527,7 +527,7 @@ Assuming there's at least one person that is unarchived.
 ---
 ### **List archived customer: `listarchive`**
 
-Shows all archived users only in contact list
+Shows all archived customers only in contact list
 
 **Format:**
 `listarchive`
