@@ -329,7 +329,7 @@ will be added.
 </div>
 
 <div markdown="span" class="alert alert-note">:memo: **Note:**
-* A student ID is automatically generated and assigned upon successful addition. It will be displayed in the success 
+A student ID is automatically generated and assigned upon successful addition. It will be displayed in the success 
 message and can be used for `addsubject`, `edit`, `detail` and `delete`.
 </div>
 
