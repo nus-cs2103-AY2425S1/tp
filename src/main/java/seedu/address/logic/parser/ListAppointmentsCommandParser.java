@@ -46,6 +46,12 @@ public class ListAppointmentsCommandParser implements Parser<ListAppointmentsCom
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListAppointmentsCommand.MESSAGE_USAGE));
             }
+        } else {
+            String trimmedArgs = args.trim();
+            if (!trimmedArgs.isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ListAppointmentsCommand.MESSAGE_USAGE));
+            }
         }
 
         return new ListAppointmentsCommand(dateFilter, timeFilter);
