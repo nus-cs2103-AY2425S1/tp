@@ -7,6 +7,8 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 
 * This project is based on the AddressBook-Level3 project created by the SE-EDU initiative.
@@ -21,6 +23,18 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Documentation, logging, testing, configuration, dev-ops**
+
+* [Documentation guide](Documentation.md)
+* [Testing guide](Testing.md)
+* [Logging guide](Logging.md)
+* [Configuration guide](Configuration.md)
+* [DevOps guide](DevOps.md)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
@@ -28,11 +42,17 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** Due to a limitation of PlantUML, the destroy marker (X) for lifelines in sequence diagrams cannot be displayed at the correct position. As a workaround, the lifelines are extended to the end of the diagram.
+</div>
+
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
+
+<div style="page-break-after: always;"></div>
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -68,6 +88,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -85,6 +107,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -92,6 +116,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
+
+<div style="page-break-after: always;"></div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -108,6 +134,8 @@ How the `Logic` component works:
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+<div style="page-break-after: always;"></div>
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
@@ -116,11 +144,12 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
 
 The `Model` component,
 
@@ -129,12 +158,15 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -152,6 +184,8 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -184,6 +218,8 @@ The Emergency Contact object is also made up of attributes:
 * `Phone`: The phone number of the emergency contact.
 * `Relationship`: The relationship of the emergency contact to the patient.
 
+<div style="page-break-after: always;"></div>
+
 #### Feature details
 
 1. MedConnect will verify that the parameters supplied by the user follow a set of relevant restrictions for the respective parameters.
@@ -203,6 +239,8 @@ The Emergency Contact object is also made up of attributes:
 
 We opted for Alternative 1 to make almost all parameters compulsory as the autocomplete feature we implemented will aid users in typing out the Add Command.
 
+<div style="page-break-after: always;"></div>
+
 ### Undo/redo feature
 
 #### Implementation
@@ -221,6 +259,8 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
+<div style="page-break-after: always;"></div>
+
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
@@ -233,6 +273,8 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
@@ -241,6 +283,8 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 than attempting to perform the undo.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
@@ -268,6 +312,8 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
@@ -285,37 +331,31 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+<div style="page-break-after: always;"></div>
 
 ### Data archiving
 
 #### Implementation
 
-The archive functionality in MedConnect is facilitated by the `ModelManager` class. It handles the archiving, listing, loading, and deleting of archived contact data. The `ModelManager` interacts with the `Model` and `Storage` components to manage archived data.
+The archive functionality in MedConnect is facilitated by the `ModelManager` class. It handles the archiving, listing, loading, and deleting of archived contact data. The `ModelManager` interacts with the `Filename` class and `FileUtil` components to manage the archive files in the archive directory.
 
 For example, the sequence diagram below illustrates the interactions within the `ModelManager` component when the `archive` command is executed.
 
 ![ArchiveSequenceDiagram.png](images%2FArchiveSequenceDiagram.png)
 
---------------------------------------------------------------------------------------------------------------------
-
-## **Documentation, logging, testing, configuration, dev-ops**
-
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+1. The `ArchiveCommand` archives the current address book data by calling the `archiveAddressBook` method in the `ModelManager` component.
+2. The `ModelManager` creates the archive directory if it does not exist.
+3. The `ModelManager` saves the current address book data to a JSON file in the archive directory with the specified file name.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
 ### Product Scope
 
----
-
-#### **Target User Profile:**
+#### Target User Profile
 
 - **User Role:** Healthcare Administrator
 - **Workplace:** Old folks home for dementia patients
@@ -330,7 +370,7 @@ For example, the sequence diagram below illustrates the interactions within the 
     - Skilled at typing and prefers keyboard shortcuts over mouse interactions for speed.
     - Comfortable with using command-line interfaces (CLI) for fast data entry and retrieval.
 
-#### **Value Proposition:**
+#### Value Proposition
 
 MedConnect offers a **streamlined contact management system** tailored for healthcare administrators. Its key features include:
 
@@ -341,58 +381,70 @@ MedConnect offers a **streamlined contact management system** tailored for healt
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
-### Beginner User Stories
+
+#### Beginner User Stories
+
+| Priority | As a …​                  | I want to …​                                    | So that I can…​                                                                |
+|----------|--------------------------|-------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * *`  | new user                 | have sample data to work with                   | understand how to use the application                                          |
+| `* * *`  | healthcare administrator | add new doctors and patients                    | easily reach out to them when needed                                           |
+| `* * *`  | healthcare administrator | update contact details                          | ensure all contact information is accurate and current                         |
+| `* * *`  | healthcare administrator | delete outdated patient contacts                | ensure all information is relevant and current                                 |
+| `* * *`  | healthcare administrator | view all contacts in the address book           | have a comprehensive overview of all patients, doctors, and emergency contacts |
+| `* * *`  | healthcare administrator | view patient emergency contact details          | notify next-of-kin during urgent medical events                                |
+| `* * *`  | healthcare administrator | add emergency contacts for patients             | quickly reach out to next-of-kin during medical emergencies                    |
+| `* * *`  | healthcare administrator | assign doctors to patients                      | easily track which doctor is responsible for each patient                      |
+| `* *`    | healthcare administrator | search contacts by name or assigned doctor      | quickly find and connect with the right person in high-pressure situations     |
+| `* *`    | healthcare administrator | add multiple emergency contacts for each person | reach different emergency contacts when one is uncontactable                   |
 
 
-| Priority | As a …​                  | I want to …​                                    | So that I can…​                                                            |
-|----------|--------------------------|-------------------------------------------------|----------------------------------------------------------------------------|
-| `* * *`  | new user                 | familiarise myself with the app                 | play around with dummy data without compromising real patient data         |
-| `* * *`  | healthcare administrator | add new doctors and patients                    | easily reach out to them when needed                                       |
-| `* * *`  | healthcare administrator | update contact details                          | ensure all contact information is accurate and current                     |
-| `* *`    | healthcare administrator | search contacts by name or assigned doctor      | quickly find and connect with the right person in high-pressure situations |
-| `* * *`  | healthcare administrator | view patient emergency contact details          | notify next-of-kin during urgent medical events                            |
-| `* *`    | healthcare administrator | add multiple emergency contacts for each person | reach different emergency contacts when one is uncontactable               |
-| `* * *`  | healthcare administrator | assign doctors to patients                      | easily track which doctor is responsible for each patient                  |
-| `* * *`  | healthcare administrator | delete outdated patient contacts                | ensure all information is relevant and current                             |
 
+#### Intermediate User Stories
 
-### Intermediate User Stories
+| Priority | As a …                   | I want to …                           | So that I can…                                                               |
+|----------|--------------------------|---------------------------------------|------------------------------------------------------------------------------|
+| `* *`    | healthcare administrator | filter contacts by their doctor       | view a consolidated list of all the patients a doctor is responsible for     |
+| `* *`    | healthcare administrator | sort patients by their admission time | provide appropriate care to longer-term patients                             |
+| `* *`    | healthcare administrator | tag important notes to patients       | remember special considerations about certain patients                       |
+| `* *`    | healthcare administrator | archive outdated contacts             | maintain a clean and relevant contact list without losing historical records |
+| `* *`    | healthcare administrator | load backup archived data             | restore a backup copy in case of data corruption or user error               |
+| `* *`    | healthcare administrator | delete archived data                  | free up storage space and remove unnecessary or outdated contact information |
+| `* *`    | healthcare administrator | view a list of all archived data      | keep track of the archived data for reference or auditing purposes           |
+| `* *`    | healthcare administrator | undo the last operation               | recover from accidental deletions or modifications                           |
+| `* *`    | healthcare administrator | redo the last undone operation        | reverse an undo operation if it was done in error                            |
 
-| Priority | As a …                   | I want to …                              | So that I can…                                                               |
-|----------|--------------------------|------------------------------------------|------------------------------------------------------------------------------|
-| `* *`    | healthcare administrator | filter contacts by their doctor          | view a consolidated list of all the patients a doctor is responsible for     |
-| `* *`    | healthcare administrator | sort patients by their admission time    | provide appropriate care to longer-term patients                             |
-| `* *`    | healthcare administrator | tag important notes to patients          | remember special considerations about certain patients                       |
-| `* *`    | healthcare administrator | archive outdated contacts                | maintain a clean and relevant contact list without losing historical records |
-| `* *`    | healthcare administrator | load backup archived data                | restore a backup copy in case of data corruption or user error              |
+<div style="page-break-after: always;"></div>
 
-### Advanced User Stories
+#### Advanced User Stories
 
 | Priority | As a …                   | I want to …                                   | So that I can…                                                       |
 |----------|--------------------------|-----------------------------------------------|----------------------------------------------------------------------|
-| `*`      | healthcare administrator | view a history of previous interactions       | have a complete record of communications for reference               |
 | `* *`    | healthcare administrator | import contact data in bulk                   | keep the database up-to-date without manual entry                    |
 | `* *`    | healthcare administrator | export contact information                    | provide it to others or have a backup in case of system failures     |
-| `* *`    | healthcare administrator | create templates for emergency communications | send critical messages quickly during emergencies                    |
+| `*`      | healthcare administrator | create templates for emergency communications | send critical messages quickly during emergencies                    |
 | `*`      | healthcare administrator | secure access with user authentication        | ensure only authorized personnel can access or update sensitive data |
+| `*`      | healthcare administrator | view a history of previous interactions       | have a complete record of communications for reference               |
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
----
-### Use Case: Add a New Contact
+#### Use Case: Add a New Contact
 
 **System:** MedConnect
 
 **Actor:** Healthcare Administrator
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to add a new patient contact.
 2. MedConnect prompts the user to enter patient details:
     - Name
@@ -412,7 +464,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    **Use case ends.**
 
-#### **Extensions:**
+<div style="page-break-after: always;"></div>
+
+**Extensions:**
 
 **3a.** The entered details are invalid (e.g., phone number contains letters).
 - **3a1.** MedConnect informs the user of the invalid details.
@@ -439,14 +493,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+<div style="page-break-after: always;"></div>
 
-### Use Case: Edit a Contact
+#### Use Case: Edit a Contact
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to list all contacts.
 2. MedConnect retrieves and shows a list of all contacts.
 3. User requests to edit a patient's details.
@@ -459,7 +515,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    **Use case ends.**
 
-#### **Extensions:**
+**Extensions:**
 
 **2a.** The patient list is empty.
 
@@ -478,14 +534,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Delete a Contact
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Delete a Contact
 
 **System:** MedConnect
 
 **Actor:** Healthcare Administrator
 
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to list all contacts.
 2. MedConnect retrieves and shows a list of all contacts.
 3. User requests to delete a specific contact by index.
@@ -494,7 +552,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    **Use case ends.**
 
 
-#### **Extensions:**
+**Extensions:**
 
 **2a.** The contact list is empty.
 
@@ -509,13 +567,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Add Emergency Contacts
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Add Emergency Contacts
 
 **System:** MedConnect
 
 **Actor:** Healthcare Administrator
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to list all contacts.
 2. MedConnect retrives and shows a list of all contacts.
 3. User requests to add a new emergency contact to a patient.
@@ -529,7 +589,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    **Use case ends.**
 
-#### **Extensions:**
+**Extensions:**
 
 **2a.** The contact list is empty.
 
@@ -553,12 +613,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Find Contacts
+#### Use Case: Find Contacts
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to find a patient by their name.
 2. MedConnect prompts the user to provide a name to search for.
 3. User provides a name.
@@ -566,7 +627,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    **Use case ends.**
 
-#### **Extensions:**
+**Extensions:**
 
 **3a.** User provides a blank name.
 - **3a1.** MedConnect notifies the user to provide a name.
@@ -580,18 +641,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Archive Contacts
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Archive Contacts
 
 **System:** MedConnect
 **Actor:** Healthcare Administrator
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to archive the address book with a description.
 2. MedConnect confirms that the contact data has been successfully archived.
 
    **Use case ends.**
 
-#### **Extensions:**
+**Extensions:**
 
 **1a.** The given description is invalid.
 - **1a1.** MedConnect informs the user of the invalid description.
@@ -601,12 +664,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Load Archived Contacts
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Load Archived Contacts
 
 **System:** MedConnect
 **Actor:** Healthcare Administrator
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to load an archive file.
 2. MedConnect prompts the user to provide the file name of an archive file in the archives folder.
 3. User enters a file name.
@@ -615,7 +680,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     **Use case ends.**
 
-#### **Extensions:**
+**Extensions:**
 
 **3a.** The given file name is invalid.
 - **3a1.** MedConnect notifies the user that the file name contains invalid characters.
@@ -631,12 +696,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-### Use Case: Delete Archive File
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Delete Archive File
 
 **System:** MedConnect
 **Actor:** Healthcare Administrator
 
-#### **Main Success Scenario (MSS):**
+**Main Success Scenario (MSS):**
 1. User requests to delete an archive file.
 2. MedConnect prompts the user to provide the file name of an archive file in the archives folder.
 3. User enters a file name.
@@ -645,7 +712,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     **Use case ends.**
 
-#### **Extensions:**
+**Extensions:**
 
 **3a.** The given file name is invalid.
 - **3a1.** MedConnect notifies the user that the file name contains invalid characters.
@@ -660,6 +727,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   **Use case resumes from step 4.**
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements (NFRs)
 
@@ -714,6 +783,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   MedConnect must be **easily testable**, with automated tests that can cover at least **80% of the codebase**. Each core feature (e.g., adding a contact, deleting outdated contacts) should have dedicated test cases.
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Glossary
 
 - **Mainstream OS**: Windows, Linux, Unix, MacOS
@@ -753,6 +824,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -791,42 +864,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Use the keyboard shortcut `Alt + F4`.
 
-### Deleting a patient
-
-1. Deleting a patient while all patients are being shown<br>
-
-    <div markdown="span" class="alert alert-primary">
-        **Prerequisites:**<br>
-        1. List all patients using the `list` command. <br>
-        2. Multiple persons in the list.
-    </div>
-
-    | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
-    |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
-    | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
-    | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
-    | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
-    | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
-    | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
-    | `delete ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
-    | `delete x` <br> (x > number of contacts)             | Error message is shown                                                   | The person index provided is invalid             |
-
-
-2. Deleting a patient while a filtered list is being shown
-
-    <div markdown="span" class="alert alert-primary">
-        **Prerequisites:** The patient list is filtered using the `find` or `finddoc` command.
-    </div>
-
-    | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
-    |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
-    | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
-    | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
-    | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
-    | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
-    | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
-    | `delete ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
-    | `delete x` <br> (x > number of contacts)             | Error message is shown                                                   | The person index provided is invalid             |
+<div style="page-break-after: always;"></div>
 
 ### Adding a patient
 
@@ -848,6 +886,8 @@ testers are expected to do more *exploratory* testing.
    | `add p/98@1532 xx/PARAMETER`                     | Error message is shown                                             | Phone numbers should only contain numbers, and it should be at least 3 digits long                             |
    | `add ecrs/knight xx/PARAMETER`                   | Error message is shown                                             | Relationship type should be Parent, Child, Sibling, Spouse, Grandparent or Relative or their gendered variants |
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a patient
 
 1. Editing a patient while any number of patients are being shown.
@@ -867,6 +907,49 @@ testers are expected to do more *exploratory* testing.
    | `edit 1 ec/x ecname/Heather ecphone/5137985 ecrs/Sibling`<br> (x > number of emergency contacts) | Error message is shown                                                                                       | The emergency contact index provided is invalid                                          |
    | `edit x n/Heather` <br> (x > number of contacts)                                                 | Error message is shown                                                                                       | The person index provided is invalid                                                     |
 
+<div style="page-break-after: always;"></div>
+
+### Deleting a patient
+
+1. Deleting a patient while all patients are being shown<br>
+
+    <div markdown="span" class="alert alert-primary">
+        **Prerequisites:**<br>
+        1. List all patients using the `list` command. <br>
+        2. Multiple persons in the list.
+    </div>
+
+   | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
+       |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
+   | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
+   | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
+   | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
+   | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
+   | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
+   | `delete ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
+   | `delete x` <br> (x > number of contacts)             | Error message is shown                                                   | The person index provided is invalid             |
+
+
+<div style="page-break-after: always;"></div>
+
+2. Deleting a patient while a filtered list is being shown
+
+    <div markdown="span" class="alert alert-primary">
+        **Prerequisites:** The patient list is filtered using the `find` or `finddoc` command.
+    </div>
+
+   | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
+       |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
+   | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
+   | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
+   | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
+   | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
+   | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
+   | `delete ec/x`<br> (x > number of emergency contacts) | Error message is shown                                                   | The emergency contact index provided is invalid  |
+   | `delete x` <br> (x > number of contacts)             | Error message is shown                                                   | The person index provided is invalid             |
+
+<div style="page-break-after: always;"></div>
+
 ### Adding an emergency contact to a patient
 1. Editing a patient while any number of patients are being shown.
      <div markdown="span" class="alert alert-primary">
@@ -883,7 +966,7 @@ testers are expected to do more *exploratory* testing.
     | `addec 2 ecname/D%#P! ecphone/91234567 ecrs/Son`                                   | Error message is shown                                                                                       | Names should only contain alphanumeric characters and spaces, and it should not be blank                       |
     | `addec x ecname/Heather ecphone/5137985 ecrs/Sibling`<br> (x > number of contacts) | Error message is shown                                                                                       | The person index provided is invalid                                                                           |
 
- ### Saving data
+### Saving data
 
   1. Dealing with missing/corrupted data files
 
@@ -891,7 +974,9 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## Appendix: Effort
+<div style="page-break-after: always;"></div>
+
+## **Appendix: Effort**
 
 Developing MedConnect as a brownfield project from the upgrading of AB3 was challenging for us as a team of relatively junior software engineers who did not have much experience in a software engineering project. For some of our team members, the only prior software engineering experience we had was our Orbital project.
 
