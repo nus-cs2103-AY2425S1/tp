@@ -54,10 +54,10 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ")
-                .append("; favourite: ")
-                .append(person.getFavourite());
+                .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; favourite: ")
+                .append(person.getFavourite());
         return builder.toString();
     }
 
@@ -75,10 +75,11 @@ public class Messages {
                     .append(person.getEmail())
                     .append("; Address: ")
                     .append(person.getAddress())
-                    .append("; Tags: ")
-                    .append("; favourite: ")
-                    .append(person.getFavourite());
+                    .append("; Tags: ");
             person.getTags().forEach(builder::append);
+            builder.append("; favourite: ")
+                    .append(person.getFavourite())
+                    .append("\n");
         }
         return builder.toString();
     }

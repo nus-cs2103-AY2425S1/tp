@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSONS_INDEX;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,11 +44,13 @@ public class FavouriteCommand extends Command {
         List<Person> personsList = contactIndexes.stream()
             .map(index -> lastShownList.get(index.getZeroBased()))
             .collect(Collectors.toList());
+        List<Person> updatedPersonList = new ArrayList<Person>();
         for (Person p : personsList) {
             Person favouritePerson = createFavouritePerson(p);
             model.setPerson(p, favouritePerson);
+            updatedPersonList.add(favouritePerson);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personsList)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(updatedPersonList)));
     }
     /**
      * @param personToEdit
