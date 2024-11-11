@@ -27,34 +27,38 @@ HireMe is a **free desktop application that helps you manage your extensive list
 <br></br>
 ### Table of Contents
 <!-- TOC -->
-* [HireMe User Guide](#-hireme-user-guide)
-  * [Welcome to HireMe!](#welcome-to-hireme-)
+* [![icon](images/hireme_logo.png) HireMe User Guide](#-hireme-user-guide)
+  * [Welcome to HireMe!](#welcome-to-hireme)
   * [Overview of User Guide](#overview-of-user-guide)
-    * [Table of Contents](#table-of-contents)
   * [Overview of target users](#overview-of-target-users)
+  * [How to use our User Guide](#how-to-use-our-user-guide)
   * [Quick start](#quick-start)
     * [Part 1: Setting up and downloading HireMe](#part-1-setting-up-and-downloading-hireme)
     * [Part 2: Using the HireMe application](#part-2-using-the-hireme-application)
-      * [_Mac Users_](#_mac-users_)
-      * [_Windows Users_](#_windows-users_)
-      * [_Using the terminal_](#_using-the-terminal_)
-      * [_Using the HireMe application_](#_using-the-hireme-application_)
+      * [_Mac Users_](#mac-users)
+      * [_Windows Users_](#windows-users)
+      * [_Using the terminal_](#using-the-terminal)
+      * [_Using the HireMe application_](#using-the-hireme-application)
   * [Features](#features)
-    * [Viewing help : `/help`](#viewing-help--help)
+    * [Viewing help : `/help`](#viewing-help-help)
     * [Adding an internship application: `/add`](#adding-an-internship-application-add)
-    * [Listing all internship applications : `/list`](#listing-all-internship-applications--list)
-    * [Deleting an internship application : `/delete`](#deleting-an-internship-application--delete)
+    * [Listing all internship applications : `/list`](#listing-all-internship-applications-list)
+    * [Deleting an internship application : `/delete`](#deleting-an-internship-application-delete)
     * [Finding applications by company name: `/find`](#finding-applications-by-company-name-find)
-    * [Updating the status of an internship application : `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application--accept-pending-reject)
+    * [Updating the Status of an Internship Application: `/accept`, `/pending`, `/reject`](#updating-the-status-of-an-internship-application-accept-pending-reject)
     * [Filtering internship applications by status: `/filter`](#filtering-internship-applications-by-status-filter)
     * [Sorting internship applications: `/sort`](#sorting-internship-applications-sort)
-    * [Clearing all entries : `/clear`](#clearing-all-entries--clear)
+    * [Clearing all entries : `/clear`](#clearing-all-entries-clear)
     * [Viewing status chart: `/chart`](#viewing-status-chart-chart)
-    * [Exiting the program : `/exit`](#exiting-the-program--exit)
+    * [Exiting the program : `/exit`](#exiting-the-program-exit)
     * [Saving the data](#saving-the-data)
   * [FAQ](#faq)
   * [Troubleshooting](#troubleshooting)
+      * [HireMe application setup failed](#hireme-application-setup-failed)
+      * [Getting errors when using the commands](#getting-errors-when-using-the-commands)
+      * [Unable to see the full text on the screen](#unable-to-see-the-full-text-on-the-screen)
   * [Command summary](#command-summary)
+  * [Glossary](#glossary)
 <!-- TOC -->
 
 
@@ -504,3 +508,30 @@ Action     | Format, Examples
 **Clear**  | `/clear`
 **Chart**  | `/chart`
 **Exit**   | `/exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+- **Application Status**:
+    - **PENDING**: The internship application is currently in progress.
+    - **REJECTED**: The user has rejected or been rejected from this internship application.
+    - **ACCEPTED**: The user has accepted the offer for this internship.
+
+- **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
+
+- **Command Line Interface (CLI)**: The user interacts with the computer by typing text commands instead of using a mouse to click on buttons or icons. As if giving instructions to execute a desired action.
+
+- **Command**: The string the user types into the HireMe application’s command bar to carry out a particular action.
+
+- **Command Bar**: The input bar at the top of the HireMe application which allows users to type in a string command.
+
+- **Company Email**: The email of the company that the user is applying for an internship role at.
+
+- **Company Name**: The name of the company that the user is applying for an internship role at.
+
+- **Graphical User Interface (GUI)**: The user interacts with the computer using visual elements like buttons, icons and windows.
+
+- **Role**: The role of the internship the user applied for.
+
+- **Index**: The index of the internship application displayed in the list.
