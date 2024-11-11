@@ -562,7 +562,7 @@ Similar to [<ins>UC01](#use-case-uc01-list-all-contacts) except to view tasks in
 Similar to [<ins>UC04](#use-case-uc04-create-a-contact) except adding a wedding to WedLinker instead of a Contact
 
 ### **Use case: UC06 — Create a Task**
-Similar to [<ins>UC04](#use-case-uc04-create-a-contact) except adding a task to WedLinker instead of a Contact
+Similar to [<ins>UC04]( #use-case-uc04-create-a-contact) except adding a task to WedLinker instead of a Contact
 
 ### **Use case: UC07 — Add Phone Number to Contact**
 
@@ -605,32 +605,25 @@ Similar to [<ins>UC07](#use-case-uc07-add-phone-number-to-contact) except duplic
 
     Use case ends.
 
-### **Use case: UC11 — Search for Contacts by Tag**
-Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by tag.
-
-### **Use case: UC12 — Search for Contacts by Wedding**
-Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by wedding.
-
-### **Use case: UC13 — Search for Contacts by Phone Number**
+### **Use case: UC11 — Search for Contacts by Phone Number**
 Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by phone number.
 
-### **Use case: UC14 — Search for Contacts by Address**
+### **Use case: UC12 — Search for Contacts by Address**
 Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by address.
 
-### **Use case: UC15 — Search for Contacts by Email Address**
+### **Use case: UC13 — Search for Contacts by Email Address**
 Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by email address.
 
----
+### **Use case: UC14 — Search for Contacts by Tag**
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by tag.
 
-### **Use case: UC16 — Search for Wedding by Wedding Name**
-Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for wedding by wedding name.
+### **Use case: UC15 — Search for Contacts by Wedding**
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by wedding.
 
-### **Use case: UC17 — Search for Task by Task Name**
-Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for task by task name.
+### **Use case: UC16 — Search for Contacts by Task**
+Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except searching for contacts by task.
 
----
-
-### **Use case: UC18 — Delete Contact**
+### **Use case: UC17 — Delete Contact**
 
 **MSS**
 
@@ -649,13 +642,13 @@ Similar to [<ins>UC10](#use-case-uc10-search-for-contacts-by-name) except search
     * 2a1. System shows an error message prompting the user to delete a valid contact.
       Use case resumes at step 1.
 
-### **Use case: UC19 — Delete Wedding**
+### **Use case: UC18 — Delete Wedding**
 Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting wedding.
 
-### **Use case: UC20 — Delete Task**
+### **Use case: UC19 — Delete Task**
 Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting task.
 
-### **Use case: UC21 — Delete Tag**
+### **Use case: UC20 — Delete Tag**
 Similar to [<ins>UC18](#use-case-uc18-delete-contact) except deleting tag.
 
 ---
@@ -703,7 +696,7 @@ Similar to [<ins>USCH01](#use-case-ucsh01-edit-details-for-a-contact) except edi
 
 **MSS**
 
-1. User requests to clear all contact.
+1. User requests to clear all contacts.
 2. System deletes all contacts and shows a blank list of persons.
 
    Use case ends.
