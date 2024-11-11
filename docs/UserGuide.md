@@ -1418,6 +1418,7 @@ Furthermore, certain edits can cause EZSTATES to **behave in unexpected ways** (
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EZSTATES home folder.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
