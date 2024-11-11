@@ -730,11 +730,26 @@ The current find command automatically assumes that user wants to search student
 Sometimes, user cannot remember the full module code, or wants to search over a wider range of modules, but the current implementation does not support that either,
 hence reducing the usefulness of this command.
 
-![point1 screenshot](images/Planned_Enhancements_Screenshots/Point1_1.png)
+![point1 screenshot_1](images/Planned_Enhancements_Screenshots/Point1_1.png)
 (As shown in the screenshot, `find r/CS1101S` only matches contacts with role **CS1101S Student**, despite that there are 2 CS1101S professors in the sample data.)
 
-![point1 screenshot](images/Planned_Enhancements_Screenshots/Point1_2.png)
-(As show in the screenshot, `find r/CS` results in error messages because construction of search query requires exact module code to work.)
+![point1 screenshot_2](images/Planned_Enhancements_Screenshots/Point1_2.png)
+(As shown in the screenshot, `find r/CS` results in error messages because construction of search query requires exact module code to work.)
 
 This limitation is due to our current system design which forces a role type to be assigned to an exact module code into the search query for the find command to execute,
 we plan to adopt other ways of constructing the query to allow for more general search of module-role in the future.
+
+2. **Allow deletion of other optional data fields of a contact, using the current edit command approach.** Currently, only description field of a contact can be deleted, by editing the contact description field with
+an empty string (For Example: `edit 9 d/` removes description of the ninth contact in the current list), and not any other optional fields such as phone, email and address.
+
+![point2_screenshot_remove_description_example](images/Planned_Enhancements_Screenshots/Point2_RemoveDescriptionExample.png)
+(As shown in the screenshot, `edit 9 d/` successfully removes description field from the ninth person in the current list.)
+
+![point2_screenshot_remove_email_example](images/Planned_Enhancements_Screenshots/Point2_RemoveEmailExample.png)
+(As shown in the screenshot, `edit 9 e/` as an attempt to remove email from ninth person in the current list fails, because empty email field for edit command is not allowed.
+Similar issues happen when removing phone using `edit 9 p/` and removing address using `edit 9 a/`.)
+
+This can be very troublesome to user if he/she accidentally adds these fields to a contact and realized that these wrong fields cannot be removed.
+If these fields are left unchanged over a long period of time, user may forget that these fields are wrong and hence use the wrong information in the program, which is definitely
+not desired. We plan to allow edit command to accept empty input for phone, email and address and change the parser such that the empty inputs for these fields can be considered as
+deleting them from the selected contact.
