@@ -230,12 +230,11 @@ The following screenshot shows the results of executing `find p/94509592 n/Alex 
 Deletes the specified person from the address book.
 
 Format: `delete INDEX`
+* Deletes the person at the specified `INDEX`.
 
 > <span style="color:Gray"> NOTE! </span> <br>
 >
->* Deletes the person at the specified `INDEX`.
->* The index refers to the index number shown in the displayed person list.
->* The index **must be a positive integer** 1, 2, 3, …​
+> * The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 >* There is a confirmation pop-out after the user enters the command but before the deletion is finalised. Click `OK` to continue or `Cancel` to abort the deletion.
 
 The following screenshot shows the delete pop-out.
