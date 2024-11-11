@@ -961,7 +961,7 @@ Team size: 5
    However, it allows users to add duplicate deliveries with different case for the product name (e.g. "bread" and "Bread").
    * **Tasks**:
      * We plan to check for duplicate deliveries case-insensitively for the product name and throw a warning message.
-     * "Warning: Duplicate delivery already exists. Please use a different product name."
+     * "Warning: Duplicate supplier detected. Please use a different name/phone number."
 
 
 7. **Enhancement 7**: Make upcoming command throw an error when the date and time input for the `aft/DELIVERY_DATE_TIME` parameter is later than the date and time input for parameter `bef/DELIVERY_DATE_TIME`.
