@@ -461,7 +461,7 @@ Action     | Format, Examples
 **List Tasks**   | `list-tasks` or `ltasks`
 **Mark Task** | `mark-task TASK_NUMBER…​` or `mtask TASK_NUMBER…​` <br> e.g., `mark-task 1 ` <br> `mtask 1 2 3`
 **Tag**   | `tag PERSON_NUMBER t/TAG_NAME…​ [f/]` <br> e.g., `tag 2 t/florist t/photographer`
-**Unssign Task**    |  `unassign-task PERSON_NUMBER TASK_NUMBER…​` or `unatask PERSON_NUMBER PERSON_TASK_NUMBER…​` <br> e.g., `unatask 2 1 3`
+**Unassign Task**    |  `unassign-task PERSON_NUMBER PERSON_TASK_NUMBER…​` or `unatask PERSON_NUMBER PERSON_TASK_NUMBER…​` <br> e.g., `unatask 2 1 3`
 **Unassign Vendor**    | `unassign-vendor PERSON_NUMBER [f/]` or `uw PERSON_NUMBER [f/]` <br> e.g., `unassign-vendor 3`
 **Unassign Wedding**    | `unassign-wedding PERSON_NUMBER w/WEDDING_NAME…​` or `uw PERSON_NUMBER w/WEDDING_NAME…​` <br> e.g., `uw 2 w/John's Wedding`
 **Unmark Task** | `unmark-task TASK_NUMBER…​` or `untask TASK_NUMBER…​` <br> e.g., `untask 1 ` <br> `unmark-task 1 2 3`
