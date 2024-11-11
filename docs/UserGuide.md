@@ -457,20 +457,11 @@ Deletes the specified tag(s) from the specified contact.
 Deleted Tags (TAG [MORE_TAG]) from Contact: (details of the updated contact)
 ```
 
-| Parameter Name | Description                                  | Required   |
-|----------------|----------------------------------------------|------------|
-| `INDEX`        | Index number of the contact to delete tag    | Compulsory |
-| `t/TAG`        | Tag to be deleted from the specified contact | Compulsory |
-| `t/MORE_TAG` | More tags to be deleted                      | Optional|
-
-<div markdown="block" class="alert alert-info">
-
-🔔 **Notes**: <br>
-
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-</div>
+| Parameter Name | Description                                                                    | Constraint                                    | Required   |
+|----------------|--------------------------------------------------------------------------------|-----------------------------------------------|------------|
+| `INDEX`        | Index number of the contact in the currently displayed list to delete tag from | Positive integer only (e.g. 1, 2, 3)          | Compulsory |
+| `t/TAG`        | Tag to be deleted from the specified contact                                   | Must be alphanumeric characters and no spaces | Compulsory |
+| `t/MORE_TAG`   | More tags to be deleted                                                        | Must be alphanumeric characters and no spaces | Optional   |
 
 **Format 2**: `deletetag all t/TAG [t/MORE_TAG]…​`
 
@@ -480,11 +471,11 @@ Deleted Tags (TAG [MORE_TAG]) from Contact: (details of the updated contact)
 Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
 ```
 
-| Parameter Name | Description                                                               | Required   |
-|----------------|---------------------------------------------------------------------------|------------|
-| `all`          | Indicates that the deletion operation applies to all contacts in the list | Compulsory |
-| `t/TAG`        | Tag to be deleted from every contact in the list associated with the tag  | Compulsory |
-| `t/MORE_TAG`   | More tags to be deleted                                                   | Optional   |
+| Parameter Name | Description                                                               | Constraints                                   | Required   |
+|----------------|---------------------------------------------------------------------------|-----------------------------------------------|------------|
+| `all`          | Indicates that the deletion operation applies to all contacts in the list |                                               | Compulsory |
+| `t/TAG`        | Tag to be deleted from every contact in the list with the tag             | Must be alphanumeric characters and no spaces | Compulsory |
+| `t/MORE_TAG`   | More tags to be deleted                                                   | Must be alphanumeric characters and no spaces | Optional   |
 
 <div markdown="block" class="alert alert-info">
 
