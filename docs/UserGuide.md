@@ -95,15 +95,17 @@ In this guide, we will walk you through Tuteez’s key features and demonstrate 
 <br>
 
 Here is a quick look at the various sections in this user guide:
-- **[Quick start](#quick-start)**: A fast-track section to get Tuteez up and running in no time. It includes setup instructions and a list of essential commands you can try out immediately. <br>
+- **[Quick Start](#quick-start)**: A fast-track section to get Tuteez up and running in no time. It includes setup instructions and a list of essential commands you can try out immediately. <br>
 - **[GUI Overview](#gui-overview)**: A quick overview of the user interface of Tuteez, with explanations of the left and right panels. <br>
 - **[Beginner's Tutorial](#beginner-s-tutorial)**: A step-by-step guide for new users to get started with Tuteez. It includes instructions on adding students, editing details, scheduling lessons, and deleting students. <br>
 - **[Features](#features)**: This section covers all the key commands in Tuteez, providing detailed descriptions of each function. You’ll learn how to add students, manage lessons, add remarks, and more. <br>
-- **[Things you should definitely know](#things-you-should-definitely-know)**: Important information about constraints and limitations of the current version of Tuteez. <br>
-- **[Future Features](#future-features)**: A sneak peek into the exciting features that will be added to Tuteez in future updates. <br>
-- **[FAQ](#faq)**: Answers to the most frequently asked questions about Tuteez. <br>
-- **[Known issues](#known-issues)**: A list of known issues that you may encounter while using Tuteez. <br>
-- **[Command summary](#command-summary)**: A quick reference guide summarising all the commands available in Tuteez. <br>
+- **[Things You Should Definitely Know](#things-you-should-definitely-know)**: Important information about constraints and limitations of the current version of Tuteez. <br>
+- **[Exciting Features in the Future](#exciting-features-in-the-future)**: A sneak peek into the exciting features that will be added to Tuteez in future updates. <br>
+- **[Frequently Asked Questions](#frequently-asked-questions)**: Answers to the most frequently asked questions about Tuteez. <br>
+- **[Known Issues](#known-issues)**: A list of known issues that you may encounter while using Tuteez. <br>
+- **[Glossary](#glossary)**: Explanation of key terms used in the user guide. 
+- **[Command Summary](#command-summary)**: A quick reference guide summarising all the commands available in Tuteez. <br>
+- **[Command Parameters](#command-parameters)**: A quick reference guide for acceptable parameters in Tuteez with examples.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -725,7 +727,7 @@ As of `V1.5`, our app has a few limitations outlined below. Rest assured, we pla
 1. Remarks can only be added and deleted one at a time.
 2. If you wish to edit a remark, first delete the incorrect one, then add the updated version.
 3. After using the find command to locate student(s), running most other commands will reset the left panel to the default view, similar to calling `list`.
-4. Tags that are too long are cut off on the _Left Panel_.
+4. Tags that are too long are cut off on the left panel.
 5. If you wish to edit a lesson, first delete the incorrect one, then add the updated version.
 6. After running edit, addremark, deleteremark, addlesson and deletelesson, the right panel will reset to the top, so you may need to scroll down to view your changes.
 
