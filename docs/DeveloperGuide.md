@@ -18,7 +18,9 @@
 - **Libraries Utilized**:
     - [JavaFX](https://openjfx.io/): Used for building a responsive graphical user interface.
     - [Jackson](https://github.com/FasterXML/jackson): Used for JSON data processing.
-    - [JUnit5](https://github.com/junit-team/junit5): Used for testing to ensure code reliability.<br>
+    - [JUnit5](https://github.com/junit-team/junit5): Used for testing to ensure code reliability.
+
+<!-- Spacer for extra break -->
 
 - **AI Assistance**: The *SellSavvy* logo was generated with ChatGPT 4.0.
 
@@ -760,7 +762,7 @@ Use case ends.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Order**: Agreement made by customers with user on delivery of product
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending. <a id="similar"></a>
+* **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending.
 * **Similar names (for customers, orders and tags)**: Names which are identical if whitespaces and case sensitivity are ignored.
 * **Similar details (orders)**: Orders with identical date, quantity and status along with similar item names.
 
@@ -830,7 +832,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `addcustomer n/Betsy Crowe t/friend e/betsycrowe@duplicate.com a/Newgate Prison p/12345678 t/criminal` <br>
       Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
 
-4. Adding a customer with a [similar name](#similar) and without the optional `tag` field.
+4. Adding a customer with a [similar name](#Glossary) and without the optional `tag` field.
 
     1. Prerequisites: Customer with name `Betsy Crowe` but not `Betsy crowe` already exist in the address book.
 
@@ -844,7 +846,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `addcustomer n/Yu Sutong t/vvip t/vvip e/su@example.com a/Newgate Prison p/12345678` <br>
        Expected: The customer is successfully added with one of the duplicated tags ignored. Details of the added customer shown in the status message.
 
-6. Adding a customer with [similar tags](#similar).
+6. Adding a customer with [similar tags](#Glossary).
 
     1. Prerequisites: Customer with name `Foo Chao` or other similar names does not already exist in the address book.
 
@@ -920,7 +922,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `editcustomer 1 n/Betsy Crowe` <br>
        Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
 
-4. Editing a customer to have a [name similar to an existing customer](#similar).
+4. Editing a customer to have a [name similar to an existing customer](#Glossary).
 
     1. Prerequisites:
         - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
@@ -937,7 +939,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `editcustomer 1 t/friends t/friends` <br>
        Expected: The customer's tags is successfully edited with one of the duplicated tags ignored. Details of the edited customer shown in the status message.
 
-6. Editing a customer to have [similar tags](#similar).
+6. Editing a customer to have [similar tags](#Glossary).
 
     1. Prerequisites: At least one customer is listed.
 
@@ -1008,7 +1010,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addo 1 q/100` <br>
         Expected: No order is added. Error details shown in the status message. Status bar remains the same.
 
-4. Adding a [similar order](#similar).
+4. Adding a [similar order](#Glossary).
 
     1. Prerequisites:
         - At least 1 customer is displayed in the customer list.
@@ -1077,7 +1079,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `edito 2 q/22` <br>
        Expected: The order is successfully edited. Details of the edited order shown in the status message.
 
-3. Editing an order to a [similar order](#similar).
+3. Editing an order to a [similar order](#Glossary).
 
     1. Prerequisites:
         - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
