@@ -270,8 +270,7 @@ Creates a `Tag` within WedLinker to be used on contacts.
 
 Format: `create-tag t/TAG_NAME` or`ctag t/TAG_NAME`
 
-* The `TAG_NAME` is alphanumeric and can contain whitespaces.
-* `TAG_NAME` is case-insensitive.
+* `TAG_NAME` is case-insensitive. It should be alphanumeric and can contain whitespaces.
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
 * Contacts can share Tags.
 * Tags are case-insensitive, so you cannot have both a 'hotel manager' and 'Hotel Manager' tag
@@ -415,8 +414,8 @@ Format: `assign-task PERSON_NUMBER TASK_NUMBER` or `atask PERSON_NUMBER TASK_NUM
 Format: `unassign-task PERSON_NUMBER TASK_NUMBER`
 
 * Un-assigns a `Task` from a contact.
-* The `PERSON_NUMBER` is the index of the person shown in the displayed person list.
-* The `TASK_NUMBER` is the index of the task associated with the selected person that will be unassigned.
+* The `PERSON_NUMBER` is the index of the person shown in the displayed person list. 
+* The `TASK_NUMBER` is the index of the task in the person's task list. e.g. if the contact with `PERSON_NUMBER` 4 has 2 tasks assigned, you would use the following command to unassign the person's second task: `unassign-task 4 2`.
 * The indexes **must be positive integers** 1, 2, 3, …​.
 
 ### Marking a task as completed : `mark-task` or `mtask`
