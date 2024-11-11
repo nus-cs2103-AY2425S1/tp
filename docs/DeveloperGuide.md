@@ -155,16 +155,17 @@ How the parsing works:
 **API** : [
 `Model.java`](https://github.com/AY2425S1-CS2103-F12-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="800" />
 
 The `Model` component,
 
-- stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+- stores the address book data e.g., all `Student` objects (which are contained in a `UniqueStudentList` object).
 - stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list
   which
   is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound
   to
   this list so that the UI automatically updates when the data in the list change.
+- the same is applied to `Group` and `Task` objects
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
   `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
