@@ -103,7 +103,6 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
 5. Open Terminal (repeat Step 1) and navigate to the folder with the `.jar` file by typing:
     ```bash
     cd path/to/your/folder
-
     ``` 
     <div class="note" markdown="span">
     Alternatively, you can open the folder where the `.jar` file  is located,
@@ -114,7 +113,6 @@ Welcome to EZSTATES! This guide will walk you through installing the app and get
    Then inside terminal, run the app with:
    ```bash
    java -jar EZSTATES.jar
-
     ```
    A GUI should appear in a few seconds as shown below. **Note that the initial launch of the app will contain some sample data**.<br><br>
    ![Ui](images/Ui.png)<br><br>
