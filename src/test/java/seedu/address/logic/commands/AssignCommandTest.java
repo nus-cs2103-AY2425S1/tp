@@ -5,6 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -28,13 +35,6 @@ import seedu.address.testutil.TypicalEvents;
 import seedu.address.testutil.TypicalVolunteers;
 import seedu.address.testutil.VolunteerBuilder;
 
-import java.nio.file.Path;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.function.Predicate;
-
-import org.junit.jupiter.api.Test;
-
 public class AssignCommandTest {
 
     private Index indexOne = Index.fromOneBased(1);
@@ -56,7 +56,7 @@ public class AssignCommandTest {
     @Test
     public void equals_twoDifferentCommands_returnFalse() {
         AssignCommand assignCommand1 = new AssignCommand(indexOne, indexOne);
-        AssignCommand assignCommand2= new AssignCommand(indexOne, indexTwo);
+        AssignCommand assignCommand2 = new AssignCommand(indexOne, indexTwo);
         assertFalse(assignCommand1.equals(assignCommand2));
     }
 
@@ -75,10 +75,10 @@ public class AssignCommandTest {
 
     @Test
     public void execute_outOfBoundsIndex_failure() {
-        assertThrows(CommandException.class, () -> new AssignCommand(indexOne, indexTwo).
-                execute(new ModelStubWithOneFreeVolunteerAndOneEvent()));
-        assertThrows(CommandException.class, () -> new AssignCommand(indexTwo, indexOne).
-                execute(new ModelStubWithOneFreeVolunteerAndOneEvent()));
+        assertThrows(CommandException.class, () -> new AssignCommand(indexOne, indexTwo)
+                .execute(new ModelStubWithOneFreeVolunteerAndOneEvent()));
+        assertThrows(CommandException.class, () -> new AssignCommand(indexTwo, indexOne)
+                .execute(new ModelStubWithOneFreeVolunteerAndOneEvent()));
     }
 
     @Test
@@ -90,7 +90,8 @@ public class AssignCommandTest {
     @Test
     public void execute_volunteerNotAvailable_failure() {
         AssignCommand assignCommand = new AssignCommand(indexOne, indexOne);
-        assertThrows(CommandException.class, () -> assignCommand.execute(new ModelStubWithOneNotFreeVolunteerAndOneEvent()));
+        assertThrows(CommandException.class, () -> assignCommand
+                .execute(new ModelStubWithOneNotFreeVolunteerAndOneEvent()));
     }
 
     @Test
@@ -114,7 +115,8 @@ public class AssignCommandTest {
     @Test
     public void execute_volunteerAssignedToOverlappingEvent_failure() {
         AssignCommand assignCommand = new AssignCommand(indexOne, indexTwo);
-        assertThrows(CommandException.class, () -> assignCommand.execute(new ModelStubVolunteerAssignedToOverlappingEvent()));
+        assertThrows(CommandException.class, () -> assignCommand
+                .execute(new ModelStubVolunteerAssignedToOverlappingEvent()));
     }
 
 
@@ -287,7 +289,7 @@ public class AssignCommandTest {
 
         @Override
         public void assignVolunteerToEvent(Volunteer volunteer, Event event)
-                throws DuplicateAssignException, VolunteerNotAvailableException{
+                throws DuplicateAssignException, VolunteerNotAvailableException {
             LocalDate eventDate = LocalDate.parse(event.getDate().toParsableString());
             if (volunteer.isInvolvedInEvent(event.getName().toString())) {
                 throw new DuplicateAssignException();
@@ -345,9 +347,13 @@ public class AssignCommandTest {
             Volunteer volunteer = new VolunteerBuilder()
                     .withAvailableDate(TypicalEvents.EVENT_A.getDate().toParsableString())
                     .build();
-            volunteer.addEvent(TypicalEvents.EVENT_A.getName().toString());
+            Event event = new EventBuilder()
+                    .withDate(TypicalEvents.EVENT_A.getDate().toParsableString())
+                    .withVolunteers(volunteer.getName().toString())
+                    .build();
+            volunteer.addEvent(event.getName().toString());
             volunteers.add(volunteer);
-            events.add(TypicalEvents.EVENT_A);
+            events.add(event);
         }
     }
 

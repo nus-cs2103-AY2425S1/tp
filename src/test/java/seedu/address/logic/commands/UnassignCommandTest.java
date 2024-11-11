@@ -5,6 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -16,24 +21,15 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.exceptions.DuplicateAssignException;
-import seedu.address.model.exceptions.OverlappingAssignException;
+import seedu.address.model.exceptions.NotAssignedException;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
-import seedu.address.model.exceptions.VolunteerNotAvailableException;
 import seedu.address.model.volunteer.UniqueVolunteerList;
 import seedu.address.model.volunteer.Volunteer;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.TypicalEvents;
 import seedu.address.testutil.TypicalVolunteers;
 import seedu.address.testutil.VolunteerBuilder;
-
-import java.nio.file.Path;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.function.Predicate;
-
-import org.junit.jupiter.api.Test;
 
 public class UnassignCommandTest {
 
@@ -56,7 +52,7 @@ public class UnassignCommandTest {
     @Test
     public void equals_twoDifferentCommands_returnFalse() {
         UnassignCommand unassignCommand1 = new UnassignCommand(indexOne, indexOne);
-        UnassignCommand unassignCommand2= new UnassignCommand(indexOne, indexTwo);
+        UnassignCommand unassignCommand2 = new UnassignCommand(indexOne, indexTwo);
         assertFalse(unassignCommand1.equals(unassignCommand2));
     }
 
@@ -75,10 +71,10 @@ public class UnassignCommandTest {
 
     @Test
     public void execute_outOfBoundsIndex_failure() {
-        assertThrows(CommandException.class, () -> new UnassignCommand(indexOne, indexTwo).
-                execute(new ModelStubWithOneVolunteerAssignedToEvent()));
-        assertThrows(CommandException.class, () -> new UnassignCommand(indexTwo, indexOne).
-                execute(new ModelStubWithOneVolunteerAssignedToEvent()));
+        assertThrows(CommandException.class, () -> new UnassignCommand(indexOne, indexTwo)
+                .execute(new ModelStubWithOneVolunteerAssignedToEvent()));
+        assertThrows(CommandException.class, () -> new UnassignCommand(indexTwo, indexOne)
+                .execute(new ModelStubWithOneVolunteerAssignedToEvent()));
     }
 
     @Test
@@ -271,26 +267,15 @@ public class UnassignCommandTest {
         protected final UniqueEventList events = new UniqueEventList();
 
         @Override
-        public void assignVolunteerToEvent(Volunteer volunteer, Event event)
-                throws DuplicateAssignException, VolunteerNotAvailableException{
-            LocalDate eventDate = LocalDate.parse(event.getDate().toParsableString());
-            if (volunteer.isInvolvedInEvent(event.getName().toString())) {
-                throw new DuplicateAssignException();
+        public void unassignVolunteerFromEvent(Volunteer volunteer, Event event) throws NotAssignedException {
+            if (!volunteer.isInvolvedInEvent(event.getName().toString())) {
+                throw new NotAssignedException();
             }
-            if (!volunteer.isFreeOn(eventDate)) {
-                throw new VolunteerNotAvailableException(event.getName().toString());
+            if (!event.hasVolunteer(volunteer.getName().toString())) {
+                throw new NotAssignedException();
             }
-            List<Event> volunteerEvents = events.asUnmodifiableObservableList()
-                    .stream()
-                    .filter(specificEvent -> volunteer.getEvents().contains(specificEvent.getName().toString()))
-                    .toList();
-            for (Event e : volunteerEvents) {
-                if (e.isOverlappingWith(event)) {
-                    throw new OverlappingAssignException(event.getName().toString());
-                }
-            }
-            volunteer.addEvent(event.getName().toString());
-            event.assignVolunteer(volunteer.getName().toString());
+            volunteer.removeEvent(event.getName().toString());
+            event.unassignVolunteer(volunteer.getName().toString());
         }
 
         @Override
@@ -320,9 +305,13 @@ public class UnassignCommandTest {
             Volunteer volunteer = new VolunteerBuilder()
                     .withAvailableDate(TypicalEvents.EVENT_A.getDate().toParsableString())
                     .build();
-            volunteer.addEvent(TypicalEvents.EVENT_A.getName().toString());
+            Event event = new EventBuilder()
+                    .withDate(TypicalEvents.EVENT_A.getDate().toParsableString())
+                    .withVolunteers(volunteer.getName().toString())
+                    .build();
+            volunteer.addEvent(event.getName().toString());
             volunteers.add(volunteer);
-            events.add(TypicalEvents.EVENT_A);
+            events.add(event);
         }
     }
 
