@@ -60,7 +60,7 @@ public class PersonCard extends UiPart<Region> {
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label((SUPPORTS_EMOJIS ? "🏷️ " : "⚑ ") + tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(new Label((SUPPORTS_EMOJIS ? "🏷 " : "⚑ ") + tag.tagName)));
     }
 
     /**
