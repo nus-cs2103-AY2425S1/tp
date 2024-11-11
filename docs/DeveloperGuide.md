@@ -157,6 +157,14 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find feature
+The `find` feature follows the sequence diagram here:
+<puml src="diagrams/FindSequenceDiagram.puml" width="550" />
+
+### Mass Reject feature
+The `mass reject` feature follows the sequence diagram here:
+<puml src="diagrams/MassRejectSequenceDiagram.puml" width="550" />
+
 
 ### Statistics feature
 The `statistics` feature follows the sequence diagram here:
@@ -386,7 +394,7 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 
 - 3b. Multiple contacts with the same name are found, and the user has not provided a phone number or email.
 
-    - 3b1. System asks the user to provide additional details (phone number or email) to specify the contact to delete.  
+    - 3b1. System asks the user to provide other details (phone number or email) to specify the contact to delete.  
         Use case ends.
 
 ---
@@ -415,9 +423,130 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 
 **Extensions**
 
-* 2a. The find criteria are invalid (e.g., tag not recognized or job code too long).
+* 2a. The find criteria are invalid (e.g., tag not recognized).
 
     * 2a1. System shows an error message.
+
+      Use case ends.
+
+---
+
+#### **UC005: Viewing Help**
+
+**MSS**
+
+1. User requests help to use the system.
+2. System displays a link to website containing more information (user guide).
+3. User goes to the provided link to see more information.
+
+   Use case ends.
+
+---
+
+#### **UC006: Showing Applicant Statistics**
+
+**MSS**
+
+1. User requests to view applicant statistics.
+2. System retrieves statistics data (e.g., counts of applicants by job code and tags).
+3. System displays the statistics in a summary view.
+
+   Use case ends.
+
+---
+
+#### **UC007: Bulk Rejecting Contacts**
+
+**MSS**
+
+1. User requests to bulk reject contacts by providing a job code, tag, or both.
+2. System validates the input and checks if any contacts match the criteria.
+3. System updates the matching contacts' tags to `r` (rejected) and displays a confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The criteria are invalid (e.g., tag not recognized).
+
+    * 2a1. System shows an error message.
+
+      Use case ends.
+
+---
+
+#### **UC008: Sorting Contacts**
+
+**MSS**
+
+1. User requests to sort contacts by specifying zero or more sorting criteria (e.g., name, phone, email, job code, tag).
+2. System validates the sorting criteria.
+3. System sorts the contacts based on the specified criteria in the given order.
+4. System displays the sorted list of contacts.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The sorting criteria are invalid (e.g., unsupported field for sorting).
+
+    - 2a1. System shows an error message indicating invalid sorting criteria.
+
+      Use case ends.
+
+---
+
+#### **UC009: Clearing All Contacts**
+
+**MSS**
+
+1. User requests to clear all contacts from the address book.
+2. System deletes all contacts and displays a confirmation message.
+
+   Use case ends.
+
+---
+
+#### **UC010: Exiting the Program**
+
+**MSS**
+
+1. User requests to exit the program.
+2. System terminates and closes the application.
+
+   Use case ends.
+
+---
+
+#### **UC011: Edit a contact**
+
+**MSS**
+
+1. User requests to edit a specific contact by providing an index and one or more fields to update (name, phone number, email, job code, tag).
+2. System validates the provided input.
+3. System checks if the contact exists at the specified index.
+4. System checks if the edited details causes duplicate.
+5. System updates the contact’s details with the provided information and displays a confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The provided input is invalid (e.g. invalid phone number format).
+
+    - 2a1. System shows an error message indicating invalid input and prompts the user to correct it.
+
+      Use case ends.
+
+- 3a. No contact is found at the specified index.
+
+    - 3a1. System shows an error message indicating that no contact exists at the specified index.
+
+      Use case ends.
+
+- 4a. The edited details causes duplicate contacts.
+
+    - 4a1. System shows an error message indicating that the contact already exists.
 
       Use case ends.
 
