@@ -26,6 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Event> filteredEvents;
+    private final List<Person> personList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,9 +40,11 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
+        personList = this.addressBook.getPersonList();
 
         ParserUtil.setFilteredPersonList(filteredPersons);
         ParserUtil.setFilteredEventList(filteredEvents);
+        ParserUtil.setPersonList(personList);
     }
 
     public ModelManager() {
