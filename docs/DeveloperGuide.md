@@ -77,7 +77,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 </box>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `VendorListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -86,7 +86,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Vendor` and `Event` objects residing in the `Model`.
 
 ### Logic component
 
@@ -399,6 +399,7 @@ Preconditions: User is viewing an item.
 **Use case: UC03 - Unassign a vendor from an event**
 
 Preconditions: User is viewing an item.
+
 **MSS**
 
 1. User enters command to unassign a vendor from an event.
@@ -626,11 +627,9 @@ Preconditions: User is viewing an item.
 
 10. **Vendor:** A service provider, such as a caterer, photographer, decorator, who is employed for events.
 
-11. **Vendor Rating:** A qualitative score assigned to a vendor to track their past performance in events.
+11. **Item**: Refers to any entity or object that can be viewed or deleted within the system, such as an event, vendor.
 
-12. **Item**: Refers to any entity or object that can be viewed or deleted within the system, such as an event, vendor.
-
-13. **Associated Entities**: Refers to any related items or dependencies connected to the main item. For example, for an event, associated entities include assigned vendors; for a vendor, associated entities include assigned events.
+12. **Associated Entities**: Refers to any related items or dependencies connected to the main item. For example, for an event, associated entities include assigned vendors; for a vendor, associated entities include assigned events.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -649,9 +648,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch:
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Open a command window.
+
+   3. Launch the jar file using the java -jar command. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences:
 
@@ -688,12 +689,12 @@ testers are expected to do more *exploratory* testing.
 1.  Delete a Vendor:
 
     1.  Type `delete v/1` <br>
-        Expected: The first vendor in the list is removed from EventTory.
+        Expected: The first vendor in the list is removed from EventTory if it is not assigned to any event. Else, the deletion will fail.
 
 2.  Delete an Event:
 
     1. Type `delete e/2` <br>
-       Expected: The second event in the list is removed from EventTory.
+       Expected: The second event in the list is removed from EventTory if it is not assigned to any vendor. Else, the deletion will fail.
 
 ### List Command
 
@@ -770,7 +771,7 @@ testers are expected to do more *exploratory* testing.
 1. Getting Help:
 
    1. Type `help` in the command box and press Enter.
-      Expected: A help window appears, showing instructions and command summaries.
+      Expected: A help window appears with a link to the user guide.
 
 ### Editing Data File (Advanced Users)
 
@@ -778,3 +779,27 @@ testers are expected to do more *exploratory* testing.
 
     1. Open the JSON data file located in `[JAR file location]/data/eventTory.json`, make changes, and restart EventTory. <br>
        Expected: Changes are reflected in the application, but incorrect formatting (e.g., invalid JSON) should prompt the app to reset to an empty state.
+
+## **Appendix: Planned Enhancements**
+### Name similarity warning
+Notifies users when creating vendors or events with names similar to existing ones. If a user attempts to add a new vendor or event with a potentially matching name, the system alerts them to existing similar entries, prompting confirmation or suggesting alternative naming options.
+
+### Description fields for events
+Introduce a description field for each event, allowing users to add more detailed notes about the event's context, objectives, special requirements, or unique features.
+
+### Association note
+Allow users to add a short note to an association between a vendor and an event. This note can serve as a custom message or reminder specific to the event-vendor relationship, such as special instructions, deadlines, or contract details.
+
+### Fine-grained find command
+Enhance the find command to support searching within specific fields. Users can specify particular fields to search within, such as name, tag, or description. This feature will make finding items more precise and adaptable to different user needs.
+
+### Bulk unassign
+Enable users to unassign multiple vendors from an event or multiple events from a vendor in one command. This feature is especially helpful for clearing out old associations after an event concludes or for quickly reassigning vendors to different events.
+
+### Enhanced Support for Foreign Phone Numbers
+Improve the system’s ability to handle phone numbers in various international formats and with non-standard characters. This includes recognizing and storing diverse formats such as country codes, extensions, and special characters to accommodate a wider range of contact details. The current approach relies on users adding these specifiers without symbols or using tags to identify them, which can be confusing and cumbersome.
+
+### Case Sensitivity for Commands
+Make commands case-insensitive to allow users more input flexibility e.g. accidentally hitting the shift key midway through typing a command word.
+* Current command words e.g. `create`, `list` require user inputs to be strictly lowercase.
+* `lISt`, `List` or `LIST` would not be recognised as valid commands.

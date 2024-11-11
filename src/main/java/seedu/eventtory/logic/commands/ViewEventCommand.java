@@ -31,6 +31,10 @@ public class ViewEventCommand extends ViewCommand {
         requireNonNull(model);
         Event eventToView = IndexResolverUtil.resolveEvent(model, targetIndex);
 
+        // Reset filtered event list to prevent not being able to find the event after viewing
+        if (model.getUiState().getValue().isVendorDetails()) {
+            model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
+        }
         model.viewEvent(eventToView);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(eventToView)));
