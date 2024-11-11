@@ -146,7 +146,7 @@ Examples:
 * `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/Resident Assistant e/betsycrowe@example.com a/Newgate Street p/1234567 t/Floor 1`
 
-The following screenshot shows the results of executing `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
+The following screenshot shows the results of executing `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`.
 
 ![AddCommandExampleUsage.png](images/AddCommandExampleUsage.png)
 
@@ -183,6 +183,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOM_NUMBER] [a/ADDRESS] [en
 
 > <span style="color:Tomato"> WARNING! </span> <br>
 > 
+> * If there are duplicate names, i.e if a person in the DorManagerPro address book already has the specified `NAME`, an error will be thrown. This is because it is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
 > * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE`, an error will be thrown. This is because no two people have the same phone number.
 > * If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
 
@@ -190,7 +191,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 en/Betsy Crower ep/+65 91235678 t/` Edits the name and phone number of the emergency contact of the 2nd person to be `Betsy Crower` and `+65 91235678` respectively, and clears all existing tags.
 
-The following screenshot shows the results of executing `edit 2 en/Betsy Crower p/+65 91235678 t/`
+The following screenshot shows the results of executing `edit 2 en/Betsy Crower p/+65 91235678 t/`.
 
 ![EditCommandExampleUsage.png](images/EditCommandExampleUsage.png)
 
@@ -201,16 +202,16 @@ Format: `find n/NAME p/PHONE r/ROOM_NUMBER t/TAG`
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 > All possible orders and combinations of the 4 parameters `NAME`, `PHONE`, `ROOM_NUMBER` and `TAG` are accepted.
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords when searching for `NAME` does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched for `NAME` e.g. `Han` will not match `Hans`
-* Only full room numbers will be matched for `ROOM_NUMBER` e.g. `01-` will not match `01-0110`
-* Only full contact numbers will be matched for `PHONE`, e.g. `9876` will not match `98765432`
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
+* The order of the keywords when searching for `NAME` does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Only full words will be matched for `NAME` e.g. `Han` will not match `Hans`.
+* Only full room numbers will be matched for `ROOM_NUMBER` e.g. `01-` will not match `01-0110`.
+* Only full contact numbers will be matched for `PHONE`, e.g. `9876` will not match `98765432`.
 * When searching by `NAME`, any contacts matching at least any one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* The order of the `TAGS` does not matter e.g. `t/friends t/colleagues` works the same
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+* The order of the `TAGS` does not matter e.g. `t/friends t/colleagues` works the same.
   as `t/colleagues t/friends`
-* `TAG` search is case-sensitive e.g. `Friends` will not match `friends`
+* `TAG` search is case-sensitive e.g. `Friends` will not match `friends`.
 * When searching by `TAG`, the contact must match every `TAG` in the input fields to appear in the listed results.
 * If the user inputs multiple fields for the `find`, then only contacts that match all the input fields will appear in the listed results.
 
@@ -218,7 +219,7 @@ Examples:
 * `find n/John` Finds contacts who have the word John in their name.
 * `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues` Finds contacts who have the tags `friends` and `colleagues`. They also must have the word Alex or Jones in their name, 94509592 as their contact number, and live in room 08-1234.
 
-The following screenshot shows the results of executing `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues`
+The following screenshot shows the results of executing `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues`.
 
 ![FindCommandExampleUsage](images/FindCommandExampleUsage.png)
 
@@ -231,9 +232,9 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* There is a confirmation popout after the user enters the command but before the delete is actually done.
-  click `OK` to continue or `Cancel` to abort the deletion.
+* There is a confirmation pop-out after the user enters the command but before the deletion is finalised. Click `OK` to continue or `Cancel` to abort the deletion.
 
+The following screenshot shows the delete pop-out.
 ![delete popout](images/deleteConfirmation.png)
 
 Examples:
@@ -263,10 +264,9 @@ Format: `clean`
 > If you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command-undo) for details!
 
 Example:
+* `clean`, executed in 2024.
 
-`clean`, executed in 2024.
-
-This deletes all students who graduate in 2023 or earlier.  
+The following screenshot shows the result of `clean`, executed in 2024, which deletes all students who graduate in 2023 or earlier.  
 ![img.png](images/CleanCommandExampleUsage.png)
 
 
@@ -274,9 +274,17 @@ This deletes all students who graduate in 2023 or earlier.
 
 Undoes the latest command that changed the data in the address book.
 
-Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`, `import`.
-
 Format: `undo`
+
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`, `import`.
+> * `undo` can revert such commands repeatedly, all the way back to when the app was first opened.
+
+
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+>
+> `undo` will display a result message that corresponds its effect to help you keep track of what you are undoing! 
 
 ### Exiting the program : `exit`
 
@@ -300,7 +308,8 @@ Format: `export`
 
 Example:
 
-The following screenshots shows the results of executing `export`
+The following screenshots shows the results of executing `export`.
+
 ![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
 ![ExportToFolderExample.png](images/ExportToFolderExample.png)
 
@@ -321,7 +330,7 @@ Examples:
 * `import fp/C:/SaveFile3.json` imports data from the file at `C:/SaveFile3.json` into the application.
 * `import fp/./data/SaveFile4.json` imports data from the file `SaveFile4.json` from the `data` folder of the home folder (`.` in the file path refers to the home folder) into the application.
 
-The following screenshot shows the results of executing `import fp/./data/11-08-2024-051337AM.json`
+The following screenshot shows the results of executing `import fp/./data/11-08-2024-051337AM.json`.
 ![ImportCommandExampleUsage.png](images/ImportCommandExampleUsage.png)
 
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
@@ -337,7 +346,7 @@ DorManagerPro data are saved automatically as a JSON file `[JAR file location]/d
 > <span style="color:Tomato"> WARNING! </span> <br>
 >
 > If your changes to the data file makes its format invalid, DorManagerPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Similarly, when trying to import a invalid JSON file, DorManagerPro will raise an error and disallow the import to go through to prevent invalid data.<br>
+Similarly, when trying to import an invalid JSON file, DorManagerPro will raise an error and disallow the import to prevent invalid data.<br>
 >Furthermore, certain edits can cause the DorManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 
@@ -362,18 +371,18 @@ Similarly, when trying to import a invalid JSON file, DorManagerPro will raise a
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOM_NUMBER] [a/ADDRESS] [en/EMERGENCY_NAME] [ep/EMERGENCY_PHONE] [g/GRADUATION_YEAR] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `find p/+123 12345 n/Alice Lee r/08-1234 t/friend`
-**List**   | `list`
-**Help**   | `help`
-**Clean**  | `clean`
-**Undo**   | `undo`
-**Exit**   | `exit`
-**Export** | `export`
-**Import** | `import fp/FILE_PATH` <br> e.g., `import fp/./data/SaveFile4.json`
+**Add**    |`add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**  |`clear`
+**Delete** |`delete INDEX`<br> e.g., `delete 3`
+**Edit**   |`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOM_NUMBER] [a/ADDRESS] [en/EMERGENCY_NAME] [ep/EMERGENCY_PHONE] [g/GRADUATION_YEAR] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   |`find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `find p/+123 12345 n/Alice Lee r/08-1234 t/friend`
+**List**   |`list`
+**Help**   |`help`
+**Clean**  |`clean`
+**Undo**   |`undo`
+**Exit**   |`exit`
+**Export** |`export`
+**Import** |`import fp/FILE_PATH` <br> e.g., `import fp/./data/SaveFile4.json`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -413,7 +422,7 @@ Duplicate handling:
 > <span style="color:Gray"> NOTE! </span> <br>
 >
 > * Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
-> * Duplicate handling rationale: Phone numbers are unique to each individual
+> * Duplicate handling rationale: Phone numbers are unique to each individual.
 
 ### Email
 
@@ -432,7 +441,7 @@ Duplicate handling:
 > <span style="color:Gray"> NOTE! </span> <br>
 >
 > * Constraint rationale: Email constraints are based on the Email Format of the International Organisation for Standardisation.
-> * Duplicate handling rationale: Emails are unique to each individual
+> * Duplicate handling rationale: Emails are unique to each individual.
 
 ### Address
 
@@ -447,7 +456,7 @@ Duplicate handling:
 
 > <span style="color:Gray"> NOTE! </span> <br>
 >
-> * Constraint rationale: A whitespace cannot be the first character of the string, such that " " cannot be a valid input.
+> * Constraint rationale: A whitespace cannot be the first character, such that " " cannot be a valid input.
 > * Duplicate handling rationale: The same address can have multiple residents. Records of students who have graduated and who lived in the address can also be maintained.
 
 ### Tags
@@ -464,7 +473,7 @@ Duplicate handling:
 
 > <span style="color:Gray"> NOTE! </span> <br>
 >
-> * Constraint rationale: The character limit ensures that the tag is concise for easy referencing. Whitespaces are allowed to define more complex positions that the person may hold, such as "Volleyball captain".
+> * Constraint rationale: The character limit ensures that the tag is concise for easy referencing. Whitespaces are allowed to define more complex positions that the person may hold, such as "Volleyball captain". A whitespace cannot be the first character, such that " " cannot be a valid input.
 
 
 ### Room number
@@ -503,17 +512,17 @@ Duplicate handling:
 
 ### Emergency contact phone number
 
-Format: Same as [Phone number](#phone-number)
+Format: Same as [Phone number](#phone-number).
 
 Constraints:
-Same as [Phone number](#phone-number)
+Same as [Phone number](#phone-number).
 
 Duplicate handling:
 * Two residents can have the same emergency contact with the same phone number.
 
 > <span style="color:Gray"> NOTE! </span> <br>
 >
-> * Constraint rationale: Same as [Phone number](#phone-number)
+> * Constraint rationale: Same as [Phone number](#phone-number).
 > * Duplicate handling rationale: It is possible for two residents to have the same emergency contact.
 
 ### Graduation year
