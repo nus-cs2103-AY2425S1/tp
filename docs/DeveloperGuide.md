@@ -629,7 +629,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: Delete popup shows up. After confirming on the popup, first contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -639,13 +639,28 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Finding a person
+
+1. Finding with parameters missing.
+   1. Test case: `find` <br>
+      Expected: An error message is shown stating that the command format is incorrect and showing the user the correct format.
+   2. Test case: `find t/` <br>
+      Expected: Listing out everyone is the contact list.  
+2. Finding a person with all possible parameters specified.
+   1. Test case:  `find n/John Doe p/98765432 r/08-0805 t/friends` <br>
+      Expected: Listing out the contact with a name John Doe, with a phone number of 98765432, and lives in the room 08-0805, who has a tag of friends.
+3. Finding a person with parameter that does not conform to data validation.
+   1. Test case: `find n/John Doe p/abcd` <br>
+      Expected: An error message is shown informing the user about the correct data format for PHONE.
+   2. Test case: `find n/John Doe r/abcd` <br>
+      Expected: An error message is shown informing the user about the correct data format for ROOM_NUMBER.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 
 ### Adding a person
