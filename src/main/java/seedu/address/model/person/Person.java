@@ -203,7 +203,7 @@ public class Person {
         boolean samePhone = (otherPerson.getPhone().equals(this.getPhone()));
         boolean sameEmail = (otherPerson.getEmail().equals(this.getEmail()));
 
-        return sameClass && sameRegNo || samePhone || sameEmail;
+        return (sameClass && sameRegNo) || samePhone || sameEmail;
     }
 
     /**
