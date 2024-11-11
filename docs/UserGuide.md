@@ -69,7 +69,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for _some_ commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for _some_ commands that do not take in parameters (such as `help`, `list`, `exit`, `archive-list` and `clear`) will be ignored.<br>
   e.g. if the user enters `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -126,7 +126,7 @@ Format: `clear`
 
 ### Exiting the Program: `exit`
 
-Automatically saves all of the user's client data and exits the program.
+Automatically saves all the user's client data and exits the program.
 
 Format: `exit`
 
@@ -142,10 +142,9 @@ You can also exit the program by clicking the "x" at the top left corner of the 
 
 Add a client to Clientele+, including details such as client name, contact information, project deadline, project status, payment status and client status. Accepted values are as specified in the [accepted values table above](#accepted-values-by-field).
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​
-[ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DEADLINE [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
-* Clients with the **same** `NAME`, `EMAIL` and `PHONE NUMBER` are considered duplicates and will not be added
+* Clients with the **same** `NAME`, `EMAIL` and `PHONE NUMBER` are considered duplicates and will not be added.
 * A person can have 0 or more tags.
 * `NAME` is case-insensitive. `John Doe` and `joHN dOE` are considered the same name, but name is stored in the same case as the input (so `John Doe` is stored as `John Doe` and `JOHN Doe` is stored as `JOHN Doe`).
 * If `PAYMENT_STATUS` is not specified, default payment status of `pending` is used.
@@ -239,8 +238,8 @@ Deletes the specified person from Clientele+.
 Format: `delete [n/NAME] [id/INDEX]`
 
 * Deletes clients identified by the specified `INDEX` or `NAME`.
-* `NAME` Acceptable values are same as [above](#accepted-values-by-field); the command looks for an **exact, case-insensitive** match in the name
-  * Ex: `delete n/John` will match `john`, `JOHN` and `John`, but not `John Doe`.
+* `NAME` Acceptable values are same as [above](#accepted-values-by-field); the command looks for an **exact, case-insensitive** match in the name.
+  * E.g.: `delete n/John` will match `john`, `JOHN` and `John`, but not `John Doe`.
 * `INDEX` refers to the index number shown in the displayed person list, and **must be a positive integer** 1, 2, 3, …​
 
 Examples:
@@ -251,7 +250,7 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 <br>
-If you try to delete by name but there are 2 or more clients in the list with that same name, then you will be shown a list of those clients and prompted to delete by index instead.
+If you try to delete by name but there are 2 or more clients in the list with that same name, you will be shown a list of those clients and prompted to delete by index instead.
 
 </div>
 
@@ -278,7 +277,7 @@ Entering `blacklist` on its own without any other parameters will display all cl
 
 Whitelists a previously-blacklisted client.
 
-_Note: a client is considered to be on the whitelist if their client status is **not** "blacklisted"._
+_Note: A client is considered to be on the whitelist if their client status is **not** "blacklisted"._
 
 Format: `whitelist INDEX cs/NEW_CLIENT_STATUS`
 
@@ -364,7 +363,6 @@ The Deadline Reminder feature automatically tracks the latest upcoming and overd
 * Reminders are only shown for clients with an `active` status.
 * The feature does not track `completed` projects.
 * If there are `overdue` deadlines, only overdue projects are shown; upcoming deadlines will not be displayed
-* `No upcoming or overdue reminders.` This indicates there are no active clients with upcoming or overdue deadlines.
 
 Examples:
 
@@ -374,6 +372,8 @@ Single Client Due Today:
 More Than Three Clients Due Today:
 * `John, Alice, Charlie and 1 more have deadlines due today.` This shows that John, Alice, Charlie, and one additional active client have deadlines due today.
 
+No Active Clients With Upcoming Or Overdue Deadlines:
+* `No upcoming or overdue reminders.` This indicates there are no active clients with upcoming or overdue deadlines.
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 
 <br>
@@ -384,7 +384,7 @@ Reminders shown are only for clients in the main client list, not for those in t
 ## Data Management
 ### Saving the Data
 
-Clientele+ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Clientele+ data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -421,7 +421,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **Sorting by Same Name/Deadline:** When a sort is applied, if multiple people share the same name or deadline, modifying other fields (e.g. project status) may shuffle their order, though sorting among different names or deadlines remains correct. This bug is due to a JavaFX SortedList issue and will be fixed in an upcoming update. More details in the [Developer's Guide](DeveloperGuide.md#appendix-planned-enhancements).
+3. **Sorting for clients with same Name/Deadline:** When a sort is applied, if multiple people share the same name or deadline, modifying other fields (e.g. project status) may shuffle their order, though sorting among different names or deadlines remains correct. This bug is due to a JavaFX SortedList issue and will be fixed in an upcoming update. More details in the [Developer's Guide](DeveloperGuide.md#appendix-planned-enhancements).
 
 --------------------------------------------------------------------------------------------------------------------
 
