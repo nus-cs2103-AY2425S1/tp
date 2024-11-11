@@ -54,6 +54,8 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional.<br>
     e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/have pHD` or as `n/John Doe`.
+* List of optional items wrapped in curly braces means that one or more of the items must be present in the command. 
+    e.g. `delete {[n/NAME] [e/EMAIL]}` means that name or email or both name and email is needed.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
@@ -76,12 +78,13 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG`
+Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG [r/REMARK]`
 
 <box type="tip" seamless>
 
-**Tip:** Only one interview stage tag will be attached to a contact at any point of time.
+* Only one interview stage tag will be attached to a contact at any point of time.
 </box>
+* If not specified, remark will be 'None' by default.
 
 Please refer to this table
 for list of valid tags:
@@ -101,6 +104,7 @@ for list of valid tags:
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com j/XYZ1010 t/N`
 * `add n/Betsy Crowe t/BP e/betsycrowe@example.com j/AB1301 p/1234567`
+* `add n/John t/A e/johnnie@example.com j/CS2103 p/444888 r/Good at drawing`
 
 ### Listing persons based on attribute : `list`
 
@@ -128,10 +132,10 @@ Examples:
 
 ### Locating persons by criteria given: `find`
 
-Finds persons by criteria given
+Finds persons by at least one criteria given.
 
 Format:
-`find [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG] [r/REMARK]`
+`find {[n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG] [r/REMARK]}`
 
 * The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo`, `Hans Bobo`, and `Rohans Bobo`, but not `Bo Hans`
 * All fields are case-insensitive
@@ -146,7 +150,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book by finding exact match of a field
+Deletes the specified person from the address book by finding exact match of a field using one criterion.
 
 Format:
 `delete INDEX`
@@ -186,7 +190,7 @@ Examples:
 Marks persons as "rejected" by updating their tags based on specified job code, tag, or a combination of both.
 
 Format:
-`massreject [j/JOB CODE] [t/TAG]`
+`massreject {[j/JOB CODE] [t/TAG]}`
 
 * Updates contacts' tags to `r` (rejected) based on the specified criteria.
 * You can filter by job code only, tag only, or a combination of both.
@@ -332,12 +336,27 @@ for list of valid tags:
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG r/REMARK` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`
-**Clear**  | `clear`
-**Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete n/NAME e/EMAIL` e.g. `delete n/Alex Yeoh e/alexyeoh@gmail.com` <br> `delete n/NAME p/PHONE` e.g. `delete n/Alex Yeoh p/88306733`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find n/FULL_NAME` `find j/JOB_CODE` `find t/TAG` `find n/FULL_NAME p/PHONE` `find n/FULL_NAME e/EMAIL`
-**List**   | `list`
-**Help**   | `help`
+Action     | Format, Examples                                                                                                                                                                   
+-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG [r/REMARK`] <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`                                      
+**Clear**  | `clear`                                                                                                                                                                            
+**Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete e/EMAIL` e.g. `delete e/alexyeoh@gmail.com` <br> `delete p/PHONE` e.g. `delete p/88306733` 
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`       
+**Exit** | `exit`
+**Find**   | `find {[n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG] [r/REMARK]}` <br> e.g. `find n/John j/123 ABC` `find p/12345678`                                                          
+**List**   | `list`                                                                                                                                                                              
+**Mass Reject**| `massreject {[j/JOB CODE] [t/TAG]}` <br> e.g. `massreject j/CS2103` `massreject t/BP j/123ABC`                                                                                     
+**Sort**| `sort [n/] [p/] [e/] [j/] [t/]` <br> e.g. `sort` `sort n/ e/` `sort p/`
+**Statistics**| `stats`    
+**Help**   | `help`                                                                                                                                                                             
+
+## Glossary
+**Java**: A  programming language used to create applications that can run on many types of computers.
+
+**CLI** (Command-Line Interface): A text-based user interface used to interact with a computer program by typing commands.
+
+**GUI** (Graphical User Interface): A user interface that enables interaction with a program through graphical elements like buttons, icons, and windows.
+
+**Parameter**: A piece of information you give to a program or command to tell it exactly what users want it to do.
+
+**Alphanumeric**: Characters only made up of both letters and numbers.
