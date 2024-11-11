@@ -10,4 +10,9 @@ any other relevant business information such as purchased goods & services, date
 
 ### Contributions
 
-1. Add persistent data storage
+1. Deletegoods command + Tests
+2. Listgoods command + Tests
+3. UI enhancements
+   1. Goods view
+   2. Resizable UI elements
+4. Developer guide documentation
