@@ -334,7 +334,7 @@ Format: `/accept INDEX`, `/reject INDEX`, `/pending INDEX`
 1. `/list` followed by `/accept 2`: Changes the status of the second application in the displayed list to `ACCEPTED`.
 2. `/pending 3`: Changes the status of the third application in the currently displayed list to `PENDING`.
 3. `/reject 1`: Changes the status of the first application in the currently displayed list to `REJECTED`.
-4. `/filter PENDING` followed by `/accept 1`: Updates the status of the first application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `pending` filter.
+4. `/filter PENDING` followed by `/accept 1`: Updates the status of the first application on the filtered list (currently `PENDING`) to `ACCEPTED`, removing it from the list view as it no longer matches the `PENDING` filter.
 5. `/list` followed by `/accept 4` when there are only three internship applications returns an error message.
 
 <p>These are the before and after images of the first example</p>
@@ -497,7 +497,7 @@ Action     | Format, Examples
 **Add**    | `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE` <br> e.g., `/add n/Google r/Software Engineer Intern e/google@gmail.com d/16/09/24`
 **List**   | `/list`
 **Delete** | `/delete INDEX`<br> e.g., `/delete 3`
-**Find**   | `/find KEYWORD [MORE_KEYWORDS]`<br> e.g., `/find Google Facebook`
+**Find**   | `/find KEYWORD [ADDITIONAL_KEYWORDS]`<br> e.g., `/find Google Facebook`
 **Accept** | `/accept INDEX`<br> e.g., `/accept 2`
 **Pending**| `/pending INDEX`<br> e.g., `/pending 3`
 **Reject** | `/reject INDEX`<br> e.g., `/reject 1`
