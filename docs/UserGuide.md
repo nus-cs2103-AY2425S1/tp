@@ -462,7 +462,7 @@ Unarchives the contacts at the specified `INDEX` or `INDICES`.
 Assuming a list of 7 contacts in the archive list, inclusive of a contact named `Betsy`,
 
 * `listarchive` followed by `unarchive 2` unarchives the 2nd contact in the displayed list of contacts.
-* `listarchive` followed by `find Betsy` followed by `unarchive 1` unarchives the 1st contact in the results of the `find` command.
+* `find Betsy` followed by `unarchive 1` unarchives the 1st contact in the results of the `find` command.
 * `listarchive` followed by `unarchive 2 3 4 5` unarchives the 2nd, 3rd, 4th and 5th contacts in the displayed list of contacts.
 </box>
 
@@ -499,7 +499,7 @@ Format: `link ch/STUDENT_NAME pa/PARENT_NAME`
 <box type="info">
 
 **Notes about `link`:**
-Links the specified student with name `STUDENT_NAME` with the specified parent with name `PARENT_NAME`.
+Links the student specified by name `STUDENT_NAME` with the parent specified by name `PARENT_NAME`.
 
 * The names provided are case-sensitive.
 * The names provided must match exactly the names displayed in the address book.
