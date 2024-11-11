@@ -518,12 +518,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Main Success Scenario (MSS)**: The primary sequence of actions in a use case that achieves the intended result.
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
 
 * **Pagination**: A technique for organising large sets of data or lists into discrete pages, making it easier to navigate and view information one section at a time. 
 
 * **User Interface (UI)**: The part of an application that users see and interact with to operate the software.
 
+* **Footer**: A footer is the bottom section of an application.
+
+* **Component**: A component is a collection of functions that provide a single responsibility to the application. 
 
 --------------------------------------------------------------------------------------------------------------------
 
