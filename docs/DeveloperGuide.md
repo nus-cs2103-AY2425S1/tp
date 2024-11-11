@@ -668,7 +668,7 @@ testers are expected to do more *exploratory* testing.
 4. Adding a person with data that does not conform to data validation.
    1. Test case: `add n/John Doe p/abcd e/johnd@example.com` <br>
       Expected: An error message is shown informing the user about the correct data format for PHONE.
-   2. Test case: `add n/John Doe p/1234567 e/HAI`
+   2. Test case: `add n/John Doe p/1234567 e/HAI` <br>
       Expected: An error message is shown informing the user about the correct data format for EMAIL.
 
 5. Adding a person with duplicate phone.
