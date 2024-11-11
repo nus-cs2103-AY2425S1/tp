@@ -9,7 +9,11 @@
 
 <page-nav-print />
 
----
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -28,7 +32,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -75,7 +81,7 @@ The sections below give more details of each component.
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -83,7 +89,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component" width="850" />
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -98,7 +104,7 @@ The `UI` component,
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -108,7 +114,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="500"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1 2 3")` API call as an example.
 
@@ -138,7 +144,7 @@ How the parsing works:
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -146,7 +152,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="600" />
+<puml src="diagrams/ModelClassDiagram.puml" width="700" />
 
 The `Model` component,
 
@@ -156,9 +162,6 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <br>
-
----
-
 <div style="page-break-after: always;"></div>
 
 ### Storage component
@@ -179,7 +182,9 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -196,7 +201,9 @@ This section describes some noteworthy details on how certain features and comma
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Add Student Command
 
@@ -216,7 +223,7 @@ The format for the `addstudent` command can be found [here](https://ay2425s1-cs2
 
 The activity diagram for adding a `Student` into the address book
 
-<puml src="diagrams/AddStudentActivityDiagram.puml" width="400" />
+<puml src="diagrams/AddStudentActivityDiagram.puml" width="475" />
 
 The sequence of the `addstudent` command is as follows:
 
@@ -233,21 +240,21 @@ The sequence of the `addstudent` command is as follows:
 
 The following two *Sequence Diagrams* shows how the `addstudent` command works:
 
-<div style="page-break-after: always;"></div>
-
 Here is the *Sequence Diagram* showing how the parser works:
 
-<puml src="diagrams/AddStudentParseSequenceDiagram.puml" width="600" />
+<puml src="diagrams/AddStudentParseSequenceDiagram.puml" />
 
 
 And here is the *Sequence Diagram* showing the command being executed:
 
-<puml src="diagrams/AddStudentExecuteSequenceDiagram.puml" width="450" />
+<puml src="diagrams/AddStudentExecuteSequenceDiagram.puml" />
 
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Add Parent Command
 
@@ -265,11 +272,9 @@ The format for the `addparent` command can be found [here](https://ay2425s1-cs21
    exist, an error message will be displayed.
 5. If all the previous stages complete without exceptions or errors, the `Parent` will be added to the `AddressBook`
 
-<div style="page-break-after: always;"></div>
-
 The activity diagram for adding a `Parent` into the address book
 
-<puml src="diagrams/AddParentActivityDiagram.puml" width="400" />
+<puml src="diagrams/AddParentActivityDiagram.puml" width="475" />
 
 The sequence of the `addparent` command is as follows:
 
@@ -287,20 +292,20 @@ The sequence of the `addparent` command is as follows:
 
 The following two *Sequence Diagrams* shows how the `addparent` command works:
 
-<div style="page-break-after: always;"></div>
-
 Here is the *Sequence Diagram* showing how the parser works:
 
-<puml src="diagrams/AddParentParseSequenceDiagram.puml" width="600" />
+<puml src="diagrams/AddParentParseSequenceDiagram.puml" />
 
 And here is the *Sequence Diagram* showing the command being executed:
 
-<puml src="diagrams/AddParentExecuteSequenceDiagram.puml" width="450" />
+<puml src="diagrams/AddParentExecuteSequenceDiagram.puml" />
 
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Edit Person Command
 
@@ -316,20 +321,22 @@ The edit mechanism uses `EditPersonDescriptor` to abstract out the fields to edi
 
 Below illustrates how `EditPersonDescriptor` is used.
 
-<div style="page-break-after: always;"></div>
-
 Here is a *Sequence Diagram* showing the parser in action:
 
-<puml src="diagrams/EditParseSequenceDiagram.puml" width="500" />
+<puml src="diagrams/EditParseSequenceDiagram.puml" />
+
+<div style="page-break-after: always;"></div>
 
 And here is a *Sequence Diagram* showing the command being executed:
 
-<puml src="diagrams/EditExecuteSequenceDiagram.puml" width="600" />
+<puml src="diagrams/EditExecuteSequenceDiagram.puml" />
 
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Delete Person Command
 
@@ -359,15 +366,15 @@ The sequence of the `delete` command is as follows:<br>
 
 The following sequence diagram shows how the `delete` command works:
 
-<puml src="diagrams/DeleteParseSequenceDiagram.puml" width="1000" />
+<puml src="diagrams/DeleteParseSequenceDiagram.puml" />
 
-<div style="page-break-after: always;"></div>
-
-<puml src="diagrams/DeleteExecuteSequenceDiagram.puml" width="1000" />
+<puml src="diagrams/DeleteExecuteSequenceDiagram.puml" width="600" />
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Link Command
 
@@ -399,13 +406,15 @@ The sequence of the `link` command is as follows:<br>
 
 The following sequence diagram shows how the `link` command works:
 
-<puml src="diagrams/LinkParseSequenceDiagram.puml" width="550"/>
+<puml src="diagrams/LinkParseSequenceDiagram.puml" />
 
-<puml src="diagrams/LinkExecuteSequenceDiagram.puml" width="1000" />
+<puml src="diagrams/LinkExecuteSequenceDiagram.puml" />
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Find Command
 
@@ -434,13 +443,13 @@ The sequence of the `find` command is as follows:<br>
 
 The following sequence diagram shows how the `find` command works:
 
-<puml src="diagrams/FindParseSequenceDiagram.puml" width="700" />
+<puml src="diagrams/FindParseSequenceDiagram.puml" />
 
 <puml src="diagrams/FindExecuteSequenceDiagram.puml" width="600" />
 
 <br>
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -471,13 +480,12 @@ The sequence of the `pin` command is as follows:<br>
 
 The following sequence diagram shows how the `pin` command works:
 
-<puml src="diagrams/PinParseSequenceDiagram.puml" width="425" />
+<puml src="diagrams/PinParseSequenceDiagram.puml" />
 
-<puml src="diagrams/PinExecuteSequenceDiagram.puml" width="675" />
+<puml src="diagrams/PinExecuteSequenceDiagram.puml"/>
 
-<br>
 
----
+<div style="page-break-after: always;"></div>
 
 ### [Proposed] Undo/redo feature
 
@@ -495,15 +503,15 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" width="400" />
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" width="400" />
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
 Step 3. The user executes `add n/David …` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" width="400" />
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
@@ -513,7 +521,7 @@ Step 3. The user executes `add n/David …` to add a new person. The `add` comma
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" width="400" />
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 <box type="info" seamless>
 
@@ -546,11 +554,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" width="400" />
+<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …` command. This is the behavior that most modern desktop applications follow.
 
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" width="450" />
+<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -637,8 +645,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | tutor who receives payments from parents                                    | add payment statuses to each student                                                         | I can manage my finance-related tasks efficiently                                                                                   |
 | `*`      | private tutor involved in long-term academic planning                       | keep a history of each student's progress and achievements                                   | I can monitor their growth over time and adjust my teaching strategies accordingly                                                  |
 | `*`      | expert user of the addressbook                                              | set macros for filters/sort                                                                  | I would be able to quickly organise without typing long commands                                                                    |
-
-<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -1367,7 +1373,3 @@ Team Size: 5. Hence, maximum number of planned enhancements is **10**.
 ### 9. Improve input validation for `findday` command to only take in days of the week.
 * **Current Situation**: Users can input any value for the `DAY` parameter of the `findday` command.
 * **Proposed Improvement**: Create an enum of valid `DAY` inputs (i.e. the days of the week), and display an error message to the user if the value input to the `DAY` parameter does not match any of the valid inputs.
-
-### 10. Improve input validation for EMAIL parameter to check for top-level domain
-* **Current Situation**: Commands that take in `EMAIL` parameter will accept email without top-level domain (i.e. local-part@domain).
-* **Proposed Improvement**: Ensure that users include a top-level domain when inputting `EMAIL` parameters (i.e. local-part@domain.com).
