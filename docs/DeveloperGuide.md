@@ -140,7 +140,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Client` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Client` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Client` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Client` needing their own `Tag` objects. Note that tne `Transaction` list cannot be refactored in the same way, because all transactions are semantically distinct (e.g two copies of a tag are the same, but two transactions with the same descriptions, amounts, date, and parties are separate because they may simply be two transactions on the same day).<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
