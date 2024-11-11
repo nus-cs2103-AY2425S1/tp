@@ -70,7 +70,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java).
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -78,7 +78,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 `AttendanceWindow` and `AttendanceRow` are separate classes from the main UI, which are used to display the attendance of students in a class.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts is defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts is defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml).
 
 <div style="page-break-after: always;"></div>
 
@@ -94,14 +94,14 @@ The `UI` component,
 The `AttendanceWindow` Class represents a window displaying the attendance records of students in a specific tutorial group. It,
 * depends on the `Logic` component, as they need to execute commands to update the attendance.
 * depends on the `Model` component, as they need to access the `Student` objects to display the attendance.
-* listens for changes to the `Model` data so that the table view can be refreshed and updated with the modified data
+* listens for changes to the `Model` data so that the table view can be refreshed and updated with the modified data.
 
 
 **`AttendanceRow` Class**
 
 The `AttendanceRow` class represents a single row in the attendance table, displaying a student's name and attendance status for each date. It,
 * depends on the `Model` component, as they need to access the `Student` objects to display the attendance.
-* listens for changes to the `Model` data so that the row can be refreshed and updated with the modified data
+* listens for changes to the `Model` data so that the row can be refreshed and updated with the modified data.
 
 Each `AttendanceRow` is updated in real-time as the underlying attendance records are modified, allowing the UI to maintain up-to-date attendance statuses for each student.
 
@@ -145,7 +145,7 @@ How the undo works:
 
 <puml src="diagrams/UndoRedoState1.puml" width = "150"/>
 
-* When the `undo` command is called, the `LogicManager` pops the latest command 
+* When the `undo` command is called, the `LogicManager` pops the latest command. 
 
 <puml src="diagrams/UndoRedoState2.puml" width = "150"/>
 
@@ -161,7 +161,7 @@ The `Model` component,
 * stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 <box type="info" seamless>
 
@@ -179,7 +179,7 @@ The `Model` component,
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 ### Common classes
 
