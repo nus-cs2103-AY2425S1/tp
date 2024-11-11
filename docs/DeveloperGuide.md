@@ -753,3 +753,13 @@ This can be very troublesome to user if he/she accidentally adds these fields to
 If these fields are left unchanged over a long period of time, user may forget that these fields are wrong and hence use the wrong information in the program, which is definitely
 not desired. We plan to allow edit command to accept empty input for phone, email and address and change the parser such that the empty inputs for these fields can be considered as
 deleting them from the selected contact.
+
+4. **Enforce realistic role assignment for contacts.** Currently, a contact can have multiple roles, such as both "Professor" and "Student".
+This is unrealistic, as an individual is typically either a student or a professor, but not both.
+
+![point4_screenshot](images/Planned_Enhancements_Screenshots/Point4_ConflictingRoleExample.png)<br>
+(As shown in the screenshot, Royston is both a CS1101S professor and CS2100 student.)
+
+We plan to enforce stricter role assignment, ensuring that:
+* A contact can be designated as a Professor across multiple modules. 
+* Alternatively, a contact can be designated as either a Student or a Tutor across multiple modules.
