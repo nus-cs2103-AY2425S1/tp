@@ -1685,19 +1685,50 @@ No parameters given. An invalid command will be shown in the result display box.
 
 #### Deleting a [_client_](#glossary-client)
 
-1. Deleting a _client_ while all _clients_ are being shown
+Deleting a _client_.
 
-    1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
+<box type="warning">
 
-    2. Test case: `cdelete 1`<br>
-       Expected: The first _client_ is deleted from the list. Details of the deleted contact will be displayed in the
-       result display box.
+**Prerequisites**: List all _clients_ using the `list` command. Multiple _clients_ in the list.
 
-    3. Test case: `cdelete 0`<br>
-       Expected: No _client_ is deleted. Error details will be displayed in the result display box.
+</box>
 
-    4. Test case: `cdelete x`, where x is larger than the total number of clients.<br>
-       Expected: No _client_ is deleted. An invalid command will be shown in the result display box.
+<box type="info" seamless>
+
+**Test case 1**: `cdelete 1`
+
+<box type="success">
+
+The app prompts for confirmation. Accepting the prompt with `y` causes the command to proceed, any other input cancels the command.
+The first _client_ is deleted from the list. Details of the deleted _client_ will be displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 2**: `cdelete 0`
+
+<box type="wrong">
+
+Client index cannot be `0`. No _client_ is deleted, and error details are displayed in the result display box.
+
+</box>
+
+</box>
+
+<box type="info" seamless>
+
+**Test case 3**: `cdelete x`, where `x` is larger than the total number of clients.
+
+<box type="wrong">
+
+Client index cannot be larger than size of the displayed list. No _client_ is deleted, and error details are displayed in the result display box.
+
+</box>
+
+</box>
 
 #### Deleting a client's [_rental information_](#glossary-rental-information)
 
