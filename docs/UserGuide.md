@@ -221,7 +221,6 @@ If there is a student with name `John Doe` and phone number `87654321` in the li
 
 </div>
 
-<div style="page-break-after: always;"></div>
 
 #### **3.2 Creating a new tutorial**
 
@@ -559,7 +558,6 @@ Invalid usages
 </div>
 {% endraw %}
 
-<div style="page-break-after: always;"></div>
 
 #### **5.4 Marking attendance of a student**
 
@@ -614,7 +612,6 @@ Invalid usages
 You can click anywhere in the attendance box to show other weeks' attendance for that tutorial.
 </div>
 
-<div style="page-break-after: always;"></div>
 
 #### **5.5 Marking attendance of a tutorial**
 *Marks the attendance of all students enrolled in the tutorial for the specified date*
@@ -663,7 +660,6 @@ Invalid usages
 </div>
 {% endraw %}
 
-<div style="page-break-after: always;"></div>
 
 #### **5.6 Unmarking attendance of a student**
 
@@ -830,6 +826,7 @@ EduVault immediately saves once the command resolves. Hence, it is recommended t
 </div>
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### **7. Viewing help**
 Shows a message explaining how to access the help page.
@@ -861,6 +858,7 @@ EduVault data is saved in the hard disk automatically after any command that cha
 There is no need to save manually.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### **10. Editing the data file**
 EduVault data is saved automatically as a JSON file at `[JAR file location]/data/eduvault.json`.
@@ -874,6 +872,7 @@ Furthermore, certain edits can cause EduVault to behave in unexpected ways (e.g.
 For reference, please refer to the [Developer Guide](https://ay2425s1-cs2103t-w08-2.github.io/tp/DeveloperGuide.html#storage-feature) for more details on editing the JSON file.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### **11. Prefix Table** 
 
@@ -1013,6 +1012,7 @@ dd/MM/yyyy</code>
 
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### **12. Format Errors**
 
@@ -1083,6 +1083,7 @@ dd/MM/yyyy</code>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduVault home folder.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### **14. Known issues**
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the application before running the application again.
