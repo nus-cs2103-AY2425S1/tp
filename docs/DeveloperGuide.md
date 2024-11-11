@@ -245,7 +245,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **2a1.** Eventory shows an error message.
       *Use case resumes at step 1.*
 
-  *Use case ends.*
+*Use case ends.*
 
 ---
 
@@ -270,7 +270,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **3a1.** Eventory shows an error message.
       *Use case resumes at step 2.*
 
-  *Use case ends.*
+*Use case ends.*
 
 ---
 
@@ -283,7 +283,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User requests to delete a specific person or event in the list.
 4. Eventory deletes the person or event.
 
-   *Use case ends.*
+*Use case ends.*
 
 **Extensions**
 
@@ -366,7 +366,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **2b.** The event does not exist.
     - **2b1.** Eventory shows an error message.
-      *Use case resumes at step 1.*
+      *Use case resumes at step 1.* <br> <br>
 
 - **2c.** The person is already linked to the event.
     - **2c1.** Eventory shows an error message.
@@ -389,11 +389,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **2a.** The given index is invalid.
     - **2a1.** Eventory shows an error message.
-      *Use case resumes at step 1.*
+      *Use case resumes at step 1.* <br> <br>
 
 - **2b.** The event does not exist.
     - **2b1.** Eventory shows an error message.
-      *Use case resumes at step 1.*
+      *Use case resumes at step 1.* <br> <br>
 
 - **2c.** The person is not already linked to the event.
     - **2c1.** Eventory shows an error message.
