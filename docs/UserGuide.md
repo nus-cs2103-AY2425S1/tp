@@ -407,7 +407,7 @@ Furthermore, certain edits can cause the application to behave in unexpected way
 
 ## Glossary
 
-* **Duplicated student:** Two students are duplicates if they have the exact same **NAME** (case-sensitive) and the same **PHONE NUMBER** at the same time.
+* **Duplicated student:** Two students are duplicates if they have the exact same **NAME** and the same **PHONE NUMBER** at the same time.
   * You can add 2 students with _different names_ but the _same phone number_ (e.g., siblings using a parent's phone number to register).
   * You can add 2 students with the _exact same name_ but _different phone numbers_ (e.g., you may have 2 students with the same name).
   * You cannot add a duplicated student or edit an existing student to make it a duplicate in UGTeach.

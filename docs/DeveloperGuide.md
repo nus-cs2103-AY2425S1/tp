@@ -863,7 +863,7 @@ testers are expected to do more *exploratory* testing.
 **_Team size: 5_**
 
 1. **Improve duplicate detection to meet real-world use cases**: 
-* The current version only considers students with **both** the same name and the same phone number duplicates. We take the 2 fields as the main criteria for differentiating students, since different students may have the exact same name. However, the email address might also a unique identity for the students. <br>
+* The current version only considers students with **both** the same name and the same phone number as duplicates. We take the 2 fields as the main criteria for differentiating students, since different students may have the exact same name. However, the email address could also serve as a unique identifier for students. <br>
 * In the future version, we plan to include email address as another criterion for detecting duplicates. To be specific,
   * two students with the same name and the same phone number are duplicates;
   * two students with the same name and the same email address are duplicates;
