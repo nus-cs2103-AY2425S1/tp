@@ -245,6 +245,7 @@ Use case ends.
   * 2b2. User requests to add a contact again
   * 2b3. Steps 2b1 and 2b2 are repeated until the information entered is valid
   * **Use case resumes from Step 3**
+
 ***
 **Use case:** UCO2 - Delete Contact  
 **Actor:** User
@@ -276,6 +277,7 @@ Use case ends.
 4. NetBook displays the relevant users in the GUI, and displays a message stating the number of contacts displayed
 
 Use case ends.
+
 ***
 **Use case:** UCO4 - List All Contacts  
 **Actor:** User
@@ -286,8 +288,8 @@ Use case ends.
 informing users that all contacts have been displayed
 
 Use case ends.
-***
 
+***
 **Use case:** UCO5 - Open Help Page  
 **Actor:** New User
 
@@ -296,6 +298,7 @@ Use case ends.
 2. NetBook displays the help page to the user
 
 Use case ends.
+
 ***
 **Use case:** UCO6 - Assign Priority To Contact   
 **Actor:** User
@@ -315,6 +318,7 @@ Use case ends.
     * 2a2. User requests to add a priority to a contact again
     * 2a3. Steps 2bi and 2bii are repeated until the information entered is valid
     * **Use case resumes from Step 3**
+
 ***
 **Use case:** UCO7 - Edit Contact 
 **Actor:** User
