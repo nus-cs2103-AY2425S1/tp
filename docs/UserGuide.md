@@ -6,7 +6,9 @@ pageNav: 3
 
 # Bridal Boss User Guide
 
-**Bridal Boss** is a desktop app designed for **wedding planners to managing contacts**, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Bridal Boss can get your contact management tasks done faster than traditional GUI apps.
+**Bridal Boss** is a desktop app designed for small to medium-scale **wedding planners to streamline contact management**. 
+It is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, Bridal Boss will help you manage contacts faster than traditional GUI apps, combining speed with functionality to enhance your wedding planning experience. 
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,13 +19,13 @@ pageNav: 3
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T11-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar BridalBoss.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   <img src="images/Ui.png" alt="Ui" width="500"/>
 1. At the top is the command box for users to enter their commands. The column on the left contains the list of client and vendor contacts while the right column contains a list of weddings. <br>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -157,11 +159,6 @@ Below are the detailed descriptions of each command, including examples, error m
 Displays instructions on how to access the help page.
 
 - **Format**: `help`
-- **Example**:
-  ```
-  > help
-  [Help instructions displayed]
-  ```
 
 ---
 
@@ -224,12 +221,6 @@ Finds persons whose names contain any of the given keywords.
 - **Examples**:
     - `find John` returns `John` and `John Doe`.
     - `find alex david` returns `Alex Yeoh`, `David Li`.
-- **Example Output**:
-  ```
-  > find Alex David
-  1. Alex Yeoh
-  2. David Li
-  ```
 
 ---
 
@@ -277,23 +268,25 @@ Deletes a specified person from the address book or removes wedding jobs assigne
 - **Examples**:
     - `delete 2` deletes the person at index 2.
     - `delete Betsy` deletes Betsy if there's only one match.
+
+---
   
 #### Removing Wedding Jobs Assigned to a Person: `delete`
 
 Removes wedding jobs assigned to specified person.
 
 - **Formats**:
-    - **By Index**: `delete INDEX [w/WEDDING_INDEX]...`
-    - **By Name**: `delete NAME [w/WEDDING_INDEX]...`
+  - **By Index**: `delete INDEX [w/WEDDING_INDEX]...`
+  - **By Name**: `delete NAME [w/WEDDING_INDEX]...`
 - **Notes**:
-    - **Removing wedding jobs assigned to a person**:
-        - If multiple matches are found when using name-based format, the system will prompt for index.
-        - Can remove multiple weddings jobs a person is assigned to.
-        - Wedding indices must be valid and must refer to weddings that the specified person is already assigned to.
-        - If no wedding indices are provided, the contact specified will be deleted.
+  - **Removing wedding jobs assigned to a person**:
+    - If multiple matches are found when using name-based format, the system will prompt for index.
+    - Can remove multiple weddings jobs a person is assigned to.
+    - Wedding indices must be valid and must refer to weddings that the specified person is already assigned to.
+    - If no wedding indices are provided, the contact specified will be deleted.
 - **Examples**:
-    - `delete 1 w/1` removes wedding job at index 1 that person at index 1 is assigned to.
-    - `delete Alice w/1 w/2` removes wedding jobs at index 1 and 2 assigned to Alice, if there's only one match to 'Alice'.
+  - `delete 1 w/1` removes wedding job at index 1 that person at index 1 is assigned to.
+  - `delete Alice w/1 w/2` removes wedding jobs at index 1 and 2 assigned to Alice, if there's only one match to 'Alice'.
 
 ---
 
@@ -304,11 +297,6 @@ Clears all entries from the address book.
 - **Format**: `clear`
 - **Warning**:
     - This action cannot be undone.
-- **Example**:
-  ```
-  > clear
-  Address book has been cleared.
-  ```
 
 ---
 
@@ -378,15 +366,15 @@ Edits the details of an existing wedding.
   - At least one optional field (`NAME`, `DATE`, `VENUE`) must be provided.
 
 - **Notes**:
-    - Client cannot be changed after creation.
-    - Existing values will be updated to the new values.
-    - Date and venue must adhere to validation rules specified in the [Validation Rules for Wedding Fields](#wedding-fields).
-    - Make use of `list` command to refresh the list with the updated information.
+  - Client cannot be changed after creation. 
+  - Existing values will be updated to the new values. 
+  - Date and venue must adhere to validation rules specified in the [Validation Rules for Wedding Fields](#wedding-fields). 
+  - Make use of `list` command to refresh the list with the updated information.
 - **Examples**:
-    - `editw w/1 n/Sunset Wedding`
-        - Changes the name of the wedding at index 1 to "Sunset Wedding".
-    - `editw w/2 d/2025-01-01 v/Grand Hotel`
-        - Updates the date and venue of the wedding at index 2.
+  - `editw w/1 n/Sunset Wedding`
+    - Changes the name of the wedding at index 1 to "Sunset Wedding".
+  - `editw w/2 d/2025-01-01 v/Grand Hotel`
+    - Updates the date and venue of the wedding at index 2.
 
 ---
 
@@ -462,7 +450,7 @@ Assigns a role and/or weddings to a person.
 
 **Success Example**:<br>
 ![Successful multiple assignment](images/success_multi_match.png)<br>
-*Example of successfully assigning a person to multiple weddings*
+*Example of successfully assigning a person to a role*
 
 ---
 
@@ -471,11 +459,6 @@ Assigns a role and/or weddings to a person.
 Exits the application.
 
 - **Format**: `exit`
-- **Example**:
-  ```
-  > exit
-  Application terminated.
-  ```
 
 ---
 
@@ -569,13 +552,13 @@ Advanced users can edit the data file directly to modify the address book data.
 #### Phone Numbers
 
 - **Format**:
-    - Must start with 8 or 9.
+    - Must start with 6, 8 or 9.
     - Exactly 8 digits long.
     - Numbers only; no spaces or special characters.
 - **Uniqueness**:
     - Each phone number must be unique in the system.
 - **Examples**:
-    - `91234567`, `82345678`.
+    - `91234567`, `82345678`, `67891234`.
 
 #### Email Addresses
 
@@ -650,27 +633,27 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
 #### Index Format
 
 - **Usage**:
-    - Uses the position number from the displayed list.
-    - Only positive non-zero integers are accepted.
+  - Uses the position number from the displayed list.
+  - Only positive non-zero integers are accepted.
     - **Format**: `COMMAND INDEX [parameters]`
     - **Example**:
-        - `edit 1 n/John Smith`
+      - `edit 1 n/John Smith`
 
 #### Name-Based Format
 
 - **Usage**:
-    - Uses the person's or wedding's name.
+  - Uses the person's or wedding's name.
     - **Format**: `COMMAND NAME [parameters]`
-    - **Behavior**:
+      - **Behavior**:
         - **Case-insensitive matching**.
         - **Full name matching**: Searches for names containing the entire keyword (not necessarily as substring).
         - **Single Match**:
-            - Command executes immediately.
+          - Command executes immediately.
         - **Multiple Matches**:
-            - System displays a list of matching entries with indices.
-            - User must re-enter the command using the index.
+          - System displays a list of matching entries with indices.
+          - User must re-enter the command using the index.
         - **No Matches**:
-            - Displays "No matches found" message.
+          - Displays "No matches found" message.
 - **Examples**:<br>
   ![Multiple matches example](images/multiple_match.png)<br>
   *When multiple matches are found, the system displays a list with indices*
@@ -711,56 +694,77 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
 
 ---
 
+## 📚 **FAQ**
 
---------------------------------------------------------------------------------------------------------------------
+**Q**: **How do I transfer my data to another Computer?**  
+**A**: 🖥️ Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-## FAQ
+---
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: **How do I input the name of a person with `d/o` or `s/o` in it?**  
+**A**: ✏️ You can input the name as `son of` or `daughter of` respectively.
 
-**Q**: How do I input the name of a person with `d/o` or `s/o` in it?<br>
-**A**: You can input the name as `son of` or `daughter of` respectively.
+---
 
-**Q**: How do I add a wedding for an existing client?<br>
-**A**: First use `list` to see all contacts. Then use either `addw n/WEDDING_NAME c/INDEX` using the client's index number, or `addw n/WEDDING_NAME c/CLIENT_NAME` using the client's name.
+**Q**: **How do I add a wedding for an existing client?**  
+**A**: First, use `list` to see all contacts. Then, use either `addw n/WEDDING_NAME c/INDEX` using the client's index number, or `addw n/WEDDING_NAME c/CLIENT_NAME` using the client's name.
 
-**Q**: What happens if I try to delete a client who has a wedding?<br>
-**A**: The system will prevent you from deleting the client and show an error message. You must first delete the client's wedding before deleting the contact.
+---
 
-**Q**: Can I change a wedding's client after creation?<br>
-**A**: No, a wedding's client cannot be changed after creation. You would need to create a new wedding for the different client.
+**Q**: **What happens if I try to delete a client who has a wedding?**  
+**A**: ⚠️ The system will prevent you from deleting the client and show an error message. You must first delete the client's wedding before deleting the contact.
 
-**Q**: Can a client have multiple weddings?<br>
-**A**: No, each client can only have one wedding at a time.
+---
 
-**Q**: Can I assign multiple roles to a person?<br>
-**A**: No, each person can only have at most one role at a time. Assigning a new role will replace the existing one.
+**Q**: **Can I change a wedding's client after creation?**  
+**A**: ❌ No, a wedding's client cannot be changed after creation. You would need to create a new wedding for the different client.
 
-**Q**: What happens when I delete a wedding?<br>
+---
+
+**Q**: **Can a client have multiple weddings?**  
+**A**: 📅 No, each client can only have one wedding at a time.
+
+---
+
+**Q**: **Can I assign multiple roles to a person?**  
+**A**: 🚫 No, each person can only have at most one role at a time. Assigning a new role will replace the existing one.
+
+---
+
+**Q**: **What happens when I delete a wedding?**  
 **A**: Deleting a wedding will remove all vendor assignments to that wedding and remove the client-wedding relationship. The contacts themselves are not deleted.
 
-**Q**: Can I use the same phone number or email for different contacts?<br>
-**A**: No, phone numbers and email addresses must be unique in the system. You'll receive an error message if you try to add or edit a contact with duplicate information.
+---
 
-**Q**: What happens if I find multiple contacts with the same name?<br>
+**Q**: **Can I use the same phone number or email for different contacts?**  
+**A**: 📛 No, phone numbers and email addresses must be unique in the system. You'll receive an error message if you try to add or edit a contact with duplicate information.
+
+---
+
+**Q**: **What happens if I find multiple contacts with the same name?**  
 **A**: When using name-based commands, if multiple matches are found, the system will show you a list of matching contacts with their indices. You'll need to use the index number to specify which contact you want to work with.
 
-**Q**: How can I see all weddings a vendor is assigned to?<br>
+---
+
+**Q**: **How can I see all weddings a vendor is assigned to?**  
 **A**: Use the `view` command with the vendor's name or index. The system will show all weddings they are assigned to as part of their contact details.
 
-**Q**: Can I search for contacts by partial name match?<br>
-**A**: Yes, use the `find` command which matches partial names. However, note that it matches whole words only (e.g., "John" will match "John Doe" but not "Johnny").
+---
 
-**Q**: What's the difference between `find` and `filter` commands?<br>
+**Q**: **Can I search for contacts by partial name match?**  
+**A**: ✅ Yes, use the `find` command which matches partial names. However, note that it matches whole words only (e.g., "John" will match "John Doe" but not "Johnny").
+
+---
+
+**Q**: **What's the difference between `find` and `filter` commands?**  
 **A**: `find` and `filter` have different search capabilities:
-- `find`:
-    - Searches only names
+- **`find`**:
+    - 🔍 Searches only names
     - Supports partial word matches
     - Allows multiple name searches (e.g., `find alex david` returns both `Alex Yeoh` and `David Li`)
     - Uses OR logic (matches any keyword)
 
-- `filter`:
+- **`filter`**:
     - Can search across multiple fields (name, role, email, phone, address)
     - Requires exact word matches for names and roles
     - Each field can only have one value - if you specify multiple values for the same field, only the last one is used
@@ -769,14 +773,20 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
         - e.g., `filter n/John r/vendor` returns contacts with either name "John" OR role "vendor"
     - Cannot search for multiple names like `find` does - must use exact single name
 
-**Q**: How do I remove a role from a contact?<br>
-**A**: Roles can be removed using the assign command.
-        - e.g., `assign 1 r/` to remove the role of person at index 1.
+---
 
-**Q**: What happens to wedding assignments if I edit a contact's details?<br>
-**A**: Editing a contact's basic details (name, phone, email, address) does not affect their wedding assignments or role. These relationships remain intact.
+**Q**: **How do I remove a role from a contact?**  
+**A**: Roles can be removed using the assign command.  
+&nbsp;&nbsp;&nbsp;&nbsp;Example: `assign 1 r/` to remove the role of person at index 1.
 
-**Q**: Can I export my contact and wedding data?<br>
+---
+
+**Q**: **What happens to wedding assignments if I edit a contact's details?**  
+**A**: ✏️ Editing a contact's basic details (name, phone, email, address) does not affect their wedding assignments or role. These relationships remain intact.
+
+---
+
+**Q**: **Can I export my contact and wedding data?**  
 **A**: While there's no direct export command, you can copy the data file (addressbook.json) which contains all your data. This file is located in the same folder as the application.
 
 --------------------------------------------------------------------------------------------------------------------
