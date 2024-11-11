@@ -1018,3 +1018,17 @@ This section outlines proposed improvements to address known feature flaws ident
     * Currently, nurses can use the `priority` command to label each patient with a priority level from 1 to 3, with 1 being of the highest priority.
     * To add on to the priority feature, we plan to implement a `sortpriority` feature, in which calling `sortpriority` will sort the displayed patient list by priority level, with patient's that are priority level 1 at the top of the list.
     * This enhancement will allow nurses to sort their patient list based on highest priority patients, helping them pay more attention to the patients who require more care.
+8. **Implement an "Edit Emergency Contact" command:**
+    * Currently, NovaCare does not provide a way to edit an existing emergency contact directly. Users must delete the emergency contact and add a new one to make any updates, which is inconvenient and time-consuming, especially for minor edits such as updating a phone number or correcting a name spelling.
+    * We propose introducing a new `editemergency` command that allows users to edit specific fields of an emergency contact (e.g., name, phone number) without the need to delete and re-add the contact. This enhancement will improve user experience by streamlining contact management.
+    * For example:
+        * `editemergency 1 n/New Name` - Edits the name of the emergency contact for patient with index 1.
+        * `editemergency 2 p/98765432` - Updates the phone number for the emergency contact associated with patient with index 2.
+        * `editemergency 3 n/Updated Name p/98765431` - Allows multiple fields to be edited in one command.
+    * This new command will check for valid input in each field and ensure that the specified emergency contact exists for the given patient ID before making any changes. Error messages will be displayed for any invalid input or if the specified emergency contact does not exist.
+    * For example:
+        * :white_check_mark: `editemergency 1 n/John Doe`
+        * :white_check_mark: `editemergency 2 n/John Doe p/91234567`
+        * :white_check_mark: `editemergency 3 p/91234567`
+        * :x: `editemergency 1 n/` (Error: Name cannot be empty)
+        * :x: `editemergency 3` (Error: Command requires at least one field to edit)<br></br>
