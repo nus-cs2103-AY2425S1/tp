@@ -147,7 +147,7 @@ Adds an Udder to the address book.
 **Constraints:**
 
     1. Names should only contain alphanumeric characters and spaces, and it should not be blank.
-    2. Phone numbers should only contain numbers, and it should be at least 3 digits long.
+    2. Phone numbers should only contain numbers, and it should be at least 3 digits long and should not have any whitespaces.
     3. Roles should only be 'brUdder' or 'mUdder' and it can't be blank.
     4. Major can only be one of the following: ‘cs’, ‘bza’, ‘ceg’, ‘isys’, ‘isec’.
     5. Emails should be of the format local-part@domain and the local-part should only contain alphanumeric characters
