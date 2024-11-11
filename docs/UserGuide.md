@@ -20,7 +20,6 @@ In this guide, we will walk you through Tuteez’s key features and demonstrate 
 <br>
 
 ### Table of Contents
-
 <br>
 
 <!-- TOC start -->
@@ -40,7 +39,7 @@ In this guide, we will walk you through Tuteez’s key features and demonstrate 
     4.2 [Exploring the Application](#exploring-the-application)<br>
     4.3 [Starting with a Clean Slate](#starting-with-a-clean-slate)<br>
     4.4 [Adding Your First Student](#adding-your-first-student)<br>
-    4.5 [Adding a Lesson to your Student's details](#adding-a-lesson-to-your-students-details)<br>
+    4.5 [Adding a Lesson to your Student's details](#adding-a-lesson-to-your-student-s-details)<br>
     4.6 [Editing Student Details](#editing-student-details)<br>
     4.7 [Deleting a Student](#deleting-a-student)<br>
     4.8 [Wrapping Up](#wrapping-up)<br>
@@ -97,10 +96,11 @@ Here is a quick look at the various sections in this user guide:
 
 #### Recommended Sections Based on User Experience
 
-| **User Experience** | **Recommended Sections** |
-|---------------------|--------------------------|
+| **User Experience** | **Recommended Sections**                                                                                                                            |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Beginner**        | We highly recommend starting with the [Beginner's Tutorial](#beginner-s-tutorial) to get comfortable with Tuteez’s essential features and commands. |
-| **Advanced User**   | Feel free to skip directly to the [Command Summary](#command-summary) for a quick overview of all commands available in Tuteez. |
+| **Advanced User**   | Feel free to skip directly to the [Command Summary](#command-summary) for a quick overview of all commands available in Tuteez.                     |
+
 <br>
 
 ### How to Read this Guide
@@ -238,8 +238,9 @@ If everything went well, you'll be greeted by this view:
 
 ![add_command](images/add_command_tutorial.png)
 
-<div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">
-    ℹ️ **Info**: For more details on the `add` command, please refer to the [Add Command](#adding-a-student-add) section.
+<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">
+
+ℹ️ **Info**: For more details on the `add` command, please refer to the [Add Command](#adding-a-student-add) section.
 </div>
 
 <br>
@@ -269,7 +270,8 @@ If everything went well, you'll be greeted by this view:
 ![edit_command](images/edit_command_tutorial.png)
 
 <div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">
-    ℹ️ **Info**: For more details on the `edit` command, please refer to the [Edit Command](#editing-a-student-edit) section.
+
+ℹ️ **Info**: For more details on the `edit` command, please refer to the [Edit Command](#editing-a-student-edit) section.
 </div>
 
 <br>
@@ -340,9 +342,15 @@ This command will allow you to add a new student and their personal details to y
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`
 
-<div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**: Only the **name** and **phone number** are required fields. The other fields are optional.</div>
+<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">
 
-<div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**:  You cannot add lessons that clash, meaning lessons cannot be scheduled on the same day and overlap in timing. If a clash is detected, the app will notify you with an error message. <br> To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)</div>
+ℹ️ **Info**: Only the **name** and **phone number** are required fields. The other fields are optional.
+</div>
+<br>
+<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">
+
+ℹ️ **Info**:  You cannot add lessons that clash, meaning lessons cannot be scheduled on the same day and overlap in timing. If a clash is detected, the app will notify you with an error message. To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)
+</div>
 
 
 Acceptable values for each parameter:
@@ -356,7 +364,10 @@ Acceptable values for each parameter:
 | TAG          | Tag names can include letters, numbers, and spaces                                                                                                                         | Primary 4          |
 | lesson       | The **`l/` (lesson)** field should include the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space | monday 1500-1700   |
 
-<div markdown="block" style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: You can add any number of tags and lessons to a student (or you could also omit them)</div>
+<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
+
+💡 **Tip**: You can add any number of tags and lessons to a student (or you could also omit them)
+</div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -400,7 +411,10 @@ Format: `addremark INDEX r/REMARK` to add a remark to the student at the specifi
 * Adds a new remark to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** such as 1, 2, 3, …​
 * You can add any text as a remark, and remarks are displayed in the order they were added.
 
-<div markdown="block" style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: You can also use the abbreviated command `addrmk` as a shortcut for `addremark`.</div>
+<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
+
+💡 **Tip**: You can also use the abbreviated command `addrmk` as a shortcut for `addremark`.
+</div>
 
 Examples:
 * `addremark 1 r/Great progress in Math` Adds the remark "Great progress in Math" to the first student.
@@ -432,9 +446,15 @@ Format: `addlesson INDEX l/LESSON [l/LESSON]…​`
 * You can add multiple lessons to a student at once.
 * Lessons have to start with the **day** of the week (case-insensitive) followed by the **time** in the **24-hour format** `HHMM-HHMM`, separated by a space.
 
-<div markdown="block" style="background-color: lightcoral; padding: 4px; border-radius: 4px;">⚠️ **Warning**: Lessons added must not clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown on your screen.Lessons added must not clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown on your screen.</div>
+<div markdown="block" style="background-color: lightcoral; padding: 4px; border-radius: 4px;">
+
+⚠️ **Warning**: Lessons added must not clash (i.e., scheduled on the same day and overlapping in timing). If a clash is detected, an error message will be shown on your screen.
+</div>
 <br>
-<div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**: To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)</div>
+<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">
+
+ℹ️ **Info**: To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)
+</div>
 
 Examples:
 * `addlesson 1 l/Monday 0900-1100` Adds a lesson on Monday from 9 am to 11 am to the first student.
@@ -457,7 +477,10 @@ Examples:
 * `deletelesson 1 li/1` Deletes the first lesson of the first student.
 * `dellsn 2 li/2 li/3` Deletes the second and third lessons of the second student.
 
-<div markdown="block" style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: Want to delete multiple lessons at once? Simply specify multiple different lesson indices in the parameters.</div>
+<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
+
+💡 **Tip**: Want to delete multiple lessons at once? Simply specify multiple different lesson indices in the parameters.
+</div>
 
 <br>
 
@@ -497,7 +520,10 @@ Format: `delete INDEX` or `delete NAME`
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** such as 1, 2, 3, …​
 
-<div markdown="block" style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: You can also use the abbreviated command `del` as a shortcut for `delete`.</div>
+<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
+
+💡 **Tip**: You can also use the abbreviated command `del` as a shortcut for `delete`.
+</div>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
@@ -531,9 +557,15 @@ Format: Press <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> on your keyboard
 * <kbd>&uarr;</kbd> will allow you to navigate to the previous command you have entered.
 * <kbd>&darr;</kbd> will allow you to navigate to the next command you have entered.
 
-<div markdown="block" style="background-color: lightyellow; padding: 4px; border-radius: 4px;">💡 **Tip**: Use these shortcuts to quickly access and reuse previous commands without having to retype them.</div>
+<div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
 
-<div markdown="block" style="background-color: lightblue; padding: 4px; border-radius: 4px;">ℹ️ **Info**: Only correctly executed commands are saved. Commands that result in errors will not be added to the history.</div>
+💡 **Tip**: Use these shortcuts to quickly access and reuse previous commands without having to retype them.
+</div>
+<br>
+<div style="background-color: lightblue; padding: 4px; border-radius: 4px;">
+
+ℹ️ **Info**: Only correctly executed commands are saved. Commands that result in errors will not be added to the history.
+</div>
 
 <br>
 
@@ -541,7 +573,10 @@ Format: Press <kbd>&uarr;</kbd> or <kbd>&darr;</kbd> on your keyboard
 
 This will allow you clears all student entries from Tuteez.
 
-<div markdown="block" style="background-color: lightcoral; padding: 4px; border-radius: 4px;">⚠️ **Warning**:  This action is irreversible and will wipe your existing data from the application. Make backups of your data if you need to, and use this command with caution!</div>
+<div style="background-color: lightcoral; padding: 4px; border-radius: 4px;">
+
+⚠️ **Warning**:  This action is irreversible and will wipe your existing data from the application. Make backups of your data if you need to, and use this command with caution!
+</div>
 
 Format: `clear`
 
@@ -551,7 +586,10 @@ Format: `clear`
 
 This command will allow you to shut down and exit the program.
 
-<div markdown="block" style="background-color: lightcoral; padding: 4px; border-radius: 4px;">⚠️ **Warning**: This action will close the application. You will need to relaunch the application to use it again.</div>
+<div markdown="block" style="background-color: lightcoral; padding: 4px; border-radius: 4px;">
+
+⚠️ **Warning**: This action will close the application. You will need to relaunch the application to use it again.
+</div>
 
 Format: `exit`
 
