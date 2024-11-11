@@ -262,7 +262,7 @@ Format: `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL
 {: .alert .alert-warning}
 > :exclamation: **Warning:**
 > 
-> The `edit` command will show an error if the edited field results in a duplicate entry. For example, if you try to edit a student's phone number to match another student's phone number, the command will not be executed. For more information, refer to the [Parameter Details](#parameter-details) section.
+> The `edit` command will show an error if the edited field results in a duplicate entry. For example, if you try to edit a person's phone number which match another person's phone number, the command will not be executed. For more information, refer to the [Parameter Details](#parameter-details) section.
 
 {: .alert .alert-info}
 
