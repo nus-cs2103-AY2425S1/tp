@@ -1,8 +1,16 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.FindCommandParser.MESSAGE_NO_KEYWORD;
+import static seedu.address.logic.parser.FindCommandParser.MESSAGE_NO_PREFIX;
 
 import java.util.Arrays;
 
@@ -105,12 +113,31 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_empty_keywords() {
-        assertParseFailure(parser, "all", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    public void parse_no_prefix() {
+        assertParseFailure(parser, "all", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_PREFIX));
 
-        assertParseFailure(parser, "ph", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "ph", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_PREFIX));
 
-        assertParseFailure(parser, "e", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "e", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_PREFIX));
+    }
+
+    @Test
+    public void parse_no_keywords() {
+        assertParseFailure(parser, "all n/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
+
+        assertParseFailure(parser, "ph p/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
+
+        assertParseFailure(parser, "e e/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
+
+        assertParseFailure(parser, "all d/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
+
+        assertParseFailure(parser, "ph r/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
+
+        String args = "all n/John p/98765432 e/john@example.com d/IT r/SWE";
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_DEPARTMENT, PREFIX_ROLE);
+        assertFalse(argMultimap.hasEmptyCommandPrefix());
     }
 
 }
