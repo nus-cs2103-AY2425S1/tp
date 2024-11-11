@@ -159,6 +159,40 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+
+#### Implementation
+
+The `add` command extends `Command` and implements `Undoable`. The `add` command adds a contact based on the supplied parameters, of which
+`NAME`, `PHONE`, and `EMAIL` are compulsory while `ADDRESS`, `ROOM_NUMBER`, and `TAG` are optional.
+The `add` command is undoable.
+
+Given below is an example usage scenario and how the `add` command behaves at each step.
+
+Step 1. The user executes `add n/John Doe p/+65 98765432 e/johnd@example.com r/01-1008 a/John street t/Floor 1`.
+
+<box type="info" seamless>
+
+**Note:** An error message will be displayed if attempting to add a contact with duplicate `NAME`, `PHONE` or `EMAIL`.
+
+</box>
+
+Step 2. The `add` command adds a contact with the name John Doe, phone number +65 98765432, email johnd@example.com, room number #01-1008, address John street, tag "Floor 1" to the address book. 
+
+The following sequence diagram shows how an `add` command goes through the `Logic` component:
+
+<puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** There are no destroy markers (X) for `AddCommand` as they are preserved in the `undo` command stack.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes a `add` command:
+
+<puml src="diagrams/AddActivityDiagram.puml" height="600" width="600" />
+
 ### Undo feature
 
 #### Implementation
@@ -216,7 +250,7 @@ Step 6. The user executes `clear`, which is pushed to the undo stack.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" height="600" width="600"/>
 
 #### Design considerations:
 
