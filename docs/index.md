@@ -8,7 +8,7 @@ title: NomNomNotifier
 
 ![Ui](images/QuickStart.png)
 
-Nom Nom Notifier is a simple command-lind application designed for small eateries or restaurants to manage the customer details efficiently for delivery purposes.
+NomNomNotifier is a simple command-line application designed for small eateries or restaurants to manage the customer details efficiently for delivery purposes.
 
 * If you are interested in using NomNomNotifier, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing NomNomNotifier, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
