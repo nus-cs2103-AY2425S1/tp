@@ -14,7 +14,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 - [Quick Start](#quick-start)
 - [Command Summary](#command-summary)
-- [Features](#features)
+- [Features](#feature-details)
   - [General Notes about Command Format](#general-notes-about-command-format)
   - [Adding a Contact: add](#adding-a-contact-add)
   - [Editing a Contact: edit](#editing-a-contact-edit)
@@ -103,7 +103,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 --------------------------------------------------------------------------------------------------------------------
 
 
-## Features
+## Feature Details
 //& Found why the clicking of Features didnt work, issue I forgot, but the fix is in _markbind/layouts/default.md
 
 //& CHECK IF REPLACING PARAMETERS WITH FIELDS MAKE SENSE <br>
@@ -508,7 +508,7 @@ Assuming the above entry in the address book, you must enter an add / edit comma
   - Domains must end with a domain label at least 2 characters long.
   - Each domain label must only contain alphabets, numbers, and `-`, if any.
   - Each domain label must not start or end with `-`.
-g
+
 ### Student Status
 - Must take one of the following values:
   1. `Undergraduate x` (where x is an integer between 1 and 6 inclusive).
