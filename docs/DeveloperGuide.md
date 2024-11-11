@@ -504,7 +504,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/active`<br>
        Expected: New person is added to the list. Details of the new person shown in the status message.
 
-    1. Test case: `add n/Alex Yeoh p/81234567 e/invalid c/CS2103/T`<br>
+    1. Test case: `add n/Alex Yeoh p/81234567 e/invalid c/CS2103/T t/struggling`<br>
        Expected: New person is not added. Error details shown in the status message for invalid email.
 
     1. Test case: `add n/Alex Yeoh p/81234567 p/98765432 e/alex@example.com c/CS2103/T`<br>
@@ -604,7 +604,7 @@ testers are expected to do more *exploratory* testing.
        addGrade 1 n/midterm s/85 w/30
        addGrade 1 n/final s/87 w/70
        
-       addGrade 2 n/midterm n/midterm s/80 w/30
+       addGrade 2 n/midterm s/80 w/30
        addGrade 2 n/final s/90 w/70
        ```
        Then list all persons using the `list` command.
