@@ -488,7 +488,7 @@ Fields
 
 * `INDEX:` Index number as shown in the displayed list of the students.
     * Must be a positive integer 1, 2, 3…
-* `PAYMENT:` Amount in integer that a student have to pay
+* `PAYMENT:` Amount in integer that a student has to pay
 </div>
 {% endraw %}
 
@@ -528,7 +528,7 @@ Fields
 
 * `INDEX:` Index number as shown in the displayed list of the students.
     * Must be a positive integer 1, 2, 3…
-* `PAYMENT:` Amount in integer that a student have paid
+* `PAYMENT:` Amount in integer that a student has paid
 </div>
 {% endraw %}
 
