@@ -29,7 +29,6 @@ public class AddConcertContactCommandParser implements Parser<AddConcertContactC
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON);
 
         try {
-            // indexP = ParserUtil.parseIndex(argMultimap.getPreamble());
             if (argMultimap.getValue(PREFIX_PERSON).isEmpty()) {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
             }
