@@ -929,7 +929,7 @@ Team size: 5
      
 
 3. **Enhancement 3**: Allow users to create their own units for quantity of products.
-   * **Description**: The current implementation only allows for a fixed set of units for quantity of products (e.g. kg, g, l, ml). 
+   * **Description**: The current implementation only allows for a fixed set of units for quantity of products (e.g. kg, g, L, mL, unit). 
    * **Tasks**:
      * We plan to allow users to define their own units for quantity of products.
      * e.g. "add -d on/18-01-2023 15:00 s/1 pro/bread q/500 customUnit c/5.50"
