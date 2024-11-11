@@ -346,7 +346,7 @@ Examples:
 
 - `addGrade 2 n/Midterm s/85 w/30`<br>
   Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 30% weightage.
-- `find Betsy` followed by `grade 1 n/Final Exam s/92 w/30`<br>
+- `find Betsy` followed by `addGrade 1 n/Final Exam s/92 w/30`<br>
   Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "Final Exam" and 30% weightage.
 
 Expected output:
