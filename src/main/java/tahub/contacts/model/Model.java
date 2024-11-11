@@ -146,4 +146,15 @@ public interface Model {
      * @return the tutorial list that contains the given student
      */
     List<Tutorial> getStudentTutorials(Person student);
+
+    /**
+     * Returns the StudentCourseAssociationList.
+     */
+    StudentCourseAssociationList getStudentScaList();
+
+    /**
+     * Replaces the given StudentCourseAssociation target with editedSca.
+     * The SCA must exist in the list.
+     */
+    void setStudentCourseAssociation(StudentCourseAssociation target, StudentCourseAssociation editedSca);
 }

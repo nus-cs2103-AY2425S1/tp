@@ -4,33 +4,58 @@
   pageNav: 3
 ---
 
+
 <!-- no toc -->
 
 # TAHub Contacts User Guide
 
-If you are a busy Computer Science student juggling Teaching Assistant roles and
-struggling to keep track of your many
-students, *TAHub Contacts* is a desktop application for you to easily manage your
+## Introduction
+
+Hi there! :wave:
+
+If *you* are a busy Computer Science student juggling Teaching Assistant roles and
+struggling to keep track of *your* many
+students, *TAHub Contacts* is a desktop application for *you* to easily manage *your*
 student contact details!
 
+Think about *TAHub Contacts* as a little helper, residing on *your* computer,
+made just for *you*, the Computing TA.
+
 <box type="tip" theme="light">
-<md>
-    While it has a *GUI* (Graphical User Interface), most of the user interactions
-    happen using a *CLI* (Command Line Interface) with typed commands. A perfect
-    fit if you’re already a wizard at the keyboard.
-</md>
-<br>
-<md>
-    (_Or if you've already taken/suffered/enjoyed `CS2030S`_)
-</md>
+
+While it has a *GUI* (Graphical User Interface), most of the user interactions
+happen using a *CLI* (Command Line Interface) with typed commands. A perfect
+fit if you’re already a wizard at the keyboard.
+
+Also preferable would be being comfortable with the concept of entering
+configurable, text-based commands into a terminal.
+
+(*Or if you've already taken/suffered/enjoyed `CS2030S`*)
+
 </box>
+
+### Overview
+
+*TAHub Contacts* allows you to easily:
+
+- Manage your students
+- Organise them by course and tutorial group
+- Mark attendance
+
+Interested? Head down to [quick start](#QUICKSTART) to get started!
+
+<!-- This section exists to correct a Markbind rendering bug. Don't worry about it-->
+<a name="TEMPFIX"><md>
+![](404.png)
+</md></a>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
 
-- [Quick Start :rocket:](#QUICK-START)
+- [Quick Start :rocket:](#QUICKSTART)
 - [Features :computer:](#FEATURES)
+  - [Data Formats](#data-formats)
   - [MAIN Commands](#main-commands)
     - [Viewing help : `help`](#help)
     - [Listing all students : `list`](#list)
@@ -45,6 +70,7 @@ student contact details!
     - [Adding a course: `course-add`](#course-add)
     - [Editing a course: `course-edit`](#course-edit)
     - [Deleting a course : `course-delete`](#course-edit)
+  - [ENROLLMENT](#enrollment-commands)
     - [Enrolling a student : `enroll`](#enroll)
     - [Unenrolling a student : `unenroll`](#unenroll)
   - [ATTENDANCE](#attendance-commands)
@@ -63,14 +89,16 @@ student contact details!
 
 <div style="page-break-after: always;"></div>
 
-<a name="QUICK-START">
+<a name="QUICKSTART">
 
 ## Quick start :rocket:
 
 1. Ensure you have Java `17` or above installed in your Computer.
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
-3. Copy the file to the folder you want to use as the *home folder* for your AddressBook.
-   - Make sure that this folder is **empty**.
+   - How to check your Java version? Run `java -version` in your terminal.
+   - Don't have Java `17` or above, download [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14B-2/tp/releases).
+3. Copy the file to the folder you want to use as the *home folder* for the program.
+   - Make sure that this folder is **empty**. (Program files will be saved in it!)
 4. Open a command terminal
    ([Windows](https://www.lifewire.com/how-to-open-command-prompt-2618089) |
    [MacOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) |
@@ -81,8 +109,8 @@ student contact details!
    contains some sample data.<br>
    ![img_1.png](img_1.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g.
-   typing **`help`** and pressing Enter will open the help window,
+5. Type the command in the command box and press **Enter** to execute it. e.g.
+   typing **`help`** and pressing **Enter** will open the help window,
    which links you back to [this page](https://ay2425s1-cs2103t-f14b-2.github.io/tp/UserGuide.html).<br>
    Some example commands you can try:
 
@@ -94,8 +122,8 @@ student contact details!
    - `clear` : Deletes all contacts.
    - `exit` : Exits the app.
 
-6. Refer to the [Features](#features :computer:) below for details of each command.
-   Alternatively check the [Command Summary](#command-summary-ledger) for a quick
+6. Refer to the [Features](#FEATURES) below for the *juicy* details of each command.
+   Alternatively check the [Command Summary](#CMD-SUMMARY) for a quick
    list of the available commands. Have fun!
 
 </a>
@@ -116,7 +144,17 @@ student contact details!
   e.g. in `person-add m/MATRICULATION_NUMBER`, `MATRICULATION_NUMBER` is a parameter which can be used as `person-add m/A1234567L`.
 
 - Items in square brackets are optional.<br>
+<<<<<<< HEAD
   e.g `n/NAME [a/ADDRESS]` can be used as `n/John Doe a/Nasi Lemak Street` or as `n/John Doe`.
+=======
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+- Items with `…`​ after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…​` can be used as
+  ``
+   (i.e. 0 times), `t/friend`, `t/friend t/family`
+  etc.
+>>>>>>> master
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME`
@@ -133,6 +171,8 @@ student contact details!
   line-breaks may be omitted when copied over to the application.
 </box>
 
+</a>
+
 ### Data Formats
 
 <!-- markdownlint-disable MD013 -->
@@ -148,9 +188,11 @@ student contact details!
 | `NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
 | `PHONE_NUMBER` | must only contain **numbers**, and it should be **at least 3 digits long**.                                                                                             |
 | `EMAIL` | must be a [valid email format](https://help.xmatters.com/ondemand/trial/valid_email_format.htm).                                                                        |
-| `COURSE_CODE` | must be in the form `AAAxxxxB` where `AAA` is 2 or 3 *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                               |
+| `COURSE_CODE` | must be in the form `AAAxxxxB` where `AAA` is 1 or more *uppercase* letters, `xxxx` is a 4-digit number, `B` is an **optional** *uppercase* letter.                     |
 | `COURSE_NAME` | must only contain **alphanumeric characters and spaces**, and **not be blank**.                                                                                         |
 | `TUTORIAL_ID` | should be in the form `Txx`, where `T` is fixed as 'T', while `xx` is a 2 digit integer from 01 to 99.                                                                  |
+
+:fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -158,7 +200,7 @@ student contact details!
 
 ### Main Commands
 
-The main commands for TAHub Contacts.
+The main basic commands for *TAHub Contacts*.
 
 <a name="help">
   <panel header="#### Viewing help : `help`" expanded no-close no-switch>
@@ -226,7 +268,15 @@ The main commands for TAHub Contacts.
 
 ### Student Commands
 
-Reminder: follow the [data formats](#data-formats)!
+This is for managing your individual **students**,
+modifying their attributes and information.
+
+See [Course Commands](#course-commands) or [Enrollment Commands](#enrollment-commands)
+regarding your students' **courses** and **tutorial groups**.
+
+<box type="warning">
+
+Reminder: follow the [:fa-solid-link: data formats](#data-formats)!
 </box>
 
 <a name="person-add">
@@ -321,11 +371,16 @@ Format: **`person-delete m/MATRICULATION_NUMBER​​`**
 
 <div style="page-break-after: always;"></div>
 
+<a name="course-commands">
+
 ### Course Commands
+
+This is for managing the **courses** you are (or previously were, *cuz why not*)
+teaching.
 
 <box type="warning">
 
-Reminder: where used, course **code** and **name**, and tutorial **code** must follow the [:fa-solid-link: data format](#data-formats)!
+Reminder: where used, parameters must follow the [:fa-solid-link: data format](#data-formats)!
 </box>
 
 <a name="course-add">
@@ -336,6 +391,9 @@ Adds a course to TAHub Contacts.
 <box type="definition" seamless><md>
 Format: **`course-add c/COURSE_CODE n/COURSE_NAME`**
 </md></box>
+
+- `COURSE_CODE` must be unique and follow the `COURSE_CODE` [format](#data-formats)
+- `COURSE_NAME` must follow the `COURSE_NAME` [format](#data-formats)
 
 | **Examples** |
 | :--- |
@@ -355,7 +413,7 @@ Format: **`course-edit c/COURSE_CODE n/COURSE_NAME`**
 </md></box>
 
 - `COURSE_CODE` must be an existing course code.
-- `COURSE_NAME` is the new course name and must only contain alphanumeric characters or spaces **and** follow the `COURSE_NAME` [format](#data-formats).
+- `COURSE_NAME` is the new course name and must follow the `COURSE_NAME` [format](#data-formats).
 - Note that it is **not possible** to **edit** the course code. If you want to do so, create a **new course** with the different code.
 
 | **Examples** |
@@ -386,14 +444,28 @@ Format: **`course-delete c/COURSE_CODE`**
 **Caution:** Deleting a course will also delete all tutorial groups, attendance and student associations related to the course.
 </box>
 
+The courses are stored in file `data/courselist.json` for easy import/export.
+
+<box type="important">
+
+**Caution:** If any of the fields in `courselist.json` are invalid, no courses will be loaded and may result in data loss.
+</box>
+
 </panel>
 </a>
+
+<br>
+
+:fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
 ### Enrollment Commands
+
+This is for you to attach ([enroll](#enroll)) and unattach ([unenroll](#unenroll)) students from
+specific courses and tutorials for better management.
 
 <a name="enroll">
 <panel header="#### Enrolling a student : `enroll`" expanded no-close no-switch>
@@ -449,9 +521,12 @@ Format: **`unenroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 
 ### Attendance Commands
 
-Each student has an attendance record associated with each unique course and tutorial.
-This record is to be edited over the duration of a semester, where you can mark and unmark
-attendance for for each consecutive session.
+This is for you to conveniently keep track of each one of your students' **attendance records**.
+
+Each of your students will have an attendance record associated with each unique course and tutorial group.
+This record is to be edited over the duration of a semester (or longer), where you can
+mark ([present :)](#attend-present) or [absent :(](#attend-absent)) and [unmark](#attend-remove)
+attendance for for **each** consecutive session.
 
 <box type="warning">
 
@@ -482,6 +557,12 @@ Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`*
 
 Marks a student in a particular course and tutorial group as having missed a session (was **absent**).
 
+<box type="info" seamless>
+
+*Tsk tsk tsk, remember to check with the student why they were absent, and
+whether they have an official valid reason or MC~*
+</box>
+
 <box type="definition" seamless><md>
 Format: **`attend-absent m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 </md></box>
@@ -497,6 +578,11 @@ Format: **`attend-absent m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 <panel header="#### Marking attendance : `attend-remove`" expanded no-close no-switch>
 
 Removes the last attendance session record of a student in a particular course and tutorial group.
+
+<box type="info" seamless>
+
+For when you accidentally marked a truant king as `present`. Oops!
+</box>
 
 <box type="definition" seamless><md>
 Format: **`attend-remove m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
@@ -524,6 +610,10 @@ Format: **`attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 | :--- |
 | `attend-clear m/A1234567Y c/CS1101S tut/T10` |
 
+<box type="important" theme="danger"><md>
+**Destructive** irreversible command. Be careful!
+</md></box>
+
 </panel>
 </a>
 
@@ -539,7 +629,8 @@ Format: **`attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 
 #### Saving the data
 
-Ever experience the sinking feeling of being petrified when you *forgot* to `Ctrl/Cmd-S` something important?
+Ever experience the stomach-churning sinking feeling of being petrified when
+you *forgot* to `Ctrl/Cmd-S` something important?
 
 Don't worry!
 
@@ -553,10 +644,12 @@ the data**. You don’t need to save manually!
 
 #### Editing the data file
 
-Data are saved automatically in the [JSON](https://www.json.org/json-en.html)
-files `[JAR file location]/data/addressbook.json`, storing the list of persons
+Data is saved automatically in the [JSON](https://www.json.org/json-en.html)
+files `[JAR file location]/data/addressbook.json`, storing the list of your students
 and `[JAR file location]/data/courselist.json`, storing the list of courses.
+
 Advanced users are *welcome* to update data directly by editing that data file.
+The file structure *should* be decently self-explanatory.
 
 <box type="warning" seamless>
 
@@ -573,11 +666,14 @@ data file only if you are confident that you can update it correctly.
 You have been duly warned.
 </box>
 
+
 ### Coming Soon
+
+<br>
 
 #### Added Support for more Course Codes and Tutorial IDs
 
-- Currently, we only support course codes of a specific format, as mentioned [here](#data-formats). However, we are aware that there are rarer course codes such as `LAJ1201` and `GESS1003`. Due to time limitations, we are not able to support __all__ potential course codes and this could be fixed in a future iteration. Similarly, valid but rarer tutorial IDs with an additional character at the back like `T01A` will not be accepted in the current iteration.
+- Currently, we only support course codes of a specific format, as mentioned [here](#data-formats). However, we are aware that there are rarer course codes such as `LAJ1201` and `GESS1003`. Due to time limitations, we are not able to support **all** potential course codes and this could be fixed in a future iteration. Similarly, valid but rarer tutorial IDs with an additional character at the back like `T01A` will not be accepted in the current iteration.
 
 <br>
 
@@ -596,10 +692,12 @@ You have been duly warned.
 it creates with the file that contains the data of your previous TAHub Contacts home
 folder.
 
-**Q**: I accidentally performed the wrong command. Is there a way for me to
+**Q**: I accidentally performed the wrong command. Is there a way for me to...
 revert the change?<br>
-**A**: Unfortunately, we have not implemented an undo command for TAHub contacts.
+**A**: Unfortunately, we have **not** implemented an undo command for TAHub contacts.
 :pensive:
+<br>
+So be careful especially when you're using desctructive (deletion) commands!
 
 </a>
 
@@ -628,7 +726,7 @@ revert the change?<br>
 
 <!-- markdownlint-disable MD013 -->
 
-|           Action          | Format, Examples                                                                                                                                                                                                       |
+| Action                    | Format, Examples                                                                                                                                                                                                       |
 |:--------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Help                      | `help`                                                                                                                                                                                                                 |
 | List Students             | `list`                                                                                                                                                                                                                 |
@@ -643,7 +741,7 @@ revert the change?<br>
 | Delete Course             | `course-delete c/COURSE_CODE`<br>e.g.`course-delete c/CS3230`                                                                                                                                                          |
 | Enroll Student            | `enroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`enroll m/A1234567Y c/CS1101S  tut/T10`                                                                                                           |
 | Unenroll Student          | `unenroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`unenroll m/A1234567Y c/CS1101S  tut/T10`                                                                                                       |
-| Mark Present           | `attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend attend m/A1234567Y c/CS1101S  tut/T10`                                                                                            |
+| Mark Present              | `attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-present m/A1234567Y c/CS1101S  tut/T10`                                                                                           |
 | Mark Absence              | `attend-absent m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-absent m/A1234567Y c/CS1101S  tut/T10`                                                                                             |
 | Remove Attendance Session | `attend-remove m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-remove m/A1234567Y c/CS1101S  tut/T10`                                                                                             |
 | Clear Attendance          | `attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-clear m/A1234567Y c/CS1101S  tut/T10`                                                                                               |
