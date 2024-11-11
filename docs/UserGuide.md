@@ -428,6 +428,13 @@ Adds an emergency contact and details to a patient in NovaCare.
 * The index **must be a positive integer** 1, 2, 3, …​
 </box>
 
+<box type="tip" seamless>
+
+**Tip:**
+* A patient can only have 1 registered emergency contact.
+* Make sure to use the `deleteemergency` command first to delete the existing emergency contact if you want to add a new one!.
+  </box>
+
 Example:
 * `emergency 1 n/Tom Tan p/91237171` adds an emergency contact `Tom Tan` with contact number `91237171` to the 1st-indexed patient in the patient list.
 
