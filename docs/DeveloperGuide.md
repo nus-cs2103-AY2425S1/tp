@@ -765,3 +765,5 @@ Team size: 5
    Currently, the date and time parsing is quite strict, requiring the user to input the date and time in a specific format.
    We plan to make the parsing less strict, allowing the user to input the date and time in a more natural way, e.g. `31-01-2024 1200` or `Jan 31, 2024, 12pm` instead of `31/01/2024 12:00`.
 
+8. **Consistent use of terminology**:
+   Currently, DATE_TIME and DATETIME are used in different commands despite having the same meaining. We plan to ensure consistent use of terminology to make it easier for users to understand the command usage formats.
