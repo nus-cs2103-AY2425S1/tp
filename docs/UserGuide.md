@@ -343,12 +343,12 @@ Parameters:
 </box>
 
 Examples:
-- `mark -s 3 inactive`
+- `mark -s 3 active`
 - Sorting by name using `sort -s so/a sb/n` followed by `mark -s 1 inactive`
 
 Expected outputs:
-- Supplier at index 3 of the displayed list will be marked as `active`, assuming there is at least three suppliers displayed and the third supplier is not currently `inactive`. Otherwise, an error message will be shown.
-- Supplier at index 1 of the displayed list will be status marked as `inactive`, assuming there is at least one supplier displayed and the first supplier is not currently `ianctive`. Otherwise, an error message wil be shown.
+- Supplier at index 3 of the displayed list will be marked as `active`, assuming there is at least three suppliers displayed and the third supplier is not currently `active`. Otherwise, an error message will be shown.
+- Supplier at index 1 of the displayed list will be status marked as `inactive`, assuming there is at least one supplier displayed and the first supplier is not currently `inactive`. Otherwise, an error message wil be shown.
 
 #### Here's how it would look like in the app:
 ![mark command](images/markSupplierCommand.png)
