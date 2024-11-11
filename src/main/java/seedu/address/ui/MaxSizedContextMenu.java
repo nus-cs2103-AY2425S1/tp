@@ -18,6 +18,8 @@ public class MaxSizedContextMenu extends ContextMenu {
      * Constructor for max sized context menu
      */
     public MaxSizedContextMenu() {
+        // Solution below adapted from
+        // https://stackoverflow.com/questions/51272738/javafx-contextmenu-max-size-has-no-effect
         addEventHandler(Menu.ON_SHOWING, e -> {
             Node content = getSkin().getNode();
             if (content instanceof Region regionContent) {
