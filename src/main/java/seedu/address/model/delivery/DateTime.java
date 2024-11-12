@@ -37,7 +37,7 @@ public class DateTime implements Comparable<DateTime> {
      * or greater than the specified dateTime.
      *
      * @param otherDateTime The dateTime to be compared.
-     * @return a negative integer, zero, or a positive integer as this dateTime is less than, equal to,
+     * @return A negative integer, zero, or a positive integer as this dateTime is less than, equal to,
      *         or greater than the other dateTime.
      */
     public int compareTo(DateTime otherDateTime) {

@@ -20,9 +20,9 @@ public class DeliverySortCostComparator extends DeliverySortComparator {
     /**
      * Compares the cost of two deliveries based on the sort order.
      *
-     * @param delivery1 the first delivery to be compared.
-     * @param delivery2 the second delivery to be compared.
-     * @return a negative integer, zero, or a positive integer as the first delivery's cost is less than,
+     * @param delivery1 The first delivery to be compared.
+     * @param delivery2 The second delivery to be compared.
+     * @return A negative integer, zero, or a positive integer as the first delivery's cost is less than,
      *         equal to, or greater than the second delivery's cost if the sort order is ascending.
      *         If the sort order is descending, the integer returned is inverted.
      */
