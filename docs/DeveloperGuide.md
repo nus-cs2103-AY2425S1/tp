@@ -32,6 +32,7 @@ title: Developer Guide
   - [Managing Appointments](#managing-appointments)
   - [Finding Entries](#finding-entries)
   - [Saving Data](#saving-data)
+- [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 
 ---
 
@@ -1211,8 +1212,6 @@ testers are expected to do more *exploratory* testing.
 
 ## Appendix: Planned Enhancements
 
-### Planned Enhancements
-
 Team Size: 5
 
 In future versions of CareLink, the following enhancements are planned to improve functionality, user experience, and data consistency:
@@ -1257,4 +1256,5 @@ In future versions of CareLink, the following enhancements are planned to improv
    - **Planned Enhancement**: Modify the `edit` command to enforce the role requirement:
      - **Mandatory Role**: Prevent the role from being left blank. If the `role/` prefix is used without a specified role, the command will prompt the user to enter a valid role (either `PATIENT` or `CAREGIVER`).
      - **Role Replacement Only**: Allow users to update the role but not to clear it entirely, ensuring each person’s profile remains complete and valid.
+
 ---
