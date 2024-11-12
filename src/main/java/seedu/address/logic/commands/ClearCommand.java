@@ -38,7 +38,9 @@ public class ClearCommand extends Command {
     public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
 
-        int originalSize = model.getAddressBook().getPersonList().size();
+        List<Person> originalPersons = model.getAddressBook().getPersonList();
+        int originalSize = originalPersons.size();
+
         model.updateFilteredPersonList(x -> !predicate.test(x));
         List<Person> remainingPersons = model.getFilteredPersonList();
         int newSize = remainingPersons.size();
@@ -49,6 +51,7 @@ public class ClearCommand extends Command {
             throw new CommandException(MESSAGE_NO_ACTION);
         }
 
+        // Create intermediate AddressBook to copy
         AddressBook newAddressBook = new AddressBook();
         newAddressBook.setPersons(remainingPersons);
 
