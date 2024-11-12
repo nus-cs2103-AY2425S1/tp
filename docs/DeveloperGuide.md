@@ -295,11 +295,11 @@ _{more aspects and alternatives to be added}_
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](./Documentation.md)
-* [Testing guide](./Testing.md)
-* [Logging guide](./Logging.md)
-* [Configuration guide](./Configuration.md)
-* [DevOps guide](./DevOps.md)
+* [Documentation guide](Documentation.md)
+* [Testing guide](Testing.md)
+* [Logging guide](Logging.md)
+* [Configuration guide](Configuration.md)
+* [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -311,14 +311,11 @@ _{more aspects and alternatives to be added}_
 
 **Target user profile**: University students who:
 
-*  want to make friends and grow their professional networks by having an all-in-one platform that consolidates all the information (contact details, interests, academic backgrounds and work experience).
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+- Want a central platform to manage and grow their professional and social networks, consolidating essential contact details like interests, academic backgrounds, and work experience.
+- Prefer desktop applications and are comfortable with typing commands.
+- Can type quickly and are familiar with CLI (Command Line Interface) applications, preferring keyboard interactions over mouse usage.
 
-**Value proposition**: It offers university students one-stop access to professional networks and allows them to easily build, manage and maintain their contact information, interests, academic backgrounds and work experience.
-
+**Value proposition**: UniVerse provides university students with an all-in-one platform to manage and expand their social and professional connections. It allows students to easily build, organize, and maintain contacts, keeping track of both personal and professional information to facilitate networking and relationship-building.
 
 ### User stories
 
@@ -336,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | sociable university student | search for contacts by their interests                                                                  | connect with people with similar interests                                 |
 | `* * *`  | university student          | edit the contact details of an existing contact                                                         | keep their information current as they progress in their studies or career |
 | `* * *`  | university student          | update interests, work experience, or major of a contact                                                | reflect their latest accomplishments and interests                         |
-| `* * *`  | university student          | change the name, phone number, or email of a contact                                                    | ensure my contact list has the most accurate and up-to-date information    |
+| `* *`    | university student          | view a contact’s birthday and receive a reminder for it                                                 | stay informed of important dates and maintain personal connections         |
 | `* *`    | university student          | add what year or alumni a contact is in                                                                 | filter my search better                                                    |
 | `*`      | university student          | add social media links (e.g., LinkedIn, Instagram) to a contact                                         | easily connect with them on other platforms                                |
 
@@ -345,7 +342,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `UniVerse` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `UniVerse` and the **Actor** is the `User`, unless specified otherwise)
 
 <br>
 

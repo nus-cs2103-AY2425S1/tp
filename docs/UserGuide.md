@@ -182,7 +182,7 @@ addi in/INDEX i/INTEREST...
 
 **Note**:
 - Only newly added interests (i.e., interests not already part of the contact's list) will appear in the confirmation message and be added.
-- Each new interest will automatically be capitalised.
+- The first letter fo each newly added interest will automatically be capitalised.
 
 </box>
 
