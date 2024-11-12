@@ -517,15 +517,15 @@ Furthermore, certain edits can cause the EduContacts to behave in unexpected way
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                                                 |
-|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student` |
-| **Clear**      | `clear`                                                                                                                                                                          |
-| **Delete**     | `delete ID`<br> e.g., `delete 12345678` <br> <br> `delete ID m/MODULE` <br> e.g., `delete 12345678 m/CS2103T`                                                                    |
-| **Edit**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`                                        |
-| **Add Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`                                                                                                             |
-| **Add Module** | `module ID m/MODULE` <br> e.g., `module 12345678 m/CS2103T`                                                                                                                      |
-| **Filter**     | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`                                                                                                          |
-| **Find**       | `find ID`<br> e.g., `find 12345678`                                                                                                                                              |
-| **List**       | `list`                                                                                                                                                                           |
-| **Help**       | `help` 
+| Action         | Format, Examples                                                                                                                                                                                                                 |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student`                                                 |
+| **Clear**      | `clear`                                                                                                                                                                                                                          |
+| **Delete**     | `delete ID`<br> e.g., `delete 12345678` <br> <br> `delete ID m/MODULE` <br> e.g., `delete 12345678 m/CS2103T`                                                                                                                    |
+| **Edit**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com` <br> <br> `edit ID m/OLD_MODULE NEW_MODULE` <br> e.g. `edit 12345678 m/CS1234 CS1231S` |
+| **Add Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`                                                                                                                                                             |
+| **Add Module** | `module ID m/MODULE` <br> e.g., `module 12345678 m/CS2103T`                                                                                                                                                                      |
+| **Filter**     | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`                                                                                                                                                          |
+| **Find**       | `find ID`<br> e.g., `find 12345678`                                                                                                                                                                                              |
+| **List**       | `list`                                                                                                                                                                                                                           |
+| **Help**       | `help`                                                                                                                                                                                                                           |
