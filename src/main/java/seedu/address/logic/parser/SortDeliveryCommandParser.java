@@ -19,6 +19,7 @@ public class SortDeliveryCommandParser implements Parser<SortDeliveryCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the SortDeliveryCommand
      * and returns a SortDeliveryCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format.
      */
     public SortDeliveryCommand parse(String args) throws ParseException {

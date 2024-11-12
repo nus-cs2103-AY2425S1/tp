@@ -29,6 +29,15 @@ public class DeliverySortStatusComparatorTest {
 
     @Test
     public void compare_ascendingEqualInputs_returnsZero() {
+        DeliverySortStatusComparator comparator = new DeliverySortStatusComparator(new SortOrder("a"));
+        Delivery delivery1 = new DeliveryBuilder().withStatus(Status.DELIVERED).build();
+        Delivery delivery2 = new DeliveryBuilder().withStatus(Status.DELIVERED).build();
+        int result = comparator.compare(delivery1, delivery2);
+        assertTrue(result == 0);
+    }
+
+    @Test
+    public void compare_descendingEqualInputs_returnsZero() {
         DeliverySortStatusComparator comparator = new DeliverySortStatusComparator(new SortOrder("d"));
         Delivery delivery1 = new DeliveryBuilder().withStatus(Status.DELIVERED).build();
         Delivery delivery2 = new DeliveryBuilder().withStatus(Status.DELIVERED).build();

@@ -137,7 +137,7 @@ public interface Model {
     void updateSortedDeliveryList(Comparator<Delivery> comparator);
 
     /**
-     * Returns an unmodifiable view of the modified delivery list.
+     * Returns an unmodifiable view of the sorted/filtered delivery list based on the last command executed.
      */
     ObservableList<Delivery> getModifiedDeliveryList();
 

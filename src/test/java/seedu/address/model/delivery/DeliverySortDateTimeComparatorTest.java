@@ -29,6 +29,15 @@ public class DeliverySortDateTimeComparatorTest {
 
     @Test
     public void compare_ascendingEqualInputs_returnsZero() {
+        DeliverySortDateTimeComparator comparator = new DeliverySortDateTimeComparator(new SortOrder("a"));
+        Delivery delivery1 = new DeliveryBuilder().withDeliveryTime("09-08-2024 12:40").build();
+        Delivery delivery2 = new DeliveryBuilder().withDeliveryTime("09-08-2024 12:40").build();
+        int result = comparator.compare(delivery1, delivery2);
+        assertTrue(result == 0);
+    }
+
+    @Test
+    public void compare_descendingEqualInputs_returnsZero() {
         DeliverySortDateTimeComparator comparator = new DeliverySortDateTimeComparator(new SortOrder("d"));
         Delivery delivery1 = new DeliveryBuilder().withDeliveryTime("09-08-2024 12:40").build();
         Delivery delivery2 = new DeliveryBuilder().withDeliveryTime("09-08-2024 12:40").build();

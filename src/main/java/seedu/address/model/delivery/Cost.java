@@ -43,8 +43,8 @@ public class Cost implements Comparable<Cost> {
      * or greater than the specified cost.
      *
      * @param otherCost The cost to be compared.
-     * @return a negative integer, zero, or a positive integer as this cost is less than, equal to,
-     *      or greater than the other cost.
+     * @return A negative integer, zero, or a positive integer as this cost is less than, equal to,
+     *         or greater than the other cost.
      */
     public int compareTo(Cost otherCost) {
         double deliveryCost = Double.parseDouble(value);

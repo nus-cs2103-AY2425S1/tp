@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.supplier.Supplier;
 
 /**
- * Adds a supplier to the address book.
+ * Adds a supplier to VendorVault.
  */
 public class AddSupplierCommand extends AddCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_SUPPLIER
@@ -51,6 +51,13 @@ public class AddSupplierCommand extends AddCommand {
         toAdd = supplier;
     }
 
+    /**
+     * Executes the add supplier command and returns the result message.
+     *
+     * @param model {@code Model} which the add supplier command should operate on.
+     * @return feedback message of the operation result for display
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

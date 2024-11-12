@@ -42,7 +42,7 @@ public class DeliveryCard extends UiPart<Region> {
         this.delivery = delivery;
         id.setText(displayedIndex + ". ");
         productName.setText(delivery.getDeliveryProduct().toString());
-        senderName.setText(delivery.getDeliverySender().getName().fullName); // only displaying supplier's name for now
+        senderName.setText(delivery.getDeliverySender().getName().getName());
         status.setText(delivery.getDeliveryStatus().name());
         setStatusStyle(delivery.getDeliveryStatus());
         deliveryTime.setText(delivery.getDeliveryDate().toString());

@@ -32,9 +32,9 @@ public class MarkSupplierCommandTest {
         Supplier firstSupplier = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
         Supplier editedSupplier = new SupplierBuilder(firstSupplier).withStatus(SUPPLIER_STATUS_STUB).build();
         MarkSupplierCommand markCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
-                new SupplierStatus(editedSupplier.getStatus().status));
+                new SupplierStatus(editedSupplier.getStatus().getStatus()));
         String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
-                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().status);
+                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().getStatus());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setSupplier(firstSupplier, editedSupplier);
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
@@ -47,9 +47,9 @@ public class MarkSupplierCommandTest {
                 model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased()))
                 .withStatus(SUPPLIER_STATUS_STUB).build();
         MarkSupplierCommand remarkCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
-                new SupplierStatus(editedSupplier.getStatus().status));
+                new SupplierStatus(editedSupplier.getStatus().getStatus()));
         String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
-                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().status);
+                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().getStatus());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setSupplier(firstSupplier, editedSupplier);
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
@@ -108,15 +108,15 @@ public class MarkSupplierCommandTest {
         Supplier firstSupplier = model.getFilteredSupplierList().get(INDEX_FIRST_SUPPLIER.getZeroBased());
         Supplier editedSupplier = new SupplierBuilder(firstSupplier).withStatus(SUPPLIER_STATUS_STUB).build();
         MarkSupplierCommand markCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
-                new SupplierStatus(editedSupplier.getStatus().status));
+                new SupplierStatus(editedSupplier.getStatus().getStatus()));
         String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
-                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().status);
+                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().getStatus());
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setSupplier(firstSupplier, editedSupplier);
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
         MarkSupplierCommand remarkCommand = new MarkSupplierCommand(INDEX_FIRST_SUPPLIER,
-                new SupplierStatus(editedSupplier.getStatus().status));
+                new SupplierStatus(editedSupplier.getStatus().getStatus()));
         assertCommandFailure(remarkCommand, model, String.format(Messages.MESSAGE_DUPLICATE_SUPPLIER_STATUS,
-                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().status));
+                Messages.formatWithoutStatus(firstSupplier), editedSupplier.getStatus().getStatus()));
     }
 }

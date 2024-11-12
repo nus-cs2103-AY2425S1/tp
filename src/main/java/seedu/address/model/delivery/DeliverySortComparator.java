@@ -1,28 +1,33 @@
 package seedu.address.model.delivery;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Comparator;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.SortOrder;
 
 /**
- * Comparators for Delivery class
+ * Represents a delivery comparator.
  */
 public abstract class DeliverySortComparator implements Comparator<Delivery> {
     private final SortOrder sortOrder;
 
+    /**
+     * Creates a DeliverySortComparator to sort the deliveries in the specified {@code sortOrder}.
+     */
     public DeliverySortComparator(SortOrder sortOrder) {
+        requireNonNull(sortOrder);
         this.sortOrder = sortOrder;
-    }
-
-    public SortOrder getSortOrder() {
-        return this.sortOrder;
     }
 
     public boolean getIsSortByAscending() {
         return this.sortOrder.getIsSortByAscending();
     }
 
+    /**
+     * Returns the toString of the sort order.
+     */
     public String toSortOrderString() {
         return this.sortOrder.toString();
     }
@@ -45,7 +50,7 @@ public abstract class DeliverySortComparator implements Comparator<Delivery> {
         }
 
         DeliverySortComparator otherDeliverySortComparator = (DeliverySortComparator) other;
-        return this.getSortOrder().equals(otherDeliverySortComparator.getSortOrder());
+        return this.sortOrder.equals(otherDeliverySortComparator.sortOrder);
     }
 
     public abstract String toSortByString();

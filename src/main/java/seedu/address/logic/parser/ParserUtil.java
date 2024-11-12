@@ -36,6 +36,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -147,10 +148,25 @@ public class ParserUtil {
         }
         return new Product(trimmedProductName);
     }
+
+    /**
+     * Parses {@code Collection<String> products} into a {@code Set<Product>}.
+     *
+     * @throws ParseException if a productName is invalid.
+     */
+    public static Set<Product> parseProducts(Collection<String> products) throws ParseException {
+        requireNonNull(products);
+        final Set<Product> productSet = new HashSet<>();
+        for (String productName : products) {
+            productSet.add(parseProduct(productName));
+        }
+        return productSet;
+    }
+
     /**
      * Parses a {@code String statusString} into a {@code SupplierStatus}.
-     * Leading and trailing whitespaces
-     * will be trimmed.
+     * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the given {@code statusString} is invalid.
      */
     public static SupplierStatus parseSupplierStatus(String statusString) throws ParseException {
@@ -160,18 +176,6 @@ public class ParserUtil {
             throw new ParseException(SupplierStatus.MESSAGE_CONSTRAINTS);
         }
         return new SupplierStatus(trimmedStatus);
-    }
-
-    /**
-     * Parses {@code Collection<String> products} into a {@code Set<Product>}.
-     */
-    public static Set<Product> parseProducts(Collection<String> products) throws ParseException {
-        requireNonNull(products);
-        final Set<Product> productSet = new HashSet<>();
-        for (String productName : products) {
-            productSet.add(parseProduct(productName));
-        }
-        return productSet;
     }
 
     /**
@@ -276,7 +280,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String sortBy } into a {@code SortBy}.
+     * Parses a {@code String sortBy } into a {@code DeliverySortBy}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code sortBy} is invalid.
@@ -289,6 +293,7 @@ public class ParserUtil {
         }
         return new DeliverySortBy(trimmedSortBy);
     }
+
     /**
      * Parses a {@code String sortBy } into a {@code SortBy}.
      * Leading and trailing whitespaces will be trimmed.

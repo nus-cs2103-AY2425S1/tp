@@ -31,10 +31,10 @@ public class SampleDataUtilTest {
 
         //check specific values for one of the suppliers
         Supplier alexYeoh = suppliers[0];
-        assertEquals("Alex Yeoh", alexYeoh.getName().fullName);
-        assertEquals("87438807", alexYeoh.getPhone().value);
-        assertEquals("alexyeoh@example.com", alexYeoh.getEmail().value);
-        assertEquals("companya", alexYeoh.getCompany().value);
+        assertEquals("Alex Yeoh", alexYeoh.getName().toString());
+        assertEquals("87438807", alexYeoh.getPhone().getPhone());
+        assertEquals("alexyeoh@example.com", alexYeoh.getEmail().getEmail());
+        assertEquals("companya", alexYeoh.getCompany().getCompany());
         assertTrue(alexYeoh.getTags().contains(new Tag("friends")));
         assertTrue(alexYeoh.getProducts().contains(new Product("rice")));
         assertEquals(new SupplierStatus("active"), alexYeoh.getStatus());
@@ -69,7 +69,7 @@ public class SampleDataUtilTest {
 
         //verify specific supplier and delivery details within the address book
         Supplier supplierInBook = sampleAddressBook.getSupplierList().get(0);
-        assertEquals("Alex Yeoh", supplierInBook.getName().fullName);
+        assertEquals("Alex Yeoh", supplierInBook.getName().toString());
 
         Delivery deliveryInBook = sampleAddressBook.getDeliveryList().get(0);
         assertEquals(new Product("Apple"), deliveryInBook.getDeliveryProduct());

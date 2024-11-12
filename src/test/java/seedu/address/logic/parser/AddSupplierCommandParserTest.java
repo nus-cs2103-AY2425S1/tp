@@ -66,7 +66,6 @@ public class AddSupplierCommandParserTest {
                 + COMPANY_DESC_BOB + TAG_DESC_FRIEND + PRODUCT_DESC_BREAD,
                 new AddSupplierCommand(expectedSupplier));
 
-
         // multiple tags - all accepted
         Supplier expectedSupplierMultipleTags = new SupplierBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();

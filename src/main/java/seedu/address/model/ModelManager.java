@@ -167,6 +167,10 @@ public class ModelManager implements Model {
         addressBook.setDelivery(target, updatedDelivery);
     }
 
+    /**
+     * Returns an unmodifiable view of the filtered/sorted list of {@code Supplier} backed by the internal list of
+     * {@code versionedAddressBook} based on the last command executed.
+     */
     @Override
     public ObservableList<Delivery> getModifiedDeliveryList() {
         return isViewingDeliveryFilteredList ? getFilteredDeliveryList() : getSortedDeliveryList();
@@ -186,11 +190,22 @@ public class ModelManager implements Model {
     }
 
     //=========== Sorted Delivery List Accessors ===============================================================
+
+    /**
+     * Returns an unmodifiable view of the sorted list of {@code Supplier} backed by the internal list of
+     * {@code versionedAddressBook}.
+     */
     @Override
     public ObservableList<Delivery> getSortedDeliveryList() {
         return sortedDeliveries;
     }
 
+    /**
+     * Updates the comparator of the sorted delivery list to sort by the given {@code comparator}.
+     *
+     * @param comparator The comparator to use to sort the delivery list.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
     @Override
     public void updateSortedDeliveryList(Comparator<Delivery> comparator) {
         requireNonNull(comparator);

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.DeliverySortComparator;
 
@@ -25,19 +26,27 @@ public class SortDeliveryCommand extends SortCommand {
             + PREFIX_SORT_ORDER + "a "
             + PREFIX_SORT_BY + "c";
 
-
     private final DeliverySortComparator comparator;
 
     /**
      * Creates a SortDeliveryCommand to sort the deliveries by the specified {@code comparator}.
      */
     public SortDeliveryCommand(DeliverySortComparator comparator) {
+        requireNonNull(comparator);
         this.comparator = comparator;
     }
 
+    /**
+     * Executes the sort delivery command and returns the result message.
+     *
+     * @param model {@code Model} which the sort delivery command should operate on.
+     * @return feedback message of the operation result for display.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        assert comparator != null;
         model.updateSortedDeliveryList(comparator);
         return new CommandResult(
                 String.format(Messages.MESSAGE_DELIVERY_SORTED_OVERVIEW,

@@ -12,8 +12,8 @@ import seedu.address.logic.parser.SortOrder;
  */
 public class DeliverySortBy {
     /**
-     * Represents the fields to sort by
-     * 'C' represents cost, 'D' represents dateTime, and 'S' represents status
+     * Represents the fields to sort by,
+     * 'C' represents cost, 'D' represents dateTime, and 'S' represents status.
      */
     public enum SortBy {
         C, D, S;
@@ -55,6 +55,9 @@ public class DeliverySortBy {
      * Returns the corresponding comparator of {@code sortBy} which compares by the {@code sortOrder}.
      */
     public static DeliverySortComparator getDeliverySortComparator(SortOrder sortOrder, DeliverySortBy deliverySortBy) {
+        requireNonNull(sortOrder);
+        requireNonNull(deliverySortBy);
+        assert deliverySortBy.getSortBy() != null;
         switch (deliverySortBy.getSortBy()) {
         case C:
             return new DeliverySortCostComparator(sortOrder);
@@ -73,13 +76,15 @@ public class DeliverySortBy {
 
     /**
      * Returns true if a given string is a valid field to sort by.
+     *
+     * @param test String to test.
      */
     public static boolean isValidSortBy(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
     /**
-     * Returns the corresponding field that is being sorted by.
+     * Returns the corresponding description that is being sorted by.
      */
     @Override
     public String toString() {

@@ -23,14 +23,15 @@ import seedu.address.model.supplier.SupplierStatus;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddSupplierCommand object
  */
 public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddSupplierCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
@@ -49,7 +50,7 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Product> productList = ParserUtil.parseProducts(argMultimap.getAllValues(PREFIX_PRODUCT));
-        SupplierStatus status = new SupplierStatus("active");
+        SupplierStatus status = new SupplierStatus(SupplierStatus.ACTIVE_STRING);
 
         Supplier supplier = new Supplier(name, phone, email, company, tagList, productList, status);
 

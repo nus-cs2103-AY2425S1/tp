@@ -30,8 +30,8 @@ public class DeliverySortCostComparatorTest {
     @Test
     public void compare_ascendingEqualInputs_returnsZero() {
         DeliverySortCostComparator comparator = new DeliverySortCostComparator(new SortOrder("a"));
-        Delivery delivery1 = new DeliveryBuilder().build();
-        Delivery delivery2 = new DeliveryBuilder().build();
+        Delivery delivery1 = new DeliveryBuilder().withCost("58.80").build();
+        Delivery delivery2 = new DeliveryBuilder().withCost("58.80").build();
         int result = comparator.compare(delivery1, delivery2);
         assertTrue(result == 0);
     }
@@ -39,8 +39,8 @@ public class DeliverySortCostComparatorTest {
     @Test
     public void compare_descendingEqualInputs_returnsZero() {
         DeliverySortCostComparator comparator = new DeliverySortCostComparator(new SortOrder("d"));
-        Delivery delivery1 = new DeliveryBuilder().build();
-        Delivery delivery2 = new DeliveryBuilder().build();
+        Delivery delivery1 = new DeliveryBuilder().withCost("123.45").build();
+        Delivery delivery2 = new DeliveryBuilder().withCost("123.45").build();
         int result = comparator.compare(delivery1, delivery2);
         assertTrue(result == 0);
     }

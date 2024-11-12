@@ -60,11 +60,11 @@ public class JsonAdaptedSupplier {
      * Converts a given {@code Supplier} into this class for Jackson use.
      */
     public JsonAdaptedSupplier(Supplier source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        company = source.getCompany().value;
-        status = source.getStatus().status;
+        name = source.getName().getName();
+        phone = source.getPhone().getPhone();
+        email = source.getEmail().getEmail();
+        company = source.getCompany().getCompany();
+        status = source.getStatus().getStatus();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));

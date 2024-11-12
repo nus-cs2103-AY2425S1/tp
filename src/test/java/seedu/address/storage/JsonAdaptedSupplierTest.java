@@ -36,7 +36,7 @@ public class JsonAdaptedSupplierTest {
             .map(JsonAdaptedProduct::new)
             .collect(Collectors.toList());
 
-    private static final String VALID_STATUS = BENSON.getStatus().status;
+    private static final String VALID_STATUS = BENSON.getStatus().getStatus();
     @Test
     public void toModelType_validSupplierDetails_returnsSupplier() throws Exception {
         JsonAdaptedSupplier supplier = new JsonAdaptedSupplier(BENSON);

@@ -28,15 +28,15 @@ public class SupplierUtil {
      */
     public static String getSupplierDetails(Supplier supplier) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + supplier.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + supplier.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + supplier.getEmail().value + " ");
-        sb.append(PREFIX_COMPANY + supplier.getCompany().value + " ");
+        sb.append(PREFIX_NAME + supplier.getName().toString() + " ");
+        sb.append(PREFIX_PHONE + supplier.getPhone().getPhone() + " ");
+        sb.append(PREFIX_EMAIL + supplier.getEmail().getEmail() + " ");
+        sb.append(PREFIX_COMPANY + supplier.getCompany().getCompany() + " ");
         supplier.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(PREFIX_TAG + s.getTagName() + " ")
         );
         supplier.getProducts().stream().forEach(
-                s -> sb.append(PREFIX_PRODUCT + s.productName + " ")
+                s -> sb.append(PREFIX_PRODUCT + s.getProductName() + " ")
         );
         return sb.toString();
     }

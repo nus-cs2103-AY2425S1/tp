@@ -13,34 +13,26 @@ public class DeliverySortByTest {
     }
 
     @Test
-    public void constructor_invalidQuantity_throwsIllegalArgumentException() {
+    public void constructor_invalidSortBy_throwsIllegalArgumentException() {
         String invalidSortBy = "100abc";
         assertThrows(IllegalArgumentException.class, () -> new DeliverySortBy(invalidSortBy));
     }
 
     @Test
     public void isValidSortBy() {
-        // null quantity
+        // null sort by
         assertThrows(NullPointerException.class, () -> DeliverySortBy.isValidSortBy(null));
 
-        // blank cost
-        assertFalse(Quantity.isValidQuantity("")); // empty string
-        assertFalse(Quantity.isValidQuantity(" ")); // spaces only
+        // blank sort by
+        assertFalse(DeliverySortBy.isValidSortBy("")); // empty string
+        assertFalse(DeliverySortBy.isValidSortBy(" ")); // spaces only
 
-        // invalid sortBy
+        // invalid sort by
         assertFalse(DeliverySortBy.isValidSortBy("a")); // not in SortBy enum
         assertFalse(DeliverySortBy.isValidSortBy("1")); // not in SortBy enum
         assertFalse(DeliverySortBy.isValidSortBy("cd")); // only one sortBy allowed
 
-        assertFalse(Quantity.isValidQuantity("100")); // missing unit
-        assertFalse(Quantity.isValidQuantity("abc kg")); // non-numeric quantity
-        assertFalse(Quantity.isValidQuantity("100abc")); // no space between number and unit
-        assertFalse(Quantity.isValidQuantity("100 grams")); // invalid unit (grams instead of g)
-        assertFalse(Quantity.isValidQuantity("100g")); // no space between number and unit
-        assertFalse(Quantity.isValidQuantity("1 liters   ")); // space at the end
-        assertFalse(Quantity.isValidQuantity("  1 liters   ")); // space at the start
-
-        // valid sortBy
+        // valid sort by
         assertTrue(DeliverySortBy.isValidSortBy("c")); // valid cost
         assertTrue(DeliverySortBy.isValidSortBy("d")); // valid date time
         assertTrue(DeliverySortBy.isValidSortBy("s")); // valid status

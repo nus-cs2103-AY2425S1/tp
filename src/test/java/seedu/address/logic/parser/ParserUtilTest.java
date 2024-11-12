@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.DateTime;
+import seedu.address.model.delivery.DeliverySortBy;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.SupplierIndex;
@@ -322,6 +323,52 @@ public class ParserUtilTest {
         assertEquals(Status.PENDING, ParserUtil.parseStatus("pending"));
         assertEquals(Status.DELIVERED, ParserUtil.parseStatus("DELIVERED"));
         assertEquals(Status.CANCELLED, ParserUtil.parseStatus("CaNcElLeD"));
+    }
+
+    @Test
+    public void parseSortOrder_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortOrder((String) null));
+    }
+
+    @Test
+    public void parseSortOrder_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortOrder("invalidSortOrder"));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithoutWhitespace_returnsSortOrder() throws Exception {
+        SortOrder expectedSortOrder = new SortOrder("a");
+        assertEquals(expectedSortOrder, ParserUtil.parseSortOrder("a"));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithWhitespace_returnsTrimmedSortOrder() throws Exception {
+        String sortOrderWithWhitespace = WHITESPACE + "d" + WHITESPACE;
+        SortOrder expectedSortBy = new SortOrder("d");
+        assertEquals(expectedSortBy, ParserUtil.parseSortOrder(sortOrderWithWhitespace));
+    }
+
+    @Test
+    public void parseDeliverySortBy_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeliverySortBy((String) null));
+    }
+
+    @Test
+    public void parseDeliverySortBy_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliverySortBy("invalidSortBy"));
+    }
+
+    @Test
+    public void parseDeliverySortBy_validValueWithoutWhitespace_returnsDeliverySortBy() throws Exception {
+        DeliverySortBy expectedSortBy = new DeliverySortBy("c");
+        assertEquals(expectedSortBy, ParserUtil.parseDeliverySortBy("c"));
+    }
+
+    @Test
+    public void parseDeliverySortBy_validValueWithWhitespace_returnsTrimmedDeliverySortBy() throws Exception {
+        String sortByWithWhitespace = WHITESPACE + "d" + WHITESPACE;
+        DeliverySortBy expectedSortBy = new DeliverySortBy("d");
+        assertEquals(expectedSortBy, ParserUtil.parseDeliverySortBy(sortByWithWhitespace));
     }
 
     @Test
