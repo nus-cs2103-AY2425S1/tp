@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Group;
 
 /**
+ * Inspired by PersonListPanel
  * Panel containing the list of groups.
  */
 public class GroupListPanel extends UiPart<Region> implements PersonListObserver {

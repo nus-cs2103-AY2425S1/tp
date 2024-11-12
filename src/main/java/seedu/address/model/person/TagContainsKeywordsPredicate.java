@@ -7,6 +7,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
+ * Inspired by NameContainsKeywordPredicate
  * Tests that a {@code Person}'s {@code Tags} match any of the keywords given.
  */
 public class TagContainsKeywordsPredicate implements Predicate<Person> {

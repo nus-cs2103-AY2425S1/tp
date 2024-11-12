@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 /**
+ * Inspired by NameContainsKeywordPredicate
  * Tests that a {@code Person}'s {@code Role} matches the specified role.
  */
 public class RoleMatchesPredicate implements Predicate<Person> {

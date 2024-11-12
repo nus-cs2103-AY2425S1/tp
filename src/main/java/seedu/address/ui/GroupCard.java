@@ -11,6 +11,7 @@ import seedu.address.model.person.Group;
 import seedu.address.model.person.Person;
 
 /**
+ * Inspired by PersonCard
  * A UI component that displays information of a {@code Group}.
  */
 public class GroupCard extends UiPart<Region> {
