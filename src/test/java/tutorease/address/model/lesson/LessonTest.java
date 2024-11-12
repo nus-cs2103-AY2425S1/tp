@@ -23,7 +23,6 @@ public class LessonTest {
     private final EndDateTime endDateTimeOverlap = EndDateTime.createEndDateTime(startDateTime, "2");
     private final StartDateTime startDateTimeNoOverlap = StartDateTime.createStartDateTime(
             DateTimeUtil.dateTimeToString(startDateTime.getDateTime().plusDays(1)));
-
     private final Lesson lesson = new Lesson(person, fee, startDateTime, endDateTime);
     private final Lesson lessonOverlap = new Lesson(person, fee, startDateTimeOverlap, endDateTimeOverlap);
     private final Lesson lessonNoOverlap = new Lesson(person, fee, startDateTimeNoOverlap, endDateTimeOverlap);

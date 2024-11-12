@@ -29,11 +29,11 @@ public class UniqueLessonListTest {
         }
     }
 
-    public UniqueLessonListTest() throws ParseException {
+    public UniqueLessonListTest() {
     }
 
     @BeforeEach
-    public void setUp() throws ParseException {
+    public void setUp() {
         uniqueLessonList.add(lesson);
     }
 
@@ -103,6 +103,7 @@ public class UniqueLessonListTest {
         // Remove the first lesson and verify it's removed
         Lesson lesson = uniqueLessonList.get(0);
         uniqueLessonList.remove(lesson);
+
         assertEquals(0, uniqueLessonList.size());
         assertFalse(uniqueLessonList.contains(lesson));
     }
@@ -130,8 +131,10 @@ public class UniqueLessonListTest {
     @Test
     public void setLessons_withValidUniqueLessonList_replacesData() {
         UniqueLessonList newData = new UniqueLessonList();
+
         newData.add(lesson);
         uniqueLessonList.setLessons(newData);
+
         assertEquals(newData, uniqueLessonList);
     }
 
@@ -139,8 +142,10 @@ public class UniqueLessonListTest {
     public void setLessons_withValidLessonList_replacesData() {
         List<Lesson> newData = List.of(lesson);
         UniqueLessonList originalData = new UniqueLessonList();
+
         originalData.add(lesson);
         uniqueLessonList.setLessons(newData);
+
         assertEquals(originalData, uniqueLessonList);
     }
 

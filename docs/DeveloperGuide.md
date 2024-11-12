@@ -577,7 +577,7 @@ Given below are instructions to test the app manually.
     1. Test case: `contact list`<br>
        Expected: All contacts are shown.
 
-    1. Test case: `lesson list 0`<br>
+    1. Test case: `contact list 0`<br>
        Expected: All contacts are shown.
 
 ### Editing a contact
@@ -661,7 +661,7 @@ Given below are instructions to test the app manually.
 
    1. Prerequisite: At least one student exists in the contact list.
 
-   1. Test case: `lesson add sid/1 f/10 d/11-11-2024 12:00 h/1`<br>
+   1. Test case: `lesson add sid/1 f/10 d/12-11-2024 12:00 h/1`<br>
       Expected: A lesson is added to the student with index 1 in the filtered contact list. Details of the added lesson is shown in the status message.
 
 ### Listing all lessons
@@ -739,3 +739,43 @@ Given below are instructions to test the app manually.
 
     1. Test case: `clear`<br>
        Expected: All contacts and lessons are cleared.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Planned Enhancements
+
+Team Size: 4
+
+#### 1. **Unique Attributes and Relationship Modeling for Students and Guardians**
+Recognizing the importance of capturing more details about different types of contacts, we plan to incorporate additional attributes for students, such as grade levels, subjects and exam dates.
+To support clear organization, we’ll also implement a tagging system that links each student to their respective guardian, making it easier to manage relationships and access relevant information at a glance.
+In the event that a student does not have contact information, they will be required to be linked to a guardian, ensuring that there exist a way to contact the student.
+
+#### 2. **Overlapping Lesson Time Handling**
+We recognize the need for clarity around overlapping lesson scheduling. Options for managing overlaps will include:
+
+* Allowing overlapping sessions for group lessons or pair lessons.
+* Enabling you to customize settings for overlap permissions based on the type of lesson.
+
+<div style="page-break-after: always;"></div>
+
+#### 3. **Enhanced Name Field Support**
+To accommodate a more diverse range of names, such as names with commas, accented characters, hyphens, etc., we plan to update the application to allow names with these characters.
+In the future, the system will support a wider variety of name formats, making it more inclusive and user-friendly.
+
+Additionally, if extra whitespace is accidentally added between names (e.g., double space between first and last name), the system will show a warning to alert you of potential duplicate entries due to spacing inconsistencies.
+
+#### 4. **Past Lesson Management**
+To enhance lesson organization, we plan to introduce features that clearly distinguish past lessons. This will include options to automatically hide completed lessons or display them in a different color for easy identification.
+You will also be able to toggle the visibility of past lessons, allowing them to focus on upcoming schedules while still being able to reference completed sessions if needed.
+
+#### 5. **Support for Decimal Places in Fees**
+We have acknowledged that it might be possible to charge an odd number (ie $25) per lesson for an even number of hours (ie 2 hours), resulting in the fee per hour not being an integer.
+To provide more flexibility in fee management, we plan to introduce support for decimal places in fee amounts.
+This will allow you to input and manage fees with greater precision, catering to scenarios where fees are calculated to fractional values (e.g., for hourly rates or partial payments).
+
+#### 6. **Support for More Screen Resolutions**
+An example of this issue is when a Tutor creates a contact with a name, address, tag, and email that are longer than expected. Part of the UI will be cut off if the screen resolution is not big enough. To ensure that the application is accessible to users with a wide range of screen sizes, we plan to optimize the user interface for additional screen resolutions so that none of the elements are cut off or hidden from view, regardless of the screen size.
+
+#### 7. **Allow integer values above 2,147,483,647**
+Although it is highly unlikely that an integer value would exceed 2,147,483,647 under normal usage, the system currently only supports integer values up to 2,147,483,647. To accommodate larger values, we plan to update the system to allow for integer values above this limit. This will ensure that you can input and manage larger values without encountering any issues related to the integer limit.
