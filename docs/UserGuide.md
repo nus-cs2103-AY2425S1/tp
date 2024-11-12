@@ -56,6 +56,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
       * [HireMe application setup failed](#hireme-application-setup-failed)
       * [Getting errors when using the commands](#getting-errors-when-using-the-commands)
       * [Unable to see the full text on the screen](#unable-to-see-the-full-text-on-the-screen)
+  * [Known Issues](#known-issues)
   * [Command summary](#command-summary)
   * [Glossary](#glossary)
   * [Acknowledgements](#acknowledgements)
@@ -487,6 +488,12 @@ Check that you have the typed the correct [command format](#notes-about-the-comm
 
 #### Unable to see the full text on the screen
 Try opening the window to full screen or scroll to view the full text. Avoid inputting texts that are too lengthy.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Known Issues
+
+1. If the user opens the application on a first monitor, then moves the application window to a second monitor and closes the application, then when the user tries to open the application again, the application would not work after opening. The current work around is that the user will then have to move the application window back to the first monitor for the application to work.
 
 --------------------------------------------------------------------------------------------------------------------
 

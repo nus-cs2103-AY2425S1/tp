@@ -47,7 +47,6 @@
     * [Saving data](#saving-data)
     * [Exit HireMe](#exit-hireme-application)
   * [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
-  * [**Appendix: Known Issues**](#appendix-known-issues)
 <!-- TOC -->
 <page-nav-print />
 
@@ -1151,7 +1150,3 @@ on why the command is invalid. The error message could be more specific to state
     - Current behaviour: Internship applications data is stored in a single data file `hireme.json`. <br></br>
     - Planned enhancement: A backup file that replicates the data in `hireme.json`. <br></br>
     - Justification: Having only a single data file to store internship applications data means having a single point of failure when the data in corrupted or lost. A backup file that synchronously replicates the data in `hireme.json` ensures data redundancy. <br></br>
-
-## **Appendix: Known Issues**
-
-1. If the user opens the application on a first monitor, then moves the application window to a second monitor and closes the application, then when the user tries to open the application again, the application would not work after opening. The current work around is that the user will then have to move the application window back to the first monitor for the application to work. 
