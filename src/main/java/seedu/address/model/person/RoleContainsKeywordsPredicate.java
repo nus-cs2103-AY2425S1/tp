@@ -12,10 +12,22 @@ import seedu.address.commons.util.ToStringBuilder;
 public class RoleContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a RoleContainsKeywordsPredicate with the given wedding
+     *
+     * @param keywords The keywords to check against
+     */
     public RoleContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
+    /**
+     * Tests if a given person has role containing some keywords.
+     * Returns true only if some keywords are found in the person's role.
+     *
+     * @param person The person to test
+     * @return true if some keywords are found in the person's role, false otherwise
+     */
     @Override
     public boolean test(Person person) {
         return keywords.stream()
