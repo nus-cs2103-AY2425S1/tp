@@ -455,7 +455,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. User enters at least one invalid description (e.g. containing non-ASCII characters, or is too long)
+* 3a. User enters at least one invalid description (e.g. containing non-ASCII characters, or is too long).
   * 3a1. System displays error message and the correct usage.
   * Use case ends.
 
