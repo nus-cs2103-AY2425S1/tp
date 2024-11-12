@@ -42,7 +42,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_INVALID_CATEGORY = "Invalid category in CSV. Category must be either 'student' "
             + "or 'company'";
     public static final String MESSAGE_INVALID_CSV_FORMAT = "Invalid CSV format";
-    public static final String MESSAGE_CORRUPTED_CSV_FILE = "File is corrupted or missing compulsory fields\n"
+    public static final String MESSAGE_CORRUPTED_CSV_FILE = "File has corrupted or missing compulsory fields\n"
             + "Please ensure all compulsory fields are present and in correct format";
     public static final String MESSAGE_NON_CSV_FILE = "The file extension must be .csv";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports contacts from a CSV file.\n"
