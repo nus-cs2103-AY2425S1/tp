@@ -192,7 +192,7 @@ The following sequence diagram shows how an `add` command goes through the `Logi
 
 The following activity diagram summarizes what happens when a user executes a `add` command:
 
-<puml src="diagrams/AddActivityDiagram.puml" height="600" width="900" />
+<puml src="diagrams/AddActivityDiagram.puml" height="600" width="600" />
 
 ### Edit feature
 
@@ -333,7 +333,7 @@ The following sequence diagram shows how a `clean` command goes through the `Log
 
 The following activity diagram summarizes what happens when a user executes a `clean` command:
 
-<puml src="diagrams/CleanActivityDiagram.puml" height="600" width="900" />
+<puml src="diagrams/CleanActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
