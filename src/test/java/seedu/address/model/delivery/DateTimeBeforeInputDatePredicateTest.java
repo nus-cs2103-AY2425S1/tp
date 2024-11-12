@@ -55,7 +55,7 @@ public class DateTimeBeforeInputDatePredicateTest {
         assertTrue(predicate.test(new DeliveryBuilder().withDeliveryTime("19-10-2012 17:35").build()));
         // earlier by years
         predicate = new DateTimeBeforeInputDatePredicate(new DateTime("01-10-2024 07:35"));
-        assertTrue(predicate.test(new DeliveryBuilder().withDeliveryTime("01-10-2023 07:35").build()));
+        assertTrue(predicate.test(new DeliveryBuilder().withDeliveryTime("01-10-2022 07:35").build()));
     }
 
     @Test

@@ -8,6 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BREAD;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.createPredicateList;
+import static seedu.address.testutil.TestUtil.prepareAfterPredicate;
+import static seedu.address.testutil.TestUtil.prepareBeforePredicate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +22,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryIsUpcomingAfterPredicate;
 import seedu.address.model.delivery.DeliveryIsUpcomingBeforePredicate;
@@ -38,22 +40,31 @@ public class UpcomingCommandTest {
     @Test
     public void execute_deliveryAfterCompletionDate_noDeliveriesFound() {
         String expectedMessage = String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 0);
-        DeliveryIsUpcomingBeforePredicate predicate = prepareBeforePredicate("31-01-2010 23:59");
-        List<Predicate<Delivery>> predicates = new ArrayList<>();
-        predicates.add(predicate);
+        DeliveryIsUpcomingAfterPredicate predicate = prepareAfterPredicate("31-01-2030 23:59", Status.PENDING);
+        List<Predicate<Delivery>> predicates = createPredicateList(predicate);
         UpcomingCommand command = new UpcomingCommand(predicates);
         expectedModel.updateFilteredDeliveryList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredDeliveryList());
     }
 
-    //need check with JZ why this fails
+    @Test
+    public void execute_deliveryBeforeStartDate_noDeliveriesFound() {
+        String expectedMessage = String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 0);
+        DeliveryIsUpcomingAfterPredicate predicate = prepareAfterPredicate("31-12-2030 23:59", Status.PENDING);
+        List<Predicate<Delivery>> predicates = new ArrayList<>();
+        predicates.add(predicate);
+        UpcomingCommand command = new UpcomingCommand(predicates);
+        expectedModel.updateFilteredDeliveryList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(expectedModel.getFilteredDeliveryList(), model.getFilteredDeliveryList());
+    }
+
     @Test
     public void execute_deliveryBeforeCompletionDate_multipleDeliveriesFound() {
         String expectedMessage = String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 3);
-        DeliveryIsUpcomingBeforePredicate predicate = prepareBeforePredicate("31-12-2030 23:59");
-        List<Predicate<Delivery>> predicates = new ArrayList<>();
-        predicates.add(predicate);
+        DeliveryIsUpcomingBeforePredicate predicate = prepareBeforePredicate("31-12-2030 23:59", Status.PENDING);
+        List<Predicate<Delivery>> predicates = createPredicateList(predicate);
         UpcomingCommand command = new UpcomingCommand(predicates);
         expectedModel.updateFilteredDeliveryList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -63,20 +74,8 @@ public class UpcomingCommandTest {
     @Test
     public void execute_deliveryAfterStartDate_multipleDeliveriesFound() {
         String expectedMessage = String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 3);
-        DeliveryIsUpcomingAfterPredicate predicate = prepareAfterPredicate("31-12-2001 23:59");
-        List<Predicate<Delivery>> predicates = new ArrayList<>();
-        predicates.add(predicate);
-        UpcomingCommand command = new UpcomingCommand(predicates);
-        expectedModel.updateFilteredDeliveryList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(expectedModel.getFilteredDeliveryList(), model.getFilteredDeliveryList());
-    }
-    @Test
-    public void execute_deliveryBeforeStartDate_noDeliveriesFound() {
-        String expectedMessage = String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 0);
-        DeliveryIsUpcomingAfterPredicate predicate = prepareAfterPredicate("31-12-2030 23:59");
-        List<Predicate<Delivery>> predicates = new ArrayList<>();
-        predicates.add(predicate);
+        DeliveryIsUpcomingAfterPredicate predicate = prepareAfterPredicate("31-12-2001 23:59", Status.PENDING);
+        List<Predicate<Delivery>> predicates = createPredicateList(predicate);
         UpcomingCommand command = new UpcomingCommand(predicates);
         expectedModel.updateFilteredDeliveryList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -86,8 +85,8 @@ public class UpcomingCommandTest {
     @Test
     public void execute_betweenStartAndEndDate_multipleDeliveriesFound() {
         String expectedMessage = String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 3);
-        DeliveryIsUpcomingBeforePredicate predicateBefore = prepareBeforePredicate("04-12-2025 23:59");
-        DeliveryIsUpcomingAfterPredicate predicateAfter = prepareAfterPredicate("12-10-2020 07:30");
+        DeliveryIsUpcomingBeforePredicate predicateBefore = prepareBeforePredicate("04-12-2025 23:59", Status.PENDING);
+        DeliveryIsUpcomingAfterPredicate predicateAfter = prepareAfterPredicate("12-10-2020 07:30", Status.PENDING);
         List<Predicate<Delivery>> predicates = new ArrayList<>();
         predicates.add(predicateAfter);
         predicates.add(predicateBefore);
@@ -100,8 +99,8 @@ public class UpcomingCommandTest {
     @Test
     public void execute_betweenStartAndEndDate_noDeliveriesFound() {
         String expectedMessage = String.format(MESSAGE_DELIVERIES_LISTED_OVERVIEW, 0);
-        DeliveryIsUpcomingBeforePredicate predicateBefore = prepareBeforePredicate("11-12-2030 23:59");
-        DeliveryIsUpcomingAfterPredicate predicateAfter = prepareAfterPredicate("31-12-2030 23:59");
+        DeliveryIsUpcomingBeforePredicate predicateBefore = prepareBeforePredicate("11-12-2030 23:59", Status.PENDING);
+        DeliveryIsUpcomingAfterPredicate predicateAfter = prepareAfterPredicate("31-12-2030 23:59", Status.PENDING);
 
         List<Predicate<Delivery>> predicates = new ArrayList<>();
         predicates.add(predicateAfter);
@@ -114,27 +113,18 @@ public class UpcomingCommandTest {
 
     @Test
     public void equals() {
-        DateTime firstDateTime = new DateTime(VALID_DATE_APPLE);
-        DateTime secondDateTimeBread = new DateTime(VALID_DATE_BREAD);
-        Status statusApple = Status.PENDING;
-        Status statusBread = Status.CANCELLED;
-        List<Predicate<Delivery>> predicates1 = new ArrayList<>();
-        List<Predicate<Delivery>> predicates2 = new ArrayList<>();
-        DeliveryIsUpcomingBeforePredicate firstPredicate = new DeliveryIsUpcomingBeforePredicate(firstDateTime,
-                statusApple);
-        predicates1.add(firstPredicate);
-        DeliveryIsUpcomingBeforePredicate secondPredicate = new DeliveryIsUpcomingBeforePredicate(secondDateTimeBread,
-                statusBread);
-        predicates2.add(secondPredicate);
-
-        UpcomingCommand upcomingFirstDate = new UpcomingCommand(predicates1);
-        UpcomingCommand upcomingSecondDate = new UpcomingCommand(predicates2);
+        DeliveryIsUpcomingBeforePredicate firstPredicate = prepareBeforePredicate(VALID_DATE_APPLE, Status.PENDING);
+        DeliveryIsUpcomingBeforePredicate secondPredicate = prepareBeforePredicate(VALID_DATE_BREAD,
+                Status.CANCELLED);
+        List<Predicate<Delivery>> predicatesForApple = createPredicateList(firstPredicate);
+        List<Predicate<Delivery>> predicatesForBread = createPredicateList(secondPredicate);
+        UpcomingCommand upcomingFirstDate = new UpcomingCommand(predicatesForApple);
+        UpcomingCommand upcomingSecondDate = new UpcomingCommand(predicatesForBread);
 
         // same object -> returns true
         assertTrue(upcomingFirstDate.equals(upcomingFirstDate));
-        List<Predicate<Delivery>> predicates3 = new ArrayList<>();
-        predicates3.add(new DeliveryIsUpcomingBeforePredicate(
-                firstDateTime, statusApple));
+
+        List<Predicate<Delivery>> predicates3 = createPredicateList(firstPredicate);
 
         // same values -> returns true
         UpcomingCommand upcomingFirstDateCopy = new UpcomingCommand(predicates3);
@@ -152,26 +142,10 @@ public class UpcomingCommandTest {
 
     @Test
     public void toStringMethod() {
-        DateTime dateTime = new DateTime(VALID_DATE_APPLE);
-        Status statusApple = Status.PENDING;
-        DeliveryIsUpcomingBeforePredicate predicate = new DeliveryIsUpcomingBeforePredicate(dateTime, statusApple);
-        List<Predicate<Delivery>> predicates = new ArrayList<>();
-        predicates.add(predicate);
+        DeliveryIsUpcomingBeforePredicate predicate = prepareBeforePredicate(VALID_DATE_APPLE, Status.PENDING);
+        List<Predicate<Delivery>> predicates = createPredicateList(predicate);
         UpcomingCommand upcomingCommand = new UpcomingCommand(predicates);
         String expected = UpcomingCommand.class.getCanonicalName() + "{predicates=" + predicates + "}";
         assertEquals(expected, upcomingCommand.toString());
-    }
-    /**
-     * Parses {@code userInput} into a {@code DeliveryIsUpcomingBeforePredicate}.
-     */
-    private DeliveryIsUpcomingBeforePredicate prepareBeforePredicate(String userInput) {
-        return new DeliveryIsUpcomingBeforePredicate(new DateTime(userInput), Status.PENDING);
-    }
-
-    /**
-     * Parses {@code userInput} into a {@code DeliveryIsUpcomingAfterPredicate}.
-     */
-    private DeliveryIsUpcomingAfterPredicate prepareAfterPredicate(String userInput) {
-        return new DeliveryIsUpcomingAfterPredicate(new DateTime(userInput), Status.PENDING);
     }
 }

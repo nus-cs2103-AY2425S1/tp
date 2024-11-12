@@ -18,12 +18,23 @@ public class DateTimeAfterInputDatePredicate implements Predicate<Delivery> {
     public DateTimeAfterInputDatePredicate(DateTime completionDateTime) {
         this.completionDateTime = completionDateTime;
     }
-
+    /**
+     * Determines if predicate is true for a given input delivery by comparing the DateTime values.
+     *
+     * @param delivery Delivery object to test.
+     * @return True if Delivery input has a DateTime value that is later than completionDateTime.
+     */
     @Override
     public boolean test(Delivery delivery) {
         return delivery.hasLaterDateThan(completionDateTime);
     }
-
+    /**
+     * Returns true if DateTime object of both objects are same.
+     *
+     * @param other Object to be compared with.
+     * @return True if object is an instance of DateTimeAfterInputDatePredicate and both
+     *         DateTime objects are equal.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -40,6 +51,9 @@ public class DateTimeAfterInputDatePredicate implements Predicate<Delivery> {
         return completionDateTime.equals(otherDateTimeAfterInputDatePredicate.completionDateTime);
     }
 
+    /**
+     * Represents the String value of predicate.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

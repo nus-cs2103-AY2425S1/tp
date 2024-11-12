@@ -175,10 +175,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String dd-MM-yyyy HH:mm } into a {@code Time}.
+     * Parses a {@code String dd-MM-yyyy HH:mm } into a {@code DateTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code dd-MM-yyyy HH:mm} is invalid.
+     * @param dateTime The String input that represents date and time.
+     * @return DateTime object that represents the date and time of a delivery.
+     * @throws ParseException If the given {@code String dd-MM-yyyy HH:mm} is invalid.
      */
     public static DateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
@@ -190,10 +192,12 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String supplierIndex } into a {@code int}.
+     * Parses a {@code String supplierIndex } into a {@code SupplierIndex}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code supplierName} is invalid.
+     * @param supplierIndex The String value of index of the supplier in the list currently displayed.
+     * @return SupplierIndex object that represents the index of supplier in displayed list.
+     * @throws ParseException If the given {@code String supplierIndex} is invalid.
      */
     public static SupplierIndex parseSupplierIndex(String supplierIndex) throws ParseException {
         requireNonNull(supplierIndex);
@@ -209,7 +213,9 @@ public class ParserUtil {
      * Parses a {@code String quantity } into a {@code Quantity}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code quantity} is invalid.
+     * @param quantity The String value of quantity of product associated with delivery.
+     * @return Quantity object that represents the quantity of product and the associated units.
+     * @throws ParseException If the given {@code quantity} is invalid.
      */
     public static Quantity parseQuantity(String quantity) throws ParseException {
         requireNonNull(quantity);
@@ -224,7 +230,9 @@ public class ParserUtil {
      * Parses a {@code String cost } into a {@code Cost}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code cost} is invalid.
+     * @param cost String value of total cost of delivery.
+     * @return Cost object that represents the total cost of delivery.
+     * @throws ParseException If the given {@code cost} is invalid.
      */
     public static Cost parseCost(String cost) throws ParseException {
         requireNonNull(cost);
@@ -239,11 +247,11 @@ public class ParserUtil {
      * Parses a {@code String status} into a {@code Status}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code status} is invalid.
+     * @throws ParseException If the given {@code status} is invalid.
      */
     public static Status parseStatus(String status) throws ParseException {
         try {
-            return Status.valueOf(status.toUpperCase()); // Convert input to uppercase for case-insensitive match
+            return Status.valueOf(status.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkDeliveryCommand.MESSAGE_USAGE));
