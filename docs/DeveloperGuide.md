@@ -444,46 +444,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Effort**
+## Appendix: Effort
 
-This project has achieved many of the extensions we have set to accomplish on top of the 
-functionalities provided by AB3.
-Here are some of the best features we are proud of achieving and the effort required to implement 
-them:
 
-1. Syntax highlighting 
+
+This project has achieved many of the extensions we have set to accomplish on top of 
+the functionalities provided by AB3.
+
+Here are some of the best features we are proud of achieving and the effort required to 
+implement them:
+
+
+
+1. Syntax highlighting:
    - Difficulty level: 2/5
-   - Challenges faced: Deciding on the conditions that should trigger a syntax 
-     highlight and separating the different cases using different colours. 
-   - Solved by: Using enum polymorphism to specify the different behaviours of the 
-     syntax highlighter for three different cases.
-2. Undo/redo feature:
-    - Difficulty level: 3/5
-    - Challenges faced: Storing the previously executed function and the accurately reverting the 
-      application back to its previous state.
-    - Solved by: Using a stack to store the previous command and state of the application and 
-      implementing the undo/redo functions to revert the application back to its previous state.
-3. Auto-completion:
-    - Difficulty level: 3/5
-    - Challenges faced: Predicting the most likely command the user wants to execute.
-    - Solved by: Store all possible commands and implementing a search function to return the 
-      most likely command the user wants to execute.
-4. Logging feature:
-    - Difficulty level: 4/5
-    - Challenges faced: Formatting the json file to support the logging feature. 
-      Updating the Ui to display the logs scrollable panel. 
-      Fixing timezone issues for the date of the logs.
-    - Solved by: Using a custom data structure and json parser to store and read the logs in a json 
-      file. 
-      Implementing a scrollable panel in the Ui to display the logs. 
-      Standardising the timezones for reading and writing the date of the logs.
-5. Shortcut keys: 
-    - Difficulty level: 5/5
-    - Challenges faced: Implementing the shortcut keys to work across the different components 
-      in JavaFx.
-    - Solved by: Using a custom key listener to listen for the shortcut keys in the parent 
-      component and executing the corresponding functions across different the children components.
+   - Challenges faced: Deciding on the conditions that should trigger a syntax highlight and separating the different cases using different colors.
+   - Solved by: Using enum polymorphism to specify the different behaviors of the syntax 
+     highlighter for three different cases.
 
+2. Find feature:
+   - Difficulty level: 2/5
+   - Challenges faced: Previous predicate tests did not have condition checks that fit our needs 
+     for using various fields as filters.
+   - Solved by: Using polymorphism to extend predicate to implement custom checks to match 
+     contacts that we want.
+
+3. Auto-completion:
+   - Difficulty level: 3/5
+   - Challenges faced: Predicting the most likely command the user wants to execute.
+   - Solved by: Store all possible commands and implementing a search function to return the 
+       most likely command the user wants to execute.
+
+4. Logging feature:
+   - Difficulty level: 4/5
+   - Challenges faced: Formatting the json file to support the logging feature. Updating the Ui to display the logs scrollable panel. Fixing timezone issues for the date of 
+     the logs.
+   - Solved by: Using a custom data structure and json parser to store and read the logs in a 
+     json file. Implementing a scrollable panel in the Ui to display the logs. Standardizing the timezones for reading and writing the date of the logs.
+
+5. Shortcut keys:
+   - Difficulty level: 5/5
+   - Challenges faced: Implementing the shortcut keys to work across the different components in 
+     JavaFx. JavaFX did not allow propagating keystroke events from children to parent, which 
+     meant that changes to the parent cannot be triggered by events like keystrokes and mouse 
+     clicks on the children components.
+   - Solved by: Using a custom key listener to listen for the shortcut keys in the parent component and executing the corresponding functions across different the children components.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
