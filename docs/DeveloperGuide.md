@@ -999,3 +999,4 @@ Expected: Attendance cleared. Success message shown.
 4. The `NAME` attribute for person shall have a maximum length of 50 characters.
 5. Add an `attendance` (or similar) command that opens the Attendance window instead of using a mouse to click the `Attendance` button.
 6. Add more detailed error messages that tell the user specifically what fields are missing instead of simply "required fields are missing"
+7. Modify enroll/unenroll commands to not allow the same student to join multiple tutorials of the same course.

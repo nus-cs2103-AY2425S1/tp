@@ -23,7 +23,7 @@ public class PersonDeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the matriculation number.\n"
-            + "Parameters: MATRICULATION_NUMBER (must be matriculation number of an existing student)\n"
+            + "Parameters: m/MATRICULATION_NUMBER (must be matriculation number of an existing student)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_MATRICULATION_NUMBER + "A1234567M ";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";

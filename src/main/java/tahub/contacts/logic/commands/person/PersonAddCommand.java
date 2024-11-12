@@ -6,7 +6,6 @@ import static tahub.contacts.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_PHONE;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TAG;
 
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
@@ -29,16 +28,13 @@ public class PersonAddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_ADDRESS + "ADDRESS\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MATRICULATION_NUMBER + "A1234567M "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 ";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
