@@ -7,7 +7,6 @@ pageNav: 3
 # EduContacts Developer Guide
 
 <!-- * Table of Contents -->
-## Table of Contents
 
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
