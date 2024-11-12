@@ -4,10 +4,12 @@
 start
 :User types a command input;
 if () then ([CommandHistory exists])
-  :User input command is added to CommandHistory;
+
 else ([else])
-:KonTActs creates an new CommandHistory;
+:KonTActs creates a new CommandHistory;
 endif
+
+:User input command is added to CommandHistory;
 
 
 stop
