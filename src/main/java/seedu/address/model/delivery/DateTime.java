@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents the date and time of a delivery in the application.
  */
-public class DateTime {
+public class DateTime implements Comparable<DateTime> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "DELIVERY_DATE_TIME should be in the format dd-MM-yyyy HH:mm and must not be blank.";
@@ -29,6 +29,19 @@ public class DateTime {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
         this.time = parseTime(time.trim());
+    }
+
+    /**
+     * Compares this dateTime with the specified dateTime for order.
+     * Returns a negative integer, zero, or a positive integer as this dateTime is less than, equal to,
+     * or greater than the specified dateTime.
+     *
+     * @param otherDateTime The dateTime to be compared.
+     * @return a negative integer, zero, or a positive integer as this dateTime is less than, equal to,
+     *      or greater than the other dateTime.
+     */
+    public int compareTo(DateTime otherDateTime) {
+        return time.compareTo(otherDateTime.time);
     }
 
     /**
