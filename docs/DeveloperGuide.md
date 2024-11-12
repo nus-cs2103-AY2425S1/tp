@@ -537,7 +537,8 @@ Execute the following:
       the name, in the following order: anna, Benet, Charlie
 3. Sorting list by role
    1. Prerequisites: <br>
-      List all persons using the `list` command.
+      List all persons using the `list` command. <br>
+   
    2. Test case: `sort role` <br>
       Expected: Feedback box will show message: `Sorted by role` <br>
       Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in
