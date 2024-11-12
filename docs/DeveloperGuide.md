@@ -236,10 +236,11 @@ This section describes some noteworthy details on how certain features are imple
 
 The Force feature is a quality of life addition for WedLinker. It enables users to bypass certain checks in the `Logic` in a controlled manner to make usage easier.
 The force feature is applicable for the following commands:
-* `Tag`: This creates a `Tag` if it does not exist in WedLinker before tagging the `Person`.
-* `Delete Tag`: This unassigns the target `Tag` from all contacts before deleting it.
-* `Assign Wedding`: This creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
-* `Delete Wedding`: This unassigns all `Person` from the `Wedding` before deleting it.
+* `Tag`:Creates a `Tag` if it does not exist in WedLinker before tagging the `Person`.
+* `Delete Tag`: Unassigns the target `Tag` from all contacts before deleting it.
+* `Assign Wedding`: Creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
+* `Delete Wedding`: Unassigns all `Person` from the `Wedding` before deleting it.
+* `Unassign Vendor`: Unassigns all `Task` from the `Vendor` before making the `Vendor` a `Person`.
 
 #### Implementation
 
@@ -1808,6 +1809,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 <h3 class="features">Tag Features</h3>
 
 #### Creating Tag
+
 1. **Creating a tag when `Tag 1` is not in the list of `Tags`.**
 
    1. **Test case**: `create-tag w/Tag1`<br>
@@ -1826,6 +1828,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 <br>
 
 #### Deleting Tag
+
 1. **Deleting a tag when `Tag 1` is in the list of `Tags`.**
 
    1. **Test case**: `delete-tag w/Tag1`<br>
@@ -1840,6 +1843,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 <br>
 
 #### Tagging contact
+
 1. **Tagging the first contact when `Tag 1` is in the list of `Tags` and the first contact is not tagged with `Tag1`.**
 
     1. **Test case**: `tag 1 t/Tag1`<br>
@@ -1872,6 +1876,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 <br>
 
 #### Untagging contact
+
 1. **Untagging the first contact when the first contact is tagged with `Tag1`.**
 
    1. **Test case**: `untag 1 w/Tag1`<br>
