@@ -47,6 +47,7 @@ public class AddDeliveryCommandParser implements Parser<AddDeliveryCommand> {
                 PREFIX_PRODUCT, PREFIX_QUANTITY, PREFIX_COST);
         SupplierIndex supplierIndex = ParserUtil.parseSupplierIndex(argMultimap.getValue(PREFIX_SUPPLIER_INDEX).get());
         Delivery delivery = createDelivery(argMultimap);
+        assert delivery != null;
         DeliveryWrapper deliveryWrapper = new DeliveryWrapper(delivery, supplierIndex);
         return new AddDeliveryCommand(deliveryWrapper);
     }
