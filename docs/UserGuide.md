@@ -2,12 +2,41 @@
 layout: page
 title: User Guide
 ---
+## What is Cher
 
-Cher is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Cher can get your contact management tasks done faster than traditional GUI apps.
+Cher is a streamlined, user-friendly application designed specifically for private school teachers who manage attendance
+and contact information manually. By digitizing these tasks, Cher helps educators save time, improve accuracy, and stay
+organized without the complexity of a full learning management system. With a simple command-based interface, Cher enables quick attendance marking,
+easy access to student and guardian contacts, and efficient data entry that caters to fast typists.
+This targeted tool empowers teachers to focus more on student engagement and less on administrative work,
+making classroom management easier and more effective.
 
 * Table of Contents
 {:toc}
 --------------------------------------------------------------------------------------------------------------------
+
+## Target Users of Cher
+
+Cher is tailored specifically for **private school teachers** who are still managing attendance and contact information manually. This app is designed for educators who handle multiple classes and need a reliable, efficient way to track attendance and manage student contact information. Typical users include:
+
+- **Private school teachers** who wish to digitize their class management processes without the complexities of full-scale learning management systems.
+- **Tutors and small-class instructors** who handle individual or small-group sessions and need a straightforward tool to record student attendance and contact details.
+- **Homeroom or advisory teachers** responsible for regular communication with students and parents, needing quick and organized access to contacts.
+
+Cher addresses the specific needs of these educators by reducing the time and effort spent on manual record-keeping and offering a user-friendly solution that can be easily incorporated into daily routines.
+
+## Value Proposition of Cher
+
+Cher provides a **dedicated digital solution for attendance and contact management**, transforming manual processes into an organized, accessible digital system. Key value points include:
+
+- **Streamlined Attendance Tracking**: Cher enables teachers to mark attendance quickly and retrieve records effortlessly, saving time and improving accuracy over traditional manual tracking.
+- **Centralized Contact Management**: Teachers can store, update, and access contact information in one place, making it easier to reach students or their guardians when necessary.
+- **User-Focused Simplicity**: Designed with teachers in mind, Cher keeps the interface simple and intuitive, allowing educators to accomplish tasks with minimal effort.
+- **Keyboard Efficiency for Fast Data Entry**: The app’s command-based functionality is perfect for teachers who value keyboard efficiency, allowing for quick entries without navigating complex menus.
+- **Dependable Organization**: Cher offers features that help teachers categorize, sort, and filter contacts and attendance records, providing quick and organized access to information for better class management.
+
+By catering to private school teachers who are still using manual processes, Cher provides a **faster, more organized way to manage class attendance and contact details**, helping teachers focus more on their students and less on administrative tasks.
+
 
 ## Quick start
 
@@ -195,7 +224,7 @@ Deletes the specified person from Cher.
 Format: `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 
 #### General Rules
-* At least one of the optional fields must be provided.
+* One of the optional fields must be provided.
 * Used to delete an individual contact
 * For attributes where duplicates may exist (such as names, addresses, and tags), if multiple matches are found, a list of possible matches will be displayed, allowing the user to choose.
 * If no contacts matching the user input are found, an empty list is returned.
@@ -237,8 +266,10 @@ Examples:
 * If multiple persons have the address `123 Clementi Ave 3` are found , a list of these persons is displayed.
 
 #### Tags (`delete t/TAG…`)
-* Case sensitive search
-* Only the pereson with tags that match all the exact tag names provided will be deleted.
+
+* Case-sensitive search
+* Multiple tags can be used for filtering
+* Only the persons with tags that match all the exact tag names provided will be deleted.
 * If multiple persons match the provided tags, Cher will display a list of matches for selection.
 
 Examples:
