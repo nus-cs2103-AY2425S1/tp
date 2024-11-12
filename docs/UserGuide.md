@@ -187,13 +187,13 @@ Health Connect is an application designed to **streamline client management** fo
     - Must be an index number shown in the displayed patient list
 
 * **DATE_TIME**
-    - Follows the format of `d/M/yyyy HHmm`
+    - Follows the format of `d/M/yyyy HHmm` (More formats will be included in future iterations)
     - `02/02/2024 1400` and `2/2/2024 1400` are both valid and accepted date and time formats.
     - Can only contain numbers, '/', and spaces. 
-    - No spaces are allowed within the date and time format. For example, `2/ 0 2/ 20 24 1400` will result in an invalid date and time format error.
+    - No spaces are allowed within the date and time format. For example, `2/ 0 2/ 20 24 14 00` will result in an invalid date and time format error.
 
 * **DATE**
-    - Follows the format of `d/M/yyyy`
+    - Follows the format of `d/M/yyyy` (More formats will be included in future iterations)
     - `02/02/2024` and `2/2/2024` are both valid and accepted date formats.
     - Can only contain numbers and '/'
     - No spaces are allowed within the date format. For example, `2/ 0 2/ 20 24` will result in an invalid date format error.
