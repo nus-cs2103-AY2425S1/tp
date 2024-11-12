@@ -41,7 +41,7 @@ public class DateTime implements Comparable<DateTime> {
      *      or greater than the other dateTime.
      */
     public int compareTo(DateTime otherDateTime) {
-        return time.compareTo(otherDateTime.time);
+        return dateTime.compareTo(otherDateTime.dateTime);
     }
 
     /**
