@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewCommandParser" as ViewCommandParser LOGIC_COLOR
+participant "v:ViewCommand" as ViewCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("view n/John")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("view n/John")
+activate AddressBookParser
+
+create ViewCommandParser
+AddressBookParser -> ViewCommandParser
+activate ViewCommandParser
+
+ViewCommandParser --> AddressBookParser
+deactivate ViewCommandParser
+
+AddressBookParser -> ViewCommandParser : parse("n/John")
+activate ViewCommandParser
+
+create ViewCommand
+ViewCommandParser -> ViewCommand
+activate ViewCommand
+
+ViewCommand --> ViewCommandParser :
+deactivate ViewCommand
+
+ViewCommandParser --> AddressBookParser : v
+deactivate ViewCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewCommandParser -[hidden]-> AddressBookParser
+destroy ViewCommandParser
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+LogicManager -> ViewCommand : execute(m)
+activate ViewCommand
+
+ViewCommand -> Model : updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS)
+activate Model
+
+Model --> ViewCommand
+deactivate Model
+
+create CommandResult
+ViewCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewCommand
+deactivate CommandResult
+
+ViewCommand --> LogicManager : r
+deactivate ViewCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

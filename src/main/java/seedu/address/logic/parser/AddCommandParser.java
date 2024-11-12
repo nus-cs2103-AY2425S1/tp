@@ -2,28 +2,35 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
+import static seedu.address.logic.parser.ParserUtil.parseNote;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.EmergencyContact;
+import seedu.address.model.student.LessonTime;
+import seedu.address.model.student.Level;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
+import seedu.address.model.student.task.TaskList;
 
 /**
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -31,31 +38,44 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMERGENCY_CONTACT,
+                        PREFIX_ADDRESS, PREFIX_SUBJECT, PREFIX_LEVEL, PREFIX_LESSON_TIME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMERGENCY_CONTACT, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        //Parse all arguments
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMERGENCY_CONTACT, PREFIX_ADDRESS,
+                PREFIX_LEVEL);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        EmergencyContact emergencyContact = ParserUtil
+                .parseEmergencyContact(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT)
+                .get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Note note = parseNote("");
+        TaskList taskList = new TaskList();
 
-        Person person = new Person(name, phone, email, address, tagList);
+        //Parse optional arguments
+        Level level = new Level("NONE NONE");
+        if (argMultimap.getValue(PREFIX_LEVEL).isPresent()) {
+            level = ParserUtil.parseLevel(argMultimap.getValue(PREFIX_LEVEL).get());
+        }
+        Set<Subject> subjectList = new HashSet<>();
+        if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
+            if (argMultimap.getValue(PREFIX_LEVEL).isEmpty()) {
+                throw new ParseException(Subject.MESSAGE_LEVEL_NEEDED);
+            }
+            subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
+        }
 
-        return new AddCommand(person);
+        Set<LessonTime> lessonTimes = ParserUtil.parseLessonTimes(argMultimap.getAllValues(PREFIX_LESSON_TIME));
+
+        Student student = new Student(name, phone, emergencyContact, address, note, subjectList,
+                level, taskList, lessonTimes);
+
+        return new AddCommand(student);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

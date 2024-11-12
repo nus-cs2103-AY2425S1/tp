@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.Ui.UiState;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,13 +44,19 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane studentListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane detailsDisplayPlaceholder;
+
+    @FXML
+    private SplitPane mainSplitPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -110,8 +118,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +129,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        mainSplitPane.setDividerPosition(0, 1);
     }
 
     /**
@@ -163,8 +173,29 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    /**
+     * Changes state of the UI based on type of command.
+     */
+    private void handleUiState(CommandResult commandResult) {
+        UiState uiState = commandResult.getUiState();
+        if (uiState == UiState.NO_CHANGE) {
+            return;
+        }
+        if (uiState == UiState.SPECIFIC_DETAILS) {
+            mainSplitPane.setDividerPosition(0, 0.5);
+            DetailsDisplay detailsDisplay = new DetailsDisplay(commandResult.getStudentToView());
+            detailsDisplayPlaceholder.getChildren().clear();
+            detailsDisplayPlaceholder.getChildren().add(detailsDisplay.getRoot());
+            detailsDisplayPlaceholder.setVisible(true);
+        } else {
+            mainSplitPane.setDividerPosition(0, 1);
+            detailsDisplayPlaceholder.setVisible(false);
+        }
+        studentListPanel.updateUiState(uiState);
+    }
+
+    public StudentListPanel getStudentListPanel() {
+        return studentListPanel;
     }
 
     /**
@@ -185,6 +216,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            handleUiState(commandResult);
 
             return commandResult;
         } catch (CommandException | ParseException e) {

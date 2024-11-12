@@ -1,0 +1,40 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+skinparam maxMessageSize 200
+start
+:User enters command;
+if () then ([help command])
+    :Display help window;
+else ([else])
+endif
+if () then ([exit command])
+    :Reset GUI settings;
+    :Hide windows and
+        primary stage;
+    stop
+else ([else])
+endif
+:Determine new UI state
+   based on command;
+if () then ([UI state changed])
+    if () then ([view command])
+        :Show both student list
+          and specific details;
+    else ([else])
+        :Show only student list;
+    endif
+    if () then ([task-related command])
+            :Set display cards to
+              show task details;
+        else ([else])
+            :Set display cards to
+            show student details;
+        endif
+else ([else])
+endif
+
+stop
+
+@enduml

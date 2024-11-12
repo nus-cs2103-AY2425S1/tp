@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":FilteredStudents" as FilteredStudents MODEL_COLOR
+end box
+
+[-> Model : setStudent(studentToTag, studentWithTags)
+activate Model
+Model -> AddressBook : setStudent(studentToTag, studentWithTags)
+activate AddressBook
+AddressBook --> Model
+deactivate AddressBook
+[<-[hidden]- Model
+deactivate Model
+
+[-> Model : updateFilteredStudentnList(PREDICATE_SHOW_ALL_STUDENTS)
+activate Model
+Model -> FilteredStudents : setPredicate(PREDICATE_SHOW_ALL_STUDENTS)
+activate FilteredStudents
+FilteredStudents --> Model
+deactivate FilteredStudents
+[<-- Model
+deactivate Model
+
+@enduml

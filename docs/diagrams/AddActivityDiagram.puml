@@ -1,0 +1,44 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 20
+skinparam ArrowFontSize 18
+|User|
+start
+:Add student command entered;
+
+|System|
+if () then ([invalid command format])
+    |User|
+    :Receive error message;
+
+else ([valid command format])
+    |System|
+    :Parse parameters;
+
+    if () then ([invalid parameter(s)])
+        |User|
+        :Receive error message;
+    else ([all parameters are valid])
+        |System|
+        :Create Student object;
+
+        if () then ([subject(s) and level do not match]))
+            |User|
+            :Receive error message;
+        else ([subject(s) and level match])
+            |System|
+            if () then ([Student already exists]))
+                |User|
+                :Receive error message;
+            else ([Student does not exist])
+                |System|
+                :Add student to EduManage;
+                |User|
+                :Receive success message;
+
+            endif
+        endif
+    endif
+endif
+stop
+@enduml
