@@ -769,7 +769,7 @@ Use case ends.
   * 2c1. System displays error status.
   * 2c2. System prompts admin to check information again.
   
-Use case ends.
+  Use case ends.
 <br><br>
 
 **UC07 - Unenroll student from tutorial**
