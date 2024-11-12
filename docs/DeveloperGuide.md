@@ -558,8 +558,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects an error in the input.
 
-    - 1a1. KonTActs request for the correct input.
-    - 1a2. Users enter a new input.
+    - 1a1. KonTActs requests for the correct input.
+    - 1a2. User enters a new input.
     - Steps 1a1-1a2 are repeated until the input entered is correct.
 
       Use case resumes from step 2.
