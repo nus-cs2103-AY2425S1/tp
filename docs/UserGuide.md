@@ -491,7 +491,7 @@ Advanced users can edit the data file directly to modify the address book data. 
     - **Validity**:
         - Incorrect file formats or invalid data can cause the application to discard all data and start with an empty data file upon the next run.
           - Changing ownWedding field of a person to 0 will only result in wedding having no client and would not corrupt the file.
-          - However, changing the hashcode of the `weddingJobs` to an invalid value will result in a corrupted file and restart the application with an empty data file.
+          - However, changing the hashcode of the `weddingJobs` to an incorrect value will result in a corrupted file and restart the application with an empty data file.
 - **Recommendation**:
     - Edit the data file only if you are confident in updating it correctly.
 
