@@ -10,7 +10,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -74,9 +76,6 @@ public class ParserUtil {
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
         return new Address(trimmedAddress);
     }
 
@@ -96,6 +95,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String birthday} into a {@code Birthday}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code birthday} is invalid.
+     */
+    public static Birthday parseBirthday(String birthday) throws ParseException {
+        requireNonNull(birthday);
+        String trimmedBirthday = birthday.trim();
+        if (!Birthday.isValidBirthday(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthday(trimmedBirthday);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -107,6 +121,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
+        assert !trimmedTag.isEmpty();
         return new Tag(trimmedTag);
     }
 
@@ -116,9 +131,32 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
+        final Set<String> netWorthTags = Set.of("highnetworth", "midnetworth", "lownetworth");
+        boolean hasNetWorthTag = false;
+
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            Tag tag = parseTag(tagName);
+            if (netWorthTags.contains(tag.tagName.toLowerCase())) {
+                if (hasNetWorthTag) {
+                    throw new ParseException(Tag.NETWORTH_CONSTRAINTS);
+                }
+                hasNetWorthTag = true;
+            }
+            tagSet.add(tag);
         }
         return tagSet;
+    }
+    /**
+     * Parses {@Code int frequency} into a {@code Frequency}.
+     *
+     * @throws ParseException if the given {@code frequency} is invalid.
+     */
+    public static Frequency parseFrequency(String frequency) throws ParseException {
+        requireNonNull(frequency);
+        String trimmedFrequency = frequency.trim();
+        if (!Frequency.isValidFrequency(trimmedFrequency)) {
+            throw new ParseException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+        return new Frequency(trimmedFrequency);
     }
 }

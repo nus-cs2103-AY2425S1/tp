@@ -1,0 +1,19 @@
+#yesButton, #noButton, #messageLabel {
+    -fx-text-fill: white;
+}
+
+#yesButton, #noButton {
+    -fx-background-color: dimgray;
+}
+
+#yesButton:hover, #noButton:hover {
+    -fx-background-color: gray;
+}
+
+#yesButton:armed, #noButton:armed {
+    -fx-background-color: darkgray;
+}
+
+VBox {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}

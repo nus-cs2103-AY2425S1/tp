@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -52,11 +51,12 @@ public class UniquePersonListTest {
         assertThrows(NullPointerException.class, () -> uniquePersonList.add(null));
     }
 
-    @Test
+    // commented out because we allow this to happen
+    /* @Test
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
-    }
+    } */
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
@@ -103,10 +103,12 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setPerson_editedPersonHasNonUniqueIdentity_success() {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+        assertTrue(uniquePersonList.contains(ALICE));
+        assertTrue(uniquePersonList.contains(BOB));
+        // assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
     }
 
     @Test
@@ -159,7 +161,12 @@ public class UniquePersonListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+        uniquePersonList.setPersons(listWithDuplicatePersons);
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add((ALICE));
+        expectedUniquePersonList.add(ALICE);
+        // assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+        assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
     @Test

@@ -59,6 +59,15 @@ public class Name {
         return fullName.equals(otherName.fullName);
     }
 
+    /**
+     * Checks if two persons have the same name, case-insensitive
+     * @param other
+     * @return
+     */
+    public boolean isSameName(Name other) {
+        return this.fullName.equalsIgnoreCase(other.fullName);
+    }
+
     @Override
     public int hashCode() {
         return fullName.hashCode();

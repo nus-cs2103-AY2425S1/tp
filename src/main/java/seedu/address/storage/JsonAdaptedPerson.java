@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,10 +12,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Frequency;
+import seedu.address.model.person.LastPaidDate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ProfilePicFilePath;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,7 +33,12 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String birthday;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String hasPaid;
+    private final String lastPaidDate;
+    private final String frequency;
+    private final String profilePicFilePath;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,14 +46,23 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("birthday") String birthday, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("hasPaid") String hasPaid, @JsonProperty("lastPaidDate") String lastPaidDate,
+            @JsonProperty("frequency") String frequency,
+            @JsonProperty("profilePicFilePath") String profilePicFilePath) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.birthday = birthday;
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.hasPaid = hasPaid;
+        this.lastPaidDate = lastPaidDate;
+        this.frequency = frequency;
+        this.profilePicFilePath = profilePicFilePath;
     }
 
     /**
@@ -54,9 +73,14 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        birthday = source.getBirthday().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        hasPaid = source.getHasPaid().toString();
+        lastPaidDate = source.getLastPaidDate().value.toString();
+        frequency = source.getFrequency().value;
+        profilePicFilePath = source.getProfilePicFilePath().toString();
     }
 
     /**
@@ -97,13 +121,51 @@ class JsonAdaptedPerson {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
         final Address modelAddress = new Address(address);
 
+        if (birthday == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Birthday.class.getSimpleName()));
+        }
+        if (!Birthday.isValidBirthday(birthday)) {
+            throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        final Birthday modelBirthday = new Birthday(birthday);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (hasPaid == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "hasPaid"));
+        }
+
+        Boolean modelHasPaid = hasPaid.equals("true");
+
+        if (lastPaidDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LastPaidDate.class.getSimpleName()));
+        }
+        if (!LastPaidDate.isValidDate(lastPaidDate)) {
+            throw new IllegalValueException(LastPaidDate.MESSAGE_CONSTRAINTS);
+        }
+        final LastPaidDate modelLastPaidDate = new LastPaidDate(lastPaidDate);
+
+        if (frequency == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Frequency.class.getSimpleName()));
+        }
+        if (!Frequency.isValidFrequency(frequency)) {
+            throw new IllegalValueException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+        final Frequency modelFrequency = new Frequency(frequency);
+
+        if (profilePicFilePath == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ProfilePicFilePath.class.getSimpleName()));
+        }
+        final ProfilePicFilePath modelProfilePicFilePath = new ProfilePicFilePath(Paths.get(profilePicFilePath));
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday,
+                modelTags, modelHasPaid, modelLastPaidDate, modelFrequency, modelProfilePicFilePath);
     }
 
 }

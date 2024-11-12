@@ -3,29 +3,42 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Controller for a help page
+ * Controller for a help page.
+ * Handles UI-related operations and delegates content and logic processing.
  */
 public class HelpWindow extends UiPart<Stage> {
-
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Button copyButton;
+    private TextFlow helpContentFlow;
 
     @FXML
-    private Label helpMessage;
+    private ListView<String> tocListView;
+
+    @FXML
+    private TableView<String[]> commandSummaryTable;
+
+    @FXML
+    private TableColumn<String[], String> actionColumn;
+
+    @FXML
+    private TableColumn<String[], String> formatColumn;
+
+    @FXML
+    private TableColumn<String[], String> exampleColumn;
+
+    private HelpContentManager contentManager;
+    private HelpLogicManager logicManager;
 
     /**
      * Creates a new HelpWindow.
@@ -34,16 +47,24 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        this.contentManager = new HelpContentManager();
+        this.logicManager = new HelpLogicManager(contentManager);
+
+        root.setWidth(800);
+        root.setHeight(600);
+
+        initializeUiComponents();
+
+        assert contentManager != null : "HelpContentManager should be initialized";
+        assert logicManager != null : "HelpLogicManager should be initialized";
+        assert tocListView != null : "Table of Contents ListView should be initialized";
+        assert commandSummaryTable != null : "Command Summary Table should be initialized";
+        assert helpContentFlow != null : "HelpContentFlow should be initialized";
     }
 
-    /**
-     * Creates a new HelpWindow.
-     */
     public HelpWindow() {
         this(new Stage());
     }
-
     /**
      * Shows the help window.
      * @throws IllegalStateException
@@ -89,14 +110,55 @@ public class HelpWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
+    /** Initializes the UI components such as the Table of Contents and command summary. */
+    private void initializeUiComponents() {
+        setupTocListView();
+        setupCommandSummary();
+        updateTextFlow(contentManager.getContent("Introduction"));
+        assert tocListView.getItems() != null : "TOC ListView items should not be null";
+
+        tocListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                logicManager.handleTocSelection(newValue, this);
+            }
+        });
+    }
+
     /**
-     * Copies the URL to the user guide to the clipboard.
+     * Updates the TextFlow with the given help content.
+     * @param content The content to display in the TextFlow.
      */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
+    public void updateTextFlow(String content) {
+        assert content != null : "Content to display in TextFlow should not be null";
+        helpContentFlow.getChildren().clear();
+        logicManager.formatTextFlow(content, helpContentFlow);
+    }
+
+    public void setupTocListView() {
+        tocListView.setItems(contentManager.getTableOfContents());
+        assert tocListView.getItems() != null && !tocListView.getItems().isEmpty() : "TOC should have items";
+    }
+
+    /** Sets up the command summary TableView with its columns. */
+    public void setupCommandSummary() {
+        contentManager.initializeCommandSummaryData(commandSummaryTable, actionColumn, formatColumn, exampleColumn);
+        assert commandSummaryTable.getItems() != null : "Command summary data should be initialized";
+        commandSummaryTable.setVisible(false);
+    }
+
+    /** Displays the command summary in the TableView. */
+    public void displayCommandSummary() {
+        helpContentFlow.getChildren().clear();
+        commandSummaryTable.setVisible(true);
+    }
+
+    /**
+     * Displays the help content for the specified key.
+     * @param key The key representing the help topic.
+     */
+    public void displayHelpContent(String key) {
+        assert key != null && !key.isEmpty() : "Help content key should not be null or empty";
+        commandSummaryTable.setVisible(false);
+        updateTextFlow(contentManager.getContent(key));
     }
 }

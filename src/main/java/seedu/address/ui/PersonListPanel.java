@@ -16,6 +16,7 @@ import seedu.address.model.person.Person;
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final boolean isVisualsEnabled;
 
     @FXML
     private ListView<Person> personListView;
@@ -23,16 +24,25 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, MainWindow mainWindow, boolean isVisualsEnabled) {
         super(FXML);
+        this.isVisualsEnabled = isVisualsEnabled;
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.setCellFactory(listView -> new PersonListViewCell(mainWindow, isVisualsEnabled));
+
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
+        private final MainWindow mainWindow;
+        private final boolean isVisualsEnabled;
+
+        public PersonListViewCell(MainWindow mainWindow, boolean isVisualsEnabled) {
+            this.mainWindow = mainWindow;
+            this.isVisualsEnabled = isVisualsEnabled;
+        }
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
@@ -41,7 +51,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new PersonCard(person, getIndex() + 1, mainWindow, isVisualsEnabled).getRoot());
             }
         }
     }

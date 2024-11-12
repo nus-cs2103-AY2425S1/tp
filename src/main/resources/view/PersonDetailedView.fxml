@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      alignment="CENTER" spacing="15" styleClass="root" maxHeight="300">
+
+    <stylesheets>
+        <URL value="@PersonView.css" />
+    </stylesheets>
+
+    <ImageView fx:id="profileImage" fitHeight="100" fitWidth="100" preserveRatio="true" styleClass="image-view" />
+
+    <Label fx:id="name" text="\$first" styleClass="label-name" />
+    <Label fx:id="phone" text="\$phone" styleClass="label-phone" />
+    <Label fx:id="email" text="\$email" styleClass="label-email" />
+
+    <VBox alignment="CENTER" spacing="3" style="-fx-padding: 10 0 10 0;">
+        <Label fx:id="birthday" text="\$birthday" styleClass="label-small" />
+        <Label fx:id="age" text="\$age" styleClass="label-small" />
+        <Label fx:id="address" text="\$address" styleClass="label-small" />
+        <Label fx:id="hasPaid" text="\$hasPaid" styleClass="label-small" />
+        <Label fx:id="frequency" text="\$frequency" styleClass="label-small" />
+    </VBox>
+
+    <FlowPane fx:id="tags" hgap="10" vgap="5" alignment="CENTER"/>
+
+    <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10 0 0 0;">
+        <Button fx:id="templateButton1" text="Template 1" styleClass="button-template"/>
+        <Button fx:id="templateButton2" text="Template 2" styleClass="button-template"/>
+        <Button fx:id="templateButton3" text="Template 3" styleClass="button-template"/>
+    </HBox>
+
+</VBox>
+
+
+
+

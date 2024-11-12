@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.ConfirmationHandler;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -38,11 +39,27 @@ public class AddCommandIntegrationTest {
                 expectedModel);
     }
 
+    // fix this
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void executeDuplicatePerson_userConfirm_success() {
+        ConfirmationHandler mockHandler = person -> true;
+
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addPerson(personInList);
+        assertCommandSuccess(new AddCommand(personInList, mockHandler), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(personInList)),
+                expectedModel);
+    }
+
+    // fix this also
+    @Test
+    public void executeDuplicatePerson_userCancel_throwsCommandException() {
+        ConfirmationHandler mockHandler = person -> false;
+
+        Person personInList = model.getAddressBook().getPersonList().get(0);
+        assertCommandFailure(new AddCommand(personInList, mockHandler), model,
+                Messages.MESSAGE_USER_CANCEL);
     }
 
 }
