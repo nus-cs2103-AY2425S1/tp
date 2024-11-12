@@ -57,7 +57,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -873,7 +873,7 @@ Given below are instructions to test the app manually.
       Expected: The contents of `SaveFile.json` is loaded into DorManagerPro.
 
 2. Importing a json file with invalid data
-   1. Prequisites: There is a json file with invalid data in the device. In this case, it is assumed the file path to the json file is `./data/SaveFile.json`.
+   1. Prerequisites: There is a json file with invalid data in the device. In this case, it is assumed the file path to the json file is `./data/SaveFile.json`.
    2. Test case: `import fp/./data/SaveFile.json`
    Expected: No information is imported into DorManagerPro. Error details shown in the status message.
 
