@@ -30,7 +30,7 @@ import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.EmployeeId;
-import seedu.address.model.employee.Name;
+import seedu.address.model.employee.EmployeeName;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
@@ -118,7 +118,7 @@ public class EditCommand extends Command {
         assert employeeToEdit != null;
 
         EmployeeId employeeId = employeeToEdit.getEmployeeId();
-        Name updatedName = editEmployeeDescriptor.getName().orElse(employeeToEdit.getName());
+        EmployeeName updatedName = editEmployeeDescriptor.getName().orElse(employeeToEdit.getName());
         Phone updatedPhone = editEmployeeDescriptor.getPhone().orElse(employeeToEdit.getPhone());
         Email updatedEmail = editEmployeeDescriptor.getEmail().orElse(employeeToEdit.getEmail());
         Address updatedAddress = editEmployeeDescriptor.getAddress().orElse(employeeToEdit.getAddress());
@@ -158,7 +158,7 @@ public class EditCommand extends Command {
      * replace the corresponding field value of the employee.
      */
     public static class EditEmployeeDescriptor {
-        private Name name;
+        private EmployeeName name;
         private Phone phone;
         private Email email;
         private Address address;
@@ -188,11 +188,11 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, skills);
         }
 
-        public void setName(Name name) {
+        public void setName(EmployeeName name) {
             this.name = name;
         }
 
-        public Optional<Name> getName() {
+        public Optional<EmployeeName> getName() {
             return Optional.ofNullable(name);
         }
 

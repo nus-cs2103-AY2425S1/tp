@@ -43,7 +43,7 @@ class JsonAdaptedProject {
      * Converts a given {@code Project} into this class for Jackson use.
      */
     public JsonAdaptedProject(Project source) {
-        name = source.getName().fullName;
+        name = source.getName().value;
         id = source.getId().value;
         skills.addAll(source.getSkills().stream()
                 .map(JsonAdaptedSkill::new)

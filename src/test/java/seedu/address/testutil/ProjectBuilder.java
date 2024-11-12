@@ -40,7 +40,7 @@ public class ProjectBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Project} that we are building.
+     * Sets the {@code ProjectName} of the {@code Project} that we are building.
      */
     public ProjectBuilder withName(String name) {
         this.projectName = new ProjectName(name);
@@ -48,7 +48,7 @@ public class ProjectBuilder {
     }
 
     /**
-     * Sets the {@code Id} of the {@code Project} that we are building.
+     * Sets the {@code ProjectId} of the {@code Project} that we are building.
      */
     public ProjectBuilder withId(String id) {
         this.projectId = new ProjectId(id);

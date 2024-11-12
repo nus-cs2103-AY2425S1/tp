@@ -46,7 +46,7 @@ public class ProjectCard extends UiPart<Region> {
         super(FXML);
         this.project = project;
         this.id.setText(displayedIndex + ". ");
-        name.setText(project.getName().fullName);
+        name.setText(project.getName().value);
         projectId.setText("id: " + project.getId().value);
         project.getSkills().stream()
                 .sorted(Comparator.comparing(skill -> skill.skill))

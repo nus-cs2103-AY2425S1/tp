@@ -15,7 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.EmployeeId;
-import seedu.address.model.employee.Name;
+import seedu.address.model.employee.EmployeeName;
 import seedu.address.model.employee.Phone;
 
 public class JsonAdaptedEmployeeTest {
@@ -64,7 +64,7 @@ public class JsonAdaptedEmployeeTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedEmployee employee = new JsonAdaptedEmployee(VALID_EMPLOYEE_ID, INVALID_NAME,
                 VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_SKILLS);
-        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        String expectedMessage = EmployeeName.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, employee::toModelType);
     }
 
@@ -72,7 +72,7 @@ public class JsonAdaptedEmployeeTest {
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedEmployee employee = new JsonAdaptedEmployee(VALID_EMPLOYEE_ID, null,
                 VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_SKILLS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, EmployeeName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, employee::toModelType);
     }
 

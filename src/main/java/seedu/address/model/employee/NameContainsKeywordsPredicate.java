@@ -9,7 +9,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Employee}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Employee}'s {@code EmployeeName} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Employee> {
     private final List<String> keywords;
@@ -30,7 +30,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Employee> {
         assert employee != null;
 
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(employee.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(employee.getName().value, keyword));
     }
 
     @Override
