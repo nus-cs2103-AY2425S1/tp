@@ -12,6 +12,7 @@ if () then ([at least 1 contact has GradYear earlier than current year])
     :Delete all contacts with GradYear earlier than current year from the address book;
 else ([else])
     :Display error message;
+    :Push to undo stack;
 
 endif
 stop
