@@ -26,5 +26,6 @@ Person *--> "1..*" Class
 Student -up-|> Person
 Student *--> NextOfKinName
 Student *--> NextOfKinPhone
+Student *--> Attendance
 
 @enduml
