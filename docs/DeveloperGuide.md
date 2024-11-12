@@ -333,7 +333,7 @@ Use case ends.
 - **1b.** Name is blank, contains invalid symbol or beyond 70 characters
     - **1b1.** Error message displayed in result display.
         - Use case ends.
-- **1c.** Phone is not 8 digits, and does not begin with '6', '8' or '9'
+- **1c.** Phone is not 8 digits, or does not begin with '6', '8' or '9'
     - **1c1.** Error message displayed in result display.
         - Use case ends.
 - **1d.** Email is blank, or does not match email regex.
