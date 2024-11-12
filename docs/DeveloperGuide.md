@@ -732,20 +732,21 @@ Similar to [<ins>UC14](#use-case-uc14search-for-contacts-by-name) except searchi
 * 2a. The wedding list is empty.
   Use case ends.
 
-* 3a. User specified to force the assigning of a contact to a wedding
-  * 3a1. System displays the specified Wedding, in the Wedding list.
+* 3a. The contact is already assigned to the specified wedding.
+    * 3a1. System displays an error message.
+
+      Use case resumes at step 2.
+
+* 3b. User specified to force the assigning of a contact to a wedding
+  * 3b1. System displays the specified Wedding, in the Wedding list.
 
     Use case resumes at step 4.
 
-* 3b. A specified wedding does not exist.
-    * 3b1. System displays an error message.
-
-      Use case resumes at step 2.
-
-* 3c. The contact is already assigned to the specified wedding.
+* 3c. A specified wedding does not exist.
     * 3c1. System displays an error message.
 
       Use case resumes at step 2.
+
 
 ### **Use case: UC23 — Unassign a Contact from one or more Weddings**
 
