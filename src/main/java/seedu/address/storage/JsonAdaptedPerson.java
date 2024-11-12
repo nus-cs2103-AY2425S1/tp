@@ -1,8 +1,10 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,11 +12,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.game.Game;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Blank;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.preferredtime.PreferredTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,20 +34,31 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedGame> games = new ArrayList<>();
+    private final List<JsonAdaptedPreferredTime> preferredTimes = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("games") List<JsonAdaptedGame> games,
+                             @JsonProperty("preferred times") List<JsonAdaptedPreferredTime> preferredTimes) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (games != null) {
+            this.games.addAll(games);
+        }
+        if (preferredTimes != null) {
+            this.preferredTimes.addAll(preferredTimes);
         }
     }
 
@@ -57,6 +73,12 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        games.addAll(source.getGames().values().stream()
+                .map(JsonAdaptedGame::new)
+                .collect(Collectors.toList()));
+        preferredTimes.addAll(source.getPreferredTimes().stream()
+                .map(JsonAdaptedPreferredTime::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -69,6 +91,14 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
+        final Map<String, Game> personGames = new HashMap<>();
+        for (JsonAdaptedGame game : games) {
+            personGames.put(game.getGameName(), game.toModelType());
+        }
+        final List<PreferredTime> personPreferredTimes = new ArrayList<>();
+        for (JsonAdaptedPreferredTime preferredTime : preferredTimes) {
+            personPreferredTimes.add(preferredTime.toModelType());
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -78,32 +108,42 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        final Phone modelPhone;
+        if (phone.isEmpty()) {
+            modelPhone = new Phone(new Blank());
+        } else {
+            if (!Phone.isValidPhone(phone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
+            modelPhone = new Phone(phone);
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        final Email modelEmail;
+        if (email.isEmpty()) {
+            modelEmail = new Email(new Blank());
+        } else {
+            if (!Email.isValidEmail(email)) {
+                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            }
+            modelEmail = new Email(email);
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+
+        final Address modelAddress;
+        if (address.isEmpty()) {
+            modelAddress = new Address(new Blank());
+        } else {
+            if (!Address.isValidAddress(address)) {
+                throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            }
+            modelAddress = new Address(address);
         }
-        final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Map<String, Game> modelGames = new HashMap<>(personGames);
+        final Set<PreferredTime> modelPreferredTimes = new HashSet<>(personPreferredTimes);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGames, modelPreferredTimes);
     }
 
 }

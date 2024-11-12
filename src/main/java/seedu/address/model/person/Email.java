@@ -45,6 +45,15 @@ public class Email {
     }
 
     /**
+     * Constructs an {@code Email}.
+     *
+     * @param blank A blank email.
+     */
+    public Email(Blank blank) {
+        value = "";
+    }
+
+    /**
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {

@@ -85,7 +85,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all of the methods failing
      */
     private class ModelStub implements Model {
         @Override
@@ -124,6 +124,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void insertPerson(Person person, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -154,7 +159,42 @@ public class AddCommandTest {
         }
 
         @Override
+        public Predicate<Person> getCurrentPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getAddressBookIndex(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCommandToLog(Command command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Command getPreviousCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addInputToLog(String input) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getPreviousInput() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void emptyCommandLog() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -196,9 +236,23 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addCommandToLog(Command command) {
+
+        }
+
+        @Override
+        public Predicate<Person> getCurrentPredicate() {
+            return null;
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
-    }
 
+        @Override
+        public void addInputToLog(String input) {
+
+        }
+    }
 }

@@ -3,14 +3,17 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PREFERREDTIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -21,11 +24,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.game.Game;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.preferredtime.PreferredTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,7 +48,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_GAME + "GAME]..."
+            + "[" + PREFIX_PREFERREDTIME + "PREFERRED TIME]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -51,9 +58,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    private static final boolean IS_UNDOABLE = true;
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private Person personToEdit;
+    private Person editedPerson;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -76,16 +86,27 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        personToEdit = lastShownList.get(index.getZeroBased());
+        editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    @Override
+    public void undo(Model model) {
+        requireNonNull(model);
+
+        model.setPerson(editedPerson, personToEdit);
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 
     /**
@@ -100,8 +121,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Map<String, Game> updatedGames = editPersonDescriptor.getGames().orElse(personToEdit.getGames());
+        Set<PreferredTime> updatedPreferredTimes =
+                editPersonDescriptor.getPreferredTimes().orElse(personToEdit.getPreferredTimes());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedGames, updatedPreferredTimes);
     }
 
     @Override
@@ -138,6 +163,9 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Map<String, Game> games;
+        private Set<PreferredTime> preferredTimes;
+
 
         public EditPersonDescriptor() {}
 
@@ -151,13 +179,15 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setGames(toCopy.games);
+            setPreferredTimes(toCopy.preferredTimes);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, games, preferredTimes);
         }
 
         public void setName(Name name) {
@@ -209,6 +239,42 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code games} to this object's {@code games}.
+         * A defensive copy of {@code games} is used internally.
+         */
+        public void setGames(Map<String, Game> games) {
+            this.games = (games != null) ? new HashMap<>(games) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code games} is null.
+         */
+        public Optional<Map<String, Game>> getGames() {
+            return (games != null) ? Optional.of(Collections.unmodifiableMap(games)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code preferredTimes} to this object's {@code preferredTimes}.
+         * A defensive copy of {@code preferredTimes} is used internally.
+         */
+        public void setPreferredTimes(Set<PreferredTime> preferredTimes) {
+            this.preferredTimes = (preferredTimes != null) ? new HashSet<>(preferredTimes) : null;
+        }
+
+        /**
+         * Returns an unmodifiable preferredTime set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code preferredTimes} is null.
+         */
+        public Optional<Set<PreferredTime>> getPreferredTimes() {
+            return (preferredTimes != null)
+                    ? Optional.of(Collections.unmodifiableSet(preferredTimes))
+                    : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -225,7 +291,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(preferredTimes, otherEditPersonDescriptor.preferredTimes);
         }
 
         @Override
@@ -236,6 +303,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("preferred times", preferredTimes)
                     .toString();
         }
     }

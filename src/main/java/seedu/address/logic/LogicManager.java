@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -49,13 +50,41 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        if (command.canBeUndone()) {
+            model.addInputToLog(commandText);
+            model.addCommandToLog(command);
+        }
 
-        try {
-            storage.saveAddressBook(model.getAddressBook());
-        } catch (AccessDeniedException e) {
-            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
-        } catch (IOException ioe) {
-            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        if (commandResult.isLoad()) {
+            try {
+                Optional<ReadOnlyAddressBook> loadedAddressBookOpt = storage.loadAddressBookManually();
+                if (loadedAddressBookOpt.isEmpty()) {
+                    throw new CommandException("No saved address book file found. Please save before trying to load!");
+                }
+
+                ReadOnlyAddressBook loadedAddressBook = loadedAddressBookOpt.get();
+                model.setAddressBook(loadedAddressBook);
+                storage.saveAddressBook(loadedAddressBook);
+                model.emptyCommandLog();
+            } catch (CommandException e) {
+                throw e; // Re-throw to maintain custom message if no file is found
+            } catch (Exception e) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, e.getMessage()), e);
+            }
+        } else if (commandResult.isSave()) {
+            try {
+                storage.saveAddressBookManually(model.getAddressBook());
+            } catch (IOException ioe) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+            }
+        } else {
+            try {
+                storage.saveAddressBook(model.getAddressBook());
+            } catch (AccessDeniedException e) {
+                throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+            } catch (IOException ioe) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+            }
         }
 
         return commandResult;

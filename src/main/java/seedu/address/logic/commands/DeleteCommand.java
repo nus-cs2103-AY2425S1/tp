@@ -24,8 +24,12 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    private static final boolean IS_UNDOABLE = true;
 
     private final Index targetIndex;
+
+    private Person deletedPerson;
+    private Index deletedPersonIndex;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -41,8 +45,24 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        deletedPersonIndex = Index.fromZeroBased(
+                model.getAddressBookIndex(targetIndex.getZeroBased()));
         model.deletePerson(personToDelete);
+        deletedPerson = personToDelete;
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    @Override
+    public void undo(Model model) {
+        requireNonNull(model);
+        assert !model.hasPerson(deletedPerson) : "Deleted person should not be in AddressBook";
+
+        model.insertPerson(deletedPerson, deletedPersonIndex.getZeroBased());
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 
     @Override

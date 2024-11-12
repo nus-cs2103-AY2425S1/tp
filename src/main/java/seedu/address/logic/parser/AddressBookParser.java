@@ -9,14 +9,24 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddGameCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteGameCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditGameCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FavouriteGameCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindGameCommand;
+import seedu.address.logic.commands.FindTimeCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoadCommand;
+import seedu.address.logic.commands.SaveCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UnfavouriteGameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -68,6 +78,12 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case FindTimeCommand.COMMAND_WORD:
+            return new FindTimeCommandParser().parse(arguments);
+
+        case FindGameCommand.COMMAND_WORD:
+            return new FindGameCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
@@ -77,6 +93,29 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case EditGameCommand.COMMAND_WORD:
+            return new EditGameCommandParser().parse(arguments);
+
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommand();
+
+        case LoadCommand.COMMAND_WORD:
+            return new LoadCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case FavouriteGameCommand.COMMAND_WORD:
+            return new FavouriteGameCommandParser().parse(arguments);
+
+        case UnfavouriteGameCommand.COMMAND_WORD:
+            return new UnfavouriteGameCommandParser().parse(arguments);
+
+        case AddGameCommand.COMMAND_WORD:
+            return new AddGameCommandParser().parse(arguments);
+
+        case DeleteGameCommand.COMMAND_WORD:
+            return new DeleteGameCommandParser().parse(arguments);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

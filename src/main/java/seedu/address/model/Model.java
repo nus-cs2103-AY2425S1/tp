@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Person;
 
 /**
@@ -57,6 +58,7 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -70,6 +72,13 @@ public interface Model {
     void addPerson(Person person);
 
     /**
+     * Inserts the given person into the given index.
+     * {@code person} must not already exist in the address book.
+     * {@code index} must be within range of the address book.
+     */
+    void insertPerson(Person person, int index);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -79,9 +88,42 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns the current predicate applied to the filtered person list */
+    Predicate<Person> getCurrentPredicate();
+
+    /** Returns the index of the Person in AddressBook given the index of the Person in the filtered person list */
+    int getAddressBookIndex(int index);
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Adds the command to {@code CommandLog}.
+     * @param command must be a command that can be undone.
+     */
+    void addCommandToLog(Command command);
+
+    /**
+     * Returns and removes most recent {@code Command} in {@code CommandLog}.
+     */
+    Command getPreviousCommand();
+
+    /**
+     * Adds the user input string to {@code CommandLog}.
+     */
+    void addInputToLog(String input);
+
+    /**
+     * Returns and removes most recent user input string in {@code CommandLog}.
+     * @return
+     */
+    String getPreviousInput();
+
+    /**
+     * Flushes the {@code CommandLog}.
+     */
+    void emptyCommandLog();
 }

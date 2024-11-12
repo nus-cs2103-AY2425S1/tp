@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -49,17 +51,19 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+    @FXML
+    private ImageView pictureView;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
-
+        Image image = new Image(getClass().getResource("/images/Untitled.png").toExternalForm());
+        pictureView.setImage(image);
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
@@ -121,6 +125,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+
     }
 
     /**
@@ -140,7 +146,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
+        // Fix undefined behaviour while help window is closed
+        if (helpWindow.getRoot().isIconified()) {
+            helpWindow.getRoot().setIconified(false);
+            helpWindow.getRoot().toFront();
+        }
         if (!helpWindow.isShowing()) {
+            helpWindow = new HelpWindow();
             helpWindow.show();
         } else {
             helpWindow.focus();
@@ -181,7 +193,9 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
-
+            if (commandResult.isLoad()) {
+                refreshPersonListPanel();
+            }
             if (commandResult.isExit()) {
                 handleExit();
             }
@@ -192,5 +206,15 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+    private void refreshPersonListPanel() {
+        // Clear existing components from the placeholder
+        personListPanelPlaceholder.getChildren().clear();
+
+        // Recreate the PersonListPanel with the updated list
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+
+        // Add the new PersonListPanel to the placeholder
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 }

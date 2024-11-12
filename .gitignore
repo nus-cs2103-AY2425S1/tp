@@ -21,3 +21,6 @@ src/test/data/sandbox/
 # MacOS custom attributes files created by Finder
 .DS_Store
 docs/_site/
+docs/_markbind/logs/
+src/main/resources/view/reference colours.css
+src/main/resources/view/DarkTheme1.css

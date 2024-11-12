@@ -1,19 +1,100 @@
-#copyButton, #helpMessage {
-    -fx-text-fill: white;
+
+*{
+    -fx-font-family: Comfortaa;
+}
+/* Make the label and button text stand out */
+#helpMessage, #copyButton {
+    -fx-text-fill: #2b6517;
+    -fx-background-color: transparent;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
 }
 
+/* Modern button style */
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: #57a83f; /* Modern blue accent color */
+    -fx-background-radius: 10; /* Rounded corners */
+    -fx-text-fill: white; /* White text */
+    -fx-font-weight: bold; /* Bolder text for buttons */
+    -fx-padding: 8 15; /* Increased padding for larger button */
+    -fx-cursor: hand; /* Pointer cursor on hover */
 }
 
 #copyButton:hover {
-    -fx-background-color: gray;
+    -fx-background-color: #66bb6a; /* Darker blue on hover */
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: #2e7d32; /* Even darker when clicked */
+}
+
+/* Background color for the message container */
+#helpMessageContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-padding: 20 0 10 0; /* More padding for cleaner layout */
+}
+
+/* Modern table look */
+#helpTable {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-table-cell-border-color: transparent; /* Remove grid lines */
+}
+
+/* Table column header style */
+.table-view .column-header-background {
+    -fx-background-color: #f2f2f2; /* Light gray for headers */
+    -fx-font-weight: bold; /* Bold header text */
+    -fx-border-color: #dddddd; /* Light border between headers */
+}
+
+/* Hover effect for table rows */
+.table-view .cell:hover {
+    -fx-background-color: gray; /* Light hover effect on rows */
+}
+
+/* Focused row styling */
+.table-view .focused .cell {
+    -fx-background-color: #e0f7fa; /* Highlighted row when focused */
+}
+
+.table-view .table-row-cell {
+    -fx-font-weight: bold;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 1 0; /* Only bottom border */
+    -fx-pref-height: 30;
+}
+
+.table-view .scroll-bar:vertical,
+.table-view .scroll-bar:horizontal {
+    -fx-opacity: 0; /* Makes the scrollbar invisible */
+    -fx-pref-width: 0; /* Sets the width to 0, effectively hiding it */
+}
+
+.table-view .column2 .table-cell {
+    -fx-alignment: CENTER;
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #57a83f;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#e1ffdb, 5%);
+}
+
+#helpTable {
+    -fx-background-color: white;
+}
+.table-view .column-header-background {
+    -fx-background-color: #66bb6a; /* Green for header background */
+    -fx-text-fill: white; /* White text for better contrast */
+}
+
+.table-view .table-row-cell {
+    -fx-border-color: #66bb6a; /* Green borders */
+    -fx-border-width: 0 0 1 0; /* Only bottom border */
+}
+.text-field {
+    -fx-prompt-text-fill: #757575; /* Change this to your desired color */
 }

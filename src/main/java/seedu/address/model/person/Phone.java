@@ -11,8 +11,8 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers should only contain numbers, and it should be between 3-15 digits long inclusive";
+    public static final String VALIDATION_REGEX = "\\d{3,15}";
     public final String value;
 
     /**
@@ -24,6 +24,15 @@ public class Phone {
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
         value = phone;
+    }
+
+    /**
+     * Constructs an {@code Phone}.
+     *
+     * @param blank A blank phone.
+     */
+    public Phone(Blank blank) {
+        value = "";
     }
 
     /**

@@ -19,13 +19,20 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Manually save the current address book state */
+    private final boolean save;
+
+    private final boolean load;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean save, boolean load) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.save = save;
+        this.load = load;
     }
 
     /**
@@ -33,7 +40,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -47,6 +54,13 @@ public class CommandResult {
     public boolean isExit() {
         return exit;
     }
+    public boolean isSave() {
+        return save;
+    }
+    public boolean isLoad() {
+        return load;
+    }
+
 
     @Override
     public boolean equals(Object other) {
@@ -62,12 +76,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && save == otherCommandResult.save;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, save);
     }
 
     @Override
@@ -76,6 +91,8 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("save", save)
+                .add("load", load)
                 .toString();
     }
 

@@ -20,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.GameDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -36,6 +37,10 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_GAME = "Legend League";
+    public static final String VALID_GAME_USERNAME = "Potato";
+    public static final String VALID_GAME_SKILLLEVEL = "Pro";
+    public static final String VALID_GAME_ROLE = "Support";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -69,6 +74,14 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
+    public static final AddGameCommand.GameDescriptor DESC_GAME;
+
+    static {
+        DESC_GAME = new GameDescriptorBuilder().withGame(VALID_GAME)
+                .withUsername(VALID_GAME_USERNAME).withSkillLevel(VALID_GAME_SKILLLEVEL)
+                .withRole(VALID_GAME_ROLE).build();
+    }
+
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
@@ -93,6 +106,24 @@ public class CommandTestUtil {
             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Executes the given {@code command} while unfiltering the {@code actualModel}, confirms that <br>
+     * - the returned {@link CommandResult} matches {@code expectedMessage} <br>
+     * - the {@code actualModel} matches {@code expectedModel}
+     */
+    public static void assertCommandSuccessUnfilter(Command command, Model actualModel, String expectedMessage,
+                                            Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        try {
+            CommandResult result = command.execute(actualModel);
+            actualModel.updateFilteredPersonList(unused -> true);
+            assertEquals(expectedCommandResult, result);
+            assertEquals(expectedModel, actualModel);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
     }
 
     /**

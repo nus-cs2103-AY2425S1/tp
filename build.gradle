@@ -7,13 +7,25 @@ plugins {
 }
 
 mainClassName = 'seedu.address.Main'
-
 sourceCompatibility = JavaVersion.VERSION_17
+
+
+
 targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+}
+
+task testNoGui(type: Test) {
+    useJUnitPlatform()
+    exclude '**/seedu/address/ui/**'
+    finalizedBy jacocoTestReport
+}
+
+run {
+    enableAssertions = true
 }
 
 checkstyle {
@@ -41,6 +53,7 @@ task coverage(type: JacocoReport) {
 }
 
 dependencies {
+    String testFxVersion = '4.0.15-alpha'
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '17.0.7'
 
@@ -61,8 +74,14 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
+    testImplementation group: 'org.testfx', name: 'testfx-core', version: testFxVersion
 
+    testRuntimeOnly group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+26'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+}
+
+run {
+    enableAssertions = true
 }
 
 shadowJar {
