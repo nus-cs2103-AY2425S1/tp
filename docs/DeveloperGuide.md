@@ -194,95 +194,50 @@ The AssignProductCommand follows these main steps when executed:
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+TThe AssignProductCommand is responsible for assigning a specified Product to a specified Supplier in an address book model. Here’s a step-by-step breakdown of how it functions:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+#### Command Initialization:
+AssignProductCommand is instantiated with a ProductName (product to be assigned) and Name (supplier to whom the product will be assigned).
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+This command object holds these details for execution.
+Execution (execute method): **When the command executes, it:**
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+1. Finds the Product: Calls findProductByName on the Model to retrieve the Product based on productName. If not found, it throws a CommandException with a message indicating the product was not found. 
+2. Finds the Supplier: Calls findSupplierByName to retrieve the Supplier based on supplierName. If the supplier is not found, it throws a CommandException.
+3. Checks Assignment Status: Verifies if the product is already assigned to any supplier. If assigned to a different supplier, it throws an exception. If already assigned to the target supplier, it prevents redundant assignments.
+4. Assigns the Product to the Supplier: Calls assignProductToSupplier, which creates a new Product with updated supplier information and adds it to the supplier’s product list.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+#### Updating the Model:
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+**After successful assignment:**
 
-Step 2. The user executes `delete 5` command to delete the 5th supplier in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+The model updates the supplier and product lists to reflect the new state.
+It returns a success message, indicating the product and supplier names.
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new supplier. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the supplier was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+#### Helper Methods:
+1. findProductByName: Looks up the product in the model by its name.
+2. findSupplierByName: Looks up the supplier in the model by its name.
+checkProductAssignmentStatus: Ensures that the product can be assigned to the supplier by checking if it’s already assigned.
+3. assignProductToSupplier: Updates the product’s supplier reference and the supplier’s product list, then updates the model with these changes.
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: Assign executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Current choice:** Saves in the system after successful execution.
+  * Pros: Easy to implement. Real time updates can be seen.
+  * Cons: Allows a product to be supplied by only one Supplier.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the supplier being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+---
+## Planned Enhancements
 
-_{more aspects and alternatives to be added}_
-
+1. Emails and phone numbers should be taken into account for duplicate handling, for the Add Supplier command as it currently takes only name into consideration.
+2. Update can take in +/- stock level so user does not need to count current stock level just need to know the increase or decrease in stock level
+3. Make the command names shorter for increasing easiness to the fast typing users.
+4. We would want to implement edit features as for any information currently, the user to delete the existing one and adding new information in case of update of values. (especially in case of tags)
+5. Number greater than Integer maximum will not give correct error, hence it is to be updated.
+6. Supplier and Product should have different panels in UI to make it look better and for the ease of not having to switch panels with view commands unnecessarily.
+7. Mac users might face some issues downloading jar file with the given instructions in UG, so the workaround shall be provided.
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -293,7 +248,7 @@ _{more aspects and alternatives to be added}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Requirements**
 
@@ -327,6 +282,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new supplier             |                                                                       |
 | `* * *`  | user                                       | delete a supplier              | remove entries that I no longer need                                  |
 | `* * *`  | user                                       | find a supplier by name        | locate details of suppliers without having to go through the entire list |
+| `* * *`  | user                                       | find a supplier by tags        | see only the details of suppliers with similar tags |
 | `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident               |
 | `*`      | user with many suppliers in the address book | sort suppliers by name         | locate a supplier easily                                                |
 | `* * *`  | inventory manager                          | add a new product           |                                                                       |
@@ -615,24 +571,20 @@ Given below are instructions to test the app manually.
 > **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-
 ### Launch and shutdown
 
 1. Initial launch
-
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
-
+2. Saving window preferences
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ### Viewing Help
-
 1. Accessing the help guide
 
     1. Test case 1: `help`<br>
@@ -647,11 +599,7 @@ testers are expected to do more *exploratory* testing.
             * No help window opens.
             * An error message is displayed indicating an unknown command.
 
-
-
-
 ### Autocomplete
-
 1. Using autocomplete for commands
 
     1. Test case 1: Start typing `add_` and press the Tab key<br>
@@ -672,8 +620,6 @@ testers are expected to do more *exploratory* testing.
             * A list of existing product names is suggested.
             * You can select a product name from the suggestions.
             * Negative test case: Autocomplete with non-existent name
-
-
 
 ### Adding a supplier
 1. Adding a supplier while all suppliers are being shown
@@ -729,7 +675,6 @@ testers are expected to do more *exploratory* testing.
 2. Other incorrect add_product commands to try: `add_product`, `add_product n/`, `add_product stk/100`, `add_product su/John Doe`, ...<br> Expected: Similar to previous; no product is added, and appropriate error messages are displayed indicating missing compulsory fields or invalid command format.
 
 ### Assigning a product to supplier
-
 1. Assigning a product to supplier
 
     1. Prerequisites:
@@ -784,9 +729,7 @@ testers are expected to do more *exploratory* testing.
 
 Expected: Similar to previous; no changes are made, and appropriate error messages are displayed indicating missing compulsory fields or invalid command format.
 
-
 ### Setting thresholds for products
-
 1. Setting thresholds of a product while consecutively on the products view.
     1. Prerequisites:
         * View all products using the `view_product` command.
@@ -816,7 +759,6 @@ Expected: Similar to previous; no changes are made, and appropriate error messag
            * Displays failure message with error being that the stock level has to be greater than 0(zero).
 
 ### Updating a stock Level
-
 1. Updating stock levels of a product while consecutively on the products view.
     1. Prerequisites:
         * View all products using the `view_product` command.
@@ -908,12 +850,10 @@ Expected: Appropriate error messages are displayed indicating missing or invalid
             * A message is displayed indicating the number of products found.
     7. Test case 6: `view_product n/Chocolate t/Snack su/John Doe sort/d`<br>
 
-
         * Description: View products with multiple filters and sort in decreasing order of stock proximity to minimum threshold.
         * Expected:
             * Products matching all criteria are displayed, sorted accordingly.
             * A message is displayed indicating the number of products found.
-
 
 ### Deleting a supplier
 
@@ -946,7 +886,6 @@ Expected: Appropriate error messages are displayed indicating missing or invalid
 2. Other incorrect delete commands to try: `delete`, `delete_supplier x/`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-
 ### Deleting a product
 1. Deleting a product while all products are being shown
 
@@ -976,9 +915,6 @@ Expected: Appropriate error messages are displayed indicating missing or invalid
 2. Other incorrect delete_product commands to try: delete_product, delete_product pr/, delete_product x/Chocolate Bar, ...<br>
 
 Expected: Similar to previous; no product is deleted, and appropriate error messages are displayed indicating missing compulsory fields or invalid command format.
-
-
-
 
 ### Clearing all entries
 1. Clearing all data from the application
@@ -1015,8 +951,8 @@ Expected: Similar to previous; no product is deleted, and appropriate error mess
         * Expected:
             * The application does not close.
             * An error message is displayed indicating an unknown command.
-### Saving data
 
+### Saving data
 1. Verifying automatic data saving
 
     1. Test case 1:
