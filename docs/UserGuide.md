@@ -426,7 +426,7 @@ Duplicate handling:
 * Two resident student contacts with the same phone numbers are not allowed.
 > <span style="color:Gray"> NOTE! </span> <br>
 >
-> * This section corresponds to the PHONE parameter.
+> * This section corresponds to the `PHONE` parameter.
 > * Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
 > * Duplicate handling rationale: Phone numbers are unique to each individual.
 
@@ -528,7 +528,7 @@ Duplicate handling:
 
 > <span style="color:Gray"> NOTE! </span> <br>
 >
-> * This section corresponds to the EMERGENCY_PHONE parameter.
+> * This section corresponds to the `EMERGENCY_PHONE` parameter.
 > * Constraint rationale: Same as [Phone number](#phone-number).
 > * Duplicate handling rationale: It is possible for two residents to have the same emergency contact.
 
