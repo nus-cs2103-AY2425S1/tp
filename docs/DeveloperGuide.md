@@ -342,18 +342,10 @@ Step 2: The `export` command exports all data currently contained by DorManagerP
 The following sequence diagram shows how an `export` command goes through the `Logic` component:
 
 <puml src="diagrams/ExportSequenceDiagram.puml" alt="ExportSequenceDiagram" />
-<br>
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `ExportCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
 
 The following activity diagram summarizes what happens when a user executes an `export` command:
 
 <puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" />
-<br>
 
 #### Design considerations:
 
@@ -392,7 +384,6 @@ Step 2. The `import` command locates the save file via the file path and reads t
 The following sequence diagram shows how an `import fp/./data/SaveFile3.json` command goes through the `Logic` component:
 
 <puml src="diagrams/ImportSequenceDiagram.puml" alt="ImportSequenceDiagram" />
-<br>
 
 <box type="info" seamless>
 
@@ -404,7 +395,6 @@ The lifeline for `ImportCommandParser` should end at the destroy marker (X) but 
 The following activity diagram summarizes what happens when a user executes an `import` command:
 
 <puml src="diagrams/ImportActivityDiagram.puml" alt="ImportActivityDiagram" />
-<br>
 
 #### Design considerations:
 
@@ -461,7 +451,6 @@ The following sequence diagram shows how an undo operation goes through the `Log
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-<br>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will not be pushed to the undo stack. Thus, the undo stack remains unchanged.
 
@@ -470,7 +459,6 @@ Step 6. The user executes `clear`, which is pushed to the undo stack.
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/CommitActivityDiagram.puml" height="400" width="400"/>
-<br>
 
 #### Design considerations:
 
@@ -841,7 +829,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Dorm room**: Rooms of the dorm where residents stay in. Corresponds to a floor and unit number that specify its location.
 * **Graduation Year**: The year during which the student will graduate.
 * **File path**: The path to the file. Is considered to be the location of the file. Can often be found by right-clicking the file as an option in the menu.
-* **JSON**: A type of file similar to `pdf` and `docx` that is often used for data storage.
+* **JSON**: A type of file like `pdf` and `docx` that is often used for data storage.
 * **Parameter**: A value / characteristic used by a feature that is often defined by the feature, or otherwise by the real world.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -860,7 +848,7 @@ Given below are instructions to test the app manually.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder.
+   1. Download the jar file and copy into an empty folder
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -873,7 +861,7 @@ Given below are instructions to test the app manually.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown.
+1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -905,7 +893,7 @@ Given below are instructions to test the app manually.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files.
+1. Dealing with missing/corrupted data files
    1. Test case: Edit a record of a person in DorManagerPro.json to have a name containing `/`, which is an invalid character in DorManagerPro. <br>
       Expected: On launch, the application has no contacts as it does not read files that contain invalid data.
 
@@ -924,27 +912,27 @@ Given below are instructions to test the app manually.
 
 ### Importing data
 
-1. Importing a json file with valid data.
+1. Importing a json file with valid data
    1. Prerequisites: There is a json file with valid data in the device. In this case, it is assumed the file path to the json file is `./data/SaveFile.json`.
    2. Test case: `import fp/./data/SaveFile.json` <br>
       Expected: The contents of `SaveFile.json` is loaded into DorManagerPro.
 
-2. Importing a json file with invalid data.
+2. Importing a json file with invalid data
    1. Prerequisites: There is a json file with invalid data in the device. In this case, it is assumed the file path to the json file is `./data/SaveFile.json`.
    2. Test case: `import fp/./data/SaveFile.json`
    Expected: No information is imported into DorManagerPro. Error details shown in the status message.
 
-3. Importing a file that is not of json format.
+3. Importing a file that is not of json format
    1. Prerequisites: There is a file not of json format on the device. In this case, it is assumed the file path to this file is `./data/text`.
    2. Test case: `import fp/./data/text`
       Expected: Same as above.
 
-4. Importing a folder.
+4. Importing a folder
    1. Prerequisites: There is a folder on the device. In this case, it is assumed the file path to this file is `./data`.
    2. Test case: `import fp/./data`
       Expected: Same as above.
 
-5. Trying to import a file that does not exist on the device.
+5. Trying to import a file that does not exist on the device
     1. Test case: `import fp/./data/SaveFile4.json` where SaveFile4.json does not exist on the device <br>
        Expected: Same as above, with error message now instead specifying that the file path must correspond to an existing system path.
 
@@ -1065,7 +1053,7 @@ to add instructions for all other features to make it easier to familiarise them
 5. **Improve specificity of `import` error messages.** Currently, the error message for when the file exists on the device but is otherwise incompatible with DorManagerPro, whether this be because it is of the wrong file type, has a format incompatible with DorManagerPro or contains invalid data is as follows: <br>
 Could not read data from file FILE_PATH due to inability to find or access the file. <br>
 This error message could be more specific and our team plans to update this to the following error message: <br>
-DorManagerPro could not access the file at FILE_PATH. This could be because the file is of the wrong type, it has a format incompatible with DorManagerPro, or it contains invalid data. Please check that the file path leads to a JSON file with valid data and formatting.
+DorManagerPro could not access the file at FILE_PATH. This could be because the file is of the wrong type, it has a format incompatible with DorManagerPro or it contains invalid data. Please check that the file path leads to a JSON file with valid data and formatting.
 
 6. **Consistent behavior for `find`.** Currently, `find` has some inconsistent behaviour depending on the field that it is being searched by, making it counterintuitive for users. The problems are as following: <br>
 The name search is case-insensitive, but tag search is not. We plan to modify `find t/` tag search to make it case-insensitive. <br>
