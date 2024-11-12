@@ -267,7 +267,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                                 | delete contacts                                                     | remove incorrect or unnecessary entries                |
 | `* * *`  | user                                                 | view contacts                                                       | access the contacts' details                           |
 | `* * *`  | user                                                 | mark attendance for each tutorial session                           | easily keep a record of student participation          |
-| `* *`    | user with many contacts in my address book           | search for a contacts by keywords (e.g. name/student ID)             | quickly access their details                           |
+| `* *`    | user with many contacts in my address book           | search for a contact by keywords (e.g. name/student ID)             | quickly access their details                           |
 | `* *`    | user with a large address book with diverse contacts | be able to sort my contacts using specific attributes               | find contacts based on the attributes more easily      |
 | `* *`    | user                                                 | filter students by their performance                                | identify those that need additional help               |
 | `* *`    | user                                                 | update a student's contact information                              | maintain accurate records                              |
