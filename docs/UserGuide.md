@@ -414,6 +414,7 @@ Examples:
     <strong>⚠️ Important:</strong>
     <ul>
         <li>Suppliers should already exist in the system, otherwise errors are displayed.</li>
+        <li>When deleting an existing supplier, any products that have been assigned this deleted supplier will have their assigned supplier removed. However, you will need to use the `view_product` command for the application to reflect this change.</li>
     </ul>
 </div>
 
@@ -433,8 +434,6 @@ Here are a few examples to help you:
     <strong>⚠️ Important:</strong>
     <ul>
         <li>Products should already exist in the system, otherwise errors are displayed.</li>
-        <li>When deleting an existing supplier, any products that have been assigned this deleted supplier will have their assigned supplier removed. However, you will need to use the `view_product` command for the application to reflect this change.
-</li>
     </ul>
 </div>
 
