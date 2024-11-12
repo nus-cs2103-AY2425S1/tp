@@ -219,6 +219,7 @@ Step 2. The `edit` command updates the details of the contact with index 1 to ha
 The following sequence diagram shows how an `edit` command goes through the `Logic` component:
 
 <puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
+
 <box type="info" seamless>
 
 **Note:** There are no destroy markers (X) for `EditCommand` as it is preserved in the `undo` command stack.
@@ -798,7 +799,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Dorm room**: Rooms of the dorm where residents stay in. Corresponds to a floor and unit number that specify its location.
 * **Graduation Year**: The year during which the student will graduate.
 * **File path**: The path to the file. Is considered to be the location of the file. Can often be found by right-clicking the file as an option in the menu.
-* **JSON**: A type of file like `pdf` and `docx` that is often used for data storage.
+* **JSON**: A type of file similar to `pdf` and `docx` that is often used for data storage.
 * **Parameter**: A value / characteristic used by a feature that is often defined by the feature, or otherwise by the real world.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -817,7 +818,7 @@ Given below are instructions to test the app manually.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -830,7 +831,7 @@ Given below are instructions to test the app manually.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -862,7 +863,7 @@ Given below are instructions to test the app manually.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing/corrupted data files.
    1. Test case: Edit a record of a person in DorManagerPro.json to have a name containing `/`, which is an invalid character in DorManagerPro. <br>
       Expected: On launch, the application has no contacts as it does not read files that contain invalid data.
 
@@ -881,27 +882,27 @@ Given below are instructions to test the app manually.
 
 ### Importing data
 
-1. Importing a json file with valid data
+1. Importing a json file with valid data.
    1. Prerequisites: There is a json file with valid data in the device. In this case, it is assumed the file path to the json file is `./data/SaveFile.json`.
    2. Test case: `import fp/./data/SaveFile.json` <br>
       Expected: The contents of `SaveFile.json` is loaded into DorManagerPro.
 
-2. Importing a json file with invalid data
+2. Importing a json file with invalid data.
    1. Prerequisites: There is a json file with invalid data in the device. In this case, it is assumed the file path to the json file is `./data/SaveFile.json`.
    2. Test case: `import fp/./data/SaveFile.json`
    Expected: No information is imported into DorManagerPro. Error details shown in the status message.
 
-3. Importing a file that is not of json format
+3. Importing a file that is not of json format.
    1. Prerequisites: There is a file not of json format on the device. In this case, it is assumed the file path to this file is `./data/text`.
    2. Test case: `import fp/./data/text`
       Expected: Same as above.
 
-4. Importing a folder
+4. Importing a folder.
    1. Prerequisites: There is a folder on the device. In this case, it is assumed the file path to this file is `./data`.
    2. Test case: `import fp/./data`
       Expected: Same as above.
 
-5. Trying to import a file that does not exist on the device
+5. Trying to import a file that does not exist on the device.
     1. Test case: `import fp/./data/SaveFile4.json` where SaveFile4.json does not exist on the device <br>
        Expected: Same as above, with error message now instead specifying that the file path must correspond to an existing system path.
 
