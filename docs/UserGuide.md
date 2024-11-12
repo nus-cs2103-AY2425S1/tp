@@ -27,9 +27,6 @@ Paired also with a revolutionary Autocomplete feature, StoreClass helps you mana
    Our program is coded in Java. So in order for you to use it, Java will need to be installed on your machine. Think of it as the engine for our program.
    </div>
 
-
-1. Copy the file to the folder you want to use as the _home folder_ for StoreClass.
-
 2. Download the latest version of the `.jar` file of our program from [here](https://github.com/AY2425S1-CS2103T-W10-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for StoreClass.
