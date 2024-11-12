@@ -155,6 +155,14 @@ The `Model` component,
     - `PostalCode`: Part of the `Address` class, further specifying the person’s address.
     - `Tag`: A list of tags associated with the person, allowing categorization of people (e.g., "friend", "colleague").
     - `OrderTracker`: Keeps track of the orders associated with the person.
+     
+#### Order Model Components
+
+* **Order**: Represents a single order that is stored in the UniqueOrderList
+* **OrderHistory**: Represents a single order that is that placed at a particular time
+* **OrderTracker**: Represents a list of `OrderHistory`, this class is used to track the order of a customer/person
+* **UniqueOrderList**: Manages the collection of all `Order` objects within the `AddressBook`. Each `Order` in the list is unique by its name.
+
 
 #### Shortcut Model Components
 
@@ -212,7 +220,7 @@ The Address Book data storage relies on JSON serialization with the following cl
     - Implements `AddressBookStorage` and manages the reading/writing of JSON data for the address book.
 - **`JsonSerializableAddressBook` (class)**:
     - Provides the schema for serializing the `AddressBook` data, including `Person` and `Shortcut` objects.
-- **`JsonAdaptedShortCut`, `JsonAdaptedPerson`, and `JsonAdaptedTag` (classes)**:
+- **`JsonAdaptedShortCut`, `JsonAdaptedPerson`, `JsonAdaptedOrder`, `JsonAdaptedOrderHistory` and `JsonAdaptedTag` (classes)**:
     - Adapter classes for each entity within the `AddressBook`.
     - These classes are responsible for converting each respective model component into a format suitable for JSON serialization and deserialization.
 
@@ -266,6 +274,7 @@ Given below is an example usage scenario and how the add shortcut mechanism work
     <img src="images/AddShortCutSequenceDiagram.png" alt="Delete Shortcut Sequence Diagram" style="width: 100%; max-width: 1200px; height: auto;">
     <p style="font-style: italic; margin-top: 10px; color: #666;">Figure: Add Shortcut Sequence Diagram</p>
 </div>
+
 ---
 
 ### Delete Shortcut feature
@@ -316,6 +325,50 @@ Additional Info
 > Design Explanation:
 > 
 > When creating a Shortcut, ALIAS and TAG_NAME are case-insensitive: the methods `Model.hasAlias` and `Model.hasTagName` checks if the value exist in storage regardless of how it is captialised. This was done to avoid confusion between different aliases set. eg. "V" and "v". We still wanted to enforce case-sensitivity for commands with `t/` when creating custom tags to offer flexibility to the user
+
+---
+
+### Add an `Order` to customer using `put`
+#### Implementation
+
+1. **Execution Begins**
+ 
+    The `LogicManager` receives the `"put cake n/Alex"` command and calls its `execute` method.
+
+2. **Command Parsing**
+
+   1. `LogicManager` sends a `parseCommand("put cake n/Alex")` request to `AddressBookParser` to interpret the command.
+   2. `AddressBookParser` creates a new instance of `PutOrderCommandParser` and forwards the request to it by calling `parse("cake n/Alex")`.
+   
+3. **Command Creation**
+
+   1. `PutOrderCommandParser` creates a `new PutOrderCommand` object with the order "cake" and person "Alex" as parameters.
+   
+4. **Order Existence Check**
+
+   1. `PutOrderCommand` sends a `hasOrder(order)` request to `Model` to check if the order "cake" exists.
+   2. `Model` returns true if the order exists (indicating that "cake" is a valid order) and the command proceeds to the next step.
+   3. If the order does not exist, `Model` returns false, and `PutOrderCommand` throws a `CommandException` with the message `MESSAGE_ORDER_NOT_FOUND` back to `LogicManager`, ending the execution.
+  
+5. **Person Existence Check (if the order exists)**
+
+   1. `PutOrderCommand` calls `findPersonByName(Name)` on `Model` to search for a person with the name "Alex".
+   2. If "Alex" exists in `Model`, `Model` returns the `Person` object representing "Alex".
+   3. If "Alex" does not exist, `Model` returns null, and `PutOrderCommand` throws a `CommandException` with the message `MESSAGE_PERSON_NOT_FOUND` back to `LogicManager`, ending the execution.
+    
+6. **Order Placement (if both the order and person exist)**
+
+   1. `PutOrderCommand` sends a `putOrder(Order)` message to the `Person` object to assign the order "cake" to "Alex".
+   2. After successfully placing the order, `PutOrderCommand` returns a `CommandResult` with the success message `MESSAGE_SUCCESS` back to `LogicManager`.
+
+7. **Execution Completion**
+
+    The command completes its execution, and `LogicManager` processes the final `CommandResult`.
+ 
+<div style="text-align: center;">
+    <img src="images/PutOrderSequenceDiagram.png" alt="Put Order Sequence Diagram" style="width: 100%; max-width: 1200px; height: auto;">
+    <p style="font-style: italic; margin-top: 10px; color: #666;">Figure: Put Order Sequence Diagram</p>
+</div>
 
 ---
 
@@ -576,32 +629,35 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                         | So that I can…​                                               |
-| -------- | ------------------------------------------ |----------------------------------------------------------------------|---------------------------------------------------------------|
-| `* * *`  | manager                                    | add a customer’s detail via a one-line CLI command                   | quickly add new customers without >1 step                     |
-| `* *`    | manager                                    | retrieve a customer’s detail via a one-line CLI command              | view their details without having to scroll through pages     |
-| `* * *`  | manager                                    | delete customer data in one-line CLI                                 | delete customers that I want to not deliver to anymore        |
-| `* * *`  | manager                                    | search for customers by name                                         | quickly access customer profiles during phone orders          |
-| `* * *`  | manager                                    | search for customers by phone number                                 | quickly access customer profiles during phone orders          |
-| `* *`    | manager                                    | edit customer data in one-line CLI                                   | update any part of user data in 1 step                        |
-| `* *`    | manager                                    | bulk-create multiple customers through a file                        | quickly populate the system                                   |
-| `* *`    | manager                                    | bulk update multiple customers                                       | effectively manage large sets of customers                    |
-| `* *`    | manager                                    | assign tags to customers easily by setting abbreviations to tagnames | waste time typing out tag names that are already predetermined |
-| `*`      | manager                                    | archive customer data instead of a hard delete                       | avoid losing this information permanently                     |
-| `*`      | manager                                    | unarchive a customer                                                 | continue serving this customer                                |
-| `*`      | manager                                    | list customers by recent order dates                                 | quickly identify who is a repeat customer                     |
-| `*`      | manager                                    | list customers by order frequency                                    | identify regular customers for reward programmes              |
-| `*`      | manager                                    | export customer data as a CSV                                        | provide the data to other people to use                       |
-| `*`      | manager                                    | convert a CSV file into a readable state file                        | have a backup                                                 |
-| `*`      | manager                                    | export CSV data using specific criteria                              | reduce the effort needed by others to parse the data          |
-| `*`      | manager                                    | validate attributes when adding a customer                           | avoid entering invalid data                                   |
-| `*`      | manager                                    | validate attributes when updating a customer                         | avoid entering invalid data                                   |
-| `*`      | manager                                    | categorise customers as VIP, regular, or new                         | know who to target for promotions                             |
-| `*`      | manager                                    | tag customers with dietary restrictions                              | personalise orders and maintain customer service              |
-| `*`      | manager                                    | create a tag                                                         | tag customers with a different issue                          |
-| `*`      | manager                                    | tag customers with multiple different tags                           | store a pattern of customers                                  |
-| `*`      | manager                                    | bulk tag customers with dietary restrictions                         | save time                                                     |
-| `*`      | manager                                    | group customers by tag                                               | easily find and manage customers for promotions               |
+| Priority | As a …​                                    | I want to …​                                                         | So that I can…​                                                |
+|---------| ------------------------------------------ |----------------------------------------------------------------------|----------------------------------------------------------------|
+| `* * *` | manager                                    | add a customer’s detail via a one-line CLI command                   | quickly add new customers without >1 step                      |
+| `* * *` | manager                                    | retrieve a customer’s detail via a one-line CLI command              | view their details without having to scroll through pages      |
+| `* * *` | manager                                    | delete customer data in one-line CLI                                 | delete customers that I want to not deliver to anymore         |
+| `* * *` | manager                                    | search for customers by name                                         | quickly access customer profiles during phone orders           |
+| `* * *` | manager                                    | search for customers by phone number                                 | quickly access customer profiles during phone orders           |
+| `* *`   | manager                                    | edit customer data in one-line CLI                                   | update any part of user data in 1 step                         |
+| `* *`   | manager                                    | bulk-create multiple customers through a file                        | quickly populate the system                                    |
+| `* *`   | manager                                    | bulk update multiple customers                                       | effectively manage large sets of customers                     |
+| `* *`   | manager                                    | assign tags to customers easily by setting abbreviations to tagnames | waste time typing out tag names that are already predetermined |
+| `* *`   | manager                                    | be able to see order history of a customer                           | apply targeted advertising                                     |
+| `* *`   | manager                                    | be able to see order frequency of a customer                         | prepare suitable amount of ingredient beforehand               |
+| `*`     | manager                                    | add order to the application                                         | track what is being served at the restaurant                   |
+| `*`     | manager                                    | archive customer data instead of a hard delete                       | avoid losing this information permanently                      |
+| `*`     | manager                                    | unarchive a customer                                                 | continue serving this customer                                 |
+| `*`     | manager                                    | list customers by recent order dates                                 | quickly identify who is a repeat customer                      |
+| `*`     | manager                                    | list customers by order frequency                                    | identify regular customers for reward programmes               |
+| `*`     | manager                                    | export customer data as a CSV                                        | provide the data to other people to use                        |
+| `*`     | manager                                    | convert a CSV file into a readable state file                        | have a backup                                                  |
+| `*`     | manager                                    | export CSV data using specific criteria                              | reduce the effort needed by others to parse the data           |
+| `*`     | manager                                    | validate attributes when adding a customer                           | avoid entering invalid data                                    |
+| `*`     | manager                                    | validate attributes when updating a customer                         | avoid entering invalid data                                    |
+| `*`     | manager                                    | categorise customers as VIP, regular, or new                         | know who to target for promotions                              |
+| `*`     | manager                                    | tag customers with dietary restrictions                              | personalise orders and maintain customer service               |
+| `*`     | manager                                    | create a tag                                                         | tag customers with a different issue                           |
+| `*`     | manager                                    | tag customers with multiple different tags                           | store a pattern of customers                                   |
+| `*`     | manager                                    | bulk tag customers with dietary restrictions                         | save time                                                      |
+| `*`     | manager                                    | group customers by tag                                               | easily find and manage customers for promotions                |
 
 
 ### Use cases
@@ -612,16 +668,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. Manager requests to add customer
-2. AddressBook adds the person 
+2. NomNomNotifier adds the person 
 3. Use Case Ends
 
 **Extension**
 * 1a. Manager request/invalid/incomplete
-  * 1a1. AddressBook shows an error message
+  * 1a1. NomNomNotifier shows an error message
   * Use Case Ends
 
-* 1a. Manager tags customer using pre-assigned shortcut
-  * 1a1. Abbreviation is mapped to pre-assigned tag name
+* 1b. Manager tags customer using pre-assigned shortcut
+  * 1b1. Abbreviation is mapped to pre-assigned tag name
   * Use Case resumes at step 2
 
 **Use case: Edit for a customer**
@@ -644,38 +700,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. Manager requests to list the customers
-2. AddressBook shows a list of customers
+2. NomNomNotifier shows a list of customers
 3. Manager requests to search for customer by name/phone number
-4. AddressBook shows the customer
+4. NomNomNotifier shows the customer
 5. Use Case Ends
 
 **Extension**
-* 3a. Manager request/invalid/incomplete
-  * 3a1. AddressBook shows an error message.
-  * Use Case Ends
 * 2a. The list is empty
-  * User Case Ends
+    * User Case Ends
+* 3a. Manager request/invalid/incomplete
+  * 3a1. NomNomNotifier shows an error message.
+  * Use Case Ends
 
 **Use case: Delete a person**
 
 **MSS**
 
 1.  Manager requests to list customers
-2.  AddressBook shows a list of customers
+2.  NomNomNotifier shows a list of customers
 3.  Manager requests to delete a specific customers in the list
-4.  AddressBook deletes the customers
-
-    Use case ends.
+4.  NomNomNotifier deletes the customers
+5. Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-
-  Use case ends.
+* 2a. The list is empty. 
+    * Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. NomNomNotifier shows an error message.
 
       Use case resumes at step 2.
 
@@ -684,32 +738,87 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Manager requests to add shortcut
-2. AddressBook adds the shortcut with alias and tag name to UniqueShortcut list
-    Use Case ends
+2. NomNomNotifier adds the shortcut with alias and tag name to UniqueShortcut list
+3. Use Case ends
 
 **Extension**
 * 1a. Shortcut format is invalid
-    * 1a1. AddressBook shows error message
+    * 1a1. NomNomNotifier shows error message
     * Use Case ends
-* 1b. Alias or tag name in shortcut already exists in AddressBook
-  * 1b1. AddressBook shows error message
+* 1b. Alias or tag name in shortcut already exists in NomNomNotifier
+  * 1b1. NomNomNotifier shows error message
   * Use Case ends
+  
 
 **Use Case: Deleting a shortcut**
 
 **MSS**
 
 1. Manager requests to delete shortcut
-2. AddressBook deletes the shortcut with specified alias and tag name in UniqueShortCut list
-
-    Use Case ends
+2. NomNomNotifier deletes the shortcut with specified alias and tag name in UniqueShortCut list
+3. Use Case ends
 
 **Extension**
 * 1a. Shortcut format is invalid
-    * 1a1. AddressBook shows error message
+    * 1a1. NomNomNotifier shows error message
     * Use Case ends
-* 1b. ShortCut does not exist in AddressBook
-    * 1b1. AddressBook shows error message
+* 1b. ShortCut does not exist in NomNomNotifier
+    * 1b1. NomNomNotifier shows error message
+    * Use Case ends
+     
+  
+**Use Case: Adding an order to the application**
+
+**MSS**
+
+1. Manager requests to add an order 
+2. NomNomNotifier add the order to UniqueOrderList in with the specified order name
+3. Use Case ends
+
+**Extension**
+* 1a. Order format is invalid
+    * 1a1. NomNomNotifier shows error message
+    * Use Case ends
+* 1b. Order already exist in NomNomNotifier
+    * 1b1. NomNomNotifier shows error message
+    * Use Case ends
+
+**Use Case: Deleting an order from the application**
+
+**MSS**
+
+1. Manager requests to delete an order
+2. NomNomNotifier delete the order with the specified order name from the UniqueOrderList
+3. Use Case ends
+
+**Extension**
+* 1a. Order format is invalid
+    * 1a1. NomNomNotifier shows error message
+    * Use Case ends
+* 1b. Order does not exist in NomNomNotifier
+    * 1b1. NomNomNotifier shows error message
+    * Use Case ends
+
+**Use Case: Viewing all order(s) stored in the application**
+
+**MSS**
+
+1. Manager requests to view all order(s)
+2. NomNomNotifier shows all order(s) stored in the UniqueOrderList
+3. Use Case ends
+
+**Use Case: Viewing the order history of a customer**
+
+**MSS**
+
+1. Manager requests to view order history of a customer 
+2. NomNomNotifier attempts to get the order history associated with the customer 
+3. NomNomNotifier display the order history of the customer
+4. Use Case ends
+
+**Extension**
+* 2a. Customer not found
+    * 2a1. NomNomNotifier shows error message
     * Use Case ends
 
 ### Planned Enhancements
@@ -734,13 +843,13 @@ Team Size: 5
     the name and phone number to be unique identifier for a `Person`. We understand that this may interfere with order put command. This would also entail the inclusion of a phone number field when using the `put` command. 
 
 4. **Being able to edit/delete order history of a customer**
+ 
+   Add editHistory and deleteHistory command that allows order history of a customer to be modified, to enhance flexibility of the application
 
-   Add editHistory and deleteHistory command that allows order history of a customer to be modified
 
+5. **Being able to export customer order history into csv file**
 
-5.**Being able to export customer order history into csv file**
-
-* Add downloadOrderHistory to export all customer data alongside the order history
+    Add downloadOrderHistory to export all customer data alongside the order history, so that the manager can mass process all the customer data for other purpose such as targeted advertising using machine learning
 
 
 ### Non-Functional Requirements
@@ -814,5 +923,6 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+ 
 
 
