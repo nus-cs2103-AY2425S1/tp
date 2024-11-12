@@ -211,36 +211,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### System: Grub Address Book (GAB)
 
-**Use Case:** UC1 - Add a new vendor
+**Use Case:** UC1 - Add a new restaurant
 
 **MSS:**
 1. User enters the add command.
-2. GAB displays the added vendor.
+2. GAB displays the added restaurant.
    <br> Use case ends.
 
 **Extensions:**
 * 1a. Wrong add command format.
     * 1a1. GAB shows an error message.
     * 1a2. User enters new data.
-    * Steps 1a1-1a2 are repeated until the right add vendor command format is recognised.
+    * Steps 1a1-1a2 are repeated until the right add restaurant command format is recognised.
       Use case resumes at step 2.
 
 ---
 
-**Use Case:** UC2 - List all saved vendors
+**Use Case:** UC2 - List all saved restaurants
 
 **MSS:**
 1. User enters the list command.
-2. GAB displays all vendors.
+2. GAB displays all restaurants.
    <br> Use case ends.
 
 ---
 
-**Use Case:** UC3 - Search by vendor name
+**Use Case:** UC3 - Search by restaurant name
 
 **MSS:**
-1. User enters the find command with vendor name.
-2. GAB returns a list of vendors matching the name.
+1. User enters the find command with restaurant name.
+2. GAB returns a list of restaurants matching the name.
    <br> Use case ends.
 
 **Extensions:**
@@ -250,7 +250,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Steps 1a1-1a2 are repeated until the data entered is correct.
     <br> Use case resumes at step 2.
 * 2a. No matches found.
-  * 2a1. GAB responds that there are no matching vendors.
+  * 2a1. GAB responds that there are no matching restaurants.
     <br> Use case ends.
 
 ---
@@ -259,7 +259,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 1. User enters the tags command with tag name.
-2. GAB returns a list of vendors matching the tag name.
+2. GAB returns a list of restaurants matching the tag name.
    <br> Use case ends.
 
 **Extensions:**
@@ -269,7 +269,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Steps 1a1-1a2 are repeated until the command format entered is correct.
     <br> Use case resumes at step 2.
 * 2a. No matches found.
-  * 2a1. GAB responds that there are no matching vendors.
+  * 2a1. GAB responds that there are no matching restaurants.
     <br> Use case ends.
 
 ---
@@ -278,7 +278,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 1. User enters the price command with price label.
-2. GAB returns a list of vendors within the price label.
+2. GAB returns a list of restaurants within the price label.
    <br> Use case ends.
 
 **Extensions:**
@@ -288,30 +288,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Steps 1a1-1a2 are repeated until the command format entered is correct.
     <br> Use case resumes at step 2.
 * 2a. No matches found.
-  * 2a1. GAB responds that there are no matching vendors.
+  * 2a1. GAB responds that there are no matching restaurants.
     <br> Use case ends.
 
 ---
 
-**Use Case:** UC6 - Update vendor
+**Use Case:** UC6 - Update restaurant
 
 **MSS:**
-1. User requests to <u>list all vendors (UC2)</u> or <u>search a vendor (UC3).</u>
+1. User requests to <u>list all restaurants (UC2)</u> or <u>search a restaurant (UC3).</u>
 2. User enters the edit command with the restaurant index.
-3. GAB displays the edited vendor.
+3. GAB displays the edited restaurant.
    <br> Use case ends.
 
 **Extensions:**
 * 2a. Wrong edit command format.
   * 2a1. GAB responds with wrong command format error message.
   * 2a2. User enters new data.
-  * Steps 2a1-2a2 are repeated until the right edit vendor command format is recognised.
+  * Steps 2a1-2a2 are repeated until the right edit restaurant command format is recognised.
     <br> Use case resumes at step 3.
-* 2b. Multiple saved vendors with the same name.
-  * 2b1. User first <u>searches for vendors name (UC3).</u>
+* 2b. Multiple saved restaurants with the same name.
+  * 2b1. User first <u>searches for restaurants name (UC3).</u>
   * 2b2. GAB returns search result.
-  * 2b3. User identifies the index of the right vendor to be updated.
-  * Steps 2b1-2b3 are repeated until user identifies the right vendor.
+  * 2b3. User identifies the index of the right restaurant to be updated.
+  * Steps 2b1-2b3 are repeated until user identifies the right restaurant.
     <br> Use case resumes at step 3.
 
 ---
@@ -320,22 +320,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 1. User adds tag via edit command after <u>initiating the update command (UC6).</u>
-2. GAB displays the updated vendor.
+2. GAB displays the updated restaurant.
    <br> Use case ends.
 
 **Extensions:**
 * 1a. Wrong edit command format.
     * 1a1. GAB shows an error message.
     * 1a2. User enters new data.
-    * Steps 1a1-1a2 are repeated until the right edit vendor command format is recognised.
+    * Steps 1a1-1a2 are repeated until the right edit restaurant command format is recognised.
       Use case resumes at step 2.
 
 ---
 
-**Use Case:** UC8 - Favourite a Vendor
+**Use Case:** UC8 - Favourite a Restaurant
 
 **MSS:**
-1. User requests to <u>list all vendors (UC2)</u> or <u>search a vendor (UC3).</u>
+1. User requests to <u>list all restaurants (UC2)</u> or <u>search a restaurant (UC3).</u>
 2. User enters the favourite command with the restaurant index.
 3. GAB marks the selected restaurant as a favourite.
    <br> Use case ends.
@@ -354,10 +354,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case:** UC9 - Un-favourite a Vendor
+**Use Case:** UC9 - Un-favourite a Restaurant
 
 **MSS:**
-1. User requests to <u>list all vendors (UC2)</u> or <u>search a vendor (UC3).</u> 
+1. User requests to <u>list all restaurants (UC2)</u> or <u>search a restaurant (UC3).</u> 
 2. User enters the un-favourite command with the restaurant index.
 3. GAB remove the selected restaurant from favourites.
    <br> Use case ends.
@@ -376,10 +376,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case:** UC10 - Rate a vendor
+**Use Case:** UC10 - Rate a restaurant
 
 **MSS:**
-1. User requests to <u>list all vendors (UC2)</u> or <u>search a vendor (UC3).</u>
+1. User requests to <u>list all restaurants (UC2)</u> or <u>search a restaurant (UC3).</u>
 2. User enters the rate command with the restaurant index.
 3. GAB adds the rating to the restaurant.
    <br> Use case ends.
@@ -405,11 +405,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. **Compatibility Requirement**: Should be compatible with any system where Java 17 and the corresponding JavaFX version is installed.
-2. **Capacity Requirement**: Should be able to store up to 100 vendors at a time.
-3. **Performance Requirement**: Vendor search results should be populated in under 500 ms.
+2. **Capacity Requirement**: Should be able to store up to 100 restaurants at a time.
+3. **Performance Requirement**: Restaurant search results should be populated in under 500 ms.
 4. **Usability Requirement**: Should be easy to use any part of the app for users who can type fast and prefer typing over other interfaces.
 5. **Maintainability Requirement**: Codebase should be modular and easy to maintain until the end of this iteration of CS2103.
-6. **Persistency Requirement**: Vendor entries should be persisted between sessions.
+6. **Persistency Requirement**: Restaurant entries should be persisted between sessions.
 7. **Security Requirement**: Input sanitization should be implemented to prevent database corruption.
 8. **Documentation Requirement**: Code should be well documented, both in-code (with JavaDocs) and otherwise (GitHub Pages, README).
 9. **Robustness Requirement**: The app should handle errors such as network failures or incorrect user inputs, with clear error messages displayed in case of issues.
@@ -422,9 +422,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Cuisine**:
   A label used to categorize different restaurants based on the style of cooking and culinary traditions associated with a specific region or culture.
-
-* **Vendor**:
-  A shop, typically a restaurant, that is listed on the app.
 
 * **Affordable Price Label (`$`)**:
   Expected price per meal per restaurant to be \( x <= \$10 \). This is a subjective estimate based on human input.
