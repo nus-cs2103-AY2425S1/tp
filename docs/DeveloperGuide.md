@@ -299,7 +299,7 @@ Team Size: 5
 **Current Issue:** Names containing symbols like `@` and parentheses (e.g., `John @ Doe` or `Jane (Admin) Smith`) are currently incompatible with the `add`, `edit`, and `filter` commands because support for these characters has not been implemented yet. Although such cases are rare, the current name validation regex excludes these symbols.
 
 **Technical Impact:**
-- There are no anticipated issues with allowing these symbols in names. TThe main reason for not supporting these symbols is the low frequency of such cases, making it a lower priority for development.
+- There are no anticipated issues with allowing these symbols in names. The main reason for not supporting these symbols is the low frequency of such cases, making it a lower priority for development.
 
 **Status:** Scheduled for future release as an enhancement to improve flexibility in name handling, allowing a broader range of symbols in user inputs.
 
@@ -348,7 +348,7 @@ Additionally, certain command hints could benefit from more clarity on constrain
 
 These requirements can be restrictive for agents who may prefer more flexible filtering, such as searching by the first few digits of a phone number (useful when multiple contacts share a company extension) or by email domain alone.
 
-**Proposed Enhancement:** Relax parsing requirements for the `income` and `email` fields when used with the `filter` command, to allow any input and matching based on substrings rather than strict validation.
+**Proposed Enhancement:** Relax parsing requirements for the `income` and `email` fields when used with the `filter` command, to allow for any input and matching based on substrings rather than strict validation.
 
 **Status:** Scheduled for future release due to current timeline priorities.
 
