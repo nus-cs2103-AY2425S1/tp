@@ -147,7 +147,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ### Save Sort Preference
 
-<img src="images/SaveSortPreferenceSequenceDiagram.png" width="550" />
+<img src="images/SaveSortPreferenceSequenceDiagram.png" width="600" />
 
 The "Save Sort Preference" feature allows users to save their preferred sorting method for NetBook so that the next time
 they open the application, their contacts are displayed in the saved order. This feature consists of multiple components working
