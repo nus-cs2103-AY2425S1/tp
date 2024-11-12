@@ -607,7 +607,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** refers to the `Eduvault` application and the **Actor** is the `Administrators` at tuition centers, unless specified otherwise)
+(For all use cases below, the **System** refers to the `EduVault` application and the **Actor** is the `Administrators` at tuition centers, unless specified otherwise)
 
 <br><br>
 **UC01 - View all students’ details**
