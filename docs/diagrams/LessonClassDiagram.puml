@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor #000000
+skinparam classBackgroundColor MODEL_COLOR_T1
+
+class Person
+class Lesson
+class LessonManager {
+    +isClashingWithExistingLessons(lesson: Lesson): boolean
+}
+enum "<<enum>>\nDay" as Day
+
+Person --right-> "*" Lesson
+LessonManager --> "*" Lesson
+Lesson -> "1" Day
+LessonManager ..> Day
+@enduml

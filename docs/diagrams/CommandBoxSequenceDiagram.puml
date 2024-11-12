@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI UI_COLOR_T1
+participant ":CommandBox" as CommandBox UI_COLOR
+participant ":CommandExecutor" as CommandExecutor UI_COLOR
+participant ":TextField" as TextField UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":CommandHistory" as CommandHistory LOGIC_COLOR
+end box
+
+
+[-> CommandBox: handleCommandEntered()
+activate CommandBox
+CommandBox -> TextField: getText()
+activate TextField
+TextField --> CommandBox: commandText
+deactivate TextField
+
+alt commandText is empty
+    CommandBox --> CommandBox: return
+else else
+    CommandBox -> CommandExecutor: execute(commandText)
+
+    activate CommandExecutor
+    note right of CommandExecutor
+              If a CommandException or ParseException
+              occurs when executing the commandText,
+                the CommandExecutor deactivates and
+                an error style is applied to the text field.
+    end note
+    CommandExecutor --> CommandBox: return CommandResult
+    deactivate CommandExecutor
+    CommandBox -> CommandHistory: add(commandText)
+    CommandBox -> TextField: clear the text field
+end
+[<--CommandBox
+deactivate CommandBox
+@enduml
