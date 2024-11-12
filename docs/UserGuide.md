@@ -319,7 +319,7 @@ Finds students whose names contain any of the given keywords *and* their schedul
 
 Records the tuition fee that the student is unable to pay immediately after the lesson. 
 
-When he/she pays the outstanding fees at a later time, you should use the [`settle` command](#settling-outstanding-fees-from-a-student-settle) to settle the tuition fee owed by the student 
+When he/she pays the outstanding fees at a later time, you should use the [`settle` command](#settling-outstanding-fees-from-a-student-settle) to settle the tuition fee owed by the student. 
 
 **Format:** `owe INDEX hr/HOURS_OWED`
 
