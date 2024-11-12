@@ -11,7 +11,7 @@
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**q
+## **Acknowledgements**
 
 This project was adapted from [AB-3's codebase](https://github.com/se-edu/addressbook-level3).
 
@@ -722,7 +722,7 @@ testers are expected to do more *exploratory* testing.
 ### Deleting multiple persons
 1. Deleting multiple valid contacts by indices.
 
-   1. Test case: `mass_delete 1 3 5 `
+   1. Test case: `mass_delete 1 3 5`
       Expected: Contacts at indices `1`, `3`, and `5` are deleted from the address book. A success message is shown indicating that contacts with these indices have been successfully deleted.
 
 1. Deleting contacts with a mix of valid and invalid indices.
@@ -738,11 +738,11 @@ testers are expected to do more *exploratory* testing.
 1. Deleting contacts with non-integer inputs.
 
    1. Test case: `mass_delete 1 two 3`
-      Expected: Contacts at indices `1` and `3 `are deleted. The input two is invalid. A success message is shown for valid deletions, followed by a message listing the invalid input `two`.
+      Expected: Contacts at indices `1` and `3` are deleted. The input two is invalid. A success message is shown for valid deletions, followed by a message listing the invalid input `two`.
 
 1. Deleting contacts with duplicate indices.
 
-   1. Test case: `mass_delete 2 2 4 `
+   1. Test case: `mass_delete 2 2 4`
       Expected: Contacts at indices `2` and `4` are deleted. A success message is shown indicating successful deletion of contacts at these indices. Duplicate indices do not affect the operation beyond the first valid occurrence.
 
 1. Deleting contacts with no indices provided.
