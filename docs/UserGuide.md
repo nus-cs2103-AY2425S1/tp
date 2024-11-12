@@ -888,7 +888,7 @@ _Details coming soon ..._
 
 # 6. Known issues
 
-1. **Using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the application window will open off-screen. The remedy is to delete the `preferences.json` file created by the application and then run the application again.
+1. **Using multiple screens**: if you move the application to a secondary screen, and later switch to using only the primary screen, the application window will open off-screen. The remedy is to delete the `preferences.json` file created by the application and then run the application again.
 2. **Running application in multiple windows simultaneously**: There will data synchronization issues. For example, if you add a new supplier named John Doe in one window, this change will not automatically reflect in other open windows. As a result, attempting to search for John Doe in a second window will not yield any results unless the application is restarted or refreshed. Avoid running multiple instances of the application at the same time to ensure consistent data access.
 3. **Minimizing the Help Window**: If the Help Window is minimized, and you try to reopen it (using the help command, Help menu, or F1), it will continue to stay minimized. To fix this, you need to manually restore the minimized Help Window.
 4. **App currently accepts certain invalid dates**: This is due to the automatic behavior of the `LocalDateTime` module, which adjusts certain invalid dates to the nearest valid date. We recommend checking the validity of dates manually before entering them. Improving these input checks to prevent invalid dates is a planned enhancement.
