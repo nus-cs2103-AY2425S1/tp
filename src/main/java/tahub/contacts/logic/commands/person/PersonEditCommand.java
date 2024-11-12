@@ -6,7 +6,6 @@ import static tahub.contacts.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_PHONE;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TAG;
 import static tahub.contacts.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -43,7 +42,7 @@ public class PersonEditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the matriculation number. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: MATRICULATION_NUMBER (must be matriculation number of an existing student) "
+            + "Parameters: m/MATRICULATION_NUMBER (must be matriculation number of an existing student) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "

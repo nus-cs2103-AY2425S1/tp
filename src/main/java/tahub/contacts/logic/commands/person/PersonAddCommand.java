@@ -6,7 +6,6 @@ import static tahub.contacts.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_PHONE;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TAG;
 
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
