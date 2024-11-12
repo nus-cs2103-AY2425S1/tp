@@ -6,7 +6,7 @@
 
 # SocialBook User Guide
 
-SocialBook is a **desktop app for managing contacts, optimized for use via a  Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a social worker based in Singapore and can type fast, SocialBook can get your contact management tasks (eg. locate/contact families) done faster than traditional GUI apps.
+SocialBook is a **desktop app designed for social workers in Singapore, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SocialBook can get your contact management tasks done faster than traditional GUI apps. It helps you manage your beneficiaries by storing contact information, important remarks and information on the last time you visited them.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -41,6 +41,71 @@ SocialBook is a **desktop app for managing contacts, optimized for use via a  Co
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Contact field requirements
+
+### Name
+* Names are compulsory for all contacts, and are denoted with the `n/` prefix.
+* Names can contain any characters at all, including spaces, hyphens, and other special characters.
+* Names will be stored in their case-sensitive form, but capitalisation will be ignored when checking for duplicate names.
+    * Eg. Adding a contact as "john Doe" will save them as such, but trying to add a "John Doe" with the same phone number will be marked as a duplicate person and rejected.
+    * To avoid unexpected behaviour with this, it is recommended that users save contacts with consistent capitalisation rules.
+
+### Phone
+* Phones are compulsory for all contacts, and are denoted with the `p/` prefix.
+* Phone numbers can only contain 8 numbers, and must begin with a 6, 8, or 9.
+* Spaces in the middle of a phone number are accepted (eg. 9123 4523), as are phone numbers without spaces (eg. 91234523).
+* Spaces in unusual locations will render the phone number invalid (eg. 912 34523).
+
+### Address
+* Addresses are optional for contacts, and are denoted by the `a/` prefix.
+* Addresses can contain any characters, including spaces, commas, hyphens, etc.
+* To indicate no address for a contact, you can `add` a contact without the `a/` prefix, or with a `a/` followed by whitespace.
+
+### Email
+* Emails are optional for contacts, and are denoted by the `e/` prefix.
+* Email addresses are confined to the limits of the traditional email format: **`localPart@domainName`**. This includes a few restrictions:
+    * The `localPart` component of the email can only contain alphanumeric characters and the following 4 special characters: **`+`, `-`, `.`, `_`**. But take note that it cannot start or end with these special characters.
+    * The `domainName` component of the email will consist of one or more domain labels, separated by periods (`.`).
+    * Every domain label can only contain alphanumeric characters, or hyphens (`-`). They must also start and end with alphanumeric characters, so no starting or ending email addresses with hyphens!
+    * The last domain label in the `domainName` must be at least 2 characters long.
+    * The `localPart` and `domainName` components of the email must be separated by a `@`.
+* To indicate no email for a contact, you can `add` a contact without the `e/` prefix, or with a `e/` followed by whitespace.
+
+### Date of Last Visit
+* Dates of last visit are optional for contacts, and are denoted by the `d/` prefix.
+* Dates of last visit are confined to the `dd-MM-yyyy` format and range of dates follows the [ISO-8601 calendar system](https://en.wikipedia.org/wiki/ISO_8601).
+* The date provided must be valid, i.e., either today's date or any date before today. This prevents accidental entering of future dates.
+* To indicate no date of last visit for a contact, you can `add` a contact without the `d/` prefix, or with a `d/` followed by whitespace.
+
+### Emergency Contact
+* Emergency contacts are optional fields, and are denoted by the `ec/` prefix.
+* Emergency contacts are subject to the same formatting requirements as `Phone`.
+* To indicate no emergency contact for a person, you can `add` a contact without the `ec/` prefix, or with a `ec/` followed by whitespace.
+
+### Tags
+* Tags are optional for contacts, and are denoted by the `t/` prefix.
+* More than one tag can be added to a contact.
+* Tags can contain any characters, but they should not begin with whitespace.
+* You can include hyphens and spaces as necessary between words for tags that are multiple words long!
+* To indicate no tags for a contact, you can `add` a contact without any `t/` prefixes.
+    * Take note that `add`ing a contact with a `t/` prefix followed by whitespace is not supported. Omit the `t/` tag for contacts without tags.
+
+### Remarks
+* Remarks are optional for contacts, and are denoted by the `r/` prefix.
+* It is recommended that long-form notes about a particular contact should be saved in remarks.
+* Remarks can contain any characters, as they allow long-form writing with multiple sentences.<br>
+* **IMPORTANT:** Only one `r/` prefix can be used when adding remarks.
+    * Adding another `r/` prefix will cause the first part of the `r/` prefix to be lost.
+    * If needed to add the prefix `r/` to remark, enclose the prefix with " ". e.g. `remark 1 r/ use "r/" to add remark`
+
+<box type="tip" seamless>
+
+**Take note:** contacts will always be created without remarks. To write a remark about a contact, you can do this with the `remark` command, or with the `edit` command by specifying an `r/` prefix.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -195,10 +260,12 @@ Format: `sort PARAMETER_PREFIX/ORDER`
 * By default, if `ORDER` is omitted, contacts will be sorted in ascending order based on the `PARAMETER`.
 * An ascending order can be specified by replacing `ORDER` with `ascending` or its short form `asc`.
 * A descending order can be specified by replacing `ORDER` with `descending` or its short form `desc`.
+* Ascending name order will **generally** be special characters and numbers followed by letters (case-insensitive).
+* Persons without date of last visit will always appear at the end when sorting by date of last visit.
 
 Examples:
 * `sort n/` sorts by name in ascending order.
-* `sort d/`, `sort d/asc`, `sort d/ascending` are all equivalent, and they sort the date of last visit in ascending order. 
+* `sort d/`, `sort d/asc`, `sort d/ascending` are all equivalent, and they sort by date of last visit in ascending order.
 * `sort d/desc` sorts by date of last visit in descending order.
 
 ### Viewing a person : `view`
@@ -220,7 +287,7 @@ Examples:
 
 <box type="tip" seamless>
 
-**Take Note:** Viewing is executed based on the currently displayed list. 
+**Take Note:** Viewing is executed based on the currently displayed list.
 Executing any commands that alter the displayed list (such as `delete`, `sort`, or `find`) may change the person being viewed.
 For this reason, it is recommended to execute `view` commands after the displayed list has been modified as intended. 
 
@@ -242,7 +309,13 @@ Format: `seed`
 
 - `seed` will add them to the contact list if they are not presently inside. 
 - `seed` does not clear or reset the list.
-- If your exisitng contact list has a person with the same name and phone number, it will **not** be overwritten.  
+- If your existing contact list has a person with the same name and phone number, it will **not** be overwritten.
+
+<box type="info" seamless>
+
+**Note:** Seed command does not inform you if a duplicate person was skipped, it will only state that it has "seeded sample data" regardless of outcome.
+
+</box>
 
 ### Exiting the program : `exit`
 
@@ -263,75 +336,6 @@ SocialBook data are saved automatically as a JSON file `[JAR file location]/data
 **Caution:**
 If a person's data values are changed to an invalid format, Socialbook will discard that particular person's data while keeping the rest. However, if your changes to the data file makes the file format invalid, SocialBook will discard all data and start with an empty data file at the next run **only if user exits SocialBook with the `exit` command**. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the SocialBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
-
-## Contact field requirements
-
-### Name
-* Names are compulsory for all contacts, and are denoted with the `n/` prefix.
-* Names can contain any characters at all, including spaces, hyphens, and other special characters.
-* Names will be stored in their case-sensitive form, but capitalisation will be ignored when checking for duplicate names.
-  * Eg. Adding a contact as "john Doe" will save them as such, but trying to add a "John Doe" with the same phone number will be marked as a duplicate person and rejected.
-  * Other instances of possible duplicates such as identical names except for extra spaces are not handled.
-
-### Phone
-* Phones are compulsory for all contacts, and are denoted with the `p/` prefix.
-* Phone numbers can only contain 8 numbers, and must begin with a 6, 8, or 9.
-* Spaces in the middle of a phone number are accepted (eg. 9123 4523), as are phone numbers without spaces (eg. 91234523).
-* Spaces in unusual locations will render the phone number invalid (eg. 912 34523).
-
-### Address
-* Addresses are optional for contacts, and are denoted by the `a/` prefix.
-* Addresses can contain any characters, including spaces, commas, hyphens, etc.
-* To indicate no address for a contact, you can `add` a contact without the `a/` prefix, or with a `a/` followed by whitespace.
-
-### Email
-* Emails are optional for contacts, and are denoted by the `e/` prefix.
-* Email addresses are confined to the limits of the traditional email format: **`localPart@domainName`**. This includes a few restrictions:
-  * The `localPart` component of the email can only contain alphanumeric characters and the following 4 special characters: **`+`, `-`, `.`, `_`**. But take note that it cannot start or end with these special characters. 
-  * The `domainName` component of the email will consist of one or more domain labels, separated by periods (`.`).
-  * Every domain label can only contain alphanumeric characters, or hyphens (`-`). They must also start and end with alphanumeric characters, so no starting or ending email addresses with hyphens!
-  * The last domain label in the `domainName` must be at least 2 characters long.
-  * The `localPart` and `domainName` components of the email must be separated by a `@`.
-* To indicate no email for a contact, you can `add` a contact without the `e/` prefix, or with a `e/` followed by whitespace.
-
-### Date of Last Visit
-* Dates of last visit are optional for contacts, and are denoted by the `d/` prefix.
-* Dates of last visit are confined to the `dd-MM-yyyy` format and range of dates follows the [ISO-8601 calendar system](https://en.wikipedia.org/wiki/ISO_8601).
-* The date provided must be valid, i.e., either today's date or any date before today. This prevents accidental entering of future dates.
-* To indicate no date of last visit for a contact, you can `add` a contact without the `d/` prefix, or with a `d/` followed by whitespace.
-
-### Emergency Contact
-* Emergency contacts are optional fields, and are denoted by the `ec/` prefix.
-* Emergency contacts are subjected to the same formatting requirements as `Phone`.
-* To indicate no emergency contact for a person, you can `add` a contact without the `ec/` prefix, or with a `ec/` followed by whitespace.
-
-### Tags
-* Tags are optional for contacts, and are denoted by the `t/` prefix.
-* More than one tag can be added to a contact.
-* Tags can contain any characters, but they should not begin with whitespace.
-* You can include hyphens and spaces as necessary between words for tags that are multiple words long!
-* To indicate no tags for a contact, you can `add` a contact without any `t/` prefixes.
-  * Take note that `add`ing a contact with a `t/` prefix followed by whitespace is not supported. Omit the `t/` tag for contacts without tags.
-
-### Remarks
-* Remarks are optional for contacts, and are denoted by the `r/` prefix.
-* It is recommended that long-form notes about a particular contact should be saved in remarks.
-* Remarks can contain any characters, as they allow long-form writing with multiple sentences.<br>
-* **IMPORTANT:** Only one `r/` prefix can be used when adding remarks. 
-  * Adding another `r/` prefix will cause the first part of the `r/` prefix to be lost.
-  * If needed to add the prefix `r/` to remark, enclose the prefix with " ". e.g. `remark 1 r/ use "r/" to add remark`
-
-<box type="tip" seamless>
-
-**Take note:** contacts will always be created without remarks. To write a remark about a contact, you can do this with the `remark` command, or with the `edit` command by specifying an `r/` prefix.
-
 </box>
 
 --------------------------------------------------------------------------------------------------------------------

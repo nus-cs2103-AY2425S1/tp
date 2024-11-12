@@ -204,7 +204,7 @@ A current contact can be assigned as another person's emergency contact. It is a
 
 <puml src="diagrams/EmergencyContact.puml" />
 
-A person will then store an EmergencyContactablePerson as their emergency contact.
+A person will then store a ContactablePerson as their emergency contact.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -241,10 +241,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                   | I want to …​                                                               | So that I can…​                                                                                        |
 |----------|-------------------------------------------|----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| `* * *`  | social worker                             | delete a contact                                                           | remove the contact when I no longer serve them so that the contact list does not get too long           |
-| `* * *`  | social worker/new user                    | add contact with phone number                                              | remember the person i serve                                                                            |
+| `* * *`  | social worker                             | delete a contact                                                           | remove the contact when I no longer serve them so that the contact list does not get too long          |
+| `* * *`  | social worker/new user                    | add contact with phone number                                              | remember the person I serve                                                                            |
 | `* * *`  | social worker/new user                    | add address                                                                | easily look up without needed to look up database/files                                                |
-| `* * *`  | social worker                             | view my list of contacts                                                   | so that i can see the beneficiaries i serve                                                            |
+| `* * *`  | social worker                             | view my list of contacts                                                   | see the beneficiaries I serve                                                                          |
 | `* *`    | overwhelmed with many households          | take note of how long it has been since I visited each house               | ensure that no house gets forgotten in my scheduling                                                   |
 | `* *`    | new user learning the interface           | check out basic commands that are frequently used with a help command      | learn the basic usage of the program more quickly                                                      |
 | `* *`    | user with multiple contacts per household | tag multiple users to be from the same household                           | simplify the process of contacting other household members                                             |
@@ -252,10 +252,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | social worker                             | add alternative contact method                                             | add a contact for elderly who do not have a phone                                                      |
 | `* *`    | social worker/expert user                 | look for emergency contact quickly                                         | inform next-of-kin when something happen                                                               |
 | `* *`    | social worker/expert user                 | add family contact                                                         | know how many people in the household                                                                  |
-| `* *`    | social worker/expert user                 | add notes                                                                  | remember if i need to take precaution before visiting the person/family or preparations i need to make |
-| `* *`    | social worker/expert user                 | sort contacts by lexicographical order                                     | find contact quickly if i remember the name                                                            |
+| `* *`    | social worker/expert user                 | add notes                                                                  | remember if I need to take precaution before visiting the person/family or preparations i need to make |
+| `* *`    | social worker/expert user                 | sort contacts by lexicographical order                                     | find contact quickly if I remember the name                                                            |
 | `* *`    | social worker/expert user                 | search through contacts using keywords                                     | find contact quickly based on key words within the contact information                                 |
-| `* *`    | social worker/expert user                 | add alternative phone number                                               | incase beneficiary cannot be reached                                                                   |
+| `* *`    | social worker/expert user                 | add alternative phone number                                               | have another way of reaching the beneficiary                                                                   |
 | `* *`    | social worker/new user                    | edit contact                                                               | edit the contact without the need to delete and create a new one                                       |
 | `* *`    | forgetful individual                      | add tags which explain what service the person needs                       | remember and be able to meet the needs of beneficiaries                                                |
 | `* *`    | holder of sensitive information           | lock the SocialBook behind a password                                      | avoid having unsolicited sharing of personal information                                               |
@@ -478,8 +478,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Singapore Standard Time**: Singapore time, which is 8 hours ahead of Coordinated Universal Time (UTC + 08:00)
 * **Hard disk**: data storage device in laptops and computers.
 * **.JSON file**: JavaScript Object Notation, stores and transports data using a human-readable text format.
-* **SocialBook**: SocialBook is an address book hence SocialBook and AddressBook are interchangable. SocialBook is used to reference the product while AddressBook refers to the Class object in source code.
-* **Social worker**: refers to full-time employees of the [Ministry of Social and Family Developement (MSF) or its subsidaries](https://www.msf.gov.sg)
+* **SocialBook**: SocialBook is an address book hence SocialBook and AddressBook are interchangeable. SocialBook is used to reference the product while AddressBook refers to the Class object in source code.
+* **Social worker**: refers to full-time employees of the [Ministry of Social and Family Development (MSF) or its subsidiaries](https://www.msf.gov.sg)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -601,3 +601,11 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add n/hunter p/61234578`
        Expected: A message is displayed showing the information of the added person. The person is added to the list according to the position of their name (given ascending name order).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. Make `list` command with miscellaneous parameters error message more helpful. Currently, typing `list` with miscellaneous parameters, ex. `list 123`, will result in a message that states "Please ensure your command is valid!". To improve specificity this will be changed to ask user to remove miscellaneous parameters.
+2. Prevent tags from allowing underscores. When searching for tags with underscores in the find command, the underscores are interpreted as an `or`. This means that searching for the tag "low_income" will bring up all tags containing "low" and "income" instead of just "low_income".
+3. Remove `remark` command while keeping remarks. Currently, remarks can be added via the edit command or the remark command but not the add command. Instead of having a dedicated remark command we will allow users to use add command to add remarks while adding a contact and edit command to add or edit the remark of a contact. This change solves an associated issue whereby the remark command currently undoes the detailed view on the contact. 
