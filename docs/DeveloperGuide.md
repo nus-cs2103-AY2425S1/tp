@@ -225,7 +225,7 @@ The diagram above shows how clashing lessons are detected,
 
 <box type="info" seamless>
 
-Note: As of `v1.6` clashing lessons are not allowed, hence when a `Student` is deleted, all of his/her lessons can be safely deleted as well. No other students will have the same lesson time. The team is considering allowing clashing lessons after warning users for a future release.
+Note: As of `v1.6` clashing lessons are not allowed, hence when a `Person` is deleted, all of his/her lessons can be safely deleted as well. No other students will have the same lesson time. The team is considering allowing clashing lessons after warning users for a future release.
 
 </box>
 
