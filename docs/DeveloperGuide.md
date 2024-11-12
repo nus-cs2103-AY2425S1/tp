@@ -308,6 +308,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                               | delete an entry                                            | remove entries that I no longer need                                    |
 | `* * *`  | private tutor                                      | view all my students' details                              | have an overview of how many student I am managing                      |
 | `* * *`  | tutor with many students                           | find a student by name                                     | locate details of students without having to go through the entire list |
+| `* * *`  | tutor with many students                           | be warned if the new added class clashes                   | better manage my teaching schedule and the number of students at the same time |
 | `* * *`  | busy undergraduate tutor                           | record students' payment status                            | how much students have paid or owe me |
 | `* * *`  | busy undergraduate tutor                           | record it when students settle the owed amount             | avoid mistakenly reminding him/her again |
 | `* *`    | busy undergraduate tutor                           | find students by day                                       | locate details of students that has tuition on a specific day           |
