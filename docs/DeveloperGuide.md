@@ -530,7 +530,7 @@ testers are expected to do more *exploratory* testing.
 
 ## Reference
 
-![MindMapLogo.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2FMindMapLogo.png)
+![MindMapLogo.png](../src/main/resources/images/MindMapLogo.png)
 
 The logo for MindMap is generated via ChatGPT, powered by Dall-E.
 Prompted used: Generate a clipart style logo in black and white which blends the style of a brain and a cloud, meant for an app that lets therapist log patient sessions
