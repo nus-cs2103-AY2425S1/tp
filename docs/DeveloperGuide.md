@@ -622,28 +622,26 @@ testers are expected to do more *exploratory* testing.
 
 1. Missing data file
 
-   1. Test case: Delete `clientell.json` from the data file directory. If there is no such file, do nothing.<br>
-      Expected: The app launches correctly with a client list populated with sample clients.<br>
-<div style="page-break-before: always; visibility: hidden"> 
-\pagebreak 
-</div>
-2. Corrupted data file<br>
-&nbsp;
-   1. Test case: Add in irrelevant key-value pairs in `clientell.json`.<br>
-      Expected: The app populates data ignoring all irrelevant key-value pairs.  
+    1. Test case: Delete `clientell.json` from the data file directory. If there is no such file, do nothing.<br>
+       Expected: The app launches correctly with a client list populated with sample clients.
 
-   2. Test case: Add in duplicate key-value pairs in `clientell.json`.<br>
-      Expected: The app populates data ignoring all duplicates except the final pair.
+2. Corrupted data file
 
-   3. Test case: Modify an existing value to be illegal in `clientell.json`, such as `phone: (+1234)`.<br>
-      Expected: The app launches with an empty UI and no data.
+    1. Test case: Add irrelevant key-value pairs in `clientell.json`.<br>
+       Expected: The app populates data, ignoring all irrelevant key-value pairs.
+
+    2. Test case: Add duplicate key-value pairs in `clientell.json`.<br>
+       Expected: The app populates data, ignoring all duplicates except the final pair.
+
+    3. Test case: Modify an existing value to be illegal in `clientell.json`, such as `phone: (+1234)`.<br>
+       Expected: The app launches with an empty UI and no data.
 
 3. Editing while app is active
 
-   1. Prerequisite: The app is active
+    1. Prerequisite: The app is active.
 
-   2. Test case: Make a legal edit anywhere in `clientell.json`, such as changing the first client's name to `name: "John"`. Then close the app.<br>
-      Expected: The legal edit is overwritten by the new data from the app's most recent session.
+    2. Test case: Make a legal edit anywhere in `clientell.json`, such as changing the first client's name to `name: "John"`. Then close the app.<br>
+       Expected: The legal edit is overwritten by the new data from the app's most recent session.
 
 
 
