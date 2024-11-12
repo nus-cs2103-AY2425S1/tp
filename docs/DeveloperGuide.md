@@ -386,8 +386,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | hide private contact details                                                               | minimize chance of someone else seeing them by accident                |
 | `*`      | user with many persons in the address book | sort persons by name                                                                       | locate a person easily                                                 |
 
-_{More to be added}_
-
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
@@ -426,7 +424,6 @@ otherwise)
 
       Use case resumes at step 2.
 
-_{More to be added}_
 
 ### Non-Functional Requirements
 
@@ -435,7 +432,6 @@ _{More to be added}_
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
 
-_{More to be added}_
 
 ### Glossary
 
@@ -454,10 +450,6 @@ _{More to be added}_
 | **SOL**                            | Solana, a high-performance blockchain supporting builders around the world creating crypto apps that scale, Solana (SOL) native cryptocurrency.                                                      |                                                                                                                                                                    |
 | **Mainstream OS**                  | Windows, Linux, Unix, MacOS                                                                                                                                                                          |
 | **Private contact detail**         | A contact detail that is not meant to be shared with others                                                                                                                                          |
-
----
-
-## **Appendix: Planned Enhancement**
 
 
 ---
