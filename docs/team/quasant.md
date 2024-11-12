@@ -11,10 +11,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to add jobs.
   * What it does: Allows the user to add representations of jobs into the address book.
-  * Justification: Jobs are tied to companies, and so recruiters inevitably
-    have to work with companies as well. Adding jobs to the address book
-    allows recruiters to manage companies associated to their job listings and
-    contacts, and enhance their existing workflow.
+  * Justification: The jobs are required so that users can see what job openings are available for the contacts that they have, aiding in their decision to match a job to a contact.
 
 * **New Feature**: Added the ability to delete jobs.
   * What it does: Allows the user to delete a job listing for when the job itself is no longer valid.
