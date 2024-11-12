@@ -489,8 +489,10 @@ Team Size: 5
 2. **Add date validation for `ETA` parameter**: For deliveries, users are currently able to enter an ETA that is before the date ordered. We plan to add date validation so that an error message is thrown in the event of an invalid date
 input just like this.
 3. **Edit command validation**: We plan to checks within the edit command to warn duplicate fields like emails and phone numbers. Currently, the edit command does not give any indication of duplicate fields.
-3. **Add a list of employees available within the inspect window**: When users assign employees to deliveries within the inspect window, they are unable to see a list of employees available. Thus, users would have to memorize the employees
-name in the main window, before switching to the inspect window to perform the assign. A helpful enhancement here would thus be to include a list of employees available within the inspect window itself, so that the user would not have to
-perform this unnecessary step.
-4. **UI Update for Delivery Assignments**: Modify UI to reflect delivery assignments in the client inspect page. Currently there is no visual indication in inspect page that a delivery is assigned.
-4. **Add ability to unassign workers**: Add command for users to unassign deliveries from an employee.
+4. **UI update for delivery assignments**: Modify UI to reflect delivery assignments in the client inspect page. Currently there is no visual indication in inspect page that a delivery is assigned.
+5. **Add ability to unassign workers**: Add command for users to unassign deliveries from an employee.
+6. **Ensure consistent window resizing**: When switching between the Inspect and Main windows in full-screen mode on Windows, the scrollable sections sometimes display incorrectly or appear cropped. We plan to address this issue to ensure a seamless resizing experience.
+7. **Restrict the back command to the Inspect window**: Currently, the back command shows a success message even when used in the Main window. We plan to update the behavior so that it results in an error message when entered outside the Inspect window, as it is intended to work exclusively within the Inspect window.
+8. **Improve error message for the assign command in the Main window**: Presently, if the assign command is entered in the Main window, the error message displays the format of the assign command. We plan to revise this message to clearly indicate that the assign command is not allowed in the Main window.
+9. **Handle sorting on empty lists**: When attempting to sort an empty list of deliveries or employees, the application currently shows a success message. We plan to update this to display an appropriate error message instead.
+10. **Make contact names case-insensitive**: Currently, duplicate contacts can be added if their names differ only in capitalization. We plan to make the name field case-insensitive to prevent such duplicates from being created.
