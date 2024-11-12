@@ -43,7 +43,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-Our project was made with AI assistance from [GitHub Copilot](https://github.com/features/copilot/) to finish small snippets of code and to provide suggestions.
+Our project was made with AI assistance from [GitHub Copilot](https://github.com/features/copilot/) to finish small snippets of code and to provide suggestions. Furthermore, the format of the features and use cases were inspired from [Avengers Assemble Developer Guide](https://ay2324s2-cs2103t-t10-1.github.io/tp/DeveloperGuide.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -566,7 +566,7 @@ The `filter` command is designed such that the user has versatility in filtering
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, Dev-Ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
