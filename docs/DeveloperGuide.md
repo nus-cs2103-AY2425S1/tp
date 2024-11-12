@@ -1055,12 +1055,12 @@ This posed a challenge as the import command could not extend two classes at onc
 To overcome this, we had to refactor the `ConcreteCommand` class to an interface `Undoable` and let all undoable commands implement this interface.
 This allowed us to implement the `undo` method in the import command.
 
-### Challenge 2: Creating a dependency between Storage and FileAccessCommand for export and import
+#### Challenge 2: Creating a dependency between Storage and FileAccessCommand for export and import
 
 Import and export was initially deemed odd to do since it would have to access `Storage`, whereas all other commands at the time only needed to have access to `Model` to be executed. Accordingly, we were fairly certain that it would have been inadequate for the `import` and `export` commands to inherit directly from `Command`.
 The workaround our team decided on was to create a new class `FileAccessCommand` that would require a `Model` and `Storage` for it's execute which `export` and `import` could then inherit from. As `FileAccessCommand` inherits from `Command` this allowed `export` and `import` to continue using the polymorphism when parsing commands and in the LogicManager while having a unique execute to carry out its functions.
 
-### Challenge 3: Removal of address field as a compulsory field
+#### Challenge 3: Removal of address field as a compulsory field
 
 While AddressBook3 initially had address as a compulsory field when adding a person to the contact list, our team felt that in the context of DorManagerPro, addresses could instead be optional. In most cases, all the residents would by default live in the dorm managed by the user, and by extension have a common address.
 We then had to contemplate between the outright removal of the field or only making it optional. We decided to make it optional as it could still provide helpful information such as the students permanent residence outside the dorm in case the user had to contact them.
