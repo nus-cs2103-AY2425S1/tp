@@ -11,11 +11,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandUtils;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Role;
 
 /**
  * Removes buyers from an existing listing in the system.
@@ -31,13 +31,11 @@ public class RemoveBuyersFromListingCommand extends Command {
 
     public static final String MESSAGE_REMOVE_BUYERS_SUCCESS = "Buyers removed from listing: %1$s.\n"
             + "Removed buyers: %2$s";
-    public static final String MESSAGE_LISTING_NOT_FOUND = "The specified listing name does not exist.";
     public static final String MESSAGE_EMPTY_SET = "Please provide valid buyers";
     public static final String MESSAGE_PERSON_NOT_BUYER = "The specified person is not a buyer:\n"
             + "%d. %s";
     public static final String MESSAGE_NOT_BUYER_FOR_LISTING =
             "The specified buyer %1$s is not a buyer of the listing %2$s.";
-    public static final String MESSAGE_BUYER_NOT_FOUND = "The specified buyer %1$s does not exist in the client list.";
 
     private final Index index;
     private final Set<Index> buyersToRemove;
@@ -62,35 +60,37 @@ public class RemoveBuyersFromListingCommand extends Command {
 
         int zeroBased = index.getZeroBased();
         List<Listing> lastShownListingList = model.getFilteredListingList();
-        if (zeroBased >= lastShownListingList.size() || zeroBased < 0) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
-        }
+        CommandUtils.handleInvalidListingIndex(zeroBased, lastShownListingList.size());
 
-        Listing listingToEdit = model.getFilteredListingList().get(zeroBased);
+        Listing listingToEdit = lastShownListingList.get(zeroBased);
 
         Set<Person> existingBuyers = new HashSet<>(listingToEdit.getBuyers());
-        Set<Person> buyersToRemoveSet = new HashSet<>();
         List<Person> lastShownPersonList = model.getFilteredPersonList();
+
+        Set<Person> buyersToRemoveSet = getBuyersToRemove(existingBuyers, lastShownPersonList, listingToEdit);
+        existingBuyers.removeAll(buyersToRemoveSet);
+
+        Listing updatedListing = ListingCommandsUtil.updateListingWithBuyers(listingToEdit, existingBuyers);
+
+        model.setListing(listingToEdit, updatedListing);
+
+        return new CommandResult(generateSuccessMessage(listingToEdit, buyersToRemoveSet));
+    }
+
+    private Set<Person> getBuyersToRemove(Set<Person> existingBuyers,
+                                     List<Person> lastShownPersonList, Listing listingToEdit) throws CommandException {
+        Set<Person> buyersToRemoveSet = new HashSet<>();
 
         for (Index buyerIndex : buyersToRemove) {
             int zeroBasedBuyer = buyerIndex.getZeroBased();
-            int oneBasedBuyer = buyerIndex.getOneBased();
-            if (zeroBasedBuyer >= lastShownPersonList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
+            CommandUtils.handleInvalidPersonIndex(zeroBasedBuyer, lastShownPersonList.size());
 
             Person buyerToRemove = lastShownPersonList.get(zeroBasedBuyer);
 
             // Check if the person is actually an instance of Buyer
-            if (!buyerToRemove.getRole().equals(Role.BUYER)) {
-                throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER,
-                        oneBasedBuyer, buyerToRemove.getName()));
-            }
-
-            if (!existingBuyers.contains(buyerToRemove)) {
-                throw new CommandException(String.format(MESSAGE_NOT_BUYER_FOR_LISTING,
-                        buyerToRemove.getName(), Messages.format(listingToEdit)));
-            }
+            ListingCommandsUtil.verifyPersonIsNotBuyer(buyerToRemove, buyerToRemove.getRole(), buyerIndex);
+            // Check if the person is a buyer of the listing
+            validateBuyerExistsInListing(existingBuyers, buyerToRemove, listingToEdit);
 
             buyersToRemoveSet.add(buyerToRemove);
         }
@@ -99,23 +99,22 @@ public class RemoveBuyersFromListingCommand extends Command {
             throw new CommandException(MESSAGE_EMPTY_SET);
         }
 
-        existingBuyers.removeAll(buyersToRemoveSet);
+        return buyersToRemoveSet;
+    }
 
-        // Create an updated listing with the modified buyers set
-        Listing updatedListing = new Listing(
-                listingToEdit.getName(),
-                listingToEdit.getAddress(),
-                listingToEdit.getPrice(),
-                listingToEdit.getArea(),
-                listingToEdit.getRegion(),
-                listingToEdit.getSeller(),
-                existingBuyers
-        );
+    private void validateBuyerExistsInListing(Set<Person> existingBuyers,
+                                              Person buyerToRemove, Listing listingToEdit) throws CommandException {
+        if (!existingBuyers.contains(buyerToRemove)) {
+            throw new CommandException(String.format(MESSAGE_NOT_BUYER_FOR_LISTING,
+                    buyerToRemove.getName(), Messages.format(listingToEdit)));
+        }
+    }
 
-        model.setListing(listingToEdit, updatedListing);
+    private String generateSuccessMessage(Listing listingToEdit, Set<Person> buyersToRemoveSet) {
+
         String removedNames = buyersToRemoveSet.stream()
                 .map(buyer -> buyer.getName().toString()).collect(Collectors.joining(", "));
-        return new CommandResult(String.format(MESSAGE_REMOVE_BUYERS_SUCCESS, listingToEdit.getName(), removedNames));
+        return String.format(MESSAGE_REMOVE_BUYERS_SUCCESS, listingToEdit.getName(), removedNames);
     }
 
     @Override
@@ -129,7 +128,9 @@ public class RemoveBuyersFromListingCommand extends Command {
         }
 
         RemoveBuyersFromListingCommand otherCommand = (RemoveBuyersFromListingCommand) other;
-        return index.equals(otherCommand.index)
-                && buyersToRemove.equals(otherCommand.buyersToRemove);
+        boolean hasSameIndex = index.equals(otherCommand.index);
+        boolean hasSameBuyersToRemove = buyersToRemove.equals(otherCommand.buyersToRemove);
+
+        return hasSameIndex && hasSameBuyersToRemove;
     }
 }

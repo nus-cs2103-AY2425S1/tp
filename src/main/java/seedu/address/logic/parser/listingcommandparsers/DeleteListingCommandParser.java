@@ -1,11 +1,7 @@
 package seedu.address.logic.parser.listingcommandparsers;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.listingcommands.DeleteListingCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -24,13 +20,7 @@ public class DeleteListingCommandParser implements Parser<DeleteListingCommand> 
      * @throws ParseException if the user input does not conform to the expected format.
      */
     public DeleteListingCommand parse(String args) throws ParseException {
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args);
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteListingCommand(index);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteListingCommand.MESSAGE_USAGE), pe);
-        }
+        Index index = ParserUtil.parseIndexWithInvalidCommandFormatMessage(args, DeleteListingCommand.MESSAGE_USAGE);
+        return new DeleteListingCommand(index);
     }
 }

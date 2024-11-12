@@ -37,8 +37,8 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
         expectedModel.addPerson(validBuyer);
 
-        assertCommandSuccess(new AddBuyerProfile(validBuyer), model,
-                String.format(AddBuyerProfile.MESSAGE_SUCCESS, Messages.format(validBuyer)),
+        assertCommandSuccess(new AddBuyerProfileCommand(validBuyer), model,
+                String.format(AddBuyerProfileCommand.MESSAGE_SUCCESS, Messages.format(validBuyer)),
                 expectedModel);
     }
 
@@ -49,16 +49,16 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
         expectedModel.addPerson(validSeller);
 
-        assertCommandSuccess(new AddSellerProfile(validSeller), model,
-                String.format(AddSellerProfile.MESSAGE_SUCCESS, Messages.format(validSeller)),
+        assertCommandSuccess(new AddSellerProfileCommand(validSeller), model,
+                String.format(AddSellerProfileCommand.MESSAGE_SUCCESS, Messages.format(validSeller)),
                 expectedModel);
     }
 
     @Test
     public void execute_duplicateBuyer_throwsCommandException() {
         Buyer buyerInList = (Buyer) model.getAddressBook().getPersonList().get(3);
-        assertCommandFailure(new AddBuyerProfile(buyerInList), model,
-                AddBuyerProfile.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddBuyerProfileCommand(buyerInList), model,
+                AddBuyerProfileCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -75,8 +75,8 @@ public class AddCommandIntegrationTest {
 
         // Ensure that a seller was found
         if (sellerInList != null) {
-            assertCommandFailure(new AddSellerProfile(sellerInList), model,
-                    AddSellerProfile.MESSAGE_DUPLICATE_PERSON);
+            assertCommandFailure(new AddSellerProfileCommand(sellerInList), model,
+                    AddSellerProfileCommand.MESSAGE_DUPLICATE_PERSON);
         } else {
             fail("No seller found in the list to perform the duplicate test.");
         }

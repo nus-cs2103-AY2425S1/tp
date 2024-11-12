@@ -16,7 +16,7 @@ import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -74,64 +74,68 @@ public class JsonAdaptedListing {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Listing toModelType() throws IllegalValueException {
+        handleExceptions();
+
         final List<Person> listingBuyers = new ArrayList<>();
         for (JsonAdaptedPerson tag : buyers) {
             listingBuyers.add(tag.toModelType());
         }
 
-        if (listingName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(listingName)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
         final Name modelListingName = new Name(listingName);
-
-        if (price == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
-        }
-        if (!Price.isValidPrice(price)) {
-            throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
-        }
-
         final Price modelPrice = new Price(price, new BigDecimal(price));
-
-        if (area == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Area.class.getSimpleName()));
-        }
-        if (!Area.isValidArea(area)) {
-            throw new IllegalValueException(Area.MESSAGE_CONSTRAINTS);
-        }
-
         final Area modelArea = new Area(area);
-
-        if (region == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Region.class.getSimpleName()));
-        }
-        if (!Region.isValidRegion(region)) {
-            throw new IllegalValueException(Region.MESSAGE_CONSTRAINTS);
-        }
-
         final Region modelRegion = Region.fromString(region);
-
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-
         final Address modelAddress = new Address(address);
-
-        if (seller == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
-        }
-
         final Person modelSeller = seller.toModelType();
-
         final Set<Person> modelBuyers = new HashSet<>(listingBuyers);
 
         return new Listing(modelListingName, modelAddress, modelPrice, modelArea, modelRegion,
                 modelSeller, modelBuyers);
+    }
+
+    private void handleExceptions() throws IllegalValueException {
+        if (listingName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+
+        if (!Name.isValidName(listingName)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+
+        if (price == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
+        }
+
+        if (!Price.isValidPrice(price)) {
+            throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
+        }
+
+        if (area == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Area.class.getSimpleName()));
+        }
+
+        if (!Area.isValidArea(area)) {
+            throw new IllegalValueException(Area.MESSAGE_CONSTRAINTS);
+        }
+
+        if (region == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Region.class.getSimpleName()));
+        }
+
+        if (!Region.isValidRegion(region)) {
+            throw new IllegalValueException(Region.MESSAGE_CONSTRAINTS);
+        }
+
+        if (address == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        }
+
+        if (!Address.isValidAddress(address)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+
+        if (seller == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+        }
     }
 }

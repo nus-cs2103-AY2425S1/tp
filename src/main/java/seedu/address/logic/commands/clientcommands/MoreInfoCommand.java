@@ -6,9 +6,9 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandUtils;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -52,11 +52,10 @@ public class MoreInfoCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        int zeroBasedPerson = targetIndex.getZeroBased();
-        if (zeroBasedPerson >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-        Person personMoreInfo = lastShownList.get(zeroBasedPerson);
+        int zeroBased = targetIndex.getZeroBased();
+
+        CommandUtils.handleInvalidPersonIndex(zeroBased, lastShownList.size());
+        Person personMoreInfo = lastShownList.get(zeroBased);
 
         MoreInfoWindow moreInfoWindow = new MoreInfoWindow(personMoreInfo);
         moreInfoWindow.show();

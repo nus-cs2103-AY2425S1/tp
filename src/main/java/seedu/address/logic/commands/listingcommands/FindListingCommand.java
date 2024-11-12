@@ -32,6 +32,7 @@ public class FindListingCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredListingList(predicate);
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_LISTINGS_LISTED_OVERVIEW, model.getFilteredListingList().size()));
     }

@@ -13,8 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.listing.Listing;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Buyer;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
 
@@ -183,17 +183,6 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns true if there exists a listing of the same name as {@code name} in Listings.
-     */
-    @Override
-    public boolean hasListingOfName(Name name) {
-        requireNonNull(name);
-        return this.getFilteredListingList()
-                .stream()
-                .anyMatch(listing -> listing.getName().equals(name));
-    }
-
-    /**
      * Determines if a listing can be edited without causing duplicate identifiers within the system.
      * Checks if the edited listing's name or address matches any existing listing (excluding the original).
      */
@@ -203,8 +192,7 @@ public class ModelManager implements Model {
         return this.getFilteredListingList()
                 .stream()
                 .filter(listing -> !listing.equals(toEdit))
-                .anyMatch(currentListing -> editedListing.getName().equals(currentListing.getName())
-                    || editedListing.getAddress().equals(currentListing.getAddress()));
+                .anyMatch(currentListing -> editedListing.equals(currentListing));
     }
 
     /**
@@ -267,17 +255,6 @@ public class ModelManager implements Model {
                     .orElse(null);
     }
 
-    /**
-     * Returns true if the person with the same name as {@code name} exists in the address book.
-     */
-    @Override
-    public boolean hasPersonOfName(Name name) {
-        requireNonNull(name);
-        return this.getFilteredPersonList()
-                .stream()
-                .anyMatch(person -> person.getName().equals(name));
-    }
-
     //=========== Filtered Listing List Accessors =============================================================
 
     /**
@@ -335,11 +312,15 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && listings.equals(otherModelManager.listings)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
-                && filteredListings.equals(otherModelManager.filteredListings);
+
+        boolean hasSameAddressBook = addressBook.equals(otherModelManager.addressBook);
+        boolean hasSameListings = listings.equals(otherModelManager.listings);
+        boolean hasSameUserPrefs = userPrefs.equals(otherModelManager.userPrefs);
+        boolean hasSameFilteredPersonsList = filteredPersons.equals(otherModelManager.filteredPersons);
+        boolean hasSameFilteredListingsList = filteredListings.equals(otherModelManager.filteredListings);
+
+        return hasSameAddressBook && hasSameListings && hasSameUserPrefs
+                && hasSameFilteredPersonsList && hasSameFilteredListingsList;
     }
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import seedu.address.model.Listings;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Region;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 
 /**
  * A utility class containing a list of {@code Listing} objects to be used in tests.

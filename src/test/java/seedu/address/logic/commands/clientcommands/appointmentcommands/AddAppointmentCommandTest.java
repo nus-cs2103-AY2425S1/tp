@@ -26,7 +26,7 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -173,12 +173,6 @@ public class AddAppointmentCommandTest {
                 throw new AssertionError("Target person not found in list.");
             }
             persons.set(index, editedPerson);
-        }
-
-        @Override
-        public boolean hasPersonOfName(Name name) {
-            return this.persons.stream()
-                    .anyMatch(person -> person.getName().equals(name));
         }
 
         @Override

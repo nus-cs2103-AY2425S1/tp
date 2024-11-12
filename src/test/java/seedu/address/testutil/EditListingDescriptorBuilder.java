@@ -17,7 +17,7 @@ import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -54,7 +54,6 @@ public class EditListingDescriptorBuilder {
         descriptor.setAddress(listing.getAddress());
         descriptor.setArea(listing.getArea());
         descriptor.setRegion(listing.getRegion());
-        System.out.println(findSellerIndexByName(listing.getSeller().getName()));
         descriptor.setSellerIndex(Index.fromZeroBased(findSellerIndexByName(listing.getSeller().getName())));
     }
 

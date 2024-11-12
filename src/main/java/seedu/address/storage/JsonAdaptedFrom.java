@@ -41,9 +41,11 @@ public class JsonAdaptedFrom {
         if (value == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, From.class.getSimpleName()));
         }
+
         if (value.equals(EMPTY_FROM_PLACEHOLDER)) {
             return From.EMPTY_FROM;
         }
+
         return new From(value);
     }
 }

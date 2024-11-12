@@ -9,15 +9,13 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandUtils;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Seller;
 
 /**
  * Adds or updates an appointment for a specified person in the address book.
@@ -71,27 +69,21 @@ public class AddAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+        int zeroBased = index.getZeroBased();
+        CommandUtils.handleInvalidPersonIndex(zeroBased, lastShownList.size());
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson;
+        Person personToEdit = lastShownList.get(zeroBased);
+        Person editedPerson =
+                AppointmentCommandsUtil.createPersonWithAppointment(personToEdit, personToEdit.getRole(), appointment);
 
-        if (personToEdit instanceof Buyer buyer) {
-            editedPerson = new Buyer(buyer.getName(), buyer.getPhone(),
-                    buyer.getEmail(), buyer.getTags(),
-                    appointment);
-        } else {
-            Seller seller = (Seller) personToEdit;
-            editedPerson = new Seller(seller.getName(), seller.getPhone(),
-                    seller.getEmail(), seller.getTags(),
-                    appointment);
-        }
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
+
+
+
     /**
      * Generates a command execution success message based on whether the remark is added to or removed from
      * {@code personToEdit}.
@@ -108,11 +100,17 @@ public class AddAppointmentCommand extends Command {
         if (other == this) {
             return true;
         }
+
         // instanceof handles nulls
         if (!(other instanceof AddAppointmentCommand)) {
             return false;
         }
+
         AddAppointmentCommand otherAppointmentCommand = (AddAppointmentCommand) other;
-        return index.equals(otherAppointmentCommand.index) && appointment.equals(otherAppointmentCommand.appointment);
+
+        boolean hasSameIndex = index.equals(otherAppointmentCommand.index);
+        boolean hasSameAppointment = appointment.equals(otherAppointmentCommand.appointment);
+
+        return hasSameIndex && hasSameAppointment;
     }
 }

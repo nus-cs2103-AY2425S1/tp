@@ -46,6 +46,16 @@ public class JsonAdaptedAppointment {
      * @throws IllegalValueException if there were any data constraints violated in the adapted appointment.
      */
     public Appointment toModelType() throws IllegalValueException {
+        handleMissingFieldExceptions();
+
+        Date modelDate = date.toModelType();
+        From modelFrom = from.toModelType();
+        To modelTo = to.toModelType();
+
+        return new Appointment(modelDate, modelFrom, modelTo);
+    }
+
+    private void handleMissingFieldExceptions() throws IllegalValueException {
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
@@ -57,12 +67,6 @@ public class JsonAdaptedAppointment {
         if (to == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, To.class.getSimpleName()));
         }
-
-        Date modelDate = date.toModelType();
-        From modelFrom = from.toModelType();
-        To modelTo = to.toModelType();
-
-        return new Appointment(modelDate, modelFrom, modelTo);
     }
 
 }

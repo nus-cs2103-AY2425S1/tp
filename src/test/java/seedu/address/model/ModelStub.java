@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.listing.Listing;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -98,11 +98,6 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean hasPersonOfName(Name name) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
     public ObservableList<Person> getFilteredPersonList() {
         throw new AssertionError("This method should not be called.");
     }
@@ -139,11 +134,6 @@ public class ModelStub implements Model {
 
     @Override
     public Listing getListingByName(Name name) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public boolean hasListingOfName(Name name) {
         throw new AssertionError("This method should not be called.");
     }
 

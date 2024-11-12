@@ -16,9 +16,9 @@ import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Seller;
@@ -70,11 +70,11 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyListings getSampleListings() {
-        Listings sampleLi = new Listings();
+        Listings sampleListings = new Listings();
         for (Listing sampleListing : sampleListings()) {
-            sampleLi.addListing(sampleListing);
+            sampleListings.addListing(sampleListing);
         }
-        return sampleLi;
+        return sampleListings;
     }
 
     /**

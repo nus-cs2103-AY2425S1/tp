@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
@@ -17,8 +19,8 @@ import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -40,6 +42,40 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} and returns an {@code Index} object.
+     * If parsing fails, throws a {@code ParseException} with a formatted message including the provided usage message.
+     *
+     * @param oneBasedIndex the one-based index as a string
+     * @param usageMessage the usage message to include in the exception if parsing fails
+     * @return the parsed {@code Index} object
+     * @throws ParseException if the index cannot be parsed as a valid integer
+     */
+    public static Index parseIndexWithInvalidCommandFormatMessage(String oneBasedIndex,
+            String usageMessage) throws ParseException {
+        try {
+            return parseIndex(oneBasedIndex);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    usageMessage));
+        }
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} and returns an {@code Index} object for a listing.
+     * Throws a {@code ParseException} if the index is not a non-zero unsigned integer.
+     *
+     * @param indexOneBased the one-based index as a string
+     * @return the parsed {@code Index} object
+     * @throws ParseException if the index is not a non-zero unsigned integer
+     */
+    public static Index getListingIndex(String indexOneBased) throws ParseException {
+        if (!StringUtil.isNonZeroUnsignedInteger(indexOneBased)) {
+            throw new ParseException(Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
+        }
+        return ParserUtil.parseIndex(indexOneBased);
     }
 
     /**
