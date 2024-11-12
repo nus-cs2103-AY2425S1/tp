@@ -1037,6 +1037,11 @@ Could not read data from file FILE_PATH due to inability to find or access the f
 This error message could be more specific and our team plans to update this to the following error message: <br>
 DorManagerPro could not access the file at FILE_PATH. This could be because the file is of the wrong type, it has a format incompatible with DorManagerPro or it contains invalid data. Please check that the file path leads to a JSON file with valid data and formatting.
 
+6. **Consistent behavior for `find`.** Currently, `find` are having inconsistent behavior on different fields which is counterintuitive. The problems are as following: <br>
+The name search is case-insensitive, but tag search is not. We plan to modify `find t/` tag search to make it case-insensitive. <br>
+In the name search any contacts matching at least any one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. But phone number search requires the number to be exactly same with country code and region code. <br>
+We plan to make the phone search versatile and let user be able to use phone number without country code, or even only with country code to search<br>
+
 ## **Appendix: Effort**
 
 ### Overview
