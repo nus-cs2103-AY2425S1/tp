@@ -734,7 +734,7 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Planned Enhancement**
 Team size: 5
 
-1. **Allowing more subejcts to be added with the addsubject feature:** Currently, Subjects are implemented using an enum with a list of common subjects offered by tuition centers in Singapore. 
+1. **Allowing more subjects to be added with the addsubject feature:** Currently, Subjects are implemented using an enum with a list of common subjects offered by tuition centers in Singapore. 
 Acknowledging that there might be niche subjects not included, we plan to enhance this feature to allow administrators to 
 define verified subjects in the system that are offered under the tuition center, such that they can enrol students into 
 those subjects as well without losing the benefit of validation and duplication checks. 
