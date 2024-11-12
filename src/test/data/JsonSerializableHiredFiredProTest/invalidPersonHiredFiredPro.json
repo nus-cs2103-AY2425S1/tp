@@ -1,0 +1,9 @@
+{
+  "persons": [ {
+    "name": "Hans Muster",
+    "job" : "Software Engineer L2",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "interviewScore": "5.0"
+  } ]
+}
