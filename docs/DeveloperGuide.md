@@ -51,6 +51,11 @@
   - [Advanced Error Messages](#advanced-error-messages)
   - [Case Insensitivity for All Contact Fields](#case-insensitivity-for-all-contact-fields)
   - [Display Index of Newly Added Contact](#display-index-of-newly-added-contact)
+- [Appendix: Effort](#appendix-effort)
+  - [Difficulty Level](#difficulty-level)
+  - [Challenges Faced](#challenges-faced)
+  - [Effort Required](#effort-required)
+  - [Achievements](#achievements)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -988,4 +993,36 @@ Users may be uncertain about where a newly added contact appears within the cont
 
 * Expected Outcome: Users can instantly see the index of the added contact, allowing them to navigate directly to its location without spending extra time searching through the list.
 
+<div style="page-break-after: always;"></div>
 
+## Appendix: Effort
+
+### Difficulty Level
+If the Individual Project (IP) was rated a difficulty of 5/10, this `Data_coNdUctorS` Team Project (TP) would be a solid 9/10. While we didn't implement highly advanced features, the project posed significant challenges, especially for our team of mostly non-Computer Science majors. Transitioning from the IP to the TP required adapting to complex structures, such as multiple `CommandParsers`, working with `.fxml` files for UI design, and fully utilising GitHub's collaborative tools. These elements presented a steep learning curve and demanded a lot of adjustment.
+
+---
+
+### Challenges Faced
+
+- Pagination: As we modified the AddressBook3 (AB3) UI, we aimed to introduce pagination to help users navigate large contact lists efficiently. Although we found some resources and code snippets online, implementing comprehensive test cases for the pagination feature proved challenging. This lowered our overall CodeCov score, as we struggled to find suitable ways to test this UI-centric functionality.
+
+- Test Coverage: Maintaining high test coverage was a significant challenge, especially due to the new UI features and pagination, which reduced our overall CodeCov score. As we were still learning to work with automated testing, achieving comprehensive test coverage for these features required more experience than we initially had.
+
+- JavaFX Framework: JavaFX was entirely new to the team, and we found it challenging to implement the necessary UI enhancements. We devoted considerable time to learning JavaFX basics, which delayed some of our intended progress but ultimately provided us with valuable skills.
+
+- IntelliJ Integration: For most of us, IntelliJ was a new development environment, and we initially struggled to navigate its features. Many of us used CLI commands in the terminal until around week 11, when we discovered that IntelliJ could streamline many processes, including Git commands. This realisation greatly improved our workflow and efficiency for the remainder of the project.
+
+---
+
+### Effort Required
+The project required consistent, focused effort from each team member. 
+
+Each week, we met as a team 2 to 3 times. The first meeting was usually to distribute tasks, with a check-in meeting closer to the submission deadline and a final meeting on the due date to ensure everything was ready for submission. These meetings accounted for approximately 4-6 hours per week. Additionally, each team member spent an average of 7 hours per week working independently on the project. Tse Hui went above and beyond, dedicating 12-14 hours weekly to drive our progress forward.
+
+---
+
+### Achievements
+Despite the challenges, we achieved several milestones that we're proud of:
+
+- Realistic Goal Setting and Achievement: Although we didn't add an extensive list of features, we set realistic project goals and are proud to have met them. This includes valuable learning outcomes, such as mastering GitHub for version control, exploring IntelliJ’s integrated tools, and learning how to collaborate effectively on a software project as a team.
+- Skill Development: Our work on this project allowed each team member to grow technically and collaboratively, strengthening our foundational skills in Java, JavaFX, and project management practices.
