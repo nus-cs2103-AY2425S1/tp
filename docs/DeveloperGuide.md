@@ -625,6 +625,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: Delete `clientell.json` from the data file directory. If there is no such file, do nothing.<br>
        Expected: The app launches correctly with a client list populated with sample clients.
 
+<div style="page-break-before: always;"></div>
+
 2. Corrupted data file
 
     1. Test case: Add irrelevant key-value pairs in `clientell.json`.<br>
