@@ -566,11 +566,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
 | `* * *`  | admin       | list all students in the system                                                             <br/><br/><br/><br/>                                                      | show all students, can look through everyone's information at once, and allow other commands to reference the list index       |
 | `* * *`  | admin       | delete ex-students' information from the address book                                                    <br/>                                                        | clean and organise the database                                                                                                |
-| `* * *`  | admin       | edit students' information in the address book                                                    <br/><br/><br/><br/>                                                | Edit a student's information without having to remove and adding them in again                                                 |
+| `* * *`  | admin       | edit students' information in the address book                                                    <br/><br/><br/><br/>                                                | Edit a student's information without having to remove and add them in again                                                    |
 | `* * *`  | admin       | check for student's attendance for past weeks                                                        <br/><br/><br/>                                                  | arrange for make up classes and calculate payment                                                                              |
-| `* * *`  | admin       | record how much a student have paid                                                                                                                                   | track the overdue fees or advance payment                                                                                      |
-| `* * *`  | admin       | log monthly/term fees for students                                                                                                                                    | increment the tutorial fees for student                                                                                        |
-| `* * *`  | admin       | see the students' contacts(phone, email)                                                                                                                              | contact the students for adminstrative issues                                                                                  |
+| `* * *`  | admin       | record how much a student have paid                                                                                                                                   | track overdue fees or advance payments                                                                                         |
+| `* * *`  | admin       | log monthly/term fees for students                                                                                                                                    | increment the tutorial fees for students                                                                                       |
+| `* * *`  | admin       | see the students' contact details (phone, email)                                                                                                                      | contact the students for adminstrative issues                                                                                  |
 | `* * *`  | admin       | add a new student and his/her related information                                                                                                                     | keep track of new students joining the center                                                                                  |
 | `* * *`  | admin       | mark attendance of the students                                                                                                                                       | keep track of students' attendance                                                                                             |
 | `* * *`  | new admin   | be disallowed from keying in invalid grade                                                                                                                            | not enter invalid information                                                                                                  |
@@ -581,11 +581,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | admin       | search for students using their payment status                                                       <br/>         <br/>  <br/>                                       | quickly locate student information based on their payment status                                                               |
 | `* *`    | admin       | search for student using their tutroial enrollment status                                                              <br/><br/>                                     | quickly locate student information based on their enrolled tutorial                                                            |
 | `* *`    | admin       | check the number of students referred by a student                                                                                                                    | determine which referral reward the student is entitled to if the maximum limit has not been reached                           |
-| `* *`    | admin       | Creating a new tutorial class                                                                                                                                         | Track the various tutorials within the center                                                                                  |
-| `* *`    | admin       | Closing a tutorial class                                                                              <br/> <br/>                                                     | Maintain only opened tutorials in the system, keep the system organised. Also can undo mistakenly opened tutorial              |
-| `* *`    | admin       | enroll students into the tutorials                                                                                                     <br/>                          | Track which student is in which tutorial                                                                                       |
+| `* *`    | admin       | Creating a new tutorial class                                                                                                                                         | track the various tutorials within the center                                                                                  |
+| `* *`    | admin       | Closing a tutorial class                                                                              <br/> <br/>                                                     | maintain only opened tutorials in the system, keep the system organised. Also can undo mistakenly opened tutorial              |
+| `* *`    | admin       | enroll students into the tutorials                                                                                                     <br/>                          | track which student is in which tutorial                                                                                       |
 | `* *`    | admin       | unenrolling students from the tutorials                                                                <br/><br/><br/><br/>                                     <br/> | remove student from tutorial if student want to change class or quit, or tutorial is closing                                   |
-| `* *`    | admin       | record the grades of students                                                                                                                                         | Keep track of student's grades                                                                                                 |
+| `* *`    | admin       | record the grades of students                                                                                                                                         | keep track of student's grades                                                                                                 |
 | `* *`    | admin       | track the homework submitted by each students                                                                                                                         | keep track of their progress and inform tutor's easily as required                                                             |
 | `* *`    | admin       | archive records of past students                                                                                                                                      | make the data cleaner and easier to manage                                                                                     |
 | `* *`    | admin       | see which student have the most overdue amount                                                                                                                        | chase/remind the students for payment                                                                                          |
@@ -674,6 +674,7 @@ Use case ends.
   * 2a1. System returns a message on payment of student being marked already.
   * 2a2. System returns a fail status.
 
+
   Use case ends.
 
 
@@ -755,12 +756,14 @@ Use case ends.
 
   Use case ends.
 
-* 2b. Admin inputs student or tutorial that do not exist.
+
+
+* 2b. Admin inputs student and/or tutorial that does not exist.
   * 2b1. System displays errors status.
   * 2b2. System prompts admin to key in information again.
   * 2b3. Admin inputs information again.
     
-    Repeat 2b1 to 2b3 until Admin inputs student and/or tutorial that exist.
+    Repeat 2b1 to 2b3 until Admin inputs student and tutorial that exist.
   * 2b4. System enrolls the student and displays success status.
   
   Use case ends.
@@ -1003,7 +1006,7 @@ Use case ends.
     * 2b2. System prompts admin to input information again.
     * 2b3. Admin inputs information again.
 
-      Repeat 2b1 to 2b3 until Admin inputs student that exists.
+      Repeat 2b1 to 2b3 until Admin inputs tutorial that exists.
     * 2b4. System marks attendance for the tutorial and displays success status.
 
   Use case ends.
