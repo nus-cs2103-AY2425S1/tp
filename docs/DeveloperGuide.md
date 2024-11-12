@@ -263,7 +263,7 @@ The activity diagram is as follows:
 
 - that the specified index is positive and within the bounds of the contacts list.
 
-### 4. Find command
+### 4. Find Command
 
 The `find` command is used to find contacts whose name match the specified keyword given by the user.
 
@@ -359,7 +359,7 @@ The format for `view` command is `view INDEX`. The valid input for `INDEX` is a 
 
 We plan to change the error message into `"Index must be a positive integer!"`.
 
-### 8. `Deletetag all` command does not work as intended on an empty list
+### 8. Allow `deletetag all` Command to Handle an Empty List 
 
 #### Current Issue:
 
@@ -369,7 +369,7 @@ If the user manages to end up with an empty list, by entering the input `clear` 
 
 Instead, we plan to show an error message whenever the user tries to use the `deletetag all` command on an empty list. The error message will be similar to `Cannot delete tags from an empty list!`. This will give the user a clear idea and bring less confusion.
 
-### 9. Restrict phone number field to 8 numbers
+### 9. Restrict Phone Number Field to 8 Numbers
 
 #### Current Issue:
 
