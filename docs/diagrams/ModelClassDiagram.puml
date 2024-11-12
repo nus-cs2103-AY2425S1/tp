@@ -18,6 +18,7 @@ Class UserPrefs
 
 Package "Buyer" {
 Class UniqueBuyerList
+Class Buyer
 
 BuyerList *--> "1" UniqueBuyerList
 UniqueBuyerList --> "~* all" Buyer

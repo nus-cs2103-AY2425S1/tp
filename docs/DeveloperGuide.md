@@ -121,8 +121,7 @@ visible GUI.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
 the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
-is specified
-in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/HelpWindow.fxml)
+is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)  
 
 The `UI` component,
 
@@ -133,8 +132,7 @@ The `UI` component,
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -163,16 +161,13 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AbcliParser` class creates a `BMPCommandParser` (`BMP` is a placeholder for the different mode of parsers, either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser`). The created BMPCommandParser then creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AbcliParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AbcliParser` class creates a `BMPCommandParser` (`BMP` is a placeholder for the different mode of parsers, either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser`). The created BMPCommandParser then creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g. `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AbcliParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g. during testing.
-* All `BMPCommandParser` classes (`BuyerCommandParser`, `MeetUpCommandParser`, and `PropertyCommandParser`) extends the `CommandParser` class so that all of them have access to general commands e.g. `HelpCommand`, ...
+* All `BMPCommandParser` classes (`BuyerCommandParser`, `MeetUpCommandParser`, and `PropertyCommandParser`) extends the `CommandParser` class so that all of them have access to general commands e.g. `HelpCommand`, `Exit Command`.
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
-
-<img src="images/ModelClassDiagram.png" width="600" />
+<img src="images/ModelClassDiagram.png" width="600" />  
 
 <div markdown="span" class="alert alert-info">:information_source: **Note**: This model class diagram is simplified for readability. The implementation of the `Buyer`, `MeetUp` and `Property` models are given below.
 
@@ -195,16 +190,9 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `BuyerList`, which `Buyer` references. This allows `BuyerList` to only require one `Tag` object per unique tag, instead of each `Buyer` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -240,10 +228,7 @@ The mode of `AbcliParser` can be switched by executing a `SwitchParserModeComman
 5. The `SwitchParserModeCommand` then switches the `currentMode` of `AbcliParser` to `ParserMode.MEETUP` when executed. The `currentMode` will affect the type of `CommandParser` that will be created for future parses (in step 2).
 6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The diagram below shows the activity diagram for a user wanting to delete the first `MeetUp` in his `MeetUpList`:
-
-<br></br>
-<br></br>
+The diagram below shows the activity diagram for a user wanting to delete the first `MeetUp` in his `MeetUpList`:<br><br>
 <img src="images/DeleteMeetUpActivityDiagram.png" width="350" />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -446,7 +431,7 @@ Use case ends.
 * 1a. The inputted keywords are invalid.
   * 1a1. ABCLI informs the User of the error.
 
-Use case ends.
+  Use case ends.
 
 **Use Case 7: Adding a meetup**
 
@@ -714,7 +699,7 @@ Expected: No property is added. Error message indicating that the property alrea
     1. Test case: `edit 1`  
     Expected: No changes are made as no fields are specified. Error message prompts for at least one field to edit.
 
-    1. Test case: `edit x`(where x is larger than the list size)  
+    1. Test case: `edit x b/700000`(where x is larger than the list size)  
        Expected: No changes are made. Error message indicating invalid buyer index is shown as the status message.
 
     1. Test case: `edit 1 b/700000 p/91@83817`  
@@ -860,7 +845,7 @@ Expected: Properties with addresses containing the keywords `Bishan`, `Marsiling
    
    1. Prerequisites: Switch to property mode using the `switch p` command.
    
-   1. Test case: `find a/ n/`, `find`  
+   1. Test case: `find a/bishan n/john`, `find`  
       Expected: Error message indicating invalid command format is shown as status message.
 
 ### Saving data
@@ -870,7 +855,11 @@ Expected: Properties with addresses containing the keywords `Bishan`, `Marsiling
       Expected: The program will automatically populate the `data` folder with a sample file.
 
    1. Under the `data` section, add a new parameter into one of the entries in any file.  
+      Expected: The program will ignore the new parameter and read the data file as usual.
+
+   1. Under the `data` section, edit any of the required parameters in any of the files to turn the parameter invalid.
       Expected: The program will ignore any saved data from that file and open an empty file.
+   
 
 
 ## **Appendix: Planned Enhancements**
@@ -884,15 +873,15 @@ Our team size is 5.
 * Property types will be given restrictions in the future such that nonsensical types will not be accepted. We will create an `enum` with common types such as `HDB`, `Landed Property`, `Condominium` etc.
 
 ### Improved duplication detection
-* Person duplication detection will be changed from the current method of matching names to checking for a repeated phone number OR email as these are more unique identifiers.
+* Buyer duplication detection will be changed from the current method of matching names to checking for a repeated phone number OR email as these are more unique identifiers.
 
 
 ### Setting a maximum for budget and asking price
 * Currently, there are no restrictions on the maximum value an asking price or budget can take. Therefore, the user can input unrealistic values such as 999,999,999,999. This also creates an issue of `long` overflow when the value is too large (exceeds `9223372036854775807`) as the application uses the `java.lang.Long.parseLong()` method. 
 * A planned enhancement will be to use validation regex to ensure that the asking price and budget values are below a maximum, which can be set to 1,000,000,000.
 
-### `Find` using more parameters
-* `Find` will be updated for all 3 modes to allow the use of more parameters (such as: `b/BUDGET`, `p/PHONE`, `e/EMAIL`, and `t/TAG` for buyers). We will change the `Find` command to accept more types of parameters. 
+### Find using more parameters
+* `find` will be updated for all 3 modes to allow the use of more parameters (such as: `b/BUDGET`, `p/PHONE_NUMBER`, `e/EMAIL`, and `t/TAG` for buyers). We will change the `find` command to accept more types of parameters. 
 
 ## **Appendix: Glossary**
 ### Glossary
@@ -903,7 +892,7 @@ Our product name.
 The command line interface is a way to interact with a computer by typing text commands instead of using a mouse to click on icons.
 
 1. **Flag**  
-In our context, a flag is something preceded by a /, but is not the initial command. e.g in `add n/NAME`,  `n/` is a flag but `add` is not.
+In our context, a flag is something preceded by a `/`, but is not the initial command. e.g. in `add n/NAME`,  `n/` is a flag but `add` is not.
 
 1. **GUI**  
 Graphical user interface. The screen you see when opening the application.
@@ -918,7 +907,7 @@ JavaFX is a Java library used to build rich, interactive graphical user interfac
 A non-functional requirement specifies criteria that judge the operation of a system, such as performance, reliability, and usability. Unlike functional requirements, it focuses on how a system performs rather than what it does.
 
 1. **Parameter**  
-A value that you need to provide for the command to work. e.g in `add n/NAME`, `NAME` is a parameter.
+A value that you need to provide for the command to work. e.g. in `add n/NAME`, `NAME` is a parameter.
 
 1. **Plant UML**  
 PlantUML is a tool that allows users to create diagrams, such as UML diagrams, by writing simple, text-based descriptions that are then converted into visual representations. It supports a range of diagrams—like class, sequence, and activity diagrams—and is often used to quickly illustrate system designs or workflows.
