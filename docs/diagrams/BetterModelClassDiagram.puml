@@ -5,7 +5,7 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 class Company {
-    -isFavourite: Boolean
+    isFavourite: Boolean
 }
 show Company members
 
