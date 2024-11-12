@@ -529,7 +529,7 @@ Currently, the input for grade is case-sensitive which may be inconvenient for t
 
 ### Input for name in `view` is case-sensitive
 
-Currently, the input for name in `view` is case-sensitive which may be inconvenient for the user. We plan to make thg input for name in `view` case-insensitive. 
+Currently, the input for name in `view` is case-sensitive which may be inconvenient for the user. We plan to make the input for name in `view` case-insensitive. 
 
 ### Prevent duplicate phone numbers.
 
