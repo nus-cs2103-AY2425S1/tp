@@ -172,24 +172,20 @@ The `add` command is undoable.
 Given below is an example usage scenario and how the `add` command behaves at each step.
 
 Step 1. The user executes `add n/John Doe p/+65 98765432 e/johnd@example.com r/01-1008 a/John street t/Floor 1`.
+<br>
 
-<box type="info" seamless>
+ > **Note:** An error message will be displayed if attempting to add a contact with duplicate `NAME`, `PHONE` or `EMAIL`.
 
-**Note:** An error message will be displayed if attempting to add a contact with duplicate `NAME`, `PHONE` or `EMAIL`.
-
-</box>
 
 Step 2. The `add` command adds a contact with the name John Doe, phone number +65 98765432, email johnd@example.com, room number #01-1008, address John street, tag "Floor 1" to the address book.
 
 The following sequence diagram shows how an `add` command goes through the `Logic` component:
 
 <puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
+<br>
 
-<box type="info" seamless>
+>**Note:** There are no destroy markers (X) for `AddCommand` as it is preserved in the `undo` command stack.
 
-**Note:** There are no destroy markers (X) for `AddCommand` as it is preserved in the `undo` command stack.
-
-</box>
 
 The following activity diagram summarizes what happens when a user executes a `add` command:
 
@@ -205,23 +201,19 @@ The `edit` command is undoable.
 
 Given below is an example usage scenario and how the `edit` command behaves at each step.
 
-Step 1. The user executes `edit 1 n/John Doe p/+65 98765432`.
+Step 1. The user executes `edit 1 n/John Doe p/+65 98765432`. 
+<br>
 
-<box type="info" seamless>
-
-**Note:** An error message will be displayed if attempting to edit a contact to have with duplicate `NAME`, `PHONE` or `EMAIL`.
-
-</box>
+>**Note:** An error message will be displayed if attempting to edit a contact to have with duplicate `NAME`, `PHONE` or `EMAIL`.
 
 Step 2. The `edit` command updates the details of the contact with index 1 to have the name John Doe and phone number +65 98765432.
 
 The following sequence diagram shows how an `edit` command goes through the `Logic` component:
 
 <puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
+<br>
 
-<box type="info" seamless>
-
-**Note:** There are no destroy markers (X) for `EditCommand` as it is preserved in the `undo` command stack.
+>**Note:** There are no destroy markers (X) for `EditCommand` as it is preserved in the `undo` command stack.
 
 </box>
 
@@ -229,94 +221,43 @@ The following activity diagram summarizes what happens when a user executes a `e
 
 <puml src="diagrams/EditActivityDiagram.puml" height="800" width="900" />
 
-### Undo feature
+### Delete Command
 
 #### Implementation
 
-The undo mechanism is facilitated by the interface `Undoable`.
-It has the `undo()` method. The `undo()` method is called when the user executes the `undo` command.
-The `undo()` method reverses the effects of the command that was previously executed.
-The `undo()` method is implemented in the undoable command classes, such as `AddCommand`, `DeleteCommand`, `EditCommand`, etc.
+The `delete` command extends `Command` and implements `Undoable`. The `delete` command deletes a contact based on its index. The `delete` command is undoable.
 
-The `Model` component stores a history of executed undoable commands in a stack.
-When a command is executed successfully, the command is pushed onto the stack.
-When the user executes the `undo` command, the `Model` component pops the last command from the stack and calls the `undo()` method of the command.
+Given below is an example usage scenario and how the `delete` command behaves at each step.
 
-These operations are exposed in the `Model` interface as `Model#pushToUndoStack()` and `Model#undoAddressBook()`.
+Step 1. The user input a delete command followed by an index. For example: `delete 1` deletes the contact with an index of 1.
 
-Given below is an example usage scenario and how the undo mechanism behaves at each step.
+Step 2. The parser parses the input command and returns a `DeleteCommand`.
 
-Step 1. The user launches the application for the first time. The undo stack is initialised as empty.
+Step 3. The `DeleteCommand` is executed by the LogicManager and delete popup get displayed.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command is pushed onto the undo stack.
+Step 4. If user click `Ok` on the pop-up, model updates the filteredPersonList and removes the contact, otherwise cancel the deletion.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command is also pushed onto the undo stack.
+The following sequence diagram shows how a `delete` command goes through the `Logic` component:
 
-<box type="info" seamless>
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions inside the Logic Component for the `delete 1` Command" />
 
-**Note:** If a command is not undoable or fails its execution, it will not be pushed onto the undo stack.
+The following activity diagram summarizes the delete pop-up mechanism:
 
-</box>
+<puml src="diagrams/DeletePopupActivityDiagram.puml" alt="Popup interactions inside the Logic Component for the `delete 1` Command" />
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will pop the last command from the undo stack and call its `undo()` method. The `undo()` method of the command will then reverse the effects of the command.
-
-<box type="info" seamless>
-
-**Note:** If the undo stack is empty, then there are no commands to undo. The `undo` command checks if this is the case. If so, it will return an error to the user.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will not be pushed to the undo stack. Thus, the undo stack remains unchanged.
-
-Step 6. The user executes `clear`, which is pushed to the undo stack.
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" height="600" width="600"/>
-
-#### Design considerations:
-
-**Aspect: How undo executes:**
-
-* **Alternative 1:** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2 (current implementation):** Individual command knows how to undo by itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
 
 ### Clean feature
 
 #### Implementation
 
-The `clean` command extends `Command` and implements `Undoable`. The `clean` command deletes the contacts whose `GradYear` field is earlier
-than the current year, deleting contacts who have graduated from the address book.
-The `clean` command is undoable.
+The `clean` command extends `Command` and implements `Undoable`. The `clean` command deletes the contacts whose `GradYear` field is earlier than the current year, deleting contacts who have graduated from the address book. The `clean` command is undoable.
 
 Given below is an example usage scenario and how the `clean` command behaves at each step.
 
 Step 1. The user executes `clean` in 2024.
+<br>
 
-<box type="info" seamless>
-
-**Note:** The `clean` command checks if there are contacts with `GradYear` 2023 or earlier. If there are none, it will return an error message to the user.
-
-</box>
+> **Note:** The `clean` command checks if there are contacts with `GradYear` 2023 or earlier. If there are none, it will return an error message to the user.
 
 
 Step 2. The `clean` command deletes all contacts with `GradYear` 2023 or earlier.
@@ -348,67 +289,62 @@ The following activity diagram summarizes what happens when a user executes a `c
     * Pros: Allow users to retain their serach results from `find`.
     * Cons: Users cannot see the full extent of `clean` until they return to the default view with `list`.
 
-### Update Find Command
+### Find Command
 
 #### Implementation
 
-* the findCommand is enhanced by new Predicates
-* RoomNumber predicates, PhonePredicate, and TagContainsKeywordsPredicate allows
- a wider range of searching based on more features
+The `find` command extends `Command` and implements `Undoable`. The `find` command searches and filters the contacts based on the following parameters: `NAME`, `PHONE`, `ROOM_NUMBER`, and `TAG`.The find command is undoable.
 
-Below is a detailed process illustration using a sequential diagram:
+Given below is an example usage scenario and how the `find` command behaves at each step.
 
-Step 1. The user issues a `find` command followed by specific parameters,
-for example: `t/friends n/Alex r/08-0805 p/9124 6892`, searches for a profile with a
-tag of friends, a name called Alex, a roomNumber of 08-0805, and a phone call of 9124 6842
+Step 1. The user issues a `find` command followed by specific parameters.
+For example: `t/friends n/Alex r/08-0805 p/9124 6892`, searches for a profile with a 
+tag of friends, a name called Alex, a room number of 08-0805, and a phone number of 9124 6842.
+<br>
 
-**Note** : These parameters can be combined in any sequence, allowing for versatile parameter configurations.
+> **Note** : These parameters can be combined in any sequence, allowing for versatile parameter configurations. 
 
-Step 2. The parser interprets the user command and constructs corresponding predicates for the `FindCommand` object.
-
-Step 3. The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search
+Step 3. The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search.
 
 results based on the specified criteria.
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
 
-## Export feature
+### Export feature
 
 ### Implementation
 
-Step 1: The user executes `export`
+The `export` command extends `Command`. The `export` command exports the data into a new file.
 
-Step 2: The `export` command exports all data currently contained by DorManagerPro to a JSON file in the data folder.
-The name of the JSON file is the time of export.
+Given below is an example usage scenario and how the `export` command behaves at each step.
+
+Step 1: The user executes `export`.
+
+Step 2: The `export` command exports all data currently contained by DorManagerPro to a JSON file in the data folder. The name of the JSON file is the time of export.
 
 The following sequence diagram shows how a `export` command goes through the `Logic` component:
 
 ### Design considerations:
 
-**Aspect: The name of the JSON file on `export`
+**Aspect**: The name of the JSON file on `export`.
 
-* **Alternative 1:** Use a generic format such as `SAVE_FILE_1`, `SAVE_FILE_2`
+* **Alternative 1:** Use a generic format such as `SAVE_FILE_1`, `SAVE_FILE_2`.
     * Pros: Easy for the user to know at first glance which save file was created latest as well as the chronological order of their creation.
     * Cons: Does not tell the user at what time they actually exported the save file or contents of the save file.
 
-* **Alternative 2 (current implementation):** The time of the device's system at the moment of `export`
+* **Alternative 2 (current implementation):** The time of the device's system at the moment of `export`.
     * Pros: Allows for pinpoint of exact save files as no two files can be exported at the same time.
-    * Cons: Takes longer to manually understand the name of the save file when trying to locate a specific one,
-  especially when multiple `exports` happen within a short period of time. Also has no mention of contents of JSON file.
+    * Cons: Takes longer to manually understand the name of the save file when trying to locate a specific one, especially when multiple `exports` happen within a short peri            od of time. Also has no mention of contents of JSON file.
 
-* **Alternative 3:** A brief summary of the file such as `FIRST-Alex_Jones LENGTH-20`
-    * Pros: Easy for the user to know at first glance which save file contains what.
-    * Cons: Does not tell the user at what time they actually exported the save file. Also has no indication of the
-  chronology of creation of the files, and hence no information on which file was the last to be created. Additionally,
-  it would become complicated when exporting files with similar data.
+* **Alternative 3:** A brief summary of the file such as `FIRST-Alex_Jones LENGTH-20`.
+    * Pros: Easy for the user to know at first glance what the contents of each file are.
+    * Cons: Does not tell the user at what time they actually exported the save file. Also has no indication of the chronology of creation of the files, and hence no information on which file was the last to be created. Additionally, it would become complicated when exporting files with similar data.
 
-## Import feature
+### Import feature
 
 ### Implementation
 
-The `import` command implements `Undoable`. The `import` command deletes the contacts whose `GradYear` field is earlier
-than the current year, deleting contacts who have graduated from the address book.
-The `clean` command is undoable.
+The `import` command implements `Undoable`. The `import` imports a file to be loaded into DorManagerPro. The `import` command is undoable.
 
 Given below is an example usage scenario and how the `import` command behaves at each step.
 
@@ -430,29 +366,69 @@ The following sequence diagram shows how a `import` command goes through the `Lo
     * Pros: Allow greater flexibility for user to import JSON files from any location of the device.
     * Cons: Significantly longer command for the user to type. Requires user to have prior knowledge of what the JSON's filepath is, increasing complexity.
 
-### Delete Command
+
+### Undo feature
 
 #### Implementation
 
-* The `delete` command extends `Command` and implements `Undoable`.
-* The `delete` command is based on the index of the contact.
+The undo mechanism is facilitated by the interface `Undoable`.
+It has the `undo()` method. The `undo()` method is called when the user executes the `undo` command.
+The `undo()` method reverses the effects of the command that was previously executed.
+The `undo()` method is implemented in the undoable command classes, such as `AddCommand`, `DeleteCommand`, `EditCommand`, etc.
 
-Below is a detailed process illustration using a sequential diagram:
+The `Model` component stores a history of executed undoable commands in a stack.
+When a command is executed successfully, the command is pushed onto the stack.
+When the user executes the `undo` command, the `Model` component pops the last command from the stack and calls the `undo()` method of the command.
 
-Step 1. The user input a delete command followed by an index,
-for example: `delete 1`, delete the contact with an index of 1.
+These operations are exposed in the `Model` interface as `Model#pushToUndoStack()` and `Model#undoAddressBook()`.
 
-Step 2. The parser parses the input command and returns a `DeleteCommand`.
+Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
-Step 3. The `DeleteCommand` is executed by the LogicManager and delete popup get displayed.
+Step 1. The user launches the application for the first time. The undo stack is initialised as empty.
 
-Step 4. If user click ok on the popup, model updates the filteredPersonList and removes the contact, otherwise cancel the deletion.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command is pushed onto the undo stack.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions inside the Logic Component for the `delete 1` Command" />
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command is also pushed onto the undo stack.
+<br>
 
-Below is the DeletePopupActivityDiagram
+> **Note:** If a command is not undoable or fails its execution, it will not be pushed onto the undo stack.
 
-<puml src="diagrams/DeletePopupActivityDiagram.puml" alt="Popup interactions inside the Logic Component for the `delete 1` Command" />
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will pop the last command from the undo stack and call its `undo()` method. The `undo()` method of the command will then reverse the effects of the command.
+<br>
+
+> **Note:** If the undo stack is empty, then there are no commands to undo. The `undo` command checks if this is the case. If so, it will return an error to the user.
+
+
+The following sequence diagram shows how an undo operation goes through the `Logic` component:
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+<br>
+
+> **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+
+Similarly, how an undo operation goes through the `Model` component is shown below:
+
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will not be pushed to the undo stack. Thus, the undo stack remains unchanged.
+
+Step 6. The user executes `clear`, which is pushed to the undo stack.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/CommitActivityDiagram.puml" height="600" width="600"/>
+
+#### Design considerations:
+
+**Aspect: How undo executes:**
+
+* **Alternative 1:** Saves the entire address book.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2 (current implementation):** Individual command knows how to undo by itself.
+  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -819,12 +795,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
+<br>
 
-<box type="info" seamless>
-
-**Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
-
-</box>
+> **Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
@@ -890,7 +863,7 @@ Given below are instructions to test the app manually.
 2. Exporting a contact list with zero contacts
    1. Prerequisites: There are no people in DorManagerPro
    2. Test case: `export` <br>
-      Expected: A json file is exported to the data folder of the application, with the name of the json file being the time of export. The contents of the json file is as follows: { "persons" : [ ] }
+      Expected: A json file is exported to the data folder of the application, with the name of the json file being the time of export. The contents of the json file is as follows: `{ "persons" : [ ] }`
 
 ### Importing data
 
@@ -1030,7 +1003,7 @@ We plan to add support for setting EmergencyName, EmergencyPhone and GraduationY
 3. **Add more features to the help command pop up window.** The `help` command pop up window currently only shows instructions for three commands, `add`, `edit` and `delete`. We plan
 to add instructions for all other features to make it easier to familiarise themselves with the commands without going to the external User Guide.
 
-4. **Add support to file path formatting in `import`.** Currently, the FILE_PATH parameter for the `import` command only takes in forward slashes, `/`, when taking in user input, e.g. `import fp/./data/SaveFile.json` would be a valid file path for `import`, but `import fp/.\data\SaveFile.json` would not be valid. We plan to add support to `\` as a delimited between folders and files in the future to be more intuitive for users of all Operating Systems, especially those that use backslashes in file paths like Windows.
+4. **Add support to file path formatting in `import`.** Currently, the FILE_PATH parameter for the `import` command only takes in forward slashes, `/`, when taking in user input, e.g. `import fp/./data/SaveFile.json` would be a valid file path for `import`, but `import fp/.\data\SaveFile.json` would not be valid. We plan to add support to `\` as a delimiter between folders and files in the future to be more intuitive for users of all Operating Systems, especially those that use backslashes in file paths like Windows.
 
 5. **Improve specificity of `import` error messages.** Currently, the error message for when the file exists on the device but is otherwise incompatible with DorManagerPro, whether this be because it is of the wrong file type, has a format incompatible with DorManagerPro or contains invalid data is as follows: <br>
 Could not read data from file FILE_PATH due to inability to find or access the file. <br>
@@ -1076,6 +1049,6 @@ The workaround our team decided on was to create a new class `FileAccessCommand`
 
 ### Challenge 3: Removal of address field as a compulsory field
 
-While AddressBook3 initially had address as a compulsory field when adding a person to the contact list, our team felt that in the context of DorManagerPro, addresses could instead be optional. This is as all the residents would by default live in the dorm managed by the user, and by extension have a common address most of the time.
+While AddressBook3 initially had address as a compulsory field when adding a person to the contact list, our team felt that in the context of DorManagerPro, addresses could instead be optional. In most cases, all the residents would by default live in the dorm managed by the user, and by extension have a common address.
 We then had to contemplate between the outright removal of the field or only making it optional. We decided to make it optional as it could still provide helpful information such as the students permanent residence outside the dorm in case the user had to contact them.
 Regardless, it was still quite a challenge to make the once compulsory field optional since it was so intertwined with the original AddressBook3.
