@@ -6,7 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":ListCommandParser" as ListCommandParser LOGIC_COLOR
-participant "l:ListCommand" as ListCommand LOGIC_COLOR
+participant "lc:ListCommand" as ListCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -37,13 +37,13 @@ activate ListCommand
 ListCommand --> ListCommandParser :
 deactivate ListCommand
 
-ListCommandParser --> AddressBookParser : l
+ListCommandParser --> AddressBookParser : lc
 deactivate ListCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 ListCommandParser -[hidden]-> AddressBookParser
 destroy ListCommandParser
 
-AddressBookParser --> LogicManager : l
+AddressBookParser --> LogicManager : lc
 deactivate AddressBookParser
 
 LogicManager -> ListCommand : execute(m)
