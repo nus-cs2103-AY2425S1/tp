@@ -26,13 +26,13 @@ activate ClearCommand
 ClearCommand --> AddressBookParser :
 deactivate ClearCommand
 
-AddressBookParser --> LogicManager : e
+AddressBookParser --> LogicManager : c
 deactivate AddressBookParser
 
 LogicManager -> ClearCommand : execute(m)
 activate ClearCommand
 
-ClearCommand -> Model : clear all internship applications
+ClearCommand -> Model : clears the internship application list
 activate Model
 
 Model --> ClearCommand

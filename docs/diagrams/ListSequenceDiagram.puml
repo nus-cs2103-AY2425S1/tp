@@ -32,7 +32,7 @@ deactivate AddressBookParser
 LogicManager -> ListCommand : execute(m)
 activate ListCommand
 
-ListCommand -> Model : updateFilteredList(PREDICATE_SHOW_ALL)
+ListCommand -> Model : updates filtered list to show all internship applications
 activate Model
 
 Model --> ListCommand

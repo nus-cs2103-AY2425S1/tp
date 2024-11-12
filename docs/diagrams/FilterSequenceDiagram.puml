@@ -40,10 +40,10 @@ StatusPredicate --> FilterCommandParser
 deactivate StatusPredicate
 
 create FilterCommand
-FilterCommandParser -> FilterCommand : s
+FilterCommandParser -> FilterCommand :
 activate FilterCommand
 
-FilterCommand --> FilterCommandParser : f
+FilterCommand --> FilterCommandParser :
 deactivate FilterCommand
 
 FilterCommandParser --> AddressBookParser : f

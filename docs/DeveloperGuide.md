@@ -19,7 +19,7 @@
     * [Common classes](#common-classes)
   * [**Implementation**](#implementation)
     * [Getting help](#getting-help)
-    * [Create new internship application](#create-new-internship-application)
+    * [Add new internship application](#add-new-internship-application)
     * [List all internship applications](#list-all-internship-applications)
     * [Delete an internship application](#delete-an-internship-application)
     * [Update the status of an internship application](#update-the-status-of-an-internship-application)
@@ -97,6 +97,9 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
+> **_NOTE:_** The sequence diagram shows a simplified execution of the DeleteCommand.
+
+<br></br>
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
@@ -143,9 +146,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser (if necessary) that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a internship application).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete an internship application).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -165,13 +168,12 @@ How the parsing works:
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
-The `Model` component:
+The `Model` component,
 
-- **Stores HireMe application data**, which includes all `InternshipApplication` objects. These objects are stored in a UniqueList, ensuring that each application is unique.
-- **Manages a filtered list** of currently 'selected' `InternshipApplication` objects (e.g., search results) as a separate, _filtered_ list. This filtered list is exposed as an unmodifiable `ObservableList<InternshipApplication>`, allowing the UI to automatically reflect any changes in the data, as the list is observable.
-- **Stores a `UserPrefs` object**, representing the user’s preferences. This object is exposed externally as a `ReadOnlyUserPrefs`, ensuring that the preferences can be accessed but not modified directly.
-- **Is self-contained**, meaning that the `Model` does not depend on any other external components. As it represents the core domain entities, it maintains logical independence to ensure modularity and encapsulation.
-
+* stores HireMe data i.e., all `InternshipApplication` objects (which are contained in a `UniqueList` object).
+* stores the currently 'selected' `InternshipApplication` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<InternshipApplication>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 <br></br>
 
 ### Storage component
@@ -203,7 +205,7 @@ In this case, since there are no additional parameters for the help command, `Ad
 
 <puml src="diagrams/HelpSequenceDiagram.puml" alt="HelpSequenceDiagram" />
 
-`AddressBookParser` ensures that there are no additional keywords provided. If there are keywords found, `AddressBookParser` throws a ParseException.
+`AddressBookParser` ensures that there are no additional parameters provided. If there are parameters found, `AddressBookParser` throws a ParseException.
 Otherwise, it creates a new instance of `HelpCommand`.
 
 Upon execution, `HelpCommand` returns an instance of `CommandResult` which contains the help message.
@@ -212,21 +214,22 @@ Upon execution, `HelpCommand` returns an instance of `CommandResult` which conta
 
 <br></br>
 
-### Create new internship application
-The implementation of the create command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+### Add new internship application
+The implementation of the add command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+
 In this case, `AddressBookParser` creates `AddCommandParser` to parse user input string.
 
 <puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
 
 `AddressBookParser` first obtains the values corresponding to the prefixes `n/`, `r/`, `e/` and `d/`.
 `AddressBookParser` ensures that:
-- All values corresponding to the prefixes are valid
+- All values corresponding to the prefixes are valid.
   If any of the above constraints are violated, `AddressBookParser` throws a ParseException. Otherwise, it creates a new instance of `AddCommand` that corresponds to the user input.
 `AddCommand` comprises of the internship application to be added, which is an instance of `InternshipApplication`.
 
 Upon execution, `AddCommand` first queries the supplied model if it contains a duplicate internship application. If no duplicate internship application exists, then `AddCommand` adds the internship application into the data.
 
-> **_NOTE:_** HireMe identifies an entry as a duplicate if its `NAME`, `ROLE`, `EMAIL` and `DATE` match **(case-insensitive)** with those of an existing internship application entry. Attempting to add a duplicate will result in an error.
+> **_NOTE:_**  The sequence diagram shows a simplified execution of the AddCommand. HireMe identifies an entry as a duplicate if its `NAME`, `ROLE`, `EMAIL` and `DATE` match **(case-insensitive)** with those of an existing internship application entry. Attempting to add a duplicate will result in an error.
 
 <br></br>
 
@@ -235,8 +238,9 @@ The implementation of the list command follows the convention of a normal comman
 
 <puml src="diagrams/ListSequenceDiagram.puml" alt="ListSequenceDiagram" />
 
-`AddressBookParser` creates `ListCommand`
-Upon execution, `ListCommand` calls on `model::updateFilteredList` to show all internship applications.
+`AddressBookParser` creates `ListCommand.
+Upon execution, `ListCommand` calls on `m::updateFilteredList` to show all internship applications.
+> **_NOTE:_** The sequence diagram shows a simplified execution of the ListCommand.
 
 <br></br>
 
@@ -249,11 +253,11 @@ In this case, `AddressBookParser` creates `DeleteCommandParser` to parse user in
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
 
 `AddressBookParser` first obtains the index from the user's input.
-`AddressBookParser` ensures that there is only one keyword found which is a number. If there is no valid keyword found, `AddressBookParser` throws a ParseException.
+`AddressBookParser` ensures that there is only one parameter found which is a number. If there is no valid parameter found, `AddressBookParser` throws a ParseException.
 Otherwise, it creates a new instance of `DeleteCommand` that corresponds to the user input.
-`DeleteCommand` comprises of a targetIndex which is the zero based index number of the internship application to be deleted.
+`DeleteCommand` comprises of a `targetIndex` which is the zero based index number of the internship application to be deleted.
 
-Upon execution, `DeleteCommand` gets the internship application to be deleted and calls on `model::deleteItem` which deletes it from the list.
+Upon execution, `DeleteCommand` gets the internship application to be deleted and calls on `m::deleteItem` which deletes it from the list.
 > **_NOTE:_** The sequence diagram shows a simplified execution of the DeleteCommand.
 
 <br></br>
@@ -269,9 +273,9 @@ In this case, `AddressBookParser` creates `StatusCommandParser` to parse user in
 The sequence diagram above illustrates the flow for the `/accept` command. Similar flows apply for `/reject` and `/pending`.
 
 `AddressBookParser` first obtains the index from the user's input.  
-`AddressBookParser` ensures that there is only one keyword found, which is a number. If no valid keyword is found, `AddressBookParser` throws a `ParseException`. Otherwise, it creates a new instance of `StatusCommand` based on the user input, with the `StatusCommand` containing the target index and specified status.
+`AddressBookParser` ensures that there is only one parameter found, which is a number. If no valid parameter is found, `AddressBookParser` throws a `ParseException`. Otherwise, it creates a new instance of `StatusCommand` based on the user input, with the `StatusCommand` containing the target index and specified status.
 
-Upon execution, `StatusCommand` retrieves the internship application to be updated and calls `model::setItem` to update the status within the list.
+Upon execution, `StatusCommand` retrieves the internship application to be updated and calls `m::setItem` to update the status within the list.
 > **_NOTE:_** The sequence diagram shows a simplified execution of the StatusCommand.
 
 <br></br>
@@ -283,17 +287,18 @@ The activity diagram above outlines the detailed flow for the `StatusCommand`, s
 
 ### Find internship applications
 The implementation of the find command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+
 In this case, `AddressBookParser` creates `FindCommandParser` to parse user input string.
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
 
 `AddressBookParser` first obtains the keyword from the user's input.
-`AddressBookParser` ensures that there is at least 1 keyword found. If there is no keyword found, `AddressBookParser` throws a ParseException.
+`AddressBookParser` ensures that there is at least one keyword found. If there is no keyword found, `AddressBookParser` throws a ParseException.
 Otherwise, it creates a new instance of `FindCommand` that corresponds to the user input.
   `FindCommand` comprises of a `NameContainsKeywordsPredicate`.
 
-Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
-`setPredicate` updates the `filteredList` in `model` to contain all the internship applications that contain the keyword.
+Upon execution, `FindCommand` calls on `m::updateFilteredList` which in turns calls on `filteredList::setPredicate`.
+`setPredicate` updates the `filteredList` in `Model` to contain all the internship applications with company name that starts with the keyword.
 
 <br></br>
 
@@ -301,6 +306,8 @@ Upon execution, `FindCommand` calls on `model::updateFilteredList` which in turn
 
 The implementation of the filter command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
 `AddressBookParser` creates `FilterCommandParser` to parse user input string.
+
+In this case, `AddressBookParser` creates `FilterCommandParser` to parse user input string.
 
 <puml src="diagrams/FilterSequenceDiagram.puml" alt="FilterSequenceDiagram"/>
 
@@ -310,23 +317,23 @@ The implementation of the filter command follows the convention of a normal comm
 Otherwise, it creates a new instance of `FilterCommand` that corresponds to the user input.
 `FilterCommand` comprises of a `StatusPredicate`.
 
-Upon execution, `FilterCommand` passes the instance of `StatusPredicate` to the model through the method `model::updateFilteredList`. The model then uses the predicate internally to update the displayed list of internship applications.
+Upon execution, `FilterCommand` passes the instance of `StatusPredicate` to the model through the method `m::updateFilteredList`. The model then uses the predicate internally to update the displayed list of internship applications.
 
 <br></br>
 
 ### Sort internship application list
 The implementation of the command follows the convention of a normal command, where `AddressBookParser` is responsible for parsing the user input string into an executable command.
+
 In this case, `AddressBookParser` creates `SortCommandParser` to parse user input string.
 
 <puml src="diagrams/SortSequenceDiagram.puml" alt="SortSequenceDiagram" />
 
 `AddressBookParser` first obtains the order from the user's input.
-`AddressBookParser` ensures that there is only 1 keyword found which is the sorting order. If there is no valid keyword found, `AddressBookParser` throws a ParseException.
+`AddressBookParser` ensures that there is only one parameter found which is the sorting order. If there is no valid parameter found, `AddressBookParser` throws a ParseException.
 Otherwise, it creates a new instance of `SortCommand` that corresponds to the user input.
 `SortCommand` comprises of a `DateComparator` which contains the sorting order, according to date of application, that the internship application list should be sorted by.
 
-Upon execution, `SortCommand` calls on `model::sortFilteredList` which in turns calls on `addressBook::sortItems`.
-`sortItems` updates the `filteredList` in `Model` to sort the internship applications in the list according to the order specified by the user.
+Upon execution, `SortCommand` calls on `m::sortFilteredList` which in turns calls on `addressBook::sortItems`which updates the `filteredList` in `Model` to sort the internship applications in the list according to the order specified by the user.
 
 <br></br>
 
@@ -336,7 +343,7 @@ The implementation of the command follows the convention of a normal command, wh
 <puml src="diagrams/ClearSequenceDiagram.puml" alt="ClearSequenceDiagram" />
 
 `AddressBookParser` creates `ClearCommand`. 
-Upon execution, `ClearCommand` calls on `model::setAddressBook` with a new address book that has zero internship applications. Finally, `ClearCommand` generates a `CommandResult` with a confirmation message.
+Upon execution, `ClearCommand` calls on `m::setAddressBook` with a new address book that has zero internship applications. Finally, `ClearCommand` generates a `CommandResult` with a confirmation message.
 > **_NOTE:_** The sequence diagram shows a simplified execution of the ClearCommand.
 
 <br></br>
@@ -357,7 +364,6 @@ The implementation of the command follows the convention of a normal command, wh
 <puml src="diagrams/ExitSequenceDiagram.puml" alt="ExitSequenceDiagram" />
 
 `AddressBookParser` creates `ExitCommand`.
-
 Upon execution, `ExitCommand` encapsulates the intent to close the application in `CommandResult`.
 
 > **_NOTE:_** `Model` is not invoked here but included for the sake of clarity.
@@ -382,12 +388,13 @@ Upon execution, `ExitCommand` encapsulates the intent to close the application i
 
 **Target user profile**:
 
-* studies at School of Computing in NUS
+* studies Computer Science
 * is constantly applying for internships
 * has a need to keep track of significant number of internships
 * can type fast
 * prefers typing to mouse interaction
 * is reasonably comfortable using CLI apps
+* who doesn't have much time
 
 **Value proposition**: HireMe is a free desktop application that helps you manage your extensive list of internship applications.
 
@@ -398,27 +405,26 @@ Upon execution, `ExitCommand` encapsulates the intent to close the application i
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (future plans) - `*`
 
 
-| Priority | As a …​                       | I want to …​                                                                     | So that …​                                                               |
-|----------|-------------------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | CS Undergraduate              | list all the internship applications                                             | I can view all my past applications                                      |
-| `* * *`  | Forgetful CS Undergraduate    | have a link to HireMe's help page                                                | I can see all the different commands that I can use                      |
-| `* * *`  | An efficient CS Undergraduate | type the commands                                                                | I do not have to lift my fingers off the keyboard                        |
-| `* * *`  | CS Undergraduate              | add an internship application                                                    | I can add on to the records of all the internships I have applied to     |
-| `* * *`  | CS Undergraduate              | delete an internship application                                                 | I can remove invalid or irrelevant applications                          |
-| `* * *`  | CS Undergraduate              | save the internship application data locally                                     | I will not lose my data when I exit the application                      |
-| `* * *`  | CS Undergraduate              | load the internship from a saved file                                            | I can get back my data when I open the application                       |
-| `* * *`  | CS Undergraduate              | clear the list of internship application I have saved                            | I can restart a new list in the next internship application cycle        |
-| `* * *`  | CS Undergraduate              | find internship applications by company name                                     | I can quickly locate specific applications for review or updates         |
-| `* * *`  | CS Undergraduate              | filter internship applications by status                                         | I can quickly view all applications of a specific status to follow up    |
-| `* * *`  | CS Undergraduate              | update the status of an internship application to accepted, pending, or rejected | I can update the status of each application accurately                   |
-| `* *`    | Meticulous CS Undergraduate   | sort the list of internship applications by date of application                  | I can prioritize follow-ups with older applications                      |
-| `* *`    | Curious CS Undergraduate      | see a chart that summarises the statuses of all my applications                  | I know know the breakdown of each status                                 |
-| `*`      | Organised CS Undergraduate    | view the interview dates for different internships applications                  | I can update my schedule accordingly                                     |
-| `*`      | Efficient CS Undergraduate    | view my most desired internship applications by favouriting them                 | I can prioritize my time on checking up on these internship applications |
-| `*`      | Forgetful CS Undergraduate    | remind myself of acceptance deadline                                             | I will not miss the deadline to accept                                   |
-| `*`      | Organised CS Undergraduate    | filter internship applications by role                                           | I can find applications of certain role                                  |
+| Priority | As a …​                     | I want to …​                                                                     | So that …​                                                               |
+|----------|-----------------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| `* * *`  | CS Undergraduate            | list all the internship applications                                             | I can view all my past applications                                      |
+| `* * *`  | Forgetful CS Undergraduate  | have a link to HireMe's user guide                                               | I can see all the different commands that I can use                      |
+| `* * *`  | Efficient CS Undergraduate  | type the commands                                                                | I do not have to lift my fingers off the keyboard                        |
+| `* * *`  | CS Undergraduate            | add an internship application                                                    | I can add on to the records of all the internships I have applied to     |
+| `* * *`  | CS Undergraduate            | delete an internship application                                                 | I can remove invalid or irrelevant applications                          |
+| `* * *`  | CS Undergraduate            | save the internship application data locally                                     | I will not lose my data when I exit the application                      |
+| `* * *`  | CS Undergraduate            | load the internship from a saved file                                            | I can get back my data when I open the application                       |
+| `* * *`  | CS Undergraduate            | clear the list of internship application I have saved                            | I can restart a new list in the next internship application cycle        |
+| `* * *`  | CS Undergraduate            | update the status of an internship application to accepted, pending, or rejected | I can update the status of each application accurately                   |
+| `* *`    | Meticulous CS Undergraduate | sort the list of internship applications by date of application                  | I can prioritize follow-ups with older applications                      |
+| `* *`    | Curious CS Undergraduate    | see a chart that summarises the statuses of all my applications                  | I know the breakdown of each status                                      |
+| `* * `   | CS Undergraduate            | find internship applications by company name                                     | I can quickly locate specific applications for review or updates         |
+| `* * `   | CS Undergraduate            | filter internship applications by status                                         | I can quickly view all applications of a specific status to follow up    |
+| `*`      | Organised CS Undergraduate  | view the interview dates for different internships applications                  | I can update my schedule accordingly                                     |
+| `*`      | Efficient CS Undergraduate  | view my most desired internship applications by favouriting them                 | I can prioritize my time on checking up on these internship applications |
+| `*`      | Forgetful CS Undergraduate  | remind myself of acceptance deadline                                             | I will not miss the deadline to accept                                   |
+| `*`      | Organised CS Undergraduate  | filter internship applications by role                                           | I can find applications of certain role                                  |
 
-*{More to be added}*
 
 <br></br>
 
@@ -444,44 +450,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
       Use case ends.
 
-* 1b. The user provided some invalid input for field.
+* 1b. The user provides some invalid input for field.
     * 1b1. HireMe shows an error message.
 
       Use case ends.
   
-* 1c. The user provided multiple fields of the same type.
+* 1c. The user provides multiple fields of the same type.
     * 1c1. HireMe shows an error message.
 
       Use case ends.
 
-    
 
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC02 - List all internship applications**
-
-**Actor**: User
-
-**MSS (Main Success Scenario)**
-
-1. The user requests to list all internship applications.
-2. HireMe shows all internship applications.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. There are no internship applications.
-
-    * 1a1. HireMe shows an empty list.
-
-      Use case ends.
-
-<br></br>
-**System**: HireMe application
-
-**Use Case: UC03 - Delete an internship application**
+**Use Case: UC02 - Delete an internship application**
 
 **Actor**: User
 
@@ -494,7 +477,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 1a. The user provides an invalid index.
+
     * 1a1. HireMe shows an error message.
 
       Use case ends.
@@ -502,40 +486,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC04 - Sort all internship applications list**
+**Use Case: UC03 - Sort internship applications list**
 
 **Actor**: User
 
 **MSS (Main Success Scenario)**
 
 1. The user requests to sort the internship applications list.
-2. HireMe shows all the sorted list of internship applications.
+2. HireMe shows the sorted list of internship applications.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. User enters an invalid number of parameters.
+* 1a. The user provides an invalid number of parameters.
     * 1a1. HireMe shows an error message 
   
       Use case ends.
 
 
-* 1b. User enters an invalid order.
+* 1b. The user provides an invalid order.
     * 1b1. HireMe shows an error message.
   
-      Use case ends.
-
-
-* 1c. User sorts an empty list.
-    * 1c1. HireMe shows an empty list.
-
       Use case ends.
   
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC05 - Find internship applications by company name**
+**Use Case: UC04 - Find internship applications by company name**
 
 **Actor**: User
 
@@ -550,33 +528,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 **Extensions**
 
 * 1a. The user provides an empty search pattern.
+
     * 1a1. HireMe shows an error message.
 
       Use case ends.
 
 
-* 1b. The provided search pattern matches no company names.
-    * 1b1. HireMe shows a message indicating that no matching internship applications were found.
+* 1b. The provides search pattern matches no company names.
+
+    * 1b1. HireMe shows an empty list.
 
       Use case ends.
 
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC06 - Update the status of an internship application**
+**Use Case: UC05 - Update the status of an internship application**
 
 **Actor**: User
 
 **MSS (Main Success Scenario)**
 
 1. The user requests to change the status of an internship application by specifying an index and the desired status (e.g., `/accept 2`, `/reject 3`, `/pending 4`).
-2. HireMe updates the status of the specified internship application to `ACCEPTED`, `REJECTED`, or `PENDING`.
+2. HireMe updates the status of the specified internship application to either `ACCEPTED`, `REJECTED`, or `PENDING`.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The user provides an invalid index (e.g., non-positive or non-integer value or integer out of range).
+* 1a. The user provides an invalid index.
+  
     * 1a1. HireMe shows an error message.
 
       Use case ends.
@@ -584,34 +565,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC07 - Load saved internship applications**
-
-**Actor**: User
-
-**MSS (Main Success Scenario)**
-
-1. The user starts the application.
-2. HireMe loads the previously saved internship applications.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. No save file is found.
-    * 1a1. HireMe creates a new empty save file.
-
-      Use case ends.
-
-
-* 1b. A file with an invalid format is found.
-    * 1b1. HireMe shows an error message.
-
-      Use case ends.
-
-<br></br>
-**System**: HireMe application
-
-**Use Case: UC08 - List all internship applications**
+**Use Case: UC06 - List all internship applications**
 
 **Actor**: User
 
@@ -624,16 +578,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 **Extensions**
 
-* 1a. The user provided extra parameter(s) in command format.
-    * 1a1. HireMe shows an error message.
+* 1a. The user provides an invalid number of parameters.
+
+    * 1a1. HireMe shows an error message
 
       Use case ends.
-
 
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC09 - Summarise all internship applications**
+**Use Case: UC07 - Summarise all internship applications**
 
 **Actor**: User
 
@@ -646,7 +600,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 **Extensions**
 
-* 1a. The user provided extra parameter(s) in command format.
+* 1a. The user provides an invalid number of parameters.
+
     * 1a1. HireMe shows an error message.
 
       Use case ends.
@@ -655,19 +610,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC10 - Filter internship applications by status**
+**Use Case: UC08 - Filter internship applications by status**
 
 **Actor**: User
 
 **MSS (Main Success Scenario)**
 
-1. The user provides a status to filter internship applications.
-2. HireMe shows all internship applications with the given status.
+1. The user requests to filter internship applications by status.
+2. HireMe shows all internship applications with the provided status.
 
    Use case ends.
 
 **Extensions**
-* 1a. The user provided an invalid status.
+* 1a. The user provides an invalid status.
+
     * 1a1. HireMe shows an error message.
 
       Use case ends.
@@ -676,20 +632,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC11 - Clear all internship applications**
+**Use Case: UC09 - Clear internship application list**
 
 **Actor**: User
 
 **MSS (Main Success Scenario)**
 
-1. The user requests to clear all internship applications.
-2. HireMe clears all internship applications.
+1. The user requests to clear the internship application list.
+2. HireMe clears the internship application list.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The user provided extra parameter(s) in command format.
+* 1a. The user provides an invalid number of parameters.
+
     * 1a1. HireMe shows an error message.
 
       Use case ends.
@@ -698,20 +655,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 <br></br>
 **System**: HireMe application
 
-**Use Case: UC12 - Exit HireMe application**
+**Use Case: UC10 - Exit HireMe application**
 
 **Actor**: User
 
 **MSS (Main Success Scenario)**
 
 1. The user requests to exit the application.
-2. HireMe application closes and auto-saves the file.
+2. HireMe application exits and auto-saves the file.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The user provided extra parameter(s) in command format.
+* 1a. The user provides an invalid number of parameters.
+
     * 1a1. HireMe shows an error message.
 
       Use case ends.
@@ -723,8 +681,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 1. **Performance**: The application should respond to user actions within **two seconds**.
 2. **Reliability**: The application should be able to **perform effectively** over time without errors or failures.
-3. **Scalability**: The application should handle **at least 500 internship applications** without any performance issues (e.g., lag or slowness).
-4. **Cross-Platform Compatibility**: The application should run on any operating system that has **Java 17** installed.
+3. **Scalability**: The application should handle **at least 500 internship applications** without any performance issues (e.g. lag or slowness).
+4. **Cross-Platform Compatibility**: The application should run on any operating system that has **Java 17 or above** installed.
 5. **User Accessibility**: The application should be usable by a **novice** with no prior experience using a CLI application, without much difficulty.
 6. **Maintainability**: The application should log useful information together with any errors that occur. The logs should be **easily accessible** to enable easier debugging and monitoring.
 7. **Data Persistence**: The application should ensure that data **persists** after the user closes the application.
@@ -743,6 +701,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
     - **REJECTED**: The user has rejected or been rejected from this internship application.
     - **ACCEPTED**: The user has accepted the offer for this internship.
 
+
 - **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
 
 - **Command Line Interface (CLI)**: The user interacts with the computer by typing text commands instead of using a mouse to click on buttons or icons. As if giving instructions to execute a desired action.
@@ -757,9 +716,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 
 - **Graphical User Interface (GUI)**: The user interacts with the computer using visual elements like buttons, icons and windows. 
 
+- **Index**: The application number of the internship application displayed in the list.
+
 - **Role**: The role of the internship the user applied for.
 
-- **Index**: The index of the internship application displayed in the list.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -783,14 +743,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Run java -jar hireme.jar in a terminal. <br>
-      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Run `java -jar hireme.jar` in a terminal. <br>
+      Expected: Shows the GUI with a set of sample internship applications. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by running java -jar hireme.jar in a terminal.<br>
+   2. Re-launch the app by running `java -jar hireme.jar` in a terminal.<br>
        Expected: The most recent window size and location is retained.
       
 <br></br>
@@ -839,14 +799,15 @@ testers are expected to do more *exploratory* testing.
 
 <br></br>
 
-### Clearing all internship applications
-1. Clear all internship applications
+### Clearing the internship application list
+1. Clear the internship application list
+
     1. Prerequisites: Ensure that the list is not empty. 
 
     2. Test case: `/clear`<br>
        Expected: A success message stating that HireMe has been cleared.
    
-    3. Test case: `/list`<br>
+    3. Test case: `/list` after the internship application list is cleared<br>
        Expected: The list of internship application remains empty.
 
    4. Test case: `/clear x`<br>
@@ -869,7 +830,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `/add n/Yahoo r/Clerk e/yahoo@yahoo.com d/31/10/24`<br>
       Expected: An internship application is successfully added, with the company name, company email, role and date of application being `Yahoo`, `yahoo@yahoo.com`, `Clerk`, `31/10/24`, respectively. The status of newly added internship application would be `Pending`.
 
-3. Adding duplicated internship application
+3. Adding a duplicate internship application
 
    1. Prerequisite: The exact internship application should already be in the list.
 
@@ -880,7 +841,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Missing/Invalid Company Name test case: `/add n/ r/Software Engineer Intern e/google@gmail.com d/31/10/24` <br>
       Expected: An error message stating what is considered a valid Company Name.<br>
-      1. Other Invalid Company Names include: `<oding lab`, `|-|appy Days`, `@pple`.<br>
+      1. Other invalid Company Names include: `<oding lab`, `|-|appy Days`, `@pple`.<br>
 
    2. Missing/Invalid Role test case: `/add n/Google r/ e/google@gmail.com d/31/10/24` <br>
       Expected: An error message stating what is considered a valid Role.<br>
@@ -894,14 +855,15 @@ testers are expected to do more *exploratory* testing.
       Expected: An error message stating what is considered a valid Date.
       1. Other invalid Dates include: Dates in the future (Relative to device's clock), `30/02/2024`, `31/04/2024`.<br>
 
-5. Adding internship application with missing field(s)
-   1. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com`<br>
+   5. Adding internship application with missing field(s)
+      1. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com`<br>
       Expected: An error message stating the valid use of the `/add` command.
 
 <br></br>
 
 ### List
 1. List all internship applications
+
     1. Prerequisites: Ensure that the list is not empty. 
    
     2. Test case: `/list`<br>
@@ -915,15 +877,15 @@ testers are expected to do more *exploratory* testing.
 ### Deleting an internship application
 1. Deleting an internship application while all internship applications are being shown
 
-   1. Prerequisites: List all internship applications using the `/list` command. Multiple internship applications in the list.
+   1. Prerequisites: List all internship applications using the `/list` command. At least two internship applications in the list.
 
-   1. Test case: `/delete 1`<br>
+   2. Test case: `/delete 1`<br>
       Expected: First application is deleted from the list. Details of the deleted application shown.
 
-   1. Test case: `/delete 0`<br>
-      Expected: No internship application is deleted. An error message indicating that the index is invalid.
+   3. Test case: `/delete 0`<br>
+      Expected: No internship application is deleted. An error message should be shown which explains how to use the delete command and what parameters are valid.
 
-   1. Other incorrect delete commands to try: `/delete`, `/delete x`, `...`, `/delete a` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `/delete`, `/delete x`, `...`, `/delete a` (where x is larger than the list size)<br>
       Expected: An error message should be shown which explains how to use the delete command and what parameters are valid.
 
 <br></br>
@@ -932,17 +894,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Sort the entire list of internship applications
 
-    1. Prerequisites: List all internship applications using the `/list` command. Multiple (at least 2) internship applications in the list with different date of applications.
+    1. Prerequisites: List all internship applications using the `/list` command. At least two internship applications in the list with different date of applications.
 
-    1. Test case: `/sort earliest`<br>
+    2. Test case: `/sort earliest`<br>
        Expected: The list of internship applications should now be sorted in ascending order by the date of application. The earliest internship applications should be at the top
        of the list and as you go down the list, the date of applications should be at later dates.
 
-    1. Test case: `/sort latest`<br>
+    3. Test case: `/sort latest`<br>
        Expected: The list of internship applications should now be sorted in descending order by the date of application. The latest internship applications should be at the top
        of the list and as you go down the list, the date of applications should be at earlier dates.
 
-    1. Other incorrect sort commands to try: `/sort`, `/sort test`, `/sort earliest latest`, `/sort 1`<br>
+    4. Other incorrect sort commands to try: `/sort`, `/sort test`, `/sort earliest latest`, `/sort 1`<br>
        Expected: An error message should be shown which explains how to use the sort command and what parameters are valid.
 
 <br></br>
@@ -950,43 +912,41 @@ testers are expected to do more *exploratory* testing.
 ### Finding internship applications
 1. Find using an exact match
 
-    1. Prerequisites: The list should have internship applications added with company names such as "Google" and "Yahoo".
+    1. Prerequisites: The list should have only two internship applications added with company names such as "Google" and "Yahoo".
    
     2. Test case: `/find Google`<br>
-       Expected: The application with the company name "Google" is displayed.
+       Expected: The internship application with the company name "Google" is displayed.
 
 2. Find using a case-insensitive pattern
 
-    1. Prerequisites: The list should have applications with company names like "Google" and "Yahoo".
+    1. Prerequisites: The list should have only two internship applications with company names like "Google" and "Yahoo".
    
     2. Test case: `/find google`<br>
-       Expected: The application with the company name "Google" is displayed, showing that the search is case-insensitive.
+       Expected: The internship application with the company name "Google" is displayed, showing that the search is case-insensitive.
    
     3. Test case: `/find YAHOO`<br>
-       Expected: The application with the company name "Yahoo" is displayed.
+       Expected: The internship application with the company name "Yahoo" is displayed.
 
 3. Find with partial matches
 
-    1. Prerequisites: The list should include applications with company names like "Google" and "Yahoo".
+    1. Prerequisites: The list should have only two internship applications with company names like "Google" and "Yahoo".
    
     2. Test case: `/find Goo`<br>
-       Expected: The application with the company name "Google" is displayed.
+       Expected: The internship application with the company name "Google" is displayed.
    
     3. Test case: `/find Y`<br>
-       Expected: The application with the company name "Yahoo" is displayed.
+       Expected: The internship application with the company name "Yahoo" is displayed.
 
 4. Find when no matches exist
 
     1. Prerequisites: The list contains only 2 applications, with company names "Google" and "Yahoo".
    
     2. Test case: `/find Microsoft`<br>
-       Expected: A message stating that no matching internship applications were found is shown.
+       Expected: The list of internship applications is empty
 
 5. Find with an empty pattern
-
-    1. Prerequisites: The application should be running.
    
-    2. Test case: `/find`<br>
+   1. Test case: `/find`<br>
        Expected: An error message should be shown which explains how to use the find command and what parameters are valid.
 
 <br></br>
@@ -994,48 +954,48 @@ testers are expected to do more *exploratory* testing.
 ### Updating the status of an internship application
 1. Update status to `ACCEPTED`
 
-    1. Prerequisites: Display all internship applications using the `/list` command. Ensure that applications for "Google" and "Yahoo" are present in the list.
+    1. Prerequisites: Ensure that internship application with the company name "Google" is at index 1 and internship application with the company name "Yahoo" is at index 2
    
     2. Test case: `/accept 1`<br>
-       Expected: The status of the first application (e.g., "Google") is updated to `ACCEPTED`.
+       Expected: The status of the first application "Google" is updated to `ACCEPTED`.
    
     3. Test case: `/accept 0`<br>
        Expected: An error message should be shown which explains how to use the status command and what parameters are valid.
 
 2. Update status to `PENDING`
 
-    1. Prerequisites: Display all internship applications using the `/list` command. Ensure that applications for "Google" and "Yahoo" are present in the list.
+    1. Prerequisites: Ensure that internship application with the company name "Google" is at index 1 and internship application with the company name "Yahoo" is at index 2
    
     2. Test case: `/pending 2`<br>
-       Expected: The status of the second application (e.g., "Yahoo") is updated to `PENDING`.
+       Expected: The status of the second application "Yahoo" is updated to `PENDING`.
 
 3. Update status to `REJECTED`
 
-    1. Prerequisites: Display all internship applications using the `/list` command. Ensure that applications for "Google" and "Yahoo" are present in the list.
+    1. Prerequisites: Ensure that internship application with the company name "Google" is at index 1 and internship application with the company name "Yahoo" is at index 2
    
     2. Test case: `/reject 1`<br>
-       Expected: The status of the first application (e.g., "Google") is updated to `REJECTED`.
+       Expected: The status of the first application "Google" is updated to `REJECTED`.
 
 <br></br>
 
 ### Chart Window
 1. Open Chart window
 
-    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the Chart window is not opened.
+    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there are at least two internship applications with different statuses and the Chart window is not opened.
    
     2. Test case `/chart`<br>
        Expected: Chart window opens.
 
 2. Open Chart window with invalid command format
 
-    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the Chart window is not opened.
+    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there are at least two internship applications with different statuses and the Chart window is not opened.
    
     2. Test case: `/chart x`<br>
        Expected: An error message stating the valid use of the `/chart` command.
 
 3. Update Chart window by updating status
 
-   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are the internship application at index 1 is of `PENDING` status and the Chart window is already opened.
+   1. Prerequisites: List all internship applications using the `/list` command. Ensure that the internship application at index 1 is of `PENDING` status and the Chart window is already opened.
    
    2. Test case: `/accept 1`<br>
       Expected: Pie chart on Chart window to update accordingly.
@@ -1049,7 +1009,7 @@ testers are expected to do more *exploratory* testing.
 
 5. Update Chart window by deleting an internship application
 
-   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at are at least two internship applications and the Chart window is already opened.
+   1. Prerequisites: List all internship applications using the `/list` command. Ensure that there are at least two internship applications and the Chart window is already opened.
    
    2. Test case: `/delete 1`<br>
       Expected: Pie chart on Chart window to update accordingly.
@@ -1074,7 +1034,6 @@ testers are expected to do more *exploratory* testing.
 2. Filter with a valid status in mixed case
 
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at least one internship application with `PENDING` status.
-       Expected: The list of internship applications remains empty.
     
    2. Test case `/filter Pending`<br>
       Expected: The list of internship applications should only display entries with `PENDING` status.
