@@ -978,7 +978,7 @@ testers are expected to do more *exploratory* testing.
     
     Currently, a general error message appears when users enter a wrong prefix when using commands (eg. 'c/'). In future iterations, we are planning to add specific error messages for when wrong prefixes are used anywhere in the commands.
 
-    Example Input: `add n/Mary id/A1234567H c/comment` or `edit 1 n/Bob c/comment`
+    Example Input: `add n/Mary id/A1234567H c/comment` or `edit 1 c/comment`
 
     Example Output: `Some prefixes entered are not supported in this command: c/`
 
