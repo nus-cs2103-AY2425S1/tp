@@ -17,9 +17,14 @@ title: Developer Guide
 - [Implementation](#implementation)
   - [Student Command](#1-student-command)
   - [Company Command](#2-company-command)
+  - [View Command](#3-view-command)
+  - [Find Command](#4-find-command)
 - [Planned Enhancements](#planned-enhancements)
   - [Disallow Duplicate Phone Number Across Contacts](#1-disallow-duplicate-phone-numbers-across-contacts)
   - [Consistent Case-Insensitive Tag Handling](#2-consistent-case-insensitive-tag-handling)
+  - [Make Error Message for View Command More Specific](#7-make-error-message-for-view-command-more-specific)
+  - [`Deletetag all` command does not work as intended on an empty list](#8-deletetag-all-command-does-not-work-as-intended-on-an-empty-list)
+  - [Restrict phone number field to 8 numbers](#9-restrict-phone-number-field-to-8-numbers)
   - [Improve Error Priority for Edit Command](#10-improve-error-priority-for-edit-command)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
@@ -307,7 +312,7 @@ The format for `view` command is `view INDEX`. The valid input for `INDEX` is a 
 
 We plan to change the error message into `"Index must be a positive integer!"`.
 
-### 8. `Deletetag all` command does not work as intended on an empty list.
+### 8. `Deletetag all` command does not work as intended on an empty list
 
 #### Current Issue:
 
