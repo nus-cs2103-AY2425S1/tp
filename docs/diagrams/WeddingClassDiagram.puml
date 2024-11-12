@@ -6,7 +6,6 @@ skinparam arrowColor MODEL_COLOR_T4
 skinparam classBackgroundColor MODEL_COLOR
 
 package "Person" as PersonPackage <<Rectangle>> {
-    class Name
 }
 
 package "Wedding" as WeddingPackage <<Rectangle>> {
@@ -14,14 +13,16 @@ package "Wedding" as WeddingPackage <<Rectangle>> {
     class Client
     class Date
     class Venue
+    class Name
     class UniqueWeddingList
 }
 
 Wedding "1" --> "1" Client : "has a"
 Wedding "1" --> "1" Date : "has a"
 Wedding "1" --> "1" Venue : "has a"
+Wedding "1" --> "1" Name : "has a"
 
-Client "1" --> "1" Name : "references"
+Client "1" --> PersonPackage : "references"
 
 UniqueWeddingList "1" *--> "0..*" Wedding : "contains"
 

@@ -61,7 +61,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -78,7 +78,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -110,7 +110,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -131,7 +131,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -149,6 +149,28 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+### Adding a new wedding
+<puml src="diagrams/PersonClassDiagram.puml" width="550" />
+<puml src="diagrams/WeddingClassDiagram.puml" width="550" />
+
+1. **Identifying the Client**:
+    - The client for the new wedding is identified either by their index in the filtered person list or by their name.
+
+2. **Validating the Client**:
+    - Before creating the new wedding, the `AddwCommand` checks if the selected client is already associated with another wedding.
+
+3. **Creating the Wedding**:
+    - Once the client is validated, the `AddwCommand` creates a new `Wedding` object with the provided details (name, client, date, and venue).
+
+4. **Checking for Duplicates**:
+    - The `AddwCommand` checks if the new wedding already exists in the address book.
+
+5. **Updating the Model**:
+    - If the new wedding passes all the validation checks, the `AddwCommand` adds the wedding to the model.
+    - It also sets the client's own wedding to the new wedding using the `setOwnWedding` method of the `Person` class.
+
+6. **Returning the Result**:
+    - Finally,  the success message is displayed to the user.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -306,7 +328,7 @@ Use case ends.
 **Extensions:**
 
 - **1a.** Name, phone, email, address prefixes not inputed
-    - **1a1.** Error message displayed in result display.
+    - **1a1.** Error message displayed in result display and proper command format is shown to user.
         - Use case ends.
 - **1b.** Name is blank, contains invalid symbol or beyond 70 characters
     - **1b1.** Error message displayed in result display.
@@ -314,7 +336,7 @@ Use case ends.
 - **1c.** Phone is not 8 digits, and does not begin with '8' or '9'
     - **1c1.** Error message displayed in result display.
         - Use case ends.
-- **1d.** Email is blank, or does not contain '@'
+- **1d.** Email is blank, or does not match email regex.
     - **1d1.** Error message displayed in result display.
         - Use case ends.
 - **1e.** Address is blank
@@ -322,12 +344,16 @@ Use case ends.
         - Use case ends.
 - **1f.** Role is not one word
     - **1f1.** Error message is displayed in result display.
+        - Use case ends.
 - **1g.** Wedding is blank when prefix is inputted, or is not one word
     - **1g1.** Error message is displayed in result display.
+        - Use case ends.
 - **1h.** Wedding field is not an index.
     - **1h1.** Error message is displayed in result display.
+        - Use case ends.
 - **1i.** Wedding index inputted is not in the list.
     - **1i1.** Error message is displayed in result display.
+        - Use case ends.
 
 #### **Use Case: UC2 - View a Contact**
 1. Wedding Organizer views a contact using the view command.
@@ -458,8 +484,7 @@ Use case ends.
 - **1b.** Wedding index is not in the displayed list
     - **1b1.** Error message displayed in result display.
         - Use case ends.
-- **1c.** Duplicate wedding with name containing inputted name
-    - **1c1.** Same as 1d1 in <u>UC7 - View a wedding</u>
+- **1c.** Same as 1d in <u>UC7 - View a wedding</u>
 
 #### **Use Case: UC9 - Edit a Wedding**
 
@@ -514,13 +539,43 @@ Use case ends.
 - Same as the Extensions from <u>UC10 - Assign a contact to a Wedding</u> excluding 1d.
 
 ---
-## **Appendix: Enhancements**
+## **Appendix: Planned Enhancements**
 
-1. Name field could also allow slash symbol such as: 's/o', 'd/o'.
-2. Restrict wedding date to five years into the future.
-3. Allow deletion of wedding data and venue.
-4. Prevent a vendor to be double booked.
-5. Remind which wedding a vendor in the error message when the vendor already have the wedding assigned.
+1. **Accept Special Characters in Names**:
+   - Remove strict alphanumeric checks for names to support special characters, such as periods, slashes (s/o, d/o), and other symbols that will appear in a person's legal name
+   - This will allow for more accurate and comprehensive name entries
+
+2. **Restrict Wedding Date to Five Years into the Future**:
+    - Implement a validation to ensure that the wedding date entered is within five years of the current date
+    - This will help maintain realistic and relevant wedding planning data
+
+3. **Allow Deletion of Wedding Data and Venue**:
+    - Introduce functionality to delete individual wedding data and associated venue information
+    - This will provide users with the ability to remove outdated or irrelevant wedding details from the system
+
+4. **Prevent Double-Booking of Vendors**:
+    - Implement a feature to check for and prevent vendors from being booked for multiple weddings on the same date
+    - Display an appropriate error message if a user attempts to book a vendor who is already assigned to another wedding on the same date
+
+5. **Provide Vendor Conflict Information in Error Messages**:
+    - When a vendor is already assigned to another wedding, include the details of the conflicting wedding in the error message
+    - This will help users quickly identify the source of the conflict and take appropriate action
+
+6. **Ensure Full Display of Long Fields in the GUI**:
+    - Optimize the GUI to display the full contents of long fields (more than 50 characters) without truncation
+    - Implement responsive design or scrolling mechanisms to ensure all relevant information is visible to the user
+
+7. **Improve Error Messages for Large Number Inputs**:
+    - Enhance the error messaging displayed when a user enters a number that is too large for the system to handle
+    - Provide clear and actionable guidance to the user on the appropriate range of values
+
+8. **Implement Functionality to "Unclick" Fields in the GUI**:
+    - Add the ability for users to "unclick" or deselect fields in the GUI after they have been clicked
+    - This will improve the user experience and provide more flexibility when interacting with the application
+
+9. **Ensure GUI Responsiveness to Window Size Adjustments**:
+    - Optimize the GUI to properly display wedding details and information regardless of the window size
+    - Implement responsive design techniques to ensure the application remains usable and visually appealing when the window size is adjusted
 
 ## **Appendix: Requirements**
 

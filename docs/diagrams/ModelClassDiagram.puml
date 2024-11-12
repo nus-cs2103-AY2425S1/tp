@@ -41,6 +41,7 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
+
 AddressBook *--> "1" UniquePersonList
 AddressBook *--> "1" UniqueWeddingList
 UniquePersonList --> "~* all" Person
@@ -49,7 +50,9 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person --> "0..1" Role
+Person -left-> "weddingJobs" Wedding
+Person --> "ownWedding" Wedding
+Person *--> "0..1" Role
 Client --> Person
 Wedding *--> Name
 Wedding *--> Client
@@ -59,9 +62,13 @@ Wedding *--> Venue
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
+Name -[hidden]up--> Client
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> Role
+Role -[hidden]right-> Date
+Date -[hidden]right-> Venue
 
 ModelManager --> "~* filtered" Person
 @enduml
