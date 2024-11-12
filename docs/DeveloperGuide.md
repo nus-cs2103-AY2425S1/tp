@@ -326,8 +326,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Y1 CS student who is unaware of the various opportunities provided by nus and soc                            | find the contact emails and main pages for the opportunities such as SEP, NOC, UROP + ReX, summer school, winter school etc |                                                                                      |
 | `*`      | User who performed action wrongly when using the app                                                         | redo/undo current actions                                                                                                   | perform multiple actions efficiently without wasting time on correcting the mistakes |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `ContactCS` and the **Actor** is the `CS freshman`, unless specified otherwise)
@@ -635,8 +633,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1. The AddressBook should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -649,8 +645,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 8. Managing contacts will remain as the core feature in all iterations.
 9. The AddressBook should not crash for any input given by the user.
 10. The AddressBook will remain as a CLI based application.
-
-*{More to be added}*
 
 ### Glossary
 * **Architecture Diagram**: A visual representation of all the elements that make up part, or all, of a system
