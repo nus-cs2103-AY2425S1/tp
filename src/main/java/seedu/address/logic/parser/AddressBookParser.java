@@ -72,77 +72,29 @@ public class AddressBookParser {
         String trimmedArguments = arguments.trim();
 
         switch (commandWord) {
-
         case AddCommand.COMMAND_WORD:
-            if (arguments.trim().startsWith("-s")) {
-                return new AddSupplierCommandParser().parse(arguments.trim().substring(2));
-            } else if (arguments.trim().startsWith("-d")) {
-                return new AddDeliveryCommandParser().parse(arguments.trim().substring(2));
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddSupplierCommand.MESSAGE_USAGE + "\nOR\n" + AddDeliveryCommand.MESSAGE_USAGE));
-            }
+            return parseAddCommand(trimmedArguments);
 
         case DeleteCommand.COMMAND_WORD:
-            if (trimmedArguments.startsWith("-s")) {
-                return new DeleteSupplierCommandParser().parse(trimmedArguments);
-            } else if (trimmedArguments.startsWith("-d")) {
-                return new DeleteDeliveryCommandParser().parse(trimmedArguments);
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        DeleteSupplierCommand.MESSAGE_USAGE + "\nOR\n" + DeleteDeliveryCommand.MESSAGE_USAGE));
-            }
+            return parseDeleteCommand(trimmedArguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            if (trimmedArguments.startsWith("-s")) {
-                return new FindSupplierCommandParser().parse(trimmedArguments.substring(2));
-            } else if (trimmedArguments.startsWith("-d")) {
-                return new FindDeliveryCommandParser().parse(trimmedArguments.substring(2));
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        FindSupplierCommand.MESSAGE_USAGE + "\nOR\n" + FindDeliveryCommand.MESSAGE_USAGE));
-            }
+            return parseFindCommand(trimmedArguments);
 
         case ListCommand.COMMAND_WORD:
-            if (trimmedArguments.equals("-s")) {
-                return new ListSupplierCommand();
-            } else if (trimmedArguments.equals("-d")) {
-                return new ListDeliveryCommand();
-            } else if (trimmedArguments.equals("-a")) {
-                return new ListAllCommand();
-            } else {
-                throw new ParseException(MESSAGE_INVALID_LIST_COMMAND_FORMAT);
-            }
+            return parseListCommand(trimmedArguments);
 
         case MarkCommand.COMMAND_WORD:
-            if (trimmedArguments.startsWith("-s")) {
-                return new MarkSupplierCommandParser().parse(trimmedArguments);
-            } else if (trimmedArguments.startsWith("-d")) {
-                return new MarkDeliveryCommandParser().parse(trimmedArguments);
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        MarkSupplierCommand.MESSAGE_USAGE + "\nOR\n" + MarkDeliveryCommand.MESSAGE_USAGE));
-            }
+            return parseMarkCommand(trimmedArguments);
 
         case SortCommand.COMMAND_WORD:
-            if (trimmedArguments.startsWith(PREFIX_DELIVERY.getPrefix())) {
-                return new SortDeliveryCommandParser().parse(trimmedArguments);
-            } else if (trimmedArguments.startsWith(PREFIX_SUPPLIER.getPrefix())) {
-                return new SortSupplierCommandParser().parse(trimmedArguments);
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SortSupplierCommand.MESSAGE_USAGE + "\nOR\n" + SortDeliveryCommand.MESSAGE_USAGE));
-            }
+            return parseSortCommand(trimmedArguments);
 
         case UpcomingCommand.COMMAND_WORD:
-            if (arguments.equals("")) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        UpcomingCommand.MESSAGE_USAGE));
-            }
-            return new UpcomingCommandParser().parse(arguments);
+            return parseUpcomingCommand(trimmedArguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -154,5 +106,80 @@ public class AddressBookParser {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+
+    private Command parseAddCommand(String arguments) throws ParseException {
+        if (arguments.trim().startsWith("-s")) {
+            return new AddSupplierCommandParser().parse(arguments.trim().substring(2));
+        } else if (arguments.trim().startsWith("-d")) {
+            return new AddDeliveryCommandParser().parse(arguments.trim().substring(2));
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddSupplierCommand.MESSAGE_USAGE + "\nOR\n" + AddDeliveryCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command parseDeleteCommand(String trimmedArguments) throws ParseException {
+        if (trimmedArguments.startsWith("-s")) {
+            return new DeleteSupplierCommandParser().parse(trimmedArguments);
+        } else if (trimmedArguments.startsWith("-d")) {
+            return new DeleteDeliveryCommandParser().parse(trimmedArguments);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteSupplierCommand.MESSAGE_USAGE + "\nOR\n" + DeleteDeliveryCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command parseFindCommand(String trimmedArguments) throws ParseException {
+        if (trimmedArguments.startsWith("-s")) {
+            return new FindSupplierCommandParser().parse(trimmedArguments.substring(2));
+        } else if (trimmedArguments.startsWith("-d")) {
+            return new FindDeliveryCommandParser().parse(trimmedArguments.substring(2));
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindSupplierCommand.MESSAGE_USAGE + "\nOR\n" + FindDeliveryCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command parseListCommand(String trimmedArguments) throws ParseException {
+        switch (trimmedArguments) {
+        case "-s":
+            return new ListSupplierCommand();
+        case "-d":
+            return new ListDeliveryCommand();
+        case "-a":
+            return new ListAllCommand();
+        default:
+            throw new ParseException(MESSAGE_INVALID_LIST_COMMAND_FORMAT);
+        }
+    }
+
+    private Command parseMarkCommand(String trimmedArguments) throws ParseException {
+        if (trimmedArguments.startsWith("-s")) {
+            return new MarkSupplierCommandParser().parse(trimmedArguments);
+        } else if (trimmedArguments.startsWith("-d")) {
+            return new MarkDeliveryCommandParser().parse(trimmedArguments);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MarkSupplierCommand.MESSAGE_USAGE + "\nOR\n" + MarkDeliveryCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command parseSortCommand(String trimmedArguments) throws ParseException {
+        if (trimmedArguments.startsWith(PREFIX_DELIVERY.getPrefix())) {
+            return new SortDeliveryCommandParser().parse(trimmedArguments);
+        } else if (trimmedArguments.startsWith(PREFIX_SUPPLIER.getPrefix())) {
+            return new SortSupplierCommandParser().parse(trimmedArguments);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SortSupplierCommand.MESSAGE_USAGE + "\nOR\n" + SortDeliveryCommand.MESSAGE_USAGE));
+        }
+    }
+
+    private Command parseUpcomingCommand(String arguments) throws ParseException {
+        if (arguments.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpcomingCommand.MESSAGE_USAGE));
+        }
+        return new UpcomingCommandParser().parse(arguments);
     }
 }
