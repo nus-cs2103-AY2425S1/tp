@@ -133,7 +133,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="700" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -177,7 +177,7 @@ The optional fields allow users to include more detailed information, making the
   * The information is stored using the `JsonAddressBookStorage#saveAddressBook()` method which calls the `JsonSerializableAddressBook`
     constructor, to create an object that can be serialized in JSON format.
 
-<puml src="diagrams/AddSequenceDiagram.puml" width="550" />
+<puml src="diagrams/AddSequenceDiagram.puml" width="1100" />
 
 #### Design Considerations
 
