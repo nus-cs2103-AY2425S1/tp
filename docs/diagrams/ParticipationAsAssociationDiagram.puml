@@ -9,9 +9,9 @@ skinparam classAttributeIconSize 0
     class Participation
     class Attendance
 
-    Participation *-- Attendance
+    Participation "1" -- "*" Attendance
 
-    Student "0..*" -right- "0..*" Tutorial
+    Student "*" -right- "*" Tutorial
     (Student, Tutorial). Participation
 }
 
