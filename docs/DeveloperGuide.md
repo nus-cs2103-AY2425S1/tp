@@ -678,7 +678,8 @@ For future versions, we plan to allow the user to specify Team 2 before Team 1.
 Currently, if a user edits the participant list, the entire list is replaced. We plan on fixing this.
 3. Multi-word search
 Currently, when a user searches for a multi-word keyword, it treats them like separate keywords. 
-We plan to fix this, such that the search treats the multi-word keyword (e.g Swimming Men) as a single keyword.
+We plan to fix this, such that the search treats the multi-word keyword (e.g Swimming Men) as a single keyword. 
+This can be done through the use of delimiters (e.g. commas) to separate the keywords.
 4. Multiple faculties in one event
 In events, such as swimming, relays, multiple faculties (i.e. more than 2) can compete against one another.
 Currently, this feature is not supported by out app, as an event is limited to two.
