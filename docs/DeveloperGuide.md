@@ -698,14 +698,17 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by rerunning `java -jar contactcs.jar` in the terminal.<br>
        Expected: The most recent window size and location is retained.
 
-### Deleting a person
+### Deleting person(s)
 
-1. Deleting a person while all persons are being shown
+1. Deleting person(s) while all persons are being shown
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+    1. Test case: `delete 1 3`<br>
+      Expected: First and third contacts are deleted from the list. Details of the deleted contacts shown in the status message.
 
     1. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -735,7 +738,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Undo/Redo
 
-1.
+
+### Find contacts
+
+
+### Edit module roles
+
+### 
 
 ## **Appendix: Planned Enhancements**
 **Team size**: 5
