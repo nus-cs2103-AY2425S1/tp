@@ -33,7 +33,7 @@ public class Date {
     }
 
     /**
-     * Returns true if a given string is a valid date according to the format "yyyy-MM-dd".
+     * Returns true if a given string is a valid date.
      *
      * @param test string to be tested
      * @return whether the string is a valid date.
