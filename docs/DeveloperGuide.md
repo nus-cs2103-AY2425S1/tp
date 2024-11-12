@@ -762,7 +762,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: 
        * Student with ID S00001 exists in the system.
-       * Another student with NRIC S2684225J exists in the system.
+       * Another student with NRIC S2684225J exists in the system.<br>
       
    2. Test case: `edit s00001 i\S2684225J`<br>
        Expected: Error message indicating that another student with the same NRIC already exists in the system.
@@ -821,7 +821,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: 
        * Multiple students exist in the system.  
-       * A student named Sam Tan exists in the system.
+       * A student named Sam Tan exists in the system.<br>
       
    2. Test case: `find sam`<br>
        Expected: A list of students, including Sam Tan, is shown.
@@ -830,7 +830,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites:
         * Multiple students exist in the system.
-        * A student named Sam Tan exists in the system.
+        * A student named Sam Tan exists in the system.<br>
        
     2. Test case: `find sa`<br>
        Expected: A list of students, including Sam Tan, is shown.
@@ -859,7 +859,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: 
        * Multiple students exist in the system.
-       * At least one student from year group 3 exists.
+       * At least one student from year group 3 exists.<br>
       
    2. Test case: `filter yg\3`<br>
        Expected: A list of students in year group 3 is shown.
