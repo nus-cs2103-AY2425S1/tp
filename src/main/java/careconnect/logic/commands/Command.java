@@ -10,8 +10,6 @@ public abstract class Command {
     public static final String CONFIRMATION_MESSAGE =
             "The %s command is irreversible. Press y to continue, or n to cancel.";
 
-    protected static final CommandStack STACK = new CommandStack();
-
     protected final boolean requireConfirmation;
 
     protected Command() {
