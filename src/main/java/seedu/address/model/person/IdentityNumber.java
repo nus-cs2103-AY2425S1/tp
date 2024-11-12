@@ -53,7 +53,7 @@ public class IdentityNumber {
      * Returns true if the checksum of the NRIC/FIN is valid.
      * Note that this validates if the NRIC/FIN is valid, but does not guarantee that
      * it belongs to a valid person. Also, given that the actual algorithm for computing the checksum
-     * of the NRIC/FIN is not officially published, this method is more of a guideline for obvious outliers.
+     * of the NRIC/FIN is not officially published, this method is more of a guidelin5e for obvious outliers.
      */
     public static boolean isValidCheckSumIdentityNumber(String test) {
         String identityNumber = test.substring(1, 8);

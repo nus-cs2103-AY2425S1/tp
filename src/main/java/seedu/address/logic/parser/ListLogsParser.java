@@ -20,6 +20,8 @@ public class ListLogsParser implements Parser<ListLogsCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_IDENTITY_NUMBER);
 
+        System.out.println(argMultimap.getValue(PREFIX_IDENTITY_NUMBER));
+
         // Ensure the prefix and value are present
         if (argMultimap.getValue(PREFIX_IDENTITY_NUMBER).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
@@ -40,5 +42,7 @@ public class ListLogsParser implements Parser<ListLogsCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListLogsCommand.MESSAGE_USAGE));
         }
+
+
     }
 }
