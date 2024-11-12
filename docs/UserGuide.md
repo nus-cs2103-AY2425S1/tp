@@ -537,8 +537,36 @@ Roles for each contact are displayed in the order listed above.
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: How do I update a contact's information?
+**A**:Use the `edit` command followed by the contact's index or name and the new details. For example, `edit 1 n/Updated Name th/new_handle`.
+
+**Q**: Why is my newly added contact not showing on the first page?
+**A**: Contacts are sorted alphabetically by default. If the contact’s name falls further down the list, it may appear on a later page. Use pagination controls to locate it.
+
+**Q**: What happens if I add a contact with the same name but a different nickname?
+**A**: As long as the nickname differs, the contact will be added without conflict. However, identical `Nickname` and `Name` entries are flagged as duplicate identities and will not be allowed.
+
+**Q**: Why is my command returning an "Invalid Role" error?
+**A**: Ensure roles are entered in the exact format expected by the app. An "Invalid Role" error may indicate that a role was mistyped or included with extra symbols, such as `[ ]`.
+
+**Q**: Can I undo a deletion?
+**A**: Currently, deletions are final and cannot be undone. Always double-check before using the `delete` command to avoid accidental deletions.
+
+**Q**: How can I search for contacts without case sensitivity?
+**A**: Searches are case-insensitive, so you can enter names, nicknames, or other fields without worrying about uppercase or lowercase letters.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if the user moves the application to a secondary screen, and later switches to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+1. **When inputting duplicate contact**, if the user edits a contact with the same `NAME` and `NICKNAME` as an existing contact currently produces an unclear message ("This contact already exists in the address book"), but could instead display the conflicting contact details and clarify the duplicated fields.
+  
+1. **When a wrong field is inputted**, running `add n/John Doe th/johnny_9876_haha e/johnd@example.com ss/undergraduate 3 r/Admin r/President [nn/altName]` outputs a vague error message ("Invalid Role"), which should specify the unrecognised role "President [". 
+
+1. **Case Sensitivity for Some Contact Fields**: Some contact fields, such as `Nickname`, `Telegram Handle`, and `Email`, are currently case-sensitive, which may lead to duplicate entries when similar contacts with different cases are loaded into the address book.
+
+1. **Delayed Display of Newly Added Contact**: If a contact is added but does not appear immediately on the first page, it may be due to the alphabetical sorting. Users may need to navigate through pages to locate newly added contacts if their names fall further down alphabetically.
+
