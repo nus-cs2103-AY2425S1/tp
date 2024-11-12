@@ -12,6 +12,7 @@ public class AttendanceSession {
      * @param isSessionAttended whether this session was attended
      */
     public AttendanceSession(boolean isSessionAttended) {
+        // primitive type - no need for null check
         this.isSessionAttended = isSessionAttended;
     }
 

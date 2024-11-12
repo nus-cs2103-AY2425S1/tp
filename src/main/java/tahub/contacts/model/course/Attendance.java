@@ -1,5 +1,7 @@
 package tahub.contacts.model.course;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class Attendance {
     private final ArrayList<AttendanceSession> attendanceList;
 
     /**
-     * Constructs an {@code Attendance} object.
+     * Constructs an {@code Attendance} object with an empty starting attendance list.
      */
     public Attendance() {
         attendanceList = new ArrayList<>();
@@ -24,6 +26,7 @@ public class Attendance {
      * @param attendanceList Preexisting attendance list as a {@link List} of {@link AttendanceSession}.
      */
     public Attendance(List<AttendanceSession> attendanceList) {
+        requireNonNull(attendanceList, "Attendance list cannot be null!");
         this.attendanceList = new ArrayList<>(attendanceList);
     }
 
