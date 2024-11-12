@@ -39,6 +39,10 @@ Given below are my contributions to the project.
   * Overhauled the GUI layout and color scheme
   * Wrote additional test cases
 
+* **Community**:
+  * Reviewed PRs (with non-trivial review comments)
+  * Contributed to forum discussions
+
 * **Documentation**:
   * User Guide:
     * Added documentation for the features `price`
