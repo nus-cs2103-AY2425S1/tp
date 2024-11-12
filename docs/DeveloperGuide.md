@@ -138,7 +138,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -620,17 +620,28 @@ Team size: 5
 1. **Customizable Subject Management**
     - Allow users to add and manage subjects beyond the current options of Math, Science, and English. This feature would provide flexibility for organizations that tutor in other subjects or wish to customize subject names.
 
-1. **Improve `vtc` Tutor Hours Chart Rendering**
+2. **Enhanced `find` for Role-Specific Searches**
+    - Expand the `find` command to allow searching by role, making it easier to locate either tutors or tutees for creating a lesson. For example, `find \r tutor` would list only tutors. This enhancement streamlines the process of identifying suitable tutors or tutees based.to
+
+3. **Timetable Function for Adding Lessons**
+    - Enhance the addLesson feature to allow date and time scheduling, and display a timetable when a person is viewed. The timetable would be updated with lessons scheduled, enabling users to view available slots and assign lessons to specific times, ensuring efficient use of tutors’ and tutees’ time. The timetable could also display conflicts or availability to simplify the scheduling process and avoid overlaps.
+
+4. **Improve `vtc` Chart UI for Large Hour Discrepancies**
+    - Adjust the chart scaling in the `vtc` command to accommodate tutors with significantly different hour totals. For example, when one tutor has very high hours (e.g., 100,000) and another has low hours (e.g., 15), the chart should still visibly differentiate each tutor's hours. This enhancement ensures that tutors with fewer hours are accurately represented, avoiding the appearance of zero hours due to chart stretching.
+
+5. **Improve `vtc` Tutor Hours Chart Rendering**
     - Enhance the tutor hours chart in `vtc` to address JavaFX’s limitation with duplicate names. Currently, random index numbers are added to each tutor entry to ensure uniqueness. In future updates, we aim to explore more effective solutions to clearly differentiate tutors with identical names, maintaining clarity in the chart.
 
-1. **Timetable Function for Adding Lessons**
-    - Enhance the addLesson feature to allow date and time scheduling, and display a timetable when a person is viewed. The timetable would be updated with lessons scheduled, enabling users to view available slots and assign lessons to specific times, ensuring efficient use of tutors’ and tutees’ time. The timetable could also display conflicts or availability to simplify the scheduling process and avoid overlaps. Introduce a timetable feature for each tutor and tutee, allowing for structured scheduling directly within the app. This feature would enable users to view available slots and assign lessons to specific times, ensuring efficient use of tutors’ and tutees’ time. The timetable could also display conflicts or availability to simplify the scheduling process and avoid overlaps.
+6. **Improve Chart UI for Long Names in `vtc` Command**
+    - Enhance the chart UI in the `vtc` command to accommodate very long names, ensuring they display correctly without disrupting chart formatting. This could involve wrapping or truncating names within the chart view to maintain readability and avoid overlap or distortion.
 
-1. **Person with no subject check hours**
+7. **Fix Disappearing Text on Hover in Help and File Tabs**
+    - Resolve the issue where hovering over and then moving the cursor away from the Help and File tabs in the top UI causes text to disappear. This enhancement will ensure that text remains visible and accessible when interacting with these tabs, improving overall usability and interface consistency.
+
+8. **Person with no subject check hours**
     - When a new tutor or tutee is added, if there are no subjects hours must be 0, or else an error message “person with no subjects cannot start with more than 0 hours” will be shown.
-
-1. **UI to wrap long names**
-    - If any of the field in details are too long, it will be wrapped.
+9. **Improve UI in personCard to wrap long fields**
+    - Ensure that long fields in the personCard UI (e.g., address, email) wrap correctly to display the full content without truncation. This enhancement will improve readability and user experience when viewing detailed information for tutors and tutees.
 
 
 
