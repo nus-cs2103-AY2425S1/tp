@@ -47,7 +47,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -79,13 +79,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T11-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -96,7 +96,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -123,7 +123,7 @@ How the parsing works:
 
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -143,7 +143,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T11-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -291,8 +291,8 @@ However, in the future, an enhancement can be added where the user is warned whe
 
 
 8. **Specific error message about date and time format:**
-   Currently, the app accepts dates and times in the format d/M/yyyy HHmm while allowing optional leading zeros for day and month, 
-which is intended to streamline input and minimise errors without unnecessarily inconveniencing the user for correct inputs. This may be considered as the format dd/MM/yyyy HHmm so a planned enhancement could be to specify this to the user, or convey that leading zeroes are allowed.
+   Currently, the app accepts dates and times in the format `d/M/yyyy HHmm` while allowing optional leading zeros for day and month, 
+which is intended to streamline input and minimise errors without unnecessarily inconveniencing the user for correct inputs. This may be considered as the format `dd/MM/yyyy HHmm` so a planned enhancement could be to specify this to the user, or convey that leading zeroes are allowed.
    In this iteration, we’ve kept the error messages simple and focused on one format to avoid overloading users with information. We want to ensure that the most critical details are clear, reducing any confusion for users who may not notice subtle differences in date and time formats.
 
 
@@ -363,7 +363,7 @@ Priorities:
 
 (For all use cases below, the **System** is the `HealthConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a client**
+**Use case: UC1 - Add a client**
 
 **MSS**
 
@@ -384,7 +384,7 @@ Priorities:
         Use case ends.
 
 
-**Use case: Delete client data**
+**Use case: UC2 - Delete client data**
 
 **MSS**
 
@@ -413,7 +413,7 @@ Priorities:
     * 1c1. HealthConnect shows an error message.<br>
         Use case ends.
 
-**Use case: Edit client data** <br>
+**Use case: UC 3 - Edit client data** <br>
 Preconditions: HealthConnect has correct view, including client to edit
 
 **MSS**
@@ -438,7 +438,7 @@ Preconditions: HealthConnect has correct view, including client to edit
         Steps 1b1-1b3 are repeated until the details inputted renders a unique person.<br>
         Use case resumes from step 2.
 
-**Use case: Add appointment date and time for client**
+**Use case: UC4 - Add appointment date and time for client**
 
 **MSS**
 
@@ -465,7 +465,7 @@ Preconditions: HealthConnect has correct view, including client to edit
     * 1c1. HealthConnect shows an error message.<br>
         Use case ends.
 
-**Use case: Show schedule for the day**
+**Use case: UC5 - Show schedule for the day**
 
 **MSS**
 
@@ -479,7 +479,7 @@ Preconditions: HealthConnect has correct view, including client to edit
     * 1a1. HealthConnect shows an error message.<br>
         Use case ends.
 
-**Use case: Find client's name by keywords**
+**Use case: UC6 - Find client's name by keywords**
 
 **MSS**
 
@@ -493,7 +493,7 @@ Preconditions: HealthConnect has correct view, including client to edit
   * 1a1. HealthConnect displays execution message.<br>
     Use case ends.
 
-**Use case: Filter clients by parameters**
+**Use case: UC7 - Filter clients by parameters**
 
 **MSS**
 
@@ -509,7 +509,7 @@ Preconditions: HealthConnect has correct view, including client to edit
 
 **To be added as potential future enhancements:**
 
-**Use case: Record Client Payment**
+**Use case: UC8 - Record Client Payment**
 
 **MSS**
 
@@ -605,18 +605,18 @@ testers are expected to do more *exploratory* testing.
 1. Adding a valid patient
 
     1. Test case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Main St t/Low Risk m/None`<br>
-       Expected: New person added: Joanne; Phone: 98788432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tag: Low Risk; Allergies: None
+       Expected: New person added: John Doe; Phone: 98788432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tag: Low Risk; Allergies: None
 
 2. Adding a patient with missing fields
 
     1. Test case: `add n/John`<br>
-       Expected: Following parameters are missing : p/, e/, a/, t/, m/
+       Expected Error Message: Following parameters are missing : p/, e/, a/, t/, m/ <br>
        add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG m/ALLERGY...
        Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/Low Risk m/Peanuts
    
 3. Adding a duplicate patient
 
-    1. Prerequisites: Ensure "John Doe" with the contact details in "Adding a valid patient" is already in the contact list.
+    1. Prerequisites: Ensure `John Doe` with the contact details in "Adding a valid patient" is already in the contact list.
    
     2. Test Case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Main St t/Low Risk m/None`<br>
        Expected Error Message: This person already exists in the address book
@@ -646,6 +646,7 @@ testers are expected to do more *exploratory* testing.
 1. Editing a patient
 
      1. Test case: `edit 1 n/Axel`<br>
+        Expected: Edited Person: Axel; Phone: 83471234; Email: alex@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
 
      2. Test case: `edit 1 p/88452209 e/alex@gmail.com`<br>
         Expected: Edited Person: Axel; Phone: 88452209; Email: alex@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
@@ -658,9 +659,9 @@ testers are expected to do more *exploratory* testing.
 
 2. Attempting to edit to create a duplicate patient
     
-     1. Prerequisites: Ensure "Alice" with the contact details above is already in the contact list.
+     1. Prerequisites: Ensure `Alice` with the contact details above is already in the contact list.
     
-     2. Test case: `edit 3 n/Alice p/90967209
+     2. Test case: `edit 3 n/Alice p/90967209`<br>
         Expected Error Message: Error. This edit will result in a person that already exists in the address book.
 
 ### Filtering patients
@@ -668,17 +669,36 @@ testers are expected to do more *exploratory* testing.
 1. Filtering patients by tag
 
      1. Test case: `filter t/Low Risk`<br>
-        Expected: Lists all patients with tag "Low Risk"
+        Expected: Lists all patients with tag `Low Risk`
 
 2. Filtering patients by phone number
 
      1. Test case: `filter p/98765432`<br>
-        Expected: Lists all patients with phone number "98765432"
+        Expected: Lists all patients with phone number `98765432`
 
 3. Filtering patients by allergy
 
      1. Test case: `filter m/Penicillin`<br>
-        Expected: Lists all patients with allergy "Penicillin"
+        Expected: Lists all patients with allergy `Penicillin`
+
+### Adding appointment date and time to patients
+
+1. Adding date and time to unique patient
+   1. Prerequisites: Ensure that there is one and only one patient named `John Doe`
+   2. Test case: `date n/John Doe d/13/11/2024 1600`
+   3. Expected: Added date and time to Person: John Doe; Phone: 98788432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tag: Low Risk; Allergies: None
+
+2. Adding date and time to patient with same appointment date and time
+   1. Prerequisites: Ensure that there is one and only one patient named `Jane Doe` and another patient has an appointment date and time of `13/11/2024 1600`
+   2. Test case: `date n/Jane Doe d/13/11/2024 1600`
+   3. Expected Message: Given date and time coincides with another appointment below. Please choose another date and time.
+   4. Expected Behaviour: Lists another patient with appointment date and time `13/11/2024 1600`
+
+### Finding schedule by date
+
+1. Finding schedule by date
+   1. Test case: `schedule d/13/11/2024`
+   2. Expected: Lists all patients with appointment date `13/11/2024` 
 
 ### Saving data
 
@@ -692,7 +712,7 @@ testers are expected to do more *exploratory* testing.
 
 **Difficulty Level:**
 
-As the group had prior experience with Orbital, it was easier to understand how to work together with one another to add to the AddressBook. 
+As the group had prior experience with Orbital, it was easier to understand how to work together with one another to add to Health Connect. 
 However, the concepts of Software Engineering were new to all members in the team, and the difficulty lies in having to implement the code according to the Software Engineering principles. 
 Most of our effort was dedicated to adding essential features, and debugging cases that we have not previously considered.
 
