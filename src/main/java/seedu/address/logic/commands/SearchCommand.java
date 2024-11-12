@@ -42,17 +42,22 @@ public class SearchCommand extends Command {
             return new CommandResult(
                     String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
         }
-        TempPredicate tempPredicate = (TempPredicate) this.predicate;
-        List<String> keywords = tempPredicate.getKeywords();
-        List<EventName> eventNames = keywords.stream().map(EventName::new).toList();
-        List<Event> events = eventNames.stream().flatMap(
-                eventName -> model.findEventsWithName(eventName).stream()).toList();
-        List<Integer> eventIds = events.stream().map(Event::getEventId).toList();
-        List<Integer> uniqueEventIds = new HashSet<Integer>(eventIds).stream().toList();
-        EventIdsContainsIdsPredicate eventIdsContainsIdsPredicate = new EventIdsContainsIdsPredicate(uniqueEventIds);
-        model.updateFilteredPersonList(eventIdsContainsIdsPredicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        try {
+            TempPredicate tempPredicate = (TempPredicate) this.predicate;
+            List<String> keywords = tempPredicate.getKeywords();
+            List<EventName> eventNames = keywords.stream().map(EventName::new).toList();
+            List<Event> events = eventNames.stream().flatMap(
+                    eventName -> model.findEventsWithName(eventName).stream()).toList();
+            List<Integer> eventIds = events.stream().map(Event::getEventId).toList();
+            List<Integer> uniqueEventIds = new HashSet<Integer>(eventIds).stream().toList();
+            EventIdsContainsIdsPredicate eventIdsContainsIdsPredicate =
+                    new EventIdsContainsIdsPredicate(uniqueEventIds);
+            model.updateFilteredPersonList(eventIdsContainsIdsPredicate);
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        } catch (IllegalArgumentException e) {
+            return new CommandResult(EventName.MESSAGE_CONSTRAINTS);
+        }
     }
 
     @Override
