@@ -327,7 +327,7 @@ results based on the specified criteria.
 
 ### Export feature
 
-### Implementation
+## Implementation
 
 The `export` command extends `FileAccessCommand` and by extension, `Command`. The `export` command exports the contacts in DorManagerPro to a JSON file in the data folder of the app. 
 
