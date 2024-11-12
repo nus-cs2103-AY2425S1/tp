@@ -210,17 +210,4 @@ public class ParserUtil {
     public static boolean isValidClassName(String className) {
         return className.matches(CLASS_NAME_VALIDATION_REGEX);
     }
-
-    /**
-     * Parses a {@code Integer daysAttended} into a {@code DaysAttended}.
-     *
-     * @throws ParseException if the given {@code daysAttended} is invalid.
-     */
-    public static DaysAttended parseDaysAttended(Integer daysAttended) throws ParseException {
-        requireNonNull(daysAttended);
-        if (!DaysAttended.isValidDaysAttended(daysAttended)) {
-            throw new ParseException(DaysAttended.MESSAGE_CONSTRAINTS);
-        }
-        return new DaysAttended(daysAttended);
-    }
 }

@@ -85,6 +85,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -93,10 +94,8 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-        Model modelWithoutPersonToEdit = new ModelManager(model.getAddressBook(), model.getUserPrefs());
-        modelWithoutPersonToEdit.deletePerson(personToEdit);
 
-        if (modelWithoutPersonToEdit.hasPerson(editedPerson)) {
+        if (isEditedPersonInModel(model, personToEdit, editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -129,6 +128,13 @@ public class EditCommand extends Command {
         return Person.createPerson(personToEdit.getType(), updatedName, updatedGender, updatedPhone, updatedEmail,
                 updatedAddress, updatedTags, updatedSubjects, updatedClasses, updatedDaysAttended,
                 updatedNextOfKin, updatedEmergencyContact);
+    }
+
+    // Checks if edited person is a duplicate of any persons in the model excluding the original person
+    private boolean isEditedPersonInModel(Model model, Person originalPerson, Person editedPerson) {
+        Model modelWithoutPersonToEdit = new ModelManager(model.getAddressBook(), model.getUserPrefs());
+        modelWithoutPersonToEdit.deletePerson(originalPerson);
+        return modelWithoutPersonToEdit.hasPerson(editedPerson);
     }
 
     @Override
