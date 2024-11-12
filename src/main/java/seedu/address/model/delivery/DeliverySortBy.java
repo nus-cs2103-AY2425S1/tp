@@ -66,7 +66,7 @@ public class DeliverySortBy {
         case S:
             return new DeliverySortStatusComparator(sortOrder);
         default:
-            return null;
+            throw new IllegalArgumentException("Unknown sort by: " + deliverySortBy);
         }
     }
 

@@ -2,8 +2,6 @@ package seedu.address.model.delivery;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDateTime;
-
 import seedu.address.logic.parser.SortOrder;
 
 /**
@@ -35,12 +33,10 @@ public class DeliverySortDateTimeComparator extends DeliverySortComparator {
         requireNonNull(delivery2);
         assert delivery1.getDeliveryDate() != null;
         assert delivery2.getDeliveryDate() != null;
-        LocalDateTime delivery1DateTime = delivery1.getDeliveryDate().time;
-        LocalDateTime delivery2DateTime = delivery2.getDeliveryDate().time;
         if (super.getIsSortByAscending()) {
-            return delivery1DateTime.compareTo(delivery2DateTime);
+            return delivery1.getDeliveryDate().compareTo(delivery2.getDeliveryDate());
         } else {
-            return delivery2DateTime.compareTo(delivery1DateTime);
+            return delivery2.getDeliveryDate().compareTo(delivery1.getDeliveryDate());
         }
     }
 

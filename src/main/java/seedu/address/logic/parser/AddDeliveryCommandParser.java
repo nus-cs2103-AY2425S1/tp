@@ -21,20 +21,23 @@ import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.product.Product;
 
 /**
- * Parses input arguments and creates a new AddDeliveryCommand object
+ * Parses input arguments and creates a new AddDeliveryCommand object.
  */
 public class AddDeliveryCommandParser implements Parser<AddDeliveryCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String} of arguments in the context of the AddDeliveryCommand
+     * and returns an AddDeliveryCommand object for execution.
+     *
+     * @param args Input String parameters provided by user.
+     * @return AddDeliveryCommand object.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public AddDeliveryCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, PREFIX_SUPPLIER_INDEX,
                         PREFIX_PRODUCT, PREFIX_QUANTITY, PREFIX_COST);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME, PREFIX_SUPPLIER_INDEX,
+        if (!hasPrefixesPresent(argMultimap, PREFIX_DATETIME, PREFIX_SUPPLIER_INDEX,
                 PREFIX_PRODUCT, PREFIX_QUANTITY, PREFIX_COST)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDeliveryCommand.MESSAGE_USAGE));
@@ -42,21 +45,37 @@ public class AddDeliveryCommandParser implements Parser<AddDeliveryCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_DATETIME, PREFIX_SUPPLIER_INDEX,
                 PREFIX_PRODUCT, PREFIX_QUANTITY, PREFIX_COST);
-        DateTime deliveryDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
         SupplierIndex supplierIndex = ParserUtil.parseSupplierIndex(argMultimap.getValue(PREFIX_SUPPLIER_INDEX).get());
-        Product product = ParserUtil.parseProduct(argMultimap.getValue(PREFIX_PRODUCT).get());
-        Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
-        Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
-        Delivery delivery = new Delivery(product, null, Status.PENDING, deliveryDateTime, cost, quantity);
+        Delivery delivery = createDelivery(argMultimap);
+        assert delivery != null;
         DeliveryWrapper deliveryWrapper = new DeliveryWrapper(delivery, supplierIndex);
         return new AddDeliveryCommand(deliveryWrapper);
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Creates a Delivery object based on the parsed inputs provided by user.
+     *
+     * @param argMultimap A map that stores mapping of prefixes to their respective arguments.
+     * @return A Delivery object.
+     * @throws ParseException If any of the parameters provided by the user is invalid.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+    public Delivery createDelivery(ArgumentMultimap argMultimap) throws ParseException {
+        DateTime deliveryDateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
+        Product product = ParserUtil.parseProduct(argMultimap.getValue(PREFIX_PRODUCT).get());
+        Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
+        Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
+        Delivery delivery = new Delivery(product, null, Status.PENDING, deliveryDateTime, cost, quantity);
+        return delivery;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values.
+     *
+     * @param argumentMultimap A map that stores mapping of prefixes to their respective arguments.
+     * @param prefixes Prefix that marks the beginning of an argument in an arguments string.
+     * @return True if all compulsory parameters are provided by user.
+     */
+    private static boolean hasPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

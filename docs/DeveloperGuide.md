@@ -637,7 +637,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Adding a delivery with invalid supplier
     1. Test case: `add -d on/18-01-2023 15:00 s/0 pro/bread q/500 g c/5.50`<br>
-       Expected: No delivery is added. Error message indicating that SUPPLIER_INDEX should be a positive number greater than 0 and smaller than total number of suppliers shown in the status message. <br>
+       Expected: No delivery is added. Error message indicating that SUPPLIER_INDEX should be a positive number greater than 0 and smaller than total number of suppliers shown in the status message.<br> </br>
 
 3. Adding a delivery with invalid units for QUANTITY
     1. Prerequisites: Ensure there is at least 1 supplier by listing all suppliers using the `list -s` command.
@@ -747,7 +747,7 @@ testers are expected to do more *exploratory* testing.
 2. Sorting deliveries with invalid parameters in ascending order
 
     1. Test case: `sort -d so/a sb/q`<br>
-       Expected: No deliveries displayed. Error message indicating possible parameters for sort order shown in the status message.
+       Expected: No deliveries displayed. Error message indicating possible parameters for sort order shown in the status message.<br></br>
 
 3. Sorting an empty list of deliveries
 
