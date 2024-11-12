@@ -1,14 +1,9 @@
 package seedu.address.logic.parser.deletecommands;
 
-import static seedu.address.logic.Messages.MESSAGE_ILLEGAL_PREFIX_USED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.ALL_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -35,13 +30,7 @@ public class DeleteTaskFromGroupCommandParser implements Parser<DeleteTaskFromGr
     @Override
     public DeleteTaskFromGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_GROUP_NAME);
-        List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_INDEX, PREFIX_GROUP_NAME));
-        List<Prefix> invalidPrefixes = ALL_PREFIX;
-        invalidPrefixes.removeAll(allowedPrefix);
-        if (containsInvalidPrefix(args, invalidPrefixes)) {
-            throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + DeleteTaskFromGroupCommand.MESSAGE_USAGE);
-        }
+            ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_GROUP_NAME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_GROUP_NAME)
             || !argMultimap.getPreamble().isEmpty()) {
@@ -63,7 +52,4 @@ public class DeleteTaskFromGroupCommandParser implements Parser<DeleteTaskFromGr
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPrefixes) {
-        return invalidPrefixes.stream().anyMatch(prefix -> arg.contains(prefix.getPrefix()));
-    }
 }

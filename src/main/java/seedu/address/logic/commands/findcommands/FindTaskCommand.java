@@ -46,6 +46,7 @@ public class FindTaskCommand extends Command {
         model.updateFilteredTaskList(predicate);
         logger.info(String.format("Found %1s tasks with predicate - %2s", model.getFilteredTaskList().size(),
             predicate));
+        model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
         if (model.getFilteredTaskList().isEmpty()) {
             return new CommandResult(NO_TASKS_FOUND, LIST_TASK_MARKER);
         }

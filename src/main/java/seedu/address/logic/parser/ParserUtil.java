@@ -124,6 +124,12 @@ public class ParserUtil {
         if (!GroupName.isValidName(trimmedName)) {
             throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
         }
+        // easiest way to add in exception for number exceeding MAX_INT currently
+        try {
+            String gn = GroupName.formatGroupName(trimmedName);
+        } catch (Exception e) {
+            throw new ParseException("Tutorial Group or Group number exceeds 2147483647");
+        }
         return new GroupName(trimmedName);
     }
 

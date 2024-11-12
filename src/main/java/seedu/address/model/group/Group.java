@@ -127,6 +127,7 @@ public class Group {
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).equals(originalTask)) {
                 taskList.set(i, editedTask);
+                break;
             }
         }
 

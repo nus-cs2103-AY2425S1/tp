@@ -73,6 +73,7 @@ public class AddTaskToAllGroupsCommand extends Command {
         }
         model.setMostRecentTaskDisplay(task);
         model.updateFilteredTaskList(x -> x.equals(task));
+        model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
         model.setStateTasks();
         ZoneId zid = ZoneId.of("Asia/Singapore");
         LocalDateTime currentTime = LocalDateTime.now(zid);

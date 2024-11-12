@@ -58,6 +58,7 @@ public class DeleteTaskForAllGroupsCommand extends Command {
         List<Group> toBeDeletedFrom = getGroupsToBeDeletedFrom(groupList, targetTask);
         updateTaskInGroup(toBeDeletedFrom, targetTask, model);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
+        model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
         String formattedGroups = toBeDeletedFrom.stream()
             .map(group -> Messages.format(group))
             .collect(Collectors.joining("\n"));

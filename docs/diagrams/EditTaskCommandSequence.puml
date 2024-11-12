@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditTaskCommandParser" as EditTaskCommandParser LOGIC_COLOR
+participant "e:EditTaskCommand" as EditTaskCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "g:Group" as Group MODEL_COLOR
+end box
+
+[-> LogicManager : execute("edit_t_g gn/CS2103-F15-3 i/1 td/2024-12-12 1800")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("gn/CS2103-F15-3 i/1 td/2024-12-12 1800")
+activate AddressBookParser
+
+create EditTaskCommandParser
+AddressBookParser -> EditTaskCommandParser : parse("gn/CS2103-F15-3 i/1 td/2024-12-12 1800")
+activate EditTaskCommandParser
+
+create EditTaskCommand
+EditTaskCommandParser -> EditTaskCommand : parse("gn/CS2103-F15-3 i/1 td/2024-12-12 1800")
+activate EditTaskCommand
+
+EditTaskCommand --> EditTaskCommandParser : e
+deactivate EditTaskCommand
+
+EditTaskCommandParser --> AddressBookParser : e
+deactivate EditTaskCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditTaskCommandParser -[hidden]-> AddressBookParser
+destroy EditTaskCommandParser
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> EditTaskCommand : execute(m)
+activate EditTaskCommand
+
+EditTaskCommand -> Model : getGroupByName(groupName)
+activate Model
+
+Model -> Group : getTasks()
+activate Group
+
+Group --> Model :
+deactivate Group
+
+Model --> EditTaskCommand :
+deactivate Model
+
+EditTaskCommand -> EditTaskCommand : createEditedTask()
+
+
+EditTaskCommand -> Model : setTask(taskToEdit, editedTask, group)
+activate Model
+
+Model -> Model : decreaseGroupWithTask(taskToEdit)
+Model -> Model : increaseGroupWithTask(editedTask)
+Model --> EditTaskCommand
+deactivate Model
+
+create CommandResult
+EditTaskCommand -> CommandResult :
+activate CommandResult
+
+CommandResult --> EditTaskCommand
+deactivate CommandResult
+destroy CommandResult
+
+EditTaskCommand --> LogicManager : r
+deactivate EditTaskCommand
+destroy EditTaskCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

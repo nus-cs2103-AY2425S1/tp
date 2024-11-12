@@ -17,5 +17,5 @@ Student -up-> "*" Tag
 Student *--> Name
 Student *--> "Student Number"
 Student *--> Email
-Student *--> Group
+Student *--> GroupName
 @enduml

@@ -9,7 +9,7 @@
 T_Assistant is a **desktop app for CS2103 tutors managing their students, groups and tasks** optimized for use via a Command
 Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-If you can type fast, T_Assistant can get your contact management tasks done faster than traditional GUI apps.
+If you can type fast, T_Assistant can get your tutor management tasks done faster than traditional GUI apps.
 
 ## Navigation
 
@@ -48,7 +48,7 @@ If you are on the PDF, use the table of contents below to navigate the site.
 
     - `undo` : Undo the last command ran.
 
-    - `clear` : Deletes all contacts.
+    - `clear` : Deletes all data.
 
     - `exit` : Exits the app.
 
@@ -86,18 +86,35 @@ If you are on the PDF, use the table of contents below to navigate the site.
   e.g. if the command specifies `sno/STUDENT_NUMBER sn/STUDENT_NAME`, `sn/STUDENT_NAME sno/STUDENT_NUMBER` is also
   acceptable.
 
-- Extraneous parameters for commands that **do not take in parameters** (such as `help`, `list`, `exit` and `clear`)
-  will be **ignored**.<br>
+- The following commands (i.e. `help`, `exit` and `clear`) will **ignore** extraneous parameters.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-- Extraneous parameters for commands that **take in parameters** will be recognised as _invalid_ input parameters.<br>
-  e.g. if the command specifies `del_t i/1 gn/CS2103-1-1`, it will be interpreted as an invalid command structure due to extra `gn/`.
+- The following commands (i.e. `list_s`, `list_g` and `sort` commands) will **throw an error** for extraneous parameters.
+
+- Using extraneous parameters/repeated parameters, unlike stated, in other commands might **result in an error**!
+
+<box type="warning" seamless>
+
+**Caution:**
+- Prefixes are detected if a space is in front of them, i.e. `gn/` will be detected as a prefix if entered like this ` (space)gn/`.
+- If your input involves a parameter used in the command, consider using a backslash like this `gn\`.
+</box>
 
 **Important**
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+</box>
+
+<box type="warning">
+
+When running commands that use `i/INDEX`, the index used references the unfiltered lists so always run the relevant `list` commands first!
+
+e.g. `add_t tn/Merry Christmas td/2024-12-24 0000` will return a filtered view of the task. 
+
+However, if you wish to edit the new task, you must run `list_t` first to edit it globally or `list_t gn/GROUP_NAME` if you wish to edit it for a group.
+
+</box>
 
 ---
 
@@ -125,7 +142,7 @@ Adds a student to T_Assistant.
 
 ##### Notes
 
-1. `Student Number` is the unique identifier for each student, so no two students can have the same student number.
+1. `Student Number` and `Email` are the unique identifiers for each student, so no two students can have the same student number or email.
 2. `Student Number` provided by the user will be capitalised by the system.
 3. `Tags` are case-insensitive, so `T1` and `t1` will be recognised as the same tags. T_Assistant will add the first
    instance of the repeated tag.
@@ -178,12 +195,13 @@ Edits the details of a student.
 
 ##### Notes
 
-1. `edit_s` edits the student identified by the index. It only accepts a valid index based on the list when `list_s` is called.
+1. `edit_s` edits the student identified by the index. It only accepts a valid index based on the list returned when `list_s` is called.
 2. Since `Student Number` is the unique identifier for each student, `Student Number` can't be edited.
-3. At least 1 optional parameter must be provided, else an error will be thrown.
-4. Editing of tags is not cumulative, i.e. tags will be replaced by the new set of tags.
-5. Tags are removed by entering `t/` without specifying any tags after it.
-6. For information on the constraints for each parameter used in this command, go
+3. `Email` can be edited, but it must not exist in T_Assistant.
+4. At least 1 optional parameter must be provided, else an error will be thrown.
+5. Editing of tags is not cumulative, i.e. tags will be replaced by the new set of tags.
+6. Tags are removed by entering `t/` without specifying any tags after it.
+7. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -209,7 +227,8 @@ Adds student(s) to a group.
 
 1. The group with the `Group Name` and student(s) with the `Student Number`(s) must both exist in T_Assistant.
 2. The max size for a `Group` is 5 `Students`.
-3. For information on the constraints for each parameter used in this command, go
+3. Returns a filtered view of the group the student was added into.
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -236,7 +255,8 @@ Deletes a student from its assigned group.
 1. This command only removes a student from a group, not from T_Assistant.
 2. The student must exist in T_Assistant and be in a group.
 3. Since a student can only be in one group, it will automatically remove the student from the group it is in.
-4. For information on the constraints for each parameter used in this command, go
+4. Returns a filtered view of the group the student was in.
+5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -265,15 +285,15 @@ Searches T_Assistant for students with fields that match the search query.
 3. A blank query i.e. `fs q/` will return all students.
 4. This command functions on an OR logic. It will return all students that have fields that match any of the queries.
 5. Searches the following fields that a student has that matches the query:
-
     - Student name
     - Student number
     - Email
     - Group name
-        - **Bonus:** If you wish to filter for students with no groups, use the following command: `find_s q/!nogroup`
-          > `!nogroup` is a special query that searches for students with no groups, it is also case-insensitive.
-
 <box type="info" seamless>
+If you wish to filter for students with no groups, use the following command: `find_s q/!nogroup`
+  
+> `!nogroup` is a special query that searches for students with no groups, it is also case-insensitive.
+
 Take note that if any other student with a group happens to have a field that matches the special keyword, they will also appear in the results.
 </box>
 
@@ -400,7 +420,7 @@ Edits the specified group in T_Assistant.
 ##### Notes
 
 1. `edit_g` edits the group identified by the index. It only accepts a valid index
-   based on the list when `list_g` is called.
+   based on the list returned when `list_g` is called.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -477,7 +497,7 @@ Shows a list of all tasks in the T_Assistant.
 
 ##### Notes
 
-1. If there's a `Group Name`, all the tasks in that group will be listed.
+1. If there's a `gn/Group Name` supplied, all the tasks in that group will be listed instead.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -519,7 +539,8 @@ Adds a task to a group or multiple groups.
    The application simply ignores the duplicates and adds the task to the desired group.
 4. This command checks for the existence of the task, hence you cannot input a task which already exists. A task is
    equal to another task when it has the same task name and deadline as it.
-5. For information on the constraints for each parameter used in this command, go
+5. Returns a filtered view of the task added.
+6. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -534,19 +555,6 @@ This is the default scenario where the task does not already exist and both grou
 This screenshot shows the result of executing `add_t_g tn/Complete task 4 td/2024-11-15 1700 gn/CS2103-F12-1 gn/CS2103-F11-1`.
 
 <img src="images/screenshots/add_t_g_1.png" width="600">
-<br>
-<br>
-
-###### Scenario #2: Adding a task with the name of `Complete task 5` and deadline of `2024-12-30 1900` to groups `CS2103-F11-1` and `CS2103-F13-2` when `CS2103-F13-2` does not exist.
-
-1. You can begin this command on any panel.
-2. Type `add_t_g tn/Complete task 5 td/2024-12-30 1900 gn/CS2103-F11-1 gn/CS2103-F13-2`.
-3. Since `CS2103-F11-1` exists, the command will still allow you to add the task into the group. However, it will display
-   an additional warning message regarding the input `CS2103-F13-2` which does not exist.
-
-This screenshot shows the result of executing `add_t_g tn/Complete task 5 td/2024-12-30 1900 gn/CS2103-F11-1 gn/CS2103-F13-2`.
-
-<img src="images/screenshots/add_t_g_2.png" width="600">
 
 ---
 
@@ -558,8 +566,9 @@ Adds a task to all groups.
 
 ##### Notes
 
-1. If the task specified already exists in some groups, it will be added to all other groups.
-2. For information on the constraints for each parameter used in this command, go
+1. If the task specified already exists in some groups, it will add the other groups in.
+2. Returns a filtered view of the task added.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -586,11 +595,12 @@ Adds an existing task to the groups specified.
 1. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
 2. `add_et_g` adds an existing task identified by the index. It only accepts a valid index
-   based on the list when `list_t` is called.
+   based on the list returned when `list_t` is called.
 3. You can add an existing task to multiple groups.
 4. This command is relatively flexible in terms of the input parameters. You can input duplicate group names or group names that don't exist.
     1. The application simply ignores the duplicates and adds the task to the desired group.
-5. For information on the constraints for each parameter used in this command, go
+5. Returns a filtered view of the task added to the group(s).
+6. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -605,20 +615,6 @@ Adds an existing task to the groups specified.
 This screenshot shows the result of executing `add_et_g i/1 gn/CS2103T-T10-1`.
 
 <img src="images/screenshots/add_et_g_1.png" width="600">
-<br>
-<br>
-
-###### Scenario #2: Adding task with index `1` that is already in `CS2103-F11-1`
-
-1. Type and execute: `list_t` to see the list of tasks.
-2. After finding the task you wish to add, remember its index number (task with index 1 in this example).
-3. You may wish to execute `list_g` to check on the names of groups you wish to add the task to.
-4. Type and execute: `add_et_g i/1 gn/CS2103-F11-1 gn/CS2103-F11-2`
-5. You will get an error message.
-
-This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-F11-1 gn/CS2103-F11-2`.
-
-<img src="images/screenshots/add_et_g_2.png" width="600">
 
 ---
 
@@ -632,10 +628,11 @@ Deletes a task from a group.
 
 1. The index must be valid and should be the index of target task in the group's task list.
 2. `del_t_g` deletes a task identified by the index. It only accepts a valid index
-   based on the list when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
+   based on the list returned when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
 3. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
-4. For information on the constraints for each parameter used in this command, go
+4. Returns a filtered view of the group the task is deleted from.
+5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -662,7 +659,7 @@ Delete a task from all groups that contain it.
 
 1. The index must be valid and should be the index of task list.
 2. `del_t` deletes a task identified by the index. It only accepts a valid index
-      based on the list when `list_t` is called.
+      based on the list returned when `list_t` is called.
 3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -689,12 +686,13 @@ Edits a task from a group.
 
 1. The index must be valid and should be the index of target task in the group's task list.
 2. `edit_t_g` edits a task identified by the index. It only accepts a valid index
-   based on the list when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
+   based on the list returned when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
 3. `Group Name` must exist in the T_Assistant.
 4. At least 1 optional parameter must be provided, else an error will be thrown.
 5. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
-6. For information on the constraints for each parameter used in this command, go
+6. Returns a filtered view of the group the task is edited in.
+7. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -720,7 +718,7 @@ Edits a task from all groups that contain it.
 
 1. The index must be valid and should be the index of task list.
 2. `edit_t` edits a task identified by the index. It only accepts a valid index
-   based on the list when `list_t`.
+   based on the list returned when `list_t`.
 3. At least 1 optional parameter must be provided, else an error will be thrown.
 4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
@@ -748,9 +746,10 @@ Marks a task as done or undone.
 
 1. The index must be valid and should be the index of target task in the group's task list.
 2. `mark_t` marks a task identified by the index. It only accepts a valid index
-   based on the list when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
+   based on the list returned when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
 3. If a task is complete it will be marked as pending/overdue, and vice versa.
-4. For information on the constraints for each parameter used in this command, go
+4. Returns a filtered view of the group the task is marked at.
+5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -967,7 +966,7 @@ All parameters are case-insensitive when used for comparison unless stated other
 | **List Students**             | `list_s/ls`                                                                                                                          |
 | **Add Student**               | `add_s/as sno/STUDENT_NUMBER sn/STUDENT_NAME e/EMAIL [t/TAG]...`<br>e.g., `as sno/A0123456A sn/James Ho e/e0123456A@u.nus.edu t/TD9` |
 | **Delete Student**            | `del_s/ds sno/STUDENT_NUMBER`<br>e.g., `ds sno/A0123456A`                                                                            |
-| **Edit Student**              | `edit_s/es i/INDEX sno/STUDENT_NUMBER [sn/STUDENT_NAME] [e/EMAIL] [t/TAG]...`<br>e.g., `es i/1 sno/A0123456A sn/James Ho Ting Kang`  |
+| **Edit Student**              | `edit_s/es i/INDEX [sn/STUDENT_NAME] [e/EMAIL] [t/TAG]...`<br>e.g., `es i/1 sno/A0123456A sn/James Ho Ting Kang`                     |
 | **Add Student to Group**      | `add_s_g/asg sno/STUDENT_NUMBER gn/GROUP_NAME`<br>e.g., `asg sno/A0123456A gn/CS2103-F12-2`                                          |
 | **Delete Student From Group** | `del_s_g/dsg sno/STUDENT_NUMBER`<br>e.g., `dsg sno/A0123456A`                                                                        |
 | **Find Student**              | `find_s/fs q/QUERY [q/QUERY]...`<br>e.g., `fs q/James`                                                                               |

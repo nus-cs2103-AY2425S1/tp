@@ -33,6 +33,9 @@ public class RedoCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.setStateStudents();
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
+        model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

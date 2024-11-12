@@ -1,14 +1,9 @@
 package seedu.address.logic.parser.addcommands;
 
-import static seedu.address.logic.Messages.MESSAGE_ILLEGAL_PREFIX_USED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.ALL_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.addcommands.AddTaskToAllGroupsCommand;
@@ -35,13 +30,7 @@ public class AddTaskToAllGroupsCommandParser implements Parser<AddTaskToAllGroup
     @Override
     public AddTaskToAllGroupsCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE);
-        List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE));
-        List<Prefix> invalidPrefixes = ALL_PREFIX;
-        invalidPrefixes.removeAll(allowedPrefix);
-        if (containsInvalidPrefix(args, invalidPrefixes)) {
-            throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + AddTaskToAllGroupsCommand.MESSAGE_USAGE);
-        }
+            ArgumentTokenizer.tokenize(args, PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE)
             || !argMultimap.getPreamble().isEmpty()) {
@@ -63,7 +52,4 @@ public class AddTaskToAllGroupsCommandParser implements Parser<AddTaskToAllGroup
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPrefixes) {
-        return invalidPrefixes.stream().anyMatch(prefix -> arg.contains(prefix.getPrefix()));
-    }
 }
