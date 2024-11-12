@@ -309,6 +309,7 @@ Priorities: Essential (must have), Novel (nice to have), Typical (unlikely to ha
 # Use cases
 
 (For all use cases below, the **System** is the `EduLog` and the **Actor** is the `Teacher`, unless specified otherwise)
+Also in the current version, as there is no authentication system, logged in would simply mean opening the app, with the proper data files.
 
 ## UC1: Add a lesson
 * Postcondition: A lesson, with at least a name, date, and time is created <br>
