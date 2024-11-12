@@ -94,8 +94,8 @@ the command `delete 1`.
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding
-  API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name} Manager` class (which follows the corresponding
+  API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
 the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component
@@ -269,51 +269,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority        | As a …​                     | I want to …​                                                                                             | So that I can…​                                                                   |
 |-----------------|-----------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| * * *           | new user                    | see usage instructions                                                                                   | refer to instructions when I forget how to use the App                            |
-| * * *           | user                        | add a new client                                                                                         | keep track of their information                                                   |
-| * * *           | user                        | delete a client                                                                                          | remove entries that I no longer need                                              |
-| * * *           | user                        | find a client by name                                                                                    | locate details of clients without having to go through the entire list            |
-| * * *           | user                        | categorize clients into buyers and properties (sellers)                                                  | easily manage different client types                                              |
-| * * *           | user                        | filter clients by name                                                                                   | easily locate clients in the address book                                         |
-| * * *           | user                        | filter properties by name or address                                                                     | easily locate properties in the address book                                      |
-| * * *           | user                        | filter meet-ups by subject                                                                               | easily locate meet-ups in the address book                                        |
-| * * *           | user                        | view my contacts using commands                                                                          | contact them for business                                                         |
-| * * *           | user                        | collect the name, contact number, and email of clients                                                   | I have access to these important information                                      |
-| * * *           | user                        | switch between viewing modes                                                                             | be focused on whichever list I want to view                                       |
-| * * *           | user                        | collect the subject, start and end date of my meetups and the client involved                            | I have access to these important information                                      |
-| * * *           | user                        | collect the landlord name, address, phone number of properties                                           | I have access to these important information                                      |
-| * * *           | user                        | have a meetup schedule                                                                                   | keep track of future meetups                                                      |
-| * * *           | user                        | tag clients with labels like high priority or first-time buyer                                           | prioritize my outreach efforts                                                    |
-| * *             | user                     | a standardise command format     | easily pick up how to use the app                                                 |
-| * *             | user                        | store notes about clients' property preferences                                                          | focus on active prospects                                                         |
-| * *             | user                        | set reminders for client follow-ups                                                                      | minimize chance of someone else seeing them by accident                           |
-| * *             | user                        | group clients by address preferences                                                                     | tailor property recommendations to their needs                                    |
-| * *             | user                        | track status of property deals for each client (e.g. interested, offer made, contract signed)            | track which stage the client is at                                                |
-| * *             | user                        | add notes to client interactions                                                                         | easily send property updates                                                      |
-| * *             | user                        | collect budget preference, neighborhood preference, and property of my buyer and seller                  | stay organized                                                                    |
-| * *             | user                        | edit my contact list                                                                                     | easily change the details of my contacts                                          |
-| * *             | user                        | edit my meetup details                                                                                   | easily update the details of my scheduled meetups                                 |
-| *               | user                        | hide private contact details                                                                             | my buyer list remains up-to-date without deleting past information                |
-| *               | user                        | filter clients by their buying timelines (e.g. immediate, next 5 months)                                 | maintain regular communication                                                    |
-| *               | user                        | send bulk emails to groups of clients                                                                    | share it with colleagues or for reporting purposes                                |
-| *               | long-term user of the app   | archive old client contacts                                                                              | quickly build my buyer list                                                       |
-| *               | long-term user of the app   | log the last interaction date with the client                                                            | capture important details discussed in meetings or phone calls                    |
-| *               | expert user                 | export my contact list to Excel or CSV                                                                   | stay in regular contact                                                           |
-| *               | expert user                 | import contacts from my phone or other databases                                                         | know which clients have been shown to which property                              |
-| *               | user                        | set a follow-up frequency for each client                                                                | focus on urgent leads                                                             |
-| *               | user                        | track a client's viewing history                                                                         | never miss an important deadline                                                  |
-| *               | user                        | set up reminders for key seller-related milestones (e.g. contract expiration, price reduction discussions) | engage them through their preferred channels                                      |
-| *               | user                        | track client communication preferences                                                                   | easily communicate progress to sellers                                            |
-| *               | user                        | generate a visual timeline of a property's selling process                                               |                                                                                   |
-| *               | user                        | receive notifications when it's time to follow up with a client                                          | not forget                                                                        |
-| *               | user                        | assign a lead source to each client, e.g. referral, open house, website                                  | know where my business is coming from                                             |
-| *               | real estate agent           | schedule and track open house events                                                                     | ensure smooth operations and follow up with attendees                             |
-| *               | user                        | monitor competing listings in the same area                                                              | adjust pricing and marketing strategies accordingly                               |
-| *               | user                        | track commission details for each property sale                                                          | keep accurate financial records                                                   |
-| *               | user                        | generate reports on the number of leads generated per listing                                            | show sellers the interest their property is receiving                             |
-| *               | user                        | manage and log referral partner interactions (e.g. contractors, photographers)                           | maintain strong professional relationships                                        |
-| *               | user                        | send property performance updates to sellers (e.g. number of views, showings)                            | keep them informed and engaged                                                    |
-| *               | user                        | track which clients were referred by past clients                                                        | send buyers personalized appreciation messages and foster long-term relationships |
+| * * *           | new user            | see usage instructions                                                                                   | refer to instructions when I forget how to use the App                            |
+| * * *           | user                | add a new client                                                                                         | keep track of their information                                                   |
+| * * *           | user                | delete a client                                                                                          | remove entries that I no longer need                                              |
+| * * *           | user                | find a client by name                                                                                    | locate details of clients without having to go through the entire list            |
+| * * *           | user                | categorize clients into buyers and properties (sellers)                                                  | easily manage different client types                                              |
+| * * *           | user                | filter clients by name                                                                                   | easily locate clients in the address book                                         |
+| * * *           | user                | filter properties by name or address                                                                     | easily locate properties in the address book                                      |
+| * * *           | user                | filter meet-ups by subject                                                                               | easily locate meet-ups in the address book                                        |
+| * * *           | user                | view my contacts using commands                                                                          | contact them for business                                                         |
+| * * *           | user                | collect the name, contact number, and email of clients                                                   | I have access to these important information                                      |
+| * * *           | user                | switch between viewing modes                                                                             | be focused on whichever list I want to view                                       |
+| * * *           | user                | collect the subject, start and end date of my meetups and the client involved                            | I have access to these important information                                      |
+| * * *           | user                | collect the landlord name, address, phone number of properties                                           | I have access to these important information                                      |
+| * * *           | user                | have a meetup schedule                                                                                   | keep track of future meetups                                                      |
+| * * *           | user                | tag clients with labels like high priority or first-time buyer                                           | prioritize my outreach efforts                                                    |
+| * *             | user                | a standardise command format                                                                             | easily pick up how to use the app                                                 |
+| * *             | user                | store notes about clients' property preferences                                                          | focus on active prospects                                                         |
+| * *             | user                | set reminders for client follow-ups                                                                      | don't miss important communication                                                |
+| * *             | user                | group clients by address preferences                                                                     | tailor property recommendations to their needs                                    |
+| * *             | user                | track status of property deals for each client (e.g. interested, offer made, contract signed)            | track which stage the client is at                                                |
+| * *             | user                | add notes to client interactions                                                                         | easily send property updates                                                      |
+| * *             | user                | collect budget preference, neighborhood preference, and property of my buyer and seller                  | tailor property recommendations to their needs                                    |
+| * *             | user                | edit my contact list                                                                                     | easily change the details of my contacts                                          |
+| * *             | user                | edit my meetup details                                                                                   | easily update the details of my scheduled meetups                                 |
+| *               | user                | hide private contact details                                                                             | minimize chance of someone else seeing them by accident                           |
+| *               | user                | filter clients by their buying timelines (e.g. immediate, next 5 months)                                 | maintain regular communication                                                    |
+| *               | user                | send bulk emails to groups of clients                                                                    | inform them of the latest property updates                                        |
+| *               | long-term user      | archive old client contacts                                                                              | I can keep my active contacts list uncluttered, while still having the ability to retrieve historical client information if needed.                                                       |
+| *               | long-term user      | log the last interaction date with the client                                                            | capture important details discussed in meetings or phone calls                    |
+| *               | expert user         | import contacts from my phone or other databases                                                         | quicky build my buyer list                                                        |
+| *               | user                | set a follow-up frequency for each client                                                                | stay in regulr contact                                                            |
+| *               | user                | track a client's viewing history                                                                         | know which clients have been shown to which property                              |
+| *               | user                | set up reminders for key seller-related milestones (e.g. contract expiration, price reduction discussions) | never miss an important deadline                                                |
+| *               | user                | track client communication preferences                                                                   | engage them through their preferred channels                                      |
+| *               | user                | generate a visual timeline of a property's selling process                                               | easily communicate progress to property owners                                    |
+| *               | user                | receive notifications when it's time to follow up with a client                                          | not forget                                                                        |
+| *               | user                | assign a lead source to each client, e.g. referral, open house, website                                  | know where my business is coming from                                             |
+| *               | real estate agent   | schedule and track open house events                                                                     | ensure smooth operations and follow up with attendees                             |
+| *               | user                | monitor competing listings in the same area                                                              | adjust pricing and marketing strategies accordingly                               |
+| *               | user                | track commission details for each property sale                                                          | keep accurate financial records                                                   |
+| *               | user                | generate reports on the number of leads generated per listing                                            | show sellers the interest their property is receiving                             |
+| *               | user                | manage and log referral partner interactions (e.g. contractors, photographers)                           | maintain strong professional relationships                                        |
+| *               | user                | track which clients were referred by past clients                                                        | send buyers personalized appreciation messages and foster long-term relationships |
 
 ### Use cases
 
@@ -324,8 +322,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to switch the parser mode.
-2. ABCLI switches to the desired parser mode.
-4. ABCLI shows the corresponding list of items in the new mode.  
+1. ABCLI switches to the desired parser mode.
+1. ABCLI shows the corresponding list of items in the new mode.  
 
 Use case ends.
 
@@ -866,13 +864,13 @@ Expected: Properties with addresses containing the keywords `Bishan`, `Marsiling
 Our team size is 5.
 
 ### Support for special characters in names
-* We plan to add support for special characters in names such as Lupita Nyong'o, Adib S/O Tharman etc. This can be done by updating the regex of our commands to accept certain special characters.
+* We plan to add support for special characters in names such as Lupita Nyong'o, Adib S/O Tharman etc. This can be done by updating the validation regex to accept certain special characters.
 
 ### Restriction of property types
 * Property types will be given restrictions in the future such that nonsensical types will not be accepted. We will create an `enum` with common types such as `HDB`, `Landed Property`, `Condominium` etc.
 
 ### Improved duplication detection
-* Buyer duplication detection will be changed from the current method of matching names to checking for a repeated phone number OR email as these are more unique identifiers.
+* Buyer duplication detection will be changed from the current method of checking for repeated names to checking for a repeated phone number OR email as these are better unique identifiers.
 
 
 ### Setting a maximum for budget and asking price
@@ -880,7 +878,7 @@ Our team size is 5.
 * A planned enhancement will be to use validation regex to ensure that the asking price and budget values are below a maximum, which can be set to 1,000,000,000.
 
 ### Find using more parameters
-* `find` will be updated for all 3 modes to allow the use of more parameters (such as: `b/BUDGET`, `p/PHONE_NUMBER`, `e/EMAIL`, and `t/TAG` for buyers). We will change the `find` command to accept more types of parameters. 
+* `find` will be updated for all 3 modes to allow the use of more parameters (such as: `b/BUDGET`, `p/PHONE`, `e/EMAIL`, and `t/TAG` for buyers). We will change the `find` command to accept more types of parameters. 
 
 ## **Appendix: Glossary**
 ### Glossary

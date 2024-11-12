@@ -183,7 +183,7 @@ These modes allow real estate agents to handle buyers, meet-ups, and property li
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/relocating`, `t/relocating t/upgrading` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `view`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -288,7 +288,7 @@ Format: `view`
 
 Adds a buyer to the buyer list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL b/BUDGET [t/TAG]…​`
+Format: `add n/NAME p/PHONE e/EMAIL b/BUDGET [t/TAG]…​`
 
 * New buyers must have unique names and must not be duplicate names of existing buyers.
 
@@ -538,7 +538,7 @@ Format: `view`
 
 Adds a property to the property list.
 
-Format: `add n/LANDLORD_NAME p/PHONE_NUMBER a/ADDRESS s/ASKING_PRICE t/PROPERTY_TYPE`
+Format: `add n/LANDLORD_NAME p/PHONE a/ADDRESS s/ASKING_PRICE t/PROPERTY_TYPE`
 
 * New properties must have unique addresses and must not be duplicate addresses of existing properties.
 
@@ -554,7 +554,7 @@ Examples:
 
 Edits an existing property in the property list.
 
-Format: `edit INDEX [n/LANDLORD_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [s/ASKING_PRICE] [t/PROPERTY_TYPE]`
+Format: `edit INDEX [n/LANDLORD_NAME] [p/PHONE] [a/ADDRESS] [s/ASKING_PRICE] [t/PROPERTY_TYPE]`
 
 * Edits the landlord at the specified `INDEX`. 
 * The index refers to the index number shown in the **displayed property list**. 
@@ -656,7 +656,7 @@ Using the clear command will delete all the properties from the list of properti
 **A**: Date-time entries in red indicate scheduling conflicts. These meet-ups overlap with another meet-up in the schedule, helping you identify potential double-bookings or timing issues that require attention.
 
 **Q**: Is there a way to search for buyers based on phone number or budget?  
-**A**: Currently, the search function for buyers only supports keywords within the `NAME` field. A future enhancement is planned to allow for more advanced searches based on other fields like `PHONE_NUMBER`, `TAG`, `EMAIL` and `BUDGET`.
+**A**: Currently, the search function for buyers only supports keywords within the `NAME` field. A future enhancement is planned to allow for more advanced searches based on other fields like `PHONE`, `TAG`, `EMAIL` and `BUDGET`.
 
 **Q**: Is there a separate save command/button, are all my changes auto-saved?<br>
 **A**: Any successfully inputted command will save the changes into the data files, thus there is no need to worry about manually saving your changes.
@@ -710,7 +710,7 @@ Using the clear command will delete all the properties from the list of properti
     <tr>
         <td><b>Field</b></td>
         <td>Information that the user provides to the commands in ABCLI.</td>
-        <td><code>PHONE_NUMBER</code> and <code>ADDRESS</code> are fields that the user needs to provide to the <code>add</code> buyer command in ABCLI. <code>912345678</code> and <code>Sembawang Street 8 Blk 220</code> are examples of the fields mentioned.</td>
+        <td><code>PHONE</code> and <code>ADDRESS</code> are fields that the user needs to provide to the <code>add</code> buyer command in ABCLI. <code>912345678</code> and <code>Sembawang Street 8 Blk 220</code> are examples of the fields mentioned.</td>
     </tr>
     <tr>
         <td><b>Graphical User Interface (GUI)</b></td>
