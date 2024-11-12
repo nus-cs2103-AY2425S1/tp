@@ -593,7 +593,7 @@ Team size : 5
      allowing only alphabetic characters. (e.g. "John Doe 1" will not be accepted as a valid name entry)
 
   3. Enhance find command to take job and skills as parameters: Users are only able to search for candidates by name currently. 
-     We plan to allow users to search by job title and, making it easier to locate candidates with specific job positions
+     We plan to allow users to search by job title and skills, making it easier to locate candidates with specific job positions
      and skills
 
   4. Enhance the view/hire/reject command such that it can also use indexing: We plan to make the view/hire/reject command format 
