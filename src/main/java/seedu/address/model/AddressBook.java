@@ -60,11 +60,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same name as {@code person} exists in the address book.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a person with the same exact identity as {@code person} exists in the address book.
+     */
+    public boolean hasExactPerson(Person person) {
+        requireNonNull(person);
+        return persons.containsExactPerson(person);
     }
 
     /**

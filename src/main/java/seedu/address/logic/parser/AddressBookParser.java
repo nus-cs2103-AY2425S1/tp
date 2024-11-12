@@ -8,15 +8,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.StaticContext;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.AddWeddingCommand;
+import seedu.address.logic.commands.ClearAddressBookCommand;
+import seedu.address.logic.commands.ClearWeddingBookCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteNCommand;
+import seedu.address.logic.commands.DeleteWeddingCommand;
+import seedu.address.logic.commands.DeleteYCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListWeddingCommand;
+import seedu.address.logic.commands.TagAddCommand;
+import seedu.address.logic.commands.TagDeleteCommand;
+import seedu.address.logic.commands.ViewWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -56,26 +66,56 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case AddWeddingCommand.COMMAND_WORD, AddWeddingCommand.COMMAND_WORD_SHORT:
+            return new AddWeddingCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case DeleteYCommand.COMMAND_WORD:
+            if (StaticContext.getWeddingToDelete() != null) {
+                return new DeleteYCommand(StaticContext.getWeddingToDelete());
+            }
+            return new DeleteYCommand(StaticContext.getPersonToDelete());
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case DeleteNCommand.COMMAND_WORD:
+            return new DeleteNCommand();
+
+        case DeleteWeddingCommand.COMMAND_WORD, DeleteWeddingCommand.COMMAND_WORD_SHORT:
+            return new DeleteWeddingCommandParser().parse(arguments);
+
+        case ClearAddressBookCommand.COMMAND_WORD, ClearAddressBookCommand.COMMAND_WORD_SHORT:
+            return new ClearAddressBookCommand();
+
+        case ClearWeddingBookCommand.COMMAND_WORD, ClearWeddingBookCommand.COMMAND_WORD_SHORT:
+            return new ClearWeddingBookCommand();
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ListWeddingCommand.COMMAND_WORD, ListWeddingCommand.COMMAND_WORD_SHORT:
+            return new ListWeddingCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case TagAddCommand.COMMAND_WORD, TagAddCommand.COMMAND_WORD_SHORT:
+            return new TagAddCommandParser().parse(arguments);
+
+        case TagDeleteCommand.COMMAND_WORD, TagDeleteCommand.COMMAND_WORD_SHORT:
+            return new TagDeleteCommandParser().parse(arguments);
+
+        case FilterCommand.COMMAND_WORD, FilterCommand.COMMAND_WORD_SHORT:
+            return new FilterCommandParser().parse(arguments);
+
+        case ViewWeddingCommand.COMMAND_WORD, ViewWeddingCommand.COMMAND_WORD_SHORT:
+            return new ViewWeddingCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

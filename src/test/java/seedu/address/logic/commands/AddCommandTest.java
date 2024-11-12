@@ -4,17 +4,21 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.AddCommand.MESSAGE_NEAR_DUPLICATE_PERSON;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -22,7 +26,16 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReadOnlyWeddingBook;
+import seedu.address.model.WeddingBook;
+import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tag;
+import seedu.address.model.wedding.Date;
+import seedu.address.model.wedding.Venue;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
+import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -41,16 +54,61 @@ public class AddCommandTest {
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(List.of(validPerson), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personAcceptedByModelWrongTag_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder().withTags("James Loh & Alice Tan").build();
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_WEDDING_DOESNT_EXIST,
+                        new Tag("James Loh & Alice Tan").getTagName(),
+                        new Tag("James Loh & Alice Tan").getTagName()) + "\n"
+                        + String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
+        assertEquals(List.of(validPerson), modelStub.personsAdded);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder().withName("John Doe").build();
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_nearDuplicatePerson_throwsCommandException() {
+        Person validPerson = new PersonBuilder().withName("John Doe").build();
+        Person nearDuplicatePerson = new PersonBuilder().withName("John Doe").withJob("Dj").build();
+        AddCommand addCommand = new AddCommand(nearDuplicatePerson);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        assertThrows(CommandException.class,
+                String.format(MESSAGE_NEAR_DUPLICATE_PERSON,
+                        Messages.format(validPerson)), () -> addCommand.execute(modelStub));
+    }
+    @Test
+    public void execute_nearDuplicatePersonWithSpaceInBetween_throwsCommandException() {
+        Person validPerson = new PersonBuilder().withName("John Doe").build();
+        Person nearDuplicatePerson = new PersonBuilder().withName("John     doe")
+                .withEmail("jdoe@gmail.com").withJob("Dj").build();
+        AddCommand addCommand = new AddCommand(nearDuplicatePerson);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        assertThrows(CommandException.class, String.format(MESSAGE_NEAR_DUPLICATE_PERSON,
+                        Messages.format(validPerson)), () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void handleWeddingDoesntExist_allWeddingsExist_returnsEmptyMessage() throws CommandException {
+        ModelStubWithWeddings modelStub = new ModelStubWithWeddings();
+        Set<Tag> tags = Set.of(new Tag("Jeremy & Jane"), new Tag("Antonio Olivera & Ramiya d/o Karthik"));
+        Person validPerson = new PersonBuilder().withName("John Doe").build();
+        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
     }
 
     @Test
@@ -119,6 +177,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getWeddingBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setWeddingBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -135,6 +203,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasExactPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -157,6 +230,101 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateFilteredPersonList(JobContainsKeywordsPredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setWeddingBook(ReadOnlyWeddingBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyWeddingBook getWeddingBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setWedding(Wedding target, Wedding editedWedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Wedding> getFilteredWeddingList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredWeddingList(Predicate<Wedding> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredWeddingList(WeddingNameContainsKeywordsPredicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPersonInWedding(Person editedPerson, Person personToEdit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person personWithAllTagsRemoved(Person personToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTagsWithWedding(Wedding weddingToDelete) {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
+        public void deletePersonInWedding(Person editedPerson, Set<Tag> tagsInBoth) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String messageWeddingDoesNotExist(Set<Tag> editedTags) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearAllPersonTags() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearAllWeddingParticipants() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -164,10 +332,12 @@ public class AddCommandTest {
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
+        private final AddressBook addressBook = new AddressBook();
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
             this.person = person;
+            addressBook.addPerson(person);
         }
 
         @Override
@@ -175,6 +345,18 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public boolean hasExactPerson(Person person) {
+            requireNonNull(person);
+            return this.person.equals(person);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return addressBook;
+        }
+
     }
 
     /**
@@ -182,11 +364,86 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private final WeddingBook weddingBook = new WeddingBook();
+        private final FilteredList<Wedding> filteredWeddings = new FilteredList<>(this.weddingBook.getWeddingList());
+
 
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public boolean hasExactPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::equals);
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            personsAdded.add(person);
+        }
+
+        @Override
+        public void setPersonInWedding(Person editedPerson, Person personToEdit) {
+            List<Wedding> weddingList = getWeddingFromTags(editedPerson.getTags());
+
+            List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                    .toList();
+
+            for (Set<Person> set : weddingParticipantsSet) {
+                set.remove(personToEdit);
+                set.add(editedPerson);
+            }
+        }
+
+        @Override
+        public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
+            List<String> predicate = tags
+                    .stream().map(Tag::getTagName).collect(Collectors.toList());
+
+            List<Wedding> list = new ArrayList<>();
+
+            for (Wedding wedding : getFilteredWeddingList()) {
+                for (String tagName : predicate) {
+                    if (wedding.getWeddingName().toString().equals(tagName)) {
+                        list.add(wedding);
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        @Override
+        public ObservableList<Wedding> getFilteredWeddingList() {
+            return filteredWeddings;
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
+
+    private class ModelStubWithWeddings extends ModelStub {
+        final ArrayList<Person> personsAdded = new ArrayList<>();
+        private final WeddingBook weddingBook = new WeddingBook();
+
+        ModelStubWithWeddings() {
+            weddingBook.addWedding(new Wedding(new WeddingName("Jeremy & Jane"), new Venue("Venue1"),
+                    new Date("11/12/2024")));
+            weddingBook.addWedding(new Wedding(new WeddingName("Antonio Olivera & Ramiya d/o Karthik"),
+                    new Venue("Venue2"),
+                    new Date("10/12/2025")));
+        }
+
+        @Override
+        public boolean hasExactPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::equals);
         }
 
         @Override
@@ -199,6 +456,41 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
-    }
 
+        @Override
+        public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
+            List<String> predicate = tags
+                    .stream().map(Tag::getTagName).collect(Collectors.toList());
+
+            List<Wedding> list = new ArrayList<>();
+
+            for (Wedding wedding : getFilteredWeddingList()) {
+                for (String tagName : predicate) {
+                    if (wedding.getWeddingName().toString().equals(tagName)) {
+                        list.add(wedding);
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        @Override
+        public void setPersonInWedding(Person editedPerson, Person personToEdit) {
+            List<Wedding> weddingList = getWeddingFromTags(editedPerson.getTags());
+
+            List<Set<Person>> weddingParticipantsSet = weddingList.stream().map(Wedding::getParticipants)
+                    .toList();
+
+            for (Set<Person> set : weddingParticipantsSet) {
+                set.remove(personToEdit);
+                set.add(editedPerson);
+            }
+        }
+
+        @Override
+        public ObservableList<Wedding> getFilteredWeddingList() {
+            return new FilteredList<>(weddingBook.getWeddingList());
+        }
+    }
 }

@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":Model" as model MODEL_COLOR
+Participant ":Storage" as storage STORAGE_COLOR
+
+user -[USER_COLOR]> ui : "add-wed w/John & Gina v/CHIJMES d/11/12/25"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> logic : execute("add-wed w/John & Gina v/CHIJMES d/11/12/25")
+activate logic LOGIC_COLOR
+
+logic -[LOGIC_COLOR]> model : hasWedding("John & Gina", "CHIJMES", "2023-12-25")
+activate model MODEL_COLOR
+
+alt Wedding exists
+    model --[MODEL_COLOR]> logic : return true
+    deactivate model
+    logic --[LOGIC_COLOR]> ui : throw CommandException
+else Wedding does not exist
+    model --[MODEL_COLOR]> logic : return false
+    deactivate model
+
+    logic -[LOGIC_COLOR]> model : addWedding("John & Gina", "CHIJMES", "2023-12-25")
+    activate model MODEL_COLOR
+
+    model --[MODEL_COLOR]> logic : wedding added
+    deactivate model
+
+    logic -[LOGIC_COLOR]> storage : saveWeddingBook(model.getWeddingBook())
+    activate storage STORAGE_COLOR
+
+    storage -[STORAGE_COLOR]> storage : Save to file
+    activate storage STORAGE_COLOR_T1
+    storage --[STORAGE_COLOR]> storage
+    deactivate storage
+
+    storage --[STORAGE_COLOR]> logic
+    deactivate storage
+end
+
+logic --[LOGIC_COLOR]> ui
+ui--[UI_COLOR]> user
+@enduml

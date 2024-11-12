@@ -65,4 +65,27 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Capitalises the first letter of each word in a given string.
+     * Ensures all words are separated by only one spacing each.
+     * Converts the rest of each word to lowercase and returns the formatted string.
+     *
+     * @param name a string input
+     * @return a string with each word capitalised and spacing corrected
+     */
+    public static String capitaliseString(String name) {
+        String capitalisedName = "";
+        String[] words = name.toLowerCase().split(" ");
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                if (word.equals("s/o") || word.equals("d/o")) {
+                    capitalisedName += word + " ";
+                } else {
+                    capitalisedName += Character.toUpperCase(word.charAt(0)) + word.substring(1) + " ";
+                }
+            }
+        }
+        return capitalisedName.trim();
+    }
 }

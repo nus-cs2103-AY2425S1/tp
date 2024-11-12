@@ -3,10 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -19,6 +23,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -26,16 +32,26 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_NAME_ALICE = "Alice Pauline";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_DANIEL = "Daniel Meier";
+    public static final String VALID_NAME_FIONA = "Fiona Kunz";
+    public static final String VALID_NAME_GEORGE = "George Best";
+    public static final String VALID_NAME_BENSON = "Benson Meier";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_JOB_AMY = "Caterer";
+    public static final String VALID_JOB_BOB = "Photographer";
+    public static final String VALID_TAG_WEDDING1 = "John Loh & Jean Tan";
+    public static final String VALID_TAG_WEDDING2 = "James Tan & Emily Koh";
+    public static final String VALID_TAG_WEDDING3 = "Jane Tan & Tom Cruise";
+    public static final String VALID_TAG_WEDDING4 = "Jim Lee & Joe Goldberg";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -45,8 +61,12 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String JOB_DESC_AMY = " " + PREFIX_JOB + VALID_JOB_AMY;
+    public static final String JOB_DESC_BOB = " " + PREFIX_JOB + VALID_JOB_BOB;
+    public static final String TAG_DESC_WEDDING1 = " " + PREFIX_TAG + VALID_TAG_WEDDING1;
+    public static final String TAG_DESC_WEDDING2 = " " + PREFIX_TAG + VALID_TAG_WEDDING2;
+
+    public static final String INVALID_NAME = "Android";
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -60,13 +80,34 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final String VALID_WEDDING_NAME_ONE = "John Loh & Jean Tan";
+    public static final String VALID_WEDDING_NAME_TWO = "Alice Tan & Bob Lee";
+    public static final String VALID_VENUE_ONE = "Orchard Hotel";
+    public static final String VALID_VENUE_TWO = "Botanic Gardens";
+    public static final String VALID_DATE_ONE = "12/11/2024";
+    public static final String VALID_DATE_TWO = "25/12/2024";
+
+    public static final String WEDDING_NAME_DESC_ONE = " " + PREFIX_WEDDING_NAME + VALID_WEDDING_NAME_ONE;
+    public static final String WEDDING_NAME_DESC_TWO = " " + PREFIX_WEDDING_NAME + VALID_WEDDING_NAME_TWO;
+    public static final String VENUE_DESC_ONE = " " + PREFIX_VENUE + VALID_VENUE_ONE;
+    public static final String VENUE_DESC_TWO = " " + PREFIX_VENUE + VALID_VENUE_TWO;
+    public static final String DATE_DESC_ONE = " " + PREFIX_DATE + VALID_DATE_ONE;
+    public static final String DATE_DESC_TWO = " " + PREFIX_DATE + VALID_DATE_TWO;
+
+    public static final String INVALID_WEDDING_NAME_DESC = " " + PREFIX_WEDDING_NAME
+            + "John Loh and Jean Tan"; // 'and' not allowed
+    public static final String INVALID_VENUE_DESC = " " + PREFIX_VENUE + " "; // empty venue description not allowed
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "42/02/2023"; // invalid date
+
+
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withJob(VALID_JOB_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withJob(VALID_JOB_BOB).build();
     }
 
     /**
@@ -111,6 +152,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -125,4 +167,17 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showWeddingAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredWeddingList().size());
+
+        Wedding wedding = model.getFilteredWeddingList().get(targetIndex.getZeroBased());
+        final String[] splitWeddingName = wedding.getWeddingName().toString().split("\\s+");
+        model.updateFilteredWeddingList(new WeddingNameContainsKeywordsPredicate(Arrays.asList(splitWeddingName[0])));
+
+        assertEquals(1, model.getFilteredWeddingList().size());
+    }
 }

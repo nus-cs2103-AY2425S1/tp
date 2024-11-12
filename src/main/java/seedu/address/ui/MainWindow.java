@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -13,7 +14,14 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.AddWeddingCommand;
+import seedu.address.logic.commands.ClearWeddingBookCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteNCommand;
+import seedu.address.logic.commands.DeleteWeddingCommand;
+import seedu.address.logic.commands.DeleteYCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListWeddingCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -32,8 +40,15 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private WeddingListPanel weddingListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    @FXML
+    private Button wbButton;
+
+    @FXML
+    private Button abButton;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,14 +57,12 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
+    @FXML
+    private StackPane personListPanelPlaceholder;
     @FXML
     private StackPane resultDisplayPlaceholder;
-
-    @FXML
-    private StackPane statusbarPlaceholder;
-
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -66,6 +79,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        toggleAddressBookButton(true);
+        toggleWeddingBookButton(false);
     }
 
     public Stage getPrimaryStage() {
@@ -78,6 +93,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -111,14 +127,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
@@ -186,11 +198,79 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (isNonUiCommand(commandText)) {
+                return commandResult;
+            }
+
+            // allows for the corresponding person or wedding list to be shown
+            listPanelPlaceholder.getChildren().clear();
+            if (isWeddingCommand(commandText)) {
+                weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
+                listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
+                toggleWeddingBookButton(true);
+                toggleAddressBookButton(false);
+            } else {
+                personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+                listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+                toggleWeddingBookButton(false);
+                toggleAddressBookButton(true);
+            }
+
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Checks if the given command text is related to wedding operations.
+     *
+     * @param commandText the command input text to check
+     * @return true if the command is a wedding-related command, false otherwise
+     */
+    public boolean isWeddingCommand(String commandText) {
+        String firstWord = commandText.split("\\s+")[0];
+        return firstWord.equals(ListWeddingCommand.COMMAND_WORD)
+                || firstWord.equals(ListWeddingCommand.COMMAND_WORD_SHORT)
+                || firstWord.equals(AddWeddingCommand.COMMAND_WORD)
+                || firstWord.equals(AddWeddingCommand.COMMAND_WORD_SHORT)
+                || firstWord.equals(DeleteWeddingCommand.COMMAND_WORD)
+                || firstWord.equals(DeleteWeddingCommand.COMMAND_WORD_SHORT)
+                || firstWord.equals(ClearWeddingBookCommand.COMMAND_WORD)
+                || firstWord.equals(ClearWeddingBookCommand.COMMAND_WORD_SHORT);
+    }
+
+    /**
+     * Checks if the given command text is a delete command that does not modify the UI.
+     *
+     * @param commandText the command input text to check
+     * @return true if the command is a delete command that
+     *      should not change the UI, false otherwise
+     */
+    public boolean isNonUiCommand(String commandText) {
+        String firstWord = commandText.split("\\s+")[0];
+        return firstWord.equals(DeleteYCommand.COMMAND_WORD)
+                || firstWord.equals(DeleteNCommand.COMMAND_WORD)
+                || firstWord.equals(HelpCommand.COMMAND_WORD);
+    }
+
+    private void toggleWeddingBookButton(boolean isToggled) {
+        if (isToggled) {
+            wbButton.setId("WeddingBookButtonToggled");
+        } else {
+            wbButton.setId("WeddingBookButtonNotToggled");
+        }
+    }
+
+    // Method to toggle the address book button style
+    private void toggleAddressBookButton(boolean isToggled) {
+        if (isToggled) {
+            abButton.setId("AddressBookButtonToggled");
+        } else {
+            abButton.setId("AddressBookButtonNotToggled");
         }
     }
 }

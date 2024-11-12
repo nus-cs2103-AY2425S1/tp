@@ -1,48 +1,82 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
+import seedu.address.logic.StaticContext;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using their name from the address book.
  */
 public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "del";
+    public static final String COMMAND_FUNCTION = COMMAND_WORD
+            + ": Deletes the person identified by the name used in the address book.";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE = COMMAND_FUNCTION
+            + "\nParameters: " + PREFIX_NAME + "NAME\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Li Sirui";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_NO_MATCH_FOUND = "No contact with the name '%1$s' found."
+            + " Please enter the full name (case-insensitive).";
+    public static final String MESSAGE_MISSING_NAME = "Contact name is required.";
+    public static final String MESSAGE_CONFIRMATION_PROMPT = """
+            Are you sure you want to delete the following contact?
+            Enter 'y' to confirm, or 'n' to cancel.
+            Name: %1$s
+            Phone: %2$s
+            Email: %3$s
+            Address: %4$s
+            Job: %5$s
+            """;
 
-    private final Index targetIndex;
+    private final String name;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    /**
+     * Creates a DeleteCommand to delete the Person with the specified {@code Name}.
+     */
+    public DeleteCommand(String name) {
+        this.name = name.trim();
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
+        if (name.isEmpty()) {
+            throw new CommandException(MESSAGE_MISSING_NAME);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        List<Person> matchingPersons = model.getFilteredPersonList().stream()
+                .filter(person -> person.getName().fullName.equalsIgnoreCase(name))
+                .toList();
+
+        if (matchingPersons.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_NO_MATCH_FOUND, name));
+        }
+
+        Person personToDelete = matchingPersons.get(0);
+
+        String confirmationMessage = String.format(MESSAGE_CONFIRMATION_PROMPT,
+                personToDelete.getName().fullName,
+                personToDelete.getPhone().value,
+                personToDelete.getEmail().value,
+                personToDelete.getAddress().value,
+                personToDelete.getJob().value);
+
+        // Store the personToDelete in a static context
+        StaticContext.setPersonToDelete(personToDelete);
+
+        return new CommandResult(confirmationMessage);
     }
 
     @Override
@@ -51,19 +85,10 @@ public class DeleteCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
+        if (!(other instanceof DeleteCommand otherDeleteCommand)) {
             return false;
         }
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
+        return name.equals(otherDeleteCommand.name);
     }
 }

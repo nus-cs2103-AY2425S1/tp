@@ -33,6 +33,8 @@
 
 !define USER_COLOR #000000
 
+!define STATIC_COLOR #FFCC00
+
 skinparam Package {
     BackgroundColor #FFFFFF
     BorderThickness 1
