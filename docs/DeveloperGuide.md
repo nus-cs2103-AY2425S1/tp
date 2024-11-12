@@ -1780,10 +1780,12 @@ applied to edited data, but specific expected results will differ. <br><br>
 
 #### Creating Tag
 1. **Creating a tag when `Tag 1` is not in the list of `Tags`.**
+
    1. **Test case**: `create-tag w/Tag1`<br>
       **Expected**: `Tag1` is added to list of `Tags`. Details of the added tag are shown.
 
 2. **Creating a tag when `Tag 1` is in the list of `Tags`.**
+
    1. **Test case**: `create-tag w/Tag1`<br>
       **Expected**: No tags are added to list of `Tags`. Error details shown.
 
@@ -1792,6 +1794,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 
 #### Deleting Tag
 1. **Deleting a tag when `Tag 1` is in the list of `Tags`.**
+
    1. **Test case**: `delete-tag w/Tag1`<br>
       **Expected**: `Tag1` is removed from list of `Tags`. Details of the removed tag are shown.
 
@@ -1801,6 +1804,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 
 #### Tagging contact
 1. **Tagging the first contact when `Tag 1` is in the list of `Tags` and the first contact is not tagged with `Tag1`.**
+
     1. **Test case**: `tag 1 t/Tag1`<br>
        **Expected**: 1st contact is tagged with `Tag1`. Details of the updated contact are shown.
 
@@ -1813,6 +1817,7 @@ applied to edited data, but specific expected results will differ. <br><br>
       **Expected**: No contacts are tagged. Error details shown.
    
 4. **Tagging the first contact when `Tag1` is not in the list of `Tags`.**
+
    1. **Test case**: `tag 1 t/Tag1`<br>
       **Expected**: No contact is tagged. Error details shown.
 
@@ -1821,10 +1826,12 @@ applied to edited data, but specific expected results will differ. <br><br>
 
 #### Untagging contact
 1. **Untagging the first contact when the first contact is tagged with `Tag1`.**
+
    1. **Test case**: `untag 1 w/Tag1`<br>
       **Expected**: `Tag1` is removed from their contact card.
 
 2. **Untagging the first contact when the first contact is not tagged with `Tag1`.**
+
    1. **Test case**: `untag 1 w/Tag1`<br>
       **Expected**: No contacts are untagged. Error details shown.
 
