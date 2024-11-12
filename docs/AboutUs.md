@@ -16,15 +16,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/flyingsalsa.png" width="200px">
 
 [[github](https://github.com/flyingsalsa)]
-[[portfolio](team/flyingsalsa.md)]
 
 ### Zheng Xiangcheng
 
 <img src="images/xczheng0105.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/xczheng0105)]
-[[portfolio](team/johndoe.md)]
 
 
 * Role: Member
@@ -34,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/chenleiyu.png" width="200px">
 
-[[github](http://github.com/ChenLeiyu)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/ChenLeiyu)]
 
 * Role: Developer
 
@@ -43,7 +40,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jjtan2002.png" width="200px">
 
 [[github](http://github.com/JJtan2002)]
-[[portfolio](team/JJtan2002.md)]
 
 * Role: Developer
 * Responsibilities: finish my equal share of this project
@@ -53,7 +49,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/kitty-001.png" width="200px">
 
 [[github](https://github.com/Kitty-001)]
-[[portfolio](team/kitty-001.md)]
 
 * Role: Developer
 * Responsibilities: learn skills and try to finish my equal share
