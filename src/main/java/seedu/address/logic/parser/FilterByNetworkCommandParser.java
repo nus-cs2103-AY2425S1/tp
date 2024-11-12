@@ -31,14 +31,16 @@ public class FilterByNetworkCommandParser implements Parser<FilterByNetworkComma
 
         // Check if the userInput is empty
         if (args.isBlank()) {
-            throw new ParseException(String.format(MESSAGE_EMPTY_NETWORK,
+            throw new ParseException(String.format(
+                    MESSAGE_EMPTY_NETWORK,
                     FilterByNetworkCommand.MESSAGE_USAGE));
         }
 
         // Check if /c is typed in the arguments
         String prefixNetworkString = PREFIX_PUBLIC_ADDRESS_NETWORK.getPrefix();
         if (!args.contains(prefixNetworkString)) {
-            throw new ParseException(String.format(MESSAGE_EMPTY_OR_WRONG_PREFIX,
+            throw new ParseException(String.format(
+                    MESSAGE_EMPTY_OR_WRONG_PREFIX,
                     PREFIX_PUBLIC_ADDRESS_NETWORK,
                     FilterByNetworkCommand.MESSAGE_USAGE));
         }
@@ -47,13 +49,15 @@ public class FilterByNetworkCommandParser implements Parser<FilterByNetworkComma
 
         // Check if more than one network was entered
         if (argMultimap.getAllValues(PREFIX_PUBLIC_ADDRESS_NETWORK).size() > 1) {
-            throw new ParseException(String.format(MESSAGE_TOO_MANY_NETWORKS,
+            throw new ParseException(String.format(
+                    MESSAGE_TOO_MANY_NETWORKS,
                     FilterByNetworkCommand.MESSAGE_USAGE));
         }
 
         // Check if no network was entered
         if (argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_NETWORK).isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_EMPTY_NETWORK,
+            throw new ParseException(String.format(
+                    MESSAGE_EMPTY_NETWORK,
                     FilterByNetworkCommand.MESSAGE_USAGE));
         }
 
