@@ -4,20 +4,7 @@ title: Developer Guide
 ---
 
 * Table of Contents
-1. [Acknowledgements](#acknowledgements)
-2. [Setting Up, Getting Started](#setting-up-getting-started)
-3. [Design](#design)
-   1. [Architecture](#architecture)
-   2. [UI Component](#ui-component)
-   3. [Logic Component](#logic-component)
-   4. [Model Component](#model-component)
-   5. [Storage Component](#storage-component)
-   6. [Common Classes](#common-classes)
-4. [Implementation](#implementation)
-   1. [Proposed - Undo/Redo feature](#proposed-undoredo-feature)
-   2. [Proposed - Data archiving](#proposed-data-archiving)
-5. [Other Helpful Resources](#other-helpful-resources)
-6. [Appendix](#appendix)
+{:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -690,7 +677,11 @@ For future versions, we plan to allow the user to specify Team 2 before Team 1.
 2. Allow user to edit participant list without having to replace the entire list.
 Currently, if a user edits the participant list, the entire list is replaced. We plan on fixing this.
 3. Multi-word search
-
-4. 
+Currently, when a user searches for a multi-word keyword, it treats them like separate keywords. 
+We plan to fix this, such that the search treats the multi-word keyword (e.g Swimming Men) as a single keyword.
+4. Multiple faculties in one event
+In events, such as swimming, relays, multiple faculties (i.e. more than 2) can compete against one another.
+Currently, this feature is not supported by out app, as an event is limited to two.
+In future versions, we plan to allow multiple faculties to compete in one event.
 
 
