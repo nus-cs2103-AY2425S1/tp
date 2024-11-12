@@ -6,7 +6,7 @@ participant ":CommandBox" as CommandBox UI_COLOR
 participant "event:KeyEvent" as KeyEvent UI_COLOR
 participant ":TextField" as TextField UI_COLOR
 
-box LOGIC LOGIC_COLOR_T1
+box Logic LOGIC_COLOR_T1
 participant ":CommandHistory" as CommandHistory LOGIC_COLOR
 end box
 

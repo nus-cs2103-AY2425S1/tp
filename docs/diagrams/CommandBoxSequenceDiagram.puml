@@ -8,7 +8,7 @@ participant ":CommandExecutor" as CommandExecutor UI_COLOR
 participant ":TextField" as TextField UI_COLOR
 end box
 
-box LOGIC LOGIC_COLOR_T1
+box Logic LOGIC_COLOR_T1
 participant ":CommandHistory" as CommandHistory LOGIC_COLOR
 end box
 
