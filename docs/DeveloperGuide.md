@@ -678,8 +678,11 @@ testers are expected to do more *exploratory* testing.
 Team size: 5
 1. Allow differentiation between Team 1 and Team 2 in AddEvent Command. 
 For future versions, we plan to allow the user to specify Team 2 before Team 1.
+This can be done by adding different prefixes for each team (e.g. such as t1/ and t2/).
+Note that when adding or editing events, duplication checks would occur regardless of the order of team 1 and team 2.
 2. Allow user to edit participant list without having to replace the entire list.
-Currently, if a user edits the participant list, the entire list is replaced. We plan on fixing this.
+Currently, if a user edits the participant list, the entire list is replaced. 
+We plan on fixing this through new command that allow appended edits to both events and persons.
 3. Multi-word search
 Currently, when a user searches for a multi-word keyword, it treats them like separate keywords. 
 We plan to fix this, such that the search treats the multi-word keyword (e.g Swimming Men) as a single keyword. 
@@ -687,6 +690,7 @@ This can be done through the use of delimiters (e.g. commas) to separate the key
 4. Multiple faculties in one event
 In events, such as swimming, relays, multiple faculties (i.e. more than 2) can compete against one another.
 Currently, this feature is not supported by out app, as an event is limited to two.
+Specific commands can be implemented for certain sports.
 In future versions, we plan to allow multiple faculties to compete in one event.
 5. Name Feature should accept multiple languages
 Currently, our app only accepts standard English names.
