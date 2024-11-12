@@ -477,6 +477,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 2b. The event does not exist.
+  * 2b1. PlanPal displays an error message indicating the event is invalid.
+
+
 **UC10: Clear all events**
 
 **MSS**
@@ -550,19 +554,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Preconditions**: User is in search mode.
 
 **MSS**
-1. User specifies a contact to include from excluded contacts.
-2. PlanPal includes the contact in future searches and displays a success message.
+1. User clears the excluded contacts list.
+2. PlanPal includes the contacts in future searches and displays a success message.
 
    Use case ends.
 
 **Extensions**
-* 2a. User specifies a contact that does not exist in the excluded contacts.
-    * 2a1. PlanPal displays an error message indicating the contact was not found.
-
-      Use case ends.
-
-* 3a. User clears the excluded contacts list.
-    * 3a1. PlanPal reinstates all excluded contacts in the search results.
+* 2a. The excluded contacts list is empty.
+    * 2a1. PlanPal displays an error message indicating that there are no excluded contacts.
 
       Use case ends.
 
