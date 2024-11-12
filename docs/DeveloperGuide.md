@@ -744,6 +744,7 @@ Saving window preferences
    - Other incorrect add commands to try: `add`, `add n/`, `add th/username e/email.com`<br>
      Expected: Error message displayed indicating missing or incorrect parameters.
 
+<img src="./diagrams/AddSequenceDiagram.svg" alt="AddSequenceDiagram" style="max-width: 35rem; height: auto;">
 ---
 
 ### Listing All Contacts
@@ -758,6 +759,7 @@ Saving window preferences
    - Other variations to try: `list all`, `list contacts` or any variation of `all` and/or `contacts` after `list`<br>
      Expected: Similar outcome to `list` command. All contacts are displayed.
 
+<img src="./diagrams/ListSequenceDiagram.svg" alt="ListSequenceDiagram" style="max-width: 35rem; height: auto;">
 ---
 
 <div style="page-break-after: always;"></div>
@@ -815,6 +817,7 @@ Saving window preferences
    - Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete NOT_FULL_NAME`<br>
       Expected: Similar to above.
 
+<img src="./diagrams/DeleteSequenceDiagram.svg" alt="DeleteSequenceDiagram" style="max-width: 35rem; height: auto;">
 ---
 
 <div style="page-break-after: always;"></div>
@@ -871,6 +874,7 @@ Saving window preferences
    - Other incorrect edit commands to try: `edit`, `edit 1`, `edit 1 e/invalidemail.com`<br>
       Expected: Similar to above.
 
+<img src="./diagrams/EditSequenceDiagram.svg" alt="EditSequenceDiagram" style="max-width: 35rem; height: auto;">
 ---
 
 <div style="page-break-after: always;"></div>
@@ -890,6 +894,7 @@ Saving window preferences
    - Other incorrect find commands to try `find`, `find n/NAME_NOT_IN_LIST r/ROLE_NOT_IN_LIST`<br>
       Expected: If no contacts match, a message appears indicating no contacts found. If an invalid role is entered, an error message displays: "Error: Invalid role specified."
 
+<img src="./diagrams/FindSequenceDiagram.svg" alt="FindSequenceDiagram" style="max-width: 35rem; height: auto;">
 ---
 
 ### Help Command
@@ -916,6 +921,7 @@ Saving window preferences
    1. Test case: `help find`<br>
       Expected: Displays the instruction and example commands for `find`.
 
+<img src="./diagrams/HelpSequenceDiagram.svg" alt="HelpSequenceDiagram" style="max-width: 35rem; height: auto;">
 ---
  
 ### Saving Data
