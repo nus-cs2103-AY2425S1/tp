@@ -605,8 +605,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | expert admin | do mass tracking for student count                                                           <br/><br/><br/>                                                          | have a general statictic of the size of the tuition center                                                                     |
 
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** refers to the `Eduvault` application and the **Actor** is the `Administrators` at tuition centers, unless specified otherwise)
@@ -1079,7 +1077,7 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Admin**: Admin at the tuition center who is in charge of all administrative processes
-* **System**: The Eduvault application
+* **System**: The EduVault application
 * **Student**: Current students who attend the tuition centre
 
 
