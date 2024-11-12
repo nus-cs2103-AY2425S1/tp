@@ -17,6 +17,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder<T extends PersonBuilder<T>> {
 
+    // Solution inspired by https://stackoverflow.com/questions/17164375/subclassing-a-java-builder-class
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
