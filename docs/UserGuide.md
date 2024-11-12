@@ -217,7 +217,8 @@ Adds student(s) to a group.
 
 1. The group with the `Group Name` and student(s) with the `Student Number`(s) must both exist in T_Assistant.
 2. The max size for a `Group` is 5 `Students`.
-3. For information on the constraints for each parameter used in this command, go
+3. Returns a filtered view of the group the student was added into.
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -244,7 +245,8 @@ Deletes a student from its assigned group.
 1. This command only removes a student from a group, not from T_Assistant.
 2. The student must exist in T_Assistant and be in a group.
 3. Since a student can only be in one group, it will automatically remove the student from the group it is in.
-4. For information on the constraints for each parameter used in this command, go
+4. Returns a filtered view of the group the student was in.
+5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -527,7 +529,8 @@ Adds a task to a group or multiple groups.
    The application simply ignores the duplicates and adds the task to the desired group.
 4. This command checks for the existence of the task, hence you cannot input a task which already exists. A task is
    equal to another task when it has the same task name and deadline as it.
-5. For information on the constraints for each parameter used in this command, go
+5. Returns a filtered view of the task added.
+6. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -554,7 +557,8 @@ Adds a task to all groups.
 ##### Notes
 
 1. If the task specified already exists in some groups, it will add the other groups in.
-2. For information on the constraints for each parameter used in this command, go
+2. Returns a filtered view of the task added.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -585,7 +589,8 @@ Adds an existing task to the groups specified.
 3. You can add an existing task to multiple groups.
 4. This command is relatively flexible in terms of the input parameters. You can input duplicate group names or group names that don't exist.
     1. The application simply ignores the duplicates and adds the task to the desired group.
-5. For information on the constraints for each parameter used in this command, go
+5. Returns a filtered view of the task added to the group(s).
+6. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -616,7 +621,8 @@ Deletes a task from a group.
    based on the list returned when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
 3. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
-4. For information on the constraints for each parameter used in this command, go
+4. Returns a filtered view of the group the task is deleted from.
+5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -675,7 +681,8 @@ Edits a task from a group.
 4. At least 1 optional parameter must be provided, else an error will be thrown.
 5. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
-6. For information on the constraints for each parameter used in this command, go
+6. Returns a filtered view of the group the task is edited in.
+7. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -731,7 +738,8 @@ Marks a task as done or undone.
 2. `mark_t` marks a task identified by the index. It only accepts a valid index
    based on the list returned when `list_t gn/GROUP_NAME` is called, where `gn/GROUP_NAME` is the group of interest.
 3. If a task is complete it will be marked as pending/overdue, and vice versa.
-4. For information on the constraints for each parameter used in this command, go
+4. Returns a filtered view of the group the task is marked at.
+5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
