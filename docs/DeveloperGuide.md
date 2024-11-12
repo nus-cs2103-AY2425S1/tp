@@ -342,8 +342,8 @@ Details of the Participation class are included [below](#participation-class).
 </div>
 
 <ol start="7">
-    <li>Once the enrollment is completed, EnrollCommand returns a **CommandResult** with a message indicating the successful enrollment.</li>
-    <li>The result then flows back through **LogicManager**.</li>
+    <li>Once the enrollment is completed, EnrollCommand returns a <b>CommandResult</b> with a message indicating the successful enrollment.</li>
+    <li>The result then flows back through <b>LogicManager</b>.</li>
 </ol>
 
 
