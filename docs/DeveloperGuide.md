@@ -693,5 +693,6 @@ Currently, our app only accepts standard English names.
 We plan to allow the user to input names in multiple languages by making the name field less restrictive.
 6. Import/Export data from/to CSV file
 We plan to allow users to import/export their data from/to a CSV file for easy sharing and backup.
-
+7. Indentation for Use Case Extensions
+We plan to add indentation to the use case extensions to make it easier to read and more aesthetically pleasing.
 
