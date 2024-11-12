@@ -428,6 +428,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
+* 2c. The event does not exist.
+  * 2c1. PlanPal displays an error message indicating the event is invalid.
+
 **UC07: Search for contacts using multiple filters**
 
 **MSS**
@@ -542,19 +545,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 3.
 
-**UC14: Manage excluded contacts in search mode**
+**UC14: Include an excluded contacts in search mode**
 
 **Preconditions**: User is in search mode.
 
 **MSS**
-1. User enters search mode.
-2. User specifies a contact to exclude from search results.
-3. PlanPal excludes the contact from future searches and displays a success message.
+1. User specifies a contact to include from excluded contacts.
+2. PlanPal includes the contact in future searches and displays a success message.
 
    Use case ends.
 
 **Extensions**
-* 2a. User specifies a contact that does not exist in the search results.
+* 2a. User specifies a contact that does not exist in the excluded contacts.
     * 2a1. PlanPal displays an error message indicating the contact was not found.
 
       Use case ends.
