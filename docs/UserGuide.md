@@ -77,7 +77,7 @@ By catering to private school teachers who are still using manual processes, Che
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -139,7 +139,7 @@ Format: `edit INDEX [n/NAME] [s/SEX] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 * Note that role cannot be edited. 
@@ -177,7 +177,7 @@ Examples:
 * `find n/jo ap` returns `John Appleseed`, `Appleseed Johnny`
 
 #### Tags (`t/TAG`)
-* Case sensitive search
+* Case-sensitive search
 * Only persons with tags that match all the exact tag names provided will be returned.
 
 Examples:
@@ -327,7 +327,7 @@ Format: `mark INDEX`
 * You cannot mark attendance for a parent. 
 
 Example:
-* `list` followed by `mark 2` marks the attendance of the the 2nd person in the Cher.
+* `list` followed by `mark 2` marks the attendance of the 2nd person in the Cher.
   ![results for 'mark'](images/mark-attendanceExample.png)
 
 ### Unmark attendance for a single student: `unmark`
@@ -435,7 +435,7 @@ Data are saved automatically as a JSON file `[JAR file location]/data/cher.json`
 
 <div markdown="span" class="alert alert-warning">:exclamation: Caution:
 If your changes to the data file makes its format invalid, Cher will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the Cher to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the Cher to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
