@@ -536,7 +536,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: Ensure that there is at least one person in NetBook. This can be confirmed with the `list` command.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
@@ -551,7 +551,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: Ensure that there is at least one person in NetBook. This can be confirmed with the `list` 
+    command.
 
     1. Test case: `edit 1 n/[valid name e.g. Johnson]` <br>
     Expected: The first person in the list is edited to have the given name. Details of the edited contact shown
