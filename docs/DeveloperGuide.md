@@ -2,9 +2,42 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
-
+## Table of Contents
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)
+   * [Architecture](#architecture)
+   * [UI component](#ui-component)
+   * [Logic component](#logic-component)
+   * [Model component](#model-component)
+   * [Storage component](#storage-component)
+   * [Common classes](#common-classes)
+4. [Implementation](#implementation)
+   * [General Features](#general-features)
+     * [Help Command : `help`](#help-command--help)
+     * [Home Command : `home`](#home-command--home)
+     * [Clear Command : `clear`](#clear-command--clear)
+     * [Exit Command : `exit`](#exit-command--exit)
+   * [Patient Management Features](#patient-management-features)
+     * [Add Command : `add`](#add-command--add)
+     * [Add Full Command : `addf`](#add-full-command--addf)
+     * [Edit Command : `edit`](#edit-command--edit)
+     * [Delete Command : `delete`](#delete-command--delete)
+     * [View Command : `view`](#view-command--view)
+   * [Appointment Management Features](#appointment-management-features)
+     * [Book Appointment : `bookappt`](#book-appointment--bookappt)
+     * [Delete Appointment : `deleteappt`](#delete-appointment--deleteappt)
+     * [Filter Appointment : `filter`](#filter-appointment--filter)
+5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+6. [Appendix](#appendix)
+   * [Appendix A: Product Scope](#appendix-a-product-scope)
+   * [Appendix B: User Stories](#appendix-b-user-stories)
+   * [Appendix C: Use Cases](#appendix-c-use-cases)
+   * [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
+   * [Appendix E: Glossary](#appendix-e-glossary)
+   * [Appendix F: Instructions for manual testing](#appendix-f-instructions-for-manual-testing)
+   * [Appendix G: Planned Enhancements](#appendix-g-planned-enhancements)
+   * [Appendix H: Effort](#appendix-h-effort)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -542,9 +575,9 @@ The `filter` command is designed such that the user has versatility in filtering
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## Appendix
 
-### Product scope
+### Appendix A: Product Scope
 
 **Target user profile:**<br>
 **Name:** Jane<br>
@@ -564,7 +597,7 @@ The `filter` command is designed such that the user has versatility in filtering
 * automate reminder messages for patient consultations and sending of patients' Test/Scan results
 * provide different GUI views for different clinic concerns
 
-### User stories
+### Appendix B: User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -587,7 +620,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | clinic assistant                           | check the payment balance of the customers                                         | remind them to pay their outstanding bills                             |
 | `*`      | clinic assistant                           | see a summary of the patient when i click on the profile                           | save time scrolling through their profiles                             |
 
-### Use cases
+### Appendix C: Use Cases
 
 (For all use cases below, the **System** is the `ClinicConnect` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -978,6 +1011,8 @@ Displays all appointments that falls between today's date and the specified end 
 
     Use case ends.
 
+**Extensions**
+
 * 1a. User inputs invalid end date that doesn't follow the format YYYY-MM-DD.
     * 1a1. ClinicConnect prompts the user to fix the date field that it should follow the specific format.<br>
       Step 1a1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
@@ -1059,7 +1094,7 @@ Displays appointments that matches with the specified `HealthService`.
 
     Use case ends.
 
-### Non-Functional Requirements
+### Appendix D: Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The system should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
@@ -1069,7 +1104,7 @@ Displays appointments that matches with the specified `HealthService`.
 8.  A first-time user should be able to navigate and perform basic tasks (e.g. adding a patient, searching for records) within 10 minutes of using the platform without prior training.
 9.  The system should maintain comprehensive logs of all user actions, especially concerning patient record access, modifications, and deletions. These logs should be easily accessible for auditing purposes and stored for at least 5 years.
 
-### Glossary
+### Appendix E: Glossary
 
 * **API (Application Programming Interface)**: A set of rules and tools that allows one piece of software to communicate with another.
 * **Component**: A modular part of a software system that has a well-defined purpose.
@@ -1084,7 +1119,7 @@ Displays appointments that matches with the specified `HealthService`.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+### Appendix F: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
@@ -1093,7 +1128,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+#### Launch and shutdown
 
 1. Initial launch.
 
@@ -1123,7 +1158,7 @@ testers are expected to do more *exploratory* testing.
    * **Test case:** `exit`
    * **Expected:** All ClinicConnect windows closes and the application exits.
 
-### Saving Data
+#### Saving Data
 
 1. Saving of data.
 
@@ -1142,7 +1177,7 @@ testers are expected to do more *exploratory* testing.
    * **Test case:** Corrupt the `data/ClinicConnect.json` file by adding random text to it.
    * **Expected:** The app should ignore the corrupted file and create a new empty `data/ClinicConnect.json` file when launchd and interacted with.
 
-### Getting help: `help`
+#### Getting help: `help`
 
 **Command:** `help`
 
@@ -1167,7 +1202,7 @@ testers are expected to do more *exploratory* testing.
 
 
 
-### Adding a Patient: `add`
+#### Adding a Patient: `add`
 
 **Command:** `add`
 
@@ -1194,7 +1229,7 @@ testers are expected to do more *exploratory* testing.
     * **Test case (invalid `Nric` field):** `add n|Jane i|T012345X p|90901282 s|F d|2002-10-10`
     * **Expected:** An error message is shown indicating that the `Nric` field is invalid and a prompt of what a valid `Nric` should be.
 
-### Adding a patient with all fields: `addf`
+#### Adding a patient with all fields: `addf`
 
 **Command:** `addf`
 
@@ -1251,7 +1286,7 @@ testers are expected to do more *exploratory* testing.
     * **Expected:** An error is shown stating `Invalid commmand format`
 
 
-### Editing a Patient: `edit`
+#### Editing a Patient: `edit`
 
 **Command:** `edit`
 
@@ -1282,7 +1317,7 @@ testers are expected to do more *exploratory* testing.
 
 
 
-### Deleting a patient: `delete`
+#### Deleting a patient: `delete`
 
 **Command:** `delete`
 
@@ -1315,7 +1350,7 @@ testers are expected to do more *exploratory* testing.
    * **Expected:** No patient is deleted. Invalid command error details shown in the status message.
 
 
-### Booking an upcoming appointment: `bookappt`
+#### Booking an upcoming appointment: `bookappt`
 
 **Command:** `bookappt`
 
@@ -1353,7 +1388,7 @@ testers are expected to do more *exploratory* testing.
     * **Test case:** `bookappt `
     * **Expected:** Error message is generated to show no valid parameters.
 
-### Deleting an appointment: `deleteappt`
+#### Deleting an appointment: `deleteappt`
 
 **Command:** `deleteappt`
 
@@ -1384,7 +1419,7 @@ testers are expected to do more *exploratory* testing.
     * **Test case:** `deleteappt T0123456A dt|2024-12-29 13:00 h|consult`
     * **Expected:** Error message is generated to show invalid prefix entered.
 
-### Filtering Appointments: `filter`
+#### Filtering Appointments: `filter`
 
 **Command:** `filter`
 
@@ -1403,7 +1438,7 @@ testers are expected to do more *exploratory* testing.
 
 
 
-### Viewing detailed information on a patient: `view`
+#### Viewing detailed information on a patient: `view`
 
 **Command:** `view`
 
@@ -1435,7 +1470,7 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-## **Appendix: Planned Enhancements**
+### Appendix G: Planned Enhancements
 
 Team size: 5
 
@@ -1457,21 +1492,21 @@ used to check if plural or singular versions of the allergies have already been 
 
 ---
 
-## **Appendix: Effort**
+### Appendix H: Effort
 
-### Difficulty Level
+#### Difficulty Level
 
 ClinicConnect introduced many new fields to the Person class to make it more tailored towards clinic assistants, such as appointments, allergies, health risk, NRIC etc. This required quite a considerable overhaul of AB3's original features to allow these features to suit our needs better. For example, we changed how patients were identified in the commands, from using names to NRIC. We also had to create 2 different versions of the add function to accommodate the vast number of fields that the Patient object has - one add function only took in the most important parameters, while another took in all parameters. These fields also came in many different forms with many different constraints, from hashsets for allergies to DateTime objects for appointments to Strings of certain patterns for NRICs. This caused quite a headache for us in ensuring that all fields were implemented properly and fit their constraints, especially for edge cases. We also had features that tampered heavily with the UI, such as the help feature which creates popup windows, the view feature and the filter feature, which replaces the PatientListPanel object in the UI. This required us to dive in deep and understand how AB3's UI works in depth, develop a strong understanding of FXML, and even create our own UI classes, further complicating our project and making it much harder than we initially thought it would be.
 
-### Challenges Faced
+#### Challenges Faced
 
 We faced a variety of challenges throughout the duration of the tp. For one, none of the team has had experience dealing with such a large codebase before this. As a result, we had a really hard time just trying to understand the codebase and how each feature works. This was especially concerning at the time as our code rather heavily focused on including parameters of different forms to the Patient object, which required us to modify the already existing functions of AB3, which requires a good understanding of the internal workings of the code. Then, we also had to figure out learn how to test all of these parameters and how to manage edge cases for all of the parameters, which took considerable effort. Finally, we also had to learn how the UI worked and learn FXML properly to be able to edit the UI for features such as filter, help and view. These were the three largest challenges that our team faced working on the tp.
 
-### Effort Required
+#### Effort Required
 
 Adding so many fields to the Patient object required a lot of effort tracing through and modifying existing code, testing each parameter and handling edge cases and errors for each parameter. We also implemented various new features such a whole appointment booking system (bookappt, deleteappt, filter), majorly overhauled previous AB3 features (help, add, addf, edit) and made some rather big tweaks to the UI. Overall, my group thinks that we have put in more than average hours and a lot of effort into this project.
 
-### Achievements
+#### Achievements
 
 Our group managed to implement all of our planned features, even though they were much harder to implement than previously thought.
 We also managed to properly identify and address many flaws and bugs in our implementation, such as changing the "/" symbol separating prefixes to "\|" to ensure that people having the "/" symbol in their names and addresses are not inconvenienced. For a group of first time software developers, we think that we tried our best, learnt a lot from this project, and ultimately managed to produce a pretty good, stable product.
