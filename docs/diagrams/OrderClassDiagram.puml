@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Order as ModelPackage <<Rectangle>>{
+
+Class OrderTracker {
+    +trackOrder(orderId: int): void
+}
+
+Class Order {
+    +getOrderDetails(): OrderDetails
+}
+
+Class OrderHistory {
+    +getHistory(): List<Order>
+}
+
+Class LocalDateTime {
+    +now(): LocalDateTime
+}
+Class LocalDateTime
+Class UniqueOrderList
+Class "<<interface>>\nIterable" as Iterable
+
+Class I #FFFFFF
+}
+
+UniqueOrderList .up.|> Iterable
+OrderHistory -up-> "0...1" LocalDateTime
+OrderHistory -up-> "0...1" Order
+OrderTracker -up-> "*" OrderHistory
+UniqueOrderList -up-> "*" Order
+
+@enduml

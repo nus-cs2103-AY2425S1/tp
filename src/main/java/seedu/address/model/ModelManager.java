@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +12,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.order.Order;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
+import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.FullTagName;
+import seedu.address.model.shortcut.ShortCut;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -111,8 +118,65 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public Person findPersonByName(Name name) {
+        requireNonNull(name);
+        return addressBook.findPersonByName(name);
+    }
 
+    @Override
+    public void removeOrder(Order order) {
+        addressBook.removeOrder(order);
+    }
+
+    @Override
+    public void addOrder(Order order) {
+        addressBook.addOrder(order);
+    }
+
+    @Override
+    public boolean hasOrder(Order order) {
+        return addressBook.hasOrder(order);
+    }
+
+    @Override
+    public ObservableList<Order> getOrderList() {
+        return addressBook.getOrderList();
+    }
+    @Override
+    public void addShortCut(ShortCut shortcut) {
+        logger.info("ShortCut Added: " + shortcut.toString());
+        addressBook.addShortCut(shortcut);
+    }
+    @Override
+    public void removeShortCut(ShortCut shortcut) {
+        logger.info("ShortCut Removed: " + shortcut.toString());
+        addressBook.removeShortCut(shortcut);
+    }
+    @Override
+    public boolean hasShortCut(ShortCut shortcut) {
+        return addressBook.hasShortCut(shortcut);
+    }
+    @Override
+    public boolean hasAlias(Alias alias) {
+        return addressBook.hasAlias(alias);
+    }
+    @Override
+    public boolean hasFullTagName(FullTagName fullTagName) {
+        return addressBook.hasFullTagName(fullTagName);
+    }
+    @Override
+    public ObservableList<ShortCut> getShortCutList() {
+        return addressBook.getShortCutList();
+    }
+    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public List<Person> getPeopleByPostalCode(PostalCode postalCode) {
+        requireNonNull(postalCode);
+        return addressBook.getPersonsByPostalCode(postalCode);
+    }
+
+    //=========== Filtered Person List Accessors =============================================================
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}

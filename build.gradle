@@ -20,9 +20,14 @@ checkstyle {
     toolVersion = '10.2'
 }
 
+run {
+    enableAssertions = true
+}
+
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+    jvmArgs = ['-ea']
 }
 
 task coverage(type: JacocoReport) {
@@ -66,7 +71,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'NomNomNotifier.jar'
 }
 
 defaultTasks 'clean', 'test'

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FULLTAGNAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -14,17 +16,27 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddShortCutCommand;
+import seedu.address.logic.commands.ArchiveCommand;
+import seedu.address.logic.commands.ArchiveCommand.ArchivePersonDescriptor;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DelShortCutCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DownloadCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListShortCutCommand;
+import seedu.address.logic.commands.UnarchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TagsContainsKeywordsPredicate;
+import seedu.address.testutil.ArchivePersonDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -63,6 +75,33 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_archive() throws Exception {
+        Person person = new PersonBuilder().build();
+        ArchivePersonDescriptor descriptor = new ArchivePersonDescriptorBuilder().build();
+        descriptor.setIsArchived(true);
+        ArchiveCommand actualCommand = (ArchiveCommand) parser.parseCommand(ArchiveCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased());
+        ArchiveCommand expectedCommand = new ArchiveCommand(INDEX_FIRST_PERSON, descriptor);
+        assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void parseCommand_unarchive() throws Exception {
+        Person person = new PersonBuilder().build();
+        ArchivePersonDescriptor descriptor = new ArchivePersonDescriptorBuilder().build();
+        descriptor.setIsArchived(false);
+        UnarchiveCommand actualCommand = (UnarchiveCommand) parser.parseCommand(UnarchiveCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased());
+        UnarchiveCommand expectedCommand = new UnarchiveCommand(INDEX_FIRST_PERSON, descriptor);
+        assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void parseCommand_download() throws Exception {
+        assertTrue(parser.parseCommand(DownloadCommand.COMMAND_WORD) instanceof DownloadCommand);
+    }
+
+    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
@@ -71,9 +110,19 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindCommand expectedCommand = new FindCommand(new NameContainsKeywordsPredicate(keywords));
+
+        assertEquals(expectedCommand, parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + String.join(" ", keywords)));
+    }
+
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        List<String> keywords = Arrays.asList("v", "vg");
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+                FilterCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FilterCommand(new TagsContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -89,9 +138,29 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addShortCut() throws Exception {
+        assertThrows(ParseException.class, () -> parser.parseCommand(AddShortCutCommand.COMMAND_WORD));
+        assertTrue(parser.parseCommand(AddShortCutCommand.COMMAND_WORD + " " + PREFIX_ALIAS + " v "
+                + PREFIX_FULLTAGNAME + " Vegan") instanceof AddShortCutCommand);
+    }
+
+    @Test
+    public void parseCommand_delShortCut() throws Exception {
+        assertThrows(ParseException.class, () -> parser.parseCommand(DelShortCutCommand.COMMAND_WORD));
+        assertTrue(parser.parseCommand(DelShortCutCommand.COMMAND_WORD + " " + PREFIX_ALIAS + " v "
+                + PREFIX_FULLTAGNAME + " Vegan") instanceof DelShortCutCommand);
+    }
+
+    @Test
+    public void parseCommand_listShortCut() throws Exception {
+        assertTrue(parser.parseCommand(ListShortCutCommand.COMMAND_WORD) instanceof ListShortCutCommand);
+        assertTrue(parser.parseCommand(ListShortCutCommand.COMMAND_WORD + " 3") instanceof ListShortCutCommand);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test

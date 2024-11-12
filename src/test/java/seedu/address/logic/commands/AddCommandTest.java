@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.order.Order;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
+import seedu.address.model.shortcut.Alias;
+import seedu.address.model.shortcut.FullTagName;
+import seedu.address.model.shortcut.ShortCut;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -157,6 +164,60 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void removeOrder(Order order) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addOrder(Order name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasOrder(Order order) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Order> getOrderList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void removeShortCut(ShortCut shortcut) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addShortCut(ShortCut shortcut) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasShortCut(ShortCut shortcut) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasAlias(Alias alias) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasFullTagName(FullTagName fullTagName) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public ObservableList<ShortCut> getShortCutList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        public List<Person> getPeopleByPostalCode(PostalCode postalCode) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
+        public Person findPersonByName(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

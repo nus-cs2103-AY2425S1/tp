@@ -12,10 +12,10 @@ public class Address {
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the address must not be a whitespace (ie start with alphanumeric or #)
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9#].*";
 
     public final String value;
 
@@ -31,10 +31,17 @@ public class Address {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid address.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(VALIDATION_REGEX);
+        String trimmedInput = test.trim();
+
+        // If input was " ", trimmedInput would be empty ie invalid address
+        if (trimmedInput.isEmpty()) {
+            return false;
+        }
+
+        return trimmedInput.matches(VALIDATION_REGEX);
     }
 
     @Override

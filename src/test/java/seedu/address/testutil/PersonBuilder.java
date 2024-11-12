@@ -3,11 +3,14 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.order.OrderHistory;
+import seedu.address.model.order.OrderTracker;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.PostalCode;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,12 +23,16 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_POSTAL_CODE = "654321";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private PostalCode postalCode;
     private Set<Tag> tags;
+    private OrderTracker tracker;
+    private Boolean isArchived;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +42,10 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        postalCode = new PostalCode(DEFAULT_POSTAL_CODE);
         tags = new HashSet<>();
+        tracker = new OrderTracker();
+        isArchived = false;
     }
 
     /**
@@ -46,7 +56,11 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        postalCode = personToCopy.getPostalCode();
         tags = new HashSet<>(personToCopy.getTags());
+        tracker = new OrderTracker();
+        tracker.add(personToCopy.getOrderTracker().get());
+        isArchived = personToCopy.isArchived();
     }
 
     /**
@@ -89,8 +103,40 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Sets the {@code PostalCode} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPostalCode(String postalCode) {
+        this.postalCode = new PostalCode(postalCode);
+        return this;
     }
 
+    /**
+     * Sets the {@code tracker} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withOrderTracker(OrderTracker tracker) {
+        this.tracker = tracker;
+        return this;
+    }
+
+    /**
+     * Add {@param orderHistory} to the {@code tracker} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withOrderHistory(OrderHistory orderHistory) {
+        this.tracker = new OrderTracker();
+        this.tracker.add(orderHistory);
+        return this;
+    }
+
+    /**
+     * Add {@param isArchived} to the {@code isArchived} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withIsArchived(Boolean isArchived) {
+        this.isArchived = isArchived;
+        return this;
+    }
+
+    public Person build() {
+        return new Person(name, phone, email, address, postalCode, tags, tracker, isArchived);
+    }
 }

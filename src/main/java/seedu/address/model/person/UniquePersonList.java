@@ -98,6 +98,20 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Return a person by its name
+     * @param name of the person
+     * @return person of with the required name, null if not found
+     */
+    public Person findPersonByName(Name name) {
+        for (Person person : internalList) {
+            if (person.getName().equals(name)) {
+                return person;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {

@@ -1,0 +1,64 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package "Shortcut Model" as ModelPackage <<Rectangle>> {
+
+    class ShortCut {
+        - alias: Alias
+        - fullTagName: FullTagName
+        + ShortCut(alias: Alias, fullTagName: FullTagName)
+        + getAlias(): Alias
+        + getFullTagName(): FullTagName
+        + equals(Object sc): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class Alias {
+        - alias: String
+        + Alias(alias: String)
+        + isValidAlias(String test): boolean
+        + equals(Object other): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class FullTagName {
+        - fullTagName: String
+        + FullTagName(fullTagName: String)
+        + isValidTagName(String test): boolean
+        + equals(Object other): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class UniqueShortCutList {
+        - internalList: ObservableList<ShortCut>
+        - internalUnmodifiableList: ObservableList<ShortCut>
+        + contains(ShortCut toCheck): boolean
+        + containsAlias(Alias aliasToCheck): boolean
+        + add(ShortCut toAdd): void
+        + remove(ShortCut toRemove): void
+        + setShortCuts(UniqueShortCutList replacement): void
+        + setShortCuts(List<ShortCut> shortcuts): void
+        + asUnmodifiableObservableList(): ObservableList<ShortCut>
+        + equals(Object other): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    Class "<<interface>>\nIterable" as Iterable
+}
+
+UniqueShortCutList .up.|> Iterable
+UniqueShortCutList --> "*" ShortCut
+ShortCut --> Alias : contains
+ShortCut --> FullTagName : contains
+UniqueShortCutList --> ObservableList : uses
+Alias --> String : contains
+FullTagName --> String : contains
+
+@enduml
