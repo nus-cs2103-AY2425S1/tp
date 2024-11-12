@@ -31,7 +31,7 @@ public class CourseEditCommand extends Command {
             + "by its course code. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + PREFIX_COURSE_CODE + "COURSE_CODE (must be course code of an existing course) "
-            + "[" + PREFIX_NAME + "COURSE_NAME]\n"
+            + PREFIX_NAME + "COURSE_NAME\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_COURSE_CODE + "CS1101S "
             + PREFIX_NAME + "Programming basics";
