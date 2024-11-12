@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Product in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidProductName(String)}
+ * Guarantees: immutable; name is valid as declared in {@link #isValidProductName(String)}.
  */
 public class Product {
     public static final String MESSAGE_CONSTRAINTS = "PRODUCT must be alphanumeric, can include spaces but must "
@@ -15,7 +15,7 @@ public class Product {
     public final String productName;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code Product}.
      *
      * @param productName A valid product name.
      */
@@ -26,7 +26,7 @@ public class Product {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid product name.
      */
     public static boolean isValidProductName(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -52,9 +52,6 @@ public class Product {
         return productName.hashCode();
     }
 
-    /**
-     * Format state as text for viewing.
-     */
     public String toString() {
         return productName;
     }

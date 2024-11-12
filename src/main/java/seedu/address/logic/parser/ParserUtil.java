@@ -147,20 +147,6 @@ public class ParserUtil {
         }
         return new Product(trimmedProductName);
     }
-    /**
-     * Parses a {@code String statusString} into a {@code SupplierStatus}.
-     * Leading and trailing whitespaces
-     * will be trimmed.
-     * @throws ParseException if the given {@code statusString} is invalid.
-     */
-    public static SupplierStatus parseSupplierStatus(String statusString) throws ParseException {
-        requireNonNull(statusString);
-        String trimmedStatus = statusString.trim();
-        if (!SupplierStatus.isValidStatus(trimmedStatus)) {
-            throw new ParseException(SupplierStatus.MESSAGE_CONSTRAINTS);
-        }
-        return new SupplierStatus(trimmedStatus);
-    }
 
     /**
      * Parses {@code Collection<String> products} into a {@code Set<Product>}.
@@ -172,6 +158,21 @@ public class ParserUtil {
             productSet.add(parseProduct(productName));
         }
         return productSet;
+    }
+
+    /**
+     * Parses a {@code String statusString} into a {@code SupplierStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code statusString} is invalid.
+     */
+    public static SupplierStatus parseSupplierStatus(String statusString) throws ParseException {
+        requireNonNull(statusString);
+        String trimmedStatus = statusString.trim();
+        if (!SupplierStatus.isValidStatus(trimmedStatus)) {
+            throw new ParseException(SupplierStatus.MESSAGE_CONSTRAINTS);
+        }
+        return new SupplierStatus(trimmedStatus);
     }
 
     /**
@@ -279,6 +280,7 @@ public class ParserUtil {
         }
         return new DeliverySortBy(trimmedSortBy);
     }
+
     /**
      * Parses a {@code String sortBy } into a {@code SortBy}.
      * Leading and trailing whitespaces will be trimmed.

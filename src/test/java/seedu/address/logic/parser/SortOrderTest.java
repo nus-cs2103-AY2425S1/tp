@@ -14,14 +14,14 @@ public class SortOrderTest {
     }
 
     @Test
-    public void constructor_invalidCost_throwsIllegalArgumentException() {
+    public void constructor_invalidSortOrder_throwsIllegalArgumentException() {
         String invalidSortOrder = "abc";
         assertThrows(IllegalArgumentException.class, () -> new SortOrder(invalidSortOrder));
     }
 
     @Test
-    public void isValidCost() {
-        // null cost
+    public void isValidSortOrder() {
+        // null sort order
         assertThrows(NullPointerException.class, () -> SortOrder.isValidSortOrder(null));
 
         // blank sort order
@@ -34,8 +34,8 @@ public class SortOrderTest {
         assertFalse(SortOrder.isValidSortOrder("ad")); // cannot be both a and d
 
         // valid sort order
-        assertTrue(SortOrder.isValidSortOrder("a"));
-        assertTrue(SortOrder.isValidSortOrder("d"));
+        assertTrue(SortOrder.isValidSortOrder("a")); // ascending
+        assertTrue(SortOrder.isValidSortOrder("d")); // descending
     }
 
     @Test

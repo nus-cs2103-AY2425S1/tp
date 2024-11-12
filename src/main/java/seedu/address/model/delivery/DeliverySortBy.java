@@ -12,8 +12,8 @@ import seedu.address.logic.parser.SortOrder;
  */
 public class DeliverySortBy {
     /**
-     * Represents the fields to sort by
-     * 'C' represents cost, 'D' represents dateTime, and 'S' represents status
+     * Represents the fields to sort by,
+     * 'C' represents cost, 'D' represents dateTime, and 'S' represents status.
      */
     public enum SortBy {
         C, D, S;

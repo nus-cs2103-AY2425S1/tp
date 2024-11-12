@@ -60,6 +60,9 @@ public class SortOrder {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns 'ascending' for ascending sort order or 'descending' for descending sort order.
+     */
     @Override
     public String toString() {
         return getIsSortByAscending() ? "ascending" : "descending";

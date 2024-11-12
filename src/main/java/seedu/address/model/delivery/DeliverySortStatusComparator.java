@@ -3,16 +3,25 @@ package seedu.address.model.delivery;
 import seedu.address.logic.parser.SortOrder;
 
 /**
- * Represents a comparator for deliveries that sort based on status then dateTime.
+ * Represents a comparator for deliveries that compares based on status.
  */
 public class DeliverySortStatusComparator extends DeliverySortComparator {
 
+    /**
+     * Creates a DeliverySortStatusComparator to compare the deliveries by status in the specified {@code sortOrder}.
+     */
     public DeliverySortStatusComparator(SortOrder sortOrder) {
         super(sortOrder);
     }
 
     /**
-     * Compares two delivery object by status, returning the order of CANCELLED -> DELIVERED -> PENDING
+     * Compares the status of two deliveries based on the sort order.
+     *
+     * @param delivery1 the first delivery to be compared.
+     * @param delivery2 the second delivery to be compared.
+     * @return a negative integer, zero, or a positive integer as the first delivery's status is less than,
+     *      equal to, or greater than the second delivery's status alphabetically if the sort order is ascending.
+     *      If the sort order is descending, the integer returned is inverted.
      */
     @Override
     public int compare(Delivery delivery1, Delivery delivery2) {
@@ -26,17 +35,16 @@ public class DeliverySortStatusComparator extends DeliverySortComparator {
     }
 
     /**
-     * Returns the order of the status in the order of CANCELLED -> DELIVERED -> PENDING (Alphabetical).
-     * The integer returned increases in the order.
+     * Returns an integer corresponding to the {@code status} based on alphabetical order.
      */
     private int getStatusOrder(Status status) {
         switch (status) {
         case CANCELLED:
             return 0;
-        case PENDING:
-            return 2;
         case DELIVERED:
             return 1;
+        case PENDING:
+            return 2;
         default:
             throw new IllegalArgumentException("Unknown status: " + status);
         }
