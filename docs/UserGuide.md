@@ -18,18 +18,18 @@ For TAs who type quickly, ConTActs provides a faster, more streamlined solution 
 
 ## Installation Guide
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed on your Computer.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your **ConTActs**.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ConTActs.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the one shown below should appear in a few seconds. Note how the app contains preloaded sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+   Here are some example commands to try:
 
    - `list` : Lists all students in the contact list.
 
@@ -49,7 +49,7 @@ For TAs who type quickly, ConTActs provides a faster, more streamlined solution 
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes on the command format:**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -118,7 +118,7 @@ Format: `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 Examples:
 
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+- `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and removes all existing tags.
 
 ### Locating students by name or tag : `find`
 
