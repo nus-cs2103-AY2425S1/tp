@@ -17,12 +17,9 @@ import seedu.address.model.wedding.Wedding;
  */
 public class Person {
 
-    // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
-
-    // Data fields
     private final Address address;
     private final Optional<Role> role;
     private Wedding ownWedding;
@@ -40,38 +37,6 @@ public class Person {
         this.address = address;
         this.role = role;
         this.ownWedding = ownWedding;
-    }
-
-    public void setOwnWedding(Wedding wedding) {
-
-        if (wedding == null) {
-            throw new NullPointerException("Wedding cannot be null.");
-        }
-        ownWedding = wedding;
-        wedding.setClient(this);
-    }
-
-    /**
-     * Reset the {@code ownWedding} status of person.
-     *
-     * @param wedding {@code Wedding} object to check against {@code ownWedding}
-     */
-    public void resetOwnWedding(Wedding wedding) {
-        if (this.ownWedding == null) {
-            return;
-        }
-
-        if (this.ownWedding.equals(wedding)) {
-            this.ownWedding = null;
-        }
-    }
-
-    public void setIsClient(boolean isClient) {
-        this.isClient = isClient;
-    }
-
-    public boolean isClient() {
-        return isClient;
     }
 
     public Name getName() {
@@ -104,6 +69,37 @@ public class Person {
 
     public Set<Wedding> getWeddingJobs() {
         return weddingJobs;
+    }
+
+    public boolean isClient() {
+        return isClient;
+    }
+
+    public void setOwnWedding(Wedding wedding) {
+        if (wedding == null) {
+            throw new NullPointerException("Wedding cannot be null.");
+        }
+        ownWedding = wedding;
+        wedding.setClient(this);
+    }
+
+    /**
+     * Reset the {@code ownWedding} status of person.
+     *
+     * @param wedding {@code Wedding} object to check against {@code ownWedding}
+     */
+    public void resetOwnWedding(Wedding wedding) {
+        if (this.ownWedding == null) {
+            return;
+        }
+
+        if (this.ownWedding.equals(wedding)) {
+            this.ownWedding = null;
+        }
+    }
+
+    public void setIsClient(boolean isClient) {
+        this.isClient = isClient;
     }
 
     /**
@@ -233,16 +229,13 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
+
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                // && role.equals(otherPerson.role)
-                // && ownWedding.equals(otherPerson.ownWedding)
+                && role.equals(otherPerson.role)
                 && weddingJobs.equals(otherPerson.weddingJobs);
-        //TODO HERE
-        // commented them out since they give null pointer exception
-        // need to use Optional
     }
 
     @Override

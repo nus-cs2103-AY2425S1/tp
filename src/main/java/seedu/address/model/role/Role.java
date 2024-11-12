@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
 
-    public static final String MESSAGE_CONSTRAINTS = "Role should be one word, alphanumeric, "
-            + "and should not be blank.";
+    public static final String MESSAGE_CONSTRAINTS = "Role should be one word and alphanumeric";
+
     public static final String VALIDATION_REGEX = "^[A-Za-z0-9]*$";
 
     public final String roleName;

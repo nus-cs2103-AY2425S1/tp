@@ -96,7 +96,17 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Ensures that the correct client is set to be client.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     void updateFilteredPersonListWithClient(Predicate<Person> predicate);
+
+    /**
+     * Sets all person to be not client.
+     */
     void setAllPersonNotClient();
 
     // =========== Wedding ===================================================================================
@@ -136,6 +146,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredWeddingList(Predicate<Wedding> predicate);
+
+    /**
+     * Updates the filter of the filtered wedding list to filter by the given {@code predicate}.
+     * Ensures that all correct weddings are set to be own wedding.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     void updateFilteredWeddingListWithOwnWedding(Predicate<Wedding> predicate);
+
+    /**
+     * Sets all wedding to not be own-wedding.
+     */
     void setAllWeddingNotOwnWedding();
 }

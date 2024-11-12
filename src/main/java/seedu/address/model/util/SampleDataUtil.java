@@ -62,6 +62,12 @@ public class SampleDataUtil {
         };
     }
 
+    /**
+     * Set weddings with clients.
+     *
+     * @param persons personlist with persons.
+     * @param weddings weddinglist with weddings.
+     */
     public static void setUpWeddings(Person[] persons, Wedding[] weddings) {
         // Set up clients
         weddings[0].setClient(persons[0]);

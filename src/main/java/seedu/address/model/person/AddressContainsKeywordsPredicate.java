@@ -11,10 +11,22 @@ import seedu.address.commons.util.StringUtil;
 public class AddressContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a AddressContainsKeywordsPredicate with the given wedding
+     *
+     * @param keywords The keywords to check against
+     */
     public AddressContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
+    /**
+     * Tests if a given person has address containing some keywords.
+     * Returns true only if some keywords are found in the person's address
+     *
+     * @param person The person to test
+     * @return true if some keywords are found in the person's address, false otherwise
+     */
     @Override
     public boolean test(Person person) {
         return keywords.stream()

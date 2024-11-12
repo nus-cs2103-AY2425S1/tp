@@ -14,10 +14,22 @@ import seedu.address.commons.util.ToStringBuilder;
 public class NameMatchesKeywordPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a NameMatchesKeywordPredicate with the given wedding
+     *
+     * @param names The keywords to check against
+     */
     public NameMatchesKeywordPredicate(List<String> names) {
         this.keywords = names;
     }
 
+    /**
+     * Tests if a given person has name containing all keywords.
+     * Returns true only if all keywords are found in the person's name
+     *
+     * @param person The person to test
+     * @return true if the keywords are all found in the person's name, false otherwise
+     */
     @Override
     public boolean test(Person person) {
         requireNonNull(person);

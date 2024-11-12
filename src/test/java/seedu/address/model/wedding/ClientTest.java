@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY_WEDDING;
-import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,6 @@ import seedu.address.testutil.PersonBuilder;
 
 public class ClientTest {
     private Client aliceClient = new Client(ALICE);
-    private Client bensonClient = new Client(BENSON);
     private Client bobClient = new Client(BOB);
 
     @Test

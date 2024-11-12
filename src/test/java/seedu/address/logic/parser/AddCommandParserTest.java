@@ -135,7 +135,8 @@ public class AddCommandParserTest {
         // Since role is optional, we don't add a default role here
         Person expectedPerson = new PersonBuilder(AMY).build();
 
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                        + ADDRESS_DESC_AMY + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson, new HashSet<>()));
     }
 

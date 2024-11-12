@@ -182,6 +182,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    @Override
     public void setAllPersonNotClient() {
         addressBook.setAllPersonNotClient();
     }
@@ -203,14 +204,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setAllWeddingNotOwnWedding() {
-        addressBook.setAllWeddingIsOwnFalse();
-    }
-
-    @Override
     public void updateFilteredWeddingListWithOwnWedding(Predicate<Wedding> predicate) {
         requireNonNull(predicate);
         filteredWeddings.setPredicate(predicate);
+    }
+
+    @Override
+    public void setAllWeddingNotOwnWedding() {
+        addressBook.setAllWeddingIsOwnFalse();
     }
 
     @Override
