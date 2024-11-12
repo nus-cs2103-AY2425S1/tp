@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-- GitHub copilot was used by Li Yifeng as an auto-complete tool during most of the coding
+- GitHub copilot was used by Li Yifeng as an auto-complete tool during most of the coding.
 
 --------------------------------------------------------------------------------------------------------------------
 
