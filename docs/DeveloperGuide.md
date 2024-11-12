@@ -1288,7 +1288,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: Start GOATS app
       Expected: GOATS should clear all data from the corrupted file and user is presented with an empty addressbook
 
-1. _Dealing with missing data files
+1. Dealing with missing data files
 
    1. Missing data files can be simulated by deleting data/addressbook.json file
 
@@ -1366,6 +1366,7 @@ Team Size: 5. Hence, maximum number of planned enhancements is **10**.
 * **Current Situation**: Users can input any value for the `DAY` parameter of the `findday` command.
 * **Proposed Improvement**: Create an enum of valid `DAY` inputs (i.e. the days of the week), and display an error message to the user if the value input to the `DAY` parameter does not match any of the valid inputs.
 
-### 10. Improve input validation for EMAIL parameter to check for top-level domain
-* **Current Situation**: Commands that take in `EMAIL` parameter will accept email without top-level domain (i.e. local-part@domain).
-* **Proposed Improvement**: Ensure that users include a top-level domain when inputting `EMAIL` parameters(i.e. <span>local-part@domain</span>.com).
+### 10. Improve UI to view contacts in a separate window
+* **Current Situation**: If the name of the contact exceeds 14 characters, users can only view the name via commands. (pin etc.)
+* **Proposed Improvement**: Create a new command that displays full details of the contact in a new window.
+

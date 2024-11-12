@@ -4,7 +4,6 @@ skinparam ArrowFontStyle plain
 
 box "Logic Layer" LOGIC_COLOR_T1
     participant "e:EditCommand" as EditCommand LOGIC_COLOR
-    participant "<<class>>\nEditCommand" as EditCommandClass LOGIC_COLOR
     participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -20,7 +19,6 @@ activate Model
 Model --> EditCommand : lastShownList
 deactivate Model
 
-EditCommand -> EditCommand : personToEdit = lastShownList.get(index)
 
 alt Person is not Student and contains education field
     EditCommand -> EditCommand : throw CommandException(...)
@@ -30,10 +28,10 @@ alt Person is not Student and contains lesson time field
     EditCommand -> EditCommand : throw CommandException(...)
 end
 
-EditCommand -> EditCommandClass : createEditedPerson(...)
-activate EditCommandClass
-EditCommandClass --> EditCommand : editedPerson
-deactivate EditCommandClass
+EditCommand -> EditCommand : createEditedPerson(...)
+activate EditCommand
+EditCommand --> EditCommand : editedPerson
+deactivate EditCommand
 
 alt editedPerson is duplicate
     EditCommand -> EditCommand : throw CommandException(...)
