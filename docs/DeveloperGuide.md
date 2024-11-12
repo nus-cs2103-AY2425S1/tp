@@ -552,5 +552,3 @@ Good job!🥳 You have tested the basic functionalities of the app. We recommend
 more functionalities.
 
 </box>
-
-~~~~
