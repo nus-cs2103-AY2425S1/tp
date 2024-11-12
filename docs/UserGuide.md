@@ -44,11 +44,11 @@ have.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-1/tp/releases/tag/v1.5).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-1/tp/releases/tag/v1.6).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your HR Helper.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HRHelper.v1.5.jar` command to run the application.
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HRHelper.v1.6.jar` command to run the application.
 
 1. A login window similar to the below should appear in a few seconds. Login to HR Helper.<br>
    ![image](images/authentication.png){width=1200}
