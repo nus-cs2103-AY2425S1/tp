@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -14,7 +13,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
 
     // Identity fields
     private final Name name;
@@ -70,8 +69,12 @@ public class Person {
             return true;
         }
 
+        // Case insensitive comparison
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().fullName
+                        .equalsIgnoreCase(getName().fullName)
+                && otherPerson.getPhone().value
+                        .equals(getPhone().value);
     }
 
     /**
@@ -98,20 +101,27 @@ public class Person {
     }
 
     @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
-    }
+    public abstract int hashCode();
 
-    @Override
-    public String toString() {
+    /**
+     * Creates a {@code ToStringBuilder} instance for this object.
+     * The builder is initialized with the current object's fields,
+     * allowing for a structured string representation.
+     *
+     * @return A {@code ToStringBuilder} object containing the string representation
+     *         of this instance with the included fields.
+     */
+    public ToStringBuilder toStringBuilder() {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
-                .toString();
+                .add("tags", tags);
     }
 
+    @Override
+    public abstract String toString();
+
+    public abstract String reflectType();
 }

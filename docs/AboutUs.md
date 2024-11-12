@@ -1,59 +1,63 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+
+You can reach us at CS2103T F09 group 3!
 
 ## Project team
+Here are the members of our team!
 
-### John Doe
+### Tan Yi Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yxtan02.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/yxtan02)]
+[[portfolio](team/yxtan02.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Integration
 
-### Jean Doe
+### Samuel Lim
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/slye20.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/slye20)]
+[[portfolio](team/slye20.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Deliverables and deadlines, Scheduling and tracking
+
+### Yang Qifeng
+
+<img src="images/yangqf2002.png" width="200px">
+
+[[github](http://github.com/YangQF2002)]
+[[portfolio](team/qifeng.md)]
+
+* Role: Developer
+* Responsibilities: Code quality
+
+### Wei Bin
+
+<img src="images/weibinlim.png" width="200px">
+
+[[github](https://github.com/weibinlim)]
+[[portfolio](team/weibin.md)]
+
+* Role: Developer
+* Responsibilities: Testing
+
+### Hovan Leong
+
+<img src="images/hovanleong.png" width="200px">
+
+[[github](https://github.com/hovanleong)]
+[[portfolio](team/hovanleong.md)]
+
+* Role: Developer
+* Responsibilities: Documentation, Testing

@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Guest;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -96,6 +98,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -123,9 +126,60 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getFilteredGuestList() {
+        return new FilteredList<>(filteredPersons,
+                person -> person instanceof Guest);
+    }
+
+    @Override
+    public ObservableList<Person> getFilteredVendorList() {
+        return new FilteredList<>(filteredPersons,
+                person -> person instanceof Vendor);
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public int[] getFilteredGuestListCount() {
+        ObservableList<Person> guestList = getFilteredGuestList();
+        int guestCount = guestList.size();
+        int guestsPending = (int) guestList.stream()
+                .filter(person -> hasRsvpStatus(person, "P"))
+                .count();
+
+        int guestsComing = (int) guestList.stream()
+                .filter(person -> hasRsvpStatus(person, "A"))
+                .count();
+
+        int guestsNotComing = (int) guestList.stream()
+                .filter(person -> hasRsvpStatus(person, "D"))
+                .count();
+        return new int[] { guestCount, guestsPending, guestsComing, guestsNotComing };
+    }
+
+    /**
+     * Predicate function used to filter the guestList.
+     * If each person matches the rsvp status, returns true.
+     * Else, returns false.
+     */
+    private boolean hasRsvpStatus(Person p, String rsvpStatus) {
+        assert(p instanceof Guest);
+        Guest g = (Guest) p;
+        if (g.getRsvp().rsvp.equals(rsvpStatus)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int getFilteredVendorListCount() {
+        ObservableList<Person> vendorList = getFilteredVendorList();
+        int vendorCount = vendorList.size();
+        return vendorCount;
     }
 
     @Override

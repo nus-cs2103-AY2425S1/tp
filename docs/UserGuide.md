@@ -1,49 +1,246 @@
 ---
-layout: page
-title: User Guide
+  layout: default.md
+  title: "User Guide"
+  pageNav: 3
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# BridalBuddy User Guide
 
-* Table of Contents
-{:toc}
+BridalBuddy is a **desktop application for managing contacts, designed for optimal use through a text-based interface** while retaining the advantages of a visual and mouse-based interface.
+It is an app targeted at wedding planners to help them streamline guest and vendor management for their clients.
+
+As wedding planners, we understand that you may frequently encounter challenges in managing the countless guests and vendors involved in the planning process.
+That's why we've created BridalBuddy just for you. With BridalBuddy, you'll have an easy and effective solution for managing your guest lists and vendor information seamlessly, so that you can concentrate on delivering an unforgettable experience your clients will never forget.
+
+With BridalBuddy, you can easily:
+* Add, update, and keep track of every detail of your guests and vendors.
+* Filter through your contact list to retrieve important details quickly.
+* Access real-time wedding statistics for an instant snapshot of guest attendance and vendor counts.
+
+To discover more about what BridalBuddy has to offer, continue reading the rest of this comprehensive user guide.
+
+## Table of Contents
+1. [**Helpful Guidelines for the User Guide**](#helpful-guidelines-for-the-user-guide)
+2. [**Quick Start**](#quick-start)
+3. [**Tutorial for Beginners**](#tutorial-for-beginners)
+   * [**Starting a fresh template**](#starting-a-fresh-template)
+   * [**Adding guests**](#adding-guests)
+   * [**Adding vendors**](#adding-vendors)
+   * [**Deleting persons**](#deleting-persons)
+   * [**Exiting the program**](#exiting-the-program)
+4. [**Features**](#features)
+    * [**General Commands**](#general-commands)
+        * [`help` Viewing help](#viewing-help-help)
+        * [`list` Listing all persons](#listing-all-persons-list)
+        * [`find` Finding a guest/vendor](#finding-a-person-find)
+        * [`clear` Clearing all entries from the guest list and the vendor list](#clearing-all-entries-clear)
+        * [`stats` Viewing the wedding statistics](#viewing-statistics-stats)
+        * [`exit` Exiting the program](#exiting-the-program-exit)
+    * [**Guest Related Commands**](#guest-related-commands)
+        * [`add_guest` Adding a new guest to the guest list](#adding-a-guest-add-guest)
+        * [`edit_guest` Editing the details of a guest](#editing-a-guest-edit-guest)
+        * [`delete_guest` Deleting a guest from the guest list](#deleting-a-guest-delete-guest)
+    * [**Vendor Related Commands**](#vendor-related-commands)
+        * [`add_vendor` Adding a vendor to the vendor list](#adding-a-vendor-add-vendor)
+        * [`edit_vendor` Editing the details of a vendor](#editing-a-vendor-edit-vendor)
+        * [`delete_vendor` Deleting a vendor from the vendor list](#deleting-a-vendor-delete-vendor)
+    * [**Other Useful Features**](#other-useful-features)
+        * [Saving the data](#saving-the-data)
+        * [Editing the data file](#editing-the-data-file)
+5. [**FAQ**](#faq)
+6. [**Known Issues**](#known-issues)
+7. [**Command summary**](#command-summary)
+8. [**Glossary**](#glossary)
+
+<div style="page-break-after: always"></div>
+
+## **Helpful Guidelines for the User Guide**
+
+### Interpreting symbols
+
+This section explains the symbols that you will find in the rest of the User Guide.
+
+| Symbol               | Meaning                                            |
+|----------------------|----------------------------------------------------|
+| :warning:            | Important information! Please read them carefully. |
+| :information_source: | Information that you should take note of.          |
+| :bulb:               | Additional useful tips.                            |
+
+### Searching for what you need
+
+This section tells you what information you will find in each of the sections of this guide. Feel free to skip to the sections which you need most.
+
+1. [Quick Start](#quick-start) teaches you how to set up BridalBuddy.
+2. [Tutorial for Beginners](#tutorial-for-beginners) walks you through the basic features of BridalBuddy to get you started.
+3. [Features](#features) helps you understand how all our features work.
+4. [FAQ](#faq) clarifies the doubts that many of our users have.
+5. [Command Summary](#command-summary) summarises all our features for easy reference.
+6. [Glossary](#glossary) explains the definitions of any technical terms used in this guide.
+7. [_Back to Top_](#table-of-contents) gives you a convenient shortcut to go back to the table of contents.
+
+[_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## **Quick Start**
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. Click [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download Java `17` if you do not already have it installed.
+    > :information_source: To check if you have Java `17` installed, simply run `java -version` on a command terminal to find out.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your BridalBuddy application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, navigate to the folder you put the jar file in, and use the `java -jar bridalbuddy.jar` command to run the application.<br>
+    > :bulb: If you need any help opening a command terminal, you may refer to the relevant information [here](https://www.youtube.com/watch?v=8gUvxU7EoNE) (for Windows users) or [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac#:~:text=Click%20the%20Launchpad%20icon%20in,%2C%20then%20double%2Dclick%20Terminal.) (for macOS users).
+    
+    > :bulb: If you need any help with navigating to the folder with the jar file, you may refer to the relevant information [here](https://www.wikihow.com/Change-Directories-in-Command-Prompt) (for Windows users) or [here](https://iboysoft.com/wiki/cd-mac-terminal.html) (for macOS users).
+
+    An interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists down all guests invited to the wedding on the guest list and all vendors involved in the wedding on the vendor list.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/H t/friends t/owesMoney` : Adds a guest named `John Doe` to the guest list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete_vendor 3` : Deletes the 3rd vendor shown in the current vendor list.
 
-   * `clear` : Deletes all contacts.
+    * `exit` : Exits the app.
 
-   * `exit` : Exits the app.
+For a comprehensive tutorial on using BridalBuddy to manage your guest and vendor lists as a wedding planner, check out the [Tutorial for Beginners](#tutorial-for-beginners).
+Alternatively, if you’d like to explore the application independently, refer to the [Features](#features) section below for detailed information on each command.
 
-1. Refer to the [Features](#features) below for details of each command.
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+## **Tutorial for Beginners**
+
+If you are new to BridalBuddy, this section will walk you through all the most basic features of BridalBuddy and will make sure you know everything you need to get started.
+For this tutorial section, you are highly encouraged to use exactly the sample commands provided for each tutorial, and only start trying out the commands on your own after going through the [Features](#features) section.
+
+
+### Tutorial Contents
+1. [**Starting a fresh template**](#starting-a-fresh-template)
+2. [**Adding guests**](#adding-guests)
+3. [**Adding vendors**](#adding-vendors)
+4. [**Deleting persons**](#deleting-persons)
+5. [**Exiting the program**](#exiting-the-program)
+
+
+**Let us explore the most basic features of BridalBuddy's from the perspective of a wedding planner.**
+When you open up the application for the first time, you will see the interface below, with some sample guest and vendors on the guest list and the vendor list respectively.
+
+![Ui](images/firstUseUi.png)
+
+At the top of the screen, there is a text box we will refer to as the *Command Line*. This is where you type in your commands to BridalBuddy.
+
+To confirm your instructions, simply press the <kbd>Enter</kbd> key on your keyboard.
+
+Below the *Command Line* is the *Outcome Box*, which will tell you the outcome of the commands you have entered, as well as other relevant information related to that command.
+
+Finally, below the *Outcome Box* is the *Display Panel*, which will contain the guest list and the vendor list for the wedding that you are planning.
+
+> :bulb: After entering the commands, if the cursor disappears from the *Command Line*, you can always press the <kbd>Tab</kbd> key on your keyboard a few times to bring the cursor back to the *Command Line* and continue typing instead of having to click on the *Command Line* with the mouse.
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### **Starting a fresh template**
+
+In order to get ready to use BridalBuddy, let's first remove the existing sample guests and vendors on our guest list and vendor list.
+All we have to do is to enter the command `clear` in the Command Line, and both the guest list and the vendor list will be emptied and ready for you to plan a new wedding.
+> :bulb: Remember to hit the <kbd>Enter</kbd> key on your keyboard to confirm an instruction/command to BridalBuddy.
+
+Once successful, you should see the following on your screen:
+
+![clear command](images/clearCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### **Adding guests**
+
+Now let's say your customer, the groom, sends you the first guest he wishes to invite, and we want to add him to the guest list of the wedding.
+Let us familiarise ourselves with the `add_guest` command, which you will need in order to add guests to the guest list.
+
+Let's try entering the following command in the Command Line: `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25`.
+
+This means you are adding a new guest, with the name `John Doe`, phone number `98765432`, email `johnd@example.com` and address `311, Clementi Ave 2, #02-25` to the guest list.
+
+Once successful, you should see the following on your screen:
+
+![add guest_command](images/addGuestCommandSample.png)
+
+For more details on the `add_guest` command, such as the additional optional fields you can classify a guest with, we encourage you to refer to [**Adding a new guest to the guest list**](#adding-a-guest-add-guest)
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### **Adding vendors**
+
+Let us now add a vendor to the list of vendors you are intending to collaborate with, and familiarise ourselves with the `add_vendor` command, which you will need in order to add vendors to the vendor list.
+
+Let's try entering the following command in the Command Line: `add_vendor n/Jane Tan p/91234567 e/janet@example.com a/743, Jurong Mall, #05-245 c/Jane's Florist`.
+
+This means you are adding a new vendor, with the name `Jane Tan`, phone number `91234567`, email `janet@example.com`, address `743, Jurong Mall, #05-245` and company name `Jane's Florist` to the vendor list.
+
+Once successful, you should see the following on your screen:
+
+![add vendor_command](images/addVendorCommandSample.png)
+
+For more details on the `add_vendor` command, such as the additional optional fields you can classify a vendor with, we encourage you to refer to [**Adding a new vendor to the vendor list**](#adding-a-vendor-add-vendor)
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### **Deleting persons**
+
+Suppose the bride tells us that she has a preferred florist in mind, and so you need to delete the florist you previously added to the vendor list.
+
+Let's try entering the following command in the Command Line: `delete_vendor 1`.
+
+This means you are deleting the first person that is currently being listed on your vendor list, which is `Jane Tan`.
+
+Once successful, you should see the following on your screen:
+
+![delete vendor_command](images/deleteVendorCommandSample.png)
+
+Deleting a guest works in a similar way but using the `delete_guest` command instead.
+For more details on the `delete_guest` and `delete_vendor` commands, we encourage you to refer to [**Deleting a guest from the guest list**](#deleting-a-guest-delete-guest) and [**Deleting a vendor from the vendor list**](#deleting-a-vendor-delete-vendor) respectively.
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### **Exiting the program**
+
+It's been a long day at work. Now let's take a break and exit the application. All you have to do is simply enter the command `exit` in the Command Line, and the program will exit automatically in a few seconds!
+
+* :bulb: Not to worry, your progress will be auto-saved and all your work will be reflected correctly the next time you open the app.
+
+[_Back to Top_](#table-of-contents)
+
+
+After trying out the tutorial, we strongly recommend you to explore our [features](#features) where you can discover the full range of tools and functionalities our app offers so that you can enhance your productivity and make the most out of BridalBuddy!
+
+[_Back to Top_](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## **Features**
 
-<div markdown="block" class="alert alert-info">
+<box type="info" seamless>
 
-**:information_source: Notes about the command format:**<br>
+**:bulb: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -57,143 +254,372 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* For all commands that take in any [prefix(es)](#glossary), the prefix(es) are case-sensitive (i.e. only small letters allowed, use of capital letters will result in an `Invalid prefix detected` error.)
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+</box>
+
+[_Back to Top_](#table-of-contents)
+
+---
+
+### **General Commands**
+
+Commands listed in this section are applicable to both guest management and vendor management, or for using the app in general.
+
+[_Back to Top_](#table-of-contents)
+
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+This command will open your web browser and redirect you to the online User Guide which will provide detailed instructions and resources for you to use the app.
 
-![help message](images/helpMessage.png)
+* :warning: The online User Guide will require a stable internet connection to successfully open.
 
-Format: `help`
+**Format:** `help`
 
+**Example Usage:** `help`
 
-### Adding a person: `add`
+[_Back to Top_](#table-of-contents)
 
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+<div style="page-break-after: always"></div>
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+This command will show you a guest list consisting of all invited guests and a vendor list consisting of all vendors involved in the current wedding that you are planning.
 
-Format: `list`
+* The guest list will be on the left of your screen while the vendor list will be on the right of your screen.
 
-### Editing a person : `edit`
+**Format:** `list`
 
-Edits an existing person in the address book.
+**Example Usage:** `list`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Entering the `list` command returns the following result on your screen (using sample `Guest` data and  `Vendor` data):
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+![list command](images/listCommand.png)
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+[_Back to Top_](#table-of-contents)
 
-### Locating persons by name: `find`
+<div style="page-break-after: always"></div>
 
-Finds persons whose names contain any of the given keywords.
+### Finding a person : `find`
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+This command will help you find guests and vendors that match any of the given keyword(s) that you provide.
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+**Format:** `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/relation] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+> :warning: **Exactly** one type of [prefix](#glossary) should be used for each `find` command.
 
-### Deleting a person : `delete`
+- Specifying multiple different prefixes (e.g. `find n/John p/12345`) will result in an invalid command
+- The prefix specified in the command indicates the attribute to be searched (e.g. `find n/NAME` searches for guests and vendors whose name matches the given keyword)
+- The search is case-insensitive for all fields (e.g. `jOhN` will match `John`)
+- The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`
+- Only full words will be matched e.g. `Jo` will not match `John`
+- Guest/Vendor matching **any** of the keywords will be returned (e.g. `John Tan` will return `John Doe` and `Alan Tan`)
 
-Deletes the specified person from the address book.
+**Example Usage:** `find n/Steve`
 
-Format: `delete INDEX`
+Entering the `find n/Steve` command returns the following result on your screen (using sample `Guest` data and  `Vendor` data):
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+![find command](images/findCommand.png)
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+This command will help you clear and empty out the entire guest list and vendor list, and could be good to help you start off your preparations for the next wedding.
 
-Format: `clear`
+**Format:** `clear`
+
+**Example Usage:** `clear`
+
+Entering the `clear` command returns the following result on your screen:
+
+![clear command](images/clearCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### Viewing statistics : `stats`
+
+This command will display to you the total number of guests invited to the wedding and the total number of vendors involved in the wedding.
+
+**Format:** `stats`
+
+**Example Usage:** `stats`
+
+Entering the `stats` command returns the following result on your screen (using sample `Guest` data and  `Vendor` data):
+
+![stats command](images/statsCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
 
 ### Exiting the program : `exit`
 
-Exits the program.
+This command will exit the program.
 
 Format: `exit`
 
+**Example Usage:** `exit`
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### **Guest Related Commands**
+
+Commands listed in this section are applicable to managing your guest list (guest management).
+
+
+[_Back to Top_](#table-of-contents)
+
+
+### Adding a guest : `add_guest`
+
+This command will help you add a new guest to the bottom of the existing overall guest list.
+
+**Format:** `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...`
+
+> :warning: You can only enter 'P'/'p' for pending, 'A'/'a' for accepted or 'D'/'d' for declined for the optional `RSVP` field.
+
+> :warning: You can only enter 'H'/'h' for related to husband, 'W'/'w' for related to wife or 'U'/'u' for unknown for the optional `RELATION` field.
+
+> :warning: If you attempt to add a new guest with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
+
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
+
+**Example Usage:** `add_guest n/Alan Tan p/97462948 e/alantan@example.com a/123, Jurong Ave 12, #012-845 rsvp/d r/w`
+
+**Example Usage:** `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`
+
+Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney` command returns the following result on your screen:
+
+![add_guest command](images/addGuestCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### Editing a guest : `edit_guest`
+
+This command will allow you to edit the details of the guest identified by the `INDEX` number used in the displayed guest list. Existing values will be overwritten by the input values.
+
+**Format:** `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [t/TAG]...`
+
+> :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
+
+> :warning: If you attempt to edit the details of an existing guest such that they end up with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
+
+> :warning: At least 1 field of a `Guest` has to be specified for the command to be valid.
+
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
+
+* :bulb: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
+
+   * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `edit_guest 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
+
+**Example Usage:** `edit_guest 2 p/98274626 e/helloworld@example.com`
+
+**Example Usage:** `edit_guest 4 p/91234567 e/johndoe@example.com`
+
+Entering the `edit_guest 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
+
+![edit_guest command](images/editGuestCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### Deleting a guest : `delete_guest`
+
+This command will help you delete a guest from your existing guest list, identified by the `INDEX` number used in the displayed guest list.
+
+**Format:** `delete_guest INDEX`
+
+> :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
+
+* :bulb: The `INDEX` you enter should be the `INDEX` of the guest you want to delete on the **exact guest list currently displayed on your screen**.
+
+   * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `delete_guest 1` would still delete the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
+
+**Example Usage:** `delete_guest 1`
+
+Assuming that `Guest` `Tony Stark` has an `INDEX` of 1 on the existing guest list, entering the `delete_guest 1` command returns the following result on your screen:
+
+![delete_guest command](images/deleteGuestCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### **Vendor Related Commands**
+
+Commands listed in this section are applicable to managing your vendor list (vendor management).
+
+
+### Adding a vendor : `add_vendor`
+
+This command will help you add a new vendor to the bottom of the existing overall vendor list.
+
+**Format:** `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS c/COMPANY [b/BUDGET] [t/TAG]...`
+
+> :warning: You can only enter a non-negative number with up to 2 decimal places for the optional `BUDGET` field.
+
+> :warning: If you attempt to add a new vendor with both the same `NAME` and `PHONE` as another existing vendor in the vendor list, an error will be shown.
+
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
+
+**Example Usage:** `add_vendor n/Alan Tan p/94838274 e/alantan@example.com a/842, Jurong Mall, #02-297 c/Alan's Jewellery b/100000.99`
+
+**Example Usage:** `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible`
+
+Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible` command returns the following result on your screen:
+
+![add_vendor command](images/addVendorCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### Editing a vendor : `edit_vendor`
+
+This command will allow you to edit the details of the vendor identified by the `INDEX` number used in the displayed vendor list. Existing values will be overwritten by the input values.
+
+**Format:** `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [b/BUDGET] [t/TAG]...`
+
+> :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
+
+> :warning: If you attempt to edit the details of an existing vendor such that they end up with both the same `NAME` and `PHONE` as another existing vendor in the vendor list, an error will be shown.
+
+> :warning: At least 1 field of a `Vendor` has to be specified for the command to be valid.
+
+* :information_source: As of now, BridalBuddy only supports one single word per `TAG`.
+
+* :information_source: As of now, BridalBuddy only supports alphanumeric characters and spaces for `NAME`, and it should not be blank.
+
+* :bulb: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
+
+    * Even if a `vendor` `John Doe` has an `INDEX` of 4 on the overall vendor list, entering `find n/John` followed by `edit_vendor 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
+
+**Example Usage:** `edit_vendor 2 p/82737573 e/hiworld@example.com`
+
+**Example Usage:** `edit_vendor 4 p/91234567 e/johndoe@example.com`
+
+Entering the `edit_vendor 4 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
+
+![edit_vendor command](images/editVendorCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### Deleting a vendor : `delete_vendor`
+
+This command will help you delete a vendor from your existing vendor list, identified by the `INDEX` number used in the displayed vendor list.
+
+**Format:** `delete_vendor INDEX`
+
+> :warning: If the `INDEX` you enter is not a positive integer, the command will automatically be deemed as invalid.
+
+* :bulb: The `INDEX` you enter should be the `INDEX` of the vendor you want to delete on the **exact vendor list currently displayed on your screen**.
+
+   * Even if a `vendor` `John Doe` has an `INDEX` of 3 on the overall vendor list, entering `find n/John` followed by `delete_vendor 1` would still delete the details of `John Doe`, assuming that there is only 1 vendor with `John` in their name.
+
+**Example Usage:** `delete_vendor 1`
+
+Assuming that `Vendor` `Bruce Banner` has an `INDEX` of 1 on the existing vendor list, entering the `delete_vendor 1` command returns the following result on your screen:
+
+![delete_vendor command](images/deleteVendorCommand.png)
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+### **Other Useful Features**
+
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+You do not need to save manually as BridalBuddy data are saved in the hard disk automatically after any command that changes the data.
+
+[_Back to Top_](#table-of-contents)
+
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+BridalBuddy data are saved automatically as a [JSON](#glossary) file `[JAR file location]/data/bridalbuddy.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+:warning: **Caution:**
+If your changes to the data file makes its format invalid, BridalBuddy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file **only if** you are confident that you can update it correctly.
+</box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+[_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## **FAQ**
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous BridalBuddy home folder. This file will be known as `[JAR file location]/data/bridalbuddy.json`.
 
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+[_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## **Known issues**
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the application will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+2. To avoid performance degradation, for now it is highly recommended that at most 300 `Guest`s and at most 300 `Vendor`s are tracked in the guest list and vendor list respectively at any point of time.
+
+3. When inputting the `INDEX` for commands which require an `INDEX`, if the `INDEX` is larger than the 2147483647, an `Invalid command format` error message will be displayed instead of an error message specifying that the `Guest`/`Vendor` `INDEX` provided exceeds the number of guests/vendors (if applicable).
+
+4. Avoid parsing slashes `/` in addresses or company names, such as in `W/T Building`, as they are misinterpreted as new prefixes.
+
+[_Back to Top_](#table-of-contents)
+
+<div style="page-break-after: always"></div>
+
+## **Command summary**
+
+| Action            | Format, Examples                                                                                                                                                                                                             |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Guest**     | `add_guest n/NAME p/PHONE e/EMAIL a/ADDRESS [rsvp/RSVP] [r/RELATION] [t/TAG]...` <br> e.g., `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`             |
+| **Add Vendor**    | `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS c/COMPANY [b/BUDGET] [t/TAG]...` <br> e.g., `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible` |
+| **Edit Guest**    | `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [t/TAG]...` <br> e.g., `edit_guest 1 p/91234567 e/johndoe@example.com`                                                                   |
+| **Edit Vendor**   | `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [b/BUDGET] [t/TAG]...` <br> e.g., `edit_vendor 1 p/91234567 e/johndoe@example.com`                                                                   |
+| **Delete Guest**  | `delete_guest INDEX` <br> e.g., `delete_guest 1`                                                                                                                                                                             |
+| **Delete Vendor** | `delete_vendor INDEX` <br> e.g., `delete_vendor 1`                                                                                                                                                                           |
+| **Help**          | `help`                                                                                                                                                                                                                       |
+| **List**          | `list`                                                                                                                                                                                                                       |
+| **Find**          | `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [c/COMPANY] [b/BUDGET] [t/TAG] ...`<br> e.g., `find n/James`                                                                                         |
+| **Clear**         | `clear`                                                                                                                                                                                                                      |
+| **Stats**         | `stats`                                                                                                                                                                                                                      |
+| **Exit**          | `exit`                                                                                                                                                                                                                       |
+
+
+[_Back to Top_](#table-of-contents)
+
+
+## **Glossary**
+
+| Term/Keyword | Definition                                                                                            |
+|--------------|-------------------------------------------------------------------------------------------------------|
+| **Prefix**   | Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.         |
+| **JSON**     | JavaScript Object Notation, a lightweight data-interchange format for structuring and exchanging data |
+
+[_Back to Top_](#table-of-contents)

@@ -1,8 +1,8 @@
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
-skinparam arrowColor MODEL_COLOR
-skinparam classBackgroundColor MODEL_COLOR
+skinparam arrowColor MODEL_COLOR_T2
+skinparam classBackgroundColor MODEL_COLOR_T2
 
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
@@ -13,12 +13,18 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
-Class Person
+Class "{abstract}\nPerson" as Person
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class Guest
+Class Budget
+Class Rsvp
+Class Vendor
+Class Company
+Class Relation
 
 Class I #FFFFFF
 }
@@ -36,12 +42,20 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
+UniquePersonList -up-> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+
+Person <|--right- Guest
+Person <|-right-- Vendor
+
+Guest *--> Rsvp
+Guest *--> Relation
+Vendor *--> Company
+Vendor *--> Budget
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -51,4 +65,5 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+
 @enduml

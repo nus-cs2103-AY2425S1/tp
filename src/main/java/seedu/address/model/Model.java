@@ -79,6 +79,18 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered guest list */
+    ObservableList<Person> getFilteredGuestList();
+
+    /** Returns an unmodifiable view of the filtered vendor list */
+    ObservableList<Person> getFilteredVendorList();
+
+    /** Returns the count of the filtered guest list in total and by rsvp status */
+    int[] getFilteredGuestListCount();
+
+    /** Returns the total count of the filtered vendor list */
+    int getFilteredVendorListCount();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

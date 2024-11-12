@@ -16,13 +16,18 @@ public class ResultDisplay extends UiPart<Region> {
     @FXML
     private TextArea resultDisplay;
 
+    /**
+     * Constructs a {@code ResultDisplay} instance and initializes the UI component
+     * defined in {@code ResultDisplay.fxml}. Disables the scroll buttons in the
+     * {@code TextArea} after the UI is rendered.
+     */
     public ResultDisplay() {
         super(FXML);
+
     }
 
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
     }
-
 }
