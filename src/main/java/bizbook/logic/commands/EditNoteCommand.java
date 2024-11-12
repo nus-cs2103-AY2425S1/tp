@@ -25,7 +25,7 @@ public class EditNoteCommand extends Command {
             + "by the person index number used on the left display panel. "
             + "The note will replace the currently stored note at the specified index.\n"
             + "Parameters: INDEX i/NOTE_INDEX n/NOTE\n"
-            + "Example: " + COMMAND_WORD + " 1 i/1 n/High profile client.";
+            + "Example: " + COMMAND_WORD + " 1 i/1 n/High profile client";
 
     public static final String MESSAGE_EDIT_NOTE_SUCCESS = "Edit note of Person: %1$s";
     public static final String DUPLICATE_MESSAGE_CONSTRAINTS = "There is already an existing note with this name.";

@@ -6,30 +6,31 @@ title: User Guide
 BizBook (BB) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, BB can get your contact management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
+
 1. [Quick start](#quick-start)
 2. [Features](#features)<br>
-  2.1 [Viewing help : `help`](#viewing-help--help)<br>
-  2.2 [Adding a person: `add`](#adding-a-person-add)<br>
-  2.3 [Listing all persons : `list`](#listing-all-persons--list)<br>
-  2.4 [Editing a person : `edit`](#editing-a-person--edit)<br>
-  2.5 [Locating persons by name: `find`](#locating-persons-by-name-find)<br>
-  2.6 [Deleting a person : `delete`](#deleting-a-person--delete)<br>
-  2.7 [Delete a tag of an existing contact: `deletetag`](#delete-a-tag-of-an-existing-contact-deletetag)<br>
-  2.8 [Add a note to an existing contact: `addnote`](#add-a-note-to-an-existing-contact-addnote)<br>
-  2.9 [Edit a note of an existing contact: `editnote`](#edit-a-note-of-an-existing-contact-editnote)<br>
-  2.10 [Deleting a note from an existing contact: `deletenote`](#deleting-a-note-from-an-existing-contact-deletenote)<br>
-  2.11 [View an existing contact’s details : `view`](#view-an-existing-contacts-details--view)<br>
-  2.12 [Pin a contact: `pin`](#pin-a-contact-pin)<br>
-  2.13 [Unpin a contact: `unpin`](#unpin-a-contact-unpin)<br>
-  2.14 [Undo a previously executed command: `undo`](#undo-a-previously-executed-command-undo)<br>
-  2.15 [Redo a previously executed undo command: `redo`](#redo-a-previously-executed-undo-command-redo)<br>
-  2.16 [Import a contact list : `import`](#import-a-contact-list--import)<br>
-  2.17 [Export the contact list : `export`](#export-the-contact-list--export)<br>
-  2.19 [Change the application’s theme : `toggle`](#change-the-applications-theme--toggle)<br>
-  2.20 [Clear all entries : `clear`](#clear-all-entries--clear)<br>
-  2.21 [Exit the program : `exit`](#exit-the-program--exit)<br>
-  2.22 [Saving the data](#saving-the-data)<br>
-  2.23 [Editing the data file](#editing-the-data-file)<br>
+   2.1 [Viewing help : `help`](#viewing-help--help)<br>
+   2.2 [Adding a person: `add`](#adding-a-person-add)<br>
+   2.3 [Listing all persons : `list`](#listing-all-persons--list)<br>
+   2.4 [Editing a person : `edit`](#editing-a-person--edit)<br>
+   2.5 [Locating persons by name: `find`](#locating-persons-by-name-find)<br>
+   2.6 [Deleting a person : `delete`](#deleting-a-person--delete)<br>
+   2.7 [Delete a tag of an existing contact: `deletetag`](#delete-a-tag-of-an-existing-contact-deletetag)<br>
+   2.8 [Add a note to an existing contact: `addnote`](#add-a-note-to-an-existing-contact-addnote)<br>
+   2.9 [Edit a note of an existing contact: `editnote`](#edit-a-note-of-an-existing-contact-editnote)<br>
+   2.10 [Deleting a note from an existing contact: `deletenote`](#deleting-a-note-from-an-existing-contact-deletenote)<br>
+   2.11 [View an existing contact’s details : `view`](#view-an-existing-contacts-details--view)<br>
+   2.12 [Pin a contact: `pin`](#pin-a-contact-pin)<br>
+   2.13 [Unpin a contact: `unpin`](#unpin-a-contact-unpin)<br>
+   2.14 [Undo a previously executed command: `undo`](#undo-a-previously-executed-command-undo)<br>
+   2.15 [Redo a previously executed undo command: `redo`](#redo-a-previously-executed-undo-command-redo)<br>
+   2.16 [Import a contact list : `import`](#import-a-contact-list--import)<br>
+   2.17 [Export the contact list : `export`](#export-the-contact-list--export)<br>
+   2.19 [Change the application’s theme : `toggle`](#change-the-applications-theme--toggle)<br>
+   2.20 [Clear all entries : `clear`](#clear-all-entries--clear)<br>
+   2.21 [Exit the program : `exit`](#exit-the-program--exit)<br>
+   2.22 [Saving the data](#saving-the-data)<br>
+   2.23 [Editing the data file](#editing-the-data-file)<br>
 3. [FAQ](#faq)
 4. [Known issues](#known-issues)
 5. [Command summary](#command-summary)
@@ -530,8 +531,9 @@ Furthermore, certain edits can cause BizBook to behave in unexpected ways (e.g.,
 5. **Maximum number of items**, the maximum number of items (contacts, notes, tags, etc.) in this application is 2147483647. If you enter a number larger than this, the program may behave unexpectedly. However, it is unlikely that you will ever have so many contacts or tags of one contact.
 6. **Contact name is a unique identifier**, this application uses the name of a contact as the unique identifier. This means that it cannot accept two of the same names in the application. Instead, consider adding the surname, use full names or, if really needed, adding numbers at the back of the name to distinguish different people.
 7. **Contact names are alphanumeric**, this application only allows users to enter alphanumeric names. This means that names that include "s/o" or "d/o" are not allowed. Alternatively, consider using "so", "do" or "son of" as a replacement.
-8. **Once selected, a person can't be unselected**, from either the contact list or pinned panel.
-9. **Notes with very long content will trail off with `...`**, instead of wrapping the text and displaying the hidden content on the next line.
+8. **Notes are alphanumeric**, similar to contact name, the notes does not allow special characters.
+9. **Once selected, a person can't be unselected**, from either the contact list or pinned panel.
+10. **Notes with very long content will trail off with `...`**, instead of wrapping the text and displaying the hidden content on the next line.
 
 ---
 
