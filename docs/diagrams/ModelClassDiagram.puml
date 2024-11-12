@@ -13,7 +13,9 @@ Class ModelManager
 Class UserPrefs
 
 Class UniqueCompanyList
-Class Company
+Class Company {
+    isFavourite: Boolean
+}
 Class Address
 Class Email
 Class Phone
@@ -29,6 +31,7 @@ Class I #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
+show Company members
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
