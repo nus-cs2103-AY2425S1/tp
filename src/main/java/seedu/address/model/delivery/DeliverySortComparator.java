@@ -1,11 +1,11 @@
 package seedu.address.model.delivery;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Comparator;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.SortOrder;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a delivery comparator.
@@ -26,7 +26,7 @@ public abstract class DeliverySortComparator implements Comparator<Delivery> {
     }
 
     /**
-     * Returns the toString of sort order
+     * Returns the toString of the sort order.
      */
     public String toSortOrderString() {
         return this.sortOrder.toString();

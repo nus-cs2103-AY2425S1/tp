@@ -73,13 +73,15 @@ public class DeliverySortBy {
 
     /**
      * Returns true if a given string is a valid field to sort by.
+     *
+     * @param test String to test.
      */
     public static boolean isValidSortBy(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
     /**
-     * Returns the corresponding field that is being sorted by.
+     * Returns the corresponding description that is being sorted by.
      */
     @Override
     public String toString() {

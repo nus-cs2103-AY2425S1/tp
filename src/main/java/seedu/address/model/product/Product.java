@@ -27,6 +27,8 @@ public class Product {
 
     /**
      * Returns true if a given string is a valid product name.
+     *
+     * @param test String to test.
      */
     public static boolean isValidProductName(String test) {
         return test.matches(VALIDATION_REGEX);

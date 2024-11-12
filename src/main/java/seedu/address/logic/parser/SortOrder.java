@@ -27,7 +27,7 @@ public class SortOrder {
     private final boolean isSortByAscending;
 
     /**
-     * Creates a SortOrder object with the corresponding sorting order.
+     * Creates a SortOrder object with the corresponding {@code sortOrder}.
      *
      * @param sortOrder Represents ascending with 'a' and descending with 'd'.
      */
@@ -47,14 +47,16 @@ public class SortOrder {
     }
 
     /**
-     * Returns true if sort order is ascending else false
+     * Returns true if sort order is ascending else false.
      */
     public boolean getIsSortByAscending() {
         return isSortByAscending;
     }
 
     /**
-     * Returns true if a given string is a valid sort order
+     * Returns true if a given string is a valid sort order else false.
+     *
+     * @param test String to test.
      */
     public static boolean isValidSortOrder(String test) {
         return test.matches(VALIDATION_REGEX);

@@ -150,6 +150,8 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> products} into a {@code Set<Product>}.
+     *
+     * @throws ParseException if a productName is invalid.
      */
     public static Set<Product> parseProducts(Collection<String> products) throws ParseException {
         requireNonNull(products);

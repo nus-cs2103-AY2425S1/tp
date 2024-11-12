@@ -1,8 +1,8 @@
 package seedu.address.model.delivery;
 
-import seedu.address.logic.parser.SortOrder;
-
 import static java.util.Objects.requireNonNull;
+
+import seedu.address.logic.parser.SortOrder;
 
 /**
  * Represents a comparator for deliveries that compares based on cost.

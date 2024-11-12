@@ -1,10 +1,10 @@
 package seedu.address.model.delivery;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 
 import seedu.address.logic.parser.SortOrder;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a comparator for deliveries that compares based on date and time.
