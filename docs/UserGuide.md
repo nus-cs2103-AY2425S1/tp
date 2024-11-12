@@ -276,6 +276,13 @@ Closes all attendance windows if any are currently open.
 
 ## Assignment Commands
 
+Assignments are displayed with different colors based on the following criteria:
+
+- **Green**: Submitted and graded
+- **Yellow**: Submitted but not graded
+- **Red**: Not submitted but before deadline
+- **Black**: Not submitted but after deadline
+
 ### Assignment Prefixes
 | Prefix | Constraints                                                                                                                                                                                                                                                | Example                                                    |
 |--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
