@@ -5,7 +5,7 @@ skinparam ArrowFontStyle plain
 box Parser LOGIC_COLOR_T1
 participant ":LinkCommandParser" as LinkCommandParser LOGIC_COLOR
 participant "l:LinkCommand" as LinkCommand LOGIC_COLOR
-participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
 end box
 
 [-> LinkCommandParser : parse(args)
