@@ -891,14 +891,13 @@ Team size: 5 members
 
 2. **List Checked-In Clients on the top of the list**: Currently, checked-in clients are listed in the order they were added. We plan to implement a feature to list checked-in clients at the top of the list to make it easier to identify which clients are currently checked in.
 
-3. **Add a feature to manage Issues directly**: Currently, the app only allows users to modify clients and cars and manage Issues through their commands. We plan to add a feature to manage issues directly. This will allow users to manage the issues for each client.
+3. **Add a feature to manage Issues directly**: Currently, users can only manage issues indirectly through client and car modifications commands. We plan to add a feature that allows users to manage issues for clients directly, streamlining issue management.
 
 4. **Add support for names with valid special characters**: Currently, the app only supports names with alphabets, numbers and spaces. We plan to add support for names with valid special characters such as hyphens, apostrophes, and periods. This will allow users to add clients with names that contain valid special characters, for example "John-Doe", "O'Neil", "Dr. Smith" and "John s/o Smith".
 
-5. **Add support for car make with valid spaces and other special characters**: Currently, the app only supports car makes with alphabets and numbers. We plan to add support for car makes with valid special characters such as hyphens, apostrophes, and periods. This will allow users to add cars with makes that contain valid special characters, for example "Mercedes-Benz", "Land Rover", "Rolls-Royce" and "St. John".
+5. **Add support for car make with spaces and other valid special characters**: Currently, the app only supports car makes with alphabets and numbers. We plan to add support for car makes with valid special characters, allowing accurate entry of names like 'Mercedes-Benz' or 'Land Rover'.
 
 6. **Allow users to have multiple cars**: Currently, each client can only have one car. We plan to allow users to have multiple cars for each client. This will allow users to keep track of multiple cars for each client.
-
 
 7. **Update functionality of Check such that it doesn't reset the list**: Currently, when a user checks in/out a client after the `find` command, the list is reset to its full state. We plan to update the functionality of Check such that it doesn't reset the list. This will allow users to check in/out clients without changing the list.
 
@@ -906,4 +905,4 @@ Team size: 5 members
 
 9. **Update the behavior of deleting clients with checked-in cars**: Currently, users can delete clients with checked-in cars to make the process of de-registering clients more efficient, as only 1 command is required. However, this may lead to accidental deletion of clients with checked-in cars. We plan to update the behavior of deleting clients with checked-in cars by introducing an additional flag to ensure that the user is fully aware that the client has a checked-in car. For example, the user will enter the command `del-client 1 -c` to delete a client with a checked-in car, using the `-c` flag to confirm the action.
 
-10. **Add support for scrollable `view` window**: Currently, the `view` window displays all client details in a fixed-size window, which could cause visual problems if there is a unusually large number of Issues. While there is a work around by reopening the `view` window via the `view` command, we plan to add support for a scrollable `view` window to allow users to view all client details without resizing the window.
+10. **Add support for scrollable `view` window**: Currently, the `view` window displays all client details in a fixed-size window, which could cause visual problems if there is an excessively large number of Issues. While there is a work around by reopening the `view` window via the `view` command, we plan to add support for a scrollable `view` window to allow users to view all client details without resizing the window.
