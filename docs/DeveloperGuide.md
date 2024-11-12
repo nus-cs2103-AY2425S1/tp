@@ -110,6 +110,8 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### General Interaction
 
 The general interactions within the `Logic` component is shown in the sequence diagram below, taking `execute("delete 1")` API call as an example.
@@ -179,6 +181,8 @@ The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+<div style="page-break-after: always;"></div>
 
 ### Common classes
 
