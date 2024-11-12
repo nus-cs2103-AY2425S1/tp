@@ -1778,16 +1778,13 @@ applied to edited data, but specific expected results will differ. <br><br>
     2. **Test case**: `mark-task 1` <br>
        **Expected**: `Task` 1 is marked as complete. Details of complete task are shown in the status message.
 
-    3. **Test case (following Test case 2)**: **Test case**: `mark 1` (assuming `Task` 1 is already complete) <br>
-       **Expected**: `Task` 1 remains marked as complete. Details of complete task are shown in the status message.
-
-    4. **Test case**: `mark-task X` (where X is greater than the number of tasks in the `Task` list) <br>
+    3. **Test case**: `mark-task X` (where X is greater than the number of tasks in the `Task` list) <br>
        **Expected**: No tasks are marked as complete. Error details shown in the status message indicating that the `Task` is not a valid one.
 
-    5. **Test case**: `mark-task 1 2 3` (where there are at least three tasks in the `Task` list) <br>
+    4. **Test case**: `mark-task 1 2 3` (where there are at least three tasks in the `Task` list) <br>
        **Expected**: `Tasks` 1, 2, and 3 are marked as complete. Details of complete tasks are shown in the status message.
 
-    6. **Test case**: `mark-task 1 2 3 4 5` (where there are only three tasks in the `Task` list) <br>
+    5. **Test case**: `mark-task 1 2 3 4 5` (where there are only three tasks in the `Task` list) <br>
        **Expected**: `Tasks` 1, 2, and 3 are marked as complete. Error details shown in the status message indicating that other `Tasks` are not valid ones.
 
 <br>
@@ -1801,10 +1798,7 @@ applied to edited data, but specific expected results will differ. <br><br>
     2. **Test case**: `unmark-task 1` <br>
        **Expected**: `Task` 1 is marked as incomplete. Details of incomplete task are shown in the status message.
 
-    3. **Test case (following Test case 2)**: **Test case**: `unmark-task 1` (assuming `Task` 1 is already incomplete) <br>
-       **Expected**: `Task` 1 remains marked as incomplete. Details of incomplete task are shown in the status message.
-
-    4. Similar test cases to Test cases 3, 4, 5, and 6 can be tested for unmark-task. Expected results are similar. 
+    3. Similar test cases to Test cases 3, 4, and 5 can be tested for unmark-task. Expected results are similar. 
 
 <br>
 
@@ -1942,7 +1936,7 @@ For example, "John Doe" and "John  Doe" (the same name but with an extra space),
 The **planned enhancement** would be to update the parser to normalise input by stripping all extra whitespace, leaving only a single space between keywords, before creating the respective command objects.
 This will ensure that entries with excessive spaces are treated as duplicates where appropriate.
 
-3. **Vendor validation for when unassiging Tasks from Person**: Currently, there is a missing validation in `unassign-task` command that negates the check of whether a Person is a Vendor, resulting 
+3. **Vendor validation for when unassigning Tasks from Person**: Currently, there is a missing validation in `unassign-task` command that negates the check of whether a Person is a Vendor, resulting 
 in an incorrect error message to be shown. When a user tries to execute the `unassign-task` command on a Person who is not a Vendor and thus cannot even have tasks assigned to it, 
 the error message indicates that there are no tasks in the person's list, rather than indicating that the person is not a Vendor.
 However, there is no functionality flaw and the application runs as intended.
@@ -1974,4 +1968,9 @@ the person is assigned as the first partner in the given wedding. However, users
 if they accidentally include both tags, especially as this might overwrite an existing partner for the wedding.
 The **planned enhancement** would be to add processing that checks for two partner tags and either considers the orders of the tag (and assigns the person as whichever partner tag is specified
 first), or that signals an error to the user in the command they enter.
+
+8. **Allow automatic update of User Interface upon changing data values**: For some commands, such as `unassign-wedding`, the User Interface will update
+when it is clicked on to show the updated data but, sometimes, will not automatically update when the command is run.
+The **planned enhancement** would be to either add more listeners for all commands in the UI components to ensure they are always updated when a command is entered
+or to make sure each command modifies the underlying lists in a way that will cause the UI to automatically update.
 
