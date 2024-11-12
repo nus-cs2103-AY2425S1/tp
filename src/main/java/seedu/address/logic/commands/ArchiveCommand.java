@@ -74,11 +74,11 @@ public class ArchiveCommand extends Command {
         indexList.sort(Comparator.comparing(Index::getZeroBased).reversed());
 
         if (AddressBookParser.getInspect()) {
-            return handleDeliveryArchive(model);
-        } else {
             if (InspectWindow.getInspectedPerson().getRole().getValue().equals("employee")) {
                 throw new CommandException(MESSAGE_CANNOT_ARCHIVE_FOR_EMPLOYEE);
             }
+            return handleDeliveryArchive(model);
+        } else {
             return handlePersonArchive(model);
         }
     }

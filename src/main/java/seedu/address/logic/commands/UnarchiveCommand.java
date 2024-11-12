@@ -63,11 +63,11 @@ public class UnarchiveCommand extends Command {
         indexList.sort(Comparator.comparing(Index::getZeroBased));
 
         if (AddressBookParser.getInspect()) {
-            return handleDeliveryUnarchive(model);
-        } else {
             if (InspectWindow.getInspectedPerson().getRole().getValue().equals("employee")) {
                 throw new CommandException(MESSAGE_CANNOT_UNARCHIVE_FOR_EMPLOYEE);
             }
+            return handleDeliveryUnarchive(model);
+        } else {
             return handlePersonUnarchive(model);
         }
     }
