@@ -249,13 +249,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -341,7 +334,7 @@ Use case ends.
 
         Use case ends.
 
-* 4a. User does not confirm addition
+* 4a. User cancels addition
 
     * 4a1. System display a message indicating that the addition was canceled.
 
@@ -377,7 +370,7 @@ Use case ends.
 
       Use case ends.
 
-* 4a. User does not confirm deletion
+* 4a. User cancels deletion
 
     * 4a1. System display a message indicating that the deletion was canceled.
 
@@ -442,7 +435,7 @@ Use case ends.
 
       Use case ends.
 
-* 4a. User does not confirm edit
+* 4a. User cancels edit
 
     * 4a1. System display a message indicating that the edit was canceled.
 
@@ -537,7 +530,7 @@ testers are expected to do more *exploratory* testing.
 
 ## Reference
 
-![MindMapLogo.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2FMindMapLogo.png)
+![MindMapLogo.png](../src/main/resources/images/MindMapLogo.png)
 
 The logo for MindMap is generated via ChatGPT, powered by Dall-E.
 Prompted used: Generate a clipart style logo in black and white which blends the style of a brain and a cloud, meant for an app that lets therapist log patient sessions
