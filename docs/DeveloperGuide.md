@@ -460,7 +460,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to mass delete contacts by providing a list of contact indices.
 2. App validates the provided contact indices.
 3. App deletes the contacts whose indices were provided by the user.
-4. App tells the user the contacts that were successfully deleted.
+4. App tells the user the contacts that were successfully deleted.  
    Use case ends.
 
 **Extensions:**
@@ -471,7 +471,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. App shows an error message to tell the user that the contact index(s) is invalid and ask the user to provide valid contact indices.  
       Use case ends.
 * 2c. Duplicate contact indices provided.
-    * 2c1. App handles duplicates internally, ensuring each index is processed once.
+    * 2c1. App handles duplicates internally, ensuring each index is processed once.  
       Use case resumes at step 2.
 
 ---
@@ -560,27 +560,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS:**
 
 1. User requests to edit an existing event by providing the index of the event in the list and optionally providing new details such as an event name, event description, event duration (start and end date must be provided together).
-2. App updates the event with the provided details.
+2. App updates the event with the provided details.  
    Use case ends.
 
 **Extensions:**
 * 1a. The given index is invalid (i.e., index is out of bounds).
-    * 1a1. App shows an error message to tell the user that the specified event index is invalid. 
+    * 1a1. App shows an error message to tell the user that the specified event index is invalid.  
       Use case ends.
 * 1b. No changes are specified for the event. 
-    * 1b1. App shows an error message to tell the user that no changes were made to the event. 
+    * 1b1. App shows an error message to tell the user that no changes were made to the event.  
       Use case ends.
-* 1c. The updated event name is invalid (i.e., name is empty or does not start with an alphabet). 
-    * 1c1. App shows an error message to tell the user that the given name is invalid. 
+* 1c. The updated event name is invalid (i.e., name is empty or does not start with an alphabet).  
+    * 1c1. App shows an error message to tell the user that the given name is invalid.  
       Use case ends.
-* 1d. The updated event description is invalid (i.e., description is empty or consists of only whitespaces). 
-    * 1d1. App shows an error message to tell the user that the given description is invalid. 
+* 1d. The updated event description is invalid (i.e., description is empty or consists of only whitespaces).
+    * 1d1. App shows an error message to tell the user that the given description is invalid.  
       Use case ends.
 * 1e. The updated event duration is invalid (i.e., dates are not in the correct format YYYY-MM-DD or dates are not valid, e.g. 30 Feb 2024 or event end date is earlier than the start date). 
-    * 1e1. App shows an error message to tell the user that the given event dates are not valid. 
+    * 1e1. App shows an error message to tell the user that the given event dates are not valid.  
       Use case ends.
 * 1f. The updated event has the same name as another event in the list. 
-    * 1f1. App shows an error message to tell the user that an event with the same name already exists in the list. 
+    * 1f1. App shows an error message to tell the user that an event with the same name already exists in the list.  
       Use case ends.
 
 ---
