@@ -10,7 +10,7 @@ if () then ([model.hasPerson()])
 else ([else])
     :add person to model;
 endif
-repeat while () is ([end of for loop == false]) not ([else])
+repeat while () is ([else]) not ([all sample persons in model])
 stop
 
 @enduml

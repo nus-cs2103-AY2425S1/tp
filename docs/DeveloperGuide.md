@@ -164,7 +164,7 @@ This section describes some noteworthy details on how certain features are imple
 
 The seed feature seeds dummy data into SocialBook. In the event that the user clears all the contacts in SocialBook, the user can execute the seed command to seed sample data into the SocialBook and continue trying out its features.
 
-The seed command works just like any other `Command` object and how a `Command` object communicates with the `Model` is explained in the [Logic component](#Logic-component).
+The seed command works just like any other `Command` object and how a `Command` object communicates with the `Model` is explained in the [Logic component](#logic-component).
 
 The seed command adds a `Person` object, in `SampleDataUtil` to the `Model`, if the `Person` object is not already inside SocialBook.
 
@@ -178,7 +178,7 @@ The following activity diagram summarises what happens when a user executes the 
 
 The view feature toggles the card status of a contact in SocialBook to either show all of their information or an abridged version of it.
 
-The view command works just like any other `Command` object and how a `Command` object communicates with the `Model` is explained in the [Logic component](#Logic-component).
+The view command works just like any other `Command` object and how a `Command` object communicates with the `Model` is explained in the [Logic component](#logic-component).
 
 The activity diagram below shows how a view command toggles the card status of a contact:
 

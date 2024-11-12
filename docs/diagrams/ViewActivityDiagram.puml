@@ -13,7 +13,7 @@ if () then ([valid person's index])
                     of card;
     endif
 else ([else])
-  :throw new CommandException();
+  :throw exception;
 endif
 
 stop
