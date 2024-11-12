@@ -17,7 +17,7 @@ import seedu.address.model.tutorial.Tutorial;
 
 public class MarkAttendanceByTutorialCommandParserTest {
 
-    private MarkAttendanceByTutorialCommandParser parser = new MarkAttendanceByTutorialCommandParser();
+    private final MarkAttendanceByTutorialCommandParser parser = new MarkAttendanceByTutorialCommandParser();
 
     @Test
     public void parse_validArgs_returnsMarkAttendanceByTutorialCommand() {

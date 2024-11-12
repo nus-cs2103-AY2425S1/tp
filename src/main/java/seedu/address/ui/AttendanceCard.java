@@ -23,10 +23,11 @@ public class AttendanceCard extends UiPart<Region> {
 
     private static final String FXML = "AttendanceCard.fxml";
 
-    public final List<Attendance> attendanceList;
-    public final String tutorial;
-
     private final Logger logger = LogsCenter.getLogger(AttendanceCard.class);
+
+    private final List<Attendance> attendanceList;
+    private final String tutorial;
+
     @FXML
     private VBox attendanceCard;
     @FXML

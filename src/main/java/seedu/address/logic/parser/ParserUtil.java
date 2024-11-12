@@ -151,7 +151,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String attendance} into an {@code Attendance}.
+     * Parses a {@code String tutorial} into an {@code Tutorial}.
      * Leading and trailing whitespaces will be trimmed
      */
     public static Tutorial parseTutorial(String subject) throws ParseException {

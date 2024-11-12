@@ -31,6 +31,7 @@ import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 import seedu.address.model.tutorial.Tutorial;
+import seedu.address.testutil.ParticipationBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -38,7 +39,7 @@ import seedu.address.model.tutorial.Tutorial;
  */
 public class MarkAttendanceByStudentCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @BeforeEach
     public void setUp() {
@@ -49,17 +50,12 @@ public class MarkAttendanceByStudentCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Tutorial tutorial = new Tutorial("Math");
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 17));
 
         // current participation of second person
         Participation currentParticipation = BENSON_MATH;
 
-        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 17));
-
-        List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-        updatedAttendance.add(new Attendance(LocalDate.of(2024, 10, 17)));
-
-        Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
-                currentParticipation.getTutorial(), updatedAttendance);
+        Participation updatedParticipation = createUpdatedParticipation(currentParticipation, attendance);
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setParticipation(currentParticipation, updatedParticipation);
@@ -84,11 +80,7 @@ public class MarkAttendanceByStudentCommandTest {
         // create participation to mark attendance for sun of previous week of 10/10/2024
         Attendance attendance = new Attendance(LocalDate.of(2024, 10, 6));
 
-        List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-        updatedAttendance.add(new Attendance(LocalDate.of(2024, 10, 6)));
-
-        Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
-                currentParticipation.getTutorial(), updatedAttendance);
+        Participation updatedParticipation = createUpdatedParticipation(currentParticipation, attendance);
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setParticipation(currentParticipation, updatedParticipation);
@@ -113,11 +105,7 @@ public class MarkAttendanceByStudentCommandTest {
         // create participation to mark attendance for mon of next week of 10/10/2024
         Attendance attendance = new Attendance(LocalDate.of(2024, 10, 14));
 
-        List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-        updatedAttendance.add(new Attendance(LocalDate.of(2024, 10, 14)));
-
-        Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
-                currentParticipation.getTutorial(), updatedAttendance);
+        Participation updatedParticipation = createUpdatedParticipation(currentParticipation, attendance);
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setParticipation(currentParticipation, updatedParticipation);
@@ -192,12 +180,7 @@ public class MarkAttendanceByStudentCommandTest {
         Attendance attendance = new Attendance(LocalDate.of(2024, 10, 17));
 
         Participation currentParticipation = BENSON_MATH;
-
-        List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-        updatedAttendance.add(new Attendance(LocalDate.of(2024, 10, 17)));
-
-        Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
-                currentParticipation.getTutorial(), updatedAttendance);
+        Participation updatedParticipation = createUpdatedParticipation(currentParticipation, attendance);
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         showPersonAtIndex(expectedModel, INDEX_SECOND_PERSON);
@@ -341,6 +324,14 @@ public class MarkAttendanceByStudentCommandTest {
         // null tutorial
         assertThrows(NullPointerException.class, () -> new MarkAttendanceByStudentCommand(
                 Index.fromZeroBased(0), attendance, null));
+    }
+
+    private Participation createUpdatedParticipation(Participation currentParticipation, Attendance attendance) {
+
+        List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
+        updatedAttendance.add(new Attendance(attendance.attendanceDate));
+
+        return new ParticipationBuilder(currentParticipation).withAttendanceList(updatedAttendance).build();
     }
 }
 

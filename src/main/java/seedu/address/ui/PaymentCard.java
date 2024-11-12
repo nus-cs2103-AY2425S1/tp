@@ -20,9 +20,10 @@ public class PaymentCard extends UiPart<Region> {
 
     private static final String FXML = "PaymentCard.fxml";
 
-    public final int payment;
-
     private final Logger logger = LogsCenter.getLogger(PaymentCard.class);
+
+    private final int payment;
+
     @FXML
     private Label month;
     @FXML

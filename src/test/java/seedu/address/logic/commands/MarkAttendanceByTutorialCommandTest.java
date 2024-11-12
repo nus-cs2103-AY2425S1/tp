@@ -53,8 +53,7 @@ public class MarkAttendanceByTutorialCommandTest {
 
         for (Participation currentParticipation : participationList) {
             List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-            LocalDate attendanceDate = LocalDate.parse(attendance.toString(), Attendance.VALID_DATE_FORMAT);
-            updatedAttendance.add(new Attendance(attendanceDate));
+            updatedAttendance.add(new Attendance(LocalDate.of(2024, 10, 17)));
 
             Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
                     currentParticipation.getTutorial(), updatedAttendance);
@@ -88,8 +87,7 @@ public class MarkAttendanceByTutorialCommandTest {
 
         // add updated participation for Alice
         List<Attendance> updatedAttendanceAlice = new ArrayList<>(ALICE_MATH.getAttendanceList());
-        updatedAttendanceAlice.add(
-                new Attendance(LocalDate.parse(attendance.toString(), Attendance.VALID_DATE_FORMAT)));
+        updatedAttendanceAlice.add(new Attendance(LocalDate.of(2024, 10, 17)));
 
         Participation updatedParticipationAlice = new Participation(ALICE_MATH.getStudent(),
                 ALICE_MATH.getTutorial(), updatedAttendanceAlice);
