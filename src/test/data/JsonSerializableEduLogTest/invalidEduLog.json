@@ -1,0 +1,26 @@
+{
+  "students": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "address": "4th street",
+    "hasPaid" : "false",
+    "fee" : "100"
+  } ],
+  "lessons" : [ {
+    "description" : "Sec 4 Chemistry Class A",
+    "startDay" : "MONDAY",
+    "startTime" : "2000",
+    "endTime" : "2200"
+  }, {
+    "description" : "Late night math catchup for P6 students",
+    "startDay" : "FRIDAY",
+    "startTime" : "2315",
+    "endTime" : "0045"
+  }, {
+    "description" : "(Relief slot) Sec 4 Chemistry Class B",
+    "startDay" : "MONDAY",
+    "startTime" : "1900",
+    "endTime" : "2100"
+  } ]
+}
