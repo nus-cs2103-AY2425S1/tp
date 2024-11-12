@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -128,5 +129,61 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+    @Test
+    public void equals_filteredPersonsListSameOrder_returnsTrue() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        modelManager = new ModelManager(addressBook, new UserPrefs());
+        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+
+        // Set both model managers to the same filtered list order
+        modelManager.updateFilteredPersonList(person -> person.equals(ALICE) || person.equals(BENSON));
+        modelManagerCopy.updateFilteredPersonList(person -> person.equals(ALICE) || person.equals(BENSON));
+
+        // Expect both to be equal
+        assertTrue(modelManager.equals(modelManagerCopy));
+    }
+
+    @Test
+    public void equals_filteredPersonsListDifferentOrder_returnsTrue() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        modelManager = new ModelManager(addressBook, new UserPrefs());
+        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+
+        // Set model managers to have the same persons but in different orders in filtered lists
+        modelManager.updateFilteredPersonList(person -> person.equals(ALICE) || person.equals(BENSON));
+        modelManagerCopy.updateFilteredPersonList(person -> person.equals(BENSON) || person.equals(ALICE));
+
+        // Expect both to be equal because the contents are the same, regardless of order
+        assertTrue(modelManager.equals(modelManagerCopy));
+    }
+
+    @Test
+    public void equals_filteredPersonsListSubset_returnsFalse() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        modelManager = new ModelManager(addressBook, new UserPrefs());
+        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+
+        // ModelManager has both ALICE and BENSON, ModelManagerCopy only has ALICE
+        modelManager.updateFilteredPersonList(person -> person.equals(ALICE) || person.equals(BENSON));
+        modelManagerCopy.updateFilteredPersonList(person -> person.equals(ALICE));
+
+        // Expect them to be unequal as one filtered list is a subset of the other
+        assertFalse(modelManager.equals(modelManagerCopy));
+    }
+
+    @Test
+    public void equals_filteredPersonsListDifferentContents_returnsFalse() {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).withPerson(CARL)
+                .build();
+        modelManager = new ModelManager(addressBook, new UserPrefs());
+        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+
+        // ModelManager has ALICE and BENSON in filtered list, ModelManagerCopy has only CARL
+        modelManager.updateFilteredPersonList(person -> person.equals(ALICE) || person.equals(BENSON));
+        modelManagerCopy.updateFilteredPersonList(person -> person.equals(CARL));
+
+        // Expect them to be unequal as they have different filtered list contents
+        assertFalse(modelManager.equals(modelManagerCopy));
     }
 }

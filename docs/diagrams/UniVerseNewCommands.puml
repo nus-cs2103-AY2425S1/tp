@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T3
+skinparam classBackgroundColor LOGIC_COLOR
+
+Class "{abstract}\nCommand" as Command
+
+package "AB3 Features" {
+
+}
+
+package "New Features" {
+    Class "AddInterestCommand" as AddInterestCommand
+    Class "AddWorkExperienceCommand" as AddWorkExperienceCommand
+    Class "FindByUniversityCommand" as FindByUniversityCommand
+    Class "FindByMajorCommand" as FindByMajorCommand
+    Class "FindByInterestCommand" as FindByInterestCommand
+    Class "FindByWorkExperienceCommand" as FindByWorkExperienceCommand
+}
+
+
+"AB3 Features" -up-|> Command
+' Inheritance arrows for New Features
+AddInterestCommand -up-|> Command
+AddWorkExperienceCommand -up-|> Command
+FindByUniversityCommand -up-|> Command
+FindByMajorCommand -up-|> Command
+FindByInterestCommand -up-|> Command
+FindByWorkExperienceCommand -up-|> Command
+
+@enduml

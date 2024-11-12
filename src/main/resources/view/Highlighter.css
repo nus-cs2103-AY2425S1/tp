@@ -1,0 +1,5 @@
+.highlighted {
+    -fx-background-color: #ffeb3b;  /* Yellow background for highlight */
+    -fx-text-fill: black;           /* Black text color for readability */
+    -fx-font-weight: bold;          /* Bold font for emphasis */
+}

@@ -2,9 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -25,16 +25,32 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    // New fields
+    private final Set<Interest> interests = new HashSet<>();
+    private final University university;
+    private final Major major;
+    private final WorkExp workExp;
+    private final Birthday birthday;
+
     /**
      * Every field must be present and not null.
+     * New fields for university, major, interest, and experience are added.
+     * Interest and experience are initialized to empty strings.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, WorkExp workExp, Set<Tag> tags,
+                  University university, Major major, Set<Interest> interests, Birthday birthday) {
+        requireAllNonNull(name, phone, email, address, tags, university, major, birthday);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.workExp = workExp;
         this.tags.addAll(tags);
+        this.university = university;
+        this.major = major;
+        this.interests.addAll(interests);
+        this.birthday = birthday;
     }
 
     public Name getName() {
@@ -53,12 +69,32 @@ public class Person {
         return address;
     }
 
+    public University getUniversity() {
+        return university;
+    }
+
+    public Major getMajor() {
+        return major;
+    }
+
+    public Birthday getBirthday() {
+        return birthday;
+    }
+
+    public Set<Interest> getInterests() {
+        return Collections.unmodifiableSet(interests);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public WorkExp getWorkExp() {
+        return workExp;
     }
 
     /**
@@ -71,7 +107,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -90,17 +126,14 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        return this.phone.equals(otherPerson.phone);
+
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return phone.hashCode();
     }
 
     @Override
@@ -110,8 +143,12 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("workExp", workExp)
                 .add("tags", tags)
+                .add("university", university)
+                .add("major", major)
+                .add("interests", interests)
+                .add("birthday", birthday.value.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))
                 .toString();
     }
-
 }

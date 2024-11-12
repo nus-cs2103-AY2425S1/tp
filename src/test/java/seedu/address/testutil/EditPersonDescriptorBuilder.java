@@ -6,10 +6,15 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Interest;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.University;
+import seedu.address.model.person.WorkExp;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,7 +41,12 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setInterests(person.getInterests());
+        descriptor.setWorkExp(person.getWorkExp());
         descriptor.setTags(person.getTags());
+        descriptor.setUniversity(person.getUniversity());
+        descriptor.setMajor(person.getMajor());
+        descriptor.setBirthday(person.getBirthday());
     }
 
     /**
@@ -72,6 +82,14 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code WorkExp} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withWorkExp(String workExp) {
+        descriptor.setWorkExp(new WorkExp(workExp));
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
@@ -80,8 +98,42 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTags(tagSet);
         return this;
     }
+    /**
+     * Parses the {@code interests} into a {@code Set<Interest>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withInterests(String... interests) {
+        Set<Interest> interestSet = Stream.of(interests).map(Interest::new).collect(Collectors.toSet());
+        descriptor.setInterests(interestSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code University} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withUniversity(String university) {
+        descriptor.setUniversity(new University(university));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Major} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withMajor(String major) {
+        descriptor.setMajor(new Major(major));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Birthday} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withBirthday(String birthday) {
+        descriptor.setBirthday(new Birthday(birthday));
+        return this;
+    }
 
     public EditPersonDescriptor build() {
         return descriptor;
     }
+
 }

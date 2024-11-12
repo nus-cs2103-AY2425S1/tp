@@ -2,12 +2,16 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTEREST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIVERSITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WORKEXP;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -26,17 +30,28 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_WORKEXP + "WORK EXPERIENCE (optional) "
+            + PREFIX_UNIVERSITY + "UNIVERSITY "
+            + PREFIX_MAJOR + "MAJOR "
+            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_INTEREST + "INTEREST]...\n"
+            + PREFIX_BIRTHDAY + "BIRTHDAY "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_WORKEXP + "Intern,Google,2024 "
+            + PREFIX_UNIVERSITY + "NUS "
+            + PREFIX_MAJOR + "Computer Science "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "owesMoney "
+            + PREFIX_INTEREST + "swimming "
+            + PREFIX_INTEREST + "reading "
+            + PREFIX_BIRTHDAY + "13-12-2003";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This phone number already exists in the address book";
 
     private final Person toAdd;
 
@@ -45,7 +60,7 @@ public class AddCommand extends Command {
      */
     public AddCommand(Person person) {
         requireNonNull(person);
-        toAdd = person;
+        this.toAdd = person;
     }
 
     @Override
@@ -66,7 +81,6 @@ public class AddCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof AddCommand)) {
             return false;
         }
@@ -77,8 +91,7 @@ public class AddCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+        return AddCommand.class.getCanonicalName() + "{toAdd=" + toAdd + "}";
     }
+
 }

@@ -55,8 +55,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new PersonBuilder().withName("Alice").withPhone("12345678").build();
+        Person bob = new PersonBuilder().withName("Bob").withPhone("12345678").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -74,7 +74,9 @@ public class AddCommandTest {
         assertFalse(addAliceCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        Person charlie = new PersonBuilder().withName("Charlie").withPhone("87654321").build();
+        AddCommand addCharlieCommand = new AddCommand(charlie);
+        assertFalse(addAliceCommand.equals(addCharlieCommand));
     }
 
     @Test
@@ -155,6 +157,10 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addPredicateToFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

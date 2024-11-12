@@ -1,59 +1,61 @@
 ---
-layout: page
-title: About Us
+layout: default.md
+title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
+
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Jeremy Chia
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jeremychiaaaaa.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/jeremychiaaaaa)]
+[[portfolio](team/jeremy.md)]
 
-* Role: Project Advisor
+* Role: Code Quality 
 
-### Jane Doe
+### Vera Koh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/verakohh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/verakohh)]
+[[portfolio](team/verakohh.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Malhotra Arnav
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/arnav12344.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/arnav12344)] 
+[[portfolio](team/arnav12344.md)]
 
-* Role: Developer
+* Role: Developer, Admin
 * Responsibilities: Data
 
-### Jean Doe
+### Tze Cheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kuiktzecheng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/kuiktzecheng)]
+[[portfolio](team/kuiktzecheng.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Chen Le
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chenle228.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/chenle228)]
+[[portfolio](team/chenle228.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Deliverables and deadlines

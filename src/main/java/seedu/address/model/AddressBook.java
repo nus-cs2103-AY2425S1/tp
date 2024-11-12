@@ -64,15 +64,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return persons.contains(person);
+        return persons.asUnmodifiableObservableList().stream()
+                .anyMatch(existingPerson -> existingPerson.getPhone().equals(person.getPhone()));
     }
-
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addPerson(Person person) {
+        if (hasPerson(person)) {
+            throw new IllegalArgumentException("This phone number already exists in the address book.");
+        }
+        persons.add(person);
     }
 
     /**
