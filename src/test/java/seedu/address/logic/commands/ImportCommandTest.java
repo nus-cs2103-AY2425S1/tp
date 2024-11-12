@@ -43,7 +43,7 @@ public class ImportCommandTest {
         StringBuilder expectedMessageBuilder = new StringBuilder();
         expectedMessageBuilder.append(String.format(ImportCommand.MESSAGE_SUCCESS, 0));
         expectedMessageBuilder.append(String.format(ImportCommand.MESSAGE_FAILED, "Row 1: "
-                + Name.MESSAGE_CONSTRAINTS + ". "));
+                + Name.MESSAGE_CONSTRAINTS + " "));
         String expectedMessage = expectedMessageBuilder.toString();
 
         assertCommandSuccess(importCommand, model, commandHistory, expectedMessage, expectedModel);

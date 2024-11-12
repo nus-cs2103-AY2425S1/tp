@@ -82,7 +82,7 @@ public class ImportCommand extends Command {
             StringBuilder failedRowsAndConstraints = new StringBuilder();
             for (Map.Entry<Integer, String> entry : failed.entrySet()) {
                 failedRowsAndConstraints.append("Row " + entry.getKey());
-                failedRowsAndConstraints.append(": " + entry.getValue() + ". ");
+                failedRowsAndConstraints.append(": " + entry.getValue() + " ");
             }
             message.append(String.format(MESSAGE_FAILED, failedRowsAndConstraints));
         }
