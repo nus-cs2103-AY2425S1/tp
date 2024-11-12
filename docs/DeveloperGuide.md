@@ -708,136 +708,193 @@ testers are expected to do more *exploratory* testing.
 ### Adding a student 
 
 1. Adding a student with a new NRIC
+
    1. Prerequisites: Student with NRIC number T3848559A does not exist in the system.
+   
    2. Test case: `add n\Sam Tan i\T3848559A yg\3 p\81003999 e\samtan@gmail.com a\9 Smith Street s\Science`<br>
        Expected: Student named Sam Tan with NRIC T3848559A is added to the list.
+   
 2. Adding a student with an existing name but new NRIC
+
    1. Prerequisites: A student named Sam Tan exists in the system.
+   
    2. Test case: `add n\Sam Tan i\S2684225J yg\2 p\88247432 e\sammmie@gmail.com a\16 Next Street s\Math`<br>
        Expected: Student named Sam Tan with NRIC S2684225J is added to the list.
+   
 3. Adding a student with an existing NRIC
+
    1. Prerequisites: A student with NRIC number T3848559A exists in the system.
+   
    2. Test case: `add n\John Doe i\T3848559A yg\2 p\91234567 e\johndoe@yahoo.com a\10 Orchard Road s\Science s\Math`<br>
        Expected: Error message indicating that another student with the same NRIC already exists in the system. 
 
 ### Editing a student
 
 1. Editing an existing student's details
+
     1. Prerequisites: A student with ID S00001 exists in the system.
+   
     2. Test case: `edit s00001 p\91234567 a\18 Tampines Road`<br>
         Expected: Student with ID S00001 is updated with phone number "91234567" and address "18 Tampines Road". 
         Success message is shown in the message box.
+   
 2. Editing a non-existent student's detail
+
    1. Prerequisites: Student with ID S00999 does not exist in the system.
+   
    2. Test case: `edit s00999 p\84754243 a\25 Orchard Road`<br>
        Expected: Error message indicating that no student is found with the provided student ID. 
+   
 3. Editing a student's NRIC to match an existing student's NRIC.
+
    1. Prerequisites: 
        * Student with ID S00001 exists in the system.
        * Another student with NRIC S2684225J exists in the system.
+      
    2. Test case: `edit s00001 i\S2684225J`<br>
        Expected: Error message indicating that another student with the same NRIC already exists in the system.
 
 ### Adding subject(s) to a student
 
 1. Adding one subject to a student
+
     1. Prerequisites: Student with ID S00001 exists in the system.
+   
     2. Test case: `addsubject S00001 s\Math`<br>
         Expected: Student with ID S00001 is added to the subject Math. Existing subjects remain unchanged.
+   
 2. Adding multiple subjects to a student
+
     1. Prerequisites: Student with ID s00001 exists in the system.
+   
     2. Test case: `addsubject S00001 s\History s\Chinese`
         Expected: Student with ID S00001 is added to subjects History and Chinese. The existing subjects remained unchanged.
 
 ### Deleting a student
 
 1. Deleting an existing student
+
    1. Prerequisites: Student with ID S00001 exists in the system.
+   
    2. Test case: `delete S00001`<br>
        Expected: Student with ID S00001 is deleted from the list. Details of the deleted student are shown in the success message.
+   
 2. Deleting a non-existent student
+
    1. Prerequisites: Student with ID S00001 does not exist in the system. 
+   
    2. Test case: `delete S00001`<br>
        Expected: No student is deleted. Error message indicating that no student is found with the provided student ID.
 
 ### Viewing student's detail
 
 1. Viewing details of an existing student
+
    1. Prerequisites: Student with ID S00002 exists in the system.
+   
    2. Test case: `detail S00002`<br>
        Expected: A pop-up window displays the details of the student with ID S00002.
+   
 2. Closing the pop-up window
+
    1. Prerequisites: A pop-up window is displayed.
+   
    2. Test case: Press `B` on the keyboard <br>
        Expected: The pop-up window closes.
 
 ### Searching for a student
 
 1. Searching for students by full name
+
    1. Prerequisites: 
        * Multiple students exist in the system.  
        * A student named Sam Tan exists in the system.
+      
    2. Test case: `find sam`<br>
        Expected: A list of students, including Sam Tan, is shown.
+   
 2. Searching for students by partial name
+
     1. Prerequisites:
         * Multiple students exist in the system.
         * A student named Sam Tan exists in the system.
+       
     2. Test case: `find sa`<br>
        Expected: A list of students, including Sam Tan, is shown.
 
 ### Sorting the student list
 
 1. Sorting the student list by specific field
+
    1. Prerequisites: Multiple students exist in the system.
+   
    2. Test case: `sort by\name`<br>
        Expected: Student list is sorted in ascending lexicographical order by name.
+   
    3. Test case: `sort by\subject`<br>
        Expected: Student list is sorted by the lexicographically smallest subject they are taking.
+   
    4. Test case: `sort by\studentId`<br>
        Expected: Student list is sorted in ascending order by student ID.
+   
    5. Test case: `sort by\yearGroup`<br>
        Expected: Student list is sorted in ascending order by year group.
       
 ### Filtering the student list
 
 1. Filter by year group
+
    1. Prerequisites: 
        * Multiple students exist in the system.
        * At least one student from year group 3 exists.
+      
    2. Test case: `filter yg\3`<br>
        Expected: A list of students in year group 3 is shown.
+   
 2. Filter the student list by subject
+
    1. Prerequisites:
        * Multiple students exist in the system.
        * At least one student taking subject English exists.
+      
    2. Test case: `filter s\English`<br>
        Expected: A list of students taking English is shown.
 
 ### Tracking subject statistics
 
 1. Opening the track subject window
+
     1. Prerequisites: None
+   
     2. Test case: `tracksubject`<br>
        Expected: A window displays subject statistics.
+   
 2. Closing the track subject window
+
     1. Prerequisites: The track subject window is displayed.
+   
     2. Test case: Press `B` on the keyboard <br>
        Expected: The track subject window closes.
 
 ### Saving data
 
 1. Dealing with missing data file
+
    1. Prerequisites: Storage file exits (default location: ./data/academyassist.json)
+   
    2. Test case: Delete `academyassist.json`<br>
        Expected: AcademyAssist erases all existing data and start with a blank data file. 
 
 2. Dealing with corrupted data file
+
    1. Prerequisites: Storage file exits (default location: ./data/academyassist.json)
+   
    2. Test case: Edit the file into an invalid JSON format (e.g., deleting a `:`)
        Expected: AcademyAssist erases all existing data and start with a blank data file.
+   
    3. Test case: Duplicate a student's entries
       Expected: AcademyAssist erases all existing data and start with a blank data file.
+   
    4. Test case: Set `idGeneratedCount` to a value greater than 99999
       Expected: AcademyAssist erases all existing data and start with a blank data file.
 
