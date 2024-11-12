@@ -162,7 +162,7 @@ Format: `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL [s/SKILL]… i/INTERVIEW_SCORE 
 
 <box type="warning">
 
-**Caution:** Attempting to add variations of `hired`, `rejected` or `pending` as additional tags will still only result in a single status tag defaulting to "pending"
+**Caution:** Attempting to add variations of `hired`, `rejected` or `pending` as additional tags will still only result in a single status tag defaulting to `pending`.
 </box>
 <br><br>
 
