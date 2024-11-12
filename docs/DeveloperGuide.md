@@ -177,7 +177,7 @@ followed by replacing the target `Client` in the Model with the newly created cl
 
 The following sequence diagram shows an example execution of command `addt 1 ...` focusing on interactions within the`Logic` component.
 
-<puml src="diagrams/AddTransactionSequenceDiagram.puml" width="650" />
+<puml src="diagrams/AddTransactionSequenceDiagram.puml" />
 
 **Note:** The lifeline for `AddTransactionCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
