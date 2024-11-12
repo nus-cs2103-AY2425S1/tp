@@ -4,6 +4,7 @@ TAHub Contacts is a contact management app that helps them save time by having e
 ## Given below are my contributions to the project.
 
 ### 1.New Feature:
+* grading system (not there in final version)
 ### 2.Code contributed: RepoSense link
 ### 3.Project management:
 ### 4.Enhancements to existing features:
@@ -12,5 +13,7 @@ TAHub Contacts is a contact management app that helps them save time by having e
 ### 7.Tools:
 ### 8.Design:
 * logo
+* Did the Ui Mockups using figma.
+* Implemented complete Ui
 ### 9.Created logo and icon designs.
-* Designed the logo using canva
+* Designed the logo using Canva

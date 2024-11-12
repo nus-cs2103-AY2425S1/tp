@@ -754,7 +754,15 @@ You have been duly warned.
 #### Added Support for more Tutorial IDs
 
 - Currently, we only support tutorial IDs of a specific format, as mentioned [here](#data-formats). However, we are aware that there are valid but rarer tutorial IDs with an additional character at the back like `T01A`. Due to time limitations, we are not able to support **all** potential tutorial IDs and this could be fixed in a future iteration.
+<br>
 
+#### Quick Refresh of Edited Course Name
+
+- Currently, on editing the name of a particular course using the [course-edit](#course-edit) command, the user(TA) 
+will have to wait for sometime before it is visible in the UI or will have to reopen the Attendance Window to 
+refresh the screen to view the new Course Name. 
+However, we are aware that this will hinder the efficiency of a fast working TA and so 
+this will be fixed in a future iteration.
 <br>
 
 :fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
