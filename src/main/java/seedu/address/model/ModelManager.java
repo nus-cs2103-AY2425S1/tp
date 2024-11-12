@@ -11,6 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.company.Company;
+import seedu.address.model.job.Job;
+import seedu.address.model.job.JobCompany;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +25,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Job> filteredJobs;
+    private final FilteredList<Company> filteredCompanies;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -29,11 +34,13 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with talent connect: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredJobs = new FilteredList<>(this.addressBook.getJobList());
+        filteredCompanies = new FilteredList<>(this.addressBook.getCompanyList());
     }
 
     public ModelManager() {
@@ -43,14 +50,14 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -78,13 +85,13 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public ReadOnlyAddressBook getAddressBook() {
+        return addressBook;
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetData(addressBook);
     }
 
     @Override
@@ -93,9 +100,42 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+    /**
+     * Returns true if the same company is in the address book.
+     *
+     * @param company Company to be checked.
+     * @return true if in address book.
+     */
+    @Override
+    public boolean hasCompany(Company company) {
+        requireNonNull(company);
+        return addressBook.hasCompany(company);
+    }
+
+    @Override
+    public boolean hasJob(Job job) {
+        requireNonNull(job);
+        return addressBook.hasJob(job);
+    }
+
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+    }
+
+    /**
+     * Deletes a company same as the target from the address book.
+     *
+     * @param target Company to be deleted.
+     */
+    @Override
+    public void deleteCompany(Company target) {
+        addressBook.removeCompany(target);
+    }
+
+    @Override
+    public void deleteJob(Job target) {
+        addressBook.removeJob(target);
     }
 
     @Override
@@ -104,11 +144,48 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    /**
+     * Adds a company to the address book.
+     *
+     * @param company Company to be added.
+     */
+    @Override
+    public void addCompany(Company company) {
+        addressBook.addCompany(company);
+        updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+    }
+
+    @Override
+    public void addJob(Job job) {
+        addressBook.addJob(job);
+        updateFilteredJobList(PREDICATE_SHOW_ALL_JOBS);
+    }
+
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setJob(Job target, Job editedJob) {
+        requireAllNonNull(target, editedJob);
+
+        addressBook.setJob(target, editedJob);
+    }
+
+    /**
+     * Replaces the target company with an edited version of itself.
+     *
+     * @param target        Company to be replaced.
+     * @param editedCompany Company to replace the other.
+     */
+    @Override
+    public void setCompany(Company target, Company editedCompany) {
+        requireAllNonNull(target, editedCompany);
+
+        addressBook.setCompany(target, editedCompany);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -123,9 +200,41 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Job> getFilteredJobList() {
+        return filteredJobs;
+    }
+
+    /**
+     * Returns the list of filtered companies.
+     *
+     * @return List of filtered companies.
+     */
+    @Override
+    public ObservableList<Company> getFilteredCompanyList() {
+        return filteredCompanies;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredJobList(Predicate<Job> predicate) {
+        requireNonNull(predicate);
+        filteredJobs.setPredicate(predicate);
+    }
+
+    /**
+     * Updates the filtered company list with the given predicate.
+     *
+     * @param predicate Predicate for the filter.
+     */
+    @Override
+    public void updateFilteredCompanyList(Predicate<Company> predicate) {
+        requireNonNull(predicate);
+        filteredCompanies.setPredicate(predicate);
     }
 
     @Override
@@ -140,9 +249,64 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+        return addressBook.equals(otherModelManager.addressBook) && userPrefs.equals(otherModelManager.userPrefs)
+               && filteredPersons.equals(otherModelManager.filteredPersons)
+               && filteredJobs.equals(otherModelManager.filteredJobs)
+               && filteredCompanies.equals(otherModelManager.filteredCompanies);
+    }
+
+    /**
+     * Returns a predicate that tests whether a {@code Person} is linked to the specified company.
+     * @param targetCompany The company to match against.
+     * @return A predicate that returns {@code true} if the person is linked to the specified company.
+     */
+    public Predicate<Person> getPersonLinkedToCompanyPredicate(Company targetCompany) {
+        return person -> person.isMatchPresent()
+                && person.getMatch().get().startsWith(targetCompany.getName().toString() + "::");
+    }
+
+    /**
+     * Returns a predicate that tests whether a {@code Job} is linked to the specified company.
+     * @param targetCompany The company to match against.
+     * @return A predicate that returns {@code true} if the job is linked to the specified company.
+     */
+    public Predicate<Job> getJobLinkedToCompanyPredicate(Company targetCompany) {
+        return job -> job.getCompany().equals(new JobCompany(targetCompany.getName().toString()));
+    }
+
+    /**
+     * Filters the lists of jobs and persons to show only those
+     * linked to the specified company.
+     * @param targetCompany The company whose linked jobs and persons will be shown.
+     */
+    @Override
+    public void showLinkedJobsAndPersonsByCompany(Company targetCompany) {
+        updateFilteredJobList(getJobLinkedToCompanyPredicate(targetCompany));
+        updateFilteredPersonList(getPersonLinkedToCompanyPredicate(targetCompany));
+    }
+
+    /**
+     * Returns an unmodifiable view of the full person list stored in the address book.
+     * This list includes all persons, regardless of any current filters applied
+     * to the filtered person list.
+     *
+     * @return An unmodifiable {@code ObservableList} of all persons in the address book.
+     */
+    @Override
+    public ObservableList<Person> getFullPersonList() {
+        return addressBook.getPersonList();
+    }
+
+    /**
+     * Returns an unmodifiable view of the full job list stored in the address book.
+     * This list includes all jobs, regardless of any current filters applied
+     * to the filtered job list.
+     *
+     * @return An unmodifiable {@code ObservableList} of all jobs in the address book.
+     */
+    @Override
+    public ObservableList<Job> getFullJobList() {
+        return addressBook.getJobList();
     }
 
 }

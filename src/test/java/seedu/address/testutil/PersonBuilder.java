@@ -3,12 +3,12 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
+import seedu.address.model.common.Name;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Role;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -19,13 +19,14 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_ROLE = "Senior software engineer";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
-    private Set<Tag> tags;
+    private Role role;
+    private Set<Skill> skills;
+    private String match;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -34,8 +35,8 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        role = new Role(DEFAULT_ROLE);
+        skills = new HashSet<>();
     }
 
     /**
@@ -45,8 +46,9 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        role = personToCopy.getRole();
+        skills = new HashSet<>(personToCopy.getSkills());
+        match = personToCopy.getMatch().orElse(null);
     }
 
     /**
@@ -58,18 +60,18 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code skill} into a {@code Set<Skill>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withSkills(String... skills) {
+        this.skills = SampleDataUtil.getSkillSet(skills);
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Role} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withRole(String role) {
+        this.role = new Role(role);
         return this;
     }
 
@@ -89,8 +91,32 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMatch(String match) {
+        this.match = match;
+        return this;
     }
 
+    /**
+     * Removes any existing match for the {@code Person} that we are building.
+     */
+    public PersonBuilder withoutMatch() {
+        this.match = null;
+        return this;
+    }
+
+    /**
+     * Builds a Person with the initialized attributes.
+     *
+     * @return Persons object.
+     */
+    public Person build() {
+        if (this.match == null) {
+            return new Person(name, phone, email, role, skills);
+        } else {
+            return new Person(name, phone, email, role, skills, match);
+        }
+    }
 }
