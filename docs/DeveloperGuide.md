@@ -278,18 +278,19 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                           | I want to …​                        | So that I can…​                                                         |
-|----------|-----------------------------------|-------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | administrator of a tuition centre | view all students' contact details  | easily access everyone's details at one place                           |
-| `* * *`  | administrator of a tuition centre | add a new person                    | add new contacts for newly enrolled students                            |
-| `* * *`  | administrator of a tuition centre | delete a student                    | remove students that are no longer enrolled                             |
-| `* * *`  | administrator of a tuition centre | find a student by name              | locate details of students without having to go through the entire list |
-| `* * *`  | administrator of a tuition centre | add subjects taken by student       | add student's subject details without creating a new entry              |
-| `* *`    | administrator of a tuition centre | filter students based on a category | easily see all students that fall under that category                   |
-| `* *`    | administrator of a tuition centre | edit student contact                | update student details when they are changed                            |
-| `* *`    | new user                          | see what commands are available     | refer to instructions when I forget how to use the App                  |
-| `*`      | administrator of a tuition centre | clear all contacts                  | empty the address book for a new academic year                          |
-| `*`      | administrator of a tuition centre | track class size                    | see if classes are nearing capacity or undersubscribed                  |
+| Priority | As a …​                           | I want to …​                        | So that I can…​                                                                          |
+|----------|-----------------------------------|-------------------------------------|------------------------------------------------------------------------------------------|
+| `* * *`  | administrator of a tuition centre | view all students' details          | easily consolidate all information in one place                                          |
+| `* * *`  | administrator of a tuition centre | add a new student                   | store details about newly enrolled students                                              |
+| `* * *`  | administrator of a tuition centre | delete a student                    | remove students that are no longer enrolled                                              |
+| `* * *`  | administrator of a tuition centre | find a student by name              | locate details of students without having to go through the entire list                  |
+| `* * *`  | administrator of a tuition centre | add subjects taken by student       | add student's subject details without creating a new entry                               |
+| `* *`    | administrator of a tuition centre | filter students based on a category | easily see all students that fall under that category                                    |
+| `* *`    | administrator of a tuition centre | sort students based on an order     | group students with similar needs, monitor their progress easily                         |
+| `* *`    | administrator of a tuition centre | edit student contact                | update student details when they are changed without needing to create a new entry       |
+| `* *`    | new user                          | see what commands are available     | refer to instructions when I forget how to use the app                                   |
+| `*`      | administrator of a tuition centre | clear all contacts                  | empty the address book for a new academic year instead of deleting entries one at a time |
+| `*`      | administrator of a tuition centre | track class size                    | see if classes are nearing capacity or undersubscribed                                   |
 
 
 ### Use cases
