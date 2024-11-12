@@ -69,7 +69,7 @@ public class MarkAttendanceByTutorialCommand extends Command {
         assert attendance != null;
         logger.info("Running execute(Model model)");
 
-        if (model.getTutorialList().stream().noneMatch(tutorial -> tutorial.equals(this.tutorial))) {
+        if (!model.hasTutorial(tutorial)) {
             logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByTutorialCommand.class
                     + "\n - Tutorial not found: " + tutorial.getSubject()));
             throw new CommandException(String.format(Messages.MESSAGE_TUTORIAL_NOT_FOUND, tutorial.getSubject()));
