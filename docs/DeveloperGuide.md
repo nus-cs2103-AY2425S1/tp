@@ -277,9 +277,9 @@ Team Size: 5
 2. **Enhance `mark` command's implementation**: The current implementation of `mark` can only mark the attendance of all students together. This prevents users from easily marking the attendance of individual students. The current workaround is to either `mark` and `unmark` all other students or to `delete` and add the student back into EduConnect with the incremented attendance field. 
 
     We plan to introduce optional index parameters for the `mark` command, allowing users to specify which indexes to specifically mark the attendance of. This implementation will be similar to the `unmark` command. E.g. `mark` will still mark the attendance of all students but `mark 1 2` will only mark the attendance of the 1st and 2nd index persons (assuming they are students)
-3. **Save theme preference upon exit**: Currently, if a user changes themes to light mode and exits EduConnect, that theme preference is not saved. That means when they reopen the app, it will use the dark mode theme (despite closing on light mode).
+3. **Use shorter command aliases**: Currently, EduConnect requires users to use longer parameters such as `/name` when entering commands.
 
-    We plan to rework the app such that it actually saves the theme preference upon exit, meaning that whatever theme a user exits with is the theme that is used automatically upon reopening the app.
+   We plan to introduce shorter command aliases, such as `/n` for `/name`, to make input faster and more convenient for users.
 4. **Prevent `edit` command from accepting `/nok`, `/attendance` and `/emergency` prefix for `teacher`**: The current implementation of the `edit` command allows for the use of `/nok`, `/attendance` and `/emergency` prefixes for `teacher` contacts. This is not necessary as these fields are not applicable to teachers. 
 
     We plan to prevent the use of these prefixes for `teacher` contacts, ensuring that only the relevant fields can be edited for teachers.
