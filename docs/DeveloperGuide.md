@@ -633,14 +633,14 @@ testers are expected to do more *exploratory* testing.
 
 ### Edit Feature
 
-**Description**: Edits an existing item in the list.
+**Description**: Edits an existing contact in the list.
 
 **Test Case 1**:
-1. Identify the index of the contact you want to edit, `X`.
-2. Enter `edit X n/New Name`
+1. Identify the index of the contact you want to edit, for example, `1`.
+2. Enter `edit 1 n/New Name`
 
 **Expected Result**:
-- Contact at index `X` has a new contact name, `New Name`.
+- Contact at index `1` has a new contact name, `New Name`.
 
 ### Mark Feature
 
@@ -669,11 +669,11 @@ testers are expected to do more *exploratory* testing.
 **Description**: Deletes a contact from the list.
 
 **Test Case 1**:
-1. Identify the index of the contact you want to edit, `X`.
-2. Enter `delete X`.
+1. Identify the index of the contact you want to delete, for example, `1`.
+2. Enter `delete 1`.
 
 **Expected Result**:
-- Contact at index `X` is removed from the list.
+- Contact at index `1` is removed from the list.
 
 ### Sort Feature
 
