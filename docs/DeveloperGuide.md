@@ -1226,7 +1226,6 @@ command: `add`
    * **Test case (invalid `Nric` field):** `add n|Jane i|T012345X p|90901282 s|F d|2002-10-10`
        * **Expected:** An error message is shown indicating that the `Nric` field is invalid and a prompt of what a valid `Nric` should be.
 
-
 ### Adding a patient with all fields
 command: `addf`
 
@@ -1251,7 +1250,6 @@ command: `addf`
         * Existing Condition: `High Blood Pressure`
         * Note: `Patient has anger management issues`
 
-
 2. Adding a patient with only the required fields
 
    * **Prerequisites:**
@@ -1263,7 +1261,6 @@ command: `addf`
       * Sex: `M`
       * Date-of-Birth: `2001-10-27`
       * Phone Number: `98178571`
-
 
 3. Adding a patient with all the required fields and 1 optional field
 
@@ -1278,33 +1275,12 @@ command: `addf`
         * Phone Number: `98178571`
         * Email: `jakejake@gmail.com`
 
-
 4. Adding a patient with missing required fields
 
     * **Prerequisites:**
         * No patients in the list
     * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27`<br>
       **Expected:** An error is shown stating `Invalid commmand format`
-
-
-### Filtering Appointments: `Filter`
-command: `filter`
-
-1. Filtering appointments with all valid fields
-
-    * **Prerequisites:**
-      Launch the app.
-
-    * **Test case:** `filter ed|2002-10-10 sd|2002-11-10 h|Blood Test`
-        * **Expected:** Blood Test appointments from Oct 10 2002 to Nov 10 2002 inclusive are displayed.
-
-2. Filtering appointments with invalid end date
-
-    * **Prerequisites:**
-      Launch the app.
-
-    * **Test case (invalid end date):** `filter ed|2027/10-10`
-        * **Expected:** An error message saying that the date entered is invalid and should follow the format of YYYY-MM-DD.
 
 
 ### Viewing detailed information on a patient
@@ -1314,22 +1290,18 @@ command: `filter`
    * **Test case:** `view T0123456A`<br>
      **Expected:** Detailed information on the patient entry with the corresponding NRIC is shown. Command success message shown in the status message.
 
-
 2. No patient with the corresponding valid NRIC found in the patient list when viewing detailed information on a patient.
    * **Prerequisites:** The patient list contains no patient entries with the NRIC "S0000001X".
    * **Test case:** `view S0000001X`<br>
      **Expected:** Detailed information is not shown. Patient not found error details shown in the status message.
 
-
 3. Keying in an invalid NRIC when viewing detailed information on a patient.
    * **Test case:** `view T000001X`<br>
      **Expected:** Detailed information is not shown. Invalid command error details shown in the status message.
 
-
 4. No NRIC keyed in when viewing detailed information on a patient.
    * **Test case:** `view`<br>
      **Expected:** Detailed information is not shown. Invalid command error details shown in the status message.
-
 
 ### Booking an upcoming appointment: `bookappt`
 
@@ -1358,7 +1330,6 @@ command: `filter`
     * **Test case:** `bookappt `
     * **Expected:** Error message is generated to show no valid parameters.
 
-
 ### Deleting an appointment: `deleteappt`
 
 1. Deleting an appointment for a patient successfully.
@@ -1380,3 +1351,34 @@ command: `filter`
     * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system.
     * **Test case:** `deleteappt T0123456A dt|2024-12-29 13:00 h|consult`
     * **Expected:** Error message is generated to show invalid prefix entered.
+
+### Filtering Appointments: `Filter`
+command: `filter`
+
+1. Filtering appointments with all valid fields
+
+    * **Prerequisites:**
+      Launch the app.
+
+    * **Test case:** `filter ed|2002-10-10 sd|2002-11-10 h|Blood Test`
+        * **Expected:** Blood Test appointments from Oct 10 2002 to Nov 10 2002 inclusive are displayed.
+
+2. Filtering appointments with invalid end date
+
+    * **Prerequisites:**
+      Launch the app.
+
+    * **Test case (invalid end date):** `filter ed|2027/10-10`
+        * **Expected:** An error message saying that the date entered is invalid and should follow the format of YYYY-MM-DD.
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. The current system does not accept special characters in names. We plan to widen the acceptance of special characters e.g. Yugan S/O Murali.
+2. A more comprehensive NRIC validity check could be performed to ensure proper correspondence between birthdate and NRIC.
+3. Allowing NRIC to be parsed case-insensitively for all commands.
+4. More specific error messages based on users' input.
+5. For `edit`, `ec` and `no`, prefixes can allow empty existing conditions and notes respectively to delete those fields.
+6. For `add`, names should have a character limit.
+7. For `al` and `rmal` prefixes, we plan to ensure that case-insensitive, singular and plural forms of the allergy are considered to be the same.
