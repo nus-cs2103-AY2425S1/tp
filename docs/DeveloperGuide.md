@@ -20,7 +20,7 @@ Libraries used include: [_JavaFX_](https://openjfx.io/), [_Jackson_](https://git
 Graphical Interface (GUI) Testing was adapted from [_AddressBook-Level4 by se-edu_](https://se-education.org/addressbook-level4/)
 
 Image resource: star.png adapted from https://www.pngegg.com/en/png-wzqhl
-git 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
