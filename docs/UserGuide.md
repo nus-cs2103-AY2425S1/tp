@@ -11,33 +11,32 @@ Talentcy is a **desktop app for managing job applicant contacts and monitoring t
 The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by CS2103 team.
 
 <!-- TOC -->
-* [Talentcy User Guide](#talentcy-user-guide)
-  * [Quick start](#quick-start)
-  * [Features](#features)
-    * [`help`: Viewing help](#viewing-help--help)
-    * [`add`: Adding a person](#adding-a-person-add)
-    * [`list`Listing all persons](#listing-all-persons--list)
-    * [`edit`: Editing a person](#editing-a-person--edit)
-    * [`find`: Locating persons by criteria given](#locating-persons-by-criteria-given-find)
-    * [`delete`: Deleting a person](#deleting-a-person--delete)
-    * [`stats`: Showing applicant statistics](#showing-applicant-statistics-stats)
-    * [`massreject`: Bulk reject persons by criteria](#bulk-reject-persons-by-criteria-massreject)
-    * [`sort`: Sorting persons by fields](#sorting-persons-by-fields-sort)
-    * [`clear`: Clearing all entries](#clearing-all-entries--clear)
-    * [`exit`: Exiting the program](#exiting-the-program--exit)
-    * [Saving the data](#saving-the-data)
-    * [Editing the data file](#editing-the-data-file)
-    * [Archiving data files `[coming in the future]`](#archiving-data-files-coming-in-the-future)
-  * [Fields](#fields)
-    * [NAME](#name)
-    * [PHONE](#phone)
-    * [EMAIL](#email)
-    * [JOBCODE](#jobcode)
-    * [TAG](#tag)
-    * [REMARK](#remark)
-  * [FAQ](#faq)
-  * [Known issues](#known-issues)
-  * [Command summary](#command-summary)
+* [Quick start](#quick-start)
+* [Features](#features)
+  * [`help`: Viewing help](#viewing-help--help)
+  * [`add`: Adding a person](#adding-a-person-add)
+  * [`list`Listing all persons](#listing-all-persons--list)
+  * [`edit`: Editing a person](#editing-a-person--edit)
+  * [`find`: Locating persons by criteria given](#locating-persons-by-criteria-given-find)
+  * [`delete`: Deleting a person](#deleting-a-person--delete)
+  * [`stats`: Showing applicant statistics](#showing-applicant-statistics-stats)
+  * [`massreject`: Bulk reject persons by criteria](#bulk-reject-persons-by-criteria-massreject)
+  * [`sort`: Sorting persons by fields](#sorting-persons-by-fields-sort)
+  * [`clear`: Clearing all entries](#clearing-all-entries--clear)
+  * [`exit`: Exiting the program](#exiting-the-program--exit)
+  * [Saving the data](#saving-the-data)
+  * [Editing the data file](#editing-the-data-file)
+  * [Archiving data files `[coming in the future]`](#archiving-data-files-coming-in-the-future)
+* [Fields](#fields)
+  * [NAME](#name)
+  * [PHONE](#phone)
+  * [EMAIL](#email)
+  * [JOBCODE](#jobcode)
+  * [TAG](#tag)
+  * [REMARK](#remark)
+* [FAQ](#faq)
+* [Known issues](#known-issues)
+* [Command summary](#command-summary)
 <!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
@@ -53,7 +52,7 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Talentcy app.
 
-4. **Windows**:Navigate to the home folder and right-click within the area highlighted in green in the image below. Select "Open in Terminal" from the menu. When the terminal window opens, enter java -jar Talentcy.jar to start the application.
+4. **Windows**: Navigate to the home folder and right-click within the area highlighted in green in the image below. Select "Open in Terminal" from the menu. When the terminal window opens, enter `java -jar Talentcy.jar` to start the application.
    <p align="center">
    <img src="images/Windows_open_terminal.jpg" alt="Windows_open_terminal" width="350"/>
    </p>
@@ -89,9 +88,9 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 6. Refer to the [Features](#features) below for details of each command.
 
-
-**Notes**:
-When you open the app, a GUI will appear with a few sample contacts already loaded, so you can immediately see the app in action.
+<box type="info" seamless>
+**Notes:**<br> When you open the app, a GUI will appear with a few sample contacts already loaded, so you can immediately see the app in action.
+</box>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -298,7 +297,6 @@ _Details coming soon ..._
 
 ## Fields
 
-<box type="info" seamless>
 
 **Notes about each valid input field:**
 
