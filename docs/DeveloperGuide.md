@@ -531,8 +531,8 @@ testers are expected to do more *exploratory* testing.
 Team size: 5
 
 * **Improve `screen job` functionality**: Currently, this command is only able to screen contacts that have roles which is a sub-string of the job name. 
-We plan to expand on this functionality by allowing users to add parameters to modify the way screen works. Examples being to 
-screen by how well the contact's skill match up to the job's requirements or to provide more options on how roles match with the jobs. 
+We plan to expand on this functionality by allowing users to add parameters to modify the criteria used in the screening process or to specify how strict the screening is. 
+Examples include to screen by skills of contacts and requirements for the job, or to display contacts whose roles contain partial elements of the job name.
 * **Enable support for job quota for `Job`**
 * **Enable support for more billing date formats (from end of month)**
 * **Enable support for `find job`**:   
