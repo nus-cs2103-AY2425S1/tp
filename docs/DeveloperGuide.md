@@ -852,6 +852,12 @@ The `listing` command adds a `listing` to EZSTATES.
 **Implementation**
 ![AddListingCommandSequence](images/dg/AddListingCommandSequence.png)
 
+1. User runs the `listing` command with the required property details (e.g., name, price, area, region, address, seller).
+2. The `EzstatesParser` parses this command and creates an `AddListingCommand` instance containing the provided details.
+3. `AddListingCommand` uses these details to create a new `Listing` object.
+4. `AddListingCommand` then calls the `Model` to add the newly created Listing to the system.
+5. If the addition is successful, a `CommandResult` is returned with a success message. If there are validation issues or missing required fields, a `CommandException` is thrown with an appropriate error message.
+
 
 #### Edit listing
 **Overview**
@@ -881,6 +887,12 @@ The `deletelistings` command deletes a `listing`.
 
 **Implementation**
 
+1. User runs the `deletelisting` command with the specific listing identifier or index.
+2. The `EzstatesParser` parses this command and creates a `DeleteListingCommand` instance with the provided identifier.
+3. `DeleteListingCommand` accesses the `Model` to retrieve the `Listing` associated with the identifier. If the listing is found, it proceeds to delete it.
+4. If the `Listing` is not found, a `CommandException` is thrown with an appropriate message.
+5. Upon successful deletion, a `CommandResult` is returned with a confirmation message indicating the listing has been deleted.
+
 #### Show listing
 **Overview**
 <br>
@@ -888,12 +900,36 @@ The `showlistings` command shows all `listings`.
 
 **Implementation**
 
+1. User runs the `showlistings` command.
+2. The `EzstatesParser` parses this command and creates a `ShowListingsCommand` instance.
+3. `ShowListingsCommand` accesses the Model to retrieve the complete list of Listings.
+4. If there are no Listings available, a `CommandResult` is returned with a message indicating that no listings are available.
+5. If listings exist, a `CommandResult` is returned displaying the list of Listings along with a success message.
+
 #### Clear listing
 **Overview**
 <br>
 The `clearlisting` clears all `listings`.
 
 **Implementation**
+
+1. User runs the `clearlisting` command.
+2. The `EzstatesParser` parses this command and creates a `ClearListingsCommand` instance.
+3. `ClearListingsCommand` accesses the Model and calls the clearAllListings() method to delete all listings from the system.
+4. If there are no listings to clear, a `CommandResult` is returned with a message indicating that no listings were available to clear.
+5. If listings are successfully cleared, a `CommandResult` is returned with a success message confirming that all listings have been removed.
+
+#### Find Listing
+**Overview**
+<br>
+The `findlisting` command searches for and lists all `Listings` where the listing name contains any of the specified keywords.
+
+**Implementation**
+
+1. User runs the `findlisting` command with one or more keywords.
+2. The `EzstatesParser` parses this command and creates a `FindListingCommandParser` instance, which processes the keywords and creates a `FindListingCommand` with a `ListingNameContainsKeywordsPredicate` that contains the user’s keywords.
+3. `FindListingCommand` updates the Model with the given predicate to filter the list of `Listings` based on names that match any of the provided keywords.
+4. If listings matching the keywords are found, `FindListingCommand` returns a `CommandResult` with a success message and the filtered list. If no matches are found, it returns a message indicating no listings match the search criteria.
 
 ### Utility
 
