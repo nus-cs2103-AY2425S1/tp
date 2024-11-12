@@ -6,8 +6,8 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
-participant "namePredicate:NameContainsKeywordsPredicate" as NameContainsKeywordsPredicate LOGIC_COLOR
-participant "combinedPredicate:FindCommandPredicate" as FindCommandPredicate LOGIC_COLOR
+participant "np:NameContainsKeywordsPredicate" as NameContainsKeywordsPredicate LOGIC_COLOR
+participant "cp:FindCommandPredicate" as FindCommandPredicate LOGIC_COLOR
 participant "f:FindCommand" as FindCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 
@@ -17,10 +17,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("find n/Alex")
+[-> LogicManager : execute( \n "find n/Alex")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("find n/Alex")
+LogicManager -> AddressBookParser : parseCommand( \n "find n/Alex")
 activate AddressBookParser
 
 create FindCommandParser
@@ -30,7 +30,7 @@ activate FindCommandParser
 FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
 
-AddressBookParser -> FindCommandParser : parse("n/Alex")
+AddressBookParser -> FindCommandParser : parse( \n "n/Alex")
 activate FindCommandParser
 
 create NameContainsKeywordsPredicate
@@ -47,14 +47,14 @@ activate FindCommandPredicate
 FindCommandPredicate --> FindCommandParser
 deactivate
 
-FindCommandParser -> FindCommandPredicate : addNameContainsKeywordsPredicate(namePredicate)
+FindCommandParser -> FindCommandPredicate : addNameContainsKeywordsPredicate(np)
 activate FindCommandPredicate
 
 FindCommandPredicate --> FindCommandParser
 deactivate FindCommandPredicate
 
 create FindCommand
-FindCommandParser -> FindCommand : new FindCommand(combinedPredicate)
+FindCommandParser -> FindCommand : new FindCommand(cp)
 activate FindCommand
 
 FindCommand --> FindCommandParser :
@@ -72,7 +72,7 @@ deactivate AddressBookParser
 LogicManager -> FindCommand : execute(m)
 activate FindCommand
 
-FindCommand -> Model : updateFilteredPersonList(combinedPredicate)
+FindCommand -> Model : updateFilteredPersonList(cp)
 activate Model
 
 Model --> FindCommand
