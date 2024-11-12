@@ -283,7 +283,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * prefer typing to mouse interactions
 * are reasonably comfortable using CLI apps
 
-**Value proposition**: The TalentHub offers celebrity managers a **secure, offline tool** to manage **various contacts and stakeholders, and schedule events** efficiently. With editable fields, it streamlines coordination while ensuring **privacy and data control** in a high-stakes environment.
+**Value proposition**: TalentHub offers celebrity managers a **secure, offline tool** to manage **various contacts and stakeholders, and schedule events** efficiently. With editable fields, it streamlines coordination while ensuring **privacy and data control** in a high-stakes environment.
 
 ### User stories
 
