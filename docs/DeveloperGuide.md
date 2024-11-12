@@ -388,7 +388,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
+(For all use cases below, the **System** is the `DLTbook` and the **Actor** is the `user`, unless specified
 otherwise)
 
 **Use case: Filter persons by network**
@@ -396,21 +396,21 @@ otherwise)
 **MSS**
 
 1. User requests to filter persons by a specific network.
-2. AddressBook shows a list of persons with the specified network.
+2. DLTbook shows a list of persons with the specified network.
 
 **Extensions**
 
 - 2a. No persons have the specified network.
-    - 2a1. AddressBook shows an error message.
+    - 2a1. DLTbook shows an error message.
 
 **Use case: Delete a person**
 
 **MSS**
 
 1. User requests to list persons
-2. AddressBook shows a list of persons
+2. DLTbook shows a list of persons
 3. User requests to delete a specific person in the list
-4. AddressBook deletes the person
+4. DLTbook deletes the person
 
 **Extensions**
 
@@ -420,9 +420,122 @@ otherwise)
 
 - 3a. The given index is invalid.
 
-    - 3a1. AddressBook shows an error message.
+  - 3a1. DLTbook shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
+
+**Use case: Edit a public address**
+
+**Preconditions**: List of contacts currently displayed
+
+**MSS**
+1. User requests to edit public address, specifying details of the public address to edit and the new public address.
+2. DLTbook updates the public address to the new value.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. DLTbook detects an error in the entered command / data.
+
+    * 1a1. DLTbook informs user of error.
+
+  Use case ends.
+
+* 1b. DLTbook cannot find a matching public address based on user's provided details.
+
+    * 1b1. DLTbook informs user that there is no matching public address.
+
+  Use case ends.
+
+**Use case: Retrieve public addresses based on label**
+
+**MSS**
+1. User requests to retrieve public address, specifying (part of) the label of public addresses to retrieve.
+2. DLTbook shows a list of public addresses whose labels includes the provided label.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. DLTbook detects an error in the entered command / data.
+
+    * 1a1. DLTbook informs user of error.
+
+  Use case ends.
+
+* 1b. DLTbook cannot find matching public addresses based on user's provided details.
+
+    * 1b1. DLTbook informs user that there ate no matching public addresses.
+
+  Use case ends.
+
+**Use case: Retrieve public addresses based on label and network type**
+
+**MSS**
+1. User requests to retrieve public address, specifying (part of) the label and network of public addresses to retrieve.
+2. DLTbook shows a list of public addresses whose labels includes the provided label, and network type matches the provided network.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. DLTbook detects an error in the entered command / data.
+
+    * 1a1. DLTbook informs user of error.
+
+  Use case ends.
+
+* 1b. DLTbook cannot find matching public addresses based on user's provided details.
+
+    * 1b1. DLTbook informs user that there ate no matching public addresses.
+
+  Use case ends.
+
+**Use case: Retrieve public addresses based on label and contact's name**
+
+**MSS**
+1. User requests to retrieve public address, specifying (part of) the label and (part of) the contact's name.
+2. DLTbook shows a list of public addresses whose labels includes the provided label, and contact's name includes the provided name.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. DLTbook detects an error in the entered command / data.
+
+    * 1a1. DLTbook informs user of error.
+
+  Use case ends.
+
+* 1b. DLTbook cannot find matching public addresses based on user's provided details.
+
+    * 1b1. DLTbook informs user that there ate no matching public addresses.
+
+  Use case ends.
+
+**Use case: Retrieve public addresses based on label, network type and contact's name**
+
+**MSS**
+1. User requests to retrieve public address, specifying (part of) the label, network of public addresses to retrieve and (part of) the contact's name.
+2. DLTbook shows a list of public addresses whose labels includes the provided label, network type matches the provided network and contact's name includes the provided name.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. DLTbook detects an error in the entered command / data.
+
+    * 1a1. DLTbook informs user of error.
+
+  Use case ends.
+
+* 1b. DLTbook cannot find matching public addresses based on user's provided details.
+
+    * 1b1. DLTbook informs user that there ate no matching public addresses.
+
+  Use case ends.
+
 
 
 ### Non-Functional Requirements
