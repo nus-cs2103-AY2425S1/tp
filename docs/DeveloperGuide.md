@@ -609,3 +609,11 @@ Team size : 5
      This enhancement will provide a smoother user experience by eliminating the need for manual clearing and ensuring the input field is ready for the 
      next command.
 
+  7. Improve job field validation: Jobs names in the real world typically would not have numbers in them. Most, including the ones in our sample
+     data are alphabetical. Thus, to match reality, we will allow only alphabetic characters in the job field. (e.g "Software Engineer 1" will not
+     be accepted as a valid job entry)
+
+  8. Enhance sort command: We recognise that hiring managers may not always want to sort based on interview scores. To give more
+     versatility to the sort command, we plan to enhance sort command to be able to sort based on alphabetical order based on the 
+     candidates' names or candidates' jobs, in addition to its current functionality.
+
