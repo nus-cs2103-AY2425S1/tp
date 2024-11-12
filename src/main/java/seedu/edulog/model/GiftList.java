@@ -1,38 +1,31 @@
 package seedu.edulog.model;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
 import java.util.Random;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.edulog.model.gift.Gift;
 
 /**
- * Wraps all data for giftlist
+ * Wraps all data for GiftList
  */
 public class GiftList implements ReadOnlyGiftList {
-    private final ObservableList<Gift> gifts;
+    private final List<Gift> gifts;
     private Random random = new Random();
 
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     * among constructors.
+    /**
+     * Generates a GiftList based on an existing list of gifts that have already been initialized.
+     * @param gifts the List of existing gifts.
      */
-    {
-        gifts = FXCollections.observableArrayList();
+    public GiftList(List<Gift> gifts) {
+        requireNonNull(gifts);
+        this.gifts = gifts;
     }
-
-    public GiftList() {}
 
     @Override
-    public ObservableList<Gift> getGiftList() {
+    public List<Gift> getGiftList() {
         return gifts;
-    }
-
-    public void addGift(Gift gift) {
-        gifts.add(gift);
     }
 
     /**
