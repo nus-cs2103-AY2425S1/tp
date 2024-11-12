@@ -13,8 +13,8 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.clientcommands.AddBuyerProfile;
-import seedu.address.logic.commands.clientcommands.AddSellerProfile;
+import seedu.address.logic.commands.clientcommands.AddBuyerProfileCommand;
+import seedu.address.logic.commands.clientcommands.AddSellerProfileCommand;
 import seedu.address.logic.commands.clientcommands.DeleteClientProfileCommand;
 import seedu.address.logic.commands.clientcommands.EditClientCommand;
 import seedu.address.logic.commands.clientcommands.FindClientCommand;
@@ -31,7 +31,7 @@ import seedu.address.logic.commands.listingcommands.EditListingCommand;
 import seedu.address.logic.commands.listingcommands.FindListingCommand;
 import seedu.address.logic.commands.listingcommands.RemoveBuyersFromListingCommand;
 import seedu.address.logic.commands.listingcommands.ShowListingsCommand;
-import seedu.address.logic.parser.clientcommandparsers.AddClientParser;
+import seedu.address.logic.parser.clientcommandparsers.AddClientProfileParser;
 import seedu.address.logic.parser.clientcommandparsers.DeleteClientProfileCommandParser;
 import seedu.address.logic.parser.clientcommandparsers.EditClientCommandParser;
 import seedu.address.logic.parser.clientcommandparsers.FindClientCommandParser;
@@ -82,8 +82,8 @@ public class EzstatesParser {
 
         // ---------------------------- Client Commands ----------------------------
 
-        case AddBuyerProfile.COMMAND_WORD, AddSellerProfile.COMMAND_WORD:
-            return new AddClientParser(commandWord).parse(arguments);
+        case AddBuyerProfileCommand.COMMAND_WORD, AddSellerProfileCommand.COMMAND_WORD:
+            return new AddClientProfileParser(commandWord).parse(arguments);
 
         case EditClientCommand.COMMAND_WORD:
             return new EditClientCommandParser().parse(arguments);

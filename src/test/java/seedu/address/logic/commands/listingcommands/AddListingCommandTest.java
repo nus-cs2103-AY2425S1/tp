@@ -36,7 +36,7 @@ import seedu.address.model.ReadOnlyListings;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.Region;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.ListingBuilder;
 
@@ -88,6 +88,7 @@ public class AddListingCommandTest {
     public void constructor_noBuyers_success() throws CommandException {
         ModelStubAcceptingListingAdded modelStub = new ModelStubAcceptingListingAdded();
         modelStub.addPerson(ALICE);
+
         CommandResult commandResult = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
                 PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
                 new HashSet<>()).execute(modelStub);
@@ -108,6 +109,7 @@ public class AddListingCommandTest {
         CommandResult commandResult = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
                 PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
                 new HashSet<>(List.of(INDEX_SECOND_PERSON, INDEX_THIRD_PERSON))).execute(modelStub);
+
         assertEquals(String.format(AddListingCommand.MESSAGE_SUCCESS, Messages.format(PASIR_RIS)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(PASIR_RIS), modelStub.listingsAdded);
@@ -118,6 +120,7 @@ public class AddListingCommandTest {
         AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
                 PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
                 new HashSet<>(List.of(INDEX_SECOND_PERSON, INDEX_THIRD_PERSON)));
+
         ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
         modelStub.addPerson(ALICE);
         modelStub.addPerson(DANIEL);
@@ -128,10 +131,12 @@ public class AddListingCommandTest {
     }
 
     @Test
-    public void execute_buyerAsSeller_throwsCommandException() {
+    public void execute_sellerNotOfTypeSeller_throwsCommandException() {
         AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
                 PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
                 new HashSet<>(List.of(INDEX_SECOND_PERSON, INDEX_THIRD_PERSON)));
+
+        // FIONA is a buyer
         ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
         modelStub.addPerson(FIONA);
         modelStub.addPerson(DANIEL);
@@ -143,10 +148,12 @@ public class AddListingCommandTest {
     }
 
     @Test
-    public void execute_sellerDoesNotExist_throwsCommandException() {
+    public void execute_sellerIndexOutOfBounds_throwsCommandException() {
         AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIFTH_PERSON,
-                new HashSet<>(List.of(INDEX_FOURTH_PERSON, INDEX_SIXTH_PERSON)));
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_THIRD_PERSON,
+                new HashSet<>(List.of(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON)));
+
+        // Only 2 people in the stub
         ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
         modelStub.addPerson(DANIEL);
         modelStub.addPerson(GEORGE);
@@ -156,18 +163,35 @@ public class AddListingCommandTest {
     }
 
     @Test
-    public void execute_buyerDoesNotExist_throwsCommandException() {
+    public void execute_buyerIndexOutOfBounds_throwsCommandException() {
         AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
                 PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
                 new HashSet<>(List.of(INDEX_SECOND_PERSON, INDEX_THIRD_PERSON)));
+
+        // Only 2 people in the stub
         ModelStub modelStub = new ModelStubWithListing(PASIR_RIS);
         modelStub.addPerson(ALICE);
-        // DANIEL does not exist (THIRD PERSON)
         modelStub.addPerson(GEORGE);
 
         assertThrows(CommandException.class,
                 String.format(Messages.MESSAGE_INVALID_BUYER_INDEX,
                         INDEX_THIRD_PERSON.getOneBased()), () -> addListingCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_buyerNotOfTypeBuyer_throwsCommandException() {
+        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
+                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
+                new HashSet<>(List.of(INDEX_SECOND_PERSON)));
+
+        // BENSON is a seller
+        ModelStub modelStub = new ModelStubAcceptingListingAdded();
+        modelStub.addPerson(ALICE);
+        modelStub.addPerson(BENSON);
+
+        assertThrows(CommandException.class,
+                String.format(AddListingCommand.MESSAGE_NOT_BUYER, INDEX_SECOND_PERSON.getOneBased(),
+                        BENSON.getName()), () -> addListingCommand.execute(modelStub));
     }
 
     // equals and toString methods
@@ -241,20 +265,6 @@ public class AddListingCommandTest {
                 + ", address=" + PASIR_RIS.getAddress()
                 + "}";
         assertEquals(expected, addListingCommand.toString());
-    }
-
-    @Test
-    public void execute_buyerNotOfTypeBuyer_throwsCommandException() {
-        AddListingCommand addListingCommand = new AddListingCommand(PASIR_RIS.getName(), PASIR_RIS.getPrice(),
-                PASIR_RIS.getArea(), PASIR_RIS.getAddress(), PASIR_RIS.getRegion(), INDEX_FIRST_PERSON,
-                new HashSet<>(List.of(INDEX_SECOND_PERSON)));
-        ModelStub modelStub = new ModelStubAcceptingListingAdded();
-        modelStub.addPerson(ALICE);
-        modelStub.addPerson(BENSON);
-
-        assertThrows(CommandException.class,
-                String.format(AddListingCommand.MESSAGE_NOT_BUYER, INDEX_SECOND_PERSON.getOneBased(),
-                        BENSON.getName()), () -> addListingCommand.execute(modelStub));
     }
 
     /**

@@ -10,16 +10,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonWithName;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalNames;
-
-import java.util.List;
-import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,8 +28,8 @@ import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Buyer;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -100,13 +96,9 @@ public class EditClientCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        Random random = new Random();
-        List<Name> typicalNames = getTypicalNames();
-        int randomIndex = random.nextInt(typicalNames.size() - 1);
+        showPersonAtIndex(model, INDEX_SECOND_PERSON);
 
-        showPersonWithName(model, typicalNames.get(randomIndex));
-
-        Index validIndex = Index.fromZeroBased(model.getFilteredPersonList().size() - 1);
+        Index validIndex = INDEX_FIRST_PERSON;
 
         Person personToEdit = model.getFilteredPersonList().get(validIndex.getZeroBased());
         Person editedPerson = new PersonBuilder(personToEdit).withName(VALID_NAME_BOB).buildBuyer();
@@ -134,11 +126,11 @@ public class EditClientCommandTest {
 
     @Test
     public void execute_editPersonToHaveSameAttributesAsDifferentPerson_failure() {
-        showPersonWithName(model, ALICE.getName());
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // Try to edit ALICE to have the same attributes as CARL
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(CARL).build();
-        EditClientCommand editClientCommand = new EditClientCommand(Index.fromZeroBased(0), descriptor);
+        EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON, descriptor);
 
         // Expect the duplicate person exception message
         assertCommandFailure(editClientCommand, model, EditClientCommand.MESSAGE_DUPLICATE_PERSON);
@@ -162,14 +154,9 @@ public class EditClientCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        Random random = new Random();
-        List<Name> typicalNames = getTypicalNames();
-        int randomIndex = random.nextInt(typicalNames.size() - 2);
-        showPersonWithName(model, typicalNames.get(randomIndex));
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        // Get the size of the filtered list (after applying filter) and create an index that's out of bounds for it
-        int filteredListSize = model.getFilteredPersonList().size();
-        Index outOfBoundsIndex = Index.fromZeroBased(filteredListSize);
+        Index outOfBoundsIndex = INDEX_SECOND_PERSON;
 
         EditClientCommand editClientCommand = new EditClientCommand(outOfBoundsIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());

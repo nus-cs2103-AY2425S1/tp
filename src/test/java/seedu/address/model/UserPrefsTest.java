@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 
 public class UserPrefsTest {
 
+    private static final String ADDRESS_BOOK_PATH = "data/addressbook.json";
+    private static final String LISTINGS_PATH = "data/listings.json";
+
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
         UserPrefs userPref = new UserPrefs();
@@ -27,11 +30,11 @@ public class UserPrefsTest {
         UserPrefs userPrefs = new UserPrefs();
         UserPrefs sameUserPrefs = new UserPrefs();
 
-        userPrefs.setAddressBookFilePath(Paths.get("data/addressbook.json"));
-        sameUserPrefs.setAddressBookFilePath(Paths.get("data/addressbook.json"));
+        userPrefs.setAddressBookFilePath(Paths.get(ADDRESS_BOOK_PATH));
+        sameUserPrefs.setAddressBookFilePath(Paths.get(ADDRESS_BOOK_PATH));
 
-        userPrefs.setListingsFilePath(Paths.get("data/listings.json"));
-        sameUserPrefs.setListingsFilePath(Paths.get("data/listings.json"));
+        userPrefs.setListingsFilePath(Paths.get(LISTINGS_PATH));
+        sameUserPrefs.setListingsFilePath(Paths.get(LISTINGS_PATH));
 
         assertTrue(userPrefs.equals(userPrefs));
 
@@ -51,11 +54,11 @@ public class UserPrefsTest {
         UserPrefs userPrefs = new UserPrefs();
         UserPrefs sameUserPrefs = new UserPrefs();
 
-        userPrefs.setAddressBookFilePath(Paths.get("data/addressbook.json"));
-        sameUserPrefs.setAddressBookFilePath(Paths.get("data/addressbook.json"));
+        userPrefs.setAddressBookFilePath(Paths.get(ADDRESS_BOOK_PATH));
+        sameUserPrefs.setAddressBookFilePath(Paths.get(ADDRESS_BOOK_PATH));
 
-        userPrefs.setListingsFilePath(Paths.get("data/listings.json"));
-        sameUserPrefs.setListingsFilePath(Paths.get("data/listings.json"));
+        userPrefs.setListingsFilePath(Paths.get(LISTINGS_PATH));
+        sameUserPrefs.setListingsFilePath(Paths.get(LISTINGS_PATH));
 
         assertEquals(userPrefs.hashCode(), userPrefs.hashCode());
 

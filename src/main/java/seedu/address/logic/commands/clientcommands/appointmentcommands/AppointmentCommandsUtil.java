@@ -3,9 +3,9 @@ package seedu.address.logic.commands.clientcommands.appointmentcommands;
 import java.util.Set;
 
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;

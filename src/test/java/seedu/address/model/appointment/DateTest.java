@@ -8,7 +8,10 @@ import org.junit.jupiter.api.Test;
 
 public class DateTest {
 
-    public static final String INVALID_FORMAT = "24/12/2024";
+    private static final String INVALID_FORMAT = "24/12/2024";
+    private static final String INVALID_DATE = "32-12-24";
+    private static final String VALID_DATE = "121224";
+    private static final String OTHER_DATE = "131224";
 
     @Test
     public void constructor_nullValues_throwsNullPointerException() {
@@ -22,7 +25,7 @@ public class DateTest {
 
     @Test
     public void equals() {
-        Date date = new Date("121224");
+        Date date = new Date(VALID_DATE);
         // null value -> returns false
         assertFalse(date.equals(null));
 
@@ -33,17 +36,15 @@ public class DateTest {
         assertTrue(date.equals(date));
 
         // same value -> returns true
-        Date otherDate = new Date("121224");
+        Date otherDate = new Date(VALID_DATE);
         assertTrue(date.equals(otherDate));
 
         // different value -> returns false
-        otherDate = new Date("131224");
+        otherDate = new Date(OTHER_DATE);
         assertFalse(date.equals(otherDate));
     }
     @Test
     public void parseDate_invalidFormat_throwsIllegalArgumentException() {
-        String invalidDate = "32-12-24";
-
-        assertThrows(IllegalArgumentException.class, () -> new Date(invalidDate));
+        assertThrows(IllegalArgumentException.class, () -> new Date(INVALID_DATE));
     }
 }

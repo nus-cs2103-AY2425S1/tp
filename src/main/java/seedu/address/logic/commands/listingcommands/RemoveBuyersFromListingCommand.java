@@ -88,7 +88,7 @@ public class RemoveBuyersFromListingCommand extends Command {
             Person buyerToRemove = lastShownPersonList.get(zeroBasedBuyer);
 
             // Check if the person is actually an instance of Buyer
-            ListingCommandsUtil.personIsNotBuyer(buyerToRemove, buyerToRemove.getRole(), buyerIndex);
+            ListingCommandsUtil.verifyPersonIsNotBuyer(buyerToRemove, buyerToRemove.getRole(), buyerIndex);
             // Check if the person is a buyer of the listing
             validateBuyerExistsInListing(existingBuyers, buyerToRemove, listingToEdit);
 

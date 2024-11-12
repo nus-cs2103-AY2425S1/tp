@@ -18,8 +18,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.clientcommands.AddBuyerProfile;
-import seedu.address.logic.commands.clientcommands.AddSellerProfile;
+import seedu.address.logic.commands.clientcommands.AddBuyerProfileCommand;
+import seedu.address.logic.commands.clientcommands.AddSellerProfileCommand;
+import seedu.address.logic.commands.clientcommands.DeleteClientProfileCommand;
 import seedu.address.logic.commands.clientcommands.ShowClientsCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -40,6 +41,9 @@ import seedu.address.testutil.PersonBuilder;
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
     private static final IOException DUMMY_AD_EXCEPTION = new AccessDeniedException("dummy access denied exception");
+    private static final String ADDRESS_BOOK_JSON = "addressBook.json";
+    private static final String USER_PREFS_JSON = "userPrefs.json";
+    private static final String LISTINGS_JSON = "listings.json";
 
     @TempDir
     public Path temporaryFolder;
@@ -51,9 +55,9 @@ public class LogicManagerTest {
     public void setUp() {
         model = new ModelManager();
         JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        JsonListingsStorage listingsStorage = new JsonListingsStorage(temporaryFolder.resolve("listings.json"));
+                new JsonAddressBookStorage(temporaryFolder.resolve(ADDRESS_BOOK_JSON));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve(USER_PREFS_JSON));
+        JsonListingsStorage listingsStorage = new JsonListingsStorage(temporaryFolder.resolve(LISTINGS_JSON));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, listingsStorage);
         logic = new LogicManager(model, storage);
     }
@@ -69,13 +73,13 @@ public class LogicManagerTest {
         // Reset the model to avoid conflicts from previous tests
         model = new ModelManager();
 
-        String addBuyerCommand = AddBuyerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " "
+        String addBuyerCommand = AddBuyerProfileCommand.COMMAND_WORD + " " + NAME_DESC_AMY + " "
                 + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
 
         Buyer expectedBuyer = new PersonBuilder(AMY).buildBuyer();
 
-        String expectedMessage = String.format("New buyer added: %1s.\nPhone number: %2s and Email: %3s",
-                expectedBuyer.getName(), expectedBuyer.getPhone(), expectedBuyer.getEmail());
+        String expectedMessage = String.format(AddBuyerProfileCommand.MESSAGE_SUCCESS,
+                Messages.format(expectedBuyer));
 
         model.addPerson(expectedBuyer);
         assertCommandSuccess(addBuyerCommand, expectedMessage, model);
@@ -86,7 +90,7 @@ public class LogicManagerTest {
         // Reset the model to avoid conflicts from previous tests
         model = new ModelManager();
 
-        String addSellerCommand = AddSellerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " "
+        String addSellerCommand = AddSellerProfileCommand.COMMAND_WORD + " " + NAME_DESC_AMY + " "
                 + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
 
         // Creating a seller with empty appointment, and no tags
@@ -94,8 +98,8 @@ public class LogicManagerTest {
                 .withTags() // No tags
                 .buildSeller();
 
-        String expectedMessage = String.format("New seller added: %1s.\nPhone number: %2s and Email: %3s",
-                expectedSeller.getName(), expectedSeller.getPhone(), expectedSeller.getEmail());
+        String expectedMessage = String.format(AddSellerProfileCommand.MESSAGE_SUCCESS,
+                Messages.format(expectedSeller));
 
         // Execute the command and check for success
         assertCommandSuccess(addSellerCommand, expectedMessage, model);
@@ -104,7 +108,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String invalidIndex = Integer.toString(model.getFilteredPersonList().size() + 1);
-        String deleteCommand = "deleteclient " + invalidIndex;
+        String deleteCommand = DeleteClientProfileCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -121,9 +125,9 @@ public class LogicManagerTest {
     public void execute_listCommandWhenNoClients_throwsCommandException() {
         model = new ModelManager();
         logic = new LogicManager(model, new StorageManager(
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json")),
-                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json")),
-                new JsonListingsStorage(temporaryFolder.resolve("listings.json")))
+                new JsonAddressBookStorage(temporaryFolder.resolve(ADDRESS_BOOK_JSON)),
+                new JsonUserPrefsStorage(temporaryFolder.resolve(USER_PREFS_JSON)),
+                new JsonListingsStorage(temporaryFolder.resolve(LISTINGS_JSON)))
         );
 
         String listCommand = ShowClientsCommand.COMMAND_WORD;
@@ -225,7 +229,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Trigger the saveAddressBook method by executing an add buyer command
-        String addBuyerCommand = AddBuyerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " "
+        String addBuyerCommand = AddBuyerProfileCommand.COMMAND_WORD + " " + NAME_DESC_AMY + " "
                 + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
         Buyer expectedBuyer = new PersonBuilder(AMY).withTags().buildBuyer();
         ModelManager expectedModel = new ModelManager();
@@ -236,9 +240,9 @@ public class LogicManagerTest {
     public void getAddressBook_returnsCorrectAddressBook() {
         Model testModel = new ModelManager();
         Logic testLogic = new LogicManager(testModel, new StorageManager(
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json")),
-                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json")),
-                new JsonListingsStorage(temporaryFolder.resolve("listings.json"))));
+                new JsonAddressBookStorage(temporaryFolder.resolve(ADDRESS_BOOK_JSON)),
+                new JsonUserPrefsStorage(temporaryFolder.resolve(USER_PREFS_JSON)),
+                new JsonListingsStorage(temporaryFolder.resolve(LISTINGS_JSON))));
 
         assertEquals(testModel.getAddressBook(), testLogic.getAddressBook());
     }
@@ -246,9 +250,9 @@ public class LogicManagerTest {
     public void getListingsFilePath_returnsCorrectListingsFilePath() {
         Model testModel = new ModelManager();
         Logic testLogic = new LogicManager(testModel, new StorageManager(
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json")),
-                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json")),
-                new JsonListingsStorage(temporaryFolder.resolve("listings.json"))));
+                new JsonAddressBookStorage(temporaryFolder.resolve(ADDRESS_BOOK_JSON)),
+                new JsonUserPrefsStorage(temporaryFolder.resolve(USER_PREFS_JSON)),
+                new JsonListingsStorage(temporaryFolder.resolve(LISTINGS_JSON))));
 
         assertEquals(testModel.getListingsFilePath(), testLogic.getListingsFilePath());
     }

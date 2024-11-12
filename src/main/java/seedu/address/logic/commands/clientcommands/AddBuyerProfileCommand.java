@@ -5,17 +5,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.model.person.Seller;
-
+import seedu.address.model.person.Buyer;
 
 /**
  * Adds a person to the address book.
  */
-public class AddSellerProfile extends AddClientProfile {
+public class AddBuyerProfileCommand extends AddClientProfileCommand {
 
-    public static final String COMMAND_WORD = "seller";
+    public static final String COMMAND_WORD = "buyer";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a seller to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a buyer to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -28,11 +27,14 @@ public class AddSellerProfile extends AddClientProfile {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New seller added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This seller already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New buyer added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This buyer already exists in the address book";
 
-    public AddSellerProfile(Seller seller) {
-        super(seller);
+    /**
+     * Creates an AddClientProfile to add the specified {@code Person}
+     */
+    public AddBuyerProfileCommand(Buyer buyer) {
+        super(buyer);
     }
 
     @Override

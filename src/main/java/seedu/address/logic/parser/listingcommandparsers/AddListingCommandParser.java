@@ -23,7 +23,7 @@ import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 
 /**
  * Parses input arguments and creates a new AddListingCommand object

@@ -17,7 +17,7 @@ import seedu.address.logic.commands.listingcommands.EditListingCommand;
 import seedu.address.logic.commands.listingcommands.EditListingCommand.EditListingDescriptor;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 
 public class EditListingCommandParserTest {
     private static final String VALID_LISTING_INDEX = "1";

@@ -23,11 +23,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Seller;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddClientProfileTest {
+public class AddClientProfileCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddBuyerProfile(null));
+        assertThrows(NullPointerException.class, () -> new AddBuyerProfileCommand(null));
     }
 
     @Test
@@ -35,9 +35,9 @@ public class AddClientProfileTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Buyer validPerson = new PersonBuilder().buildBuyer();
 
-        CommandResult commandResult = new AddBuyerProfile(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddBuyerProfileCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddBuyerProfile.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddBuyerProfileCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -45,25 +45,25 @@ public class AddClientProfileTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Buyer validPerson = new PersonBuilder().buildBuyer();
-        AddBuyerProfile addCommand = new AddBuyerProfile(validPerson);
+        AddBuyerProfileCommand addCommand = new AddBuyerProfileCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class,
-                AddBuyerProfile.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+                AddBuyerProfileCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Buyer alice = new PersonBuilder().withName("Alice").buildBuyer();
         Buyer bob = new PersonBuilder().withName("Bob").buildBuyer();
-        AddBuyerProfile addAliceCommand = new AddBuyerProfile(alice);
-        AddBuyerProfile addBobCommand = new AddBuyerProfile(bob);
+        AddBuyerProfileCommand addAliceCommand = new AddBuyerProfileCommand(alice);
+        AddBuyerProfileCommand addBobCommand = new AddBuyerProfileCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddBuyerProfile addAliceCommandCopy = new AddBuyerProfile(alice);
+        AddBuyerProfileCommand addAliceCommandCopy = new AddBuyerProfileCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -78,8 +78,8 @@ public class AddClientProfileTest {
 
     @Test
     public void toStringMethod() {
-        AddSellerProfile addCommand = new AddSellerProfile((Seller) ALICE);
-        String expected = AddSellerProfile.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        AddSellerProfileCommand addCommand = new AddSellerProfileCommand((Seller) ALICE);
+        String expected = AddSellerProfileCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addCommand.toString());
     }
 

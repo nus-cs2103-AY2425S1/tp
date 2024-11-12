@@ -25,11 +25,11 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.clientcommands.AddBuyerProfile;
-import seedu.address.logic.commands.clientcommands.AddSellerProfile;
+import seedu.address.logic.commands.clientcommands.AddBuyerProfileCommand;
+import seedu.address.logic.commands.clientcommands.AddSellerProfileCommand;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Seller;
 import seedu.address.testutil.PersonBuilder;
@@ -38,7 +38,7 @@ public class AddClientProfileParserTest {
 
     @Test
     public void parse_addBuyer_success() {
-        AddClientParser parser = new AddClientParser("buyer");
+        AddClientProfileParser parser = new AddClientProfileParser("buyer");
         Buyer expectedBuyer = new PersonBuilder()
                 .withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB)
@@ -47,12 +47,12 @@ public class AddClientProfileParserTest {
 
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                new AddBuyerProfile(expectedBuyer));
+                new AddBuyerProfileCommand(expectedBuyer));
     }
 
     @Test
     public void parse_addSeller_success() {
-        AddClientParser parser = new AddClientParser("seller");
+        AddClientProfileParser parser = new AddClientProfileParser("seller");
         Seller expectedSeller = new PersonBuilder()
                 .withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB)
@@ -61,13 +61,13 @@ public class AddClientProfileParserTest {
 
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                new AddSellerProfile(expectedSeller));
+                new AddSellerProfileCommand(expectedSeller));
     }
 
     @Test
     public void parse_allFieldsPresent_success() {
-        AddClientParser buyerParser = new AddClientParser("buyer");
-        AddClientParser sellerParser = new AddClientParser("seller");
+        AddClientProfileParser buyerParser = new AddClientProfileParser("buyer");
+        AddClientProfileParser sellerParser = new AddClientProfileParser("seller");
 
         // Buyer case
         Buyer expectedBuyer = new PersonBuilder()
@@ -79,7 +79,7 @@ public class AddClientProfileParserTest {
 
         assertParseSuccess(buyerParser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_FRIEND,
-                new AddBuyerProfile(expectedBuyer));
+                new AddBuyerProfileCommand(expectedBuyer));
 
         // Seller case
         Seller expectedSeller = new PersonBuilder()
@@ -91,12 +91,12 @@ public class AddClientProfileParserTest {
 
         assertParseSuccess(sellerParser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_FRIEND,
-                new AddSellerProfile(expectedSeller));
+                new AddSellerProfileCommand(expectedSeller));
     }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        AddClientParser buyerParser = new AddClientParser("buyer");
+        AddClientProfileParser buyerParser = new AddClientProfileParser("buyer");
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB;
 
         // multiple names
@@ -120,26 +120,26 @@ public class AddClientProfileParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        AddClientParser buyerParser = new AddClientParser("buyer");
-        AddClientParser sellerParser = new AddClientParser("seller");
+        AddClientProfileParser buyerParser = new AddClientProfileParser("buyer");
+        AddClientProfileParser sellerParser = new AddClientProfileParser("seller");
 
         // Buyer case
         Buyer expectedBuyer = new PersonBuilder(AMY).withTags().buildBuyer();
         assertParseSuccess(buyerParser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
-                new AddBuyerProfile(expectedBuyer));
+                new AddBuyerProfileCommand(expectedBuyer));
 
         // Seller case
         Seller expectedSeller = new PersonBuilder(AMY).withTags().buildSeller();
         assertParseSuccess(sellerParser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
-                new AddSellerProfile(expectedSeller));
+                new AddSellerProfileCommand(expectedSeller));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        AddClientParser buyerParser = new AddClientParser("buyer");
-        AddClientParser sellerParser = new AddClientParser("seller");
+        AddClientProfileParser buyerParser = new AddClientProfileParser("buyer");
+        AddClientProfileParser sellerParser = new AddClientProfileParser("seller");
 
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyerProfile.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyerProfileCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(buyerParser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB, expectedMessage);
@@ -157,7 +157,7 @@ public class AddClientProfileParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        AddClientParser buyerParser = new AddClientParser("buyer");
+        AddClientProfileParser buyerParser = new AddClientProfileParser("buyer");
 
         // invalid name
         assertParseFailure(buyerParser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB,

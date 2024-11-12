@@ -34,6 +34,7 @@ public class UniqueListingListTest {
     @Test
     public void contains_listingInList_returnsTrue() {
         uniqueListingList.add(PASIR_RIS);
+
         assertTrue(uniqueListingList.contains(PASIR_RIS));
     }
 
@@ -41,6 +42,7 @@ public class UniqueListingListTest {
     public void contains_listingWithSameIdentityFieldsInList_returnsTrue() {
         uniqueListingList.add(PASIR_RIS);
         Listing editedListing = new ListingBuilder(PASIR_RIS).build();
+
         assertTrue(uniqueListingList.contains(editedListing));
     }
 
@@ -52,6 +54,7 @@ public class UniqueListingListTest {
     @Test
     public void add_duplicateListing_throwsDuplicateListingException() {
         uniqueListingList.add(PASIR_RIS);
+
         assertThrows(DuplicateListingException.class, () -> uniqueListingList.add(PASIR_RIS));
     }
 
@@ -74,8 +77,10 @@ public class UniqueListingListTest {
     public void setListing_editedListingIsSameListing_success() {
         uniqueListingList.add(PASIR_RIS);
         uniqueListingList.setListing(PASIR_RIS, PASIR_RIS);
+
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
         expectedUniqueListingList.add(PASIR_RIS);
+
         assertEquals(uniqueListingList, expectedUniqueListingList);
     }
 
@@ -84,8 +89,10 @@ public class UniqueListingListTest {
         uniqueListingList.add(PASIR_RIS);
         Listing editedListing = new ListingBuilder(PASIR_RIS).build();
         uniqueListingList.setListing(PASIR_RIS, editedListing);
+
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
         expectedUniqueListingList.add(editedListing);
+
         assertEquals(uniqueListingList, expectedUniqueListingList);
     }
 
@@ -93,8 +100,10 @@ public class UniqueListingListTest {
     public void setListing_editedListingHasDifferentIdentity_success() {
         uniqueListingList.add(PASIR_RIS);
         uniqueListingList.setListing(PASIR_RIS, TAMPINES);
+
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
         expectedUniqueListingList.add(TAMPINES);
+
         assertEquals(uniqueListingList, expectedUniqueListingList);
     }
 
@@ -102,6 +111,7 @@ public class UniqueListingListTest {
     public void setListing_editedListingHasNonUniqueIdentity_throwsDuplicateListingException() {
         uniqueListingList.add(PASIR_RIS);
         uniqueListingList.add(TAMPINES);
+
         assertThrows(DuplicateListingException.class, () -> uniqueListingList.setListing(PASIR_RIS, TAMPINES));
     }
 
@@ -119,7 +129,9 @@ public class UniqueListingListTest {
     public void remove_existingListing_removesListing() {
         uniqueListingList.add(PASIR_RIS);
         uniqueListingList.remove(PASIR_RIS);
+
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
+
         assertEquals(expectedUniqueListingList, uniqueListingList);
     }
 
@@ -131,8 +143,10 @@ public class UniqueListingListTest {
     @Test
     public void setListings_uniqueListingList_replacesOwnListWithProvidedUniqueListingList() {
         uniqueListingList.add(PASIR_RIS);
+
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
         expectedUniqueListingList.add(TAMPINES);
+
         uniqueListingList.setListings(expectedUniqueListingList);
         assertEquals(expectedUniqueListingList, uniqueListingList);
     }
@@ -147,14 +161,17 @@ public class UniqueListingListTest {
         uniqueListingList.add(PASIR_RIS);
         List<Listing> listingList = Collections.singletonList(TAMPINES);
         uniqueListingList.setListings(listingList);
+
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
         expectedUniqueListingList.add(TAMPINES);
+
         assertEquals(expectedUniqueListingList, uniqueListingList);
     }
 
     @Test
     public void setListings_listWithDuplicateListings_throwsDuplicateListingException() {
         List<Listing> listWithDuplicateListings = Arrays.asList(PASIR_RIS, PASIR_RIS);
+
         assertThrows(DuplicateListingException.class, () -> uniqueListingList.setListings(listWithDuplicateListings));
     }
 

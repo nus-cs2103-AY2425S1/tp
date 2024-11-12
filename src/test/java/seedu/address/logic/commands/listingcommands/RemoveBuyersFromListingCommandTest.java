@@ -34,7 +34,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.listing.Listing;
-import seedu.address.model.person.Name;
+import seedu.address.model.name.Name;
 import seedu.address.testutil.ListingBuilder;
 
 public class RemoveBuyersFromListingCommandTest {
@@ -73,6 +73,7 @@ public class RemoveBuyersFromListingCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalListings());
         Listing editedListing = new ListingBuilder(VALID_LISTING).withBuyers(GEORGE).build();
         expectedModel.setListing(VALID_LISTING, editedListing);
+
         assertCommandSuccess(removeBuyersFromListingCommand, model, expectedMessage, expectedModel);
     }
 
@@ -89,6 +90,7 @@ public class RemoveBuyersFromListingCommandTest {
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         RemoveBuyersFromListingCommand removeBuyersFromListingCommand =
                 new RemoveBuyersFromListingCommand(INDEX_FIRST_LISTING, VALID_BUYER_INDEXES);
+
         assertCommandFailure(removeBuyersFromListingCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
@@ -96,6 +98,7 @@ public class RemoveBuyersFromListingCommandTest {
     public void execute_listingIndexOutOfBoundsUnfilteredListingList_throwsCommandException() {
         RemoveBuyersFromListingCommand removeBuyersFromListingCommand =
                 new RemoveBuyersFromListingCommand(LISTING_INDEX_OUT_OF_BOUNDS, VALID_BUYER_INDEXES);
+
         assertCommandFailure(removeBuyersFromListingCommand, model,
                 Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
     }
@@ -105,6 +108,7 @@ public class RemoveBuyersFromListingCommandTest {
         showListingAtIndex(model, INDEX_SECOND_LISTING);
         RemoveBuyersFromListingCommand removeBuyersFromListingCommand =
                 new RemoveBuyersFromListingCommand(LISTING_INDEX_OUT_OF_BOUNDS, VALID_BUYER_INDEXES);
+
         assertCommandFailure(removeBuyersFromListingCommand, model,
                 Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
     }
@@ -113,6 +117,7 @@ public class RemoveBuyersFromListingCommandTest {
     public void execute_inputSeller_throwsCommandException() {
         RemoveBuyersFromListingCommand removeBuyersFromListingCommand =
                 new RemoveBuyersFromListingCommand(INDEX_FIRST_LISTING, SELLER_INDEX);
+
         assertCommandFailure(removeBuyersFromListingCommand, model,
                 String.format(RemoveBuyersFromListingCommand.MESSAGE_PERSON_NOT_BUYER,
                         INDEX_FIRST_LISTING.getOneBased(), SELLER_NAME));
@@ -122,6 +127,7 @@ public class RemoveBuyersFromListingCommandTest {
     public void execute_notBuyerOfListing_throwsCommandException() {
         RemoveBuyersFromListingCommand removeBuyersFromListingCommand =
                 new RemoveBuyersFromListingCommand(INDEX_FIRST_LISTING, NOT_BUYER_OF_LISTING);
+
         assertCommandFailure(removeBuyersFromListingCommand, model,
                 String.format(RemoveBuyersFromListingCommand.MESSAGE_NOT_BUYER_FOR_LISTING,
                         ELLE.getName(), Messages.format(VALID_LISTING)));
@@ -131,6 +137,7 @@ public class RemoveBuyersFromListingCommandTest {
     public void execute_emptySet_throwsCommandException() {
         RemoveBuyersFromListingCommand removeBuyersFromListingCommand =
                 new RemoveBuyersFromListingCommand(INDEX_FIRST_LISTING, EMPTY_SET);
+
         assertCommandFailure(removeBuyersFromListingCommand, model,
                 RemoveBuyersFromListingCommand.MESSAGE_EMPTY_SET);
     }

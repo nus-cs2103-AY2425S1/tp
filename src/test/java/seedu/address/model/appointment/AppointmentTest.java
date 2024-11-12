@@ -6,9 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class AppointmentTest {
+
+    private static final String VALID_DATE = "121224";
+    private static final String VALID_FROM = "0800";
+    private static final String VALID_TO = "1000";
+    private static final String OTHER_DATE = "131224";
+    private static final String OTHER_FROM = "0900";
+    private static final String OTHER_TO = "1100";
+
+
     @Test
     public void equals() {
-        Appointment appointment = new Appointment(new Date("121224"), new From("0800"), new To("1000"));
+        Appointment appointment = new Appointment(new Date(VALID_DATE), new From(VALID_FROM), new To(VALID_TO));
 
         // null value -> return false
         assertFalse(appointment.equals(null));
@@ -20,19 +29,19 @@ public class AppointmentTest {
         assertTrue(appointment.equals(appointment));
 
         // same values -> returns true
-        Appointment otherAppointment = new Appointment(new Date("121224"), new From("0800"), new To("1000"));
+        Appointment otherAppointment = new Appointment(new Date(VALID_DATE), new From(VALID_FROM), new To(VALID_TO));
         assertTrue(appointment.equals(otherAppointment));
 
         // different date -> returns false
-        otherAppointment = new Appointment(new Date("131224"), new From("0800"), new To("1000"));
+        otherAppointment = new Appointment(new Date(OTHER_DATE), new From(VALID_FROM), new To(VALID_TO));
         assertFalse(appointment.equals(otherAppointment));
 
         // different from -> returns false
-        otherAppointment = new Appointment(new Date("121224"), new From("0900"), new To("1000"));
+        otherAppointment = new Appointment(new Date(VALID_DATE), new From(OTHER_FROM), new To(VALID_TO));
         assertFalse(appointment.equals(otherAppointment));
 
         // different to -> returns false
-        otherAppointment = new Appointment(new Date("121224"), new From("0800"), new To("1100"));
+        otherAppointment = new Appointment(new Date(VALID_DATE), new From(VALID_FROM), new To(OTHER_TO));
         assertFalse(appointment.equals(otherAppointment));
 
     }

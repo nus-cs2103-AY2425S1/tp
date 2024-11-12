@@ -9,17 +9,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.clientcommands.AddBuyerProfile;
-import seedu.address.logic.commands.clientcommands.AddSellerProfile;
+import seedu.address.logic.commands.clientcommands.AddBuyerProfileCommand;
+import seedu.address.logic.commands.clientcommands.AddSellerProfileCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.name.Name;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
@@ -28,10 +28,10 @@ import seedu.address.model.tag.Tag;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddClientParser implements Parser<Command> {
+public class AddClientProfileParser implements Parser<Command> {
     private final String role;
 
-    public AddClientParser(String commandWord) {
+    public AddClientProfileParser(String commandWord) {
         role = commandWord;
     }
 
@@ -64,7 +64,9 @@ public class AddClientParser implements Parser<Command> {
 
         if (hasMissingPrefix) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    role.equals("buyer") ? AddBuyerProfile.MESSAGE_USAGE : AddSellerProfile.MESSAGE_USAGE));
+                    role.equals("buyer")
+                    ? AddBuyerProfileCommand.MESSAGE_USAGE
+                    : AddSellerProfileCommand.MESSAGE_USAGE));
         }
     }
 
@@ -72,10 +74,10 @@ public class AddClientParser implements Parser<Command> {
 
         if (role.equals("buyer")) {
             Buyer buyer = new Buyer(name, phone, email, tagList, appointment);
-            return new AddBuyerProfile(buyer);
+            return new AddBuyerProfileCommand(buyer);
         } else {
             Seller seller = new Seller(name, phone, email, tagList, appointment);
-            return new AddSellerProfile(seller);
+            return new AddSellerProfileCommand(seller);
         }
     }
 }

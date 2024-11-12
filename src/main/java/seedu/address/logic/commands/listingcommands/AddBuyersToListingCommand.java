@@ -76,7 +76,7 @@ public class AddBuyersToListingCommand extends Command {
             CommandUtils.handleInvalidPersonIndex(zeroBasedBuyer, lastShownPersonList.size());
 
             Person buyerToAdd = lastShownPersonList.get(zeroBasedBuyer);
-            ListingCommandsUtil.personIsNotBuyer(buyerToAdd, buyerToAdd.getRole(), buyerIndex);
+            ListingCommandsUtil.verifyPersonIsNotBuyer(buyerToAdd, buyerToAdd.getRole(), buyerIndex);
 
             // Add the buyer to newBuyers set only if not already in existingBuyers
             if (!existingBuyers.contains(buyerToAdd)) {

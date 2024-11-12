@@ -3,12 +3,14 @@ package seedu.address.logic.commands.listingcommands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showListingAtIndex;
-import static seedu.address.logic.commands.CommandTestUtil.showListingWithName;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_LISTING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LISTING;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_LISTING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LISTING;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SEVENTH_LISTING;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SIXTH_LISTING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_LISTING;
 import static seedu.address.testutil.TypicalListings.getTypicalListings;
-import static seedu.address.testutil.TypicalListings.getTypicalNames;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -49,25 +51,16 @@ public class ShowListingsCommandTest {
         showListingAtIndex(model, INDEX_THIRD_LISTING);
         assertCommandSuccess(new ShowListingsCommand(), model, ShowListingsCommand.MESSAGE_SUCCESS, expectedModel);
 
-        showListingWithName(model, getTypicalNames().get(0));
+        showListingAtIndex(model, INDEX_FOURTH_LISTING);
         assertCommandSuccess(new ShowListingsCommand(), model, ShowListingsCommand.MESSAGE_SUCCESS, expectedModel);
 
-        showListingWithName(model, getTypicalNames().get(1));
+        showListingAtIndex(model, INDEX_FIFTH_LISTING);
         assertCommandSuccess(new ShowListingsCommand(), model, ShowListingsCommand.MESSAGE_SUCCESS, expectedModel);
 
-        showListingWithName(model, getTypicalNames().get(2));
+        showListingAtIndex(model, INDEX_SIXTH_LISTING);
         assertCommandSuccess(new ShowListingsCommand(), model, ShowListingsCommand.MESSAGE_SUCCESS, expectedModel);
 
-        showListingWithName(model, getTypicalNames().get(3));
-        assertCommandSuccess(new ShowListingsCommand(), model, ShowListingsCommand.MESSAGE_SUCCESS, expectedModel);
-
-        showListingWithName(model, getTypicalNames().get(4));
-        assertCommandSuccess(new ShowListingsCommand(), model, ShowListingsCommand.MESSAGE_SUCCESS, expectedModel);
-
-        showListingWithName(model, getTypicalNames().get(5));
-        assertCommandSuccess(new ShowListingsCommand(), model, ShowListingsCommand.MESSAGE_SUCCESS, expectedModel);
-
-        showListingWithName(model, getTypicalNames().get(6));
+        showListingAtIndex(model, INDEX_SEVENTH_LISTING);
         assertCommandSuccess(new ShowListingsCommand(), model, ShowListingsCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

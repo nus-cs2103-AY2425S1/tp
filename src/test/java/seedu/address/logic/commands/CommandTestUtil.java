@@ -27,7 +27,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.listing.Listing;
 import seedu.address.model.listing.ListingContainsKeywordsPredicate;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -60,9 +59,6 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
 
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final String VALID_NAME_PASIR_RIS = "Pasir Ris Condo";
     public static final String VALID_ADDRESS_PASIR_RIS = "123 Pasir Ris Drive 3";
@@ -157,18 +153,6 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
-    /**
-     * Updates {@code model}'s filtered list to show only the person with the given {@code targetName} in the
-     * {@code model}'s address book.
-     */
-    public static void showPersonWithName(Model model, Name targetName) {
-        Person person = model.getPersonByName(targetName);
-        assertTrue(model.hasPerson(person));
-        final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-
-        assertEquals(1, model.getFilteredPersonList().size());
-    }
 
     /**
      * Updates {@code model}'s filtered list to show only the listing at the given {@code targetIndex} in the
@@ -178,19 +162,6 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredListingList().size());
 
         Listing listing = model.getFilteredListingList().get(targetIndex.getZeroBased());
-        final String[] splitName = listing.getName().fullName.split("\\s+");
-        model.updateFilteredListingList(new ListingContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-
-        assertEquals(1, model.getFilteredListingList().size());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show only the listing with the given {@code targetName} in the
-     * {@code model}'s address book.
-     */
-    public static void showListingWithName(Model model, Name targetName) {
-        Listing listing = model.getListingByName(targetName);
-        assertTrue(model.hasListing(listing));
         final String[] splitName = listing.getName().fullName.split("\\s+");
         model.updateFilteredListingList(new ListingContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
