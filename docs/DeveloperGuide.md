@@ -119,8 +119,9 @@ How the parsing works:
 
 Output after parsing:
 * If an invalid command is input, a help message is shown to a user to specify the proper use of the command.
-* Depending on the parameters input by the user, the same command type can result in different output. 
+* Depending on the parameters input by the user, the same command type can result in different outputs. 
   * For example, the `filter` command can filter by either `subject` or `yearGroup` as shown below.
+  * Calling the `list` command reverts the shown list to show all students again.
 
 <img src="images/FilterActivityDiagram.png" width="600"/>
 
@@ -266,7 +267,7 @@ _{more aspects and alternatives to be added}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* people who work in management/administration of tuition centres in **Singapore**
+* people who work in management/administration of tuition centres for primary and secondary schools in **Singapore**
 * manages a tuition centre of **small to medium size (roughly a few hundred students)**
 
 **Value proposition**: Centralizes contact details, tracks student data and offers functions that improve administrative efficiency and organization for a tuition centre.
@@ -278,18 +279,19 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                           | I want to …​                        | So that I can…​                                                         |
-|----------|-----------------------------------|-------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | administrator of a tuition centre | view all students' contact details  | easily access everyone's details at one place                           |
-| `* * *`  | administrator of a tuition centre | add a new person                    | add new contacts for newly enrolled students                            |
-| `* * *`  | administrator of a tuition centre | delete a student                    | remove students that are no longer enrolled                             |
-| `* * *`  | administrator of a tuition centre | find a student by name              | locate details of students without having to go through the entire list |
-| `* * *`  | administrator of a tuition centre | add subjects taken by student       | add student's subject details without creating a new entry              |
-| `* *`    | administrator of a tuition centre | filter students based on a category | easily see all students that fall under that category                   |
-| `* *`    | administrator of a tuition centre | edit student contact                | update student details when they are changed                            |
-| `* *`    | new user                          | see what commands are available     | refer to instructions when I forget how to use the App                  |
-| `*`      | administrator of a tuition centre | clear all contacts                  | empty the address book for a new academic year                          |
-| `*`      | administrator of a tuition centre | track class size                    | see if classes are nearing capacity or undersubscribed                  |
+| Priority | As a …​                           | I want to …​                        | So that I can…​                                                                          |
+|----------|-----------------------------------|-------------------------------------|------------------------------------------------------------------------------------------|
+| `* * *`  | administrator of a tuition centre | view all students' details          | easily consolidate all information in one place                                          |
+| `* * *`  | administrator of a tuition centre | add a new student                   | store details about newly enrolled students                                              |
+| `* * *`  | administrator of a tuition centre | delete a student                    | remove students that are no longer enrolled                                              |
+| `* * *`  | administrator of a tuition centre | find a student by name              | locate details of students without having to go through the entire list                  |
+| `* * *`  | administrator of a tuition centre | add subjects taken by student       | add student's subject details without creating a new entry                               |
+| `* *`    | administrator of a tuition centre | filter students based on a category | easily see all students that fall under that category                                    |
+| `* *`    | administrator of a tuition centre | sort students based on an order     | group students with similar needs, monitor their progress easily                         |
+| `* *`    | administrator of a tuition centre | edit student contact                | update student details when they are changed without needing to create a new entry       |
+| `* *`    | new user                          | see what commands are available     | refer to instructions when I forget how to use the app                                   |
+| `*`      | administrator of a tuition centre | clear all contacts                  | empty the address book for a new academic year instead of deleting entries one at a time |
+| `*`      | administrator of a tuition centre | track class size                    | see if classes are nearing capacity or undersubscribed                                   |
 
 
 ### Use cases
@@ -691,66 +693,243 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file. <br>
+       Expected: A help window appears for first-time users, along with the GUI displaying a set of sample contacts. The window size may not be optimal.
 
-1. Saving window preferences
+2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Resize the window to an optimal size, move it to a different location and close it.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Relaunch the app by double-clicking the JAR file.<br>
+       Expected: No help window appears. The most recent window size and location are retained.
 
-1. _{ more test cases …​ }_
+### Adding a student 
 
-### Deleting a person
+1. Adding a student with a new NRIC
+   1. Prerequisites: Student with NRIC number T3848559A does not exist in the system.
+   2. Test case: `add n\Sam Tan i\T3848559A yg\3 p\81003999 e\samtan@gmail.com a\9 Smith Street s\Science`<br>
+       Expected: Student named Sam Tan with NRIC T3848559A is added to the list.
+2. Adding a student with an existing name but new NRIC
+   1. Prerequisites: A student named Sam Tan exists in the system.
+   2. Test case: `add n\Sam Tan i\S2684225J yg\2 p\88247432 e\sammmie@gmail.com a\16 Next Street s\Math`<br>
+       Expected: Student named Sam Tan with NRIC S2684225J is added to the list.
+3. Adding a student with an existing NRIC
+   1. Prerequisites: A student with NRIC number T3848559A exists in the system.
+   2. Test case: `add n\John Doe i\T3848559A yg\2 p\91234567 e\johndoe@yahoo.com a\10 Orchard Road s\Science s\Math`<br>
+       Expected: Error message indicating that another student with the same NRIC already exists in the system. 
 
-1. Deleting a person while all persons are being shown
+### Editing a student
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Editing an existing student's details
+    1. Prerequisites: A student with ID S00001 exists in the system.
+    2. Test case: `edit s00001 p\91234567 a\18 Tampines Road`<br>
+        Expected: Student with ID S00001 is updated with phone number "91234567" and address "18 Tampines Road". 
+        Success message is shown in the message box.
+2. Editing a non-existent student's detail
+   1. Prerequisites: Student with ID S00999 does not exist in the system.
+   2. Test case: `edit s00999 p\84754243 a\25 Orchard Road`<br>
+       Expected: Error message indicating that no student is found with the provided student ID. 
+3. Editing a student's NRIC to match an existing student's NRIC.
+   1. Prerequisites: 
+       * Student with ID S00001 exists in the system.
+       * Another student with NRIC S2684225J exists in the system.
+   2. Test case: `edit s00001 i\S2684225J`<br>
+       Expected: Error message indicating that another student with the same NRIC already exists in the system.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+### Adding subject(s) to a student
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. Adding one subject to a student
+    1. Prerequisites: Student with ID S00001 exists in the system.
+    2. Test case: `addsubject S00001 s\Math`<br>
+        Expected: Student with ID S00001 is added to the subject Math. Existing subjects remain unchanged.
+2. Adding multiple subjects to a student
+    1. Prerequisites: Student with ID s00001 exists in the system.
+    2. Test case: `addsubject S00001 s\History s\Chinese`
+        Expected: Student with ID S00001 is added to subjects History and Chinese. The existing subjects remained unchanged.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+### Deleting a student
 
-1. _{ more test cases …​ }_
+1. Deleting an existing student
+   1. Prerequisites: Student with ID S00001 exists in the system.
+   2. Test case: `delete S00001`<br>
+       Expected: Student with ID S00001 is deleted from the list. Details of the deleted student are shown in the success message.
+2. Deleting a non-existent student
+   1. Prerequisites: Student with ID S00001 does not exist in the system. 
+   2. Test case: `delete S00001`<br>
+       Expected: No student is deleted. Error message indicating that no student is found with the provided student ID.
+
+### Viewing student's detail
+
+1. Viewing details of an existing student
+   1. Prerequisites: Student with ID S00002 exists in the system.
+   2. Test case: `detail S00002`<br>
+       Expected: A pop-up window displays the details of the student with ID S00002.
+2. Closing the pop-up window
+   1. Prerequisites: A pop-up window is displayed.
+   2. Test case: Press `B` on the keyboard <br>
+       Expected: The pop-up window closes.
+
+### Searching for a student
+
+1. Searching for students by full name
+   1. Prerequisites: 
+       * Multiple students exist in the system.  
+       * A student named Sam Tan exists in the system.
+   2. Test case: `find sam`<br>
+       Expected: A list of students, including Sam Tan, is shown.
+2. Searching for students by partial name
+    1. Prerequisites:
+        * Multiple students exist in the system.
+        * A student named Sam Tan exists in the system.
+    2. Test case: `find sa`<br>
+       Expected: A list of students, including Sam Tan, is shown.
+
+### Sorting the student list
+
+1. Sorting the student list by specific field
+   1. Prerequisites: Multiple students exist in the system.
+   2. Test case: `sort by\name`<br>
+       Expected: Student list is sorted in ascending lexicographical order by name.
+   3. Test case: `sort by\subject`<br>
+       Expected: Student list is sorted by the lexicographically smallest subject they are taking.
+   4. Test case: `sort by\studentId`<br>
+       Expected: Student list is sorted in ascending order by student ID.
+   5. Test case: `sort by\yearGroup`<br>
+       Expected: Student list is sorted in ascending order by year group.
+      
+### Filtering the student list
+
+1. Filter by year group
+   1. Prerequisites: 
+       * Multiple students exist in the system.
+       * At least one student from year group 3 exists.
+   2. Test case: `filter yg\3`<br>
+       Expected: A list of students in year group 3 is shown.
+2. Filter the student list by subject
+   1. Prerequisites:
+       * Multiple students exist in the system.
+       * At least one student taking subject English exists.
+   2. Test case: `filter s\English`<br>
+       Expected: A list of students taking English is shown.
+
+### Tracking subject statistics
+
+1. Opening the track subject window
+    1. Prerequisites: None
+    2. Test case: `tracksubject`<br>
+       Expected: A window displays subject statistics.
+2. Closing the track subject window
+    1. Prerequisites: The track subject window is displayed.
+    2. Test case: Press `B` on the keyboard <br>
+       Expected: The track subject window closes.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data file
+   1. Prerequisites: Storage file exits (default location: ./data/academyassist.json)
+   2. Test case: Delete `academyassist.json`<br>
+       Expected: AcademyAssist erases all existing data and start with a blank data file. 
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+2. Dealing with corrupted data file
+   1. Prerequisites: Storage file exits (default location: ./data/academyassist.json)
+   2. Test case: Edit the file into an invalid JSON format (e.g., deleting a `:`)
+       Expected: AcademyAssist erases all existing data and start with a blank data file.
+   3. Test case: Duplicate a student's entries
+      Expected: AcademyAssist erases all existing data and start with a blank data file.
+   4. Test case: Set `idGeneratedCount` to a value greater than 99999
+      Expected: AcademyAssist erases all existing data and start with a blank data file.
 
 --------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
 
+### Difficulty
+The development of **AcademyAssist** presented a moderate to high difficulty level to our team. The project required a 
+solid understanding of Java programming, particularly in object-oriented design. Even though our team has prior experience
+with Java, the complexity of the project demanded a deeper understanding of JavaFX, which was new to most of us. But with
+the experience gained from developing the individual project before this, we were able to quickly adapt to the team project
+development.
+
+### Challenges Faced
+The main challenges faced by our team during the development of **AcademyAssist** were:
+1. **Designing the product**: The team had to spend a significant amount of time designing the product, including deciding
+on the features to include, the architecture of the application, and the user interface design. This required a lot of
+discussion and collaboration among team members.
+2. **Data Validation**: Implementing robust validation for user inputs was essential to prevent errors and ensure that 
+the data entered into the system was accurate and consistent. This involved defining multiple constraints for different 
+fields, such as name, NRIC, phone numbers, and email formats.
+3. **Ensure OOP Principles**: The team had to ensure that the codebase followed object-oriented programming principles to
+maintain code quality and readability. This involved designing classes with clear responsibilities, encapsulating data, and
+implementing inheritance and polymorphism where necessary.
+4. **Testing**: Writing comprehensive unit tests and integration tests to validate the functionality of the application was
+a challenging task. The team had to ensure that the tests covered all possible scenarios and edge cases to catch any bugs
+or issues in the development process.
+5. **Time Management**: Managing the project timeline and ensuring that all tasks were completed on time was a significant
+challenge. The team had to prioritize tasks, allocate resources effectively, and coordinate efforts to meet the project
+deadlines.
+
+### Achievements from the Project
+Despite the challenges faced, the team was able to successfully develop **AcademyAssist** and deliver a functional product
+through effective collaboration, communication, and problem-solving. Some of the key achievements from the project include:
+1. **Functional Product**: The team was able to develop a fully functional tuition center management application that
+incorporated the features and requirements specified in the project brief.
+2. **Collaboration**: The team worked well together, leveraging each member's strengths and skills to contribute to the
+project's success. Regular meetings, discussions, and feedback sessions helped to keep the project on track and ensure that
+everyone was aligned on the goals and objectives.
+3. **Learning and Growth**: The project provided an opportunity for team members to develop a functional application from
+an existing codebase (AB3), enhancing their programming skills, problem-solving abilities, and teamwork. 
+
+
+### Conclusion
+Overall, the development of **AcademyAssist** was a challenging but rewarding experience for our team. The project allowed
+us to apply our Java programming skills in a real-world context, collaborate effectively with team members, and deliver a
+functional product that met the requirements of the project brief. We learned valuable through the project, and we are proud
+of the work we have accomplished together.
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancement**
 Team size: 5
-### 1. Delete subject feature
-Currently, subjects must be manually deleted using 
 
-### 2. Add subject feature
-Currently, Subjects are implemented using an Enum with a list of common subjects offered by tuition centers in Singapore. 
+1. **Allowing more subjects to be added with the addsubject feature:** Currently, Subjects are implemented using an enum with a list of common subjects offered by tuition centers in Singapore. 
 Acknowledging that there might be niche subjects not included, we plan to enhance this feature to allow administrators to 
 define verified subjects in the system that are offered under the tuition center, such that they can enrol students into 
 those subjects as well without losing the benefit of validation and duplication checks. 
 
-### 3. Enhance Subject Tracking with list sorted alphabetically or by enrolment
-Currently, the subject list shown when using the subject tracking feature is not sorted. We plan to include the options
+2. **Enhance Subject Tracking with list sorted alphabetically or by enrolment:** Currently, the subject list shown when using the subject tracking feature is not sorted. We plan to include the options
 to sort by alphabetical order or by enrolment numbers in the future to support easier accessing and allocation of resources.
 
-### 4. Allowing additional special characters in names 
-Currently, only the special characters 
+3. **Enhance UI for scrolling and viewing:** Currently, the UI (e.g. scrollbar) can experience some errors when the app first launches, 
+and pop-up windows may require users to manually resize in order to view all the data. In the future, we plan to improve the UI responsiveness 
+to work across various window sizes and different computer settings. 
 
-### 5. Improved verification of address
-In the future, we plan to improve the verification of the address field of the add functionality, such that we can check 
-that necessary fields are present, e.g. post code, country, street name etc., to ensure that addresses saved are valid addresses. 
+4. **Allowing additional special characters in names:** Currently, only the special characters (-/') are allowed in names. In the future, we plan to improve our validation checks 
+to include more special characters such as '.' and ',', and allowing names to end with some of the special characters (e.g. Robert Downey Jr.). 
+
+5. **Accepting consecutive spaces in names:** Currently, consecutive spaces in names are not allowed. We plan to improve the validation checks of names to treat  
+multiple spaces in names, which arise likely due to mistakes in entry, as just one space (e.g. treating Jane     Tan as Jane Tan). 
+
+6. **Improved verification of address:** Currently, any String is accepted as an address. In the future, we plan to improve the verification of the address field of 
+the add functionality, such that we can check that necessary fields are present, e.g. post code, country, street name etc., 
+to ensure that addresses saved are valid addresses.
+
+7. **Allowing Help window to be closed by keyboard shortcut:** Currently, the help window can only be closed by clicking on 
+the cross on the window. To improve convenience to the user, we plan to enable the help window to be closed by a keyboard shortcut 
+in the future. 
+
+8. **Automatically refresh tracksubject window:** Currently, whenever the user uses a command such as filter or find that 
+changes the student contacts listed, the user has to manually run the tracksubject command again to view updated enrolment 
+data according to the newly filtered student list. In the future, we plan to enhance the tracksubject method such that 
+the enrolment data will be refreshed automatically whenever the student list is changed. 
+
+9. **Display more information on a student's contact:** Currently, only a few fields of a student's contact is displayed 
+to keep the information concise and ensure ease of navigation. Although there is a workaround method (detail) provided to 
+let users view the full student details, we plan to improve the UI to include more essential information such as NRIC or student photo better 
+to reduce ambiguity when navigating through the contact lists.
+
+10. **Make the error message of the 'detail' command more specific:** Currently, when the user enters the detail command 
+with a StudentID that has an invalid format, the error message is too general. We plan to make it more specific by making it clearer  
+to the user that the failed execution was due to an error in the StudentID, and state what the expected format should be. This can help to reduce 
+ambiguity and help with troubleshooting. 
 
 --------------------------------------------------------------------------------------------------------------------

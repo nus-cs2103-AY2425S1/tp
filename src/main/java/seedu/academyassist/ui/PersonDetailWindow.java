@@ -136,6 +136,8 @@ public class PersonDetailWindow extends UiPart<Stage> {
      * @param root The root stage to add the key event handler to.
      */
     private void addKeyEventHandler(Stage root) {
+        // This function is inspired by the following StackOverflow post:
+        // https://stackoverflow.com/questions/25397742/javafx-keyboard-event-shortcut-key
         if (root.getScene() == null) {
             root.setScene(scene);
         } else {
