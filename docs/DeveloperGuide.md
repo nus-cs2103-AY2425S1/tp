@@ -122,12 +122,12 @@ The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the archived address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores the currently 'selected' `Person` objects (e.g., after an archive command) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI is bound to this list when the command to access the archived list is entered.
+* stores the currently 'selected' `Person` objects (e.g. results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g. after an archive command) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI is bound to this list when the command to access the archived list is entered.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects. This is the same for the archived address book as well.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects. This is the same for `ArchivedAddressBook` as well.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -291,7 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | software developer | blacklist a client                           | avoid working with certain clients in future                       |
 | `* *`    | software developer | view clients on the blacklist                | view all the clients I intend to avoid                             |
 | `* *`    | software developer | whitelist a blacklisted client               | consider working with said client again                            |
-| `* *`    | software developer | view clients on the whitelist                | view all clients that are not on the blacklist                     |
+| `* *`    | software developer | view clients on the whitelist                | view all clients that I have no issues working with                |
 | `* *`    | software developer | archive a client                             | store information of old clients without cluttering my client list |
 | `* *`    | software developer | unarchive a client                           | bring the information of archived clients back to the client list  |
 | `* *`    | software developer | see reminders for the next earliest deadline | focus on the most urgent task first                                |
@@ -466,6 +466,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. **Make `add` and `edit` commands accept blacklisted client status:** The current implementation throws an error of invalid command format for the parameter `cs/blacklisted`. Users can work around this by using the blacklist command implemented. In the future, we plan to remove the restriction on blacklisted client status from both `AddCommandParser` and `EditCommandParser`.<br>
 7. **Make rejection of blacklisted client status for add and edit command more specific:** This is an alternative to point 6 above. The current error message thrown is `"Invalid command format!` which does not accurately explain to the user that the issue lies with the blacklisted parameter. We plan to make the error message mention that `cs/blacklisted cannot be used for this command`. **It is important to note that this enhancement will be deemed redundant if point 6 is implemented, where `cs/blacklisted` is indeed accepted.**<br>
 8. **Reject email inputs without a period between alphanumeric characters for the domain portion:** Currently, an input like `e/john@example` is accepted, however, this should not be the case as a valid domain format would require at least 1 period for the top level domain (ie.john@example.com). We plan to adjust the regex for the domain portion of the email from `"(" + DOMAIN_PART_REGEX + "\\.)*"` to `"(" + DOMAIN_PART_REGEX + "\\.)+"` to reject such an input.<br>
+9. **Make `INDEX` 0 and negative `INDEX` error messages more specific:** Currently, when 0 or negative numbers are passed for the `INDEX` parameter, the error message thrown is `Invalid command format!`. In the future, we will change this error message to `The person index provided is invalid`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -481,11 +482,11 @@ An issue in `SortedList.sourceChanged()` arises when an element in the source li
 
 Steps to reproduce:
 
-1. Add multiple (at least 3) people with the same name(i.e `John`) and make the phone numbers `1111 1111`, `2222 2222`, `3333 3333`, ...
+1. Add multiple people (at least 3) with the same name (i.e `John`) and make the phone numbers `1111 1111`, `2222 2222`, `3333 3333`, ...
 2. Observe the initial order
 3. Do a sort command (`sort name ascending`)
 4. Start editing other fields of these John's (i.e edit their project status)
-5. After doing some of these edits, you will most likely see the list order change
+5. After doing some of these edits, you will most likely see the list order change among Johns
 
 In the future, we will firstly modify the program, such that it no longer uses `SortedList`.
 
@@ -543,6 +544,31 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+### Adding a person
+1. Adding a client while the client list is shown
+
+   1. Prerequisites: List all clients using the `list` command.
+
+   2. Test case: `add n/Michael Jackson p/12345678 e/Michael@gmail.com a/Block 17 d/10-10-2024`<br>
+      Expected: The client is added. Details of the added client is shown in the status message with<br> 
+      in progress project status, pending payment status and active client status
+
+### Editing a person
+1. Editing a client while the client list is shown
+
+    1. Prerequisites: Ensure you have at least 2 clients in the list, and that the client in the first position of the list has the following parameters, `NAME`: Jack, `PHONE_NUMBER`: 999, `EMAIL`: Jack@gmail.com
+
+    2. Test case: `edit 2 n/Jack p/999 e/Jack@gmail.com`<br>
+       Expected: The error message `This person already exists in either the address book or the archived address book.` is shown.
+
+### Finding a person
+1. Finding a client while the client list is shown
+
+    1. Prerequisites: Delete your data folder to start with the sample client list
+
+    2. Test case: `find n/b`<br>
+       Expected: The list has a size of 2 and displays the clients with `NAME` Bernice Yu and Roy Balakrishnan
 
 ### Deleting a person
 
