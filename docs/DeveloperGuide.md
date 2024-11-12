@@ -523,7 +523,6 @@ We plan to adjust the overlap detection mechanism in the `findtime` command so t
 
 ### Enhanced Error Messaging for FindTime Command
 
-**Current Issue**:  
 When users enter an incorrect, overnight time format in the `findtime` command, the application currently displays a generic "invalid format" message. This can be unclear for users, as it does not specify that the issue is specifically with the overnight time format.
 
 **Enhancement Plan**:  
@@ -534,7 +533,6 @@ This adjustment will improve usability by providing more informative feedback, a
 
 ### Contact Card Title Overflow Handling
 
-**Current Issue**:  
 Currently, when a contact card contains a title or name with an excessively long string, it extends beyond the available width, which may lead to display issues and poor user experience, especially in narrow or non-optimal window sizes. This issue is unlikely to arise with typical names, but could occur with unusually long titles.
 
 **Enhancement Plan**:  
@@ -549,15 +547,15 @@ This enhancement will prevent titles from overflowing and maintain a clean, cons
 
 ## **Appendix: Efforts**
 
-GamerBook Pro Max is a project built on the foundation of the original AddressBook, tailored specifically for gamers and their gaming friends. Our team of five embarked on this project to create an efficient and user-friendly application with advanced functionalities that address the unique needs of gamers. The development of GamerBook Pro Max involved applying principles from CS2103T, including:
+GamerBook Pro Max is a project built on the foundation of the original AddressBook, tailored specifically for gamers and their gaming friends. Our team of five embarked on this project to create an efficient and user-friendly application with advanced functionalities that address the unique needs of gamers.
 
-### Difficulty Level:
+### Difficulty Level
 
 Adapting from the AddressBook to GamerBook Pro Max presented several challenges. While we retained core functionalities, we needed to significantly customize the app to better serve gamers. This included adding features like preferred game times, favorite games, and stateful command history, as well as implementing a powerful search feature.
 
 The main difficulty lay in the number of advanced features we had to develop and integrate, as each new feature introduced additional complexity. As expected, more features resulted in more potential bugs, making debugging and testing a crucial part of the development process.
 
-### Challenges Faced:
+### Challenges Faced
 
 1. **Forking Workflow**:  
    Using the Forking Workflow allowed us to work on multiple features in parallel, which was vital given the size of the project. However, it also introduced the overhead of managing forks and dealing with frequent merge conflicts, especially as we worked on overlapping components such as the command history and address book state features.
@@ -571,6 +569,6 @@ The main difficulty lay in the number of advanced features we had to develop and
 4. **Design Decisions**:  
    Making design decisions, such as implementing a robust time scheduling feature for gaming sessions, required balancing the user experience with technical constraints. We also had to consider scalability and future enhancements, which led to some complex decisions around data storage and retrieval.
 
-### Effort Required:
+### Effort Required
 
 The effort required to develop GamerBook Pro Max was substantial due to the large number of features we implemented and the inevitable bugs that emerged with each new iteration. The effort to resolve issues and fine-tune the system was greater than if we had stuck to the original AddressBook functionality, but it was necessary to achieve the advanced feature set and quality of user experience we envisioned.
