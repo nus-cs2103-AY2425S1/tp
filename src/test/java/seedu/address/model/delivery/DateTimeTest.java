@@ -19,7 +19,7 @@ public class DateTimeTest {
     }
 
     @Test
-    public void isEarlierThan_laterDeliveryTimes() {
+    public void isEarlierThan_laterDeliveryTimes_returnsTrue() {
         DateTime datetime = new DateTime("18-06-2023 17:00");
         assertTrue(datetime.isEarlierThan(new DateTime("18-06-2023 17:01"))); //later time by minute
         assertTrue(datetime.isEarlierThan(new DateTime("18-06-2024 17:00"))); //later by year
@@ -28,7 +28,7 @@ public class DateTimeTest {
     }
 
     @Test
-    public void isEarlierThan_earlierDeliveryTimes() {
+    public void isEarlierThan_earlierDeliveryTimes_returnsFalse() {
         DateTime datetime = new DateTime("18-06-2023 08:00");
         assertFalse(datetime.isEarlierThan(new DateTime("18-06-2023 07:59"))); //earlier time by minute
         assertFalse(datetime.isEarlierThan(new DateTime("18-06-2022 08:00"))); //earlier by year

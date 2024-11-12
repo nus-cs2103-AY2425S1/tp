@@ -21,7 +21,7 @@ import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.product.Product;
 
 /**
- * Parses input arguments and creates a new AddDeliveryCommand object
+ * Parses input arguments and creates a new AddDeliveryCommand object.
  */
 public class AddDeliveryCommandParser implements Parser<AddDeliveryCommand> {
     /**
@@ -37,7 +37,7 @@ public class AddDeliveryCommandParser implements Parser<AddDeliveryCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_DATETIME, PREFIX_SUPPLIER_INDEX,
                         PREFIX_PRODUCT, PREFIX_QUANTITY, PREFIX_COST);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME, PREFIX_SUPPLIER_INDEX,
+        if (!hasPrefixesPresent(argMultimap, PREFIX_DATETIME, PREFIX_SUPPLIER_INDEX,
                 PREFIX_PRODUCT, PREFIX_QUANTITY, PREFIX_COST)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDeliveryCommand.MESSAGE_USAGE));
@@ -68,13 +68,13 @@ public class AddDeliveryCommandParser implements Parser<AddDeliveryCommand> {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given.
+     * Returns true if none of the prefixes contains empty {@code Optional} values.
      *
      * @param argumentMultimap A map that stores mapping of prefixes to their respective arguments.
      * @param prefixes Prefix that marks the beginning of an argument in an arguments string.
      * @return True if all compulsory parameters are provided by user.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+    private static boolean hasPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

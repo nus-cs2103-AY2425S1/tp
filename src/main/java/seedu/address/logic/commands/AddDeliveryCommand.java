@@ -58,13 +58,14 @@ public class AddDeliveryCommand extends AddCommand {
      * Executes the AddDeliveryCommand and returns the result message.
      *
      * @param model {@code Model} which the command should operate on.
-     * @return feedback message of the AddDeliveryCommand result for display.
+     * @return Feedback message of the AddDeliveryCommand result for display.
      * @throws CommandException If an error occurs during the AddDeliveryCommand execution.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Supplier sender = this.getSupplierBasedOnIndex(model);
+        assert sender != null;
         SupplierStatus senderStatus = sender.getStatus();
         if (senderStatus.equals(new SupplierStatus("inactive"))) {
             throw new CommandException(MESSAGE_INACTIVE_SUPPLIER);
@@ -101,7 +102,7 @@ public class AddDeliveryCommand extends AddCommand {
      *
      * @param other Object to be compared with.
      * @return True if object is an instance of AddDeliveryCommand and both
-     *      deliveryWrapper are equal.
+     *         deliveryWrapper are equal.
      */
     @Override
     public boolean equals(Object other) {

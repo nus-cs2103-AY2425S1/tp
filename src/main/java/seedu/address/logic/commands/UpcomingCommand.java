@@ -31,7 +31,7 @@ public class UpcomingCommand extends Command {
      * Creates an UpcomingCommand to display the list of pending deliveries before the
      * specified date.
      *
-     * @param predicates The list of predicates to filer the delivery list by.
+     * @param predicates The list of predicates to filter the delivery list by.
      */
     public UpcomingCommand(List<Predicate<Delivery>> predicates) {
         requireNonNull(predicates);
@@ -41,7 +41,7 @@ public class UpcomingCommand extends Command {
      * Executes the UpcomingCommand and returns the result message.
      *
      * @param model {@code Model} which the UpcomingCommand should operate on.
-     * @return feedback message of the UpcomingCommand result for display
+     * @return Feedback message of the UpcomingCommand result for display.
      * @throws CommandException If an error occurs during UpcomingCommand execution.
      */
     @Override
@@ -57,7 +57,7 @@ public class UpcomingCommand extends Command {
      *
      * @param other Object to be compared with.
      * @return True if object is an instance of UpcomingCommand and contains the same
-     *      Predicate objects in the list.
+     *         Predicate objects in the list.
      */
     @Override
     public boolean equals(Object other) {
