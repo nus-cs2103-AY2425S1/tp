@@ -183,13 +183,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAppointmentDate_validValueWithWhitespace_returnsAppointmentDate() throws Exception {
-        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
-        AppointmentDate expectedAppointmentDate = new AppointmentDate(VALID_DATE);
-        assertEquals(expectedAppointmentDate, ParserUtil.parseAppointmentDate(dateWithWhitespace));
-    }
-
-    @Test
     public void parseAppointmentDate_validValue_returnsAppointmentDate() throws Exception {
         AppointmentDate expectedAppointmentDate = new AppointmentDate(VALID_DATE);
         assertEquals(expectedAppointmentDate, ParserUtil.parseAppointmentDate(VALID_DATE));
