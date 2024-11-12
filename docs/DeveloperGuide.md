@@ -197,10 +197,10 @@ This section describes some noteworthy details on how certain features are imple
 EduVault stores data in JSON file using the Jackson library.
 
 EduVault stores four types of objects:
-* Student (Person)
-* Tutorial
-* Participation
-* Attendance
+* `Student` (`Person`)
+* `Tutorial`
+* `Participation`
+* `Attendance`
 
 An overarching structure of the JSON file is as shown below:
 
@@ -214,7 +214,7 @@ An overarching structure of the JSON file is as shown below:
 
 <br>
 
-Within each of the different objects (Student, Tutorial, Participation), data is stored in the following format as shown below. Conditions for storage are also included.
+Within each of the different objects (`Student`, `Tutorial`, `Participation`), data is stored in the following format as shown below. Conditions for storage are also included.
 
 `Student`
 ```dtd
@@ -254,7 +254,7 @@ Two `Tutorials` are considered to be duplicates if they have matching `subject`.
     {
         "student" : "Alex Yeoh",
         "phone" : "87438807",
-        "tutorial" : "a",
+        "tutorial" : "Mathematics",
         "attendances" : [...]
     },
 ]
@@ -282,7 +282,7 @@ For the purposes of storage into JSON format, EduVault defines two objects as di
 
 * Two `Students` are considered to be duplicates if they have matching `name` and `phone`.
 * Two `Tutorials` are considered to be duplicates if they have matching `subject`.
-* Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same.
+* Two `Participations` are considered to be duplicates if the `name`, `phone` and `subject` are the same (`Student` and `Tutorial` identifiers).
 
 ##### Loading Order
 The order which storage loads `Person`, `Tutorial` and `Participation` is shown below. 
