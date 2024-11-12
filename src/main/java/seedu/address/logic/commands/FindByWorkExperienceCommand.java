@@ -20,7 +20,7 @@ public class FindByWorkExperienceCommand extends Command {
             + "the specified role, company, or year (case-insensitive) and "
             + "displays them as a list with index numbers.\n"
             + "Parameters: ROLE COMPANY YEAR\n"
-            + "Example: " + COMMAND_WORD + " w/Intern Google 2024";
+            + "Example: " + COMMAND_WORD + " w/Intern,Google,2024";
 
     private final WorkExperienceContainsKeywordsPredicate predicate;
 
