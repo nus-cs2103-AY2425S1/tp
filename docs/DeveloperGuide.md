@@ -731,10 +731,10 @@ The current find command automatically assumes that user wants to search student
 Sometimes, user cannot remember the full module code, or wants to search over a wider range of modules, but the current implementation does not support that either,
 hence reducing the usefulness of this command.
 <br><br>
-    ![point1 screenshot_1](images/Planned_Enhancements_Screenshots/Point1_1.png)<br>
+    ![point1 screenshot_1](images/planned_enhancements_screenshots/Point1_1.png)<br>
 (As shown in the screenshot, `find r/CS1101S` only matches contacts with role **CS1101S Student**, despite that there are 2 CS1101S professors in the sample data.)
 <br><br>
-    ![point1 screenshot_2](images/Planned_Enhancements_Screenshots/Point1_2.png)<br>
+    ![point1 screenshot_2](images/planned_enhancements_screenshots/Point1_2.png)<br>
 (As shown in the screenshot, `find r/CS` results in error messages because construction of search query requires exact module code to work.)
 <br><br>
     This limitation is due to our current system design which forces a role type to be assigned to an exact module code into the search query for the find command to execute,
@@ -742,10 +742,10 @@ we plan to adopt other ways of constructing the query to allow for more general 
 <br><br>
 2. **Allow deletion of other optional data fields of a contact, using the current edit command approach.** Currently, only the description and tag fields can be deleted, by specifying the corresponding prefix followed by an empty string (For Example: `edit 9 t/` removes all tags, while `edit 9 d/` removes the description of the ninth contact in the current list). However, other optional fields such as the phone, email and address cannot be removed as of v1.6.
 <br><br>
-    ![point2_screenshot_remove_description_example](images/Planned_Enhancements_Screenshots/Point2_RemoveDescriptionExample.png)<br>
+    ![point2_screenshot_remove_description_example](images/planned_enhancements_screenshots/Point2_RemoveDescriptionExample.png)<br>
 (As shown in the screenshot, `edit 9 d/` successfully removes description field from the ninth person in the current list.)
 <br><br>
-    ![point2_screenshot_remove_email_example](images/Planned_Enhancements_Screenshots/Point2_RemoveEmailExample.png)<br>
+    ![point2_screenshot_remove_email_example](images/planned_enhancements_screenshots/Point2_RemoveEmailExample.png)<br>
 (As shown in the screenshot, `edit 9 e/` as an attempt to remove email from ninth person in the current list fails, because empty email field for edit command is not allowed.
 Similar issues happen when removing phone using `edit 9 p/` and removing address using `edit 9 a/`.)
 <br><br>
@@ -760,7 +760,7 @@ For example, if the user attempts to execute `edit 1 d/For a/b testing`, the com
    - change the description of the first contact to `For`, and
    - add a new contact with description `b testing`. (refer to the screenshot below)
 <br><br>
-    ![point3 screenshot](images/Planned_Enhancements_Screenshots/Point3.png)<br><br>
+    ![point3 screenshot](images/planned_enhancements_screenshots/Point3.png)<br><br>
    
     The current workaround is to add a non-whitespace character in front of the prefix (i.e. `edit 1 d/For 'a/b testing`), but this is not intuitive to the user.
 We plan to follow a more standard approach of using a backslash to escape the special prefixes.
@@ -769,7 +769,7 @@ More importantly, the parser will remove the backslash at the end of parsing, so
 4. **Enforce realistic role assignment for contacts.** Currently, a contact can have multiple roles, such as both "Professor" and "Student".
 This is unrealistic, as an individual is typically either a student or a professor, but not both.
 <br><br>
-    ![point4_screenshot](images/Planned_Enhancements_Screenshots/Point4_ConflictingRoleExample.png)<br>
+    ![point4_screenshot](images/planned_enhancements_screenshots/Point4_ConflictingRoleExample.png)<br>
 (As shown in the screenshot, Royston is both a CS1101S professor and CS2100 student.)
 <br><br>
 We plan to enforce stricter role assignment, ensuring that:
@@ -787,7 +787,7 @@ We plan to allow the user to view the contacts in a sorted order to find the con
 7. **Allow multi-word tags for contacts** Currently, tag field only allows alphanumeric inputs for tag creation, which means **spaces**, **underscores(_)** and **dashes(-)** are not
 allowed in the input, and as a result prevents user from creating multi-word tags for contacts. 
 <br><br>
-    ![point6_tag_error_example](images/Planned_Enhancements_Screenshots/Point6_TagErrorExample.png)<br>
+    ![point6_tag_error_example](images/planned_enhancements_screenshots/Point6_TagErrorExample.png)<br>
 (As shown in the screenshot, `edit 9 t/team leader` as an attempt to replace existing tags of ninth person in the current list shows an error message,
 because tag input `team leader` contains space which is not allowed, same issue happens with the add command)
 <br><br>
@@ -795,3 +795,9 @@ because tag input `team leader` contains space which is not allowed, same issue 
 such as `team leader`, `best friend`, `financial office` etc, and the current validation method does not offer this level of flexibility. Therefore, we plan to loosen the restriction
 on tag creation input to allow space for word separation, so that user can create multi-word tag to contacts for easier management.
 <br><br>
+
+8. **Reflect the true redo/undo states of the address book in the history command list.** Currently, the history command list only shows all data changing commands executed by the user and does not precisely reflect the current and history states of the address book.
+   For example, if the user executes `delete 1`, then `delete 2`, then `undo`, then `delete 3`, the true history states are `[delete 1, delete 3]` since `delete 2` has been purged.
+   However, the history command list will only show all data changing commands executed so far, (refer to the screenshot below) which is not accurate.
+   Moreover, we plan to highlight the current state of the address book in the history command list, so that the user can easily identify the current state of the address book.
+   ![point8_screenshot](images/planned_enhancements_screenshots/Point8.png)

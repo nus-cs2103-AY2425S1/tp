@@ -72,7 +72,7 @@ Alerts you to potential issues or problems that may arise.
        Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\ContactCS`
 
         To find the actual path to your folder: <br>
-     
+    
        Press the Windows key + S to open the search bar, type in the name of the file, and right-click the file that appears. Click on copy path.
            </box>
 
@@ -90,7 +90,7 @@ Alerts you to potential issues or problems that may arise.
        2. Right-click or Control-click on it and choose Get Info.
        3. In the window that opens, look at the Where field.
        4. Copy the path from the Where field.
-        
+       
        </box>
    * Run the application with the following command:
      ```
@@ -608,7 +608,7 @@ to be 500 characters which should be enough for most users.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **There is an unused space below the command history box**. 
+3. **There is an unused space below the command history box**.
 ![unused space](images/UiUnusedSpace.png)<br>
 As shown in the screenshot above, marked by the red box.
 4. **When you add a duplicate contact with same phone number**, the app will allow it if the phone number is the same but with different country codes or descriptions.
