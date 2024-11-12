@@ -73,8 +73,8 @@ The user guide contains formatting to highlight important info. The standards us
   - [Summary of assignment commands](#summary-of-assignment-commands)
   - [Summary of other commands](#summary-of-other-commands)
 - [Glossary](#glossary)
-  - [Command word](#command-word)
   - [Alphanumeric](#alphanumeric)
+  - [Command word](#command-word)
   - [Graphical User Interface](#graphical-user-interface)
   - [Java](#java)
   - [JSON](#json)
@@ -184,7 +184,7 @@ Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [
   - Employee IDs are compared numerically. `0001` is treated the same as `1`.
 
 - Name must be: [*Alphanumeric*](#alphanumeric), spaces allowed
-  - Names which require special characters can be spelt out in full. e.g. `Nagaratnam s/o Suppiah` can be spelt out as `Nagaratnam son of Suppiah`
+  - Names which require special characters should be spelt out in full. e.g. `Nagaratnam s/o Suppiah` should be spelt out as `Nagaratnam son of Suppiah`
 
 - Phone Number must be: [*Numeric*](#numeric), no spaces, at least 3 digits long
 - Email must be: of the format `local-part@domain` and follow these constraints:
@@ -299,17 +299,18 @@ Examples:
 
 - `find John` returns `john` and `John Doe`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 Expected output:
 - System message noting success
 - Employees matching criteria above shown in the displayed employee list
+- Result for `find alex david` with sample data:
+![result for 'find alex david'](images/findAlexDavidResult.png)
 
 [Return to Top](#table-of-contents)
 
 #### Deleting an employee : `delete`
 
-**Deletes the specified employee** from the address book.
+**Deletes the specified employee <span style="color:red">and all its assignments</span>** from the address book.
 
 Format: `delete INDEX`
 
@@ -333,7 +334,7 @@ Expected output:
 **Clears all employee entries** from the address book.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-This deletes all employee data!
+This deletes all employee data AND their assignments!
 </div>
 
 Format: `clear`
@@ -587,19 +588,19 @@ If your changes to the data file makes its format invalid, HRConnect will discar
 
 Furthermore, certain edits can cause HRConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. <br>
 
-When editing employee and project IDs directly in the data file, take extra caution and make sure that relevant assignments are edited to reflect the updated IDs.
+If you decide to edit employee and project IDs directly in the data file, take extra caution and make sure that relevant assignments are edited to reflect the updated IDs.
 </div>
 
 [Return to Top](#table-of-contents)
 
 ### Editing the command history save file
 
-Similar to [Editing the data file](#editing-the-data-file), advanced users are welcome to update their command history directly by editing `[JAR file location]/data/hrconnect.json`.
+Similar to [Editing the data file](#editing-the-data-file), advanced users are welcome to update their command history directly by editing `[JAR file location]/data/commandtexthistory.json`.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to this file makes its format invalid, HRConnect will discard all data and start with an empty file at the next run. Hence, it is recommended to backup the file before editing it.<br>
 
-Likewise, certain edits can cause HRConnect to behave in unexpected ways. Therefore, edit the command history file only if you are confident of updating it correctly. <br>
+Like the data file, certain edits to this file can cause HRConnect to behave in unexpected ways. Therefore, edit the command history file only if you are confident of updating it correctly. <br>
 
 </div>
 
@@ -608,14 +609,14 @@ Likewise, certain edits can cause HRConnect to behave in unexpected ways. Theref
 ## FAQ
 
 **Q**: How do I install Java?<br>
-**A**: Download the installer (.exe or .msi) from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows). Click on the downloaded file and follow the instructions to install.
+**A**: Download the installer (.exe or .msi) from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17). Click on the downloaded file and follow the instructions to install.
 
 **Q**: Where is my data stored?<br>
 **A**: It is stored in `hrconnect.json`. This is located in the `data` subfolder, in the folder you put `HRConnect.jar` in.
 ![rootFileStructure.png](images/rootFileStructure.png)
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HRConnect home folder.
+**A**: Install the app in the other computer and overwrite the data file it creates with the file that contains the data of your previous HRConnect home folder.
 
 **Q**: I don't see the data files anywhere.<br>
 **A**: You may need to run the app for the first time and run any command (such as `exit`) to generate these files.
@@ -674,7 +675,7 @@ Likewise, certain edits can cause HRConnect to behave in unexpected ways. Theref
 
 [Return to Top](#table-of-contents)
 
-### Summary of assignment commands
+### Summary of other commands
 
 | Action                          | Format, Examples                                                                                                                                                                                                         |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -689,18 +690,18 @@ Likewise, certain edits can cause HRConnect to behave in unexpected ways. Theref
 
 List of certain technical terms / uncommon words used in this user guide.
 
-### Command word
-- Word used at the beginning of each command denoting the action performed. Examples: `add`, `listemployees`, `filter`.
-
 ### Alphanumeric
 - Consisting of the letters A to Z (upper/lowercase) and the digits 0 to 9.
+
+### Command word
+- Word used at the beginning of each command denoting the action performed. Examples: `add`, `listemployees`, `filter`.
 
 ### Graphical User Interface
 - A digital interface in which a user interacts with graphical components such as icons, buttons, and menus. Example: Windows 11, most websites
 
 ### Java
 - The programming language HRConnect is primarily developed with.
-- It has to be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows) (scroll down to get to the Java 17 downloads) and installed before attempting to run HRConnect.
+- It can be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17) (scroll down to get to the Java 17 downloads) and installed before attempting to run HRConnect.
 
 ### JSON
 - JavaScript Object Notation, a format for storing and transferring data.
