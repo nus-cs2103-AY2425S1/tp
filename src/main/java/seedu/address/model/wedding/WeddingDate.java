@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Class for WeddingDate
+ * Represents a Wedding's date in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidWeddingDate(String)}
  */
 public class WeddingDate {
     public static final String MESSAGE_CONSTRAINTS = "Date is not in the correct format. Please use the format "

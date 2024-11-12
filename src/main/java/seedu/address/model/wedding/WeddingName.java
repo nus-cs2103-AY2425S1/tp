@@ -5,7 +5,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Class for WeddingName
+ * Represents a Wedding's name in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidWeddingName(String)}
  */
 public class WeddingName {
     public static final int WEDDING_NAME_MAX_LEN = 30;

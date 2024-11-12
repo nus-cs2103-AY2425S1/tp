@@ -7,7 +7,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Actually clears the address book
+ * Clears all the address book data.
  */
 public class ActualClearCommand extends Command {
 
@@ -27,6 +27,7 @@ public class ActualClearCommand extends Command {
             return new CommandResult(message);
         }
         requireNonNull(model);
+        model.setCurrentWeddingName(null);
         model.setAddressBook(new AddressBook());
         return new CommandResult(message);
 

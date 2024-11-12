@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import seedu.address.logic.commands.ActualClearCommand;
 
 /**
- * Handles parsing for user confirmation to clear all contacts
+ * Handles parsing for user confirmation to clear all contacts and creates a new ActualClearCommand object.
  */
 public class ActualClearCommandParser implements Parser<ActualClearCommand> {
     public static final String MESSAGE_FAILURE = "Address book has not been cleared!";

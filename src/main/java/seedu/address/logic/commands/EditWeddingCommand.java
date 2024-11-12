@@ -79,14 +79,12 @@ public class EditWeddingCommand extends Command {
 
         model.setWedding(weddingToEdit, editedWedding);
 
-        // check if wedding currently viewed is the wedding being edited, if it is set current wedding name
+        // if wedding currently viewed is the wedding being edited set current wedding name
         // to be the same as the edited wedding's name
         if (weddingToEdit.getWeddingName().equals(model.getCurrentWeddingName().getValue())) {
             model.setCurrentWeddingName(editedWedding.getWeddingName());
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatWedding(editedWedding)));
-
-
     }
 
     private static Wedding createEditedWedding(Wedding weddingToEdit,

@@ -23,6 +23,10 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.EditWeddingDescriptorBuilder;
 
+/**
+ * Contains tests for {@code EditWeddingCommand}.
+ */
+
 public class EditWeddingCommandTest {
     private Model model;
 
