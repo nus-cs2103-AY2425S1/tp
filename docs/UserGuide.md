@@ -537,8 +537,34 @@ Roles for each contact are displayed in the order listed above.
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: How do I update a contact's information?
+**A**:Use the `edit` command followed by the contact's index or name and the new details. For example, `edit 1 n/Updated Name th/new_handle`.
+
+**Q**: Why is my newly added contact not showing on the first page?
+**A**: Contacts are sorted alphabetically by default. If the contact’s name falls further down the list, it may appear on a later page. Use pagination controls to locate it.
+
+**Q**: What happens if I add a contact with the same name but a different nickname?
+**A**: As long as the nickname differs, the contact will be added without conflict. However, identical `Nickname` and `Name` entries are flagged as duplicate identities and will not be allowed.
+
+**Q**: Why is my command returning an "Invalid Role" error?
+**A**: Ensure roles are entered in the exact format expected by the app. An "Invalid Role" error may indicate that a role was mistyped or included with extra symbols, such as `[ ]`.
+
+**Q**: Can I undo a deletion?
+**A**: Currently, deletions are final and cannot be undone. Always double-check before using the `delete` command to avoid accidental deletions.
+
+**Q**: How can I search for contacts without case sensitivity?
+**A**: Searches are case-insensitive, so you can enter names, nicknames, or other fields without worrying about uppercase or lowercase letters.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+1. **Advanced Error Messages**: Informing the user about specific issues with commands is currently limited, leading to confusion and wasted time. The goal is to improve user experience by providing clearer error messages specifying which part of a command is incorrect. For example, editing a contact with the same `NAME` and `NICKNAME` as an existing contact currently produces an unclear message ("This contact already exists in the address book"), but could instead display the conflicting contact details and clarify the duplicated fields.
+  
+1. Additionally, running `add n/John Doe th/johnny_9876_haha e/johnd@example.com ss/undergraduate 3 r/Admin r/President [nn/altName]` outputs a vague error message ("Invalid Role"), which should specify the unrecognized role "President [". **Expected Outcome**: Users will spend less time debugging commands, especially in large address books, as error messages will provide clearer guidance.
+
+1. **Case Sensitivity for Some Contact Fields**: Some contact fields, such as `Nickname`, `Telegram Handle`, and `Email`, are currently case-sensitive, which may lead to duplicate entries when similar contacts with different cases are loaded into the address book. The goal is to improve user experience and data integrity by making all contact fields case-insensitive, thereby preventing accidental duplicates and ensuring consistent search results. For instance, `Nickname` is currently case-sensitive (e.g., `nn/alice` and `nn/Alice` are treated as distinct), but implementing case insensitivity would allow `nn/alice` and `nn/Alice` to be treated as identical, avoiding conflicts. Similarly, case insensitivity for `Telegram Handle` and `Email` would ensure two contacts cannot share the same value for these fields, regardless of casing. **Expected Outcome**: Reduced errors and confusion due to case variations, improved data integrity, and prevention of duplicate entries based on case differences.
+
