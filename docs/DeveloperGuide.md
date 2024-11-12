@@ -644,6 +644,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Use Case: Archive Contacts
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 **Main Success Scenario (MSS):**
@@ -667,6 +668,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Use Case: Load Archived Contacts
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 **Main Success Scenario (MSS):**
@@ -699,6 +701,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Use Case: Delete Archive File
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 **Main Success Scenario (MSS):**
@@ -800,8 +803,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Test Coverage**: The percentage of the system's code that is covered by automated tests, ensuring that key features and functionality are reliably tested.
 
-
-
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 
@@ -821,6 +823,8 @@ Currently, MedConnect's duplicate person detection only works within each class.
 
 Currently, MedConnect is able to remove leading and trailing whitespaces from names. However, the functionality to remove whitespaces in between words in a name is not yet implemented. We plan to implement this in the future to prevent users from entering names with excessive whitespaces between words in the future as it may reduce readability.
 
+<div style="page-break-after: always;"></div>
+
 ### Handling long fields
 
 Currently, MedConnect does not handle long fields well. For example, if a user enters a long name, the name may be cut off in the GUI. Our planned enhancement is to implement a feature that allows users to view the full details of each field by hovering over the field in the GUI or clicking to expand the details for the field in the card. This will allow users to view the full field (e.g. full name) should the field be too long to be displayed in the GUI.
@@ -836,6 +840,8 @@ Currently, clicking on a emergency contact card of a patient in the GUI, followe
 ### Autocomplete field suggestion
 
 Currently, due to difficulties with parsing, the autocomplete feature does not suggest square brackets for optional fields, such as in the Edit command. Users would have to refer to the User Guide or error message to know which fields are optional. We plan to add the square brackets to clearly indicate optional parameters in the autocomplete feature in future iterations of MedConnect to minimise the need for users to continuously reference the User Guide.
+
+<div style="page-break-after: always;"></div>
 
 ### Autocomplete dynamic parsing
 
