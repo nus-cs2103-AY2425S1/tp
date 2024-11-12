@@ -275,7 +275,31 @@ _{Explain here how the data archiving feature will be implemented}_
 --------------------------------------------------------------------------------------------------------------------
 ## **Planned Enhancements**
 Team size: 4
-1. Make each applicant to have a unique ID: The current addressbook list shows the numbering of each contact based on its sequence. We plan to generate a random unique ID for each applicant (Eg.JXZ1000).
+
+1. **Enhanced Find Command with Multiple Keywords**  
+   The current `find` command supports only one keyword at a time for each field. We plan to extend this functionality to accept multiple keywords (e.g., `find n/Hans or n/Hera`), making it easier for users to locate multiple contacts in a single search.
+
+2. **Extended Tagging Functionality**  
+   Presently, only a limited set of tags is supported. We plan to expand this feature to support additional types of tags, enabling more flexible categorization and better organization of contacts.
+
+3. **Resizable Feedback Box**  
+   Users are currently unable to adjust the feedback box size. To improve usability, we plan to make the feedback box resizable, allowing users to expand or contract it based on their preferences and screen size.
+
+4. **Restrictive Phone Number Validation**  
+   The existing phone number validation allows entries as short as three digits. We plan to tighten validation criteria to ensure that phone numbers meet a more realistic length requirement, improving data accuracy and reliability.
+
+5. **Appendable Remarks**  
+   Currently, remarks can only be overwritten, not appended to. We plan to enhance the remark feature to support appending, so users can add additional notes without replacing existing remarks.
+
+6. **Advanced Statistics Filtering Options**  
+   To support more detailed insights, we plan to extend statistics functionality by offering additional predicate filters. This enhancement will allow users to specify criteria (e.g., `Stats [j/] [t/]`) for more targeted statistical analysis.
+
+7. **Mass Actions Command**  
+   At present, the `massReject` command allows only batch rejections. We plan to rename this command to `mass` and introduce a predicate/parameter option to enable mass deletions, edits, or rejections. This will streamline bulk actions, making management of large applicant pools more efficient.
+
+8. **Unique Listing with Job Predicate**  
+   The `list` command currently lacks options for filtering by unique attributes. We plan to enhance it by adding the `list [j/]` parameter to allow listing of unique items, such as distinct jobs or tags, providing users with a clearer overview.
+
 
 --------------------------------------------------------------------------------------------------------------------
 

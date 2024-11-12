@@ -10,9 +10,36 @@ Talentcy is a **desktop app for managing job applicant contacts and monitoring t
 
 The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by CS2103 team.
 
-<!-- * Table of Contents -->
+<!-- TOC -->
+* [Talentcy User Guide](#talentcy-user-guide)
+  * [Quick start](#quick-start)
+  * [Features](#features)
+    * [`help`: Viewing help](#viewing-help--help)
+    * [`add`: Adding a person](#adding-a-person-add)
+    * [`list`Listing all persons](#listing-all-persons--list)
+    * [`edit`: Editing a person](#editing-a-person--edit)
+    * [`find`: Locating persons by criteria given](#locating-persons-by-criteria-given-find)
+    * [`delete`: Deleting a person](#deleting-a-person--delete)
+    * [`stats`: Showing applicant statistics](#showing-applicant-statistics-stats)
+    * [`massreject`: Bulk reject persons by criteria](#bulk-reject-persons-by-criteria-massreject)
+    * [`sort`: Sorting persons by fields](#sorting-persons-by-fields-sort)
+    * [`clear`: Clearing all entries](#clearing-all-entries--clear)
+    * [`exit`: Exiting the program](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+    * [Archiving data files `[coming in the future]`](#archiving-data-files-coming-in-the-future)
+  * [Fields](#fields)
+    * [NAME](#name)
+    * [PHONE](#phone)
+    * [EMAIL](#email)
+    * [JOBCODE](#jobcode)
+    * [TAG](#tag)
+    * [REMARK](#remark)
+  * [FAQ](#faq)
+  * [Known issues](#known-issues)
+  * [Command summary](#command-summary)
+<!-- TOC -->
 <page-nav-print />
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -99,7 +126,7 @@ Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG [r/REMARK]`
 <box type="tip" seamless>
 
 **Tip:** Only one interview stage tag will be attached to a contact at any point of time.
-</box>
+<box>
 
 Please refer to this table
 for list of valid tags:
@@ -114,7 +141,7 @@ for list of valid tags:
 | BC | Behavioral Interview Confirmed | Behavioral interview has been scheduled for the applicant                   |
 | A| Accepted| Applicant has been accepted by the company                                  |
 | R | Rejected | Applicant has been rejected by the company                                  |
-
+</box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com j/XYZ1010 t/N`
@@ -330,7 +357,14 @@ for list of valid tags:
 
 ### REMARK
 - Must be at most 50 characters, excluding leading and trailing whitespaces.
+
+<box type="warning" seamless>
+
+**Caution:**
+If you wish to add a remark that a person is unavailable, you may enter `edit INDEX r/this is n/a`.  Note that this will be interpreted as two commands—one for editing the remark and another for editing the name.
 </box>
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
