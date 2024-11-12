@@ -44,6 +44,7 @@ If you plan to use Intellij IDEA (highly recommended):
 
    **Tip:**
    Optionally, you can follow the guide [_[se-edu/guides] Using Checkstyle_](https://se-education.org/guides/tutorials/checkstyle.html) to find how to use the CheckStyle within IDEA e.g., to report problems _as_ you write code.
+
    </box>
 
 1. **Set up CI**
@@ -60,3 +61,4 @@ If you plan to use Intellij IDEA (highly recommended):
    * [Tracing code](tutorials/TracingCode.md)
    * [Adding a new command](tutorials/AddRemark.md)
    * [Removing fields](tutorials/RemovingFields.md)
+
