@@ -717,8 +717,6 @@ testers are expected to do more *exploratory* testing.
    2. Double-click the jar file. <br>
        Expected: A help window appears for first-time users, along with the GUI displaying a set of sample contacts. The window size may not be optimal.
 
-<div style="page-break-after: always;"></div>
-
 2. Saving window preferences
 
    1. Resize the window to an optimal size, move it to a different location and close it.
@@ -842,8 +840,6 @@ testers are expected to do more *exploratory* testing.
        
     2. Test case: `find sa`<br>
        Expected: A list of students, including Sam Tan, is shown.
-
-<div style="page-break-after: always;"></div>
 
 ### Sorting the student list
 
@@ -988,8 +984,6 @@ to include more special characters such as '.' and ',', and allowing names to en
 
 5. **Accepting consecutive spaces in names:** Currently, consecutive spaces in names are not allowed. We plan to improve the validation checks of names to treat  
 multiple spaces in names, which arise likely due to mistakes in entry, as just one space (e.g. treating Jane     Tan as Jane Tan). 
-
-<div style="page-break-after: always;"></div>
 
 6. **Improved verification of address:** Currently, any String is accepted as an address. In the future, we plan to improve the verification of the address field of 
 the add functionality, such that we can check that necessary fields are present, e.g. post code, country, street name etc., 
