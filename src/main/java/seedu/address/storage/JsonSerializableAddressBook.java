@@ -77,6 +77,11 @@ class JsonSerializableAddressBook {
         );
     }
 
+    /**
+     * Validates if the lessons in the addressbook have valid subjects.
+     *
+     * @param addressBook the addressbook to validate
+     */
     public boolean validateLessonSubject(AddressBook addressBook) {
         ObservableList<Lesson> lessonList = addressBook.getLessonList();
         for (Lesson lesson : lessonList) {
