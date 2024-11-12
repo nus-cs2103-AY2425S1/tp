@@ -9,7 +9,7 @@ title: AdmiNUS
 # AdmiNUS - Contact Management for NUS Clubs
 ![Ui](images/viewContactUI.png)
 
-AdmiNUS is a desktop application for managing contact details of NUS club administrators, student leaders, and event coordinators. It is optimized for Command Line Interface (CLI) users who prefer efficient and fast contact management without sacrificing the convenience of a Graphical User Interface (GUI).
+AdmiNUS is a desktop application for managing contact details of NUS club administrators. It is optimized for Command Line Interface (CLI) users who prefer efficient and fast contact management without sacrificing the convenience of a Graphical User Interface (GUI).
 
 ## Features
 
