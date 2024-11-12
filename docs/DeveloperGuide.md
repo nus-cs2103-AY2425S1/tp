@@ -199,8 +199,11 @@ This section describes some noteworthy details on how certain features are imple
 
 ### View Command
 
-Here's an overview of what happens when the view command is executed:
-![alt text](ViewActivityDiagram.png)
+The view command is used to view a specific contact on the contact display pane.
+Here's an overview of what happens when the `view 1` command is being input by the user:
+![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+The activity diagram is as follows:
+![ViewActivityDiagram](images/ViewActivityDiagram.png)
 
 - **The View Command checks:**
   - that the specified index is positive and within the bounds of the contacts list.
