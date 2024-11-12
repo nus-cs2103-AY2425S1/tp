@@ -72,6 +72,11 @@ public class AttendCommandTestUtil {
     private static class ModelStub implements Model {
 
         @Override
+        public void addListener(Runnable listener) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void notifyEnrollmentChanged() {
             throw new AssertionError("This method should not be called.");
         }
