@@ -685,7 +685,7 @@ hence reducing the usefulness of this command.
 <br><br>
     This limitation is due to our current system design which forces a role type to be assigned to an exact module code into the search query for the find command to execute,
 we plan to adopt other ways of constructing the query to allow for more general search of module-role in the future.
-<br><br>
+<br>
 2. **Allow deletion of other optional data fields of a contact, using the current edit command approach.** Currently, only the description and tag fields can be deleted, by specifying the corresponding prefix followed by an empty string (For Example: `edit 9 t/` removes all tags, while `edit 9 d/` removes the description of the ninth contact in the current list). However, other optional fields such as the phone, email and address cannot be removed as of v1.6.
 <br><br>
     ![point2_screenshot_remove_description_example](images/planned_enhancements_screenshots/Point2_RemoveDescriptionExample.png)<br>
@@ -699,7 +699,7 @@ Similar issues happen when removing phone using `edit 9 p/` and removing address
 If these fields are left unchanged over a long period of time, user may forget that these fields are wrong and hence use the wrong information in the program, which is definitely
 not desired. We plan to allow edit command to accept empty input for phone, email and address and change the parser such that the empty inputs for these fields can be considered as
 deleting them from the selected contact.
-<br><br>
+<br>
 3. **Allow the user to delimit special prefixes appearing in the contact details.**
 Currently, if any of the input fields contain the special prefixes, the string will be split into multiple fields, which may not be the user's intention.
 For example, if the user attempts to execute `edit 1 d/For a/b testing`, the command will be wrongly interpreted as
@@ -711,7 +711,7 @@ For example, if the user attempts to execute `edit 1 d/For a/b testing`, the com
     The current workaround is to add a non-whitespace character in front of the prefix (i.e. `edit 1 d/For 'a/b testing`), but this is not intuitive to the user.
 We plan to follow a more standard approach of using a backslash to escape the special prefixes.
 More importantly, the parser will remove the backslash at the end of parsing, so that the user does not see the backslash in the final output.
-<br><br>
+<br>
 4. **Enforce realistic role assignment for contacts.** Currently, a contact can have multiple roles, such as both "Professor" and "Student".
 This is unrealistic, as an individual is typically either a student or a professor, but not both.
 <br><br>
@@ -725,11 +725,11 @@ We plan to enforce stricter role assignment, ensuring that:
 5. **Allow command navigation using up and down arrows.** Currently, the user has to type the command from scratch if he/she wants to execute a previous command again.
 This can be very troublesome if the user wants to execute the same command multiple times, or if the user wants to execute a similar command to the previous one.
 We plan to allow the user to navigate through the command history using the up and down arrows.
-   <br><br>
+   <br>
 6. **Allows sorting of contacts based on different fields.** Currently, the contacts are displayed in the order they are added to the address book. 
 This can make it challenging for users to locate a contact if they are unsure of specific search criteria.
 We plan to allow the user to view the contacts in a sorted order to find the contact he/she is looking for more easily.
-   <br><br>
+   <br>
 7. **Allow multi-word tags for contacts.** Currently, tag field only allows alphanumeric inputs for tag creation, which means **spaces**, **underscores(_)** and **dashes(-)** are not
 allowed in the input, and as a result prevents user from creating multi-word tags for contacts. 
 <br><br>
@@ -740,7 +740,7 @@ because tag input `team leader` contains space which is not allowed, same issue 
     This is not very suitable design because user may want to create multi-word tags
 such as `team leader`, `best friend`, `financial office` etc, and the current validation method does not offer this level of flexibility. Therefore, we plan to loosen the restriction
 on tag creation input to allow space for word separation, so that user can create multi-word tag to contacts for easier management.
-<br><br>
+<br>
 
 8. **Reflect the true redo/undo states of the address book in the history command list.** Currently, the history command list only shows all data changing commands executed by the user and does not precisely reflect the current and history states of the address book.
    For example, if the user executes `delete 1`, then `delete 2`, then `undo`, then `delete 3`, the true history states are `[delete 1, delete 3]` since `delete 2` has been purged.
@@ -748,7 +748,7 @@ on tag creation input to allow space for word separation, so that user can creat
    Moreover, we plan to highlight the current state of the address book in the history command list, so that the user can easily identify the current state of the address book.
    <br><br>
    <img src="images/planned_enhancements_screenshots/Point8.png" alt="point8_screenshot" width="50%"/><br><br>
-<br>
+
 9. **Standardize Phone Number Format for Duplicate Detection.** Currently, the application allows adding multiple contacts with phone numbers that may look different but essentially represent the same number.
 For example, `+65 12345678 (24 hr)` and `12345678` are treated as distinct, leading to potential duplicates and inconsistencies.
 We plan to implement a standardization process to recognize and handle variations in phone number formatting. Specifically:
