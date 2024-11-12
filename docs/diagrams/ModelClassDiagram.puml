@@ -66,5 +66,5 @@ Email -[hidden]right-> TelegramUsername
 ModelManager --> "~* filtered" Person
 
 EventList *--> "~* all" Event
-Event *-left-> "~* some" Person
+Event -left-> "~* some" Person
 @enduml

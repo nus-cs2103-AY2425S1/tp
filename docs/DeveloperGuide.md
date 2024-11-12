@@ -129,13 +129,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -295,11 +288,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | `* * *`  | Student Event Planner who handles contact information of many people                                   | Add contact details of event attendees, vendors, sponsors and volunteers | store their contact details and have a platform to view the contact information of the relevant parties all in one place |
 | `* * *`  | Student event planner who can type fast and prefer typing over other means of input                    | Perform the functions of the app solely by typing                        | speed up the process of accessing and managing information                                                               |
-| `* * *`  | Student Event Planner                                                                                  | delete a person                                                          | keep my contacts up-to-date                                                                                              |
+| `* * *`  | Student Event Planner                                                                                  | Delete a person                                                          | keep my contacts up-to-date                                                                                              |
 | `* * *`  | Student Event Planner                                                                                  | View the list of all contacts and number of contacts                     | quickly get an overview of contact information of all attendees, vendors, sponsors and volunteer saved so far            |
 | `* *`    | Student event planner who has to contact vendors, sponsors, attendees and volunteers via various means | Save their name, phone number, email address, telegram handle, address   | efficiently keep track of their contact details and reach out to them through the appropriate channels                   |
 | `* *`    | Student event planner                                                                                  | Update contact details of attendees, vendors, sponsors and volunteers    | keep their most current information or rectify a mistake                                                                 |
-| `* *`    | Student event planner who needs to contact different stakeholders of an event                          | View list of contacts by categories                                      | zoom in on contacts of a particular category that interest me                                                            |
+| `* *`    | Student event planner who needs to contact different stakeholders of an event                          | Search for contacts by name                                              | quickly locate the contacts I need                                                                                       |
 
 *{More to be added}*
 
@@ -510,6 +503,19 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisite: At least one event exists in the list.
     2. Test case: `erase 1`
         - Expected: Deletes the first event. Status message confirms the deletion.
+    3. Test case: `erase`
+        - Expected: Error message indicating invalid command.
+
+5. **Find contacts by event**
+    1. Prerequisite: At least one event exists in the list.
+    2. Test case: `find-event 1`
+        - Expected: Displays all contacts in the first event.
+    3. Test case: `find-event`
+        - Expected: Error message indicating invalid command.
+
+6. **Clear all events**
+   1. Test case: `clear-event`
+        - Expected: All events are deleted.
 
 ---
 
@@ -517,9 +523,9 @@ testers are expected to do more *exploratory* testing.
 
 1. **Entering and using search mode**
     1. Test case: `search-mode`
-        - Expected: Application enters search mode, displaying all contacts in a search panel.
+        - Expected: Application enters search mode, displaying an empty search results panel.
     2. Test case: `search n/John`
-        - Expected: Filters the contacts in the search panel to display only those matching the name "John."
+        - Expected: Adds contacts that match the name "John" to the search results panel.
 
 2. **Excluding contacts**
     1. Prerequisite: At least one contact is displayed in the search results.
@@ -530,8 +536,17 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisite: At least one contact is excluded.
     2. Test case: `clear-excluded`
         - Expected: All excluded contacts are restored to the search results.
+       
+4. **Checking exclusions**
+    1. Test case: `check-excluded`
+        - Expected: All excluded contacts are displayed in the result display.
 
-4. **Exiting search mode**
+5. **Add all contacts from search results to event**
+   1. Prerequisite: At least one contact is present in the search results panel, there is at least 1 event, the contacts in the search results panel all have at least one role and are not already inside the event to be added to.
+   2. Test case: `add-all 1`
+       - Expected: Adds all contacts from the search results panel to the first event.
+
+6. **Exiting search mode**
     1. Test case: `exit-search`
         - Expected: Application returns to normal mode.
 
@@ -545,10 +560,22 @@ testers are expected to do more *exploratory* testing.
 
 ---
 ### **Planned Enhancements**
-1. **Clear Search Results in Searchmode**: Currently is no way to clear an existing search conditions in `searchmode`.
+Team size: 5
+1. **Clear Search Results in Searchmode**: Currently is no way to clear existing search conditions in `searchmode`.
    This enhancement will allow users to clear the current search results and view all contacts again.
 2. **find-role search for users with no Roles**: Currently, the find-role command is unable to search for users with no roles.
    This enhancement will allow search for users with no roles.
 3. **Better TLD input validation for emails**: Currently, it is possible to create emails of `x@xx` format, even though 
    the domain part of the email should have at least 2 domain labels, the last one being the Top Level Domain (TLD) in
    real life. We could have better input validation to enforce that there must be at least 2 domain labels.
+4. **Allow users to define roles for contacts**: Currently, contacts can only have attendee, sponsor, vendor and volunteer roles or have no roles, which may
+   be too restrictive. We could allow users to add additional roles to contacts such as "emcee", "performer", "VIP" etc so that 
+   they get a classification instead of being labelled as no roles just because they do not fit in one of the 4 pre-determined roles. 
+5. **Allow users to add contacts to events under more roles** Building on top of point 4, we could then allow users to add these contacts to events under these additional roles so that events are not limited
+   to just attendees, sponsors, vendors and volunteers.
+6. **Search within an event**: Currently, all searches are done on the general list of contacts. We could expand find-event to include a search for contacts within an event
+   e.g. find-event ei/1 n/john to find a contact with name "john" within event 1 so that users can find a contact for a specific event more quickly.
+7. **Add description to event**: Currently, users are only able to create events with an event name. We could allow users to add
+   description to events when they create a new event e.g. new n/EVENT_NAME d/EVENT_DESCRIPTION so that they can add additional important details like the date and location of the event.
+8. **Make remove contact from event message more specific**: Currently, if user types "remove ei/1 ci/0", the app says "Invalid command format!
+   remove ei/EVENT_INDEX ci/CONTACT_INDEX : Removes a contact from an event" which is not specific enough. We plan to make the error message say "Contact Index should be a positive integer" instead.

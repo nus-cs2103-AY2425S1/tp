@@ -68,10 +68,7 @@ public class RemovePersonFromEventCommand extends Command {
         if (!event.hasPerson(person)) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
-        //        String personRole = event.getRole(person);
-        //        if (personRole == null) {
-        //            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
-        //        }
+
         // at this point, person should have a role in event
         assert(event.hasPerson(person));
         logger.info("Removing person " + person.getName() + " from event " + event.getName());
