@@ -405,15 +405,11 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
     Use case ends. 
 * 1b. Cher detects that the specified contact is not a student.
   - 1b1. Cher shows error message that the attendance of the specified contact cannot be unmarked. <br>
-    Use case ends. 
-<<<<<<< HEAD
-* 1c. Cher detects that the attendance count of the specified contact is already at 0.
-  - 1c1. Cher shows error message that the attebdance count is already at 0. <br>
-=======
-* 2c. Cher detects that the attendance count of the specified contact is already at 0.
-  - 2c1. Cher shows error message that the attendance count is already at 0. <br>
->>>>>>> 3ae51315ef8f83e2218e3560fa54197cd5e386f3
     Use case ends.
+* 1c. Cher detects that the attendance count of the specified contact is already at 0.
+  - 1c1. Cher shows error message that the attendance count is already at 0. <br>
+    Use case ends. 
+
 
 #### Use case: UG13 - Reset attendance 
 **MSS**
