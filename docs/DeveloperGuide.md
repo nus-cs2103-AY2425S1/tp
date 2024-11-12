@@ -214,6 +214,45 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Search Public Address feature
+
+The `searchpa` command is a feature that allows users who have a public address to quickly find the contact within the
+DLTbook which this public address is associated to. An example is
+`searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`
+
+#### Implementation
+
+The `searchpa` command is facilitated by `SearchPublicAddressCommand`,`SearchPublicAddressCommandParser` and
+`PublicAddressComposition`. It uses `Model#getFilteredPersonList()` to get the list of filtered persons currently
+displayed and searches each of the persons for the presence of the public address being searched for using
+Person#hasPublicAddressStringAmongAllNetworks(String publicAddressString).
+
+#### How to execute the command
+
+1. The `searchpa` command is executed by typing `searchpa` followed by the public address to be searched for.
+2. The `AddressBookParser` class creates a new `SearchPublicAddressCommandParser` object.
+3. If there is no string of Public Address entered or more than 1 string of public address entered, a `ParseException
+   will be thrown.
+4. The `SearchPublicAddressCommandParser` class creates a new `SearchPublicAddressCommand` object with the parsed public
+   address string.
+5. The `SearchPublicAddressCommand` object calls the PublicAddressComposition#validatePublicAddress(String
+   publicAddressString) method to validate the public address string, and throws a `ParseException` if the public
+   address is invalid.
+6. The `SearchPublicAddressCommand` object then calls the `Model#getFilteredPersonList()` method
+   to get the list of filtered persons currently displayed.
+7. The `SearchPublicAddressCommand` object then searches each of the persons for the presence of the public address
+   being
+   searched for using `Person#hasPublicAddressStringAmongAllNetworks(String publicAddressString)`.
+8. `Person#hasPublicAddressStringAmongAllNetworks(String publicAddressString)` calls
+   `PublicAddressComposition#hasPublicAddress(String publicAddressString)`.
+9. The boolean value returned from `PublicAddressComposition#hasPublicAddress(String publicAddressString)` is then used
+   to
+   create a `List<Persons>` object that have the public address being searched for in the `SearchPublicAddressCommand`
+   object.
+10. The `SearchPublicAddressCommand` object then calls the
+    `SearchPublicAddressCommand#generateResult(List<Person> personsWithPublicAddressMatch)` to generate the success or
+    error message.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
