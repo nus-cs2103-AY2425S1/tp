@@ -643,7 +643,7 @@ Use case ends.
 
 1. Teacher chooses to search for revenue
 2. Teacher specifies the revenue type to be revenue paid
-3. Edulog retrieves and displays a list of students who have not paid their fee. 
+3. Edulog retrieves and displays a list of students who have paid their fee. 
 4. Edulog shows the total amount of the unpaid fees.  
 
 Use case ends.
