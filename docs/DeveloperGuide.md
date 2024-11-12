@@ -138,13 +138,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -291,6 +284,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | TA                                       | unmark students' attendance   | correct attendance records if mistakes are made                                    |
 | `* * *`  | TA                                       | list attendance for an event  | see which students attended a particular event                                     |
 | `* * *`  | TA                                       | list all attendance events    | get an overview of all events                                                      |
+| `* *`    | TA                                       | tag groups to a student       | see which group(s) a student is in                                                 |
+| `* *`    | TA                                       | find students by groups       | get an overview of which student is in the group(s)                                |
 | `* *`    | TA                                       | delete attendance events      | get rid of events that are no longer needed or if some duplicate events is created |
 | `* *`    | TA                                       | track student's attendance    | award credit appropriately                                                         |
 | `*`      | TA with many persons in the address book | sort persons by name          | locate a person easily                                                             |
@@ -349,29 +344,34 @@ Preconditions: There is some student data available
     Use case resumes from step 1.
 
 
-**Use Case: UC3 - List Student**  
-Preconditions: Installed the application
+**Use Case: UC3 - List Student**
 
 **MSS:**
 
-1. TA requests a list of students
-2. TP shows a list of all student data
+1. TA enters the `list` command
+2. TP validates the input
+3. TP shows a list of all student data
 
     Use case ends.
 
 **Extensions:**
 
-- 2a. There is no student data found in the list
-  - 2a1. TP shows an empty list of students
+- 2a. The input validation detects that the input is not valid (e.g. extra argument typed in after `list`)
+  - 2a1. TP alerts user of the proper way to type the command.
 
-    Use case ends.
+    Use case resumes from step 1.
+
+- 3a. There is no student data found in the list
+    - 3a1. TP shows an empty list of students
+
+      Use case ends.
 
 
 **Use Case: UC4 - Find Student**
 
 **MSS:**
 
-1. TA enters the find command with at least one valid search parameter (e.g., /n <Name>, /id <Student ID>).
+1. TA enters the `find` command with at least one valid search parameter (e.g., /n <Name>, /id <Student ID>).
 2. TP validates the input parameters.
 3. TP searches the student database for records matching all the specified criteria.
 4. TP displays a list of students matching the search criteria.
@@ -581,7 +581,7 @@ Preconditions: Installed the application
 
 **MSS:**
 
-1. TA enters the show command with at least one keyword (e.g., "group 1").
+1. TA enters the `show` command with at least one keyword (e.g., "group 1").
 2. TP searches the student database for students with groups matching the keyword(s).
 3. TP displays a list of students matching the search criteria.
 
@@ -611,20 +611,20 @@ Preconditions: Installed the application
 
 **MSS:**
 
-1. TA enters the index of the student to be edited and the updated student details
-2. TP updates the new student record
+1. TA enters the `edit` command together with the `INDEX` of the student to be edited and the updated student details (e.g. `n/ Mary Tan`)
+2. TP updates the student record with the new details (e.g. `Name` is changed to `Mary Tan`)
 
    Use case ends.
 
 **Extensions:**
 
-- 1a. TP detects that data is entered in an incorrect format
+- 1a. TP detects that data is entered in an incorrect format (e.g. Student ID not keyed in correctly)
     - 1a1. TP informs TA of the correct format
 
       Use case resumes from step 1.
 
-- 1b. The index keyed in is invalid (eg. out of bounds, invalid character)
-    - 1b1. TP informs TA of the correct indexing format
+- 1b. The `INDEX` keyed in is invalid (eg. out of bounds, invalid character)
+    - 1b1. TP informs TA of the correct format for `INDEX`
 
       Use case resumes from step 1.
 
@@ -742,6 +742,48 @@ testers are expected to do more *exploratory* testing.
        Currently multiple comments per student is not supported. However, you are allowed to have /c as part of
        your string for your comment so long as it is not preceded with blank space.
 
+### Showing students in groups
+
+1. Showing students in groups matching the keywords
+    1. Prerequisites: There is one person in the list with the group: `group awesome`
+
+    2. Test case: `show group`
+       Expected: The person is listed
+
+    3. Test case: `show group awesome`
+       Expected: The person is listed
+   
+    4. Test case: `show gro`
+       Expected: The person is listed
+
+2. Showing that there are no students found
+    1. Prerequisites: There is one person in the list with the group: `group awesome`
+
+    2. Test case: `show team`
+       Expected: No student is listed
+
+### Listing students in groups
+
+1. Showing all students in the list
+    1. Prerequisites: There is at least one student in the list
+
+    2. Test case: `list`
+       Expected: All students are listed
+
+2. Showing that there are no students found
+    1. Prerequisites: There are no students in the list
+
+    2. Test case: `list`
+       Expected: No student is listed
+
+### Randomly selecting a student
+
+1. Randomly displaying a student
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `random`
+
+       Expected: Success message shown in the status message. List updates to display only the random student.
 
 ### Managing Attendance Events
 
@@ -859,46 +901,6 @@ testers are expected to do more *exploratory* testing.
        is shown in status message and a pop-up with a link to the user guide will appear.
        This is allowed as help is not considered a critical action does not require exact formatting.
 
-### Showing students in groups
-
-1. Showing students in groups matching the keywords
-   1. Prerequisites: There is one person in the list with the group: `group awesome`
-  
-   2. Test case: `show group`
-      Expected: The person is listed
-      
-   3. Test case: `show group awesome`
-     Expected: The person is listed
-
-2. Showing that there are no students found
-   1. Prerequisites: There is one person in the list with the group: `group awesome`
-      
-   2. Test case: `show team`
-      Expected: No student is listed
-
-### Listing students in groups
-
-1. Showing all students in the list
-   1. Prerequisites: There is at least one student in the list
-  
-   2. Test case: `list`
-      Expected: All students are listed
-
-2. Showing that there are no students found
-   1. Prerequisites: There are no students in the list
-      
-   2. Test case: `list`
-      Expected: No student is listed
-
-### Randomly selecting a student
-
-1. Randomly displaying a student
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-   
-   2. Test case: `random`
-   
-        Expected: Success message shown in the status message. List updates to display only the random student.
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -972,8 +974,11 @@ testers are expected to do more *exploratory* testing.
 
     Currently, when users use the `delete` feature they can only delete one student at a time for example `delete 1` deletes the first student if available. In the future `delete 1 2 5` for example will be able to delete students at the index of 1, 2 and 5 on the list shown to improve efficiency.
 
-7.  **Add warnings for possible duplicate student**
-    Currently, students with same names but slightly different studentIDs do not generate a warning despite it likely being a user mistake. We plan to add in warnings for when the user tries to add a student with a similar name and similar studentID as an existing student in the list. Similar name means matching names without case sensitivity and without whitespace within the name (eg. `johndoe` is similar to `JOHN DOE`) and similar studentID means two studentIDs that differ by a single character, case-insensitive, for example `A1234567E` is similar to `a2234567e` (2nd character different) and `A1234567U` (Last character different). This accounts for the user trying to add a student that already exists and making a slight typo in the studentID. This applies for both the `add` and `edit` commands and the warning message will be appended to the end of the respective success messages as: `This person may already exist. Please check to ensure this person is not a duplicate.`. The commands will execute normally just with an additional warning to alert users.
+7.  **Add specific error messages for the use of `c/` prefix in `add` and `edit` command**
+    
+    Currently, users are unable to add or edit comments via the `add` or `edit` command. In future iterations, we are planning to add specific error messages for when the `c/` prefix is used anywhere in the `add` or `edit` commands.
+    For instance, a specific error message would be thrown when the user types `add n/Mary id/A1234567H c/comment` (this includes other permutations of using the `c/` prefix in the `add` command eg. `add n/Mary c/comment id/A1234567H`). This also applies to the `edit` command
+    where there would be specific error message thrown when user inputs is, for instance, `edit 1 c/comment` (Likewise, this also applies to different permutations of prefixes eg. `edit 1 id/A2345678J c/comment`).
 
 8. **Add warnings for Year inputs that may be mistakes**
 
