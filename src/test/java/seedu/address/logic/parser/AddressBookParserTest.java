@@ -22,9 +22,15 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.CompoundedPredicate;
+import seedu.address.model.person.DateDistantToRecentComparator;
+import seedu.address.model.person.DateRecentToDistantComparator;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.OrgContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PriorityHighToLowComparator;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -41,15 +47,35 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_add_alt() throws Exception {
+        Person person = new PersonBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommandAlt(person));
+        assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
+    public void parseCommand_clear_alt() throws Exception {
+        assertTrue(parser.parseCommand(ClearCommand.ALT_COMMAND_WORD) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.ALT_COMMAND_WORD + " 3") instanceof ClearCommand);
+    }
+
+    @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_delete_alt() throws Exception {
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(
+                DeleteCommand.ALT_COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -63,17 +89,76 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_edit_alt() throws Exception {
+        Person person = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.ALT_COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
     @Test
+    public void parseCommand_exit_alt() throws Exception {
+        assertTrue(parser.parseCommand(ExitCommand.ALT_COMMAND_WORD) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.ALT_COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new CompoundedPredicate(new NameContainsKeywordsPredicate(keywords),
+                        new OrgContainsKeywordsPredicate(Arrays.asList("")))),
+                command);
+    }
+
+    @Test
+    public void parseCommand_find_alt() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.ALT_COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new CompoundedPredicate(new NameContainsKeywordsPredicate(keywords),
+                        new OrgContainsKeywordsPredicate(Arrays.asList("")))),
+                command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " recent");
+
+        assertEquals(new SortCommand(new DateRecentToDistantComparator()), command);
+    }
+
+    @Test
+    public void parseCommand_sortDate_alt() throws Exception {
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.ALT_COMMAND_WORD + " distant");
+
+        assertEquals(new SortCommand(new DateDistantToRecentComparator()), command);
+    }
+
+    @Test
+    public void parseCommand_sortPriority() throws Exception {
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " high");
+
+        assertEquals(new SortCommand(new PriorityHighToLowComparator()), command);
+    }
+
+    @Test
+    public void parseCommand_sortPriority_alt() throws Exception {
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.ALT_COMMAND_WORD + " high");
+
+        assertEquals(new SortCommand(new PriorityHighToLowComparator()), command);
     }
 
     @Test
@@ -83,9 +168,21 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_help_alt() throws Exception {
+        assertTrue(parser.parseCommand(HelpCommand.ALT_COMMAND_WORD) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.ALT_COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_list_alt() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.ALT_COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.ALT_COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test

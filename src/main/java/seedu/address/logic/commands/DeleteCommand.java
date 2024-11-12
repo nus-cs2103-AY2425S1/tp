@@ -18,6 +18,8 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
+    public static final String ALT_COMMAND_WORD = "del";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"

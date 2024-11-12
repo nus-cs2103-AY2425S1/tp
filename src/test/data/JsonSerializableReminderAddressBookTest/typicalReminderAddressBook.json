@@ -1,0 +1,24 @@
+{
+  "_comment": "ReminderAddressBook save file which contains the same Reminder values as in TypicalReminders#getTypicalReminderAddressBook()",
+  "reminders" : [ {
+    "person" : "Alice Pauline",
+    "date" : "12-12-2024",
+    "description" : "Mock interview with Alice"
+  }, {
+    "person" : "Benson Lin",
+    "date" : "15-12-2024",
+    "description" : "Networking session with Benson for internship insights"
+  }, {
+    "person" : "Carl Kurz",
+    "date" : "20-12-2024",
+    "description" : "Resume review and feedback session with Carl"
+  }, {
+    "person" : "Daniel Meier",
+    "date" : "22-12-2024",
+    "description" : "Technical interview prep with Daniel"
+  }, {
+    "person" : "Elle Meyer",
+    "date" : "30-12-2024",
+    "description" : "Behavioral interview coaching with Elle"
+  }]
+}

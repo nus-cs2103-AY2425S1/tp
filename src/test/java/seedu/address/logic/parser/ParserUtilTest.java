@@ -14,10 +14,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,13 +27,16 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_PRIORITY = "Very High";
+    private static final String INVALID_REMARK = " ";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_PRIORITY = "low";
+    private static final String VALID_REMARK = "pretty";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -103,29 +107,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
-    }
-
-    @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
-    }
-
-    @Test
-    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
-    }
-
-    @Test
-    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
-        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
-    }
-
-    @Test
     public void parseEmail_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
     }
@@ -192,5 +173,51 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parsePriority_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePriority((String) null));
+    }
+
+    @Test
+    public void parsePriority_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePriority(INVALID_PRIORITY));
+    }
+
+    @Test
+    public void parsePriority_validValueWithoutWhitespace_returnsPriority() throws Exception {
+        Priority expectedPriority = new Priority(VALID_PRIORITY);
+        assertEquals(expectedPriority, ParserUtil.parsePriority(VALID_PRIORITY));
+    }
+
+    @Test
+    public void parsePriority_validValueWithWhitespace_returnsTrimmedPriority() throws Exception {
+        String priorityWithWhitespace = WHITESPACE + VALID_PRIORITY + WHITESPACE;
+        Priority expectedPriority = new Priority(VALID_PRIORITY);
+        assertEquals(expectedPriority, ParserUtil.parsePriority(priorityWithWhitespace));
+    }
+
+    @Test
+    public void parseRemark_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRemark((String) null));
+    }
+
+    @Test
+    public void parseRemark_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRemark(INVALID_REMARK));
+    }
+
+    @Test
+    public void parseRemark_validValueWithoutWhitespace_returnsRemark() throws Exception {
+        Remark expectedRemark = new Remark(VALID_REMARK);
+        assertEquals(expectedRemark, ParserUtil.parseRemark(VALID_REMARK));
+    }
+
+    @Test
+    public void parseRemark_validValueWithWhitespace_returnsTrimmedRemark() throws Exception {
+        String remarkWithWhitespace = WHITESPACE + VALID_REMARK + WHITESPACE;
+        Remark expectedRemark = new Remark(VALID_REMARK);
+        assertEquals(expectedRemark, ParserUtil.parseRemark(remarkWithWhitespace));
     }
 }

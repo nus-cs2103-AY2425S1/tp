@@ -7,18 +7,25 @@ skinparam classBackgroundColor MODEL_COLOR
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+Class "<<interface>>\nReadOnlyReminderAddressBook"" as ReadOnlyReminderAddressBook
 Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
+Class ReminderAddressBook
 
 Class UniquePersonList
 Class Person
-Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class Priority
+Class LastSeen
+Class Reminder
+Class UniqueReminderList
+Class Organisation
+Class Remark
 
 Class I #FFFFFF
 }
@@ -27,28 +34,35 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
+ReminderAddressBook .up.|> ReadOnlyReminderAddressBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
+Model .left.> ReadOnlyReminderAddressBook
 ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" ReminderAddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+ReminderAddressBook *--> "1" UniqueReminderList
+UniqueReminderList --> "~* all" Reminder
+Reminder *--> Name
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
 Person *--> "*" Tag
+Person *--> "1" Priority
+Person *--> "1" LastSeen
+Person *--> "1" Organisation
+Person *--> "1" Remark
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
 @enduml

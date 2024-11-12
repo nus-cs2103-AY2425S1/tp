@@ -4,43 +4,64 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "organisation": "National University of Singapore",
+    "lastSeen" : "02-09-2024",
+    "tags" : [ "friends" ],
+    "priority" : "low",
+    "remark" : "likes apple"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "email" : "benson@example.com",
+    "organisation": "National University of Singapore",
+    "lastSeen" : "17-11-2024",
+    "tags" : [ "owesMoney", "friends" ],
+    "priority" : "medium",
+    "remark" : "likes apple"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tags" : [ ]
+    "email" : "carl@example.com",
+    "organisation": "National University of Singapore",
+    "lastSeen" : "05-09-2022",
+    "tags" : [ ],
+    "priority" : "low",
+    "remark" : "handsome"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tags" : [ "friends" ]
+    "email" : "daniel@example.com",
+    "organisation": "National University of Singapore",
+    "lastSeen" : "04-04-2023",
+    "tags" : [ "friends" ],
+    "priority" : "low",
+    "remark" : "handsome"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tags" : [ ]
+    "email" : "elle@example.com",
+    "organisation": "National University of Singapore",
+    "lastSeen" : "06-06-2024",
+    "tags" : [ ],
+    "priority" : "low",
+    "remark" : "plays basketball"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tags" : [ ]
+    "email" : "fiona@example.com",
+    "organisation": "National University of Singapore",
+    "lastSeen" : "03-07-2024",
+    "tags" : [ ],
+    "priority" : "low",
+    "remark" : "pretty"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tags" : [ ]
+    "email" : "george@example.com",
+    "organisation": "National University of Singapore",
+    "lastSeen" : "01-09-2024",
+    "tags" : [ ],
+    "priority" : "low",
+    "remark" : "pretty"
   } ]
 }

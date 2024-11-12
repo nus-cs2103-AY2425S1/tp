@@ -1,0 +1,7 @@
+{
+  "reminders" : [ {
+    "person" : "Person with invalid name field: Ha!ns Mu@ster",
+    "date" : "invalid",
+    "description" : "Meet up for dinner"
+  } ]
+}

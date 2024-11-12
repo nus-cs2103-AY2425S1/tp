@@ -1,0 +1,83 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":SaveSortPreferenceCommandParser" as SaveSortPreferenceCommandParser LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant "s:SaveSortPreferenceCommand" as SaveSortPreferenceCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "<<class>>\nSortPreference" as SortPreference MODEL_COLOR
+end box
+
+[-> LogicManager : execute("svp high")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("svp high")
+activate AddressBookParser
+
+create SaveSortPreferenceCommandParser
+AddressBookParser -> SaveSortPreferenceCommandParser
+activate SaveSortPreferenceCommandParser
+
+SaveSortPreferenceCommandParser --> AddressBookParser :
+deactivate SaveSortPreferenceCommandParser
+
+AddressBookParser -> SaveSortPreferenceCommandParser : parse("high")
+activate SaveSortPreferenceCommandParser
+
+SaveSortPreferenceCommandParser -> ParserUtil : parseSortPreference("high")
+activate ParserUtil
+
+ParserUtil -> SortPreference : isValidSortPreference("high")
+activate SortPreference
+SortPreference --> ParserUtil : true
+deactivate SortPreference
+
+ParserUtil --> SaveSortPreferenceCommandParser : SortPreference object
+deactivate ParserUtil
+
+create SaveSortPreferenceCommand
+SaveSortPreferenceCommandParser -> SaveSortPreferenceCommand
+activate SaveSortPreferenceCommand
+
+SaveSortPreferenceCommand --> SaveSortPreferenceCommandParser : s
+deactivate SaveSortPreferenceCommand
+
+SaveSortPreferenceCommandParser --> AddressBookParser : s
+deactivate SaveSortPreferenceCommandParser
+
+SaveSortPreferenceCommandParser -[hidden]-> AddressBookParser
+destroy SaveSortPreferenceCommandParser
+
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> SaveSortPreferenceCommand : execute(m)
+activate SaveSortPreferenceCommand
+
+SaveSortPreferenceCommand -> Model :
+activate Model
+
+Model --> SaveSortPreferenceCommand :
+deactivate Model
+
+create CommandResult
+SaveSortPreferenceCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SaveSortPreferenceCommand :
+deactivate CommandResult
+
+SaveSortPreferenceCommand --> LogicManager : r
+deactivate SaveSortPreferenceCommand
+
+[<-- LogicManager :
+deactivate LogicManager
+@enduml
