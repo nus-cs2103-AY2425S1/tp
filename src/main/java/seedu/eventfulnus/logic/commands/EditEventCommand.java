@@ -1,7 +1,6 @@
 package seedu.eventfulnus.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.eventfulnus.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.eventfulnus.logic.parser.CliSyntax.PREFIX_PARTICIPANT;
 import static seedu.eventfulnus.logic.parser.CliSyntax.PREFIX_SPORT;
 import static seedu.eventfulnus.logic.parser.CliSyntax.PREFIX_TEAM;
@@ -38,13 +37,17 @@ public class EditEventCommand extends Command {
                                                + "by the index number used in the displayed event list. "
                                                + "Existing values will be overwritten by the input values.\n"
                                                + "Parameters: INDEX (must be a positive integer) "
-                                               + "[" + PREFIX_NAME + "NAME\n]"
+                                               + PREFIX_SPORT + "SPORT "
+                                               + PREFIX_TEAM + "TEAM1 "
+                                               + PREFIX_TEAM + "TEAM2 "
+                                               + PREFIX_VENUE + "VENUE "
+                                               + "[" + PREFIX_PARTICIPANT + "PARTICIPANT]...\n"
                                                + "Example: " + COMMAND_WORD + " 1 "
-                                               + PREFIX_SPORT + "Chess"
-                                               + PREFIX_TEAM + "COM"
-                                               + PREFIX_TEAM + "FASS"
-                                               + PREFIX_VENUE + "Stadium"
-                                               + PREFIX_PARTICIPANT + "Alice";
+                                               + PREFIX_SPORT + "Chess "
+                                               + PREFIX_TEAM + "COM "
+                                               + PREFIX_TEAM + "FASS "
+                                               + PREFIX_VENUE + "Stadium "
+                                               + PREFIX_PARTICIPANT + "Alice ";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

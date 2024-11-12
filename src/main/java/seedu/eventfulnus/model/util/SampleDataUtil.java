@@ -24,18 +24,20 @@ import seedu.eventfulnus.model.person.role.athlete.Sport;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                getRoleSet("Athlete - COM - Volleyball Women, Tennis")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                getRoleSet("Volunteer - Photographer", "Committee - Publicity - Project Director")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+            new Person(new Name("Alice Pauline"), new Phone("94351253"), new Email("alice@example.com"),
+                getRoleSet("Athlete - COM - Volleyball Women, Floorball Women")),
+            new Person(new Name("Benson Meier"), new Phone("98765432"), new Email("johnd@example.com"),
+                getRoleSet("Volunteer - Emcee", "Athlete - DEN - Swimming Men")),
+            new Person(new Name("Carl Kurz"), new Phone("95352563"), new Email("heinz@example.com"),
+                getRoleSet("Referee - MED - Tchoukball, Squash")),
+            new Person(new Name("Daniel Meier"), new Phone("87652533"), new Email("cornelia@example.com"),
                 getRoleSet("Sponsor - OATSIDE")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                getRoleSet("Athlete - FASS - Swimming Men")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                getRoleSet("Audience")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                getRoleSet("Committee - Sports - Vice Sports Director - BIZ")),
+            new Person(new Name("Elle Meyer"), new Phone("9482224"), new Email("werner@example.com"),
+                getRoleSet("Committee - Marketing - Project Director")),
+            new Person(new Name("Fiona Kunz"), new Phone("9482427"), new Email("lydia@example.com"),
+                getRoleSet("Committee - Publicity - Project Director")),
+            new Person(new Name("George Best"), new Phone("9482442"), new Email("anna@example.com"),
+                getRoleSet("Committee - Sports - Vice Sports Director - BIZ"))
         };
     }
 
@@ -45,7 +47,7 @@ public class SampleDataUtil {
                     new Pair<>(Faculty.COM, Faculty.NUSC),
                     new Venue("UT AUD2"),
                     ParserUtil.parseDateTime("2024 09 20 1000"),
-                    Set.of(getSamplePersons()[0], getSamplePersons()[1])),
+                    Set.of(getSamplePersons()[0], getSamplePersons()[4])),
             new Event(Sport.SQUASH,
                     new Pair<>(Faculty.FASS, Faculty.YNC),
                     new Venue("Arena"),
@@ -55,12 +57,12 @@ public class SampleDataUtil {
                     new Pair<>(Faculty.MED, Faculty.DEN),
                     new Venue("Pool"),
                     ParserUtil.parseDateTime("2024 09 20 1600"),
-                    Set.of(getSamplePersons()[3], getSamplePersons()[4])),
+                    Set.of(getSamplePersons()[1], getSamplePersons()[5])),
             new Event(Sport.TABLE_TENNIS,
                     new Pair<>(Faculty.LAW, Faculty.BIZ),
                     new Venue("Court"),
                     ParserUtil.parseDateTime("2024 09 21 1000"),
-                    Set.of(getSamplePersons()[5]))
+                    Set.of(getSamplePersons()[3], getSamplePersons()[6]))
         };
     }
 

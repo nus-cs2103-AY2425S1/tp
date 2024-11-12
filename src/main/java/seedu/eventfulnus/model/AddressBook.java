@@ -12,8 +12,8 @@ import seedu.eventfulnus.model.person.Person;
 import seedu.eventfulnus.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the address-book level.
+ * Duplicates are not allowed (by .isSamePerson and .isSameEvent comparison).
  */
 public class AddressBook implements ReadOnlyAddressBook {
 

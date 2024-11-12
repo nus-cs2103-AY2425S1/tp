@@ -163,7 +163,7 @@ public class ParserUtil {
         case "SCM", "SOCCER MEN" -> Sport.SOCCER_M;
         case "SCW", "SOCCER WOMEN" -> Sport.SOCCER_W;
         case "SQH", "SQUASH" -> Sport.SQUASH;
-        case "SWM", "SWIMMING MEN" -> Sport.SWIMMING_M;
+        case "SMM", "SWIMMING MEN" -> Sport.SWIMMING_M;
         case "SMW", "SWIMMING WOMEN" -> Sport.SWIMMING_W;
         case "TBT", "TABLE TENNIS" -> Sport.TABLE_TENNIS;
         case "TCB", "TCHOUK", "TCHOUKBALL" -> Sport.TCHOUKBALL;
@@ -246,7 +246,8 @@ public class ParserUtil {
         return switch (roleType.toLowerCase()) {
         case "ath", "ref", "athlete", "referee" -> {
             Faculty faculty = parseFaculty(tagSplit[1]);
-            List<Sport> sports = Arrays.stream(tagSplit[2].split(", ")).map(ParserUtil::parseSport).toList();
+            List<Sport> sports = Arrays.stream(tagSplit[2].split(",")).map(String::trim)
+                    .map(ParserUtil::parseSport).toList();
             yield new Athlete(faculty, sports);
         }
         case "comm", "committee" -> {
