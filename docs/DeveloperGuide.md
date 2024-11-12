@@ -598,7 +598,7 @@ Use case ends.
 
       Use case resumes at step 2.
 
-- 3b. The Student already exits.
+- 3b. The Student already exists.
 
     - 3b1. T_Assistant shows an error message.
 
@@ -1667,8 +1667,6 @@ testers are expected to do more _exploratory_ testing.
 ## **Appendix: Planned Enhancements**
 
 **Group size:** 4
-
-**Total Enhancements:** 5/8 (`2x4`)
 
 ### 1. Update Email Constraints
 
