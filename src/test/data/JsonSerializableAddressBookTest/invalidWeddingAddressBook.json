@@ -1,0 +1,9 @@
+{
+  "persons": [ ],
+  "weddings": [ {
+    "name" : "Null client wedding",
+    "client" : null,
+    "date" : "",
+    "venue" : ""
+  } ]
+}

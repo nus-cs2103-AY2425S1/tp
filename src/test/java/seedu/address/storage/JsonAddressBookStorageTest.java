@@ -6,24 +6,97 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.WeddingBuilder;
 
 public class JsonAddressBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
-
     @TempDir
     public Path testFolder;
+    private ModelManager model;
+
+    public static AddressBook getTypicalAddressBookForStorage() {
+        Wedding aliceWedding = new WeddingBuilder()
+                .withName("Alice Adam Wedding")
+                .withVenue("Marina Bay Sands")
+                .withDate("2024-12-12")
+                .build();
+
+        Wedding georgeWedding = new WeddingBuilder()
+                .withName("George Jane Wedding")
+                .withVenue("Sentosa")
+                .withDate("2025-01-01")
+                .build();
+
+        Person alice = new PersonBuilder()
+                .withName("Alice Pauline")
+                .withAddress("123, Jurong West Ave 6, #08-111")
+                .withEmail("alice@example.com")
+                .withPhone("94351253")
+                .withRole("florist")
+                .withOwnWedding(aliceWedding)
+                .build();
+
+        Person benson = new PersonBuilder()
+                .withName("Benson Meier")
+                .withAddress("311, Clementi Ave 2, #02-25")
+                .withEmail("johnd@example.com")
+                .withPhone("98756432")
+                .withRole("caterer")
+                .addWeddingJob(georgeWedding)
+                .build();
+
+        Person carl = new PersonBuilder()
+                .withName("Carl Kurz")
+                .withPhone("95352563")
+                .withEmail("heinz@example.com")
+                .withAddress("wall street")
+                .withRole("florist")
+                .addWeddingJob(georgeWedding)
+                .build();
+
+        Person george = new PersonBuilder()
+                .withName("George Best")
+                .withPhone("94824422")
+                .withEmail("anna@example.com")
+                .withAddress("4th street")
+                .withOwnWedding(georgeWedding)
+                .build();
+
+        ArrayList<Person> persons = new ArrayList<>(Arrays.asList(alice, benson, carl, george));
+        ArrayList<Wedding> weddings = new ArrayList<>(Arrays.asList(aliceWedding, georgeWedding));
+        AddressBook addressBook = new AddressBook();
+        for (Person person : persons) {
+            addressBook.addPerson(person);
+        }
+        for (Wedding wedding : weddings) {
+            addressBook.addWedding(wedding);
+        }
+        return addressBook;
+    }
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBookForStorage(), new UserPrefs());
+    }
 
     @Test
     public void readAddressBook_nullFilePath_throwsNullPointerException() {
@@ -63,26 +136,28 @@ public class JsonAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        AddressBook original = getTypicalAddressBook();
+        ReadOnlyAddressBook original = model.getAddressBook();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
         // Save in new file and read back
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(original.toString(), readBack.toString());
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        model.addPerson(HOON);
+        model.deletePerson(ALICE);
+        original = model.getAddressBook();
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(original.toString(), new AddressBook(readBack).toString());
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
+        model.addPerson(IDA);
+        original = model.getAddressBook();
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(original.toString(), new AddressBook(readBack).toString());
 
     }
 

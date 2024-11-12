@@ -1,0 +1,46 @@
+{
+  "persons": [{
+    "name" : "alice tan",
+    "phone" : "91234567",
+    "email" : "alicetan@gmail.com",
+    "address" : "lakeside",
+    "role" : null,
+    "ownWedding" : -521745495,
+    "weddingJobs" : [ ]
+  }, {
+    "name" : "ben lee",
+    "phone" : "93456789",
+    "email" : "benlee@gmail.com",
+    "address" : "amk",
+    "role" : null,
+    "ownWedding" : 613499389,
+    "weddingJobs" : [ ]
+  }],
+  "weddings": [ {
+    "name" : "valid alice wedding",
+    "client" : {
+      "name" : "alice tan",
+      "phone" : "91234567",
+      "email" : "alicetan@gmail.com",
+      "address" : "lakeside",
+      "role" : null,
+      "ownWedding" : 0,
+      "weddingJobs" : [ ]
+    },
+    "date" : "2024-12-31",
+    "venue" : "chijmes"
+  }, {
+    "name" : "invalid null venue ben wedding",
+    "client" : {
+      "name" : "ben lee",
+      "phone" : "93456789",
+      "email" : "benlee@gmail.com",
+      "address" : "amk",
+      "role" : null,
+      "ownWedding" : 0,
+      "weddingJobs" : [ ]
+    },
+    "date" : "2025-06-01",
+    "venue" : null
+  } ]
+}

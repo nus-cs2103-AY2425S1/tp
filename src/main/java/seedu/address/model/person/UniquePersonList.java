@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -34,6 +35,22 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains the same phone number as the given argument.
+     */
+    public boolean containsPhone(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::hasSamePhone);
+    }
+
+    /**
+     * Returns true if the list contains the same email as the given argument.
+     */
+    public boolean containsEmail(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::hasSameEmail);
     }
 
     /**
@@ -69,6 +86,22 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Updates the person involve in the edited wedding.
+     */
+    public void updatePersonInvolveInEditedWedding(Wedding target, Wedding editedWedding) {
+        requireAllNonNull(target, editedWedding);
+        for (Person person : internalList) {
+            if (person.getOwnWedding() != null && person.getOwnWedding().equals(target)) {
+                person.setOwnWedding(editedWedding);
+            }
+            if (person.getWeddingJobs().contains(target)) {
+                person.getWeddingJobs().remove(target);
+                person.getWeddingJobs().add(editedWedding);
+            }
+        }
+    }
+
+    /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */
@@ -95,6 +128,15 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Sets all persons in the list to be non-client.
+     */
+    public void setAllPersonNotClient() {
+        for (Person person : internalList) {
+            person.setIsClient(false);
+        }
     }
 
     /**

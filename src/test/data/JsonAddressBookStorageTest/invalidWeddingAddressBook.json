@@ -1,0 +1,25 @@
+{
+  "persons": [ {
+    "name" : "alice tan",
+    "phone" : "91234567",
+    "email" : "alicetan@gmail.com",
+    "address" : "lakeside",
+    "role" : null,
+    "ownWedding" : -521745495,
+    "weddingJobs" : [ ]
+  } ],
+  "weddings": [ {
+    "name" : "null date wedding",
+    "client" : {
+      "name" : "alice tan",
+      "phone" : "91234567",
+      "email" : "alicetan@gmail.com",
+      "address" : "lakeside",
+      "role" : null,
+      "ownWedding" : 0,
+      "weddingJobs" : [ ]
+    },
+    "date" : null,
+    "venue" : "chijmes"
+  } ]
+}

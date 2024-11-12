@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * The API of the Model component.
@@ -13,6 +14,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Wedding> PREDICATE_SHOW_ALL_WEDDINGS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -58,6 +60,16 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person has the same phone number as {@code person} in the address book.
+     */
+    boolean hasPhone(Person person);
+
+    /**
+     * Returns true if a person has the same email address as {@code person} in the address book.
+     */
+    boolean hasEmail(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -84,4 +96,66 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Ensures that the correct client is set to be client.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPersonListWithClient(Predicate<Person> predicate);
+
+    /**
+     * Sets all person to be not client.
+     */
+    void setAllPersonNotClient();
+
+    // =========== Wedding ===================================================================================
+
+    /**
+     * Returns true if a wedding with the same identity as {@code wedding} exists in the address book.
+     */
+    boolean hasWedding(Wedding wedding);
+
+    void updatePersonEditedWedding(Wedding target, Wedding editedWedding);
+
+    /**
+     * Deletes the given wedding.
+     * The wedding must exist in the address book.
+     */
+    void deleteWedding(Wedding wedding);
+
+    /**
+     * Adds the given wedding.
+     * {@code wedding} must not already exist in the address book.
+     */
+    void addWedding(Wedding wedding);
+
+    /**
+     * Replaces the given wedding {@code target} with {@code editedWedding}.
+     * {@code target} must exist in the address book.
+     * The wedding identity of {@code editedWedding} must not be the same as
+     * another existing wedding in the address book.
+     */
+    void setWedding(Wedding target, Wedding editedWedding);
+
+    /** Returns an unmodifiable view of the filtered wedding list */
+    ObservableList<Wedding> getFilteredWeddingList();
+
+    /**
+     * Updates the filter of the filtered wedding list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredWeddingList(Predicate<Wedding> predicate);
+
+    /**
+     * Updates the filter of the filtered wedding list to filter by the given {@code predicate}.
+     * Ensures that all correct weddings are set to be own wedding.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredWeddingListWithOwnWedding(Predicate<Wedding> predicate);
+
+    /**
+     * Sets all wedding to not be own-wedding.
+     */
+    void setAllWeddingNotOwnWedding();
 }

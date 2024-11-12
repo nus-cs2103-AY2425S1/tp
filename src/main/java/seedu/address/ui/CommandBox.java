@@ -4,9 +4,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.suggestion.Suggestions;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -17,9 +19,12 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final Suggestions suggestions;
 
     @FXML
     private TextField commandTextField;
+    @FXML
+    private TextField suggestionTextField;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -27,8 +32,58 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        // calls #setStyleToDefault() whenever there is a change to the text of the command box.
-        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        this.suggestions = new Suggestions();
+        setupTextFields();
+    }
+
+    private void setupTextFields() {
+        suggestionTextField.setMouseTransparent(true);
+        suggestionTextField.setFocusTraversable(false);
+
+        // Make suggestion text field transparent and match command text field
+        suggestionTextField.setStyle("-fx-background-color: transparent;");
+        suggestionTextField.fontProperty().bind(commandTextField.fontProperty());
+
+        // Bind suggestion width to command width
+        suggestionTextField.prefWidthProperty().bind(commandTextField.widthProperty());
+
+        // Add listeners for real-time command detection and positioning
+        commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateSuggestion(newValue);
+            updateSuggestionPosition();
+            setStyleToDefault();
+        });
+
+        // This ensures suggestion updates when the text layout changes
+        commandTextField.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
+            updateSuggestionPosition();
+        });
+    }
+
+    private void updateSuggestion(String currentText) {
+        String fullSuggestion = suggestions.checkAllCommands(currentText);
+
+        if (fullSuggestion.isEmpty() || !fullSuggestion.startsWith(currentText)) {
+            suggestionTextField.setText("");
+            return;
+        }
+
+        // Only show the remaining part of the suggestion
+        String remainingSuggestion = fullSuggestion.substring(currentText.length());
+        suggestionTextField.setText(remainingSuggestion);
+    }
+
+
+    private void updateSuggestionPosition() {
+        String currentText = commandTextField.getText();
+
+        // Get the text width using a Text node for accurate measurement
+        Text text = new Text(currentText);
+        text.setFont(commandTextField.getFont());
+        double textWidth = text.getLayoutBounds().getWidth();
+
+        // Position the suggestion text field
+        suggestionTextField.setTranslateX(textWidth);
     }
 
     /**
@@ -37,13 +92,14 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandEntered() {
         String commandText = commandTextField.getText();
-        if (commandText.equals("")) {
+        if (commandText.isEmpty()) {
             return;
         }
 
         try {
             commandExecutor.execute(commandText);
-            commandTextField.setText("");
+            commandTextField.clear();
+            suggestionTextField.clear();
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
@@ -54,6 +110,7 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToDefault() {
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        suggestionTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
     /**
@@ -61,12 +118,10 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToIndicateCommandFailure() {
         ObservableList<String> styleClass = commandTextField.getStyleClass();
-
-        if (styleClass.contains(ERROR_STYLE_CLASS)) {
-            return;
+        if (!styleClass.contains(ERROR_STYLE_CLASS)) {
+            styleClass.add(ERROR_STYLE_CLASS);
+            suggestionTextField.clear();
         }
-
-        styleClass.add(ERROR_STYLE_CLASS);
     }
 
     /**
@@ -81,5 +136,4 @@ public class CommandBox extends UiPart<Region> {
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
-
 }

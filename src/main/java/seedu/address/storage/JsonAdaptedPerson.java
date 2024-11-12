@@ -3,6 +3,8 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,7 +17,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.role.Role;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -28,21 +31,33 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String role;
+
+    //Own wedding is stored as hashcode
+    private final int ownWedding;
+    // Wedding jobs are stored as hashcodes
+    private final List<Integer> weddingJobs = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(
+            @JsonProperty("name") String name,
+            @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email,
+            @JsonProperty("address") String address,
+            @JsonProperty("role") String role,
+            @JsonProperty("ownWedding") int ownWedding,
+            @JsonProperty("weddingJobs") List<Integer> weddingJobs) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        this.role = role;
+        this.ownWedding = ownWedding;
+        if (weddingJobs != null) {
+            this.weddingJobs.addAll(weddingJobs);
         }
     }
 
@@ -54,8 +69,12 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        role = source.getRole().map(r -> r.roleName).orElse(null);
+        // If person is not a client, hashcode to represent own wedding is replaced by 0
+        ownWedding = source.getOwnWedding() != null ? source.getOwnWedding().hashCode() : 0;
+        // Wedding jobs are stored as hashcodes
+        weddingJobs.addAll(source.getWeddingJobs().stream()
+                .map(Wedding::hashCode)
                 .collect(Collectors.toList()));
     }
 
@@ -64,11 +83,7 @@ class JsonAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
-    public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
+    public Person toModelType(List<Wedding> weddingList) throws IllegalValueException {
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -102,8 +117,88 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        Optional<Role> modelRole = Optional.empty();
+
+        if (role != null) {
+            if (!Role.isValidRoleName(role)) {
+                throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+            }
+            modelRole = Optional.of(new Role(role));
+        }
+        boolean modelHasOwnWedding = ownWedding != 0;
+        Wedding modelOwnWedding = null;
+        if (modelHasOwnWedding) {
+            modelOwnWedding = lookupWeddingByHashCode(ownWedding, weddingList);
+        }
+        Set<Wedding> modelWeddingJobs = new HashSet<>();
+        for (Integer weddingHashCode : weddingJobs) {
+            Wedding wedding = lookupWeddingByHashCode(weddingHashCode, weddingList);
+            if (wedding != null) {
+                modelWeddingJobs.add(wedding);
+            }
+        }
+        Person person = new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelOwnWedding);
+        person.getWeddingJobs().addAll(modelWeddingJobs);
+        return person;
     }
 
+    /**
+     * Returns the {@code Wedding} corresponding to the hashcode
+     * @param hashCode hashcode to match Weddings to
+     * @param weddings List of {@code Wedding} to search search from
+     */
+    private Wedding lookupWeddingByHashCode(int hashCode, List<Wedding> weddings) {
+        for (Wedding wedding : weddings) {
+            if (wedding.hashCode() == hashCode) {
+                return wedding;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets the wedding jobs hashcodes list.
+     */
+    public List<Integer> getWeddingJobs() {
+        return new ArrayList<>(weddingJobs);
+    }
+
+    /**
+     * Gets the own wedding hashcode.
+     */
+    public int getOwnWedding() {
+        return ownWedding;
+    }
+
+    /**
+     * Gets the name of the person.
+     */
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof JsonAdaptedPerson)) {
+            return false;
+        }
+
+        JsonAdaptedPerson otherPerson = (JsonAdaptedPerson) other;
+        return name.equals(otherPerson.name)
+                && phone.equals(otherPerson.phone)
+                && email.equals(otherPerson.email)
+                && address.equals(otherPerson.address)
+                && ((role == null && otherPerson.role == null) || (role != null && role.equals(otherPerson.role)))
+                && ownWedding == otherPerson.ownWedding
+                && weddingJobs.equals(otherPerson.weddingJobs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, phone, email, address, role, ownWedding, weddingJobs);
+    }
 }

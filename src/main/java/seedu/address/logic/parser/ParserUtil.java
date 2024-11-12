@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -13,7 +14,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.role.Role;
+import seedu.address.model.wedding.Client;
+import seedu.address.model.wedding.Date;
+import seedu.address.model.wedding.Venue;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -21,6 +25,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String WHITESPACE_REGEX = "\\s+";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -96,29 +101,103 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String client} into an {@code Client}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code name} and {@code index} are invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static String parseClient(String client) throws ParseException {
+        requireNonNull(client);
+        String trimmedClient = client.trim();
+
+        if (!Client.isValidClientIndex(trimmedClient)) {
+            if (!Client.isValidClientName(trimmedClient)) {
+                throw new ParseException(Client.MESSAGE_CONSTRAINTS);
+            }
         }
-        return new Tag(trimmedTag);
+
+        return trimmedClient;
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String date} into an {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Date parseDate(String date) throws ParseException {
+        if (date == null) {
+            return null;
         }
-        return tagSet;
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
     }
+
+    /**
+     * Parses a {@code String venue} into an {@code Venue}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code venue} is invalid.
+     */
+    public static Venue parseVenue(String venue) throws ParseException {
+        if (venue == null) {
+            return null;
+        }
+        String trimmedVenue = venue.trim();
+        if (!Venue.isValidVenue(trimmedVenue)) {
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
+        }
+        return new Venue(trimmedVenue);
+    }
+
+
+    /**
+     * Parses a {@code String role} into a {@code Optional<Role>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code role} is invalid.
+     */
+    public static Optional<Role> parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (trimmedRole.isEmpty()) {
+            return Optional.empty();
+        }
+        if (!Role.isValidRoleName(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
+        return Optional.of(new Role(trimmedRole));
+    }
+
+    /**
+     * Parses {@code Collection<String> weddings} into a {@code Set<Index>}.
+     *
+     * @throws ParseException if any of the given {@code index} is invalid.
+     */
+    public static Set<Index> parseWeddingJobs(Collection<String> weddings) throws ParseException {
+        requireNonNull(weddings);
+
+        final Set<Index> weddingSet = new HashSet<>();
+        for (String weddingIndex : weddings) {
+            Index indexToAdd = parseIndex(weddingIndex);
+            if (!weddingSet.contains(indexToAdd)) {
+                weddingSet.add(indexToAdd);
+            }
+        }
+        return weddingSet;
+    }
+
+    /**
+     * Checks if the given {@code String} is a numeric value.
+     *
+     * @param str The {@code String} to be checked.
+     * @return true if the {@code String} is numeric, false otherwise.
+     */
+    public static boolean isNumeric(String str) {
+        return str != null && str.matches("-?\\d+");
+    }
+
 }

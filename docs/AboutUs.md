@@ -1,59 +1,60 @@
 ---
-layout: page
-title: About Us
+layout: default.md
+title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
+
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Yik Jun Xian
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yikjunxian.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://yikjunxian.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: UI developer
+* Responsibilities: Develop GUI features
 
-### Jane Doe
+### Sng Ying Xuan Shernice
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shernicesng.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/shernicesng)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Code Quality
 
-### James Doe
+### Joey Goh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jowhee3011.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/jowhee3011)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Scheduling and tracking
+
+### Guan Yi Sim
+
+<img src="images/droas590.png" width="200px">
+
+* Role: Developer
+* Responsibilities: Testing
+
+### Ved Joshi
+
+<img src="images/vedjoshi.png" width="200px">
+
+[[github](http://github.com/vedjoshi)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Documentation
