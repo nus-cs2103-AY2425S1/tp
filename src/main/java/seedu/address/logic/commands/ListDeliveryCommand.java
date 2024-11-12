@@ -8,9 +8,7 @@ import seedu.address.model.Model;
 /**
  * Lists all deliveries in the Vendor Vault to the user.
  */
-public class ListDeliveryCommand extends Command {
-
-    public static final String COMMAND_WORD = "list";
+public class ListDeliveryCommand extends ListCommand {
 
     public static final String MESSAGE_SUCCESS = "Listed all delivery(s)";
 

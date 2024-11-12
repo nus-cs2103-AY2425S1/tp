@@ -14,7 +14,10 @@ public class DeleteDeliveryCommandParser implements Parser<DeleteDeliveryCommand
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteDeliveryCommand
      * and returns a DeleteDeliveryCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @param args User input after the command word.
+     * @return A new DeleteDeliveryCommand instance with the index of the delivery.
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public DeleteDeliveryCommand parse(String args) throws ParseException {
         try {

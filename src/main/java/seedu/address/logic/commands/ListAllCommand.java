@@ -8,9 +8,7 @@ import seedu.address.model.Model;
 /**
  * Lists all suppliers and deliveries in the Vendor Vault to the user.
  */
-public class ListAllCommand extends Command {
-
-    public static final String COMMAND_WORD = "list";
+public class ListAllCommand extends ListCommand {
 
     public static final String MESSAGE_SUCCESS = "Listed all supplier(s) and delivery(s).";
 

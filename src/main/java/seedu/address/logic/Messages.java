@@ -93,6 +93,9 @@ public class Messages {
 
     /**
      * Formats the {@code Delivery} without its status for display to the user.
+     *
+     * @param delivery Contains all attributes of target delivery.
+     * @return String to be displayed to user.
      */
     public static String formatWithoutStatus(Delivery delivery) {
         final StringBuilder builder = new StringBuilder();

@@ -41,12 +41,13 @@ public class FindDeliveryCommand extends FindCommand {
     private final Predicate<Delivery> predicate;
 
     /**
-     * Creates an FindDeliveryCommand instance based on the filter predicates given by user.
+     * Creates a FindDeliveryCommand instance based on the filter predicates given by user.
      *
-     * @param predicate consists of status, date and product filters.
-     * @param supplierIndex consists the index of supplier by which deliveries will be filtered.
+     * @param predicate Consists of status, date and product filters.
+     * @param supplierIndex Index of supplier by which deliveries will be filtered.
      */
     public FindDeliveryCommand(Predicate<Delivery> predicate, Optional<SupplierIndex> supplierIndex) {
+        requireNonNull(predicate);
         this.predicate = predicate;
         this.supplierIndex = supplierIndex;
     }
@@ -60,6 +61,8 @@ public class FindDeliveryCommand extends FindCommand {
         // If supplier index is provided, retrieve the supplier and filter by that supplier
         if (supplierIndex.isPresent()) {
             List<Supplier> lastShownList = model.getModifiedSupplierList();
+            assert lastShownList != null;
+
             SupplierIndex index = supplierIndex.get();
             if (index.getZeroBased() >= lastShownList.size()) {
                 return new CommandResult(MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
