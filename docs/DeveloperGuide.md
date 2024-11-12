@@ -74,7 +74,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F12-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F12-2/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -125,7 +125,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -143,7 +143,7 @@ The `Model` component,
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 ### Common classes
 
@@ -273,10 +273,10 @@ Team Size: 5
 
 1. **Update `student` and `teacher` success message**: The current success message for adding a student or teacher without any tags ends with `; Tags:`, i.e. it attempts to display the tags but since none were added, it ends off abruptly. 
 
-    We plan to make the success message only mention the Tags _if_ there are tags to be listed, e.g. either `... Next of Kin: Bob Doe; Emergency Contact: 87654321;` (i.e. no tags) or `... Next of Kin: Bob Doe; Emergency Contact: 87654321; Tags: [friend]` (i.e. at least one tag to be displayed)
+    We plan to make the success message only mention the Tags _if_ there are tags to be listed, e.g. either `... Next of Kin: Bob Doe; Emergency Contact: 87654321;` (i.e. no tags) or `... Next of Kin: Bob Doe; Emergency Contact: 87654321; Tags: [friend]` (i.e. at least one tag to be displayed).
 2. **Enhance `mark` command's implementation**: The current implementation of `mark` can only mark the attendance of all students together. This prevents users from easily marking the attendance of individual students. The current workaround is to either `mark` and `unmark` all other students or to `delete` and add the student back into EduConnect with the incremented attendance field. 
 
-    We plan to introduce optional index parameters for the `mark` command, allowing users to specify which indexes to specifically mark the attendance of. This implementation will be similar to the `unmark` command. E.g. `mark` will still mark the attendance of all students but `mark 1 2` will only mark the attendance of the 1st and 2nd index persons (assuming they are students)
+    We plan to introduce optional index parameters for the `mark` command, allowing users to specify which indexes to specifically mark the attendance of. This implementation will be similar to the `unmark` command. E.g. `mark` will still mark the attendance of all students but `mark 1 2` will only mark the attendance of the 1st and 2nd index persons (assuming they are students).
 3. **Use shorter command aliases**: Currently, EduConnect requires users to use longer parameters such as `/name` when entering commands.
 
    We plan to introduce shorter command aliases, such as `/n` for `/name`, to make input faster and more convenient for users.
@@ -319,7 +319,7 @@ Additionally, making significant changes to the JSON storage file posed another 
 ### Product scope
 
 **Target user profile**:
-School teachers looking to manage the details of both students and other teachers
+School teachers looking to manage the details of both students and other teachers.
 * needs to keep track of many students at a time
 * can type fast
 * prefers to type in a command line interface
@@ -367,36 +367,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC01 - Add a student**
 
 **Preconditions**
-* User has the student’s details, i.e. name, gender, contact, classes, subject, email, address, attendance, next of kin and emergency contact
+* User has the student’s details, i.e. name, gender, contact, classes, subject, email, address, attendance, next of kin and emergency contact.
 
 **MSS**
 
-1. Teacher enters the add student command
-2. EduConnect verifies the command inputs
-3. EduConnect adds the student’s contact details to the address book
-4. EduConnect displays a success message
+1. Teacher enters the add student command.
+2. EduConnect verifies the command inputs.
+3. EduConnect adds the student’s contact details to the address book.
+4. EduConnect displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. Required parameter(s) missing in command format
+* 2a. Required parameter(s) missing in command format.
   * 2a1. EduConnect displays an error message.
 
     Use case ends.
 
-* 2b. Invalid/Unsupported parameter tag used
+* 2b. Invalid/Unsupported parameter tag used.
   * 2b1. EduConnect displays an error message.
 
     Use case ends.
 
-* 2c. Invalid argument for a parameter given
-  * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”
+* 2c. Invalid argument for a parameter given.
+  * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”.
 
     Use case ends.
 
-* 2d. Existing contact or email given
-  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
+* 2d. Existing contact or email given.
+  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”.
 
     Use case ends.
 
@@ -406,140 +406,140 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * User has the teacher’s details, i.e. name, gender, contact, classes, subject, email and address.
 
 **MSS**
-1. Teacher enters the add teacher command
-2. EduConnect verifies the command inputs
-3. EduConnect adds the teacher’s contact details to the address book
-4. EduConnect displays a success message
+1. Teacher enters the add teacher command.
+2. EduConnect verifies the command inputs.
+3. EduConnect adds the teacher’s contact details to the address book.
+4. EduConnect displays a success message.
 
     Use case ends.
 
 **Extensions**
-* 2a. Required parameter(s) missing in command format
+* 2a. Required parameter(s) missing in command format.
   * 2a1. EduConnect displays an error message.
 
     Use case ends.
 
-* 2b. Invalid/Unsupported parameter tag used
-  * 2b1. EduConnect displays an error message
+* 2b. Invalid/Unsupported parameter tag used.
+  * 2b1. EduConnect displays an error message.
 
     Use case ends.
 
-* 2c. Invalid argument for a parameter given
-  * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”
+* 2c. Invalid argument for a parameter given.
+  * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”.
 
     Use case ends.
 
-* 2d. Existing contact or email given
-  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
+* 2d. Existing contact or email given.
+  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”.
 
     Use case ends.
 
 **Use case: UC-03 Delete a contact**
 
 **Preconditions**
-* The address book contains at least one contact
-* User knows the index of the contact to be deleted
+* The address book contains at least one contact.
+* User knows the index of the contact to be deleted.
 
 **MSS**
-1. Teacher enters the delete contact command
-2. EduConnect verifies the index validity
-3. EduConnect deletes the contact from the address book
-4. EduConnect displays a success message
+1. Teacher enters the delete contact command.
+2. EduConnect verifies the index validity.
+3. EduConnect deletes the contact from the address book.
+4. EduConnect displays a success message.
 
     Use case ends.
 
 **Extensions**
-* 2a. Invalid index provided
-  * 2a1. EduConnect displays an error message, e.g. “The person index provided is invalid: 2”
+* 2a. Invalid index provided.
+  * 2a1. EduConnect displays an error message, e.g. “The person index provided is invalid: 2”.
 
     Use case ends.
 
 **Use case: UC-04 List contacts**
 
 **MSS**
-1. Teacher enters the list command
-2. EduConnect displays a list of all contacts in the address book
+1. Teacher enters the list command.
+2. EduConnect displays a list of all contacts in the address book.
 
     Use case ends.
 
 **Use case: UC-05 Edit a contact**
 
 **Preconditions**
-* The address book contains at least one contact
-* User knows the index of the contact to be edited
+* The address book contains at least one contact.
+* User knows the index of the contact to be edited.
 
 **MSS**
-1. Teacher enters the edit command
-2. EduConnect verifies the command inputs
-3. EduConnect edits the specified contact in the address book
-4. EduConnect displays a success message
+1. Teacher enters the edit command.
+2. EduConnect verifies the command inputs.
+3. EduConnect edits the specified contact in the address book.
+4. EduConnect displays a success message.
 
     Use case ends.
 
 **Extensions**
-* 2a. Invalid index provided
+* 2a. Invalid index provided.
   * 2a1. EduConnect displays an error message.
 
     Use case ends.
 
-* 2b. Invalid/Unsupported parameter tag used
+* 2b. Invalid/Unsupported parameter tag used.
   * 2b1. EduConnect displays an error message.
 
     Use case ends.
 
-* 2c. Invalid new argument for a parameter given
-  * 2c1. EduConnect displays an error message, e.g. "Names should only contain alphanumeric characters and spaces, and it should not be blank"
+* 2c. Invalid new argument for a parameter given.
+  * 2c1. EduConnect displays an error message, e.g. "Names should only contain alphanumeric characters and spaces, and it should not be blank".
 
     Use case ends.
 
-* 2d. Duplicate contact or email provided
-  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
+* 2d. Duplicate contact or email provided.
+  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”.
 
     Use case ends.
 
 **Use case: UC-06 Clear**
 
 **Preconditions**
-* User may optionally specify tags to filter which contacts are cleared
+* User may optionally specify tags to filter which contacts are cleared.
 
 **MSS**
-1. Teacher enters the clear command
-2. EduConnect clears all contacts in the address book
-3. EduConnect displays a success message
+1. Teacher enters the clear command.
+2. EduConnect clears all contacts in the address book.
+3. EduConnect displays a success message.
 
     Use case ends.
 
 **Extensions**
-* 1a. Teacher specifies a tag to clear
-  * 1a1. EduConnect clears all contacts with that tag value in the address book
+* 1a. Teacher specifies a tag to clear.
+  * 1a1. EduConnect clears all contacts with that tag value in the address book.
 
     Use case ends.
 
-* 1b. Teacher specifies an invalid tag
+* 1b. Teacher specifies an invalid tag.
   * 1b1. EduConnect displays an error message.
 
     Use case ends.
 
-* 1c. Teacher specifies a tag with no matching contacts
-  * 1c1. EduConnect displays an error, e.g. “No possible entries in EduConnect to clear!”
+* 1c. Teacher specifies a tag with no matching contacts.
+  * 1c1. EduConnect displays an error, e.g. “No possible entries in EduConnect to clear!”.
 
     Use case ends.
 
 **Use case: UC-07 Find**
 
 **MSS**
-1. Teacher enters the find command with some specific criteria
-2. EduConnect displays a list of all persons that fit that criteria in the address book
+1. Teacher enters the find command with some specific criteria.
+2. EduConnect displays a list of all persons that fit that criteria in the address book.
 
    Use case ends.
 
 **Extensions**
-* 1a. Teacher doesn't specify any criteria
+* 1a. Teacher doesn't specify any criteria.
     * 1b1. EduConnect displays an error message.
 
       Use case ends.
 
-* 1b. Teacher uses invalid tags to filter
+* 1b. Teacher uses invalid tags to filter.
     * 1b1. EduConnect displays an error message.
 
       Use case ends.
@@ -547,18 +547,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC-08 Sort**
 
 **MSS**
-1. Teacher enters the sort command with some criteria
-2. EduConnect sorts the list of all persons by that criteria
-3. EduConnect displays the list of all persons in the address book
+1. Teacher enters the sort command with some criteria.
+2. EduConnect sorts the list of all persons by that criteria.
+3. EduConnect displays the list of all persons in the address book.
 
    Use case ends.
 
 **Extensions**
-* 1a. Teacher doesn't specify any criteria
+* 1a. Teacher doesn't specify any criteria.
   * 1a1. EduConnect displays an error message.
 
     Use case ends.
-* 1b. Teacher specifies invalid criteria
+* 1b. Teacher specifies invalid criteria.
   * 1b1. EduConnect displays an error message.
 
     Use case ends.
@@ -566,29 +566,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC-09 Mark Attendance**
 
 **MSS**
-1. Teacher enters the mark command
-2. EdUConnect marks all the students attendance, incrementing it by 1
+1. Teacher enters the mark command.
+2. EdUConnect marks all the students attendance, incrementing it by 1.
 
     Use case ends.
 
 **Use case: UC-10 Unmark Attendance**
 
 **MSS**
-1. Teacher enters the unmark command with the index(es) of the student(s) to unmark
-2. EduConnect unmarks the specified student(s) attendance, decrementing it by 1
+1. Teacher enters the unmark command with the index(es) of the student(s) to unmark.
+2. EduConnect unmarks the specified student(s) attendance, decrementing it by 1.
 
     Use case ends.
 
 **Extensions**
-* 1a. Teacher doesn't specify any indexes
+* 1a. Teacher doesn't specify any indexes.
   * 1a1. EduConnect displays an error message.
 
     Use case ends.
-* 1b. Teacher specifies an invalid index
+* 1b. Teacher specifies an invalid index.
   * 1b1. EduConnect displays an error message.
 
     Use case ends.
-* 1c. Teacher specifies an index of a Student with 0 days attendance
+* 1c. Teacher specifies an index of a Student with 0 days attendance.
   * 1c1. EduConnect displays an error message, e.g. "Only students who have attended at least one day can be unmarked".
 
     Use case ends.
@@ -596,8 +596,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC-11 Reset attendance**
 
 **MSS**
-1. Teacher enters the resetAttendance command
-2. EduConnect resets the attendance of all students in the address book
+1. Teacher enters the resetAttendance command.
+2. EduConnect resets the attendance of all students in the address book.
 
     Use case ends.
 
@@ -613,12 +613,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Subject**: The subject the student / teacher is taking
-* **Class**: The class the student / teacher is taking
-* **Command Line Interface (CLI)**: Text-based user interface that allows the user to input
-* **Next-of-Kin**: The contact of the closest relative of the current contact
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Subject**: The subject the student / teacher is taking.
+* **Class**: The class the student / teacher is taking.
+* **Command Line Interface (CLI)**: Text-based user interface that allows the user to input.
+* **Next-of-Kin**: The contact of the closest relative of the current contact.
 * **Database**: An organized collection of structured information or data, typically stored electronically.
 * **GUI (Graphical User Interface)**: A visual user interface that allows users to interact with an application through graphical elements like buttons, icons, and menus, instead of typing commands.
 * **Encryption**: The process of converting plain text data into a coded format to prevent unauthorized access.
@@ -639,19 +639,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
-
-   1. Open the “Command Prompt” (for Windows) or “Terminal” (for Mac/Linux).
-   2. Type `cd` followed by the folder location where you saved the EduConnect file.
-   3. Type and enter the command `java -jar educonnect.jar`
+   1. Download the jar file and copy into an empty folder.
+   2. Open the “Command Prompt” (for Windows) or “Terminal” (for Mac/Linux).
+   3. Type `cd` followed by the folder location where you saved the EduConnect file.
+   4. Type and enter the command `java -jar educonnect.jar`.
 
         Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by following the instructions from 1ii onwards.<br>
+   2. Re-launch the app by following the instructions from 1ii onwards.<br>
        Expected: The most recent window size and location is retained.
 
 ### Adding a Student
