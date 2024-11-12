@@ -720,7 +720,8 @@ Edits a task from all groups that contain it.
 2. `edit_t` edits a task identified by the index. It only accepts a valid index
    based on the list returned when `list_t`.
 3. At least 1 optional parameter must be provided, else an error will be thrown.
-4. For information on the constraints for each parameter used in this command, go
+4. There is a known issue for this command, go to [Known Issues](#known-issues) for more information.
+5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -921,6 +922,7 @@ the data of your previous T_Assistant home folder and also copy over `versionHis
    manually restore the minimized Help Window.
 3. The application will sometimes open to a blank screen with no information displayed, simply run any commands and
    the application should function as per normal.
+4. When **running edit task for all groups `et`**, if a group has completed the task, their status will be reset to pending or overdue. The remedy is to run `etg` such that you create a new task for the groups with completed status before editing the task.
 
 ---
 
