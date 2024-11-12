@@ -75,14 +75,14 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list` : Lists all persons.
 
     * `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/A r/good ethic` : Adds a person
     * named `John Doe` to the Address Book.
 
     * `delete 3` : Deletes the 3rd person shown in the current list.
 
-    * `clear` : Deletes all contacts.
+    * `clear` : Deletes all persons.
 
     * `exit` : Exits the app.
 
@@ -90,7 +90,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
 <box type="info" seamless>
 
-Notes:<br> When you open the app, a GUI will appear with a few sample contacts already loaded, so you can immediately see the app in action.
+Notes:<br> When you open the app, a GUI will appear with a few sample persons already loaded, so you can immediately see the app in action.
 
 </box>
 
@@ -132,7 +132,7 @@ Format: `add n/NAME p/PHONE e/EMAIL j/JOB CODE t/TAG [r/REMARK]`
 
 * Only one interview stage tag will be attached to a person at any point of time.
 * If no remark is provided, or if user inputs uses `r/`, then remark is empty by default.
-* **Tip:** Only one interview stage tag will be attached to a contact at any point of time.
+* **Tip:** Only one interview stage tag will be attached to a person at any point of time.
 <box type="tip" seamless>
 
 Please refer to this table
@@ -190,11 +190,11 @@ Format:
 
 Examples:
 * `find n/alex yeoh` returns `Alex Yeoh`, `Alex Yeoh Bin Sheng`, and `Dalex Yeohanes`
-* `find t/TP` returns the list of contacts with `TP` tag <br>
+* `find t/TP` returns the list of persons with `TP` tag <br>
     <p align="center">
         <img src="images/findTp.png" alt="result for 'findTp'" width="300"/>
     </p>
-* `find n/alex yeoh t/TP` return the list of contacts with name containing `alex yeoh` whose tag is `TP`
+* `find n/alex yeoh t/TP` return the list of persons with name containing `alex yeoh` whose tag is `TP`
 
 ### Deleting a person : `delete`
 

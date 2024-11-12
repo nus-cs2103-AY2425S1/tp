@@ -272,10 +272,10 @@ _{more aspects and alternatives to be added}_
 Team size: 4
 
 1. **Enhanced Find Command with Multiple Keywords**  
-   The current `find` command supports only one keyword at a time for each field. We plan to extend this functionality to accept multiple keywords (e.g., `find n/Hans or n/Hera`), making it easier for users to locate multiple contacts in a single search.
+   The current `find` command supports only one keyword at a time for each field. We plan to extend this functionality to accept multiple keywords (e.g., `find n/Hans or n/Hera`), making it easier for users to locate multiple persons in a single search.
 
 2. **Extended Tagging Functionality**  
-   Presently, only a limited set of tags is supported. We plan to expand this feature to support additional types of tags, enabling more flexible categorization and better organization of contacts.
+   Presently, only a limited set of tags is supported. We plan to expand this feature to support additional types of tags, enabling more flexible categorization and better organization of persons.
 
 3. **Resizable Feedback Box**  
    Users are currently unable to adjust the feedback box size. To improve usability, we plan to make the feedback box resizable, allowing users to expand or contract it based on their preferences and screen size.
@@ -355,14 +355,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### **UC001: Add a contact**
+#### **UC001: Add A Person**
 
 **MSS**
 
-1. User requests to add a new contact by providing a name, phone number, email, job code, tag, and optional remark.
+1. User requests to add a new person by providing a name, phone number, email, job code, tag, and optional remark.
 2. System validates the provided input.
-3.  System checks if the contact already exists by verifying the uniqueness of the phone number and email. 
-4. System adds the contact to the system and displays a confirmation message.
+3.  System checks if the person already exists by verifying the uniqueness of the phone number and email. 
+4. System adds the person to the system and displays a confirmation message.
 
     Use case ends.
 
@@ -374,26 +374,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3a. A duplicate contact is found (same phone number or email).
+* 3a. A duplicate person is found (same phone number or email).
 
-    * 3a1. System displays a duplicate contact error message.
+    * 3a1. System displays a duplicate person error message.
 
       Use case ends.
 
 ---
 
-#### **UC002: Delete a contact**
+#### **UC002: Delete A Person**
 
 **MSS**
 
-1. User requests to delete a specific contact by providing a valid identifier, which can be one of the following:  
+1. User requests to delete a specific person by providing a valid identifier, which can be one of the following:  
     Index (positive integer), Name (n/NAME), Email (e/EMAIL), Phone (p/PHONE).
 2. System validates the provided input:
 Checks if the identifier matches the valid format (e.g., positive integer, name, email, or phone).
 
-3. System checks if the contact exists (using the provided identifier, which could be a name, email, or phone number).
+3. System checks if the person exists (using the provided identifier, which could be a name, email, or phone number).
 
-4. System deletes the contact and displays a confirmation message.
+4. System deletes the person and displays a confirmation message.
 
     Use case ends.
 
@@ -405,38 +405,38 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 
         Use case ends.
 
-- 3a. No contact matches the provided identifier.
+- 3a. No person matches the provided identifier.
 
-    - 3a1. System shows an error message stating that no contact matches the provided identifier and prompts the user to correct the input.
+    - 3a1. System shows an error message stating that no person matches the provided identifier and prompts the user to correct the input.
 
         Use case ends.
 
-- 3b. Multiple contacts with the same name are found, and the user has not provided a phone number or email.
+- 3b. Multiple persons with the same name are found, and the user has not provided a phone number or email.
 
-    - 3b1. System asks the user to provide other details (phone number or email) to specify the contact to delete.  
+    - 3b1. System asks the user to provide other details (phone number or email) to specify the person to delete.  
         Use case ends.
 
 ---
 
-#### **UC003: List all contacts**
+#### **UC003: List All Persons**
 
 **MSS**
 
-1. User requests to list all contacts.
-2. System retrieves all stored contacts from the system.
-3. System displays the list of contacts.
+1. User requests to list all persons.
+2. System retrieves all stored persons from the system.
+3. System displays the list of persons.
 
    Use case ends.
 
 ---
 
-#### **UC004: Find contacts**
+#### **UC004: Find Persons**
 
 **MSS**
 
-1. User requests to find contacts by name, phone number, email, job code, tag, remark or a combination of some of them.
+1. User requests to find persons by name, phone number, email, job code, tag, remark or a combination of some of them.
 2. System validates the find criteria.
-3. System retrieves and displays the contacts matching the criteria.
+3. System retrieves and displays the persons matching the criteria.
 
    Use case ends.
 
@@ -474,7 +474,7 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 
 ---
 
-#### **UC007: Bulk Rejecting Contacts**
+#### **UC007: Bulk Rejecting Persons**
 
 **MSS**
 
@@ -494,14 +494,14 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 
 ---
 
-#### **UC008: Sorting Contacts**
+#### **UC008: Sorting Persons**
 
 **MSS**
 
-1. User requests to sort contacts by specifying zero or more sorting criteria (e.g., name, phone, email, job code, tag).
+1. User requests to sort persons by specifying zero or more sorting criteria (e.g., name, phone, email, job code, tag).
 2. System validates the sorting criteria.
-3. System sorts the contacts based on the specified criteria in the given order.
-4. System displays the sorted list of contacts.
+3. System sorts the persons based on the specified criteria in the given order.
+4. System displays the sorted list of persons.
 
    Use case ends.
 
@@ -515,12 +515,12 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 
 ---
 
-#### **UC009: Clearing All Contacts**
+#### **UC009: Clearing All Persons**
 
 **MSS**
 
-1. User requests to clear all contacts from the address book.
-2. System deletes all contacts and displays a confirmation message.
+1. User requests to clear all persons from the address book.
+2. System deletes all persons and displays a confirmation message.
 
    Use case ends.
 
@@ -537,15 +537,15 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 
 ---
 
-#### **UC011: Edit a contact**
+#### **UC011: Edit A Person**
 
 **MSS**
 
-1. User requests to edit a specific contact by providing an index and one or more fields to update (name, phone number, email, job code, tag).
+1. User requests to edit a specific person by providing an index and one or more fields to update (name, phone number, email, job code, tag).
 2. System validates the provided input.
-3. System checks if the contact exists at the specified index.
+3. System checks if the person exists at the specified index.
 4. System checks if the edited details causes duplicate.
-5. System updates the contact’s details with the provided information and displays a confirmation message.
+5. System updates the person’s details with the provided information and displays a confirmation message.
 
    Use case ends.
 
@@ -557,15 +557,15 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 
       Use case ends.
 
-- 3a. No contact is found at the specified index.
+- 3a. No person is found at the specified index.
 
-    - 3a1. System shows an error message indicating that no contact exists at the specified index.
+    - 3a1. System shows an error message indicating that no person exists at the specified index.
 
       Use case ends.
 
-- 4a. The edited details causes duplicate contacts.
+- 4a. The edited details causes duplicate persons.
 
-    - 4a1. System shows an error message indicating that the contact already exists.
+    - 4a1. System shows an error message indicating that the person already exists.
 
       Use case ends.
 
@@ -575,7 +575,7 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 1. The system should work seamlessly across macOS, Windows, and Linux operating systems.
 2. The system should support both 32-bit and 64-bit environments.
 3. Should work on any mainstream OS as long as it has Java `17` or above installed.
-4. The system should execute commands (such as adding, deleting, or listing contacts) within 1 second under normal loads (e.g., up to 1,000 contacts).
+4. The system should execute commands (such as adding, deleting, or listing persons) within 1 second under normal loads (e.g., up to 1,000 persons).
 5. Should be able to hold up to 1,000 persons without noticeable sluggishness in performance for typical usage.
 6. A user with above-average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 7. The system must be user-friendly and usable by individuals with no prior experience with contact management systems. 
@@ -602,7 +602,7 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 | R | Rejected | Applicant has been rejected by the company                                  |
 
 * **Person**: A single entry in Talency address book that contains information about a particular applicant such as name, phone number, email address, and any other relevant details.
-* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG is a command to add a contact to the address book).
+* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG is a command to add a person to the address book).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -624,7 +624,7 @@ testers are expected to do more *exploratory* testing.
    1. Download the jar file and copy into an empty folder
 
    1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Talentcy.jar` command to run the application. <br>
-       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+       Expected: Shows the GUI with a set of sample persons. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -638,11 +638,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a Person
     1. Test case: `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/N r/Good skills`  
-       Expected: Assuming no duplicates, a new contact named John Doe is added to the list. The status message displays details of the added contact.
+       Expected: Assuming no duplicates, a new person named John Doe is added to the list. The status message displays details of the added person.
     2. Test case: `add n/ p/ e/ j/ t/`  
        Expected: No person is added. An error message displays in the status, indicating missing fields.
     3. Other incorrect add commands to try: `add n/John`, `add p/98765432`, `add e/notemail`, `add t/Went to NUS`  
-       Expected: Error messages display for each incomplete command, and no contact is added.
+       Expected: Error messages display for each incomplete command, and no person is added.
 
 ### Deleting a person
 
