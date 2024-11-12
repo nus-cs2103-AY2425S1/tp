@@ -148,15 +148,14 @@ Here is a partial and representative class diagram of the `Storage` component:
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
-The `Storage` component has the responsibility of saving HallPointer data and user preferences data to disk in JSON format, and then parsing them back into the corresponding objects when the application is re-opened.
+The `Storage` component has the following responsibilities:
 
-It inherits from both `Storage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- Saving HallPointer data and user preferences data to disk in JSON format.
+- Parsing the saved JSON data back into the corresponding objects when the application is re-opened.
 
-- depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+It inherits from both `Storage` and `UserPrefStorage`, allowing it to be treated as either one, depending on the functionality needed.
 
-### Common classes
-
-Classes used by multiple components are in the `hallpointer.address.commons` package.
+- Depends on some classes in the `Model` component, as its job is to save and retrieve objects that belong to the `Model`.
 
 ---
 
@@ -274,6 +273,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**:
 
 - **2a. Hall Pointer detects an error in the entered data**.
+
   - 2a1. Hall Pointer displays an error message with relevant details.
   - 2a2. CCA Leader re-enters corrected data.
   - Steps 2a1-2a2 are repeated until all data is correct.
@@ -622,6 +622,5 @@ Team Size: 5
    > - Example: An `add_points` command could let users award or modify points for members directly, without requiring a session link, accommodating various tracking needs.
 
    This enhancement would allow users to manage point allocations more flexibly, streamlining adjustments and providing greater control over point tracking.
-
 
 ---
