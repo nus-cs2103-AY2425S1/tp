@@ -317,9 +317,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 2a. PlanPal detects that the event name is missing or invalid.
     * 2a1. PlanPal shows an error message.
-    * 2a2. User re-enters a valid event name.
 
-      Use case resumes from step 3.
+      Use case ends.
 
 **UC06: Assign a contact to an event**
 
@@ -336,11 +335,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2b. The contact does not have a role.
-    * 2b1. PlanPal prompts the user to assign a role to the contact before adding them to the event.
-    * 2b2. User assigns a role.
+* 2b. The contact does not have the role specified.
+    * 2b1. PlanPal displays an error message indicating that the contact does not have the specified role.
 
-      Use case resumes from step 1.
+      Use case ends
+
 
 * 2c. The event does not exist.
   * 2c1. PlanPal displays an error message indicating the event is invalid.
@@ -374,9 +373,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 2a. User enters invalid information (e.g., telegram name longer than 32 characters).
     * 2a1. PlanPal displays an error message.
-    * 2a2. User re-enters valid information.
 
-      Use case resumes from step 3.
+      Use case ends.
 
 **UC09: Remove a contact from an event**
 
@@ -395,6 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. The event does not exist.
   * 1b1. PlanPal displays an error message indicating the event is invalid.
 
+    Use case ends.
 
 **UC10: Clear all events**
 
@@ -431,9 +430,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 1a. User provides invalid or incomplete search criteria.
     * 1a1. PlanPal displays an error message and prompts the user to provide valid criteria.
-    * 1a2. User re-enters valid search criteria.
 
-      Use case resumes from step 2.
+      Use case ends.
 
 * 2a. No contacts match the search criteria.
     * 2a1. PlanPal displays a message indicating no matches were found.
@@ -454,17 +452,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 2a. User specifies an invalid or non-existent contact.
     * 2a1. PlanPal displays an error message indicating the contact is invalid.
-    * 2a2. User re-enters a valid contact.
 
-      Use case resumes from step 3.
+      Use case ends
 
-**UC14: Include excluded contacts in search mode**
+**UC14: Clear currently excluded contacts in search mode**
+
 
 **Preconditions**: User is in search mode.
 
 **MSS**
-1. User enters command to clear the excluded contacts list.
-2. PlanPal includes the contacts in search results panel and displays a success message.
+1. User clears the excluded contacts list.
+2. PlanPal clears all currently exclude contacts and displays a success message.
+3. Previously excluded contacts are now included in the search results.
 
    Use case ends.
 
