@@ -10,6 +10,8 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.assignment.ReadOnlyPredefinedAssignmentsData;
+import seedu.address.storage.assignment.PredefinedAssignmentDataStorage;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -19,13 +21,18 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private PredefinedAssignmentDataStorage predefinedAssignmentDataStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(
+            AddressBookStorage addressBookStorage,
+            UserPrefsStorage userPrefsStorage,
+            PredefinedAssignmentDataStorage predefinedAssignmentDataStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.predefinedAssignmentDataStorage = predefinedAssignmentDataStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -75,4 +82,20 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ PredefinedAssignment methods ==============================
+
+    @Override
+    public Path getAssignmentFilePath() {
+        return predefinedAssignmentDataStorage.getAssignmentFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyPredefinedAssignmentsData> readAssignment() throws DataLoadingException {
+        return readAssignment(predefinedAssignmentDataStorage.getAssignmentFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyPredefinedAssignmentsData> readAssignment(Path filePath) throws DataLoadingException {
+        return predefinedAssignmentDataStorage.readAssignment(filePath);
+    }
 }

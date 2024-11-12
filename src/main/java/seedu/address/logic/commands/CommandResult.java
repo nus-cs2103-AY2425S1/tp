@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import javafx.beans.property.ObjectProperty;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the result of a command execution.
@@ -13,11 +15,21 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
+    /**
+     * Help information should be shown to the user.
+     */
     private final boolean showHelp;
 
-    /** The application should exit. */
+    /**
+     * The application should exit.
+     */
     private final boolean exit;
+
+    private ObjectProperty<Person> person;
+
+    private boolean isView;
+
+    private boolean isCloseView;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -26,6 +38,21 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        isView = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, ObjectProperty<Person> person, boolean isCloseView) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.person = person;
+        this.isView = true;
+        this.isCloseView = isCloseView;
+
+
     }
 
     /**
@@ -48,6 +75,18 @@ public class CommandResult {
         return exit;
     }
 
+    public ObjectProperty<Person> getPerson() {
+        return person;
+    }
+
+    public boolean isCloseView() {
+        return isCloseView;
+    }
+
+    public boolean isView() {
+        return isView;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -55,14 +94,20 @@ public class CommandResult {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CommandResult)) {
+        if (!(other instanceof CommandResult otherCommandResult)) {
             return false;
         }
 
-        CommandResult otherCommandResult = (CommandResult) other;
+        if (person == null || otherCommandResult.person == null) {
+            return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                    && showHelp == otherCommandResult.showHelp
+                    && exit == otherCommandResult.exit
+                    && person == otherCommandResult.person;
+        }
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && person.get().equals(otherCommandResult.person.get());
     }
 
     @Override

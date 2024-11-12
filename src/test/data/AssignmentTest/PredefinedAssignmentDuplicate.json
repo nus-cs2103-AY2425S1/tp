@@ -1,0 +1,16 @@
+{
+  "assignments": [
+    {
+      "name": "Ex01",
+      "maxScore": 10
+    },
+    {
+      "name": "Ex02",
+      "maxScore": 20
+    },
+    {
+      "name": "Ex01",
+      "maxScore": 10
+    }
+  ]
+}

@@ -14,12 +14,14 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookFilePath = Paths.get("data", "kontacts.json");
+    private Path assignmentFilePath = Paths.get("data", "assignment.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
      */
-    public UserPrefs() {}
+    public UserPrefs() {
+    }
 
     /**
      * Creates a {@code UserPrefs} with the prefs in {@code userPrefs}.
@@ -36,6 +38,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setAssignmentFilePath(newUserPrefs.getAssignmentFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -57,6 +60,16 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     @Override
+    public Path getAssignmentFilePath() {
+        return assignmentFilePath;
+    }
+
+    public void setAssignmentFilePath(Path assignmentFilePath) {
+        requireNonNull(assignmentFilePath);
+        this.assignmentFilePath = assignmentFilePath;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -69,7 +82,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
+                && assignmentFilePath.equals(otherUserPrefs.assignmentFilePath);
     }
 
     @Override
@@ -82,6 +96,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\n Predefined assignment file location : " + assignmentFilePath);
         return sb.toString();
     }
 

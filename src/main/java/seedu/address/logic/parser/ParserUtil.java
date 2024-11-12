@@ -8,11 +8,12 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,10 +22,13 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    // Assuming that a typical semester has 13 weeks.
+    public static final int MAX_WEEK = 13;
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing
+     * whitespaces will be trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -36,8 +40,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -50,35 +54,6 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
-    /**
-     * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code phone} is invalid.
-     */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
-    }
 
     /**
      * Parses a {@code String email} into an {@code Email}.
@@ -111,6 +86,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String telegram} into an {@code Telegram}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code telegram} is invalid.
+     */
+    public static Telegram parseTelegram(String telegram) throws ParseException {
+        requireNonNull(telegram);
+        String trimmedTelegram = telegram.trim();
+        if (!Telegram.isValidTelegram(trimmedTelegram)) {
+            throw new ParseException(Telegram.MESSAGE_CONSTRAINTS);
+        }
+        return new Telegram(trimmedTelegram);
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
@@ -121,4 +111,61 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses String assignment without trailing spaces.
+     */
+    public static String parseAssignmentName(String assignment) throws ParseException {
+        requireNonNull(assignment);
+        return assignment.trim();
+    }
+
+    /**
+     * Parses String into float.
+     */
+    public static Float parseScore(String score) throws ParseException {
+        requireNonNull(score);
+
+        return Float.parseFloat(score.trim());
+    }
+
+    /**
+     * Parses a GitHub username into an {@code Github} instance.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code username} is invalid.
+     */
+    public static Github parseGithub(String username) throws ParseException {
+        requireNonNull(username);
+        String trimmedUsername = username.trim();
+        if (!Github.isValidGithubUsername(trimmedUsername)) {
+            throw new ParseException(Github.MESSAGE_CONSTRAINTS);
+        }
+        return new Github(trimmedUsername);
+    }
+
+    /**
+     * Parses a {@code String week} into an {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code week} is invalid.
+     */
+    public static int parseWeek(String week) throws ParseException {
+        requireNonNull(week);
+        String trimmedWeek = week.trim();
+
+        try {
+            int parsedWeek = Integer.parseInt(trimmedWeek);
+            if (parsedWeek < 0) {
+                throw new ParseException("Week number must be a non-negative integer.");
+            }
+            if (parsedWeek > MAX_WEEK) {
+                throw new ParseException("Week number cannot exceed 13.");
+            }
+            return parsedWeek;
+        } catch (NumberFormatException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_WEEK);
+        }
+    }
+
 }

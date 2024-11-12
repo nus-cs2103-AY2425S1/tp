@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User access previous command
+using the keyboard up key;
+if () then ([CommandHistory exists])
+  if () then ([CommandHistory is empty])
+    : KonTActs informs users that
+    there is no previous commands;
+   else ([CommandHistory is not empty])])
+    :KonTActs gets previous command
+    from the CommandHistory's ArrayList;
+    :Previous command is displayed to the user;
+   endif
+else ([CommandHistory does not exist])
+:KonTActs creates a new CommandHistory;
+:KonTActs informs users
+that there is no previous commands;
+endif
+stop
+
+@enduml
