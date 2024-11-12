@@ -651,6 +651,8 @@ testers are expected to do more *exploratory* testing.
 * **Test case:** Click the "Help" button in the application GUI.
 * **Expected:** The help window opens, displaying a comprehensive list of available commands and their usage.
 
+---
+
 #### Add Command
 
 **Adding a valid person**
