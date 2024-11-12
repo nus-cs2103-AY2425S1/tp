@@ -20,11 +20,6 @@ AI generated content was verified by a human.
 We referenced the general format of the User Guide and Developer Guide from this repo:
 https://github.com/AY2324S1-CS2103T-T11-2/tp/blob/master/docs/
 
-| AI Tool | How it was used                                                    | Used by            |
-|---------|--------------------------------------------------------------------|--------------------|
-| Claude  | Generate JavaDoc comments based some sample self-written comments. | Alexander Liswandy |
-| Claude  | Suggest and add missing test scenarios to existing test suite.     | Alexander Liswandy |
-
 ---
 
 ## **Setting up, getting started**
@@ -140,12 +135,12 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
    a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
    is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
    several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -570,12 +565,12 @@ Use case ends.
 
 ## **Appendix: Planned Enhancements**
 
-In the current state, if a very long name is entered, the command box will be very long, text wrapping should be
+1. In the current state, if a very long name is entered, the command box will be very long. In the future, text wrapping should be
 implemented.
 
-In the current state, for the searchpa command if users enter extraneous inputs according to user guide, Dltbook will
+2. In the current state, for the searchpa command if users enter extraneous inputs according to user guide, Dltbook will
 serve a error message like but this error message does not accurately reflect the error caused by extraneous input.
-for example if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9 w/main" is entered but the prefix w/
+For example, if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9 w/main" is entered but the prefix w/
 is not recognized globally, a error of "Public Address for length BTC/ETH/SOL should be less than 44 characters" occurs.
 of if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5sv n/s" is entered, the error message of "Public
 Address contains only alphanumeric characters" occurs
