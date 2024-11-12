@@ -739,13 +739,15 @@ In summary, this project required considerable effort due to the added functiona
 
 6. **Allow for deletion of optional fields**
 * Current Issue: The only way to remove optional fields of a contact currently is to delete the entire contact and re-add the contact with all the fields except the one being deleted. There is no way of simply deleting an optional field.
-* Example: A user wants to remove the remark field from a contact named John Doe who has the details: `n/John Doe p/98765432 e/johndoe@example.com r/Met at conference`. Currently, the only way to remove the remark field is to delete the entire contact and re-add it without the remark field.
+* Example: A user wants to remove the remark field from a contact named John Doe who has the details: `ct/Work n/John Doe p/98765432 e/johndoe@example.com r/Met at conference`. Currently, the only way to remove the remark field is to delete the entire contact and re-add it without the remark field.
 * Proposed Change: Allow for deletion of optional fields of a contact using the `edit` command (e.g. `edit 1 r/` can delete the remark of the contact)
 
 7. **Provide feedback for skipped contacts during import**
-* Current Issue: Currently, when the import function encounters any invalid contacts, it skips over these unimported contacts without providing feedback. This leaves users unaware of which contacts were not imported and why they were skipped.
-* Example: If a contact in the .csv file is missing the contactType or if the contactType is invalid, the import function will skip over that contact without any notification or reason provided.
-* Proposed Change: Enhance the import function to provide detailed feedback for skipped contacts. This feedback should specify which contacts could not be imported and include the reasons for each case.
+* Current Issue: Currently, when the import function encounters any invalid contacts, it skips over these unimported contacts without providing feedback. This leaves users unaware of which contacts were not imported and why they were skipped. Additionally, there is a related issue where if a contact in an initial `.csv` file has only 4 fields filled in and is successfully imported, but a later `.csv` file contains the same contact with more fields (e.g., 6 fields), the import function skips the contact as a duplicate without notifying the user.
+* Example: 
+  * If a contact in the `.csv` file is missing the `contactType` or if the `contactType` is invalid, the import function will skip over that contact without any notification or reason provided.
+  * If a contact such as `John Doe` is imported from the first `.csv` file with 4 fields filled (`ct/Work n/John Doe p/12345678 e/johndoe@example.com`) and a subsequent `.csv file` has `John Doe` with 6 fields filled, the import function will skip it as a duplicate without any indication or feedback.
+* Proposed Change: Enhance the import function to provide detailed feedback for skipped contacts. This feedback should specify which contacts could not be imported and include the reasons for each case. This includes indicating when a contact is skipped due to being a duplicate, even if it contains additional or different information compared to a previously imported contact.
 
 8. **Make error messages more specific and standardised**
 * Current Issue: For most errors in formatting, the app shows a generic error message: Invalid command format! This may be hard for users to find out exactly what is wrong with their format.
