@@ -17,7 +17,7 @@ that is adapted from Manuel Moser's implementation [here](https://stackoverflow.
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting up and getting started_](https://ay2425s1-cs2103t-w13-2.github.io/tp/SettingUp.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
