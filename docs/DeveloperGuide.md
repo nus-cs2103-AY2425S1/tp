@@ -844,7 +844,7 @@ Team Size: 5
 
 5. **Being able to export customer order history into csv file**
     
-    Add downloadOrderHistory to export all customer data alongside the order history, so that the manager can mass process all the customer data for other purpose such as targeted advertising using machine learning
+    Add `downloadOrderHistory` command to export all customer data alongside the order history, so that the manager can mass process all the customer data for other purpose such as targeted advertising using machine learning
 
 6. **Add support for reading long command**
 
