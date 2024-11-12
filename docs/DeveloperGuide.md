@@ -794,12 +794,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
+<br>
 
-<box type="info" seamless> 
-
-**Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
-
-</box>
+> **Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
