@@ -31,15 +31,15 @@ public class VolunteerRemoveDateCommand extends Command {
             + "Multiple dates must be separated by a comma,"
             + " although spacing is optional.)\n"
             + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " i/1 d/2202-01-12, 2022-02-11";
-    static final String MESSAGE_REMOVE_DATE_VOLUNTEER_SUCCESS =
+    protected static final String MESSAGE_REMOVE_DATE_VOLUNTEER_SUCCESS =
             "Removed dates from %s's list of available dates.";
 
-    static final String MESSAGE_REMOVE_DATE_FAIL_NO_REMAINING_DATES = "Volunteers must be free on"
+    protected static final String MESSAGE_REMOVE_DATE_FAIL_NO_REMAINING_DATES = "Volunteers must be free on"
             + " at least 1 day!\n This remove command will leave them with no available days."
             + " \nPlease add at least 1 more day to proceed.";
 
-    final Index targetIndex;
-    final String dateList;
+    protected final Index targetIndex;
+    protected final String dateList;
 
     /**
      * Constructor. Takes in a non-zero, non-negative index and a list of dates formatted as a single string.
