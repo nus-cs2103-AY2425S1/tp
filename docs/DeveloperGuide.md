@@ -1199,4 +1199,5 @@ Success action: When a person is successfully assigned:
             - Starts with empty address book
 
 ## Acknowledgements
-GitHub copilot was used to generate some parts of the code.
+- GitHub copilot was used to generate some parts of the code.
+- Generative AI was used for writing some unit tests, regex validation, generation of javadoc and code completion.
