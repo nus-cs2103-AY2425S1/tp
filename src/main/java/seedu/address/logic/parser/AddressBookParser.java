@@ -142,14 +142,13 @@ public class AddressBookParser {
     }
 
     private Command parseListCommand(String trimmedArguments) throws ParseException {
-        switch (trimmedArguments) {
-        case "-s":
+        if (trimmedArguments.equals("-s")) {
             return new ListSupplierCommand();
-        case "-d":
+        } else if (trimmedArguments.equals("-d")) {
             return new ListDeliveryCommand();
-        case "-a":
+        } else if (trimmedArguments.equals("-a")) {
             return new ListAllCommand();
-        default:
+        } else {
             throw new ParseException(MESSAGE_INVALID_LIST_COMMAND_FORMAT);
         }
     }
