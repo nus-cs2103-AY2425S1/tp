@@ -561,8 +561,8 @@ Roles for each contact are displayed in the order listed above.
 **Q**: How can I search for contacts without case sensitivity?<br>
 **A**: Searches are case-insensitive, so you can enter names, nicknames, or other fields without worrying about uppercase or lowercase letters.
 
-**Q**: After executing the find command, why can't the display continue to show the filtered list if I add or edit or delete a contact immediately after?<br>
-**A**: This functionality is not supported. Adding, editing, or deleting a contact will show the full list of contacts with the updated change made as the display (i.e., as if `list` command has been executed after `add`, `edit` or `delete`) .
+**Q**: After executing the find command, why can't the display continue to show the filtered list if I add or edit a contact immediately after?<br>
+**A**: This functionality is not supported. Adding or editing a contact will show the full list of contacts with the updated change made as the display (i.e., as if `list` command has been executed after `add` or `edit` command is executed).
 
 
 --------------------------------------------------------------------------------------------------------------------
