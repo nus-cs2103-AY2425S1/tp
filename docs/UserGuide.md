@@ -537,22 +537,22 @@ Roles for each contact are displayed in the order listed above.
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-**Q**: How do I update a contact's information?
+**Q**: How do I update a contact's information?<br>
 **A**:Use the `edit` command followed by the contact's index or name and the new details. For example, `edit 1 n/Updated Name th/new_handle`.
 
-**Q**: Why is my newly added contact not showing on the first page?
+**Q**: Why is my newly added contact not showing on the first page?<br>
 **A**: Contacts are sorted alphabetically by default. If the contact’s name falls further down the list, it may appear on a later page. Use pagination controls to locate it.
 
-**Q**: What happens if I add a contact with the same name but a different nickname?
+**Q**: What happens if I add a contact with the same name but a different nickname?<br>
 **A**: As long as the nickname differs, the contact will be added without conflict. However, identical `Nickname` and `Name` entries are flagged as duplicate identities and will not be allowed.
 
-**Q**: Why is my command returning an "Invalid Role" error?
+**Q**: Why is my command returning an "Invalid Role" error?<br>
 **A**: Ensure roles are entered in the exact format expected by the app. An "Invalid Role" error may indicate that a role was mistyped or included with extra symbols, such as `[ ]`.
 
-**Q**: Can I undo a deletion?
+**Q**: Can I undo a deletion?<br>
 **A**: Currently, deletions are final and cannot be undone. Always double-check before using the `delete` command to avoid accidental deletions.
 
-**Q**: How can I search for contacts without case sensitivity?
+**Q**: How can I search for contacts without case sensitivity?<br>
 **A**: Searches are case-insensitive, so you can enter names, nicknames, or other fields without worrying about uppercase or lowercase letters.
 
 
