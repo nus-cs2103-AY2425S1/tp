@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Role as RolePackage <<Rectangle>>{
+Class "<<enumeration>>\nSport" as Sport
+Class "<<enumeration>>\nBranch" as Branch
+Class "<<enumeration>>\nPosition" as Position
+Class "<<enumeration>>\nFaculty" as Faculty
+Class "<<enumeration>>\nVolunteerRole" as VolunteerRole
+
+Class Role
+Class Athlete
+Class SportString
+Class Sponsor
+Class Referee
+Class CommitteeMember
+Class FacultySportCommitteeMember
+Class PositionString
+Class Volunteer
+Class VolunteerRoleString
+
+Class I #FFFFFF
+}
+
+Class Person
+
+Role <|-- Athlete
+Role <|-- CommitteeMember
+CommitteeMember <|-left- FacultySportCommitteeMember
+Role <|-- Volunteer
+Role <|-- Sponsor
+Role <|-- Referee
+
+Sponsor -[hidden]left- Volunteer
+
+
+Athlete --> "*" Sport
+Athlete --> "1" Faculty
+SportString .up.> Sport
+Referee --> "*" Sport
+Referee --> "1" Faculty
+CommitteeMember --> "1" Branch
+CommitteeMember --> "1" Position
+PositionString .up.> Position
+FacultySportCommitteeMember --> "1" Faculty
+Volunteer --> "1" VolunteerRole
+VolunteerRoleString .up.> VolunteerRole
+
+Person *--> "*" Role
+@enduml
