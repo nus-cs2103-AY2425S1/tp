@@ -301,18 +301,18 @@ mouse/GUI driven app.
 
 Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, Low (unlikely to have) - `Novel`
 
-| Priority  | As a …​        | I want to …​                                                     | So that I can…​                                                                       |
-|-----------|----------------|------------------------------------------------------------------|---------------------------------------------------------------------------------------|
-| Essential | Interviewer    | add candidates                                                   | keep track of current candidates                                                      |
-| Essential | Interviewer    | delete candidates                                                | keep track of current candidates                                                      |
-| Essential | Hiring Manager | view a list of candidates                                        | quickly assess who has applied for the position                                       |
-| Essential | Hiring Manager | mark candidates as "hired" or "rejected"                         | finalize the hiring process                                                           |
-| Essential | Hiring Manager | see the current status of a candidate (e.g. shortlisted, rejected) | track their progress                                                                  |
-| Typical   | Interviewer    | see candidates’ programming languages                            | ensure that they have sufficient programming knowledge based on company needs         |
-| Typical   | Interviewer    | assign an interview score to a specific candidate                | objectively evaluate their performance across multiple criteria                       |
-| Typical   | Interviewer    | attach files (resumes, portfolios) to a candidate's profile      | have all relevant documents in one place                                              |
-| Typical   | Hiring Manager | sort candidates according to alphabetical order                  | easily pick out the potential candidates                                              |
-| Typical   | Hiring Manager | search for candidates based on keywords (skills, position etc.)  | quickly find the right profiles                                                       |
+| Priority  | As a …​        | I want to …​                                                              | So that I can…​                                                                       |
+|-----------|----------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| Essential | Interviewer    | add candidates                                                            | keep track of current candidates                                                      |
+| Essential | Interviewer    | delete candidates                                                         | keep track of current candidates                                                      |
+| Essential | Hiring Manager | view a list of candidates                                                 | quickly assess who has applied for the position                                       |
+| Essential | Hiring Manager | mark candidates as "hired" or "rejected"                                  | finalize the hiring process                                                           |
+| Essential | Hiring Manager | see the current status of a candidate (e.g. shortlisted, rejected)        | track their progress                                                                  |
+| Typical   | Interviewer    | see candidates’ programming languages                                     | ensure that they have sufficient programming knowledge based on company needs         |
+| Typical   | Interviewer    | assign an interview score to a specific candidate                         | objectively evaluate their performance across multiple criteria                       |
+| Typical   | Interviewer    | attach files (resumes, portfolios) to a candidate's profile               | have all relevant documents in one place                                              |
+| Typical   | Hiring Manager | sort candidates in ascending / descending order based on interview scores | easily pick out the potential candidates                                              |
+| Typical   | Hiring Manager | search for candidates based on keywords (skills, position etc.)           | quickly find the right profiles                                                       |
                                                    
 
 ## Use cases
@@ -366,7 +366,7 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 
 **Main Success Scenario**:
 1. Hiring Manager enters the command to list all candidates.
-2. HiredFiredPro retrieves and displays the list of candidates in alphabetical order.
+2. HiredFiredPro retrieves and displays the list of candidates.
 
     Use case ends.
 
@@ -580,3 +580,33 @@ testers are expected to do more *exploratory* testing.
 
        1. Test case: `view n/Adib j/Developer`<br>
           Expected: No candidate displayed on display panel. Error details shown in the result panel.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Team size : 5
+
+  1. Add support for international phone numbers: To accommodate candidates from various countries, 
+     we plan to enhance the phone number input field to include area codes (e.g., +6598765432). 
+     This update will allow for different international formats and enable the field to accept alphanumeric characters in the future.
+
+  2. Improve name field validation: To ensure accuracy, the name field will be enhanced to prevent the entry of numerical characters, 
+     allowing only alphabetic characters. (e.g. "John Doe 1" will not be accepted as a valid name entry)
+
+  3. Enhance find command to take job and skills as parameters: Users are only able to search for candidates by name currently. 
+     We plan to allow users to search by job title and skills, making it easier to locate candidates with specific job positions
+     and skills.
+
+  4. Enhance the view/hire/reject command such that it can also use indexing: We plan to make the view/hire/reject command format 
+     much simpler by adopting a similar command format from the delete command where indexing was used instead of having 
+     to input both the candidate's name and the job position.(e.g. "view 1" instead of "view n/John Doe j/Software Engineer)
+
+  5. Enhanced error messages: Some commands give a general error message even when there are multiple type of invalid inputs.
+     As such, we will provide more specific error messages across the platform, guiding users with clear, actionable feedback when 
+     inputs are incorrect or incomplete. This will improve usability and reduce the likelihood of repeated errors.
+
+  6. Enhanced Command Line Input: Based on user feedback, we will improve the command line input to automatically clear after each command execution. 
+     This enhancement will provide a smoother user experience by eliminating the need for manual clearing and ensuring the input field is ready for the 
+     next command.
