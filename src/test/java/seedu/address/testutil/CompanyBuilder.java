@@ -12,6 +12,7 @@ import seedu.address.model.person.company.Industry;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
+//@@author ruiming97
 /**
  * A utility class to help with building Company objects.
  */

@@ -21,6 +21,7 @@ import seedu.address.model.person.company.Company;
 import seedu.address.model.person.company.Industry;
 import seedu.address.model.tag.Tag;
 
+//@@author ruiming97
 /**
  * Parses input arguments and creates a new AddCompanyCommand object
  */

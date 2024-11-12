@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.commands.AddCompanyCommand;
 import seedu.address.model.person.company.Company;
 
+//@@author ruiming97
 /**
  * A utility class for Company.
  */

@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.person.company.Company;
 import seedu.address.model.person.student.Student;
 
+//@@author ruiming97
 /**
  * A utility class containing a list of typical {@code Student} and {@code Company} objects to be used in tests.
  */

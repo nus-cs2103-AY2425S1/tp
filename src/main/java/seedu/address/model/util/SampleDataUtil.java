@@ -17,6 +17,7 @@ import seedu.address.model.person.student.Student;
 import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
+//@@author ruiming97
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
@@ -50,6 +51,7 @@ public class SampleDataUtil {
         };
     }
 
+    //@@author
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {

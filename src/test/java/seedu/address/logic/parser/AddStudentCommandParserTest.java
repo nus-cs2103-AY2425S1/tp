@@ -45,6 +45,7 @@ import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.StudentBuilder;
 
+//@@author ruiming97
 public class AddStudentCommandParserTest {
     private AddStudentCommandParser parser = new AddStudentCommandParser();
 
