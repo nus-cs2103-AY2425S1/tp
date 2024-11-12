@@ -767,3 +767,9 @@ Team size: 5
 
 8. **Consistent use of terminology**:
    Currently, DATE_TIME and DATETIME are used in different commands despite having the same meaining. We plan to ensure consistent use of terminology to make it easier for users to understand the command usage formats.
+
+9. **Enable truncation of listed records**:
+   When a student record contains a large number of attendances or grades, the UI would appear very cluttered. By enable truncation of information, users would be able to minimize the record when they are not focused on a record enabling them to view more records at once.  
+
+10. **Allow multi-word tags**:
+   Currently, tags are limited to alphanumeric characters, which restricts how users can label each tag. We plan to remove this restriction to allow users to create more meaningful labels for students.  
