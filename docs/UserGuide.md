@@ -68,8 +68,8 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
        Right-click inside the folder and select "Open in Terminal" (or use the Ctrl + Alt + T shortcut to open the terminal, then navigate to the folder using the cd command).
        In the terminal, type java -jar Talentcy.jar and press Enter.
 
-A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-![Ui](images/Ui.png)
+A GUI should appear in a few seconds. Shown below is the annotated GUI. Note how the app contains some sample data.<br>
+![Ui](images/Annotated-GUI.jpg)
 
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
