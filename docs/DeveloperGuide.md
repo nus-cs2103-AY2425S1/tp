@@ -86,6 +86,8 @@ For example, the `Logic` component defines its **API** in the `Logic.java` inter
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -127,7 +129,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AgentAssistParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a client).<br>
+1. The command can communicate with the `Model` when it is executed (e.g., to delete a client).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -141,6 +143,8 @@ How the parsing works:
     * Note: `FilterCommandParser` performs an additional step by creating multiple predicate classes (e.g., `NameContainsSubstringPredicate`). These individual predicates are then combined into a single `CombinedPredicate`.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `FilterCommandParser`, etc.) implement the `Parser` interface, allowing them to be handled consistently, such as in testing scenarios.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -150,9 +154,13 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Client` objects (which are contained in a `UniqueClientList` object).
-* stores the currently 'selected' `Client` objects (i.e., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Client` objects (i.e., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Client>` that can be 'observed' e.g., the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
+
+
+<div style="page-break-after: always;"></div>
+
 
 ### Storage component
 
@@ -171,6 +179,9 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
+
 ## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -185,7 +196,7 @@ Additionally, the inclusion of a status attribute for clients enhances customer 
 
 The `Tier` and `Status` fields are implemented as classes containing `enum` values, which restrict the possible options for these fields and improve data consistency.
 
-<img src="images/TierStatusAttributes.png" width="600">
+<img src="images/TierStatusAttributes.png" width="620">
 
 Using `enum` values for `Tier` aligns with a real-world banking scenario where a predefined set of credit card tiers is available. This structure also accommodates clients who may have applied but been declined for a credit card, providing agents with an at-a-glance view of a client’s status and relevant product options.
 
@@ -193,9 +204,9 @@ Moreover, using enums for `Tier` simplifies updates to the list of predefined se
 
 When updating the `Tier` `enum`, ensure that related CSS files (`ClientDetailPanel.css` and `ClientListCard.css`) are also updated. These files specify color settings for each tier, and you may need to rename the CSS classes to align with the new enum values. 
 - Below is an example of a CSS update after renaming an enum value to `TEST`:
-    <img src="images/CssFileSetting.png" width="300">
+    <img src="images/CssFileSetting.png" width="360">
 - This is the result in the UI after updating the CSS:  
-    <img src="images/UIChangeAfterCSSFileChange.png" width="200">
+    <img src="images/UIChangeAfterCSSFileChange.png" width="240">
 
 Similarly, `Status` is implemented using `enum` values to define a set of predefined client statuses. Each status has a corresponding color in the UI, offering agents visual cues to prioritize their follow-ups effectively:
 
@@ -204,6 +215,8 @@ Similarly, `Status` is implemented using `enum` values to define a set of predef
 - `URGENT` – Indicates clients who need an **urgent follow-up**, displayed in red to ensure prompt action.
 
 By assigning specific colors to each status, the UI helps agents prioritize their tasks effectively.
+
+<div style="page-break-after: always;"></div>
 
 ### 2. Add Command
 The `add` command is used to add new clients into the existing list of clients. However, the command will prevent adding any clients who are considered 'duplicates' of existing clients.
@@ -217,7 +230,7 @@ Three checks are performed:
 - **Value Validation:** Checks that the values provided for each specified flag are valid.
 - **Duplicate Check:** Checks that there is no existing client with the same details (same `name`, `phone` and `email`) to prevent duplicate entries.
 
-![AddActivityDiagram.png](images%2FAddActivityDiagram.png)
+<img src="images/AddActivityDiagram.png" width="700">
 
 Note: The error messages shown will differ based on which check fails. The checks also occur in the same sequential order that they are listed in above.
 
@@ -227,7 +240,8 @@ The `edit` command is used to add a client's contact to the existing list of cli
 
 #### Current Implementation
 Here is a high-level view of the logic flow when the `edit` command is executed:
-![EditActivityDiagram.png](images%2FEditActivityDiagram.png)
+<img src="images/EditActivityDiagram.png" width="700">
+<img src="images/EditActivityDiagramFlagCheck.png" width="700">
 
 The `edit` command performs five sequential checks:
 - **Index Validation:** Checks that the specified index is not negative.
@@ -256,10 +270,9 @@ This follows the activity diagram shown below:
 
 The user confirmation prompt shown here is also used in the `clear` command. This prompt is intended to help prevent accidental data loss by allowing users to confirm their decision, providing an opportunity to reconsider or correct any unintended command input.
 
-
-
 ### 5. Filter Command
 The `filter` command is used to view a specific subset of clients by applying specific filtering criteria to the client list. 
+
 
 #### Current Implementation
 The following diagrams provide a high-level overview of the `filter` command's logic flow:
@@ -278,6 +291,7 @@ Once these validations are complete, each valid flag and its corresponding argum
 
 The `CombinedPredicate` is applied to each client in AgentAssist, evaluating whether the client meets all filter criteria. Clients that satisfy the criteria are added to the filtered list. After all clients are evaluated, the filtered client list is displayed.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ## Planned enhancements
 
@@ -317,6 +331,8 @@ Team Size: 5
 - Exporting data files
 
 **Status:** Scheduled for future release as current manual process provides a workable solution.
+
+<div style="page-break-after: always;"></div>
 
 ### 5. Error Message Improvement
 **Current issue:** Error messages are inconsistent when users input incorrect values. Depending on the parameter that is incorrect, the messages vary in detail. For example:
@@ -387,6 +403,7 @@ These requirements can be restrictive for agents who may prefer more flexible fi
 **Status:** Scheduled for future release as the current behavior, while not optimal, does not impact system functionality or data integrity. The enhancement is purely cosmetic and aimed at improving user experience through more precise feedback messaging.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -413,6 +430,7 @@ These requirements can be restrictive for agents who may prefer more flexible fi
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -426,8 +444,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | banking agent   | remove a client                                                           | I can remove a client that is no longer going to use our credit card services or is blacklisted                                     |
 | `* * *`  | banking agent   | view details of a client                                                  | I need not ask clients for details again                                                                                            |
 | `* * *`  | banking agent   | save contact details of the clients                                       | I can contact clients who are more willing to spend money and call back clients with updates                                        |
-| `* * *`  | banking agent   | edit contact details of the clients                                       | I need not delete and re-add a client just for a small change in detail (i.e. moved house)                                          |
-| `* * *`  | banking agent   | save a note/remarks about the clients                                     | I can recall any particular notable details about the client (for e.g. This client is very concerned about pricing)                 |
+| `* * *`  | banking agent   | edit contact details of the clients                                       | I need not delete and re-add a client just for a small change in detail (i.e., moved house)                                         |
+| `* * *`  | banking agent   | save a note/remarks about the clients                                     | I can recall any particular notable details about the client (for e.g., This client is very concerned about pricing)                |
 | `* *`    | banking agent   | check which credit card services or plans a client has/had                | I avoid selling products that the client already has                                                                                |
 | `* *`    | banking agent   | filter using details like occupation and income                           | I can target a group of clients more quickly                                                                                        |
 | `* *`    | first time user | have a walkthrough guide to show me the user interface                    | I am familiar with the features available and how I can find and use them                                                           |
@@ -440,6 +458,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | long time user  | access my most frequently used features easily                            | I can save time when accessing my most used features                                                                                |
 | `*`      | beginner user   | have a help menu                                                          | I know how to perform a particular task                                                                                             |
 | `*`      | beginner user   | have some sample client data that has already been inputted into the app  | I can find out information can be saved in the application                                                                          |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -619,7 +639,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 2a. There was no recorded last change
+* 2a. There was no recorded last change.
   * 2a1. AgentAssist shows an error message to user.
   * 2a2. No change is made.
 
@@ -656,6 +676,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Description**: Provide comprehensive, easy-to-read User and Developer Guides detailing functionality, usage, and system requirements.
 - **Additional**: Both guides should be formatted to be printer-friendly, particularly in PDF format, facilitating easy distribution and referencing.
 
+<div style="page-break-after: always;"></div>
+
 #### Installation and Distribution
 - **Description**: AgentAssist should be accessible without the need for a traditional installer. The application should be distributable as a single JAR file, simplifying setup and use.
 - **Dependency**: The software should operate independently without requiring connections to any remote servers owned or managed by the developer.
@@ -673,6 +695,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Client**: An individual whose information is managed within the AgentAssist system. This client may be a prospective or existing customer of the banking agent, expressing interest in or currently using credit card services.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 
 ## **Appendix: Instructions for manual testing**
 
@@ -750,10 +774,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all clients using the `list` command. At least one client in the list.
    
     2. Test case: `edit 1 n/ <NAME>`<br>
-         Expected: The name of the client in index 1 will be changed to <NAME>.
+         Expected: The name of the client in index 1 will be changed to `<NAME>`.
    
     3. Test case: `edit 1 n/ <NAME> p/ <PHONE>`<br>
-         Expected: The name and the phone of the client in index 1 will be changed to <NAME> and <PHONE> respectively.
+         Expected: The name and the phone of the client in index 1 will be changed to `<NAME>` and `<PHONE>` respectively.
    
    4. Other correct edit commands to try: `edit 1 n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
       Expected: Similar to previous.
@@ -777,13 +801,13 @@ testers are expected to do more *exploratory* testing.
 1. Filtering for a client based on a criteria
 
    1. Test case: `filter n/ <NAME>`<br>
-      Expected: The list will display all clients with names that include <NAME>.
+      Expected: The list will display all clients with names that include `<NAME>`.
    
    2. Test case: `filter n/ <NAME> p/ <PHONE>`<br>
-      Expected: The list will display all clients with names that include <NAME> and phones that match <PHONE>.
+      Expected: The list will display all clients with names that include `<NAME>` and phones that match `<PHONE>`.
    
    3. Test case: `filter i/ =<INCOME>`<br>
-      Expected: The list will display all clients with incomes that match <INCOME>.
+      Expected: The list will display all clients with incomes that match `<INCOME>`.
    
    4. Other correct `filter` commands to try: `filter n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
       Expected: Similar to previous.
@@ -837,11 +861,14 @@ testers are expected to do more *exploratory* testing.
    
    6. If the data file is successfully repaired, running `agentassist.jar` should result in the old data being displayed back in the application.
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Appendix: Effort**
 
 AgentAssist is a specialized Customer Relationship Management (CRM) system for credit card sales. This required domain-specific changes to the architecture, guided by Object-Oriented Programming (OOP) principles and design patterns.
 
-For example, we added a custom `help` window with an image-based command layout, enhancing user experience beyond a generic user guide. The `view` and `close` commands also enabled a split-pane view, allowing truncated client details on cards and displaying full details in a separate pane.
+For example, we added a custom `help` window with an image-based command layout, enhancing user experience beyond a generic user guide.
+
 ### Other Challenging Features 
 - Add and Edit Commands: Adding new flags (such as `Remark`, `Tier`, `Status`, and `Income`) was straightforward but required updates to several supporting classes, including `PersonBuilder` and `TypicalPersons`, to ensure seamless functionality. 
 
