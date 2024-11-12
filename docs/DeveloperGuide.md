@@ -509,3 +509,13 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+## Reference
+
+![MindMapLogo.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2FMindMapLogo.png)
+
+The logo for MindMap is generated via ChatGPT, powered by Dall-E.
+Prompted used: Generate a clipart style logo in black and white which blends the style of a brain and a cloud, meant for an app that lets therapist log patient sessions
+
+This is said to comply with copyrights issue as mentioned in ChatGPT website.
