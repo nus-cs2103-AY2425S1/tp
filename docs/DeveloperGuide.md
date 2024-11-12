@@ -494,7 +494,7 @@ Below is an example usage scenario and how the deletePC mechanism works at each 
 
 <div style="text-align: center;">
     <img src="images/DeletePostalCodeCommandSequenceDiagram.png" style="width: 100%; max-width: 1200px; height: auto;">
-    <p style="font-style: italic; margin-top: 10px; color: #666;">Figure: Delete Postal Code Command Sequence Diagram</p>
+    <p style="font-style: italic; margin-top: 10px; color: #666;">Figure: Delete by Postal Code Command Sequence Diagram</p>
 </div>
 
 ---
