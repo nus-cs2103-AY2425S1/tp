@@ -488,6 +488,9 @@ Team Size: 5
 1. **Make `failed contact deletion` message more specific**: The current error message for a failed contact deletion Operation failed! is too general. We plan to make the error message also mention which action failed and the reason for the failure: The contact Amy Lee could not be deleted as it is referenced by another contact Ben Chua.
 2. **Add date validation for `ETA` parameter**: For deliveries, users are currently able to enter an ETA that is before the date ordered. We plan to add date validation so that an error message is thrown in the event of an invalid date
 input just like this.
+3. **Edit command validation**: We plan to checks within the edit command to warn duplicate fields like emails and phone numbers. Currently, the edit command does not give any indication of duplicate fields.
 3. **Add a list of employees available within the inspect window**: When users assign employees to deliveries within the inspect window, they are unable to see a list of employees available. Thus, users would have to memorize the employees
 name in the main window, before switching to the inspect window to perform the assign. A helpful enhancement here would thus be to include a list of employees available within the inspect window itself, so that the user would not have to
 perform this unnecessary step.
+4. **UI Update for Delivery Assignments**: Modify UI to reflect delivery assignments in the client inspect page. Currently there is no visual indication in inspect page that a delivery is assigned.
+4. **Add ability to unassign workers**: Add command for users to unassign deliveries from an employee.
