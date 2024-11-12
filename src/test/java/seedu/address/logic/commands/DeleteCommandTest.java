@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -130,7 +129,6 @@ public class DeleteCommandTest {
 
     // Test deleting by valid name.
 
-    @Disabled
     @Test
     public void execute_validDeleteByName_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
