@@ -16,11 +16,13 @@
         <searchbar :data="searchData" placeholder="Search" :on-hit="searchCallback" menu-align-right></searchbar>
       </form>
     </li>
+
   </navbar>
 </header>
 
 <div id="flex-body">
   <nav id="site-nav">
+    <ul class="dropdown-menu navbar-nav">
     <div class="site-nav-top">
       <div class="fw-bold mb-2" style="font-size: 1.25rem;">Site Map</div>
     </div>
@@ -37,10 +39,10 @@
 
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
 
-* [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
+  * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
 
-* [Design]({{ baseUrl }}/DeveloperGuide.html#design)
+  * [Design]({{ baseUrl }}/DeveloperGuide.html#design)
 
   * [Implementation]({{ baseUrl }}/DeveloperGuide.html#implementation)
 
@@ -49,15 +51,11 @@
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
 
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
-
-* Tutorials
-  * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
-  * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
-  * [Removing Fields]({{ baseUrl }}/tutorials/RemovingFields.html)
-
 * [About Us]({{ baseUrl }}/AboutUs.html)
-      </site-nav>
-    </div>
+
+    </site-nav>
+  </div>
+  </ul>
   </nav>
   <div id="content-wrapper">
     {{ content }}
@@ -69,6 +67,8 @@
   </nav>
   <scroll-top-button></scroll-top-button>
 </div>
+
+
 
 <footer>
   <!-- Support MarkBind by including a link to us on your landing page! -->
