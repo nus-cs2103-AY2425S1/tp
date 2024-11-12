@@ -27,7 +27,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/quasant.md)]
 
 * Role: Developer
-* Responsibilities: TBC
+* Responsibilities: Add and maintain features for jobs
 
 ### MAU ZE WEI
 
