@@ -654,6 +654,7 @@ testers are expected to do more *exploratory* testing.
 ### Listing all deliveries
 
 1. Listing all deliveries
+
     1. Test case: `list -d`<br>
        Expected: All added deliveries shown. Success message shown in the status message.
 
@@ -692,14 +693,14 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a delivery
 
-1. deleting an existing delivery
+1. Deleting an existing delivery
 
     1. Prerequisites: Ensure there is at least 1 delivery by listing all deliveries using the `list -d` command.
 
     1. Test case: `delete -d 1`<br>
        Expected: The first delivery is deleted. Details of the deleted delivery shown in the status message.
 
-2. deleting a non-existent delivery
+2. Deleting a non-existent delivery
 
     1. Prerequisites: Ensure there is no delivery by listing all deliveries using the `list -d` command.
 
@@ -727,10 +728,10 @@ testers are expected to do more *exploratory* testing.
 
 3. Finding a delivery that does not exist
 
-    1. Prerequisites: Ensure there is no deliveries with 20-10-1999 12:00 as DELIVERY_DATE_TIME by listing all deliveries using the `list -d` command.
+    1. Prerequisites: Ensure there are no deliveries with 20-10-1999 12:00 as DELIVERY_DATE_TIME by listing all deliveries using the `list -d` command.
 
     1. Test case: `find -d on/20-10-1999 12:00`<br>
-       Expected: No deliveries is displayed. Message indicating 0 deliveries listed shown in the status message.
+       Expected: No deliveries are displayed. Message indicating 0 deliveries listed shown in the status message.
 
 4. Other incorrect find commands to try: find -d, find -d pro/@@## ...
    Expected: No delivery is displayed and error message is shown in the status message.
@@ -747,14 +748,14 @@ testers are expected to do more *exploratory* testing.
 2. Sorting deliveries with invalid parameters in ascending order
 
     1. Test case: `sort -d so/a sb/q`<br>
-       Expected: No deliveries displayed. Error message indicating possible parameters for sort order shown in the status message.<br></br>
+       Expected: No deliveries are displayed. Error message indicating possible parameters for sort order shown in the status message.<br></br>
 
 3. Sorting an empty list of deliveries
 
-    1. Prerequisites: Ensure there is no deliveries displayed by listing all deliveries using the `list -d` command.
+    1. Prerequisites: Ensure there are no deliveries displayed by listing all deliveries using the `list -d` command.
 
     1. Test case: `sort -d so/a sb/c`<br>
-       Expected: No deliveries is displayed. Message indicating 0 deliveries sorted by cost in ascending order is shown in the status message.
+       Expected: No deliveries are displayed. Message indicating 0 deliveries sorted by cost in ascending order is shown in the status message.
 
 4. Other incorrect sort -d commands to try: sort -d, sort -d so/a ...
    Expected: No delivery is displayed and invalid command error message is shown in the status message.
