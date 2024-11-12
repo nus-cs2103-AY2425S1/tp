@@ -449,7 +449,7 @@ Assigns a role and/or weddings to a person.
     -  `assign John Doe r/photographer w/2`
         - If there's only one match for "John Doe", assigns them the role "photographer" and to wedding at index 2.<br>
 
-Visual Examples:
+Visual Examples:<br>
 **Error Example**:<br>
 ![Assignment error example](images/error_example_assign.png)<br>
 *Example of error when trying to assign a client to their own wedding*
