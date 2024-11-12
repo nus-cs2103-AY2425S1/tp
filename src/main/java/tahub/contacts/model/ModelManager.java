@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -30,6 +31,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final UniqueCourseList courseList;
     private final FilteredList<Person> filteredPersons;
+    private final List<Runnable> listeners = new ArrayList<> ();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -52,6 +54,29 @@ public class ModelManager implements Model {
     public ModelManager() {
         this(new AddressBook(), new UserPrefs(), new UniqueCourseList(), new StudentCourseAssociationList());
     }
+
+    @Override
+    public void addListener(Runnable listener) {
+        listeners.add(listener);
+    }
+
+    /**
+     * Notifies all listeners of a model change
+     */
+    private void notifyListeners() {
+        for (Runnable listener : listeners) {
+            listener.run();
+        }
+    }
+
+    /**
+     * Call this method whenever there's a change in the model that should trigger UI updates
+     * For example, in methods that modify courses or SCAs
+     */
+    private void indicateModelChanged() {
+        notifyListeners();
+    }
+
 
     //=========== UserPrefs ==================================================================================
 
@@ -125,6 +150,14 @@ public class ModelManager implements Model {
     public void setCourse(Course target, Course editedCourse) {
         requireAllNonNull(target, editedCourse);
         courseList.setCourse(target, editedCourse);
+        updateRelevantStudentCourseAssociations(target, editedCourse);
+    }
+
+    /**
+     * Updates all StudentCourseAssociations when a course is edited
+     */
+    private void updateRelevantStudentCourseAssociations(Course oldCourse, Course newCourse) {
+        scaList.updateCoursesInScas(oldCourse, newCourse);
     }
 
     @Override

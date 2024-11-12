@@ -114,6 +114,12 @@ public interface Model {
     void deleteCourse(Course course);
     boolean hasCourse(Course course);
 
+    /**
+     * Adds a listener to be notified when the model changes
+     * @param listener the listener to be added
+     */
+    void addListener(Runnable listener);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
