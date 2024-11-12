@@ -30,7 +30,7 @@ In this guide, users will be able to learn the following details:
 5. [Get started with NovaCare](#5-get-started-with-novacare)
 6. [Features](#6-features)
     - 6.1 [Parameter information](#6-1-parameter-information)
-    - 6.2 [Patient commands](#6-2-patient-commands)
+    - 6.2 [Patient Commands](#6-2-patient-commands)
       - 6.2.1 [Adding a patient](#6-2-1-adding-a-patient-add)
       - 6.2.2 [Listing all patients](#6-2-2-listing-all-patients-list)
       - 6.2.3 [Editing a patient](#6-2-3-editing-a-patient-edit)
@@ -40,7 +40,7 @@ In this guide, users will be able to learn the following details:
       - 6.2.7 [Deleting emergency contact](#6-2-7-deleting-emergency-contact-deleteemergency)
       - 6.2.8 [Adding priority level](#6-2-8-adding-priority-level-priority)
       - 6.2.9 [Deleting priority level](#6-2-9-deleting-priority-level-deletelevel)
-    - 6.3 [Task commands](#6-3-task-commands)
+    - 6.3 [Task Commands](#6-3-task-commands)
       - 6.3.1 [Adding a task](#6-3-1-adding-a-task-addtask)
       - 6.3.2 [Deleting a task](#6-3-2-deleting-a-task-deletetask)
       - 6.3.3 [Marking a task](#6-3-3-marking-a-task-marktask)
@@ -48,7 +48,7 @@ In this guide, users will be able to learn the following details:
       - 6.3.5 [Finding a task](#6-3-5-finding-a-task-findtask)
       - 6.3.6 [Listing tasks](#6-3-6-listing-tasks-listtask)
       - 6.3.7 [Listing incomplete tasks](#6-3-7-listing-incomplete-tasks-listincomplete)
-    - 6.4 [General commands](#6-4-general-commands)
+    - 6.4 [General Commands](#6-4-general-commands)
       - 6.4.1 [Viewing help](#6-4-1-viewing-help-help)
       - 6.4.2 [Clearing all entries](#6-4-2-clearing-all-entries-clear)
       - 6.4.3 [Exiting the program](#6-4-3-exiting-the-program-exit)
@@ -543,7 +543,7 @@ Priority level reset to default for John Doe
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-### 6.3 Task commands
+### 6.3 Task Commands
 In NovaCare, these commands will allow you to modify your list of tasks, with each task being specific to each patient to suit your needs.
 <br>
 
@@ -612,7 +612,7 @@ Deleted Task: Eat paracetamol 1000mg for Betsy Crower
 ```
 <br>
 
-#### 6.3.3 Marking a Task: `marktask`
+#### 6.3.3 Marking a task: `marktask`
 
 **Marks a task at a specific index as "complete".**
 
@@ -635,7 +635,7 @@ Marked task as complete: Clear diapers for John Doe
 ```
 <br>
 
-#### 6.3.4 Unmarking a Task: `unmarktask`
+#### 6.3.4 Unmarking a task: `unmarktask`
 
 **Unmarks a task at a specific index to be "incomplete".**
 
@@ -658,7 +658,7 @@ Marked task as incomplete: Clear diapers for John Doe
 ```
 <br>
 
-#### 6.3.5 Finding a Task: `findtask`
+#### 6.3.5 Finding a task: `findtask`
 
 **Finds all task(s) for a particular patient specific index.**
 
@@ -673,7 +673,7 @@ Expected output:
 ```
 <br>
 
-#### 6.3.6 Listing Tasks: `listtask`
+#### 6.3.6 Listing tasks: `listtask`
 
 **Lists all tasks in NovaCare.**
 
@@ -688,7 +688,7 @@ Listed all tasks
 ```
 <br>
 
-#### 6.3.7 Listing Incomplete Tasks: `listincomplete`
+#### 6.3.7 Listing incomplete tasks: `listincomplete`
 
 **Lists all "incomplete" tasks in NovaCare.**
 
@@ -705,7 +705,7 @@ Listed all incomplete tasks
 [⬆️ Back to Table of Contents](#table-of-contents)
 <br></br>
 
-### 6.4 General commands
+### 6.4 General Commands
 In NovaCare, these are the default commands for getting help, clearing and saving your patient and task data.
 <br></br>
 
