@@ -31,7 +31,12 @@ public class AddressTest {
         // valid addresses
         assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
         assertTrue(Address.isValidAddress("-")); // one character
-        assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+
+        // test length of address
+        assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // 55 characters
+        assertTrue(Address.isValidAddress("A".repeat(79))); // exactly 70 characters
+        assertTrue(Address.isValidAddress("A".repeat(80))); // exactly 80 characters
+        assertFalse(Address.isValidAddress("A".repeat(81))); // 81 characters
     }
 
     @Test

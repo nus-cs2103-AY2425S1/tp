@@ -6,9 +6,13 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.car.Car;
+import seedu.address.model.car.Vrn;
+import seedu.address.model.issue.Issue;
 
 /**
  * Represents a Person in the address book.
@@ -23,18 +27,53 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Car car;
+
+    private final Set<Issue> issues = new HashSet<>();
+    private boolean isServicing;
+
+    private final Logger logger = LogsCenter.getLogger(Person.class);
 
     /**
      * Every field must be present and not null.
+     * Constructor for Person without Car
+     * @param name
+     * @param phone
+     * @param email
+     * @param address
+     * @param issues
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Issue> issues) {
+        requireAllNonNull(name, phone, email, address, issues);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.isServicing = false;
+        this.issues.addAll(issues);
+        this.car = null;
+        logger.info("Person without car created");
+    }
+
+    /**
+     * Constructor for Person with Car
+     * @param name
+     * @param phone
+     * @param email
+     * @param address
+     * @param issues
+     * @param car
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Issue> issues, Car car) {
+        requireAllNonNull(name, phone, email, address, issues);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.isServicing = false;
+        this.car = car;
+        this.issues.addAll(issues);
+        logger.info("Person with car created" + car);
     }
 
     public Name getName() {
@@ -53,12 +92,42 @@ public class Person {
         return address;
     }
 
+    public Car getCar() {
+        return car;
+    }
+
+    public Vrn getVrn() {
+        return this.getCar().getVrn();
+    }
+
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable issue set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Issue> getIssues() {
+        return Collections.unmodifiableSet(issues);
+    }
+
+    /**
+     * Servicing status of a Client's Car.
+     *
+     * @return true if Checked in. False if not Checked in or no Car.
+     */
+    public boolean isServicing() {
+        if (this.car == null) {
+            return false; // Safeguard.
+        }
+        return this.isServicing;
+    }
+
+    /**
+     * Toggle isServicing for Clients with Car.
+     */
+    public void setServicing() {
+        if (this.car != null) {
+            this.isServicing = !this.isServicing;
+            logger.info("Client " + name + " has been " + (this.isServicing ? "Checked-In" : "Checked-Out"));
+        }
     }
 
     /**
@@ -90,27 +159,48 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
+
+        if (car == null && otherPerson.car == null) {
+            return name.equals(otherPerson.name)
+                    && phone.equals(otherPerson.phone)
+                    && email.equals(otherPerson.email)
+                    && address.equals(otherPerson.address)
+                    && issues.equals(otherPerson.issues);
+        } else if (car == null || otherPerson.car == null) {
+            return false;
+        }
+
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && issues.equals(otherPerson.issues)
+                && car.equals(otherPerson.car);
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, issues, car);
     }
 
     @Override
     public String toString() {
+        if (car == null) {
+            return new ToStringBuilder(this)
+                    .add("name", name)
+                    .add("phone", phone)
+                    .add("email", email)
+                    .add("address", address)
+                    .add("issues", issues)
+                    .toString();
+        }
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("issues", issues)
+                .add("car", car)
                 .toString();
     }
 

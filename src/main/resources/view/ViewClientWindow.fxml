@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
+
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
+         xmlns:fx="http://javafx.com/fxml/1" title="MATER - View Client" resizable="false">
+  <icons>
+    <Image url="@/images/mater.png" />
+  </icons>
+  <scene>
+    <Scene>
+      <stylesheets>
+        <URL value="@ClientWindow.css" />
+      </stylesheets>
+      <VBox fx:id="clientDetailsContainer" styleClass="client_details_container" spacing="15">
+        <HBox>
+          <Region HBox.hgrow="ALWAYS"/>
+          <Label fx:id="correctAsOfLabel" styleClass="client_correct_as_of_label"/>
+        </HBox>
+        <!-- Check-In Status Button -->
+        <Button fx:id="checkInStatusButton" text="Checked-Out" styleClass="checkin_status_button" />
+        <padding>
+          <Insets top="20" right="30" bottom="20" left="30"/>
+        </padding>
+        <!-- Client Details -->
+        <Label text="Client Details" styleClass="client_details_header_label"/>
+        <Label fx:id="clientNameLabel" text="Client's Name Not Found"
+            styleClass="client_details_field_label"/>
+        <Label fx:id="clientPhoneLabel" text="Client's Phone Number Not Found"
+            styleClass="client_details_field_label"/>
+        <Label fx:id="clientEmailLabel" text="Client's Email Address Not Found"
+            styleClass="client_details_field_label"/>
+        <Label fx:id="clientAddressLabel" text="Client's Home Address Not Found"
+            styleClass="client_details_field_label"/>
+        <!-- Car Details -->
+        <Label text="Car Details" styleClass="client_details_header_label" />
+        <Label fx:id="clientCarDetailsLabel" text="Client's Car Details Not Found"
+            styleClass="client_details_field_label"/>
+
+        <!-- Car Issues -->
+        <Label text="Car Issues" styleClass="client_details_header_label" />
+        <FlowPane fx:id="issues" />
+
+        <!-- Close Button -->
+        <Button fx:id="closeButton" text="Close" onAction="#handleClose" />
+      </VBox>
+    </Scene>
+  </scene>
+</fx:root>

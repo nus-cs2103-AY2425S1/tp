@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":ViewClientWindow" as ViewClientWindow UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "v:ViewClientCommand" as ViewClientCommand LOGIC_COLOR
+end box
+
+[-> MainWindow : "view 1"
+activate MainWindow
+
+MainWindow-> LogicManager : execute("view 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("view 1")
+activate AddressBookParser
+
+create ViewClientCommand
+AddressBookParser -> ViewClientCommand
+activate ViewClientCommand
+
+ViewClientCommand --> AddressBookParser
+deactivate ViewClientCommand
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+LogicManager -> ViewClientCommand : execute(model)
+activate ViewClientCommand
+
+ViewClientCommand -> MainWindow
+activate MainWindow
+
+MainWindow -> ViewClientWindow : show(client)
+activate ViewClientWindow
+
+ViewClientWindow -> ViewClientWindow : fillClientDetails(client)
+activate ViewClientWindow
+
+ViewClientWindow --> ViewClientWindow
+deactivate ViewClientWindow
+
+ViewClientWindow --> MainWindow
+deactivate ViewClientWindow
+
+MainWindow --> ViewClientCommand
+deactivate MainWindow
+
+ViewClientCommand --> LogicManager : result
+deactivate ViewClientCommand
+ViewClientCommand -[hidden]-> LogicManager : result
+destroy ViewClientCommand
+
+LogicManager --> MainWindow
+deactivate LogicManager
+
+[<--MainWindow
+deactivate MainWindow
+@enduml

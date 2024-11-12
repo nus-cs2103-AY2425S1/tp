@@ -3,12 +3,17 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.car.Car;
+import seedu.address.model.car.CarMake;
+import seedu.address.model.car.CarModel;
+import seedu.address.model.car.Vin;
+import seedu.address.model.car.Vrn;
+import seedu.address.model.issue.Issue;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -16,7 +21,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_NAME = "Am Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
@@ -25,7 +30,8 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
+    private Set<Issue> issues;
+    private Car car = null;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +41,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        issues = new HashSet<>();
     }
 
     /**
@@ -46,7 +52,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        car = personToCopy.getCar();
+        issues = new HashSet<>(personToCopy.getIssues());
     }
 
     /**
@@ -58,10 +65,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code issues} into a {@code Set<Issue>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withIssues(String ... issues) {
+        this.issues = SampleDataUtil.getIssueSet(issues);
         return this;
     }
 
@@ -89,8 +96,22 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Car} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCar(String vrn, String vin, String make, String model) {
+        this.car = new Car(new Vrn(vrn), new Vin(vin), new CarMake(make), new CarModel(model));
+        return this;
+    }
+
+    /**
+     * Builds a person object with the given details.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        if (car != null) {
+            return new Person(name, phone, email, address, issues, car);
+        }
+        return new Person(name, phone, email, address, issues);
     }
 
 }

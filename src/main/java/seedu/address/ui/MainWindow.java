@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ViewClientWindow viewclientWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +68,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        viewclientWindow = new ViewClientWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -142,8 +145,25 @@ public class MainWindow extends UiPart<Stage> {
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
+            return;
+        }
+
+        // Focus on the help window if it is already opened or minimized (Bug from AB3)
+        if (helpWindow.isIconified()) {
+            helpWindow.restore();
+        }
+        helpWindow.focus();
+    }
+
+    /**
+     * Opens the view window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleShowView(Person client) {
+        if (!viewclientWindow.isShowing()) {
+            viewclientWindow.show(client);
         } else {
-            helpWindow.focus();
+            viewclientWindow.focus(client);
         }
     }
 
@@ -160,6 +180,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        viewclientWindow.hide();
         primaryStage.hide();
     }
 
@@ -184,6 +205,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowView()) {
+                handleShowView(commandResult.getClient());
             }
 
             return commandResult;

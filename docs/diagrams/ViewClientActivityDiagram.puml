@@ -1,0 +1,27 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 20
+skinparam ArrowFontSize 15
+start
+:User executes the
+view command;
+
+if () then ([valid Client index])
+    :Update Client details, Car details
+    and Car Issues for latest request;
+
+    if () then ([Window already open])
+    else ([else])
+        :Set visibility of View
+        Client Window to True;
+    endif
+
+:User clicks the Close
+or Terminate button;
+:View Client Window
+visibility set to False;
+
+else ([invalid Client index])
+endif
+stop
+@enduml

@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.car.Car;
 import seedu.address.model.person.Person;
 
 /**
@@ -56,6 +57,21 @@ public interface Model {
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Returns true if a car with the same identity as {@code car} exists in the address book.
+     */
+    boolean hasCar(Car car);
+
+    /**
+     * Returns total number of cars with the same VRN or VIN as {@code car}.
+     */
+    int getCarsWithSameVrnOrVinCount(Car car);
+
+    /**
+     * Returns true if a car with the same VRN and VIN as {@code car} exists in the address book.
+     */
+    boolean hasCarWithSameVrnAndVin(Car car);
 
     /**
      * Deletes the given person.

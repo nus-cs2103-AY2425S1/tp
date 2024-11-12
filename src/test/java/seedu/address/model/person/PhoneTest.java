@@ -35,7 +35,11 @@ public class PhoneTest {
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+
+        // test for maximum length of phone numbers
+        assertTrue(Phone.isValidPhone("12429384203312")); // exactly 14 numbers
+        assertTrue(Phone.isValidPhone("124293842033123")); // exactly 15 numbers
+        assertFalse(Phone.isValidPhone("1242938420331234")); // 16 numbers
     }
 
     @Test

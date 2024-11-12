@@ -1,0 +1,97 @@
+/* Root style */
+.root {
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-font-size: 14px;
+    -fx-background-color: #2B2B2B;
+    -fx-text-fill: #FFFFFF;
+}
+
+.client_correct_as_of_label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7ccfc1;
+
+}
+/* Container Styles */
+.client_details_container {
+    -fx-background-color: #2B2B2B;
+    -fx-padding: 20;
+    -fx-spacing: 4;
+}
+
+/* Header Labels */
+.client_details_header_label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 10 5 1 1;
+    -fx-border-color: #7ccfc1;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* Field Labels */
+.client_details_field_label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #DDDDDD;
+    -fx-padding: 0 0 0 15;
+}
+
+/* Issues FlowPane */
+#issues {
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+    -fx-padding: 10 0 30 0;
+}
+
+#issues .label {
+    -fx-background-color: #b98474;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 5px 15px 5px 15px;
+    -fx-background-radius: 20;
+    -fx-font-size: 13px;
+}
+
+#issues .label:hover {
+    -fx-background-color: #a87364; /* Slightly darker color */
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Button Styles */
+.button {
+    -fx-background-color: #af4c4c;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 25;
+    -fx-border-radius: 25;
+    -fx-cursor: hand;
+    -fx-border: none;
+}
+
+.button:hover {
+    -fx-background-color: #6d2e2e;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* Scene Styles */
+.scene {
+    -fx-background-color: #2B2B2B;
+}
+
+.checkin_status_button {
+    -fx-background-color: #af4c4c;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 25;
+    -fx-border-radius: 25;
+    -fx-cursor: hand;
+    -fx-border: none;
+}
+
+.checkin_status_button:hover {
+    -fx-background-color: #6d2e2e;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}

@@ -100,63 +100,82 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #484848;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #515658;
+    -fx-background-color: #585858;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
-}
-
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-background-color: #2c3451;
 }
 
 .list-cell .label {
     -fx-text-fill: white;
 }
 
-.cell_big_label {
+.cell_index_label {
+    -fx-font-family: "Segoe UI Black";
+    -fx-font-size: 40px;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 0 5 0 0;
+    -fx-min-width: 50;
+    -fx-alignment: center;
+}
+
+.cell_field_label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-font-size: 18px;
+    -fx-text-fill: #FFFFFF;
 }
 
-.cell_small_label {
-    -fx-font-family: "Segoe UI";
+.isServicing_label {
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+    -fx-padding: 5px 5px 5px 5px;
+    -fx-background-color: #573088;
+    -fx-background-radius: 10;
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
 }
 
+.isServicing_label:hover {
+    -fx-background-color: #472078;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+
+/* The Enter Command Here Container Styling */
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+/* Handles the background of the 3 different panes, only the "padding" border visible */
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+    -fx-background-color: derive(#1d1d1d, 20%); /* Container Color */
+    -fx-border-color: derive(#1d1d1d, 10%); /* Border Color */
      -fx-border-top-width: 1px;
 }
 
+/* Bottom Storage Bar */
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
 .result-display {
     -fx-background-color: transparent;
-    -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 10pt;
     -fx-text-fill: white;
+    -fx-wrap-text: true;
 }
 
 .result-display .label {
     -fx-text-fill: black !important;
 }
 
+/* Bottom Storage Bar Text */
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
@@ -192,6 +211,7 @@
     -fx-text-fill: white;
 }
 
+/* Top Menu Bar */
 .menu-bar {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -214,27 +234,26 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: #282828;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
+    -fx-background-color: #484848;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
+    -fx-font-size: 12pt;
+    -fx-text-fill: #FFFFFF;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: #585858;
 }
 
 .button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: #1d1d1d;
+  -fx-background-color: #484848;
 }
 
 .button:focused {
-    -fx-border-color: white, white;
+    -fx-border-color: #585858, #585858;
     -fx-border-width: 1, 1;
     -fx-border-style: solid, segments(1, 1);
     -fx-border-radius: 0, 0;
@@ -335,18 +354,4 @@
 #resultDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
-}
-
-#tags {
-    -fx-hgap: 7;
-    -fx-vgap: 3;
-}
-
-#tags .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
 }

@@ -18,7 +18,12 @@ Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Issue
+Class Car
+Class Vrn
+Class Vin
+Class CarMake
+Class CarModel
 
 Class I #FFFFFF
 }
@@ -37,11 +42,17 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
+Person --> "0..1" Car
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
+
+Car *--> Vrn
+Car *--> Vin
+Car *--> CarMake
+Car *--> CarModel
+Car *--> "*" Issue
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

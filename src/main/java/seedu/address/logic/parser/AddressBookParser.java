@@ -8,15 +8,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddCarCommand;
+import seedu.address.logic.commands.AddClientCommand;
+import seedu.address.logic.commands.CheckClientCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.DeleteCarCommand;
+import seedu.address.logic.commands.DeleteClientCommand;
+import seedu.address.logic.commands.EditClientCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListClientCommand;
+import seedu.address.logic.commands.ViewClientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -53,23 +57,38 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        // Client and Car Commands
+        case AddClientCommand.COMMAND_WORD:
+            return new AddClientCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditClientCommand.COMMAND_WORD:
+            return new EditClientCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteClientCommand.COMMAND_WORD:
+            return new DeleteClientCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case DeleteCarCommand.COMMAND_WORD:
+            return new DeleteCarCommandParser().parse(arguments);
+
+        case AddCarCommand.COMMAND_WORD:
+            return new AddCarCommandParser().parse(arguments);
+
+        case CheckClientCommand.COMMAND_WORD:
+            return new CheckClientCommandParser().parse(arguments);
+
+        // GUI Commands
+        case ListClientCommand.COMMAND_WORD:
+            return new ListClientCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ViewClientCommand.COMMAND_WORD:
+            return new ViewClientCommandParser().parse(arguments);
+
+        // Miscellaneous Commands.
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
