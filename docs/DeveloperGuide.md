@@ -2,8 +2,9 @@
 layout: page
 title: Developer Guide
 ---
+
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -52,7 +53,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `/e delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `/e del 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="544"  alt=""/>
 
@@ -98,11 +99,11 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="534" alt=""/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("/v delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("del 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `/v delete 1` Command](images/DeleteVolunteerSequenceDiagram.png)
-![Supporting sd Frame](images/DeleteVolunteerSequenceDiagramSdFrame.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteVolunteerSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `VolunteerDeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+
 </div>
 
 How the `Logic` component works:
@@ -121,7 +122,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="668"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `EventCommandParser`) which uses the other classes shown above such as the ParserUtil to parse the user command and create a `XYZCommand` object (e.g., `EventNewCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `EventCommandParser`) which uses the other classes shown above such as the EventParserUtil to parse the user command and create a `XYZCommand` object (e.g., `EventNewCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `EventNewCommandParser`, `EventDeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 <div style="page-break-after: always;"></div>

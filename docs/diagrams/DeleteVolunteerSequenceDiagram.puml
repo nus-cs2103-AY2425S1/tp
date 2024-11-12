@@ -20,11 +20,9 @@ activate LogicManager
 LogicManager -> AddressBookParser : parseCommand("/v del 1")
 activate AddressBookParser
 
-ref over AddressBookParser, VolunteerDeleteCommandParser : create VolunteerDeleteCommand
-
 deactivate VolunteerDeleteCommandParser
 
-AddressBookParser -> VolunteerDeleteCommandParser : parse("1")
+AddressBookParser -> VolunteerDeleteCommandParser : parse("del 1")
 activate VolunteerDeleteCommandParser
 
 create VolunteerDeleteCommand
