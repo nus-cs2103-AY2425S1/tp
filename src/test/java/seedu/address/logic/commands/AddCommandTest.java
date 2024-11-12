@@ -18,10 +18,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EduContacts;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEduContacts;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -42,6 +43,7 @@ public class AddCommandTest {
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(validPerson, modelStub.personDisplayed);
     }
 
     @Test
@@ -95,11 +97,13 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public GuiSettings getGuiSettings() {
+
             throw new AssertionError("This method should not be called.");
         }
 
@@ -109,37 +113,52 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getEduContactsFilePath() {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setEduContactsFilePath(Path eduContactsFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addPerson(Person person) {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void addModule(Person person, Module module) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public void setEduContacts(ReadOnlyEduContacts eduContacts) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyEduContacts getEduContacts() {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasPerson(Person person) {
+
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deletePerson(Person target) {
+
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteModule(Person target, Module module) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -155,6 +174,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPersonToDisplay(Person personToDisplay) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPersonToDisplay() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -182,6 +211,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private Person personDisplayed;
 
         @Override
         public boolean hasPerson(Person person) {
@@ -193,11 +223,12 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+            personDisplayed = person;
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyEduContacts getEduContacts() {
+            return new EduContacts();
         }
     }
 

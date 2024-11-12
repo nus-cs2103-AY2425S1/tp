@@ -1,17 +1,17 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in the EduContacts.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
@@ -20,21 +20,47 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final StudentId studentId;
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Course course;
+    private final Role role;
+    private ArrayList<Module> modules = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(StudentId studentId, Name name, Phone phone, Email email, Address address, Course course,
+                  Role role) {
+        requireAllNonNull(studentId, name, phone, email, address, course, role);
+        this.studentId = studentId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.course = course;
+        this.role = role;
+    }
+
+    /**
+     * Facilitates creating new Person object with module list.
+     */
+    public Person(StudentId studentId, Name name, Phone phone, Email email, Address address, Course course,
+                  Role role, ArrayList<Module> modules) {
+        requireAllNonNull(studentId, name, phone, email, address, course, role);
+        this.studentId = studentId;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.course = course;
+        this.role = role;
+        this.modules = modules;
+    }
+
+    public StudentId getStudentId() {
+        return studentId;
     }
 
     public Name getName() {
@@ -53,12 +79,87 @@ public class Person {
         return address;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Sets the module to the provided list.
+     *
+     * @param newModules A list of modules to set.
+     */
+    public void setModules(List<Module> newModules) {
+        modules.clear();
+        modules.addAll(newModules);
+    }
+
+    /**
+     * Returns a new Person object with the module added.
+     *
+     * @param module The module to add.
+     */
+    public Person addModule(Module module) {
+        requireNonNull(module, "Module cannot be null");
+
+        ArrayList<Module> updatedModules = new ArrayList<>(modules);
+        updatedModules.add(module);
+        return new Person(studentId, name, phone, email, address, course, role, updatedModules);
+    }
+
+    /**
+     * Returns a new Person object with the module grade set.
+     *
+     * @param module The module for which to update the grade.
+     * @param grade The grade to associate with the module.
+     */
+    public Person setModuleGrade(Module module, Grade grade) {
+        requireNonNull(module, "Module cannot be null");
+        requireNonNull(grade, "Grade cannot be null");
+
+        ArrayList<Module> updatedModules = new ArrayList<>(modules);
+        module.setGrade(grade);
+        int index = modules.indexOf(module);
+        updatedModules.set(index, module);
+        return new Person(studentId, name, phone, email, address, course, role, updatedModules);
+    }
+
+    /**
+     * Returns an immutable course grades map, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public ArrayList<Module> getModules() {
+        return new ArrayList<>(modules);
+    }
+
+    /**
+     * Returns a new Person object after deletion of a specified module.
+     */
+    public Person deleteModule(Module module) {
+        requireNonNull(module, "Module cannot be null");
+
+        ArrayList<Module> updatedModules = new ArrayList<>(modules);
+
+        updatedModules.remove(module);
+        return new Person(studentId, name, phone, email, address, course, role, updatedModules);
+    }
+
+    /**
+     * Returns true if the person has the specified module.
+     *
+     * @param module The module to check.
+     * @return true if the person has the module, false otherwise.
+     */
+    public boolean hasModule(Module module) {
+        requireNonNull(module, "Module cannot be null");
+        return modules.contains(module);
+    }
+
+    /**
+     * Returns an immutable role set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Role getRole() {
+        return role;
     }
 
     /**
@@ -71,7 +172,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getStudentId().equals(getStudentId());
     }
 
     /**
@@ -90,27 +191,33 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
+        return studentId.equals(otherPerson.studentId)
+                && name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && course.equals(otherPerson.course)
+                && role.equals(otherPerson.role)
+                && modules.equals(otherPerson.modules);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(studentId, name, phone, email, address, course, role, modules);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("studentId", studentId)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("course", course)
+                .add("role", role)
+                .add("modules", modules)
                 .toString();
     }
 

@@ -1,16 +1,14 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -33,13 +31,23 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label studentId;
+    @FXML
     private Label phone;
     @FXML
     private Label address;
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private Label role;
+    @FXML
+    private Label course;
+
+    @FXML
+    private Label module;
+
+    @FXML
+    private StackPane rolePane;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,11 +57,25 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        studentId.setText("StudentID: " + person.getStudentId().value);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        role.setText(person.getRole().role.getRole());
+        course.setText(person.getCourse().course);
+        course.getStyleClass().add("bold-text");
+
+        if (person.getRole().role.getRole().equalsIgnoreCase("Student")) {
+            rolePane.getStyleClass().add("student-pane");
+        } else if (person.getRole().role.getRole().equalsIgnoreCase("Tutor")) {
+            rolePane.getStyleClass().add("tutor-pane");
+        }
+
+        String modulesAsString = person.getModules().stream()
+                .map(m -> m.toString() + "\n")
+                .reduce("", (x, y) -> x + y);
+
+        module.setText(modulesAsString.isEmpty() ? "No enrolled modules" : modulesAsString);
+        /*person.getRoles().stream()
+                .sorted(Comparator.comparing(role -> role.roleName))
+                .forEach(role -> roles.getChildren().add(new Label(role.roleName)));*/
     }
 }

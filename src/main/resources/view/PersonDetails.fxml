@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox spacing="80">
+            <VBox spacing="3.5" alignment="CENTER">
+                <Label fx:id="id" styleClass="cell_big_label">
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+                <ImageView fx:id="profileImage" fitWidth="100" fitHeight="100" visible="false"/>
+                <Label fx:id="name" text="\$first" styleClass="details_name" />
+                <Label fx:id="course" styleClass="details_subinfo" text="\$course" />
+                <Label fx:id="role" styleClass="details_subinfo" text="\$role" />
+            </VBox>
+            <VBox.margin>
+                <Insets bottom="20" />
+            </VBox.margin>
+            <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0" spacing="15">
+                <padding>
+                    <Insets top="5" right="5" bottom="5" left="15" />
+                </padding>
+                <VBox>
+                    <Label fx:id="studentIdHeader" text="Student ID" styleClass="field-header" visible="false"/>
+                    <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
+                </VBox>
+                <VBox>
+                    <Label fx:id="contactHeader" text="Contact Number" styleClass="field-header" visible="false" minWidth="500"/>
+                    <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+                </VBox>
+                <VBox>
+                    <Label fx:id="addressHeader" text="Address" styleClass="field-header" visible="false"/>
+                    <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+                </VBox>
+                <VBox>
+                    <Label fx:id="emailHeader" text="Email Address" styleClass="field-header" visible="false"/>
+                    <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+                </VBox>
+                <VBox>
+                    <Label fx:id="moduleHeader" text="Modules" styleClass="field-header" visible="false"/>
+                    <Label fx:id="module" styleClass="cell_small_label" text="\$module" />
+                </VBox>
+            </VBox>
+        </VBox>
+    </GridPane>
+</HBox>
+
+
+
+
+
