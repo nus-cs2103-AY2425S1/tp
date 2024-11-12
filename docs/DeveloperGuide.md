@@ -628,6 +628,8 @@ Use case ends.
 
 - **Wedding Organizer:** A professional responsible for planning and managing wedding events, coordinating with clients and vendors.
 - **Client:** The individuals who have hired the wedding organizer, typically the bride and groom.
+- **Client Preferences:** Specific requirements and preferences of the clients for their wedding event eg: vendors in wedding, date and venue.
+- **Vendor:** A service provider involved in the wedding event, such as caterers, photographers, florists, etc.
 - **Stakeholders:** All parties involved in the wedding event, including clients, vendors, and participants.
 - **Role:** A role assigned to contacts to categorize and filter them (e.g., "Florist", "Photographer").
 - **Contact:** An entry in the system containing information about a person or vendor.
@@ -1181,6 +1183,7 @@ Success action: When a person is successfully assigned:
             2. Manually modify wedding references (change hashcodes)
             3. Save file and restart application
         * Expected:
+            - Changing ownWedding field of a person to 0 will only result in weddings having no client and would not corrupt the file.
             - App detects corrupted relationships
             - Shows error message: "Address book data is corrupted: Found weddings without corresponding clients"
             - Starts with empty address book
