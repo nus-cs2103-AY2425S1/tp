@@ -7,7 +7,10 @@ import java.awt.HeadlessException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
@@ -25,6 +28,7 @@ public class FunctionalBrowser implements seedu.address.commons.core.Browser {
         + "Please try again.";
     private static FunctionalBrowser browser = null;
     private Desktop desktop;
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     /**
      * Constructs a {@code FunctionalBrowser}.
@@ -32,6 +36,7 @@ public class FunctionalBrowser implements seedu.address.commons.core.Browser {
     private FunctionalBrowser() {
         try {
             if (!isLinux()) {
+                logger.log(Level.INFO, "OS is not running on linux");
                 this.desktop = Desktop.getDesktop();
             }
         } catch (HeadlessException e) {
@@ -86,6 +91,7 @@ public class FunctionalBrowser implements seedu.address.commons.core.Browser {
             URI uri = new URI(url);
             if (isLinux()) {
                 //For linux OS
+                logger.log(Level.INFO, "Launching browser on linux OS");
                 if (Runtime.getRuntime().exec(new String[] { "which", "xdg-open" }).getInputStream().read() != -1) {
                     Runtime.getRuntime().exec(new String[] { "xdg-open", url });
                 } else {
@@ -93,6 +99,7 @@ public class FunctionalBrowser implements seedu.address.commons.core.Browser {
                 }
             } else {
                 //For non linux OS
+                logger.log(Level.INFO, "Launching browser on non-linux OS");
                 if (this.desktop != null && Desktop.isDesktopSupported()
                         && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     this.desktop.browse(uri);
