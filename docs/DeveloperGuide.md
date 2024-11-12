@@ -1394,6 +1394,11 @@ Prerequisites: Have a contact list with multiple entries.
   2. Test Case: `sort desc`  
      **Expected:** Contacts are sorted in descending order (Z-A).
 
+#### Negative test cases
+
+1. Test Case: `sort` 
+   <br>**Expected:** Error message as order of sort not provided.
+
 ### Remarking a Person
 
 <div markdown="span" class="alert alert-info">:information_source: 
@@ -1518,9 +1523,9 @@ Prerequisites: Have a contact list with multiple entries.
 1. Invalid Input Cases: Test with invalid input formats (yyyy-mm-dd).  
    **Expected:** Error message is displayed indicating missing information.
 2.   Test case:`birthday 1 b/ 2002-11-9`
-<br>**Expected:** Error message is displayed indicating missing information.
+<br>**Expected:** Error message is displayed indicating invalid format.
 2.   Test case:`birthday 1 b/ 2002/10/19`
-     <br>**Expected:** Error message is displayed indicating missing information.
+     <br>**Expected:** Error message is displayed indicating invalid format.
 
 ### Reminder for Birthday
 
