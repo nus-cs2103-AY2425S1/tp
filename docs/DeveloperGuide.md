@@ -172,9 +172,12 @@ The `add` command is undoable.
 Given below is an example usage scenario and how the `add` command behaves at each step.
 
 Step 1. The user executes `add n/John Doe p/+65 98765432 e/johnd@example.com r/01-1008 a/John street t/Floor 1`.
-<br>
 
- > **Note:** An error message will be displayed if attempting to add a contact with duplicate `NAME`, `PHONE` or `EMAIL`.
+<box type="info" seamless>
+
+ **Note:** An error message will be displayed if attempting to add a contact with duplicate `NAME`, `PHONE` or `EMAIL`.
+
+</box>
 
 
 Step 2. The `add` command adds a contact with the name John Doe, phone number +65 98765432, email johnd@example.com, room number #01-1008, address John street, tag "Floor 1" to the address book.
@@ -182,10 +185,12 @@ Step 2. The `add` command adds a contact with the name John Doe, phone number +6
 The following sequence diagram shows how an `add` command goes through the `Logic` component:
 
 <puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
-<br>
 
->**Note:** There are no destroy markers (X) for `AddCommand` as it is preserved in the `undo` command stack.
+<box type="info" seamless>
 
+**Note:** There are no destroy markers (X) for `AddCommand` as it is preserved in the `undo` command stack.
+
+</box>
 
 The following activity diagram summarizes what happens when a user executes a `add` command:
 
@@ -203,18 +208,21 @@ The `edit` command is undoable.
 Given below is an example usage scenario and how the `edit` command behaves at each step.
 
 Step 1. The user executes `edit 1 n/John Doe p/+65 98765432`. 
-<br>
 
->**Note:** An error message will be displayed if attempting to edit a contact to have with duplicate `NAME`, `PHONE` or `EMAIL`.
+<box type="info" seamless>
+
+**Note:** An error message will be displayed if attempting to edit a contact to have with duplicate `NAME`, `PHONE` or `EMAIL`.
+
+</box>
 
 Step 2. The `edit` command updates the details of the contact with index 1 to have the name John Doe and phone number +65 98765432.
 
 The following sequence diagram shows how an `edit` command goes through the `Logic` component:
 
 <puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
-<br>
+<box type="info" seamless>
 
->**Note:** There are no destroy markers (X) for `EditCommand` as it is preserved in the `undo` command stack.
+**Note:** There are no destroy markers (X) for `EditCommand` as it is preserved in the `undo` command stack.
 
 The following activity diagram summarizes what happens when a user executes a `edit` command:
 
@@ -255,10 +263,10 @@ The `clean` command extends `Command` and implements `Undoable`. The `clean` com
 Given below is an example usage scenario and how the `clean` command behaves at each step.
 
 Step 1. The user executes `clean` in 2024.
-<br>
+<box type="info" seamless>
 
-> **Note:** The `clean` command checks if there are contacts with `GradYear` 2023 or earlier. If there are none, it will return an error message to the user.
-
+ **Note:** The `clean` command checks if there are contacts with `GradYear` 2023 or earlier. If there are none, it will return an error message to the user.
+</box>
 
 Step 2. The `clean` command deletes all contacts with `GradYear` 2023 or earlier.
 
@@ -301,9 +309,12 @@ Given below is an example usage scenario and how the `find` command behaves at e
 Step 1. The user issues a `find` command followed by specific parameters.
 For example: `t/friends n/Alex r/08-0805 p/9124 6892`, searches for a profile with a 
 tag of friends, a name called Alex, a room number of 08-0805, and a phone number of 9124 6842.
-<br>
 
-> **Note** : These parameters can be combined in any sequence, allowing for versatile parameter configurations. 
+<box type="info" seamless>
+
+ **Note** : These parameters can be combined in any sequence, allowing for versatile parameter configurations. 
+
+</box>
 
 Step 3. The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search.
 
@@ -389,22 +400,23 @@ Step 1. The user launches the application for the first time. The undo stack is 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command is pushed onto the undo stack.
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command is also pushed onto the undo stack.
-<br>
 
-> **Note:** If a command is not undoable or fails its execution, it will not be pushed onto the undo stack.
-
+<box type="info" seamless>
+ 
+**Note:** If a command is not undoable or fails its execution, it will not be pushed onto the undo stack.
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will pop the last command from the undo stack and call its `undo()` method. The `undo()` method of the command will then reverse the effects of the command.
 <br>
 
-> **Note:** If the undo stack is empty, then there are no commands to undo. The `undo` command checks if this is the case. If so, it will return an error to the user.
-
+**Note:** If the undo stack is empty, then there are no commands to undo. The `undo` command checks if this is the case. If so, it will return an error to the user.
+</box>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 <puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-<br>
 
-> **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<box type="info" seamless>
 
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</box>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
@@ -795,9 +807,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
-<br>
 
-> **Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
+
+</box>
 
 ### Launch and shutdown
 
