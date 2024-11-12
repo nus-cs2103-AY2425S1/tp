@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+title Find Client Sequence Diagram
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant ":FindClientCommandParser" as FindClientCommandParser LOGIC_COLOR
+participant "f:FindClientCommand" as FindClientCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+note left of LogicManager
+cmd:
+"find alice bob charlie"
+keywords:
+"alice bob charlie"
+end note
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(cmd)
+activate LogicManager
+
+LogicManager -> EzstatesParser : parseCommand(cmd)
+activate EzstatesParser
+
+create FindClientCommandParser
+EzstatesParser -> FindClientCommandParser
+activate FindClientCommandParser
+
+FindClientCommandParser --> EzstatesParser
+deactivate FindClientCommandParser
+
+EzstatesParser -> FindClientCommandParser : parse(keywords)
+activate FindClientCommandParser
+
+
+create FindClientCommand
+FindClientCommandParser -> FindClientCommand :
+activate FindClientCommand
+FindClientCommand --> FindClientCommandParser
+deactivate FindClientCommand
+
+
+FindClientCommandParser --> EzstatesParser : f
+deactivate FindClientCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindClientCommandParser -[hidden]-> EzstatesParser
+destroy FindClientCommandParser
+
+EzstatesParser --> LogicManager : f
+deactivate EzstatesParser
+
+LogicManager -> FindClientCommand : execute(m:Model)
+activate FindClientCommand
+
+FindClientCommand -> Model : updateFilteredPersonList(predicate)
+activate Model
+Model --> FindClientCommand
+deactivate Model
+
+create CommandResult
+FindClientCommand -> CommandResult
+activate CommandResult
+CommandResult --> FindClientCommand
+deactivate CommandResult
+
+FindClientCommand --> LogicManager : r
+deactivate FindClientCommand
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml
+

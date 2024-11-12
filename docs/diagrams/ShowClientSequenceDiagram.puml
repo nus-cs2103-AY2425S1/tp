@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+title Show Clients Sequence Diagram
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant "s:ShowClientsCommand" as ShowClientsCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("showclients")
+activate LogicManager
+
+LogicManager -> EzstatesParser : parseCommand(cmd)
+activate EzstatesParser
+
+EzstatesParser --> LogicManager :
+deactivate EzstatesParser
+
+LogicManager -> ShowClientsCommand : execute(m:Model)
+activate ShowClientsCommand
+
+ShowClientsCommand -> Model : updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+Model --> ShowClientsCommand
+deactivate Model
+
+alt list is empty
+    ShowClientsCommand -> LogicManager
+    deactivate ShowClientsCommand
+else else
+    create CommandResult
+    ShowClientsCommand -> CommandResult
+    activate CommandResult
+    CommandResult --> ShowClientsCommand
+    deactivate CommandResult
+    ShowClientsCommand --> LogicManager : r
+    deactivate ShowClientsCommand
+end
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml
+

@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+title Delete Appointment Sequence Diagram
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant ":DeleteAppointmentCommandParser" as DeleteAppointmentCommandParser LOGIC_COLOR
+participant "d:DeleteAppointmentCommand" as DeleteAppointmentCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+note left of LogicManager
+cmd:
+"deleteapt 1"
+args:
+"1"
+end note
+
+[-> LogicManager : execute(cmd)
+activate LogicManager
+
+LogicManager -> EzstatesParser : parseCommand(cmd)
+activate EzstatesParser
+
+create DeleteAppointmentCommandParser
+EzstatesParser -> DeleteAppointmentCommandParser
+activate DeleteAppointmentCommandParser
+
+DeleteAppointmentCommandParser --> EzstatesParser
+deactivate DeleteAppointmentCommandParser
+
+EzstatesParser -> DeleteAppointmentCommandParser : parse(args)
+activate DeleteAppointmentCommandParser
+
+create DeleteAppointmentCommand
+DeleteAppointmentCommandParser -> DeleteAppointmentCommand
+activate DeleteAppointmentCommand
+DeleteAppointmentCommand --> DeleteAppointmentCommandParser
+deactivate DeleteAppointmentCommand
+
+DeleteAppointmentCommandParser --> EzstatesParser : d
+deactivate DeleteAppointmentCommandParser
+EzstatesParser --> LogicManager : d
+deactivate EzstatesParser
+
+LogicManager -> DeleteAppointmentCommand : execute(m:Model)
+activate DeleteAppointmentCommand
+
+DeleteAppointmentCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> DeleteAppointmentCommand : List<Person>
+deactivate Model
+
+DeleteAppointmentCommand -> Model : setPersonWithoutAppointment(index)
+activate Model
+Model --> DeleteAppointmentCommand
+deactivate Model
+
+create CommandResult
+DeleteAppointmentCommand -> CommandResult
+activate CommandResult
+CommandResult --> DeleteAppointmentCommand
+deactivate CommandResult
+
+DeleteAppointmentCommand --> LogicManager : r
+deactivate DeleteAppointmentCommand
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml
+

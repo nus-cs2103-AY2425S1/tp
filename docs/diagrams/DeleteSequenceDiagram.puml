@@ -1,70 +1,78 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+title Delete Client Profile Sequence Diagram
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant ":DeleteClientProfileCommandParser" as DeleteClientProfileCommandParser LOGIC_COLOR
+participant "d:DeleteClientProfileCommand" as DeleteClientProfileCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
+
+note left of LogicManager
+cmd:
+"deleteclient 1"
+args:
+"1"
+end note
 
 box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete n/Bob")
+[-> LogicManager : execute(cmd)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete n/Bob")
-activate AddressBookParser
+LogicManager -> EzstatesParser : parseCommand(cmd)
+activate EzstatesParser
 
-create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
-activate DeleteCommandParser
+create DeleteClientProfileCommandParser
+EzstatesParser -> DeleteClientProfileCommandParser
+activate DeleteClientProfileCommandParser
 
-DeleteCommandParser --> AddressBookParser
-deactivate DeleteCommandParser
+DeleteClientProfileCommandParser --> EzstatesParser
+deactivate DeleteClientProfileCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("n/Bob")
-activate DeleteCommandParser
+EzstatesParser -> DeleteClientProfileCommandParser : parse(args)
+activate DeleteClientProfileCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteClientProfileCommand
+DeleteClientProfileCommandParser -> DeleteClientProfileCommand
+activate DeleteClientProfileCommand
+DeleteClientProfileCommand --> DeleteClientProfileCommandParser
+deactivate DeleteClientProfileCommand
 
-DeleteCommand --> DeleteCommandParser :
-deactivate DeleteCommand
+DeleteClientProfileCommandParser --> EzstatesParser : d
+deactivate DeleteClientProfileCommandParser
+EzstatesParser --> LogicManager : d
+deactivate EzstatesParser
 
-DeleteCommandParser --> AddressBookParser : d
-deactivate DeleteCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
-destroy DeleteCommandParser
+LogicManager -> DeleteClientProfileCommand : execute(m:Model)
+activate DeleteClientProfileCommand
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
-
-LogicManager -> DeleteCommand : execute(m:Model)
-activate DeleteCommand
-
-DeleteCommand -> Model : deletePerson(Bob:Person)
+DeleteClientProfileCommand -> Model : getFilteredPersonList()
 activate Model
+Model --> DeleteClientProfileCommand
+deactivate Model
 
-Model --> DeleteCommand
+DeleteClientProfileCommand -> Model : deletePerson(personToDelete)
+activate Model
+Model --> DeleteClientProfileCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteClientProfileCommand -> CommandResult
 activate CommandResult
-
-CommandResult --> DeleteCommand
+CommandResult --> DeleteClientProfileCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : r
-deactivate DeleteCommand
+DeleteClientProfileCommand --> LogicManager : r
+deactivate DeleteClientProfileCommand
 
-[<--LogicManager
+[<-- LogicManager : r
 deactivate LogicManager
 @enduml
