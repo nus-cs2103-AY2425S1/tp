@@ -46,7 +46,7 @@ faster than traditional GUI apps.
 ## Overview
 TalentConnect offers management of multiple entities that work together to better help our users. To facilitate this, the commands in app can be categorized into two types, entity specific and non-entity specific. For entity specific commands, it is required to supply an entity after the action in the command. e.g. `add contact ...` command has an entity `contact` after the action `add`. 
 
-The valid entities in the system are `contact`, `job`, `company` and `all`. The first three of those refers to a specific entity, while `all` is used in certain commands to refer to all three entities. Do note that not all commands/actions works on all valid entities, kindly refer to [Command Summary](#command-summary) for the summary of what entities is supported in each action/command.
+The valid entities in the system are `contact`, `job`, `company` and `all`. The first three of those refers to a specific entity, while `all` is used in certain commands to refer to all three entities. Do note that not all commands/actions work on all valid entities, kindly refer to [Command Summary](#command-summary) for the summary of what entities are supported in each command/action.
 
 Entities `contact`, `job`, `company` are displayed in their corresponding lists, as shown below. 
 ![Overview](images/Overview.png)
@@ -80,7 +80,7 @@ Entities `contact`, `job`, `company` are displayed in their corresponding lists,
 </div>
 
 ## Contact Management
-Contacts represent candidates applying for job positions. Each contact can have details such as name, phone, email, and relevant skills, aiding in recruitment processes. A contact's role represents the job that they are applying for, and is used when screening contacts with a certain job. A contact is uniquely identified by their phone number and email, therefore no two contacts can share a same phone number or email. 
+Contacts represent candidates applying for job positions. Each contact can have details such as name, phone, email, and relevant skills, aiding in recruitment processes. A contact's role represents the job that they are applying for, and is used when screening contacts with a certain job. A contact is uniquely identified by their phone number and email, therefore no two contacts can share the same phone number or email. 
 
 * Add Contact: `add contact n/NAME p/PHONE e/EMAIL r/ROLE [s/SKILL]…​`
 * Edit Contact: `edit contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SKILL]…​`
@@ -163,7 +163,7 @@ Examples:
 
 
 ## Company Management 
-Companies are organizations that provide job positions. Each company can have attributes such as address, billing date, and contact details, facilitating job creation and matching. A company is unique identify by its name (case-insensitive). 
+Companies are organizations that provide job positions. Each company can have attributes such as address, billing date, and contact details, facilitating job creation and matching. A company is uniquely identified by its name (case-insensitive). 
 
 * Add Company: `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE`
 * View Company: `view company INDEX`
@@ -233,14 +233,12 @@ Examples:
 * If the company at index 1 has a job attributed to it, `delete company 1` will also delete the job.
 
 ## Job Management
-Jobs are positions offered by companies that contacts can apply for. Jobs contain details like monthly salary, description, and requirements, enabling precise candidate matching. A job is unique identified by its name and company. Multiple openings for the same job position at a company can be represented using a single job, hence duplicates are not allowed. 
+Jobs are positions offered by companies that contacts can apply for. Jobs contain details like monthly salary, description, and requirements, enabling precise candidate matching. A job is uniquely identified by its name and company. Multiple openings for the same job position at a company can be represented using a single job, hence duplicates are not allowed.
 
 * Add Job: `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
 * List Jobs: `list job`
 * Delete Job: `delete job INDEX`
 * Screen Contacts by Job: `screen job INDEX`
-* Match Contact to Job: `match CONTACT_INDEX JOB_INDEX`
-* Unmatch Contact from Job: `unmatch CONTACT_INDEX JOB_INDEX`
 
 ### Adding a job : `add job`
 
@@ -285,7 +283,7 @@ Examples:
 
 ### Screening contacts by a job : `screen job`
 
-Screens the list of contacts in the address book with the job specified.
+Screens the list of contacts in the address book with the job specified.  
 
 Format: `screen job INDEX`
 
@@ -302,6 +300,17 @@ Examples:
   show a contact with role `Software Engineer`.
 * If the job at index 2 has name `Data Scientist`, `screen job 2` will
   show a contact with role `data scientist`.
+
+## Other Commands
+Additional commands offer general functionality to manage and analyze data across TalentConnect, including clearing data, generating statistics, and accessing help.
+
+* Match Contact to Job: `match CONTACT_INDEX JOB_INDEX`
+* Unmatch Contact from Job: `unmatch CONTACT_INDEX JOB_INDEX`
+* List All Entities: `list all`
+* View Statistics: `stats`
+* Clear Data: `clear`
+* Exit Application: `exit`
+* Help: `help`
 
 ### Matching a contact with a job : `match`
 
@@ -322,8 +331,6 @@ Examples:
 * `match 1 2` will match the contact at index 1 and job at index 2 together.
 * `match 2 3` will match the contact at index 2 and job at index 3 together.
 
-
-
 ### Undoing a matched contact and job : `unmatch`
 
 Undoes a matching between a contact and job.
@@ -342,15 +349,6 @@ Examples:
   the job at index 2 if they were matched beforehand.
 * If `match 1 2` was called previously, calling `unmatch 1 2` will undo the matching
   if the shown list was in the same condition as when the previous command was called.
-
-## Other Commands
-Additional commands offer general functionality to manage and analyze data across TalentConnect, including clearing data, generating statistics, and accessing help.
-
-* List All Entities: `list all`
-* View Statistics: `stats`
-* Clear Data: `clear`
-* Exit Application: `exit`
-* Help: `help`
 
 ### Listing all entities : `list all`
 
