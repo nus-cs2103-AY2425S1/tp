@@ -127,6 +127,54 @@ Here is a class diagram showing the classes related to the `AbstractEditCommand`
 
 <puml src="diagrams/AbstractEditCommandClassDiagram.puml" width="550"/>
 
+The parameters of a few methods in the `AbstractEditCommand` class are omitted for brevity. For example, the `createEditedPerson, saveEditedPerson` methods have additional parameters that are not shown in the diagram. They can be found below.
+
+<puml src="diagrams/AbstractEditCommandClassDiagramMethods.puml" width="550"/>
+
+
+The snippet below shows how the "execute" method is implemented in the `AbstractEditCommand` class:
+
+```java
+@Override
+public CommandResult execute(Model model) throws CommandException {
+    Person personToEdit = getPersonToEdit(model);
+    Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+    return saveEditedPerson(model, personToEdit, editedPerson, MESSAGE_EDIT_PERSON_SUCCESS);
+}
+```
+
+Pertinently, the method `createEditedPerson` will merge a `personToEdit` object with an `editPersonDescriptor` object by optionally replacing the fields in `personToEdit` with the fields in `editPersonDescriptor` only if they exist. As such, all fields will be entirely overwritten if they are non-empty in `editPersonDescriptor`.
+
+```java
+private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    assert personToEdit != null;
+
+    Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+    Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+    Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+    Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+    PublicAddressesComposition updatedPublicAddresses =
+        editPersonDescriptor.getPublicAddresses().orElse(personToEdit.getPublicAddressesComposition());
+    Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+
+    return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPublicAddresses, updatedTags);
+}
+```
+
+We thus propose an overloaded implementation of the `createEditedPerson` method - `makeEditedPerson` - that will allow the `personToEdit` and `editPersonDescriptor` objects to be merged in a manner defined by the child methods using `BiFunction`.
+
+```java
+CommandResult execute(
+    Model model,
+    BiFunction<? super Person, ? super EditPersonDescriptor, ? extends Person> makeEditedPerson,
+    String successMessage
+) throws CommandException {
+    Person personToEdit = getPersonToEdit(model);
+    Person editedPerson = makeEditedPerson.apply(personToEdit, editPersonDescriptor);
+    return saveEditedPerson(model, personToEdit, editedPerson, successMessage);
+}
+```
+
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
