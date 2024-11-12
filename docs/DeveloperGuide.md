@@ -252,6 +252,9 @@ Person#hasPublicAddressStringAmongAllNetworks(String publicAddressString).
 10. The `SearchPublicAddressCommand` object then calls the
     `SearchPublicAddressCommand#generateResult(List<Person> personsWithPublicAddressMatch)` to generate the success or
     error message.
+    The sequence diagram below shows how the `searchpa` command works from steps 1-10.
+
+<puml src="diagrams/SearchPublicAddressSequenceDiagram.puml" />
 
 ### \[Proposed\] Undo/redo feature
 
