@@ -679,5 +679,5 @@ testers are expected to do more *exploratory* testing.
 2. Dealing with missing data files
    1. Open the project using an IDE (recommended to use IntelliJ IDEA)
    2. Navigate to `/data` folder
-   3. Open the JSON file inside, it should be named `ab3myguest.json`.
+   3. Open the JSON file inside, it should be named `ab3myguest.json`
    4. If there is none, you can copy the default data file from our [code space](https://github.com/AY2425S1-CS2103T-W11-2/tp)
