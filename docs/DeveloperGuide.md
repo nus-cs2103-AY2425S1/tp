@@ -607,7 +607,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 3. The product should not rely on a remote server.
 4. It should accommodate up to 250 elderly without performance slowdowns of more than 10 seconds during typical usage.
 5. The product should generally respond within five seconds.
-6. The product should work on Windows, Linux and Mac as long as they have `Java 17` installed.
+6. The product should work on Windows, Linux as long as they have `Java 17` installed.
+7. The product should work on Mac as long as they have the specific version of **Java 17 JDK+FX Azul distribution** installed.
 7. The product should not use a Database Management System.
 8. The data should be stored locally and should be in a human editable text file.
 8. The product needs to be developed in a breadth-first incremental manner over the project duration.
