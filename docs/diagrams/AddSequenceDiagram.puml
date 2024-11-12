@@ -38,6 +38,7 @@ AddCommandParser --> AddressBookParser : c
 deactivate AddCommandParser
 destroy AddCommandParser
 
+
 AddressBookParser --> LogicManager : c
 deactivate AddressBookParser
 
