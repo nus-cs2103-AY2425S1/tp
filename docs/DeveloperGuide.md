@@ -45,7 +45,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-GoonBook is a brownfield software project based off AddressBook Level-3, taken under the CS2103T Software Engineering module held by the School of Computing at the National University of Singapore.
+GoonBook is a brownfield software project based off [AddressBook Level-3](https://se-education.org/addressbook-level3/) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)), taken under the CS2103T Software Engineering module held by the School of Computing at the National University of Singapore.
 
 Java dependencies:
 
