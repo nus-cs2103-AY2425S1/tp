@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+title Activity: Check for prefixes
+
+start
+if () then ([no prefixes])
+      :Throw no prefix exception;
+      stop
+    elseif () then ([multiple prefixes])
+      :Throw incorrect prefix count exception;
+      stop
+    else ([else])
+      :Check which criteria input;
+      if () then ([name prefix])
+        :Create sort by name command;
+      elseif () then ([student ID prefix])
+        :Create sort by student ID command;
+      elseif () then ([tutorial prefix])
+        :Create sort by tutorial command;
+      else ([else])
+        :Throw format exception;
+        stop
+      endif
+      :LogicManager executes command;
+      :Update GUI to show sorted results;
+      stop
+    endif
+
+@enduml
