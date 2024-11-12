@@ -296,7 +296,7 @@ The lesson management system is implemented through several key mechanisms:
 
 **1. Date and Time Validation**
 
-The system enforces strict validation for consultation scheduling:
+The system enforces strict validation for lesson scheduling:
 * Dates must be in `YYYY-MM-DD` format and represent valid calendar dates
 * Times must be in 24-hour `HH:mm` format
 * Both use Java's built-in `LocalDate` and `LocalTime` for validation
@@ -317,7 +317,7 @@ The `Lesson` class manages:
 
 Core operations:
 ```java
-// Creating a consultation
+// Creating a lesson
 Lesson lesson = new Lesson(date, time, studentLessonInfoList);
 
 // Adding/removing students
