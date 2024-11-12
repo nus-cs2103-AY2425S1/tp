@@ -543,7 +543,7 @@ Use case ends.
 
 #### Extensions
 
-2a. User enters an invalid attendance date (incorrect date format: yyyy-MM-dd)
+2a. User enters an invalid attendance date (correct date format: yyyy-MM-dd)
 * 2a1. TrackMate informs the user of the accepted date format for attendance.
 * 2a2. User re-enters the date. Steps 2a1–2a2 are repeated until a valid status is given.
 
