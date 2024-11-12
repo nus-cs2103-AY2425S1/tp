@@ -261,7 +261,7 @@ SocialBook data are saved automatically as a JSON file `[JAR file location]/data
 <box type="warning" seamless>
 
 **Caution:**
-If a person's data values are changed to an invalid format, Socialbook will discard that particular person's data while keeping the rest. However, if your changes to the data file makes the file format invalid, SocialBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If a person's data values are changed to an invalid format, Socialbook will discard that particular person's data while keeping the rest. However, if your changes to the data file makes the file format invalid, SocialBook will discard all data and start with an empty data file at the next run **only if user exits SocialBook with the `exit` command**. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the SocialBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -309,7 +309,7 @@ _Details coming soon ..._
 
 ### Emergency Contact
 * Emergency contacts are optional fields, and are denoted by the `ec/` prefix.
-* Emergency contacts are subject to the same formatting requirements as `Phone`.
+* Emergency contacts are subjected to the same formatting requirements as `Phone`.
 * To indicate no emergency contact for a person, you can `add` a contact without the `ec/` prefix, or with a `ec/` followed by whitespace.
 
 ### Tags

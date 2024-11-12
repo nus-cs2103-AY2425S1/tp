@@ -314,7 +314,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | overwhelmed with many households          | take note of how long it has been since I visited each house               | ensure that no house gets forgotten in my scheduling                                                   |
 | `* *`    | new user learning the interface           | check out basic commands that are frequently used with a help command      | learn the basic usage of the program more quickly                                                      |
 | `* *`    | user with multiple contacts per household | tag multiple users to be from the same household                           | simplify the process of contacting other household members                                             |
-| `* *`    | social worker                             | prioritize contacts                                                        | allow myself to have quick access to high priority household                                           |
+| `* *`    | social worker                             | prioritize contacts                                                        | allow myself to be able to prioritise household with special needs                                     |
 | `* *`    | social worker                             | add alternative contact method                                             | add a contact for elderly who do not have a phone                                                      |
 | `* *`    | social worker/expert user                 | look for emergency contact quickly                                         | inform next-of-kin when something happen                                                               |
 | `* *`    | social worker/expert user                 | add family contact                                                         | know how many people in the household                                                                  |
@@ -346,7 +346,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `SocialBook` and the **Actor** is the `user`, unless specified otherwise)
 
-##### **Use case: View all contacts**
+##### **Use case: UC01 - View all contacts**
 
 **MSS**
 
@@ -361,7 +361,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-##### **Use case: Add a contact**
+##### **Use case: UC02 - Add a contact**
 
 **MSS**
 
@@ -390,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-##### **Use case: View all information about a contact**
+##### **Use case: UC03 - View all information about a contact**
 
 **MSS**
 
@@ -419,7 +419,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-##### **Use case: Delete a contact**
+##### **Use case: UC04 - Delete a contact**
 
 **MSS**
 
@@ -442,7 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-##### **Use case: Edit a contact**
+##### **Use case: UC05 - Edit a contact**
 
 **MSS**
 
@@ -473,7 +473,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-##### **Use case: Find a contact**
+##### **Use case: UC06 - Find a contact**
 
 **MSS**
 
@@ -498,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-##### **Use case: Add remarks to a contact**
+##### **Use case: UC07 - Add remarks to a contact**
 
 **MSS**
 
