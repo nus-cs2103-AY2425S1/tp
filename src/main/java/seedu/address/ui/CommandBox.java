@@ -70,6 +70,15 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Clear command box.
+     */
+    @FXML
+    private void clearCommandBox() {
+        commandTextField.clear();
+        commandTextField.requestFocus();
+    }
+
+    /**
      * Represents a function that can execute commands.
      */
     @FunctionalInterface
@@ -81,5 +90,4 @@ public class CommandBox extends UiPart<Region> {
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
-
 }

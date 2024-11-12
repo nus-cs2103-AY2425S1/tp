@@ -16,9 +16,12 @@ Class UniquePersonList
 Class Person
 Class Address
 Class Email
+Class Appointment
+Class Birthday
 Class Name
 Class Phone
 Class Tag
+Class Policies
 
 Class I #FFFFFF
 }
@@ -41,8 +44,10 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Appointment
+Person *--> Birthday
 Person *--> "*" Tag
-
+Person *--> "*" Policies
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 

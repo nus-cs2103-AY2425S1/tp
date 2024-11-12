@@ -1,14 +1,18 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -192,5 +196,29 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Displays a confirmation dialog with the specified message.
+     * The dialog prompts the user to confirm an action by typing "y".
+     *
+     * @param message The message to display in the confirmation dialog.
+     * @return {@code true} if the user types "y" to confirm, {@code false} otherwise.
+     */
+    public static boolean showConfirmationDialog(String message) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Confirmation");
+        dialog.setHeaderText(null);
+
+        Label contentLabel = new Label(message + "\n(\"y\" to confirm or any other key to cancel)");
+        contentLabel.setWrapText(true);
+        contentLabel.setMaxWidth(400);
+
+        VBox content = new VBox(contentLabel, dialog.getEditor());
+        content.setSpacing(10);
+        dialog.getDialogPane().setContent(content);
+
+        Optional<String> result = dialog.showAndWait();
+        return result.isPresent() && result.get().trim().equals("y");
     }
 }

@@ -2,11 +2,17 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INSURANCE_PAYMENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_NAME_LIFE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -15,16 +21,24 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Policy;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -87,9 +101,9 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
+        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_AMY).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
@@ -144,6 +158,88 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void editPolicies_invalidOutOfBoundIndex_throwsCommandException() throws CommandException {
+        Person personToEdit = new PersonBuilder().build();
+        Index outOfBoundIndex = Index.fromOneBased(1);
+        Policy validPolicy = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+
+        Map<Index, Policy> policyMap = new HashMap<>();
+        policyMap.put(outOfBoundIndex, validPolicy);
+
+        assertThrows(CommandException.class, () -> EditCommand.editPolicies(personToEdit, policyMap));
+    }
+
+    @Test
+    public void editPolicies_invalidDuplicatePolicyName_throwsCommandException() throws CommandException {
+        Person personToEdit = new PersonBuilder().build();
+        Policy oldPolicy1 = new Policy(VALID_NAME_BOB, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+        Policy oldPolicy2 = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+        List<Policy> oldPolicyList = new ArrayList<>();
+        oldPolicyList.add(oldPolicy1);
+        oldPolicyList.add(oldPolicy2);
+        personToEdit.setPolicies(oldPolicyList);
+
+        Policy duplicateNamePolicy =
+                new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+        Index validIndex = Index.fromOneBased(1);
+
+        Map<Index, Policy> policyMap = new HashMap<>();
+        policyMap.put(validIndex, duplicateNamePolicy);
+
+        assertThrows(CommandException.class, () -> EditCommand.editPolicies(personToEdit, policyMap));
+    }
+
+    @Test
+    public void editPolicies_validPolicyMap_returnsPolicyList() throws CommandException {
+        Person personToEdit = new PersonBuilder().build();
+        Policy oldPolicy1 = new Policy(VALID_NAME_BOB, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+        Policy oldPolicy2 = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+        List<Policy> oldPolicyList = new ArrayList<>();
+        oldPolicyList.add(oldPolicy1);
+        oldPolicyList.add(oldPolicy2);
+        personToEdit.setPolicies(oldPolicyList);
+
+        Policy validPolicy = new Policy(VALID_NAME_AMY, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+
+        Index validIndex = Index.fromOneBased(2);
+
+        Map<Index, Policy> policyMap = new HashMap<>();
+        policyMap.put(validIndex, validPolicy);
+
+        List<Policy> expectedPolicyList = new ArrayList<>();
+        expectedPolicyList.add(oldPolicy1);
+        expectedPolicyList.add(validPolicy);
+
+        expectedPolicyList.sort(Comparator.comparing(Policy::getPolicyPaymentDueDate));
+
+        personToEdit.setPolicies(expectedPolicyList);
+
+        assertEquals(expectedPolicyList, EditCommand.editPolicies(personToEdit, policyMap));
+    }
+
+    @Test
+    public void editPolicies_validPolicyMapChangePolicyName_returnsPolicyList() throws CommandException {
+        Person personToEdit = new PersonBuilder().build();
+        Policy oldPolicy = new Policy(VALID_NAME_BOB, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+        personToEdit.setPolicies(List.of(oldPolicy));
+        Policy validPolicy = new Policy(VALID_POLICY_NAME_LIFE, VALID_DATE_1, VALID_DATE_2, VALID_INSURANCE_PAYMENT);
+
+        Index validIndex = Index.fromOneBased(1);
+
+        Map<Index, Policy> policyMap = new HashMap<>();
+        policyMap.put(validIndex, validPolicy);
+
+        List<Policy> expectedPolicyList = new ArrayList<>();
+        expectedPolicyList.add(validPolicy);
+
+        expectedPolicyList.sort(Comparator.comparing(Policy::getPolicyPaymentDueDate));
+
+        personToEdit.setPolicies(expectedPolicyList);
+
+        assertEquals(expectedPolicyList, EditCommand.editPolicies(personToEdit, policyMap));
     }
 
     @Test

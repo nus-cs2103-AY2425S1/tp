@@ -3,9 +3,16 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_PAYMENT_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_END_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -33,9 +40,28 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
+    public static final String VALID_ADDRESS_AMY_NO_SPECIAL = "block312AmyStreet1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_BIRTHDAY_AMY = "2000-12-12";
+    public static final String VALID_BIRTHDAY_BOB = "1990-10-10";
+    public static final String VALID_APPOINTMENT_AMY = "2024-12-12 10:00";
+    public static final String VALID_APPOINTMENT_FIONA = "2024-12-12 10:00";
+    public static final String VALID_APPOINTMENT_BOB = "2024-12-11 11:00";
+    public static final String VALID_POLICY_NAME_LIFE = "life insurance";
+    public static final String VALID_POLICY_NAME_INVESTMENT = "investment insurance";
+    public static final String VALID_DATE_1 = "2021-10-16";
+    public static final String VALID_DATE_2 = "2027-11-11";
+    public static final String VALID_INSURANCE_PAYMENT = "2023-05-05 349.00";
+    public static final String VALID_PAID_INSURANCE_PAYMENT = "2026-12-12 349.00";
+    public static final String VALID_INSURANCE_PAYMENT_DATE = "2023-05-05";
+    public static final String VALID_INSURANCE_AMOUNT_DUE = "349.00";
+    public static final String INVALID_DATE_1 = "2021222-10-16";
+    public static final String INVALID_INSURANCE_AMOUNT_DUE = "349.00asdd";
+    public static final String INVALID_INSURANCE_PAYMENT = "2023-05-05 349.00asd";
+
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,12 +73,38 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-
+    public static final String BIRTHDAY_AMY = " " + PREFIX_BIRTHDAY + VALID_BIRTHDAY_AMY;
+    public static final String BIRTHDAY_BOB = " " + PREFIX_BIRTHDAY + VALID_BIRTHDAY_BOB;
+    public static final String APPOINTMENT_AMY = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_AMY;
+    public static final String APPOINTMENT_BOB = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_BOB;
+    public static final String EDIT_POLICY_LIFE_1 = " 1 "
+            + PREFIX_POLICY_NAME + VALID_POLICY_NAME_LIFE + " "
+            + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " "
+            + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
+            + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
+            + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;
+    public static final String VALID_ASSIGN_POLICY = " " + PREFIX_POLICY_NAME + VALID_POLICY_NAME_LIFE + " "
+            + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " " + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
+            + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
+            + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;
+    public static final String INVALID_ASSIGN_POLICY = " " + PREFIX_POLICY_NAME + VALID_POLICY_NAME_LIFE + " "
+            + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " " + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
+            + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
+            + PREFIX_PAYMENT_AMOUNT + INVALID_INSURANCE_AMOUNT_DUE;
+    public static final String INVALID_ASSIGN_POLICY_START_DATE = " " + PREFIX_POLICY_NAME
+            + VALID_POLICY_NAME_LIFE + " " + PREFIX_POLICY_START_DATE + INVALID_DATE_1 + " "
+            + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " " + PREFIX_NEXT_PAYMENT_DATE
+            + VALID_INSURANCE_PAYMENT_DATE + " " + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;
+    public static final String POLICY_END_DATE_EARLIER_THAN_START = " " + PREFIX_POLICY_NAME
+            + VALID_POLICY_NAME_LIFE + " " + PREFIX_POLICY_START_DATE + VALID_DATE_2 + " "
+            + PREFIX_POLICY_END_DATE + VALID_DATE_1 + " " + PREFIX_NEXT_PAYMENT_DATE
+            + VALID_INSURANCE_PAYMENT_DATE + " " + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -63,11 +115,25 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withAppointment(VALID_APPOINTMENT_AMY)
+                .withBirthday(VALID_BIRTHDAY_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withAppointment(VALID_APPOINTMENT_BOB).withBirthday(VALID_BIRTHDAY_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
+
+    public static final String VALID_PARAMETER_NAME = "n/";
+
+    public static final String VALID_PARAMETER_APPOINTMENT = "appt/";
+
+    public static final String VALID_PARAMETER_BIRTHDAY = "b/";
+
+    public static final String VALID_PARAMETER_PAYDATE = "paydate/";
+
+    public static final String VALID_ORDER_ASC = "asc";
+
+    public static final String VALID_ORDER_DESC = "desc";
 
     /**
      * Executes the given {@code command}, confirms that <br>

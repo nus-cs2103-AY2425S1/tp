@@ -1,10 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -17,13 +19,27 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY);
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
+            String[] splitArgs = args.trim().split("\\s+");
+            Index targetIndex = ParserUtil.parseIndex(splitArgs[0]);
+
+            if (splitArgs.length > 1 && splitArgs[1].startsWith("po/")) {
+                Index policyIndex = ParserUtil.parseIndex(splitArgs[1].substring(3));
+                return new DeleteCommand(targetIndex, policyIndex);
+            } else {
+                return new DeleteCommand(targetIndex);
+            }
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            try {
+                Name name = ParserUtil.parseName(args, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteCommand.MESSAGE_USAGE));
+                return new DeleteCommand(name);
+            } catch (ParseException pe2) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe2);
+            }
         }
     }
-
 }
