@@ -462,8 +462,17 @@ Use this command format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 
 **Examples:**
 
-- `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00` Use this command to add a one-hour appointment on January 1st, 2025
-- `addapp nric/S9876543B d/15/03/2025 start/14:30 end/16:00` Use this command to add a 90-minute appointment on March 15th, 2025
+- `addapp nric/S6283947C d/01/01/2025 start/10:00 end/11:00` Use this command to add a one-hour appointment on January 1st, 2025
+
+The example of using the `addapp` command in CareLink appears below:
+![Add Appointment command example](images/addappointmentcommand.png)
+_Figure 10: Example of using the `addapp` command to add an appointment for a person in CareLink_
+
+When the command succeeds, the appointment will be added, which can be found using the [`findapp` command](#locating-appointments-by-date-time-range-findapp)
+![Add Appointment success](images/addappointmentcommandsuccess.png)
+_Figure 11: Success mesage displayed after using the `addapp` command_
+
+- `addapp nric/S6283947C d/15/03/2025 start/14:30 end/16:00` Use this command to add a 90-minute appointment on March 15th, 2025
 
 <div class="alert alert-warning">
 <i>:warning:</i> <b>Warning:</b> CareLink is designed for independent geriatricians' use during office hours. All appointments must start and end on the same day.
@@ -503,8 +512,21 @@ Use this command format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] 
 
 **Examples:**
 
-- `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025` Changes the appointment date, but the timings remain the same.
-- `editapp nric/S1234567D d/02/01/2025 start/10:00 end/11:00 newstart/08:00  newend/09:00` Shifts the appointment timing forward, but appointment remains on the same day.
+- `editapp nric/S6283947C d/01/01/2025 start/10:00 newd/02/01/2025` Changes the appointment date, but the timings remain the same.
+
+The example of using the `editapp` command in CareLink appears below:
+![Edit Appointment example](images/editappointmentcommand.png)
+_Figure 10: Example of using the `editapp` command to edit an appointment in CareLink_
+
+When the command succeeds, the appointment will be edited, which can be found using the [`findapp` command](#locating-appointments-by-date-time-range-findapp)
+![Edit Appointment success](images/editappointmentcommandsuccess.png)
+_Figure 11: Success mesage displayed after using the `editapp` command_
+
+- `editapp nric/S6283947C d/02/01/2025 start/10:00 newstart/08:00  newend/09:00` Shifts the appointment timing forward, but appointment remains on the same day.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To edit an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
+</div>
 
 **Common errors and their meanings:**
 
@@ -532,8 +554,17 @@ Use this command format: `updatestatus nric/NRIC d/DATE start/START_TIME status/
 
 **Examples:**
 
-- `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/completed` updates the status to completed for the appointment on January 1st, 2025 at 10:00.
-- `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/pending` updates the status to pending for the appointment on January 1st, 2025 at 10:00.
+- `updatestatus nric/S6283947C d/02/01/2025 start/10:00 status/completed` updates the status to completed for the appointment on January 2nd, 2025 at 10:00.
+
+The example of using the `updatestatus` command in CareLink appears below:
+![Update Appointment Status example](images/updatestatuscommand.png)
+_Figure 10: Example of using the `updatestatus` command to update status of an appointment in CareLink_
+
+When the command succeeds, the status of the appointment will be edited, which can be confirmed using the [`findapp` command](#locating-appointments-by-date-time-range-findapp)
+![Update Appointment Status success](images/updatestatuscommandsuccess.png)
+_Figure 11: Success mesage displayed after using the `updatestatus` command_
+
+- `updatestatus nric/S6283947C d/02/01/2025 start/10:00 status/pending` updates the status to pending for the appointment on January 2nd, 2025 at 10:00.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To change the status of an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
@@ -561,8 +592,17 @@ Use this command format: `deleteapp nric/NRIC d/DATE start/START_TIME`
 
 Examples:
 
-- `deleteapp nric/S1234567D d/01/01/2025 start/10:00` deletes the appointment on January 1st, 2025 at 10:00
-- `deleteapp nric/S9876543B d/15/03/2025 start/14:30` deletes the appointment on March 15th, 2025 at 14:30
+- `deleteapp nric/S6283947C d/02/01/2025 start/10:00` deletes the appointment on January 2nd, 2025 at 10:00
+
+The example of using the `deleteapp` command in CareLink appears below:
+![Delete Appointment example](images/deleteappointmentcommand.png)
+_Figure 10: Example of using the `deleteapp` command to delete an appointment in CareLink_
+
+When the command succeeds, the appointment will be deleted, which can be found using the [`findapp` command](#locating-appointments-by-date-time-range-findapp)
+![Delete Appointment success](images/deleteappointmentcommandsuccess.png)
+_Figure 11: Success mesage displayed after using the `deleteapp` command_
+
+- `deleteapp nric/S6283947C d/15/03/2025 start/14:30` deletes the appointment on March 15th, 2025 at 14:30
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To delete an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
@@ -591,15 +631,23 @@ Use this command format: `findapp sdate/START_DATE start/START_TIME edate/END_DA
 
 ##### Examples:
 
+If you have cleared your appointments, and want to try the below command, you can first [add appointment](#adding-an-appointment-addapp) as follows:
+
+- `addapp nric/S7012345B d//01/2025 start/10:00 end/11:00`
+
+Then you can try to find appointment using the following command:
+
+- `findapp sdate/01/01/2025 start/10:00 edate/02/01/2025 end/12:00` finds and lists appointments that starts and ends within the specified date-time range.
+
+The example below of the result obtained from the `findapp` command appears below:
+![Find Appointment command example](images/findapp2success.png)
+_Figure 12: Example of using the `findapp` command to locate appointments within a specific date-time range_
+
 - `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` finds and lists appointments that starts and ends within the specified date-time range.
 
 <div markdown="span" class="alert alert-primary">:warning: **Note:**
 When using date ranges for searching appointments, ensure your end date comes after your start date. For example, searching from 01/01/2024 to 30/12/2024 is valid, but searching from 01/01/2025 to 30/10/2024 will always return 0 results since no appointments can exist in an impossible time range.
 </div>
-
-The example below of the result obtained from the `findapp` command appears below:
-![Find Appointment command example](images/findappointment.png)
-_Figure 12: Example of using the `findapp` command to locate appointments within a specific date-time range_
 
 **Possible Errors:**
 
