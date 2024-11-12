@@ -438,7 +438,7 @@ Use case ends.
 - The application should be user-friendly enough for novices while still providing advanced functionalities for experienced users.
 - All features should undergo usability testing to confirm that they meet user expectations and support effective, efficient interactions.
 - The design should prioritize clarity and simplicity to prevent user frustration or confusion.
-
+--------
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
