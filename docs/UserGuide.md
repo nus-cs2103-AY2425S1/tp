@@ -24,7 +24,7 @@ done faster than traditional GUI apps.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Teletutors.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teletutors.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teletutor.jar` command to run the application.<br>
    A GUI similar to the one below should appear in a few seconds. <br>
    <img src="images/Ui.png" alt="Ui" style="zoom: 45%"/>
 
