@@ -899,6 +899,7 @@ The `deletelistings` command deletes a `listing`.
 The `showlistings` command shows all `listings`.
 
 **Implementation**
+![ShowListingsSequenceDiagram.png](images/dg/ShowListingsSequenceDiagram.png)
 
 1. User runs the `showlistings` command.
 2. The `EzstatesParser` parses this command and creates a `ShowListingsCommand` instance.
@@ -912,6 +913,7 @@ The `showlistings` command shows all `listings`.
 The `clearlisting` clears all `listings`.
 
 **Implementation**
+![ClearListingsSequenceDiagram.png](images/dg/ClearListingsSequenceDiagram.png)
 
 1. User runs the `clearlisting` command.
 2. The `EzstatesParser` parses this command and creates a `ClearListingsCommand` instance.
