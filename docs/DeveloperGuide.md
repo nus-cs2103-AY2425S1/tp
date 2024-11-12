@@ -25,14 +25,14 @@ title: Developer Guide
 - [Planned Enhancements](#planned-enhancements)
   - [Disallow Duplicate Phone Number Across Contacts](#1-disallow-duplicate-phone-numbers-across-contacts)
   - [Consistent Case-Insensitive Tag Handling](#2-consistent-case-insensitive-tag-handling)
-  - [Modify Industry Field To Be Case Insensitive](#3-modify-industry-field-to-be-case-insensitive)
-  - [Handling Prefix Collision In All Input Fields](#4-handling-prefix-collision-in-all-input-fields)
-  - [Specify `t/` Prefix for Tag Inputs in filtertag](#5-specify-t-prefix-for-tag-inputs-in-filtertag)
-  - [More Specific Error Messages for Corrupted CSV Files in Import](#6-more-specific-error-messages-for-corrupted-csv-files-in-import)
-  - [Make Error Message for View Command More Specific](#7-make-error-message-for-view-command-more-specific)
-  - [`Deletetag all` command does not work as intended on an empty list](#8-deletetag-all-command-does-not-work-as-intended-on-an-empty-list)
-  - [Restrict phone number field to 8 numbers](#9-restrict-phone-number-field-to-8-numbers)
-  - [Improve Error Priority for Edit Command](#10-improve-error-priority-for-edit-command)
+  - [Modify Industry Field to be Case Insensitive](#3-modify-industry-field-to-be-case-insensitive)
+  - [Handling Prefix Collision in All Input Fields](#4-handling-prefix-collision-in-all-input-fields)
+  - [Specify `t/` Prefix for Tag Inputs in `filtertag`](#5-specify-t-prefix-for-tag-inputs-in-filtertag)
+  - [More Specific Error Messages for Corrupted CSV Files in `import`](#6-more-specific-error-messages-for-corrupted-csv-files-in-import)
+  - [Make Error Message for `view` Command More Specific](#7-make-error-message-for-view-command-more-specific)
+  - [Allow `deletetag all` Command to Handle an Empty List](#8-allow-deletetag-all-command-to-handle-an-empty-list)
+  - [Restrict Phone Number Field to 8 Numbers](#9-restrict-phone-number-field-to-8-numbers)
+  - [Improve Error Priority for `edit` Command](#10-improve-error-priority-for-edit-command)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
@@ -313,7 +313,7 @@ The activity diagram below shows the flow of the `import` operation.
 
 The `track` command is used to track and display contacts by predefined categories such as `student` or `company`, to effectively manage the visibility of different groups of contacts.
 
-#### Current implementation
+#### Current Implementation
 Here is a high-level view of the logic flow when the `track` command is executed:
 ![TrackActivityDiagram](images/TrackActivityDiagram.png)
 
@@ -369,17 +369,17 @@ Currently, AdmiNUS misinterprets certain content in input fields if it resembles
 
 Implement an improved parsing mechanism that can intelligently differentiate between actual command prefixes and input data that coincidentally contains these prefixes. The proposed enhancement will apply to all input fields (e.g., name, address, email, etc.), ensuring that users can enter data without encountering errors related to command prefix misinterpretation. By enhancing how prefixes are handled in user inputs, this change will allow for more flexible and user-friendly data entry, eliminating errors when prefixes appear naturally in input text.
 
-### 5. Specify `t/` Prefix for Tag Inputs in filtertag
+### 5. Specify `t/` Prefix for Tag Inputs in `filtertag`
 
 #### Current Issue: 
 
-Currently, the `filtertag` command does not require a specific prefix for tag inputs, which can cause ambiguity or lead to misinterpretation of user input. Example: `filtertag friends` Users may inadvertently enter invalid data without realizing they did not need to specify tags explicitly, which can result in errors or unintended command behavior.
+Currently, the `filtertag` command does not require a specific prefix for tag inputs, which can cause ambiguity or lead to misinterpretation of user input.Example: `filtertag friends` Users may inadvertently enter invalid data without realizing they did not need to specify tags explicitly, which can result in errors or unintended command behavior.
 
 #### Proposed Enhancement: 
 
 Introduce the t/ prefix for tag inputs in the `filtertag` command, requiring users to specify tags as t/<tag>. Example: `filtertag t/friends`. This enhancement clarifies user intent by indicating that they are filtering by a specific tag and aligns with other command syntax patterns that use prefixes for inputs. The t/ prefix will improve command consistency and reduce input errors, resulting in a more user-friendly experience.
 
-### 6. More Specific Error Messages for Corrupted CSV Files in Import
+### 6. More Specific Error Messages for Corrupted CSV Files in `import`
 
 #### Current Issue: 
 
@@ -389,7 +389,7 @@ The current error message for CSV file corruption in the `import` command is gen
 
 Enhance the error message to specify which fields are missing or incorrectly formatted. For example, `“Error: Missing compulsory field ‘name’ in row 3”` or `“Invalid category in row 5; expected ‘student’ or ‘company’”`. By providing more precise feedback on CSV formatting issues, users will be better equipped to correct their files quickly, minimizing trial and error and streamlining the import process. This enhancement will improve user experience by making error messages actionable and informative.
 
-### 7. Make Error Message for View Command More Specific
+### 7. Make Error Message for `view` Command More Specific
 
 #### Current Issue:
 
@@ -399,7 +399,7 @@ The format for `view` command is `view INDEX`. The valid input for `INDEX` is a 
 
 We plan to change the error message into `"Index must be a positive integer!"`.
 
-### 8. Allow `deletetag all` Command to Handle an Empty List 
+### 8. Allow `deletetag all` Command to Handle an Empty List
 
 #### Current Issue:
 
@@ -419,7 +419,7 @@ Currently, the phone number field accepts inputs as long as they are numbers and
 
 Perform input check for phone numbers to at least make sure it has 8 digits.
 
-### 10. Improve Error Priority for Edit Command
+### 10. Improve Error Priority for `edit` Command
 
 #### Current Issue:
 
@@ -427,7 +427,7 @@ When attempting to edit fields restricted to specific contact types (such as `ST
 
 #### Proposed Enhancement:
 
-Adjust the error-checking sequence in the edit command to prioritise checks on editability based on contact type before format validation. This means users will receive a direct message if they attempt to edit fields restricted for a contact type (e.g., "Industry field cannot be edited for a student contact"), reducing unnecessary steps and making the error feedback more user-friendly.
+Adjust the error-checking sequence in the `edit` command to prioritise checks on editability based on contact type before format validation. This means users will receive a direct message if they attempt to edit fields restricted for a contact type (e.g., "Industry field cannot be edited for a student contact"), reducing unnecessary steps and making the error feedback more user-friendly.
 
 ---
 
