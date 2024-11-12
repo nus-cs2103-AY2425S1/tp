@@ -385,7 +385,10 @@ _Team size: 5_
    E.g. For the `Find` command, the user could not only find based on a segment of names, but also based on phone, email, appointment etc.
 
 
-7. **Improve on the appointment field** Currently when adding an appointment to patient and doctor, only the starting appointment time is needed. However, in the real life, it would be better if the doctor/user could also specify the end time of the appointment to ensure better planning. Hence, we plan to allow the users to input the end time when adding appointment.
+7. **Improve on the appointment field**. Currently when adding an appointment to patient and doctor, only the starting appointment time is needed. However, in the real life, it would be better if the doctor/user could also specify the end time of the appointment to ensure better planning. Hence, we plan to allow the users to input the end time when adding appointment.
+
+
+8. **Fix the known bug with the sample dataset**. On some devices, there were occasional occurrences of a bug where while trying to add remarks to a person, it would add the remarks to all people in the sample database. This is a bug that could only be replicated at times, upon downloading the .jar file for the first time. As it only affects the sample dataset and the function works fine for user-added patients and doctors, our team has not yet fixed this issue, prioritizing other matters over this as this issue is unlikely to affect the typical and actual use of the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
