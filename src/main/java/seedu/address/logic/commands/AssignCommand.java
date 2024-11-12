@@ -35,7 +35,6 @@ public class AssignCommand extends Command {
     public static final String MESSAGE_NOT_EMPLOYEE = "Entered person is not an employee";
     public static final String MESSAGE_NOT_VALID_PERSON = "This person doesn't exist";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "This delivery has already been assigned to this person";
-    public static final String MESSAGE_EMPLOYEE_DOES_NOT_EXIST = "The entered employee does not exist";
     private final Index index;
     private final Name toAssign;
 
@@ -60,10 +59,6 @@ public class AssignCommand extends Command {
 
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             model.updateFilteredPersonList(toCheck -> toCheck.getName().equals(new Name(nameKeyword)));
-
-            if (model.getFilteredPersonList().isEmpty()) {
-                throw new CommandException(MESSAGE_EMPLOYEE_DOES_NOT_EXIST);
-            }
 
             if (model.getFilteredPersonList().isEmpty()) {
                 throw new CommandException(MESSAGE_NOT_VALID_PERSON);
