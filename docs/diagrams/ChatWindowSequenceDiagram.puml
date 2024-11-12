@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor UI_COLOR
+
+title Chat Window Sequence Diagram
+
+box UI UI_COLOR_T1
+participant ":ChatWindow" as ChatWindow UI_COLOR
+participant ":TextArea" as TextArea UI_COLOR
+participant ":TextField" as TextField UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
+
+note left of ChatWindow
+User inputs a message and hits send (or presses Enter)
+end note
+
+[-> ChatWindow : handleSendButtonAction()
+activate ChatWindow
+
+ChatWindow -> TextField : getText()
+activate TextField
+TextField --> ChatWindow : userMessage
+deactivate TextField
+
+alt userMessage is not empty
+    ChatWindow -> TextArea : appendText("You: " + userMessage)
+    activate TextArea
+    TextArea --> ChatWindow
+    deactivate TextArea
+
+    ChatWindow -> LogicManager : getResponse(userMessage)
+    activate LogicManager
+    LogicManager --> ChatWindow : response
+    deactivate LogicManager
+
+    ChatWindow -> TextArea : appendText("Assistant: " + response)
+    activate TextArea
+    TextArea --> ChatWindow
+    deactivate TextArea
+
+    opt userMessage is a goodbye message
+        ChatWindow -> ChatWindow : closeChatWindow()
+    end
+end
+
+deactivate ChatWindow
+@enduml

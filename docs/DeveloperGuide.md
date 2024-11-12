@@ -28,7 +28,7 @@ This project is adapted from the AddressBook-Level3 project created by the [SE-E
 <div class="note" markdown="span"> 
 If you would like test our EZSTATES, you can refer to our [quick start](userguide.md#quick-start) in our user guide.
 </div>
-
+<br>
 In order to develop for EZSTATES you can follow the steps we have provided below:
 
 Ensure that the project is set up locally:
@@ -156,7 +156,7 @@ When the app is first opened, the user is able to immediately see the `MainWindo
 EZSTATES displays a default message in the `ResultDisplay` which helps new users navigate
 the application.
 
-**PICTURE**
+![UILayout](images/img_11.png)
 
 For developers, there are 5 main UI components that are essential in understanding the design and implementation of
 EZSTATES, which will be elaborated in the [UI Components](#ui-components) section.
@@ -260,12 +260,16 @@ A newly added `client` is added to the bottom of the `PersonListPanel`.
 Certain fields that the user can input in EZSTATES are allowed values that can exceed the UI's ability to fully
 display them. This design choice can be seen in fields such as the `client name`.
 <br>
-IMAGE HERE LOLOLOL
+<br>
+<div style="text-align: center;">
+    <img src="images/img_16.png" alt="OverflownText" style="max-width:100%;">
+</div>
 <br>
 Our team has accounted for this as we do not wish to enforce arbitrary limits on the user. To account for this, we have 
 implemented proper UI/UX design to wrap the overflown text. Additionally, the `moreinfo` command allows users to view the 
 fully expanded details of their client.
-</div>    
+</div> 
+<br>
 
 4. ListingListPanel
 - This component mirrors the design implementation of `PersonListPanel`.
@@ -305,6 +309,7 @@ fully expanded details of their client.
 The `Listing Region` color pattern follows the same colour scheme as the Mass Transportation System (MRT) in
 Singapore. 
 </div>       
+<br>
 
 5. Status Bar Footer
 - This component is a visual element located at the bottom of the `MainWindow`
@@ -318,7 +323,7 @@ The `HelpWindow` can be accessed by pressing the `F1` keyboard shortcut or by ut
 The window is split into two areas. One area is the link to the EZSTATES user guide. The other area displays a scrollable
 view of the common commands in EZSTATES.
 
-**IMAGE**
+![HelpWindowUI](images/img_13.png)
 
 #### HelpWindow Implementation
 
@@ -339,7 +344,7 @@ in the bottom right corner of the application.
 
 Upon accessing this feature, a new window opens with 3 main components:`chatArea`, `userInput` and `Send`.
 
-**IMAGE**
+![ChatWindowUI](images/img_14.png)
 
 The `chatArea` displays the conversation between the user, identified by the header `You:` at the front of each sentence, and
 the chatbot, identified by the `Assistant: ` at the front of each sentence.
@@ -370,7 +375,6 @@ Secondly, the chatbot can be closed by prompting the bot with a `bye` message.
    - The method utilises regular expressions to identify specific keywords and actions within the 
    user's message.
    - For each command, the method provides a usage example and syntax as a response.
-   - The full logic can be found [here]().
 3. `userInput`
     - A `TextField` that sends the user prompt to the `getResponse()` method.
 4. `Send`
@@ -386,7 +390,7 @@ When opened, this window shows the same fields in the `PersonCard` but in greate
 by displaying the fields with greater length to provide a complete overview of the `client` details
 to the user.
 
-**IMAGE** 
+![MoreInfoWindowUI](images/img_15.png)
 
 Additionally, there is a `clientRemarksLabel` and `remarkInput` which provides users with another field
 to specify characteristics or information about their `client` which can be hidden from the `MainWindow` as this 
@@ -503,7 +507,6 @@ The `Model` component,
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
-
 </div>
 
 ### Storage component
@@ -555,12 +558,12 @@ and timely deployment of updates.
 ### Unit testing
 Unit testing covers non-UI related components of EZSTATES, such as `model`, `storage`, `logic` and `utility` classes.
 
-The dependencies used for Unit Testing is [JUnit 5]().
+The dependencies used for Unit Testing is [JUnit 5](https://junit.org/junit5/docs/current/user-guide/).
 
 ### Automated UI testing
 Automated UI testing helps to simulate user interactions, ensuring that the UI is working as intended.
 
-The dependencies used for automated UI testing is [JUnit 5]() and [TestFX]().
+The dependencies used for automated UI testing is [JUnit 5](https://junit.org/junit5/docs/current/user-guide/) and [TestFX](https://github.com/TestFX/TestFX).
 
 ### Automated Github testing
 
@@ -578,7 +581,7 @@ Code coverage reports are provided to developers in two methods: JaCoCoTest repo
 
 JaCoCoTest reports are generated using `build.gradle` and CodeCov reports are generated on every Github Workflow.
 
-As of v1.5.2 release, the test coverage for EZSTATES is [95%]().
+As of v1.5.2 release, the test coverage for EZSTATES is [95%](https://app.codecov.io/gh/AY2425S1-CS2103T-F11-4/tp).
 
 Usage: 
 1. JaCoCoTest reports
@@ -963,23 +966,64 @@ The `findlisting` command searches for and lists all `Listings` where the listin
 #### Chat Window
 **Overview**
 <br>
-The `editclient` edits a `client`.
-
+The `chatbot` command opens the `ChatWindow` UI component, which is a conversation bot that is able to answer
+prompts from the user.
+ 
 **Implementation**
+![ChatWindowSequenceDiagram](images/dg/ChatWindowSequenceDiagram.png)
+The Sequence diagram above depicts how the user interacts with the UI when the `chatbot` command is used
+and how `Logic` responds to the user's prompts. 
+
+1. User types a message in the `ChatWindow` and presses `Enter` or clicks the send button.
+2. The `ChatWindow` retrieves the message from the `TextField`. If the message is not empty, it appends the user’s message to the `TextArea`.
+3. The `ChatWindow` sends the message to the `LogicManager`, which processes the input and returns a response.
+4. The response is appended to the `TextArea` in the chat interface.
+5. If the message is recognized as a goodbye, the `ChatWindow` initiates `closeChatWindow()` to end the session.
+
 #### Help
 **Overview**
 <br>
-The `editclient` edits a `client`.
+The `help` command opens the `HelpWindow` UI component.
 
 **Implementation**
+1. User opens the `HelpWindow` by issuing the `help` command.
+2. `HelpWindow` is displayed, presenting a list of common commands and a link to the user guide.
+3. The user has the option to:
+    - Copy the user guide URL to the clipboard by pressing the `Copy` button.
+    - Open the user guide in their default browser by pressing the `Open in Browser` button.
+4. `HelpWindow` logs the action and waits for further interactions or can be closed by the user.
+
 #### Exit
 **Overview**
 <br>
-The `editclient` edits a `client`.
+The `exit` command exits the application. 
 
 **Implementation**
+1. User issues the `exit` command to terminate the application.
+2. The `exit` command is passed to `LogicManager`, which invokes the `ExitCommand`.
+3. `ExitCommand` creates a `CommandResult` with a confirmation message, setting an exit flag to signal application termination.
+4. The main application controller detects the exit flag and proceeds to shut down the application.
 
 ## Git Commit Script
+
+This is a locally ran script for developers to enforce the [Git Conventions](https://se-education.org/guides/conventions/git.html#git-conventions). The script stops an invalid commit message from being committed. An invalid commit message follows the above mentioned Git Conventions.
+
+- How to use:
+    1. In the project root repository, run the following terminal commands:
+       `./setup.sh`
+    2. You should see the following in your terminal:
+       `Made hooks/commit-msg executable.`\
+       `Setup completed: All hooks are now executable.`
+    4. `ls -l hooks/` to verify that the scripts are executable
+    5. You should see the following (or something similar in this format) in your terminal:
+       `-rwxr-xr-x 1 user group  1234 Oct 20 15:45 commit-msg`
+    7. `git config core.hooksPath hooks` to ensure that Git is configured correctly to run the script
+
+And you're done! This script will automatically run whenever you make a git commit!
+
+To stop using the script:
+1. Run this command in the root project directory:
+   `git config --unset core.hooksPath`
 
 This section describes some noteworthy details on how certain features are implemented.
 
