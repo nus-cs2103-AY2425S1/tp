@@ -127,6 +127,8 @@ Output after parsing:
 
 <img src="images/FilterActivityDiagram.png" width="600"/>
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/academyassist/model/Model.java)
 

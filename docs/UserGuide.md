@@ -666,6 +666,8 @@ It's like a digital filing cabinet just for AcademyAssist.
 3. **Easy to Understand**: We use a format called JSON to store your data. While you don't need
 to know the details, it's designed to be easy for both computers and humans to read if needed.
 
+<div style="page-break-after: always;"></div>
+
 ## Keeping Your Data Safe
 
 Your information is important, so here are some tips to keep it secure:
@@ -700,6 +702,8 @@ If you ever have questions about your data, just ask - we're always happy to hel
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 # FAQ
 This section provides answers to frequently asked questions about AcademyAssist. If you have any other questions or
 encounter issues while using the application, please feel free to reach out to us via our email (academyassist@gmail.com).
@@ -738,6 +742,8 @@ main window for a cleaner user interface. To view more detailed information abou
 command followed by the student's ID. This will provide you with all the additional details you need.<br><br>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 # Upcoming Features
 As part of our ongoing efforts to enhance the functionality of the student management system, we are excited to 
 introduce the following features aimed at providing greater flexibility in subject management:
@@ -762,6 +768,8 @@ users to manage student interactions effectively<br><br>
 These planned features are designed to improve the administrative capabilities of our student management system, allowing for more efficient subject management. We welcome your feedback and suggestions as we work towards implementing these enhancements!
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 # Glossary
 1. **Command**: An instruction given by a user to a computer program.
 2. **Command Line Interface (CLI)**: A text-based interface for interacting with a program.
