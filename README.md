@@ -3,7 +3,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a contact management app for volunteers called VolunTier**.<br>
+* This is **a contact management app for volunteering tutors called VolunTier**.<br>
   Example usages:
   * Add new tutors and their relevant details
   * Add new tutees and their relevant details
