@@ -19,9 +19,12 @@ title: Developer Guide
   - [Company Command](#2-company-command)
   - [View Command](#3-view-command)
   - [Find Command](#4-find-command)
+  - [Track Command](#7-track-command)
 - [Planned Enhancements](#planned-enhancements)
   - [Disallow Duplicate Phone Number Across Contacts](#1-disallow-duplicate-phone-numbers-across-contacts)
   - [Consistent Case-Insensitive Tag Handling](#2-consistent-case-insensitive-tag-handling)
+  - [Modify Industry Field To Be Case Insensitive](#3-modify-industry-field-to-be-case-insensitive)
+  - [Handling Prefix Collision In All Input Fields](#4-handling-prefix-collision-in-all-input-fields)
   - [Make Error Message for View Command More Specific](#7-make-error-message-for-view-command-more-specific)
   - [`Deletetag all` command does not work as intended on an empty list](#8-deletetag-all-command-does-not-work-as-intended-on-an-empty-list)
   - [Restrict phone number field to 8 numbers](#9-restrict-phone-number-field-to-8-numbers)
@@ -126,7 +129,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `HelpWindow` and `ContactDisplay`. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T14-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -137,7 +140,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -169,7 +172,7 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -188,7 +191,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -278,7 +281,7 @@ The activity diagram below shows the flow of the `find` operation.
 <img src="images/FindActivityDiagram.png" width="750" />
 
 
-### 5. Track Command
+### 7. Track Command
 
 The `track` command is used to track and display contacts by predefined categories such as `student` or `company`, to effectively manage the visibility of different groups of contacts.
 
@@ -420,22 +423,25 @@ The activity diagram is as follows:
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                      | I want to …​                                                                       | So that I can…​                                                                    |
-| -------- | -------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `* * *`  | new user                                     | see usage instructions                                                             | refer to instructions when I forget how to use the App                             |
+|----------|----------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| `* * *`  | new user                                     | see usage instructions                                                             | refer to instructions when I forget how to use the app                             |
 | `* * *`  | user                                         | add new contacts                                                                   | manage contact information quickly                                                 |
 | `* * *`  | user                                         | view all contacts                                                                  | see all my contacts saved in one screen                                            |
 | `* * *`  | user                                         | delete a contact                                                                   | remove entries that I no longer need                                               |
+| `* * *`  | user                                         | delete all contacts                                                                | remove all entries no longer needed, such as clearing old data                     |
 | `* *`    | user                                         | edit existing contacts                                                             | amend mistakes/update new info on my contacts                                      |
 | `* *`    | potential user                               | see the app populated with sample data                                             | easily try and see how the app will look like when it is in use                    |
 | `* *`    | new user ready to use the app                | remove all current data                                                            | remove all sample data I used when exploring the app                               |
 | `* *`    | admin user                                   | track contacts by category (e.g., students, companies)                             | quickly retrieve specific groups of contacts (e.g., all students or all companies) |
 | `* *`    | admin user                                   | filter contacts by tag (e.g., "sponsor", "member")                                 | find contacts associated with specific events or groups                            |
-| `* *`    | familiar user of the app                     | save the contacts under a favourites tab                                           | easily access the contacts that I frequently use                                   |
-| `* *`    | familiar user of the app                     | tag certain contacts                                                               | remember where I know the contacts from                                            |
+| `* *`    | admin user                                   | tag a certain contact                                                              | remember which group the contact is from                                           |
+| `* *`    | admin user                                   | tag all contacts                                                                   | efficiently add a relevant tag to all contacts, such as for mass updates           |
+| `* *`    | admin user                                   | delete the tag of a certain contact                                                | remove outdated or incorrect tags from a specific contact to maintain accuracy     |
+| `* *`    | admin user                                   | delete tag from all contacts                                                       | quickly remove a tag applied across multiple contacts to ensure uniform updates    |
 | `* *`    | new user                                     | learn how to use the app quickly                                                   | use the app frequently with other club admins                                      |
 | `* *`    | impatient user                               | use shortcut commands instead of the full name of the commands                     | make minimal spelling mistakes when I am entering the commands                     |
 | `* *`    | familiar user of the app                     | search contacts by name                                                            | easily find the contact person instead of scrolling                                |
-| `* *`    | admin user with frequent changes in schedule | mark contacts as "high priority" or "low priority"                                 | focus on the most relevant people when my schedule is tight                        |
+| `* *`    | admin user with frequent changes in schedule | tag contacts as "high priority" or "low priority"                                  | focus on the most relevant people when my schedule is tight                        |
 | `*`      | new user who is unfamiliar with English      | have suggestions on commands to enter                                              | enter the right commands if I am unsure on how to spell certain words              |
 | `*`      | familiar user of the app                     | mass add a large list of contacts                                                  | avoid from entering repetitive commands                                            |
 | `*`      | impatient user                               | experience reasonable response time while up to 1000 concurrent users are using it | use the app even when the traffic is at the maximum expected level                 |
