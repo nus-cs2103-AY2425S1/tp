@@ -369,7 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### UC03 - Add a module to a student**
+#### UC03 - Add a module to a student
 
 **MSS**
 
