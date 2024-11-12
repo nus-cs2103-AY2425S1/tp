@@ -794,8 +794,13 @@ Execute the following:
 
 ## **Appendix: Planned Enhancements**
 
+### Select Command
+* We plan on updating select command such that it can select a range of people. For example, `select 5-10` will select the 5th to 10th persons.
+
+
 ### Sort Command
 * In the future, we plan on implementing sorting by multiple attributes rather than just one.
+
 
 ### Find Command
 * We plan on adding functionality for partial matches for phone number, address, and email, following the same format as the current partial name search.
