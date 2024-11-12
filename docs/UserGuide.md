@@ -281,6 +281,7 @@ Examples:
 <br><br/>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+<br/><br/>
 <div style="page-break-after: always;"></div>
 
 #### Filtering contacts by tag: `filter`

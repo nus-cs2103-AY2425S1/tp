@@ -9,7 +9,7 @@
 <!-- * Table of Contents -->
 <page-nav-print />
 
-<br/><br/>
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
@@ -17,11 +17,13 @@ This app is based on AddressBook-Level3, courtesy of [SE-EDU](https://se-educati
 
 Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5), [Jackson](https://github.com/FasterXML/jackson)
 
-<br/><br/>
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -69,6 +71,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<br></br>
 <div style="page-break-after: always;"></div>
 
 ### UI component
@@ -88,6 +91,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<br></br>
 <div style="page-break-after: always;"></div>
 
 ### Logic component
@@ -123,6 +127,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<br></br>
 <div style="page-break-after: always;"></div>
 
 ### Model component
@@ -147,6 +152,7 @@ The `Model` component,
 
 </box>
 
+<br></br>
 <div style="page-break-after: always;"></div>
 
 ### Storage component
@@ -160,10 +166,13 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+<br></br>
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+<br></br>
 <div style="page-break-after: always;"></div>
 
 ## **Implementation**
@@ -261,6 +270,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+<br></br>
 <div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -271,6 +281,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
+<br></br>
 
 ## **Appendix: Requirements**
 
@@ -291,6 +302,8 @@ Wedding planners who:
 * **Weddings**: Allows users to categorize contacts around wedding events, allowing for easy tracking of who is involved in which wedding
 
 With its fast and efficient Command Line Interface (CLI), PlanPerfect enables users to manage their contacts significantly faster than traditional mouse/GUI-driven apps, providing greater flexibility and speed for busy wedding planners.
+
+<br></br>
 
 ### User stories
 
@@ -682,6 +695,7 @@ Use case ends.
 
 
 <br/><br/>
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -696,6 +710,7 @@ Use case ends.
 9. The **Graphical User Interface (GUI)** (if used) should work seamlessly for screens with standard resolutions of **1920x1080** and higher, and support scaling at **100%** and **125%**, ensuring that users on both laptops and desktop displays have an optimal experience.
 10. The system should be designed to run efficiently on **low-resource systems**, ensuring smooth performance even on devices with lower computational power or limited memory.
 
+<br></br>
 
 ### Glossary
 
@@ -706,6 +721,7 @@ Use case ends.
 * **CLI**: Command Line Interface
 * **GUI**: Graphic User Interface
 
+<br></br>
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
@@ -830,6 +846,7 @@ management and changed the UI to increase its complexity and better reflect an i
   wedding management.
 - Achieving a passing code coverage of 76% reflecting thorough testing of core features.
 
+<br></br>
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
