@@ -434,6 +434,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+Not all commands use cases are included as commands, such as `clear` and `exit` are self-explanatory.
+
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use Case: Add a New Contact
@@ -455,6 +457,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Emergency Contact Name
     - Emergency Contact Phone Number
     - Emergency Contact Relationship to Patient
+    - Tag(s) [Optional]
 3. User enters the required details.
 4. MedConnect validates the provided information.
 5. MedConnect successfully adds the new contact to the address book.
@@ -544,11 +547,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Main Success Scenario (MSS):**
 1. User requests to list all contacts.
 2. MedConnect retrieves and shows a list of all contacts.
-3. User requests to delete a specific contact by index.
+3. User requests to delete a specific contact by its index.
 4. MedConnect removes the contact from the database.
 
    **Use case ends.**
-
 
 **Extensions:**
 
@@ -611,7 +613,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use Case: Find Contacts
+#### Use Case: Delete an Emergency Contact
+
+**System:** MedConnect
+
+**Actor:** Healthcare Administrator
+
+
+**Main Success Scenario (MSS):**
+1. User requests to list all contacts.
+2. MedConnect retrieves and shows a list of all contacts.
+3. User requests to delete a specific emergency contact of a patient by its index.
+4. MedConnect removes the emergency contact from the database.
+
+   **Use case ends.**
+
+
+**Extensions:**
+
+**2a.** The contact list is empty.
+
+- **Use case ends.**
+
+
+**3a.** The given index is invalid (e.g., out of range).
+- **3a1.** MedConnect informs the user of the invalid index.
+
+  **Use case resumes from step 2.**
+
+**3b.** The specified patient only has 1 emergency contact.
+- **3b1.** MedConnect informs the user that they cannot delete a patient's only emergency contact.
+
+  **Use case ends.**
+
+---
+
+#### Use Case: Find Contacts By Patient Name
 
 **System:** MedConnect
 
@@ -639,6 +676,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+#### Use Case: Find Contacts By Doctor Name
+
+**System:** MedConnect
+
+**Actor:** Healthcare Administrator
+
+**Main Success Scenario (MSS):**
+1. User requests to find a patient by their assigned doctor's name.
+2. MedConnect prompts the user to provide a name to search for.
+3. User provides a name.
+4. MedConnect returns a list of patients whose assigned doctor matches the provided name.
+
+   **Use case ends.**
+
+**Extensions:**
+
+**3a.** User provides a blank name.
+- **3a1.** MedConnect notifies the user to provide a name.
+
+  **Use case resumes from step 3.**
+
+**4a.** There are no patients whose doctor matches the provided name.
+- **4a1.** MedConnect returns a list of 0 patients.
+
+  **Use case ends.**
+
+---
+
 <div style="page-break-after: always;"></div>
 
 #### Use Case: Archive Contacts
@@ -660,6 +725,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **1a2.** User corrects the invalid description and resubmits.
 
   **Use case resumes from step 2.**
+
+---
+
+#### Use Case: List Archive Files
+
+**System:** MedConnect
+
+**Actor:** Healthcare Administrator
+
+**Main Success Scenario (MSS):**
+1. User requests to list all archived data files in the archive folder.
+2. MedConnect returns a list of all the archived data files in the archive folder.
+
+   **Use case ends.**
 
 ---
 
@@ -728,6 +807,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   **Use case resumes from step 4.**
 
 ---
+
+#### Use Case: Undo Last Command
+
+**System:** MedConnect
+
+**Actor:** Healthcare Administrator
+
+**Main Success Scenario (MSS):**
+1. User performs an command that modifies the address book (e.g., adds or deletes a contact).
+2. User requests to undo the last command.
+3. MedConnect reverts to the state before the last command.
+
+    **Use case ends.**
+
+**Extensions:**
+
+**2a.** There is no previous command to undo.
+- **2a1.** MedConnect informs the user that there are no actions to undo.
+
+  **Use case ends.**
+---
+
+#### Use Case: Redo Last Undone Command
+
+**System: MedConnect**
+
+**Actor: Healthcare Administrator**
+
+**Main Success Scenario (MSS):**
+1. User performs an undo command.
+2. User requests to redo the last undone action.
+3. MedConnect restores the previously undone action.
+
+  **Use case ends.**
+
+**Extensions:**
+
+**2a.** There is no undone command to redo.
+- **2a1.** MedConnect informs the user that there are no actions to redo.
+
+  **Use case ends.**
+
+**2b.** User makes a new change after an undo command.
+- **2b1.** MedConnect restores the undo command that the user most recently executed.
+
+  **Use case ends.**
 
 <div style="page-break-after: always;"></div>
 
