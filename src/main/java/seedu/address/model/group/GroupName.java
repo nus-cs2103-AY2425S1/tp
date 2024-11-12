@@ -57,7 +57,7 @@ public class GroupName {
     /**
      * Returns reformatted group name string, based on regex.
      */
-    private static String formatGroupName(String groupName) {
+    public static String formatGroupName(String groupName) {
         // this method is only called after validity of groupName is checked.
         assert isValidName(groupName) : "Validity of group name should have been checked already.";
         Pattern namePattern = Pattern.compile(VALIDATION_REGEX);

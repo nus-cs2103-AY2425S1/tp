@@ -14,18 +14,18 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu")
+[-> LogicManager : execute(command)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu")
+LogicManager -> AddressBookParser : parseCommand(command)
 activate AddressBookParser
 
 create AddStudentCommandParser
-AddressBookParser -> AddStudentCommandParser : parse("sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu")
+AddressBookParser -> AddStudentCommandParser : parse(args)
 activate AddStudentCommandParser
 
 create AddStudentCommand
-AddStudentCommandParser -> AddStudentCommand : parse("sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu")
+AddStudentCommandParser -> AddStudentCommand : parse(args)
 activate AddStudentCommand
 
 AddStudentCommand --> AddStudentCommandParser : a
