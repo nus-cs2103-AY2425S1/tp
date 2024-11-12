@@ -185,7 +185,7 @@ Additionally, the inclusion of a status attribute for clients enhances customer 
 
 The `Tier` and `Status` fields are implemented as classes containing `enum` values, which restrict the possible options for these fields and improve data consistency.
 
-<img src="images/TierStatusAttributes.png" width="510">
+<img src="images/TierStatusAttributes.png" width="600">
 
 Using `enum` values for `Tier` aligns with a real-world banking scenario where a predefined set of credit card tiers is available. This structure also accommodates clients who may have applied but been declined for a credit card, providing agents with an at-a-glance view of a client’s status and relevant product options.
 
