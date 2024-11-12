@@ -212,7 +212,7 @@ The command format is as follows:<br>
 * **Storage (ThemePreference)**
     * `ThemePreference` loads the saved theme from `themePreference.json`, or defaults to 'LIGHT' if none is found.
 
-<puml src="diagrams/SwitchThemeSequenceDiagram.puml" width="550" />
+<puml src="diagrams/SwitchThemeSequenceDiagram.puml" width="1100" />
 
 #### Design Considerations
 
@@ -242,8 +242,8 @@ The command format is as follows:<br>
 
 **Target user profile**:
 
-* university student who
-  * meets people from many different places (e.g. different classes, CCAs, student accomodation, etc.)
+* National University of Singapore (NUS) student who
+  * meets people from many different places (e.g. different classes, CCAs, student accommodation, etc.)
   * have a need to manage a significant number of contacts
   * prefer desktop apps over other types
   * can type fast
