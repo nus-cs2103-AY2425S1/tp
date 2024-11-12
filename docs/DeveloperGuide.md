@@ -275,7 +275,10 @@ Two `Participations` are considered to be duplicates if the `Student` and `Tutor
 ]
 ```
 
-There is no enforcement of duplicate `Attendance` in storage.
+**Condition:** There may be no duplicate `Attendances`.
+1. Two `Attendances` are considered to be duplicates if the `attendanceDate` occurs in the same week of week-based-year.
+
+2. EduVault selects the first `Attendance` of duplicate `Attendance` entries as defined above to load from storage.
 
 ##### Uniqueness of objects
 For the purposes of storage into JSON format, EduVault defines two objects as distinct based on these factors:
