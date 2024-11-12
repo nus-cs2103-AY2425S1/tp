@@ -15,6 +15,12 @@
 ## **Acknowledgements**
 
 As Edulog is a fork of [_AddressBook_](https://github.com/nus-cs2103-AY2425S1/tp), this developer guide builds upon the original.
+Our friend Lenzork, for his unsolicited contribution to our GitHub repository by providing a comprehensive list of gifts. 
+
+--------------------------------------------------------------------------------------------------------------------
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 ## **Setting up, getting started**
 
