@@ -494,13 +494,17 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 1`<br>
       Expected: System displays a confirmation message asking if the user is sure. On confirmation, the person is deleted. 
 
+   1. Test case: `delete i/S1234567D`<br>
+      Expected: System displays a confirmation message asking if the user is sure upon checking if the person is in the system. On confirmation, the person is deleted.
+   
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+   
+   2. Other incorrect delete commands to try: `delete i/S1234567A` (NRIC is invalid due to invalid checkstyle)
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 ### Saving data
 
