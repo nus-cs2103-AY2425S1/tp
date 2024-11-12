@@ -158,103 +158,53 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Seed feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The seed feature seeds dummy data into SocialBook. In the event that the user clears all the contacts in SocialBook, the user can execute the seed command to seed sample data into the SocialBook and continue trying out its features.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The seed command works just like any other `Command` object and how a `Command` object communicates with the `Model` is explained in the [Logic component](#logic-component).
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The seed command adds a `Person` object, in `SampleDataUtil` to the `Model`, if the `Person` object is not already inside SocialBook.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+The following activity diagram summarises what happens when a user executes the seed command:
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+<puml src="diagrams/SeedActivityDiagram.puml" alt="SeedActivityDiagram" />
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+### View feature
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+#### Implementation
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+The view feature toggles the card status of a contact in SocialBook to either show all of their information or an abridged version of it.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+The view command works just like any other `Command` object and how a `Command` object communicates with the `Model` is explained in the [Logic component](#logic-component).
 
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+The activity diagram below shows how a view command toggles the card status of a contact:
 
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+<puml src="diagrams/ViewActivityDiagram.puml" alt="ViewActivityDiagram" />
 
 
-<box type="info" seamless>
+### \[Proposed\] Visit History
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial SocialBook state, then there are no previous SocialBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+The visit history feature allows users to save a record of visits to contacts with optional remarks. This allows social workers to better keep track of their interactions with beneficiaries. 
 
-</box>
+The Model component would be altered such that each person would now store a visit history object:
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+<puml src="diagrams/VisitHistory.puml" />
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+It is optional to include a remark when adding a visit to the visit history. Given this implementation the person's date of last visit can be obtained from visit history.
 
-<box type="info" seamless>
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+### \[Proposed\] Emergency Contact Expansion
 
-</box>
+The emergency contact was designed to only be a phone number in the current implementation. It is intended to extend this so that the emergency contact includes a name and phone number.
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+A current contact can be assigned as another person's emergency contact. It is also possible to create a person who is only an emergency contact. To generalize we create a class called contactable person which has all the necessary methods and values for an emergency contact:
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+<puml src="diagrams/EmergencyContact.puml" />
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone SocialBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+A person will then store a ContactablePerson as their emergency contact.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -291,30 +241,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                   | I want to …​                                                               | So that I can…​                                                                                        |
 |----------|-------------------------------------------|----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| `* * *`  | social worker                             | delete a contact                                                           | remove the contact when I no longer serve them so that the contact list do not get too long            |
-| `* * *`  | social worker/new user                    | add contact with phone number                                              | remember the person i serve                                                                            |
+| `* * *`  | social worker                             | delete a contact                                                           | remove the contact when I no longer serve them so that the contact list does not get too long          |
+| `* * *`  | social worker/new user                    | add contact with phone number                                              | remember the person I serve                                                                            |
 | `* * *`  | social worker/new user                    | add address                                                                | easily look up without needed to look up database/files                                                |
-| `* * *`  | social worker                             | view my list of contacts                                                   | so that i can see the beneficiaries i serve                                                            |
+| `* * *`  | social worker                             | view my list of contacts                                                   | see the beneficiaries I serve                                                                          |
 | `* *`    | overwhelmed with many households          | take note of how long it has been since I visited each house               | ensure that no house gets forgotten in my scheduling                                                   |
 | `* *`    | new user learning the interface           | check out basic commands that are frequently used with a help command      | learn the basic usage of the program more quickly                                                      |
 | `* *`    | user with multiple contacts per household | tag multiple users to be from the same household                           | simplify the process of contacting other household members                                             |
-| `* *`    | social worker                             | prioritize contacts                                                        | allow myself to have quick access to high priority household                                           |
+| `* *`    | social worker                             | prioritize contacts                                                        | allow myself to be able to prioritise household with special needs                                     |
 | `* *`    | social worker                             | add alternative contact method                                             | add a contact for elderly who do not have a phone                                                      |
 | `* *`    | social worker/expert user                 | look for emergency contact quickly                                         | inform next-of-kin when something happen                                                               |
 | `* *`    | social worker/expert user                 | add family contact                                                         | know how many people in the household                                                                  |
-| `* *`    | social worker/expert user                 | add notes                                                                  | remember if i need to take precaution before visiting the person/family or preparations i need to make |
-| `* *`    | social worker/expert user                 | sort contacts by lexicographical order                                     | find contact quickly if i remember the name                                                            |
+| `* *`    | social worker/expert user                 | add notes                                                                  | remember if I need to take precaution before visiting the person/family or preparations i need to make |
+| `* *`    | social worker/expert user                 | sort contacts by lexicographical order                                     | find contact quickly if I remember the name                                                            |
 | `* *`    | social worker/expert user                 | search through contacts using keywords                                     | find contact quickly based on key words within the contact information                                 |
-| `* *`    | social worker/expert user                 | add alternative phone number                                               | incase beneficiary cannot be reached                                                                   |
+| `* *`    | social worker/expert user                 | add alternative phone number                                               | have another way of reaching the beneficiary                                                                   |
 | `* *`    | social worker/new user                    | edit contact                                                               | edit the contact without the need to delete and create a new one                                       |
 | `* *`    | forgetful individual                      | add tags which explain what service the person needs                       | remember and be able to meet the needs of beneficiaries                                                |
-| `* *`    | holder of sensitive information           | lock the SocialBook behind a password                                     | avoid having unsolicited sharing of personal information                                               |
+| `* *`    | holder of sensitive information           | lock the SocialBook behind a password                                      | avoid having unsolicited sharing of personal information                                               |
 | `* *`    | max/expert user                           | add the medicinal information of beneficiaries                             | to know when to follow up on critical medicines                                                        |
-| `* *` | new user | see a sample of the product features on display | so that I know how a feature can be used to maximise the value |
-| `*`      | has rotating beneficiaries                | remove several contacts at once, when beneficiaries no longer require care | so that I can make space for new benficiaries and not keep track of old ones                           |
+| `* *`    | new user                                  | see a sample of the product features on display                            | so that I know how a feature can be used to maximise the value                                         |
+| `*`      | has rotating beneficiaries                | remove several contacts at once, when beneficiaries no longer require care | so that I can make space for new beneficiaries and not keep track of old ones                          |
 | `*`      | max/expert user                           | know the households I need to visit on a certain day                       | so that I can schedule my day and not forget to visit any households                                   |
 | `*`      | user short on time                        | visit households that are geographically close in the same day/visit       | minimise the travelling time for myself                                                                |
-| `*`      | user switching devices                    | transfer the SocialBook contacts from one device to another              | avoid having to manually re-enter all the current contacts                                             |
+| `*`      | user switching devices                    | transfer the SocialBook contacts from one device to another                | avoid having to manually re-enter all the current contacts                                             |
 | `*`      | max/expert user                           | export all contacts to a txt file/excel file                               | so that I have a copy of all beneficiaries, past and present, in a larger database                     |
 | `*`      | max/expert user                           | record social media credentials of a contact, if they have any             | so that I can get to know their lives better and establish a closer bond                               |
 | `*`      | max/expert user                           | send reminder to my email a day before my visit                            | so that I will not forget to visit a household                                                         |
@@ -326,14 +276,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | efficient person                          | create visit paths based on proximity of beneficiaries                     | to be able to serve the most beneficiaries a day                                                       |
 | `*`      | social person                             | add notes of on conversations with beneficiaries                           | develop stronger relationships by building rapport                                                     |
 
-
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `SocialBook` and the **Actor** is the `user`, unless specified otherwise)
 
-##### **Use case: View all contacts**
+##### **Use case: UC01 - View all contacts**
 
 **MSS**
 
@@ -348,7 +295,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-##### **Use case: Add a contact**
+##### **Use case: UC02 - Add a contact**
 
 **MSS**
 
@@ -377,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-##### **Use case: View all information about a contact**
+##### **Use case: UC03 - View all information about a contact**
 
 **MSS**
 
@@ -406,7 +353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-##### **Use case: Delete a contact**
+##### **Use case: UC04 - Delete a contact**
 
 **MSS**
 
@@ -429,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-##### **Use case: Edit a contact**
+##### **Use case: UC05 - Edit a contact**
 
 **MSS**
 
@@ -460,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-##### **Use case: Find a contact**
+##### **Use case: UC06 - Find a contact**
 
 **MSS**
 
@@ -485,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-##### **Use case: Add remarks to a contact**
+##### **Use case: UC07 - Add remarks to a contact**
 
 **MSS**
 
@@ -503,8 +450,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. SocialBook shows an error message.
 
       Use case resumes at step 2.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -533,8 +478,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Singapore Standard Time**: Singapore time, which is 8 hours ahead of Coordinated Universal Time (UTC + 08:00)
 * **Hard disk**: data storage device in laptops and computers.
 * **.JSON file**: JavaScript Object Notation, stores and transports data using a human-readable text format.
-* **SocialBook**: SocialBook is an address book hence SocialBook and AddressBook are interchangable. SocialBook is used to reference the product while AddressBook refers to the Class object in source code.
-* **Social worker**: refers to full-time employees of the [Ministry of Social and Family Developement (MSF) or its subsidaries](https://www.msf.gov.sg)
+* **SocialBook**: SocialBook is an address book hence SocialBook and AddressBook are interchangeable. SocialBook is used to reference the product while AddressBook refers to the Class object in source code.
+* **Social worker**: refers to full-time employees of the [Ministry of Social and Family Development (MSF) or its subsidiaries](https://www.msf.gov.sg)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -564,8 +509,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person or persons
 
 1. Deleting a person while all persons are being shown
@@ -573,7 +516,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -586,7 +529,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Find people with names matching a particular keyword using the `find` command.
 
     1. Test case: `delete x`<br> (where x is less than or equal to the number of found persons)
-       Expected: Contact x is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: Contact x is deleted from the list. Details of the deleted contact shown in the status message.
 
     1. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -599,32 +542,70 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1 2`<br>
-       Expected: First and second contact are deleted from the list. Names of the deleted contacts are shown in the status message. Timestamp in the status bar is updated.
+       Expected: First and second contact are deleted from the list. Names of the deleted contacts are shown in the status message.
 
     1. Test case: `delete x y`<br> (where x,y are greater than the number of listed persons)
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Test case: `delete 0 1`<br>
-       Expected: First contact is deleted from the list. Name of the deleted contact and invalidity of the index 0 is shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Name of the deleted contact and invalidity of the index 0 is shown in the status message.
 
 ### Saving data
 
 1. Dealing with missing files
 
-   1. Delete `config.json` and re-launch the app. Expected: New `config.json` created. Existing data is not affected.
+   1. Delete `config.json` and re-launch the app. 
+      Expected: New `config.json` created. Existing data is not affected.
 
-   2. Delete `preferences.json` and re-launch the app. Expected: New `preferences.json` created. Existing data is not affected.
+   2. Delete `preferences.json` and re-launch the app. 
+      Expected: New `preferences.json` created. Existing data is not affected.
 
-   3. Edit the line `"addressBookFilePath" : "data/socialbook.json"` to `"addressBookFilePath" : "data/data.json"` and re-launch the app. Expected: App starts on clean slate (i.e. with sample data only).
+   3. Edit the line `"addressBookFilePath" : "data/socialbook.json"` to `"addressBookFilePath" : "data/data.json"` and re-launch the app. 
+      Expected: App starts on clean slate (i.e. with sample data only).
 
-   4. Delete `data/` or `data/socialbook.json`. Expected:  New `data/socialbook.json` created. App starts on clean slate (i.e. with sample data only).
+   4. Delete `data/` or `data/socialbook.json`. 
+      Expected:  New `data/socialbook.json` created. App starts on clean slate (i.e. with sample data only).
 
 2. Dealing with corrupted data files
 
-   1. Add `"p"` to a `"phone"` field in data file. Expected: The person with the `"p"` in `"phone"` field is lost. The rest of the contacts still exist in the contact list.
+   1. Add `"p"` to a `"phone"` field in data file. 
+      Expected: The person with the `"p"` in `"phone"` field is lost. The rest of the contacts still exist in the contact list.
 
-   2. Add a new field `"newField" : "newField"` to a person. Expected: The person with the new field is lost. The rest of the contacts still exist in the contact list.
+   2. Add a new field `"newField" : "newField"` to a person. 
+      Expected: The person with the new field is lost. The rest of the contacts still exist in the contact list.
 
-   3. Remove `"remark"` field from a person. Expected: The person with the missing `"remark"` field is lost. The rest of the contacts still exist in the contact list.
+   3. Remove `"remark"` field from a person. 
+      Expected: The person with the missing `"remark"` field is lost. The rest of the contacts still exist in the contact list.
 
-   4. Add a `","` to the `"remark"` field of a person. Expected: The file data format is invalid. All data is lost. The app starts on clean slate.
+   4. Add a `","` to the `"remark"` field of a person. 
+      Expected: The file data format is invalid. All data is lost. The app starts on clean slate.
+
+### Sorting of person list
+
+1. Sorting entries while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `sort n/asc`<br> 
+       Expected: Persons are sorted in ascending order according to ASCII. A message saying the list has been sorted by name in ascending order is displayed. 
+
+    1. Test case: `sort d/desc`<br>
+       Expected: Persons are sorted in descending order according to date of last visit. Where a person doesn't have a date of last visit they are at the end of the list. A message saying the list has been sorted by date of last visit in descending order is displayed.
+
+2. Editing a parameter being sorted while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Sort using `sort n/asc`
+
+    1. Test case: `edit 1 n/"name starting with a different letter"`
+       Expected: A message is displayed showing the information of the updated person. The person moves in the display list according to the position of their new name (given ascending name order).
+
+    1. Test case: `add n/hunter p/61234578`
+       Expected: A message is displayed showing the information of the added person. The person is added to the list according to the position of their name (given ascending name order).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. Make `list` command with miscellaneous parameters error message more helpful. Currently, typing `list` with miscellaneous parameters, ex. `list 123`, will result in a message that states "Please ensure your command is valid!". To improve specificity this will be changed to ask user to remove miscellaneous parameters.
+2. Prevent tags from allowing underscores. When searching for tags with underscores in the find command, the underscores are interpreted as an `or`. This means that searching for the tag "low_income" will bring up all tags containing "low" and "income" instead of just "low_income".
+3. Remove `remark` command while keeping remarks. Currently, remarks can be added via the edit command or the remark command but not the add command. Instead of having a dedicated remark command we will allow users to use add command to add remarks while adding a contact and edit command to add or edit the remark of a contact. This change solves an associated issue whereby the remark command currently undoes the detailed view on the contact. 

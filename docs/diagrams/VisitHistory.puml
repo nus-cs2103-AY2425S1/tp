@@ -1,0 +1,16 @@
+@startuml
+
+'https://plantuml.com/class-diagram
+
+class Person
+class VisitHistory
+class Visit
+
+Person *-right-> "1" VisitHistory
+VisitHistory *-right-> "*" Visit
+
+Visit : date: LocalDate
+Visit : remark: Optional<String>
+
+VisitHistory : getDateOfLastVisit()
+@enduml
