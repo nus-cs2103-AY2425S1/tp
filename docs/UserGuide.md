@@ -176,13 +176,13 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOM_NUMBER] [a/ADDRESS] [en
 > * `NAME` and `EMERGENCY_NAME` consist of alphabets, numbers, dashes (-), commas (-), and apostrophes (').
 > * `PHONE` and `EMERGENCY_PHONE` consist of an optional country code indicated with a plus (+), an optional area code and a compulsory number.
 > * `EMAIL` should be of the format `local-part@domain`.
-> * `ROOM_NUMBER` should be of the format `##-####`, where # corresponds to the digits 0, 1, 2, ... 9. 
+> * `ROOM_NUMBER` should be of the format `##-####`, where # corresponds to the digits 0, 1, 2, ... 9.
 > * `GRADUATION_YEAR` should be of the format `2YYY`.
 > * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
 
 
 > <span style="color:Tomato"> WARNING! </span> <br>
-> 
+>
 > * If there are duplicate names, i.e if a person in the DorManagerPro address book already has the specified `NAME`, an error will be thrown. This is because it is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
 > * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE`, an error will be thrown. This is because no two people have the same phone number.
 > * If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
@@ -260,7 +260,7 @@ Format: `clean`
 > <span style="color:Gray"> NOTE! </span> <br>
 >
 > * If you execute `clean` after executing a `find` command, the search results of the `find` command remains in place. Use `list` to see the full effects of the `clean` command.
-> * This is such that the results of your query with `find` are not lost after applying `clean`. 
+> * This is such that the results of your query with `find` are not lost after applying `clean`.
 
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 >
@@ -269,7 +269,7 @@ Format: `clean`
 Example:
 * `clean`, executed in 2024.
 
-The following screenshot shows the result of `clean`, executed in 2024, which deletes all students who graduate in 2023 or earlier.  
+The following screenshot shows the result of `clean`, executed in 2024, which deletes all students who graduate in 2023 or earlier.
 <img src="images/CleanCommandExampleUsage.png" alt="CleanCommand screenshot" height=auto width="850"/>
 
 
@@ -287,7 +287,7 @@ Format: `undo`
 
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 >
-> `undo` will display a result message that corresponds its effect to help you keep track of what you are undoing! 
+> `undo` will display a result message that corresponds its effect to help you keep track of what you are undoing!
 
 ### Exiting the program : `exit`
 
@@ -306,7 +306,7 @@ The `export` command will directly and immediately save the contents of the data
 Format: `export`
 
 > <span style="color:Gray"> NOTE! </span> <br>
-> This exports the data of DorManagerPro to a file `NOW.json` into the data folder of the home folder. 
+> This exports the data of DorManagerPro to a file `NOW.json` into the data folder of the home folder.
 > `NOW` is the time at the point of `export`, in the format MM-dd-yyyy-HHmmssPM.
 
 Example:
