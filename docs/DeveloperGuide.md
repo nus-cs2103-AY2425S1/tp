@@ -219,9 +219,12 @@ Step 2. The `edit` command updates the details of the contact with index 1 to ha
 The following sequence diagram shows how an `edit` command goes through the `Logic` component:
 
 <puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
+
 <box type="info" seamless>
 
 **Note:** There are no destroy markers (X) for `EditCommand` as it is preserved in the `undo` command stack.
+ 
+</box>
 
 The following activity diagram summarizes what happens when a user executes a `edit` command:
 
@@ -261,9 +264,11 @@ The `clean` command extends `Command` and implements `Undoable`. The `clean` com
 Given below is an example usage scenario and how the `clean` command behaves at each step.
 
 Step 1. The user executes `clean` in 2024.
+
 <box type="info" seamless>
 
  **Note:** The `clean` command checks if there are contacts with `GradYear` 2023 or earlier. If there are none, it will return an error message to the user.
+
 </box>
 
 Step 2. The `clean` command deletes all contacts with `GradYear` 2023 or earlier.
@@ -324,15 +329,30 @@ results based on the specified criteria.
 
 ### Implementation
 
-The `export` command extends `Command`. The `export` command exports the data into a new file.
+The `export` command extends `FileAccessCommand` and by extension, `Command`. The `export` command exports the contacts in DorManagerPro to a JSON file in the data folder of the app. 
 
 Given below is an example usage scenario and how the `export` command behaves at each step.
 
-Step 1: The user executes `export`.
+Step 1: The user executes the `export` command.
 
-Step 2: The `export` command exports all data currently contained by DorManagerPro to a JSON file in the data folder. The name of the JSON file is the time of export.
+Step 2: The `export` command exports all data currently contained by DorManagerPro to a JSON file in the data folder of the application.
 
-The following sequence diagram shows how a `export` command goes through the `Logic` component:
+<box type="info" seamless>
+
+**Note:** The name of the JSON file is the time of export in the format MM-dd-yyyy-HHmmssPM.
+
+</box>
+
+The following sequence diagram shows how an `export` command goes through the `Logic` component:
+<puml src="diagrams/ExportSequenceDiagram.puml"
+ alt="ExportSequenceDiagram" />
+
+> The lifeline for `ExportCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens when a user executes an `export` command:
+
+<puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" />
+
 
 ### Design considerations:
 
@@ -354,15 +374,34 @@ The following sequence diagram shows how a `export` command goes through the `Lo
 
 ### Implementation
 
-The `import` command implements `Undoable`. The `import` imports a file to be loaded into DorManagerPro. The `import` command is undoable.
+The `import` command extends `FileAccessCommand` and by extension, `Command`. It also implements `Undoable`. `import` loads data from a save file into DorManagerPro, with the file path of the save file provided by the user. The `import` command is undoable.
 
 Given below is an example usage scenario and how the `import` command behaves at each step.
 
 Step 1. The user executes `import fp/./data/SaveFile3.json`
 
-Step 2. The
+Step 2. The `import` command locates the save file via the file path and reads the data in the save file into DorManagerPro if it is of the correct format and has valid data.
 
-The following sequence diagram shows how a `import` command goes through the `Logic` component:
+<box type="info" seamless>
+
+**Note:** An error message is raised if the file path does not exist in the device or if the file itself cannot be read into DorManagerPro.
+
+</box>
+
+The following sequence diagram shows how an `import fp/./data/SaveFile3.json` command goes through the `Logic` component:
+<puml src="diagrams/ImportSequenceDiagram.puml"
+alt="ImportSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** There is no destroy marker (X) for `ImportCommand` as it is preserved in the `undo` command stack. <br>
+The lifeline for `ImportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes an `import` command:
+
+<puml src="diagrams/ImportActivityDiagram.puml" alt="ImportActivityDiagram" />
 
 ### Design considerations:
 

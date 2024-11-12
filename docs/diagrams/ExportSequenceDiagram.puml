@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "e:ExportCommand" as ExportCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant "s:Storage" as Storage STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("export")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("export")
+activate AddressBookParser
+
+create ExportCommand
+AddressBookParser -> ExportCommand
+activate ExportCommand
+
+ExportCommand --> AddressBookParser :
+deactivate ExportCommand
+
+AddressBookParser --> LogicManager : e
+deactivate AddressBookParser
+
+LogicManager -> ExportCommand : execute(m, s)
+activate ExportCommand
+
+ExportCommand -> Model : getAddressBook()
+activate Model
+
+Model --> ExportCommand : r : ReadOnlyAddressBook
+deactivate Model
+
+ExportCommand -> Storage : saveAddressBook(r, exportFileLocation)
+activate Storage
+
+Storage --> ExportCommand
+deactivate Storage
+
+ExportCommand --> LogicManager : result
+deactivate ExportCommand
+destroy ExportCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
