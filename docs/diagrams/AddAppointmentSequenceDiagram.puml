@@ -1,0 +1,34 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include style.puml
+
+Participant "User" as User
+Participant "AddAppointmentCommand" as AddAppCommand
+Participant "Model" as Model
+Participant "AppointmentManager" as AppManager
+
+User -> AddAppCommand: execute()
+activate AddAppCommand
+
+AddAppCommand -> Model: getPerson(patientNric)
+activate Model
+Model --> AddAppCommand: person
+deactivate Model
+
+AddAppCommand -> Model: addAppointment(appointment, person)
+activate Model
+Model -> AppManager: addAppointment(appointment, person)
+activate AppManager
+
+AppManager -> AppManager: hasConflict(appointment, appointments)
+AppManager --> Model: success/failure
+deactivate AppManager
+
+Model --> AddAppCommand: success/failure
+deactivate Model
+
+AddAppCommand --> User: showSuccessMessage()/showErrorMessage()
+deactivate AddAppCommand
+@enduml

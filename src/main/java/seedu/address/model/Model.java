@@ -1,10 +1,16 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.Status;
+import seedu.address.model.person.Note;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,4 +90,32 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    boolean hasLink(Person patient, Person caregiver);
+
+    void addLink(Person patient, Person caregiver);
+
+    void deleteLink(Person patient, Person caregiver);
+
+    Person getPerson(Nric nric);
+
+    ObservableList<Person> getUnfilteredPersonList();
+
+    boolean addAppointment(Appointment newAppointment, Person person);
+
+    void removeAppointment(Appointment oldAppointment, Person person);
+
+    boolean editAppointment(Appointment appointment, Person person, Appointment newAppointment);
+
+    List<Appointment> getAllAppointments();
+
+    List<Appointment> getAppointmentsForPerson(Person person);
+
+    Appointment getAppointmentForPersonAndTime(Person person, LocalDateTime startTime);
+
+    boolean hasAppointment(Appointment appointment);
+
+    void updateAppointmentStatus(Appointment appointment, Status status);
+
+    void addNoteToPerson(Note note, Person person);
 }

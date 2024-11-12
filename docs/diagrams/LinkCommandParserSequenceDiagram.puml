@@ -1,0 +1,42 @@
+@startuml
+participant User as "User"
+participant AddressBookParser as "AddressBookParser"
+participant LinkCommandParser as "LinkCommandParser"
+participant ArgumentTokenizer as "ArgumentTokenizer"
+participant Prefix as "Prefix"
+participant LogicManager as "LogicManager"
+participant Model as "Model"
+
+activate User
+User ->> AddressBookParser: parse("link 1 2")
+activate AddressBookParser
+AddressBookParser ->> LinkCommandParser: parse()
+activate LinkCommandParser
+LinkCommandParser ->> ArgumentTokenizer: tokenize()
+activate ArgumentTokenizer
+ArgumentTokenizer ->> LinkCommandParser: tokens
+deactivate ArgumentTokenizer
+LinkCommandParser ->> Prefix: getPrefix()
+activate Prefix
+Prefix ->> LinkCommandParser: prefix
+deactivate Prefix
+LinkCommandParser ->> LinkCommandParser: validateArguments()
+activate LinkCommandParser
+LinkCommandParser ->> LinkCommandParser: createLinkCommand()
+activate LinkCommandParser
+LinkCommandParser ->> LogicManager: execute()
+activate LogicManager
+LogicManager ->> Model: link(1, 2)
+activate Model
+Model ->> Model: updatePerson(1)
+activate Model
+Model ->> Model: updatePerson(2)
+activate Model
+Model ->> LogicManager: success
+deactivate Model
+LogicManager ->> LinkCommandParser: showSuccessMessage()
+deactivate LogicManager
+deactivate LinkCommandParser
+deactivate AddressBookParser
+deactivate User
+@enduml

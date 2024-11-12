@@ -25,8 +25,8 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 public class UniquePersonList implements Iterable<Person> {
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Person> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Person> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
@@ -95,6 +95,55 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Return person with the given nric.
+     * @param nric
+     * @return
+     */
+    public Person get(Nric nric) {
+        for (Person p : internalList) {
+            if (p.getNric().equals(nric)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns true if the list contains a link between the given patient and caregiver.
+     * @param patient
+     * @param caregiver
+     * @return
+     */
+    public boolean hasLink(Person patient, Person caregiver) {
+        return patient.isSamePerson(caregiver)
+                || patient.hasCaregiver(caregiver.getNric()) && caregiver.hasPatient(patient.getNric());
+    }
+
+    /**
+     * Adds a link between the given patient and caregiver.
+     * @param patient
+     * @param caregiver
+     */
+    public void addLink(Person patient, Person caregiver) {
+        patient.addCaregiver(caregiver.getNric());
+        caregiver.addPatient(patient.getNric());
+    }
+
+    /**
+     * Deletes a link between the given patient and caregiver.
+     * @param patient
+     * @param caregiver
+     */
+    public void deleteLink(Person patient, Person caregiver) {
+        patient.removeCaregiver(caregiver.getNric());
+        caregiver.removePatient(patient.getNric());
+    }
+
+    public void addNoteToPerson(Note note, Person person) {
+        person.addNote(note);
     }
 
     /**

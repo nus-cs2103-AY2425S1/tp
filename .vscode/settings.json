@@ -1,0 +1,15 @@
+{
+    "java.format.settings.url": "",
+    "java.format.settings.profile": "GoogleStyle",
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "java.checkstyle.configuration": "${workspaceFolder}/config/checkstyle/checkstyle.xml",
+    "java.checkstyle.version": "8.41",
+    "java.format.comments.enabled": false,
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    },
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

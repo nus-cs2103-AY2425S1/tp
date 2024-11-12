@@ -13,6 +13,12 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
+    /** Comprehensive information about the person shown to the user. */
+    private final boolean findPerson;
+
+    /** Comprehensive information about the appointment(s) displayed to doctor. */
+    private final boolean findAppointment;
+
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
@@ -22,10 +28,13 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+                         boolean findPerson, boolean findAppointment) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.findPerson = findPerson;
+        this.findAppointment = findAppointment;
     }
 
     /**
@@ -33,11 +42,17 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+    public boolean isFindAppointment() {
+        return findAppointment;
+    }
+    public boolean isFindPerson() {
+        return findPerson;
     }
 
     public boolean isShowHelp() {
@@ -62,12 +77,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && findPerson == otherCommandResult.findPerson;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, findPerson);
     }
 
     @Override
@@ -76,6 +92,8 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("findPerson", findPerson)
+                .add("findAppointment", findAppointment)
                 .toString();
     }
 

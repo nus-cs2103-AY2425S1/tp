@@ -8,8 +8,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +24,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.Status;
+import seedu.address.model.person.Note;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -51,6 +57,24 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_personWithMultipleRoles_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        // Create a person with both PATIENT and CAREGIVER roles
+        Person validPersonWithMultipleRoles = new PersonBuilder().withRole("PATIENT", "CAREGIVER").build();
+
+        // Execute the add command
+        CommandResult commandResult = new AddCommand(validPersonWithMultipleRoles).execute(modelStub);
+
+        // Check if the command result is correct
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPersonWithMultipleRoles)),
+                commandResult.getFeedbackToUser());
+
+        // Verify the person was added with the correct roles
+        assertEquals(Arrays.asList(validPersonWithMultipleRoles), modelStub.personsAdded);
     }
 
     @Test
@@ -157,6 +181,77 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasLink(Person patient, Person caregiver) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addLink(Person patient, Person caregiver) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLink(Person patient, Person caregiver) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPerson(Nric nric) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Person> getUnfilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean addAppointment(Appointment newAppointment, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeAppointment(Appointment oldAppointment, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Appointment> getAllAppointments() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Appointment> getAppointmentsForPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Appointment getAppointmentForPersonAndTime(Person person, LocalDateTime startTime) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAppointment(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean editAppointment(Appointment appointmentToEdit, Person person, Appointment editedAppointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateAppointmentStatus(Appointment appointment, Status status) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addNoteToPerson(Note note, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

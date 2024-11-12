@@ -5,8 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,15 +20,23 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLinkCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.UpdateAppointmentStatusCommand;
+import seedu.address.logic.parser.criteria.NameSearchCriteria;
+import seedu.address.logic.parser.criteria.SearchCriteria;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.appointment.Status;
+import seedu.address.model.person.ContainsKeywordsPredicate;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -42,15 +55,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD
+                + " " + ClearCommand.COMMAND_CONFIRM_WORD) instanceof ClearCommand);
     }
 
     @Test
     public void parseCommand_delete() throws Exception {
+        Nric nric = AMY.getNric();
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + AMY.getNric());
+        assertEquals(new DeleteCommand(nric), command);
     }
 
     @Test
@@ -58,8 +72,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + AMY.getNric() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(AMY.getNric(), descriptor), command);
     }
 
     @Test
@@ -72,8 +86,58 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" n/")));
+        /* ArgumentMultimap mapForKeywords = new ArgumentMultimap();
+        keywords.stream().forEach(keyword -> mapForKeywords.put(PREFIX_NAME, keyword));
+        mapForKeywords.put(new Prefix(""), "");*/
+        List<SearchCriteria> searchCriteria = new ArrayList<>();
+        searchCriteria.add(new NameSearchCriteria(keywords));
+        FindCommand expectedCommand = new FindCommand(new ContainsKeywordsPredicate(searchCriteria));
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_link() throws Exception {
+        Nric nric1 = AMY.getNric();
+        Nric nric2 = BOB.getNric();
+        LinkCommand command = (LinkCommand) parser.parseCommand(PersonUtil.getLinkCommand(nric1, nric2));
+        assertEquals(new LinkCommand(nric1, nric2), command);
+    }
+
+    @Test
+    public void parseCommand_deleteLink() throws Exception {
+        Nric nric1 = AMY.getNric();
+        Nric nric2 = BOB.getNric();
+        DeleteLinkCommand command = (DeleteLinkCommand) parser.parseCommand(
+                PersonUtil.getDeleteLinkCommand(nric1, nric2));
+        assertEquals(new DeleteLinkCommand(nric1, nric2), command);
+    }
+
+    @Test
+    public void parseCommand_deleteAppointment() throws Exception {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        Nric validNric = new PersonBuilder().build().getNric();
+        String validDate = "22/10/2025";
+        String validStartTime = "10:00";
+        DeleteAppointmentCommand command = (DeleteAppointmentCommand) parser.parseCommand(
+                PersonUtil.getDeleteAppointmentCommand(validNric, validDate, validStartTime));
+        assertEquals(new DeleteAppointmentCommand(validNric, LocalDate.parse(validDate, dateFormatter),
+                LocalTime.parse(validStartTime, timeFormatter)), command);
+    }
+
+    @Test
+    public void parseCommand_updateAppointmentStatus() throws Exception {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        Nric validNric = new PersonBuilder().build().getNric();
+        String validDate = "22/10/2025";
+        String validStartTime = "10:00";
+        String validStatus = "COMPLETED";
+        UpdateAppointmentStatusCommand command = (UpdateAppointmentStatusCommand) parser.parseCommand(
+                PersonUtil.getUpdateAppointmentStatusCommand(validNric, validDate, validStartTime, validStatus));
+        assertEquals(new UpdateAppointmentStatusCommand(validNric, LocalDate.parse(validDate, dateFormatter),
+                LocalTime.parse(validStartTime, timeFormatter), Status.COMPLETED), command);
     }
 
     @Test
@@ -90,8 +154,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
     }
 
     @Test

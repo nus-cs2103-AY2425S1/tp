@@ -4,51 +4,60 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
-
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
-
-Class I #FFFFFF
+Package Model as ModelPackage <<Rectangle>> {
+    Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+    Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+    Class "<<interface>>\nModel" as Model
+    Class AddressBook
+    Class ModelManager
+    Class UserPrefs
+    Class UniquePersonList
+    Class Person
+    Class Address
+    Class Email
+    Class Name
+    Class Phone
+    Class Nric
+    Class Tag
+    Class Appointment
+    Class Note
+    Class Role
+    Class AppointmentManager
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
-
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
+ModelManager --> "1" AppointmentManager
 UserPrefs .up.|> ReadOnlyUserPrefs
-
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
+Person *--> "1" Nric
 Person *--> "*" Tag
+Person *--> "1..2" Role
+Person *--> "*" Appointment
+Person *--> "*" Note
+Person --> "*" Nric : patients
+Person --> "*" Nric : caregivers
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
-
+Person -[hidden]up--> HiddenOutside
+UniquePersonList -[hidden]right-> HiddenOutside
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+AppointmentManager --> "*" Appointment
+
 @enduml
