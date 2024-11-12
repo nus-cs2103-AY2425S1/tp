@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-* The methods for the addition of remark, module and telegram handle field were adapted from AB3 Tutorial 2.
+* The methods for the addition of remark, module and telegram handle fields were adapted from AB3 Tutorial 2.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -164,7 +164,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The add command allows users to add a new contact to the addressbook with required and optional fields.
+The `add` command allows users to add a new contact to the addressbook with required and optional fields.
 The command format is as follows:<br>
 `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`
 
@@ -203,11 +203,11 @@ The optional fields allow users to include more detailed information, making the
 
 #### Implementation
 
-The switch theme command allows users to change the display to "light" mode or "dark" mode according to their preference. The preferred theme will be stored and displayed every time the user opens the app.<br>
+The `switch` theme command allows users to change the display to "light" mode or "dark" mode according to their preference. The preferred theme will be stored and displayed every time the user opens the app.<br>
 The command format is as follows:<br>
 `switch THEME​`
 
-* `THEME` can be either 'light' or 'dark'
+* `THEME` can be either `LIGHT` or `DARK`
 
 #### Key Components and Operations
 
@@ -221,7 +221,7 @@ The command format is as follows:<br>
     * The `ThemeController` clears current stylesheets, applies the specified stylesheet and logs the theme change.
     * The selected theme is stored via `ThemePreference.setTheme()`, which calls `saveThemePreference()` to update the JSON file.
 * **Storage (ThemePreference)**
-    * `ThemePreference` loads the saved theme from `themePreference.json`, or defaults to 'LIGHT' if none is found.
+    * `ThemePreference` loads the saved theme from `themePreference.json`, or defaults to `LIGHT` if none is found.
 
 <puml src="diagrams/SwitchThemeSequenceDiagram.puml" width="100%" />
 
@@ -232,13 +232,13 @@ The command format is as follows:<br>
     * Saving the user's theme preference ensures a consistent experience each time the application is launched, enhancing usability.
 * **Error Handling**
     * Invalid theme inputs raises clear errors, guiding users on valid options.
-    * `ThemePreference` manages file I/O errors with warnings, defaulting to "LIGHT" if any issues arise with loading or saving preferences.
+    * `ThemePreference` manages file I/O errors with warnings, defaulting to `LIGHT` if any issues arise with loading or saving preferences.
 
 ### Import feature
 
 #### Implementation
 
-The import command allows users to import multiple contacts from a .csv file. The command allows for convenient distribution and importing of contacts. Contact distributors (e.g. course coordinators) can compile many contacts at a time (e.g. course TAs), with appropriate contact information and distributte them to users.<br>
+The `import` command allows users to import multiple contacts from a .csv file. The command allows for convenient distribution and importing of contacts. Contact distributors (e.g. course coordinators) can compile many contacts at a time (e.g. course TAs), with appropriate contact information and distributte them to users.<br>
 
 The command format is as follows:<br>
 `import​`
@@ -246,7 +246,7 @@ The command format is as follows:<br>
 #### Key Components and Operations
 
 * **Converter (CsvToJsonConverter)**
-    * The `Converter` component processes the `.csv` files to convert each file into a `.json` file. It first requests all the fields that compose a Person class. It then reads the `.csv` file headers for headers that match these fields (case-insensitive). 
+    * The `Converter` component processes the `.csv` files to convert each file into a `.json` file. It first requests all the fields that compose a `Person` class. It then reads the `.csv` file headers for headers that match these fields (case-insensitive). 
     * It will then read the `.csv` file line by line, to parse each line under a valid header into a properly formatted `.json` object, which is then added to a jsonFile. 
     * It writes the contents of the `.csv` file into a `.json` file with the same name.
     * After converting all `.csv` files, these individual `.json` files are put into an `ArrayList` of `.json` files and returned
@@ -574,7 +574,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Saving theme preferences
 
-    1. Enter the command 'switch light' or 'switch dark' to set the theme of the app. Close the window.
+    1. Enter the command `switch light` or `switch dark` to set the theme of the app. Close the window.
 
     2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent theme is retained.
@@ -661,14 +661,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing data file
 
-    1. Navigate to ./data/addressbook.json and delete the addressbook.json file.
+    1. Navigate to `./data/addressbook.json` and delete the `addressbook.json` file.
 
     2. Launch the app by double-clicking the jar file.<br>
        Expected: The default list of contacts is loaded.
 
 2. Dealing with corrupted data file
 
-    1. Navigate to ./data/addressbook.json. Right click the addressbook.json file and open in TextEdit.
+    1. Navigate to `./data/addressbook.json`. Right click the `addressbook.json` file and open in TextEdit.
 
     2. Delete all the contents of the file and type some symbols (e.g. `&*$@`).
 
