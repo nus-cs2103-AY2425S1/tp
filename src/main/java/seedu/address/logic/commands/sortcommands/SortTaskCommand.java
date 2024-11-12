@@ -32,6 +32,7 @@ public class SortTaskCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
         model.sortTaskList(new Comparator<Task>() {
             @Override
             public int compare(Task t1, Task t2) {

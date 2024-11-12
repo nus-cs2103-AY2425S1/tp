@@ -137,6 +137,7 @@ public class AddExistingTaskToGroupCommand extends Command {
         }
 
         model.updateFilteredTaskList(task -> task.equals(taskToAdd));
+        model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
         model.setMostRecentTaskDisplay(taskToAdd);
         model.setStateTasks();
         return new CommandResult(String.format(successMessage.toString(), taskToAdd.getTaskName())
