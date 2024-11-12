@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant "model:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("addTut tn/CS2103T id/T1001")
+[-> LogicManager : execute("addTut tn/CS2103T c/T1001")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("addTut tn/CS2103T id/T1001")
+LogicManager -> AddressBookParser : parseCommand("addTut tn/CS2103T c/T1001")
 activate AddressBookParser
 
 create AddTutorialCommandParser
@@ -27,7 +27,7 @@ activate AddTutorialCommandParser
 AddTutorialCommandParser --> AddressBookParser
 deactivate AddTutorialCommandParser
 
-AddressBookParser -> AddTutorialCommandParser : parse("tn/CS2103T id/T1001")
+AddressBookParser -> AddTutorialCommandParser : parse("tn/CS2103T c/T1001")
 activate AddTutorialCommandParser
 
 create AddTutorialCommand
