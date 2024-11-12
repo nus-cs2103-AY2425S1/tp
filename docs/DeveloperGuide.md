@@ -268,8 +268,9 @@ This section is a list of fixes that we propose to add in the near future, to im
 2. **Allow contacts / events to start with a non-alphabet**: Our app currently only allow contacts / events that start with an alphabet. However, we understand that users might want to add contacts / events that start with a non-alphabet, such as `2025 Orbital Workshop`. To improve user experience, we plan to allow contacts / events to start with any character (while still making other commands that uses indexes and names work).
 3. **Display contact and event lists concurrently**: Our app currently only displays one list at a time (either contact or event list). Users would need to use `list` / `list_events` to display the contact / event list. However, we understand that this might be inconvenient for users, especially when using the `assign` and `unassign` commands, where users need to remember the index of the contact / event to use these commands using indices. To improve user experience, we plan to display the contact and event lists side-by-side, so that users do not need to type `list` / `list_events` to display the contacts / events, and make it easier to use `assign` and `unassign` commands. In addition, this would also fix the current GUI issue that we have, which shows an empty box at the bottom of the screen for contact list, and right below the status message for event list.
 4. **Change EVENT_DESCRIPTION to be optional**: The current `add_event` command is designed such that the event's description is a compulsory field. However, we understand that not all events have a description to it. Some events' names are self-explanatory and do not require a description. To improve user experience, we plan to make the `EVENT_DESCRIPTION` field optional in the future to provide more convenience.
-5. **Display events assigned to each contact within contact details**: The current `assign` command does not cause any changes in the GUI with regard to the contact information of each person. This would make it difficult to see which events a person has been assigned to. To improve user experience, we plan to make the events that a person has been assigned to visible in the details of each contact in the GUI.
-6. **Modify `search` command**: The current `search` command will return all contacts whose specified field matches any one of the keywords entered. This would make it inconvenient for users who have many contacts, and would like to do a more specific search for contacts whose specified field matches all of the keywords entered. The current `search` command also only searches one field at a time. This would make it inconvenient for user who would like to search for contacts using multiple fields at the same time. To improve user experience, we plan to support searches that can match multiple fields at the same time, or return only contacts that match with all specified keywords.
+5. **Edit Event Start or End Date Independently**: Currently, the EditEventCommand requires users to specify both the start and end dates when they want to edit an event's duration. This can be restrictive if a user only needs to change one of these dates. To improve user experience, we plan to modify the EditEventCommand to allow editing the start date or end date independently. This change will involve updating the command's logic to handle partial updates to the event's duration.
+6. **Display events assigned to each contact within contact details**: The current `assign` command does not cause any changes in the GUI with regard to the contact information of each person. This would make it difficult to see which events a person has been assigned to. To improve user experience, we plan to make the events that a person has been assigned to visible in the details of each contact in the GUI.
+7. **Modify `search` command**: The current `search` command will return all contacts whose specified field matches any one of the keywords entered. This would make it inconvenient for users who have many contacts, and would like to do a more specific search for contacts whose specified field matches all of the keywords entered. The current `search` command also only searches one field at a time. This would make it inconvenient for user who would like to search for contacts using multiple fields at the same time. To improve user experience, we plan to support searches that can match multiple fields at the same time, or return only contacts that match with all specified keywords.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -290,33 +291,34 @@ Computing Club Committee members
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`, Exists - `EXISTS`, Not possible - `N.A.`
 
-| Priority | As a …​                            | I want to …​                                                                        | So that I can…​                                                                     |
-|----------|------------------------------------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| `* * *`  | Committee president                | Search contacts by multiple criteria (e.g., job title, tags)                        | Find the right contacts even if I don’t remember their names                        |
-| `* * *`  | Committee president                | Filter the contacts to different types of events                                    | Easily know who to contact for specific purposes, even with multiple ongoing events |
-| `* * *`  | Committee member                   | Detect and merge duplicate contacts easily                                          | Keep my address book clean and well-organized                                       |
-| `* * *`  | Committee president                | Mass delete contacts                                                                | Easily remove all contacts related to one event after it's over                     |
-| `* *`    | Committee president                | Assign tasks and responsibilities to committee members                              | Ensure all activities are covered without confusion                                 |
-| `* *`    | Committee member                   | Receive notifications for upcoming meetings and events                              | Stay informed and participate on time                                               |
-| `* *`    | Events coordinator                 | Send out event reminders and notifications to members                               | Keep everyone informed and boost engagement                                         |
-| `* *`    | Committee member                   | Import contacts from a CSV file                                                     | Quickly populate the address book                                                   |
-| `* *`    | Committee member                   | Export contacts to a CSV file                                                       | Share the contact list with others                                                  |
-| `* *`    | Committee member                   | Customize the app's interface                                                       | Tailor the app to my preferences                                                    |
-| `* *`    | Club member                        | View a list of upcoming events                                                      | Stay informed about club activities                                                 |
-| `* *`    | Committee member                   | Add a new event to the calendar                                                     | Plan club activities                                                                |
-| `*`      | Committee president                | Have a blacklist of participants                                                    | Keep track of people who are not allowed to join future events                      |
-| `*`      | Committee member                   | Track event attendance                                                              | See who participated                                                                |
-| `*`      | Secretary                          | Track meeting attendance                                                            | Maintain records of who participated in club activities                             |
-| `*`      | Committee member                   | View a member's participation history                                               | Recognize active members                                                            |
-| `EXISTS` | Committee member organizing events | Label each of my contacts                                                           | I can easily mass contact sponsors / participants / organizing committee, etc       |
-| `EXISTS` | Committee member                   | Add a new member to the address book                                                | Keep track of all members in the club                                               |
-| `EXISTS` | Committee president                | Delete contacts                                                                     | Avoid contacting people no longer involved with the committee                       |
-| `EXISTS` | Committee president                | Keep track of every member’s contact information, e.g., phone number, email address | Contact them during an emergency                                                    |
-| `N.A.`   | Committee member                   | Password-protect sensitive contact information                                      | Ensure my contacts remain private and secure                                        |
-| `N.A.`   | Communication committee member     | Log all interactions with sponsors and partners                                     | Reference past conversations and ensure nothing is overlooked                       |
-| `N.A.`   | Committee member                   | Send a group email to all members                                                   | Communicate important information quickly                                           |
-| `N.A.`   | Committee member                   | Set reminders for upcoming events                                                   | Ensure I don’t miss important activities                                            |
-| `N.A.`   | Committee member                   | Integrate the app with my calendar                                                  | Automatically sync important events and reminders                                   |
+| Priority | As a …​                            | I want to …​                                                                              | So that I can…​                                                                     |
+|----------|------------------------------------|-------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *`  | Committee president                | Search contacts by multiple criteria (e.g., job title, tags)                              | Find the right contacts even if I don’t remember their names                        |
+| `* * *`  | Committee president                | Filter the contacts to different types of events                                          | Easily know who to contact for specific purposes, even with multiple ongoing events |
+| `* * *`  | Committee member                   | Detect and merge duplicate contacts easily                                                | Keep my address book clean and well-organized                                       |
+| `* * *`  | Committee president                | Mass delete contacts                                                                      | Easily remove all contacts related to one event after it's over                     |
+| `* *`    | Committee president                | Assign tasks and responsibilities to committee members                                    | Ensure all activities are covered without confusion                                 |
+| `* *`    | Committee member                   | Receive notifications for upcoming meetings and events                                    | Stay informed and participate on time                                               |
+| `* *`    | Events coordinator                 | Send out event reminders and notifications to members                                     | Keep everyone informed and boost engagement                                         |
+| `* *`    | Committee member                   | Import contacts from a CSV file                                                           | Quickly populate the address book                                                   |
+| `* *`    | Committee member                   | Export contacts to a CSV file                                                             | Share the contact list with others                                                  |
+| `* *`    | Committee member                   | Customize the app's interface                                                             | Tailor the app to my preferences                                                    |
+| `* *`    | Club member                        | View a list of upcoming events                                                            | Stay informed about club activities                                                 |
+| `* *`    | Committee member                   | Add a new event to the calendar                                                           | Plan club activities                                                                |
+| `* *`    | Committee member                   | Edit an existing event in the calendar                                                    | Update event details to reflect changes in club activities                          |
+| `*`      | Committee president                | Have a blacklist of participants                                                          | Keep track of people who are not allowed to join future events                      |
+| `*`      | Committee member                   | Track event attendance                                                                    | See who participated                                                                |
+| `*`      | Secretary                          | Track meeting attendance                                                                  | Maintain records of who participated in club activities                             |
+| `*`      | Committee member                   | View a member's participation history                                                     | Recognize active members                                                            |
+| `EXISTS` | Committee member organizing events | Label each of my contacts                                                                 | I can easily mass contact sponsors / participants / organizing committee, etc       |
+| `EXISTS` | Committee member                   | Add a new member to the address book                                                      | Keep track of all members in the club                                               |
+| `EXISTS` | Committee president                | Delete contacts                                                                           | Avoid contacting people no longer involved with the committee                       |
+| `EXISTS` | Committee president                | Keep track of every member’s contact information, e.g., phone number, email address       | Contact them during an emergency                                                    |
+| `N.A.`   | Committee member                   | Password-protect sensitive contact information                                            | Ensure my contacts remain private and secure                                        |
+| `N.A.`   | Communication committee member     | Log all interactions with sponsors and partners                                           | Reference past conversations and ensure nothing is overlooked                       |
+| `N.A.`   | Committee member                   | Send a group email to all members                                                         | Communicate important information quickly                                           |
+| `N.A.`   | Committee member                   | Set reminders for upcoming events                                                         | Ensure I don’t miss important activities                                            |
+| `N.A.`   | Committee member                   | Integrate the app with my calendar                                                        | Automatically sync important events and reminders                                   |
 
 ### Use cases
 
@@ -521,7 +523,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to edit an existing event by providing the index of the event in the list and optionally providing new details such as an event name, event description, event start date, and event end date.
+1. User requests to edit an existing event by providing the index of the event in the list and optionally providing new details such as an event name, event description, event duration (start and end date must be provided together).
 2. App updates the event with the provided details.
    Use case ends.
 
@@ -545,8 +547,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1f1. App shows an error message to tell the user that an event with the same name already exists in the list. 
       Use case ends.
 
-**Use case: UC11 - Unassign event from person**
+---
 
+**Use case: UC11 - Unassign event from person**
 
 **MSS:**
 1. User requests to unassign an event from a person by providing an event name or an event index, and a person name or a person index.
@@ -569,6 +572,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1e. The given person was not previously assigned to the given event.
     * 1e1. App shows an error message to tell the user that the given person is not assigned to the given event.  
       Use case ends.
+
+---
 
 **Use Case: UC12 - Assign Event to Person**
 
@@ -594,6 +599,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1e1. App shows an error message to tell the user that the given person is already assigned to the given event.  
       Use case ends.
 
+---
+
 **Use Case: UC13 - Export Contacts**
 
 **MSS:**
@@ -608,6 +615,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. An error occurs while preparing or saving the file.
     * 1a1. App displays an error message indicating the export failed.  
       Use case ends.
+
+---
 
 **Use Case: UC14 - Import Contacts from CSV**
 
