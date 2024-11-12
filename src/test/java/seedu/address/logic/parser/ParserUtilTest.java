@@ -92,6 +92,7 @@ public class ParserUtilTest {
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
+
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
     }
 
@@ -115,6 +116,7 @@ public class ParserUtilTest {
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         Phone expectedPhone = new Phone(VALID_PHONE);
+
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
@@ -138,6 +140,7 @@ public class ParserUtilTest {
     public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
         Address expectedAddress = new Address(VALID_ADDRESS);
+
         assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
     }
 
@@ -154,6 +157,7 @@ public class ParserUtilTest {
     @Test
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
         Email expectedEmail = new Email(VALID_EMAIL);
+
         assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
         assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
     }
@@ -162,6 +166,7 @@ public class ParserUtilTest {
     public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
+
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
 
@@ -185,6 +190,7 @@ public class ParserUtilTest {
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_ROLE_1 + WHITESPACE;
         Optional<Role> expectedTag = Optional.of(new Role(VALID_ROLE_1));
+
         assertEquals(expectedTag, ParserUtil.parseRole(tagWithWhitespace));
     }
 
@@ -192,6 +198,7 @@ public class ParserUtilTest {
     public void parseRole_withValidRole_returnsRole() throws Exception {
         Optional<Role> actualRole = ParserUtil.parseRole(VALID_ROLE_1);
         Optional<Role> expectedRole = Optional.of(new Role(VALID_ROLE_1));
+
         assertEquals(expectedRole, actualRole);
     }
 
@@ -199,6 +206,7 @@ public class ParserUtilTest {
     public void parseRole_withValidEmptyRole_returnsRole() throws Exception {
         Optional<Role> actualRole = ParserUtil.parseRole(VALID_EMPTY_ROLE);
         Optional<Role> expectedRole = Optional.empty();
+
         assertEquals(expectedRole, actualRole);
     }
 
@@ -222,6 +230,7 @@ public class ParserUtilTest {
     public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
         String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
         Date expectedDate = new Date(VALID_DATE);
+
         assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
     }
 
@@ -245,6 +254,7 @@ public class ParserUtilTest {
     public void parseVenue_validValueWithWhitespace_returnsTrimmedVenue() throws Exception {
         String venueWithWhitespace = WHITESPACE + VALID_VENUE + WHITESPACE;
         Venue expectedVenue = new Venue(VALID_VENUE);
+
         assertEquals(expectedVenue, ParserUtil.parseVenue(venueWithWhitespace));
     }
 
@@ -296,6 +306,7 @@ public class ParserUtilTest {
         HashSet<Index> expectedSet = new HashSet<>();
         expectedSet.add(Index.fromOneBased(1));
         expectedSet.add(Index.fromOneBased(3));
+
         assertTrue(expectedSet.equals(ParserUtil.parseWeddingJobs(VALID_LIST_OF_JOBS_WITHOUT_WHITESPACE)));
     }
 
@@ -305,6 +316,7 @@ public class ParserUtilTest {
         HashSet<Index> expectedSet = new HashSet<>();
         expectedSet.add(Index.fromOneBased(1));
         expectedSet.add(Index.fromOneBased(3));
+
         assertTrue(expectedSet.equals(ParserUtil.parseWeddingJobs(VALID_LIST_OF_JOBS_WITH_WHITESPACE)));
     }
 

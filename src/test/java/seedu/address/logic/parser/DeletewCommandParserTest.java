@@ -21,6 +21,7 @@ public class DeletewCommandParserTest {
 
         DeletewCommand expectedDeletewCommand =
                 new DeletewCommand(null, new NameMatchesWeddingPredicate(Arrays.asList("Alice", "Bob")));
+
         assertParseSuccess(parser, "Alice Bob", expectedDeletewCommand);
 
         assertParseSuccess(parser, " \n Alice Bob  \t", expectedDeletewCommand);
