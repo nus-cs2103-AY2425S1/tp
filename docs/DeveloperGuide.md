@@ -474,7 +474,7 @@ handle the complexities of coordinating with multiple vendors, venues, and clien
 ### User stories
 
 Priorities:
-High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+High (must have) - `* * *`, Medium (nice to have) -  `* *`, Low (unlikely to have) - `*`
 
 Those without any stars are user stories that were considered but will not be implemented at this time.
 
@@ -1130,6 +1130,8 @@ testers are expected to do more *exploratory* testing.
 
    5. Refer to [saving data](#saving-data) to understand how data is saved during operation.
 
+<br>
+
 ### Quick Guide to Prefixes and Commands
 
 1. WedLinker uses prefixes to parse the required fields for the commands.
@@ -1142,7 +1144,7 @@ testers are expected to do more *exploratory* testing.
    - task: `tk/`
    - wedding: `w/`
    - force: `f/`
-<br>
+<br><br>
 
 2. WedLinker has the following functions
    - find a person: `find`
@@ -1187,246 +1189,249 @@ testers are expected to do more *exploratory* testing.
 <box type="info" seamless>
 
 **Note:** The guide for the find command will be based on the sample address book created on application launch, assuming no persons have been deleted. The commands can be similarly
-applied to edited data, but specific expected results will differ. <br>
+applied to edited data, but specific expected results will differ. <br><br>
 **Suggestion:** Refer to User Guide for additional test cases, such as multiple prefixes or blank keywords.
 </box>
 
-1. Finding a person by name
+1. **Finding a person by name**
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+   1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list. <br>
 
-   2. Test case: `find n/alex` <br>
-      Expected: The contact `Alex Yeoh` is shown in the `Person` view. If this contact has been deleted and no other contacts whose
+   2. **Test case**: `find n/alex` <br>
+      **Expected**: The contact `Alex Yeoh` is shown in the `Person` view. If this contact has been deleted and no other contacts whose
       names have the keyword `Alex` are in the system, an empty `Person` list is shown. The status message reflects the success of the find command.
 
-   3. Test case:  `find n/B` <br>
-      Expected: The contacts `Bernice Yu`, `Irfan Ibrahim`, and `Roy Balakrishnan` are shown in the `Person` view. If any of these contacts
+   3. **Test case**:  `find n/B` <br>
+      **Expected**: The contacts `Bernice Yu`, `Irfan Ibrahim`, and `Roy Balakrishnan` are shown in the `Person` view. If any of these contacts
       have been deleted, they are not shown in the `Person` list. The status message reflects the success of the find command.
 
-   4. Test case:  `find n/roy n/Irf` <br>
-      Expected: The contacts `Irfan Ibrahim` and `Roy Balakrishnan` are shown in the `Person` view. If any of these contacts
+   4. **Test case**:  `find n/roy n/Irf` <br>
+      **Expected**: The contacts `Irfan Ibrahim` and `Roy Balakrishnan` are shown in the `Person` view. If any of these contacts
       have been deleted, they are not shown in the `Person` list. The status message reflects the success of the find command.
 
-   5. Test case:  `find n/NAMETHATDOESNOTEXIST` (where NAMETHATDOESNOTEXIST is not part of the names of any `Person` in the system)
-      Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+   5. **Test case**:  `find n/NAMETHATDOESNOTEXIST` (where NAMETHATDOESNOTEXIST is not part of the names of any `Person` in the system) <br>
+      **Expected**: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-   6. Test case: `find n/X` (where X is a character unsupported in `Person` names)
-      Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+   6. **Test case**: `find n/X` (where X is a character unsupported in `Person` names) <br>
+      **Expected**: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
    7. Other incorrect find name commands to try:
       * `find`
       * `find n/` (where name keyword is blank)
       * `find n/XXX e/` (where XXX is any name keyword, and e/ is any other valid prefix in WedLinker)
-
-      Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+        <br>
+      **Expected**: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
-2. Finding a person by address
+2. **Finding a person by address**
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list. <br>
 
-    2. Test case: `find a/30` <br>
-       Expected: The contacts `Alex Yeoh` and `Bernice Yu` are shown in the `Person` view. The status message reflects the success of the find command.
+    2. **Test case**: `find a/30` <br>
+       **Expected**: The contacts `Alex Yeoh` and `Bernice Yu` are shown in the `Person` view. The status message reflects the success of the find command.
 
-    3. Test case: `find a/serangoon a/Aljunied`
-       Expected: The contacts `Bernice Yu`, `David Li`, and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
+    3. **Test case**: `find a/serangoon a/Aljunied` <br>
+       **Expected**: The contacts `Bernice Yu`, `David Li`, and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
 
-    4. Test case:  `find a/%%%` (where %%%  is not part of the address of any addresses of any `Person` in the system) <br>
-      Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+    4. **Test case**:  `find a/%%%` (where %%%  is not part of the address of any addresses of any `Person` in the system) <br>
+       **Expected**: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
     5. Other incorrect find address commands to try:
         * `find`
         * `find a/` (where name keyword is blank)
         * `find a/XXX p/` (where XXX is any address keyword, and p/ is any other valid prefix in WedLinker)
-
-       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+          <br>
+        **Expected**: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
-3. Finding a person by phone
+3. **Finding a person by phone**
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list. <br>
 
-    2. Test case: `find p/88` <br>
-       Expected: The contact `Alex Yeoh` is shown in the `Person` view. The status message reflects the success of the find command.
+    2. **Test case**: `find p/88` <br>
+       **Expected**: The contact `Alex Yeoh` is shown in the `Person` view. The status message reflects the success of the find command.
 
-    3. Test case: `find p/92` <br>
-       Expected: The contacts `Bernice Yu`, `Irfan Ibrahim`, and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
+    3. **Test case**: `find p/92` <br>
+       **Expected**: The contacts `Bernice Yu`, `Irfan Ibrahim`, and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
 
-    4. Test case:  `find p/XXXXXXXXXX` (where XXXXXXXXXX is not part of the phone number of any phone numbers of any `Person` in the system) <br>
-       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+    4. **Test case**:  `find p/XXXXXXXXXX` (where XXXXXXXXXX is not part of the phone number of any phone numbers of any `Person` in the system) <br>
+       **Expected**: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
     5. Other incorrect find phone commands to try:
         * `find`
         * `find p/` (where name keyword is blank)
         * `find p/XXX t/` (where XXX is any phone keyword, and t/ is any other valid prefix in WedLinker)
-
-       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+          <br>
+        **Expected**: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
-4. Finding a person by email
+4. **Finding a person by email**
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list. <br>
 
-    2. Test case: `find e/LI` <br>
-       Expected: The contact `David Li` is shown in the `Person` view. The status message reflects the success of the find command.
+    2. **Test case**: `find e/LI` <br>
+       **Expected**: The contact `David Li` is shown in the `Person` view. The status message reflects the success of the find command.
 
-    3. Test case: `find e/er e/ro` <br>
-       Expected: The contacts `Bernice Yu` and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
+    3. **Test case**: `find e/er e/ro` <br>
+       **Expected**: The contacts `Bernice Yu` and `Roy Balakrishnan` are shown in the `Person` view. The status message reflects the success of the find command.
 
-    4. Test case: `find e/XXXX@XXX.XXX` (where XXXX@XXX.XXX is not part of the email of any emails of any `Person` in the system) <br>
-       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+    4. **Test case**: `find e/XXXX@XXX.XXX` (where XXXX@XXX.XXX is not part of the email of any emails of any `Person` in the system) <br>
+       **Expected**: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
     5. Other incorrect find email commands to try:
         * `find`
         * `find e/` (where email keyword is blank)
         * `find e/XXX a/` (where XXX is any email keyword, and a/ is any other valid prefix in WedLinker)
-
-       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+          <br>
+        **Expected**: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
-5. Finding a person by tag
+5. **Finding a person by tag**
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
-       1. **Tip**: You can also enter the `list-tags` or `ltags` command to list all tags in the system. <br>
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list. <br>
+       1. **Tip**: You can also enter the `list-tags` or `ltags` command to list all tags in the system. <br> <br>
 
-    2. Test case: `find t/guest` <br>
-       Expected: The contacts `Bernice Yu` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+    2. **Test case**: `find t/guest` <br>
+       **Expected**: The contacts `Bernice Yu` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
 
-    3. Test case: `find t/photographer t/HOTEL MANAGER` <br>
-       Expected: The contacts `Alex Yeoh` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+    3. **Test case**: `find t/photographer t/HOTEL MANAGER` <br>
+       **Expected**: The contacts `Alex Yeoh` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
 
-    4. Test case: `find t/NONEXISTENTTAG` (where NONEXISTENTTAG is not a `Tag` in the system) <br>
-       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+    4. **Test case**: `find t/NONEXISTENTTAG` (where NONEXISTENTTAG is not a `Tag` in the system) <br>
+       **Expected**: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-    5. Test case:  `find t/UNASSIGNEDTAG` (where UNASSIGNEDTAG is a `Tag` in the system, but there are no `Persons` tagged with it) <br>
-       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+    5. **Test case**:  `find t/UNASSIGNEDTAG` (where UNASSIGNEDTAG is a `Tag` in the system, but there are no `Persons` tagged with it) <br>
+       **Expected**: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
     6. Other incorrect find tag commands to try:
         * `find`
         * `find t/` (where tag keyword is blank)
         * `find t/XXX a/` (where XXX is any tag keyword, and a/ is any other valid prefix in WedLinker)
-
-       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+          <br>
+        **Expected**: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
 6. Finding a person by wedding
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
-        1. **Tip**: You can also enter the `list-weddings` or `lw` command to list all weddings in the system. <br>
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list. <br>
+        1. **Tip**: You can also enter the `list-weddings` or `lw` command to list all weddings in the system. <br> <br>
 
-    2. Test case: `find w/wedding 2` <br>
-       Expected: The contact `Charlotte Oliveiro` is shown in the `Person` view. The status message reflects the success of the find command.
+    2. **Test case**: `find w/wedding 2` <br>
+       **Expected**: The contact `Charlotte Oliveiro` is shown in the `Person` view. The status message reflects the success of the find command.
 
-    3. Test case: `find w/August w/Case` <br>
-       Expected: The contacts `Alex Yeoh`, `Charlotte Oliveiro`, and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+    3. **Test case**: `find w/August w/Case` <br>
+       **Expected**: The contacts `Alex Yeoh`, `Charlotte Oliveiro`, and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
 
-    4. Test case: `find w/NONEXISTENTWEDDING` (where NONEXISTENTWEDDING is not a `Wedding` in the system) <br>
-       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+    4. **Test case**: `find w/NONEXISTENTWEDDING` (where NONEXISTENTWEDDING is not a `Wedding` in the system) <br>
+       **Expected**: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-    5. Test case:  `find w/UNASSIGNEDWEDDING` (where UNASSIGNEDWEDDING is a `Wedding` in the system, but there are no `Persons` assigned to it) <br>
-       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+    5. **Test case**:  `find w/UNASSIGNEDWEDDING` (where UNASSIGNEDWEDDING is a `Wedding` in the system, but there are no `Persons` assigned to it) <br>
+       **Expected**: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-    6. Test case:  `find w/` <br>
-       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
+    6. **Test case**:  `find w/` <br>
+       **Expected**: The currently shown `Person` list is unchanged. Error details shown in the status message, as blank keywords cannot be searched.
 
-    7. Test case:  `find w/tom's wedding t/` <br>
-       Expected: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
+    7. **Test case**:  `find w/tom's wedding t/` <br>
+       **Expected**: The currently shown `Person` list is unchanged. Error details shown in the status message, as only one prefix can be searched at a time.
 
     8. Other incorrect find wedding commands to try:
         * `find`
         * `find w/` (where wedding keyword is blank)
         * `find w/XXX p/` (where XXX is any wedding keyword, and a/ is any other valid prefix in WedLinker)
-
-       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+          <br>
+        **Expected**: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
-7. Finding a person by task
+7. **Finding a person by task**
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. <br>
-        1. **Tip**: You can also enter the `list-tasks` or `ltasks` command to list all tasks in the system. <br>
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list. <br>
+        1. **Tip**: You can also enter the `list-tasks` or `ltasks` command to list all tasks in the system. <br> <br>
 
-    2. Test case: `find tk/invitations` <br>
-       Expected: The contact `David Li` is shown in the `Person` view. The status message reflects the success of the find command.
+    2. **Test case**: `find tk/invitations` <br>
+       **Expected**: The contact `David Li` is shown in the `Person` view. The status message reflects the success of the find command.
 
-    3. Test case: `find tk/send tk/hair` <br>
-       Expected: The contacts `David Li` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
+    3. **Test case**: `find tk/send tk/hair` <br>
+       **Expected**: The contacts `David Li` and `Irfan Ibrahim` are shown in the `Person` view. The status message reflects the success of the find command.
 
-    4. Test case: `find tk/NONEXISTENTTASK` (where NONEXISTENTTASK is not a `Task` in the system) <br>
-       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+    4. **Test case**: `find tk/NONEXISTENTTASK` (where NONEXISTENTTASK is not a `Task` in the system) <br>
+       **Expected**: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
-    5. Test case:  `find tk/UNASSIGNEDTASK` (where UNASSIGNEDTASK is a `Task` in the system, but there are no `Persons` assigned to it) <br>
-       Expected: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
+    5. **Test case**:  `find tk/UNASSIGNEDTASK` (where UNASSIGNEDTASK is a `Task` in the system, but there are no `Persons` assigned to it) <br>
+       **Expected**: The system shows a blank list of `Persons`. The status message reflects that no contacts were found to match the keyword.
 
     6. Other incorrect find task commands to try:
         * `find`
         * `find tk/` (where task keyword is blank)
         * `find tk/XXX e/` (where XXX is any task keyword, and a/ is any other valid prefix in WedLinker)
-       
-       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command. 
+          <br>
+        **Expected**: `Person` list remains unchanged. System displays error describing source of problem with the command. 
 
 <br>
 
 #### Listing persons
 
-1. Listing persons when viewing all persons.
+1. **Listing persons when viewing all persons.**
 
-   1. Test case: `list` <br>
-    Expected: `Person` list displayed will remain unchanged, and all persons in the `Person` list will be shown.
+   1. **Test case**: `list` <br>
+      **Expected**: `Person` list displayed will remain unchanged, and all persons in the `Person` list will be shown.
 
-2. Listing persons when viewing a filtered view of persons.
+ <br>
 
-   1. Test case: `list` <br>
-    Expected: `Person` list displayed will change to show all persons in the `Person` list.
+2. **Listing persons when viewing a filtered view of persons.**
+
+   1. **Test case**: `list` <br>
+      **Expected**: `Person` list displayed will change to show all persons in the `Person` list.
 
 <br>
 
 #### Adding a person
 
-1. Adding a person
+1. **Adding a person**
 
-   1. Prerequisites: List all persons using the `list` command. At least one person in the list.
+   1. **Prerequisites**: List all persons using the `list` command. At least one person in the list.
 
-   2. Test case: `add n/Nancy Drew p/9911882 e/nancy.drew@hotmail.com` <br>
-      Expected: A new contact with name `Nancy Drew`, phone `9911882`, and email `nancy.drew@hotmail.com` is added to the `Person` list.
+   2. **Test case**: `add n/Nancy Drew p/9911882 e/nancy.drew@hotmail.com` <br>
+      **Expected**: A new contact with name `Nancy Drew`, phone `9911882`, and email `nancy.drew@hotmail.com` is added to the `Person` list.
 
-   3. Test case: `add n/Tatiana Komarova w/NEW WEDDING t/NEW TAG` (where NEW WEDDING and NEW TAG are a wedding and tag, respectively, that do not yet exist in WedLinker) <br>
-      Expected: A new contact with name `Tatiana Komarova` is added to the `Person` list. A new tag with name `NEW TAG` is added to the `Tag` list.
+   3. **Test case**: `add n/Tatiana Komarova w/NEW WEDDING t/NEW TAG` (where NEW WEDDING and NEW TAG are a wedding and tag, respectively, that do not yet exist in WedLinker) <br>
+      **Expected**: A new contact with name `Tatiana Komarova` is added to the `Person` list. A new tag with name `NEW TAG` is added to the `Tag` list.
       A new wedding with name `NEW WEDDING` is added to the `Wedding` list. The new contact, `Tatiana Komarova`, will be tagged with `NEW TAG` and
       will be assigned to the wedding `NEW WEDDING`.
 
-   4. Test case (following Test case 4): `add n/Tatiana Komarova` <br>
-      Expected: The `Person` list remains unchanged. System displays an error indicating that the person already exists in WedLinker.
+   4. **Test case (following Test case 4)**: `add n/Tatiana Komarova` <br>
+      **Expected**: The `Person` list remains unchanged. System displays an error indicating that the person already exists in WedLinker.
 
-   5. Test case: `add n/Felicia D'Alimaty w/EXISTING WEDDING t/EXISTING TAG` (where EXISTING WEDDING and EXISTING TAG are a wedding and tag, respectively, that exist in WedLinker) <br>
-      Expected: A new contact with name `Felicia D'Alimaty` is added to the `Person` list. No new tags or weddings will be created. The new contact, `Felicia D'Alimaty`, will be tagged with `EXISTING TAG` and
+   5. **Test case**: `add n/Felicia D'Alimaty w/EXISTING WEDDING t/EXISTING TAG` (where EXISTING WEDDING and EXISTING TAG are a wedding and tag, respectively, that exist in WedLinker) <br>
+      **Expected**: A new contact with name `Felicia D'Alimaty` is added to the `Person` list. No new tags or weddings will be created. The new contact, `Felicia D'Alimaty`, will be tagged with `EXISTING TAG` and
       will be assigned to the wedding `EXISTING WEDDING`.
 
    6. Other incorrect add commands to try:
       * `add`
       * `add n/NAME e/EMAIL@email.com tk/TASK` (where tk/ is the task prefix, and the email field restricts input values according to the User Guide)
       * `add n/` (with a blank name keyword)
-      Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+        <br>
+      **Expected**: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
 #### Editing a person
 
-1. Editing a person while all persons are being shown
+1. **Editing a person while all persons are being shown**
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list.
 
-    2. Test case: `edit 1 p/9927364`<br>
-       Expected: First contact has their phone number updated to `9927364`. Details of the edited contact shown in the status message.
+    2. **Test case**: `edit 1 p/9927364`<br>
+       **Expected**: First contact has their phone number updated to `9927364`. Details of the edited contact shown in the status message.
        List of `Persons` is updated to show the first contact's new details.
 
-    3. Test case: `edit 2 a/Blk 99, Adams Avenue e/newemail@gmail.com` (assuming there are at least 2 people in the current `Person` list displayed) <br>
-       Expected: Second contact has their address updated to `Blk 99, Adams Avenue` and their email updated to `newemail@gmail.com`. Details of the edited contact shown in the status message.
+    3. **Test case**: `edit 2 a/Blk 99, Adams Avenue e/newemail@gmail.com` (assuming there are at least 2 people in the current `Person` list displayed) <br>
+       **Expected**: Second contact has their address updated to `Blk 99, Adams Avenue` and their email updated to `newemail@gmail.com`. Details of the edited contact shown in the status message.
        List of `Persons` is updated to show the second contact's new details.
 
     4. Incorrect delete commands to try:
@@ -1434,18 +1439,18 @@ applied to edited data, but specific expected results will differ. <br>
         * `edit 1` (where no prefixes are specified)
         * `edit x a/Blk 99` (where x is an integer larger than the list size)
         * `edit 1 tk/XXX` (where tk/ is the task prefix, which the edit command does not support - similarly, can test w/ and t/ prefixes)
-
-       Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
+          <br>
+        **Expected**: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
 <br>
 
-2. Editing a person when a filtered list is being shown.
+2. **Editing a person when a filtered list is being shown.**
 
-    1. Prerequisites: List all persons using the `list` command. Use the `find` command to filter the list by either name, phone, address, email, tag, wedding, or task.
+    1. **Prerequisites**: List all persons using the `list` command. Use the `find` command to filter the list by either name, phone, address, email, tag, wedding, or task.
     Multiple persons in the list, but not the same number as the list of all contacts.
 
        1. **Tip:** If the sample data is loaded, this can be done by entering the `find n/c` command or the `find t/guest` command.
-       Refer to the [find command](#finding-a-person) for more details. 
+       Refer to the [find command](#finding-a-person) for more details.  <br>
 
     2. Valid test cases similar to 1.2 and 1.3 of [Editing a person](#editing-a-person) can be tested in filtered view.
 
@@ -1457,40 +1462,40 @@ applied to edited data, but specific expected results will differ. <br>
 
 #### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. **Deleting a person while all persons are being shown**
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list.
 
-    2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+    2. **Test case**: `delete 1`<br>
+       **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-    3. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    3. **Test case**: `delete 0`<br>
+       **Expected**: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
     4. Other incorrect delete commands to try:
        * `delete`
        * `delete x` (where x is an integer larger than the list size)
        * `delete e` (where e is a string, a non-integer, or any other data type)
        * `delete 1 random` (where the list of persons has at least 1 person, and random is an extraneous input of any data type) <br>
-       
-        Expected: Similar to previous.
+         <br>
+       **Expected**: Similar to previous.
 
 <br>
 
-2. Deleting a person when a filtered list is being shown
+2. **Deleting a person when a filtered list is being shown**
 
-    1. Prerequisites: List all persons using the `list` command. Use the `find` command to filter the list by either name, phone, address, email, tag, wedding, or task.
+    1. **Prerequisites**: List all persons using the `list` command. Use the `find` command to filter the list by either name, phone, address, email, tag, wedding, or task.
     Multiple persons in the list, but not the same number as the list of all contacts.
 
        1. **Tip:** If the sample data is loaded, this can be done by entering the `find n/c` command or the `find t/guest` command.
-       Refer to the [find command](#finding-a-person) for more details. 
+       Refer to the [find command](#finding-a-person) for more details.  <br>
 
-    2.  Test case: `delete 1` <br>
-        Expected: First contact in the filtered list is deleted. Details of the deleted contact shown in the status message. When listing all contacts,
+    2.  **Test case**: `delete 1` <br>
+        **Expected**: First contact in the filtered list is deleted. Details of the deleted contact shown in the status message. When listing all contacts,
         contact that was first in the filtered list is deleted from the list.
 
-    3. Test case: `delete x` (where x is an integer greater than the number of persons shown in the current filtered list, but smaller than the number of all contacts)
-        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    3. **Test case**: `delete x` (where x is an integer greater than the number of persons shown in the current filtered list, but smaller than the number of all contacts)
+       **Expected**: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
     4. Other incorrect test cases to try can be found at point 1.iv of [Deleting a person](#deleting-a-person)
 
@@ -1506,18 +1511,18 @@ applied to edited data, but specific expected results will differ. <br>
 **Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
 </box>
 
-1. Assigning a `Person` as a vendor
+1. **Assigning a `Person` as a vendor**
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, not all of whom are `Vendors`.
+   1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list, not all of whom are `Vendors`.
 
-   2. Test case: `assign-vendor 2` (assuming the second `Person` **is not** a `Vendor`) <br>
-      Expected: Contact 2 is updated to be a `Vendor` and the `Person` list is updated to show this. Status message shows successful vendor assignment.
+   2. **Test case**: `assign-vendor 2` (assuming the second `Person` **is not** a `Vendor`) <br>
+      **Expected**: Contact 2 is updated to be a `Vendor` and the `Person` list is updated to show this. Status message shows successful vendor assignment.
 
-   3. Test case (following Test case 2): `assign-vendor 2` (assuming the second `Person` **is now** a `Vendor`) <br> 
-      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 2 is already a `Vendor`.
+   3. **Test case (following Test case 2)**: `assign-vendor 2` (assuming the second `Person` **is now** a `Vendor`) <br>
+      **Expected**: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 2 is already a `Vendor`.
 
-   4. Test case: `assign-vendor` <br>
-         Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message.
+   4. **Test case**: `assign-vendor` <br>
+      **Expected**: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message.
 
 <br>
 
@@ -1528,115 +1533,204 @@ applied to edited data, but specific expected results will differ. <br>
 **Suggestion:** You can tell which contacts are `Vendors` and which are not by looking for the red VENDOR label in the `Person` view on the left.
 </box>
 
-1. Unassigning a `Person` as a vendor
+1. **Unassigning a `Person` as a vendor**
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, some of whom are `Vendors`.
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list, some of whom are `Vendors`.
 
-   2. Test case: `unassign-vendor 1` (assuming the first `Person` **is** a `Vendor` with no tasks assigned) <br>
-      Expected: Contact 1 is updated to no longer be a `Vendor` and the `Person` list is updated to show this. Status message shows successful vendor unassignment.
+   2. **Test case**: `unassign-vendor 1` (assuming the first `Person` **is** a `Vendor` with no tasks assigned) <br>
+      **Expected**: Contact 1 is updated to no longer be a `Vendor` and the `Person` list is updated to show this. Status message shows successful vendor unassignment.
 
-   3. Test case (following Test case 2): `unassign-vendor 1` (assuming the first `Person` is now **no longer** a `Vendor`) <br>
-      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 1 is not a `Vendor`.
+   3. **Test case (following Test case 2)**: `unassign-vendor 1` (assuming the first `Person` is now **no longer** a `Vendor`) <br>
+      **Expected**: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 1 is not a `Vendor`.
 
-   4. Test case: `unassign-vendor 4` (assuming the fourth `Person` **is** a `Vendor` with tasks assigned) <br>
-      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 1 is a `Vendor` with tasks still assigned.
+   4. **Test case**: `unassign-vendor 4` (assuming the fourth `Person` **is** a `Vendor` with tasks assigned) <br>
+      **Expected**: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message indicating that contact 1 is a `Vendor` with tasks still assigned.
 
-   5. Test case: `unassign-vendor 4 f/` (assuming the fourth `Person` **is** a `Vendor` with tasks assigned) <br>
-      Expected: Contact 4 is updated to no longer be a `Vendor` and the `Person` list is updated to show this. All previously assigned tasks are removed from contact 4.
+   5. **Test case**: `unassign-vendor 4 f/` (assuming the fourth `Person` **is** a `Vendor` with tasks assigned) <br>
+      **Expected**: Contact 4 is updated to no longer be a `Vendor` and the `Person` list is updated to show this. All previously assigned tasks are removed from contact 4.
       Status message shows successful vendor unassignment.
 
-   6. Test case: `assign-vendor` <br>
-      Expected: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message.
+   6. **Test case**: `assign-vendor` <br>
+      **Expected**: No contacts are updated and the `Person` list remains unchanged. Error details shown in status message.
 
 <br>
 
 ---
 <h3 class="features">Wedding Features</h3>
 
-### Creating Wedding
-##### ... if `John's Wedding` is not in the list of weddings
-1. Test case: `create-wedding w/John's Wedding`<br>
-   Expected: `John's Wedding` is added to list of weddings. Details of the added wedding are shown.
+#### Creating Wedding
 
-##### ... if `John's Wedding` is in the list of weddings
-1. Test case: `create-wedding w/John's Wedding`<br>
-   Expected: No weddings are added to list of weddings. Error details shown.
+1. **Creating a new `Wedding`**
+    
+    1. **Prerequisites**: List all weddings using the `list-weddings` command.
 
-### Deleting Wedding
-##### ... if `John's Wedding` is in the list of weddings
-1. Test case: `delete-wedding w/John's Wedding`<br>
-   Expected: `John's Wedding` is removed from list of weddings. Details of the removed wedding are shown.
+    2. **Test case**: `create-wedding w/John's Wedding`<br>
+       **Expected**: `John's Wedding` is added to the list of weddings. Details of the added wedding are shown in the status message.
 
-##### ... if `John's Wedding` is not in the list of weddings
-1. Test case: `delete-wedding w/John's Wedding`<br>
-   Expected: No weddings are removed from list of weddings. Error details shown.
+<br>
 
-### Editing Wedding
-##### ... if there is only 1 wedding in the list
-1. Test case: `edit-wedding 1 w/John's Wedding a/Address1 d/2024-12-31 `<br>
-   Expected: 1st wedding's date is set as `John's Wedding`, with address `Address1` and date `2024-12-31`. Details of edited wedding are shown.
+2. **Creating a `Wedding` already in the list of `Weddings`**
 
-1. Test case: `edit-wedding 2 w/John's Wedding a/Address1 d/2024-12-31 `<br>
-   Expected: No weddings are edited. Error details shown.
+    1. **Test case**: `create-wedding w/John's Wedding` (assuming `John's Wedding` is in the list of `Weddings` already) <br>
+       **Expected**: No weddings are added to list of weddings. Error details shown indicating that the `Wedding` already exists.
 
-### Assigning Wedding
-##### ... if `John's Wedding` is in the list and if the first contact is not already in John's Wedding
-1. Test case: `assign-wedding 1 w/John's Wedding`<br>
-   Expected: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
+    2. **Test case**: `create-wedding w/JOHN'S WEDDING` (assuming `John's Wedding` is in the list of `Weddings` already) <br>
+       **Expected**: No weddings are added to list of weddings. Error details shown indicating that the `Wedding` already exists.
 
-1. Test case: `assign-wedding 1 w/John's Wedding p1/`<br>
-   Expected: 1st contact is put as `John's Wedding`'s Partner 1 and 1st contact has `John's Wedding` on its contact card.
+<br>
 
-1. Test case: `assign-wedding 1 w/John's Wedding p2/`<br>
-   Expected: 1st contact is put as `John's Wedding`'s Partner 2 and 1st contact has `John's Wedding` on its contact card.
+#### Deleting Wedding
 
-1. Test case: `assign-wedding 1 w/John's Wedding p1/ p2/`<br>
-   Expected: 1st contact is put as `John's Wedding`'s Partner 1 and 1st contact has `John's Wedding` on its contact card.
+1. **Deleting a `Wedding` already in the list of `Weddings`**
 
-##### ... if `John's Wedding` is in the list and if the first contact is already in John's Wedding
-1. Test case: `assign-wedding 1 w/John's Wedding`<br>
-   Expected: No weddings are assigned to any contacts. Error details shown.
+    1. **Test case**: `delete-wedding w/John's Wedding` (assuming `John's Wedding` is in the list of `Weddings` already and has **no people** assigned to it) <br>
+       **Expected**: `John's Wedding` is removed from the list of `Weddings`. Details of the removed wedding are shown in the status message.
 
-##### ... if `John's Wedding` is not in the list
-1. Test case: `assign-wedding 1 w/John's Wedding`<br>
-   Expected: No contact is assigned. Error details shown.
+   2. **Test case**: `delete-wedding w/John's Wedding` (assuming `John's Wedding` is in the list of `Weddings` already and **does have people** assigned to it) <br>
+      **Expected**: No weddings are removed from list of weddings. Error details shown indicating that `John's Wedding` is still used.
 
-1. Test case: `assign-wedding 1 w/John's Wedding f/`<br>
-   Expected: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
+   3. **Test case**: `delete-wedding w/John's Wedding f/` (assuming `John's Wedding` is in the list of `Weddings` already and **does have people** assigned to it) <br>
+      **Expected**: `John's Wedding` is removed from the list of `Weddings`. Details of the removed wedding are shown in the status message.
 
-### Unassigning Wedding
-##### ... if first contact in `John's Wedding`
-1. Test case: `unassign-wedding 1 w/John's Wedding`<br>
-   Expected: 1st contact is removed from `John's Wedding` and `John's Wedding` is removed from their contact card.
+<br>
 
-##### ... if first contact not in `John's Wedding`
-1. Test case: `unassign-wedding 1 w/John's Wedding`<br>
-   Expected: No weddings are unassigned. Error details shown.
+2. **Deleting a `Wedding` not in the list of `Weddings`**
+
+    1. **Test case**: `delete-wedding w/Maddy's Wedding` (assuming `Maddy's Wedding` is not in the list of `Weddings`)
+       **Expected**: No weddings are removed from list of weddings. Error details shown indicating that the `Wedding` does not exist.
+
+<br>
+
+#### Editing Wedding
+
+1. **Editing a `Wedding` in the `Wedding` list**
+
+    1. **Prerequisites**: List all weddings using the `list-weddings` command. At least 2 weddings exist in the system.
+
+    2. **Test case**: `edit-wedding 1 w/John's Wedding a/Address1 d/2024-12-31 ` (assuming `John's Wedding` **does not exist** in the system) <br>
+       **Expected**: The first wedding's name is set to `John's Wedding`, with address `Address1` and date `2024-12-31`. The new details of the wedding are shown in the `Wedding` list.
+       Details of edited wedding are shown in the status message.
+
+    3.  **Test case**: `edit-wedding 2 w/John's Wedding a/Address1 d/2024-12-31 ` (assuming `John's Wedding` **exists** in the system) <br>
+        **Expected**: No weddings are altered in the list of weddings. Error details shown indicating that `John's Wedding` already exists.
+
+    4. **Test case**: `edit-wedding X w/Carla's Wedding` (where X is greater than the number of weddings in the `Wedding` list) <br>
+       **Expected**: No weddings are altered in the list of weddings. Error details shown indicating the wedding number is too high.
+   
+<br>
+
+#### Assigning Wedding
+
+1. **Assigning a `Wedding` in the `Wedding list` to a `Person` not assigned to the `Wedding`**
+
+    1. **Prerequisites**: List all weddings using the `list-weddings` command. At least 1 wedding exists in the system.
+       List all persons using the `list` command. At least 1 `Person` exists in the list.
+
+    2. **Test case**: `assign-wedding 1 w/John's Wedding`<br>
+       **Expected**: The first contact is put in `John's Wedding`'s guest list and the first contact is assigned `John's Wedding` on its contact card.
+
+    3. **Test case**: `assign-wedding 1 w/John's Wedding p1/` (assuming `John's Wedding` does not yet have a partner 1 assigned) <br>
+       **Expected**: The first contact is set as `John's Wedding`'s `Partner 1` and the first contact is assigned `John's Wedding` on its contact card.
+
+    4. **Test case**: `assign-wedding 2 w/John's Wedding p1/` (assuming `John's Wedding` **does** have a partner 1 assigned) <br>
+       **Expected**: The first contact is set as `John's Wedding`'s `Partner 1` and the first contact is assigned `John's Wedding` on its contact card.
+        `John's Wedding` is unassigned from the contact card of the contact that was previously assigned as `Partner 1`.
+
+    5. Similar test cases to 3 and 4 can be attempted with the `[p2/]` prefix instead to test assigning weddings to contacts as `Partner 2`.
+       **Expected**: Similar to expected results for 3 and 4.
+
+    6. **Test case**: `assign-wedding 1 w/Wedding August 19th 2029` (assuming that `Wedding August 19th 2029` is not in the `Wedding` list) <br>
+       **Expected**: No weddings are assigned to any contacts. Error details shown in status message indicating that the `Wedding` does not exist.
+
+    7. **Test case**: `assign-wedding 1 w/Wedding August 19th 2029 f/` (assuming that `Wedding August 19th 2029` is not in the `Wedding` list) <br>
+       **Expected**: The wedding `Wedding August 19th 2029` is created and shown in the `Wedding` list. The first contact is put in `Wedding August 19th 2029`'s guest
+       list and the first contact is assigned `Wedding August 19th 2029` on its contact card.
+
+<br>
+
+2. **Assigning a `Wedding` in the `Wedding list` to a `Person` assigned to the `Wedding`**
+
+   1. **Prerequisites**: List all weddings using the `list-weddings` command. At least 1 wedding exists in the system.
+      List all persons using the `list` command. At least 1 `Person` exists in the list that does not have one `Wedding` assigned to them.
+
+   2. **Test case**: `assign-wedding 1 w/John's Wedding p1/` (assuming `John's Wedding` already has person 1 assigned either in guest list, partner 1, or partner 2) <br>
+      **Expected**: No weddings are assigned to any contacts. Error details shown in status message indicating that the `Wedding` is already assigned to the `Person`.
+
+<br>
+
+
+3. **Assigning a `Wedding` in the `Wedding List` to a `Person` when the `Wedding` is not in the `Wedding List`**
+
+   1. List all persons using the `list` command. At least 1 `Person` exists in the list. 
+   
+   2. **Test case**: `assign-wedding 1 w/John's Wedding` (assuming that `John's Wedding` is not in the `Wedding` list)<br>
+      **Expected**: No contact is assigned. Error details shown.
+
+   3. **Test case**: `assign-wedding 1 w/John's Wedding f/` (assuming that `John's Wedding` is not in the `Wedding` list)<br>
+      **Expected**: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
+
+<br>
+
+
+#### Unassigning Wedding
+
+1. **Unassigning a `Wedding` in the `Wedding list` from a `Person` assigned to the `Wedding`**
+
+   1. **Prerequisites**: List all weddings using the `list-weddings` command. At least 1 wedding exists in the system.
+      List all persons using the `list` command. At least 1 `Person` exists in the list that has 1 wedding assigned.
+   
+   2. **Test case**: `unassign-wedding 1 w/John's Wedding` (assuming the first contact is assigned to `John's Wedding`)<br>
+      **Expected**: 1st contact is removed from `John's Wedding` and `John's Wedding` is removed from their contact card.
+
+<br>
+
+2. **Unassigning a `Wedding` in the `Wedding list` from a `Person` not assigned to the `Wedding`**
+
+   1. **Prerequisites**: List all weddings using the `list-weddings` command. At least 1 wedding exists in the system.
+      List all persons using the `list` command. At least 1 `Person` exists in the list.
+   
+   2. **Test case**: `unassign-wedding 1 w/John's Wedding` (assuming the first contact is not assigned to `John's Wedding`)<br>
+      **Expected**: No weddings are unassigned. Error details shown.
+
+<br>
 
 ---
 <h3 class="features">Task Features</h3>
 
-### Creating Task
-##### ... if `Task1` is not in the list of tasks
-1. Test case: `create-task tk/Task1`<br>
-   Expected: `Task1` is added to list of tasks. Details of the added task are shown.
+#### Creating Task
 
-##### ... if `Task1` is in the list of tasks
-1. Test case: `create-task tk/Task1`<br>
-   Expected: No tasks are added to list of tasks. Error details shown.
+1. **Creating a new `Task`**
 
-1. Test case: `create-task tk/task1`<br>
-   Expected: No tasks are added to list of tasks. Error details shown.
+   1. **Prerequisites**: List all tasks using the `list-tasks` command.
+   
+   2. **Test case**: `create-task tk/Task1`<br>
+         **Expected**: `Task1` is added to list of tasks. Details of the added task are shown in the status message.
 
-### Deleting Task
-##### ... if there is only 1 task in the list
-1. Test case: `delete-task 1`<br>
-   Expected: `Task1` is removed from list of tasks. Details of the removed task are shown.
+<br>
 
-1. Test case: `delete-task 2`<br>
-   Expected: No tasks are removed from list of tasks. Error details shown.
+2. **Creating a `Task` already in the list of `Tasks`**
 
-### Assigning Task
+   1. **Test case**: `create-task tk/Task1` (assuming `Task1` is in the list of `Tasks` already)<br>
+      **Expected**: No tasks are added to list of tasks. Error details shown indicating that the `Task` already exists.
+   
+   2. **Test case**: `create-task tk/task1` (assuming `Task1` is in the list of `Tasks` already)<br>
+      **Expected**: No tasks are added to list of tasks. Error details shown indicating that the `Task` already exists.
+
+<br>
+
+#### Deleting Task
+
+1. **Deleting a `Task` already in the list of `Tasks`, if there is only 1 task in the list.**
+
+   1. **Test case**: `delete-task 1`(assuming the first task is in the list of `Tasks` already) <br>
+      **Expected**: 1st task is removed from the list of `Tasks`. Details of the removed task are shown in the status message.
+
+   2. **Test case**: `delete-task 2`<br>
+      **Expected**: No tasks are removed from list of tasks. Error details shown indicating that the index is invalid.
+
+<br>
+
+#### Assigning Task
 ##### ... if there's only 1 task and 1 vendor in WedLinker and vendor does not have that task assigned to them
 1. Test case: `assign-task 1 1`<br>
    Expected: 1st contact is put in `Task1`'s guest list and 1st contact has `Task1` on its contact card.
@@ -1655,7 +1749,7 @@ applied to edited data, but specific expected results will differ. <br>
 1. Test case: `assign-task 1 1`<br>
    Expected: No tasks are assigned. Error details shown.
 
-### Unassigning Task
+#### Unassigning Task
 ##### ... if first contact has first task
 1. Test case: `unassign-task 1 1`<br>
    Expected: First task unassigned. Details of updated contact shown.
@@ -1664,7 +1758,7 @@ applied to edited data, but specific expected results will differ. <br>
 1. Test case: `unassign-task 1 1`<br>
    Expected: No tasks are unassigned. Error details shown.
 
-### Marking Task
+#### Marking Task
 ##### ... if there's only 2 tasks
 1. Test case: `mark-task 1 2`<br>
    Expected: First two task marked. Details of updated tasks shown.
@@ -1672,7 +1766,7 @@ applied to edited data, but specific expected results will differ. <br>
 1. Test case: `mark-task 1 2 3 4`<br>
    Expected: No tasks marked (besides those originally marked). Error details shown.
 
-### Unmarking Task
+#### Unmarking Task
 ##### ... if there's only 2 tasks
 1. Test case: `unmark-task 1`<br>
    Expected: First task unmarked. Details of updated tasks shown.
@@ -1684,7 +1778,7 @@ applied to edited data, but specific expected results will differ. <br>
 ---
 <h3 class="features">Tag Features</h3>
 
-### Creating Tag
+#### Creating Tag
 ##### ... if `Tag1` is not in the list of tags
 1. Test case: `create-tag w/Tag1`<br>
    Expected: `Tag1` is added to list of tags. Details of the added tag are shown.
@@ -1696,7 +1790,7 @@ applied to edited data, but specific expected results will differ. <br>
 1. Test case: `create-tag w/tag1`<br>
    Expected: No tags are added to list of tags. Error details shown.
 
-### Deleting Tag
+#### Deleting Tag
 ##### ... if `Tag1` is in the list of tags
 1. Test case: `delete-tag w/Tag1`<br>
    Expected: `Tag1` is removed from list of tags. Details of the removed tag are shown.
@@ -1705,7 +1799,7 @@ applied to edited data, but specific expected results will differ. <br>
 1. Test case: `delete-tag w/Tag1`<br>
    Expected: No tags are removed from list of tags. Error details shown.
 
-### Tagging contact
+#### Tagging contact
 ##### ... if `Tag1` is in the list and if the first contact is not tagged with `Tag1`
 1. Test case: `tag 1 t/Tag1`<br>
    Expected: 1st contact is tagged with `Tag1`. Details of the updated contact are shown.
@@ -1721,7 +1815,7 @@ applied to edited data, but specific expected results will differ. <br>
 1. Test case: `tag 1 t/Tag1 f/`<br>
    Expected: 1st contact is tagged with newly created `Tag1`. Details of the updated contact are shown.
 
-### Untagging contact
+#### Untagging contact
 ##### ... if first contact is tagged with `Tag1`
 1. Test case: `untag 1 w/Tag1`<br>
    Expected: `Tag1` is removed from their contact card.
@@ -1731,6 +1825,8 @@ applied to edited data, but specific expected results will differ. <br>
    Expected: No contacts are untagged. Error details shown.
 
 ---
+
+<h3 class="features">General Features</h3>
 
 ### Saving data
 
