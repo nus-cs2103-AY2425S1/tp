@@ -8,7 +8,7 @@ package Logic as LogicPackage {
 
 package "Parser Classes" as ParserClasses{
 }
-Class XYZCommand
+Class WXYZCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
 Class CommandStack
@@ -34,9 +34,9 @@ HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
 LogicManager -right->"1" ParserClasses
-ParserClasses ..> XYZCommand : <<create>>
+ParserClasses ..> WXYZCommand : <<create>>
 
-XYZCommand -up-|> Command
+WXYZCommand -up-|> Command
 LogicManager .left.> Command : <<call>>
 
 LogicManager --> Model
@@ -44,7 +44,7 @@ LogicManager --> Storage
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
-note right of XYZCommand: XYZCommand = AddStudentCommand, \nViewCommand, etc
+note right of WXYZCommand: WXYZCommand = AddStudentCommand, \nViewCommand, etc
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
