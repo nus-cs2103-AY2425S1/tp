@@ -1,16 +1,5 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddJobCommand;
-import seedu.address.model.common.Name;
-import seedu.address.model.job.Job;
-import seedu.address.model.job.JobCompany;
-import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobSalary;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.JobBuilder;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COMPANY_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_JOB_COMPANY_DESC;
@@ -31,11 +20,23 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_NAME_BARIST
 import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_SALARY_BARISTA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
-import static seedu.address.testutil.TypicalJobs.BARISTA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalJobs.BARISTA;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.AddJobCommand;
+import seedu.address.model.common.Name;
+import seedu.address.model.job.Job;
+import seedu.address.model.job.JobCompany;
+import seedu.address.model.job.JobDescription;
+import seedu.address.model.job.JobSalary;
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.JobBuilder;
 
 public class AddJobCommandParserTest {
     private AddJobCommandParser parser = new AddJobCommandParser();
