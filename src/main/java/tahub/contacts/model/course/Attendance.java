@@ -115,7 +115,7 @@ public class Attendance {
     }
 
     /**
-     * Format state as text for viewing.
+     * Formats state as text for viewing.
      */
     public String toString() {
         return String.format("[%d/%d]", getAttendanceAttendedCount(), getAttendanceTotalCount());

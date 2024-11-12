@@ -69,7 +69,7 @@ public class AttendanceSession {
     }
 
     /**
-     * Format state as text for viewing.
+     * Formats state as text for viewing.
      */
     public String toString() {
         return isSessionAttended ? "V" : "X";
