@@ -9,51 +9,43 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Amadeus Eka Kesuma
+<img src="images/amadeuseka.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](https://github.com/AmadeusEka)]
+[[portfolio](team/amadeus.md)]
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* Role: Developer
+* Responsibilities: UI + Data + DevOps
 
-* Role: Project Advisor
+### Saw Jing Wen
 
-### Jane Doe
+<img src="images/shotnothing.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[homepage](https://jwen.cc)]
+[[github](https://github.com/shotnothing)]
+[[portfolio](team/sawjingwen.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* Role: Developer
+* Responsibilities: UI + DevOps
+
+### Jagdeep Singh Hundal
+
+<img src="images/jagdeepsinghnus.png" width="200px">
+
+[[github](http://github.com/JagdeepSinghNUS)]
+[[portfolio](team/jagdeep.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Ensure proper code quality and standards are met in the source code
 
-### Johnny Doe
+### Wong Wei Han
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weihanwong.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/weihanwong)] [[portfolio](team/weihanwong.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Data + DevSecOps
 
-### James Doe
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI

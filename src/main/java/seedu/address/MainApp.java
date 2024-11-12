@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
@@ -36,7 +37,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 3, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -64,7 +65,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model, storage);
 
-        ui = new UiManager(logic);
+        ui = new UiManager(logic, getHostServices());
     }
 
     /**
@@ -84,10 +85,21 @@ public class MainApp extends Application {
                         + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            if (initialData.getRestaurantList().isEmpty()) {
+                throw new DataLoadingException(new Exception("Mismatch"));
+            }
+            storage.saveAddressBook(initialData);
+        } catch (DataLoadingException | IOException e) {
+            try {
+                logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+                        + " Will be starting with an Sample AddressBook.");
+                initialData = SampleDataUtil.getSampleAddressBook();
+                storage.saveAddressBook(initialData);
+            } catch (IOException f) {
+                logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+                        + " Will be starting with an Blank AddressBook.");
+                initialData = new AddressBook();
+            }
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -166,6 +178,15 @@ public class MainApp extends Application {
         }
 
         return initializedPrefs;
+    }
+
+    /**
+     * Returns an instance of HostServices.
+     *
+     * @return HostServices instance
+     */
+    public HostServices getHostServicesInstance() {
+        return getHostServices();
     }
 
     @Override

@@ -1,0 +1,21 @@
+{
+  "restaurants" : [ {
+    "name" : "Swenswen",
+    "phone" : "87438807",
+    "email" : "sowhen@idk.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "rating" : null,
+    "tags" : [ "western", "family" ],
+    "price" : "$$",
+    "isFavourite" : false
+  }, {
+    "name" : "Swenswen",
+    "phone" : "87438807",
+    "email" : "sowhen@idk.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "rating" : null,
+    "tags" : [ "western", "family" ],
+    "price" : "$$",
+    "isFavourite" : false
+  } ]
+}

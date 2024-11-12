@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":UnfavouriteCommandParser" as UnfavouriteCommandParser LOGIC_COLOR
+participant "u:UnfavouriteCommand" as UnfavouriteCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("unfav 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("unfav 1")
+activate AddressBookParser
+
+create UnfavouriteCommandParser
+AddressBookParser -> UnfavouriteCommandParser
+activate UnfavouriteCommandParser
+
+UnfavouriteCommandParser --> AddressBookParser
+deactivate UnfavouriteCommandParser
+
+AddressBookParser -> UnfavouriteCommandParser : parse("1")
+activate UnfavouriteCommandParser
+
+create UnfavouriteCommand
+UnfavouriteCommandParser -> UnfavouriteCommand
+activate UnfavouriteCommand
+
+UnfavouriteCommand --> UnfavouriteCommandParser
+deactivate UnfavouriteCommand
+
+UnfavouriteCommandParser --> AddressBookParser : u
+deactivate UnfavouriteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+UnfavouriteCommandParser -[hidden]-> AddressBookParser
+destroy UnfavouriteCommandParser
+
+AddressBookParser --> LogicManager : u
+deactivate AddressBookParser
+
+LogicManager -> UnfavouriteCommand : execute(u)
+activate UnfavouriteCommand
+
+UnfavouriteCommand -> Model : unfavouriteRestaurant(1)
+activate Model
+
+Model --> UnfavouriteCommand
+deactivate Model
+
+create CommandResult
+UnfavouriteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> UnfavouriteCommand
+deactivate CommandResult
+
+UnfavouriteCommand --> LogicManager : r
+deactivate UnfavouriteCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml
