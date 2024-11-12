@@ -785,7 +785,7 @@ revert the change?<br>
 **A**: Unfortunately, we have **not** implemented an undo command for TAHub contacts.
 :pensive:
 <br>
-So be careful especially when you're using desctructive (deletion) commands!
+So be careful especially when you're using destructive (deletion) commands!
 
 </a>
 
