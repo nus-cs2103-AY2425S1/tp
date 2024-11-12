@@ -178,7 +178,7 @@ Step 1. The user executes `add n/John Doe p/+65 98765432 e/johnd@example.com r/0
 
 </box>
 
-Step 2. The `add` command adds a contact with the name John Doe, phone number +65 98765432, email johnd@example.com, room number #01-1008, address John street, tag "Floor 1" to the address book. 
+Step 2. The `add` command adds a contact with the name John Doe, phone number +65 98765432, email johnd@example.com, room number #01-1008, address John street, tag "Floor 1" to the address book.
 
 The following sequence diagram shows how an `add` command goes through the `Logic` component:
 
@@ -233,7 +233,7 @@ The following activity diagram summarizes what happens when a user executes a `e
 #### Implementation
 
 The undo mechanism is facilitated by the interface `Undoable`.
-It has the `undo()` method. The `undo()` method is called when the user executes the `undo` command. 
+It has the `undo()` method. The `undo()` method is called when the user executes the `undo` command.
 The `undo()` method reverses the effects of the command that was previously executed.
 The `undo()` method is implemented in the undoable command classes, such as `AddCommand`, `DeleteCommand`, `EditCommand`, etc.
 
@@ -351,21 +351,21 @@ The following activity diagram summarizes what happens when a user executes a `c
 
 #### Implementation
 
-* the findCommand is enhanced by new Predicates 
+* the findCommand is enhanced by new Predicates
 * RoomNumber predicates, PhonePredicate, and TagContainsKeywordsPredicate allows
  a wider range of searching based on more features
 
 Below is a detailed process illustration using a sequential diagram:
 
-Step 1. The user issues a `find` command followed by specific parameters, 
-for example: `t/friends n/Alex r/08-0805 p/9124 6892`, searches for a profile with a 
+Step 1. The user issues a `find` command followed by specific parameters,
+for example: `t/friends n/Alex r/08-0805 p/9124 6892`, searches for a profile with a
 tag of friends, a name called Alex, a roomNumber of 08-0805, and a phone call of 9124 6842
- 
-**Note** : These parameters can be combined in any sequence, allowing for versatile parameter configurations. 
+
+**Note** : These parameters can be combined in any sequence, allowing for versatile parameter configurations.
 
 Step 2. The parser interprets the user command and constructs corresponding predicates for the `FindCommand` object.
 
-Step 3. The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search 
+Step 3. The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search
 
 results based on the specified criteria.
 
@@ -392,12 +392,12 @@ The following sequence diagram shows how a `export` command goes through the `Lo
 
 * **Alternative 2 (current implementation):** The time of the device's system at the moment of `export`
     * Pros: Allows for pinpoint of exact save files as no two files can be exported at the same time.
-    * Cons: Takes longer to manually understand the name of the save file when trying to locate a specific one, 
+    * Cons: Takes longer to manually understand the name of the save file when trying to locate a specific one,
   especially when multiple `exports` happen within a short period of time. Also has no mention of contents of JSON file.
 
 * **Alternative 3:** A brief summary of the file such as `FIRST-Alex_Jones LENGTH-20`
     * Pros: Easy for the user to know at first glance which save file contains what.
-    * Cons: Does not tell the user at what time they actually exported the save file. Also has no indication of the 
+    * Cons: Does not tell the user at what time they actually exported the save file. Also has no indication of the
   chronology of creation of the files, and hence no information on which file was the last to be created. Additionally,
   it would become complicated when exporting files with similar data.
 
@@ -413,7 +413,7 @@ Given below is an example usage scenario and how the `import` command behaves at
 
 Step 1. The user executes `import fp/./data/SaveFile3.json`
 
-Step 2. The 
+Step 2. The
 
 The following sequence diagram shows how a `import` command goes through the `Logic` component:
 
@@ -443,7 +443,7 @@ for example: `delete 1`, delete the contact with an index of 1.
 
 Step 2. The parser parses the input command and returns a `DeleteCommand`.
 
-Step 3. The `DeleteCommand` is executed by the LogicManager and delete popup get displayed. 
+Step 3. The `DeleteCommand` is executed by the LogicManager and delete popup get displayed.
 
 Step 4. If user click ok on the popup, model updates the filteredPersonList and removes the contact, otherwise cancel the deletion.
 
@@ -562,7 +562,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to edit or add additional information for a specific profile. This can be the name, phone number, email address, address, emergency contact details, graduation year or tags. 
+1. User requests to edit or add additional information for a specific profile. This can be the name, phone number, email address, address, emergency contact details, graduation year or tags.
 2. DorManagerPro updates the profile with the new or updated information.
 
    Use case ends.
@@ -616,7 +616,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. DorManagerPro cannot find any students who have graduated.
     * 1b1. DorManagerPro displays an error message informing the user all students in the address book have yet to graduate.
-    
+
   Use case ends.
 
 * *a. At any time, User chooses to stop deleting all graduated students.
@@ -819,7 +819,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless> 
+<box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more *exploratory* testing.
 
@@ -861,7 +861,7 @@ Given below are instructions to test the app manually.
    1. Test case: `find` <br>
       Expected: An error message is shown stating that the command format is incorrect and showing the user the correct format.
    2. Test case: `find t/` <br>
-      Expected: Listing out everyone is the contact list.  
+      Expected: Listing out everyone is the contact list.
 2. Finding a person with all possible parameters specified.
    1. Prerequisites: There is a contact in the list with a name `John Doe`, a phone number of `98765432`, a room number of `08-0805`, and a tag of `friends`.
    2. Test case:  `find n/John Doe p/98765432 r/08-0805 t/friends` <br>
@@ -942,7 +942,7 @@ Given below are instructions to test the app manually.
 
 5. Adding a person with duplicate phone.
    1. Prerequisites: There is at least one person in the address book.
-   2. Test case: 
+   2. Test case:
       1. Step 1: `add n/John Doe p/12345678 e/johnd@example.com` <br>
       2. Step 2: `add n/Alex Yeoh p/12345678 e/heyhey@example.com` <br>
          Expected: An error message appears informing the user that there is already someone with that phone number in the address book.
@@ -997,7 +997,7 @@ Given below are instructions to test the app manually.
 
 1. Deleting all graduated students when all persons are being shown.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with at least 1 person with GRADUATION_YEAR field earlier than the current year.
-   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br> 
+   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br>
       Expected: All persons with GRADUATION_YEAR field YEAR - 1 or earlier deleted from the address book. Status message informs the user that graduated students have been deleted, and deleted persons visibly disappear from the list of all students.
    3. Test case: `clean dasd`, executed in YEAR, where YEAR is the current year. <br>
       Expected: Similar to (ii). All trailing characters in a valid command is ignored.
@@ -1011,7 +1011,7 @@ Given below are instructions to test the app manually.
       4. We execute `list` and see that Alex is deleted. ![step 4](images/CleanManualTestingAfterFindStep4.png)
 3. Attempting to delete all graduated students when there are none.
    1. Prerequisites: No persons present in the address book with GRADUATION_YEAR field earlier than the current year.
-   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br> 
+   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br>
       Expected: An error message displayed informing the user that there are no graduated students to be deleted.
 
 
@@ -1019,9 +1019,7 @@ Given below are instructions to test the app manually.
 
 Team size: 5
 
-1. **Add more precise functionality to the `clean` command**. The `clean` command currently does not allow removal of 
-students who have graduated in the current year, as it can only detect the graduation year but not the month. We plan to 
-add support for storing a more specific graduation date, such that we can accurately remove students who have graduated immediately after their graduation.
+1. **Add more precise functionality to the `clean` command**. The `clean` command currently does not allow removal of students who have graduated in the current year, as it can only detect the graduation year but not the month. We plan to add support for storing a more specific graduation date, such that we can accurately remove students who have graduated immediately after their graduation.
 
 2. **Add support for setting EmergencyName, EmergencyPhone and GraduationYear using the `add` command.**
 The `add` command currently does not allow setting emergency contact details and graduation year of students.
@@ -1029,7 +1027,7 @@ The only way to set these fields is through the `edit` command, which can be inc
 We plan to add support for setting EmergencyName, EmergencyPhone and GraduationYear to the `add` command.
 
 3. **Add more features to the help command pop up window.** The `help` command pop up window currently only shows instructions for three commands, `add`, `edit` and `delete`. We plan
-to add instructions for all other features to make it easier to familiarise themselves with the commands without going to the external User Guide. 
+to add instructions for all other features to make it easier to familiarise themselves with the commands without going to the external User Guide.
 
 4. **Add support to file path formatting in `import`.** Currently, the FILE_PATH parameter for the `import` command only takes in forward slashes, `/`, when taking in user input, e.g. `import fp/./data/SaveFile.json` would be a valid file path for `import`, but `import fp/.\data\SaveFile.json` would not be valid. We plan to add support to `\` as a delimited between folders and files in the future to be more intuitive for users of all Operating Systems, especially those that use backslashes in file paths like Windows.
 
@@ -1043,7 +1041,7 @@ DorManagerPro could not access the file at FILE_PATH. This could be because the 
 ### Overview
 
 As we have adapted AB3 for university dorm managers, our main efforts were in adding support for other necessary fields, enhancing the duplicate handling and data validation, and providing extra functions to streamline data saving, adding, updating and to safeguard against mistakes.
-This posed substantial difficulties for us, as we had to work within the AB3 model and implement the multiple features to be compatible with the rest of the app. 
+This posed substantial difficulties for us, as we had to work within the AB3 model and implement the multiple features to be compatible with the rest of the app.
 
 Here are some of the achievements of DorManagerPro:
 * Fields
@@ -1065,7 +1063,7 @@ Lines of Code: 24608
 #### Challenge 1: Implementing undo functionality for import command
 
 The undo functionality was initially implemented by extending an abstract class `ConcreteCommand` with the `undo` abstract method.
-However, the import command is an undoable command that also extends the `FileAccessCommand` class. 
+However, the import command is an undoable command that also extends the `FileAccessCommand` class.
 This posed a challenge as the import command could not extend two classes at once because Java does not allow multiple inheritance.
 To overcome this, we had to refactor the `ConcreteCommand` class to an interface `Undoable` and let all undoable commands implement this interface.
 This allowed us to implement the `undo` method in the import command.
@@ -1077,6 +1075,6 @@ The workaround our team decided on was to create a new class `FileAccessCommand`
 
 ### Challenge 3: Removal of address field as a compulsory field
 
-While AddressBook3 initially had address as a compulsory field when adding a person to the contact list, our team felt that in the context of DorManagerPro, addresses could instead be optional. This is as all the residents would by default live in the dorm managed by the user, and by extension have a common address most of the time. 
+While AddressBook3 initially had address as a compulsory field when adding a person to the contact list, our team felt that in the context of DorManagerPro, addresses could instead be optional. This is as all the residents would by default live in the dorm managed by the user, and by extension have a common address most of the time.
 We then had to contemplate between the outright removal of the field or only making it optional. We decided to make it optional as it could still provide helpful information such as the students permanent residence outside the dorm in case the user had to contact them.
 Regardless, it was still quite a challenge to make the once compulsory field optional since it was so intertwined with the original AddressBook3.
