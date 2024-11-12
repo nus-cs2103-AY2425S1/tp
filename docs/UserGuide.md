@@ -734,10 +734,9 @@ The `import` command allows you to bring data from a CSV file into the applicati
 - For errors such as "file not found," confirm the path type (absolute vs. relative) and the file’s existence.
 - Ensure the application has access rights to the specified directory.
 - If you receive an error message indicating that the file is "corrupted or missing compulsory fields," check the following:
-
-Ensure all required fields are present in each row of your CSV file (e.g., name, category, studentID or industry, phone, email, address).
-Confirm that each row follows the correct format, with entries for every compulsory field. Empty fields can trigger this error.
-Verify that the file is saved with a .csv extension and is structured as a valid CSV (comma-separated values), with columns corresponding to the required fields.
+  - Ensure all required fields are present in each row of your CSV file (e.g., name, category, studentID or industry, phone, email, address).
+  - Confirm that each row follows the correct format, with entries for every compulsory field. Empty fields can trigger this error.
+  - Verify that the file is saved with a `.csv` extension and is structured as a valid CSV (comma-separated values), with columns corresponding to the required fields.
 
 ---
 
