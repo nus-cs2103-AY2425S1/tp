@@ -12,12 +12,6 @@ public class RoleTest {
         assertThrows(NullPointerException.class, () -> new Role(null));
     }
 
-    //    @Test
-    //    public void constructor_invalidRoleName_throwsIllegalArgumentException() {
-    //        String invalidRoleName = "";
-    //        assertThrows(IllegalArgumentException.class, () -> new Role(invalidRoleName));
-    //    }
-
     @Test
     public void constructor_whiteSpaceRoleName_throwsIllegalArgumentException() {
         String invalidRoleName = "   ";
