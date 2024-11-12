@@ -4,10 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -23,6 +26,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Email;
@@ -49,8 +53,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_ADDRESS + " ADDRESS] "
-            + "[" + PREFIX_SUBJECT + " SUBJECT]"
-            + "[" + PREFIX_CLASSES + " CLASS]"
+            + "[" + PREFIX_SUBJECT + " SUBJECT]… "
+            + "[" + PREFIX_CLASSES + " CLASS] "
+            + "[" + PREFIX_NEXT_OF_KIN + " NEXT_OF_KIN] "
+            + "[" + PREFIX_EMERGENCY_CONTACT + " EMERGENCY_CONTACT] "
+            + "[" + PREFIX_TAG + " TAG]… "
+            + "\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + " johndoe@example.com";
@@ -85,8 +93,10 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Model modelWithoutPersonToEdit = new ModelManager(model.getAddressBook(), model.getUserPrefs());
+        modelWithoutPersonToEdit.deletePerson(personToEdit);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (modelWithoutPersonToEdit.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -189,7 +199,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, classes, subjects, gender);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, classes, subjects, gender, nextOfKin,
+                    emergencyContact);
         }
 
         public void setNextOfKin(Name nextOfKin) {
@@ -309,7 +320,9 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(subjects, otherEditPersonDescriptor.subjects)
-                    && Objects.equals(classes, otherEditPersonDescriptor.classes);
+                    && Objects.equals(classes, otherEditPersonDescriptor.classes)
+                    && Objects.equals(nextOfKin, otherEditPersonDescriptor.nextOfKin)
+                    && Objects.equals(emergencyContact, otherEditPersonDescriptor.emergencyContact);
         }
 
         @Override

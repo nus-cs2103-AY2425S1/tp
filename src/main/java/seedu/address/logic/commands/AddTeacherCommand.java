@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -28,9 +29,11 @@ public class AddTeacherCommand extends Command {
             + PREFIX_GENDER + " GENDER "
             + PREFIX_PHONE + " PHONE "
             + PREFIX_EMAIL + " EMAIL "
-            + PREFIX_ADDRESS + " ADDRESS "
+            + "[" + PREFIX_ADDRESS + " ADDRESS] "
             + PREFIX_SUBJECT + " SUBJECT "
+            + "[" + PREFIX_SUBJECT + " SUBJECT]... "
             + PREFIX_CLASSES + " CLASSES "
+            + "[" + PREFIX_TAG + " TAG]..."
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
@@ -42,7 +45,6 @@ public class AddTeacherCommand extends Command {
             + PREFIX_CLASSES + " 7A,7B ";
 
     public static final String MESSAGE_SUCCESS = "New teacher added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TEACHER = "This teacher already exists in the address book";
 
     private final Teacher toAdd;
 
@@ -59,7 +61,7 @@ public class AddTeacherCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TEACHER);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addPerson(toAdd);

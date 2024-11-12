@@ -155,6 +155,38 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Command History
+
+#### Implementation
+
+The command history functionality is implemented in three main components:
+
+1. `CommandHistory`: This class maintains a list of past commands and `currentIndex` to track the current position within the list. It includes methods for adding new commands and retrieving the previous or next command:
+
+* `add(command)` — Adds a command to the history and resets the pointer to the most recent position.
+* `getPreviousCommand()` — Moves the pointer to the previous command and returns it.
+* `getNextCommand()` — Moves the pointer to the next command and returns it.
+
+2. `LogicManager`: The `LogicManager` component integrates the `CommandHistory` to store each command upon execution. It provides access to the history for other components like the UI.
+
+
+3. `CommandBox` UI Component: This component captures key events when the user presses the up or down arrow keys. Based on these key events, it retrieves commands from `CommandHistory` via `LogicManager` and displays them in the command input field.
+
+#### Sequence Diagram
+
+The following sequence diagram illustrates the flow when a user presses the up arrow key to access the previous command in history:
+
+![CommandHistorySequence](images/CommandHistorySequenceDiagram.png)
+
+1. The user presses the up arrow key.
+2. `CommandBox` calls `LogicManager#getPreviousCommand()`.
+3. `LogicManager` delegates this request to `CommandHistory#getPrevious()`.
+4. `CommandHistory` retrieves the previous command and returns it to `LogicManager`.
+5. `LogicManager` then passes the command back to `CommandBox`.
+6. `CommandBox` displays the previous command in the input field.
+
+This streamlined structure keeps the history management isolated within CommandHistory, simplifying logic in other components. The result is an intuitive user experience that enhances the command-line interface.
+
 ### Undo/redo feature
 
 #### Implementation
@@ -232,7 +264,32 @@ The following activity diagram summarizes what happens when a user executes a ne
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md) 
+* [DevOps guide](DevOps.md)
+
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned Enhancements**
+
+Team Size: 5
+
+1. **Update `student` and `teacher` success message**: The current success message for adding a student or teacher without any tags ends with `; Tags:`, i.e. it attempts to display the tags but since none were added, it ends off abruptly. 
+
+    We plan to make the success message only mention the Tags _if_ there are tags to be listed, e.g. either `... Next of Kin: Bob Doe; Emergency Contact: 87654321;` (i.e. no tags) or `... Next of Kin: Bob Doe; Emergency Contact: 87654321; Tags: [friend]` (i.e. at least one tag to be displayed)
+2. **Enhance `mark` command's implementation**: The current implementation of `mark` can only mark the attendance of all students together. This prevents users from easily marking the attendance of individual students. The current workaround is to either `mark` and `unmark` all other students or to `delete` and add the student back into EduConnect with the incremented attendance field. 
+
+    We plan to introduce optional index parameters for the `mark` command, allowing users to specify which indexes to specifically mark the attendance of. This implementation will be similar to the `unmark` command. E.g. `mark` will still mark the attendance of all students but `mark 1 2` will only mark the attendance of the 1st and 2nd index persons (assuming they are students)
+3. **Save theme preference upon exit**: Currently, if a user changes themes to light mode and exits EduConnect, that theme preference is not saved. That means when they reopen the app, it will use the dark mode theme (despite closing on light mode).
+
+    We plan to rework the app such that it actually saves the theme preference upon exit, meaning that whatever theme a user exits with is the theme that is used automatically upon reopening the app.
+4. Prevent teacher command from accepting "/nok", "/attendance" and "/emergency" prefix
+5. Relax restrictions on phone number to allow international phone numbers
+6. Make gender keyword case-insensitive
+7. Allow editing of attendance for students
+8. Update find to be able to find with partial info (e.g. /find name han can find "Hans")
+9. **Prevent duplicate subjects to be added**: The current implementation for adding a contact allows for duplicate subjects to be added for a contact. We plan to prevent the addition of duplicate contacts by filtering out subjects that already exist in the contact's subject list.
+10. **Allow certain special characters in names**: The current implementation for adding a contact prevents the use of any special characters in names. We plan to allow the incorporation of characters such as '/' and '-' in names to accommodate a wider range of names. 
+
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -297,14 +354,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. EduConnect verifies the command inputs
 3. EduConnect adds the student’s contact details to the address book
 4. EduConnect displays a success message
-    
+
     Use case ends.
 
 **Extensions**
 
 * 2a. Required parameter(s) missing in command format
   * 2a1. EduConnect displays an error message.
-  
+
     Use case ends.
 
 * 2b. Invalid/Unsupported parameter tag used
@@ -319,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2d. Existing contact or email given
   * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
-    
+
     Use case ends.
 
 **Use case: UC02 - Add a teacher**
@@ -332,34 +389,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. EduConnect verifies the command inputs
 3. EduConnect adds the teacher’s contact details to the address book
 4. EduConnect displays a success message
-   
+
     Use case ends.
 
 **Extensions**
 * 2a. Required parameter(s) missing in command format
   * 2a1. EduConnect displays an error message.
-    
+
     Use case ends.
 
 * 2b. Invalid/Unsupported parameter tag used
   * 2b1. EduConnect displays an error message
-    
+
     Use case ends.
 
-* 2c. Invalid argument for a parameter given 
+* 2c. Invalid argument for a parameter given
   * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”
-    
+
     Use case ends.
 
 * 2d. Existing contact or email given
   * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
-    
+
     Use case ends.
 
 **Use case: UC-03 Delete a contact**
 
 **Preconditions**
-* The address book contains at least one contact 
+* The address book contains at least one contact
 * User knows the index of the contact to be deleted
 
 **MSS**
@@ -367,32 +424,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. EduConnect verifies the index validity
 3. EduConnect deletes the contact from the address book
 4. EduConnect displays a success message
-   
+
     Use case ends.
 
 **Extensions**
 * 2a. Invalid index provided
   * 2a1. EduConnect displays an error message, e.g. “The person index provided is invalid: 2”
-    
+
     Use case ends.
 
 **Use case: UC-04 List contacts**
 
 **MSS**
 1. Teacher enters the list command
-2. EduConnect displays a list of all contacts in the address book 
+2. EduConnect displays a list of all contacts in the address book
 
-    Use case ends.
-
-**Extensions**
-* 1a. Teacher specifies some filter criteria using valid tags
-  * 1a1. EduConnect displays a list of all contacts that fit that criteria in the address book
-    
-    Use case ends.
-  
-* 1b. Teacher uses invalid tags to filter
-  * 1b1. EduConnect displays an error message, e.g. “Invalid detail to find with! Please use one of the following options: name, gender, contact, classes, subject, email”
-    
     Use case ends.
 
 **Use case: UC-05 Edit a contact**
@@ -405,35 +451,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Teacher enters the edit command
 2. EduConnect verifies the command inputs
 3. EduConnect edits the specified contact in the address book
-4. EduConnect displays a success message 
+4. EduConnect displays a success message
 
     Use case ends.
 
 **Extensions**
 * 2a. Invalid index provided
-  * 2a1. EduConnect displays an error message, e.g. “Invalid index provided, enter an integer between [0, 10)”
+  * 2a1. EduConnect displays an error message.
 
     Use case ends.
 
 * 2b. Invalid/Unsupported parameter tag used
-  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to edit! Please use the following options: name, gender, contact, classes, subject, email”
-  
+  * 2b1. EduConnect displays an error message.
+
     Use case ends.
-  
+
 * 2c. Invalid new argument for a parameter given
-  * 2c1. EduConnect displays an error message, e.g. “New name given is invalid! Please give a name that fits: First name and last name (with optional middle names)”
-    
+  * 2c1. EduConnect displays an error message, e.g. "Names should only contain alphanumeric characters and spaces, and it should not be blank"
+
     Use case ends.
 
 * 2d. Duplicate contact or email provided
-  * 2d1. EduConnect displays an error message, e.g. “The email boydanderson@gmail.com is already in use”
-  
+  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
+
     Use case ends.
 
 **Use case: UC-06 Clear**
 
 **Preconditions**
-* User may optionally specify the occupation (teacher or student) and tags to filter which contacts are cleared
+* User may optionally specify tags to filter which contacts are cleared
 
 **MSS**
 1. Teacher enters the clear command
@@ -443,28 +489,94 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
-* 1a. Teacher specifies an occupation to clear
-  * 1a1. EduConnect clears all contacts of that occupation in the address book
-  
-    Use case ends.
-
-* 1b. Teacher specifies an invalid occupation
-  * 1b1. EduConnect displays an error message, e.g. “Invalid occupation to clear, please specify either teacher or student”
-  
-    Use case ends.
-
-* 1c. Teacher specifies a tag to clear 
-  * 1c1. EduConnect clears all contacts with that tag value in the address book
+* 1a. Teacher specifies a tag to clear
+  * 1a1. EduConnect clears all contacts with that tag value in the address book
 
     Use case ends.
 
-* 1d. Teacher specifies an invalid tag
-  * 1d1. EduConnect displays an error message, e.g. “Invalid detail to clear with! Please use one of the following options: name, gender, contact, classes, subject, email”
+* 1b. Teacher specifies an invalid tag
+  * 1b1. EduConnect displays an error message.
 
     Use case ends.
 
-* 1e. Teacher specifies an occupation or tag with no matching contacts
-  * 1e1. EduConnect displays a warning, e.g. “No contacts matching the specified filter, no changes made to address book”
+* 1c. Teacher specifies a tag with no matching contacts
+  * 1c1. EduConnect displays an error, e.g. “No possible entries in EduConnect to clear!”
+
+    Use case ends.
+
+**Use case: UC-07 Find**
+
+**MSS**
+1. Teacher enters the find command with some specific criteria
+2. EduConnect displays a list of all persons that fit that criteria in the address book
+
+   Use case ends.
+
+**Extensions**
+* 1a. Teacher doesn't specify any criteria
+    * 1b1. EduConnect displays an error message.
+
+      Use case ends.
+
+* 1b. Teacher uses invalid tags to filter
+    * 1b1. EduConnect displays an error message.
+
+      Use case ends.
+
+**Use case: UC-08 Sort**
+
+**MSS**
+1. Teacher enters the sort command with some criteria
+2. EduConnect sorts the list of all persons by that criteria
+3. EduConnect displays the list of all persons in the address book
+
+   Use case ends.
+
+**Extensions**
+* 1a. Teacher doesn't specify any criteria
+  * 1a1. EduConnect displays an error message.
+
+    Use case ends.
+* 1b. Teacher specifies invalid criteria
+  * 1b1. EduConnect displays an error message.
+
+    Use case ends.
+
+**Use case: UC-09 Mark Attendance**
+
+**MSS**
+1. Teacher enters the mark command
+2. EdUConnect marks all the students attendance, incrementing it by 1
+
+    Use case ends.
+
+**Use case: UC-10 Unmark Attendance**
+
+**MSS**
+1. Teacher enters the unmark command with the index(es) of the student(s) to unmark
+2. EduConnect unmarks the specified student(s) attendance, decrementing it by 1
+
+    Use case ends.
+
+**Extensions**
+* 1a. Teacher doesn't specify any indexes
+  * 1a1. EduConnect displays an error message.
+
+    Use case ends.
+* 1b. Teacher specifies an invalid index
+  * 1b1. EduConnect displays an error message.
+
+    Use case ends.
+* 1c. Teacher specifies an index of a Student with 0 days attendance
+  * 1c1. EduConnect displays an error message, e.g. "Only students who have attended at least one day can be unmarked".
+
+    Use case ends.
+
+**Use case: UC-11 Reset attendance**
+
+**MSS**
+1. Teacher enters the resetAttendance command
+2. EduConnect resets the attendance of all students in the address book
 
     Use case ends.
 
@@ -511,7 +623,7 @@ testers are expected to do more *exploratory* testing.
    1. Open the “Command Prompt” (for Windows) or “Terminal” (for Mac/Linux).
    2. Type `cd` followed by the folder location where you saved the EduConnect file.
    3. Type and enter the command `java -jar educonnect.jar`
-   
+
         Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
@@ -525,15 +637,15 @@ testers are expected to do more *exploratory* testing.
 1. Adding a Student
     1. Prerequisities: There is no existing person (student or teacher) in EduConnect with the same contact or email as the student we're adding.
     1. Test case: `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321`
-   
+
         **Expected**: A student is added to EduConnect with the specified details. A new blue colored card is added to the GUI with the student's details.
    2. Test case: `student` (missing required fields like name, contact, etc. )
-   
+
         **Expected**: No student is added. An error is thrown indicating the command given has an invalid format.
    3. Other incorrect `student` commands to try:
       - `student /name John Doe` (missing other required fields)
       - `student /name John Doe /contact 12345 ...` (invalid phone format)
-   
+
       **Expected**: Similar to previous case. No student is added. If all required fields are provided but an invalid format was used, specific error details for that will be given. For example, "Phone numbers should only contain numbers, and it should be exactly 8 digits long".
 
 ### Adding a Teacher
@@ -565,7 +677,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, negative or a non-integer)<br>
       **Expected**: Similar to previous.
-   
+
    1. Test case: `delete 1 2`<br>
         **Expected**: First and second contact is deleted from the list. Details of the deleted contacts are shown in the status message.
 
@@ -583,7 +695,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `edit 3 /name Bob /contact 12345678`<br>
         **Expected**: Third contact's name is edited to "Bob" and contact number is edited to 12345678. Details of the edited contact shown in the status message.
    4. Test case: `edit 0 /name Bob`<br>
-        **Expected**: No person is edited. Error details shown in the status message. 
+        **Expected**: No person is edited. Error details shown in the status message.
    5. Other incorrect edit commands to try: `edit`, `edit x` (where x is larger than the list size, negative or non-integer), `edit 1 /contact 111` (invalid phone format)<br>
         **Expected**: Similar to previous case. No person is edited. If an invalid format was used, specific error details for that will be given. For example, "Phone numbers should only contain numbers, and it should be exactly 8 digits long".
 
@@ -614,11 +726,11 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `sort name`<br>
         **Expected**: All the persons in EduConnect are sorted by their name in alphabetical order.
    3. Test case: `sort subject`<br>
-      **Expected**: All the persons in EduConnect are sorted by their subjects in alphabetical order.
+      **Expected**: All the persons in EduConnect are sorted by their first subject in their list in alphabetical order.
    4. Test case: `sort class`<br>
-      **Expected**: All the persons in EduConnect are sorted by their classes in alphabetical order.
+      **Expected**: All the persons in EduConnect are sorted by their first class in their list in alphabetical order.
    5. Test case: `sort attendance`<br>
-      **Expected**: All the persons in EduConnect are sorted by their attendance in alphabetical order. Teachers (who don't have attendance) are pushed to the end.
+      **Expected**: All the persons in EduConnect are sorted by their attendance in descending order. Teachers (who don't have attendance) are pushed to the end.
    6. Test case: `sort x` (where x is some random input that isn't any of the earlier test cases)<br>
         **Expected**: EduConnect is not sorted. Error details shown in the status message.
 2. Sorting EduConnect while only some persons are shown
@@ -638,7 +750,7 @@ testers are expected to do more *exploratory* testing.
    **Expected**: EduConnect remains the same. Error details shown in the status message.
    6. Other incorrect `find` commands to try:
       - `find John` (where the command is missing a TAG to find with)
-   
+
       **Expected**: Similar to previous case. EduConnect remains the same. Error details shown in the status message.
 
 2. Finding people in EduConnect while only some persons are shown
@@ -678,7 +790,7 @@ testers are expected to do more *exploratory* testing.
    **Expected**: No students' attendance are affected. Error details shown in the status message.
    4. Other incorrect `unmark` commands to try:
       - `unmark`, `unmark x` (where x is larger than the list size, negative or a non-integer)
-   
+
       **Expected**: Similar to previous case. Error details shown in the status message.
    5. Test case: `unmark 1` (where index 1 is a teacher) <br>
    **Expected**: Similar to previous case. Error details shown in the status message.

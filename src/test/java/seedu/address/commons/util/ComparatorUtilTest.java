@@ -1,6 +1,7 @@
 package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -28,6 +29,11 @@ public class ComparatorUtilTest {
     }
 
     @Test
+    public void compareClassStrings_invalidNumericFormat_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> ComparatorUtil.compareClassStrings("1A", "B"));
+    }
+
+    @Test
     public void getPrimaryClassForSorting_nonEmptyList_correctPrimaryClass() {
         List<String> classList = Arrays.asList("4B", "2A", "3C", "1D");
         String primaryClass = ComparatorUtil.getPrimaryClassForSorting(classList);
@@ -46,6 +52,11 @@ public class ComparatorUtilTest {
         List<String> classList = Arrays.asList("2A");
         String primaryClass = ComparatorUtil.getPrimaryClassForSorting(classList);
         assertEquals("2A", primaryClass);
+    }
+
+    @Test
+    public void getPrimaryClassForSorting_nullList_throwsException() {
+        assertThrows(NullPointerException.class, () -> ComparatorUtil.getPrimaryClassForSorting(null));
     }
 
     @Test

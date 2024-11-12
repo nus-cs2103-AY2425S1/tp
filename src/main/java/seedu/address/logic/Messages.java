@@ -20,12 +20,16 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_DUPLICATE_PERSON_DISPLAYED_INDEX = "There was a duplicate index provided";
 
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+
     public static final String MESSAGE_INVALID_STUDENT_INDEX = "Only Students can have their attendance unmarked";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_INVALID_ATTENDANCE = "Only students who have attended at "
             + "least one day can be unmarked.";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+
+    public static final String MESSAGE_NO_STUDENTS = "There are no students in the address book.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

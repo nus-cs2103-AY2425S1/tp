@@ -152,6 +152,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Unmarks the attendance of a particular student.
      */
     public void unmarkAttendance(Person personToUnmark) throws CommandException {
+        requireNonNull(personToUnmark);
         Person updatedPerson = personToUnmark.withDecrementedAttendance();
         setPerson(personToUnmark, updatedPerson);
     }

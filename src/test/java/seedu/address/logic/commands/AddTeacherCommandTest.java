@@ -52,7 +52,7 @@ public class AddTeacherCommandTest {
         ModelStub modelStub = new ModelStubWithTeacher(validTeacher);
 
         assertThrows(CommandException.class,
-                AddTeacherCommand.MESSAGE_DUPLICATE_TEACHER, () -> addTeacherCommand.executeCommand(modelStub));
+                Messages.MESSAGE_DUPLICATE_PERSON, () -> addTeacherCommand.executeCommand(modelStub));
     }
 
     @Test

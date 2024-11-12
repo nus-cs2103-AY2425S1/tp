@@ -123,16 +123,19 @@ public class ModelManager implements Model {
 
     @Override
     public void markAttendance() {
+        logger.info("Marking attendance");
         addressBook.markAttendance();
     }
 
     @Override
     public void unmarkAttendance(Person personToUnmark) throws CommandException {
+        logger.info("Unmarking attendance for person: " + personToUnmark);
         addressBook.unmarkAttendance(personToUnmark);
     }
 
     @Override
     public void resetAttendance() {
+        logger.info("Resetting attendance");
         addressBook.resetAttendance();
     }
 

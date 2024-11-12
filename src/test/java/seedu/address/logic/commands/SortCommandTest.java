@@ -15,15 +15,18 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code SortCommand}.
+ */
 public class SortCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_sortByNameAscending_success() throws CommandException {
         Comparator<Person> comparator = Comparator.comparing(person -> person.getName().fullName);
         SortCommand sortCommand = new SortCommand(comparator);
-        String expectedMessage = "List sorted successfully.";
+        String expectedMessage = SortCommand.MESSAGE_SUCCESS;
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         List<Person> sortedList = new ArrayList<>(expectedModel.getFilteredPersonList());
@@ -37,9 +40,10 @@ public class SortCommandTest {
 
     @Test
     public void execute_sortByNameDescending_success() throws CommandException {
-        Comparator<Person> comparator = (p1, p2) -> p2.getName().fullName.compareToIgnoreCase(p1.getName().fullName);
+        Comparator<Person> comparator = (p1, p2) -> p2.getName().fullName
+                .compareToIgnoreCase(p1.getName().fullName);
         SortCommand sortCommand = new SortCommand(comparator);
-        String expectedMessage = "List sorted successfully.";
+        String expectedMessage = SortCommand.MESSAGE_SUCCESS;
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         List<Person> sortedList = new ArrayList<>(expectedModel.getFilteredPersonList());
@@ -65,7 +69,7 @@ public class SortCommandTest {
                     }).orElse("");
         });
         SortCommand sortCommand = new SortCommand(comparator);
-        String expectedMessage = "List sorted successfully.";
+        String expectedMessage = SortCommand.MESSAGE_SUCCESS;
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         List<Person> sortedList = new ArrayList<>(expectedModel.getFilteredPersonList());
@@ -81,7 +85,7 @@ public class SortCommandTest {
     public void execute_sortBySubject_success() throws CommandException {
         Comparator<Person> comparator = Comparator.comparing(person -> person.getSubjects().toString());
         SortCommand sortCommand = new SortCommand(comparator);
-        String expectedMessage = "List sorted successfully.";
+        String expectedMessage = SortCommand.MESSAGE_SUCCESS;
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         List<Person> sortedList = new ArrayList<>(expectedModel.getFilteredPersonList());
@@ -91,5 +95,25 @@ public class SortCommandTest {
         CommandResult result = sortCommand.executeCommand(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void equals_sameComparator_returnsTrue() {
+        Comparator<Person> comparator = Comparator.comparing(person -> person.getName().fullName);
+        SortCommand sortCommand1 = new SortCommand(comparator);
+        SortCommand sortCommand2 = new SortCommand(comparator);
+
+        assertEquals(sortCommand1, sortCommand2);
+    }
+    @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        Comparator<Person> comparator = Comparator.comparing(person -> person.getName().fullName);
+        SortCommand sortCommand = new SortCommand(comparator);
+
+        try {
+            sortCommand.executeCommand(null);
+        } catch (NullPointerException | CommandException e) {
+            assertEquals(NullPointerException.class, e.getClass());
+        }
     }
 }
