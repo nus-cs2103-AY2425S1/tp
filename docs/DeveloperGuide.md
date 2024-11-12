@@ -863,7 +863,7 @@ Given below are instructions to test the app manually.
 2. Exporting a contact list with zero contacts
    1. Prerequisites: There are no people in DorManagerPro
    2. Test case: `export` <br>
-      Expected: A json file is exported to the data folder of the application, with the name of the json file being the time of export. The contents of the json file is as follows: { "persons" : \[ \] }
+      Expected: A json file is exported to the data folder of the application, with the name of the json file being the time of export. The contents of the json file is as follows: `{ "persons" : [ ] }`
 
 ### Importing data
 
