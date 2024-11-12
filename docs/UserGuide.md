@@ -1,7 +1,7 @@
 ---
-layout: default
-title: "User Guide"
-pageNav: 3
+  layout: default.md
+    title: "User Guide"
+    pageNav: 3
 ---
 
 # LogiLink User Guide
