@@ -934,7 +934,7 @@ The following planned enhancements address known feature flaws identified during
 
 10. **Improve Error Message Specificity**
     - **Feature Flaw**: Currently errors messages are not specific.
-    - **Proposed Solution**: Error message should indicate the specific reason the command (e.g. invalid index/assignment fails due to overlapping event assignment/assignment fails due to the volunteer not being free on the day of the event).
+    - **Proposed Solution**: Error message should indicate the specific reason the command (e.g. invalid index/assignment fails due to overlapping event assignment or fails due to the volunteer not being free on the day of the event).
     - **Expected Outcome**: Users should be able to read and instantly understand the reason their command failed so that they can rectify the error without needing to check the possible causes one by one.
 
    
