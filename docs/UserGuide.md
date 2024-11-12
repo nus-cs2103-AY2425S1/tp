@@ -363,6 +363,8 @@ Format: `delete STUDENT_ID`
 The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID S00001` and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 
 (instead of replacing S00001).
 
+<div style="page-break-after: always;"></div>
+
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
