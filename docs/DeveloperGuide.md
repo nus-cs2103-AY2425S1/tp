@@ -328,15 +328,17 @@ Use case ends.
 * **2a. Teacher wants to abort the ‘add lesson’ process**
 
     * 2a1. Teacher can clear fields and exit the procedure
+    Use case ends
 
 * **4a. Lesson with description already exists**
 
     * 4a1. System alerts the teacher that the lesson exists and displays its details
+    Use case ends
 
 * **4b. Invalid lesson details (see features)**
 
     * 4b1. System alerts the teacher and prompts them to correct the invalid information
-
+      Use case ends
 
 ## UC2: Delete a lesson
 
@@ -356,14 +358,17 @@ Use case ends.
 * **2a. Teacher wants to abort the ‘delete lesson’ process**
 
     * 2a1. Teacher can clear fields and exit the procedure
+      Use case ends
 
 * **4a. Lesson with description does not exist**
 
     * 4a1. System alerts the teacher that the lesson does not exist, and prompts user to check again
+      Use case ends
 
 * **4b. Invalid lesson details (see features)**
 
     * 4b1. System alerts the teacher and prompts them to correct the invalid information
+      Use case ends
 
 ## UC3: Add student
 
@@ -382,21 +387,27 @@ Use case ends.
 
 - **2a. Teacher wants to abort the ‘add student’ process**
     * 2a1.Teacher can clear fields and exit the procedure.
+      Use case ends
 
 - **4a. Student with the same name already exists**
     * 4a1.System alerts the teacher that the student exists and displays their details.
+      Use case ends
 
 - **4b. Invalid student details**
     * 4b1.System alerts the teacher and prompts them to correct the invalid information.
+      Use case ends
 
 - **4c. Subject does not exist**
     * 4c1.System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
+      Use case ends
 
 - **4d. Lesson does not exist**
     * 4d1.System prompts the teacher to first create the lesson using <u>UC1: Add a Lesson</u>.
+      Use case ends
 
 - **4e. Tag does not exist**
     * 4e1.System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
+      Use case ends
 
 ## UC4: Edit student
 
@@ -411,21 +422,25 @@ Use case ends.
 ### **Extension:**
 - **2a. Teacher wants to abort the ‘edit student’ process:**
     * 2a1.Teacher can clear fields and exit the procedure.
+      Use case ends
 
 - **4a. Student with new name already exists**
     * 4a1.System alerts the teacher that the student exists and displays their details.
+      Use case ends
 
 - **4b. Invalid student details (see features):**
     * 4b1.System alerts the teacher and prompts them to correct the invalid information.
-
+      Use case ends
 - **4c. Subject does not exist**
     * 4c1.System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
+      Use case ends
 
 - **4d. Lesson does not exist**
     * 4d1.System prompts the teacher to first create the lesson using <u>UC1: Add a Lesson</u>.
-
+      Use case ends
 - **4e. Tag does not exist**
     * 4e1.System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
+      Use case ends
 
 ## UC5: Create Tag
 
@@ -440,13 +455,16 @@ Use case ends.
 ### **Extension:**
 - **2a. Teacher wants to abort the ‘create tag’ process:**
     * 2a1.Teacher clears the fields and exits the procedure without saving any data.
+      Use case ends
 
 - **3a. Tag with the same name already exists**
     * 3a1.System alerts the teacher that the tag exists and no new tag is created.
+      Use case ends
 
 - **3b. Invalid tag details:**
     * 3b1.System alerts the teacher if any of the entered details are invalid.
     * 3b2.System prompts the teacher to correct the information before proceeding.
+      Use case ends
 
 ## UC6: Edit tag
 
@@ -461,14 +479,16 @@ Use case ends.
 ### **Extension:**
 - **2a. Teacher wants to abort the ‘edit tag’ process:**
     * 2a1.Teacher clears the fields and exits the procedure without saving any data.
-
+      Use case ends
 - **3a. Tag with new name already exists**
     * 3a1.System alerts the teacher that the tag exists.  
     * 3a2.System requests to add another name.
+      Use case ends
 
 - **3b. Invalid tag details (see features):**
     * 3b1.System alerts the teacher if any of the entered details are invalid.  
     * 3b2.System prompts the teacher to correct the information before proceeding.
+      Use case ends
 
 ## UC7: Delete tag
 
@@ -482,11 +502,13 @@ Use case ends.
 ### **Extension:**
 
 - **1a. Tag does not exist**
-  System alerts the teacher that the tag does not exist and cannot be deleted.
+  * 1a1. System alerts the teacher that the tag does not exist and cannot be deleted.
+    Use case ends
 
 - **2a. Teacher wants to abort the ‘delete tag’ process:**
-  Teacher cancels the operation and exits the procedure without deleting the tag.
-
+  * 2a1. Teacher cancels the operation and exits the procedure without deleting the tag.
+    Use case ends
+  
 ## UC8: View students
 
 **Precondition:** The teacher is logged into the app. <br>
@@ -619,6 +641,7 @@ Use case ends.
 **2a.** **Student no longer exists in the list of the teacher’s students:**
 
 **2a1.** System notifies the teacher that the student is not present in his/her set of students.
+Use case ends
 
 ## UC15: Mark all students
 
