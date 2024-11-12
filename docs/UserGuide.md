@@ -220,7 +220,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 
-- `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/patient`
+- `add n/John Doe nric/S6483749D p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/patient`
 
 Here’s how to add a patient to the address book:
 ![add Patient Command](images/addPatient.png)
@@ -230,7 +230,7 @@ When the command succeeds, you’ll see the following message confirming that th
 ![add Patient Succeeds](images/addPatientSucceed.png)
 _Figure 3: Success message displayed after adding a patient_
 
-Possible Errors:
+**Possible Errors:**
 
 - `This person already exists in the address book` - Displayed when trying to add a person with an NRIC that already exists.
 - `Roles should only be 'PATIENT' or 'CAREGIVER'` - Displayed when an invalid role is provided.
@@ -248,7 +248,7 @@ Examples:
 
 The example below demonstrates how to use CareLink to link a patient and a caregiver:
 
-If you are following our guide, add the following commands to first add the two people to link:
+If you have cleared your data before testing out this feature, add the following commands to first add the two people to link:
 
 - `add n/Alex Y nric/S6283947C p/88888888 e/Alex@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/patient`
 - `add n/Bernice nric/S6382947A p/98765432 e/bernice@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/caregiver`
@@ -319,7 +319,7 @@ _Figure 9: Success message displayed after adding a note to a patient's record_
 To view all notes for a person, use the `find` command with their NRIC or name. Notes are shown only in the search results to keep the main display clean and focused.
 </div>
 
-Possible Errors:
+**Possible Errors:**
 
 - `Person not found` - When the person's NRIC entered cannot be found in the system
 
@@ -349,7 +349,11 @@ Use this command format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/
 - `edit S6483749D n/Betsy Crower t/`
   Edits the person with NRIC `S6483749D` to be `Betsy Crower` and clears all existing tags.
 
-Possible Errors:
+<div class="alert alert-warning">
+<i>:warning:</i> <b>Warning:</b> Existing links that the person has are lost due to the edit command, as crucial data is changed. You can find more about this under [Known Issues](#known-issues)
+</div>
+
+**Possible Errors:**
 
 - `Incorrect NRIC. Person not found` - When the specified NRIC doesn't exist in CareLink
 - `At least one field to edit must be provided.` - When no fields to edit are specified
@@ -359,6 +363,8 @@ Possible Errors:
 
 Use this command to find persons based on specified criteria and prefixes.
 
+Use this command format: `find [n/NAME] [nric/NRIC] [p/PHONE] [e/EMAIL] [role/ROLE] [t/TAG]…​`
+
 <div class="alert alert-warning">
 <i>:warning:</i> <b>Warning:</b> All search parameters (NRIC, phone, email, role) must exactly match the stored data, except for name which allows partial matches. For example:
 - NRIC 'S1234567D' will match 'S1234567D' only
@@ -367,39 +373,6 @@ Use this command to find persons based on specified criteria and prefixes.
 - The NRIC must be a valid Singapore NRIC that follows the official format ('S/T' for citizens/PRs, 'F/G' for foreigners, followed by 7 digits and a checksum letter)
 
 </div>
-
-#### Deleting a person : `delete`
-
-**Use this command to delete the specified person from CareLink.**
-
-Use this format: `delete NRIC`
-
-- Deletes the person with the specified `NRIC`.
-- The NRIC **must be a valid Singapore National ID** (eg. S1234567D)​
-
-Examples:
-
-- `find n/David` returns `David LI` with NRIC `S6483749D`
-- `delete S6483749D` deletes the person with the NRIC `S6483749D` in the address book.
-
-The example of using the delete command in CareLink is shown below.
-
-> :bulb: **Tip:** Notice the NRIC used in the example belongs to `David LI`.
-
-![delete command example](images/deleteDavid.png)
-_Figure 13: Example of using the `delete` command to remove a person from CareLink_
-
-When the command succeeds, you can notice that David is removed and hence no longer displayed.
-![result for 'delete S6483749D'](images/deleteDavidResult.png)
-_Figure 14: Display after a successful delete command, showing the removed person is no longer listed_
-
-**Possible Errors:**
-
-- `The patient NRIC provided is not found` - When the specified NRIC does not exist in CareLink
-
-#### Finding a person : `find`
-
-**Format**: `find [n/NAME] [nric/NRIC] [p/PHONE] [e/EMAIL] [role/ROLE] [t/TAG]…​`
 
 - The search is case-insensitive. e.g `n/alex` will match `Alex`.
 - The order of the prefixes and keywords does not matter. e.g `n/Alex nric/S1234567D` is equivalent to `nric/S1234567D n/Alex`.
@@ -436,12 +409,41 @@ When the command succeeds, the persons found will be displayed with comprehensiv
 ![Find command success](images/findcommandsucceed.png)
 _Figure 11: List of persons displayed after using the `find` command with specified criteria_
 
-Possible Errors:
+**Possible Errors:**
 
 - `Invalid command format! `
   find: Finds all persons based on the specified criteria and displays them as a list with index numbers. Search is case-insensitive.
   Parameters: [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...
   At least one parameter must be provided. You do not need to include all parameters.
+
+#### Deleting a person : `delete`
+
+Use this command to find persons based on specified criteria and prefixes.
+
+Use this format: `delete NRIC`
+
+- Deletes the person with the specified `NRIC`.
+- The NRIC **must be a valid Singapore National ID** (eg. S1234567D)​
+
+Examples:
+
+- `find n/David` returns `David LI` with NRIC `S6483749D`
+- `delete S6483749D` deletes the person with the NRIC `S6483749D` in the address book.
+
+The example of using the delete command in CareLink is shown below.
+
+> :bulb: **Tip:** Notice the NRIC used in the example belongs to `David LI`.
+
+![delete command example](images/deleteDavid.png)
+_Figure 13: Example of using the `delete` command to remove a person from CareLink_
+
+When the command succeeds, you can notice that David is removed and hence no longer displayed.
+![result for 'delete S6483749D'](images/deleteDavidResult.png)
+_Figure 14: Display after a successful delete command, showing the removed person is no longer listed_
+
+**Possible Errors:**
+
+- `The patient NRIC provided is not found` - When the specified NRIC does not exist in CareLink
 
 ### Managing Appointments
 
@@ -462,8 +464,17 @@ Use this command format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 
 **Examples:**
 
-- `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00` Use this command to add a one-hour appointment on January 1st, 2025
-- `addapp nric/S9876543B d/15/03/2025 start/14:30 end/16:00` Use this command to add a 90-minute appointment on March 15th, 2025
+- `addapp nric/S6283947C d/01/01/2025 start/10:00 end/11:00` Use this command to add a one-hour appointment on January 1st, 2025
+
+The example of using the `addapp` command in CareLink appears below:
+![Add Appointment command example](images/addappointmentcommand.png)
+_Figure 10: Example of using the `addapp` command to add an appointment for a person in CareLink_
+
+When the command succeeds, the appointment will be added, which can be found using the [`findapp` command](#locating-appointments-by-date-time-range-findapp)
+![Add Appointment success](images/addappointmentcommandsuccess.png)
+_Figure 11: Success mesage displayed after using the `addapp` command_
+
+- `addapp nric/S6283947C d/15/03/2025 start/14:30 end/16:00` Use this command to add a 90-minute appointment on March 15th, 2025
 
 <div class="alert alert-warning">
 <i>:warning:</i> <b>Warning:</b> CareLink is designed for independent geriatricians' use during office hours. All appointments must start and end on the same day.
@@ -503,8 +514,21 @@ Use this command format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] 
 
 **Examples:**
 
-- `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025` Changes the appointment date, but the timings remain the same.
-- `editapp nric/S1234567D d/02/01/2025 start/10:00 end/11:00 newstart/08:00  newend/09:00` Shifts the appointment timing forward, but appointment remains on the same day.
+- `editapp nric/S6283947C d/01/01/2025 start/10:00 newd/02/01/2025` Changes the appointment date, but the timings remain the same.
+
+The example of using the `editapp` command in CareLink appears below:
+![Edit Appointment example](images/editappointmentcommand.png)
+_Figure 10: Example of using the `editapp` command to edit an appointment in CareLink_
+
+When the command succeeds, the appointment will be edited, which can be found using the [`findapp` command](#locating-appointments-by-date-time-range-findapp)
+![Edit Appointment success](images/editappointmentcommandsuccess.png)
+_Figure 11: Success mesage displayed after using the `editapp` command_
+
+- `editapp nric/S6283947C d/02/01/2025 start/10:00 newstart/08:00  newend/09:00` Shifts the appointment timing forward, but appointment remains on the same day.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To edit an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
+</div>
 
 **Common errors and their meanings:**
 
@@ -532,8 +556,17 @@ Use this command format: `updatestatus nric/NRIC d/DATE start/START_TIME status/
 
 **Examples:**
 
-- `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/completed` updates the status to completed for the appointment on January 1st, 2025 at 10:00.
-- `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/pending` updates the status to pending for the appointment on January 1st, 2025 at 10:00.
+- `updatestatus nric/S6283947C d/02/01/2025 start/10:00 status/completed` updates the status to completed for the appointment on January 2nd, 2025 at 10:00.
+
+The example of using the `updatestatus` command in CareLink appears below:
+![Update Appointment Status example](images/updatestatuscommand.png)
+_Figure 10: Example of using the `updatestatus` command to update status of an appointment in CareLink_
+
+When the command succeeds, the status of the appointment will be edited, which can be confirmed using the [`findapp` command](#locating-appointments-by-date-time-range-findapp)
+![Update Appointment Status success](images/updatestatuscommandsuccess.png)
+_Figure 11: Success mesage displayed after using the `updatestatus` command_
+
+- `updatestatus nric/S6283947C d/02/01/2025 start/10:00 status/pending` updates the status to pending for the appointment on January 2nd, 2025 at 10:00.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To change the status of an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
@@ -561,8 +594,17 @@ Use this command format: `deleteapp nric/NRIC d/DATE start/START_TIME`
 
 Examples:
 
-- `deleteapp nric/S1234567D d/01/01/2025 start/10:00` deletes the appointment on January 1st, 2025 at 10:00
-- `deleteapp nric/S9876543B d/15/03/2025 start/14:30` deletes the appointment on March 15th, 2025 at 14:30
+- `deleteapp nric/S6283947C d/02/01/2025 start/10:00` deletes the appointment on January 2nd, 2025 at 10:00
+
+The example of using the `deleteapp` command in CareLink appears below:
+![Delete Appointment example](images/deleteappointmentcommand.png)
+_Figure 10: Example of using the `deleteapp` command to delete an appointment in CareLink_
+
+When the command succeeds, the appointment will be deleted, which can be found using the [`findapp` command](#locating-appointments-by-date-time-range-findapp)
+![Delete Appointment success](images/deleteappointmentcommandsuccess.png)
+_Figure 11: Success mesage displayed after using the `deleteapp` command_
+
+- `deleteapp nric/S6283947C d/15/03/2025 start/14:30` deletes the appointment on March 15th, 2025 at 14:30
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To delete an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
@@ -591,15 +633,23 @@ Use this command format: `findapp sdate/START_DATE start/START_TIME edate/END_DA
 
 ##### Examples:
 
+If you have cleared your appointments, and want to try the below command, you can first [add appointment](#adding-an-appointment-addapp) as follows:
+
+- `addapp nric/S7012345B d//01/2025 start/10:00 end/11:00`
+
+Then you can try to find appointment using the following command:
+
+- `findapp sdate/01/01/2025 start/10:00 edate/02/01/2025 end/12:00` finds and lists appointments that starts and ends within the specified date-time range.
+
+The example below of the result obtained from the `findapp` command appears below:
+![Find Appointment command example](images/findapp2success.png)
+_Figure 12: Example of using the `findapp` command to locate appointments within a specific date-time range_
+
 - `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` finds and lists appointments that starts and ends within the specified date-time range.
 
 <div markdown="span" class="alert alert-primary">:warning: **Note:**
 When using date ranges for searching appointments, ensure your end date comes after your start date. For example, searching from 01/01/2024 to 30/12/2024 is valid, but searching from 01/01/2025 to 30/10/2024 will always return 0 results since no appointments can exist in an impossible time range.
 </div>
-
-The example below of the result obtained from the `findapp` command appears below:
-![Find Appointment command example](images/findappointment.png)
-_Figure 12: Example of using the `findapp` command to locate appointments within a specific date-time range_
 
 **Possible Errors:**
 
@@ -614,8 +664,7 @@ _Figure 12: Example of using the `findapp` command to locate appointments within
 
 > :warning: **Warning:** This command will permanently delete all entries from the address book. Ensure that you want to proceed before executing this command.
 
-**Format**:
-`clear confirm`
+Use this command format: `clear confirm`
 
 - You must type `confirm` explicitly to execute this command. Any other input will not clear the address book.
 
