@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class SortCommandTest {
 
     @Test
     public void execute_sortByTag_success() {
-        SortCommand sortCommand = new SortCommand(new ArrayList<>(Arrays.asList(new Prefix("t/"))));
+        SortCommand sortCommand = new SortCommand(new ArrayList<>(Arrays.asList(PREFIX_TAG)));
         sortCommand.execute(model);
 
         // Sort expected model manually for comparison
