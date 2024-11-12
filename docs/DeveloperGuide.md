@@ -79,13 +79,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in `Ui.java`
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the `MainWindow` is specified in `MainWindow.fxml`
 
 The `UI` component,
 
@@ -96,7 +96,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : `Logic.java`
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -126,7 +126,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : `Model.java`
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -140,7 +140,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : `Storage.java`
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -974,13 +974,18 @@ testers are expected to do more *exploratory* testing.
 
     Currently, when users use the `delete` feature they can only delete one student at a time for example `delete 1` deletes the first student if available. In the future `delete 1 2 5` for example will be able to delete students at the index of 1, 2 and 5 on the list shown to improve efficiency.
 
-7.  **Add specific error messages for the use of `c/` prefix in `add` and `edit` command**
+7.  **Add specific error messages for the use of wrong prefixes in commands**
     
-    Currently, users are unable to add or edit comments via the `add` or `edit` command. In future iterations, we are planning to add specific error messages for when the `c/` prefix is used anywhere in the `add` or `edit` commands.
-    For instance, a specific error message would be thrown when the user types `add n/Mary id/A1234567H c/comment` (this includes other permutations of using the `c/` prefix in the `add` command eg. `add n/Mary c/comment id/A1234567H`). This also applies to the `edit` command
-    where there would be specific error message thrown when user inputs is, for instance, `edit 1 c/comment` (Likewise, this also applies to different permutations of prefixes eg. `edit 1 id/A2345678J c/comment`).
+    Currently, a general error message appears when users enter a wrong prefix when using commands (eg. 'c/'). In future iterations, we are planning to add specific error messages for when wrong prefixes are used anywhere in the commands.
+
+    Example Input: `add n/Mary id/A1234567H c/comment` or `edit 1 n/Bob c/comment`
+
+    Example Output: `Some prefixes entered are not supported in this command: c/`
 
 8. **Add warnings for Year inputs that may be mistakes**
 
-   Currently, there is no warning if a year such as '15' is inputted which is likely a user mistake since it is unlikely a student has been studying in NUS for 15 years. We plan to add in warnings for when the input to Year is >9. (Accounts for PhD students as well). The warning would apply for `add` and `edit` commands and would be appended to the end of the respective success messages as: `Year specified is larger than 9. Please check that this is not a mistake`. Note that the commands are allowed to execute, just with an additional warning to alert users to their possible mistake.
+   Currently, there is no warning if a year such as '15' is inputted which is likely a user mistake since it is unlikely a student has been studying in NUS for 15 years. We plan to add in warnings for when the input to Year is >9. (Accounts for PhD students as well). The warning would apply for `add` and `edit` commands and would be appended to the end of the respective success messages on a new line. Note that the commands are allowed to execute, just with an additional warning to alert users to their possible mistake.
 
+    Example Input: `add n/ John id/ A1234567U y/ 10` or `edit 1 y/ 11`
+
+    Example Output: [SUCCESS_MESSAGE] + `Year specified is larger than 9. Please check that this is not a mistake` (Warning appears on a new line)
