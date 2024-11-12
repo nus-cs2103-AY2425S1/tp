@@ -220,7 +220,7 @@ Note: While the diagram shows the lifeline of objects even after their deletion,
 2. KonTActs will create a contact of Tom with the given details before adding it to the contact list.
 3. The contact is then displayed in the UI, along with a success message.
 
-## Add Grade implementation
+### Add Grade implementation
 
 **Logic**: 
 1. `AddGradeCommand.java`
