@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+
+box UI UI_COLOR_T1
+participant ":CommandBox" as CommandBox UI_COLOR
+participant ":TextField" as TextField UI_COLOR
+end box
+
+user -> CommandBox : Press up/down arrow key
+
+alt KeyCode.UP
+    CommandBox -> CommandBox : Retrieve previous command
+else KeyCode.DOWN
+    CommandBox -> CommandBox : Retrieve next command
+end
+
+CommandBox -> TextField : Set text to retrieved command
+
+TextField --> CommandBox : Text updated
+
+user <-- CommandBox :
+
+@enduml

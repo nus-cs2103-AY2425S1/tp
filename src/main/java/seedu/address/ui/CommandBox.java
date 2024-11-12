@@ -1,8 +1,11 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,6 +21,9 @@ public class CommandBox extends UiPart<Region> {
 
     private final CommandExecutor commandExecutor;
 
+    private ArrayList<String> inputs = new ArrayList<>();
+    private int inputIndex;
+
     @FXML
     private TextField commandTextField;
 
@@ -27,6 +33,15 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+
+        // Handles when up/down arrow is pressed
+        commandTextField.setOnKeyPressed(e -> {
+            KeyCode k = e.getCode();
+            if (k == KeyCode.UP || k == KeyCode.DOWN) {
+                quickSwitchInputs(k);
+            }
+        });
+
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -42,11 +57,30 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
+            inputs.add(commandText);
+            inputIndex = inputs.size();
             commandExecutor.execute(commandText);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    /**
+     * Handles the Up_Arrow/Down_Arrow button pressed event.
+     */
+    @FXML
+    private void quickSwitchInputs(KeyCode k) {
+        String commandText;
+        if (k == KeyCode.UP && inputIndex != 0) {
+            commandText = inputs.get(--inputIndex);
+        } else if (k == KeyCode.DOWN && inputIndex != inputs.size() - 1) {
+            commandText = inputs.get(++inputIndex);
+        } else {
+            return;
+        }
+
+        commandTextField.setText(commandText);
     }
 
     /**

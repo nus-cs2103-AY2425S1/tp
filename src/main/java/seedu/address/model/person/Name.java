@@ -28,7 +28,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = capitaliseAndTrim(name);
     }
 
     /**
@@ -36,6 +36,27 @@ public class Name {
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Capitalizes the first letter of each word and trims leading/trailing spaces.
+     */
+    private String capitaliseAndTrim(String name) {
+        // Trim leading/trailing spaces and split by spaces
+        String[] words = name.trim().split("\\s+");
+        StringBuilder capitalised = new StringBuilder();
+
+        // Capitalise first letter of each word
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                capitalised.append(Character.toUpperCase(word.charAt(0)))
+                        .append(word.substring(1).toLowerCase())
+                        .append(" ");
+            }
+        }
+
+        // Remove the last extra space
+        return capitalised.toString().trim();
     }
 
 

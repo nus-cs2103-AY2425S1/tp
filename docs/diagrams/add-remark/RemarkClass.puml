@@ -9,6 +9,8 @@ Class RemarkCommand {
   +COMMAND_WORD: String
   +MESSAGE_USAGE: String
   +MESSAGE_NOT_IMPLEMENTED_YET: String
+  +MESSAGE_SUCCESS: String
+  +MESSAGE_DUPLICATE_REMARK: String
   +execute(Model): CommandResult
 }
 Class CommandException

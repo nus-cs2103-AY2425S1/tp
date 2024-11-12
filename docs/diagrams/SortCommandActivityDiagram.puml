@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+'SVG definition taken from https://forum.plantuml.net/195/is-there-any-support-for-subactivity-or-the-rake-symbol
+sprite $rake <svg width="16" height="16" viewBox="0 0 16 16">
+<path
+    style="fill:#000000"
+    d="M 7,1 H 9 V 7 H 15 V 15 H 13 V 9 H 9 V 15 H 7 V 9 H 3 V 15 H 1 V 7 H 7 Z"
+/>
+</svg>
+
+start
+
+:User enters SortCommand;
+if () then ([has preamble])
+  :Check preamble value;
+  if () then ([is -1 or 1])
+    :Check for prefixes <$rake>;
+    stop
+  else ([else])
+    :Throw invalid preamble exception;
+    stop
+  endif
+else ([else])
+    :Throw format exception;
+    stop
+
+@enduml
