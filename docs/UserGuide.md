@@ -121,7 +121,7 @@ Once ContactCS is running, you’ll see the main interface divided into several 
 
 * Result Display Box: Shows the outcome of the commands you enter, including success messages, errors, and other feedback.
 
-* Contact List: Displays the list of contacts, allowing easy access to patient information and management.
+* Contact List: Displays the list of contacts, allowing easy access to contact information.
 
 * Command History Window: Contains a history of commands that modify the contact list, enabling you to quickly refer to recent modifications.
 
