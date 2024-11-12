@@ -188,7 +188,7 @@ The `Model` component handles the data and state management for the app, storing
     * **Data Storage**:
         * Maintains address book data, including lists of `Person`, `Wedding`, `Tag` and `Task` objects.
     * **Filtered Views**:
-        * Provides filtered lists of `Person` objects (e.g., search results), exposing these as unmodifiable `ObservableList`s. This allows the UI to automatically update in response to changes.
+        * Provides filtered lists of `Person` objects (e.g., search results), exposing these as an unmodifiable `ObservableList`. This allows the UI to automatically update in response to changes.
     * **User Preferences**:
         * Stores user preferences in a `UserPref` object, which is accessible externally as `ReadOnlyUserPref`.
     * **Independence**:
@@ -234,14 +234,15 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Force Feature
 
-#### Implementation
-
 The Force feature is a quality of life addition for WedLinker. It enables users to bypass certain checks in the `Logic` in a controlled manner to make usage easier.
 The force feature is applicable for the following commands:
-* `Tag`: This creates a `Tag` if it does not exist in WedLinker before tagging the `Person`.
-* `Delete Tag`: This unassigns the target `Tag` from all contacts before deleting it.
-* `Assign Wedding`: This creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
-* `Delete Wedding`: This unassigns all `Person` from the `Wedding` before deleting it.
+* `Tag`: Creates a `Tag` if it does not exist in WedLinker before tagging the `Person`.
+* `Delete Tag`: Unassigns the target `Tag` from all contacts before deleting it.
+* `Assign Wedding`: Creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
+* `Delete Wedding`: Unassigns all `Person` from the `Wedding` before deleting it.
+* `Unassign Vendor`: Unassigns all `Task` from the `Vendor` before making the `Vendor` a `Person`.
+
+#### Implementation
 
 The force functionality can be used with the above functions by including f/ at the end of the command. Additional inputs following the f/ are extraneous and would be discarded.
 
@@ -301,8 +302,6 @@ Known bugs:
 
 ### Wedding Feature
 
-#### Implementation
-
 The Wedding Feature allows users to store details of a Wedding in WedLinker. Wedding contains the Contacts involved to facilitate easy planning and consolidation for wedding planners.
 Wedding would support the following functions:
 
@@ -311,6 +310,8 @@ Wedding would support the following functions:
 * `Edit Wedding` — Edits the information for a Wedding. Editable information includes the `Wedding Name`, `Address` and `Date`.
 * `Unassign Wedding` — Unassigns a `Person` from a Wedding.
 * `Delete Wedding` — Deletes the Wedding from WedLinker.
+
+#### Implementation
 
 Given below is an example usage scenario and how Weddings are used in WedLinker.
 
@@ -347,13 +348,13 @@ Known bugs:
 
 ### Vendors
 
-#### Implementation
-
 The `Vendor` Feature allows users to track which `Person` are `Vendors` and assign `Tasks` to them. Only `Vendors` can be assigned `Tasks`.
 Vendor would support the following functions:
 
 * `Assign Vendor` — Assigns an existing `Person` in WedLinker to become a `Vendor`. 
 * `Unassign Vendor` — Unassigns a `Vendor` to become a non-vendor `Person` contact. 
+
+#### Implementation
 
 Given below is an example usage scenario and how Vendors are used in WedLinker.
 
@@ -391,6 +392,8 @@ There are different types of `Task` to support different requirements for the us
 * `Unassign Task` —  Unassigns a `Task` from a `Vendor`. 
 * `Delete Task` —  Deletes a `Task` from WedLinker. 
 
+#### Implementation
+
 Given below is an example usage scenario and how Tasks are used in WedLinker.
 
 Step 1. The user launches the application, `Tasks` are loaded into the `Model`.
@@ -409,11 +412,12 @@ Step 6. The user executes `delete-task 1 ` to delete the `Task` at index 1 of th
 WedLinker features a split-view interface designed to display different lists side by side. The left side of the screen consistently shows the `Person List`, while the right side dynamically displays one of the following lists based on user input: `Wedding List`, `Task List`, or `Tag List`.
 This functionality is managed through an enumeration that defines the available views: `WEDDING`, `TASK`, and `TAG`. The system switches between these views based on the user's actions, ensuring a flexible and intuitive user experience.
 
-
 `View` supports the following functions: 
 `List Weddings` —  displays a list of all weddings.
 `List Tasks` —  displays a list of all tasks.
 `List Tags` —  displays a list of all tags.
+
+#### Implementation
 
 Given below is an example usage scenario and how Tasks are used in WedLinker.
 
@@ -955,7 +959,7 @@ Similar to [<ins>UC30](#use-case-uc30delete-contact) except deleting tag and two
 
 **MSS**
 
-1. User <ins>lists all contacts (UC01)</ins>.
+1. User <ins>lists all contacts [(UC01)](#use-case-uc01list-all-contacts)</ins>.
 2. User requests to edit the details of a person and specifies what they want to change the details to.
 3. System changes the existing details to the specified details and shows list of persons with new details.
 
@@ -1806,10 +1810,13 @@ applied to edited data, but specific expected results will differ. <br><br>
 <h3 class="features">Tag Features</h3>
 
 #### Creating Tag
+
 1. **Creating a tag when `Tag 1` is not in the list of `Tags`.**
 
    1. **Test case**: `create-tag w/Tag1`<br>
       **Expected**: `Tag1` is added to list of `Tags`. Details of the added tag are shown.
+
+<br>
 
 2. **Creating a tag when `Tag 1` is in the list of `Tags`.**
 
@@ -1819,48 +1826,71 @@ applied to edited data, but specific expected results will differ. <br><br>
    2. **Test case**: `create-tag w/tag1`<br>
       **Expected**: No tags are added to list of `Tags`. Error details shown.
 
+<br>
+
 #### Deleting Tag
+
 1. **Deleting a tag when `Tag 1` is in the list of `Tags`.**
 
    1. **Test case**: `delete-tag w/Tag1`<br>
       **Expected**: `Tag1` is removed from list of `Tags`. Details of the removed tag are shown.
 
+<br>
+
 2. **Deleting a tag when `Tag 1` is not in the list of `Tags`.**
    1. **Test case**: `delete-tag w/Tag1`<br>
       **Expected**: No tags are removed from list of `Tags`. Error details shown.
 
+<br>
+
 #### Tagging contact
+
 1. **Tagging the first contact when `Tag 1` is in the list of `Tags` and the first contact is not tagged with `Tag1`.**
 
     1. **Test case**: `tag 1 t/Tag1`<br>
        **Expected**: 1st contact is tagged with `Tag1`. Details of the updated contact are shown.
 
+<br>
+
 2. **Tagging the first contact when `Tag 1` is in the list of `Tags` and the first contact is already tagged with `Tag1`.**
     1. **Test case**: `tag 1 t/Tag1`<br>
        **Expected**: No contacts are tagged. Error details shown.
 
+<br>
+
 3. **Tagging the first contact when `Tag1` is in the list of `Tags` and the first contact is already tagged with `Tag1`.**
    1. **Test case**: `tag 1 t/Tag1`<br>
       **Expected**: No contacts are tagged. Error details shown.
-   
+
+<br>
+
 4. **Tagging the first contact when `Tag1` is not in the list of `Tags`.**
 
    1. **Test case**: `tag 1 t/Tag1`<br>
       **Expected**: No contact is tagged. Error details shown.
 
+<br>
+
    2. **Test case**: `tag 1 t/Tag1 f/`<br>
       **Expected**: 1st contact is tagged with newly created `Tag1`. Details of the updated contact are shown.
 
+<br>
+
 #### Untagging contact
+
 1. **Untagging the first contact when the first contact is tagged with `Tag1`.**
 
    1. **Test case**: `untag 1 w/Tag1`<br>
       **Expected**: `Tag1` is removed from their contact card.
 
+<br>
+
 2. **Untagging the first contact when the first contact is not tagged with `Tag1`.**
 
    1. **Test case**: `untag 1 w/Tag1`<br>
       **Expected**: No contacts are untagged. Error details shown.
+
+<br>
 
 ---
 
