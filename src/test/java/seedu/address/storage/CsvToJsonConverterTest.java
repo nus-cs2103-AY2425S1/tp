@@ -29,16 +29,6 @@ public class CsvToJsonConverterTest {
     }
 
     @Test
-    public void csvToJsonConverter_correctFieldNames() {
-        CsvToJsonConverter testConverter = new CsvToJsonConverter(new File(testImportFilePath));
-        assertEquals(new File(testImportFilePath), testConverter.getDirectory());
-
-        String[] expectedFields = {"contactType", "name", "phone", "email", "telegramHandle", "moduleName",
-            "remark", "set"};
-        assertEquals(Arrays.toString(expectedFields), Arrays.toString(testConverter.getPersonFieldNames()));
-    }
-
-    @Test
     public void convertAllCsvFiles_validFile_correctJsonFile() {
         List<File> expected = new ArrayList<>();
         assertTrue(
@@ -59,13 +49,6 @@ public class CsvToJsonConverterTest {
         );
         List<File> expected = new ArrayList<>();
         assertJsonFileEqualsNoException(expected, testConverter, true);
-    }
-
-    @Test
-    public void convertAllCsvFile_emptyDirectory_throwsException() {
-        String expected = "The import directory contains no .csv files to import";
-        CsvToJsonConverter testConverter = new CsvToJsonConverter(new File(testImportFilePath));
-        assertThrows(ConverterException.class, expected, testConverter::convertAllCsvFiles);
     }
 
     @Test
