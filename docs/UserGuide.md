@@ -9,58 +9,69 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 {:toc}
 
 <div style="page-break-after: always"></div>
---------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed on your computer.
+1\. Ensure you have Java `17` or above installed on your computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-2/tp/releases).
+2\. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your CareConnect application.
+3\. Copy the file to the folder you want to use as the _home folder_ for your CareConnect application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar careconnect.jar`
+4\. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar careconnect.jar`
    command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. To get started, you can play around with some of the sample data that the app comes with!<br>
    ![Ui](images/Ui.png)
 
-1. Note that CareConnect is best viewed in a **desktop** environment with **full screen**. You may see some
+5\. Note that CareConnect is best viewed in a **desktop** environment with **full screen**. You may see some
    content being cut-off if the window size is too small.
 
-1. Let's try opening up a contact with the `view` command!
+<div style="page-break-after: always"></div>
+
+6\. Let's try opening up a contact with the `view` command!
 
    - As you type, notice that an invalid command word will be coloured in red.
-       ![incomplete command](images/syntax_highlighting_1.png)
-   <div style="page-break-after: always"></div>
+
+       ![incomplete command](images/syntax_highlighting_1.png){: width="340" }
    - You can try autocompleting the command by pressing `TAB` on your keyboard too. In this case, the command `view` will be matched, and it will be displayed in grey to indicate that it's a valid command word that is waiting for an argument.
-       ![valid_command](images/syntax_highlighting_2.png)
-   <div style="page-break-after: always"></div>
+   
+       ![valid_command](images/syntax_highlighting_2.png){: width="340" }
    - In this case, `view 1` indicates that we want to view the first contact in the list. Once a full valid command is entered, the command will be colored black.<br>
-       ![complete command](images/syntax_highlighting_3.png)
+       
+       ![complete command](images/syntax_highlighting_3.png){: width="340" }
+   <div style="page-break-after: always"></div>
    - Press Enter to execute command, and you should see the details for the first contact `Alex Yeoh` appear on the right pane!
    ![view command result](images/quickStart_1.png)
 
-4. Let's delve a little deeper now, try adding a new contact using `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`. This adds a contact named `John Doe` to the application.
-![add new person](images/quickStart_addNew.png)
+<div style="page-break-after: always"></div>
+
+7\. Let's delve a little deeper now, try adding a new contact using `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`. This adds a contact named `John Doe` to the application.
+
+![add new person](images/quickStart_addNew.png){: width="550" }
+
+8\. You can use `shift+tab` to navigate between your command box and the contact list. You will see a brown box around the list when it is selected.
+Try using the arrow key to navigate around the list until you find `John Doe`.
+
+![shift tab](images/quickStart_shiftTab_2.png){: width="550" }
+
+9\. To add a new log entry for John, try `addlog 1 r/First meetup. d/2019-10-15 14:00`. You can add multiple logs for
+the same contact, and the logs will appear as a list on the right.
+
+![logs](images/quickStart_log_2.png){: width="550" }
+
+10\. Finally, to delete a contact, simply use `delete <id>`. In this case, John has an id of 6 (visible from the contact list), so we can run `delete 6` to delete his contact.
+
+11\. For security, you will be prompted to confirm your delete command. Press `y` to confirm, or `n` to cancel.
+
+![delete](images/quickStart_delete_1.png){: width="550" }
 
 <div style="page-break-after: always"></div>
 
-5. You can use `shift+tab` to navigate between your command box and the contact list. You will see a brown box around the list when it is selected.
-Try using the arrow key to navigate around the list until you find `John Doe`
-   ![shift tab](images/quickStart_shiftTab_2.png)
-
-6. To add a new log entry for John, try `addlog 1 r/First meetup. d/2019-10-15 14:00`. You can add multiple logs for the same contact, and the logs will appear as a list in the right pane.
-   ![logs](images/quickStart_log_2.png)
-
-7. Finally, to delete a contact, simply use `delete <id>`. In this case, John has an id of 6 (visible from the contact list), so we can run `delete 6` to delete his contact.
-8. For security, you will be prompted to confirm your delete command. Press `y` to confirm, or `n` to cancel.
-   ![delete](images/quickStart_delete_1.png)
-9. Confirm that the contact has been removed from the list on the right
+12\. Confirm that the contact has been removed from the list on the right.
    ![delete finished](images/quickStart_delete_2.png)
-10. That's all! Feel free to refer to the [Features](#features) below for more details on each command and other features included in CareConnect.
+13\. That's all! Feel free to refer to the [Features](#features) below for more details on each command and other features included in CareConnect.
 
 <div style="page-break-after: always"></div>
---------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -198,6 +209,8 @@ Lists of all beneficiaries in the case management system.
 
 Format: `list`
 
+<div style="page-break-after: always"></div>
+
 ### Viewing a client's details: `view`
 
 View the details of the specified client in the case management system.
@@ -258,6 +271,8 @@ Example:
 Example:
 - `setappointment 1 d/` removes the appointment date for the client at index 1.
 
+<div style="page-break-after: always"></div>
+
 ### Searching and filtering clients: `find`
 
 Finds and filters all clients using a combination of name, address, and tags.
@@ -302,6 +317,8 @@ Examples:
   and tags `urgent`, `ill`.
 ![img.png](images/findJohnHans.png)
 
+<div style="page-break-after: always"></div>
+
 ### Deleting a client : `delete`
 
 Deletes the specified client from the case management system.
@@ -336,6 +353,8 @@ Format: `addlog INDEX r/REMARK [d/DATE]`
 Examples:
 * `addlog 2 r/Client is doing well d/2022-12-12 14:00` adds a log entry to the 2nd client with the remark `Client is doing well` and the date `2022-12-12 14:00`.
 * `addlog 1 r/Client is doing well` adds a log entry to the 1st client in the displayed client list, with the current date and time.
+
+<div style="page-break-after: always"></div>
 
 ### Deleting a log entry : `deletelog`
 
