@@ -76,7 +76,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of `MainWindow` and its parts like `CommandBox`, `ResultDisplay`, `PersonListPanel`, and `StatusBarFooter`. All these, including `MainWindow`, inherit from the abstract `UiPart` class, capturing common traits among the visible GUI classes.
+The `UI` consists of `MainWindow` and its parts like `CommandBox`, `ResultDisplay`, `PersonListPanel`, and `StatusBarFooter`. All these, including `MainWindow`, inherit from the abstract `UiPart` class, capturing common traits among the visible GUI classes.
 
 The `CommandBox` integrates with `commandpopup` to provide auto-suggestion functionality. It monitors changes in the `AutoSuggestionTextField` and dynamically generates `CommandTextFlows` that are displayed to the user.
 
