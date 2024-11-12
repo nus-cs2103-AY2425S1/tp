@@ -1540,7 +1540,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 <br>
 
 
-##### ... if `John's Wedding` is not in the list
+3. **Assigning a `Wedding` in the `Wedding List` when the `Wedding` is not in the `Wedding List`.**
 1. Test case: `assign-wedding 1 w/John's Wedding`<br>
    Expected: No contact is assigned. Error details shown.
 
