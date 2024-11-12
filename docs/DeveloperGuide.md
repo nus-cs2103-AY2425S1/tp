@@ -1775,28 +1775,38 @@ applied to edited data, but specific expected results will differ. <br><br>
 
     1. **Prerequisites**: List all tasks using the `list-tasks` command. There is at least one `Task` in the list of `Tasks`.
 
-    2. **Test case**: `mark 1` <br>
+    2. **Test case**: `mark-task 1` <br>
        **Expected**: `Task` 1 is marked as complete. Details of complete task are shown in the status message.
 
     3. **Test case (following Test case 2)**: **Test case**: `mark 1` (assuming `Task` 1 is already complete) <br>
        **Expected**: `Task` 1 remains marked as complete. Details of complete task are shown in the status message.
 
-    4. **Test case**: `mtask X` (where X is greater than the number of tasks in the `Task` list) <br>
+    4. **Test case**: `mark-task X` (where X is greater than the number of tasks in the `Task` list) <br>
        **Expected**: No tasks are marked as complete. Error details shown in the status message indicating that the `Task` is not a valid one.
 
-    4. **Test case**: `mtask 1 2 3` (where there are at least three tasks in the `Task` list) <br>
+    5. **Test case**: `mark-task 1 2 3` (where there are at least three tasks in the `Task` list) <br>
        **Expected**: `Tasks` 1, 2, and 3 are marked as complete. Details of complete tasks are shown in the status message.
+
+    6. **Test case**: `mark-task 1 2 3 4 5` (where there are only three tasks in the `Task` list) <br>
+       **Expected**: `Tasks` 1, 2, and 3 are marked as complete. Error details shown in the status message indicating that other `Tasks` are not valid ones.
 
 <br>
 
 #### Unmarking Task
-##### ... if there's only 2 tasks
-1. Test case: `unmark-task 1`<br>
-   Expected: First task unmarked. Details of updated tasks shown.
 
-##### ... if first contact does not have first task
-1. Test case: `unmark-task 1 2 3 4`<br>
-   Expected: No tasks are unmarked (besides those originally unmarked). Error details shown.
+1. **Unmarking a `Task` as complete**
+
+    1. **Prerequisites**: List all tasks using the `list-tasks` command. There is at least one `Task` in the list of `Tasks`.
+
+    2. **Test case**: `unmark-task 1` <br>
+       **Expected**: `Task` 1 is marked as incomplete. Details of incomplete task are shown in the status message.
+
+    3. **Test case (following Test case 2)**: **Test case**: `unmark-task 1` (assuming `Task` 1 is already incomplete) <br>
+       **Expected**: `Task` 1 remains marked as incomplete. Details of incomplete task are shown in the status message.
+
+    4. Similar test cases to Test cases 3, 4, 5, and 6 can be tested for unmark-task. Expected results are similar. 
+
+<br>
 
 ---
 <h3 class="features">Tag Features</h3>
