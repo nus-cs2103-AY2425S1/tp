@@ -24,18 +24,15 @@
 * [3.2 Add Feature](#3-2-add-feature)
   * [3.2.1 Implementation - Activity Diagram](#3-2-1-implementation-activity-diagram)
   * [3.2.2 Design Considerations](#3-2-2-design-considerations)
-* [3.3 Delete Feature](#3-3-delete-feature)
-  * [3.3.1 Implementation - Sequence Diagram](#3-3-1-implementation-sequence-diagram)
+* [3.3 Tag Feature](#3-3-tag-feature)
+  * [3.3.1 Implementation - Sequence Diagrams](#3-3-1-implementation-sequence-diagrams)
   * [3.3.2 Design Considerations](#3-3-2-design-considerations)
-* [3.4 Tag Feature](#3-4-tag-feature)
-  * [3.4.1 Implementation - Sequence Diagrams](#3-4-1-implementation-sequence-diagrams)
+* [3.4 View Specific Student Feature](#3-4-view-specific-student-feature)
+  * [3.4.1 Implementation - Sequence Diagram](#3-4-1-implementation-sequence-diagram)
   * [3.4.2 Design Considerations](#3-4-2-design-considerations)
-* [3.5 View Specific Student Feature](#3-5-view-specific-student-feature)
+* [3.5 Add Task Feature](#3-5-add-task-feature)
   * [3.5.1 Implementation - Sequence Diagram](#3-5-1-implementation-sequence-diagram)
   * [3.5.2 Design Considerations](#3-5-2-design-considerations)
-* [3.6 Add Task Feature](#3-6-add-task-feature)
-  * [3.6.1 Implementation - Sequence Diagram](#3-6-1-implementation-sequence-diagram)
-  * [3.6.2 Design Considerations](#3-6-2-design-considerations)
 
 [4. Documentation, Logging, Testing, Configuration, Dev-Ops](#4-documentation-logging-testing-configuration-dev-ops)
 
@@ -54,10 +51,14 @@
 * [6.5 Adding a Task to a Student](#6-5-adding-a-task-to-a-student)
 
 [7. Appendix: Planned Enhancements](#7-appendix-planned-enhancements)
-* [7.1 Update subject and lesson time cumulatively](#7-1-update-subject-and-lesson-time-cumulatively)
-* [7.2 Names with special characters](#7-2-names-with-special-characters)
-* [7.3 Multiple students with the same name](#7-3-multiple-students-with-the-same-name)
-* [7.4 Usage of reserved prefixes in parameters](#7-4-usage-of-reserved-prefixes-in-parameters)
+* [7.1 Cumulative Updates for Subjects and Lesson Times](#7-1-cumulative-updates-for-subjects-and-lesson-times)
+* [7.2 Support for Special Characters in Names](#7-2-support-for-special-characters-in-names)
+* [7.3 Handling Multiple Students with Identical Names](#7-3-handling-multiple-students-with-identical-names)
+* [7.4 Restriction on Using Reserved Prefixes within Parameters](#7-4-restriction-on-using-reserved-prefixes-within-parameters)
+* [7.5 Remove Note Display if Blank](#7-5-remove-note-display-if-blank)
+* [7.6 Autoscale Student List When Manually Adjusting Size](#7-6-autoscale-student-list-when-manually-adjusting-size)
+* [7.7 Restrict Task Deadlines to Dates After the Current Date](#7-7-restrict-task-deadlines-to-dates-after-the-current-date)
+* [7.8 Allow Lesson Times to Span Across Multiple Days](#7-8-allow-lesson-times-to-span-across-multiple-days)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -274,43 +275,7 @@ success message. If any check fails, the user is notified with an appropriate er
 
 ***
 
-### 3.3 Delete Feature
-This feature allows users to delete a student from EduManage based on their index in the displayed student list. The
-process involves identifying the student by their index and removing their details from the database.
-
-- **Index Validation**: EduManage checks if the provided index is valid and within the bounds of the current student
-  list. If the index is out of bounds or invalid, an error message is shown.
-- **Student Deletion**: Upon valid index input, the student is deleted from the model and the filtered student list is
-  updated to reflect this change and a success message is shown.
-
-#### 3.3.1 Implementation - Sequence Diagram
-The sequence diagram below illustrates the interaction between various components during the execution of the
-`DeleteCommand`. This includes validation of the index, the deletion of the student from the model, and updating the
-filtered student list.
-
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</box>
-
-#### 3.3.2 Design Considerations
-**Name vs Index for Deletion**
-- **Current Implementation (Alternative 1):**
-    - **Description**: The user identifies the student by their index in the displayed student list.
-    - **Pros**: Simple, fast, and unambiguous with unique indexes.
-    - **Cons**: Users must visually track and remember the index number of the student, which can be cumbersome if the list is long or filtered.
-
-- **Alternative 2**:
-    - **Description**: The user specifies the student’s name for deletion.
-    - **Pros**: Names are easier for users to remember and identify, making the deletion process more intuitive.
-    - **Cons**: Searching by name can be slower with a large contact list, and misspelling the name could lead to
-      the accidental deletion of the wrong student.
-
-***
-
-### 3.4 Tag Feature
+### 3.3 Tag Feature
 This feature allows users to tag a student's profile with specific details related to school level (e.g., `S1 NA`) and
 subject(s) (e.g., `MATH`). By entering the student's name and specifying tags for level or subject(s) (or both), users can
 manage student profiles more efficiently.
@@ -326,7 +291,7 @@ manage student profiles more efficiently.
   value (e.g., `Math` and `MATH`), only one instance of each unique tag will be added, preventing unnecessary
   duplication.
 
-#### 3.4.1 Implementation - Sequence Diagrams
+#### 3.3.1 Implementation - Sequence Diagrams
 The sequence diagrams below depicts the interaction among various classes during the execution of a tag command.
 
 <puml src="diagrams/TagSequenceDiagram-Logic.puml" alt="TagSequenceDiagram-Logic" />
@@ -338,7 +303,7 @@ The sequence diagrams below depicts the interaction among various classes during
 
 <puml src="diagrams/TagSequenceDiagram-Model.puml" alt="TagSequenceDiagram-Model" />
 
-#### 3.4.2 Design Considerations
+#### 3.3.2 Design Considerations
 **Parsing Tag Input**
 - **Current Implementation (Alternative 1):**
     - **Description**: Tag validation is managed by the `ParserUtil` class, centralizing validation logic for improved
@@ -366,7 +331,7 @@ The sequence diagrams below depicts the interaction among various classes during
 
 ***
 
-### 3.5 View Specific Student Feature
+### 3.4 View Specific Student Feature
 
 This feature allows users to view the details of an existing student by specifying their name. It enables quick access
 to a student's profile for viewing key information.
@@ -378,7 +343,7 @@ to a student's profile for viewing key information.
 - **Case Insensitivity**: EduManage treats student names case-insensitively, ensuring that variations in capitalization
   do not affect the search result.
 
-#### 3.5.1 Implementation - Sequence Diagram
+#### 3.4.1 Implementation - Sequence Diagram
 The sequence diagram below depicts the interaction among various classes during the execution of a view command.
 
 <puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
@@ -388,7 +353,7 @@ The sequence diagram below depicts the interaction among various classes during 
 **Note:** The lifeline for `ViewCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-#### 3.5.2 Design Considerations
+#### 3.4.2 Design Considerations
 **Case Insensitivity and Name Matching**
 - **Current Implementation (Alternative 1)**:
     - **Description**: Ignore cases when matching student names, ensuring that capitalization does not affect
@@ -403,7 +368,7 @@ The sequence diagram below depicts the interaction among various classes during 
 
 ***
 
-### 3.6 Add Task Feature
+### 3.5 Add Task Feature
 
 This feature allows users to add specific tasks to a student's profile, enhancing the ability to track individual
 assignments, exams, or goals for each student. By entering the student's name, task description and due date, users
@@ -416,7 +381,7 @@ can manage and monitor students' progress more efficiently.
 - **Fixed Date Format**: Due dates must be entered in a strict `YYYY-MM-DD` format. This format avoids ambiguity and
   enforces consistency, helping users easily interpret task deadlines.
 
-#### 3.6.1 Implementation - Sequence Diagram
+#### 3.5.1 Implementation - Sequence Diagram
 The sequence diagram below illustrate the interactions among various classes when an add task command is executed.
 
 <puml src="diagrams/AddTaskSequenceDiagram-Logic.puml" alt="AddTaskSequenceDiagram-Logic" />
@@ -426,7 +391,7 @@ The sequence diagram below illustrate the interactions among various classes whe
 **Note:** The lifeline for `AddTaskCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-#### 3.6.2 Design Considerations
+#### 3.5.2 Design Considerations
 **Parsing Task Input**
 - **Current Implementation (Alternative 1)**:
     - **Description**: The `ParserUtil` class manages validation for task attributes, including date format checking,
@@ -926,9 +891,9 @@ testers are expected to do more *exploratory* testing.
     1. Download the jar file and copy into an empty folder.
 
     2. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EduManage.jar` command to run the application.
-       Expected: A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+       Expected: A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
        ![Ui](images/Ui.png)
-       <br>
+       <br><br>
 
 2. Saving window preferences
 
@@ -1043,7 +1008,7 @@ Given below are the planned enhancements for future versions of EduManage.
 
 **Team size**: 5.
 
-### 7.1 Update subject and lesson time cumulatively
+### 7.1 Cumulative Updates for Subjects and Lesson Times
 
 Currently, both subjects and lesson times are not updated cumulatively; using the `update` command replaces all previous
 entries with the new values provided. This behavior can be inconvenient, especially when users want to add additional
@@ -1053,14 +1018,14 @@ by changing the behaviour of the `update` command.
 
 ***
 
-### 7.2 Names with special characters
+### 7.2 Support for Special Characters in Names
 
 Currently, only alphanumeric names are allowed. Users are advised to omit special characters (e.g., `,`, `-`, `/`) or replace them with spaces.
 A future version will include support for names with special characters to accommodate a wider range of naming conventions.
 
 ***
 
-### 7.3 Multiple students with the same name
+### 7.3 Handling Multiple Students with Identical Names
 
 Currently, EduManage does not support multiple students with identical names. As a workaround, users can differentiate these
 students by adding numbering to their names (e.g., "John Doe 1," "John Doe 2"). We plan to accommodate this in the future by
@@ -1068,12 +1033,43 @@ relying on `INDEX` instead of `n/NAME` or `NAME` for commands.
 
 ***
 
-### 7.4 Usage of reserved prefixes in parameters
+### 7.4 Restriction on Using Reserved Prefixes within Parameters
 
 Currently, EduManage does not check whether reserved prefixes are used within parameters. A future version will ensure that
 all reserved prefixes are restricted from use in any parameters to prevent conflicts or unexpected behavior. This planned
 enhancement aims to improve system reliability by reducing potential errors arising from misuse of reserved prefixes.
 
 The reserved prefixes are: `a/`, `e/`, `lt/`, `l/`, `n/`, `nt/`, `p/`, `s/`, `d/`, `t/`, `ti/`.
+
+***
+
+### 7.5 Remove Note Display if Blank
+
+Currently, notes are displayed even if they are left blank, which creates unnecessary clutter in the user interface.
+In a future update, we aim to enhance the note display feature by automatically hiding it when no content is present,
+providing a cleaner and more efficient user experience by removing unnecessary elements.
+
+***
+
+### 7.6 Autoscale Student List When Manually Adjusting Size
+Currently, when users adjust the size of the student list window, the content does not automatically rescale, leading to
+potential readability and usability issues. A future version will include an autoscaling feature for the student list,
+ensuring that content dynamically adjusts to fit the window's new size. This enhancement will improve the flexibility
+and adaptability of the user interface.
+
+***
+
+### 7.7 Restrict Task Deadlines to Dates After the Current Date
+Currently, task deadlines can be set to dates in the past, which can lead to unintentional errors and confusion for
+users. In an upcoming version, we plan to restrict task deadlines so that they can only be set to dates in the near
+future (maximum of 1 year from the current date). This restriction will enhance user experience by ensuring that all
+task deadlines are relevant and achievable.
+
+***
+
+### 7.8 Allow Lesson Times to Span Across Multiple Days
+At present, lesson times are restricted to a single day, which can be limiting for scheduling. We plan to enhance the
+scheduling feature to support lesson times that span multiple days, enabling users to create more flexible and realistic
+lesson schedules. This feature will accommodate the needs of users with extended or multi-day lessons.
 
 [(Back to Top)](#edumanage-developer-guide)
