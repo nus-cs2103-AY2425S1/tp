@@ -30,8 +30,15 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+This project, ABCLI, builds on the Address Book Level 3 (AB3) project, originally developed by the [SE-EDU initiative](https://se-education.org). We extend our heartfelt thanks to the AB3 developers for their foundational work, which has greatly influenced the structure and functionality of ABCLI.
+
+We would also like to express our gratitude to the creators of the following resources, libraries, and tools that were pivotal in the development of ABCLI:
+* [AB3 Codebase](https://github.com/se-edu/addressbook-level3)
+* [JavaFX](https://openjfx.io)
+* [JUnit](https://junit.org/junit5/)
+* [Jackson Library](https://github.com/FasterXML/jackson)
+
+The contributions of these resources and their developers were indispensable in bringing ABCLI to fruition, and we deeply value their impact on our work.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -114,8 +121,7 @@ visible GUI.
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
 the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
-is specified
-in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)  
 
 The `UI` component,
 
@@ -161,17 +167,24 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
+<img src="images/ModelClassDiagram.png" width="600" />  
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<div markdown="span" class="alert alert-info">:information_source: **Note**: This model class diagram is simplified for readability. The implementation of the `Buyer`, `MeetUp` and `Property` models are given below.
 
+<img src="images/BuyerMeetupModelClassDiagram.png" width="600" />
+
+<img src="images/PropertyModelClassDiagram.png" width="450" />
+</div>
 
 The `Model` component,
 
 * stores the buyer list data i.e., all `Buyer` objects (which are contained in a `UniqueBuyerList` object).
-* stores the currently 'selected' `Buyer` objects (e.g. results of a search query) as a separate _filtered_ list which
+* stores the meet-up list data i.e. all `MeetUp` objects (which are contained in a `UniqueMeetUpList` object).
+* stores the property list data i.e. all `Property` objects (which are contained in a `UniquePropertyList` object).
+* stores the currently 'selected' `Buyer` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Buyer>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `MeetUp` and `Property` objects in a similar fashion to the currently 'selected' `Buyer` objects.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
@@ -216,7 +229,7 @@ The mode of `AbcliParser` can be switched by executing a `SwitchParserModeComman
 6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The diagram below shows the activity diagram for a user wanting to delete the first `MeetUp` in his `MeetUpList`:<br><br>
-<img src="images/DeleteMeetUpActivityDiagram.png" width="386" />
+<img src="images/DeleteMeetUpActivityDiagram.png" width="350" />
 
 --------------------------------------------------------------------------------------------------------------------
 

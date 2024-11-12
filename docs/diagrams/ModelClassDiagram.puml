@@ -16,14 +16,31 @@ Class PropertyList
 Class ModelManager
 Class UserPrefs
 
+Package "Buyer" {
 Class UniqueBuyerList
 Class Buyer
 
+BuyerList *--> "1" UniqueBuyerList
+UniqueBuyerList --> "~* all" Buyer
+ModelManager --> "~* filtered" Buyer
+}
+
+Package "Meet-Up" {
 Class UniqueMeetUpList
 Class MeetUp
 
+MeetUpList *--> "1" UniqueMeetUpList
+UniqueMeetUpList --> "~* all" MeetUp
+}
+
+Package "Property" {
 Class UniquePropertyList
 Class Property
+
+PropertyList *--> "1" UniquePropertyList
+UniquePropertyList --> "~* all" Property
+ModelManager --> "~* filtered" Property
+}
 
 Class I #FFFFFF
 }
@@ -46,26 +63,8 @@ ModelManager -right-> "1" MeetUpList
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-BuyerList *--> "1" UniqueBuyerList
-UniqueBuyerList --> "~* all" Buyer
-
-PropertyList *--> "1" UniquePropertyList
-UniquePropertyList --> "~* all" Property
-
-MeetUpList *--> "1" UniqueMeetUpList
-UniqueMeetUpList --> "~* all" MeetUp
-
-
-Buyer -[hidden]up--> I
 UniqueBuyerList -[hidden]right-> I
-
-Property -[hidden]up--> I
 UniquePropertyList -[hidden]right-> I
-
-MeetUp -[hidden]up--> I
 UniqueMeetUpList -[hidden]right-> I
 
-ModelManager --> "~* filtered" Buyer
-ModelManager --> "  ~* filtered" Property
-ModelManager --> " ~* filtered" MeetUp
 @enduml
