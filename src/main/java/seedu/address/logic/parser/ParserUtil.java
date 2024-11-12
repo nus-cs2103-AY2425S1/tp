@@ -101,7 +101,7 @@ public class ParserUtil {
             // Catch any ParseExceptions wrapped in RuntimeExceptions
             throw new ParseException(causeMessage, e);
         }
-    }
+    } //inspired by OpenAI. (2024). ChatGPT [Large language model]. https://chatgpt.com
     private static void checkIndicesNotEmpty(String indices) throws ParseException {
         if (indices.isEmpty()) {
             throw new ParseException(MESSAGE_EMPTY_INDICES);
