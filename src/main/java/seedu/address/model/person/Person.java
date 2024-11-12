@@ -19,22 +19,22 @@ public class Person {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
+    private final Gender gender;
 
     // Data fields
-    private final Address address;
+    private final Set<Module> modules = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Gender gender, Set<Module> modules, Set<Tag> tags) {
+        requireAllNonNull(name, phone, gender, modules, tags);
         this.name = name;
         this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.modules.addAll(modules);
         this.tags.addAll(tags);
+        this.gender = gender;
     }
 
     public Name getName() {
@@ -45,12 +45,12 @@ public class Person {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
+    public Gender getGender() {
+        return gender;
     }
 
-    public Address getAddress() {
-        return address;
+    public Set<Module> getModules() {
+        return Collections.unmodifiableSet(modules);
     }
 
     /**
@@ -71,7 +71,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().isSameName(getName());
     }
 
     /**
@@ -92,15 +92,14 @@ public class Person {
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+                && modules.equals(otherPerson.modules)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, modules, tags);
     }
 
     @Override
@@ -108,8 +107,8 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
+                .add("gender", gender)
+                .add("modules", modules)
                 .add("tags", tags)
                 .toString();
     }

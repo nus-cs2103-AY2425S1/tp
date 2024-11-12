@@ -1,8 +1,11 @@
 {
   "persons": [ {
     "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e",
-    "address": "4th street"
+    "phone": "#9482424",
+    "gender": "male",
+    "modules" : [ {
+      "module" : "MA1522",
+      "grade" : 20
+    } ]
   } ]
 }

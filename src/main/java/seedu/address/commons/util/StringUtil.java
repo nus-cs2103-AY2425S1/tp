@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * Helper functions for handling strings.
@@ -36,6 +37,38 @@ public class StringUtil {
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
+    }
+
+    /**
+     * Returns true if the {@code phoneNumber} contains the {@code number}.
+     *   It requires at least one number to match the phoneNumber.
+     *   <br>examples:<pre>
+     *       containsNumber("123456", "123") == true
+     *       containsNumber("123456", "789") == false
+     *       containsNumber("123456", "124") == false
+     *       </pre>
+     * @param phoneNumber cannot be null, must be a single number
+     * @param inputNumber cannot be null, cannot be empty, must be a single number
+     */
+    public static boolean containsNumber(String phoneNumber, String inputNumber) {
+        requireNonNull(phoneNumber);
+        requireNonNull(inputNumber);
+
+        String preppedNumber = inputNumber.trim();
+        checkArgument(!preppedNumber.isEmpty(), "Number parameter cannot be empty");
+
+        String preppedPhoneNumber = phoneNumber.trim();
+        if (preppedPhoneNumber.isEmpty()) {
+            return false;
+        }
+
+        //phone number should not have any space
+        checkArgument(preppedNumber.split("\\s+").length == 1, "Number parameter should be a single word");
+        checkArgument(phoneNumber.split("\\s+").length == 1, "phoneNumber parameter should be a single word");
+
+        Pattern pattern = Pattern.compile("^\\d+$");
+
+        return pattern.matcher(phoneNumber).matches() && phoneNumber.contains(inputNumber);
     }
 
     /**

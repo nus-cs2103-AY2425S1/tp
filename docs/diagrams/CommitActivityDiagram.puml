@@ -3,16 +3,28 @@ skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
-:User executes command;
 
-'Since the beta syntax does not support placing the condition outside the
-'diamond we place it as the true branch instead.
+:User inputs command;
 
-if () then ([command commits AddressBook])
-    :Purge redundant states;
-    :Save AddressBook to
-    addressBookStateList;
+:Program checks command type;
+
+if () then ([List, Find, Filter Command])
+
+  :Do not save to stateList;
 else ([else])
+  if () then ([Archive Command])
+    :Clear stateList;
+  else ([Else])
+    if () then ([Load Command])
+      :Clear stateList;
+      :Load original data as initialState to undo to;
+    else ([Other Commands])
+      :Purge redundant slide;
+      :Execute the command;
+      :Save current state to stateList;
+    endif
+  endif
 endif
+
 stop
 @enduml

@@ -15,6 +15,9 @@ Class PersonListPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class DialogBox
+Class HBox
+Class AutocompleteParser
 }
 
 package Model <<Rectangle>> {
@@ -31,6 +34,7 @@ HiddenOutside ..> Ui
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
+MainWindow *-down->  "1" DialogBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
@@ -42,6 +46,8 @@ MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
+CommandBox --down-> "1" AutocompleteParser
+DialogBox --|> HBox
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart

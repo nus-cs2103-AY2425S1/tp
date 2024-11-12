@@ -2,6 +2,9 @@
 layout: page
 title: Developer Guide
 ---
+
+![Logo](images/StoreClass-Logo.png)
+
 * Table of Contents
 {:toc}
 
@@ -9,7 +12,10 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Our team member isaactodo's iP chatbot code. https://github.com/isaactodo/ip
+* Solution for max sized context menu for Autocomplete feature adapted from https://stackoverflow.com/questions/51272738/javafx-contextmenu-max-size-has-no-effect.
+* Code and idea for Undo and Redo were inspired by the original AB3 Developer Guide.
+* Code for sidebar of UG and DG inspired by ChatGPT.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -72,7 +78,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI. However, `DialogBox` inherits from `HBox`.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -83,6 +89,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+`CommandBox` holds a reference towards `AutocompleteParser` which helps parses user input for a list of suggestions to show to the user.
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -144,6 +151,25 @@ The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+  
+The following is an example JSON output for a person:
+
+```json
+{
+    "name": "John Doe",
+    "phone": "98765432",
+    "gender": "male",
+    "modules": [
+        {
+            "module": "CS2103T",
+            "grade": 85
+        }
+    ],
+    "tags": [
+        "colleague"
+    ]
+}
+```
 
 ### Common classes
 
@@ -151,41 +177,96 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## General Flow
+The activity diagram below illustrates the general flow of an interaction between the user and StoreClass.
+
+<img src="images/GeneralFlowActivity.png" width="1000" />
+
+1. The user enters a command in the `CommandBox`.
+2. The AddressBookParser parses the command.
+3. If the command is a valid command and is of a valid format, the corresponding `Command` object is created.
+4. The `Command` object is executed by the `Logic` component.
+5. The `UI` component displays the result of the command execution to the user. <br>
+
+---
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation Overview
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo functionality is implemented in the `VersionedAddressBook`, which extends the basic `AddressBook` to include versioning capabilities. This is achieved by maintaining an internal history of address book states. The history is stored in a list (`addressBookStateList`), and the current state is tracked by the `currentStatePointer`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The key operations involved in undo/redo are:
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+- **`VersionedAddressBook#save()`**: Saves the current state of the address book into the history list.
+- **`VersionedAddressBook#undo()`**: Restores the address book to the previous state.
+- **`VersionedAddressBook#redo()`**: Restores the address book to a previously undone state.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+These operations are available to the rest of the system through the `Model` interface, specifically:
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+- `Model#saveAddressBook()`
+- `Model#undoAddressBook()`
+- `Model#redoAddressBook()`
+
+---
+
+## How Undo/Redo Works
+
+The mechanism functions as follows:
+
+1. **Save**: Every modification to the address book, such as `add`, `delete`, or `edit` commands, triggers a save operation to save the current state of the address book.
+
+2. **Undo**: The undo operation moves the `currentStatePointer` backward and restores the previous state. If no more undo operations can be performed (i.e., if the pointer is at the start of the history), the operation fails and returns an error.
+
+3. **Redo**: The redo operation moves the `currentStatePointer` forward and restores the next state that was undone. If there are no undone states, the operation fails and returns an error.
+
+The activity diagram below illustrates how the state list changes according to the user's commands.
+
+<img src="images/CommitActivityDiagram.png" width="1000" />
+
+---
+
+### Example Flow
+
+Here is how undo and redo would work through a sequence of user actions:
+
+---
+
+#### Step 1. Initial State
+Upon launching the application, the `VersionedAddressBook` is initialized with the default state (an empty address book, for example). This state is stored in the `addressBookStateList` as the first entry, and the `currentStatePointer` points to this state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+---
+
+#### Step 2. Performing a Deletion
+When a user executes the `delete` command (e.g., `delete 5`), the current state of the address book is saved before the change is made. This ensures that the delete action is reversible. The new state of the address book (with the 5th person deleted) is then stored in the history.
+
+The `saveAddressBook()` operation is called internally, and the `currentStatePointer` is moved forward to point to the newly saved state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+---
+
+#### Step 3. Performing an Addition
+Next, if a user executes an `add` command (e.g., `add n/David ...`), a new state of the address book is created. As before, `saveAddressBook()` is invoked to save the new state, and the `currentStatePointer` is shifted to this new state.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#saveAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+---
+
+#### Step 4. Undoing the Addition
+If the user decides to undo the most recent action (the `add` command), the `undo` operation will restore the address book to the state before the addition. Internally, `undoAddressBook()` is called, which moves the `currentStatePointer` backward and restores the state.
+
+If the pointer is already at the first state (the initial state), attempting to undo will return an error.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -194,7 +275,10 @@ than attempting to perform the undo.
 
 </div>
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+#### Undo Sequence Diagram
+The following sequence diagram shows how the undo operation works across the `Logic` and `Model` components:
+
+`Logic`:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
 
@@ -202,7 +286,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 </div>
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+`Model`:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
@@ -212,39 +296,84 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+---
+
+#### Step 5. Redoing the Addition
+If the user decides to redo the action after undoing it, the `redo` operation will restore the state that was undone. The `redoAddressBook()` method is invoked, which moves the `currentStatePointer` forward to the next state in history and restores that state.
+
+As with undo, if the pointer is at the last state in the list, trying to redo will return an error.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+#### Redo Sequence Diagram
+The following sequence diagram shows how the redo operation works across the `Logic` and `Model` components:
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
-The following activity diagram summarizes what happens when a user executes a new command:
+---
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+## Design Considerations
 
-#### Design considerations:
+Here are the important aspects of the undo/redo implementation:
 
-**Aspect: How undo & redo executes:**
+- **Saving Mechanism:** Each modification to the address book (like `add`, `delete`, or `edit`) triggers a call to `saveAddressBook()`. This function stores the current state of the address book and updates the `currentStatePointer`. However, commands that do not modify the address book (such as `list`, `find`, or `filter`) do not trigger a call to `saveAddressBook()`, and therefore do not modify the history.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+- **Undo/Redo Pointer Management:** The `currentStatePointer` is moved backward during undo and forward during redo. If no more states can be undone or redone, appropriate error messages are returned.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+- **Memory Considerations:** Since each address book state is stored in memory, excessive changes could increase memory usage. The current implementation keeps track of all states but might need optimization in the future, depending on the application’s use case.
 
-_{more aspects and alternatives to be added}_
+- **State Purging:** After calling `undo`, when a command that modifies the address book is executed (such as `add`, `delete`, or `edit`), the states after the current one are purged to ensure consistency. This prevents errors from conflicting history states. Additionally, after calls to `archive` and `load`, the history is also purged to ensure consistency between different data files.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+---
 
 
---------------------------------------------------------------------------------------------------------------------
+
+### Data archiving
+
+The archive and load feature is achieved through `ArchiveCommand` and `LoadCommand` which both extend the `Command` class. When such command is executed, the LogicManager will update the Storage when necessary.
+
+The Following UML Object Diagrams will illustrate how archive and load are done
+
+Before the archiving or loading
+
+We will use a simple case where there is one working AddressBook named `addressBook.json` in `data` folder and one archived AddressBook named `archivedFile1.json` in `archived` folder
+
+![ArchiveAndLoadInitialState](images/ArchiveAndLoadInitialState.png)
+
+**Scenario 1 Archive to a new file**
+
+In this scenario, the user is trying to archive the current address book into a new file named `archiveFile2.json`. He enters the command `archive pa/archiveFile2.json` A new file names `archiveFile2.json` will be created and hold the data of `addressBook.json`. And the data in `addressBook.json` will be discarded.
+
+![ArchiveToNewFile](images/ArchiveToNewFile.png)
+
+**Scenario 2 Archive to a existing file**
+
+In this scenario, the user is trying to archive the current address book into the existing file named `archiveFile1.json`. He enters the command `archive pa/archiveFile1.json` A file names `archiveFile1.json` will be overwritten and hold the data of `addressBook.json`. And the data in `addressBook.json` will be discarded.
+
+![ArchiveToNExistingFile](images/ArchiveToExistingFile.png)
+
+The following sequence diagram illustrate how an archive operation is processed under `Logic` component.
+
+![ArchiveSequenceDiagram](images/ArchiveSequenceDiagram-Logic.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. Some details like parameters of function is omitted for simplicity.
+
+</div>
+
+**Scenario 3 Loading from a file**
+
+In this scenario, the user is trying to load the address book from a file named `archiveFile1.json`. He enters the command `load pa/archiveFile1.json`. The data in the current working address book will be discarded. The data in `archiveFile1.json` will be loaded into the working address book.
+![Load](images/Load.png)
+
+The following sequence diagram illustrate how a load operation is processed under `Logic` component.
+
+![LoadSequenceDiagram](images/LoadSequenceDiagram-Logic.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `LoadCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. Some details like parameters of function is omitted for simplicity.
+
+</div>
+
+-------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -262,42 +391,64 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* a teacher in an educational institution (private institution, i.e. tuition centers)
+* need to manage large amount of student information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: It allows for easy and efficient retrieval or storage of student information while providing a clean and user-friendly interface. The application supports modularity, and users are able to import and export to other similar applications without relying on complex or costly software.
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​  | I want to …​                                              | So that I can…​                                                |
+|----------|----------|-----------------------------------------------------------|----------------------------------------------------------------|
+| `* * *`  | educator | add students into the database                            | easily refer to their information when needed                  |
+| `* * *`  | educator | list all students to view the number of students          | collate that information                                       |
+| `* * *`  | educator | delete a student                                          | remove entries that I no longer need                           |
+| `* * *`  | educator | find a person by name                                     | find the relevant person without scrolling through a long list |
+| `* *`    | educator | clear all information                                     | start anew for a new academic year                             |
+| `* *`    | educator | update details easily when there are changes              | have the most updated information                              |
+| `* *`    | educator | categorize students into groups                           |                                                                |
+| `* *`    | educator | record students grades for tests and assignments          |                                                                |
+| `* *`    | educator | view a summary of each student's grade                    |                                                                |
+| `* *`    | educator | tag students with relevant labels                         | prioritize students based on their status                      |
+| `* *`    | educator | record notes on student behaviour                         | easily track issues related to their behaviour                 |
+| `* *`    | educator | archive old student data                                  | keep my AB clean while being able to retrieve old information  |
+| `*`      | educator | set learning goals                                        | track their progress towards these goals                       |
+| `*`      | educator | undo/redo any changes                                     | avoid re-entering the data during a mis-entry                  |
+| `*`      | educator | see a list of suggested commands when typing out commands | easily type in the commands that I want and reduce typos       |
+| `*`      | educator | export student data                                       | share the information with others                              |
+| `*`      | educator | keep track of meetings with students                      | keep track of my commitments                                   |
+| `*`      | educator | see sample data                                           | try out the app's feature without adding my own student data   |
 
-*{More to be added}*
+
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `StoreClass` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+#### **Use case 1: List out all students**
 
-**MSS**
+**Main Success Scenario**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  StoreClass shows a list of students
+
+    Use case ends.
+
+#### **Use case 2: Delete a student**
+
+**Main Success Scenario**
+
+1.  User requests to list students
+2.  StoreClass shows a list of students
+3.  User requests to delete a specific student in the list
+4.  StoreClass deletes the student
 
     Use case ends.
 
@@ -313,20 +464,203 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+#### **Use case 3: Add a student**
 
+**Main Success Scenario**
+
+1.  User requests to add persons and type in the relevant information
+2.  StoreClass adds the new student
+3. StoreClass show the new list of students
+    Use case ends.
+
+**Extensions**
+
+* 1a. The provided information is invalid.
+
+    * 1a1. StoreClass displays the corresponding data error message.
+
+      Use case resumes at step 1.
+
+#### **Use case 4: Search for student**
+
+**Main Success Scenario**
+
+1.  User requests to search for student with the relevant search query.
+2.  StoreClass displays the relevant student(s) matching the query. <br>
+    Use case ends.
+
+**Extensions**
+
+* 1a. StoreClass is unable to find any matching results.
+
+    * 1a1. StoreClass displays a message indicating that not students match the search query.
+
+      Use case ends.
+
+#### **Use case 5: Update Student Information**
+
+**Main Success Scenario**
+
+1.  User requests to <u>list students (UC1)</u>.
+2. User selects the specific student from the list to update.
+3. User enters the new information.
+4. StoreClass updates the student's details and display a success message. <br>
+    Use case ends.
+
+**Extensions**
+
+* 4a. StoreClass detects an error in the entered information.
+
+    * 1a1. StoreClass displays a message indicating which fields are invalid.
+
+      Use case ends.
+
+#### **Use case 6: Record Student Grades**
+
+**Main Success Scenario**
+
+1. User requests to <u>list students (UC1)</u>.
+2. User selects the specific student to record a grade.
+3. User enters the grade information.
+4. StoreClass updates the student's grades and display a success message. <br>
+    Use case ends.
+
+**Extensions**
+
+* 4a. StoreClass detects an error in the entered information.
+
+    * 1a1. StoreClass displays a message indicating which fields are invalid.
+
+      Use case ends.
+
+#### **Use case 7: Categorize Students**
+
+**Main Success Scenario**
+
+1. User requests to <u>list students (UC1)</u>.
+2. User selects one or more students to be categorized.
+3. StoreClass requests for the group to assign the students to.
+4. User selects the group.
+5. StoreClass categorize the student(s) and display a success message. <br>
+    Use case ends.
+
+**Extensions**
+
+* 4a. StoreClass detects that no groups exist.
+
+    * 4a1. StoreClass allows the user to create a new group.
+    * 4a2. StoresClass creates a new group.
+
+      Use case resumes from step 6.
+
+#### **Use case 8: Tag Students**
+
+**Main Success Scenario**
+
+1. User requests to <u>list students (UC1)</u>.
+2. User selects one or more students to be tagged.
+3. StoreClass requests for the tag(s) to assign the students to.
+4. User enters the tag(s)
+5. StoreClass applies the tags to the selected student(s) and display a success message. <br>
+    Use case ends.
+
+**Extensions**
+
+* 4a. StoreClass detects an invalid tag(s).
+
+    * 4a1. StoreClass requests a valid tag.
+    * 4a2. User enters a valid tag. <br>
+      Steps 4a1-4a2 are repeated until a valid tag is entered. <br>
+      Use case resumes from step 6.
+
+#### **Use case 9: Archive Student Data**
+
+**Main Success Scenario**
+
+1.  User requests to archive student data.
+2.  StoreClass requests confirmation for archiving.
+3. User confirms.
+4. StoreClass archives the students data and removes them from the current interface.
+5. StoreClass displays a success message. <br>
+    Use case ends.
+
+**Extensions**
+
+* *a. User wishes to view the archived data.
+
+    * *a1. StoreClass lists all available archives.
+    * *a2. User selects the archive.
+    * *a3. StoreClass displays the archives information.
+
+      Use case ends
+
+#### **Use case 10: Export Student Data**
+
+**Main Success Scenario**
+
+1.  User chooses to export student data.
+2.  StoreClass requests confirmation for exporting.
+3. User confirms.
+4. StoreClass exports the students data and displays a success message. <br>
+   Use case ends.
+
+**Extensions**
+
+* *4a. StoreClass is unable to export the data.
+
+    * *4a1. StoreClass returns an error message.
+
+      Use case ends.
+
+#### **Use case 11: Undo/Redo Actions**
+
+**Main Success Scenario**
+
+1.  User performs an action/command.
+2.  User chooses to undo the action.
+3. StoreClass reverses the action and displays a success message. <br>
+   Use case ends.
+
+**Extensions**
+
+* *a. User chooses to redo the action.
+
+    * *a1. StoreClass restores the previous action and display a success message.
+
+      Use case ends.
+
+#### **Use case 12: Filter Student List** 
+
+**Main Success Scenario**
+
+1.  User request to filter a list of student based on specified conditions.
+2.  StoreClass displays all students that match all conditions. <br>
+    Use case ends.
+
+**Extensions**
+* 1a. No matching student found.
+    * 1a1. StoreClass display a message indicating that no students match the search query. <br>
+      Use case ends.
+  
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  The product should be an offline product that can run without accessing the internet, allowing access to core features such as adding, deleting, listing and archiving.
+5. Sensitive student data such as contact details, grades and payment information should be protected through encryption or password protection to prevent unauthorized access.
+6. The system should be able to manage an increasing number of students and additional data fields without significant performance degradation, ensuring that response times remains under 200ms.
 
-*{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Archive**: A feature that allows users to store old data for use later without cluttering the current interface.
+* **Export**: Saving the student data in a file format as `json` file. This is done through data archiving.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Student Number**: A unique identifier assigned to each student.
+* **Tag**: A label that can be added to a student for categorization or searching.
+* **Undo/Redo**: The ability to reverse an action/command made in the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -354,7 +688,36 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exit the App
+    1. Enter `exit` in the command box. This will exit the app.
+
+### Adding a person
+1. Adding a person into the person list
+   1. Assumption: We assume there is no duplicate in this test case
+   2. Test case `add n/John Doe p/98765432 g/male m/Physics`<br>
+   Expected: A person named John Doe into StoreClass with the details givens
+   3. Test case `add n/John Doe p/000 g/male m/Physics`<br> 
+   Expected: No person is added, an error message will be displayed.
+   4. Other incorrect add command to try : <br>
+   `add n/John Doe p/98765432 g/notAGender m/Physics`<br>
+   `add n/J@hn Do! p/98765432 g/male m/Physics`<br>
+   Expected: Same as test case 3
+
+### Editing a person
+1. Editing a person in the person list
+    1. Assumption: We assume the index here is valid if it is a positive integer
+    2. Test case `edit 1 g/female`<br>
+       Expected: The gender of the first person in the list is changed to female
+    3. Test case `edit 0 g/female`<br>
+       Expected: No person is edited, an error message will be displayed. 
+    4. Other incorrect edit command to try : <br>
+       `edit 1 p/000`<br>
+       `edit 1 n/J@hn D*n`<br>
+       Expected: Same as test case 3
+    5. Other valid edit command to try : <br>
+        `edit 1 n/Angelica Lee`<br>
+        `edit 1 p/96754328`<br>
+        Expected: the field indicated by the prefix is edit to the information given.
 
 ### Deleting a person
 
@@ -371,12 +734,71 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+   1. Here `<HomeFolder>` refer to the folder containing the jar file.
+   1. Test case: Missing data file<br>
+      1. Close the app
+      2. Delete the json file with path `<HomeFolder>/data/addressbook.json` or remove the `data` folder entirely
+      3. Reopen the app <br>
+      Expected: a sample database will be provided.
+   2. Test case: Corrupted file<br>
+      1. Ensure that there is at least 1 student in StoreClass
+      1. Close the app
+      2. Open the json file with path  `<HomeFolder>/data/addressbook.json` and edit the name of the first student name to a invalid one e.g. `J@hn D*n`
+      3. ReOpen the app <br>
+      Expected: the corrupted list is discarded and an empty list is provided.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Saving data
+   1. Do some simple command to add / edit / delete student.
+   2. Close the app.
+   3. Reopen the app to see if your changes are saved correctly.<br>
+   Expected: Data is saved correctly, the list should after reopen should be same as before close.
 
-1. _{ more test cases …​ }_
+### Finding a person
+
+1. Test case: `find John`<br>
+Expected: list out all students whose names and tags contain john.
+
+### Filtering a list
+
+1. Test case: `filter g/male`<br>
+Expected: list out all the male students.
+
+### Undoing and Redoing a action
+
+1. Test case: Undo and redo a command
+   1. Perform a simple command that is supported by undo and redo e.g. add, edit or delete
+   2. Enter the command `undo`<br>
+   Expected: the action performed in step 1 will be undo.
+   3. Enter the command `redo`<br>
+   Expected: the action undone in step 2 will be redo.
+
+### Archiving Data
+Prerequisite: Ensure you can write in the `<HomeFolder>`
+
+Test case:  `archive pa/mybook.json`<br>
+Expected: The current list is cleared. Its data is stored in a json file with path `<HomeFolder>/archived/mybook.json`
+
+### Loading Data
+Prerequisite: Ensure you have a local `json` file containing a StoreClass data to read in the folder `<HomeFolder>/archived`. This can be done by try to archive one using the previous test.
+
+Test case: `load pa/mybook.json`<br>
+Expected: The current list will be overwritten and the content of the file will be loaded into the list.
+
+### Grade a person
+Assumption: The index and module are valid
+
+1. Test case: `grade 1 m/Math s/95`<br>
+Expected: Grade the first student's math as 95.
+2. Test case `grade 1 m/Math s/999`<br>
+Expected: No one will be graded, an error message will be shown.
+
+## **Planned Enhancements**
+1. Support for phone numbers that are not strictly 8 digits.
+2. User customization of pass/fail grade boundary.
+3. Support for grades that are in decimal values.
+4. Add a way to view grades without hovering over the class, preferably without using the mouse.

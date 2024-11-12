@@ -61,8 +61,9 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveAndArchiveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
+        Path archivePath = testFolder.resolve("ArchiveAddressBook.json");
         AddressBook original = getTypicalAddressBook();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
@@ -84,6 +85,11 @@ public class JsonAddressBookStorageTest {
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new AddressBook(readBack));
 
+        // Archive the file and read back to compare
+        jsonAddressBookStorage.saveAddressBook(original, filePath);
+        jsonAddressBookStorage.saveArchivedAddressBook(original, archivePath);
+        ReadOnlyAddressBook readBackArchive = jsonAddressBookStorage.readAddressBook(archivePath).get();
+        assertEquals(original, new AddressBook(readBackArchive));
     }
 
     @Test
@@ -106,5 +112,27 @@ public class JsonAddressBookStorageTest {
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveAddressBook(new AddressBook(), null));
+    }
+
+    /**
+     * Archive {@code addressBook} at the specified {@code filePath}.
+     */
+    private void archiveAddressBook(ReadOnlyAddressBook addressBook, String archivePath) {
+        try {
+            new JsonAddressBookStorage(Paths.get(archivePath))
+                    .saveArchivedAddressBook(addressBook, addToTestDataPathIfNotNull(archivePath));
+        } catch (IOException ioe) {
+            throw new AssertionError("There should not be an error writing to the file.", ioe);
+        }
+    }
+
+    @Test
+    public void saveArchivedAddressBook_nullAddressBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> archiveAddressBook(null, "SomeFile.json"));
+    }
+
+    @Test
+    public void saveArchivedAddressBook_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> archiveAddressBook(new AddressBook(), null));
     }
 }

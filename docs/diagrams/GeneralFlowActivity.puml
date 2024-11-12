@@ -1,0 +1,39 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+
+:User enters a command;
+:Parser parses the command;
+
+if () then ([valid command])
+    if () then ([Exit Command])
+        :Exit command is created;
+        :Exit command is executed;
+
+    else ([not Exit Command])
+        if () then ([Help Command])
+            :Help command is created;
+            :Help command is executed;
+            :UI displays Help window;
+
+        else ([Other commands])
+            :Respective parser parses arguments of specified command;
+            if () then ([valid format])
+                :Command is created;
+                :Command is executed;
+                :UI displays executed message;
+
+            else ([invalid format])
+                :UI displays an error message;
+
+            endif
+        endif
+    endif
+else ([invalid command])
+    :UI displays an error message;
+
+endif
+stop
+@enduml

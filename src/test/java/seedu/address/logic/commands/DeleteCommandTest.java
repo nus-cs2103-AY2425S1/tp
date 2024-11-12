@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -37,6 +39,7 @@ public class DeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
+        expectedModel.saveAddressBook();
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -61,6 +64,7 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
+        expectedModel.saveAddressBook();
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -77,6 +81,83 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_undoRedoSingleValidIndex_success() throws Exception {
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+        Person personToDelete = model.getFilteredPersonList().get(lastPersonIndex.getZeroBased());
+
+        DeleteCommand deleteCommand = new DeleteCommand(lastPersonIndex);
+
+        // Update expected model
+        expectedModel.deletePerson(personToDelete);
+        expectedModel.saveAddressBook();
+
+        // Execute delete command on test model
+        deleteCommand.execute(model);
+        assertFalse(model.getFilteredPersonList().contains(personToDelete));
+
+        expectedModel.undoAddressBook();
+        assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
+        assertTrue(model.getFilteredPersonList().contains(personToDelete));
+
+        expectedModel.redoAddressBook();
+        assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_REDO_SUCCESS, expectedModel);
+        assertFalse(model.getFilteredPersonList().contains(personToDelete));
+    }
+
+    @Test
+    public void execute_undoRedoMultipleValidIndex_success() throws Exception {
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ArrayList<Person> deletedPersons = new ArrayList<>();
+
+        //Perform multiple deletions, saving deleted persons and updating expected model
+        for (int i = 0; i < 3; i++) {
+            Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+            Person personToDelete = model.getFilteredPersonList().get(lastPersonIndex.getZeroBased());
+
+            DeleteCommand deleteCommand = new DeleteCommand(lastPersonIndex);
+
+            // Update expected model
+            expectedModel.deletePerson(personToDelete);
+            expectedModel.saveAddressBook();
+
+            // Execute delete command on test model
+            deleteCommand.execute(model);
+
+            // Add deleted person to list and verify they are not in the test model list
+            deletedPersons.add(personToDelete);
+            assertFalse(model.getFilteredPersonList().contains(personToDelete));
+        }
+
+        for (int i = deletedPersons.size() - 1; i >= 0; i--) {
+            Person lastDeletedPerson = deletedPersons.get(i);
+
+            // Undo deletion
+            expectedModel.undoAddressBook();
+            assertCommandSuccess(new UndoCommand(), model, UndoCommand.MESSAGE_UNDO_SUCCESS, expectedModel);
+            assertTrue(model.getFilteredPersonList().contains(lastDeletedPerson));
+        }
+
+        for (Person personToRedoDelete : deletedPersons) {
+            // Redo deletion
+            expectedModel.redoAddressBook();
+            assertCommandSuccess(new RedoCommand(), model, RedoCommand.MESSAGE_REDO_SUCCESS, expectedModel);
+            assertFalse(model.getFilteredPersonList().contains(personToRedoDelete));
+        }
+    }
+
+    @Test
+    public void execute_undoRedoInvalidIndex_failure() {
+        Index invalidIndex = Index.fromOneBased(Integer.MAX_VALUE);
+        DeleteCommand deleteCommand = new DeleteCommand(invalidIndex);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
+        // no changes made, so undo and redo should fail
+        assertCommandFailure(new UndoCommand(), model, UndoCommand.MESSAGE_UNDO_FAILURE);
+        assertCommandFailure(new RedoCommand(), model, RedoCommand.MESSAGE_REDO_FAILURE);
     }
 
     @Test

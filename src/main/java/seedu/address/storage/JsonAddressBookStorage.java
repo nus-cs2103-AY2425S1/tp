@@ -23,6 +23,10 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     private Path filePath;
 
+    /**
+     * Create a  JsonAddressBookStorage with file Path and default archive path
+     * @param filePath the file path.
+     * */
     public JsonAddressBookStorage(Path filePath) {
         this.filePath = filePath;
     }
@@ -75,6 +79,16 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+    }
+
+
+    @Override
+    public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook, Path archivePath) throws IOException {
+        requireNonNull(addressBook);
+        requireNonNull(archivePath);
+
+        FileUtil.createIfMissing(archivePath);
+        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), archivePath);
     }
 
 }

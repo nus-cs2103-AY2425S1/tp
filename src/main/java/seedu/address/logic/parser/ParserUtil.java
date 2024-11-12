@@ -2,15 +2,20 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ArchiveCommand;
+import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -21,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_FILE_NOT_EXIST = "The target file is not a file or does not exits!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -66,35 +72,45 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String gender} into a {@code Gender}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code Gender} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Gender(trimmedGender);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String module} into a {@code Module}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code module} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static Module parseModule(String module) throws ParseException {
+        requireNonNull(module);
+        String trimmedModuleName = module.trim();
+        if (!Module.isValidModule(trimmedModuleName) || !Module.isValidLength(trimmedModuleName)) {
+            throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Module(trimmedModuleName);
     }
-
+    /**
+     * Parses {@code Collection<String> modules} into a {@code Set<Module>}.
+     */
+    public static Set<Module> parseModules(Collection<String> modules) throws ParseException {
+        requireNonNull(modules);
+        final Set<Module> moduleSet = new HashSet<>();
+        for (String module : modules) {
+            moduleSet.add(parseModule(module));
+        }
+        return moduleSet;
+    }
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
@@ -120,5 +136,56 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+    /**
+     * Parses a {@code String grade} into a {@code Grade}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code grade} is invalid.
+     */
+    public static int parseGrade(String grade) throws ParseException {
+        requireNonNull(grade);
+        String trimmedGrade = grade.trim();
+        try {
+            int numericGrade = Integer.parseInt(trimmedGrade);
+            if (!Module.isValidGrade(numericGrade)) {
+                throw new ParseException(Module.GRADE_CONSTRAINTS);
+            }
+            return numericGrade;
+        } catch (NumberFormatException e) {
+            throw new ParseException(Module.GRADE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code String path} into a {@code Path}.
+     * Leading and trailing whitespaces will be trimmed.
+     * */
+
+    public static Path parsePathWithCheck(String path) throws ParseException {
+        requireNonNull(path);
+        path = path.trim();
+        final Path parsedPath = Paths.get("archived", path);
+        if (!path.endsWith(".json") || path.contains("/")) {
+            throw new ParseException(LoadCommand.MESSAGE_USAGE);
+        } else if (!Files.exists(parsedPath) || !Files.isRegularFile(parsedPath)) {
+            throw new ParseException(MESSAGE_FILE_NOT_EXIST);
+        }
+        return parsedPath;
+    }
+
+    /**
+     * Parses a {@code String path} into a {@code Path}.
+     * Leading and trailing whitespaces will be trimmed.
+     * */
+
+    public static Path parsePathWithoutCheck(String path) throws ParseException {
+        requireNonNull(path);
+        path = path.trim();
+        final Path parsedPath = Paths.get("archived", path);
+        if (!path.endsWith(".json") || path.contains("/")) {
+            throw new ParseException(ArchiveCommand.MESSAGE_USAGE);
+        }
+        return parsedPath;
     }
 }

@@ -2,11 +2,14 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,13 +36,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label gender;
+    @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane modules;
+    @FXML
+    private FlowPane grades;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,11 +54,53 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        gender.setText(person.getGender().getGenderWithSymbol());
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getModules().stream()
+                .sorted(Comparator.comparing(module -> module.module))
+                .forEach(moduleCode -> {
+                    Label moduleLabel = new Label(moduleCode.module);
+
+                    // Color-coding based on grade
+                    String gradeString = moduleCode.getGrade();
+                    int gradeValue = 0; // Default to 0 if parsing is needed
+
+                    if (gradeString.equalsIgnoreCase("Ungraded")) {
+                        // Set style for ungraded modules
+                        moduleLabel.setStyle("-fx-background-color: #B0BEC5; -fx-background-radius: 5; "
+                                + "-fx-text-fill: black; -fx-padding: 5 10; -fx-font-weight: bold;");
+                        moduleLabel.setTooltip(new Tooltip(moduleCode.module + " (Ungraded)"));
+                    } else {
+                        try {
+                            gradeValue = Integer.parseInt(gradeString);
+                            // Set color based on grade range
+                            if (gradeValue >= 50) {
+                                moduleLabel.setStyle("-fx-background-color: #4CAF50; -fx-background-radius: 5; "
+                                        + "-fx-text-fill: white; -fx-padding: 5 10; -fx-font-weight: bold;");
+                            } else {
+                                moduleLabel.setStyle("-fx-background-color: #F44336; -fx-background-radius: 5; "
+                                        + "-fx-text-fill: white; -fx-padding: 5 10; -fx-font-weight: bold;");
+                            }
+                            // Tooltip for graded modules
+                            moduleLabel.setTooltip(new Tooltip("Module: " + moduleCode.module + "\nGrade: "
+                                    + gradeValue));
+                        } catch (NumberFormatException e) {
+                            // Handle unexpected non-numeric grades gracefully
+                            moduleLabel.setStyle("-fx-background-color: #B0BEC5; -fx-background-radius: 5; "
+                                    + "-fx-text-fill: black; -fx-padding: 5 10; -fx-font-weight: bold;");
+                            moduleLabel.setTooltip(new Tooltip(moduleCode.module + " (Invalid grade)"));
+                        }
+                    }
+
+                    // Add the moduleLabel directly to the modules FlowPane
+                    modules.getChildren().add(moduleLabel);
+                });
+        gender.textFillProperty().bind(
+                Bindings.when(gender.textProperty().isEqualTo("♂"))
+                        .then(Color.LIGHTBLUE)
+                        .otherwise(Color.PINK));
     }
 }
