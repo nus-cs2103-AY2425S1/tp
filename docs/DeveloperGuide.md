@@ -451,6 +451,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes at step 4.
 
+**Use case: UC5 - Import a list of persons**
+
+**MSS**
+
+1.  User requests to import a list of persons from a CSV file
+2.  VolunTier prompts the user to input the file path of the CSV file
+3.  User provides the file path
+4.  VolunTier reads the CSV file and imports the list of persons
+5.  VolunTier confirms that the persons have been successfully imported
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The file path is invalid.
+
+    * 2a1. VolunTier shows an error message.
+
+  Use case resumes at step 2.
+
+* 4a. The CSV file has invalid entries.
+
+    * 4a1. VolunTier shows an error message specifying the invalid entries and imports the valid entries.
+    * 4a2. VolunTier confirms that the valid entries have been successfully imported.
+    * 4a3. VolunTier shows an error message specifying the invalid entries.
+  
+  Use case resumes at step 2.
+
 
 ### Non-Functional Requirements
 
