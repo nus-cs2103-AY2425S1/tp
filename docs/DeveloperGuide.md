@@ -171,7 +171,8 @@ How the parsing works:
 
 <div markdown="span" class="alert alert-info">:information_source: **Note**: This model class diagram is simplified for readability. The implementation of the `Buyer`, `MeetUp` and `Property` models are given below.
 
-<img src="images/BuyerMeetupModelClassDiagram.png" width="550" />  
+<img src="images/BuyerMeetupModelClassDiagram.png" width="550" /> <br>
+
 <img src="images/PropertyModelClassDiagram.png" width="450" />
 </div>
 
