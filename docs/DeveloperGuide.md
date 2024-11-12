@@ -605,7 +605,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a valid patient
 
     1. Test case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Main St t/Low Risk m/None`<br>
-       Expected: New person added: John Doe; Phone: 98788432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tag: Low Risk; Allergies: None
+       Expected: New person added: John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Main St; Tag: Low Risk; Allergies: [none]
 
 2. Adding a patient with missing fields
 
@@ -629,13 +629,13 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a patient 
 
     1. Test case: `delete n/Alex Yeoh`<br>
-       Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+       Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: [none]
    
     2. Test case: `delete p/81239873`<br>
-       Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+       Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: [none]
    
     3. Test case: `delete e/alex@yahoo.com`<br>
-       Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+       Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: [none]
    
     4. Other incorrect delete commands to try: `delete`, `delete 1`, `delete x`, `...` <br>
        Expected: Invalid command format!
@@ -646,13 +646,13 @@ testers are expected to do more *exploratory* testing.
 1. Editing a patient
 
      1. Test case: `edit 1 n/Axel`<br>
-        Expected: Edited Person: Axel; Phone: 83471234; Email: alex@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+        Expected: Edited Person: Axel; Phone: 83471234; Email: alex@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: [none]
 
      2. Test case: `edit 1 p/88452209 e/alex@gmail.com`<br>
-        Expected: Edited Person: Axel; Phone: 88452209; Email: alex@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+        Expected: Edited Person: Axel; Phone: 88452209; Email: alex@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: [none]
 
      3. Test case: `edit 1 n/Alice p/90967209 e/alice@gmail.com`<br>
-        Expected: Edited Person: Alice; Phone: 90967209; Email: alice@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+        Expected: Edited Person: Alice; Phone: 90967209; Email: alice@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: [none]
 
      4. Test case: `edit 1`<br>
         Expected: At least one field to edit must be provided
@@ -686,7 +686,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding date and time to unique patient
    1. Prerequisites: Ensure that there is one and only one patient named `John Doe`
    2. Test case: `date n/John Doe d/13/11/2024 1600`
-   3. Expected: Added date and time to Person: John Doe; Phone: 98788432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tag: Low Risk; Allergies: None
+   3. Expected: Added date and time to Person: John Doe; Phone: 98788432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tag: Low Risk; Allergies: [none]
 
 2. Adding date and time to patient with same appointment date and time
    1. Prerequisites: Ensure that there is one and only one patient named `Jane Doe` and another patient has an appointment date and time of `13/11/2024 1600`
