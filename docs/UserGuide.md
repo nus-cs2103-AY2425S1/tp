@@ -444,7 +444,7 @@ Assigns a role and/or weddings to a person.
       - Removes the role of person at index 1.
     -  `assign John Doe r/photographer w/2`
         - If there's only one match for "John Doe", assigns them the role "photographer" and to wedding at index 2.<br>
-          **Error Examples**:<br>
+**Error Example**:<br>
 ![Assignment error example](images/error_example_assign.png)<br>
 *Example of error when trying to assign a client to their own wedding*
 
@@ -497,7 +497,8 @@ Advanced users can edit the data file directly to modify the address book data.
 - **Error Messages**:
     - The application provides specific error messages to guide users in correcting their commands.
 - **Case Sensitivity**:
-    - Commands are generally case-insensitive, but parameters (especially for exact matches) may be case-sensitive as per the validation rules.
+  - Commands must be **lowercase** (`add, addw, edit, editw etc.`)
+  - Parameters (`n/..., e/...` ) are **case-insensitive** as per the validation rules.
 
 [↥ Back to Top](#bridal-boss-user-guide)
 
