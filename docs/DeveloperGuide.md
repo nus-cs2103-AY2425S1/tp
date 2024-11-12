@@ -16,7 +16,7 @@ title: Developer Guide
 
 ## **Setting Up, Getting Started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting up and getting started_](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/docs/SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -258,11 +258,11 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Other Helpful Resources**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [Documentation guide](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/docs/Documentation.md)
+* [Testing guide](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/docs/Testing.md)
+* [Logging guide](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/docs/Logging.md)
+* [Configuration guide](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/docs/Configuration.md)
+* [DevOps guide](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/docs/DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
 # Appendix
