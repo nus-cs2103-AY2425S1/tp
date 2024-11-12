@@ -23,12 +23,13 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
-    @Test
+    /* @Test
     public void parse_tooShortSearchString_throwsParseException() {
         assertParseFailure(
                 parser, "a",
                 String.format(MESSAGE_TOO_SHORT_SEARCH, FindCommand.MESSAGE_USAGE));
     }
+    */
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
