@@ -75,7 +75,7 @@ public class ContactCard extends UiPart<Region> {
         }
 
         // @@author cth06-Github-reused
-        // Reused from ChatGPT output with minor modifications, see developer guide
+        // Reused from ChatGPT output with minor modifications, see docs/team/cth06-github.md
         final Label nicknameConfirm = nicknameLabel; // in order to be streamed in the event listener
         cardPane.widthProperty().addListener(new ChangeListener<Number>() {
             private Label[] labels = new Label[]{name, nicknameConfirm, email};
