@@ -49,7 +49,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
 
-            String[] modules = argMultimap.getValue(PREFIX_MODULE).get().split(" ");
+            String[] modules = argMultimap.getValue(PREFIX_MODULE).get().trim().replaceAll("\\s+", " ").split(" ");
             if (modules.length != 2) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }

@@ -18,6 +18,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setEduContacts(new EduContacts());
-        return new CommandResult(MESSAGE_SUCCESS);
+        model.setPersonToDisplay(null);
+        return new CommandResult(MESSAGE_SUCCESS, true);
     }
 }
