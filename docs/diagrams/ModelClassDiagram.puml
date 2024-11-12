@@ -22,6 +22,8 @@ Class Name
 Class Phone
 Class Log
 Class Status
+Class LogEntry
+Class AppointmentDate
 
 Class I #FFFFFF
 }

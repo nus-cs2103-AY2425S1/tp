@@ -13,6 +13,16 @@
 
 ## **Acknowledgements**
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)
+
+GitHub CoPilot was used by the following team members:
+- [junyi73](Used it as an auto-complete tool throughout the project)
+- [jeanyang04](Used it as an auto-complete tool throughout the project)
+- [slidings](Used it as an auto-complete tool throughout the project)
+
+ChatGPT was used by the following team members:
+- [slidings](Used it to generate the logo for the app)
+- [zhiyi12345](Used it to improve a few test cases and java documentation)
+- [t-leongchuan](Uses it to improve some java documentation in IdentityNumber class)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -239,13 +249,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -269,7 +272,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* most likely a psychiatrist/psychologist
+* most likely a therapist
 
 **Value proposition**: manage patients faster than a typical mouse/GUI driven app
 
@@ -287,7 +290,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | store data locally                                      | keep patient data private                                |
 | `* *`    | user    | get a manual all the available commands (-help command) | learn all the possible commands to fully utilize the app |
 | `* *`    | user    | clear the list of patients                              | start from an empty patient list                         |
-| `* *`    | user    | edit session log/ patient information                   | change incorrect or out of date information              |
+| `* *`    | user    | edit patient information                                | change incorrect or out of date information              |
 | `* *`    | user    | confirm a command                                       | verify if I really want to do an action                  |
 | `* *`    | user    | cancel a command                                        | reverse an action that I did not intend to do            |
 | `* *`    | user    | be able to classify my patient as discharged/new        | cross reference their progress                           |
@@ -331,7 +334,7 @@ Use case ends.
 
         Use case ends.
 
-* 4a. User does not confirm addition
+* 4a. User cancels addition
 
     * 4a1. System display a message indicating that the addition was canceled.
 
@@ -367,7 +370,7 @@ Use case ends.
 
       Use case ends.
 
-* 4a. User does not confirm deletion
+* 4a. User cancels deletion
 
     * 4a1. System display a message indicating that the deletion was canceled.
 
@@ -432,7 +435,7 @@ Use case ends.
 
       Use case ends.
 
-* 4a. User does not confirm edit
+* 4a. User cancels edit
 
     * 4a1. System display a message indicating that the edit was canceled.
 
@@ -446,8 +449,6 @@ Use case ends.
 4. The application must be able to recover gracefully from unexpected failures or errors, such as improper input, without crashing or losing data.
 5. The system should include comprehensive user and developer documentation, including instructions for installation, configuration, usage, and troubleshooting.
 6. The application must provide feedback to the user within 600 milliseconds for all interactive actions (e.g., executing a command, saving a record).
-
-*{More to be added}*
 
 ### Glossary
 
@@ -481,9 +482,21 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
+   
+3. Testing of our product
 
-1. _{ more test cases …​ }_
+   1. Re-launch the app by double-clicking the jar file
+   
+   2. Refer to our [user guide](https://ay2425s1-cs2103t-w13-3.github.io/tp/UserGuide.html) to test out the features.<br>
+      Expected: Feature should work as described in the user guide.
+   
+   Note: You can refer [here](https://ay2425s1-cs2103t-w13-3.github.io/tp/UserGuide.html#sample-nrics) for a list of NRIC with the correct checksum.
+   
+4. Exiting of the app
+
+   1. Type in the exit command referring to the [user guide](https://ay2425s1-cs2103t-w13-3.github.io/tp/UserGuide.html).<br>
+      Expected: App should exit without failing. User data should be saved automatically onto your local storage. Upon relaunch, the app should have the most up-to-date user data.
 
 ### Deleting a person
 
@@ -500,24 +513,24 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `delete i/S1234567A`(NRIC is invalid due to invalid checkstyle), `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-   
-   2. Other incorrect delete commands to try: `delete i/S1234567A` (NRIC is invalid due to invalid checkstyle)
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   Test cases:
+   1. Navigate to the ./data folder created under the same directory of the program and delete the addressbook.json file<br>
+      Expected: The app loads up with the default data.
+   
+   2. Navigate to the ./data folder created under the same directory of the program and corrupt the addressbook.json file by adding a random character to it.<br>
+      Expected: The app loads up with an empty address book.
 
 
 ## Reference
 
-![MindMapLogo.png](..%2Fsrc%2Fmain%2Fresources%2Fimages%2FMindMapLogo.png)
+![MindMapLogo.png](../src/main/resources/images/MindMapLogo.png)
 
 The logo for MindMap is generated via ChatGPT, powered by Dall-E.
 Prompted used: Generate a clipart style logo in black and white which blends the style of a brain and a cloud, meant for an app that lets therapist log patient sessions
