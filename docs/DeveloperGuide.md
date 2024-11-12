@@ -840,13 +840,16 @@ Team Size: 5
 
 4. **Being able to edit/delete order history of a customer**
  
-   Add editHistory and deleteHistory command that allows order history of a customer to be modified, to enhance flexibility of the application
-
+   Add `editHistory` and `deleteHistory` command that allows order history of a customer to be modified, to enhance flexibility of the application. To do that, we can add `editHistory`/`deleteHistory` method inside `OrderTracker`, and call it from the `execute` in `editHistory`/`deleteHistory`. 
 
 5. **Being able to export customer order history into csv file**
     
     Add downloadOrderHistory to export all customer data alongside the order history, so that the manager can mass process all the customer data for other purpose such as targeted advertising using machine learning
 
+6. **Add support for reading long command**
+
+    Currently, the application may crash if the user inputs a very large string into the text box, as the entire content is loaded into memory at once. This can cause issues with memory management and lead to application instability or crashes, especially for files or inputs with significant text content. To prevent crashes and improve performance, we plan to implement a buffered reading approach using Java's BufferedReader to handle large text inputs in manageable chunks
+ 
 
 ### Non-Functional Requirements
 
