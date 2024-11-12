@@ -46,16 +46,22 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
 
         EditScheduleDescriptor editScheduleDescriptor = new EditScheduleDescriptor();
 
-        List<Index> contactIndexes = argMultimap.getAllValues(PREFIX_CONTACT).stream()
-                .flatMap(value -> Stream.of(value.split("\\s+"))) // Split multiple indices by spaces
-                .map(contactIndexStr -> {
-                    try {
-                        return ParserUtil.parseIndex(contactIndexStr);
-                    } catch (ParseException e) {
-                        throw new RuntimeException(e); // Wrap ParseException to unchecked exception
-                    }
-                }).toList();
+        List<Index> contactIndexes;
 
+        try {
+            contactIndexes = argMultimap.getAllValues(PREFIX_CONTACT).stream()
+                    .flatMap(value -> Stream.of(value.split("\\s+"))) // Split multiple indices by spaces
+                    .map(contactIndexStr -> {
+                        try {
+                            return ParserUtil.parseIndex(contactIndexStr);
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }).toList();
+        } catch (RuntimeException pe) {
+            throw new ParseException(String
+                    .format(MESSAGE_INVALID_COMMAND_FORMAT, EditScheduleCommand.MESSAGE_USAGE), pe);
+        }
         // Parse and set the new values if present
         if (argMultimap.getValue(PREFIX_CONTACT).isPresent()) {
             editScheduleDescriptor.setContactIndex(contactIndexes);
