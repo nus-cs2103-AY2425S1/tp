@@ -92,45 +92,32 @@ public class UndoCommandTest {
     }
 
     @Test
-    public void execute_helpCommand_throwsCommandException() throws CommandException {
+    public void execute_deleteCommand_success() throws CommandException {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        sampleUserInput = "help";
+        sampleUserInput = "delete test";
 
-        HelpCommand helpCommand = new HelpCommand();
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         UndoCommand undoCommand = new UndoCommand();
 
-        LogicStub logicStub = new LogicStub(model, helpCommand);
+        LogicStub logicStub = new LogicStub(model, deleteCommand);
         logicStub.execute(sampleUserInput);
+        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS, sampleUserInput);
 
-        assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_INVALID_PREVIOUS_COMMAND);
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_saveCommand_throwsCommandException() throws CommandException {
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        sampleUserInput = "help";
+    public void execute_notUndoableCommand_throwsCommandException() throws CommandException {
+        Command[] notUndoableCommands = {new HelpCommand(), new SaveCommand(), new LoadCommand()};
+        sampleUserInput = "notUndoableCommand test";
 
-        SaveCommand saveCommand = new SaveCommand();
-        UndoCommand undoCommand = new UndoCommand();
+        for (int i = 0; i < 3; i++) {
+            UndoCommand undoCommand = new UndoCommand();
+            LogicStub logicStub = new LogicStub(model, notUndoableCommands[i]);
+            logicStub.execute(sampleUserInput);
 
-        LogicStub logicStub = new LogicStub(model, saveCommand);
-        logicStub.execute(sampleUserInput);
-
-        assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_INVALID_PREVIOUS_COMMAND);
-    }
-
-    @Test
-    public void execute_loadCommand_throwsCommandException() throws CommandException {
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        sampleUserInput = "help";
-
-        LoadCommand loadCommand = new LoadCommand();
-        UndoCommand undoCommand = new UndoCommand();
-
-        LogicStub logicStub = new LogicStub(model, loadCommand);
-        logicStub.execute(sampleUserInput);
-
-        assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_INVALID_PREVIOUS_COMMAND);
+            assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_INVALID_PREVIOUS_COMMAND);
+        }
     }
 
     /**
