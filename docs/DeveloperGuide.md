@@ -105,7 +105,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-How the `Logic` Component works:
+How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
@@ -121,13 +121,13 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### Model Component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F15-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" />
 
 
-The `Model` Component,
+The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the address book data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
@@ -339,9 +339,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Nurse    | edit the address for each patient                  | reflect changes in the event that the information was keyed in wrongly         |
 
 
-### Use cases
+### Use Cases
 
-(For all use cases below, the **System** is the `NovaCare` and the **Actor** is the `nurses`, unless specified otherwise)
+(For all Use Cases below, the **System** is the `NovaCare` and the **Actor** is the `nurses`, unless specified otherwise)
 
 **Use Case: UC01 - Add Patient**
 
@@ -350,7 +350,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Nurse requests to add patient details to the system.
 2. NovaCare adds the patient to the list.
 
-   Use case ends.
+   Use Case ends.
 
 **Extensions**
 
@@ -374,7 +374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Nurse requests to edit the patient details of a specific patient.
 2. NovaCare edits the details of the specified patient in the list.
 
-   Use case ends.
+   Use Case ends.
 
 **Extensions**
 
@@ -398,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Nurse requests to edit the patient details of a specific patient.
 2. NovaCare deletes the patient from the patient list and the tasks related to the patient in the task list.
 
-   Use case ends.
+   Use Case ends.
 
 **Extensions**
 
@@ -417,7 +417,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Nurse requests to list all patient details.
 2. NovaCare displays a list of all patient details.
 
-   Use case ends.
+   Use Case ends.
 
 **Use Case: UC05 - Find Patient(s) by Name**
 
@@ -426,7 +426,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Nurse requests to find patients whose name contains `keywords`.
 2. NovaCare lists patient(s) whose name contains `keywords`.
 
-   Use case ends.
+   Use Case ends.
 
 **Extensions**
 
@@ -434,7 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
 
-**Use case: UC06 - Add Emergency contact**
+**Use Case: UC06 - Add Emergency contact**
 **Preconditions: Patient list is not empty**
 
 **MSS**
@@ -442,7 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Nurse requests to add emergency contact details to a selected patient.
 2. NovaCare adds the emergency contact details to the selected patient.
 
-   Use case ends.
+   Use Case ends.
 
 **Extensions**
 
@@ -462,7 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1d1. NovaCare displays an error message that the patient already has a registered emergency contact.<br>Use Case ends.
 
-**Use case: UC07 - Delete Emergency contact**
+**Use Case: UC07 - Delete Emergency contact**
 **Preconditions: Patient list is not empty**
 
 **MSS**
@@ -470,7 +470,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Nurse requests to delete the emergency contact details of a selected patient.
 2. NovaCare deletes the emergency contact details of the selected patient.
 
-   Use case ends.
+   Use Case ends.
 
 **Extensions**
 
@@ -484,7 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1d. NovaCare detects that the patient already does not have a registered emergency contact.
 
-    * 1d1. NovaCare displays an error message that the patient already does not have a registered emergency contact.<br>Use case ends.
+    * 1d1. NovaCare displays an error message that the patient already does not have a registered emergency contact.<br>Use Case ends.
 
 **Use Case: UC08 - Add Priority**
 **Preconditions: Patient list is not empty**
@@ -494,7 +494,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Nurse requests to add a priority level to a specified patient.
 2. NovaCare updates the given patient details with the entered priority level.
 
-   Use case ends.
+   Use Case ends.
 
 **Extensions**
 
@@ -513,10 +513,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Nurse requests to reset a priority level of a specified patient.
 2. NovaCare resets the given patient details with the default priority level.
 
-   Use case ends.
+   Use Case ends.
 
 
-**Use case: UC10 - Add Task**
+**Use Case: UC10 - Add Task**
 **Preconditions: Patient list is not empty**
 
 **MSS**
@@ -524,9 +524,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Nurse requests to add a new task to a specific patient.
 2. NovaCare adds the task to the task list.
 
-    Use case ends.
+    Use Case ends.
 
-Use case ends.
+Use Case ends.
 
 **Extensions**
 
@@ -546,7 +546,7 @@ Use case ends.
 1. Nurse requests to delete a new task from the task list.
 2. NovaCare deletes the task from the task list.
 
-   Use case ends.
+   Use Case ends.
 
 **Extensions**
 
@@ -565,7 +565,7 @@ Use case ends.
 1. Nurse requests to list all tasks.
 2. NovaCare displays a list of all tasks.
 
-   Use case ends.
+   Use Case ends.
 
 **Use Case: UC13 - Find Task(s) by Patient Index**
 
@@ -574,7 +574,7 @@ Use case ends.
 1. Nurse requests to find tasks for a specified patient's index.
 2. NovaCare lists task(s) under patient with the given index.
 
-   Use case ends.
+   Use Case ends.
 
 **Extensions**
 
@@ -594,7 +594,7 @@ Use case ends.
 1. Nurse requests to mark a specified task as complete.
 2. NovaCare marks given task to be complete.
 
-   Use case ends.
+   Use Case ends.
 
 **Extensions**
 
@@ -614,7 +614,7 @@ Use case ends.
 1. Nurse requests to unmark a specified task to be incomplete.
 2. NovaCare unmarks given task to be incomplete.
 
-   Use case ends.
+   Use Case ends.
 
 **Extensions**
 
@@ -633,7 +633,7 @@ Use case ends.
 1. Nurse requests to list all incomplete tasks.
 2. NovaCare displays a list of all incomplete tasks.
 
-   Use case ends.
+   Use Case ends.
 
 **Use Case: UC17 - Clear All Patients and Tasks**
 
@@ -642,7 +642,7 @@ Use case ends.
 1. Nurse requests to clear all patients and tasks in NovaCare.
 2. NovaCare clears all patient and task data.
 
-   Use case ends.
+   Use Case ends.
 
 ### Non-Functional Requirements
 
