@@ -571,7 +571,7 @@ Advanced users can edit the data file directly to modify the address book data. 
 #### Email Addresses
 
 - **Format**:
-    - Must be in the form `local-part@domain.toplevel`
+    - Must be in the form `local-part@domain`
 - **Local-part Rules**:
     - Can contain alphanumeric characters and `+`, `_`, `.`, `-`
     - Cannot start or end with a special character
