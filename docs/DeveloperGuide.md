@@ -4,7 +4,42 @@ title: Developer Guide
 ---
 * Table of Contents
 {:toc}
-
+## Table of Contents
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)
+   * [Architecture](#architecture)
+   * [UI component](#ui-component)
+   * [Logic component](#logic-component)
+   * [Model component](#model-component)
+   * [Storage component](#storage-component)
+   * [Common classes](#common-classes)
+4. [Implementation](#implementation)
+   * [General Features](#general-features)
+     * [Help Command : `help`](#help-command--help)
+     * [Home Command : `home`](#home-command--home)
+     * [Clear Command : `clear`](#clear-command--clear)
+     * [Exit Command : `exit`](#exit-command--exit)
+   * [Patient Management Features](#patient-management-features)
+     * [Add Command : `add`](#add-command--add)
+     * [Add Full Command : `addf`](#add-full-command--addf)
+     * [Edit Command : `edit`](#edit-command--edit)
+     * [Delete Command : `delete`](#delete-command--delete)
+     * [View Command : `view`](#view-command--view)
+   * [Appointment Management Features](#appointment-management-features)
+     * [Book Appointment : `bookappt`](#book-appointment--bookappt)
+     * [Delete Appointment : `deleteappt`](#delete-appointment--deleteappt)
+     * [Filter Appointment : `filter`](#filter-appointment--filter)
+5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+6. [Appendix](#appendix)
+   * [Appendix A: Product Scope](#appendix-a-product-scope)
+   * [Appendix B: User Stories](#appendix-b-user-stories)
+   * [Appendix C: Use Cases](#appendix-c-use-cases)
+   * [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
+   * [Appendix E: Glossary](#appendix-e-glossary)
+   * [Appendix F: Instructions for manual testing](#appendix-f-instructions-for-manual-testing)
+   * [Appendix G: Planned Enhancements](#appendix-g-planned-enhancements)
+   * [Appendix H: Effort](#appendix-h-effort)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -542,9 +577,9 @@ The `filter` command is designed such that the user has versatility in filtering
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix**
 
-### Product scope
+### Appendix A: Product Scope
 
 **Target user profile:**<br>
 **Name:** Jane<br>
@@ -564,7 +599,7 @@ The `filter` command is designed such that the user has versatility in filtering
 * automate reminder messages for patient consultations and sending of patients' Test/Scan results
 * provide different GUI views for different clinic concerns
 
-### User stories
+### Appendix B: User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -587,7 +622,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | clinic assistant                           | check the payment balance of the customers                                         | remind them to pay their outstanding bills                             |
 | `*`      | clinic assistant                           | see a summary of the patient when i click on the profile                           | save time scrolling through their profiles                             |
 
-### Use cases
+### Appendix C: Use Cases
 
 (For all use cases below, the **System** is the `ClinicConnect` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -978,6 +1013,8 @@ Displays all appointments that falls between today's date and the specified end 
 
     Use case ends.
 
+**Extensions**
+
 * 1a. User inputs invalid end date that doesn't follow the format YYYY-MM-DD.
     * 1a1. ClinicConnect prompts the user to fix the date field that it should follow the specific format.<br>
       Step 1a1 is repeated until the input entered has entered valid dates that follows the specified format.<br>
@@ -1059,7 +1096,7 @@ Displays appointments that matches with the specified `HealthService`.
 
     Use case ends.
 
-### Non-Functional Requirements
+### Appendix D: Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The system should be able to hold up to 1000 patients without a noticeable sluggishness in performance for typical usage.
@@ -1069,7 +1106,7 @@ Displays appointments that matches with the specified `HealthService`.
 8.  A first-time user should be able to navigate and perform basic tasks (e.g. adding a patient, searching for records) within 10 minutes of using the platform without prior training.
 9.  The system should maintain comprehensive logs of all user actions, especially concerning patient record access, modifications, and deletions. These logs should be easily accessible for auditing purposes and stored for at least 5 years.
 
-### Glossary
+### Appendix E: Glossary
 
 * **API (Application Programming Interface)**: A set of rules and tools that allows one piece of software to communicate with another.
 * **Component**: A modular part of a software system that has a well-defined purpose.
@@ -1084,7 +1121,7 @@ Displays appointments that matches with the specified `HealthService`.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix F: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -1435,7 +1472,7 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
-## **Appendix: Planned Enhancements**
+## Appendix G: Planned Enhancements
 
 Team size: 5
 
@@ -1457,7 +1494,7 @@ used to check if plural or singular versions of the allergies have already been 
 
 ---
 
-## **Appendix: Effort**
+## Appendix H: Effort
 
 ### Difficulty Level
 
