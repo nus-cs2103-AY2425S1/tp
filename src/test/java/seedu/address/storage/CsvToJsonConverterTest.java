@@ -18,7 +18,9 @@ import seedu.address.storage.exceptions.ConverterException;
 import seedu.address.testutil.TestUtil;
 
 public class CsvToJsonConverterTest {
-    private String testImportFilePath = "src/test/data/ConverterTestUtil/ImportTest";
+    private final String testImportFilePath = "src/test/data/ConverterTestUtil/ImportTest";
+    private final String testImportEmptyCsv = "src/test/data/ConverterTestUtil/ImportTestEmptyCsv";
+    private final String testImportUncommonCases = "src/test/data/ConverterTestUtil/ImportTestUncommonCases";
     @Test
     public void csvToJsonConverter_emptyDirectory_throwsIllegalArgumentException() {
         String expectedStr = "The import file is missing. Restart the program.";
@@ -37,7 +39,7 @@ public class CsvToJsonConverterTest {
     }
 
     @Test
-    public void convertAllCsvFile_validFile_correctJsonFile() {
+    public void convertAllCsvFiles_validFile_correctJsonFile() {
         List<File> expected = new ArrayList<>();
         assertTrue(
                 expected.add(
@@ -51,12 +53,37 @@ public class CsvToJsonConverterTest {
     }
 
     @Test
-    public void convertAllCsvFile_nonDirectory_returnsEmptyJsonFile() {
+    public void convertAllCsvFiles_nonDirectory_returnsEmptyJsonFile() {
         CsvToJsonConverter testConverter = new CsvToJsonConverter(
                 new File("src/test/data/ConverterTestUtil/test.csv")
         );
         List<File> expected = new ArrayList<>();
         assertJsonFileEqualsNoException(expected, testConverter, true);
+    }
+
+    @Test
+    public void convertAllCsvFile_emptyDirectory_throwsException() {
+        String expected = "The import directory contains no .csv files to import";
+        CsvToJsonConverter testConverter = new CsvToJsonConverter(new File(testImportFilePath));
+        assertThrows(ConverterException.class, expected, testConverter::convertAllCsvFiles);
+    }
+
+    @Test
+    public void convertAllCsvFile_emptyCsvFile_throwsException() {
+        String expected = "The .csv file is empty";
+        CsvToJsonConverter testConverter = new CsvToJsonConverter(new File(testImportEmptyCsv));
+        assertThrows(ConverterException.class, expected, testConverter::convertAllCsvFiles);
+    }
+
+    @Test
+    public void convertAllCsvFile_repeatedHeader() {
+        CsvToJsonConverter testConverter = new CsvToJsonConverter(new File(testImportUncommonCases));
+        File expectedFile = new File(
+                "src/test/data/ConverterTestUtil/ImportTestUncommonCases/2101TAs - Unnecessary column.json"
+        );
+        List<File> expectedList = new ArrayList<>();
+        expectedList.add(expectedFile);
+        assertJsonFileEqualsNoException(expectedList, testConverter, true);
     }
 
     /**

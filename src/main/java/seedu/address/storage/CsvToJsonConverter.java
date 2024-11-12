@@ -83,7 +83,7 @@ public class CsvToJsonConverter {
             addAllJSonObjects(br, objectMapper, headers, jsonArray);
             br.close();
         } catch (IOException ioe) {
-            throw new ConverterException("There has been a corrupted input", ioe);
+            throw new ConverterException(ioe.getMessage());
         }
         return writeToJson(objectMapper, jsonArray, getJsonName(csvFile));
     }
@@ -124,7 +124,7 @@ public class CsvToJsonConverter {
         String line = br.readLine();
 
         if (line == null) {
-            throw new IOException(".csv file is empty");
+            throw new IOException("The .csv file is empty");
         }
 
         return line.split(",");

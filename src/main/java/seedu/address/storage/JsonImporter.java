@@ -80,4 +80,7 @@ public class JsonImporter {
         }
     }
 
+    public List<File> getJsonFiles() {
+        return jsonFiles;
+    }
 }
