@@ -22,7 +22,6 @@ Class JsonAdaptedPerson
 Class JsonAdaptedTag
 Class JsonAdaptedTask
 Class JsonAdaptedWedding
-Class JsonAdaptedVendor
 Class JsonAdaptedTodo
 Class JsonAdaptedDeadline
 Class JsonAdaptedEvent
@@ -43,13 +42,16 @@ Storage -right-|> AddressBookStorage
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "0..*" JsonAdaptedPerson
-JsonAdaptedPerson --> "0..*" JsonAdaptedTag
-JsonAdaptedPerson --> "0..*" JsonAdaptedWedding
-JsonAdaptedVendor --|> JsonAdaptedPerson
-JsonAdaptedVendor --> "0..*" JsonAdaptedTask
-JsonAdaptedEvent --|> JsonAdaptedTask
-JsonAdaptedTodo --|> JsonAdaptedTask
-JsonAdaptedDeadline --|> JsonAdaptedTask
+JsonSerializableAddressBook -down-> "0..*" JsonAdaptedWedding
+JsonSerializableAddressBook -down-> "0..*" JsonAdaptedPerson
+JsonSerializableAddressBook -down-> "0..*" JsonAdaptedTask
+JsonSerializableAddressBook -down-> "0..*" JsonAdaptedTag
+JsonAdaptedPerson -left-> "0..*" JsonAdaptedTag
+JsonAdaptedPerson --> "0..*" JsonAdaptedTask
+JsonAdaptedWedding -left-> "~* guests" JsonAdaptedPerson
+JsonAdaptedWedding -left-> "0..2 partners" JsonAdaptedPerson
+JsonAdaptedEvent -up-|> JsonAdaptedTask
+JsonAdaptedTodo -up-|> JsonAdaptedTask
+JsonAdaptedDeadline -up-|> JsonAdaptedTask
 
 @enduml
