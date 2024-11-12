@@ -706,8 +706,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `edit 1 r/0` <br/>
       Expected: An error message displayed reminds you that **RATE** must be from $0.01 to $1000.00.
 
-   1. Test case: `edit 1 n/ p/654321234` <br/>
-      Expected: An error message displayed reminds you that **NAME** must not be empty. <br/>Notice that both values of **NAME** and **PHONE_NUMBER** are invalid; however, the error message is shown in the order that the attributes shown in the app.
+   1. Test case: `edit 1 n/ p/65432123` <br/>
+         Expected: An error message displayed reminds you that **NAME** must not be empty and must contain only alphanumeric characters and space.
 
 
 ### Deleting a student
