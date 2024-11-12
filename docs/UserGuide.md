@@ -249,8 +249,8 @@ Valid inputs for sort order parameter: `timeadded`, `timeadded asc`, `timeadded 
   * `timeadded` and `timeadded asc` sorts the patient list from least to most recently added. 
   * `timeadded desc` sorts the patient list from most to least recently added.
 * `name`, `name asc` and `name desc` sets the patient list to be sorted according to their name in alphabetical order. 
-  * `name` and `name asc` sorts by the patients' names from A to Z. 
-  * `name desc` sorts by the patients' names from Z to A.
+  * `name` and `name asc` sorts by the patients' names from uppercase A to Z, followed by lowercase a to z. 
+  * `name desc` sorts by the patients' names from lowercase z to a, followed by uppercase Z to A.
 
 **Examples**
 * `list name asc`<br>
@@ -295,7 +295,7 @@ Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing t
 
 ### Locating patients by patient's name: `find`
 
-Finds persons patients names contain any of the given keywords.
+Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
