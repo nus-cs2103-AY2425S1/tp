@@ -66,10 +66,6 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
-    public CommandHistory getCommandHistory() {
-        return commandHistory;
-    }
-
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();

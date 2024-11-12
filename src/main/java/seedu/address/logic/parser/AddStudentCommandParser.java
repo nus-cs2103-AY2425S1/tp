@@ -98,11 +98,4 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
-    /**
-     * Validates a class name.
-     */
-    public static boolean isValidClassName(String className) {
-        return className.matches(CLASS_NAME_VALIDATION_REGEX);
-    }
 }

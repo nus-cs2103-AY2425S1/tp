@@ -10,7 +10,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
@@ -188,6 +187,11 @@ public class ParserUtil {
 
         Set<String> classSet = new HashSet<>();
         String[] classArray = classes.split(",");
+
+        // Check if no class arguments were provided
+        if (classArray.length == 1 && classArray[0].isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_CLASSES);
+        }
 
         for (String className : classArray) {
             // Trim to remove unnecessary spaces

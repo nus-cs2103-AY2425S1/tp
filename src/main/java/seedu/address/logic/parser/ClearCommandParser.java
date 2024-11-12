@@ -23,7 +23,6 @@ public class ClearCommandParser implements Parser<ClearCommand> {
         String trimmedArgs = args.trim();
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-
         try {
             PersonContainsKeywordsPredicate predicate =
                     new PersonContainsKeywordsPredicate(Arrays.asList(nameKeywords));
