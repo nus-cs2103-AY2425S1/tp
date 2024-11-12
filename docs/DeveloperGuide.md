@@ -127,7 +127,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model Component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/src/main/java/seedu/eventfulnus/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -139,11 +139,15 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+### Role Component
+**API** : [`Role.java`](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/src/main/java/seedu/eventfulnus/model/person/role/Role.java)
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/RoleClassDiagram.png" width="550" />
 
-</div>
+The `Role` component,
+
+* helps to keep track of the different roles that a person can have in the application.
+
 
 
 ### Storage Component
