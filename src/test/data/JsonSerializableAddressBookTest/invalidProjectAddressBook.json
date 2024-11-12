@@ -1,0 +1,11 @@
+{
+  "_comment": "AddressBook save file which contains the same  values as in TypicalEmployees#getTypicalAddressBook()",
+  "employees" : [],
+  "projects" : [ {
+    "name" : "Project Alpha++@",
+    "id" : "1"
+  }, {
+    "name" : "Project Beta",
+    "id" : "2"
+  }]
+}

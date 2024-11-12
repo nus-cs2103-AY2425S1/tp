@@ -14,7 +14,8 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path addressBookFilePath = Paths.get("data" , "hrconnect.json");
+    private Path commandTextHistoryFilePath = Paths.get("data" , "commandtexthistory.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -54,6 +55,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public Path getCommandTextHistoryFilePath() {
+        return commandTextHistoryFilePath;
+    }
+
+    public void setCommandTextHistoryFilePath(Path commandTextHistoryFilePath) {
+        requireNonNull(commandTextHistoryFilePath);
+        this.commandTextHistoryFilePath = commandTextHistoryFilePath;
     }
 
     @Override

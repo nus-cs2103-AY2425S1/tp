@@ -11,24 +11,43 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.employee.Employee;
+import seedu.address.model.project.Project;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "hrconnect")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_EMPLOYEE = "Employees list contains duplicate employee(s).";
+    public static final String MESSAGE_DUPLICATE_PROJECT = "Projects list contains duplicate project(s).";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "Projects list contains duplicate assignment(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedEmployee> employees = new ArrayList<>();
+    private final List<JsonAdaptedProject> projects = new ArrayList<>();
+    private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given employees,
+     * projects and assignments.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(
+            @JsonProperty("employees") List<JsonAdaptedEmployee> employees,
+            @JsonProperty("projects") List<JsonAdaptedProject> projects,
+            @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments
+    ) {
+        this.employees.addAll(employees);
+
+        if (projects != null) {
+            this.projects.addAll(projects);
+        }
+
+        if (assignments != null) {
+            this.assignments.addAll(assignments);
+        }
     }
 
     /**
@@ -37,7 +56,11 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        employees.addAll(source.getEmployeeList().stream().map(JsonAdaptedEmployee::new).collect(Collectors.toList()));
+        projects.addAll(source.getProjectList().stream().map(JsonAdaptedProject::new).collect(Collectors.toList()));
+        assignments.addAll(source.getAssignmentList()
+                .stream().map(JsonAdaptedAssignment::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +70,26 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedEmployee jsonAdaptedEmployee : employees) {
+            Employee employee = jsonAdaptedEmployee.toModelType();
+            if (addressBook.hasEmployee(employee)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_EMPLOYEE);
             }
-            addressBook.addPerson(person);
+            addressBook.addEmployee(employee);
+        }
+        for (JsonAdaptedProject jsonAdaptedProject : projects) {
+            Project project = jsonAdaptedProject.toModelType();
+            if (addressBook.hasProject(project)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PROJECT);
+            }
+            addressBook.addProject(project);
+        }
+        for (JsonAdaptedAssignment jsonAdaptedAssignment : assignments) {
+            Assignment assignment = jsonAdaptedAssignment.toModelType(addressBook);
+            if (addressBook.hasAssignment(assignment)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ASSIGNMENT);
+            }
+            addressBook.addAssignment(assignment);
         }
         return addressBook;
     }

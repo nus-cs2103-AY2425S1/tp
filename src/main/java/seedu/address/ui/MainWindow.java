@@ -24,6 +24,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String ACTIVE_PANEL_STYLE = "-fx-background-color: derive(#f0f032, 20%);";
+    private static final String IDLE_PANEL_STYLE = "-fx-background-color: derive(#1d1d1d, 20%);";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -31,7 +33,9 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private EmployeeListPanel employeeListPanel;
+    private ProjectListPanel projectListPanel;
+    private AssignmentListPanel assignmentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +46,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane employeeListPanelPlaceholder;
+
+    @FXML
+    private StackPane projectListPanelPlaceholder;
+
+    @FXML
+    private StackPane assignmentListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +120,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
+        employeeListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());
+
+        projectListPanel = new ProjectListPanel(logic.getFilteredProjectList());
+        projectListPanelPlaceholder.getChildren().add(projectListPanel.getRoot());
+
+        assignmentListPanel = new AssignmentListPanel(logic.getFilteredAssignmentList());
+        assignmentListPanelPlaceholder.getChildren().add(assignmentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -119,7 +135,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, logic.getCommandTextHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -133,6 +149,36 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Highlights the list of employees.
+     */
+    @FXML
+    public void emphasizeEmployeeListPanel() {
+        employeeListPanelPlaceholder.getParent().setStyle(ACTIVE_PANEL_STYLE);
+        projectListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
+        assignmentListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
+    }
+
+    /**
+     * Highlights the list of projects.
+     */
+    @FXML
+    public void emphasizeProjectListPanel() {
+        employeeListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
+        projectListPanelPlaceholder.getParent().setStyle(ACTIVE_PANEL_STYLE);
+        assignmentListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
+    }
+
+    /**
+     * Highlights the list of assignments.
+     */
+    @FXML
+    public void emphasizeAssignmentListPanel() {
+        employeeListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
+        projectListPanelPlaceholder.getParent().setStyle(IDLE_PANEL_STYLE);
+        assignmentListPanelPlaceholder.getParent().setStyle(ACTIVE_PANEL_STYLE);
     }
 
     /**
@@ -163,10 +209,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -177,6 +219,19 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            // TODO: Consider using factory classes for this
+            if (commandResult.getDisplayType().equals(DisplayType.EMPLOYEE_LIST)) {
+                emphasizeEmployeeListPanel();
+            }
+
+            if (commandResult.getDisplayType().equals(DisplayType.PROJECT_LIST)) {
+                emphasizeProjectListPanel();
+            }
+
+            if (commandResult.getDisplayType().equals(DisplayType.ASSIGNMENT_LIST)) {
+                emphasizeAssignmentListPanel();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

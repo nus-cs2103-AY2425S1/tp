@@ -1,0 +1,22 @@
+{
+  "_comment": "AddressBook save file which contains the same  values as in TypicalEmployees#getTypicalAddressBook()",
+  "employees" : [{
+    "employeeId": "1",
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "tags" : [ "friends" ],
+    "skills" : [ "moneyManagement" ]
+  }],
+  "projects" : [ {
+    "name" : "Project Alpha",
+    "id" : "1"
+  }],
+  "assignments": [ {
+    "assignmentId": "01234",
+    "employeeId": "2",
+    "projectId": "1"
+  }]
+}
+

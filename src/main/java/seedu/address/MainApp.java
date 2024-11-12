@@ -16,6 +16,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.CommandTextHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -23,7 +24,9 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CommandTextHistoryStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCommandTextHistoryStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -36,7 +39,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 5, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -48,7 +51,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing HRConnect ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -58,7 +61,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CommandTextHistoryStorage commandTextHistoryStorage = new JsonCommandTextHistoryStorage(
+                userPrefs.getCommandTextHistoryFilePath());
+        storage = new StorageManager(addressBookStorage, commandTextHistoryStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -81,16 +86,31 @@ public class MainApp extends Application {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+                        + " populated with a sample HRConnect address book.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty HRConnect address book.");
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        Optional<CommandTextHistory> commandTextHistoryOptional;
+        CommandTextHistory initialCommandTextHistory;
+        try {
+            commandTextHistoryOptional = storage.readCommandTextHistory();
+            if (!commandTextHistoryOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getCommandTextHistoryFilePath()
+                        + " populated with a sample HRConnect address book.");
+            }
+            initialCommandTextHistory = commandTextHistoryOptional.orElseGet(CommandTextHistory::new);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getCommandTextHistoryFilePath() + " could not be loaded."
+                    + " Will be starting with an empty HRConnect address book.");
+            initialCommandTextHistory = new CommandTextHistory();
+        }
+
+        return new ModelManager(initialData, initialCommandTextHistory, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -170,13 +190,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting HRConnect " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("============================ [ Stopping HRConnect ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
