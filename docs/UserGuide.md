@@ -329,6 +329,7 @@ Furthermore, certain edits can cause the SeeRee2.0 to behave in unexpected ways 
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When resizing the application to a smaller size or having multiple meetings in the same day**, the scrollbars of the schedule panel will cause a white box to appear in the UI. The remedy is to increase the size of the application if applicable. Proposed solution for this is discussed in planned enhancement of the DeveloperGuide. 
 4. **If you maximize the application** and then close and reopen the application, the application will not stay maximized. The remedy is to manually maximize the application again.
+5. **When executing clear command when contacts are in meetings**, the contacts will be deleted from the address book but will still be present in the meetings. This is a feature that we are looking to improve in the future.
 
 --------------------------------------------------------------------------------------------------------------------
 
