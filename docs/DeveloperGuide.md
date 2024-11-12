@@ -193,6 +193,34 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add contacts
+
+**Overview**
+
+The `add` command allows user to add students' contact into KonTActs.
+
+The Sequence Diagram below shows how the logic component handles the user input.
+
+<puml src="diagrams/AddSequenceDiagram.puml" width="650"/>
+
+Note: While the diagram shows the lifeline of objects even after their deletion, this is a limitattion of plantUML.
+
+**Details**
+
+1. The user inputs "add n/John tele/@John g/Johnny e/John@test.com". (Not shown in diagram)
+2. The `LogicManager` object will be called to `execute` the input.
+3. The `AddressBookParser` will identify the type of command is `AddCommand`, before creating a `AddCommandParser` to parse the details.
+4. The `AddCommandParser` will `parse` the `USER_DETAILS` before creating a `AddCommand`.
+5. The new `AddCommand` will be returned to `LogicManager`.
+6. The `LogicManager` will then calls `exectute` on `AddCommand` while providing the model.
+7. This causes the `AddCommand` to call the `addPerson` method of model, adding the person to the model.
+8. A `CommandResult` object is subsequently created which indicates the success of `AddCommand`.
+
+**Example Usage**
+1. User inputs the command "add n/Tom tele/@Tom g/Tommy e/Tom@test.com".
+2. KonTActs will create a contact of Tom with the given details before adding it to the contact list.
+3. The contact is then displayed in the UI, along with a success message.g
+
 ---
 
 {{ newPage }}
