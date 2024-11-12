@@ -297,7 +297,7 @@ Priorities: Essential (must have), Novel (nice to have), Typical (unlikely to ha
 | Essential | Teacher | manage how much each student pays in tuition fees   | remember how much to bill my student every month             |
 | Essential | Teacher | easily total how much money is paid or not paid yet | easily see how much revenue I have earned or not earned      |
 | Novel     | Teacher | have ideas for gifts                                | buy gifts for my students.                                   |
-*{More to be added}*
+
 
 # Use cases
 
