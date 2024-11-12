@@ -38,8 +38,8 @@ public class EditPublicAddressCommandTest {
         model.addPerson(new PersonBuilder(JOE).build());
     }
 
+    // EP: All valid
     @Test
-
     public void execute_validIndexValidPublicAddress_success() {
         PublicAddress updatedPublicAddress =
             new EthAddress(VALID_PUBLIC_ADDRESS_ETH_SUB_STRING, VALID_PUBLIC_ADDRESS_ETH_MAIN.getLabel());
@@ -57,6 +57,7 @@ public class EditPublicAddressCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    // EP: Different label casing
     @Test
     public void execute_validIndexValidPublicAddressDifferentCaseLabel_success() {
         PublicAddress updatedPublicAddress =
@@ -80,6 +81,7 @@ public class EditPublicAddressCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    // EP: Index out of bounds
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
@@ -90,6 +92,7 @@ public class EditPublicAddressCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
+    // EP: Non-matching label
     @Test
     public void execute_nonMatchingLabel_throwsCommandException() {
         EditPublicAddressCommand editCommand =
@@ -101,6 +104,7 @@ public class EditPublicAddressCommandTest {
             JOE.getName()));
     }
 
+    // EP: Non-matching network
     @Test
     public void execute_noNetworkAddresses_throwsCommandException() {
         EditPublicAddressCommand editCommand =
@@ -135,25 +139,25 @@ public class EditPublicAddressCommandTest {
         EditPublicAddressCommand editCommand3 = new EditPublicAddressCommand(Index.fromOneBased(1),
             VALID_PUBLIC_ADDRESS_ETH_MAIN);
 
-        // same object -> returns true
+        // EP: Same object
         assertEquals(editCommand1, editCommand1);
 
-        // same values -> returns true
+        // EP: Same values
         EditPublicAddressCommand editCommand1Copy =
             new EditPublicAddressCommand(Index.fromOneBased(1),
                 VALID_PUBLIC_ADDRESS_BTC_MAIN);
         assertEquals(editCommand1, editCommand1Copy);
 
-        // different types -> returns false
+        // EP: Different type
         assertNotEquals(1, editCommand1);
 
-        // null -> returns false
+        // EP: null
         assertNotEquals(null, editCommand1);
 
-        // different index -> returns false
+        // EP: Different index
         assertNotEquals(editCommand1, editCommand2);
 
-        // different public address -> returns false
+        // EP: Different public address
         assertNotEquals(editCommand1, editCommand3);
     }
 

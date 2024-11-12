@@ -12,78 +12,105 @@ We are so thrilled to present a new contact and DLT Public Address management to
 In the world of cryptocurrency, we know that managing public addresses manually currently is a hassle and improper
 management of public addresses might lead to financially costly mistakes.
 
-This is why we developed **DLTbook** for crypto users to manage the public addresses of contacts with greater
+This is why we developed **DLTbook** for average crypto users to manage the public addresses of contacts with greater
 convenience and security.
 
 **DLTbook** offers a command-line first interface, allowing you to manage your contacts and their DLT
 addresses with ease.
 
-We’ll walk you through each feature, so you can discover with ease **DLTbooks** offerings. Let’s get started with *
-*DLTbook** and manage your contact's public addresses with greater ease.
+We’ll walk you through each feature, so you can discover with ease **DLTbook**'s offerings. Let’s get started with
+**DLTbook** and manage your contact's public addresses with greater ease.
 
-<div style="page-break-after: always"></div>
-⚠️ **Security Note**: To protect your data from potential manipulation, we recommend using DLTbook on a device with no internet connectivity.  
+⚠️ **Security Note** : To protect your data from potential manipulation, we recommend using DLTbook on a device with no
+internet connectivity.
 
-# Contents
+# Table Of Contents
 
 - [Introduction](#introduction)
-- [How to use this user guide](#how-to-use-this-user-guide)
-- [Quick Start](#quick-start)
+
+    - [Beginner's Guide](#beginner-s-guide)
+
+    - [Expert's Guide](#expert-s-guide)
+
+- [Setup Guide](#setup-guide)
 - [GUI Summary](#gui-summary)
+- [Try it out!](#try-it-out)
+
 - [Features](#features)
+
+    - [Command Overview](#command-overview)
+
     - [Basic Features](#basic-features)
-        - [Getting help: `help`](#help)
-        - [Clearing all contacts from DLTbook: `clear`]()
-        - [Exiting the application: `exit`](#exiting-the-program--exit)
+
+        - [Viewing help: `help`](#viewing-help-help)
+
+        - [Clearing all contacts from DLTbook: `clear`](#clearing-all-entries-clear)
+
+        - [Exiting the application: `exit`](#exiting-the-program-exit)
+
     - [Contact Management Features](#contact-management-features)
-        - [Adding a contact: `add`](#adding-a-contact--add)
-        - [Deleting a contact: `delete`](#deleting-a-contact--delete)
-        - [Editing a contact: `edit`](#editing-a-contact--edit)
-        - [Finding contacts: `find`](#finding-contacts--find)
-        - [Listing all contacts: `list`](#listing-all-contacts--list)
+
+        - [Adding a contact: `add`](#adding-a-contact-add)
+
+        - [Deleting a contact: `delete`](#deleting-a-contact-delete)
+
+        - [Editing a contact: `edit`](#editing-a-contact-edit)
+
+        - [Finding contacts: `find`](#finding-contacts-by-name-find)
+
+        - [Listing all contacts: `list`](#listing-all-contacts-list)
 
     - [Public Address Management Features](#public-address-management-features)
-        - [Adding a public address to a contact: `addpa`](#adding-a-public-address--addpa)
-        - [Deleting a public address from a contact: `deletepa`](#deleting-a-public-address--deletepa)
-        - [Editing a public address of a contact: `editpa`](#editing-a-public-address--editpa)
-        - [Retrieving public address given contact infomation:
-          `retrievepa`](#retrieving-a-public-address-by-label--retrievepa)
+
+        - [Adding a public address to a contact: `addpa`](#adding-a-public-address-to-a-contact-addpa)
+
+        - [Deleting a public address from a contact: `deletepa`](#deleting-a-public-address-of-a-contact-deletepa)
+
+        - [Editing a public address of a contact: `editpa`](#editing-a-public-address-of-a-contact-editpa)
+
+        - [Retrieving public address given contact information:
+          `retrievepa`](#retrieving-public-addresses-of-a-contact-retrievepa)
+
         - [Searching for currently displayed contacts for a public address:
-          `searchpa`](#searching-a-public-address--searchpa)
-        - [Filters contacts based on presence of network: `filter`](#filtering-contacts--filter)
-- [Support](#Support)
-    - [Frequently Asked Questions](#frequently-asked-questions)
-    - [Known Limitations](#known-issues)
-    - [Help](#Help)
-    - [Data Storage](#Data Storage)
-    - [Troubleshooting Guide](#common-errors)
-    - [Setup Guide](#setup-guide)
-- [Feature Summary](#command-feature)
-    - [Basic Features](#basic-commands)
-    - [Contact Management Features](#contact-management-commands)
-    - [Public Address Management Features](#public-address-management-features)
-    -
-- [Glossary](#glossary)
+          `searchpa`](#searching-for-a-public-address-searchpa)
 
-<div style="page-break-after: always"></div>
+        - [Filters contacts based on presence of network:
+          `filter`](#filtering-contacts-by-public-addresses-network-filter)
+
+- [Support](#support)
+
+    - [Frequently Asked Questions](#frequently-asked-questions)
+
+    - [Data Storage](#data-storage)
+
+    - [Common Errors](#common-errors)
+
+    - [Known Issues](#known-issues)
+
+    - [Future Enhancements](#future-enhancements)
+
+
+- [Feature Summary](#feature-summary)
+
+    - [Basic Features](#basic-features-2)
+
+    - [Contact Management Features](#contact-management-features)
+
+    - [Public Address Management Features](#public-address-management-features-2)
+
+- [Glossary](#glossary)
 
 # Introduction
 
-**DLTbook** is a application for users to manage DLT public addresses.
+**DLTbook**:
 
-**DLTbook** is:
-
-- Essentially a basic address book with the added functionality to effectively manage public addresses of contact.
-- Is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User
+- is essentially a basic address book with the added functionality to effectively manage public addresses of contact.
+- is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a **Graphical User
   Interface** (GUI).
 
-[Back to Top]
-
-
-
-<div style="page-break-after: always"></div>
-
-
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
 ## Beginner's Guide
 
@@ -91,6 +118,7 @@ We’ll walk you through each feature, so you can discover with ease **DLTbooks*
 
 _If you're new to DLTbook or the concept of Distributed Ledger Technology (DLT), this guide will walk you through the
 basics. Here, we'll cover key concepts, important terminology, and guide you through the first steps in using DLTbook._
+
 </panel>
 
 <br>
@@ -134,7 +162,7 @@ Before diving in, let's clarify some essential terms:
   Source: [Ledger](https://www.ledger.com/academy/topics/security/what-is-a-software-wallet))
 
 - **Wallet Name**: A label that you use tag to the wallet to identify the wallets purpose
-- (for daily transactions, for decentralised fiannce transactions, for long term storage).
+  (for daily transactions, for decentralised finance transactions, for long term storage).
 
 - **Public Address**: A public address is a unique series of cryptographic codes that can be shared with others to
   receive messages, coins, or tokens. (similar to an
@@ -160,7 +188,22 @@ Here’s how you can start using DLTbook:
 
 4. Once you're comfortable with the basics, explore the full range of [features](#features) available in DLTbook.
 
-### Setup Guide
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+## Expert's Guide
+
+If you have used DLTbook before, jump straight to [Setup Guide](#setup-guide) for a quick overview on basic
+commands.
+Go to the [Features](#features) section for a detailed guide on all available commands and capabilities.
+</panel>
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+# Setup Guide
 
 1. **Download/Check Java Installation**
 
@@ -215,19 +258,23 @@ Here’s how you can start using DLTbook:
 After a few seconds, you'll see the DLTbook window:
 
 ![Ui](images/Ui.png)
+Note that the app initially contains some sample data.
 
-### Inexperienced Users
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
-Continue to [Try It Out!](#try-it-out) for a guide of the basic commands
+# GUI summary
 
-### Experienced Users
+We have labelled the various parts of DLTbook's GUI for your reference:
 
-If you have used DLTbook before, jump straight to [Quick Start](#quick-start) for a quick overview on basic
-commands.
-Go to the [Features](#features) section for a detailed guide on all available commands and capabilities.
-</panel>
+![GUI summary](images/GUISummary.png)
 
-### Try It Out!
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+# Try It Out!
 
 DLTbook comes with sample data to help you get started. Here are some basic commands to try:
 
@@ -286,30 +333,33 @@ DLTbook comes with sample data to help you get started. Here are some basic comm
 Ready to learn more? Check out the [Features](#features) section below for a complete guide to all DLTbook commands and
 capabilities.
 <br>
-<br>
 
-## Features
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
-### Command Overview
+# Features
+
+## Command Overview
 
 DLTbook supports the following commands:
 
- Command                                                                | Description                                                                     
-------------------------------------------------------------------------|---------------------------------------------------------------------------------
- [**help**](#viewing-help-help)                                         | Shows a message explaining how to access the help page                          
- [**add**](#adding-a-person-add)                                        | Adds a contact to the address book                                              
- [**list**](#listing-all-persons-list)                                  | Shows a list of all contacts in the address book                                
- [**edit**](#editing-a-person-edit)                                     | Edits an existing contact in the address book                                   
- [**find**](#locating-persons-by-name-find)                             | Finds contacts whose names contain any of the given keywords                    
- [**delete**](#deleting-a-person-delete)                                | Deletes the specified contact from the address book                             
- [**clear**](#clearing-all-entries-clear)                               | Clears all entries from the address book                                        
- [**exit**](#exiting-the-program-exit)                                  | Exits the program                                                               
- [**addpa**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact                                              
- [**editpa**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a contact                                   
- [**retrievepa**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a contact                                     
- [**deletepa**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact                                         
- [**searchpa**](#searching-for-a-public-address-publicaddresssearch)    | Searches for a public address                                                   
- [**filter**](#filtering-persons-by-public-addresses-network-filter)    | Filters out a list of people with the public addresses of the specified network 
+| Command                                                                | Description                                                                             |
+|------------------------------------------------------------------------|-----------------------------------------------------------------------------------------| 
+| [**help**](#viewing-help-help)                                         | Shows a message explaining how to access the help page.                                 |
+| [**add**](#adding-a-contact-add)                                       | Adds a contact to the address book.                                                     |
+| [**delete**](#deleting-a-contact-delete)                               | Deletes the specified contact from the address book.                                    |
+| [**edit**](#editing-a-contact-edit)                                    | Edits an existing contact in the address book.                                          |
+| [**find**](#finding-contacts-by-name-find)                             | Finds contacts whose names contain any of the given keywords.                           |
+| [**list**](#listing-all-contacts-list)                                 | Shows a list of all contacts in the address book.                                       |
+| [**addpa**](#adding-a-public-address-to-a-contact-addpa)               | Adds a public address to a contact.                                                     |
+| [**deletepa**](#deleting-a-public-address-of-a-contact-deletepa)       | Deletes the public address of a contact.                                                |
+| [**editpa**](#editing-a-public-address-of-a-contact-editpa)            | Edits an existing public address of a contact.                                          |
+| [**retrievepa**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves public addresses with matching labels.                                        |
+| [**searchpa**](#searching-for-a-public-address-searchpa)               | Based on contacts displayed, it searches for a contact using the unique public address. |
+| [**filter**](#filtering-contacts-by-public-addresses-network-filter)   | Filters out a list of contacts with the public addresses of the specified network.      |
+| [**clear**](#clearing-all-entries-clear)                               | Clears all entries from the address book.                                               |
+| [**exit**](#exiting-the-program-exit)                                  | Exits the program.                                                                      |
 
 <box type="info" seamless>
 
@@ -336,6 +386,14 @@ DLTbook supports the following commands:
   </box>
   <br>
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Basic Features
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Viewing help : `help`
@@ -344,17 +402,56 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+#### Format: `help`
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Adding a contact: `add`
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+#### Format: `clear`
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+#### Format: `exit`
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Contact Management Features
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Adding a contact : `add`
 
 Adds a contact to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+#### Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 * if the another contact within DLTbook already has the same details as contact of the incoming contact to be added,
   the incoming contact will not be added.
@@ -366,22 +463,45 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 </box>
 
+</box>
 
-Examples:
+#### Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Listing all contacts : `list`
+### Deleting a contact : `delete`
 
-Shows a list of all contacts in the address book.
+Deletes the specified contact from the address book.
 
-Format: `list`
+#### Format: `delete INDEX`
+
+* Deletes the contact at the specified `INDEX`.
+
+* The index refers to the index number shown in the displayed contact list.
+
+* The index **must be a positive integer** 1, 2, 3, …​
+
+#### Examples:
+
+* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
 
 <br>
 
@@ -391,7 +511,7 @@ Format: `list`
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+#### Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list.
   The index **must be a positive integer** 1, 2, 3, …​
@@ -406,22 +526,27 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
   specifying any tags after it.
 
-Examples:
+#### Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567`
   and `johndoe@example.com` respectively.
 
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Locating contacts by name: `find`
+### Finding contacts by name : `find`
 
 Finds contacts whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+#### Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is **case-insensitive**. e.g `hans` will match `Hans`
 
@@ -435,37 +560,39 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
+#### Examples:
 
 * `find John` returns `john` and `John Doe`
 
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/find_example.png)
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
 
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Deleting a contact : `delete`
+### Listing all contacts : `list`
 
-Deletes the specified contact from the address book.
+Shows a list of all contacts in the address book.
 
-Format: `delete INDEX`
+#### Format: `list`
 
-* Deletes the contact at the specified `INDEX`.
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
-* The index refers to the index number shown in the displayed contact list.
-
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-
-* `list` followed by `delete 2` deletes the 2nd contact in the address book.
-
-* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 <br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Public Address Management Features
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -473,18 +600,18 @@ Examples:
 
 Adds a public address to a contact.
 
-Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
+#### Format: `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
 
-| Parameter        | Explanation                                            | Details                                                                                                                                                             |
-|------------------|--------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`          | The index of the contact in the displayed contact list | - The index **must be a positive integer** 1, 2, 3, …​<br/> - This field does not accept negative numbers or zero.                                                  |
-| `NETWORK`        | The network of the public address to be added          | - Allowed values: `BTC`, `ETH` and `SOL`<br/> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted.                                       |
-| `WALLET_NAME`    | The wallet name of the public address to be added      | - This field is **case-insensitive**.                                                                                                                               |
-| `PUBLIC_ADDRESS` | The public address to be added                         | - Only alphanumeric characters allowed.  <br/>  - The length should be more than 26 characters and less than 44 characters.<br/>This field is **case-insensitive**. |
+| Parameter        | Explanation                                             | Details                                                                                                                                   |
+|------------------|---------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`          | The index of the contact in the displayed contact list. | - The index **must be a positive integer** 1, 2, 3, ...<br/> - This field does not accept negative numbers or zero.                       |
+| `NETWORK`        | The network of the public address to be added.          | - Allowed values: `BTC`, `ETH` and `SOL`<br/> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted.             |
+| `WALLET_NAME`    | The wallet name of the public address to be added.      | - This field is **case-insensitive**.                                                                                                     |
+| `PUBLIC_ADDRESS` | The public address to be added.                         | - Only alphanumeric characters allowed.<br/>- The length should be **26 - 44 characters** long.<br/>- This field is **case-insensitive**. |
 
 * Adds a public address to a contact at the specified `INDEX`.
 
-Examples:
+#### Examples:
 
 * `addpa 1 c/ETH l/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2` adds a public address
   to the first contact on the list `Alex Yeoh` under the ETH network with the wallet name `wallet1` and the public
@@ -496,77 +623,10 @@ Examples:
 
 ![img.png](img.png)
 
-<br>
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
---------------------------------------------------------------------------------------------------------------------
-
-### Editing a public address of a contact : `editpa`
-
-Edits an existing public address of a contact.
-
-Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
-
-* Edits the public address of the contact at the specified `INDEX`. The index refers to the index number shown in the
-  displayed contact list.
-  The index **must be a positive integer** 1, 2, 3, …​
-
-* The `NETWORK` parameter specifies the ticker name for each network (e.g., `BTC`, `ETH`,
-  `SOL`, etc.). This field is **case-insensitive** and will be converted to UPPERCASE. <br />
-  Allowed values: `BTC|ETH|SOL`.
-
-* The `WALLET_NAME` parameter specifies the wallet name to which the public address belongs.
-  This field is **case-insensitive** and will be stored as is.
-
-* The `PUBLIC_ADDRESS` parameter specifies the new public address to be added.
-  The length of BTC/ETH/SOL public addresses should be more than 26 characters, less than 44 characters and can only
-  contain alphanumeric characters.
-  This field is **case-insensitive** and will be converted to lowercase.
-
-#### Examples
-
-* `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`<br />
-  if the contact at index 3 exists and has a BTC public address labelled as 'Daily wallet'.
-  Changes the third contact's BTC public address labelled `Daily wallet` to
-  `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.<br />
-
-* `editpa 3 c/BTC l/daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`<br />
-  if the contact at index 3 exists and has a BTC public address 'bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9'.
-  Changes the third contact's BTC public address labelled "Daily wallet" to "daily wallet" as `WALLET_NAME` is *
-  *case-insensitive**.
-
-<br>
-
---------------------------------------------------------------------------------------------------------------------
-
-### Retrieving public addresses of a contact : `retrievepa`
-
-Retrieves the public addresses of a contact.
-
-Format: `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`
-
-* `WALLET_NAME` parameter is compulsory and specifies the label (or part of the label) of the public address(es) to be
-  retrieved. This field is **case-insensitive**.
-
-* `NETWORK` parameter is optional and specifies the ticker name for each network.
-  This field is **case-insensitive** <br />
-  Allowed values: `BTC|ETH|SOL`.
-
-* `PERSON_NAME` parameter is optional and specifies the name (or part of the name) of the contact(s) whose addresses
-  should be retrieved. This field is **case-insensitive**.
-
-#### Examples
-
-* `retrievepa l/MyWallet`<br />
-  Retrieves all public addresses with labels containing "MyWallet" for all contacts and networks.
-
-* `retrievepa l/Daily c/BTC`<br />
-  Retrieves all BTC public addresses with labels containing "Daily" for all contacts.
-
-* `retrievepa l/Savings n/John`<br />
-  Retrieves all public addresses with labels containing "Savings" for contacts whose names contain "John".
-
-* `retrievepa l/Business c/ETH n/Alice`<br />
-  Retrieves all ETH public addresses with labels containing "Business" for contacts whose names contain "Alice".
 
 <br>
 
@@ -576,13 +636,13 @@ Format: `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`
 
 Deletes the public address of a contact.
 
-Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
+#### Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
 
-| Parameter     | Explanation                                              | Details                                                                                                                                                                      |
-|---------------|----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`       | The index of the contact in the displayed contact list   | - The index **must be a positive integer** 1, 2, 3, ... <br> - This field does not accept negative numbers or zero.                                                          |
-| `NETWORK`     | The network of the public address to be deleted          | - Allowed values: `BTC, ETH, SOL` <br> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted.                                                       |
-| `WALLET_NAME` | Optional wallet name of the public address to be deleted | - This field is **case-insensitive** <br> - If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the contact at the specified `INDEX` will be deleted. |
+| Parameter     | Explanation                                               | Details                                                                                                                                                                      |
+|---------------|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`       | The index of the contact in the displayed contact list.   | - The index **must be a positive integer** 1, 2, 3, ... <br> - This field does not accept negative numbers or zero.                                                          |
+| `NETWORK`     | The network of the public address to be deleted.          | - Allowed values: `BTC, ETH, SOL` <br> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted.                                                       |
+| `WALLET_NAME` | Optional wallet name of the public address to be deleted. | - This field is **case-insensitive** <br> - If `WALLET_NAME` is not provided, all public addresses in the `NETWORK` of the contact at the specified `INDEX` will be deleted. |
 
 <box type = "tip" seamless>
 
@@ -590,19 +650,108 @@ Format: `deletepa INDEX c/NETWORK [l/WALLET_NAME]`
 
 </box>
 
-* Deletes the public address of the contact with the specified `INDEX` in the specified `NETWORK`, and if applicable, the specified `WALLET_NAME`.
+* Deletes the public address of the contact with the specified `INDEX` in the specified `NETWORK`, and if applicable,
+  the specified `WALLET_NAME`.
 
-Examples:
+#### Examples:
 
-* `deletepa 1 c/BTC l/wallet1` **only** deletes the public address of the first contact in the BTC network with the wallet name
+* `deletepa 1 c/BTC l/wallet1` **only** deletes the public address of the first contact in the BTC network with the
+  wallet name
   `wallet1`.
 
 ![deletepa1.png](images/deletepa1.png)
 
-* `deletepa 3 c/BTC` deletes all the public addresses of the third contact in the BTC network but not in the ETH network.
+* `deletepa 3 c/BTC` deletes all the public addresses of the third contact in the BTC network but not in the ETH
+  network.
 
 ![deletepa2.png](images/deletepa2.png)
+
 <br>
+
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Editing a public address of a contact : `editpa`
+
+Edits an existing public address of a contact.
+
+#### Format: `editpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`
+
+| Parameter        | Explanation                                             | Details                                                                                                                                   |
+|------------------|---------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`          | The index of the contact in the displayed contact list. | - The index **must be a positive integer** 1, 2, 3, ...<br/> - This field does not accept negative numbers or zero.                       |
+| `NETWORK`        | The network of the public address to be edited.         | - Allowed values: `BTC`, `ETH` and `SOL`<br/>- This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted.              |
+| `WALLET_NAME`    | The wallet name of the public address to be added.      | - This field is **case-insensitive**.                                                                                                     |
+| `PUBLIC_ADDRESS` | The updated public address.                             | - Only alphanumeric characters allowed.<br/>- The length should be **26 - 44 characters** long.<br/>- This field is **case-insensitive**. |
+
+#### Examples
+
+* `editpa 1 c/BTC l/Main wallet pa/bc1phkt4pgl42lad3mm2srne73y8a7zgam3cumrzmc`<br />
+  Edits the contact at index 1's BTC public address labelled as "Main wallet" to the new value
+  `bc1phkt4pgl42lad3mm2srne73y8a7zgam3cumrzmc`.<br />
+
+  **Before**
+  ![editpa](images/editpa-before.png)
+  **After**
+  ![editpa](images/editpa-1.png)
+
+* `editpa 1 c/BTC l/MAIN WALLET pa/bc1phkt4pgl42lad3mm2srne73y8a7zgam3cumrzmc`<br />
+  If the contact at index 1 exists and has a BTC public address labelled as "MAIN WALLET", public address will be
+  updated to the new value and label will be updated to "MAIN WALLET" as `WALLET_NAME` is **case-insensitive**.
+
+  ![editpa](images/editpa-2.png)
+
+<br>
+
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Retrieving public addresses of a contact : `retrievepa`
+
+Retrieves public addresses with matching labels.
+
+#### Format: `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`
+
+| Parameter     | Explanation                                                    | Details                                                                                                                                                                                                          |
+|---------------|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `WALLET_NAME` | The label (or part of the label) of desired public addresses.  | - This field is **case-insensitive**. `MAIN` and `main` are equivalent.                                                                                                                                          |
+| `NETWORK`     | Optional ticker name for network to filter for.                | - Allowed values: `BTC, ETH, SOL`.<br />- This field is **case-insensitive**. `BTC` and `btc` are equivalent.<br />- If `NETWORK` is not provided, it will retrieve matching public addresses from all networks. |
+| `PERSON_NAME` | Optional name (or part of the name) of contacts to filter for. | - This field is **case-insensitive**. `ALEX` and `alex` are equivalent.<br />- If `PERSON_NAME` is not provided, it will retrieve matching public addresses of all contacts.                                     |
+
+#### Examples
+
+* `retrievepa l/main wallet`<br />
+  Retrieves all public addresses with labels containing "main wallet" for all contacts and networks.
+  ![retrievepa label](images/retrievepa-label.png)
+
+* `retrievepa l/Main c/ETH`<br />
+  Retrieves all ETH public addresses with labels containing "Main" for all contacts.
+
+* `retrievepa l/Business n/Alex`<br />
+  Retrieves all public addresses with labels containing "Business" for contacts whose names contain "Alex".
+
+* `retrievepa l/main c/btc n/bernice`<br />
+  Retrieves all BTC public addresses with labels containing "main" for contacts whose names contain "bernice".
+  ![retrievepa label](images/retrievepa-label-network-name.png)
+
+<br>
+
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -610,29 +759,33 @@ Examples:
 
 Based on contacts displayed, it searches for a contact using the unique public address
 
-Format: `searchpa pa/PUBLIC_ADDRESS`
+#### Format: `searchpa pa/PUBLIC_ADDRESS`
 
-| Parameter        | Explanation          | Constraints                                                                                                               | Safeguards                                                                                      |
-|------------------|----------------------|---------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
-| `PUBLIC_ADDRESS` | a DLT public address | - Only alphanumeric characters allowed  <br/>  - The length should be more than 26 characters and less than 44 characters | This field is **case-insensitive** and searches for contacts based on lowercase public address. |
+| Parameter        | Explanation           | Details                                                                                                                                                                | 
+|------------------|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PUBLIC_ADDRESS` | A DLT public address. | - Only alphanumeric characters allowed.  <br/>  - The length should be more than 26 characters and less than 44 characters.<br/> - This field is **case-insensitive**. |
 
 * Searches for a public address based on the `PUBLIC_ADDRESS` provided.
 
-<box type="tip" seamless>
 This command only searches the current list of public addresses displayed (e.g. if all contacts are displayed
-  searchpa will perform a global search. if a filtered list of contacts
-  displayed, searchpa will perform a local
-  search on list of contacts displayed).
-  </box>
+searchpa will perform a global search. if a filtered list of contacts
+displayed, searchpa will perform a local
+search on list of contacts displayed).
 
-Examples:
+#### Examples:
 
 * `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` searches for a public
   address `bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` and displays the contact and wallet to
   which it belongs.
 
 ![searchpa](images/searchpa.png)
+
 <br>
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -640,21 +793,29 @@ Examples:
 
 Filters out a list of contacts with the public addresses of the specified network.
 
-Format: `filter c/NETWORK`
+#### Format: `filter c/NETWORK`
 
-| Parameter | Explanation                                      | Details                                                                                                                       |
-|-----------|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| `NETWORK` | The network of the public address to be filtered | - Allowed values: `BTC`, `ETH` and `SOL`<br/> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted. |
+| Parameter | Explanation                                       | Details                                                                                                                       |
+|-----------|---------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| `NETWORK` | The network of the public address to be filtered. | - Allowed values: `BTC`, `ETH` and `SOL`<br/> - This field is **case-insensitive**. `eth`, `btc` and `sol` are also accepted. |
 
 * Filters out a list of contacts based on the `NETWORK` provided.
 
-Examples:
+#### Examples:
 
 * `filter c/BTC` filters a list of contacts with the public addresses of `BTC` and
   displays it with their respective list number.
 
 ![filter](images/filter.png)
+
 <br>
+
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -662,7 +823,11 @@ Examples:
 
 Clears all entries from the address book.
 
-Format: `clear`
+#### Format: `clear`
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
 <br>
 
@@ -672,9 +837,16 @@ Format: `clear`
 
 Exits the program.
 
-Format: `exit`
+#### Format: `exit`
 
 <br>
+
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -683,14 +855,56 @@ Format: `exit`
 DLTbook data are saved in the hard disk automatically after any command that changes the data. There is no need to save
 manually.
 
+
 <br>
+
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Editing the data file
+# Support
+
+## Frequently Asked Questions
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
+the data of your previous AddressBook home folder.
+
+**Q**: Can I integrate it with other Crypto Wallet services? (eg. Metamask,etc.)<br>
+**A**: We are planning to add integration with other Crypto wallets in the future.
+
+**Q**: Does it support other Crypto Networks? (eg. BNB, Polygon, etc.)<br>
+**A**: Right now, we only support BTC, ETH and SOL. We are planning to support these networks in the future.
+
+**Q**: Can I use it on my phone?<br>
+**A**: DLTbook is a desktop application and is not supported on mobile devices.
+
+**Q**: How do I report a bug?<br>
+**A**: You can report a bug by creating an issue on
+our [GitHub repository](https://github.com/AY2425S1-CS2103T-T08-1/tp/issues).
+
+**Q**: Can I use it offline?<br>
+**A**: Yes, DLTbook is a desktop application and does not require an internet connection to run.
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Data Storage
 
 DLTbook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
 welcome to update data directly by editing that data file.
+
+<br>
+
+<box type = "info">
 
 **Caution:**
 
@@ -699,33 +913,16 @@ file at the next run. Hence, it is recommended to take a backup of the file befo
 
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside
 the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
---------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AddressBook home folder.
+<br>
 
 
-**Q**: Can I integrate it with other Crypto Wallet services? (eg. Metamask,etc.)<br>
-**A**: We are planning to add integration with other Crypto wallets in the future.
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
-
-**Q**: Does it support other Crypto Networks? (eg. BNB, Polygon, etc.)<br>
-**A**: Right now, we only support BTC, ETH and SOL. We are planning to support these networks in the future.
-
-
-**Q**: Can I use it on my phone?<br>
-**A**: DLTbook is a desktop application and is not supported on mobile devices.
-
-**Q**: How do I report a bug?<br>
-**A**: You can report a bug by creating an issue on our [GitHub repository](https://github.com/AY2425S1-CS2103T-T08-1/tp/issues).
-
-**Q**: Can I use it offline?<br>
-**A**: Yes, DLTbook is a desktop application and does not require an internet connection to run.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -733,20 +930,20 @@ the data of your previous AddressBook home folder.
 
 1. **Invalid command format!**<br>
    Ensure that the command is in the correct format. Check the error messsage for the correct syntax to use.
-
 2. **Unknown command**<br>
    Ensure that the command is correct. Check [Command Overview](#command-overview) for correct commands to use.
-
 3. **The person index provided is invalid**<br>
    Ensure that the index is a positive integer starting with 1 and within the range of the list of contacts displayed.
-
 4. **Network is blank or not supported. Currently supported: BTC, ETH, SOL**<br>
    Ensure that the network is provided and is one of the supported networks: `BTC`, `ETH`, `SOL`. The network is
    case-sensitive so `btc`, `eth`, `sol` are not valid.
-
 5. **Public Address for length BTC/ETH/SOL should be more than 26 characters**<br>
    Ensure that the public address is provided and is valid. The length of BTC/ETH/SOL public addresses should be more
    than 26 characters, less than 44 characters and can only contain alphanumeric characters.
+
+ <div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -764,6 +961,11 @@ the data of your previous AddressBook home folder.
 4. **Missing email validation** The email field of contacts in DLTbook have no restrictions and can be duplicated across
    contacts.
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Future Enhancements
@@ -772,23 +974,66 @@ Most commands currently do not forgive extraneous inputs for commands that do no
 Such inputs will be ignored. But the error message displayed for this error for commands are different and may not
 exactly describe this error. This shall be fixed in the future.
 
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+# Feature Summary
 
-| Action                      | Format, Examples                                                                                                                                                       |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**                   | `clear`                                                                                                                                                                |
-| **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                    |
-| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                             |
-| **List**                    | `list`                                                                                                                                                                 |
-| **Help**                    | `help`                                                                                                                                                                 |
-| **Exit**                    | `exit`                                                                                                                                                                 |
-| **Add Public Address**      | `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addpa 1 c/ETH l/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`                              |
-| **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/NEW_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                          |
-| **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                                                   |
-| **Delete Public Address**   | `deletepa c/NETWORK [l/WALLET_NAME]`<br> e.g., `deletepa 1 c/BTC l/wallet1`                                                                                            |
-| **Search Public Address**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                                                                        |
-| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                                            |
+## Basic Features
+
+| Action    | Format, Examples |
+|-----------|------------------|
+| **Help**  | `help`           |
+| **Clear** | `clear`          |
+| **Exit**  | `exit`           |
+
+## Contact Management Features
+
+| Action     | Format, Examples                                                                                                                                                       |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                    |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                             |
+| **List**   | `list`                                                                                                                                                                 |
+
+## Public Address Management Features
+
+| Action                      | Format, Examples                                                                                                                                 |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Public Address**      | `addpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addpa 1 c/ETH l/wallet1 pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`        |
+| **Edit Public Address**     | `editpa INDEX c/NETWORK l/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `editpa 3 c/BTC l/Daily wallet pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9` |
+| **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                             |
+| **Delete Public Address**   | `deletepa c/NETWORK [l/WALLET_NAME]`<br> e.g., `deletepa 1 c/BTC l/wallet1`                                                                      |
+| **Search Public Address**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`                                                  |
+| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                      |
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+# Glossary
+
+| Term                               | Definition                                                                                                                                                                                           |
+|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Blockchain**                     | A system in which a record of transactions made in bitcoin or another cryptocurrency is maintained across several computers that are linked in a peer-to-peer network.                               |
+| **Blockchain Network/DLT Network** | A decentralized digital ledger that records transactions across multiple computers. Acts like a currency, but it's digital and secure. (e.g., Bitcoin, Ethereum, Solana).                            |
+| **BTC**                            | Bitcoin, a decentralized digital currency without a central bank or single administrator that can be sent from user to user on the peer-to-peer bitcoin network without the need for intermediaries. |
+| **CLI**                            | Command Line Interface, a text-based interface used to interact with software and operating systems by typing commands.                                                                              |
+| **DLT**                            | Distributed Ledger Technology, the technological infrastructure and protocols that allow simultaneous access, validation, and record updating across a networked database.                           |
+| **ETH**                            | Ethereum, a decentralized, open-source blockchain with smart contract functionality, Ether (ETH) is the native cryptocurrency.                                                                       |
+| **GUI**                            | Graphical User Interface, allows users to interact with electronic devices through graphical icons and visual indicators.                                                                            |
+| **JAR**                            | Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources into one file for distribution.                                          |
+| **JSON**                           | JavaScript Object Notation, a lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate.                                            |
+| **Public Address**                 | A unique series of alphanumerical characters that is shared with others to receive cryptocurrencies (similar to an account number).                                                                  |
+| **SOL**                            | Solana, a high-performance blockchain supporting builders around the world creating crypto apps that scale, Solana (SOL) native cryptocurrency.                                                      |                                                                                                                                                                    |
+
+<div style="text-align: left;">
+  <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
+</div>
