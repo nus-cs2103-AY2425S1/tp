@@ -168,6 +168,28 @@ The implementation is similar to the `Delete` command above, with a few addition
    3. Note that the sorting preference is finally stored in `UserPrefs` as a String
 4. **Result**: A `CommandResult` is generated and returned to the `LogicManager`, indicating either success or failure
 
+### Sort Command
+
+The `Sort` command allows users to change the ordering of the contacts based on priority and the last seen date.
+The feature works by leveraging the ObservableList class provided by the JavaFX library, similiar the the `Find` command.
+Where the `Find` command uses `FilteredList`, `Sort` uses `SortedList`.
+
+<img src="images/SortCommandSimpleSequence.png" width="600">
+
+The sequence diagram of the Sort Command is typical of other commands. 
+The notable aspect of the diagram is that the `SortedList` in the `model` is updated with a new comparator. 
+In the case of `sort high`, the comparator is `PriorityHighToLowComparator`.
+
+<img src="images/ContactDisplaySequencyDiagram.png" width="600">
+
+As shown above, the `UI` displays the list of contacts as contained in the `FilteredList` in the `Model`.
+
+To ensure the changes to the `SortedList` is visible to the `UI`, persons are initialised from the `AddressBook` into the `SortedList`. 
+The `SortedList` is used to populate the `FilteredList`. This way, any changes made to the `SortedList` is visible in the UI via the `FilteredList`.
+
+<img src="images/SortedPersonListRelationship.png">
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
