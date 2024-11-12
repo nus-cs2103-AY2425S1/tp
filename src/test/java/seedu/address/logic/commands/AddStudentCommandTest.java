@@ -203,11 +203,7 @@ public class AddStudentCommandTest {
             markedAttendance.clear();
         }
 
-        // Helper method for tests
-        public boolean isPersonMarkedPresent(Person person) {
-            return markedAttendance.stream().anyMatch(p -> p.isSamePerson(person));
-        }
-
+        @Override
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }

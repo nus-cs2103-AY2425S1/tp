@@ -48,10 +48,6 @@ public class AddTeacherCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Teacher expectedTeacher = new TeacherBuilder().withName(VALID_NAME_BOB).withGender(VALID_GENDER_BOB)
-            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withSubject(VALID_SUBJECT_BOB).withTags(VALID_TAG_FRIEND).withClasses(VALID_CLASSES_BOB).build();
-
         // multiple tags - all accepted
         Teacher expectedTeacherMultipleTags = new TeacherBuilder().withName(VALID_NAME_BOB).withGender(VALID_GENDER_BOB)
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
