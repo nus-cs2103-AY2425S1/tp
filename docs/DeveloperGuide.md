@@ -45,12 +45,17 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+GoonBook is a brownfield software project based off AddressBook Level-3, taken under the CS2103T Software Engineering module held by the School of Computing at the National University of Singapore.
 
-- **Third-party libraries**
-- opencsv Library
-- org json Library
+Java dependencies:
+
+- JavaFX for GUI
+- JUnit5 for testing
+
+Documentation dependencies:
+
+- Jekyll for rendering the website
+- PlantUML for creating UML diagrams
 
 ## **Setting up, getting started**
 
@@ -145,8 +150,7 @@ The `UI` component,
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -164,12 +168,12 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
    a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
    is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
    several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -186,8 +190,7 @@ How the parsing works:
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="488" />
 
@@ -214,8 +217,7 @@ The `Model` component,
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -264,11 +266,11 @@ The `AddressBook` will be initialized with the previously saved address book sta
 Step 2. The user executes `group` command with the specific data at each prefix to specify the person to be added.
 The `GroupCommand` will then call `excecute()`, which checks whether there is a duplicate Group in the group list before calling `addGroup(Group)`.
 
-<box type="info" seamless>
+<div markdown="span" class="alert alert-info">
 
 **Note:** If the `groupName` and `students` provided is invalid, a `CommandException` will be thrown.
 
-</box>
+</div>
 
 #### Sequence Diagram
 
@@ -920,7 +922,8 @@ otherwise)
 
 - **Mainstream OS**: Windows, Linux, Unix, MacOS
 - **Educator**: Primary, secondary, JC, poly teacher
-- **Duplicate**: Student with the same name and contact number
+- **Duplicate Student**: Student with the same name (case-insensitive)
+- **Duplicate Group**: Group with the same name (case-insensitive)
 
 ---
 
