@@ -481,10 +481,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Precondition**
 
-1. The file is in CSV format and ends with .csv
-2. The file contains valid data of at least 1 person
-3. The header of the file is in the required sequence
-4. Current user have permissions to access and read the file
+1. The file is in CSV format and ends with `.csv`.
+2. The file contains valid data of at least 1 person.
+3. The header of the file is in the required sequence.
+4. Current user have permissions to access and read the file.
 
 **MSS**
 
@@ -498,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 1a. KonTActs detects the file provided is invalid.
 
   - 1a1. KonTActs request for the correct file path.
-  - 1a2. User provides a new file path
+  - 1a2. User provides a new file path.
   - Steps 1a1 - 1a2 are repeated until KonTActs is able to import contacts from the file.
 
     Use case resumes from step 2.
@@ -524,7 +524,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to sort the contact list, providing the sort criteria.
-2. KonTActs sots the contact list and displays the sorted list.
+2. KonTActs sorts the contact list and displays the sorted list.
 
    Use case ends.
 
@@ -532,8 +532,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 1a. KonTActs detects an error in the input.
 
-    - 1a1. KonTActs request for the correct input.
-    - 1a2. Users enter a new input.
+    - 1a1. KonTActs requests for the correct input.
+    - 1a2. User enters a new input.
     - Steps 1a1-1a2 are repeated until the input entered is correct.
 
       Use case resumes from step 2.
@@ -545,7 +545,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Precondition**
 
-1. The user have permission to open the browser.
+1. The user have set permissions to allow browser to be opened from external applications.
 
 **MSS**
 
