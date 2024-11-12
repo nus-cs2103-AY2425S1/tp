@@ -349,6 +349,10 @@ Use this command format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/
 - `edit S6483749D n/Betsy Crower t/`
   Edits the person with NRIC `S6483749D` to be `Betsy Crower` and clears all existing tags.
 
+<div class="alert alert-warning">
+<i>:warning:</i> <b>Warning:</b> Existing links that the person has are lost due to the edit command, as crucial data is changed. You can find more about this under [Known Issues](#known-issues)
+</div>
+
 **Possible Errors:**
 
 - `Incorrect NRIC. Person not found` - When the specified NRIC doesn't exist in CareLink
