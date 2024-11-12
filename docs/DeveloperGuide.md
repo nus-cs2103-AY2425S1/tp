@@ -316,12 +316,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add a new supplier             |                                                                        |
 | `* * *`  | user                                       | delete a supplier              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a supplier by name        | locate details of suppliers without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
+| `* * *`  | user                                       | find a supplier by tags        | see only the details of suppliers with similar tags |
 | `*`      | user with many suppliers in the address book | sort suppliers by name         | locate a supplier easily                                                 |
 | `* * *`  | inventory manager                          | add a new product           |                                                                        |
 | `* * *`  | inventory manager                          | assign products to suppliers  | collectively manage products which corresponding suppliers supply                |
 | `* * `  | inventory manager                          | remove suppliers/products              | prune obsolete data   |
-| `* * `  | inventory manager                          | track order status for a supplier              | avoid delays and ensure timely stock replenishment   |
+| `* * `  | inventory manager                          | find products by name              | locate details of products without having to go through the entire list   |
+| `* * `  | inventory manager                          | find products by tags              | see only the details of products with similar tags   |
+| `* * `  | inventory manager                          | find products for a given supplier              | see all the products a certain supplier supplies   |
 | `* * `  | inventory manager                          | set pre-defined max stock level for products              | determine quantity to request for an order   |
 | `* * `  | experienced inventory manager                          | set pre-defined minimum stock level for a product              | ensure availability of the product at all times   |
 | `* * `  | experienced inventory manager                          | request an order from a supplier | replenish stocks of the corresponding products |
@@ -330,6 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* `     | inventory manager             | receive automated re-order alerts | reduce the risk of stockouts or overstocking |
 | `* *`    | inventory manager             | view payment/order history for a supplier | so that I have a clear understanding of past cash flow and plan future expenses |
 | `* *`    | inventory manager             | get alerts in case of any supplier issues        | find a convenient replacement in time  |
+| `* *`    | inventory manager             | use autocomplete        | easily type in longer names or commands  |
 | `* *`    | inventory manager             | quickly send standardized communication to suppliers via email or messaging without leaving the interface        | streamline communication and reduce errors  |
 | `* *`    | inventory manager             | I can store contracts and terms of agreements with suppliers in the system        | quickly refer to them when negotiating orders  |
 | `* *`    | inventory manager             | be able to get printable txt of relevant information  |  get hard-copy of the information  |

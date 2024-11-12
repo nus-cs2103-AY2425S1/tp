@@ -11,28 +11,28 @@
 }
 
 .menu-item {
-    -fx-background-color: #904f4f;
-    -fx-background-radius: 0.3em;
+    -fx-background-color: #907A4F; /* Medium brownish-yellow */
+    -fx-background-radius: 0.7em; /* Slightly reduced radius */
 }
 
 .menu-item:hover {
     -fx-background-color: #A58A5E; /* Lighter on hover */
-    -fx-background-radius: 0.4em;
+    -fx-background-radius: 0.7em;
 }
 
 .menu:hover {
     -fx-background-color: #A58A5E;
-    -fx-background-radius: 0.4em;
+    -fx-background-radius: 0.7em;
 }
 
 .menu:showing {
     -fx-background-color: #A58A5E;
-    -fx-background-radius: 0.4em;
+    -fx-background-radius: 0.7em;
 }
 
 .menu-item:showing, .menu-item:selected {
     -fx-background-color: #A58A5E;
-    -fx-background-radius: 0.4em;
+    -fx-background-radius: 0.7em;
 }
 
 .label-bright {
@@ -229,7 +229,7 @@
 
 .menu-bar {
     -fx-background-color: #907A4F;
-    -fx-background-radius: 0.0em;
+    -fx-background-radius: 0.7em;
 }
 
 .menu-bar .label {
