@@ -805,3 +805,6 @@ Team size: 5
    Currently, Sunday is being displayed as the last day in the scheduler, however the scheduler treats Sunday as the first day of the week.
    While the current iteration is not wrong, however users may be confused and assume the Sunday at the end of the list to be the Sunday of the following week since it comes after Saturday.
    Thus for clarity, Sunday should instead be displayed at the start of the scheduler instead.
+1. **Enhance clear command.**
+   Currently, the clear command clears all contacts even if they are in the meeting. This is not ideal since the contacts are remained in the meeting even though they are deleted.
+   Instead, the error message should be displayed if the contact is in the meeting and the user should be prompted to remove the contact from the meeting first before deleting the contact.
