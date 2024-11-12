@@ -476,7 +476,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-* 3d.  The more than 1 field to sort by is provided.
+* 3d.  More than 1 field to sort by is provided.
 
     * 3d1. ConTActs shows an error message indicating the sort command takes only 1 field to sort by.
 
@@ -550,12 +550,16 @@ Prerequisites: Ensure more than one contact is present. These tests can and shou
 1. Marking attendance as present for a contact
    1. Test case: `mark 1 tut/1`<br>
    Expected: First contact's tutorial box 1 turns green.
+   
    2. Test case: `mark 1 tut/1-2`<br>
    Expected: First contact's tutorial box 1 remains green and box 2 turns green.
+   
    3. Test case: `unmark 2 tut/[1,3]`<br>
    Expected: Second contact's tutorial box 1 and 3 turns red.
+   
    4. Test case: `reset * tut/1`<br>
    Expected: All contact's tutorial box 1 turns grey. First contact's tutorial box 2 remains green and second contact's tutorial box 3 remains red.
+   
    5. Test case: `mark 1 tut/2`<br>
    Expected: No change will occur. Details shown in the status message.
 
@@ -623,7 +627,9 @@ This is makes the `find` command meaningless for large data sets.
 Possible improvement is to implement a "match score" to rank the contacts by, and display them in that order instead.
 
 10. We plan to allow sorting by more than 1 fields (e.g: by name AND tutorial), to further improve the usefulness of sort.
+
 ---
+
 ## **Appendix: Effort**
 
 ### Difficulty Level
