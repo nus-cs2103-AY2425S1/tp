@@ -46,7 +46,6 @@ public class DeleteCommand extends Command {
             "Cannot delete this person as they are a client in a wedding.\n"
                     + "Please delete their wedding first.";
 
-
     public static final String MESSAGE_PERSON_NOT_ASSIGNED_WEDDING =
             "Cannot unassign wedding(s) from this person because they are not assigned to the specified wedding(s)";
 
@@ -56,7 +55,11 @@ public class DeleteCommand extends Command {
 
 
     /**
-     * Creates a DeleteCommand object to delete the person at the specified {@code Index} or keyword.
+     * Creates a {@code DeleteCommand} object to delete the person at the specified {@code Index} or keyword.
+     *
+     * @param targetIndex {@code Index} of the person in the filtered person list to delete.
+     * @param predicate {@code NameMatchesKeywordPredicate} used to filter the person list to find the target person.
+     * @param weddingIndices set of indices representing the weddings jobs to delete from the person.
      */
     public DeleteCommand(Index targetIndex, NameMatchesKeywordPredicate predicate, Set<Index> weddingIndices) {
         this.targetIndex = targetIndex;
@@ -99,7 +102,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Gets the person by index without deleting them.
+     * Returns the target person by index without deleting them.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return the target person.
+     * @throws CommandException if the list is empty or if the index is invalid.
      */
     private Person getPersonByIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -117,7 +124,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Gets the person by keyword without deleting them.
+     * Returns the target person by keyword without deleting them.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return the target person (if only one person matched) or null (if multiple people matched).
+     * @throws CommandException if the list resulting from {@code predicate} is empty.
      */
     private Person getPersonByKeyword(Model model) throws CommandException {
         model.updateFilteredPersonList(predicate);
@@ -135,7 +146,8 @@ public class DeleteCommand extends Command {
     /**
      * Validates that the person to be deleted is not a client in any wedding.
      *
-     * @throws CommandException if the person is a client in a wedding
+     * @param person the person to be checked.
+     * @throws CommandException if the person is a client in a wedding.
      */
     private void validatePersonIsNotClient(Person person) throws CommandException {
         if (person.getOwnWedding() != null) {
@@ -144,10 +156,10 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Check if wedding indices inputs are valid
+     * Checks if wedding indices inputs are valid.
      *
-     * @param model {@code Model} which the command should operate on
-     * @throws CommandException if the list is empty or if the index is invalid
+     * @param model {@code Model} which the command should operate on.
+     * @throws CommandException if the list is empty or if the index is invalid.
      */
     public void checkValidWeddingIndices(Model model) throws CommandException {
         List<Wedding> lastShownList = model.getFilteredWeddingList();
@@ -165,11 +177,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Checks if person is even assigned to weddings before attempting to remove them.
+     * Checks if the person is assigned to weddings before attempting to remove them.
      *
-     * @param personToDelete person to check assigned weddings
-     * @param model The model containing the list of weddings.
-     * @throws CommandException if person is not assigned weddings
+     * @param personToDelete the person to be checked.
+     * @param model {@code Model} which the command should operate on, which contains the list of weddings.
+     * @throws CommandException if person is not assigned weddings.
      */
     public void checkIsAssignedWeddings(Model model, Person personToDelete) throws CommandException {
         List<Wedding> weddingList = model.getFilteredWeddingList();
@@ -182,10 +194,10 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Removes specified wedding jobs from person
+     * Removes specified wedding jobs from the person.
      *
-     * @param personToDelete person to remove wedding jobs
-     * @param model The model containing the list of weddings.
+     * @param personToDelete the target person getting wedding jobs removed.
+     * @param model {@code Model} which the command should operate on, which contains the list of weddings.
      */
     public void removeWeddingJobs(Person personToDelete, Model model) {
         List<Wedding> weddingList = model.getFilteredWeddingList();

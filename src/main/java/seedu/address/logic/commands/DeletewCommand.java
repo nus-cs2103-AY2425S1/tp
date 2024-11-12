@@ -35,7 +35,10 @@ public class DeletewCommand extends Command {
     private final NameMatchesWeddingPredicate predicate;
 
     /**
-     * Creates a DeletewCommand object to delete the wedding at the specified {@code Index} or keyword.
+     * Creates a {@code DeletewCommand} object to delete the wedding at the specified {@code Index} or keyword.
+     *
+     * @param targetIndex {@code Index} of the wedding in the filtered wedding list to delete.
+     * @param predicate {@code NameMatchesWeddingPredicate} used to filter the wedding list to find the target wedding.
      */
     public DeletewCommand(Index targetIndex, NameMatchesWeddingPredicate predicate) {
         this.targetIndex = targetIndex;
@@ -67,7 +70,11 @@ public class DeletewCommand extends Command {
     }
 
     /**
-     * Gets the wedding by index without deleting them.
+     * Returns the wedding by index without deleting them.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return the target wedding.
+     * @throws CommandException if the list is empty or if the index is invalid.
      */
     private Wedding getWeddingByIndex(Model model) throws CommandException {
         List<Wedding> lastShownList = model.getFilteredWeddingList();
@@ -84,7 +91,11 @@ public class DeletewCommand extends Command {
     }
 
     /**
-     * Gets the wedding by keyword without deleting them.
+     * Returns the wedding by keyword without deleting them.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return the target wedding (if only one wedding matched) or null (if multiple weddings matched).
+     * @throws CommandException if the list resulting from {@code predicate} is empty.
      */
     private Wedding getWeddingByKeyword(Model model) throws CommandException {
         model.updateFilteredWeddingList(predicate);

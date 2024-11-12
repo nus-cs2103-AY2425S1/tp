@@ -34,7 +34,6 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_WEDDING + "WEDDING...]\n"
-
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -46,12 +45,11 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_WEDDING_DOES_NOT_EXIST = "Wedding %d is not in the list.";
 
-
     private final Person toAdd;
     private Set<Index> weddingIndices;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an {@code AddCommand} object to add the specified {@code Person}
      */
     public AddCommand(Person person, Set<Index> weddingIndices) {
         requireNonNull(person);
@@ -80,7 +78,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Checks validity of all provided wedding indexes..
+     * Checks validity of all provided wedding indexes.
      *
      * @param model The model containing the list of weddings.
      */

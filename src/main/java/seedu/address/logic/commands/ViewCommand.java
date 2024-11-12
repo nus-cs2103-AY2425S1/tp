@@ -17,8 +17,8 @@ import seedu.address.model.wedding.WeddingMatchesClientPredicate;
 
 
 /**
- * View the person in address book whose name matches the keyword or at the given index.
- * Keyword matching is case insensitive.
+ * Views a person identified from the address book, using index or keyword.
+ * Keyword matching is case-insensitive.
  */
 public class ViewCommand extends Command {
 
@@ -43,7 +43,10 @@ public class ViewCommand extends Command {
     private final NameMatchesKeywordPredicate predicate;
 
     /**
-     * Creates a ViewCommand to view the contact details of the specified person
+     * Creates a {@code ViewCommand} object to view the person at the specified {@code Index} or keyword.
+     *
+     * @param targetIndex {@code Index} of the person in the filtered person list to view.
+     * @param predicate {@code NameMatchesKeywordPredicate} used to filter the person list to find the target person.
      */
     public ViewCommand(Index targetIndex, NameMatchesKeywordPredicate predicate) {
         this.targetIndex = targetIndex;
@@ -75,7 +78,11 @@ public class ViewCommand extends Command {
     }
 
     /**
-     * Gets the person by index.
+     * Returns the target person by index.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return the target person to be viewed.
+     * @throws CommandException if the list is empty or if the index is invalid.
      */
     private Person getPersonByIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -93,7 +100,11 @@ public class ViewCommand extends Command {
     }
 
     /**
-     * Gets the person by keyword.
+     * Returns the target person by keyword.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return the target person (if only one person matched) or null (if multiple people matched).
+     * @throws CommandException if the list resulting from {@code predicate} is empty.
      */
     private Person getPersonByKeyword(Model model) throws CommandException {
         model.updateFilteredPersonList(predicate);
@@ -108,10 +119,18 @@ public class ViewCommand extends Command {
         }
     }
 
+    /**
+     * Updates the filtered wedding list with the client's own wedding, if any.
+     *
+     * @param client the {@code Person} to be checked.
+     * @param model {@code Model} which the command should operate on.
+     * @throws CommandException if the {@code client} owns multiple weddings.
+     */
     private void updateWedding(Person client, Model model) throws CommandException {
         WeddingMatchesClientPredicate clientPredicate = new WeddingMatchesClientPredicate(client);
         model.updateFilteredWeddingList(clientPredicate);
         List<Wedding> filteredList = model.getFilteredWeddingList();
+
         if (filteredList.size() == 1) {
             Wedding ownWedding = filteredList.get(0);
             Wedding updatedWedding = new Wedding(ownWedding.getName(), ownWedding.getClient(),

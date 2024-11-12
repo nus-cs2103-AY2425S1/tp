@@ -18,7 +18,7 @@ import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
 
 /**
- * Edits the details of an existing wedding.
+ * Edits the details of an existing wedding in wedding list. Details that can be edited are name, date and venue.
  */
 public class EditwCommand extends Command {
 
@@ -43,8 +43,10 @@ public class EditwCommand extends Command {
     private final EditWeddingDescriptor editWeddingDescriptor;
 
     /**
-     * @param index of the wedding in the filtered wedding list to edit
-     * @param editWeddingDescriptor details to edit the wedding with
+     * Creates a {@code EditwCommand} object to edit the wedding at the specified {@code Index}.
+     *
+     * @param index {@code Index} of the wedding in the filtered wedding list to edit.
+     * @param editWeddingDescriptor details of what is to be edited in the wedding.
      */
     public EditwCommand(Index index, EditWeddingDescriptor editWeddingDescriptor) {
         requireNonNull(index);
@@ -83,8 +85,11 @@ public class EditwCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Wedding} with the details of {@code weddingToEdit}
-     * edited with {@code editWeddingDescriptor}.
+     * Returns a {@code Wedding} with updated name, date or venue.
+     *
+     * @param weddingToEdit the target wedding.
+     * @param descriptor details of what is to be edited in the wedding.
+     * @return updated {@code Wedding} with the edited information.
      */
     static Wedding createEditedWedding(Wedding weddingToEdit, EditWeddingDescriptor descriptor) {
         assert weddingToEdit != null;

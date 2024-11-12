@@ -52,9 +52,8 @@ public class AddwCommand extends Command {
     private Wedding toAdd;
 
     /**
-     * Creates a new AddwCommand to add the specified wedding.
-     * Either index or predicate must be provided to identify the client,
-     * but not both.
+     * Creates a new {@code AddwCommand} to add the specified wedding.
+     * Either index or predicate must be provided to identify the client, but not both.
      *
      * @param index The index of the person to set as client. Can be null if using name matching.
      * @param predicate The predicate to match person by name. Can be null if using index.
@@ -70,18 +69,18 @@ public class AddwCommand extends Command {
 
     /**
      * Executes the command to add a new wedding to the address book.
-     * This method will:
-     * 1. Identify the client using either index or name matching
-     * 2. Verify the client is not already associated with another wedding
-     * 3. Create a new wedding with the identified client
-     * 4. Add the wedding to the model if it's not a duplicate
+     * This method will:<br>
+     * 1. Identify the client using either index or name matching <br>
+     * 2. Verify the client is not already associated with another wedding<br>
+     * 3. Create a new wedding with the identified client<br>
+     * 4. Add the wedding to the model if it's not a duplicate<br>
      *
      * @param model The model which the command should operate on.
-     * @return A CommandResult indicating the outcome of the command execution
-     * @throws CommandException if:
-     *         - The specified person does not exist
-     *         - The person is already a client for another wedding
-     *         - The wedding is a duplicate
+     * @return A CommandResult indicating the outcome of the command execution.
+     * @throws CommandException if:<br>
+     *         - The specified person does not exist<br>
+     *         - The person is already a client for another wedding<br>
+     *         - The wedding is a duplicate<br>
      *         - Multiple persons match the provided name
      */
     @Override
@@ -165,14 +164,14 @@ public class AddwCommand extends Command {
     }
 
     /**
-     * Compares this AddwCommand with another object for equality.
-     * Two AddwCommand objects are considered equal if they have:
-     * - The same index (or both null)
-     * - The same predicate (or both null)
+     * Compares this {@code AddwCommand} object with another object for equality.
+     * Two {@code AddwCommand} objects are considered equal if they have:<br>
+     * - The same index (or both null)<br>
+     * - The same predicate (or both null)<br>
      * - Equal wedding objects
      *
-     * @param other The object to compare with
-     * @return true if the objects are equal, false otherwise
+     * @param other The object to compare with.
+     * @return true if the objects are equal, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -197,10 +196,10 @@ public class AddwCommand extends Command {
     }
 
     /**
-     * Returns a string representation of the AddwCommand object.
+     * Returns a string representation of the {@code AddwCommand} object.
      * Includes the index, predicate, and wedding to be added.
      *
-     * @return A string representation of this command
+     * @return A string representation of this command.
      */
     @Override
     public String toString() {

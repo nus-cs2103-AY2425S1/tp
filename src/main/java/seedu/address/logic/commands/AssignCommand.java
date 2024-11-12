@@ -27,7 +27,8 @@ import seedu.address.model.role.Role;
 import seedu.address.model.wedding.Wedding;
 
 /**
- * Tags existing person in the address book.
+ * Assigns, reassigns or removes the role of an existing person in the address book.
+ * Assigns wedding(s) to an existing person in the address book.
  */
 public class AssignCommand extends Command {
 
@@ -74,8 +75,13 @@ public class AssignCommand extends Command {
     private final Set<Index> weddingIndices;
 
     /**
-     * @param index                    of the person in the filtered person list to assign role
-     * @param personWithRoleDescriptor details of the person to assign role
+     * Creates a new {@code AssignCommand} to assign a role or wedding(s) to a specified person.
+     * Either index or predicate must be provided to identify the person to be assigned, but not both.
+     *
+     * @param index {@code Index} of the person in the filtered person list to assign role or wedding(s).
+     * @param predicate {@code NameMatchesKeywordPredicate} used to filter the person list to find the target person.
+     * @param personWithRoleDescriptor details of the person, including the new role to be assigned.
+     * @param weddingIndices set of indices representing the weddings to assign to the person.
      */
     public AssignCommand(Index index, NameMatchesKeywordPredicate predicate,
                          PersonWithRoleDescriptor personWithRoleDescriptor, Set<Index> weddingIndices) {
@@ -126,11 +132,11 @@ public class AssignCommand extends Command {
     }
 
     /**
-     * Performs edit command logic when the input is an index.
+     * Performs {@code AssignCommand} logic when the input is an index.
      *
-     * @param model {@code Model} which the command should operate on
-     * @return the person to be edited
-     * @throws CommandException if the list is empty or if the index is invalid
+     * @param model {@code Model} which the command should operate on.
+     * @return the person to be assigned.
+     * @throws CommandException if the list is empty or if the index is invalid.
      */
     public Person assignWithIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
@@ -149,11 +155,11 @@ public class AssignCommand extends Command {
     }
 
     /**
-     * Performs edit command logic when the input is a {@code String}.
+     * Performs {@code AssignCommand} logic when the input is a {@code String}.
      *
-     * @param model {@code Model} which the command should operate on
-     * @return the person to be edited
-     * @throws CommandException if the filtered list using {@code predicate} is empty or contains more than 1 element
+     * @param model {@code Model} which the command should operate on.
+     * @return the person to be assigned.
+     * @throws CommandException if the filtered list using {@code predicate} is empty or contains more than 1 element.
      */
     public Person assignWithKeyword(Model model) throws CommandException {
         model.updateFilteredPersonList(predicate);
@@ -170,8 +176,12 @@ public class AssignCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the role added to {@code personToAddRole}
-     * with {@code personWithRoleDescriptor}.
+     * Returns a {@code Person} with updated role and wedding job list.
+     *
+     * @param personToAddRole the original person from the contact list to be assigned.
+     * @param personWithRoleDescriptor details of the person, including the new role to be assigned.
+     * @return the updated {@code Person} with updated role and wedding(s).
+     * @throws CommandException if the wedding to be assigned is already assigned.
      */
     private static Person createPersonWithRole(Person personToAddRole,
                                                PersonWithRoleDescriptor personWithRoleDescriptor)
@@ -182,6 +192,7 @@ public class AssignCommand extends Command {
         Phone updatedPhone = personWithRoleDescriptor.getPhone().orElse(personToAddRole.getPhone());
         Email updatedEmail = personWithRoleDescriptor.getEmail().orElse(personToAddRole.getEmail());
         Address updatedAddress = personWithRoleDescriptor.getAddress().orElse(personToAddRole.getAddress());
+
         // if the role is null -> r/ prefix was not specified, retain original role
         // if role is Optional -> update role
         Optional<Role> updatedRole = personWithRoleDescriptor.getRole() == null
@@ -204,10 +215,10 @@ public class AssignCommand extends Command {
     }
 
     /**
-     * Check if wedding indices inputs are valid
+     * Checks if the wedding indices inputs are valid.
      *
-     * @param model {@code Model} which the command should operate on
-     * @throws CommandException if the list is empty or if the index is invalid
+     * @param model {@code Model} which the command should operate on.
+     * @throws CommandException if the list is empty or if the index is invalid.
      */
     public void checkValidWeddingIndices(Model model) throws CommandException {
         List<Wedding> lastShownList = model.getFilteredWeddingList();
@@ -225,10 +236,11 @@ public class AssignCommand extends Command {
     }
 
     /**
-     * Check if person is client of wedding to assign
+     * Checks if person is client of the wedding to be assigned.
      *
-     * @param model {@code Model} which the command should operate on
-     * @throws CommandException if the list is empty or if the index is invalid
+     * @param model {@code Model} which the command should operate on.
+     * @param personToAssign the target person to check.
+     * @throws CommandException if the {@code personToAssign} is the client of the wedding to be assigned.
      */
     public void checkIsClientOfWedding(Model model, Person personToAssign) throws CommandException {
         List<Wedding> weddings = model.getFilteredWeddingList();
@@ -241,10 +253,11 @@ public class AssignCommand extends Command {
     }
 
     /**
-     * Check if weddings are already assigned to person
+     * Checks if any of the weddings to be assigned are already assigned to the person.
      *
-     * @param model {@code Model} which the command should operate on
-     * @throws CommandException if the list is empty or if the index is invalid
+     * @param model {@code Model} which the command should operate on.
+     * @param personToAssign the target person to check.
+     * @throws CommandException if any of the weddings to be assigned are already assigned to {@code personToAssign}.
      */
     public void checkIsAssignedWeddings(Model model, Person personToAssign) throws CommandException {
         List<Wedding> weddings = model.getFilteredWeddingList();
@@ -259,7 +272,7 @@ public class AssignCommand extends Command {
     /**
      * Assigns the person with wedding jobs based on the provided indices.
      *
-     * @param model The model containing the list of weddings.
+     * @param model {@code Model} which the command should operate on, which contains the list of weddings.
      */
     public void assignWeddingJobs(Model model) {
         List<Wedding> weddingList = model.getFilteredWeddingList();
@@ -296,8 +309,8 @@ public class AssignCommand extends Command {
     }
 
     /**
-     * Stores the details to add role to person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores details about a person for the purpose of assigning or removing a role.
+     * Each non-empty field value will replace the corresponding field value of the person.
      */
     public static class PersonWithRoleDescriptor {
         private Name name;
@@ -308,6 +321,10 @@ public class AssignCommand extends Command {
         private Wedding ownWedding;
         private Set<Wedding> weddingJobs = new HashSet<>();
 
+        /**
+         * Default constructor for {@code PersonWithRoleDescriptor}.
+         * Initializes an empty descriptor with no values set.
+         */
         public PersonWithRoleDescriptor() {
         }
 
@@ -322,7 +339,6 @@ public class AssignCommand extends Command {
             setAddress(toCopy.address);
             setRole(toCopy.role);
         }
-
 
         public void setName(Name name) {
             this.name = name;
