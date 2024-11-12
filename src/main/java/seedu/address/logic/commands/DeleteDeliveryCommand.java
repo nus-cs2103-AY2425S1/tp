@@ -37,17 +37,26 @@ public class DeleteDeliveryCommand extends DeleteCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Ensure delivery list has items
-        if (targetIndex.getZeroBased() >= model.getModifiedDeliveryList().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
-        }
-
-        Delivery deliveryToDelete = model.getModifiedDeliveryList().get(targetIndex.getZeroBased());
+        Delivery deliveryToDelete = getDeliveryToDelete(model);
 
         model.deleteDelivery(deliveryToDelete);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
 
         return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS, Messages.format(deliveryToDelete)));
+    }
+
+    /**
+     * Retrieves delivery to be deleted.
+     *
+     * @param model Model which the command should operate on.
+     * @return existing Delivery that needs to be deleted.
+     * @throws CommandException If index given exceeds the number of deliveries.
+     */
+    private Delivery getDeliveryToDelete(Model model) throws CommandException {
+        if (targetIndex.getZeroBased() >= model.getModifiedDeliveryList().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+        }
+        return model.getModifiedDeliveryList().get(targetIndex.getZeroBased());
     }
 
     @Override
