@@ -303,7 +303,7 @@ simpler to use while being even more functional than alternatives on the market.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                 | I want to …​                                                | So that I can…​                                              |
-| -------- |-----------------------------------------|-------------------------------------------------------------|--------------------------------------------------------------|
+|----------|-----------------------------------------|-------------------------------------------------------------|--------------------------------------------------------------|
 | `* * *`  | new user                                | see usage instructions                                      | refer to instructions when I forget how to use the app       |
 | `* * *`  | user                                    | add a client with their information                         | view them later                                              |
 | `* * *`  | user                                    | delete a client                                             | remove entries that I no longer need                         |
@@ -315,9 +315,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user with many things to remember       | add remarks/notes to some clients                           | remember things when I look up clients                       |
 | `* *`    | user                                    | know some suggestions of types of tags                      | keep track of client preferences and interactions            |
 | `* *`    | user                                    | set reminders linked to clients                             | follow up with clients on time                               |
-| `* *`    | user                                    | have an undo feature when editing or deleting a client     | prevent accidental loss of information                       |
+| `* *`    | user                                    | have an undo feature when editing or deleting a client      | prevent accidental loss of information                       |
 | `* *`    | new user                                | see a guide on what features there are and how to use them  | know what to do with the application                         |
-| `* *`    | user                                    | press [TAB] to auto-complete commands                       | not waste time typing the full command                       |
+| `* *`    | user                                    | have the option to auto-complete commands                   | not waste time typing the full command                       |
 | `* *`    | user                                    | find commands by typing part of it                          | not have to remember exact commands                          |
 | `* *`    | user                                    | see multiple attributes in the command box                  | know available commands without referring to help guide      |
 | `* *`    | user                                    | have appropriate colour highlighting for each attribute     | see what I input more easily                                 |
@@ -331,19 +331,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user with many different friend groups  | manage all my tags                                          | better organize my clients                                   |
 | `* *`    | user who likes to categorise everything | choose different colours for my tags                        | they don't all look the same                                 |
 | `* *`    | impatient user                          | find and sort multiple tags at once                         | not have to search for each tag slowly                       |
-| `* *`    | user                                    | sort my clients in different ways                          | view clients in different ways                               |
+| `* *`    | user                                    | sort my clients in different ways                           | view clients in different ways                               |
 | `* *`    | user                                    | add and customise my own tags                               | personalise my address book                                  |
-| `* *`    | user                                    | link property listings to specific clients                 | know who to market units to quickly                          |
-| `*`      | user                                    | merge duplicate clients                                    | keep my address book clean and organised                     |
-| `*`      | user                                    | export my clients to a CSV file                            | back up or share my client list                             |
-| `*`      | user                                    | put my deleted clients in a recycle bin                    | keep my clients clean and restore them if it was an accident |
-| `*`      | user                                    | auto-complete or suggest commands if multiple are available | complete commands more easily                                |
-| `*`      | user                                    | use "fuzzy searching" when using "find" command             | not need to remember the exact words                         |
-| `*`      | user with many social accounts          | save and link to client social pages and media handles     | connect with clients on social media easily                  |
-| `*`      | user who changes devices often          | export and import clients on different devices easily      | not save everything manually again when I change devices     |
-| `*`      | user with many groups of friends        | know who the clients I have put a particular tag on        | organise events                                              |
-| `*`      | user with many hobbies                  | remove the tag for clients easily                          | remove their tags if not useful anymore                      |
-| `*`      | user with many clients                 | find and search client besides the name                    | find clients more easily with different kinds of input       |
+| `* *`    | user                                    | link property listings to specific clients                  | know who to market units to quickly                          |
+| `*`      | user                                    | merge duplicate clients                                     | keep my address book clean and organised                     |
+| `*`      | user                                    | export my clients to a CSV file                             | back up or share my client list                              |
+| `*`      | user                                    | put my deleted clients in a recycle bin                     | keep my clients clean and restore them if it was an accident |
+| `*`      | user with many social accounts          | save and link to client social pages and media handles      | connect with clients on social media easily                  |
+| `*`      | user who changes devices often          | export and import clients on different devices easily       | not save everything manually again when I change devices     |
+| `*`      | user with many categories of clients    | know who the clients I have put a particular tag on         | organise events                                              |
+| `*`      | user with many clients                  | find and search client besides the name                     | find clients more easily with different kinds of input       |
 
 <div class="page-break"></div>
 
