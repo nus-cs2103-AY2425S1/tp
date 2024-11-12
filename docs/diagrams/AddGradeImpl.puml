@@ -1,0 +1,10 @@
+@startuml
+start
+:User executes addGrade command with assignment name, score and name of person;
+if () then ([AssignmentExists and ScoreValid and PersonExists])
+    :Specified assignment and score is added to specified person;
+else ([else])
+:addGrade command returns an error to the user;
+endif
+stop
+@enduml

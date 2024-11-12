@@ -220,6 +220,21 @@ Note: While the diagram shows the lifeline of objects even after their deletion,
 2. KonTActs will create a contact of Tom with the given details before adding it to the contact list.
 3. The contact is then displayed in the UI, along with a success message.
 
+### Add Grade implementation
+
+**Logic**: 
+1. `AddGradeCommand.java`
+2. `AddGradeCommandParser.java`
+
+The `addGrade` command is used by KonTActs to add an assignment and grade to a contact.
+The added assignments and grades uses `HashMap` to store the assignments and grades in each person object.
+
+This is illustrated in the activity diagram below:
+
+<puml src="diagrams/AddGradeImpl.puml" width="450" />
+
+* addGrade checks whether the assignment exists in the database, if the score is valid and if the person exists in the contacts.
+* If the conditions are satisfied, the assignment is added to the `HashMap` in the person object which stores all the added assignments of that person.
 
 ### MarkCommand
 
