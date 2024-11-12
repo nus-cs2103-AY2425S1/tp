@@ -1,8 +1,10 @@
+<!--
 ---
   layout: default.md
   title: "Testing guide"
   pageNav: 3
 ---
+-->
 
 # Testing guide
 
@@ -22,7 +24,9 @@ There are two ways to run tests.
   * Open a console and run the command `gradlew clean test` (Mac/Linux: `./gradlew clean test`)
 
 <box type="info" seamless>
-**Link**: Read [this Gradle Tutorial from the se-edu/guides](https://se-education.org/guides/tutorials/gradle.html) to learn more about using Gradle.
+
+Read [this Gradle Tutorial from the se-edu/guides](https://se-education.org/guides/tutorials/gradle.html) 
+to learn more about using Gradle.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------

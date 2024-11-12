@@ -7,7 +7,7 @@ pageNav: 3
 
 <div style="display: flex; align-items: center;">
   <div style="flex: 0 0 auto;">
-    <img src="images/EduLog.png" alt="EduLog Logo" style="width: 60px; height: auto;" />
+    <img src="images/Edulog.png" alt="EduLog Logo" style="width: 70px; height: auto;" />
   </div>
  <div style="margin-left: 15px;">
     <h4 style="font-size: 40px; padding-top: 20px; margin-bottom: 0;">EduLog User Guide</h4> <!-- Remove bottom margin on h1 -->
@@ -33,8 +33,7 @@ EduLog is a **desktop app for managing students and lesson details, optimized fo
 </box>
 
 
-
-<h2 style="color: black"> Quick start </h2>
+## Quick Start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -50,7 +49,7 @@ EduLog is a **desktop app for managing students and lesson details, optimized fo
    
 A screen (User Interface) similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
-<img src="images/UI.png" alt="UI" style="width: 780px;">
+<img src="images/Ui.png" alt="UI" style="width: 780px;">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.
 
@@ -71,7 +70,7 @@ A screen (User Interface) similar to the below should appear in a few seconds. N
 6. Refer to the [Features](#features) below for details of each command.
 
 
-<h2 style="color: black; padding-top: 30px"> Features </h2>
+## Features 
 
 <box>
     <h5 style="display: flex; align-items: center; color: black; font-weight: 600; margin-bottom: 10px">
@@ -370,14 +369,12 @@ Furthermore, certain edits can cause the EduLog to behave in unexpected ways (e.
 
 ## 
 
-<h2 style="color: black; padding-top: 30px"> FAQ </h2>
-
+## FAQ
 **Q**: How do I transfer my data to another Computer?
 
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduLog home folder.
 
-<h2 style="color: black; padding-top: 30px"> Known Issues </h2>
-
+## Known Issues
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
 
