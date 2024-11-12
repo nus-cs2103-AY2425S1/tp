@@ -1230,7 +1230,7 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-Team size: 5
+We are committed to always improving our product, and we do acknowledge that we can enhance more. Below are some planned enhancements. 
 
 1. Currently, the summary statistics in the UI do not update automatically when the data is modified through add, edit, 
 delete, or clear commands. Users must manually run the summary command to refresh the statistics. To enhance user 
