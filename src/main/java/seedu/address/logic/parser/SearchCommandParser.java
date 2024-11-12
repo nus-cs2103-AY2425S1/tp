@@ -51,7 +51,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         String phoneArgs = argMultimap.getValue(PREFIX_PHONE).orElse("");
         String roleArgs = argMultimap.getValue(PREFIX_ROLE).orElse("");
 
-        // Create a map of prefixes and associated values to check for empty inputs
+        // Hashmap of prefixes and associated values to check for empty inputs
         Map<Prefix, String> prefixValueMap = new HashMap<>();
         prefixValueMap.put(PREFIX_NAME, nameArgs);
         prefixValueMap.put(PREFIX_TAG, tagArgs);
@@ -132,7 +132,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
 
     private Predicate<Person> combinePredicates(List<Predicate<Person>> predicates) {
         return predicates.stream()
-                .filter(Objects::nonNull) // Filter out null predicates
+                .filter(Objects::nonNull) // Filter out the null predicates
                 .reduce(Predicate::and)
                 .orElse(null); // Return null if all predicates are null
     }

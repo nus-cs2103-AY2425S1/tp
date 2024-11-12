@@ -32,10 +32,8 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
 
-        // Add a listener to detect changes in the person list
         personList.addListener((ListChangeListener<Person>) change -> {
             while (change.next()) {
-                // Notify the observers if there are any additions or removals
                 if (change.wasAdded() || change.wasRemoved()) {
                     notifyObservers();
                 }

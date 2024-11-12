@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 /**
+ * Inspired by NameContainsKeywordPredicate
  * Tests that a {@code Person} belongs to a specific {@code Group}.
  */
 public class GroupContainsKeywordsPredicate implements Predicate<Person> {

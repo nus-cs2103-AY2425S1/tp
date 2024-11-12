@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 /**
+ * Inspired by NameContainsKeywordPredicate
  * Tests that a {@code Person}'s {@code Phone} matches exactly the given phone number.
  */
 public class PhoneNumberMatchesPredicate implements Predicate<Person> {
