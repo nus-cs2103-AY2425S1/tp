@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Parser LOGIC_COLOR_T1
 participant ":PinCommandParser" as PinCommandParser LOGIC_COLOR
-participant "ParserUtil" as ParserUtil LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
 participant "p:PinCommand" as PinCommand LOGIC_COLOR
 participant ":ParseException" as ParseException LOGIC_COLOR
 end box

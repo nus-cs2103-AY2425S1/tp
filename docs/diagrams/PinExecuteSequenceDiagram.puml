@@ -6,7 +6,6 @@ box Logic LOGIC_COLOR_T1
 participant ":PinCommand" as PinCommand LOGIC_COLOR
 participant "result:CommandResult" as CommandResult LOGIC_COLOR
 participant ":CommandException" as CommandException LOGIC_COLOR
-participant "Messages" as Messages LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -32,10 +31,7 @@ loop For each index in targetIndices
     activate Model
     deactivate Model
 
-    PinCommand -> Messages : format(person)
-    activate Messages
-    Messages --> PinCommand : formatted message
-    deactivate Messages
+
 end
 
 PinCommand -> Model : sortByPin()

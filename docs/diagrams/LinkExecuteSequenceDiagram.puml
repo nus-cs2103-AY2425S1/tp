@@ -4,11 +4,12 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LinkCommand" as LinkCommand LOGIC_COLOR
-participant "CommandResult" as CommandResult LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
+
 end box
 
 [-> LinkCommand : execute(model)
@@ -26,15 +27,17 @@ Model --> LinkCommand : parent
 deactivate Model
 
 
-LinkCommand -> Model : createLinkedChild(castedChild, castedParent)
-activate Model
-Model --> LinkCommand : linkedChild
-deactivate Model
+LinkCommand -> LinkCommand : createLinkedChild(...)
+activate LinkCommand
+LinkCommand --> LinkCommand
+deactivate LinkCommand
 
-LinkCommand -> Model : createLinkedParent(castedParent, castedChild)
-activate Model
-Model --> LinkCommand : linkedParent
-deactivate Model
+
+LinkCommand -> LinkCommand : createLinkedParent(...)
+activate LinkCommand
+LinkCommand --> LinkCommand
+deactivate LinkCommand
+
 
 LinkCommand -> Model : setPerson(castedChild, linkedChild)
 activate Model
