@@ -331,6 +331,9 @@ Additional Info
 
 ### Add an `Order` to customer using `put`
 #### Implementation
+The put command enables users to add an order for a specified contact in the address book. This process includes parsing the command input to retrieve the order and contact name, checking in Model if the order and person exist, and, if valid, adding the order to the contact's record.
+
+Below is an example usage scenario and how the put command mechanism works at each step.
 
 1. **Execution Begins**
  
@@ -438,6 +441,64 @@ Below is the sequence diagram for the `download` command:
 
 ---
 
+### Delete by postal code feature 
+#### Implementation 
+
+The deletePC feature allows users to delete all contacts associated with a specified postal code. This process involves parsing the command input, validating the postal code format, retrieving the list of people matching the postal code from Model, and, if matches are found, deleting each associated contact in Model.
+
+Below is an example usage scenario and how the deletePC mechanism works at each step.
+
+1. **Execution Begins**:
+    - The `LogicManager` receives the `"deletePC 540123"` command and initiates the `execute` method.
+
+2. **Command Parsing**:
+    - `LogicManager` sends the `parseCommand("deletePC 540123")` request to `AddressBookParser` to interpret the command.
+    - `AddressBookParser` creates a `DeletePostalCodeCommandParser` instance and calls its `parse("deletePC 540123")` method.
+
+3. **Postal Code Validation**:
+    - `DeletePostalCodeCommandParser` validates the format of the postal code `"540123"`.
+    - **If the format is invalid**: `DeletePostalCodeCommandParser` returns a `ParseException` with the message "Invalid format" to `LogicManager`, and the process terminates.
+    - **If the format is valid**: `DeletePostalCodeCommandParser` proceeds to the next step.
+
+4. **Postal Code Creation**:
+    - `DeletePostalCodeCommandParser` creates a new `PostalCode` object with the value `"540123"`.
+    - Once created, `PostalCode` returns itself (`c`) to `DeletePostalCodeCommandParser`.
+
+5. **Command Creation**:
+    - `DeletePostalCodeCommandParser` creates a new `DeletePostalCodeCommand` object using the `PostalCode` instance `c`.
+    - `DeletePostalCodeCommand` returns itself to `DeletePostalCodeCommandParser`.
+    - `DeletePostalCodeCommandParser` then sends `DeletePostalCodeCommand` back to `AddressBookParser`, completing the parsing.
+
+6. **Command Execution**:
+    - `AddressBookParser` returns `DeletePostalCodeCommand` to `LogicManager`.
+    - `LogicManager` then calls `execute(m)` on `DeletePostalCodeCommand`, passing the `Model` instance `m` as a parameter.
+
+7. **Finding People by Postal Code**:
+    - `DeletePostalCodeCommand` requests `Model` to find all people associated with postal code `"540123"` by calling `getPeopleByPostalCode(c)`.
+    - `Model` returns a list of people (`peopleToDelete`) associated with `"540123"`.
+
+8. **Handling Results**:
+    - **If `peopleToDelete` is empty**: `DeletePostalCodeCommand` returns a `CommandException` with the message "No match" to `LogicManager`, ending the execution.
+    - **If `peopleToDelete` is not empty**: `DeletePostalCodeCommand` proceeds to delete each person in the list.
+
+9. **Deleting People**:
+    - For each `Person` in `peopleToDelete`, `DeletePostalCodeCommand` calls `Model`’s `deletePerson(person)` to remove the person.
+
+10. **Generating Result**:
+    - After all people are deleted, `DeletePostalCodeCommand` creates a `CommandResult` with the message "Deleted customers with postal code 540123: [names]" to indicate the successful deletion.
+    - `CommandResult` is returned to `DeletePostalCodeCommand`, completing the command execution.
+
+11. **Completion**:
+    - `DeletePostalCodeCommand` sends the final `CommandResult` (`r`) to `LogicManager`.
+    - `LogicManager` processes the result, concluding the execution of `"deletePC 540123"`.
+
+<div style="text-align: center;">
+    <img src="images/DeletePostalCodeCommandSequenceDiagram.png" style="width: 100%; max-width: 1200px; height: auto;">
+    <p style="font-style: italic; margin-top: 10px; color: #666;">Figure: Delete Postal Code Command Sequence Diagram</p>
+</div>
+
+---
+
 ### List Shortcut feature
 #### Implementation
 The `listShortCut` feature allows users to view all existing shortcuts for tags in the address book. This process involves parsing the command input, retrieving the list of shortcuts from the `Model`, formatting the shortcuts into a readable format, and displaying them to the user.
@@ -467,6 +528,8 @@ Below is a step-by-step usage scenario of the `listShortCut` feature, showing ho
 * The result is returned to `LogicManager`, completing the `listShortCut` command execution.
 
 <img src="images/ListShortCutSequenceDiagram.png" width="600" />
+
+---
 
 ### Filter feature
 #### Implementation
