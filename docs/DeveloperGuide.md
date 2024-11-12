@@ -731,7 +731,7 @@ Similar to [<ins>UC14](#use-case-uc14search-for-contacts-by-name) except searchi
 * 2a. The wedding list is empty.
   Use case ends.
 
-* 3a. The contact is already assigned to the specifsied wedding.
+* 3a. The contact is already assigned to the specified wedding.
     * 3a1. System displays an error message.
 
       Use case resumes at step 2.
@@ -1730,50 +1730,77 @@ applied to edited data, but specific expected results will differ. <br><br>
 
 <br>
 
-#### Assigning Task
-##### ... if there's only 1 task and 1 vendor in WedLinker and vendor does not have that task assigned to them
-1. Test case: `assign-task 1 1`<br>
-   Expected: 1st contact is put in `Task1`'s guest list and 1st contact has `Task1` on its contact card.
+#### Assigning Tasks
 
-1. Test case: `assign-task 0 0`<br>
-   Expected: No tasks are assigned. Error details shown.
+1. **Assigning a `Task` to a `Person`**
 
-1. Test case: `assign-task 2 2`<br>
-   Expected: No tasks are assigned. Error details shown.
+    1. **Prerequisites**: List all tasks using the `list-tasks` command. There is at least one `Task` in the list of `Tasks`. List all contacts using the
+       `list` command. There is are at least two contacts in the `Person` list, one of whom is a `Vendor`.
 
-##### ... if there's only 1 task and 1 vendor in WedLinker and vendor has that task already assigned to them
-1. Test case: `assign-task 1 1`<br>
-   Expected: No tasks are assigned to any contacts. Error details shown.
+    2. **Test case**: `assign-task 1 1` (assuming contact 1 is a `Vendor` that does not have `Task` 1 assigned to them yet) <br>
+       **Expected**: The first contact has `Task` on their contact card. Details of the assigned task are shown in the status message.
 
-##### ... if there's only 1 task and 0 vendors
-1. Test case: `assign-task 1 1`<br>
-   Expected: No tasks are assigned. Error details shown.
+    3. **Test case (following Test case 2)**: `assign-task 1 1` (assuming contact 1 is a `Vendor` who now has `Task` 1 assigned to them) <br>
+       **Expected**: No tasks are assigned. Error details shown in the status message indicating that the `Task` is already assigned.
 
-#### Unassigning Task
-##### ... if first contact has first task
-1. Test case: `unassign-task 1 1`<br>
-   Expected: First task unassigned. Details of updated contact shown.
+    4. **Test case**: `assign-task 2 1` (assuming contact 2 is **not** a `Vendor`) <br>
+       **Expected**: No tasks are assigned. Error details shown in the status message indicating that `Person` 2 is not a `Vendor`.
 
-##### ... if first contact does not have first task
-1. Test case: `unassign-task 1 1`<br>
-   Expected: No tasks are unassigned. Error details shown.
+    5. **Test case**: `assign-task 1 X` (assuming contact 1 is a `Vendor`, and X is greater than the number of tasks in the `Task` list) <br>
+       **Expected**: No tasks are assigned. Error details shown in the status message indicating that the `Task` is not a valid one.
+
+<br>
+
+#### Unassigning Tasks
+
+1. **Unassigning a `Task` from a `Person`**
+
+    1. **Prerequisites**: List all tasks using the `list-tasks` command. There is at least one `Task` in the list of `Tasks`. List all contacts using the
+       `list` command. There is are at least two contacts in the `Person` list, one of whom is a `Vendor`.
+
+    2. **Test case**: `unassign-task 1 2` (assuming contact 1 is a `Vendor` that has one `Task` assigned to them) <br>
+       **Expected**: No tasks are unassigned. Error details shown in the status message indicating that the `Vendor` does not have the `Task`.
+
+    3. **Test case (following Test case 2)**: `assign-task 1 1` (assuming contact 1 is a `Vendor` that has one `Task` assigned to them) <br>
+       **Expected**: The first contact is unassigned their first `Task` on their contact card. Details of the unassigned task are shown in the status message.
+
+    4. **Test case**: `assign-task 2 1` (assuming contact 2 is **not** a `Vendor`) <br>
+       **Expected**: No tasks are unassigned. Error details shown in the status message indicating that `Person` 2 does not have any `Task` assigned.
+
+<br>
 
 #### Marking Task
-##### ... if there's only 2 tasks
-1. Test case: `mark-task 1 2`<br>
-   Expected: First two task marked. Details of updated tasks shown.
 
-1. Test case: `mark-task 1 2 3 4`<br>
-   Expected: No tasks marked (besides those originally marked). Error details shown.
+1. **Marking a `Task` as complete**
+
+    1. **Prerequisites**: List all tasks using the `list-tasks` command. There is at least one `Task` in the list of `Tasks`.
+
+    2. **Test case**: `mark-task 1` <br>
+       **Expected**: `Task` 1 is marked as complete. Details of complete task are shown in the status message.
+
+    3. **Test case**: `mark-task X` (where X is greater than the number of tasks in the `Task` list) <br>
+       **Expected**: No tasks are marked as complete. Error details shown in the status message indicating that the `Task` is not a valid one.
+
+    4. **Test case**: `mark-task 1 2 3` (where there are at least three tasks in the `Task` list) <br>
+       **Expected**: `Tasks` 1, 2, and 3 are marked as complete. Details of complete tasks are shown in the status message.
+
+    5. **Test case**: `mark-task 1 2 3 4 5` (where there are only three tasks in the `Task` list) <br>
+       **Expected**: `Tasks` 1, 2, and 3 are marked as complete. Error details shown in the status message indicating that other `Tasks` are not valid ones.
+
+<br>
 
 #### Unmarking Task
-##### ... if there's only 2 tasks
-1. Test case: `unmark-task 1`<br>
-   Expected: First task unmarked. Details of updated tasks shown.
 
-##### ... if first contact does not have first task
-1. Test case: `unmark-task 1 2 3 4`<br>
-   Expected: No tasks are unmarked (besides those originally unmarked). Error details shown.
+1. **Unmarking a `Task` as complete**
+
+    1. **Prerequisites**: List all tasks using the `list-tasks` command. There is at least one `Task` in the list of `Tasks`.
+
+    2. **Test case**: `unmark-task 1` <br>
+       **Expected**: `Task` 1 is marked as incomplete. Details of incomplete task are shown in the status message.
+
+    3. Similar test cases to Test cases 3, 4, and 5 in marking a `Task` as complete can be tested for unmark-task. Expected results are similar. 
+
+<br>
 
 ---
 <h3 class="features">Tag Features</h3>
@@ -1920,7 +1947,7 @@ For example, "John Doe" and "John  Doe" (the same name but with an extra space),
 The **planned enhancement** would be to update the parser to normalise input by stripping all extra whitespace, leaving only a single space between keywords, before creating the respective command objects.
 This will ensure that entries with excessive spaces are treated as duplicates where appropriate.
 
-3. **Vendor validation for when unassiging Tasks from Person**: Currently, there is a missing validation in `unassign-task` command that negates the check of whether a Person is a Vendor, resulting 
+3. **Vendor validation when unassigning Tasks from Person**: Currently, there is a missing validation in `unassign-task` command that negates the check of whether a Person is a Vendor, resulting 
 in an incorrect error message to be shown. When a user tries to execute the `unassign-task` command on a Person who is not a Vendor and thus cannot even have tasks assigned to it, 
 the error message indicates that there are no tasks in the person's list, rather than indicating that the person is not a Vendor.
 However, there is no functionality flaw and the application runs as intended.
@@ -1952,4 +1979,9 @@ the person is assigned as the first partner in the given wedding. However, users
 if they accidentally include both tags, especially as this might overwrite an existing partner for the wedding.
 The **planned enhancement** would be to add processing that checks for two partner tags and either considers the orders of the tag (and assigns the person as whichever partner tag is specified
 first), or that signals an error to the user in the command they enter.
+
+8. **Allow automatic update of User Interface upon changing data values**: For some commands, such as `unassign-wedding`, the User Interface will update
+when it is clicked on to show the updated data but, sometimes, will not automatically update when the command is run.
+The **planned enhancement** would be to either add more listeners for all commands in the UI components to ensure they are always updated when a command is entered
+or to make sure each command modifies the underlying lists in a way that will cause the UI to automatically update.
 
