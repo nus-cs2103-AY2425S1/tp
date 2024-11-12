@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+actor User
+participant DeleteStudentFromGroupCommand
+participant Model
+participant Group
+participant Student
+participant CommandResult
+
+User -> DeleteStudentFromGroupCommand : execute(model)
+activate DeleteStudentFromGroupCommand
+
+DeleteStudentFromGroupCommand -> Model : containsGroupName(targetGroupName)
+alt group exists
+    Model -> DeleteStudentFromGroupCommand : return true
+else group not found
+    Model -> DeleteStudentFromGroupCommand : return false
+    DeleteStudentFromGroupCommand -> User : throw CommandException(MESSAGE_GROUP_NAME_NOT_FOUND)
+    deactivate DeleteStudentFromGroupCommand
+    return
+end
+
+DeleteStudentFromGroupCommand -> Model : getGroupByName(targetGroupName)
+Model -> Group : return targetGroup
+DeleteStudentFromGroupCommand -> Group : getStudents()
+Group -> DeleteStudentFromGroupCommand : return Set<Student>
+
+alt student found
+    DeleteStudentFromGroupCommand -> Model : deleteStudentFromGroup(targetGroup, studentToBeDeleted)
+    DeleteStudentFromGroupCommand -> Model : updateFilteredGroupList(predicate)
+    DeleteStudentFromGroupCommand -> Model : setStateGroups()
+    DeleteStudentFromGroupCommand -> CommandResult : create success message
+    CommandResult -> DeleteStudentFromGroupCommand : return CommandResult
+    DeleteStudentFromGroupCommand -> User : return CommandResult
+else student not found
+    DeleteStudentFromGroupCommand -> User : throw CommandException(MESSAGE_STUDENT_NO_NOT_FOUND)
+end
+
+deactivate DeleteStudentFromGroupCommand
+@enduml

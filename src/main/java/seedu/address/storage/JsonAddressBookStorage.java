@@ -46,11 +46,11 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         requireNonNull(filePath);
 
         Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+            filePath, JsonSerializableAddressBook.class);
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
-
+        logger.info(String.valueOf(jsonAddressBook));
         try {
             return Optional.of(jsonAddressBook.get().toModelType());
         } catch (IllegalValueException ive) {

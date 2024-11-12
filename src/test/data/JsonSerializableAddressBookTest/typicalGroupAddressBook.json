@@ -1,0 +1,33 @@
+{
+  "persons" : [ ],
+  "groups" : [ {
+    "students" : [ ],
+    "tasks" : [ ],
+    "groupName" : "CS2103T-F12-5"
+  }, {
+    "students" : [ ],
+    "tasks" : [ ],
+    "groupName" : "CS2103T-F12-4"
+  }, {
+    "students" : [ ],
+    "tasks" : [ ],
+    "groupName" : "CS2103-F12-3"
+  }, {
+    "students" : [ ],
+    "tasks" : [ ],
+    "groupName" : "CS2103-F12-2"
+  }, {
+    "students" : [ ],
+    "tasks" : [ ],
+    "groupName" : "CS2103-F12-1"
+  }, {
+    "students" : [ ],
+    "tasks" : [ ],
+    "groupName" : "CS2103T-F12-6"
+  }, {
+    "students" : [ ],
+    "tasks" : [ ],
+    "groupName" : "CS2103T-F12-7"
+  } ],
+  "tasks" : [ ]
+}

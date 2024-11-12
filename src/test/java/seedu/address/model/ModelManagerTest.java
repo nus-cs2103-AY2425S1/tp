@@ -15,11 +15,14 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
+import seedu.address.model.student.StudentMatchesQueryPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 
+    private static final Group DUMMY_GROUP = new Group(new GroupName("CS2103-F12-4"));
     private ModelManager modelManager = new ModelManager();
 
     @Test
@@ -78,14 +81,30 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasGroup_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasGroup(null));
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasGroup_groupNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasGroup(DUMMY_GROUP));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasGroup_groupInAddressBook_returnsTrue() {
+        modelManager.addGroup(DUMMY_GROUP);
+        assertTrue(modelManager.hasGroup(DUMMY_GROUP));
     }
 
     @Test
@@ -117,8 +136,8 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        String[] keywords = ALICE.getName().getFullName().split("\\s+");
+        modelManager.updateFilteredPersonList(new StudentMatchesQueryPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

@@ -1,0 +1,49 @@
+{
+  "persons" : [ {
+    "name" : "Student B",
+    "email" : "studentB@u.nus.edu",
+    "tags" : [ ],
+    "studentNumber" : "A0123456B",
+    "groupName" : "CS2103-F12-2"
+  }, {
+    "name" : "Student C",
+    "email" : "studentC@u.nus.edu",
+    "tags" : [ ],
+    "studentNumber" : "A0123456C",
+    "groupName" : "!"
+  }, {
+    "name" : "Student D",
+    "email" : "studentD@u.nus.edu",
+    "tags" : [ ],
+    "studentNumber" : "A0123456D",
+    "groupName" : "CS2103-F12-2"
+  }, {
+    "name" : "Student A",
+    "email" : "studentA@u.nus.edu",
+    "tags" : [ ],
+    "studentNumber" : "A0123456A",
+    "groupName" : "!"
+  } ],
+  "groups" : [ {
+    "students" : [ {
+      "name" : "Student D",
+      "email" : "studentD@u.nus.edu",
+      "tags" : [ ],
+      "studentNumber" : "A0123456D",
+      "groupName" : "CS2103-F12-2"
+    }, {
+      "name" : "Student B",
+      "email" : "studentB@u.nus.edu",
+      "tags" : [ ],
+      "studentNumber" : "A0123456B",
+      "groupName" : "!"
+    } ],
+    "tasks" : [ ],
+    "groupName" : "CS2103-F12-2"
+  },{
+    "students" : [ ],
+    "tasks" : [ ],
+    "groupName" : "CS2103-F12-2"
+  }  ],
+  "tasks" : [ ]
+}

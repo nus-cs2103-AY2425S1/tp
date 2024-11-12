@@ -1,59 +1,52 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
+
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Lewis Lye
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ghos7ie.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/ghos7ie)]
+[[portfolio](team/ghos7ie.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation + Code Testing + Project Management
 
-### Jean Doe
+### Wang Hongyanyan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yanyan-w.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/YANYAN-w)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
-### James Doe
+### Tan Soo Yap
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/sooyap.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/SooYap)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer and Testing
+* Responsibilities: Dev Ops + Code Testing
+
+### Desiree Sng
+
+<img src="images/dez2003.png" width="200px">
+
+[[github](http://github.com/dez2003)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Code Quality

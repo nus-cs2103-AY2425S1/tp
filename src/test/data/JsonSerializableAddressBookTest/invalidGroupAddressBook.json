@@ -1,0 +1,9 @@
+{
+  "persons": [ ],
+  "tasks": [ ],
+  "groups" : [ {
+    "students" : [ ],
+    "groupName" : ",,,,,,",
+    "tasks" : [ ]
+  } ]
+}

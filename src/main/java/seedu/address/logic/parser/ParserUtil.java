@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,11 +10,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.group.GroupName;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Status;
+import seedu.address.model.task.TaskName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -25,6 +29,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -48,36 +53,6 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
-    }
-
-    /**
-     * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code phone} is invalid.
-     */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
     }
 
     /**
@@ -121,4 +96,92 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String student number} into a {@code StudentNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentNumber} is invalid.
+     */
+    public static StudentNumber parseStudentNumber(String studentNumber) throws ParseException {
+        requireNonNull(studentNumber);
+        String trimmedNumber = studentNumber.trim();
+        if (!StudentNumber.isValidStudentNumber(trimmedNumber)) {
+            throw new ParseException(StudentNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentNumber(studentNumber);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code groupName} is invalid.
+     */
+    public static GroupName parseGroupName(String groupName) throws ParseException {
+        requireNonNull(groupName);
+        String trimmedName = groupName.trim();
+        if (!GroupName.isValidName(trimmedName)) {
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+        }
+        // easiest way to add in exception for number exceeding MAX_INT currently
+        try {
+            String gn = GroupName.formatGroupName(trimmedName);
+        } catch (Exception e) {
+            throw new ParseException("Tutorial Group or Group number exceeds 2147483647");
+        }
+        return new GroupName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code TaskName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskName} is invalid.
+     */
+    public static TaskName parseTaskName(String taskName) throws ParseException {
+        requireNonNull(taskName);
+        String trimmedName = taskName.trim();
+        if (!TaskName.isValidName(trimmedName)) {
+            throw new ParseException(TaskName.NAME_CONSTRAINT);
+        }
+        return new TaskName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String deadline} into a {@code Deadline}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deadline} is invalid.
+     */
+    public static Deadline parseDeadline(String deadline) throws ParseException {
+        requireNonNull(deadline);
+        String trimmedName = deadline.trim();
+        if (!Deadline.isValidDeadline(trimmedName)) {
+            if (trimmedName.length() < Deadline.DATETIME_FORMAT.length()) {
+                throw new ParseException(Deadline.MESSAGE_CONSTRAINTS + Deadline.MESSAGE_INCOMPLETE);
+            } else if (trimmedName.length() > Deadline.DATETIME_FORMAT.length()) {
+                throw new ParseException(Deadline.MESSAGE_CONSTRAINTS + Deadline.MESSAGE_EXCESSIVE);
+            } else {
+                throw new ParseException(Deadline.MESSAGE_CONSTRAINTS + Deadline.MESSAGE_INVALID);
+            }
+        }
+        return new Deadline(LocalDateTime.parse(trimmedName, Deadline.DATETIME_FORMATTER));
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code Status}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toUpperCase();
+        if (!Status.isValidStatus(trimmedStatus)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+        return Status.valueOf(trimmedStatus);
+    }
+
 }

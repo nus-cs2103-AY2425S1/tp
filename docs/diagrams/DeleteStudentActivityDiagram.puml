@@ -1,0 +1,30 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 15
+start
+:User runs del_s command;
+
+:Parse command input;
+
+if () then ([input is valid])
+    :Construct DeleteStudentCommand object;
+    :Return DeleteStudentCommand object to LogicManager;
+    :LogicManager executes DeleteStudentCommand;
+    if () then ([Student to delete found])
+        if () then ([Student belongs\n to a group])
+            :Remove student from group;
+         else ([else])
+        endif
+        :Delete student from StudentList;
+        :Update model state;
+        :Update UI;
+    else ([else])
+        :Display student not found error message;
+    endif
+else ([else])
+    :Display error message;
+endif
+
+stop
+@enduml

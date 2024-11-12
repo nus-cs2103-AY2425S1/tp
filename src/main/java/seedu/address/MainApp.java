@@ -25,9 +25,11 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.JsonVersionHistoryStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.VersionHistoryStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -36,7 +38,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 6, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -48,7 +50,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing T_Assistant ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -58,11 +60,12 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        VersionHistoryStorage versionHistoryStorage = new JsonVersionHistoryStorage(config.getVersionHistoryFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, versionHistoryStorage);
 
         ui = new UiManager(logic);
     }

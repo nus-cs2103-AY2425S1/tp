@@ -12,10 +12,15 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.State;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.panels.GroupListPanel;
+import seedu.address.ui.panels.GroupTaskPanel;
+import seedu.address.ui.panels.StudentListPanel;
+import seedu.address.ui.panels.TaskListPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -23,6 +28,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    private static final State DEFAULT_STUDENT = new State("Students");
+    private static final State DEFAULT_GROUP = new State("Groups");
+    private static final State DEFAULT_GROUP_TASK = new State("GroupTask");
+    private static final State DEFAULT_TASK = new State("Tasks");
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -31,7 +40,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private StudentListPanel studentListPanel;
+    private GroupListPanel groupListPanel;
+    private TaskListPanel taskListPanel;
+    private GroupTaskPanel groupTaskPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane informationListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +122,23 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        logic.setStatus();
+        studentListPanel = new StudentListPanel(logic.getFilteredPersonList());
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+        groupTaskPanel = new GroupTaskPanel(logic.getFilteredGroupList());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList(), logic.getFilteredGroupList());
+        if (this.logic.getState().equals(DEFAULT_STUDENT)) {
+            informationListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+        } else if (this.logic.getState().equals(DEFAULT_GROUP_TASK)) {
+            informationListPanelPlaceholder.getChildren().add(groupTaskPanel.getRoot());
+            logic.setMostRecentGroupTaskDisplay();
+        } else if (this.logic.getState().equals(DEFAULT_GROUP)) {
+            informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+            logic.setMostRecentGroupDisplay();
+        } else {
+            informationListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+            logic.setMostRecentTaskDisplay();
+        }
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -159,12 +186,37 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+
         helpWindow.hide();
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public StudentListPanel getStudentListPanel() {
+        return studentListPanel;
+    }
+
+    public GroupListPanel getGroupListPanel() {
+        return groupListPanel;
+    }
+
+    /**
+     * Changes the display of the system.
+     */
+    @FXML
+    private void changeSystemState(int changeState) {
+        if (changeState == 0) {
+            informationListPanelPlaceholder.getChildren().clear();
+            informationListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+        } else if (changeState == 1) {
+            informationListPanelPlaceholder.getChildren().clear();
+            informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        } else if (changeState == 2) {
+            informationListPanelPlaceholder.getChildren().clear();
+            informationListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+        } else {
+            informationListPanelPlaceholder.getChildren().clear();
+            informationListPanelPlaceholder.getChildren().add(groupTaskPanel.getRoot());
+        }
     }
 
     /**
@@ -175,8 +227,26 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+            studentListPanel = new StudentListPanel(logic.getFilteredPersonList());
+            groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+            groupTaskPanel = new GroupTaskPanel(logic.getFilteredGroupList());
+            taskListPanel = new TaskListPanel(logic.getFilteredTaskList(), logic.getFilteredGroupList());
+            if (this.logic.getState().equals(DEFAULT_STUDENT)) {
+                informationListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+            } else if (this.logic.getState().equals(DEFAULT_GROUP_TASK)) {
+                informationListPanelPlaceholder.getChildren().add(groupTaskPanel.getRoot());
+                logic.setMostRecentGroupTaskDisplay();
+            } else if (this.logic.getState().equals(DEFAULT_GROUP)) {
+                informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+            } else {
+                informationListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+            }
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (!logic.getMostRecentGroupTaskDisplay().equals("")) {
+
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -186,6 +256,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.getChangeState() != -1) {
+                changeSystemState(commandResult.getChangeState());
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);

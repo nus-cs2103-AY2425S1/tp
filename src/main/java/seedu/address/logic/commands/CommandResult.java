@@ -11,6 +11,8 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class CommandResult {
 
+    private int changeState;
+
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
@@ -26,6 +28,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.changeState = -1;
     }
 
     /**
@@ -34,10 +37,24 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
+        this.changeState = -1;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser}, the change state marker,
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, int changeState) {
+        this(feedbackToUser, false, false);
+        this.changeState = changeState;
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public int getChangeState() {
+        return changeState;
     }
 
     public boolean isShowHelp() {

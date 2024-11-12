@@ -12,7 +12,7 @@ public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String tagName;
+    private final String tagName;
 
     /**
      * Constructs a {@code Tag}.
@@ -23,6 +23,10 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+    }
+
+    public String getTagName() {
+        return this.tagName;
     }
 
     /**
@@ -44,12 +48,12 @@ public class Tag {
         }
 
         Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        return tagName.equalsIgnoreCase(otherTag.tagName);
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return tagName.toLowerCase().hashCode();
     }
 
     /**

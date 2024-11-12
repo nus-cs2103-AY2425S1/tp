@@ -4,11 +4,14 @@ import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.State;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.group.Group;
+import seedu.address.model.student.Student;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component
@@ -16,6 +19,7 @@ import seedu.address.model.person.Person;
 public interface Logic {
     /**
      * Executes the command and returns the result.
+     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
@@ -31,7 +35,13 @@ public interface Logic {
     ReadOnlyAddressBook getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Student> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered list of groups */
+    ObservableList<Group> getFilteredGroupList();
+
+    /** Returns an unmodifiable view of the filtered list of tasks */
+    ObservableList<Task> getFilteredTaskList();
 
     /**
      * Returns the user prefs' address book file path.
@@ -47,4 +57,33 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    String getMostRecentGroupTaskDisplay();
+
+    void setMostRecentGroupTaskDisplay(String string);
+
+    void setMostRecentGroupTaskDisplay();
+
+    Task getMostRecentTaskDisplay();
+
+    void setMostRecentTaskDisplay(Task task);
+
+    void setMostRecentTaskDisplay();
+
+    String getMostRecentGroupDisplay();
+
+    void setMostRecentGroupDisplay(String string);
+
+    void setMostRecentGroupDisplay();
+
+    void setStateStudents();
+
+    void setStateGroups();
+
+    void setStateGroupTask();
+
+    State getState();
+
+    void setStatus();
+
 }
