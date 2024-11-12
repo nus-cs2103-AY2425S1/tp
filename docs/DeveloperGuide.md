@@ -840,19 +840,19 @@ testers are expected to do more *exploratory* testing.
 
    1. Missing/Invalid Company Name test case: `/add n/ r/Software Engineer Intern e/google@gmail.com d/31/10/24` <br>
       Expected: An error message stating what is considered a valid Company Name.<br>
-      1. Other invalid Company Names include: `<oding lab`, `|-|appy Days`, `@pple`.<br>
+      1. Other invalid Company Names include: `<oding lab`, `|-|appy Days`, `@pple`.<br></br>
 
    2. Missing/Invalid Role test case: `/add n/Google r/ e/google@gmail.com d/31/10/24` <br>
       Expected: An error message stating what is considered a valid Role.<br>
-      1. Other invalid Roles include: `Software_Engineer_Intern`, `Cl-erk`.<br>
+      1. Other invalid Roles include: `Software_Engineer_Intern`, `Cl-erk`.<br></br>
 
    3. Missing/Invalid Email test case: `/add n/Google r/Software Engineer Intern e/ d/31/10/24`<br>
       Expected: An error message stating what is considered a valid Email.
-      1. Other invalid Emails include: `@gmail.com`, `google.com`, `domainLabelTooShort@gmail.x`.<br>
+      1. Other invalid Emails include: `@gmail.com`, `google.com`, `domainLabelTooShort@gmail.x`.<br></br>
 
    4. Missing/Invalid Date test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com d/`<br>
       Expected: An error message stating what is considered a valid Date.
-      1. Other invalid Dates include: Dates in the future (Relative to device's clock), `30/02/2024`, `31/04/2024`.<br>
+      1. Other invalid Dates include: Dates in the future (Relative to device's clock), `30/02/2024`, `31/04/2024`.<br></br>
 
    5. Adding internship application with missing field(s)
       1. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com`<br>
@@ -1074,7 +1074,7 @@ testers are expected to do more *exploratory* testing.
 1. Exit via Window's close button
 
    1. Test case: Close the window by clicking on the Window's close button.<br>
-      Expected: The window should close.
+      Expected: The window should close. <br></br>
 
 2. Exit via exit command
 
