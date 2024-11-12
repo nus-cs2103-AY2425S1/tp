@@ -531,7 +531,7 @@ Furthermore, certain edits can cause BizBook to behave in unexpected ways (e.g.,
 5. **Maximum number of items**, the maximum number of items (contacts, notes, tags, etc.) in this application is 2147483647. If you enter a number larger than this, the program may behave unexpectedly. However, it is unlikely that you will ever have so many contacts or tags of one contact.
 6. **Contact name is a unique identifier**, this application uses the name of a contact as the unique identifier. This means that it cannot accept two of the same names in the application. Instead, consider adding the surname, use full names or, if really needed, adding numbers at the back of the name to distinguish different people.
 7. **Contact names are alphanumeric**, this application only allows users to enter alphanumeric names. This means that names that include "s/o" or "d/o" are not allowed. Alternatively, consider using "so", "do" or "son of" as a replacement.
-8. **Notes are alphanumeric**, similar to contact name, the notes does not allow special characters.
+8. **Notes are alphanumeric**, similar to contact name, the notes do not allow special characters.
 9. **Once selected, a person can't be unselected**, from either the contact list or pinned panel.
 10. **Notes with very long content will trail off with `...`**, instead of wrapping the text and displaying the hidden content on the next line.
 
