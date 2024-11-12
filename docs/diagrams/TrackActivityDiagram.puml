@@ -1,0 +1,24 @@
+Track Activity Diagram
+ @startuml
+ start
+ :Track command is given;
+ :Check for category input;
+ if() then ([non-empty input])
+     if () then ([category is from predefined categories])
+     :Create category predicate object;
+         if () then ([non-empty contact list])
+           :Filter contact list by category predicate;
+           :Display filtered contact list;
+         else ([else])
+           :Show error message about no contacts to track;
+     endif
+     else ([else])
+       :Show error message about invalid input;
+     endif
+  else ([else])
+  :Show error message about invalid
+  format with command usage;
+       endif
+ stop
+ @enduml
+
