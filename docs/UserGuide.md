@@ -325,6 +325,13 @@ Format: `addProperty INDEX address/ADDRESS town/TOWN type/TYPE size/SIZE bed/NUM
 * The property details include the address, town, property type, size, number of bedrooms, number of bathrooms, and price. All fields are required.
 * Size is in square meters.
 
+Success output when a property is added:
+![Add Property Success Message](images/PropertySuccessMessage.png)
+
+Existing properties in a view window:
+![Properties in View Window](images/PropertyInView.png)
+
+
 Examples:
 * `addProperty 1 address/123 Main St town/Springfield type/Condo size/85 bed/2 bath/2 price/500000` adds a property with the specified details to the 1st person in the list.
 * `addProperty 2 address/45 Elm St town/Anytown type/HDB size/70 bed/3 bath/1 price/350000` adds a property to the 2nd person in the list.
@@ -500,7 +507,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ### Editing and deleting log entries
 * Currently RealConnect does not support editing or deleting history logs. This feature is designed as such due to the nature of logging, of which modification or postmortem addition is not encouraged. However to tolerate user mistakes such as accidental wrong input, editing and deleting of log will be implemented and added to RealConnect.
 ### Editing and deleting of properties
+* Currently, users can only add properties to contacts, but they cannot edit existing properties or delete any contact's properties. As RealConnect is primarily a tool for real estate agents, this limitation is recognized as a feature gap, as properties often need updates or corrections due to market changes or evolving client requirements. To address this, RealConnect will implement property editing and deletion functions, allowing agents to maintain more accurate and current property records. These updates aim to improve flexibility and support efficient management of listings in an agent's portfolio.
 ### More flexible date input formatting
+* Currently, RealConnect only supports the date format `yyyy-mm-dd`, which may be restrictive for some users. To improve usability, the platform will expand its accepted date formats to include more common variations, such as `dd-mm-yyyy`, `dd Month yyyy` (e.g., `22 May 2001`), and potentially region-specific formats. This enhancement will provide users with greater flexibility and make the platform more accessible to diverse user groups, reducing the chance of input errors due to date formatting.
 ### Confirmation upon unusual input when adding properties
 * Currently RealConnect accepts any non-negative integer values for property attributes number of bathrooms and bedrooms. Additional confirmation dialog will be implemented in the future to prompt the user to confirm unusually large input like 2000 bathrooms, to mitigate the chance of user mistakes.
 ### Allow closing App by clicking close button
