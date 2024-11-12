@@ -1,0 +1,57 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+title Today Command Sequence Diagram
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant "t:TodayCommand" as TodayCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+
+[-> LogicManager : execute("today")
+activate LogicManager
+
+LogicManager -> EzstatesParser : parseCommand("today")
+activate EzstatesParser
+
+EzstatesParser --> LogicManager
+deactivate EzstatesParser
+
+LogicManager -> TodayCommand : execute(m:Model)
+activate TodayCommand
+
+TodayCommand -> Model : updateFilteredPersonList(PREDICATE)
+activate Model
+Model --> TodayCommand
+deactivate Model
+
+TodayCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> TodayCommand : List<Person>
+deactivate Model
+
+alt no appointments today
+    TodayCommand --> LogicManager
+    deactivate TodayCommand
+else else
+    create CommandResult
+    TodayCommand -> CommandResult
+    activate CommandResult
+    CommandResult --> TodayCommand
+    deactivate CommandResult
+    TodayCommand --> LogicManager : r
+    deactivate TodayCommand
+end
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml

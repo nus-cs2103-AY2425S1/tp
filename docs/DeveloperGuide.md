@@ -645,9 +645,7 @@ created.
     `BUYER` role.
     <br><br>
     **Implementation**
-    <div style="text-align: center;">
-    <img src="images/dg/AddBuyerSequenceDiagram.png" alt="AddBuyerSequenceDiagram" style="width:100%">
-    </div>
+   ![AddBuyerSequenceDiagram](images/dg/AddBuyerSequenceDiagram.png)
    <br>
    <br>
    
@@ -658,31 +656,29 @@ created.
    `CommandException` is thrown.
    4. Finally, `AddClientProfileCommand` returns a `CommandResult`, which encapsulates a response to the user's input.
 
-2. #### Add seller
-   **Overview**
-   <br>
-    The `seller` command adds a `Seller` to EZSTATES. `Seller` inherits the `Person` class and is associated with a 
-    `SELLER` role.
-    <br><br>
-   **Implementation**
-    <br>
-    The execution of `seller` command mirrors the execution of the `buyer` command.
-   1. User runs a `seller` command with valid inputs.
-   2. Command is parsed by `EzstatesParser` and a `AddClientProfileParser` is created to parse the `buyer` command which creates a
-   `AddSellerProfileCommand` that implicitly creates `AddSellerProfileCommand`.
-   3. `AddClientProfileCommand` handles the logic to detect duplicate `Seller`. A `seller` is added to the `Model` if it is a new `seller`, else a
-      `CommandException` is thrown.
-   4. Finally, `AddClientProfileCommand` returns a `CommandResult` with a corresponding success message.
-   
+   2. #### Add seller
+      **Overview**
+      <br>
+       The `seller` command adds a `Seller` to EZSTATES. `Seller` inherits the `Person` class and is associated with a 
+       `SELLER` role.
+       <br><br>
+      **Implementation**
+       <br>
+       The execution of `seller` command mirrors the execution of the `buyer` command.
+      1. User runs a `seller` command with valid inputs.
+      2. Command is parsed by `EzstatesParser` and a `AddClientProfileParser` is created to parse the `buyer` command which creates a
+      `AddSellerProfileCommand` that implicitly creates `AddSellerProfileCommand`.
+      3. `AddClientProfileCommand` handles the logic to detect duplicate `Seller`. A `seller` is added to the `Model` if it is a new `seller`, else a
+         `CommandException` is thrown.
+      4. Finally, `AddClientProfileCommand` returns a `CommandResult` with a corresponding success message.
+
 #### Edit client
 
 **Overview**
 The `editclient` command edits a `client`. 
 
 **Implementation**
-<div style="text-align: center;">
-    <img src="images/dg/EditClientSequenceDiagram.png" alt="EditClientSequenceDiagram" style="width:100%">
-    </div>
+![EditClientSequenceDiagram](images/dg/EditClientSequenceDiagram.png)
 
 1. User runs a `editclient` command with valid `INDEX` and valid prefixes.
 2. Command is parsed by `EzstatesParser` and a `EditClientCommandParser` is created to parse the `editclient` command which 
@@ -714,9 +710,7 @@ a listing.
 The `find` command finds and lists all `Persons` whose name contains any of the input keywords.
 
 **Implementation**
-<div style="text-align: center;">
-    <img src="images/dg/FindClientSequenceDiagram.png" alt="AddBuyerSequenceDiagram" style="width:100%">
-    </div>
+![FindClientSequenceDiagram](images/dg/FindClientSequenceDiagram.png)
 
 1. User runs a `find` command with keywords.
 2. Command is parsed by `EzstatesParser` and a `FindClientCommandParser` is created to parse the keywords which creates
@@ -730,15 +724,13 @@ The `find` command finds and lists all `Persons` whose name contains any of the 
 The `deleteclient` command deletes a `Person` according to the `INDEX` that is on the `PersonListPanel`.
 
 **Implementation**
-<div style="text-align: center;">
-    <img src="images/DeleteSequenceDiagram.png" alt="DeleteSequenceDiagram" style="width:100%">
-    </div>
+![DeleteClientSequenceDiagram](images/DeleteSequenceDiagram.png)
 
 1. User runs a `deleteclient` command with an `INDEX` as argument.
 2. Command is parsed by `EzstatesParser` and a `DeleteClientCommandParser` is created to parse the argument which creates
 a `DeleteClientCommand`.
-3. `DeleteClientCommand` retrives the list of `Persons` from `Model` if it exists and then deletes the `Person` once the
-user confirms his deletion.
+3. `DeleteClientCommand` retrieves the list of `Persons` from `Model` and checks if the specified `Person` 
+exists and then deletes the `Person` once the user confirms his deletion.
 4. Finally, `DeleteClientCommand` returns a `CommandResult` with a corresponding success message.
 
 #### Show client
@@ -747,9 +739,7 @@ user confirms his deletion.
 The `showclient` command displays all clients in EZSTATES to the user.
 
 **Implementation**
-<div style="text-align: center;">
-    <img src="images/dg/ShowClientSequenceDiagram.png" alt="ShowClientSequenceDiagram" style="width:100%">
-    </div>
+![ShowClientSequenceDiagram](images/dg/ShowClientSequenceDiagram.png)
 
 1. User runs a `showclient` command.
 2. Command is parsed by `EzstatesParser`, which creates a `ShowClientCommand`, skipping the creation of a specific `Parser` instance.
@@ -764,43 +754,80 @@ corresponding success message.
 The `clear` command clears all `Persons` and `Listings` from EZSTATES.
 
 **Implementation**
-<div style="text-align: center;">
-    <img src="images/dg/ClearCommandSequenceDiagram.png" alt="ClearCommandSequenceDiagram" style="width:100%">
-    </div>
+![ClearSequenceDiagram](images/dg/ClearCommandSequenceDiagram.png)
 
 1. User runs a `clear` command.
-2. Command is parsed by `EzstatesParser`, which creates a `CLearCommand`, skipping the creation of a speicifc `Parser` instance.
+2. Command is parsed by `EzstatesParser`, which creates a `CLearCommand`, skipping the creation of a specific `Parser` instance.
 3. `ClearCommand` always sets the `Model's` storage to a new `AddressBook` which stores `Persons` and a new `Listings` which stores `Listings`.
 4. A `CommandResult` is returned with a corresponding success message.
 
 ### Appointment Management
-**Overview**
 <br>
-<div style="text-align: center;">
-    <img src="images/dg/AppointmentClassDiagram.png" alt="AppointmentClassDiagram" style="width:100%">
-    </div>
 
-**Implementation**
+![AppointmentClassDiagram](images/dg/AppointmentClassDiagram.png)
+
+The `Appointment` class represents an appointment in the address book. 
+
+`Appointment` comprises of one `Date`, `From` and `To` each. Each of these classes represent the date of an appointment, the start time
+of an appointment and the end time of an appointment respectively. 
 
 #### Add appointment
 **Overview**
-<br>
-The 
+
+An `Appointment` can be added to a `Person` using the `apt` command.
+
 **Implementation**
+![AddAppointmentSequenceDiagram](images/dg/AddAppointmentSequenceDiagram.png)
+
+1. User runs a `apt` command with a valid index.
+2. Command is parsed by `EzstatesParser` which creates a `AddAppointmentCommandParser` that parses the user's arguments. 
+Parsing a valid input creates `AddAppointmentCommand` with the relevant arguments.
+3. The `AddAppointmentCommand` retrieves the relevant `Person` from the `Model` and creates a new `Person` with the user's `Appointment`.
+4. The original `Person` is removed and the new `Person` is added in its place.
+4. Finally, `AddAppointmentCommand` returns a `CommandResult` with the corresponding success message.
+
+<div class="note" markdown="span"> 
+
+What is the point of the static EMPTY fields in `Appointment`, `Date`, `From` and `To`? 
+
+Every `Person` is created without an `Appointment`. 
+
+The static EMPTY fields, such as `EMPTY_APPOINTMENT` in `Appointment`, follow the **Singleton pattern** 
+to represent a `null` or empty state, providing a single, globally accessible instance for cases where an `Appointment` is absent.
+</div>
 
 #### Delete appointment
 **Overview**
 <br>
-The `editclient` edits a `client`.
+The `deleteapt` command deletes an `Appointment` from a `Person`.
 
 **Implementation**
+![DeleteAppointmentSequenceDiagram](images/dg/DeleteAppointmentSequenceDiagram.png)
+
+1. User runs a `deleteapt` command with an `INDEX` as argument.
+2. Command is parsed by `EzstatesParser` and a `DeleteAppointmentCommandParser` is created to parse the argument which creates
+   a `DeleteAppointmentCommand`.
+3. `DeleteAppointmentCommand` retrieves the list of `Persons` from `Model` and checks if the specified `Person` exists and creates a
+new `Person` with the `EMPTY_APPOINTMENT` singleton.
+4. The original `Person` is deleted and new `Person` is added to the list of `Persons`.
+5. Finally, `DeleteAppointmentCommand` returns a `CommandResult` with a corresponding success message.
 
 #### Today
 **Overview**
 <br>
-The `editclient` edits a `client`.
+The `today` command lists all the `Appointments` that the user has made today.
+Today is defined as the current time on the user's operating system.
 
 **Implementation**
+
+![TodaySequenceDiagram](images/dg/TodayCommandSequenceDiagram.png)
+
+1. User runs a `today` command.
+2. Command is parsed by `EzstatesParser`, which creates a `TodayCommand`, skipping the creation of a specific `Parser` instance.
+3. `TodayCommand` retrieves the list of `Persons` from the `Model` with a `HasAppointmentTodayPredicate` which returns a list of `Persons`
+with appointments scheduled for today.
+4. If there are no `Persons` in this list, a `CommandException` is thrown, else a `CommandResult` is returned with a
+   corresponding success message.
 
 ### Listing Management
 
