@@ -177,6 +177,8 @@ Creates a new log entry for a specific patient. This command is typically used t
 2) `\n` characters will be interpreted as new lines in the `l/LOG_ENTRY` fields of both `addlog` and `addentry`. This format will be preserved in the detailed view of the log entry.
 3) Log entries that contains purely `\n` characters will be treated as a non-text entry which will disallow you from saving it as a log.
 4) Adding an older log is allowed, considering you may want to move your logs from a physical notebook to the application.
+5) Adding a same log with different case will not be treated as a duplicate log entry. This is to allow for error correction in the log entry. For example, if you have entered `john checked in at clinic` and you want to correct it to `John checked in at clinic`, you can do so without any issues. But normally we do not expect the same log entry to be entered twice.
+
 </box>
 
 <div style="page-break-after: always;"></div>
