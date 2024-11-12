@@ -1143,11 +1143,14 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a student
 1. Test case: `add n/TestOne p/11111111 e/test1@example.com c/CS2103T`<br>
-    Expected: Student `TestOne` is added to the list. Details of the added student is shown.
+   Expected: Student `TestOne` is added to the list. Details of the added student is shown.
+
 2. Test case: `add n/TestOne p/11111111`<br>
    Expected: No student is added. Error details shown.
+
 3. Test case: `add n/TestOne e/test1@example.com c/CS2103T`<br>
    Expected: No student is added. Error details shown.
+
 4. Test case: `add n/Test1 p/11111111 e/test1@example.com c/CS2103T`<br>
    Expected: No student is added. Error details shown.
 
@@ -1156,8 +1159,10 @@ testers are expected to do more *exploratory* testing.
 
 2. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` Exist)<br>
    Expected: Displays students details with course `CS2103T`.
+
 3. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` does not Exist)<br>
    Expected: No Students Found. Displays 0 students.
+
 4. Test case: `find c/1234`
    Expected: No Students Found. Error details shown.
 
@@ -1167,8 +1172,10 @@ testers are expected to do more *exploratory* testing.
 
 2. Test case: `find n/TestOne` (Assuming Student with name `TestOne` Exists)<br>
    Expected: Displays students details with name `TestOne`.
+
 3. Test case: `find n/TestOne` (Assuming Students with name `TestOne` does not Exist)<br>
    Expected: No Students Found. Displays 0 students.
+
 4. Test case: `find n/Test1`
    Expected: No Students Found. Error details shown.
 
@@ -1177,10 +1184,13 @@ testers are expected to do more *exploratory* testing.
 
 2. Test case: `edit 1 n/TestOne p/11111111`<br>
    Expected: 1st student is edited. Details of the edited student is shown.
+
 3. Test case: `edit 2 e/test1@example.com c/CS2103T`<br>
    Expected: 2nd student is edited. Details of the edited student is shown.
+
 4. Test case: `edit 2 n/Test 2`<br>
    Expected: No student is edited. Error details shown.
+
 5. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
    Expected: No student is edited. Error details shown.
 
@@ -1189,8 +1199,10 @@ testers are expected to do more *exploratory* testing.
 
 2. Test case: `delete 1`<br>
    Expected: 1st student is deleted from the list. Details of the deleted student shown in the status message.
+
 3. Test case: `delete 0`<br>
    Expected: No student is deleted. Error details shown in the status message.
+
 4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
    Expected: No student is deleted. Error details shown in the status message.
 
@@ -1200,10 +1212,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Test case: `addlesson d/2024-10-20 t/14:00`  
    Expected: Lesson with date 2024-10-20 and time 14:00 is added to the list. Details of the added lesson are shown.
+
 2. Test case: `addlesson d/2024-10-20`  
    Expected: No lesson is added. Error details shown.
+
 3. Test case: `addlesson t/14:00`  
    Expected: No lesson is added. Error details shown.
+
 4. Test case: `addlesson d/2024-10-20 t/14:00` (when a lesson with the same date and time already exists)  
    Expected: No lesson is added. Error message about duplicate lesson shown.
 
@@ -1213,12 +1228,16 @@ testers are expected to do more *exploratory* testing.
 
 2. Test case: `addtolesson 1 n/TestOne`  
    Expected: Student TestOne is added to the first lesson. Confirmation message is shown.
+
 3. Test case: `addtolesson 1 i/2` (assuming the student at index 2 exists)  
    Expected: The student at index 2 is added to the first lesson. Confirmation message is shown.
+
 4. Test case: `addtolesson 1 n/NonExistentStudent`  
    Expected: No student is added. Error message about student not found shown.
+
 5. Test case: `addtolesson 2 n/TestOne` (where lesson at index 2 doesn’t exist)  
    Expected: No student is added. Error details shown.
+
 6.	Test case: `addtolesson 1 n/TestOne i/2`
    Expected: Both TestOne and the student at index 2 are added to the first lesson. Confirmation message is shown.
 
@@ -1229,27 +1248,30 @@ testers are expected to do more *exploratory* testing.
 
 2. Test case: `removefromlesson 1 n/TestOne`  
    Expected: Student TestOne is removed from the first lesson. Confirmation message is shown.
-3. Test case: `removefromlesson 1 i/2` (assuming the student at index 2 exists in the lesson)  
-   Expected: The student at index 2 is removed from the first lesson. Confirmation message is shown.
-4. Test case: `removefromlesson 1 n/NonExistentStudent`  
+
+3. Test case: `removefromlesson 1 n/NonExistentStudent`  
    Expected: No student is removed. Error message about student not found shown.
-5. Test case: `removefromlesson 2 n/TestOne` (where lesson at index 2 doesn’t exist)  
+
+4. Test case: `removefromlesson 2 n/TestOne` (where lesson at index 2 doesn’t exist)  
    Expected: No student is removed. Error details shown.
-6. Test case: `removefromlesson 1 n/TestOne i/2`
-   Expected: Both TestOne and the student at index 2 are removed from the first lesson. Confirmation message is shown.
 
 ### Marking attendance in a lesson: `marka`
 
 1. Test case: `marka 1 n/TestOne a/1`  
    Expected: Student `TestOne` is marked as attended for the first lesson. Confirmation message is shown.
+
 2. Test case: `marka 1 n/TestOne a/0`  
    Expected: Student `TestOne` is marked as absent for the first lesson. Confirmation message is shown.
+
 3. Test case: `marka 1 n/John Doe n/Jane Doe a/1`  
    Expected: Students `John Doe` and `Jane Doe` are both marked as attended for the first lesson. Confirmation message is shown.
+
 4. Test case: `marka 1 n/John Doe n/Jane Doe a/0`  
    Expected: Students `John Doe` and `Jane Doe` are both marked as absent for the first lesson. Confirmation message is shown.
+
 5. Test case: `marka 1 n/NonExistentStudent a/1`  
    Expected: No attendance is marked. Error message about student not found is shown.
+
 6. Test case: `marka 2 n/TestOne a/1` (where lesson at index 2 doesn’t exist)  
    Expected: No attendance is marked. Error message about lesson not found is shown.
 
@@ -1257,16 +1279,22 @@ testers are expected to do more *exploratory* testing.
 
 1. Test case: `markp 1 n/TestOne pt/10`  
    Expected: Student `TestOne` is marked with a participation score of 10 for the first lesson, and attendance is set to true. Confirmation message is shown.
+
 2. Test case: `markp 1 n/TestOne pt/0`  
    Expected: Student `TestOne` is marked with a participation score of 0 for the first lesson. Attendance remains unchanged. Confirmation message is shown.
+
 3. Test case: `markp 1 n/John Doe n/Jane Doe pt/15`  
    Expected: Students `John Doe` and `Jane Doe` are both marked with a participation score of 15 for the first lesson, and their attendance is set to true. Confirmation message is shown.
+
 4. Test case: `markp 1 n/NonExistentStudent pt/10`  
    Expected: No participation is marked. Error message about student not found is shown.
+
 5. Test case: `markp 2 n/TestOne pt/10` (where lesson at index 2 doesn’t exist)  
    Expected: No participation is marked. Error message about lesson not found is shown.
+
 6. Test case: `markp 1 n/TestOne pt/101`  
    Expected: No participation is marked. Error message about invalid participation score is shown (as the score exceeds the valid range of 0-100).
+
 7. Test case: `markp 1 n/TestOne pt/-1`  
    Expected: No participation is marked. Error message about invalid participation score is shown (as the score is below the valid range of 0-100).
 
@@ -1276,10 +1304,13 @@ testers are expected to do more *exploratory* testing.
 
 2. Test case: `deletelesson 1`
    Expected: The first lesson is removed from the list. Confirmation message is shown.
+
 3. Test case: `deletelesson 0`  
    Expected: No lesson is removed. Error details shown.
+
 4. Other incorrect remove commands: `deletelesson`, `deletelesson x` (where x is larger than the list size)  
    Expected: No lesson is removed. Error details shown.
+
 5. Test case: `deletelesson 1;2`
    Expected: Both the 1st and 2nd lessons are deleted from the list. Confirmation message is shown.
 
@@ -1289,10 +1320,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Test case: `addconsult d/2024-10-20 t/14:00`  
    Expected: Consultation on 2024-10-20 at 14:00 is added. Confirmation message is shown.
+
 2. Test case: `addconsult d/2024-10-20`  
    Expected: No consultation is added. Error details shown.
+
 3. Test case: `addconsult t/14:00`  
    Expected: No consultation is added. Error details shown.
+
 4. Test case: `addconsult d/2024-10-20 t/14:00` (when a consultation with the same date and time exists)  
    Expected: No consultation is added. Error message about duplicate consultation shown.
 
@@ -1308,12 +1342,16 @@ testers are expected to do more *exploratory* testing.
 
 2. Test case: `addtoconsult 1 n/TestOne`  
    Expected: Student TestOne is added to the first consultation. Confirmation message is shown.
+
 3. Test case: `addtoconsult 1 i/2` (assuming the student at index 2 exists)  
    Expected: The student at index 2 is added to the first consultation. Confirmation message is shown.
+
 4. Test case: `addtoconsult 1 n/NonExistentStudent`  
    Expected: No student is added. Error message about student not found shown.
+
 5. Test case: `addtoconsult 2 n/TestOne` (where consultation at index 2 doesn’t exist)  
    Expected: No student is added. Error details shown.
+
 6.	Test case: `addtoconsult 1 n/TestOne i/2`
    Expected: Both TestOne and the student at index 2 are added to the first consultation. Confirmation message is shown.
 
@@ -1323,14 +1361,12 @@ testers are expected to do more *exploratory* testing.
 
 2. Test case: `removefromconsult 1 n/TestOne`  
    Expected: Student TestOne is removed from the first consultation. Confirmation message is shown.
-3. Test case: `removefromconsult 1 i/2` (assuming the student at index 2 exists in the consultation)  
-   Expected: The student at index 2 is removed from the first consultation. Confirmation message is shown.
-4. Test case: `removefromconsult 1 n/NonExistentStudent`  
+
+3. Test case: `removefromconsult 1 n/NonExistentStudent`  
    Expected: No student is removed. Error message about student not found shown.
-5. Test case: `removefromconsult 2 n/TestOne` (where consultation at index 2 doesn’t exist)  
+
+4. Test case: `removefromconsult 2 n/TestOne` (where consultation at index 2 doesn’t exist)  
    Expected: No student is removed. Error details shown.
-6. Test case: `removefromconsult 1 n/TestOne i/2`
-   Expected: Both TestOne and the student at index 2 are removed from the first consultation. Confirmation message is shown.
 
 ### Deleting consultations: `deleteconsult`
 
@@ -1338,10 +1374,13 @@ testers are expected to do more *exploratory* testing.
 
 2. Test case: `deleteconsult 1`  
    Expected: The first consultation is deleted. Confirmation message is shown.
+
 3. Test case: `deleteconsult 0`  
    Expected: No consultation is deleted. Error details shown.
+
 4. Other incorrect delete commands: `deleteconsult`, `deleteconsult x` (where x is larger than the list size)  
    Expected: No consultation is deleted. Error details shown.
+
 5. Test case: `deleteconsult 1;2`
    Expected: Both the 1st and 2nd consultations are deleted from the list. Confirmation message is shown.
 
