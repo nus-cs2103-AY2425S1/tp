@@ -98,6 +98,7 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* interacts with the `Authentication` component.
 
 ### Logic component
 
@@ -523,7 +524,7 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Planned enhancements
+## Appendix: Planned enhancements
 
 Team size: 5
 
