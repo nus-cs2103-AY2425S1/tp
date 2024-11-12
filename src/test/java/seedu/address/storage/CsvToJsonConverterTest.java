@@ -17,7 +17,6 @@ import seedu.address.storage.exceptions.ConverterException;
 import seedu.address.testutil.TestUtil;
 
 public class CsvToJsonConverterTest {
-    private final String testImportFilePath = "src/test/data/ConverterTestUtil/ImportTest";
     private final String testImportEmptyCsv = "src/test/data/ConverterTestUtil/ImportTestEmptyCsv";
     private final String testImportUncommonCases = "src/test/data/ConverterTestUtil/ImportTestUncommonCases";
     @Test
