@@ -34,14 +34,14 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20&tabOpen=true&tabType=authorship&tabAuthor=verakohh&tabRepo=AY2425S1-CS2103T-T17-1/tp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
-* **Testing** (Pull requests [\#51](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/51), [\#52](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/52), [\#64](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/64), [\#96](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/96), [\#98](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/98))
+* **Testing**: (Pull requests [\#51](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/51), [\#52](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/52), [\#64](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/64), [\#96](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/96), [\#98](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/98))
   * What it does: Increased test coverage for specific components, including `UniversityContainsKeywordsPredicate`, `FindByUniversityCommand`, `FindByUniversityCommandParser`, `FindByInterestCommandParser`, `AddInterestCommand`, `AddInterestCommandParser`, `Person`.
   * Justification: Improved test coverage ensures reliability and correctness of the new and existing features, particularly in handling user inputs and commands.
   * Highlights: Raised the coverage from 0% to 100% for these components, contributing to the overall robustness of the application.
 
-* **Documentation**:
+* **Documentation**: (Pull requests [\#306](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/306), [\#308](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/308), [\#314](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/314), [\#315](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/315), [\#317](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/317), [\#289](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/289), [\#290](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/290), [\#296](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/296))
     * User Guide:
-        * Formatted and updated documentation for better readability and consistency.
+        * Formatted and updated documentation for better readability and consistency. 
         * Documented new features `findu` and `addi` with detailed usage instructions (Pull request [\#130](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/130)).
     * Developer Guide:
         * Created and included UML diagrams: `AB3Commands.puml` and `UniVerseNewCommands.puml` to illustrate command structures and feature interactions.
