@@ -8,13 +8,16 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.commons.Address;
+import seedu.address.model.commons.Name;
+import seedu.address.model.commons.NamedObject;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements NamedObject {
 
     // Identity fields
     private final Name name;
@@ -23,20 +26,23 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Role role;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
         this.tags.addAll(tags);
     }
 
+    @Override
     public Name getName() {
         return name;
     }
@@ -53,6 +59,10 @@ public class Person {
         return address;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -62,7 +72,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same name, phone and email.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -71,7 +81,9 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -94,6 +106,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && role.equals(otherPerson.role)
                 && tags.equals(otherPerson.tags);
     }
 
@@ -110,6 +123,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("role", role)
                 .add("tags", tags)
                 .toString();
     }

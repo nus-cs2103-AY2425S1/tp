@@ -1,14 +1,27 @@
 {
-  "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
-  }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street"
-  } ]
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "role": "artist",
+      "tags": ["friends"]
+    },
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "4th street",
+      "role": "artist"
+    }
+  ],
+  "concerts": [
+    {
+      "name": "Coachella",
+      "address": "81800 51st Ave, Indio, Southern California, United States",
+      "date": "20 Dec 2024 1010"
+    }
+  ],
+  "concertContacts": []
 }

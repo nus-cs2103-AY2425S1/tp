@@ -1,4 +1,6 @@
 @startuml
+Title Commit Activity Diagram
+
 skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12

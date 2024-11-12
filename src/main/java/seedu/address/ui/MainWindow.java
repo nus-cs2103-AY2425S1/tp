@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -32,6 +31,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private ConcertListPanel concertListPanel;
+    private ConcertContactListPanel concertContactListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +43,22 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem toggleConcertContactViewItem;
+
+    @FXML
+    private StackPane mainPanelPlaceholder;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane concertListPanelPlaceholder;
+
+    @FXML
+    private StackPane concertContactListContainer;
+
+    @FXML
+    private StackPane concertContactListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -74,6 +90,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(toggleConcertContactViewItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -99,7 +116,7 @@ public class MainWindow extends UiPart<Stage> {
          * in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
+            if (keyCombination.match(event)) {
                 menuItem.getOnAction().handle(new ActionEvent());
                 event.consume();
             }
@@ -112,6 +129,12 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        concertListPanel = new ConcertListPanel(logic.getFilteredConcertList());
+        concertListPanelPlaceholder.getChildren().add(concertListPanel.getRoot());
+
+        concertContactListPanel = new ConcertContactListPanel(logic.getFilteredConcertContactList());
+        concertContactListPanelPlaceholder.getChildren().add(concertContactListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -168,6 +191,74 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Toggles the visibility of the list of {@code ConcertContact}.
+     *
+     * Visibility is set to {@code false} by default.
+     */
+    public void handleToggleConcertContactView() {
+        boolean visibility = concertContactListContainer.visibleProperty().get();
+        concertContactListContainer.visibleProperty().setValue(!visibility);
+    }
+
+    /**
+     * Shows the list of {@code ConcertContact}.
+     *
+     */
+    public void handleShowConcertContactView() {
+        concertContactListContainer.visibleProperty().setValue(true);
+    }
+
+    /**
+     * Hides the list of {@code ConcertContact}.
+     *
+     */
+    public void handleHideConcertContactView() {
+        concertContactListContainer.visibleProperty().setValue(false);
+    }
+
+    /**
+     * Shows the full details of each {@code ConcertCard}.
+     */
+    public void handleShowFullPerson() {
+        personListPanel.showFullPerson();
+    }
+
+    /**
+     * Hides the full details of each {@code ConcertCard}.
+     */
+    public void handleHideFullPerson() {
+        personListPanel.hideFullPerson();
+    }
+
+    /**
+     * Shows the full details of each {@code ConcertCard}.
+     */
+    public void handleShowFullConcert() {
+        concertListPanel.showFullConcert();
+    }
+
+    /**
+     * Hides the full details of each {@code ConcertCard}.
+     */
+    public void handleHideFullConcert() {
+        concertListPanel.hideFullConcert();
+    }
+
+    /**
+     * Shows the full details of each {@code ConcertCard}.
+     */
+    public void handleShowFullConcertContact() {
+        concertContactListPanel.showFullConcertContact();
+    }
+
+    /**
+     * Hides the full details of each {@code ConcertCard}.
+     */
+    public void handleHideFullConcertContact() {
+        concertContactListPanel.hideFullConcertContact();
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -184,6 +275,36 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowConcertContacts()) {
+                handleShowConcertContactView();
+            } else {
+                handleHideConcertContactView();
+            }
+
+            if (commandResult.isShowFullPerson()) {
+                handleShowFullPerson();
+            }
+
+            if (commandResult.isHideFullPerson()) {
+                handleHideFullPerson();
+            }
+
+            if (commandResult.isShowFullConcert()) {
+                handleShowFullConcert();
+            }
+
+            if (commandResult.isHideFullConcert()) {
+                handleHideFullConcert();
+            }
+
+            if (commandResult.isShowFullConcertContact()) {
+                handleShowFullConcertContact();
+            }
+
+            if (commandResult.isHideFullConcertContact()) {
+                handleHideFullConcertContact();
             }
 
             return commandResult;

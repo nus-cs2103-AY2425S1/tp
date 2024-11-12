@@ -1,4 +1,6 @@
 @startuml
+Title Architecture Diagram
+
 !include <office/Concepts/globe_internet>
 !include <office/Concepts/documents>
 !include <office/Users/user>

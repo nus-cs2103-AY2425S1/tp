@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.concert.Concert;
+import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,9 +15,18 @@ import seedu.address.model.person.Person;
 public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+    public static final String INDEX_HELP =
+            "Index must be a positive integer within the smallest and largest displayed index.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid!\n"
+            + INDEX_HELP;
+    public static final String MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX = "The concert index provided is invalid!\n"
+            + INDEX_HELP;
+    public static final String MESSAGE_INVALID_CONCERT_CONTACT_DISPLAYED_INDEX =
+            "The concert contact index provided is invalid!\n" + INDEX_HELP;
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_CONCERTS_LISTED_OVERVIEW = "%1$d concerts listed!";
+    public static final String MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW = "%1$d concert contacts listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -43,8 +54,33 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
+                .append("; Role: ")
+                .append(person.getRole())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code Concert} for display to the user.
+     */
+    public static String format(Concert concert) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(concert.getName())
+                .append("; Address: ")
+                .append(concert.getAddress())
+                .append("; Date: ")
+                .append(concert.getDate());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code ConcertContact} for display to the user.
+     */
+    public static String format(ConcertContact concertContact) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(format(concertContact.getPerson()))
+                .append(format(concertContact.getConcert()));
         return builder.toString();
     }
 

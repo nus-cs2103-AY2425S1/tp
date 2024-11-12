@@ -1,4 +1,6 @@
 @startuml
+Title Model Class Diagram
+
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
@@ -13,12 +15,18 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
+Class UniqueConcertList
+Class UniqueConcertContactList
 Class Person
+Class Concert
+Class ConcertDate
 Class Address
 Class Email
 Class Name
 Class Phone
+Class Role
 Class Tag
+Class ConcertContact
 
 Class I #FFFFFF
 }
@@ -36,12 +44,21 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
+AddressBook *--> "1" UniqueConcertList
+AddressBook *--> "1" UniqueConcertContactList
 UniquePersonList --> "~* all" Person
+UniqueConcertList --> "~* all" Concert
+UniqueConcertContactList --> "~* all" ConcertContact
+
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Role
 Person *--> "*" Tag
+Concert *--> Name
+Concert *--> Address
+Concert *--> ConcertDate
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -51,4 +68,8 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Concert
+ModelManager --> "~* filtered" ConcertContact
+(Person, Concert) .. ConcertContact
+Person "1" - "1" Concert
 @enduml
