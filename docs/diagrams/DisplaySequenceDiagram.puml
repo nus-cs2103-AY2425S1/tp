@@ -61,7 +61,7 @@ create CommandResult
 DisplayCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DisplayCommand
+CommandResult --> DisplayCommand : r
 deactivate CommandResult
 
 DisplayCommand --> LogicManager : r
