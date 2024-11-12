@@ -810,7 +810,7 @@ management and changed the UI to increase its complexity and better reflect an i
 **Difficulty level:**
 - Moderate difficulty: While numerous newly added commands and tests did leverage existing AB3 code in some aspects
   when creating some wedding commands, adapting it to handle dual entities (contacts and wedding) and augmenting the
-  UI to display the wedding list and current wedding viewed required a significant amount of effort.
+  UI to display the wedding list and name of the current wedding viewed required a significant amount of effort.
 
 **Challenges faced:**
 - Ensuring robust test coverage for new and adapted features, which required a lot of consideration for edge cases.
@@ -829,31 +829,30 @@ management and changed the UI to increase its complexity and better reflect an i
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancements**
 
-1. **Enhanced duplicate detection handling for Wedding Names and Contacts**
+Team size: 5
 
-   Wedding Names should be compared on a case-insensitive basis ('john' and 'jOhN' are considered the same
-   wedding names) and contacts should be determined to be duplicates if both emails and/or both phone numbers of a
-   contact are identical, rather than just by the basis of an identical phone number.
+1. **Improve duplicate detection handling for Wedding Names**: Currently, Wedding names are case-sensitive, which 
+   could result in unintended duplicates ("smith and john" & "Smith and John" are treated as distinct entries). We 
+   plan to introduce case-insensitive comparison to catch potential duplicates even if capitalization differs.
 
-2. **More advanced date validation for invalid dates**
+2. **More accurate error messages for extreme numerical inputs**: The current error message for contact indexes
+   provided which are larger than the MAX_INT or less than or equal to 0 is "Invalid command format!"
+   which is too general. We plan to improve error handling to provide an "Invalid index" error message instead.
 
-   Implement stricter date validation to handle invalid dates like February 29 on non-leap years or days that exceed the
-   maximum for a given month (e.g., 31st in months with only 30 days). This enhancement will ensure that users are
-   notified of invalid dates instead of automatically adjusting them to the nearest valid date when using `addw` or
-   `editw`.
+3. **Improve parsing for address fields with text resembling flags (eg. `a/` or `t/`)**: We plan to update the address  
+   parsing logic to differentiate between actual command flags and address text that may resemble these flags to 
+   allow users to store addresses like `1 Street e/b Building` or `Frenk t/t road` without triggering errors that 
+   multiple values have been specified for single-valued fields.
 
-3. **More accurate error messages for extreme numerical inputs**
-
-   Improve error handling to provide an "invalid index" message instead of a "wrong format error' for contact indexes
-   provided which are larger than the MAX_INT or equal to or below 0 (negative numbers).
-
-4. **Improve parsing for address fields with text resembling flags (eg. `a/` or `t/`)**
-
-   Update address parsing logic to differentiate between actual command flags and address text that may resemble these
-   flags to allow users to store addresses like `1 Street e/b Building` or `Frenk t/t road` without triggering errors
-   that multiple values have been specified for single-valued fields.
-
-5. **Add support for names with non-alphanumeric characters (e.g., -, @, .).**
-
-    Special characters like hyphens (-), at symbols (@), and periods (.), are common in some names, thus there will be an 
-    update to allow the addition of names with special characters. This update will ensure that names with such characters can be added without errors thrown.
+4. **Add support for names with non-alphanumeric characters (eg. -, @, .)**: Currently, names are forbidden 
+   to contain special characters and will show an error stating that names should only contain alphanumeric characters. 
+   Special characters like hyphens (-), at symbols (@), and periods (.), are common in some names, thus we plan to make 
+   an update to allow the addition of names with special characters. This update will ensure that names with such 
+   characters can be added without errors.
+   
+5. **Make the current view name (located in the blue box on top of the weddings list panel) more specific**: Currently, 
+    the view name is either set to the wedding name (e.g., "John and Mary Wedding") or "Not viewing any wedding." This 
+    could be made more specific when the user applies filters or search commands. For example, if the user filters a 
+    wedding by tags, the view name could display "John and Mary Wedding – Filter: Florist." Similarly, when 
+    using the Find command, it could show "Search Results for: john" instead of "Not viewing any wedding" when the user 
+    enters `find john`.
