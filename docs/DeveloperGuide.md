@@ -683,7 +683,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 7.  The application should demonstrate stability during long-term usage like after a few hours without crashing or freezing.
 8.  The application should be usable by novice users without extensive training.
 9.  The application should handle errors gracefully, providing meaningful feedback to users in case of failures.
-10. Comprehensive user and technical documentation should be provided
+10. The user guide and the developer guide should be PDF-friendly. (No expandable panels, embedded videos, animated GIFs etc.)
 
 
 ### Glossary
