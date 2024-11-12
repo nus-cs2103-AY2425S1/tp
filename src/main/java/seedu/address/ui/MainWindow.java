@@ -9,11 +9,13 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandResult.SwitchView;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -32,6 +34,9 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private WeddingListPanel weddingListPanel;
+    private TaskListPanel taskListPanel;
+    private TagListPanel tagListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +47,16 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private VBox personList;
+
+    @FXML
+    private VBox entityList;
+
+    @FXML
+    private StackPane personPanelPlaceholder;
+
+    @FXML
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -111,7 +125,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        tagListPanel = new TagListPanel(logic.getFilteredTagList());
+        weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
+
+        personPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -186,11 +205,62 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isSwitchView()) {
+                switchView(commandResult.getView());
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Switches the view shown to the user.
+     * @param switchView The view that should be shown.
+     */
+    public void switchView(SwitchView switchView) {
+        switch (switchView) {
+        case TASK:
+            changeToTaskView();
+            break;
+        case TAG:
+            changeToTagView();
+            break;
+        case WEDDING:
+            changeToWeddingView();
+            break;
+        default:
+            throw new UnsupportedOperationException("Invalid view selected.");
+        }
+    }
+
+    /**
+     * Changes the list panel to show the {@code Wedding} list.
+     */
+    public void changeToWeddingView() {
+        weddingListPanel.updateWeddingList(logic.getFilteredWeddingList());
+        entityList.getChildren().clear();
+        entityList.getChildren().add(weddingListPanel.getRoot());
+    }
+
+    /**
+     * Changes the list panel to show the {@code Task} list.
+     */
+    public void changeToTaskView() {
+        taskListPanel.updateTaskList(logic.getFilteredTaskList());
+        entityList.getChildren().clear();
+        entityList.getChildren().add(taskListPanel.getRoot());
+    }
+
+    /**
+     * Changes the list panel to show the {@code Task} list.
+     */
+    public void changeToTagView() {
+        tagListPanel.updateTagList(logic.getFilteredTagList());
+        entityList.getChildren().clear();
+        entityList.getChildren().add(tagListPanel.getRoot());
     }
 }

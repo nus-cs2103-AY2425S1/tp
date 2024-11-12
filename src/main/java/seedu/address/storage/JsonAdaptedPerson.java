@@ -15,7 +15,14 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Event;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -28,7 +35,10 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final boolean isVendor;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<WeddingName> weddings = new ArrayList<>();
+    private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,7 +46,10 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("weddings") List<WeddingName> weddings,
+            @JsonProperty("tasks") List<JsonAdaptedTask> tasks,
+            @JsonProperty("isVendor") boolean isVendor) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +57,14 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        if (tasks != null) {
+            this.tasks.addAll(tasks);
+        }
+        if (weddings != null) {
+            this.weddings.addAll(weddings);
+        }
+        this.isVendor = isVendor;
+
     }
 
     /**
@@ -57,17 +78,91 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        weddings.addAll(source.getWeddings().stream()
+                .map(Wedding::getWeddingName)
+                .collect(Collectors.toList()));
+        tasks.addAll(source.getTasks().stream()
+                .map(this::mapToJsonAdaptedTask)
+                .collect(Collectors.toList()));
+        isVendor = source.isVendor();
+    }
+
+    protected String getName() {
+        return name;
+    }
+
+    protected String getPhone() {
+        return phone;
+    }
+
+    protected String getEmail() {
+        return email;
+    }
+
+    protected String getAddress() {
+        return address;
+    }
+
+    protected List<JsonAdaptedTag> getTags() {
+        return tags;
+    }
+
+    protected List<WeddingName> getWeddings() {
+        return weddings;
+    }
+
+    protected List<JsonAdaptedTask> getTasks() {
+        return tasks;
+    }
+
+    protected boolean isVendor() {
+        return this.isVendor;
+    }
+
+    protected boolean hasTasks() {
+        return !this.tasks.isEmpty();
+    }
+
+    /**
+     * Helper function to map a Task to its corresponding JsonAdaptedTask subclass.
+     */
+    private JsonAdaptedTask mapToJsonAdaptedTask(Task task) {
+        if (task instanceof Todo) {
+            return new JsonAdaptedTodo((Todo) task);
+        } else if (task instanceof Deadline) {
+            return new JsonAdaptedDeadline((Deadline) task);
+        } else if (task instanceof Event) {
+            return new JsonAdaptedEvent((Event) task);
+        } else {
+            throw new IllegalArgumentException("Unknown task type");
+        }
     }
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Stores blank weddings with only the wedding name.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
+        final List<Wedding> personWeddings = new ArrayList<>();
+        final List<Task> personTasks = new ArrayList<>();
+
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            Tag toAdd = tag.toModelType();
+            personTags.add(toAdd);
+        }
+
+        for (JsonAdaptedTask task : tasks) {
+            personTasks.add(task.toModelType());
+        }
+
+        for (WeddingName weddingName : weddings) {
+            if (!Wedding.isValidWeddingName(weddingName.toString())) {
+                throw new IllegalValueException(WeddingName.MESSAGE_CONSTRAINTS);
+            }
+            personWeddings.add(new Wedding(weddingName));
         }
 
         if (name == null) {
@@ -97,13 +192,16 @@ class JsonAdaptedPerson {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        final Set<Wedding> modelWeddings = new HashSet<>(personWeddings);
+        final Set<Task> modelTasks = new HashSet<>(personTasks);
+
+        if (isVendor) {
+            return new Vendor(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelWeddings, modelTasks);
+        }
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelWeddings, modelTasks);
     }
 
 }

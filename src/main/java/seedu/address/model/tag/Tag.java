@@ -1,7 +1,6 @@
 package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Tag in the address book.
@@ -9,20 +8,31 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Tag names should be alphanumeric";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String tagName;
+    private final TagName tagName;
+    private int taggedCount;
 
     /**
      * Constructs a {@code Tag}.
-     *
-     * @param tagName A valid tag name.
+     * @param tagName A valid {@code TagName}.
      */
-    public Tag(String tagName) {
+    public Tag(TagName tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+        this.taggedCount = 0;
+    }
+
+    /**
+     * Constructs a {@code Tag}.
+     * @param tagName A valid {@code TagName}.
+     * @param taggedCount The number of people tagged with this tag.
+     */
+    public Tag(TagName tagName, int taggedCount) {
+        requireNonNull(tagName);
+        this.tagName = tagName;
+        this.taggedCount = taggedCount;
     }
 
     /**
@@ -30,6 +40,46 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if another tag has the same TagName as this tag.
+     * @param otherTag A {@code tag} to compare with.
+     */
+    public boolean isSameTag(Tag otherTag) {
+        if (otherTag == this) {
+            return true;
+        }
+
+        return otherTag != null
+                && otherTag.getTagName().equals(getTagName());
+    }
+
+    public TagName getTagName() {
+        return tagName;
+    }
+
+    public int getNumberOfPersonsTagged() {
+        return taggedCount;
+    }
+
+    public void increaseTaggedCount() {
+        taggedCount++;
+    }
+
+    public void decreaseTaggedCount() {
+        taggedCount--;
+    }
+
+    public int getTagCount() {
+        return taggedCount;
+    }
+    /**
+     * Returns true if the tag can be deleted.
+     * The tag can be deleted if TaggedCount is 0.
+     */
+    public boolean canBeDeleted() {
+        return taggedCount == 0;
     }
 
     @Override
@@ -55,8 +105,9 @@ public class Tag {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
-        return '[' + tagName + ']';
+        return '[' + tagName.toString() + ']';
     }
 
 }

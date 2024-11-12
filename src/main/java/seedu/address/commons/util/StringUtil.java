@@ -6,6 +6,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.HashSet;
+
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Event;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 
 /**
  * Helper functions for handling strings.
@@ -39,6 +45,47 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code sentence} contains the {@code word}.
+     *   Ignores case, and only a partial match is required.
+     *   <br>examples:<pre>
+     *       containsPartialWordIgnoreCase("ABc def", "abc") == true
+     *       containsPartialWordIgnoreCase("ABc def", "DEF") == true
+     *       containsPartialWordIgnoreCase("ABc def", "AB") == true
+     *       containsPartialWordIgnoreCase("ABc def", "cd") == false // no partial match with a word
+     *       </pre>
+     * @param sentence cannot be null
+     * @param word cannot be null, cannot be empty
+     */
+    public static boolean containsPartialWordIgnoreCase(String sentence, String word) {
+        requireNonNull(sentence);
+        requireNonNull(word);
+
+        String preppedSentence = sentence.toLowerCase();
+        String preppedWord = word.trim().toLowerCase();
+        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        return preppedSentence.contains(preppedWord);
+    }
+
+    /**
+     * Returns true if the {@code phoneNumber} contains the {@code searchNumber}.
+     *   Only a partial match is required.
+     *   <br>examples:<pre>
+     *       containsPhoneNumber("99209378", "92") == true // partial match
+     *       containsPhoneNumber("99209378", "9378") == true // partial match
+     *       containsPhoneNumber("82810284", "82810284") == true // full match
+     *       containsPhoneNumber("99209378", "86") == false // no partial match with number
+     *       </pre>
+     * @param phoneNumber cannot be null
+     * @param searchNumber cannot be null, cannot be empty
+     */
+    public static boolean containsPhoneNumber(String phoneNumber, String searchNumber) {
+        requireNonNull(phoneNumber);
+        requireNonNull(searchNumber);
+        checkArgument(!searchNumber.isEmpty(), "Phone number parameter cannot be empty");
+        return phoneNumber.toLowerCase().contains(searchNumber.toLowerCase());
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
@@ -64,5 +111,29 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Formats the tasks nicely for output
+     * @param tasks HashSet of tasks to be formatted
+     * @return Properly formatted string for output
+     */
+    public static String tasksString(HashSet<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+        for (Task task : tasks) {
+            if (task instanceof Todo) {
+                sb.append("\nTodo: ").append(task.getDescription());
+            } else if (task instanceof Deadline deadline) {
+                // Cast to Deadline to access its specific methods
+                sb.append("\nDeadline: ").append(deadline.getDescription())
+                        .append(" by ").append(deadline.getBy());
+            } else if (task instanceof Event event) {
+                // Cast to Event to access its specific methods
+                sb.append("\nEvent: ").append(event.getDescription())
+                        .append(" from ").append(event.getFrom())
+                        .append(" to ").append(event.getTo());
+            }
+        }
+        return sb.toString();
     }
 }
