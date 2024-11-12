@@ -779,7 +779,7 @@ Similar to [<ins>UC22](#use-case-uc22-assign-a-contact-to-one-or-more-weddings) 
 
 1. User <ins>lists all contacts [(UC01)](#use-case-uc01-list-all-contacts)</ins>.
 2. User requests to unassign the Vendor designation from a contact.
-3. System displays the contact as no longer being designated as a vendor, in the list of contacts.
+3. System displays the contact as no longer being designated as a Vendor, in the list of contacts.
 
    Use case ends.
 
@@ -799,7 +799,7 @@ Similar to [<ins>UC22](#use-case-uc22-assign-a-contact-to-one-or-more-weddings) 
       Use case resumes at step 1.
   
 * 2c. The user specified to force the unassigning of a Vendor.
-    * 2c1. System displays the contact as no longer being designated as a vendor and with no tasks assigned to them, in the list of contacts.
+    * 2c1. System displays the contact as no longer being designated as a Vendor and with no tasks assigned to them, in the list of contacts.
 
       Use case ends.
 
