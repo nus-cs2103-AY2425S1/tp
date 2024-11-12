@@ -162,93 +162,8 @@ Above shows the sequence diagram when a user wants to add an event.
 6. AddEventCommand object calls the addEvent method of eventManager
 7. AddEventCommand object returns a CommandResult object to Logic Manager
 
-### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -284,15 +199,27 @@ Student event planners at NUS who:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                                                                | I want to …​                                                             | So that I can…​                                                                                                          |
-|----------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | Student Event Planner who handles contact information of many people                                   | Add contact details of event attendees, vendors, sponsors and volunteers | store their contact details and have a platform to view the contact information of the relevant parties all in one place |
-| `* * *`  | Student event planner who can type fast and prefer typing over other means of input                    | Perform the functions of the app solely by typing                        | speed up the process of accessing and managing information                                                               |
-| `* * *`  | Student Event Planner                                                                                  | Delete a person                                                          | keep my contacts up-to-date                                                                                              |
-| `* * *`  | Student Event Planner                                                                                  | View the list of all contacts and number of contacts                     | quickly get an overview of contact information of all attendees, vendors, sponsors and volunteer saved so far            |
-| `* *`    | Student event planner who has to contact vendors, sponsors, attendees and volunteers via various means | Save their name, phone number, email address, telegram handle, address   | efficiently keep track of their contact details and reach out to them through the appropriate channels                   |
-| `* *`    | Student event planner                                                                                  | Update contact details of attendees, vendors, sponsors and volunteers    | keep their most current information or rectify a mistake                                                                 |
-| `* *`    | Student event planner who needs to contact different stakeholders of an event                          | Search for contacts by name                                              | quickly locate the contacts I need                                                                                       |
+| Priority   | As a …​                                                                                                | I want to …​                                                                                                                              | So that I can…​                                                                                                                                    |
+|------------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`    | Student Event Planner who handles contact information of many people                                   | Add contact details of event attendees, vendors, sponsors and volunteers                                                                  | store their contact details and have a platform to view the contact information of the relevant parties all in one place                           |
+| `* * *`    | Student event planner who can type fast and prefer typing over other means of input                    | Perform the functions of the app solely by typing                                                                                         | speed up the process of accessing and managing information                                                                                         |
+| `* * *`    | Student Event Planner                                                                                  | Delete a person                                                                                                                           | keep my contacts up-to-date                                                                                                                        |
+| `* * *`    | Student Event Planner                                                                                  | View the list of all contacts and number of contacts                                                                                      | quickly get an overview of contact information of all attendees, vendors, sponsors and volunteer saved so far                                      |
+| `* * *`    | Student event planner who has to contact vendors, sponsors, attendees and volunteers via various means | Save their name, phone number, email address, telegram handle, address                                                                    | efficiently keep track of their contact details and reach out to them through the appropriate channels                                             |
+| `* * *`    | Student event planner                                                                                  | Update contact details of attendees, vendors, sponsors and volunteers                                                                     | keep their most current information or rectify a mistake                                                                                           |
+| `* * *`    | Busy student event planner who has to deal with large number of contacts                               | Search for contacts by name                                                                                                               | find contact information of specific people quickly when I need to                                                                                 |
+| `* * `     | Student event planner managing various roles of events                                                 | Search for contacts by role                                                                                                               | quickly locate and communicate with specific groups of people relevant to my event planning needs                                                  |
+| `* * `     | Student event planner who manages multiple events                                                      | Add new events                                                                                                                            | keep track of events and categorise contacts based on the events they are involved in                                                              |
+| `* * `     | Student Event planner who is helping to plan multiple events                                           | Add contacts (such as attendees, vendors, sponsors, and volunteers) to specific events                                                    | easily track who is involved in each event and streamline communication and planning for each contact group                                        |
+| `* * `     | Student event planner coordinating multiple events                                                     | Find and view contacts associated with a specific event                                                                                   | quickly access and manage the attendees, volunteers, vendors, and sponsors relevant to that event without searching through all contacts           |
+| `* * `     | Student event planner managing event contact lists                                                     | Remove a contact from a specific event                                                                                                    | keep the event’s contact list accurate and up-to-date if an attendee, volunteer, vendor, or sponsor no longer needs to be involved                 |
+| `* * `     | Student event planner organising multiple events                                                       | Delete an event                                                                                                                           | maintain a clean and relevant list of events and remove outdated or canceled events                                                                |
+| `* * `     | Student event planner who occasionally needs to reset or start fresh                                   | Clear all events                                                                                                                          | remove outdated information in bulk and prepare the platform for a new set of events without manually deleting each one                            |
+| `* * `     | Student event planner managing diverse contacts                                                        | Use Search Mode to search for contacts based on multiple criteria (such as name, phone number, email, address, Telegram handle, and role) | quickly find relevant contacts that I need                                                                                                         |
+| `* * `     | Student event planner who needs to add contacts to events efficiently                                  | Add multiple contacts (attendees, vendors, sponsors, and volunteers) to an event simultaneously                                           | quickly organize event contacts and save time by grouping relevant contacts together                                                               |
+| `* * `     | Student event planner managing a large contact list                                                    | Exclude certain contacts (such as those already added to an event) from search results                                                    | focus on finding only the contacts who still need to be added, avoiding redundancy and saving time                                                 |
+| `* `       | Student event planner managing a large contact list                                                    | See which contacts are currently excluded from search results                                                                             | easily verify which contacts have already been added to events and avoid adding them again by mistake                                              |
+| `* `       | Student event planner managing event contacts                                                          | Remove all contacts from the excluded list                                                                                                | have those contacts reappear in search results and add them to events if necessary, ensuring I can efficiently manage my contact list when needed  |
 
 *{More to be added}*
 
@@ -406,7 +333,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **GUI (Graphical User Interface)**: A icon-based user interface where the user interacts with the system through visual indicators and graphical icons.
 * **Contact**: An individual or entity whose information is stored in PlanPal, typically including name, phone number, email, address, role, and optionally a Telegram handle.
 * **Role**: A category assigned to a contact to indicate their relationship to an event, such as "attendee," "vendor," "volunteer," or "sponsor".
-* **Tag**: A label that is applied to a contact to categorize them (e.g., as an attendee, vendor, volunteer, or sponsor) for easy organization and filtering.
 * **Telegram Handle**: A unique username used on the Telegram messaging platform, which can be optionally stored as part of a contact's information in PlanPal.
 * **User Object**: The data structure in PlanPal that holds the information of a contact, including details like name, phone number, email, address, role, and Telegram handle.
 * **Single User**: PlanPal is designed to support only one user per system. It is not intended for multiple users on the same computer.
@@ -561,23 +487,29 @@ testers are expected to do more *exploratory* testing.
 ---
 ### **Planned Enhancements**
 Team size: 5
-1. **Clear Search Results in Searchmode**: Currently is no way to clear existing search conditions in `searchmode`.
-   This enhancement will allow users to clear the current search results and view all contacts again.
-2. **find-role search for users with no Roles**: Currently, the find-role command is unable to search for users with no roles.
+1. **Clear Search Results in Search Mode**: Currently there is no way to clear existing search conditions in `search-mode`.
+   This enhancement will add a command to allow users to clear the current search results and revert to the beginning of activating `search-mode` again.
+2. **find-role search for users with no Roles**: Currently, the `find-role` command is unable to search for users with no roles.
    This enhancement will allow search for users with no roles.
-3. **Better TLD input validation for emails**: Currently, it is possible to create emails of `x@xx` format, even though 
+3. **Top Level Domain (TLD) input validation for emails**: Currently, it is possible to create emails of `x@xx` format, even though 
    the domain part of the email should have at least 2 domain labels, the last one being the Top Level Domain (TLD) in
-   real life. We could have better input validation to enforce that there must be at least 2 domain labels.
-4. **Allow users to define roles for contacts**: Currently, contacts can only have attendee, sponsor, vendor and volunteer roles or have no roles, which may
+   real life (i.e. the minimal format should be `@xx.xx`). We could have better input validation to enforce that there must be at least 2 domain labels.
+4. **Allow users to define custom roles for contacts**: Currently, contacts can only have attendee, sponsor, vendor and volunteer roles or have no roles, which may
    be too restrictive. We could allow users to add additional roles to contacts such as "emcee", "performer", "VIP" etc so that 
-   they get a classification instead of being labelled as no roles just because they do not fit in one of the 4 pre-determined roles. 
-5. **Allow users to add contacts to events under more roles** Building on top of point 4, we could then allow users to add these contacts to events under these additional roles so that events are not limited
-   to just attendees, sponsors, vendors and volunteers.
-6. **Search within an event**: Currently, all searches are done on the general list of contacts. We could expand find-event to include a search for contacts within an event
+   they get a classification instead of being labelled as no roles just because they do not fit in one of the 4 pre-determined roles. These user defined roles
+   will continue to work the same way as the 4 pre-determined roles.
+5. **Search within an event**: Currently, all searches are done on the general list of contacts. We could expand `find-event` to include a search for contacts within an event
    e.g. find-event ei/1 n/john to find a contact with name "john" within event 1 so that users can find a contact for a specific event more quickly.
-7. **Add description to event**: Currently, users are only able to create events with an event name. We could allow users to add
+6. **Add description to event**: Currently, users are only able to create events with an event name. We could allow users to add
    description to events when they create a new event e.g. new n/EVENT_NAME d/EVENT_DESCRIPTION so that they can add additional important details like the date and location of the event.
-8. **Make remove contact from event message more specific**: Currently, if user types "remove ei/1 ci/0", the app says "Invalid command format!
+7. **Make remove contact from event message more specific**: Currently, if user types "remove ei/1 ci/0", the app says "Invalid command format!
    remove ei/EVENT_INDEX ci/CONTACT_INDEX : Removes a contact from an event" which is not specific enough. We plan to make the error message say "Contact Index should be a positive integer" instead.
-9. **Implement more graceful handling of invalid JSON data** : Currently, manual editing of JSON data is allowed. However, if invalid data is entered, the event list or address list could be completely cleared or the app
-may fail unexpectedly. We plan to implement more graceful handling of invalid JSON data so that invalid data entries can be ignored, allowing for operation with the remaining valid data.
+8. **Make event-add and add-all error message more specific and less misleading**: Currently, when "event-add" command or "add-all" command in search mode is called to add multiple contacts to an event at the same time, if one of the contacts to be added to event does not have the role that he or she is being added to,
+   PlanPal shows an error message informing the user of the contact that does not have the role. However, some of the contacts may get added to the event. We plan to make the
+   error message include which contacts got added to the event so that users know that certain contacts got added and which contacts did not get added to the event.
+9. **Implement more graceful handling of invalid JSON data**: Currently, manual editing of JSON data is allowed. However, if invalid data is entered, the event list or address list could be completely cleared or the app 
+   may fail unexpectedly. We plan to implement more graceful handling of invalid JSON data so that invalid data entries can be ignored, allowing for operation with the remaining valid data.
+10. **Allow input fields to have longer length limits**: Currently, we limit the lengths of all the input fields such as event name,
+    contact name, phone number, address and email to a reasonable limit such that they are visible within the UI. However, it is possible that there are rare cases where the
+    length of real life information exceeds the input length limits we have imposed. We could allow greater input lengths by making our UI more robust in viewing
+    inputs that are very lengthy.
