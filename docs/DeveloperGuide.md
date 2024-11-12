@@ -209,6 +209,45 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Search Public Address feature
+
+The `searchpa` command is a feature that allows users who have a public address to quickly find the contact within the
+DLTbook which this public address is associated to. An example is
+`searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`
+
+#### Implementation
+
+The `searchpa` command is facilitated by `SearchPublicAddressCommand`,`SearchPublicAddressCommandParser` and
+`PublicAddressComposition`. It uses `Model#getFilteredPersonList()` to get the list of filtered persons currently
+displayed and searches each of the persons for the presence of the public address being searched for using
+Person#hasPublicAddressStringAmongAllNetworks(String publicAddressString).
+
+#### How to execute the command
+
+1. The `searchpa` command is executed by typing `searchpa` followed by the public address to be searched for.
+2. The `AddressBookParser` class creates a new `SearchPublicAddressCommandParser` object.
+3. If there is no string of Public Address entered or more than 1 string of public address entered, a `ParseException
+   will be thrown.
+4. The `SearchPublicAddressCommandParser` class creates a new `SearchPublicAddressCommand` object with the parsed public
+   address string.
+5. The `SearchPublicAddressCommand` object calls the PublicAddressComposition#validatePublicAddress(String
+   publicAddressString) method to validate the public address string, and throws a `ParseException` if the public
+   address is invalid.
+6. The `SearchPublicAddressCommand` object then calls the `Model#getFilteredPersonList()` method
+   to get the list of filtered persons currently displayed.
+7. The `SearchPublicAddressCommand` object then searches each of the persons for the presence of the public address
+   being
+   searched for using `Person#hasPublicAddressStringAmongAllNetworks(String publicAddressString)`.
+8. `Person#hasPublicAddressStringAmongAllNetworks(String publicAddressString)` calls
+   `PublicAddressComposition#hasPublicAddress(String publicAddressString)`.
+9. The boolean value returned from `PublicAddressComposition#hasPublicAddress(String publicAddressString)` is then used
+   to
+   create a `List<Persons>` object that have the public address being searched for in the `SearchPublicAddressCommand`
+   object.
+10. The `SearchPublicAddressCommand` object then calls the
+    `SearchPublicAddressCommand#generateResult(List<Person> personsWithPublicAddressMatch)` to generate the success or
+    error message.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -565,15 +604,29 @@ Use case ends.
 
 ## **Appendix: Planned Enhancements**
 
-1. In the current state, if a very long name is entered, the command box will be very long. In the future, text wrapping should be
-implemented.
+
+1. In the current state, if a very long name is entered, the command box will be very long, text wrapping should be
+   implemented.
 
 2. In the current state, for the searchpa command if users enter extraneous inputs according to user guide, Dltbook will
-serve a error message like but this error message does not accurately reflect the error caused by extraneous input.
-For example, if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9 w/main" is entered but the prefix w/
-is not recognized globally, a error of "Public Address for length BTC/ETH/SOL should be less than 44 characters" occurs.
-of if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5sv n/s" is entered, the error message of "Public
-Address contains only alphanumeric characters" occurs
+   serve a error message like but this error message does not accurately reflect the error caused by extraneous input.
+   for example if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9 w/main" is entered but the prefix
+   w/
+   is not recognized globally, a error of "Public Address for length BTC/ETH/SOL should be less than 44 characters"
+   occurs.
+   of if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5sv n/s" is entered, the error message of "Public
+   Address contains only alphanumeric characters" occurs.
+
+3. In the current state, for the add/edit command, only alphanumeric character names are allowed. We shall add support
+   for more with special characters in the future.
+
+4. In the current state, for the add/edit command, contacts in DLTbook have no support for phone numbers with symbols
+   such as "+"
+   and "-" in the phone number field which may be useful for saving international phone numbers
+
+5. In the current state, for the add/edit command, Duplicates allowed The email field of contacts in DLTbook have no
+   restrictions and can be duplicated across contacts.
+
 
 ## **Appendix: Instructions for manual testing**
 
