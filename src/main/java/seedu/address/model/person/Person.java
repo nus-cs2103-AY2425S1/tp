@@ -2,12 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.scheme.Scheme;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,18 +25,47 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Priority priority;
+    private final DateOfBirth dateOfBirth;
+    private final Income income;
+    private final FamilySize familySize;
     private final Set<Tag> tags = new HashSet<>();
 
+    private final UpdatedAt updatedAt;
+
+    private final ArrayList<Scheme> schemes = new ArrayList<>();
+    private final boolean isArchived;
+
     /**
+     * Constructor for a new person with schemes, only used in AddSchemeCommand.
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Priority priority, DateOfBirth dateOfBirth,
+                  Income income, FamilySize familySize, Set<Tag> tags, ArrayList<Scheme> schemes, UpdatedAt updatedAt,
+                  boolean isArchived) {
+        requireAllNonNull(name, phone, email, address, priority, dateOfBirth,
+                income, familySize, tags, schemes, updatedAt);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.priority = priority;
+        this.dateOfBirth = dateOfBirth;
+        this.income = income;
+        this.familySize = familySize;
         this.tags.addAll(tags);
+        this.schemes.addAll(schemes);
+        this.updatedAt = updatedAt;
+        this.isArchived = isArchived;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Priority priority, DateOfBirth dateOfBirth,
+                  Income income, FamilySize familySize, Set<Tag> tags, UpdatedAt updatedAt) {
+        this(name, phone, email, address, priority, dateOfBirth, income, familySize, tags, new ArrayList<>(),
+                updatedAt, false);
     }
 
     public Name getName() {
@@ -53,12 +84,40 @@ public class Person {
         return address;
     }
 
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public DateOfBirth getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public Income getIncome() {
+        return income;
+    }
+
+    public FamilySize getFamilySize() {
+        return familySize;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public UpdatedAt getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public ArrayList<Scheme> getSchemes() {
+        return schemes;
+    }
+
+    public boolean isArchived() {
+        return this.isArchived;
     }
 
     /**
@@ -70,8 +129,7 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -85,22 +143,29 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && priority.equals(otherPerson.priority)
+                && dateOfBirth.equals(otherPerson.dateOfBirth)
+                && income.equals(otherPerson.income)
+                && familySize.equals(otherPerson.familySize)
+                && tags.equals(otherPerson.tags)
+                && schemes.containsAll(otherPerson.schemes)
+                && otherPerson.schemes.containsAll(schemes)
+                && isArchived == otherPerson.isArchived;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, priority, dateOfBirth,
+                income, familySize, tags, updatedAt, schemes);
     }
 
     @Override
@@ -110,8 +175,12 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("priority", priority)
+                .add("dateOfBirth", dateOfBirth)
+                .add("income", income)
+                .add("familySize", familySize)
                 .add("tags", tags)
+                .add("updatedAt", updatedAt)
                 .toString();
     }
-
 }

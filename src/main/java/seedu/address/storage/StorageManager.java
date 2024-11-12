@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -10,6 +11,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.appointment.Appointment;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -17,14 +19,17 @@ import seedu.address.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
-    private UserPrefsStorage userPrefsStorage;
+    private final AddressBookStorage addressBookStorage;
+    private final AppointmentStorage appointmentStorage;
+    private final UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, AppointmentStorage appointmentStorage,
+                          UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
+        this.appointmentStorage = appointmentStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -44,7 +49,6 @@ public class StorageManager implements Storage {
     public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
-
 
     // ================ AddressBook methods ==============================
 
@@ -75,4 +79,30 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    @Override
+    public Path getAppointmentFilePath() {
+        return appointmentStorage.getAppointmentFilePath();
+    }
+
+    @Override
+    public Optional<List<Appointment>> readAppointments() throws DataLoadingException {
+        return appointmentStorage.readAppointments();
+    }
+
+    @Override
+    public Optional<List<Appointment>> readAppointments(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return appointmentStorage.readAppointments(filePath);
+    }
+
+    @Override
+    public void saveAppointments(List<Appointment> appointments) throws IOException {
+        appointmentStorage.saveAppointments(appointments);
+    }
+
+    @Override
+    public void saveAppointments(List<Appointment> appointments, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        appointmentStorage.saveAppointments(appointments, filePath);
+    }
 }

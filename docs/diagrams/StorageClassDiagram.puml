@@ -20,6 +20,14 @@ Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+Class JsonAdaptedScheme
+}
+
+package "Appointment Storage" #F4F6F6{
+Class "<<interface>>\nAppointmentStorage" as AppointmentStorage
+Class JsonAppointmentStorage
+Class JsonSerializableAppointment
+Class JsonAdaptedAppointment
 }
 
 }
@@ -30,8 +38,10 @@ HiddenOutside ..> Storage
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" AppointmentStorage
 
 Storage -left-|> UserPrefsStorage
+Storage -left-|> AppointmentStorage
 Storage -right-|> AddressBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
@@ -39,5 +49,10 @@ JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedPerson --> "*" JsonAdaptedScheme
+
+JsonAppointmentStorage .up.|> AppointmentStorage
+JsonAppointmentStorage ..> JsonSerializableAppointment
+JsonSerializableAppointment --> "*" JsonAdaptedAppointment
 
 @enduml

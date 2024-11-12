@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.Arrays;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -18,8 +20,33 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
+            String[] inputArr = args.split(",");
+            int inputSize = inputArr.length;
+            int[] intArr = new int[inputSize];
+
+            for (int i = 0; i < inputSize; i++) {
+                ParserUtil.parseIndex(inputArr[i].trim());
+            }
+            //convert string indexes to int indexes and sort int indexes in ascending order
+            for (int i = 0; i < inputSize; i++) {
+                try {
+                    intArr[i] = Integer.parseInt(inputArr[i].trim());
+                } catch (NumberFormatException e) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                }
+            }
+            //extract only the unique int indexes
+            int[] uniqueIntArr = Arrays.stream(intArr)
+                    .distinct()
+                    .toArray();
+            int uniqueSize = uniqueIntArr.length;
+            Index[] uniqueIndex = new Index[uniqueSize];
+
+            for (int i = 0; i < uniqueSize; i++) {
+                uniqueIndex[i] = ParserUtil.parseIndex(String.valueOf(uniqueIntArr[i]));
+            }
+            return new DeleteCommand(uniqueIndex);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);

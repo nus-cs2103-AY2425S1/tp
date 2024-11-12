@@ -5,42 +5,89 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "priority" : "MEDIUM",
+    "dateOfBirth": "1999-06-10",
+    "income" : 1000,
+    "familySize" : 1,
+    "appointment" : null,
+    "tags" : [ "friends" ],
+    "schemes" : [ ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "priority" : "HIGH",
+    "dateOfBirth": "1999-01-29",
+    "income" : 0,
+    "familySize" : 1,
+    "appointment" : {
+      "date" : "2024-10-20",
+      "startTime" : "14:00",
+      "endTime" : "16:00"
+    },
+    "tags" : [ "owesMoney", "friends" ],
+    "schemes" : [ ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "priority" : "LOW",
+    "dateOfBirth": "2000-01-01",
+    "income" : 970.50,
+    "familySize" : 1,
+    "appointment" : null,
+    "tags" : [ ],
+    "schemes" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "priority" : "LOW",
+    "dateOfBirth": "1990-01-01",
+    "income" : 2200.46,
+    "familySize" : 1,
+    "appointment" : null,
+    "tags" : [ "friends" ],
+    "schemes" : [ ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "priority" : "LOW",
+    "dateOfBirth": "2000-05-01",
+    "income" : 2532.00,
+    "familySize" : 1,
+    "appointment" : null,
+    "tags" : [ ],
+    "schemes" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "priority" : "LOW",
+    "dateOfBirth": "2000-05-31",
+    "income" : 1750.96,
+    "familySize" : 1,
+    "appointment" : null,
+    "tags" : [ ],
+    "schemes" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
-  } ]
+    "priority" : "LOW",
+    "dateOfBirth": "2010-12-25",
+    "income" : 1300.54,
+    "familySize" : 1,
+    "appointment" : null,
+    "tags" : [ ],
+    "schemes" : [ ]
+  } ],
+  "archivedPersons": [ ]
 }

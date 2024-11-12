@@ -25,12 +25,30 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+        <Label fx:id="isArchived" text="ARCHIVED">
+          <HBox.margin>
+            <Insets left="4" />
+          </HBox.margin>
+        </Label>
+        <Label fx:id="priority" text="\$priority">
+          <HBox.margin>
+            <Insets left="4" />
+          </HBox.margin>
+          <minWidth>
+            <!-- Ensures that the label text is never truncated -->
+            <Region fx:constant="USE_PREF_SIZE" />
+          </minWidth>
+        </Label>
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="dateOfBirth" styleClass="cell_small_label" text="\$dateOfBirth" />
+      <Label fx:id="householdIncome" styleClass="cell_small_label" text="\$householdIncome" />
+      <Label fx:id="familySize" styleClass="cell_small_label" text="\$familySize" />
+      <Label fx:id="updatedAt" styleClass="cell_small_label" text="\$updatedAt" />
     </VBox>
   </GridPane>
 </HBox>

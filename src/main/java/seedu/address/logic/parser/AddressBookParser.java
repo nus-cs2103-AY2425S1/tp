@@ -8,15 +8,29 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.LogicManager;
+import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddSchemeCommand;
+import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteSchemeCommand;
+import seedu.address.logic.commands.EditAppointmentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListAppointmentCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SchemeCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.StatisticsCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewPersonSchemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -56,11 +70,20 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case AddAppointmentCommand.COMMAND_WORD:
+            return new AddAppointmentCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
+        case EditAppointmentCommand.COMMAND_WORD:
+            return new EditAppointmentCommandParser().parse(arguments);
+
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DeleteAppointmentCommand.COMMAND_WORD:
+            return new DeleteAppointmentCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -68,19 +91,51 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case GetCommand.COMMAND_WORD:
+            return new GetCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand(LogicManager.getPastCommands());
+
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
+
+        case ListAppointmentCommand.COMMAND_WORD:
+            return new ListAppointmentCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommandParser().parse(arguments);
+
+        case StatisticsCommand.COMMAND_WORD:
+            return new StatisticsCommand();
+
+        case SchemeCommand.COMMAND_WORD:
+            return new SchemeCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
+        case AddSchemeCommand.COMMAND_WORD:
+            return new AddSchemeCommandParser().parse(arguments);
+
+        case DeleteSchemeCommand.COMMAND_WORD:
+            return new DeleteSchemeCommandParser().parse(arguments);
+
+        case ViewPersonSchemeCommand.COMMAND_WORD:
+            return new ViewPersonSchemeCommandParser().parse(arguments);
+
+        case ArchiveCommand.COMMAND_WORD_ARCHIVE:
+            return new ArchiveCommandParser(true).parse(arguments);
+
+        case ArchiveCommand.COMMAND_WORD_UNARCHIVE:
+            return new ArchiveCommandParser(false).parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

@@ -3,6 +3,11 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "address": "4th street"
-  } ]
+    "address": "4th street",
+    "dateOfBirth": "99 January 1000BCE",
+    "priority" : "priority",
+    "income": -3.291,
+    "familySize": 0
+  } ],
+  "archivedPersons": [ ]
 }

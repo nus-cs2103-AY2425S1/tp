@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
@@ -15,6 +16,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -25,6 +28,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Priority;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -33,7 +37,8 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Helper helper = new Helper();
+    private final Model model = new ModelManager(getTypicalAddressBook(), new ArrayList<>(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -43,7 +48,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(model.getAddressBook()), new ArrayList<>(), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -64,10 +70,18 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(model.getAddressBook()), new ArrayList<>(), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_specifiedPriorityField_shouldModifyPriority() {
+        for (Priority priority : Priority.values()) {
+            helper.execute_specifiedPriorityField_shouldModifyPriority(priority);
+        }
     }
 
     @Test
@@ -77,7 +91,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(model.getAddressBook()), new ArrayList<>(), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -93,7 +108,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new AddressBook(model.getAddressBook()), new ArrayList<>(), new UserPrefs());
+        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -110,10 +127,10 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Person personInList = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()); // second in list
 
-        // edit person in filtered list into a duplicate in address book
-        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        showPersonAtIndex(model, INDEX_FIRST_PERSON); // filters list to now only contain first person
+
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(personInList).build());
 
@@ -181,4 +198,70 @@ public class EditCommandTest {
         assertEquals(expected, editCommand.toString());
     }
 
+    @Test
+    public void execute_newUpdatedAtFieldComesAfterOld() {
+        Person personToBeEdited = model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased());
+
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
+
+        Model expectedModel = generateExpectedModel(personToBeEdited, personToBeEdited);
+
+        String expectedMessage = generateExpectedSuccessMessage(personToBeEdited);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+        Person editedPerson = model.getFilteredPersonList()
+                .get(INDEX_FIRST_PERSON.getZeroBased());
+
+        assertEquals(personToBeEdited, editedPerson); // ensure we are comparing the same person for updatedAt
+        assertTrue(editedPerson.getUpdatedAt().getValue()
+                .isAfter(personToBeEdited.getUpdatedAt().getValue()));
+    }
+
+    private class Helper {
+
+        public void execute_specifiedPriorityField_shouldModifyPriority(Priority priority) {
+            assertNotNull(priority);
+
+            Person personToBeEdited = model.getFilteredPersonList()
+                    .get(INDEX_FIRST_PERSON.getZeroBased());
+
+            Person personToBeExpected = new Person(
+                    personToBeEdited.getName(),
+                    personToBeEdited.getPhone(),
+                    personToBeEdited.getEmail(),
+                    personToBeEdited.getAddress(),
+                    priority,
+                    personToBeEdited.getDateOfBirth(),
+                    personToBeEdited.getIncome(),
+                    personToBeEdited.getFamilySize(),
+                    personToBeEdited.getTags(),
+                    personToBeEdited.getUpdatedAt());
+
+            EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                    .withPriority(priority)
+                    .build();
+
+            EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+            Model expectedModel = generateExpectedModel(personToBeEdited, personToBeExpected);
+
+            String expectedMessage = generateExpectedSuccessMessage(personToBeExpected);
+
+            assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        }
+    }
+
+    private Model generateExpectedModel(Person personToBeEdited, Person personToBeExpected) {
+        Model expectedModel = new ModelManager(
+                new AddressBook(model.getAddressBook()), new ArrayList<>(), new UserPrefs());
+        expectedModel.setPerson(personToBeEdited, personToBeExpected);
+        return expectedModel;
+    }
+
+    private String generateExpectedSuccessMessage(Person personToBeExpected) {
+        return String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(personToBeExpected));
+    }
 }

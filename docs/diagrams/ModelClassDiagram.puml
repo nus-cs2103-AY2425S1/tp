@@ -13,15 +13,26 @@ Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
-Class Person
-Class Address
-Class Email
+Class Person {
+    - isArchived : boolean
+}
 Class Name
 Class Phone
+Class Email
+Class Address
+Class DateOfBirth
+Class Priority
+Class Income
+Class FamilySize
+Class Scheme
 Class Tag
+
+class Appointment
 
 Class I #FFFFFF
 }
+
+show Person fields
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
@@ -41,6 +52,11 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> DateOfBirth
+Person *--> Priority
+Person *--> Income
+Person *--> FamilySize
+Person *--> "*" Scheme
 Person *--> "*" Tag
 
 Person -[hidden]up--> I
@@ -51,4 +67,7 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+
+ModelManager --> "~* all" Appointment
+ModelManager --> "~* filtered" Appointment
 @enduml

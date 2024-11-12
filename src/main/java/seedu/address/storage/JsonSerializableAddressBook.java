@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,21 +13,31 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Person list contains duplicate person(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+
+    private final List<JsonAdaptedPerson> archivedPersons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(
+            @JsonProperty("persons")
+            List<JsonAdaptedPerson> persons,
+            @JsonProperty("archivedPersons")
+            List<JsonAdaptedPerson> archivedPersons) {
         this.persons.addAll(persons);
+
+        if (archivedPersons != null) {
+            this.archivedPersons.addAll(archivedPersons);
+        }
     }
 
     /**
@@ -37,7 +46,15 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(source.getPersonList().stream()
+                .filter(person -> !person.isArchived())
+                .map(JsonAdaptedPerson::new)
+                .toList());
+
+        archivedPersons.addAll(source.getPersonList().stream()
+                .filter(Person::isArchived)
+                .map(JsonAdaptedPerson::new)
+                .toList());
     }
 
     /**
@@ -47,6 +64,7 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
@@ -54,7 +72,15 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+
+        for (JsonAdaptedPerson jsonAdaptedPerson : archivedPersons) {
+            Person person = jsonAdaptedPerson.toArchivedModelType();
+            if (addressBook.hasPerson(person)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            }
+            addressBook.addPerson(person);
+        }
+
         return addressBook;
     }
-
 }

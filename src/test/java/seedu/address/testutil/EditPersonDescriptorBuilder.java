@@ -1,15 +1,20 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FamilySize;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,7 +22,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditPersonDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    private final EditPersonDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
         descriptor = new EditPersonDescriptor();
@@ -36,6 +41,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setPriority(person.getPriority());
+        descriptor.setDateOfBirth(person.getDateOfBirth());
+        descriptor.setIncome(person.getIncome());
+        descriptor.setFamilySize(person.getFamilySize());
         descriptor.setTags(person.getTags());
     }
 
@@ -68,6 +77,46 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code DateOfBirth} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withDateOfBirth(LocalDate dateOfBirth) {
+        descriptor.setDateOfBirth(new DateOfBirth(dateOfBirth));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Income} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withIncome(double income) {
+        descriptor.setIncome(new Income(income));
+        return this;
+    }
+
+    /**
+     * Sets the {@code FamilySize} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withFamilySize(int familySize) {
+        descriptor.setFamilySize(new FamilySize(familySize));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Priority} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPriority(Priority priority) {
+        descriptor.setPriority(priority);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Priority} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withPriority(String priority) {
+        descriptor.setPriority(Priority.valueOf(priority));
         return this;
     }
 

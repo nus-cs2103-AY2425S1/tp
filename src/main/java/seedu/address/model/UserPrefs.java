@@ -14,7 +14,8 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path socialBookFilePath = Paths.get("data" , "socialbook.json");
+    private Path appointmentFilePath = Paths.get("data" , "appointments.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -35,7 +36,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setSocialBookFilePath(newUserPrefs.getSocialBookFilePath());
+        setAppointmentFilePath(newUserPrefs.getAppointmentFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -47,13 +49,22 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getAddressBookFilePath() {
-        return addressBookFilePath;
+    public Path getSocialBookFilePath() {
+        return socialBookFilePath;
     }
 
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
+    public void setSocialBookFilePath(Path socialBookFilePath) {
+        requireNonNull(socialBookFilePath);
+        this.socialBookFilePath = socialBookFilePath;
+    }
+
+    public Path getAppointmentFilePath() {
+        return appointmentFilePath;
+    }
+
+    public void setAppointmentFilePath(Path appointmentFilePath) {
+        requireNonNull(appointmentFilePath);
+        this.appointmentFilePath = appointmentFilePath;
     }
 
     @Override
@@ -63,26 +74,24 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UserPrefs)) {
+        if (!(other instanceof UserPrefs otherUserPrefs)) {
             return false;
         }
 
-        UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+                && socialBookFilePath.equals(otherUserPrefs.socialBookFilePath)
+                && appointmentFilePath.equals(otherUserPrefs.appointmentFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, socialBookFilePath);
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + addressBookFilePath);
-        return sb.toString();
+        return "Gui Settings : " + guiSettings
+                + "\nLocal socialbook data file location : " + socialBookFilePath
+                + "\nLocal appointment data file location : " + appointmentFilePath;
     }
-
 }
