@@ -346,11 +346,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**UC07: Search for contacts using multiple filters**
+**UC07: Search for contacts using a filter**
 
 **MSS**
 1. User enters a command to search for contacts.
-2. User specifies one or more filters (e.g., name, role, phone number).
+2. User specifies a filter (e.g., name, role, event).
 3. PlanPal displays the filtered list of contacts.
 
    Use case ends.
