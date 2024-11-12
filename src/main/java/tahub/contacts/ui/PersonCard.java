@@ -60,6 +60,16 @@ public class PersonCard extends UiPart<Region> {
         this.logic = logic;
         attendanceWindow = new AttendanceWindow(person, logic);
         updateCardContent(displayedIndex);
+
+        // Get all courses the student is enrolled in
+        ObservableList<StudentCourseAssociation> scaList = logic.getStudentScas(person)
+                .getByMatric(person.getMatricNumber().value);
+        // Add course codes as tags
+        for (StudentCourseAssociation sca : scaList) {
+            Label courseLabel = new Label(sca.getCourse().courseCode.toString());
+            courseLabel.getStyleClass().add("course-tag");
+            tags.getChildren().add(courseLabel);
+        }
     }
 
     /**
@@ -107,10 +117,40 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private void onClickHandler(ActionEvent event) {
         event.consume();
+        if (attendanceWindow == null) {
+            attendanceWindow = new AttendanceWindow(person, logic);
+        }
+
         if (!attendanceWindow.isShowing()) {
             attendanceWindow.show();
         } else {
             attendanceWindow.focus();
         }
+    }
+
+    /**
+     * Cleanup resources when the card is being removed.
+     */
+    public void cleanup() {
+        if (attendanceWindow != null) {
+            attendanceWindow.cleanup();
+            attendanceWindow.hide();
+            attendanceWindow = null;
+        }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof PersonCard)) {
+            return false;
+        }
+
+        PersonCard card = (PersonCard) other;
+        return id.getText().equals(card.id.getText())
+                && person.equals(card.person);
     }
 }

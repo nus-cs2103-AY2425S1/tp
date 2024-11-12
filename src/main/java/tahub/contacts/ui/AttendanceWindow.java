@@ -3,6 +3,7 @@ package tahub.contacts.ui;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -46,6 +47,7 @@ public class AttendanceWindow extends UiPart<Stage> {
     private final Person person;
     /** The currently selected student-course association. */
     private StudentCourseAssociation currentSca;
+    private ListChangeListener<StudentCourseAssociation> scaListChangeListener;
 
     // FXML injected fields documentation
     /** ComboBox for selecting different courses the student is enrolled in. */
@@ -85,7 +87,16 @@ public class AttendanceWindow extends UiPart<Stage> {
         this.logic = logic;
         this.person = person;
         attendanceListView.setCellFactory(listView -> new AttendanceListCell());
+
+        setupScaListChangeListener();
         setupCourseComboBox();
+
+        // Add listener to the stage's showing property to refresh when shown
+        root.showingProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                refreshDisplay();
+            }
+        });
     }
 
     /**
@@ -96,6 +107,26 @@ public class AttendanceWindow extends UiPart<Stage> {
      */
     public AttendanceWindow(Person person, Logic logic) {
         this(person, logic, new Stage());
+    }
+
+    /**
+     * Sets up a listener to monitor changes in the SCA list.
+     */
+    private void setupScaListChangeListener() {
+        scaListChangeListener = change -> {
+            while (change.next()) {
+                if (change.wasUpdated() || change.wasAdded() || change.wasRemoved()) {
+                    // Use Platform.runLater to ensure UI updates happen on the JavaFX Application Thread
+                    if (getRoot().isShowing()) {
+                        javafx.application.Platform.runLater(this::refreshDisplay);
+                    }
+                }
+            }
+        };
+
+        // Add the listener to the observable list
+        logic.getStudentScas(person).asUnmodifiableObservableList()
+                .addListener(scaListChangeListener);
     }
 
     /**
@@ -128,11 +159,8 @@ public class AttendanceWindow extends UiPart<Stage> {
             @Override
             protected void updateItem(StudentCourseAssociation sca, boolean empty) {
                 super.updateItem(sca, empty);
-                if (empty || sca == null) {
-                    setText(null);
-                } else {
-                    setText(sca.getCourse().courseCode + ": " + sca.getCourse().courseName);
-                }
+                setText(empty || sca == null ? null :
+                                sca.getCourse().courseCode + ": " + sca.getCourse().courseName);
             }
         });
 
@@ -155,29 +183,32 @@ public class AttendanceWindow extends UiPart<Stage> {
     }
 
     /**
-     * Refreshes the display with the latest data for the currently selected course.
-     * Updates all UI elements including course details, attendance list, and statistics.
+     * Refreshes the display with current data.
      */
     private void refreshDisplay() {
         if (currentSca != null) {
-            // Refresh the current SCA from the logic to get the latest data
-            currentSca = logic.getStudentScas(person)
-                    .getByMatric(person.getMatricNumber().value)
-                    .filtered(sca -> sca.equals(currentSca))
-                    .get(0);
+            // Get the latest version of the current SCA
+            ObservableList<StudentCourseAssociation> currentList =
+                    logic.getStudentScas(person).getByMatric(person.getMatricNumber().value);
 
-            courseCode.setText(String.valueOf(currentSca.getCourse().courseCode));
-            courseName.setText(String.valueOf(currentSca.getCourse().courseName));
-            tutorialCode.setText(currentSca.getTutorial().getTutorialId());
-            tutorialName.setText(String.valueOf(currentSca.getTutorial().getCourse().courseName));
+            StudentCourseAssociation latestSca = currentList.stream()
+                    .filter(sca -> sca.isSameSca(currentSca))
+                    .findFirst()
+                    .orElse(currentSca);
 
-            // Update attendance list
+            // Update currentSca with the latest version
+            currentSca = latestSca;
+
+            courseCode.setText(String.valueOf(latestSca.getCourse().courseCode));
+            courseName.setText(String.valueOf(latestSca.getCourse().courseName));
+            tutorialCode.setText(latestSca.getTutorial().getTutorialId());
+            tutorialName.setText(String.valueOf(latestSca.getTutorial().getCourse().courseName));
+
             attendanceListView.setItems(FXCollections.observableArrayList(
-                    currentSca.getAttendance().getAttendanceList()));
+                    latestSca.getAttendance().getAttendanceList()));
 
-            // Update summary
-            int attended = currentSca.getAttendance().getAttendanceAttendedCount();
-            int total = currentSca.getAttendance().getAttendanceTotalCount();
+            int attended = latestSca.getAttendance().getAttendanceAttendedCount();
+            int total = latestSca.getAttendance().getAttendanceTotalCount();
             double percentage = total == 0 ? 0 : (double) attended / total * 100;
 
             attendanceCount.setText(String.format("%d/%d sessions", attended, total));
@@ -268,5 +299,15 @@ public class AttendanceWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Cleanup method to remove listeners when the window is closed.
+     */
+    public void cleanup() {
+        if (scaListChangeListener != null) {
+            logic.getStudentScas(person).asUnmodifiableObservableList()
+                    .removeListener(scaListChangeListener);
+        }
     }
 }
