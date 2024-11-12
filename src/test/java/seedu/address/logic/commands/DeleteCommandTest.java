@@ -32,9 +32,28 @@ public class DeleteCommandTest {
      */
     @Test
     public void execute_validIdentityNumberUnfilteredList_success() {
+        // Using IdentityNumber
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         IdentityNumber identityNumber = personToDelete.getIdentityNumber();
         DeleteCommand deleteCommand = new DeleteCommand(identityNumber);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Test for successfully deleting a person by index
+     */
+    @Test
+    public void execute_validIndexUnfilteredList_success() {
+        // Using IdentityNumber
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
