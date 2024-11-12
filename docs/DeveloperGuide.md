@@ -399,19 +399,23 @@ Step 1. The user launches the application for the first time. The undo stack is 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command is pushed onto the undo stack.
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command is also pushed onto the undo stack.
-<br>
 
-> **Note:** If a command is not undoable or fails its execution, it will not be pushed onto the undo stack.
+<box type="info" seamless>
+ 
+**Note:** If a command is not undoable or fails its execution, it will not be pushed onto the undo stack.
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will pop the last command from the undo stack and call its `undo()` method. The `undo()` method of the command will then reverse the effects of the command.
 <br>
 
-> **Note:** If the undo stack is empty, then there are no commands to undo. The `undo` command checks if this is the case. If so, it will return an error to the user.
+**Note:** If the undo stack is empty, then there are no commands to undo. The `undo` command checks if this is the case. If so, it will return an error to the user.
+</box>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 <puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-<br>
 
-> **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<box type="info" seamless>
+
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</box>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
