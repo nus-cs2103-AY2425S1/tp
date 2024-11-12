@@ -12,6 +12,7 @@ public class AttendanceSession {
      * @param isSessionAttended whether this session was attended
      */
     public AttendanceSession(boolean isSessionAttended) {
+        // primitive type - no need for null check
         this.isSessionAttended = isSessionAttended;
     }
 
@@ -69,7 +70,7 @@ public class AttendanceSession {
     }
 
     /**
-     * Format state as text for viewing.
+     * Formats state as text for viewing.
      */
     public String toString() {
         return isSessionAttended ? "V" : "X";
