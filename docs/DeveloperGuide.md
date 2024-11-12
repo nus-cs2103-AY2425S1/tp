@@ -780,3 +780,6 @@ We plan to enforce stricter role assignment, ensuring that:
 This can be very troublesome if the user wants to execute the same command multiple times, or if the user wants to execute a similar command to the previous one.
 We plan to allow the user to navigate through the command history using the up and down arrows.
 
+6. **Allows sorting of contacts based on different fields.** Currently, the contacts are displayed in the order they are added to the address book. 
+This can make it challenging for users to locate a contact if they are unsure of specific search criteria.
+We plan to allow the user to view the contacts in a sorted order to find the contact he/she is looking for more easily.
