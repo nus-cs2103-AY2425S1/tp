@@ -471,7 +471,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. App shows an error message to tell the user that the contact index(s) is invalid and ask the user to provide valid contact indices.  
       Use case ends.
 * 2c. Duplicate contact indices provided.
-    * 2c1. App handles duplicates internally, ensuring each index is processed once.
+    * 2c1. App handles duplicates internally, ensuring each index is processed once.  
       Use case resumes at step 2.
 
 ---
