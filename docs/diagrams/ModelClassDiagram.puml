@@ -45,7 +45,7 @@ Person *--> "1" Email
 Person *--> "1" Address
 Person *--> "1" Nric
 Person *--> "*" Tag
-Person *--> "0..2" Role
+Person *--> "1..2" Role
 Person *--> "*" Appointment
 Person *--> "*" Note
 Person --> "*" Nric : patients
