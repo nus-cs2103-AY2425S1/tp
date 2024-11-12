@@ -118,8 +118,6 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`]&#40;https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java&#41;
-
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
@@ -141,6 +139,7 @@ The `Model` component,
 
 
 ### Storage component
+
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
@@ -191,7 +190,7 @@ The following sequence diagram shows how an `add` command goes through the `Logi
 
 The following activity diagram summarizes what happens when a user executes a `add` command:
 
-<puml src="diagrams/AddActivityDiagram.puml" height="800" width="900" />
+<puml src="diagrams/AddActivityDiagram.puml" height="900" width="1000" />
 
 ### Edit feature
 
@@ -220,12 +219,12 @@ The following sequence diagram shows how an `edit` command goes through the `Log
 <box type="info" seamless>
 
 **Note:** There are no destroy markers (X) for `EditCommand` as it is preserved in the `undo` command stack.
-
+ 
 </box>
 
 The following activity diagram summarizes what happens when a user executes a `edit` command:
 
-<puml src="diagrams/EditActivityDiagram.puml" height="800" width="900" />
+<puml src="diagrams/EditActivityDiagram.puml" height="900" width="1000" />
 
 ### Delete Command
 
@@ -245,11 +244,11 @@ Step 4. If user click `Ok` on the pop-up, model updates the filteredPersonList a
 
 The following sequence diagram shows how a `delete` command goes through the `Logic` component:
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions inside the Logic Component for the `delete 1` Command"/>
 
 The following activity diagram summarizes the delete pop-up mechanism:
 
-<puml src="diagrams/DeletePopupActivityDiagram.puml" alt="Popup interactions inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeletePopupActivityDiagram.puml" alt="Popup interactions inside the Logic Component for the `delete 1` Command"  height="500" width="800"/>
 
 
 ### Clean feature
@@ -261,9 +260,11 @@ The `clean` command extends `Command` and implements `Undoable`. The `clean` com
 Given below is an example usage scenario and how the `clean` command behaves at each step.
 
 Step 1. The user executes `clean` in 2024.
+
 <box type="info" seamless>
 
  **Note:** The `clean` command checks if there are contacts with `GradYear` 2023 or earlier. If there are none, it will return an error message to the user.
+
 </box>
 
 Step 2. The `clean` command deletes all contacts with `GradYear` 2023 or earlier.
@@ -281,7 +282,8 @@ The following sequence diagram shows how a `clean` command goes through the `Log
 
 The following activity diagram summarizes what happens when a user executes a `clean` command:
 
-<puml src="diagrams/CleanActivityDiagram.puml" height="600" width="900" />
+
+<puml src="diagrams/CleanActivityDiagram.puml" height="500" width="800" />
 
 #### Design considerations:
 
@@ -317,21 +319,40 @@ Step 3. The `FindCommand` get executed and updates the filteredPersonList within
 
 results based on the specified criteria.
 
-<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" height="900" width="1000"/>
 
 ### Export feature
 
-### Implementation
+## Implementation
 
-The `export` command extends `Command`. The `export` command exports the data into a new file.
+The `export` command extends `FileAccessCommand` and by extension, `Command`. The `export` command exports the contacts in DorManagerPro to a JSON file in the data folder of the app. 
 
 Given below is an example usage scenario and how the `export` command behaves at each step.
 
-Step 1: The user executes `export`.
+Step 1: The user executes the `export` command.
 
-Step 2: The `export` command exports all data currently contained by DorManagerPro to a JSON file in the data folder. The name of the JSON file is the time of export.
+Step 2: The `export` command exports all data currently contained by DorManagerPro to a JSON file in the data folder of the application.
 
-The following sequence diagram shows how a `export` command goes through the `Logic` component:
+<box type="info" seamless>
+
+**Note:** The name of the JSON file is the time of export in the format MM-dd-yyyy-HHmmssPM.
+
+</box>
+
+The following sequence diagram shows how an `export` command goes through the `Logic` component:
+
+<puml src="diagrams/ExportSequenceDiagram.puml" alt="ExportSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `ExportCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes an `export` command:
+
+<puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" />
+
 
 #### Design considerations:
 
@@ -353,15 +374,34 @@ The following sequence diagram shows how a `export` command goes through the `Lo
 
 ### Implementation
 
-The `import` command implements `Undoable`. The `import` imports a file to be loaded into DorManagerPro. The `import` command is undoable.
+The `import` command extends `FileAccessCommand` and by extension, `Command`. It also implements `Undoable`. `import` loads data from a save file into DorManagerPro, with the file path of the save file provided by the user. The `import` command is undoable.
 
 Given below is an example usage scenario and how the `import` command behaves at each step.
 
 Step 1. The user executes `import fp/./data/SaveFile3.json`
 
-Step 2. The
+Step 2. The `import` command locates the save file via the file path and reads the data in the save file into DorManagerPro if it is of the correct format and has valid data.
 
-The following sequence diagram shows how a `import` command goes through the `Logic` component:
+<box type="info" seamless>
+
+**Note:** An error message is raised if the file path does not exist in the device or if the file itself cannot be read into DorManagerPro.
+
+</box>
+
+The following sequence diagram shows how an `import fp/./data/SaveFile3.json` command goes through the `Logic` component:
+
+<puml src="diagrams/ImportSequenceDiagram.puml" alt="ImportSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** There is no destroy marker (X) for `ImportCommand` as it is preserved in the `undo` command stack. <br>
+The lifeline for `ImportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes an `import` command:
+
+<puml src="diagrams/ImportActivityDiagram.puml" alt="ImportActivityDiagram" />
 
 ### Design considerations:
 
@@ -426,7 +466,7 @@ Step 6. The user executes `clear`, which is pushed to the undo stack.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" height="600" width="600"/>
+<puml src="diagrams/CommitActivityDiagram.puml" height="400" width="400"/>
 <br>
 
 #### Design considerations:
@@ -1024,6 +1064,11 @@ Could not read data from file FILE_PATH due to inability to find or access the f
 This error message could be more specific and our team plans to update this to the following error message: <br>
 DorManagerPro could not access the file at FILE_PATH. This could be because the file is of the wrong type, it has a format incompatible with DorManagerPro, or it contains invalid data. Please check that the file path leads to a JSON file with valid data and formatting.
 
+6. **Consistent behavior for `find`.** Currently, `find` has some inconsistent behaviour depending on the field that it is being searched by, making it counterintuitive for users. The problems are as following: <br>
+The name search is case-insensitive, but tag search is not. We plan to modify `find t/` tag search to make it case-insensitive. <br>
+Searching by name filters contacts that match at least one keyword (i.e. `OR` search). E.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. However, searching by phone number only filters contacts that match exactly to the optional country code, optional area code, and compulsory number. E.g. `98765432` will not return `+65 98765432`.<br>
+We plan to modify `find p/` to allow searching by country code or area code only, and compulsory number only, so as to make this more versatile for users. <br>
+
 ## **Appendix: Effort**
 
 ### Overview
@@ -1056,12 +1101,12 @@ This posed a challenge as the import command could not extend two classes at onc
 To overcome this, we had to refactor the `ConcreteCommand` class to an interface `Undoable` and let all undoable commands implement this interface.
 This allowed us to implement the `undo` method in the import command.
 
-### Challenge 2: Creating a dependency between Storage and FileAccessCommand for export and import
+#### Challenge 2: Creating a dependency between Storage and FileAccessCommand for export and import
 
 Import and export was initially deemed odd to do since it would have to access `Storage`, whereas all other commands at the time only needed to have access to `Model` to be executed. Accordingly, we were fairly certain that it would have been inadequate for the `import` and `export` commands to inherit directly from `Command`.
 The workaround our team decided on was to create a new class `FileAccessCommand` that would require a `Model` and `Storage` for it's execute which `export` and `import` could then inherit from. As `FileAccessCommand` inherits from `Command` this allowed `export` and `import` to continue using the polymorphism when parsing commands and in the LogicManager while having a unique execute to carry out its functions.
 
-### Challenge 3: Removal of address field as a compulsory field
+#### Challenge 3: Removal of address field as a compulsory field
 
 While AddressBook3 initially had address as a compulsory field when adding a person to the contact list, our team felt that in the context of DorManagerPro, addresses could instead be optional. In most cases, all the residents would by default live in the dorm managed by the user, and by extension have a common address.
 We then had to contemplate between the outright removal of the field or only making it optional. We decided to make it optional as it could still provide helpful information such as the students permanent residence outside the dorm in case the user had to contact them.
