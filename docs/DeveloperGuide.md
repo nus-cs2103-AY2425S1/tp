@@ -544,8 +544,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `add`<br>
        Expected: No person is added. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `add n/John doe`, `add n/John Doe p/98765432 e/johnd@example.com
-       o/NUS d/2024-23-09`, `...`<br>
+    1. Other incorrect delete commands to try: `add n/John doe`, `add n/John Doe p/98765432 e/johnd@example.com o/NUS d/2024-23-09`
+       , `...`<br>
        Expected: Similar to previous.
 
 ### Deleting a person
