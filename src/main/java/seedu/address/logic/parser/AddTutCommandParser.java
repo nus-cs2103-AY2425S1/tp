@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUT_NAME;
 
 import java.util.stream.Stream;
@@ -23,16 +23,15 @@ public class AddTutCommandParser implements Parser<AddTutCommand> {
      * @throws ParseException if the user input does not conform to the expected format
      */
     public AddTutCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUT_NAME, PREFIX_TUTORIALID);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUT_NAME, PREFIX_TUT_ID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TUT_NAME, PREFIX_TUTORIALID)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_TUT_NAME, PREFIX_TUT_ID) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTutCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUT_NAME, PREFIX_TUTORIALID);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUT_NAME, PREFIX_TUT_ID);
         TutName tutName = ParserUtil.parseTutName(argMultimap.getValue(PREFIX_TUT_NAME).get());
-        TutorialId id = ParserUtil.parseTutorialId(argMultimap.getValue(PREFIX_TUTORIALID).get());
+        TutorialId id = ParserUtil.parseTutorialId(argMultimap.getValue(PREFIX_TUT_ID).get());
 
         Tutorial tutorial = Tutorial.of(tutName, id);
 
