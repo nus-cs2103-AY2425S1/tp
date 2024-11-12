@@ -457,6 +457,44 @@ methods of `UniqueCompanyList` that manipulates its `internalList`.
    * Pros: More flexible which allows different methods of sorting the future.
    * Cons: More effort by developers to ensure that the list is sorted by favourites when it should be.
 
+--------------------------------------------------------------------------------------------------------------------
+
+### Reopen feature
+
+#### Implementation
+
+The `reopen` command allows users to change the status of a specified `Company` from `CLOSED` to `INTERESTED`
+
+The `reopen` command is facilitated by `ReopenCommand` and `ReopenCommandParser`.
+
+The following methods and operations are involved:
+* `ReopenCommand#execute(Model model)` &mdash; Reopens the specified `Company`.
+* `Model#setCompany(Company targetCompany, Company updatedCompany` &mdash; Replaces the existing company in the model with
+the same `Company` but with its `Status` set to `INTERESTED`
+* `AddressBook#setCompany(Company target, Company editedCompany` &mdash; Commits the changes to the address book.
+
+#### Example usage scenario:
+
+Step 1. The user selects a company and executes the `reopen` command with the corresponding company list index.
+
+Step 2. The `ReopenCommand` fetches the selected company `companyToEdit` and creates an identical company `editedCompany` but with the updated `Status` field and
+calls `Model#setCompany(companyToEdit, editedCompany)` to replace the old company in the model with the updated one.
+
+Step 3. The changes are committed to the address book by calling `AddressBook#setCompany(companyToEdit, editedCompany)`
+
+
+#### Design considerations:
+
+**Aspect: How to handle reopening a company:**
+
+* **Alternative 1 (current choice):** Change the status of the company directly from `CLOSED` to `INTERESTED`.
+   * Pros: Simple to implement and straightforward for users to understand.
+   * Cons: Limited flexibility if more statuses are introduced in the future.
+
+* **Alternative 2:** Introduce an intermediate status such as `REOPENING` before changing to `INTERESTED`.
+   * Pros: Provides more granularity and control over the reopening process.
+   * Cons: Adds complexity to the implementation and may confuse users with additional statuses.
+
 [back to top](#internbuddy-developer-guide)
 
 --------------------------------------------------------------------------------------------------------------------
