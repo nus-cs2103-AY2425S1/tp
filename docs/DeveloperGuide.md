@@ -1,15 +1,19 @@
 ---
-layout: page
-title: Developer Guide
+  layout: default.md
+  title: "Developer Guide"
+  pageNav: 3
 ---
-* Table of Contents
-{:toc}
+
+# LogiLink Developer Guide
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+_This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/addressbook-level3/)._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -21,14 +25,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
-
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -36,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -53,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,19 +61,25 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` and `InspectWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow` and `InspectWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `MainWindow` and `InspectWindow` are toggleable, meaning that if `MainWindow` is currently being displayed, then the `InspectWindow` will be hidden, and vice versa.
+
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder.
+
+For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/resources/view/MainWindow.fxml), while the layout of the [`InspectWindow`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/ui/InspectWindow.java) is specified in [`InspectWindow.fxml`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/resources/view/InspectWindow.fxml).
+
+The `CSS` files that style the `UI` are also stored in the same folder.
 
 The `UI` component,
 
@@ -85,18 +90,20 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 How the `Logic` component works:
 
@@ -108,16 +115,16 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
@@ -127,18 +134,20 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<box type="info" seamless>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-</div>
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+
+</box>
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T12-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -155,95 +164,23 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Switching window views
 
-#### Proposed Implementation
+#### Implementation
+The `UI` consists of toggleable window views, `MainWindow` and `InspectWindow`. The `MainWindow` is used for displaying the information of each contact (i.e. `Person`), while the `InspectWindow` is used for displaying the `DeliveryList` of
+each inspected contact. User inputs parsed by certain `XYZCommandParser` classes (e.g., `AddCommandParser`, `SortCommandParser`, ...) differ based on the window view the `UI` is currently in.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+For example, while in `MainWindow`, `AddCommandParser` parses the following user inputs: `n/NAME p/PHONE e/EMAIL r/ROLE a/ADDRESS [t/TAG]...`. <br>However, while in `InspectWindow`, `AddCommandParser` parses the following user inputs:
+`i/ITEM... e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]...`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
+Given below is an example usage scenario of switching from the `MainWindow` to `InspectWindow`:
+1. The user inputs `inspect [INDEX]` into the command box, where the index refers to the index number of a contact shown in the displayed contacts list.
+2. `AddressBookParser` then creates an `InspectCommandParser`, which parses the user input to check for a valid index. If the parsing is successful, `InspectCommandParser` returns an `InspectCommand`.
+3. The `LogicManager` then executes this `InspectCommand` to return a `CommandResult`. This `CommandResult` stores the boolean `isInspect = true` to indicate that it was created by executing an `InspectCommand`, as well as the contact
+to inspect.
+4. The `executeCommand()` method within `MainWindow.java` checks if `isInspect = true`, and changes the window view from `MainWindow` to `InspectWindow` using the `handleInspect()` method if so.
+5. Additionally, within the `handleInspect()` method, a separate `isInspect` boolean within `AddressBookParser` is set to `true`. Certain `XYZCommandParser` classes use this boolean to decide what user inputs are valid during parsing. This
+allows the same commands to have different functionality depending on the current window view.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -262,71 +199,232 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
+* Logistic coordinator for logistic companies
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: Enables the company to have an organized way to track all their shipments, plan their deliveries, calculate shipping, etc., as well as an easy and fast way to access information of all their customers and clients
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​ | I want to …​ | So that I can…​ |
+|---|---------|--------------|----------------|
+| *** | new user | add customer contacts | store their information for easy access later. |
+| *** | user | delete customer contacts | get rid of contacts that are no longer customers. |
+| *** | user | view all customer contacts | have an overview of what contacts are available. |
+| *** | user | input delivery schedules for each contact | plan and track upcoming shipments. |
+| *** | user | add information about each shipment’s ETA | easily inform clients of expected arrival times. |
+| ** | user | assign products to a shipment | track what goods are being delivered. |
+| ** | user | calculate and view the estimated cost of a shipment | provide accurate quotes to clients. |
+| ** | regular user | filter my delivery list by date | focus on immediate shipments. |
+| ** | user | update the shipment status (e.g., in transit, delivered) for each delivery | track its progress. |
+| ** | user | add notes to each contact | record special instructions or preferences for future deliveries. |
+| ** | user | search for a specific client or contact using a search bar | find them quickly. |
+| ** | user | deactivate contacts that are no longer active | keep the list organized without deleting old records. |
+| ** | long-time user | archive past shipments that have been delivered | focus on current and future deliveries. |
+| ** | user | schedule repeated deliveries | ensure consistency in service. |
+| ** | user | record any delays or issues with deliveries | review them later and work on improving delivery times. |
+| ** | user | view the delivery history of individual worker | evaluate their performance and workload over time. |
+| ** | user | edit delivery details | make adjustments when plans change or errors are identified. |
+| * | first-time user | view a demo shipment and contact data | understand how the app will look and function when fully populated. |
+| * | new user | be guided through setting up my company's logistics data | start using the app immediately. |
+| * | user ready to start | remove any demo/sample data | work with only my own company’s data. |
+| * | regular user | see a visual timeline of my delivery schedules | easily plan ahead. |
+| * | user | categorize customers by priority or frequency | manage key accounts effectively. |
+| * | user | add multiple points of contact for a client | communicate with various stakeholders within the same company. |
+| * | regular user | generate reports showing all shipments for a particular client | easily present the information when needed. |
+| * | user | export customer and shipment data into a spreadsheet | share information with clients. |
+| * | user | assign priority levels to deliveries | ensure critical deliveries are handled first. |
+| * | user | print a hard copy of the daily or weekly delivery schedule | have a physical reference for planning or sharing with others. |
+| * | user | import and export delivery data in a standard file format | back up data or share it with other systems or stakeholders. |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `LogiLink` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use Case 1: Add Contact**
+
+**Preconditions:** User in default page.
+
+**Postconditions:** The contact is successfully added to the LogiLink with the provided details.
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new contact by providing the necessary details (name, phone number, email, address, and tags).
+2.  LogiLink validates the input details (e.g., ensuring name is not empty, phone number and email are in valid formats, etc.).
+3.  User confirms the addition.
+4.  LogiLink adds the contact and displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Invalid input format provided.
+    * 2a1. LogiLink shows an error message indicating which field has invalid input.
+    * 2a2. Use case resumes at step 1.
 
-  Use case ends.
+      Use case resumes at step 1.
 
-* 3a. The given index is invalid.
+* 2b. Duplicate contact detected.
+    * 2b1. LogiLink warns about duplicate name, phone number, or email.
+    * 2b2. User can modify the input or cancel the action.
 
-    * 3a1. AddressBook shows an error message.
+      Use case resumes at step 1.
+
+**Use Case 2: List All Contacts**
+
+**Preconditions:** User in default page.
+
+**Postconditions:** All contacts are displayed.
+
+**MSS**
+
+1.  User requests to list all contacts.
+2.  LogiLink retrieves and displays all contacts on the GUI.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No contacts available.
+    * 2a1. LogiLink shows a message stating that no contacts are available.
+
+      Use case ends.
+
+**Use Case 3: Delete Contact**
+
+**Preconditions:** User in default page.
+
+**Postconditions:** The specified contact is deleted.
+
+**MSS**
+
+1.  User requests to list contacts.
+2.  LogiLink displays the list of contacts.
+3.  User requests to delete one or more contacts by ID.
+4.  LogiLink deletes the selected contacts and confirms deletion.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. No contacts available.
+    * 2a1. LogiLink informs the user that there are no contacts to delete.
+
+      Use case ends.
+
+* 3a. Invalid or missing ID.
+    * 3a1. LogiLink shows an error message indicating the ID is invalid or missing.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use Case 4: Inspect Contact**
+
+**Preconditions:** User in default page.
+
+**Postconditions:** The LogiLink displays the contact details, and the user enters inspection mode.
+
+**MSS**
+
+1.  User requests to inspect a contact by providing the contact index.
+2.  LogiLink retrieves the details of the specified contact and enters inspection mode.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Invalid contact index.
+    * 2a1. LogiLink shows an error message indicating an invalid index.
+
+      Use case resumes at step 1.
+
+**Use Case 5: Add Delivery for Contact**
+
+**Preconditions:** User is in inspection mode for a contact and wants to add a delivery.
+
+**Postconditions:** A new delivery is successfully added to the contact.
+
+**MSS**
+
+1.  User requests to add a delivery with specific details (time, date, ETA, address, cost).
+2.  LogiLink validates the delivery details.
+3.  User confirms the addition.
+4.  LogiLink adds the delivery to the contact and displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Invalid input format.
+    * 2a1. LogiLink shows an error message indicating which delivery field is invalid.
+
+      Use case resumes at step 1.
+
+**Use Case 6: Delete Delivery for Contact**
+
+**Preconditions:** User is in inspection mode and wants to delete a delivery for a contact.
+
+**Postconditions:** The specified delivery is deleted from the contact.
+
+**MSS**
+
+1.  User requests to delete a delivery by providing the delivery number.
+2.  LogiLink deletes the selected delivery and confirms deletion.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Invalid or missing delivery number.
+    * 2a1. LogiLink shows an error message indicating an invalid or missing delivery number.
+
+      Use case resumes at step 1.
+
+**Use Case 7: View Deliveries for Contact**
+
+**Preconditions:** User is in inspection mode and wants to view the deliveries for a contact.
+
+**Postconditions:** The specified deliveries are displayed.
+
+**MSS**
+
+1.  User requests to view deliveries by providing the delivery number(s).
+2.  LogiLink retrieves and displays the specified deliveries.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Invalid delivery number.
+    * 2a1. LogiLink shows an error message indicating an invalid delivery number.
+
+      Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  The system should support horizontal and vertical scaling to handle increasing users and data as the business grows, ensuring seamless performance.
+5.  Should have 99.9% uptime with robust disaster recovery mechanisms and failover systems to prevent data loss and maintain system availability.
+6.  Should provide an intuitive, user-friendly interface that supports accessibility.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, MacOS
+* **Inspection Mode**: A feature that enables the user to enter a specific contact and view detailed information. In this mode, the user can also manage deliveries, such as adding or deleting them, for the selected contact.
+* **Default Page**: The main page that the user is presented with upon launching the application. It serves as the starting point for all primary actions, including adding, viewing, and deleting contacts.
+* **ETA (Estimated Time of Arrival)**: The estimated time when a delivery is expected to reach its destination. This is one of the key delivery details used in planning and tracking shipments.
+* **Tag**: A label that can be assigned to a contact for organizational purposes. Tags help categorize and filter contacts, making it easier to manage them.
+* **Contact**: An individual or business entity stored in the LogiLink system. A contact holds personal or business information, such as name, phone number, email, address, and associated deliveries.
+* **Delivery**: A shipment or consignment associated with a specific contact. Each delivery includes details such as the time, date, ETA, delivery address, and cost.
+* **Shipment**: A package or group of packages sent from one location to another. In the context of the LogiLink app, shipments are tracked within deliveries linked to contacts.
+* **Logistics Coordinator**: A user of the LogiLink system responsible for managing shipments, deliveries, and customer information. This role typically oversees the planning and execution of transportation processes.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -334,10 +432,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box>
 
 ### Launch and shutdown
 
@@ -345,7 +445,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -354,7 +454,8 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Close the program
+   1. Type `exit` in the command box
 
 ### Deleting a person
 
@@ -371,12 +472,27 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Simulate corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Assuming data present in the program. Find the `LogiLink.json` file in the `data` folder
+   2. Delete any line. An empty address book will be loaded.
+   3. IF any command is used the `LogiLink.json` would be wiped clean. Save the data in another file if necessary.
+   4. Delete the corrupted `LogiLink.json` file. The program will create a new file.
 
-1. _{ more test cases …​ }_
+## **Appendix: Planned Enhancements**
+
+Team Size: 5
+
+1. **Make `failed contact deletion` message more specific**: The current error message for a failed contact deletion Operation failed! is too general. We plan to make the error message also mention which action failed and the reason for the failure: The contact Amy Lee could not be deleted as it is referenced by another contact Ben Chua.
+2. **Add date validation for `ETA` parameter**: For deliveries, users are currently able to enter an ETA that is before the date ordered. We plan to add date validation so that an error message is thrown in the event of an invalid date
+input just like this.
+3. **Edit command validation**: We plan to checks within the edit command to warn duplicate fields like emails and phone numbers. Currently, the edit command does not give any indication of duplicate fields.
+4. **UI update for delivery assignments**: Modify UI to reflect delivery assignments in the client inspect page. Currently there is no visual indication in inspect page that a delivery is assigned.
+5. **Add ability to unassign workers**: Add command for users to unassign deliveries from an employee.
+6. **Ensure consistent window resizing**: When switching between the Inspect and Main windows in full-screen mode on Windows, the scrollable sections sometimes display incorrectly or appear cropped. We plan to address this issue to ensure a seamless resizing experience.
+7. **Restrict the back command to the Inspect window**: Currently, the back command shows a success message even when used in the Main window. We plan to update the behavior so that it results in an error message when entered outside the Inspect window, as it is intended to work exclusively within the Inspect window.
+8. **Improve error message for the assign command in the Main window**: Presently, if the assign command is entered in the Main window, the error message displays the format of the assign command. We plan to revise this message to clearly indicate that the assign command is not allowed in the Main window.
+9. **Handle sorting on empty lists**: When attempting to sort an empty list of deliveries or employees, the application currently shows a success message. We plan to update this to display an appropriate error message instead.
+10. **Make contact names case-insensitive**: Currently, duplicate contacts can be added if their names differ only in capitalization. We plan to make the name field case-insensitive to prevent such duplicates from being created.

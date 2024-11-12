@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -16,6 +17,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -68,11 +70,69 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same phone as {@code person} exists in the address book.
+     */
+    public boolean hasPhone(Person person) {
+        requireNonNull(person);
+        return persons.containPhone(person);
+    }
+
+    /**
+     * Returns true if a person with the same email as {@code person} exists in the address book.
+     */
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return persons.containEmail(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /**
+     * Sorts the address book by date and time, in ascending order.
+     */
+    public void sortByDate() {
+        persons.sortByDate();
+    }
+
+    /**
+     * Sorts the address book by name, in ascending order.
+     */
+    public void sortByName() {
+        persons.sortByName();
+    }
+
+    /**
+     * Sorts the address book by phone number, in ascending order.
+     */
+    public void sortByPhone() {
+        persons.sortByPhone();
+    }
+
+    /**
+     * Sorts the address book by email, in ascending order.
+     */
+    public void sortByEmail() {
+        persons.sortByEmail();
+    }
+
+    /**
+     * Sorts the address book by role, in ascending order.
+     */
+    public void sortByRole() {
+        persons.sortByRole();
+    }
+
+    /**
+     * Sorts the address book by role, in ascending order.
+     */
+    public void reversePersonList() {
+        persons.reversePersonList();
     }
 
     /**
@@ -92,6 +152,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Returns the {@code Index} of the first archived person in the list.
+     * If there are no archived person in the list, index after the last index would be returned.
+     */
+    public Index getFirstArchivedIndex() {
+        return persons.getFirstArchivedIndex();
     }
 
     //// util methods

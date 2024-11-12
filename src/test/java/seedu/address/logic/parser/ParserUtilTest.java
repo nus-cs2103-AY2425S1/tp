@@ -4,15 +4,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LIST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SECOND_LIST;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -28,17 +32,28 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_PHONE = "12345678";
+    private static final String VALID_ADDRESS = "123 Main Street #0505, S120300";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_DELIVERY_ATTRIBUTE_ADDRESS = "address";
+    private static final String VALID_DELIVERY_ATTRIBUTE_COST = "cost";
+    private static final String VALID_DELIVERY_ATTRIBUTE_DATE = "date";
+    private static final String VALID_DELIVERY_ATTRIBUTE_ETA = "eta";
+    private static final String VALID_DELIVERY_ATTRIBUTE_ID = "id";
+    private static final String VALID_DELIVERY_ATTRIBUTE_STATUS = "status";
+    private static final String VALID_CONTACT_ATTRIBUTE_EMAIL = "email";
+    private static final String VALID_CONTACT_ATTRIBUTE_NAME = "name";
+    private static final String VALID_CONTACT_ATTRIBUTE_PHONE = "phone";
+    private static final String VALID_CONTACT_ATTRIBUTE_ROLE = "role";
 
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("1 a"));
     }
 
     @Test
@@ -50,10 +65,21 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST_LIST, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST_LIST, ParserUtil.parseIndex("  1  "));
+
+        // 2 Input with only one whitespace
+        List<Index> indexList = new ArrayList<>();
+        indexList = ParserUtil.parseIndex("1 2");
+        assertTrue(INDEX_FIRST_SECOND_LIST.containsAll(indexList)
+                && indexList.containsAll(INDEX_FIRST_SECOND_LIST));
+
+        //2 Input with leading and trailing whitespace
+        indexList = ParserUtil.parseIndex("   1    2     ");
+        assertTrue(INDEX_FIRST_SECOND_LIST.containsAll(indexList)
+                && indexList.containsAll(INDEX_FIRST_SECOND_LIST));
     }
 
     @Test
@@ -192,5 +218,191 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseDeliveryAttribute_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeliveryAttribute(null));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_unknownAttributeWithoutWhitespace_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryAttribute("gamer"));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_unknownAttributeWithWhitespace_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryAttribute(WHITESPACE + "gamer" + WHITESPACE));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_knownAttributeWithGibberishBehind_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryAttribute(VALID_DELIVERY_ATTRIBUTE_ADDRESS
+                + WHITESPACE + "gamer" + WHITESPACE));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_knownAttributeWithGibberishBehindAndWhiteSpaceInFront_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryAttribute(WHITESPACE
+                + VALID_DELIVERY_ATTRIBUTE_ADDRESS + WHITESPACE + "gamer" + WHITESPACE));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_addressAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
+        String expectedAttribute = "address";
+        assertEquals(expectedAttribute, ParserUtil.parseDeliveryAttribute(VALID_DELIVERY_ATTRIBUTE_ADDRESS));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_addressAttributeWithWhitespace_returnsTrimmedAttribute() throws Exception {
+        String attributeWithWhitespace = WHITESPACE + VALID_DELIVERY_ATTRIBUTE_ADDRESS + WHITESPACE;
+        String expectedAttribute = "address";
+        assertEquals(expectedAttribute, ParserUtil.parseDeliveryAttribute(attributeWithWhitespace));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_costAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
+        String expectedAttribute = "cost";
+        assertEquals(expectedAttribute, ParserUtil.parseDeliveryAttribute(VALID_DELIVERY_ATTRIBUTE_COST));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_costAttributeWithWhitespace_returnsTrimmedAttribute() throws Exception {
+        String attributeWithWhitespace = WHITESPACE + VALID_DELIVERY_ATTRIBUTE_COST + WHITESPACE;
+        String expectedAttribute = "cost";
+        assertEquals(expectedAttribute, ParserUtil.parseDeliveryAttribute(attributeWithWhitespace));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_dateAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
+        String expectedAttribute = "date";
+        assertEquals(expectedAttribute, ParserUtil.parseDeliveryAttribute(VALID_DELIVERY_ATTRIBUTE_DATE));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_dateAttributeWithWhitespace_returnsTrimmedAttribute() throws Exception {
+        String attributeWithWhitespace = WHITESPACE + VALID_DELIVERY_ATTRIBUTE_DATE + WHITESPACE;
+        String expectedAttribute = "date";
+        assertEquals(expectedAttribute, ParserUtil.parseDeliveryAttribute(attributeWithWhitespace));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_etaAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
+        String expectedAttribute = "eta";
+        assertEquals(expectedAttribute, ParserUtil.parseDeliveryAttribute(VALID_DELIVERY_ATTRIBUTE_ETA));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_etaAttributeWithWhitespace_returnsTrimmedAttribute() throws Exception {
+        String attributeWithWhitespace = WHITESPACE + VALID_DELIVERY_ATTRIBUTE_ETA + WHITESPACE;
+        String expectedAttribute = "eta";
+        assertEquals(expectedAttribute, ParserUtil.parseDeliveryAttribute(attributeWithWhitespace));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_idAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
+        String expectedAttribute = "id";
+        assertEquals(expectedAttribute, ParserUtil.parseDeliveryAttribute(VALID_DELIVERY_ATTRIBUTE_ID));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_idAttributeWithWhitespace_returnsTrimmedAttribute() throws Exception {
+        String attributeWithWhitespace = WHITESPACE + VALID_DELIVERY_ATTRIBUTE_ID + WHITESPACE;
+        String expectedAttribute = "id";
+        assertEquals(expectedAttribute, ParserUtil.parseDeliveryAttribute(attributeWithWhitespace));
+    }
+
+
+    @Test
+    public void parseDeliveryAttribute_statusAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
+        String expectedAttribute = "status";
+        assertEquals(expectedAttribute, ParserUtil.parseDeliveryAttribute(VALID_DELIVERY_ATTRIBUTE_STATUS));
+    }
+
+    @Test
+    public void parseDeliveryAttribute_statusAttributeWithWhitespace_returnsTrimmedAttribute() throws Exception {
+        String attributeWithWhitespace = WHITESPACE + VALID_DELIVERY_ATTRIBUTE_STATUS + WHITESPACE;
+        String expectedAttribute = "status";
+        assertEquals(expectedAttribute, ParserUtil.parseDeliveryAttribute(attributeWithWhitespace));
+    }
+
+    @Test
+    public void parseContactAttribute_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseContactAttribute(null));
+    }
+
+    @Test
+    public void parseContactAttribute_unknownAttributeWithoutWhitespace_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactAttribute("gamer"));
+    }
+
+    @Test
+    public void parseContactAttribute_unknownAttributeWithWhitespace_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContactAttribute(WHITESPACE + "gamer" + WHITESPACE));
+    }
+
+    @Test
+    public void parseContactAttribute_dateAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
+        String expectedAttribute = "date";
+        assertEquals(expectedAttribute, ParserUtil.parseContactAttribute(VALID_DELIVERY_ATTRIBUTE_DATE));
+    }
+
+    @Test
+    public void parseContactAttribute_dateAttributeWithWhitespace_returnsTrimmedAttribute() throws Exception {
+        String attributeWithWhitespace = WHITESPACE + VALID_DELIVERY_ATTRIBUTE_DATE + WHITESPACE;
+        String expectedAttribute = "date";
+        assertEquals(expectedAttribute, ParserUtil.parseContactAttribute(attributeWithWhitespace));
+    }
+
+    @Test
+    public void parseContactAttribute_emailAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
+        String expectedAttribute = "email";
+        assertEquals(expectedAttribute, ParserUtil.parseContactAttribute(VALID_CONTACT_ATTRIBUTE_EMAIL));
+    }
+
+    @Test
+    public void parseContactAttribute_emailAttributeWithWhitespace_returnsTrimmedAttribute() throws Exception {
+        String attributeWithWhitespace = WHITESPACE + VALID_CONTACT_ATTRIBUTE_EMAIL + WHITESPACE;
+        String expectedAttribute = "email";
+        assertEquals(expectedAttribute, ParserUtil.parseContactAttribute(attributeWithWhitespace));
+    }
+
+    @Test
+    public void parseContactAttribute_nameAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
+        String expectedAttribute = "name";
+        assertEquals(expectedAttribute, ParserUtil.parseContactAttribute(VALID_CONTACT_ATTRIBUTE_NAME));
+    }
+
+    @Test
+    public void parseContactAttribute_nameAttributeWithWhitespace_returnsTrimmedAttribute() throws Exception {
+        String attributeWithWhitespace = WHITESPACE + VALID_CONTACT_ATTRIBUTE_NAME + WHITESPACE;
+        String expectedAttribute = "name";
+        assertEquals(expectedAttribute, ParserUtil.parseContactAttribute(attributeWithWhitespace));
+    }
+
+    @Test
+    public void parseContactAttribute_phoneAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
+        String expectedAttribute = "phone";
+        assertEquals(expectedAttribute, ParserUtil.parseContactAttribute(VALID_CONTACT_ATTRIBUTE_PHONE));
+    }
+
+    @Test
+    public void parseContactAttribute_phoneAttributeWithWhitespace_returnsTrimmedAttribute() throws Exception {
+        String attributeWithWhitespace = WHITESPACE + VALID_CONTACT_ATTRIBUTE_PHONE + WHITESPACE;
+        String expectedAttribute = "phone";
+        assertEquals(expectedAttribute, ParserUtil.parseContactAttribute(attributeWithWhitespace));
+    }
+
+    @Test
+    public void parseContactAttribute_roleAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
+        String expectedAttribute = "role";
+        assertEquals(expectedAttribute, ParserUtil.parseContactAttribute(VALID_CONTACT_ATTRIBUTE_ROLE));
+    }
+
+    @Test
+    public void parseContactAttribute_roleAttributeWithWhitespace_returnsTrimmedAttribute() throws Exception {
+        String attributeWithWhitespace = WHITESPACE + VALID_CONTACT_ATTRIBUTE_ROLE + WHITESPACE;
+        String expectedAttribute = "role";
+        assertEquals(expectedAttribute, ParserUtil.parseContactAttribute(attributeWithWhitespace));
     }
 }

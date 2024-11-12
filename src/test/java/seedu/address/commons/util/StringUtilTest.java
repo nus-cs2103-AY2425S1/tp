@@ -140,4 +140,37 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    //------------------ Tests for containsIgnoreCase ----------------------------
+    @Test
+    public void containsIgnoreCase_nullSubstring_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsIgnoreCase("typical sentence",
+                null));
+    }
+    @Test
+    public void containsIgnoreCase_emptyWord_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Substring parameter cannot be empty", ()
+                -> StringUtil.containsIgnoreCase("typical sentence", "  "));
+    }
+    @Test
+    public void containsIgnoreCase_multipleWords_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "Substring parameter should be a single string", ()
+                -> StringUtil.containsIgnoreCase("typical sentence", "aaa BBB"));
+    }
+    @Test
+    public void containsIgnoreCase_nullSentence_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsIgnoreCase(null, "abc"));
+    }
+    @Test
+    public void containsIgnoreCase_validInputs_correctResult() {
+        // Empty sentence
+        assertFalse(StringUtil.containsIgnoreCase("", "abc")); // Boundary case
+        assertFalse(StringUtil.containsIgnoreCase("    ", "123"));
+        // Matches word in the sentence, different upper/lower case letters
+        assertTrue(StringUtil.containsIgnoreCase("aAA Bbb cCc", "aa"));
+        assertTrue(StringUtil.containsIgnoreCase("aAA Bbb cCc", "Aa"));
+        assertFalse(StringUtil.containsIgnoreCase("aAA Bbb cCc", "ab"));
+        assertTrue(StringUtil.containsIgnoreCase("aAA Bbb cCcA", "Ca"));
+        // Matches multiple words in sentence
+        assertTrue(StringUtil.containsIgnoreCase("aAA Bbb cCcaA", "aA"));
+    }
 }
