@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Logic;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -85,6 +86,21 @@ public class UndoCommandTest {
         UndoCommand undoCommand = new UndoCommand();
 
         LogicStub logicStub = new LogicStub(model, clearCommand);
+        logicStub.execute(sampleUserInput);
+        String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS, sampleUserInput);
+
+        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteCommand_success() throws CommandException {
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        sampleUserInput = "delete test";
+
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        UndoCommand undoCommand = new UndoCommand();
+
+        LogicStub logicStub = new LogicStub(model, deleteCommand);
         logicStub.execute(sampleUserInput);
         String expectedMessage = String.format(UndoCommand.MESSAGE_SUCCESS, sampleUserInput);
 
