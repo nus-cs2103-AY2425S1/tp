@@ -626,7 +626,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The app launches correctly with a client list populated with sample clients.
 
 <div style="page-break-before: always;">
-\pagebreak
+⠀
 </div>
 
 2. Corrupted data file
