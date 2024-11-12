@@ -1,18 +1,17 @@
 @startuml
 
 package Model as ModelPackage<<Rectangle>>{
-
+hide circle
+hide members
+skinparam classAttributeIconSize 0
     class Student
-
     class Tutorial
+    class Participation
+    class Attendance
 
-    class Participation {
-            - List<Attendance> attendance
+    Participation "1" -- "*" Attendance
 
-            }
-    }
-
-    Student "0..*" -right- "0..*" Tutorial
+    Student "*" -right- "*" Tutorial
     (Student, Tutorial). Participation
 }
 
