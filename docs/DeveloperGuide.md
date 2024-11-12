@@ -220,6 +220,22 @@ Note: While the diagram shows the lifeline of objects even after their deletion,
 2. KonTActs will create a contact of Tom with the given details before adding it to the contact list.
 3. The contact is then displayed in the UI, along with a success message.
 
+
+### MarkCommand
+
+<puml src="diagrams/MarkCommandActivityDiagram.puml" width="750" />
+
+
+* The `MarkCommand` is used by KonTActs to allow TAs to mark the attendance for a student.
+* It follows the activity diagram as shown above where it first checks if the person exists.
+* If the person exists, it will check if the weeksPresent contains the week to be marked.
+* If the weeksPresent does not contain the week to be marked yet, it will add it in and return a success message. Else it will throw a mark already success message to tell the TA that the attendance for the TA for that week has been marked.
+
+**Example Usage**
+1. User inputs the command "mark n/John Doe w/1".
+2. KonTActs will set the week 1 attendance for John Doe to be true.
+3. The update is then displayed in the UI, along with a success message.
+
 ---
 
 ### Command History implementation
