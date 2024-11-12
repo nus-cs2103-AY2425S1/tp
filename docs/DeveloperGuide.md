@@ -426,8 +426,7 @@ Team size: 5 people
 
 9. Currently, the UI does not show the list of tutorials and assignments permanently. This causes some inconvenience to the users, as they have to constantly list assignments and tutorials. Hence, we plan to add the tutorial and assignment list display in future versions for the ease of usage.
 
-10. In current implementation, list commands for students, assignments and tutorials do not show specific messages when there is no student/assignment/tutorial in the list. For example, executing the command `list` when the student list is empty shows a successful message indicating that all students are listed. We plan to make it more specific by showing a message saying that there is no student in the list etc. Same applies to `listAsg` and `listTut`.
-
+10. In the current implementation, certain commands could be enhanced to provide more specific feedback for empty lists and invalid inputs. For instance, when executing list commands for students, assignments, or tutorials (list, listAsg, listTut), a generic success message appears even if the respective list is empty, which could be more informative. Displaying a message such as "No students/assignments/tutorials in the list" would provide clearer feedback for users. Additionally, mark attendance and delete attendance commands currently give a general error message ("Date should be valid and in correct format (yyyy-MM-dd)!") when an invalid date is entered (e.g., "2024-02-32"). Enhancing this feedback to distinguish between invalid formats and dates would improve user experience by clearly indicating whether the error is due to format issues or an invalid date.
 
 --------------------------------------------------------------------------------------------------------------------
 
