@@ -13,11 +13,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.util.Pair;
 import seedu.eventfulnus.logic.parser.ParserUtil;
+import seedu.eventfulnus.model.Faculty;
 import seedu.eventfulnus.model.event.Event;
 import seedu.eventfulnus.model.event.Venue;
 import seedu.eventfulnus.model.person.Person;
-import seedu.eventfulnus.model.person.role.Faculty;
-import seedu.eventfulnus.model.person.role.athlete.Sport;
+import seedu.eventfulnus.model.person.role.Sport;
 
 /**
  * A utility class to help with building {@link Event} objects.

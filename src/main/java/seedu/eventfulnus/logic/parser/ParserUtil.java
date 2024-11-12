@@ -15,6 +15,7 @@ import javafx.util.Pair;
 import seedu.eventfulnus.commons.core.index.Index;
 import seedu.eventfulnus.commons.util.StringUtil;
 import seedu.eventfulnus.logic.parser.exceptions.ParseException;
+import seedu.eventfulnus.model.Faculty;
 import seedu.eventfulnus.model.event.Event;
 import seedu.eventfulnus.model.event.Venue;
 import seedu.eventfulnus.model.person.Email;
@@ -22,10 +23,9 @@ import seedu.eventfulnus.model.person.Name;
 import seedu.eventfulnus.model.person.Person;
 import seedu.eventfulnus.model.person.PersonContainsKeywordsPredicate;
 import seedu.eventfulnus.model.person.Phone;
-import seedu.eventfulnus.model.person.role.Faculty;
 import seedu.eventfulnus.model.person.role.Role;
+import seedu.eventfulnus.model.person.role.Sport;
 import seedu.eventfulnus.model.person.role.athlete.Athlete;
-import seedu.eventfulnus.model.person.role.athlete.Sport;
 import seedu.eventfulnus.model.person.role.committee.Branch;
 import seedu.eventfulnus.model.person.role.committee.CommitteeMember;
 import seedu.eventfulnus.model.person.role.committee.FacultySportCommitteeMember;
@@ -306,7 +306,7 @@ public class ParserUtil {
         requireNonNull(venue);
         String trimmedVenue = venue.trim();
         if (!Venue.isValidVenue(trimmedVenue)) {
-            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
+            throw new ParseException("Invalid venue name: " + trimmedVenue + " " + Venue.MESSAGE_CONSTRAINTS);
         }
         return new Venue(trimmedVenue);
     }
@@ -321,7 +321,7 @@ public class ParserUtil {
         try {
             return LocalDateTime.parse(trimmedDateTime, Event.DATE_TIME_PARSE_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new ParseException(Event.MESSAGE_CONSTRAINTS);
+            throw new ParseException("Invalid date and time: " + trimmedDateTime + " " + Event.MESSAGE_CONSTRAINTS);
         }
     }
 

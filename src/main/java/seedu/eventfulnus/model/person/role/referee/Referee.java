@@ -5,10 +5,10 @@ import static seedu.eventfulnus.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import seedu.eventfulnus.model.person.role.Faculty;
+import seedu.eventfulnus.model.Faculty;
 import seedu.eventfulnus.model.person.role.Role;
-import seedu.eventfulnus.model.person.role.athlete.Sport;
-import seedu.eventfulnus.model.person.role.athlete.SportString;
+import seedu.eventfulnus.model.person.role.Sport;
+import seedu.eventfulnus.model.person.role.SportString;
 
 /**
  * Represents a {@code Referee} in the address book.

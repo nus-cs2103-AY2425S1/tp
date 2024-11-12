@@ -2,7 +2,7 @@ package seedu.eventfulnus.model.person.role.committee;
 
 import static seedu.eventfulnus.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.eventfulnus.model.person.role.Faculty;
+import seedu.eventfulnus.model.Faculty;
 
 /**
  * Represents a Faculty Sports Committee Member role in the address book.

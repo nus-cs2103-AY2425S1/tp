@@ -462,7 +462,6 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-<<<<<<< HEAD
 **Use case: UC8 - Add event**\
 **Actor: User**
 
@@ -481,9 +480,6 @@ Use case resumes from step 2.
 
 **System: EventfulNUS**\
 **Use case: UC9 - Delete event**\
-=======
-**Use case: UC7 - Delete event**\
->>>>>>> ca6ec761df1e074f6fa10155fe88a3922053a1df
 **Actor: User**\
 **Guarantee: MSS → The event at the specified index will not be present in the system after the command is entered**
 
