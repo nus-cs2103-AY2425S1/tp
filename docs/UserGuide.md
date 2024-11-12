@@ -52,9 +52,10 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 
 1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar LogiLink.jar` to run LogiLink.<br>
    - For example you select _LogiLink_ as your _home folder_. By right clicking in the empty space, you should see the dropdown below. Click on Open in Terminal.<br>
-   ![openinterminal](images/openinterminal.png)
+   <img src="images/openinterminal.png" alt="openinterminal" width="600">
+ 
    - A window similar to the diagram should appear, and the program should contain some sample data.<br>
-   ![Ui](images/Ui.png)
+   <img src="images/Ui.png" alt="ui" width="600">
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -80,17 +81,11 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 **Notes about the command format:**
 1. There are two windows in this program:
   - **Main window**: the default window you see when opening LogiLink.
-<<<<<<< HEAD
-    ![main window](images/Ui.png)
-  - **Inspect window**: the window you see when inspecting a contact.
-    ![inspect window](images/Ui2.png)
-=======
     <img src="images/Ui.png" alt="ui" width="600"> 
 
 
   - **Inspect window**: the window you see when inspecting a contact.
     <img src="images/Ui2.png" alt="ui2" width="600">
->>>>>>> 055cf7dbc5a425da92707a59f05a1778f05743fa
     <br></br>
 
 2. Words in `UPPER_CASE` are parameters you need to provide.<br>
