@@ -21,6 +21,9 @@ With InvenTrack, you can:
 ---
 
 ## Table of Contents
+
+<page-nav-print />
+
 1. [Quick Start](#quick-start)
 2. [Notes about command format](#notes-about-the-command-format-and-other-information)
 3. [Prefixes Glossary](#prefixes-glossary)
@@ -29,8 +32,8 @@ With InvenTrack, you can:
    - [Autocomplete](#autocomplete--)
    - [Adding a supplier](#adding-a-supplier-add_supplier-)
    - [Adding a product](#adding-a-product--add_product-)
-   - [Assigning a product to supplier](#assigning-a-product-to-supplier-assign---)
-   - [Unassigning product from a supplier](#un-assigning-a-product-to-supplier-unassign---)
+   - [Assigning a product to supplier](#assigning-a-product-to-supplier-assign--)
+   - [Unassigning product from a supplier](#un-assigning-a-product-to-supplier-unassign--)
    - [Setting threshold for a product](#setting-threshold-for-a-product-set_threshold--)
    - [Updating stock level of a product](#updating-stock-level-for-a-product-update_stock-)
    - [Locating all suppliers](#locating-all-suppliers-view_supplier-)
@@ -45,8 +48,6 @@ With InvenTrack, you can:
 7. [FAQ](#faq)
 8. [Known Issues](#known-issues)
 9. [Command Summary](#command-summary-)
-
-<page-nav-print />
 
 ---
 
@@ -122,10 +123,6 @@ Refer to the [Features](#features) below to know more about the commands you cou
 > - **Example**: Typing `help 123` or `help -10` will be interpreted as `help`.
 > #### 📦 Setting Current Stock to be Greater than Maximum Threshold
 > - MAX_STOCK_LEVEL is the maximum number of products you would like to have in your store for a particular product, so it might happen that CURRENT_STOCK_LEVEL maybe greater than the former because of greater number of purchase order. This helps to suit real world implementation.
-
-<div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px;">
-    <strong>📝 Note:</strong> 
-</div>
 
 <div style="background-color: #f0f8ff; padding: 15px; border-left: 6px solid #2196F3; margin-bottom: 15px; ">
     <strong>📝 Note:</strong> 
