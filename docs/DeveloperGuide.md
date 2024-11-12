@@ -637,7 +637,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 3.
 
-* 3b. The given command format is invalid (e.g., missing name or phone number field).
+* 3b. The given command format is invalid (e.g., incorrect parameter prefix).
 
     * 3b1. System informs user of invalid command format.
 
