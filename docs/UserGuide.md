@@ -600,12 +600,17 @@ When you are searching for lessons, you can search for lesson day and/or lesson 
 * Lesson day keywords must be a **day** of the week (case-insensitive), or the first 3 letters of a day e.g. `mon tue wed`
 * Lesson time keywords must be in **24-hour format** `HHMM-HHMM`. Lessons with overlapping time-ranges will be matched e.g. `0800-1000` will overlap with `0900-1100`
 * Persons with at least one parameter matching at least one of its keyword will be returned (i.e. `OR` search).
-* For example, `find n/John t/Science English` will return students `John Doe` with tag `Math`, `Alice Richardson` with tag `Science` and `Mary Jane` with tag `English`
+
+<div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
+
+ℹ️ **Info**: After using the find command, running another command may reset the left panel to default view. This will be resolved in future iterations.
+</div>
 
 Examples:
-* `find n/alex david` returns `Alex Yeoh`, `David Li`, as shown below:<br>
+* `find n/alex david` returns `Alex Yeoh`, `David Li`
 * `find a/jurong` returns students with address `Jurong Lake #09-11` and `jurong west #13-21`
 * `find ld/monday lt/1000-1100` returns students with lessons `monday 0800-0900` and `tuesday 0900-1030`
+* `find n/John t/Science English` returns students `John Doe` with tag `Math`, `Alice Richardson` with tag `Science` and `Mary Jane` with tag `English`
 
 [Take me back to Table of Contents](#table-of-contents)
 <br>
