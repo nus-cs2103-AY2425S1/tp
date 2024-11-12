@@ -87,7 +87,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `ClientDetailPanel`, `StatusBarFooter`, `StatusPieChart` etc. All these UI components, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g., `CommandBox`, `ResultDisplay`, `ClientListPanel`, `ClientDetailPanel`, `StatusBarFooter`, `StatusPieChart` etc. All these UI components, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `ClientListPanel` contains multiple `ClientCard` components, each representing a client's information with six `ClientCardField` elements that utilize the Ikonli package for icons. The `MainWindow` also includes a `ClientDetailPanel` that acts as a split view within the main window, and a `HelpWindow` that can be launched as a separate window.
 
@@ -145,7 +145,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Client` objects (which are contained in a `UniqueClientList` object).
-* stores the currently 'selected' `Client` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Client` objects (i.e., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
@@ -172,7 +172,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### 1. Tier and Status Attributes
 
-AgentAssist is designed to support credit card sales, making it essential to have predefined credit card tiers that align with the bank’s product offerings. These tiers provide agents with insights into a client’s financial profile, allowing them to tailor their sales approach to meet each client’s unique needs.
+AgentAssist is designed to support credit card sales, making it essential to have predefined credit card tiers that align with the bank’s product offerings. These tiers provide agents with insight into a client’s financial profile, allowing them to tailor their sales approach to meet each client’s unique needs.
 
 Additionally, the inclusion of a status attribute for clients enhances customer service by indicating whether follow-up action is required. This feature helps agents keep track of promised actions, reducing missed commitments and ensuring a reliable client experience.
 
