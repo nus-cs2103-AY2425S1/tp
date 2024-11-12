@@ -2,7 +2,8 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 skinparam style strictuml
-skinparam ArrowFontSize 20
+skinparam defaultFontSize 24
+skinparam ArrowFontSize 24
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR

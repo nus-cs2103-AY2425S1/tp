@@ -2,6 +2,7 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 skinparam style strictuml
+skinparam defaultFontSize 20
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -79,7 +80,7 @@ activate CommandResult
 CommandResult --> SortCommand
 deactivate CommandResult
 
-SortCommand --> LogicManager : result
+SortCommand --> LogicManager : r
 deactivate SortCommand
 
 [<--LogicManager
