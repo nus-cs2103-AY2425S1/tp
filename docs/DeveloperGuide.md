@@ -1153,6 +1153,11 @@ Team size: 5
 * **Enhancement:** Change the error message for cases where the time format is incorrect.
 * **Sample Input:** User enters `edit appt 3 d/2024-12-05 25:00`
 * **Expected Output:** The result display box shows `Invalid date-time format. Expected format: yyyy-MM-dd HH:mm. For example, 2024-04-24 13:00, which would be 24th March 2024, 1:00 PM.
+
+9. **The sequence diagram for the entity commands should include interactions with the `Model` class**
+* **Flaw:** The current sequence diagram (EntityCommandSequenceDiagram.puml) for the entity commands does 
+  not include interactions with the `Model` class. 
+* **Enhancement:** Update the sequence diagram to include interactions with the `Model` class. Reference frames can be included to show the interactions with the `Model` class for different commands.
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
