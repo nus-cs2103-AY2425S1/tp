@@ -1,0 +1,18 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "{abstract}\nCommand" as Command {
+  +execute(Model): CommandResult
+}
+Class CommentCommand {
+  +COMMAND_WORD: String
+  +MESSAGE_USAGE: String
+  +execute(Model): CommandResult
+}
+Class CommandException
+
+CommentCommand -up-|> Command
+Command ..> CommandException: throws >
+CommentCommand .right.> CommandException: throws >
+@enduml

@@ -4,8 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.attendance.AttendanceEvent;
+import seedu.address.model.attendance.exceptions.DuplicateAttendanceEventException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -16,6 +19,8 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    //private final List<AttendanceEvent> attendanceEvents;
+    private final ObservableList<AttendanceEvent> attendanceEvents = FXCollections.observableArrayList();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        //attendanceEvents = new ArrayList<>();
     }
 
     public AddressBook() {}
@@ -55,6 +61,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        attendanceEvents.setAll(newData.getAttendanceEventList());
     }
 
     //// person-level operations
@@ -94,6 +101,38 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// Attendance-related methods
+
+    /**
+     * Returns an unmodifiable view of the attendance events list.
+     */
+    @Override
+    public ObservableList<AttendanceEvent> getAttendanceEventList() {
+        return FXCollections.unmodifiableObservableList(attendanceEvents);
+    }
+
+    /**
+     * Adds an attendance event to the address book.
+     * The event must not already exist in the address book.
+     */
+    public void addAttendanceEvent(AttendanceEvent event) {
+        requireNonNull(event);
+        if (hasAttendanceEvent(event)) {
+            throw new DuplicateAttendanceEventException();
+        }
+        attendanceEvents.add(event);
+    }
+
+    /**
+     * Returns true if an attendance event with the same identity exists in the address book.
+     */
+    public boolean hasAttendanceEvent(AttendanceEvent event) {
+        requireNonNull(event);
+        return attendanceEvents.stream().anyMatch(e -> e.isSameEvent(event));
+    }
+
+
+
     //// util methods
 
     @Override
@@ -107,6 +146,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+
+    /**
+     * Removes an attendance event from the address book.
+     * The event must exist in the address book.
+     */
+    public void removeAttendanceEvent(AttendanceEvent event) {
+        attendanceEvents.remove(event);
+    }
+
 
     @Override
     public boolean equals(Object other) {

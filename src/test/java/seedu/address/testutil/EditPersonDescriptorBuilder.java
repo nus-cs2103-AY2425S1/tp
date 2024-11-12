@@ -5,12 +5,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
+import seedu.address.model.group.Group;
+import seedu.address.model.list.GroupList;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Year;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -33,10 +35,11 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
+        descriptor.setStudentId(person.getStudentId());
         descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getTags());
+        descriptor.setMajor(person.getMajor());
+        descriptor.setGroups(person.getGroupList());
+        descriptor.setYear(person.getYear());
     }
 
     /**
@@ -50,8 +53,8 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+    public EditPersonDescriptorBuilder withStudentId(String studentId) {
+        descriptor.setStudentId(new StudentId(studentId));
         return this;
     }
 
@@ -59,7 +62,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+        descriptor.setEmail(Email.makeEmail(email));
         return this;
     }
 
@@ -67,17 +70,25 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+        descriptor.setMajor(Major.makeMajor(address));
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code groups} into a {@code GroupList} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditPersonDescriptorBuilder withGroups(String... groups) {
+        Set<Group> groupSet = Stream.of(groups).map(Group::new).collect(Collectors.toSet());
+        descriptor.setGroups(new GroupList(groupSet));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Year} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withYear(String year) {
+        descriptor.setYear(Year.makeYear(year));
         return this;
     }
 

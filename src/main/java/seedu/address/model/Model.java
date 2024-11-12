@@ -1,11 +1,15 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.attendance.AttendanceEvent;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
 
 /**
  * The API of the Model component.
@@ -84,4 +88,20 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Attendance management methods **/
+    void addAttendanceEvent(AttendanceEvent event);
+
+    boolean hasAttendanceEvent(AttendanceEvent event);
+
+    Optional<AttendanceEvent> getAttendanceEvent(String eventName);
+
+    void markStudentAttendance(String eventName, StudentId studentId, boolean isPresent);
+
+    ObservableList<AttendanceEvent> getAttendanceEventList();
+
+    List<Person> getStudentsByAttendance(String eventName, boolean isPresent);
+
+    void deleteAttendanceEvent(AttendanceEvent event);
+
 }

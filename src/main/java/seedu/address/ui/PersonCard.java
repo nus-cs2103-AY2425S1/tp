@@ -4,9 +4,12 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,13 +36,21 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label studentId;
     @FXML
-    private Label address;
+    private Label major;
+    @FXML
+    private Label year;
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane groups;
+    @FXML
+    private VBox fields;
+    @FXML
+    private Label comment;
+    @FXML
+    private Separator separator;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,11 +60,33 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
+        studentId.setText(person.getStudentId().value);
+        major.setText(person.getMajor().value);
+        year.setText(person.getYear().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        comment.setText(person.getComment().value);
+        person.getGroups().stream()
+                .sorted(Comparator.comparing(group -> group.groupName))
+                .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
+
+        removeEmptyLabels(fields);
+
+        if (!fields.getChildren().contains(comment)) {
+            fields.getChildren().remove(separator);
+        }
+
+        comment.setText("Comment: " + comment.getText());
+        year.setText("Year " + year.getText());
     }
+
+    private static void removeEmptyLabels(Pane parentNode) {
+        parentNode.getChildren().removeIf(node -> {
+            if (node instanceof Label) {
+                Label label = (Label) node;
+                return label.getText().isEmpty();
+            }
+            return false;
+        });
+    }
+
 }

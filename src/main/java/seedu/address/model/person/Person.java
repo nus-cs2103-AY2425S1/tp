@@ -2,13 +2,12 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Group;
+import seedu.address.model.list.GroupList;
 
 /**
  * Represents a Person in the address book.
@@ -18,51 +17,72 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
     private final Email email;
+    private final StudentId studentId;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Major major;
+    private final Year year;
+    private final GroupList groups = new GroupList();
+    private final Comment comment;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, StudentId studentId, Email email, Major major, GroupList groups,
+                  Year year, Comment comment) {
+        requireAllNonNull(name, studentId, email, major, groups, year, comment);
         this.name = name;
-        this.phone = phone;
+        this.studentId = studentId;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.major = major;
+        this.year = year;
+        this.groups.addAll(groups);
+        this.comment = comment;
     }
 
     public Name getName() {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public StudentId getStudentId() {
+        return studentId;
     }
 
     public Email getEmail() {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Major getMajor() {
+        return major;
+    }
+
+    public Year getYear() {
+        return year;
+    }
+
+    public Comment getComment() {
+        return comment;
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable group list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public GroupList getGroupList() {
+        return groups.makeListUnmodifiable();
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Returns an immutable group set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Group> getGroups() {
+        return groups.getUnmodifiableGroups();
+    }
+
+    /**
+     * Returns true if both persons have the same StudentId.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -71,7 +91,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getStudentId().equals(getStudentId());
     }
 
     /**
@@ -91,26 +111,28 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
+                && studentId.equals(otherPerson.studentId)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && major.equals(otherPerson.major)
+                && year.equals(otherPerson.year);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, studentId, email, major, year, groups);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
+                .add("studentId", studentId)
                 .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("major", major)
+                .add("year", year)
+                .add("groups", groups)
+                .add("comment", comment)
                 .toString();
     }
 

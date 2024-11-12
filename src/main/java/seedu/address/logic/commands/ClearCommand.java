@@ -11,6 +11,10 @@ import seedu.address.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
+
+    public static final String MESSAGE_USAGE = "There should be no parameters!\n"
+            + "WARNING " + COMMAND_WORD + ": Removes all students data from your list! This is irreversible!\n"
+            + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
 

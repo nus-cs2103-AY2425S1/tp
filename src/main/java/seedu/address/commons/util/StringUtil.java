@@ -65,4 +65,84 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Verifies that the given index string does not overflow the maximum integer value.
+     * The method checks if the string represents a valid integer that is within the range of a 32-bit signed integer
+     * and ensures it does not exceed {@code Integer.MAX_VALUE}.
+     *
+     * <p>If the string starts with a negative or positive sign, it is considered valid as long as the length is not
+     * excessive and does not exceed the integer range.</p>
+     *
+     * @param trimmedIndex The string representing the index value to check.
+     * @return {@code true} if the index string does not exceed the maximum integer value;
+     *         {@code false} if it overflows {@code Integer.MAX_VALUE}.
+     * @throws NullPointerException If the input string is {@code null}.
+     */
+    public static boolean verifyNotIntOverflow(String trimmedIndex) {
+        requireNonNull(trimmedIndex);
+
+        if (trimmedIndex.startsWith("-") || trimmedIndex.startsWith("+")) {
+            return true;
+        }
+        if (trimmedIndex.length() > 10) {
+            return false;
+        }
+        if (trimmedIndex.length() == 10) {
+            // lexicographically checks if index is less than max integer
+            return trimmedIndex.compareTo(String.valueOf(Integer.MAX_VALUE)) <= 0;
+        }
+        // checks for valid integer value if length is less than 10, which is checked by isNonZeroUnsignedInteger
+        return true;
+    }
+
+    /**
+     * Verifies that the given index string does not represent a valid number.
+     * This method checks if the string contains only digits (0-9). If the string contains any non-digit characters,
+     * the method returns {@code true}, indicating that the string is not a valid number.
+     *
+     * <p>The method returns {@code false} only if the string consists exclusively of digits.</p>
+     *
+     * @param trimmedIndex The string representing the index value to check.
+     * @return {@code true} if the string contains non-digit characters or is not a valid number;
+     *         {@code false} if the string is a valid number consisting of digits only.
+     * @throws NullPointerException If the input string is {@code null}.
+     */
+    public static boolean verifyNotNumber(String trimmedIndex) {
+        requireNonNull(trimmedIndex);
+
+        // negates the check that input only has digits 0-9
+        // AI was used to generate regex
+        return !trimmedIndex.matches("\\d+");
+    }
+
+    /**
+     * Verifies that the given string does not contain excessive leading zeros.
+     * A valid string should not have more than 9 leading zeros unless the string represents a value of zero.
+     *
+     * <p>The method checks the number of leading zeros and returns {@code false} if there are 10 or more.
+     * If the string only consists of zeros (e.g., "0000"), the check passes.</p>
+     *
+     * @param s The string to check for excessive leading zeros.
+     * @return {@code true} if the string does not have more than 9 leading zeros or if the string represents zero;
+     *         {@code false} if there are 10 or more leading zeros.
+     * @throws NullPointerException If the input string is {@code null}.
+     */
+    public static boolean verifyNotExcessiveLeadingZeros(String s) {
+        requireNonNull(s);
+
+        // removes zeros starting from start of string
+        // AI was used to generate regex
+        String noLeadingZeros = s.replaceFirst("^0+", "");
+        int leadingZeroCounter = s.length() - noLeadingZeros.length();
+
+        if (s.matches("0+") && leadingZeroCounter <= 10) {
+            return true;
+        }
+        if (leadingZeroCounter >= 10) {
+            return false;
+        }
+
+        return true;
+    }
 }

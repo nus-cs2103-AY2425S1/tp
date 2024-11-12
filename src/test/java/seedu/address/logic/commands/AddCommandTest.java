@@ -10,10 +10,14 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -22,7 +26,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.attendance.AttendanceEvent;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -157,6 +163,41 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addAttendanceEvent(AttendanceEvent event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAttendanceEvent(AttendanceEvent event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<AttendanceEvent> getAttendanceEvent(String eventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markStudentAttendance(String eventName, StudentId studentId, boolean isPresent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<AttendanceEvent> getAttendanceEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Person> getStudentsByAttendance(String eventName, boolean isPresent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAttendanceEvent(AttendanceEvent event) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -198,6 +239,37 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void addAttendanceEvent(AttendanceEvent event) {
+            // Not needed for this test
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAttendanceEvent(AttendanceEvent event) {
+            return false;
+        }
+
+        @Override
+        public Optional<AttendanceEvent> getAttendanceEvent(String eventName) {
+            return Optional.empty();
+        }
+
+        @Override
+        public void markStudentAttendance(String eventName, StudentId studentId, boolean isPresent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<AttendanceEvent> getAttendanceEventList() {
+            return FXCollections.observableArrayList();
+        }
+
+        @Override
+        public List<Person> getStudentsByAttendance(String eventName, boolean isPresent) {
+            return Collections.emptyList();
         }
     }
 

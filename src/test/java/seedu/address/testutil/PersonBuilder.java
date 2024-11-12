@@ -1,14 +1,18 @@
 package seedu.address.testutil;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
+import seedu.address.model.group.Group;
+import seedu.address.model.list.GroupList;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Year;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -17,25 +21,34 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_STUDENTID = "A8535525P";
+    public static final String DEFAULT_EMAIL = "e1234567@u.nus.edu";
+    public static final String DEFAULT_MAJOR = "Computer Science";
+    public static final String DEFAULT_YEAR = "1";
+    public static final String DEFAULT_GROUP = "group 1";
+    public static final String DEFAULT_COMMENT = "Shes a very vocal person";
+
 
     private Name name;
-    private Phone phone;
+    private StudentId studentId;
     private Email email;
-    private Address address;
-    private Set<Tag> tags;
+    private Major major;
+    private Year year;
+    private GroupList groups;
+    private Comment comment;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        studentId = new StudentId(DEFAULT_STUDENTID);
+        email = Email.makeEmail(DEFAULT_EMAIL);
+        major = Major.makeMajor(DEFAULT_MAJOR);
+        year = Year.makeYear(DEFAULT_YEAR);
+        Set<Group> groupSet = new HashSet<>(Collections.singleton(new Group(DEFAULT_GROUP)));
+        groups = new GroupList(groupSet);
+        comment = new Comment(DEFAULT_COMMENT);
     }
 
     /**
@@ -43,10 +56,12 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        phone = personToCopy.getPhone();
+        studentId = personToCopy.getStudentId();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        major = personToCopy.getMajor();
+        year = personToCopy.getYear();
+        groups = personToCopy.getGroupList();
+        comment = personToCopy.getComment();
     }
 
     /**
@@ -58,26 +73,26 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code groups} into a {@code GroupList} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withGroups(String ... groups) {
+        this.groups = SampleDataUtil.getGroupList(groups);
         return this;
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code Major} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withMajor(String major) {
+        this.major = Major.makeMajor(major);
         return this;
     }
 
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+    public PersonBuilder withStudentId(String studentId) {
+        this.studentId = new StudentId(studentId);
         return this;
     }
 
@@ -85,12 +100,28 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+        this.email = Email.makeEmail(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Year} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withYear(String year) {
+        this.year = Year.makeYear(year);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Comment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withComment(String comment) {
+        this.comment = new Comment(comment);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, studentId, email, major, groups, year, comment);
     }
 
 }

@@ -1,21 +1,22 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
+import seedu.address.model.group.Group;
+import seedu.address.model.list.GroupList;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Year;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -25,24 +26,28 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
-    private final String phone;
+    private final String studentId;
     private final String email;
-    private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String major;
+    private final String year;
+    private final List<JsonAdaptedGroup> groups = new ArrayList<>();
+    private final String comment;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("studentId") String studentId,
+            @JsonProperty("email") String email, @JsonProperty("major") String major, @JsonProperty("year") String year,
+            @JsonProperty("groups") List<JsonAdaptedGroup> groups, @JsonProperty("comment") String comment) {
         this.name = name;
-        this.phone = phone;
+        this.studentId = studentId;
         this.email = email;
-        this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        this.major = major;
+        this.year = year;
+        this.comment = comment;
+        if (groups != null) {
+            this.groups.addAll(groups);
         }
     }
 
@@ -51,12 +56,14 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        studentId = source.getStudentId().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        major = source.getMajor().value;
+        year = source.getYear().value;
+        groups.addAll(source.getGroups().stream()
+                .map(JsonAdaptedGroup::new)
                 .collect(Collectors.toList()));
+        comment = source.getComment().value;
     }
 
     /**
@@ -65,45 +72,96 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
 
+        final Name modelName = convertStringToName();
+        final StudentId modelStudentId = convertStringToStudentId();
+        final Email modelEmail = convertStringToEmail();
+        final Major modelMajor = convertStringToMajor();
+        final Year modelYear = convertStringToYear();
+        final Comment modelComment = convertStringToComment();
+        final GroupList modelGroups = convertStringToGroups();
+
+        return new Person(modelName, modelStudentId, modelEmail, modelMajor, modelGroups, modelYear, modelComment);
+    }
+
+    private Name convertStringToName() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
+        return new Name(name);
+    }
 
+    private StudentId convertStringToStudentId() throws IllegalValueException {
+        if (studentId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentId.class.getSimpleName()));
+        }
+        if (!StudentId.isValidStudentId(studentId)) {
+            throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentId(studentId);
+    }
+
+    private Email convertStringToEmail() throws IllegalValueException {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
+
+        if (!Email.isValidEmail(email) && !email.isEmpty()) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        return Email.makeEmail(email);
+    }
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+    private Major convertStringToMajor() throws IllegalValueException {
+        if (major == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Major.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        if (!Major.isValidMajor(major) && !major.isEmpty()) {
+            throw new IllegalValueException(Major.MESSAGE_CONSTRAINTS);
+        }
+        return Major.makeMajor(major);
+    }
+
+    private Year convertStringToYear() throws IllegalValueException {
+        if (year == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Year.class.getSimpleName()));
+        }
+
+        if (!Year.isValidYear(year) && !year.isEmpty()) {
+            throw new IllegalValueException(Year.MESSAGE_CONSTRAINTS);
+        }
+        return Year.makeYear(year);
+    }
+
+    private Comment convertStringToComment() throws IllegalValueException {
+        if (comment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Comment.class.getSimpleName()));
+        }
+        return new Comment(comment);
+    }
+
+    private GroupList convertStringToGroups() throws IllegalValueException {
+        GroupList modelGroups = new GroupList();
+
+        for (JsonAdaptedGroup group : groups) {
+            modelGroups.addGroup(group.toModelType());
+        }
+
+        List<Group> invalidGroups = modelGroups.getUnmodifiableGroups().stream()
+                .filter(groupName -> !Group.isValidGroupName(groupName.getGroupName()))
+                .collect(Collectors.toList());
+
+        if (!invalidGroups.isEmpty()) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Group.class.getSimpleName()));
+        }
+
+        return modelGroups;
     }
 
 }
