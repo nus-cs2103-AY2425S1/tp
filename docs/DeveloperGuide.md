@@ -57,7 +57,7 @@
 * [7.1 Update subject and lesson time cumulatively](#7-1-update-subject-and-lesson-time-cumulatively)
 * [7.2 Names with special characters](#7-2-names-with-special-characters)
 * [7.3 Multiple students with the same name](#7-3-multiple-students-with-the-same-name)
-* [7.4 Usage of reserved prefixes in parameters](#7-4-usgae-of-reserved-prefixes-in-parameters)
+* [7.4 Usage of reserved prefixes in parameters](#7-4-usage-of-reserved-prefixes-in-parameters)
 
 --------------------------------------------------------------------------------------------------------------------
 
