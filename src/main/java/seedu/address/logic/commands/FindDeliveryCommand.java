@@ -47,6 +47,7 @@ public class FindDeliveryCommand extends FindCommand {
      * @param supplierIndex Index of supplier by which deliveries will be filtered.
      */
     public FindDeliveryCommand(Predicate<Delivery> predicate, Optional<SupplierIndex> supplierIndex) {
+        requireNonNull(predicate);
         this.predicate = predicate;
         this.supplierIndex = supplierIndex;
     }
@@ -60,6 +61,8 @@ public class FindDeliveryCommand extends FindCommand {
         // If supplier index is provided, retrieve the supplier and filter by that supplier
         if (supplierIndex.isPresent()) {
             List<Supplier> lastShownList = model.getModifiedSupplierList();
+            assert lastShownList != null;
+
             SupplierIndex index = supplierIndex.get();
             if (index.getZeroBased() >= lastShownList.size()) {
                 return new CommandResult(MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);

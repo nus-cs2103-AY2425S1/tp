@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -38,6 +40,7 @@ public class DeleteDeliveryCommand extends DeleteCommand {
         requireNonNull(model);
 
         Delivery deliveryToDelete = getDeliveryToDelete(model);
+        assert deliveryToDelete != null;
 
         model.deleteDelivery(deliveryToDelete);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
@@ -53,7 +56,10 @@ public class DeleteDeliveryCommand extends DeleteCommand {
      * @throws CommandException If index given exceeds the number of deliveries.
      */
     private Delivery getDeliveryToDelete(Model model) throws CommandException {
-        if (targetIndex.getZeroBased() >= model.getModifiedDeliveryList().size()) {
+        List<Delivery> deliveryList = model.getModifiedDeliveryList();
+        assert deliveryList != null;
+
+        if (targetIndex.getZeroBased() >= deliveryList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }
         return model.getModifiedDeliveryList().get(targetIndex.getZeroBased());

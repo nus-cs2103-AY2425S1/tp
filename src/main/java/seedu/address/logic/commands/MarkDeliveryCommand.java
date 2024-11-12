@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -43,6 +45,7 @@ public class MarkDeliveryCommand extends MarkCommand {
         requireNonNull(model);
 
         Delivery deliveryToMark = getDeliveryToMark(model);
+        assert deliveryToMark != null;
 
         validateDeliveryStatus(deliveryToMark);
 
@@ -62,7 +65,10 @@ public class MarkDeliveryCommand extends MarkCommand {
      * @throws CommandException If index given exceeds the number of deliveries.
      */
     private Delivery getDeliveryToMark(Model model) throws CommandException {
-        if (index.getZeroBased() >= model.getModifiedDeliveryList().size()) {
+        List<Delivery> deliveryList = model.getModifiedDeliveryList();
+        assert deliveryList != null;
+
+        if (index.getZeroBased() >= deliveryList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }
         return model.getModifiedDeliveryList().get(index.getZeroBased());
@@ -75,6 +81,7 @@ public class MarkDeliveryCommand extends MarkCommand {
      * @return Delivery with updated status.
      */
     private Delivery createDeliveryWithUpdatedStatus(Delivery deliveryToMark) {
+        assert deliveryToMark != null;
         return new Delivery(
                 deliveryToMark.getDeliveryProduct(),
                 deliveryToMark.getDeliverySender(),
