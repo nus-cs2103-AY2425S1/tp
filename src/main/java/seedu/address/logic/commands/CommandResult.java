@@ -16,6 +16,7 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
+
     /** The application should exit. */
     private final boolean exit;
 
@@ -47,6 +48,7 @@ public class CommandResult {
     public boolean isExit() {
         return exit;
     }
+
 
     @Override
     public boolean equals(Object other) {

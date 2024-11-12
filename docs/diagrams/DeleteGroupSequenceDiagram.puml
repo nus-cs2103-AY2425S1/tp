@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteGroupCommandParser" as DeleteGroupCommandParser LOGIC_COLOR
+participant "d:DeleteGroupCommand" as DeleteGroupCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "groupName:GroupName" as GroupName LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deleteGroup ClassA")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deleteGroup ClassA")
+activate AddressBookParser
+
+create DeleteGroupCommandParser
+AddressBookParser -> DeleteGroupCommandParser
+activate DeleteGroupCommandParser
+
+DeleteGroupCommandParser -> AddressBookParser
+deactivate DeleteGroupCommandParser
+
+AddressBookParser -> DeleteGroupCommandParser  : parse("ClassA")
+activate DeleteGroupCommandParser
+
+create GroupName
+DeleteGroupCommandParser --> GroupName
+activate GroupName
+
+GroupName --> DeleteGroupCommandParser : groupName
+deactivate GroupName
+
+create DeleteGroupCommand
+DeleteGroupCommandParser -> DeleteGroupCommand : new DeleteGroupCommand(groupName)
+activate DeleteGroupCommand
+DeleteGroupCommand --> DeleteGroupCommandParser : d
+deactivate DeleteGroupCommand
+
+DeleteGroupCommandParser --> AddressBookParser : d
+deactivate DeleteGroupCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteGroupCommand : execute(m:Model)
+activate DeleteGroupCommand
+
+DeleteGroupCommand -> Model : deleteGroup(groupName)
+activate Model
+
+Model --> DeleteGroupCommand : groupToDelete
+deactivate Model
+
+create CommandResult
+DeleteGroupCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteGroupCommand : r
+deactivate CommandResult
+
+DeleteGroupCommand --> LogicManager : r
+deactivate DeleteGroupCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+autonumber
+scale 2
+@enduml

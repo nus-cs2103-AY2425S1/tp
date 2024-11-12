@@ -5,24 +5,29 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tags;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
     /**
-     * Replaces user prefs data with the data in {@code userPrefs}.
+     * {@code Predicate} that always evaluate to true
      */
-    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
+
+    /**
+     * Replaces user prefs data with the data in {@code userPrefs}.
+     */
+    void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
     /**
      * Returns the user prefs' GUI settings.
@@ -45,12 +50,14 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
+     * Returns the AddressBook
+     */
+    ReadOnlyAddressBook getAddressBook();
+
+    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
-
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -76,12 +83,54 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Check if any of the already exist for the person.
+     * {@code person} must already exist in the address book.
+     */
+    boolean tagExists(Person target, Tags tags);
+
+    /**
+     * Adds the tags to the specified person.
+     * {@code person} must already exist in the address book.
+     */
+    void addTag(Person target, Tags tags);
+
+    /**
+     * Deletes the tags of the specified person.
+     * {@code person} must already exist in the address book.
+     * {@code tags} must already exist for the person.
+     */
+    void deleteTag(Person target, Tags tags);
+
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Adds the group to the model.
+     *
+     * @throws NullPointerException if {@code group} is null.
+     */
+    void addGroup(Group group);
+
+    void deleteGroup(Group groupToDelete);
+
+    String groupsString();
+
+    boolean hasGroupName(Group group);
+
+    void updateFilteredGroupList(Predicate<Group> groupName);
+
+    /**
+     * Returns an unmodifiable view of the groups list
+     */
+    ObservableList<Group> getFilteredGroupList();
 }

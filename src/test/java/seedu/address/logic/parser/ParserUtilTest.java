@@ -19,14 +19,15 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Tags;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "+_651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-
+    private static final String LONG_TAG = "abcdefghijklmnopqrstuvxwyz0123456789";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
@@ -188,9 +189,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        Tags actualTags = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Tags expectedTags = new Tags(expectedTagSet);
+        assertEquals(expectedTags, actualTags);
+    }
 
-        assertEquals(expectedTagSet, actualTagSet);
+    @Test
+    public void parseTags_exceedsLengthLimit_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(LONG_TAG));
     }
 }

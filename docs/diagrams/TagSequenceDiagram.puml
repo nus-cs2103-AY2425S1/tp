@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":TagCommandParser" as TagCommandParser LOGIC_COLOR
+participant "t:TagCommand" as TagCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("tag 1 t/friend t/colleague")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("tag 1 t/friend t/colleague")
+activate AddressBookParser
+
+create TagCommandParser
+AddressBookParser -> TagCommandParser
+activate TagCommandParser
+
+TagCommandParser --> AddressBookParser
+deactivate TagCommandParser
+
+AddressBookParser -> TagCommandParser : parse("1 t/friend t/colleague")
+activate TagCommandParser
+
+create TagCommand
+TagCommandParser -> TagCommand : new TagCommand(index, tags)
+activate TagCommand
+TagCommand --> TagCommandParser : t
+deactivate TagCommand
+
+TagCommandParser --> AddressBookParser
+deactivate TagCommandParser
+
+AddressBookParser --> LogicManager : t
+deactivate AddressBookParser
+
+LogicManager -> TagCommand : execute(m)
+activate TagCommand
+
+TagCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> TagCommand : lastShownList
+deactivate Model
+
+TagCommand -> Model : addTag(...)
+activate Model
+Model --> TagCommand
+deactivate Model
+
+create CommandResult
+TagCommand -> CommandResult
+activate CommandResult
+CommandResult --> TagCommand : r
+deactivate CommandResult
+
+TagCommand --> LogicManager : r
+deactivate TagCommand
+
+ <-- LogicManager
+deactivate LogicManager
+
+scale 2
+@enduml

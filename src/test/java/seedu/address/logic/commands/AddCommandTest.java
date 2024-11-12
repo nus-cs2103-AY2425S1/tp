@@ -22,7 +22,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tags;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -89,12 +91,17 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        public String groupsString() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -124,12 +131,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -149,6 +156,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean tagExists(Person target, Tags tags) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTag(Person target, Tags tags) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTag(Person target, Tags tags) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -156,6 +178,29 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasGroupName(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Group> getFilteredGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void updateFilteredGroupList(Predicate<Group> groupPredicate) {
+            throw new AssertionError("This method should not be called");
         }
     }
 

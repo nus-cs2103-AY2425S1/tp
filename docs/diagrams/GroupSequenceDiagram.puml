@@ -1,0 +1,80 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":GroupCommandParser" as GroupCommandParser LOGIC_COLOR
+participant "g:GroupCommand" as GroupCommand LOGIC_COLOR
+participant "newGroup:Group" as Group LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("group g/ClassA s/Alice")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("group g/ClassA s/Alice")
+activate AddressBookParser
+
+create GroupCommandParser
+AddressBookParser -> GroupCommandParser
+activate GroupCommandParser
+
+GroupCommandParser --> AddressBookParser
+deactivate GroupCommandParser
+
+AddressBookParser -> GroupCommandParser : parse("g/ClassA s/Alice")
+activate GroupCommandParser
+
+create GroupCommand
+GroupCommandParser -> GroupCommand : new GroupCommand(...)
+activate GroupCommand
+
+GroupCommand --> GroupCommandParser : g
+deactivate GroupCommand
+
+
+GroupCommandParser --> AddressBookParser : g
+deactivate GroupCommandParser
+
+AddressBookParser --> LogicManager : g
+deactivate AddressBookParser
+
+LogicManager -> GroupCommand : execute(m:Model)
+activate GroupCommand
+
+create Group
+GroupCommand --> Group : new Group("ClassA", ["Alice"])
+activate Group
+
+Group --> GroupCommand : newGroup
+deactivate Group
+
+GroupCommand -> Model : addGroup(newGroup)
+activate Model
+
+Model --> GroupCommand
+deactivate Model
+
+create CommandResult
+GroupCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> GroupCommand : r
+deactivate CommandResult
+
+GroupCommand --> LogicManager : r
+deactivate GroupCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+autonumber
+scale 3
+@enduml
