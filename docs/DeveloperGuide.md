@@ -172,6 +172,8 @@ This section describes some noteworthy details on how certain features are imple
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+Note that the usage of `AddressBook` in the naming scheme is because the app is still fundamentally an addressbook contact management app, not because it is a reference to AB3. 
+As you will see, this naming scheme is consistent in the code to reduce confusion.
 
 * `VersionedAddressBook#commit()` — Saves the current careconnect book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous careconnect book state from its history.
