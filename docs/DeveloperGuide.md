@@ -19,6 +19,8 @@ title: Developer Guide
   - [Company Command](#2-company-command)
   - [View Command](#3-view-command)
   - [Find Command](#4-find-command)
+  - [Filtertag Command](#5-filtertag-command)
+  - [Import Command](#6-import-command)
 - [Planned Enhancements](#planned-enhancements)
   - [Disallow Duplicate Phone Number Across Contacts](#1-disallow-duplicate-phone-numbers-across-contacts)
   - [Consistent Case-Insensitive Tag Handling](#2-consistent-case-insensitive-tag-handling)
@@ -276,6 +278,30 @@ The activity diagram below shows the flow of the `find` operation.
 
 <img src="images/FindActivityDiagram.png" width="750" />
 
+### 5. Filtertag Command
+
+The filtertag command is used to find contacts whose tags are the same as the specified keyword.
+
+#### Current Implementation
+
+To execute the `filtertag` command, users must enter a valid `KEYWORD` parameter, by ensuring that the `KEYWORD` parameter is not empty.
+
+This is a high-level view of what occurs when user inputs `filtertag tagName`.
+
+<img src="images/FiltertagSequenceDiagram.png"/>
+
+### 6. Import Command
+
+The `import` command allows you to bring data from a CSV file into the application, enabling seamless population of your contacts database from external sources.
+
+#### Current Implementation
+
+To execute the `import` command, users must enter a valid `FILE_PATH` parameter, by ensuring that the `FILE_PATH` parameter is not empty, is a valid file path and the file format is `.csv`.
+
+The activity diagram below shows the flow of the `import` operation.
+
+<img src="images/ImportActivityDiagram.png"/>
+
 ---
 
 ## Planned Enhancements
@@ -301,6 +327,26 @@ The current tag handling system in the app is inconsistent regarding case sensit
 #### Proposed Enhancement:
 
 Standardise the tag handling logic to be case-insensitive across all commands. This means that tags with the same letters but different capitalisations (e.g., `OwesMoney`, `owesmOney`, `OWESMONEY`) will be treated as identical tags in all scenarios, including adding contacts, adding tags, deleting tags and filtering tags. By making this adjustment, the program will align with standard user expectations of case-insensitivity, creating a more intuitive and consistent experience for users.
+
+### 5. Specify t/ Prefix for Tag Inputs in filtertag
+
+#### Current Issue: 
+
+Currently, the filtertag command does not require a specific prefix for tag inputs, which can cause ambiguity or lead to misinterpretation of user input.Example: `filtertag friends` Users may inadvertently enter invalid data without realizing they did not need to specify tags explicitly, which can result in errors or unintended command behavior.
+
+#### Proposed Enhancement: 
+
+Introduce the t/ prefix for tag inputs in the filtertag command, requiring users to specify tags as t/<tag>. Example: `filtertag t/friends`. This enhancement clarifies user intent by indicating that they are filtering by a specific tag and aligns with other command syntax patterns that use prefixes for inputs. The t/ prefix will improve command consistency and reduce input errors, resulting in a more user-friendly experience.
+
+### 6. More Specific Error Messages for Corrupted CSV Files in Import
+
+#### Current Issue: 
+
+The current error message for CSV file corruption in the import command is generic, providing minimal detail about the specific problem (e.g., missing fields or incorrect formatting). This lack of specificity may lead to user confusion, as they may be unsure of what exactly needs to be corrected in the CSV file to successfully import data.
+
+#### Proposed Enhancement: 
+
+Enhance the CSV import error message to specify which fields are missing or incorrectly formatted. For example, `“Error: Missing compulsory field ‘name’ in row 3”` or `“Invalid category in row 5; expected ‘student’ or ‘company’”`. By providing more precise feedback on CSV formatting issues, users will be better equipped to correct their files quickly, minimizing trial and error and streamlining the import process. This enhancement will improve user experience by making error messages actionable and informative.
 
 ### 7. Make Error Message for View Command More Specific
 
@@ -341,17 +387,6 @@ When attempting to edit fields restricted to specific contact types (such as `ST
 #### Proposed Enhancement:
 
 Adjust the error-checking sequence in the edit command to prioritise checks on editability based on contact type before format validation. This means users will receive a direct message if they attempt to edit fields restricted for a contact type (e.g., "Industry field cannot be edited for a student contact"), reducing unnecessary steps and making the error feedback more user-friendly.
-
-### View Command
-
-The view command is used to view a specific contact on the contact display pane.
-Here's an overview of what happens when the `view 1` command is being input by the user:
-![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
-The activity diagram is as follows:
-![ViewActivityDiagram](images/ViewActivityDiagram.png)
-
-- **The View Command checks:**
-  - that the specified index is positive and within the bounds of the contacts list.
 
 ---
 
@@ -567,24 +602,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to filter contacts by tag (eg. "group A").
-2. The system filters and displays the list of contacts belonging to the specified tag.
+1. User requests to filter contacts by specifying a tag (e.g., "group A").
+2. AdmiNUS filters and displays the list of contacts associated with the specified tag.
 
    Use case ends.
 
 **Extensions**
 
-- 2a. No contacts have the specified tag.
+- 2a. No contacts are associated with the specified tag.
+    - 2a1. AdmiNUS displays an empty list.
 
-  - 2a1. AdmiNUS displays an empty list.
-
-    Use case ends.
+      Use case ends.
 
 **Use case: UC10 - Import contacts from a CSV file**
 
 **MSS**
 
-1. User requests to import contacts by specifying the file path of the CSV file.
+1. User requests to import contacts by providing the file path of the CSV file.
 2. AdmiNUS reads the CSV file and imports the contacts.
 3. AdmiNUS displays a success message indicating the number of contacts imported.
 
@@ -593,8 +627,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - 1a. The specified file path is invalid or does not end with `.csv`.
-  - 1a1. AdmiNUS shows an error message indicating an invalid file path or incorrect file format.
-    Use case resumes at step 1.
+    - 1a1. AdmiNUS shows an error message indicating an invalid file path or incorrect file format.
+
+      Use case resumes at step 1.
+
+- 2a. The CSV file is corrupted or missing compulsory fields.
+    - 2a1. AdmiNUS displays an error message specifying the missing or invalid fields.
+
+      Use case resumes at step 1.
 
 **Use case: UC11 - Export contacts to a CSV file**
 
@@ -609,18 +649,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 - 1a. The specified file path is invalid or does not end with `.csv`.
+    - 1a1. AdmiNUS shows an error message indicating an invalid file path or incorrect file format.
 
-  - 1a1. AdmiNUS shows an error message indicating an invalid file path or incorrect file format.
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
 - 1b. The system does not have permission to write to the specified path.
+    - 1b1. AdmiNUS displays an error message indicating insufficient write permissions.
 
-  - 1b1. AdmiNUS displays an error message indicating insufficient write permissions.
-    Use case resumes at step 1.
+      Use case resumes at step 1.
 
 - 2a. The specified file already exists.
-  - 2a1. AdmiNUS overwrites the file without warning.
-    Use case ends.
+    - 2a1. AdmiNUS overwrites the file without warning.
+
+      Use case ends.
 
 ---
 
