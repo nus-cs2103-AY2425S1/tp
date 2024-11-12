@@ -572,9 +572,13 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder.
-
    1. Double-click the jar file.<br>
-       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+      Expected: Shows the HR Helper Login window.
+
+1. Authentication
+
+   1. Login using username and password.<br>
+      Expected: Shows the GUI with a set of sample employees. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -584,9 +588,11 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 1. Executing commands
+   
     1. Refer to the User Guide [here](https://ay2425s1-cs2103t-t16-1.github.io/tp/UserGuide.html#5-command-summary) for the list of commands.
 
 1. Closing the application
+
     1. Use the `exit` command to close the application.
 
 --------------------------------------------------------------------------------------------------------------------
