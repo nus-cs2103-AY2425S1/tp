@@ -51,12 +51,14 @@ public class ModelManagerTest {
         userPrefs.setListingsFilePath(Paths.get("listings/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
+
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
         userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
         userPrefs.setListingsFilePath(Paths.get("new/listings/file/path"));
+
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -69,6 +71,7 @@ public class ModelManagerTest {
     public void setGuiSettings_validGuiSettings_setsGuiSettings() {
         GuiSettings guiSettings = new GuiSettings(1, 2, 3, 4);
         modelManager.setGuiSettings(guiSettings);
+
         assertEquals(guiSettings, modelManager.getGuiSettings());
     }
 
@@ -81,6 +84,7 @@ public class ModelManagerTest {
     public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("address/book/file/path");
         modelManager.setAddressBookFilePath(path);
+
         assertEquals(path, modelManager.getAddressBookFilePath());
     }
 
@@ -97,6 +101,7 @@ public class ModelManagerTest {
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
+
         assertTrue(modelManager.hasPerson(ALICE));
     }
 
@@ -115,6 +120,7 @@ public class ModelManagerTest {
         modelManager.addPerson(ALICE);
         modelManager.deletePerson(ALICE);
         ModelManager expected = new ModelManager();
+
         assertEquals(modelManager, expected);
     }
 
@@ -147,6 +153,7 @@ public class ModelManagerTest {
     public void setListingsFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("listings/file/path");
         modelManager.setListingsFilePath(path);
+
         assertEquals(path, modelManager.getListingsFilePath());
     }
 
@@ -163,6 +170,7 @@ public class ModelManagerTest {
     @Test
     public void hasListing_listingInListings_returnsTrue() {
         modelManager.addListing(PASIR_RIS);
+
         assertTrue(modelManager.hasListing(PASIR_RIS));
     }
 
@@ -181,6 +189,7 @@ public class ModelManagerTest {
         modelManager.addListing(PASIR_RIS);
         modelManager.deleteListing(PASIR_RIS);
         ModelManager expected = new ModelManager();
+
         assertEquals(modelManager, expected);
     }
 
@@ -222,6 +231,7 @@ public class ModelManagerTest {
     @Test
     public void getPersonByName_personFound_returnPerson() {
         modelManager.addPerson(ALICE);
+
         assertEquals(ALICE, modelManager.getPersonByName(ALICE.getName()));
     }
 
@@ -284,10 +294,12 @@ public class ModelManagerTest {
         modelManager.updateListingsAfterClientEdit(originalBuyer, updatedBuyer);
 
         Listing listing = modelManager.getListings().getListingList().get(0);
+
         assertTrue(
                 listing.hasBuyer(updatedBuyer),
                 "The listing should have the updated buyer."
         );
+
         assertFalse(
                 listing.hasBuyer(originalBuyer),
                 "The listing should no longer have the original buyer."
@@ -302,6 +314,7 @@ public class ModelManagerTest {
 
         assertTrue(modelManager.hasListing(TypicalListings.PASIR_RIS),
                 "The listing should initially exist.");
+
         assertEquals(originalSeller, modelManager.getListings().getListingList()
                         .get(0).getSeller(),
                 "The seller should initially be ALICE.");
@@ -309,6 +322,7 @@ public class ModelManagerTest {
         modelManager.updateListingsAfterClientEdit(originalSeller, updatedSeller);
 
         Listing updatedListing = modelManager.getListings().getListingList().get(0);
+
         assertEquals(updatedSeller, updatedListing.getSeller(),
                 "The listing should have the updated seller (BOB).");
 

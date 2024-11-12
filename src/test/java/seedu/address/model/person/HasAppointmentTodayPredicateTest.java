@@ -14,11 +14,12 @@ import seedu.address.testutil.PersonBuilder;
 public class HasAppointmentTodayPredicateTest {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yy");
+    private static final String VALID_FROM = "0800";
+    private static final String VALID_TO = "0900";
 
     @Test
     public void equals() {
         HasAppointmentTodayPredicate firstPredicate = new HasAppointmentTodayPredicate();
-        HasAppointmentTodayPredicate secondPredicate = new HasAppointmentTodayPredicate();
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
@@ -41,7 +42,7 @@ public class HasAppointmentTodayPredicateTest {
 
         // Person with an appointment scheduled for today
         Person personWithTodayAppointment = new PersonBuilder()
-                .withAppointment(todayDate, "0800", "0900")
+                .withAppointment(todayDate, VALID_FROM, VALID_TO)
                 .buildBuyer();
 
         HasAppointmentTodayPredicate predicate = new HasAppointmentTodayPredicate();
@@ -57,7 +58,7 @@ public class HasAppointmentTodayPredicateTest {
 
         // Person with an appointment scheduled for yesterday
         Person personWithYesterdayAppointment = new PersonBuilder()
-                .withAppointment(yesterdayDate, "0800", "0900")
+                .withAppointment(yesterdayDate, VALID_FROM, VALID_TO)
                 .buildBuyer();
 
         HasAppointmentTodayPredicate predicate = new HasAppointmentTodayPredicate();
@@ -71,7 +72,7 @@ public class HasAppointmentTodayPredicateTest {
         // Person with an appointment scheduled on a future date
         String futureDate = LocalDate.now().plusDays(1).format(DATE_FORMATTER);
         Person personWithoutTodayAppointment = new PersonBuilder()
-                .withAppointment(futureDate, "0800", "0900")
+                .withAppointment(futureDate, VALID_FROM, VALID_TO)
                 .buildBuyer();
 
         HasAppointmentTodayPredicate predicate = new HasAppointmentTodayPredicate();

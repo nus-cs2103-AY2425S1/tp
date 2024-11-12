@@ -8,26 +8,34 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class RemarkTest {
+
+    private static final String REMARK_STRING = "This is a test remark.";
+
     @Test
     public void equals() {
-        Remark remark = new Remark("Hello");
+        Remark remark = new Remark(REMARK_STRING);
+
         // same object -> returns true
         assertTrue(remark.equals(remark));
+
         // same values -> returns true
-        Remark remarkCopy = new Remark(remark.value);
+        Remark remarkCopy = new Remark(REMARK_STRING);
         assertTrue(remark.equals(remarkCopy));
+
         // different types -> returns false
         assertFalse(remark.equals(1));
+
         // null -> returns false
         assertFalse(remark.equals(null));
+
         // different remark -> returns false
         Remark differentRemark = new Remark("Bye");
         assertFalse(remark.equals(differentRemark));
     }
     @Test
     public void testToString() {
-        Remark remark = new Remark("This is a test remark.");
-        assertEquals("This is a test remark.", remark.toString());
+        Remark remark = new Remark(REMARK_STRING);
+        assertEquals(REMARK_STRING, remark.toString());
     }
 
     @Test

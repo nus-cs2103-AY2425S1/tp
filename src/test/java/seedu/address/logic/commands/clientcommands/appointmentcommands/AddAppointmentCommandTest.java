@@ -35,8 +35,11 @@ public class AddAppointmentCommandTest {
     private static final String VALID_DATE = "20-12-24";
     private static final String VALID_FROM = "0800";
     private static final String VALID_TO = "1000";
+    private static final String OTHER_DATE = "02-11-24";
+    private static final String OTHER_FROM = "10:00";
+    private static final String OTHER_TO = "11:00";
 
-    private final Appointment validAppointment = new Appointment(
+    private static final Appointment VALID_APPOINTMENT = new Appointment(
             new Date(VALID_DATE),
             new From(VALID_FROM),
             new To(VALID_TO)
@@ -45,7 +48,7 @@ public class AddAppointmentCommandTest {
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
         // Test null index
-        assertThrows(NullPointerException.class, () -> new AddAppointmentCommand(null, validAppointment));
+        assertThrows(NullPointerException.class, () -> new AddAppointmentCommand(null, VALID_APPOINTMENT));
     }
 
     @Test
@@ -59,7 +62,7 @@ public class AddAppointmentCommandTest {
         ModelStubWithPerson modelStub = new ModelStubWithPerson(new PersonBuilder().buildBuyer());
         Index invalidIndex = Index.fromZeroBased(1);
 
-        AddAppointmentCommand command = new AddAppointmentCommand(invalidIndex, validAppointment);
+        AddAppointmentCommand command = new AddAppointmentCommand(invalidIndex, VALID_APPOINTMENT);
 
         assertThrows(CommandException.class, () -> command.execute(modelStub),
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -71,7 +74,7 @@ public class AddAppointmentCommandTest {
         Person personToEdit = ALICE;
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
-        AddAppointmentCommand command = new AddAppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
+        AddAppointmentCommand command = new AddAppointmentCommand(INDEX_FIRST_PERSON, VALID_APPOINTMENT);
 
         // Act
         CommandResult result = command.execute(modelStub);
@@ -80,7 +83,7 @@ public class AddAppointmentCommandTest {
         Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
                 .buildBuyer();
         assertEquals(String.format(AddAppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS,
-                        editedPerson.getName(), validAppointment),
+                        editedPerson.getName(), VALID_APPOINTMENT),
                 result.getFeedbackToUser());
     }
 
@@ -90,7 +93,7 @@ public class AddAppointmentCommandTest {
         Person personToEdit = DANIEL;
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
-        AddAppointmentCommand command = new AddAppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
+        AddAppointmentCommand command = new AddAppointmentCommand(INDEX_FIRST_PERSON, VALID_APPOINTMENT);
 
         // Act
         CommandResult result = command.execute(modelStub);
@@ -99,7 +102,7 @@ public class AddAppointmentCommandTest {
         Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
                 .buildBuyer();
         assertEquals(String.format(AddAppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS,
-                        editedPerson.getName(), validAppointment),
+                        editedPerson.getName(), VALID_APPOINTMENT),
                 result.getFeedbackToUser());
     }
 
@@ -109,7 +112,7 @@ public class AddAppointmentCommandTest {
         Person personToEdit = ALICE;
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
-        AddAppointmentCommand command = new AddAppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
+        AddAppointmentCommand command = new AddAppointmentCommand(INDEX_FIRST_PERSON, VALID_APPOINTMENT);
 
         // Act
         command.execute(modelStub);
@@ -117,21 +120,21 @@ public class AddAppointmentCommandTest {
         // Assert
         Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
                 .buildBuyer();
-        assertEquals(editedPerson.getAppointment(), validAppointment);
+        assertEquals(editedPerson.getAppointment(), VALID_APPOINTMENT);
     }
     @Test
     public void equals() {
         AddAppointmentCommand firstAddAppointmentCommand =
-                new AddAppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
+                new AddAppointmentCommand(INDEX_FIRST_PERSON, VALID_APPOINTMENT);
         AddAppointmentCommand secondAddAppointmentCommand =
-                new AddAppointmentCommand(INDEX_SECOND_PERSON, validAppointment);
+                new AddAppointmentCommand(INDEX_SECOND_PERSON, VALID_APPOINTMENT);
 
         // same object -> returns true
         assertTrue(firstAddAppointmentCommand.equals(firstAddAppointmentCommand));
 
         // same values -> returns true
         AddAppointmentCommand firstAddAppointmentCommandCopy =
-                new AddAppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
+                new AddAppointmentCommand(INDEX_FIRST_PERSON, VALID_APPOINTMENT);
         assertTrue(firstAddAppointmentCommand.equals(firstAddAppointmentCommandCopy));
 
         // different types -> returns false
@@ -144,7 +147,8 @@ public class AddAppointmentCommandTest {
         assertFalse(firstAddAppointmentCommand.equals(secondAddAppointmentCommand));
 
         // same index, different appointment -> returns false
-        Appointment differentAppointment = new Appointment(new Date("02-11-24"), new From("10:00"), new To("11:00"));
+        Appointment differentAppointment = new Appointment(new Date(OTHER_DATE),
+                new From(OTHER_FROM), new To(OTHER_TO));
         AddAppointmentCommand firstAddAppointmentCommandWithDifferentAppointment =
                 new AddAppointmentCommand(INDEX_FIRST_PERSON, differentAppointment);
         assertFalse(firstAddAppointmentCommand.equals(firstAddAppointmentCommandWithDifferentAppointment));

@@ -3,8 +3,7 @@ layout: page
 title: Developer Guide
 ---
 
-**Team**: T11-04
-<br>
+**Team**: F11-04
 **Name**: EZSTATES
 
 **User Target Profile**:
@@ -106,7 +105,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F11-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F11-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -138,7 +137,7 @@ The sections below give more details of each component.]-->
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F11-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -459,7 +458,7 @@ simplifies code, improves maintainability and enhances reusability.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F11-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -490,7 +489,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F11-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -509,7 +508,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F11-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -952,19 +951,19 @@ This section describes some noteworthy details on how certain features are imple
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                                       | So that I can…​                                         |
-|----------|-----------------------------|--------------------------------------------------------------------|---------------------------------------------------------|
-| `High`   | tech-savvy property agent   | have a place to store my client details                            | manage my large number of client details                |
-| `High`   | tech-savvy property agent   | create a new client profile                                        | store new clients                                       |
-| `High`   | tech-savvy property agent   | delete a client profile                                            | remove clients I no longer serve                        |
-| `High`   | tech-savvy property agent   | search for a client by name                                        | quickly access the profile of the client of interest    |
-| `High`   | tech-savvy property agent   | be able to add my client's phone number and email to their profile | know how to contact him/her                             |
-| `High`   | tech-savvy property agent   | create appointments with my clients                                | manage my appointments with my clients                  |
-| `High`   | tech-savvy property agent   | delete appointments                                                | remove appointments I have already cleared              |
-| `Medium` | tech-savvy property agent   | assign a status to a client                                        | easily categorise clients by priority                   |
-| `Medium` | tech-savvy property agent   | search by appointments                                             | pinpoint which client I am serving for that appointment |
-| `Medium` | tech-savvy property agent   | be able to keep track of all my appointments                       | plan out my schedule efficiently                        |
-| `Medium` | tech-savvy property agent   | be able to know what appointments I have for the day               | make immediate changes to my schedule                   |
+| Priority  | As a …​                     | I want to …​                                                       | So that I can…​                                         |
+|-----------|-----------------------------|--------------------------------------------------------------------|---------------------------------------------------------|
+| `* * *`   | tech-savvy property agent   | have a place to store my client details                            | manage my large number of client details                |
+| `* * *`   | tech-savvy property agent   | create a new client profile                                        | store new clients                                       |
+| `* * *`   | tech-savvy property agent   | delete a client profile                                            | remove clients I no longer serve                        |
+| `* * *`   | tech-savvy property agent   | search for a client by name                                        | quickly access the profile of the client of interest    |
+| `* * *`   | tech-savvy property agent   | be able to add my client's phone number and email to their profile | know how to contact him/her                             |
+| `* * *`   | tech-savvy property agent   | create appointments with my clients                                | manage my appointments with my clients                  |
+| `* * *`   | tech-savvy property agent   | delete appointments                                                | remove appointments I have already cleared              |
+| `* *`     | tech-savvy property agent   | assign a status to a client                                        | easily categorise clients by priority                   |
+| `* *`     | tech-savvy property agent   | search by appointments                                             | pinpoint which client I am serving for that appointment |
+| `* *`     | tech-savvy property agent   | be able to keep track of all my appointments                       | plan out my schedule efficiently                        |
+| `* *`     | tech-savvy property agent   | be able to know what appointments I have for the day               | make immediate changes to my schedule                   |
 
 
 *{More to be added}*
@@ -973,110 +972,301 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `EZSTATES` and the **Actor** is the `User`, unless specified otherwise)
 
-**Use case: Add a client**
 
-**MSS**
+#### Use Case: Add Buyer
 
-1.  `User` adds a client name
+**MSS**:
+1. User chooses to add a new buyer.
+2. System requests buyer details (name, contact info, property interest, etc.).
+3. User enters the required information.
+4. System confirms the details and creates the profile.
+5. System displays a success message.
+    - Use case ends.
 
-    Use case ends.
-
-**Extensions**
-
-* 2a. The client name already exists
-    * 2a1. `EZSTATES` shows an error message
-
-        Use Case resumes at step 1.
-
-**Use case: Delete a person**
-
-**MSS**
-
-1.  `User` lists all clients
-2. `EZSTATES` shows a list of all clients
-3. `User` identifies a client to remove
-4. `User` requests to delete that client from the list
-5. `EZSTATES` deletes the requested user
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. List is empty
-
-    Use case ends
+**Extensions**:
+- **3a.** System detects missing or incorrect data:
+    - **3a1.** System displays am error and requests valid inputs.
+    - **3a2.** User enters the correct data.
+    - Steps 3a1–3a2 are repeated until all data is valid.
+    - Use case resumes from step 4.
 
 
-* 3a. The client does not exist
-    * 3a1. `EZSTATES` shows an error message.
+#### Use Case: Add Seller
 
-      Use case resumes at step 1.
+**MSS**:
+1. User chooses to add a new seller profile.
+2. System requests seller details (name, contact info, property interest, etc.).
+3. User enters the required information.
+4. System confirms the details and creates the profile.
+5. System displays a success message.
+    - Use case ends.
 
-**Use case: List all profiles**
+**Extensions**:
+- **3a.** System detects missing or incorrect data:
+    - **3a1.** System displays am error and requests valid inputs.
+    - **3a2.** User enters the correct data.
+    - Steps 3a1–3a2 are repeated until all data is valid.
+    - Use case resumes from step 4.
 
-**MSS**
 
-1.  `User` requests to list all clients
-2.  `EZSTATES` shows a list of all clients
+#### Use Case: Edit Client Profile
 
-    Use case ends.
+**MSS**:
+1. User selects an existing client profile to edit.
+2. System displays the client’s current information.
+3. User updates the desired fields.
+4. System confirms the changes and updates the profile.
+5. System displays a success message.
+    - Use case ends.
 
-**Extensions**
+**Extensions**:
+- **3a.** User tries to edit a field with invalid data:
+    - **3a1.** System displays an error and requests valid data.
+    - **3a2.** User corrects the data.
+    - Steps 3a1–3a2 repeat until all data is valid.
+    - Use case resumes from step 4.
 
-* 2a. The list is empty.
 
-  Use case ends.
+#### Use Case: Delete Client Profile
 
-**Use case: Create Appointment**
+**MSS**:
+1. User chooses to delete a client profile.
+2. System asks for confirmation.
+3. User confirms the deletion.
+4. System removes the client profile from the database.
+5. System displays a success message.
+    - Use case ends.
 
-**MSS**
+**Extensions**:
+- **2a.** User cancels the deletion:
+    - **2a1.** System aborts the deletion process.
+    - Use case ends.
 
-1.  `User` requests to add an appointment with one client
-2.  `User` enters relevant appointment time
-3. `EZSTATES` adds the appointment
 
-    Use case ends.
+#### Use Case: Add Appointment
 
-**Extensions**
+**MSS**:
+1. User chooses to schedule an appointment for a client.
+2. System requests appointment details (date, time, location).
+3. User enters the requested details.
+4. System confirms the details and saves the appointment.
+5. System displays a success message.
+    - Use case ends.
 
-* 2a. Client name not specified
-    * 2a1. `EZSTATES` shows an error message
+**Extensions**:
+- **3a.** System detects a scheduling conflict:
+    - **3a1.** System notifies the user of the conflict.
+    - **3a2.** User chooses a new date/time.
+    - Use case resumes from step 3.
 
-        Use case resumes at step 1
 
-* 3a. Client already has an appointment
-    * 3a1. `EZSTATES` shows an error message
+#### Use Case: Delete Appointment
 
-        Use case resumes at step 1
+**MSS**:
+1. User selects an appointment to delete.
+2. System requests confirmation.
+3. User confirms deletion.
+4. System removes the appointment from the schedule.
+5. System displays a success message.
+    - Use case ends.
 
-**Use case: Delete Appointment**
+**Extensions**:
+- **2a.** User cancels the deletion:
+    - **2a1.** System stops the deletion process.
+    - Use case ends.
 
-**MSS**
 
-1. `User` requests a list of all profiles
-2. `User` chooses a certain client's appointment
-3. `User` requests to delete an appointment with a certain client
-4. `EZSTATES` removes the appointment
+#### Use Case: List Clients
 
-   Use case ends.
+**MSS**:
+1. User chooses to view a list of all clients.
+2. System retrieves and displays the client list.
+    - Use case ends.
 
-**Extensions**
 
-* 2a. Client name not specified
+#### Use Case: Find Client by Name
 
-    Use case ends
+**MSS**:
+1. User chooses to search for a client by name.
+2. System requests the client’s name.
+3. User enters the name.
+4. System retrieves and displays matching client profiles.
+    - Use case ends.
 
-* 3a. Client name not specified
-    * 3a1. `EZSTATES` shows an error message
+**Extensions**:
+- **4a.** System finds no clients matching the entered name:
+    - **4a1.** System displays a “No clients found” message.
+    - Use case ends.
 
-      Use case resumes at step 1
 
-* 4a. Client already has an appointment
-    * 4a1. `EZSTATES` shows an error message
+#### Use Case: List Appointments
 
-      Use case resumes at step 1
+**MSS**:
+1. User chooses to view all appointments.
+2. System retrieves and displays the list of appointments.
+    - Use case ends.
 
-*{More to be added}*
+
+#### Use Case: Add Listing
+
+**MSS**:
+1. User chooses to add a new property listing.
+2. System requests details for the listing (name, price, area, address, region, etc.).
+3. User enters the required information.
+4. System confirms the details and creates the listing.
+5. System displays a success message.
+    - Use case ends.
+
+**Extensions**:
+- **3a.** System detects missing or incorrect data:
+    - **3a1.** System prompts for the correct information.
+    - **3a2.** User enters the correct data.
+    - Steps 3a1–3a2 repeat until all data is valid.
+    - Use case resumes from step 4.
+
+
+#### Use Case: Show Listings
+
+**MSS**:
+1. User chooses to view all available listings.
+2. System retrieves and displays the list of property listings.
+    - Use case ends.
+
+
+#### Use Case: Find Listings
+
+**MSS**:
+1. User chooses to search for listings by keyword.
+2. System requests keywords for the search.
+3. User enters the keyword(s).
+4. System retrieves and displays matching listings.
+    - Use case ends.
+
+**Extensions**:
+- **4a.** System finds no listings matching the entered keywords:
+    - **4a1.** System displays a “No listings found” message.
+    - Use case ends.
+
+
+#### Use Case: Edit Listing
+
+**MSS**:
+1. User selects an existing listing to edit.
+2. System displays the listing’s current details.
+3. User updates the desired fields.
+4. System confirms the changes and updates the listing.
+5. System displays a success message.
+    - Use case ends.
+
+**Extensions**:
+- **3a.** User tries to edit a field with invalid data:
+    - **3a1.** System displays an error and requests valid data.
+    - **3a2.** User corrects the data.
+    - Steps 3a1–3a2 repeat until all data is valid.
+    - Use case resumes from step 4.
+
+
+#### Use Case: Add Buyers to Listing
+
+**MSS**:
+1. User chooses to add buyer(s) to an existing listing.
+2. System requests the buyer index for the listing.
+3. User enters the buyer index.
+4. System adds the buyer(s) to the listing.
+5. System displays a success message.
+    - Use case ends.
+
+**Extensions**:
+- **3a.** System detects invalid buyer index:
+    - **3a1.** System prompts for a valid index.
+    - **3a2.** User enters a valid index.
+    - Use case resumes from step 4.
+
+
+#### Use Case: Remove Buyers from Listing
+
+**MSS**:
+1. User chooses to remove buyer(s) from a listing.
+2. System requests the buyer index for the listing.
+3. User enters the buyer index.
+4. System removes the buyer(s) from the listing.
+5. System displays a success message.
+    - Use case ends.
+
+**Extensions**:
+- **3a.** System detects invalid buyer index:
+    - **3a1.** System prompts for a valid index.
+    - **3a2.** User enters a valid index.
+    - Use case resumes from step 4.
+
+
+#### Use Case: Delete Listing
+
+**MSS**:
+1. User selects a listing to delete.
+2. System requests confirmation.
+3. User confirms deletion.
+4. System removes the listing.
+5. System displays a success message.
+    - Use case ends.
+
+**Extensions**:
+- **2a.** User cancels the deletion:
+    - **2a1.** System stops the deletion process.
+    - Use case ends.
+
+
+#### Use Case: Clear Listings
+
+**MSS**:
+1. User chooses to clear all listings.
+2. System requests confirmation.
+3. User confirms the action.
+4. System clears all listings from the system.
+5. System displays a success message.
+    - Use case ends.
+
+
+#### Use Case: More Info
+
+**MSS**:
+1. User requests more information on a specific listing.
+2. System requests the listing index.
+3. User enters the index of the listing.
+4. System displays detailed information for the listing.
+    - Use case ends.
+
+
+#### Use Case: Chat Window
+
+**MSS**:
+1. User chooses to open the chat window.
+2. System displays the chat interface.
+3. User can interact with the chatbot for assistance with commands and inquiries.
+    - Use case ends.
+
+
+#### Use Case: Help
+
+**MSS**:
+1. User requests help.
+2. System displays general instructions for using the application.
+    - Use case ends.
+
+
+#### Use Case: Exit Application
+
+**MSS**:
+1. User chooses to exit the application.
+2. System prompts for confirmation.
+3. User confirms the exit.
+4. System closes the application.
+    - Use case ends.
+
+**Extensions**:
+- **2a.** User cancels the exit:
+    - **2a1.** System returns to the previous screen.
+    - Use case ends.
 
 ### Non-Functional Requirements
 
@@ -1116,54 +1306,141 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-### Clients
+### Command Summary
 
-#### Adding a client
 
-#### Deleting a client
+1. **Adding a Buyer Profile**  
+   **Use**: `buyer n/John Doe p/91234567 e/johndoe@example.com`  
+   **Expected output**: Buyer profile is added, and a success message is displayed.
 
-#### Deleting a person
 
-1. Deleting a person while all persons are being shown
+2. **Adding a Seller Profile**  
+   **Use**: `seller n/Jane Smith p/98765432 e/janesmith@example.com a/456 Oak Ave`  
+   **Expected output**: Seller profile is added, and a success message is displayed.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+3. **Editing a Client Profile**  
+   **Use**: `editclient 1 n/Jane Doe p/98765432`  
+   **Expected output**: Client profile is edited, and a success message is displayed.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+4. **Deleting a Client Profile**  
+   **Use**: `deleteclient 1`  
+   **Expected output**: Client profile is deleted, and a success message is displayed.
 
-#### Editing a client
 
-#### Finding a client
+5. **Adding a Listing**  
+   **Use**: `listing n/Greenwood House pr/500000 ar/1200 add/456 Elm St reg/central sel/3 buy/2`  
+   **Expected output**: Listing is added, and a success message is displayed.
 
-#### Listing all clients
 
-#### Clearing clients
+6. **Editing a Listing**  
+   **Use**: `d`  
+   **Expected output**: Listing is edited, and a success message is displayed.
 
-### Appointments
 
-#### Adding an appointment
-#### Deleting an appointment
-#### Today
+7. **Deleting a Listing**  
+   **Use**: `deletelisting 1`  
+   **Expected output**: Listing is deleted, and a success message is displayed.
 
-### Listings
 
-#### Adding a listing
-#### Editing a listing
-#### Finding a listing
-#### Listing all listings
-#### Clearing listings
+8. **Adding Buyers to Listing**  
+   **Use**: `addlistingbuyers 1 buy/2 buy/3`  
+   **Expected output**: Buyers are added to the listing, and a success message is displayed.
 
-### Utility
-#### Help
-#### ChatWindow
-#### Exit
 
-### Appendix: Future enhancements
+9. **Removing Buyers from Listing**  
+   **Use**: `removelistingbuyers 1 buy/2`  
+   **Expected output**: Buyers are removed from the listing, and a success message is displayed.
+
+
+10. **Listing All Clients**  
+    **Use**: `showclients`  
+    **Expected output**: All clients are displayed.
+
+
+11. **Listing All Listings**  
+    **Use**: `showlistings`  
+    **Expected output**: All listings are displayed.
+
+
+12. **Finding Clients by Name**  
+    **Use**: `find David`  
+    **Expected output**: All clients matching the specified name are displayed.
+
+
+13. **Finding Listings by Keyword**  
+    **Use**: `findlisting Greenwood`  
+    **Expected output**: All listings matching the specified keyword are displayed.
+
+
+14. **Getting More Information on a Listing**  
+    **Use**: `moreinfo 1`  
+    **Expected output**: Detailed information about the listing is displayed.
+
+
+15. **Clearing All Listings**  
+    **Use**: `clearlistings`  
+    **Expected output**: All listings are cleared, and a success message is displayed.
+
+
+16. **Clearing All Data**  
+    **Use**: `clear`  
+    **Expected output**: All data (clients, listings, etc.) is cleared, and a success message is displayed.
+
+
+17. **Help**  
+    **Use**: `help`  
+    **Expected output**: General instructions for using the application are displayed.
+
+
+18. **Opening the Chat Window**  
+    **Use**: `chatbot`  
+    **Expected output**: The chat window is opened, allowing interaction with the chatbot.
+
+
+19. **Exiting the Application**  
+    **Use**: `exit`  
+    **Expected output**: The application is closed.
+
+
+### Saving data
+
+1. Dealing with missing/corrupted data files
+
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+
+### Future Enhancements
+
+1. **Customizable Command Aliases**: Allow users to define their own aliases for commands, making it easier to personalize the command-line experience and speed up common tasks.
+
+2. **AI-Driven Insights**: Introduce AI-driven analytics accessible through CLI commands to help agents identify property trends, set optimal pricing, and predict client needs. This would turn EZSTATES into a strategic assistant, offering data insights directly within the app.
+
+3. **Command Auto-Completion**: Add an auto-completion feature that suggests commands and arguments as users type, reducing typing time and minimizing errors.
+
+4. **Automated Follow-Up Reminders**: Implement a feature to set reminders for client follow-ups. Agents could schedule reminders directly within the CLI to stay on top of leads without needing separate reminders.
+
+5. **Dual Role for Clients**: Allow a client to be designated as both a buyer and a seller. This would enable agents to manage clients with multiple roles within a single profile, simplifying interactions and reducing redundancy.
+
+6. **Calendar Integration**: Provide a command to sync appointments with external calendar apps (e.g., Google Calendar), so agents can manage schedules within EZSTATES while keeping appointments visible across platforms.
+
+7. **In-App Reporting Tools**: Develop simple CLI commands to generate reports on client activities, property listings, and market insights. Reports would be displayed within the CLI, offering agents a quick overview of key metrics without leaving the app.
+
 
 ### Appendix: Known Bugs
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+2. **If you minimize the Help Window** and then run the `help` command (or use the Help menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+3. **For the n/ prefix**, users are not able to put slashes in their names (e.g., Kumar S/O Navareen). A temporary workaround is to input `son of` or `so` or `s o` until this issue has been rectified.
+
+4. **For the add/ prefix**, addresses are case-sensitive. As a result, `add/123 Clementi Ave` and `add/123 clementi ave` will be treated as distinct addresses, which may lead to unintentional duplicates.
+
+5. **For the Edit Listing command**, users can modify listings to assign a buyer as the seller of a listing.
+
+6. **For the Add Buyers to Listing command**, the Result Display displays an incorrect error message.
+
+7. **For the MoreInfo command**, the `Output` for User Error #2 has a missing `parameters` line where the CLIENT_INDEX should be. Refer to the Special Comments section under More Info for more clarification.
+
+8. **For the Chatbot**, the text input field appears in black, which does not contrast well with its gray background.

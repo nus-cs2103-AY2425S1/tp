@@ -7,7 +7,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class ToTest {
-    public static final String INVALID_FORMAT = "9am";
+    private static final String INVALID_FORMAT = "9am";
+    private static final String INVALID_TO = "10:64";
+    private static final String VALID_TO = "0800";
+    private static final String OTHER_TO = "0900";
+
     @Test
     public void constructor_nullValues_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new To(null));
@@ -20,7 +24,7 @@ public class ToTest {
 
     @Test
     public void equals() {
-        To to = new To("0800");
+        To to = new To(VALID_TO);
         // null value -> returns false
         assertFalse(to.equals(null));
 
@@ -31,17 +35,15 @@ public class ToTest {
         assertTrue(to.equals(to));
 
         // same value -> returns true
-        To otherDate = new To("0800");
+        To otherDate = new To(VALID_TO);
         assertTrue(to.equals(otherDate));
 
         // different value -> returns false
-        otherDate = new To("0900");
+        otherDate = new To(OTHER_TO);
         assertFalse(to.equals(otherDate));
     }
     @Test
     public void parseTime_invalidFormat_throwsIllegalArgumentException() {
-        String invalidTime = "10:64";
-
-        assertThrows(IllegalArgumentException.class, () -> new To(invalidTime));
+        assertThrows(IllegalArgumentException.class, () -> new To(INVALID_TO));
     }
 }

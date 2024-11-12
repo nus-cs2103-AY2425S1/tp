@@ -3,12 +3,14 @@ package seedu.address.logic.commands.clientcommands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonWithName;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SEVENTH_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SIXTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalNames;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,25 +51,16 @@ public class ShowClientsCommandTest {
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         assertCommandSuccess(new ShowClientsCommand(), model, ShowClientsCommand.MESSAGE_SUCCESS, expectedModel);
 
-        showPersonWithName(model, getTypicalNames().get(0));
+        showPersonAtIndex(model, INDEX_FOURTH_PERSON);
         assertCommandSuccess(new ShowClientsCommand(), model, ShowClientsCommand.MESSAGE_SUCCESS, expectedModel);
 
-        showPersonWithName(model, getTypicalNames().get(1));
+        showPersonAtIndex(model, INDEX_FIFTH_PERSON);
         assertCommandSuccess(new ShowClientsCommand(), model, ShowClientsCommand.MESSAGE_SUCCESS, expectedModel);
 
-        showPersonWithName(model, getTypicalNames().get(2));
+        showPersonAtIndex(model, INDEX_SIXTH_PERSON);
         assertCommandSuccess(new ShowClientsCommand(), model, ShowClientsCommand.MESSAGE_SUCCESS, expectedModel);
 
-        showPersonWithName(model, getTypicalNames().get(3));
-        assertCommandSuccess(new ShowClientsCommand(), model, ShowClientsCommand.MESSAGE_SUCCESS, expectedModel);
-
-        showPersonWithName(model, getTypicalNames().get(4));
-        assertCommandSuccess(new ShowClientsCommand(), model, ShowClientsCommand.MESSAGE_SUCCESS, expectedModel);
-
-        showPersonWithName(model, getTypicalNames().get(5));
-        assertCommandSuccess(new ShowClientsCommand(), model, ShowClientsCommand.MESSAGE_SUCCESS, expectedModel);
-
-        showPersonWithName(model, getTypicalNames().get(6));
+        showPersonAtIndex(model, INDEX_SEVENTH_PERSON);
         assertCommandSuccess(new ShowClientsCommand(), model, ShowClientsCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

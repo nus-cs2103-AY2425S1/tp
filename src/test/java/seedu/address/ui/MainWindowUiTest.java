@@ -30,6 +30,7 @@ class MainWindowUiTest extends ApplicationTest {
         robot.clickOn("#commandTextField");
         robot.write("help");
         robot.type(KeyCode.ENTER);
+
         assertTrue(robot.lookup("#helpMessage").query().isVisible());
     }
     @Test
@@ -38,6 +39,7 @@ class MainWindowUiTest extends ApplicationTest {
         robot.clickOn("#commandTextField");
         robot.write("showlistings");
         robot.type(KeyCode.ENTER);
+
         TextArea resultDisplay = robot.lookup("#resultDisplay").query();
         assertTrue(resultDisplay.getText().contains("Here are your listings!")
                 || resultDisplay.getText().contains("You have no listings available."));
