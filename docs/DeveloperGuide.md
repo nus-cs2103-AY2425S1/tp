@@ -16,6 +16,11 @@ pageNav: 3
 _{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
 original source as well }_
 
+| AI Tool | How it was used                                                    | Used by            |
+|---------|--------------------------------------------------------------------|--------------------|
+| Claude  | Generate JavaDoc comments based some sample self-written comments. | Alexander Liswandy |
+| Claude  | Suggest and add missing test scenarios to existing test suite.     | Alexander Liswandy |
+
 ---
 
 ## **Setting up, getting started**
