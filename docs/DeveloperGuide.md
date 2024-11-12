@@ -34,41 +34,41 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The **Architecture Diagram** above presents a high-level view of the GamerBook app’s design.  
 
-Given below is a quick overview of main components and how they interact with each other.
+Below is a brief overview of the main components and their interactions.
 
-**Main components of the architecture**
+**Main Components of the Architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+* At app launch, it initializes and connects all other components in the correct order.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
-The bulk of the app's work is done by the following four components:
+The core functionality is managed by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#ui-component): Manages the app’s user interface.
+* [**`Logic`**](#logic-component): Processes commands.
+* [**`Model`**](#model-component): Holds app data in memory.
+* [**`Storage`**](#storage-component): Handles data persistence (read/write) on the disk.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#common-classes) section includes helper classes shared across multiple components.
 
-**How the architecture components interact with each other**
+**Interaction between Components**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows the interaction flow for the scenario where the user issues the command `delete 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a `{Component Name}Manager` which implements the corresponding API `interface`.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+The class diagram below shows a partial view of these component relationships.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
-The sections below give more details of each component.
+The sections below give detailed descriptions of each component.
 
 ### UI component
 
@@ -76,7 +76,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of `MainWindow` and its parts like `CommandBox`, `ResultDisplay`, `PersonListPanel`, and `StatusBarFooter`. All these, including `MainWindow`, inherit from the abstract `UiPart` class, capturing common traits among the visible GUI classes.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -84,8 +84,8 @@ The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* relies on the `Logic` component to execute commands and keeps a reference to the `Logic` component.
+* depends on `Model` classes (e.g., `Person`) to display data in the UI.
 
 ### Logic component
 
@@ -95,7 +95,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below details the interactions within the `Logic` component for the `delete 1` command.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
@@ -104,21 +104,22 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-How the `Logic` component works:
+#### Workflow in the Logic Component
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. **Execution Request**: `Logic` receives a command to execute.
+2. **Parsing**: The command is parsed by `AddressBookParser`, which generates an appropriate command object (e.g., `DeleteCommand`).
+3. **Execution**: The command object interacts with the `Model` to execute (e.g., deleting a person).
+4. **Result**: A `CommandResult` object encapsulates the execution outcome, which is returned by `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
-How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+#### Parsing Flow
+
+* **AddressBookParser**: This component identifies the appropriate command parser based on the user input (e.g., `AddCommandParser`, `DeleteCommandParser`).
+* **Command Parsers**: Each `XYZCommandParser` (e.g., `AddCommandParser`) implements the `Parser` interface, ensuring a uniform approach for handling and testing commands.
+* **Command Processing**: The parser processes the user's command, generating a corresponding `Command` object (e.g., `AddCommand`). This object is then passed back to `Logic` by the `AddressBookParser`.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -128,14 +129,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores data (`Person` objects) in a `UniquePersonList`.
+* manages a filtered list of currently 'selected' `Person` objects, observable by the UI.
+* stores a `UserPref` object that represents the user’s preferences, exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Alternative Model:** A more OOP design could use a `Tag` list in `AddressBook`, where each `Person` references a single `Tag`, minimizing redundancy.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -149,7 +150,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* saves and reads both address book data and user preference data in JSON format
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -181,83 +182,6 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 </box>
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
@@ -271,66 +195,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data Archiving
-
-#### Proposed Implementation
-
-The data archiving feature allows users to archive older address book entries, such as contacts or other information, that are no longer actively used but should still be stored for record-keeping purposes. The archived data will be stored separately from the main active address book, ensuring a cleaner and more efficient main application state while still retaining access to archived information when needed.
-
-To implement this, the following changes and components are proposed:
-
-1. **Archive Mechanism**:
-    - A new class called `ArchivedAddressBook` will be introduced to handle archived entries.
-    - The `ArchivedAddressBook` will extend the base `AddressBook` class but will be optimized to manage entries that are less frequently accessed or modified.
-    - `VersionedAddressBook` will also maintain a history for the `ArchivedAddressBook`, allowing undo/redo of archive operations.
-
-2. **Operations**:
-    - `Model#archivePerson(Person person)`: Archives a person by moving the person entry from the active `AddressBook` to the `ArchivedAddressBook`.
-    - `Model#restorePerson(Person person)`: Restores a person from the `ArchivedAddressBook` back to the active `AddressBook`.
-    - `Model#getArchivedPersons()`: Retrieves a list of all archived persons for display or further actions.
-    - These operations will also be added to the command logic so that the user can archive and restore entries using new commands, e.g., `archive 5` (to archive the 5th person in the list).
-
-3. **Storage**:
-    - The `JsonAddressBookStorage` class will be modified to support saving and loading both active and archived data separately. The archived data will be stored in a separate JSON file (`archivedAddressBook.json`), keeping it distinct from the main address book data.
-    - When the application starts, both the main and archived address books will be loaded into the system, and changes to either will be saved independently.
-
-4. **User Interface**:
-    - A new tab or section in the UI will be added to display archived entries separately from the main list.
-    - Users will be able to toggle between viewing the active address book and the archived address book.
-    - Archived entries will have limited actions available, such as restoring or permanently deleting them.
-
-#### Example Usage Scenario
-
-1. The user decides to archive an old contact, `John Doe`, by executing the command `archive 3`. This will call `Model#archivePerson()`, moving `John Doe` from the active address book to the archived one and committing the state.
-
-2. The user later views the archived entries via a command like `show archived`. The application displays a list of archived entries.
-
-3. If the user wishes to bring back a previously archived contact, they can use the command `restore 2` while viewing the archived list. This restores the contact to the active address book and updates the state history.
-
-4. If the user clears the active address book, archived entries remain unaffected. This separation ensures that old data is kept while maintaining the flexibility to manage current information.
-
-#### Design Considerations
-
-**Aspect**: How data is stored and managed.
-- **Alternative 1 (Current Choice)**: Store archived data in a separate file (`archivedAddressBook.json`).
-    - **Pros**: Keeps the main address book file smaller, improving performance when accessing active data.
-    - **Cons**: Requires additional storage logic and structure.
-- **Alternative 2**: Store archived data in the same file with an "archived" flag.
-    - **Pros**: Simplifies storage management as only one file is used.
-    - **Cons**: Increases file size and complexity when accessing or updating active entries, as all entries (active and archived) are mixed together.
-
-**Aspect**: User access to archived data.
-- **Alternative 1 (Current Choice)**: A separate tab for archived data.
-    - **Pros**: Clear separation in the UI, reducing confusion for users.
-    - **Cons**: Requires additional UI components and logic.
-- **Alternative 2**: Filter archived entries within the main view.
-    - **Pros**: Easier to implement with existing UI.
-    - **Cons**: Could clutter the main view and make it harder to manage active entries.
-
-This design ensures that the application efficiently manages both current and archived data, aligning with user needs for flexibility and simplicity.
 
 --------------------------------------------------------------------------------------------------------------------
 
