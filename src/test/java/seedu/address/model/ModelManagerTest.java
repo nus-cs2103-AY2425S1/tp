@@ -4,19 +4,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.person.Birthday.BIRTHDAY_REMINDER_EMPTY;
+import static seedu.address.model.person.Birthday.BIRTHDAY_REMINDER_HEADER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -128,5 +136,45 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    void testGetBirthdayPredicate() {
+        Person editedAlice = new PersonBuilder(ALICE).withBirthday(LocalDate.now()
+                .plusDays(1).minusYears(20).toString()).build();
+        Person editedBob = new PersonBuilder(BOB).withBirthday(LocalDate.now()
+                .minusDays(1).minusYears(20).toString()).build();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(editedAlice).withPerson(editedBob).build();
+        AddressBook differentAddressBook = new AddressBook();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, userPrefs);
+        Predicate<Person> birthdayPredicate = modelManager.getBirthdayPredicate();
+        assertTrue(birthdayPredicate.test(editedAlice));
+        assertFalse(birthdayPredicate.test(editedBob));
+    }
+
+    @Test
+    void testGetPersonsWithUpcomingBirthdays() {
+        Person editedAlice = new PersonBuilder(ALICE).withBirthday(LocalDate.now()
+                .plusDays(7).minusYears(20).toString()).build();
+        Person editedBob = new PersonBuilder(BOB).withBirthday(LocalDate.now()
+                .minusDays(1).minusYears(20).toString()).build();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(editedAlice).withPerson(editedBob).build();
+        UserPrefs userPrefs = new UserPrefs();
+
+        modelManager = new ModelManager(addressBook, userPrefs);
+        assertEquals(modelManager.getPersonsWithUpcomingBirthdays(), BIRTHDAY_REMINDER_EMPTY);
+
+        LocalDate sixDaysAfterTodaySomeYearsBack = LocalDate.now().plusDays(6).minusYears(20);
+        LocalDate todaySomeYearsBack = LocalDate.now().minusDays(0).minusYears(20);
+        Person editedBenson = new PersonBuilder(BENSON).withBirthday(sixDaysAfterTodaySomeYearsBack.toString()).build();
+        Person editedCarl = new PersonBuilder(CARL).withBirthday(todaySomeYearsBack.toString()).build();
+        addressBook = new AddressBookBuilder().withPerson(editedBenson).withPerson(editedCarl).build();
+
+        modelManager = new ModelManager(addressBook, userPrefs);
+        assertEquals(modelManager.getPersonsWithUpcomingBirthdays(), BIRTHDAY_REMINDER_HEADER
+                + "Benson Meier's birthday is on " + sixDaysAfterTodaySomeYearsBack.plusYears(20) + "\n"
+                + "Carl Kurz's birthday is on " + todaySomeYearsBack.plusYears(20));
     }
 }

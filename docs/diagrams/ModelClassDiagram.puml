@@ -18,7 +18,12 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class Remark
+Class DateOfCreation
+Class Birthday
+Class History
 Class Tag
+Class PropertyList
 
 Class I #FFFFFF
 }
@@ -37,11 +42,15 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
+Person *--> "1" Remark
+Person *--> "1" Birthday
+Person *--> "1" History
 Person *--> "*" Tag
+Person *--> "1" PropertyList
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -49,6 +58,10 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> Remark
+Remark -[hidden]right-> Birthday
+Birthday -[hidden]right-> History
+History -[hidden]right-> PropertyList
 
 ModelManager --> "~* filtered" Person
 @enduml

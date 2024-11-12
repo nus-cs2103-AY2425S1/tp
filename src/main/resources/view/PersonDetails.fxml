@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="700.0" prefWidth="545.0" stylesheets="@PersonDetails.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.PersonDetails">
+<children>
+    <Label fx:id="nameLabel" prefHeight="26.0" prefWidth="499.0" wrapText="true" />
+      <HBox prefHeight="20.0" prefWidth="419.0">
+         <children>
+            <FlowPane fx:id="tags" prefHeight="6.0" prefWidth="419.0" />
+         </children>
+      </HBox>
+
+      <HBox prefHeight="20.0" prefWidth="419.0"  spacing="4.0">
+         <children>
+            <Label fx:id="birthdayTitleLabel" text="Birthday:" />
+            <Label fx:id="birthdayLabel" />
+         </children>
+      </HBox>
+    <Label fx:id="phoneTitleLabel" text="Phone:" minWidth="55.0"/>
+    <ScrollPane fitToWidth="true">
+        <content>
+            <Label fx:id="phoneLabel" wrapText="true"/>
+        </content>
+    </ScrollPane>
+    <Label fx:id="emailTitleLabel" text="Email:" />
+    <ScrollPane fitToWidth="true">
+        <content>
+            <Label fx:id="emailLabel" wrapText="true" />
+        </content>
+    </ScrollPane>
+
+    <Label fx:id="addressTitleLabel" text="Address:" />
+    <ScrollPane fitToWidth="true">
+        <content>
+            <Label fx:id="addressLabel" wrapText="true" />
+        </content>
+    </ScrollPane>
+    <Label fx:id="remarkTitleLabel" text="Remarks:" />
+    <ScrollPane fitToWidth="true">
+        <content>
+            <Label fx:id="remarkLabel" wrapText="true" />
+        </content>
+    </ScrollPane>
+    <Label fx:id="propertyListLabel" text="Properties:" />
+    <ScrollPane fx:id="propertyListScrollPane" fitToWidth="true" minHeight="75.0" maxHeight="400.0" styleClass="hidden-scrollbar">
+        <content>
+            <VBox fx:id="propertyList" spacing="4.0"/>
+        </content>
+    </ScrollPane>
+    <Label fx:id="historyLabel" text="History:" />
+    <ScrollPane fx:id="historyScrollPane" fitToWidth="true" maxHeight="400.0" styleClass="hidden-scrollbar">
+        <content>
+            <VBox fx:id="history" minHeight="75.0" prefWidth="419.0" spacing="4.0">
+            </VBox>
+        </content>
+    </ScrollPane>
+</children>
+</VBox>

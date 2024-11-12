@@ -1,7 +1,11 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,9 +14,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,6 +27,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DOUBLE = "Invalid double value: %s";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -81,6 +88,33 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String address} into an {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Remark parseRemark(String remark) {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String address} into an {@code Birthday}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Birthday parseBirthday(String birthday) throws ParseException {
+        requireNonNull(birthday);
+        String trimmedBirthday = birthday.trim();
+        try {
+            if (!Birthday.isValidBirthday(trimmedBirthday)) {
+                throw new ParseException(Birthday.MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT);
+            }
+            return new Birthday(trimmedBirthday);
+        } catch (DateTimeParseException dtpe) {
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+        }
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +154,54 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is of invalid format.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        try {
+            LocalDate parsedDate = LocalDate.parse(trimmedDate);
+            return parsedDate;
+        } catch (DateTimeException e) {
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+        }
+    }
+
+    /**
+     * Parses a {@code String} into a {@code double}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code input} is not a valid double.
+     */
+    public static double parseDouble(String input) throws ParseException {
+        requireNonNull(input);
+        String trimmedInput = input.trim();
+        try {
+            return Double.parseDouble(trimmedInput);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Invalid double value: " + input);
+        }
+    }
+
+
+    /**
+     * Parses a {@code String} into an {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code input} is not a valid integer.
+     */
+    public static int parseInteger(String input) throws ParseException {
+        requireNonNull(input);
+        String trimmedInput = input.trim();
+        try {
+            return Integer.parseInt(trimmedInput);
+        } catch (NumberFormatException e) {
+            throw new ParseException("Invalid integer value: " + input);
+        }
     }
 }

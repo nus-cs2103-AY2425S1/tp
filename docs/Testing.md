@@ -1,10 +1,8 @@
 ---
 layout: page
-title: Testing guide
+title: RealConnect Test Guide
 ---
 
-* Table of Contents
-{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -30,7 +28,12 @@ This project has three types of tests:
 
 1. *Unit tests* targeting the lowest level methods/classes.<br>
    e.g. `seedu.address.commons.StringUtilTest`
-1. *Integration tests* that are checking the integration of multiple code units (those code units are assumed to be working).<br>
+2. *Integration tests* that are checking the integration of multiple code units (those code units are assumed to be working).<br>
    e.g. `seedu.address.storage.StorageManagerTest`
-1. Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
+3. Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
    e.g. `seedu.address.logic.LogicManagerTest`
+
+
+<div markdown="span" class="alert alert-info">:information_source: 
+Tips on manual tests are located in the developer guide.
+</div>

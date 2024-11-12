@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.NoWindowException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -187,10 +188,25 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (NoWindowException | CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Displays pre-decided messages when the application starts up.
+     */
+    public void showMessagesAtStartUp() {
+        //Show upcoming birthdays on startup
+        showUpcomingBirthdaysOnStartup();
+    }
+
+    private void showUpcomingBirthdaysOnStartup() {
+        String personsWithUpcomingBirthdays = logic.getPersonsWithUpcomingBirthdays();
+        if (!personsWithUpcomingBirthdays.isEmpty()) {
+            resultDisplay.setFeedbackToUser(personsWithUpcomingBirthdays);
         }
     }
 }

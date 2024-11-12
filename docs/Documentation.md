@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Documentation guide
+title: RealConnect Documentation Guide
 ---
 
 **Setting up and maintaining the project website:**
@@ -23,6 +23,9 @@ title: Documentation guide
 **Diagrams:**
 
 * See the [_[se-edu/guides] **Using PlantUML**_](https://se-education.org/guides/tutorials/plantUml.html)
+* <div markdown="span" class="alert alert-info">:information_source: 
+Due to restrictions with PlantUML, we are unable to size every diagram to equal size without compromising the view quality and user experience.
+</div>
 
 **Converting a document to the PDF format:**
 

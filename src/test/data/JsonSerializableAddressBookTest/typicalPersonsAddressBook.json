@@ -1,46 +1,210 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ {
-    "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
-  }, {
-    "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tags" : [ ]
-  }, {
-    "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tags" : [ ]
-  }, {
-    "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tags" : [ ]
-  }, {
-    "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tags" : [ ]
-  } ]
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "remark": "",
+      "birthday": "2001-01-01",
+      "tags": ["friends"],
+      "dateOfCreation": "2024-01-12",
+      "history": [
+        {
+          "date": "2024-01-12",
+          "activities": ["Created"]
+        },
+        {
+          "date": "2024-10-10",
+          "activities": ["Attended seminar"]
+        },
+        {
+          "date": "2024-10-11",
+          "activities": ["Met with client"]
+        }
+      ],
+      "properties": [
+        {
+          "address": "Block 14 Clementi Ave 3 #10-10",
+          "town": "Clementi",
+          "type": "HDB",
+          "size": "100",
+          "bedrooms": "2",
+          "bathrooms": "2",
+          "price": "600000"
+        }
+      ]
+    },
+    {
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "email": "johnd@example.com",
+      "address": "311, Clementi Ave 2, #02-25",
+      "remark": "",
+      "birthday": "2001-02-02",
+      "tags": ["owesMoney", "friends"],
+      "dateOfCreation": "2022-09-19",
+      "history": [
+        {
+          "date": "2022-09-19",
+          "activities": ["Created"]
+        },
+        {
+          "date": "2024-09-25",
+          "activities": ["Completed project A"]
+        },
+        {
+          "date": "2024-10-01",
+          "activities": ["Attended team meeting"]
+        }
+      ],
+      "properties": [
+        {
+          "address": "23, Holland Road",
+          "town": "Holland Village",
+          "type": "Condo",
+          "size": "85",
+          "bedrooms": "1",
+          "bathrooms": "1",
+          "price": "800000"
+        }
+      ]
+    },
+    {
+      "name": "Carl Kurz",
+      "phone": "95352563",
+      "email": "heinz@example.com",
+      "address": "Wall Street",
+      "remark": "",
+      "birthday": "2001-03-03",
+      "tags": [],
+      "dateOfCreation": "2021-09-10",
+      "history": [
+        {
+          "date": "2021-09-10",
+          "activities": ["Created"]
+        }
+      ],
+      "properties": [
+        {
+          "address": "45, Marine Parade",
+          "town": "Marine Parade",
+          "type": "Landed",
+          "size": "300",
+          "bedrooms": "5",
+          "bathrooms": "4",
+          "price": "2500000"
+        }
+      ]
+    },
+    {
+      "name": "Daniel Meier",
+      "phone": "87652533",
+      "email": "cornelia@example.com",
+      "address": "10th Street",
+      "remark": "",
+      "birthday": "2001-04-04",
+      "tags": ["friends"],
+      "dateOfCreation": "2012-02-19",
+      "history": [
+        {
+          "date": "2012-02-19",
+          "activities": ["Created"]
+        }
+      ],
+      "properties": [
+        {
+          "address": "88, Orchard Road",
+          "town": "Orchard",
+          "type": "Condo",
+          "size": "120",
+          "bedrooms": "3",
+          "bathrooms": "2",
+          "price": "1500000"
+        }
+      ]
+    },
+    {
+      "name": "Elle Meyer",
+      "phone": "9482224",
+      "email": "werner@example.com",
+      "address": "Michegan Ave",
+      "remark": "",
+      "birthday": "2001-05-05",
+      "tags": [],
+      "dateOfCreation": "2024-02-20",
+      "history": [
+        {
+          "date": "2024-02-20",
+          "activities": ["Created"]
+        }
+      ],
+      "properties": [
+        {
+          "address": "99, Yishun Ave 11",
+          "town": "Yishun",
+          "type": "HDB",
+          "size": "95",
+          "bedrooms": "3",
+          "bathrooms": "2",
+          "price": "500000"
+        }
+      ]
+    },
+    {
+      "name": "Fiona Kunz",
+      "phone": "9482427",
+      "email": "lydia@example.com",
+      "address": "Little Tokyo",
+      "remark": "",
+      "birthday": "2001-06-06",
+      "tags": [],
+      "dateOfCreation": "2018-01-29",
+      "history": [
+        {
+          "date": "2018-01-29",
+          "activities": ["Created"]
+        }
+      ],
+      "properties": [
+        {
+          "address": "10, Serangoon Ave 5",
+          "town": "Serangoon",
+          "type": "Landed",
+          "size": "350",
+          "bedrooms": "4",
+          "bathrooms": "3",
+          "price": "2200000"
+        }
+      ]
+    },
+    {
+      "name": "George Best",
+      "phone": "9482442",
+      "email": "anna@example.com",
+      "address": "4th Street",
+      "remark": "",
+      "birthday": "2001-07-07",
+      "tags": [],
+      "dateOfCreation": "2019-12-11",
+      "history": [
+        {
+          "date": "2019-12-11",
+          "activities": ["Created"]
+        }
+      ],
+      "properties": [
+        {
+          "address": "77, Bukit Timah Road",
+          "town": "Bukit Timah",
+          "type": "Condo",
+          "size": "70",
+          "bedrooms": "2",
+          "bathrooms": "1",
+          "price": "900000"
+        }
+      ]
+    }
+  ]
 }

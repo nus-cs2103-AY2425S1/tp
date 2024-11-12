@@ -1,10 +1,7 @@
 ---
 layout: page
-title: DevOps guide
+title: RealConnect DevOps
 ---
-
-* Table of Contents
-{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 

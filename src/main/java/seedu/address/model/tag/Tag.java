@@ -8,7 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
+    public static final Tag FAVOURITE_TAG = new Tag("favourite");
+    public static final Tag BUYER_TAG = new Tag("buyer");
 
+    public static final Tag SELLER_TAG = new Tag("seller");
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
@@ -24,6 +27,21 @@ public class Tag {
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
     }
+    /**
+     * Static method to return instance of pre-defined tags or new tags when undefined name is used.
+     * */
+    public static Tag of(String tagName) {
+        if (tagName.equalsIgnoreCase(FAVOURITE_TAG.getTagName())) {
+            return FAVOURITE_TAG;
+        }
+        if (tagName.equalsIgnoreCase(BUYER_TAG.getTagName())) {
+            return BUYER_TAG;
+        }
+        if (tagName.equalsIgnoreCase(SELLER_TAG.getTagName())) {
+            return SELLER_TAG;
+        }
+        return new Tag(tagName);
+    }
 
     /**
      * Returns true if a given string is a valid tag name.
@@ -31,7 +49,9 @@ public class Tag {
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
+    public String getTagName() {
+        return this.tagName;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

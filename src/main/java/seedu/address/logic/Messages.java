@@ -14,11 +14,20 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is out of bound";
+    public static final String MESSAGE_DUPLICATE_PROPERTIES = "This property is already listed for the person.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
-
+            "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format! Please use yyyy-mm-dd.";
+    public static final String MESSAGE_REMARK_PERSON_SUCCESS = "";
+    public static final String MESSAGE_BEFORE_DATE_OF_CREATION =
+            "%1$s is before the date of creation of this log %2$s!";
+    public static final String MESSAGE_AFTER_TODAY =
+            "%1$s is in the future!";
+    public static final String MESSAGE_NO_ENTRY_ON_DATE = "%1$s has no entry!";
+    public static final String MESSAGE_ACTIVITY_LIST_NOT_INITIALIZED = "Activity list not initialized!";
+    public static final String MESSAGE_LOG_MESSAGE_EMPTY = "Message cannot be empty";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -43,8 +52,19 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
+                .append("; Remark: ")
+                .append(person.getRemark())
+                .append("; Birthday: ")
+                .append(person.getBirthday().toString())
+                .append("; Remark: ")
+                .append(person.getRemark())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; DateOfCreation: ")
+                .append(person.getDateOfCreation().toString())
+                .append(";\nHistory: ").append(person.getHistory());
+        builder.append("PropertyList: ")
+                .append(person.getPropertyList().toString());
         return builder.toString();
     }
 

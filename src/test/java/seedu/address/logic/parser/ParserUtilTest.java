@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -35,6 +36,9 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
+    private static final String VALID_DATE_STRING = "1970-01-01";
+    private static final String INVALID_DATE_STRING = "01-01-1970";
+    private static final String ANOTHER_INVALID_DATE_STRING = "1st January 1970";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -192,5 +196,41 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+    @Test
+    public void parseDate_validDateFormat_returnLocalDate() throws Exception {
+        LocalDate expectedDate = LocalDate.of(1970, 1, 1);
+        LocalDate parsedDate = ParserUtil.parseDate(VALID_DATE_STRING);
+        assertEquals(expectedDate, parsedDate);
+    }
+    @Test
+    public void parseDate_invalidDateFormat_throwsDateTimeException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE_STRING));
+    }
+
+    @Test
+    public void parseInteger_validIntegerWithoutWhitespace_returnsInteger() throws Exception {
+        assertEquals(123, ParserUtil.parseInteger("123"));
+    }
+
+    @Test
+    public void parseInteger_validIntegerWithWhitespace_returnsTrimmedInteger() throws Exception {
+        assertEquals(123, ParserUtil.parseInteger("   123   "));
+    }
+
+    @Test
+    public void parseInteger_invalidInteger_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInteger("123abc"));
+    }
+
+    @Test
+    public void parseInteger_nullInput_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInteger(null));
+    }
+
+    @Test
+    public void parseBirthday_invalidDateFormat_throwsDateTimeException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(INVALID_DATE_STRING));
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(ANOTHER_INVALID_DATE_STRING));
     }
 }
