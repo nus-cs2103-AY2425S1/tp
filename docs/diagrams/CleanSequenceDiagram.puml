@@ -26,11 +26,17 @@ create GradYearPredicate
 CleanCommand -> GradYearPredicate
 activate GradYearPredicate
 
-GradYearPredicate --> CleanCommand : p
+GradYearPredicate --> CleanCommand
 deactivate GradYearPredicate
 
 CleanCommand --> AddressBookParser
 deactivate CleanCommand
+
+LogicManager -> Model: pushToUndoStack(c)
+activate Model
+
+Model --> LogicManager
+deactivate Model
 
 AddressBookParser --> LogicManager : c
 deactivate AddressBookParser

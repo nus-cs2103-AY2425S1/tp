@@ -13,6 +13,7 @@ if () then ([at least 1 contact has GradYear earlier than current year])
 else ([else])
     :Display error message;
     :Push to undo stack;
+
 endif
 stop
 @enduml
