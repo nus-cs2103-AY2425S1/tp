@@ -165,7 +165,9 @@ private static Person createEditedPerson(Person personToEdit, EditPersonDescript
 }
 ```
 
-We thus propose an overloaded implementation of the `createEditedPerson` method - `makeEditedPerson` - that will allow the `personToEdit` and `editPersonDescriptor` objects to be merged in a manner defined by the child methods using `BiFunction`.
+`makeEditedPerson` is a `BiFunction` that will allow the `personToEdit` and `editPersonDescriptor` objects to be merged in a manner defined by the child methods using `BiFunction`. This is useful for commands that require different ways of merging the two objects.
+
+`successMessage` allows a custom success message to be passed to the `saveEditedPerson` method. This is useful for commands that require different success messages.
 
 ```java
 CommandResult execute(
