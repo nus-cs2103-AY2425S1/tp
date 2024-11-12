@@ -177,7 +177,7 @@ public class SampleDataUtil {
         return new Event[] {
             new Event("NUS Student Life Fair 2024",
                     getPersonSet(samplePersons[20]),
-                    getPersonSet(samplePersons[0]),
+                    getPersonSet(samplePersons[3]),
                     getPersonSet(samplePersons[5]),
                     getPersonSet(samplePersons[22])
             ),
