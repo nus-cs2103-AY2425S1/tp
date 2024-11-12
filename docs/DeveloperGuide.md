@@ -778,3 +778,7 @@ Execute the following:
          Expected: List of persons shown remains unchanged.
          Feedback box shows error details regarding incorrect input format.
 
+## **Appendix: Planned Enhancements**
+
+### Sort Command
+* In the future, we plan on implementing sorting by multiple attributes rather than just one.
