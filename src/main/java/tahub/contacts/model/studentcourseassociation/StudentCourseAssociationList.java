@@ -320,6 +320,24 @@ public class StudentCourseAssociationList implements Iterable<StudentCourseAssoc
     }
 
     /**
+     * Updates all SCAs that reference the old course to use the new course
+     */
+    public void updateCoursesInScas(Course oldCourse, Course newCourse) {
+        for (int i = 0; i < internalList.size(); i++) {
+            StudentCourseAssociation sca = internalList.get(i);
+            if (sca.getCourse().equals(oldCourse)) {
+                StudentCourseAssociation updatedSca = new StudentCourseAssociation(
+                        sca.getStudent(),
+                        newCourse,
+                        sca.getTutorial(),
+                        sca.getAttendance()
+                );
+                internalList.set(i, updatedSca);
+            }
+        }
+    }
+
+    /**
      * Returns the list of tutorials associated with a student in the SCA list.
      *
      * @param student the student to retrieve tutorials from

@@ -2,6 +2,7 @@ package tahub.contacts.ui;
 
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -15,6 +16,7 @@ import tahub.contacts.logic.Logic;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.course.AttendanceSession;
+import tahub.contacts.model.course.Course;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 
@@ -91,6 +93,16 @@ public class AttendanceWindow extends UiPart<Stage> {
         setupScaListChangeListener();
         setupCourseComboBox();
 
+        // Register to listen for model changes
+        logic.addListener(() -> {
+            if (getRoot().isShowing()) {
+                javafx.application.Platform.runLater(() -> {
+                    refreshDisplay();
+                    updateComboBoxItems();
+                });
+            }
+        });
+
         // Add listener to the stage's showing property to refresh when shown
         root.showingProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
@@ -115,18 +127,66 @@ public class AttendanceWindow extends UiPart<Stage> {
     private void setupScaListChangeListener() {
         scaListChangeListener = change -> {
             while (change.next()) {
-                if (change.wasUpdated() || change.wasAdded() || change.wasRemoved()) {
-                    // Use Platform.runLater to ensure UI updates happen on the JavaFX Application Thread
+                if (change.wasUpdated() || change.wasAdded() || change.wasRemoved() || change.wasReplaced()) {
                     if (getRoot().isShowing()) {
-                        javafx.application.Platform.runLater(this::refreshDisplay);
+                        Platform.runLater(() -> {
+                            // Force a complete rebuild of the ComboBox
+                            ObservableList<StudentCourseAssociation> scaList =
+                                    logic.getStudentScas(person).getByMatric(person.getMatricNumber().value);
+
+                            // Store current selection's course code
+                            String currentCourseCode = currentSca != null
+                                    ? currentSca.getCourse().courseCode.toString() : null;
+
+                            // Create new ComboBox with fresh data
+                            ComboBox<StudentCourseAssociation> newComboBox = new ComboBox<>();
+                            newComboBox.setItems(scaList);
+                            newComboBox.setCellFactory(lv -> createComboBoxCell());
+                            newComboBox.setButtonCell(createComboBoxCell());
+
+                            // Restore selection based on course code
+                            if (currentCourseCode != null) {
+                                for (StudentCourseAssociation sca : scaList) {
+                                    if (sca.getCourse().courseCode.toString().equals(currentCourseCode)) {
+                                        newComboBox.setValue(sca);
+                                        currentSca = sca;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            // Copy all properties from new ComboBox to existing one
+                            courseComboBox.setItems(newComboBox.getItems());
+                            courseComboBox.setCellFactory(newComboBox.getCellFactory());
+                            courseComboBox.setButtonCell(newComboBox.getButtonCell());
+                            courseComboBox.setValue(newComboBox.getValue());
+
+                            refreshDisplay();
+                        });
                     }
                 }
             }
         };
 
-        // Add the listener to the observable list
         logic.getStudentScas(person).asUnmodifiableObservableList()
                 .addListener(scaListChangeListener);
+    }
+
+    private void updateButtonCell() {
+        StudentCourseAssociation selected = courseComboBox.getValue();
+        if (selected != null) {
+            courseComboBox.setButtonCell(new javafx.scene.control.ListCell<StudentCourseAssociation>() {
+                @Override
+                protected void updateItem(StudentCourseAssociation item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(item.getCourse().courseCode + ": " + item.getCourse().courseName);
+                    }
+                }
+            });
+        }
     }
 
     /**
@@ -135,46 +195,22 @@ public class AttendanceWindow extends UiPart<Stage> {
      * courses are available.
      */
     private void setupCourseComboBox() {
-        // Get all SCAs for this student
-        ObservableList<StudentCourseAssociation> scaList = this.logic.getStudentScas(person)
+        ObservableList<StudentCourseAssociation> scaList = logic.getStudentScas(person)
                 .getByMatric(person.getMatricNumber().value);
 
-        // Set up the combo box
         courseComboBox.setItems(scaList);
+        courseComboBox.setCellFactory(lv -> createComboBoxCell());
+        courseComboBox.setButtonCell(createComboBoxCell());
 
-        // Set up the display converter for the combo box
-        courseComboBox.setCellFactory(lv -> new javafx.scene.control.ListCell<StudentCourseAssociation>() {
-            @Override
-            protected void updateItem(StudentCourseAssociation sca, boolean empty) {
-                super.updateItem(sca, empty);
-                if (empty || sca == null) {
-                    setText(null);
-                } else {
-                    setText(sca.getCourse().courseCode + ": " + sca.getCourse().courseName);
-                }
-            }
-        });
-
-        courseComboBox.setButtonCell(new javafx.scene.control.ListCell<StudentCourseAssociation>() {
-            @Override
-            protected void updateItem(StudentCourseAssociation sca, boolean empty) {
-                super.updateItem(sca, empty);
-                setText(empty || sca == null ? null
-                                : sca.getCourse().courseCode + ": " + sca.getCourse().courseName);
-            }
-        });
-
-        // Add listener for course selection changes
-        courseComboBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        courseComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 currentSca = newValue;
                 refreshDisplay();
             }
         });
 
-        // Select first course if available
         if (!scaList.isEmpty()) {
-            courseComboBox.getSelectionModel().select(0);
+            courseComboBox.setValue(scaList.get(0));
             currentSca = scaList.get(0);
             refreshDisplay();
         } else {
@@ -183,36 +219,96 @@ public class AttendanceWindow extends UiPart<Stage> {
     }
 
     /**
+     * Creates a ListCell for the ComboBox
+     */
+    private javafx.scene.control.ListCell<StudentCourseAssociation> createComboBoxCell() {
+        return new javafx.scene.control.ListCell<StudentCourseAssociation>() {
+            @Override
+            protected void updateItem(StudentCourseAssociation item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    // Get fresh course data every time
+                    ObservableList<StudentCourseAssociation> currentList =
+                            logic.getStudentScas(person).getByMatric(person.getMatricNumber().value);
+
+                    StudentCourseAssociation latestSca = currentList.stream()
+                            .filter(sca -> sca.isSameSca(item))
+                            .findFirst()
+                            .orElse(item);
+
+                    Course course = latestSca.getCourse();
+                    setText(course.courseCode + ": " + course.courseName);
+                }
+            }
+        };
+    }
+
+    /**
+     * Updates the items in the combo box
+     */
+    private void updateComboBoxItems() {
+        ObservableList<StudentCourseAssociation> scaList = logic.getStudentScas(person)
+                .getByMatric(person.getMatricNumber().value);
+
+        StudentCourseAssociation selectedSca = courseComboBox.getValue();
+        courseComboBox.setItems(scaList);
+
+        if (selectedSca != null) {
+            // Find and select the corresponding item in the new list
+            scaList.stream()
+                    .filter(sca -> sca.isSameSca(selectedSca))
+                    .findFirst()
+                    .ifPresent(sca -> {
+                        courseComboBox.setValue(sca);
+                        currentSca = sca;
+                    });
+        }
+    }
+
+    /**
      * Refreshes the display with current data.
      */
     private void refreshDisplay() {
         if (currentSca != null) {
-            // Get the latest version of the current SCA
+            // Get fresh data
             ObservableList<StudentCourseAssociation> currentList =
                     logic.getStudentScas(person).getByMatric(person.getMatricNumber().value);
 
+            // Find current SCA in fresh list
             StudentCourseAssociation latestSca = currentList.stream()
                     .filter(sca -> sca.isSameSca(currentSca))
                     .findFirst()
                     .orElse(currentSca);
 
-            // Update currentSca with the latest version
             currentSca = latestSca;
+            Course course = latestSca.getCourse();
 
-            courseCode.setText(String.valueOf(latestSca.getCourse().courseCode));
-            courseName.setText(String.valueOf(latestSca.getCourse().courseName));
-            tutorialCode.setText(latestSca.getTutorial().getTutorialId());
-            tutorialName.setText(String.valueOf(latestSca.getTutorial().getCourse().courseName));
+            Platform.runLater(() -> {
+                // Update labels
+                courseCode.setText(course.courseCode.toString());
+                courseName.setText(course.courseName.toString());
+                tutorialCode.setText(latestSca.getTutorial().getTutorialId());
+                tutorialName.setText(course.courseName.toString());
 
-            attendanceListView.setItems(FXCollections.observableArrayList(
-                    latestSca.getAttendance().getAttendanceList()));
+                // Force ComboBox to update its display
+                courseComboBox.setButtonCell(createComboBoxCell());
+                courseComboBox.setValue(latestSca); // This forces a refresh of the button cell
 
-            int attended = latestSca.getAttendance().getAttendanceAttendedCount();
-            int total = latestSca.getAttendance().getAttendanceTotalCount();
-            double percentage = total == 0 ? 0 : (double) attended / total * 100;
+                // Update attendance list
+                attendanceListView.setItems(FXCollections.observableArrayList(
+                        latestSca.getAttendance().getAttendanceList()));
 
-            attendanceCount.setText(String.format("%d/%d sessions", attended, total));
-            attendancePercentage.setText(String.format("%.1f%%", percentage));
+                int attended = latestSca.getAttendance().getAttendanceAttendedCount();
+                int total = latestSca.getAttendance().getAttendanceTotalCount();
+                double percentage = total == 0 ? 0 : (double) attended / total * 100;
+
+                attendanceCount.setText(String.format("%d/%d sessions", attended, total));
+                attendancePercentage.setText(String.format("%.1f%%", percentage));
+            });
+        } else {
+            showNoCourseMessage();
         }
     }
 

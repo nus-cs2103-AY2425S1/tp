@@ -34,6 +34,12 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
+    /**
+     * Adds a listener to be notified when the model changes
+     * @param listener the listener to be added
+     */
+    void addListener(Runnable listener);
+
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 

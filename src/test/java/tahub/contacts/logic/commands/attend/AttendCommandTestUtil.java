@@ -1,26 +1,11 @@
-package tahub.contacts.logic.commands.person;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static tahub.contacts.testutil.Assert.assertThrows;
-import static tahub.contacts.testutil.TypicalPersons.ALICE;
+package tahub.contacts.logic.commands.attend;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-import org.junit.jupiter.api.Test;
-
 import javafx.collections.ObservableList;
 import tahub.contacts.commons.core.GuiSettings;
-import tahub.contacts.logic.Messages;
-import tahub.contacts.logic.commands.CommandResult;
-import tahub.contacts.logic.commands.exceptions.CommandException;
-import tahub.contacts.model.AddressBook;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.ReadOnlyAddressBook;
 import tahub.contacts.model.ReadOnlyUserPrefs;
@@ -29,83 +14,68 @@ import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
+import tahub.contacts.model.studentcourseassociation.exceptions.ScaNotFoundException;
 import tahub.contacts.model.tutorial.Tutorial;
-import tahub.contacts.testutil.PersonBuilder;
+import tahub.contacts.testutil.ScaBuilder;
 
-public class PersonAddCommandTest {
-
-    @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new PersonAddCommand(null));
-    }
-
-    @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
-
-        CommandResult commandResult = new PersonAddCommand(validPerson).execute(modelStub);
-
-        assertEquals(String.format(PersonAddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
-    }
-
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        PersonAddCommand personAddCommand = new PersonAddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
-        assertThrows(CommandException.class,
-                PersonAddCommand.MESSAGE_DUPLICATE_PERSON, () -> personAddCommand.execute(modelStub));
-    }
-
-    @Test
-    public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        PersonAddCommand addAliceCommand = new PersonAddCommand(alice);
-        PersonAddCommand addBobCommand = new PersonAddCommand(bob);
-
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
-
-        // same values -> returns true
-        PersonAddCommand addAliceCommandCopy = new PersonAddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        PersonAddCommand personAddCommand = new PersonAddCommand(ALICE);
-        String expected = PersonAddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, personAddCommand.toString());
+/**
+ * Helpers used to test Attendance Commands
+ */
+public class AttendCommandTestUtil {
+    /**
+     * Creates a stubbed ScaList with no SCA match.
+     *
+     * @return Stubbed ScaList.
+     */
+    public ScaListNoMatch createNoMatchScaList() {
+        return new ScaListNoMatch();
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * Creates a stubbed ScaList with an SCA match.
+     *
+     * @param sca SCA to return.
+     * @return Stubbed ScaList.
      */
-    private class ModelStub implements Model {
+    public static ScaListWithMatch createMatchScaList(StudentCourseAssociation sca) {
+        return new ScaListWithMatch(sca);
+    }
 
-        @Override
-        public void addListener(Runnable listener) {
-            throw new AssertionError("This method should not be called.");
-        }
+    /**
+     * Gets a new standard SCA to be used for Attendance command testing.
+     * This SCA will have an empty {@code Attendance}.
+     *
+     * @return SCA.
+     */
+    public static StudentCourseAssociation getNewScaToTestAttendance() {
+        StudentCourseAssociation sca = ScaBuilder.createDefault();
+        sca.getAttendance().clear();
+        return sca;
+    }
+
+    /**
+     * Creates a new {@code ModelStub} with an ScaList.
+     *
+     * @param scaList ScaList to be used.
+     * @return new {@link ModelStubWithScaList}.
+     */
+    public static ModelStubWithScaList createModelStubWithScaList(StudentCourseAssociationList scaList) {
+        return new ModelStubWithScaList(scaList);
+    }
+
+    // ==================== STUB CLASSES ======================
+
+    // @@author miloaisdino
+    /**
+     * A default model stub that has all the unnecessary methods failing.
+     */
+    private static class ModelStub implements Model {
 
         @Override
         public void notifyEnrollmentChanged() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void setStudentCourseAssociation(StudentCourseAssociation target, StudentCourseAssociation editedSca) {
             throw new AssertionError("This method should not be called.");
@@ -130,40 +100,39 @@ public class PersonAddCommandTest {
         public GuiSettings getGuiSettings() {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public void setAddressBookFilePath(java.nio.file.Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Path getCourseListFilePath() {
+        public java.nio.file.Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Path getScaListFilePath() {
-            return null;
-        }
-
-        @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setCourseListFilePath(Path courseListFilePath) {
+        public void setCourseListFilePath(java.nio.file.Path courseListFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setScaListFilePath(Path scaListFilePath) {
 
+        }
+
+        @Override
+        public java.nio.file.Path getCourseListFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getScaListFilePath() {
+            return null;
         }
 
         @Override
@@ -227,13 +196,13 @@ public class PersonAddCommandTest {
         }
 
         @Override
-        public boolean hasSca(StudentCourseAssociation sca) {
-            return false;
+        public void setCourse(Course target, Course editedCourse) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setCourse(Course target, Course editedCourse) {
-            throw new AssertionError("This method should not be called.");
+        public boolean hasSca(StudentCourseAssociation sca) {
+            return false;
         }
 
         @Override
@@ -243,6 +212,11 @@ public class PersonAddCommandTest {
 
         @Override
         public boolean hasCourse(Course course) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addListener(Runnable listener) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -271,47 +245,63 @@ public class PersonAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
+    // @@author
 
     /**
-     * A Model stub that contains a single person.
+     * Model stub that takes in and has a {@link StudentCourseAssociationList}.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+    public static class ModelStubWithScaList extends ModelStub {
+        private StudentCourseAssociationList scaList;
+        ModelStubWithScaList(StudentCourseAssociationList scaList) {
+            this.scaList = scaList;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public StudentCourseAssociationList getScaList() {
+            return scaList;
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * ScaList stub class with no match.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
+    public static class ScaListNoMatch extends StudentCourseAssociationList {
+        /**
+         * Throws a guaranteed {@link ScaNotFoundException}.
+         *
+         * @param toFind Ignored query SCA.
+         * @return NIL
+         */
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public StudentCourseAssociation findMatch(StudentCourseAssociation toFind) {
+            throw new ScaNotFoundException("STUB: SCA not found.");
         }
     }
 
+    /**
+     * ScaList stub class with a match.
+     */
+    public static class ScaListWithMatch extends StudentCourseAssociationList {
+        private StudentCourseAssociation scaToMatch;
+
+        /**
+         * Creates a stubbed ScaList with a guaranteed SCA return for the method {@code findMatch}.
+         *
+         * @param scaToMatch SCA to be returned on every {@code findMatch} call.
+         */
+        ScaListWithMatch(StudentCourseAssociation scaToMatch) {
+            this.scaToMatch = scaToMatch;
+        }
+
+        /**
+         * Returns the SCA associated with this stub SCAList class.
+         *
+         * @param toFind Ignored query SCA.
+         * @return NIL
+         */
+        @Override
+        public StudentCourseAssociation findMatch(StudentCourseAssociation toFind) {
+            return scaToMatch;
+        }
+    }
 }

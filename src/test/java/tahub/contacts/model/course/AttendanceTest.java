@@ -23,6 +23,12 @@ public class AttendanceTest {
 
     // Constructor-only tests
     @Test
+    @DisplayName("Throws NullPointerException if constructor takes in null")
+    public void constructor_null_throwsException() {
+        assertThrows(NullPointerException.class, () -> new Attendance(null));
+    }
+
+    @Test
     @DisplayName("Returns correct values after constructor takes in no list")
     public void constructor_noList_correctValues() {
         Attendance a = new Attendance();
