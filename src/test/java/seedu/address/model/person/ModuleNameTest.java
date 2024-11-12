@@ -41,12 +41,14 @@ public class ModuleNameTest {
         assertFalse(ModuleName.isValidModName("C2030")); // missing alphabet
         assertFalse(ModuleName.isValidModName("C2030S")); // missing alphabet with alphabet at the back
         assertFalse(ModuleName.isValidModName("C2030-T")); // missing alphabet with hyphen and alphabet at the back
+        assertFalse(ModuleName.isValidModName("ABCDE0000")); // extra alphabet at the start
         assertFalse(ModuleName.isValidModName("CS2030CS")); // multiple alphabets at the back
         assertFalse(ModuleName.isValidModName("CS2030C-S")); // hyphen after alphabet
         assertFalse(ModuleName.isValidModName("CS2030-ST")); // 2 alphabets after hyphen
 
         // valid module name
         assertTrue(ModuleName.isValidModName("CS2030")); // 2 alphabets and 4 digits
+        assertTrue(ModuleName.isValidModName("GESS1000")); // 4 alphabets and 4 digits
         assertTrue(ModuleName.isValidModName("CS2030S")); // 2 alphabets, 4 digits and 1 trailing alphabet
         assertTrue(ModuleName.isValidModName("LSM2251")); // 3 alphabets and 4 digits
         assertTrue(ModuleName.isValidModName("CS2103-T")); // 2 alphabets, 4 digits, a hyphen and trailing alphabet
