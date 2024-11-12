@@ -608,3 +608,8 @@ Team size: 5
 5. Allow for the `sort` command to sort not only by tag but also by other fields.
 6. Allow for the `favorite` command to view only favorited employees.
 7. Implement Undo/Redo features for person details window to improve the user experience
+8. Add a fix to make sure that certain duplicated information is not accepted by `add` command, such as phone number, 
+   email etc.
+9. Fix invalid `add` command message.
+10. Improve commands such that all of them are not case-sensitive.
+
