@@ -319,9 +319,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | new user                                | see a guide on what features there are and how to use them  | know what to do with the application                         |
 | `* *`    | user                                    | press [TAB] to auto-complete commands                       | not waste time typing the full command                       |
 | `* *`    | user                                    | find commands by typing part of it                          | not have to remember exact commands                          |
-| `* *`    | user                                    | press [TAB] to auto-suggest attributes                      | not waste time typing full command                           |
 | `* *`    | user                                    | see multiple attributes in the command box                  | know available commands without referring to help guide      |
-| `* *`    | user                                    | press [TAB] to auto-suggest values                          | save time figuring out command types                         |
 | `* *`    | user                                    | have appropriate colour highlighting for each attribute     | see what I input more easily                                 |
 | `* *`    | user                                    | see different colours for each attribute                    | classify information more easily                             |
 | `* *`    | user                                    | see error messages clearly                                  | know what went wrong with my input                           |
@@ -338,7 +336,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                    | link property listings to specific clients                 | know who to market units to quickly                          |
 | `*`      | user                                    | merge duplicate clients                                    | keep my address book clean and organised                     |
 | `*`      | user                                    | export my clients to a CSV file                            | back up or share my client list                             |
-| `*`      | beginner                                | know some suggestions of types of tag                       | have an idea on how to sort my customers                     |
 | `*`      | user                                    | put my deleted clients in a recycle bin                    | keep my clients clean and restore them if it was an accident |
 | `*`      | user                                    | auto-complete or suggest commands if multiple are available | complete commands more easily                                |
 | `*`      | user                                    | use "fuzzy searching" when using "find" command             | not need to remember the exact words                         |
@@ -346,7 +343,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user who changes devices often          | export and import clients on different devices easily      | not save everything manually again when I change devices     |
 | `*`      | user with many groups of friends        | know who the clients I have put a particular tag on        | organise events                                              |
 | `*`      | user with many hobbies                  | remove the tag for clients easily                          | remove their tags if not useful anymore                      |
-| `*`      | user                                    | search up other client information other than name         | find clients based on other information                      |
 | `*`      | user with many clients                 | find and search client besides the name                    | find clients more easily with different kinds of input       |
 
 <div class="page-break"></div>
