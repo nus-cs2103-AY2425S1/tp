@@ -366,110 +366,303 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `EZSTATES` and the **Actor** is the `User`, unless specified otherwise)
 
-**Use case: Add a client**
+---
 
-**MSS**
+#### Use Case: Add Client Profile
 
-1.  `User` adds a client name
+**MSS**:
+1. User chooses to add a new client profile.
+2. System requests client details (name, contact info, property interest, etc.).
+3. User enters the required information.
+4. System confirms the details and creates the profile.
+5. System displays a success message.
+    - Use case ends.
 
-    Use case ends.
+**Extensions**:
+- **3a.** System detects missing or incorrect data:
+    - **3a1.** System displays am error and requests valid inputs.
+    - **3a2.** User enters the correct data.
+    - Steps 3a1–3a2 are repeated until all data is valid.
+    - Use case resumes from step 4.
 
-**Extensions**
+---
 
-* 2a. The client name already exists
-    * 2a1. `EZSTATES` shows an error message
+#### Use Case: Edit Client Profile
 
-        Use Case resumes at step 1.
+**MSS**:
+1. User selects an existing client profile to edit.
+2. System displays the client’s current information.
+3. User updates the desired fields.
+4. System confirms the changes and updates the profile.
+5. System displays a success message.
+    - Use case ends.
 
-**Use case: Delete a person**
+**Extensions**:
+- **3a.** User tries to edit a field with invalid data:
+    - **3a1.** System displays an error and requests valid data.
+    - **3a2.** User corrects the data.
+    - Steps 3a1–3a2 repeat until all data is valid.
+    - Use case resumes from step 4.
 
-**MSS**
+---
 
-1.  `User` lists all clients
-2. `EZSTATES` shows a list of all clients
-3. `User` identifies a client to remove
-4. `User` requests to delete that client from the list
-5. `EZSTATES` deletes the requested user
+#### Use Case: Delete Client Profile
 
-    Use case ends.
+**MSS**:
+1. User chooses to delete a client profile.
+2. System asks for confirmation.
+3. User confirms the deletion.
+4. System removes the client profile from the database.
+5. System displays a success message.
+    - Use case ends.
 
-**Extensions**
+**Extensions**:
+- **2a.** User cancels the deletion:
+    - **2a1.** System aborts the deletion process.
+    - Use case ends.
 
-* 2a. List is empty
+---
 
-    Use case ends
+#### Use Case: Add Appointment
 
+**MSS**:
+1. User chooses to schedule an appointment for a client.
+2. System requests appointment details (date, time, location).
+3. User enters the requested details.
+4. System confirms the details and saves the appointment.
+5. System displays a success message.
+    - Use case ends.
 
-* 3a. The client does not exist
-    * 3a1. `EZSTATES` shows an error message.
+**Extensions**:
+- **3a.** System detects a scheduling conflict:
+    - **3a1.** System notifies the user of the conflict.
+    - **3a2.** User chooses a new date/time.
+    - Use case resumes from step 3.
 
-      Use case resumes at step 1.
+---
 
-**Use case: List all profiles**
+#### Use Case: Delete Appointment
 
-**MSS**
+**MSS**:
+1. User selects an appointment to delete.
+2. System requests confirmation.
+3. User confirms deletion.
+4. System removes the appointment from the schedule.
+5. System displays a success message.
+    - Use case ends.
 
-1.  `User` requests to list all clients
-2.  `EZSTATES` shows a list of all clients
+**Extensions**:
+- **2a.** User cancels the deletion:
+    - **2a1.** System stops the deletion process.
+    - Use case ends.
 
-    Use case ends.
+---
 
-**Extensions**
+#### Use Case: List Clients
 
-* 2a. The list is empty.
+**MSS**:
+1. User chooses to view a list of all clients.
+2. System retrieves and displays the client list.
+    - Use case ends.
 
-  Use case ends.
+---
 
-**Use case: Create Appointment**
+#### Use Case: Find Client by Name
 
-**MSS**
+**MSS**:
+1. User chooses to search for a client by name.
+2. System requests the client’s name.
+3. User enters the name.
+4. System retrieves and displays matching client profiles.
+    - Use case ends.
 
-1.  `User` requests to add an appointment with one client
-2.  `User` enters relevant appointment time
-3. `EZSTATES` adds the appointment
+**Extensions**:
+- **4a.** System finds no clients matching the entered name:
+    - **4a1.** System displays a “No clients found” message.
+    - Use case ends.
 
-    Use case ends.
+---
 
-**Extensions**
+#### Use Case: List Appointments
 
-* 2a. Client name not specified
-    * 2a1. `EZSTATES` shows an error message
+**MSS**:
+1. User chooses to view all appointments.
+2. System retrieves and displays the list of appointments.
+    - Use case ends.
 
-        Use case resumes at step 1
+---
 
-* 3a. Client already has an appointment
-    * 3a1. `EZSTATES` shows an error message
+#### Use Case: Add Listing
 
-        Use case resumes at step 1
+**MSS**:
+1. User chooses to add a new property listing.
+2. System requests details for the listing (name, price, area, address, region, etc.).
+3. User enters the required information.
+4. System confirms the details and creates the listing.
+5. System displays a success message.
+    - Use case ends.
 
-**Use case: Delete Appointment**
+**Extensions**:
+- **3a.** System detects missing or incorrect data:
+    - **3a1.** System prompts for the correct information.
+    - **3a2.** User enters the correct data.
+    - Steps 3a1–3a2 repeat until all data is valid.
+    - Use case resumes from step 4.
 
-**MSS**
+---
 
-1. `User` requests a list of all profiles
-2. `User` chooses a certain client's appointment
-3. `User` requests to delete an appointment with a certain client
-4. `EZSTATES` removes the appointment
+#### Use Case: Show Listings
 
-   Use case ends.
+**MSS**:
+1. User chooses to view all available listings.
+2. System retrieves and displays the list of property listings.
+    - Use case ends.
 
-**Extensions**
+---
 
-* 2a. Client name not specified
+#### Use Case: Find Listings
 
-    Use case ends
+**MSS**:
+1. User chooses to search for listings by keyword.
+2. System requests keywords for the search.
+3. User enters the keyword(s).
+4. System retrieves and displays matching listings.
+    - Use case ends.
 
-* 3a. Client name not specified
-    * 3a1. `EZSTATES` shows an error message
+**Extensions**:
+- **4a.** System finds no listings matching the entered keywords:
+    - **4a1.** System displays a “No listings found” message.
+    - Use case ends.
 
-      Use case resumes at step 1
+---
 
-* 4a. Client already has an appointment
-    * 4a1. `EZSTATES` shows an error message
+#### Use Case: Edit Listing
 
-      Use case resumes at step 1
+**MSS**:
+1. User selects an existing listing to edit.
+2. System displays the listing’s current details.
+3. User updates the desired fields.
+4. System confirms the changes and updates the listing.
+5. System displays a success message.
+    - Use case ends.
 
-*{More to be added}*
+**Extensions**:
+- **3a.** User tries to edit a field with invalid data:
+    - **3a1.** System displays an error and requests valid data.
+    - **3a2.** User corrects the data.
+    - Steps 3a1–3a2 repeat until all data is valid.
+    - Use case resumes from step 4.
+
+---
+
+#### Use Case: Add Buyers to Listing
+
+**MSS**:
+1. User chooses to add buyer(s) to an existing listing.
+2. System requests the buyer index for the listing.
+3. User enters the buyer index.
+4. System adds the buyer(s) to the listing.
+5. System displays a success message.
+    - Use case ends.
+
+**Extensions**:
+- **3a.** System detects invalid buyer index:
+    - **3a1.** System prompts for a valid index.
+    - **3a2.** User enters a valid index.
+    - Use case resumes from step 4.
+
+---
+
+#### Use Case: Remove Buyers from Listing
+
+**MSS**:
+1. User chooses to remove buyer(s) from a listing.
+2. System requests the buyer index for the listing.
+3. User enters the buyer index.
+4. System removes the buyer(s) from the listing.
+5. System displays a success message.
+    - Use case ends.
+
+**Extensions**:
+- **3a.** System detects invalid buyer index:
+    - **3a1.** System prompts for a valid index.
+    - **3a2.** User enters a valid index.
+    - Use case resumes from step 4.
+
+---
+
+#### Use Case: Delete Listing
+
+**MSS**:
+1. User selects a listing to delete.
+2. System requests confirmation.
+3. User confirms deletion.
+4. System removes the listing.
+5. System displays a success message.
+    - Use case ends.
+
+**Extensions**:
+- **2a.** User cancels the deletion:
+    - **2a1.** System stops the deletion process.
+    - Use case ends.
+
+---
+
+#### Use Case: Clear Listings
+
+**MSS**:
+1. User chooses to clear all listings.
+2. System requests confirmation.
+3. User confirms the action.
+4. System clears all listings from the system.
+5. System displays a success message.
+    - Use case ends.
+
+---
+
+#### Use Case: More Info
+
+**MSS**:
+1. User requests more information on a specific listing.
+2. System requests the listing index.
+3. User enters the index of the listing.
+4. System displays detailed information for the listing.
+    - Use case ends.
+
+---
+
+#### Use Case: Chat Window
+
+**MSS**:
+1. User chooses to open the chat window.
+2. System displays the chat interface.
+3. User can interact with the chatbot for assistance with commands and inquiries.
+    - Use case ends.
+
+---
+
+#### Use Case: Help
+
+**MSS**:
+1. User requests help.
+2. System displays general instructions for using the application.
+    - Use case ends.
+
+---
+
+#### Use Case: Exit Application
+
+**MSS**:
+1. User chooses to exit the application.
+2. System prompts for confirmation.
+3. User confirms the exit.
+4. System closes the application.
+    - Use case ends.
+
+**Extensions**:
+- **2a.** User cancels the exit:
+    - **2a1.** System returns to the previous screen.
+    - Use case ends.
 
 ### Non-Functional Requirements
 
@@ -478,8 +671,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The app should be intuitive and require no more than three user actions to perform any major task.
 5.  The codebase should adhere to clear coding principles to allow easy updates and bug fixes.
-
-*{More to be added}*
+6.  The app should ensure that all client and listing data is securely stored and handled, with data validation to prevent unauthorized access.
+7.  The app should handle errors gracefully, providing clear error messages and suggestions for corrective action.
+8.  The app should provide immediate feedback (within 200 ms) to user actions, confirming that commands are being processed.
+9.  The app should log significant actions and errors for debugging purposes, with options to adjust log levels (e.g., error-only, debug, info).
+10.  The codebase should support automated testing, with unit and integration tests to ensure reliability and early detection of issues.
 
 ## Appendix
 
