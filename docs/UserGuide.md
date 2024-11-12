@@ -104,7 +104,7 @@ _Figure 1: CareLink main window with sample data_
 - Adds a new person:<br>
 
   ```
-  add n/John Lee nric/S9369777D p/91234567 e/johnlee@email.com a/123 Medical Drive nric/S9876543A role/patient
+  add n/John Lee nric/S9369777D p/91234567 e/johnlee@email.com a/123 Medical Drive role/patient
   ```
 
 - Views help:<br>
