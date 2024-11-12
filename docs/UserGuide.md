@@ -365,7 +365,7 @@ Format: `import \f FILEPATH`
 
 
 Example:
-*  `import \f ~/data/new_persons.csv` imports a list of people in new_persons.csv located in ~/data/ into VolunTier.
+*  `import \f ./data/new_persons.csv` imports a list of people in new_persons.csv located in ./data/ into VolunTier.
 * Output: `5 persons added. Rows with duplicates: [2, 4]. The following rows had data which failed some constraints: Row 3: Invalid email format. Row 5: Missing phone number.`
 
 <box type="info" seamless>
