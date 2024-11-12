@@ -50,6 +50,7 @@ public class DeliveryList {
     public void add(Index targetIndex, Delivery toAdd) {
         requireAllNonNull(toAdd, targetIndex);
         int index = targetIndex.getZeroBased();
+        System.out.println(index);
         internalList.add(index, toAdd);
     }
 
@@ -61,6 +62,7 @@ public class DeliveryList {
             Delivery delivery = internalList.get(i);
             if (delivery.isArchived()) {
                 Index firstArchivedIndex = Index.fromZeroBased(i);
+
                 return firstArchivedIndex;
             }
         }

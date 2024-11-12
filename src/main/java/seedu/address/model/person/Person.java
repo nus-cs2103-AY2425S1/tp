@@ -40,7 +40,6 @@ public class Person {
     private final DeliveryList deliveryList = new DeliveryList();
     private final Archive archive;
     private final Date date; // Date and time are used for sorting purposes only.
-
     private final Time time;
 
 
@@ -153,10 +152,10 @@ public class Person {
     }
 
     /**
-     * Remove the delivery from the delivery list of this person.
+     * Removes the specified delivery from the delivery list of this person based on index.
      */
-    public void deleteDelivery(Index deliveryIndex) {
-        deliveryList.remove(deliveryIndex);
+    public void deleteDelivery(Delivery delivery) {
+        deliveryList.remove(delivery);
     }
 
     /**
@@ -172,8 +171,7 @@ public class Person {
      * Add the given delivery {@code unarchivedDelivery} to the list at {@code targetIndex}.
      * {@code targetIndex} must be a valid index in the deliveryList.
      */
-    public void unarchiveDelivery(Index targetIndex, Delivery unarchivedDelivery) {
-        deleteDelivery(targetIndex);
+    public void unarchiveDelivery(Delivery unarchivedDelivery) {
         addDelivery(getFirstArchivedIndex(), unarchivedDelivery);
     }
 

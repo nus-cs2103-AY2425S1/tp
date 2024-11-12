@@ -19,7 +19,6 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryId;
-import seedu.address.model.delivery.DeliveryList;
 import seedu.address.model.delivery.Eta;
 import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Status;
@@ -55,11 +54,13 @@ public class ArchiveCommand extends Command {
 
     public static final String MESSAGE_ARCHIVED_DELIVERY_SUCCESS = "Archived Delivery for %1$s: %2$s";
 
-
     public static final String MESSAGE_ARCHIVED_PERSON_SUCCESS = "Archived Person: %1$s";
 
     public static final String MESSAGE_INVALID_WINDOW = "Cannot archive contact. "
             + "Navigate to inspection window to archive deliveries";
+
+    public static final String MESSAGE_CANNOT_ARCHIVE_FOR_EMPLOYEE = "Cannot archive for employee. This currently only"
+            + " works for clients";
 
     private final List<Index> indexList;
 
@@ -73,6 +74,9 @@ public class ArchiveCommand extends Command {
         indexList.sort(Comparator.comparing(Index::getZeroBased).reversed());
 
         if (AddressBookParser.getInspect()) {
+            if (InspectWindow.getInspectedPerson().getRole().getValue().equals("employee")) {
+                throw new CommandException(MESSAGE_CANNOT_ARCHIVE_FOR_EMPLOYEE);
+            }
             return handleDeliveryArchive(model);
         } else {
             return handlePersonArchive(model);
@@ -89,8 +93,8 @@ public class ArchiveCommand extends Command {
     private CommandResult handleDeliveryArchive(Model model) throws CommandException {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
-        DeliveryList deliveryList = inspectedPerson.getDeliveryList();
-        validateIndexes(inspectedPerson.getDeliveryListSize(), indexList, true);
+        List<Delivery> deliveryList = model.getFilteredDeliveryList();
+        validateIndexes(deliveryList.size(), indexList, true);
 
         List<Delivery> deliveryToArchiveList = archiveDeliveries(inspectedPerson, deliveryList);
 
@@ -164,16 +168,16 @@ public class ArchiveCommand extends Command {
      * @param deliveryList The list of deliveries to archive from.
      * @return A list of deliveries that were archived.
      */
-    private List<Delivery> archiveDeliveries(Person inspectedPerson, DeliveryList deliveryList) {
+    private List<Delivery> archiveDeliveries(Person inspectedPerson, List<Delivery> deliveryList) {
         List<Delivery> deliveryToArchiveList = new ArrayList<>();
         List<Delivery> deliveryToAddList = new ArrayList<>();
 
         for (Index targetIndex : indexList) {
-            Delivery deliveryToArchive = deliveryList.asUnmodifiableObservableList().get(targetIndex.getZeroBased());
+            Delivery deliveryToArchive = deliveryList.get(targetIndex.getZeroBased());
             Delivery archivedDelivery = createArchivedDelivery(deliveryToArchive);
 
             if (!deliveryToArchive.isArchived()) {
-                inspectedPerson.deleteDelivery(targetIndex);
+                inspectedPerson.deleteDelivery(deliveryToArchive);
                 deliveryToAddList.add(archivedDelivery);
             }
             deliveryToArchiveList.add(archivedDelivery);

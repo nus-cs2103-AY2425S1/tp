@@ -55,7 +55,7 @@ public class RemoveCommand extends Command {
     /**
      * Handles the removal of deliveries from the employee
      */
-    public CommandResult handleDeliveryRemoval(Model model) throws CommandException {
+    private CommandResult handleDeliveryRemoval(Model model) throws CommandException {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
         Worker inspectedWorker = inspectedPerson.getWorker();

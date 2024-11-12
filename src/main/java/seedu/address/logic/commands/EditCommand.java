@@ -99,7 +99,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_EDIT_DELIVERY_SUCCESS = "Edited Delivery %d: %2$s";
     public static final String MESSAGE_EMPTY_ITEMS = "At least one item has to be entered";
-
+    public static final String MESSAGE_CANNOT_EDIT_FOR_EMPLOYEE = "Cannot edit delvieries for employee."
+            + " You can only do this in the clients window";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -140,8 +141,11 @@ public class EditCommand extends Command {
             requireNonNull(editPersonDescriptor);
             return editPerson(model);
         } else {
+            if (InspectWindow.getInspectedPerson().getRole().getValue().equals("employee")) {
+                throw new CommandException(MESSAGE_CANNOT_EDIT_FOR_EMPLOYEE);
+            }
             requireNonNull(editDeliveryDescriptor);
-            return editDelivery();
+            return editDelivery(model);
         }
     }
 
@@ -178,12 +182,10 @@ public class EditCommand extends Command {
     /**
      * Edits delivery according to descriptor and returns CommandResult
      */
-    private CommandResult editDelivery() throws CommandException {
+    private CommandResult editDelivery(Model model) throws CommandException {
         Person inspectedPerson = InspectWindow.getInspectedPerson();
 
-        //Currently no filtered list for delivery
-
-        List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
+        List<Delivery> deliveryList = model.getFilteredDeliveryList();
         if (index.getZeroBased() >= deliveryList.size()) {
             throw new CommandException(
                 String.format(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX, index.getOneBased())

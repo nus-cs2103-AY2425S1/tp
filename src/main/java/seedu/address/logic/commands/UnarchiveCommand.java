@@ -19,7 +19,6 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryId;
-import seedu.address.model.delivery.DeliveryList;
 import seedu.address.model.delivery.Eta;
 import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Status;
@@ -55,6 +54,8 @@ public class UnarchiveCommand extends Command {
 
     public static final String MESSAGE_UNARCHIVED_DELIVERY_SUCCESS = "Unarchived Delivery for %1$s: %2$s";
     public static final String MESSAGE_UNARCHIVED_PERSON_SUCCESS = "Unarchived Person: %1$s";
+    public static final String MESSAGE_CANNOT_UNARCHIVE_FOR_EMPLOYEE = "Cannot unarchive for employee. This currently "
+            + "only works for clients";
     private final List<Index> indexList;
 
     public UnarchiveCommand(List<Index> indexList) {
@@ -67,6 +68,9 @@ public class UnarchiveCommand extends Command {
         indexList.sort(Comparator.comparing(Index::getZeroBased));
 
         if (AddressBookParser.getInspect()) {
+            if (InspectWindow.getInspectedPerson().getRole().getValue().equals("employee")) {
+                throw new CommandException(MESSAGE_CANNOT_UNARCHIVE_FOR_EMPLOYEE);
+            }
             return handleDeliveryUnarchive(model);
         } else {
             return handlePersonUnarchive(model);
@@ -83,7 +87,7 @@ public class UnarchiveCommand extends Command {
     private CommandResult handleDeliveryUnarchive(Model model) throws CommandException {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
-        DeliveryList deliveryList = inspectedPerson.getDeliveryList();
+        List<Delivery> deliveryList = model.getFilteredDeliveryList();
         validateIndexes(inspectedPerson.getDeliveryListSize(), indexList, true);
 
         List<Delivery> deliveryToArchiveList = unarchiveDeliveries(inspectedPerson, deliveryList);
@@ -123,14 +127,13 @@ public class UnarchiveCommand extends Command {
      * @param deliveryList The list of deliveries to archive from.
      * @return A list of deliveries that were archived.
      */
-    private List<Delivery> unarchiveDeliveries(Person inspectedPerson, DeliveryList deliveryList) {
+    private List<Delivery> unarchiveDeliveries(Person inspectedPerson, List<Delivery> deliveryList) {
         List<Delivery> deliveryToUnarchiveList = new ArrayList<>();
         for (Index targetIndex : indexList) {
-            Delivery deliveryToUnarchive = deliveryList.asUnmodifiableObservableList().get(targetIndex.getZeroBased());
+            Delivery deliveryToUnarchive = deliveryList.get(targetIndex.getZeroBased());
             Delivery unarchivedDelivery = createUnarchivedDelivery(deliveryToUnarchive);
-            if (deliveryToUnarchive.isArchived()) {
-                inspectedPerson.unarchiveDelivery(targetIndex, unarchivedDelivery);
-            }
+            inspectedPerson.deleteDelivery(deliveryToUnarchive);
+            inspectedPerson.unarchiveDelivery(unarchivedDelivery);
             deliveryToUnarchiveList.add(unarchivedDelivery);
         }
         Collections.reverse(deliveryToUnarchiveList);
