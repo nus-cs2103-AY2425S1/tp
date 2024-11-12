@@ -474,7 +474,7 @@ handle the complexities of coordinating with multiple vendors, venues, and clien
 ### User stories
 
 Priorities:
-High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+High (must have) - `* * *`, Medium (nice to have) -  `* *`, Low (unlikely to have) - `*`
 
 Those without any stars are user stories that were considered but will not be implemented at this time.
 
@@ -497,7 +497,7 @@ Those without any stars are user stories that were considered but will not be im
 |  `* *`   | careless, first-time user | reload the sample contacts into the app                                                                              | I can continue trying out different features without needing to add my own data in case I accidentally cleared the contacts.                                        |
 |  `* *`   | first-time user           | see a help message linking to a guide on the features and how the features can be used                               | I can easily try out all the different features with correct formats by referring to the linked guide.                                                              |
 |  `* *`   | lazy user                 | want to use command keyword shortcuts                                                                                | I can quickly use commands without needing to type the full command word.                                                                                           |
-|  `* *`   | lazy user                 | want to bypass certain restrains of the command                                                                     | I can quickly use commands to bypass controls in a safe manner.                                                                                                     |
+|  `* *`   | lazy user                 | want to bypass certain restrains of the command                                                                      | I can quickly use commands to bypass controls in a safe manner.                                                                                                     |
 |  `* *`   | user                      | assign tasks to certain contacts                                                                                     | I can track which tasks have been assigned to each contact.                                                                                                         |
 |  `* *`   | user                      | update the status of tasks of contacts                                                                               | I can track whether tasks have been completed or not.                                                                                                               |
 |  `* *`   | busy user                 | add multiple wedding events                                                                                          | I can track contacts for multiple weddings at once.                                                                                                                 |
@@ -1540,44 +1540,76 @@ applied to edited data, but specific expected results will differ. <br><br>
 <br>
 
 
-3. **Assigning a `Wedding` in the `Wedding List` when the `Wedding` is not in the `Wedding List`.**
-1. Test case: `assign-wedding 1 w/John's Wedding`<br>
-   Expected: No contact is assigned. Error details shown.
+3. **Assigning a `Wedding` in the `Wedding List` to a `Person` when the `Wedding` is not in the `Wedding List`**
 
-1. Test case: `assign-wedding 1 w/John's Wedding f/`<br>
-   Expected: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
+   1. List all persons using the `list` command. At least 1 `Person` exists in the list. 
+   
+   2. **Test case**: `assign-wedding 1 w/John's Wedding` (assuming that `John's Wedding` is not in the `Wedding` list)<br>
+      **Expected**: No contact is assigned. Error details shown.
+
+   3. **Test case**: `assign-wedding 1 w/John's Wedding f/` (assuming that `John's Wedding` is not in the `Wedding` list)<br>
+      **Expected**: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
+
+<br>
+
 
 #### Unassigning Wedding
-##### ... if first contact in `John's Wedding`
-1. Test case: `unassign-wedding 1 w/John's Wedding`<br>
-   Expected: 1st contact is removed from `John's Wedding` and `John's Wedding` is removed from their contact card.
 
-##### ... if first contact not in `John's Wedding`
-1. Test case: `unassign-wedding 1 w/John's Wedding`<br>
-   Expected: No weddings are unassigned. Error details shown.
+1. **Unassigning a `Wedding` in the `Wedding list` from a `Person` assigned to the `Wedding`**
+
+   1. **Prerequisites**: List all weddings using the `list-weddings` command. At least 1 wedding exists in the system.
+      List all persons using the `list` command. At least 1 `Person` exists in the list that has 1 wedding assigned.
+   
+   2. **Test case**: `unassign-wedding 1 w/John's Wedding` (assuming the first contact is assigned to `John's Wedding`)<br>
+      **Expected**: 1st contact is removed from `John's Wedding` and `John's Wedding` is removed from their contact card.
+
+<br>
+
+2. **Unassigning a `Wedding` in the `Wedding list` from a `Person` not assigned to the `Wedding`**
+
+   1. **Prerequisites**: List all weddings using the `list-weddings` command. At least 1 wedding exists in the system.
+      List all persons using the `list` command. At least 1 `Person` exists in the list.
+   
+   2. **Test case**: `unassign-wedding 1 w/John's Wedding` (assuming the first contact is not assigned to `John's Wedding`)<br>
+      **Expected**: No weddings are unassigned. Error details shown.
+
+<br>
 
 ---
 <h3 class="features">Task Features</h3>
 
 #### Creating Task
-##### ... if `Task1` is not in the list of tasks
-1. Test case: `create-task tk/Task1`<br>
-   Expected: `Task1` is added to list of tasks. Details of the added task are shown.
 
-##### ... if `Task1` is in the list of tasks
-1. Test case: `create-task tk/Task1`<br>
-   Expected: No tasks are added to list of tasks. Error details shown.
+1. **Creating a new `Task`**
 
-1. Test case: `create-task tk/task1`<br>
-   Expected: No tasks are added to list of tasks. Error details shown.
+   1. **Prerequisites**: List all tasks using the `list-tasks` command.
+   
+   2. **Test case**: `create-task tk/Task1`<br>
+         **Expected**: `Task1` is added to list of tasks. Details of the added task are shown in the status message.
+
+<br>
+
+2. **Creating a `Task` already in the list of `Tasks`**
+
+   1. **Test case**: `create-task tk/Task1` (assuming `Task1` is in the list of `Tasks` already)<br>
+      **Expected**: No tasks are added to list of tasks. Error details shown indicating that the `Task` already exists.
+   
+   2. **Test case**: `create-task tk/task1` (assuming `Task1` is in the list of `Tasks` already)<br>
+      **Expected**: No tasks are added to list of tasks. Error details shown indicating that the `Task` already exists.
+
+<br>
 
 #### Deleting Task
-##### ... if there is only 1 task in the list
-1. Test case: `delete-task 1`<br>
-   Expected: `Task1` is removed from list of tasks. Details of the removed task are shown.
 
-1. Test case: `delete-task 2`<br>
-   Expected: No tasks are removed from list of tasks. Error details shown.
+1. **Deleting a `Task` already in the list of `Tasks`, if there is only 1 task in the list.**
+
+   1. **Test case**: `delete-task 1`(assuming the first task is in the list of `Tasks` already) <br>
+      **Expected**: 1st task is removed from the list of `Tasks`. Details of the removed task are shown in the status message.
+
+   2. **Test case**: `delete-task 2`<br>
+      **Expected**: No tasks are removed from list of tasks. Error details shown indicating that the index is invalid.
+
+<br>
 
 #### Assigning Task
 ##### ... if there's only 1 task and 1 vendor in WedLinker and vendor does not have that task assigned to them
