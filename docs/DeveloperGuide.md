@@ -1007,7 +1007,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding an event on TalentHub.
 
-    1. **Prerequisites**: List all events using the `list events` command. Multiple events in the list. Three entries with the name Oscars listed. One entry with the name Red Carpet. No entries with name Emmys listed.
+    1. **Prerequisites**: List all events using the `list event` command. Multiple events in the list. Three entries with the name Oscars listed. One entry with the name Red Carpet. No entries with name Emmys listed.
 
     2. Test case: `find event Oscars`.
         1. **Expected**: 3 events listed!
@@ -1054,7 +1054,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Filtering an event on TalentHub.
 
-    1. **Prerequisites**: List all events using the `list events` command. Multiple events in the list. Three events with celebrity, Alex Yeoh. No events with celebrity, Bernice Yu listed.
+    1. **Prerequisites**: List all events using the `list event` command. Multiple events in the list. Three events with celebrity, Alex Yeoh. No events with celebrity, Bernice Yu listed.
 
     2. Test case: `filter event Alex Yeoh`.
         1. **Expected**: 3 events listed!
