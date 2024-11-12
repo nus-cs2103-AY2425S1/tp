@@ -65,8 +65,6 @@ Each of the four main components (also shown in the diagram above),
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
-<box type="important" seamless> XYZCommand can also be structured as an abstract class to serve as a base for a set of related child commands that would be implemented individually as concrete classes.
-</box>
 
 The sections below give more details of each component.
 
@@ -94,7 +92,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" alt="Structure of the Logic Component"/>
-
+<box type="important" seamless> XYZCommand can also be structured as an abstract class to serve as a base for a set of related child commands that would be implemented individually as concrete classes.
+</box>
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 **This example can be used as a guide for all EduLog commands**.
 
@@ -136,6 +135,7 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
+e
 <b>Note:</b> An alternative (arguably, a more OOP) model is given below. It has a <code>Tag</code> list in the <code>EduLog</code>, which <code>Student</code> references. This allows <code>EduLog</code> to only require one <code>Tag</code> object per unique tag, instead of each <code>Student</code> needing their own <code>Tag</code> objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
@@ -195,7 +195,8 @@ Step 3. The user executes `add n/David …​` to add a new student. The `add` c
 <b>Note:</b> If a command fails its execution, it will not call `Model#commitEduLog()`, so the address book state will not be saved into the `eduLogStateList`.
 </box>
 
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> If a command fails its execution, it will not call `Model#commitEdulog()`, so the edulog state will not be saved into the `eduLogStateList`.
+<div markdown="span" class="alert alert-info">
+<b>Note:</b> If a command fails its execution, it will not call <code>Model#commitEdulog()</code>, so the edulog state will not be saved into the <code>eduLogStateList</code>.
 
 </div>
 
@@ -225,6 +226,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 The `redo` command does the opposite — it calls `Model#redoEduLog()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <box type="info" seamless>
+
 <b>Note:</b> If the `currentStatePointer` is at index `eduLogStateList.size() - 1`, pointing to the latest address book state, then there are no undone EduLog states to restore. The `redo` command uses `Model#canRedoEduLog()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
@@ -300,6 +302,7 @@ Priorities: Essential (must have), Novel (nice to have), Typical (unlikely to ha
 | Essential | Teacher | mark all students as unpaid                         | quickly mark students as unpaid, when the new month comes in |
 | Essential | Teacher | manage how much each student pays in tuition fees   | remember how much to bill my student every month             |
 | Essential | Teacher | easily total how much money is paid or not paid yet | easily see how much revenue I have earned or not earned      |
+| Essential | Teacher | delete all my students and lessons                  | easily start over in the new semester                        |
 | Novel     | Teacher | have ideas for gifts                                | buy gifts for my students.                                   |
 
 
@@ -363,8 +366,6 @@ Use case ends.
 
 ## UC3: Add student
 
-**System**: EduLog
-**Actor**: Teacher 
 **Postcondition**: A student, with at least a name, is successfully enrolled in at least one lesson <br>
 
 **MSS:**
@@ -398,9 +399,6 @@ Use case ends.
 
 ## UC4: Edit student
 
-**System**: EduLog <br>
-**Actor**: Teacher <br>
-
 **MSS:**
 1. Teacher initiates the process to edit an existing student in EduLog.
 2. System provides the required fields for student information.
@@ -430,9 +428,6 @@ Use case ends.
 
 ## UC5: Create Tag
 
-**System**: EduLog <br>
-**Actor**: Teacher <br>
-
 **MSS:**
 1. Teacher initiates the process to create a new tag.
 2. System displays the required fields for tag creation.
@@ -453,9 +448,6 @@ Use case ends.
   System prompts the teacher to correct the information before proceeding.
 
 ## UC6: Edit tag
-
-**System**: EduLog <br>
-**Actor**: Teacher <br>
 
 **MSS:**
 1. Teacher initiates the process to edit an existing tag.
@@ -479,9 +471,6 @@ Use case ends.
 
 ## UC7: Delete tag
 
-**System**: EduLog <br>
-**Actor**: Teacher <br>
-
 **MSS:**
 
 1. Teacher selects a tag to delete.
@@ -499,8 +488,6 @@ Use case ends.
 
 ## UC8: View students
 
-**System:** EduLog <br>
-**Actor:** Teacher <br>
 **Precondition:** The teacher is logged into the app. <br>
 
 **MSS:**
@@ -523,8 +510,6 @@ Use case resumes from Step 2.
 
 ## UC9: Find students
 
-**System:** EduLog <br>
-**Actor:** Teacher <br>
 **Precondition:** The teacher is logged into the app. <br>
 
 **MSS:**
@@ -547,8 +532,6 @@ Use case resumes from Step 2
 
 ## UC10: Delete student
 
-**System:** EduLog <br>
-**Actor:** Teacher <br>
 **Precondition:** The teacher is logged into the app, the student is present in the list of students enrolled under the teacher. <br>
 **Postcondition:** The student is removed from the teacher’s list of students. <br>
 
@@ -594,8 +577,6 @@ Use case ends.
 
 ## UC12: Display gift
 
-**System:** EduLog <br>
-**Actor:** Teacher <br>
 **Precondition:** The teacher is logged into the app. <br>
 
 **MSS:**
@@ -606,8 +587,6 @@ Use case ends.
 
 ## UC13: Mark Student
 
-**System:** EduLog <br>
-**Actor:** Teacher <br>
 **Precondition:** The teacher has the list of students. <br>
 
 **MSS:**
@@ -625,8 +604,6 @@ Use case ends.
 
 ## UC14: Unmark Student
 
-**System:** EduLog <br>
-**Actor:** Teacher <br>
 **Precondition:** The teacher has the list of students. <br>
 
 **MSS:**
@@ -643,8 +620,6 @@ Use case ends.
 **2a1.** System notifies the teacher that the student is not present in his/her set of students.
 
 ## UC15: Mark all students
-**System:** EduLog <br>
-**Actor:** Teacher <br>
 
 **MSS:**
 
@@ -653,8 +628,6 @@ Use case ends.
 Use case ends.
 
 ## UC16: Unmark all students
-**System:** EduLog <br>
-**Actor:** Teacher <br>
 
 **MSS:**
 
@@ -664,8 +637,6 @@ Use case ends.
 
 ## UC17: Calculate Revenue
 
-**System:** Edulog <br>
-**Actor:** Teacher <br>
 **Precondition:** The teacher is logged into the app.
 
 **MSS:**
