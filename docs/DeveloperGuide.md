@@ -1293,7 +1293,6 @@ Team size: 5
 
 ### Ui
 * Ui can be adjusted such that long names and phone numbers will not be truncated when added into StudentManagerPro.
-* Update help command to show a command summary instead of a link to the UG.
 
 ### Sex
 * Sex attribute can be adjusted to be case insensitive in the future to make it more convenient for users.
@@ -1306,6 +1305,7 @@ Team size: 5
 
 ### Filter
 * Allow filtering by phone numbers using predicates less than 3 digits long.
+* Allow filtering for exact multi-word addresses. For example, using `filter a/Block 30 Geylang` will return only students with an address that exactly matches `Block 30 Geylang` rather than returning partial matches for individual words like `Block`, `30`, or `Geylang`
 
 ### Sort
 * Sort in descending order.
