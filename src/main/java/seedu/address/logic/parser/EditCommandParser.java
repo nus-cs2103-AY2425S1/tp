@@ -32,6 +32,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_JOBCODE, PREFIX_TAG,
                         PREFIX_REMARK);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_EMAIL, PREFIX_JOBCODE, PREFIX_TAG, PREFIX_REMARK);
 
         Index index;
 

@@ -29,7 +29,7 @@ public class FindCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] | "
             + "[" + PREFIX_JOBCODE + "JOB CODE] | "
             + "[" + PREFIX_TAG + "TAG] | "
-            + "[" + PREFIX_REMARK + "REMARK]}1..*\n"
+            + "[" + PREFIX_REMARK + "REMARK]}+\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John "
             + PREFIX_PHONE + "9876 \n"
