@@ -4,16 +4,18 @@ title: "Developer Guide"
 pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# TAHub Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* This project uses `JavaFX`,`Jackson`,`JUnit5`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -49,6 +51,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
@@ -66,6 +70,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T08-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -82,6 +88,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -102,8 +110,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g. `DeleteCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -114,8 +122,10 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g. `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g. `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g. `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 
@@ -127,7 +137,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g. results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -138,6 +148,8 @@ The `Model` component,
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -156,10 +168,14 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+### Current Implementation
+
+The _Sequence Diagram_ below shows how the components interact with each other for the general command scenario, such as `addGrade`.
+<puml src="diagrams/addGradeCommand.puml" alt="AddGrade" />
 
 ### \[Proposed\] Undo/redo feature
 
@@ -252,14 +268,8 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -294,18 +304,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|--------------------------------------------------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
 | `* * *`  | Teaching Assistant                                     | add a new student's contact                                                    | I can keep track of all my students in my course                                    |
 | `* * *`  | Teaching Assistant                                     | view a student's contact information                                           | I can contact a student directly if required                                        |
-| `* * *`  | Teaching Assistant                                     | view a students' grades                                                        | I can have a comprehensive overview of each students' performance                   |
+| `* * *`  | Teaching Assistant                                     | view a student's grades                                                        | I can have a comprehensive overview of each students' performance                   |
 | `* * *`  | Teaching Assistant                                     | record student grades                                                          | I can keep accurate records of their performance                                    |
+| `* * *`  | Teaching Assistant                                     | query different statistics about student's grades (e.g. mean, median, etc.)    | I can analyze their performance                                                     |
 | `* * *`  | Teaching Assistant                                     | list out all students                                                          | I can see who's contacts I have saved                                               |
 | `* * *`  | Teaching Assistant                                     | view students' attendance                                                      | I can keep track of when a student has not shown up to class                        |
 | `* * *`  | Teaching Assistant                                     | mark students' attendance                                                      | I can keep track of who goes to class                                               |
 | `* *`    | Teaching Assistant                                     | import student contact information from a csv                                  | I can quickly add multiple students at once                                         |
-| `*`      | Teaching Assistant                                     | collect students contact information                                           | I can keep track and make use of it if required                                     |
-| `*`      | Teaching assistant with bad student management ability | automate student management                                                    | I can manage my students better                                                     |
 | `* *`    | Experienced teaching assistant                         | Migrate/get used to the app easily                                             | it doesn't take so much time to get used to the new app to increase my productivity |
 | `* *`    | Teaching Assistant                                     | tag my students with different labels                                          | it is easy for me to find/search them based on their tags                           |
 | `* *`    | Teaching Assistant                                     | link with my Canvas account                                                    | I can save time exporting grades                                                    |
-| `* *`    | busy Teaching Assistant                                | view a help message                                                            | I can quickly learn how to use the app                                              |
+| `* *`    | Busy Teaching Assistant                                | view a help message                                                            | I can quickly learn how to use the app                                              |
 | `* *`    | Teaching Assistant                                     | separate my work (TA) contacts with my personal contact                        | I can have privacy and a line between work and life                                 |
 | `* *`    | Teaching Assistant that values privacy                 | sort students by performance metrics like attendance or participation          | I can identify students who may need additional support.                            |
 | `* *`    | Helpful Teaching Assistant                             | set up notifications for missing assignment or attendance                      | I can address potential issues with students                                        |
@@ -315,20 +324,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Teaching Assistant                                     | set up alerts for low attendance or poor participation                         | I can help struggling students early in the course                                  |
 | `* *`    | Responsible Teaching Assistant                         | attach remarks for each student                                                | I can keep track of additional things to remember for each student                  |
 | `* *`    | Teaching Assistant                                     | add a custom column/property on the student database                           | I can personalize my contacts based on my own needs                                 |
-| `*`      | Student                                                | upload my MC to my TA through the app                                          | I can easily send an MC without sending it through other mediums                    |
-| `*`      | Teaching Assistant                                     | draft an email to the student with a summary of their grades and participation | notify students about their progress                                                |
-| `*`      | Teaching Assistant                                     | access and archive past year exam papers                                       | I can distribute the practice papers to students                                    |
-| `* *`    | Student                                                | Submit questions to my TA                                                      | I can easily contact him and get an answer                                          |
 | `* *`    | Teaching Assistant                                     | view assignment submission status for each student                             | I can find which students have not submitted assignments                            |
 | `* *`    | Teaching Assistant                                     | create notes for each student                                                  | I can track any special considerations                                              |
 | `* *`    | SoC Teaching Assistant                                 | Link my account with github                                                    | I can review my students' code                                                      |
-| `* *`    | Student                                                | I can submit feedback to my TA                                                 | he can improve his teaching                                                         |
-| `* *`    | Teaching Assistant                                     | view feedback from my students                                                 | I can improve my teaching                                                           |
-| `* *`    | Teaching Assistant                                     | view only feedback scores lower than 2/5                                       | I can focus on improving on areas that are more important                           |
+| `*`      | Teaching Assistant                                     | view feedback from my students                                                 | I can improve my teaching                                                           |
+| `*`      | Teaching Assistant                                     | view only feedback scores lower than 2/5                                       | I can focus on improving on areas that are more important                           |
+| `*`      | Teaching Assistant                                     | collect students contact information                                           | I can keep track and make use of it if required                                     |
+| `*`      | Teaching assistant with bad student management ability | automate student management                                                    | I can manage my students better                                                     |
+| `*`      | Teaching Assistant                                     | draft an email to the student with a summary of their grades and participation | notify students about their progress                                                |
+| `*`      | Teaching Assistant                                     | access and archive past year exam papers                                       | I can distribute the practice papers to students                                    |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
-### **1\. Use Case: Add a New Student Contact**
+#### **1\. Use Case: Add a New Student Contact**
 
 **System:** TAHub  
 **Actor:** Teaching Assistant (TA)  
@@ -342,109 +352,107 @@ Use case ends.
 
 **Extensions:**
 
-* **1a.** TAHub detects invalid input (e.g., invalid email or phone number).  
-  1a1. TAHub requests correction of the invalid input.  
-  Use case ends.
-* **1b.** TAHub detects that the contact already exists  
-  1b1. TAHub ignores the entry and notifies the TA.  
-  Use case ends.
-
-**Actors:** Teaching Assistant
+* **1a.** TAHub detects invalid input (e.g. invalid email or phone number).
+    * 1a1. TAHub requests correction of the invalid input.  
+      Use case ends.
+* **1b.** TAHub detects that the contact already exists
+    * 1b1. TAHub ignores the entry and notifies the TA.  
+      Use case ends.
 
 ---
 
-### **2\. Use Case: View Student Contact Information**
+#### **2\. Use Case: Find Student Contact Information**
 
 **System:** TAHub  
 **Actor:** Teaching Assistant (TA)  
 **Use Case ID:** UC02 \- View Contact  
 **Main Success Scenario (MSS):**
 
-1. TA requests to view a specific student’s contact information.
-2. TAHub displays the student's name, phone number, email, Telegram ID, matriculation number, and other relevant details.
+1. TA searches for a specific student’s contact information by name.
+2. TAHub displays the student(s) name, phone number, email, and other relevant details.
 
 Use case ends.
 
 **Extensions:**
 
-* **1a.** TA enters a number that is out of bounds or not a number.  
-  1a1. TAHub notifies the TA with an error message (e.g., "Index out of bounds" or "Please input a number").  
-  Use case ends.
-
-**Actors:** Teaching Assistant
+* **1a.** TA does not enter a name
+    * 1a1. TAHub notifies the TA with an error message (e.g. "Invalid command format").  
+      Use case ends.
 
 ---
 
-### **3\. Use Case: Record Student Grade**
+#### **3\. Use Case: Record Student Grade**
 
 **System:** TAHub  
 **Actor:** Teaching Assistant (TA)  
 **Use Case ID:** UC03 \- Record Grade  
 **Main Success Scenario (MSS):**
 
-1. TA records a grade for a student.
-2. TAHub confirms the successful recording of the grade.
+1. TA finds a student in the system.
+2. TA records a grade for the student.
+3. TAHub confirms the successful recording of the grade.
 
 Use case ends.
 
 **Extensions:**
 
-* **1a.** TAHub detects invalid input for the grade  
-  1a1. TAHub requests correction of the invalid input.  
-  Use case ends.
-* **1b.** TA attempts to record a grade for a test that has already been recorded.  
-  1b1. TAHub overwrites the previous grade and notifies the TA.  
-  Use case ends.
-
-**Actors:** Teaching Assistant
+* **1a.** TAHub detects invalid input for the grade
+    * 1a1. TAHub requests correction of the invalid input.  
+      Use case ends.
+* **1b.** TA attempts to record a grade for a test that has already been recorded.
+    * 1b1. TAHub overwrites the previous grade and notifies the TA.  
+      Use case ends.
 
 ---
 
-### **4\. Use Case: View Student Grades**
+#### **4\. Use Case: Find Absentees**
 
 **System:** TAHub  
 **Actor:** Teaching Assistant (TA)  
-**Use Case ID:** UC04 \- View Grades  
+**Use Case ID:** UC04 - View Absentees  
 **Main Success Scenario (MSS):**
 
-1. TA views a student’s grades.
-2. TAHub displays the student's grades for all tests.
+1. TA requests a list of students absent on a specified date and time.
+2. TAHub displays a list of all students marked as "Absent" on the specified date and time.
 
 Use case ends.
 
 **Extensions:**
 
-* **1a.** TA enters a number that is out of bounds or not a number.  
-  1a1. TAHub notifies the TA with an error message (e.g., "Index out of bounds" or "Please input a number").  
-  Use case ends.
-
-**Actors:** Teaching Assistant
+* **1a.** TAHub detects an invalid date or time.
+    * 1a1. TAHub displays an error message (e.g. "Invalid date or time") and requests correction of the input.  
+      Use case ends.
+* **1b.** TAHub detects date is not in the correct format.
+    * 1b1. TAHub displays an error message (e.g. "Date must be in the format: dd/MM/yyyy HH:mm") and requests correction of the input.  
+      Use case ends.
+* **1c.** TAHub detects incorrect command usage.
+    * 1c1. TAHub displays an error message (e.g. "Invalid command format") and requests correction of the input.  
+      Use case ends.
 
 ---
 
-### **5\. Use Case: Mark Attendance**
+#### **5\. Use Case: Mark Attendance**
 
 **System:** TAHub  
 **Actor:** Teaching Assistant (TA)  
 **Use Case ID:** UC05 \- Mark Attendance  
 **Main Success Scenario (MSS):**
 
-1. TA records attendance for a student.
-2. TAHub outputs the successful recording of attendance.
+1. TA finds a student in the system.
+2. TA records attendance for the student.
+3. TAHub outputs the successful recording of attendance.
 
 Use case ends.
 
 **Extensions:**
 
-* **1a.** TAHub detects invalid input for the date.  
-  1a1. TAHub requests correction of the invalid input.  
-  1a2. TA provides corrected input.  
-  Use case ends.
-* **1b.** TA attempts to record attendance for a date where attendance has already been marked.  
-  1b1. TAHub overwrites the previous attendance and notifies the TA.  
-  Use case ends.
-
-**Actors:** Teaching Assistant
+* **1a.** TAHub detects invalid input for the date.
+    * 1a1. TAHub requests correction of the invalid input.
+    * 1a2. TA provides corrected input.  
+      Use case ends.
+* **1b.** TA attempts to record attendance for a date where attendance has already been marked.
+    * 1b1. TAHub overwrites the previous attendance and notifies the TA.  
+      Use case ends.
 
 ---
 
@@ -453,17 +461,20 @@ Use case ends.
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2. Should be able to hold up to 500 students without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Should be a standalone application and must not depend on any external or remote servers
-5. Should respond to user input (e.g., adding a student contact, viewing information) within two seconds under normal operating conditions.
+4. Should be a standalone application and must not depend on any external or remote servers.
+5. Should respond to user input (e.g. adding a student contact, viewing information) within two seconds under normal operating conditions.
+
+<div style="page-break-after: always;"></div>
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Duplicate Entry**: An attempt to add a student contact, grade, or record that already exists in the system. TAHub identifies and prevents duplicate entries based on specific criteria (e.g., matriculation number).
-* **Index**: A numerical value representing the position of a student’s contact in the TAHub system. TAs use this index to refer to a student’s record in commands.
+* **Duplicate Entry**: An attempt to add a student contact, grade, or record that already exists in the system. TAHub identifies and prevents duplicate entries based on specific criteria (e.g. course name and email).
+* **Index**: An integer value between 0 and 2147483648 representing the position of a student’s record in the TAHub system. TAs use this index to refer to a student’s record in commands.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -491,7 +502,154 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person
+
+1. Adding a new person into an empty address book.
+
+    1. Prerequisites: No person currently in the list. Remove default list using the `clear` command.
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T t/active`<br>
+       Expected: New person is added to the list. Details of the new person shown in the status message.
+
+    1. Test case: `add n/Alex Yeoh p/81234567 e/invalid c/CS2103/T t/struggling`<br>
+       Expected: New person is not added. Error details shown in the status message for invalid email.
+
+    1. Test case: `add n/Alex Yeoh p/81234567 p/98765432 e/alex@example.com c/CS2103/T`<br>
+       Expected: New person is not added. Error details shown in the status message for duplicate prefix.
+
+    1. Test case: `add n/Jane Doe p/98765432 e/johnd@example.com c/CS2103/T`<br>
+       Expected: New person is not added as the course name and email are already used by John Doe. Error details shown in the status message for person already exists.
+
+    1. Other incorrect add commands to try: `add`, `add n/John Doe`, `add x/XXX` where `x/` is an unknown prefix.<br>
+       Expected: Similar to previous.
+
+### Editing a person
+
+1. Editing a person's details while all persons are being shown
+
+    1. Prerequisites: Two persons in the list obtained from using the following `add` commands:
+       ```
+       add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T
+       add n/Betsy Crowe e/betsycrowe@example.com c/CS1231S p/1234567
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `edit 1 n/Jane Doe`<br>
+       Expected: Name of the first person is changed to Jane Doe. Details of the edited person shown in the status message.
+
+    1. Test case: `edit 2 p/87654321`<br>
+       Expected: Phone number of the second person is changed to 87654321. Details of the edited person shown in the status message.
+
+    1. Test case: `edit 1 e/invalid`<br>
+       Expected: Email of the second person is not changed. Error details shown in the status message for invalid email.
+
+    1. Test case: `edit 0 n/John Doe`<br>
+       Expected: No person is edited. Error details shown in the status message for invalid index.
+
+    1. Other incorrect edit commands to try: `edit`, `edit 1 x/XXX` where `x/` is an unknown prefix.<br>
+       Expected: Similar to previous.
+
+### Adding a grade to a person
+
+1. Adding a grade to a person while all persons are being shown
+
+    1. Prerequisites: One person in the list obtained from using the following `add` command:
+       ```
+       add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `addGrade 1 n/midterm s/90 w/40`<br>
+       Expected: New grade is added to the first person. Details of the new grade shown in the status message.
+
+    1. Test case: `addGrade 1 n/midterm s/85 w/30`<br>
+       Expected: Old grade is overwritten with the new grade. Details of the edited grade shown in the status message.
+
+    1. Test case: `addGrade 1 n/final s/150 w/50`<br>
+       Expected: No grade is added. Error details shown in the status message for invalid score.
+
+    1. Test case: `addGrade 1 n/final s/80 w/90`<br>
+       Expected: No grade is added. Error details shown in the status message for total weightage exceeding 100%.
+
+    1. Other incorrect edit commands to try: `addGrade`, `addGrade 1 x/XXX` where `x/` is an unknown prefix.<br>
+       Expected: Similar to previous.
+
+### Marking a person's attendance
+
+1. Marking a person's attendance while all persons are being shown
+
+    1. Prerequisites: One person in the list obtained from using the following `add` command:
+       ```
+       add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `mark 1 d/31/01/2024 12:00 m/attended`<br>
+       Expected: Attendance is marked for the first person. Details of the attendance shown in the status message.
+
+    1. Test case: `mark 1 d/31/01/2024 12:00 m/absent`<br>
+       Expected: Old attendance is overwritten with the new attendance. Details of the edited attendance shown in the status message.
+
+    1. Test case: `mark 1 d/31/01/2024 12:00 m/invalid`<br>
+       Expected: No attendance is marked. Error details shown in the status message for invalid attendance status.
+
+    1. Test case: `mark 1 d/31/01/2024 m/attended`<br>
+       Expected: No attendance is marked. Error details shown in the status message for invalid date or time.
+
+    1. Other incorrect edit commands to try: `mark`, `mark 1 x/XXX` where `x/` is an unknown prefix.<br>
+       Expected: Similar to previous.
+
+### Performing grade aggregation operations
+
+1. Aggregating grades while all persons are being shown
+
+    1. Prerequisites: Two persons in the list obtained from using the following commands:
+       ```
+       add n/Alex Yeoh p/87438807 e/alexyeoh@example.com c/CS2103/T
+       add n/Bernice Yu p/99272758 e/berniceyu@example.com c/CS2103/T
+
+       addGrade 1 n/midterm s/85 w/30
+       addGrade 1 n/final s/87 w/70
+       
+       addGrade 2 n/midterm s/80 w/30
+       addGrade 2 n/final s/90 w/70
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `aggGrade mean`<br>
+       Expected: Mean of all overall grades is calculated and shown in the status message.
+
+    1. Test case: `aggGrade mean n/midterm`<br>
+       Expected: Mean of all overall midterm scores is calculated and shown in the status message.
+
+    1. Test case: `aggGrade total`<br>
+       Expected: Error is thrown and shown in status message for invalid operation.
+
+    1. Other incorrect edit commands to try: `aggGrade`, `aggGrade x/XXX` where `x/` is an unknown prefix.<br>
+       Expected: Similar to previous.
+
+### Listing all persons absent on a certain date and time
+
+1. Listing all persons absent on a certain date and time while all persons are being shown
+
+    1. Prerequisites: Two persons in the list obtained from using the following commands:
+       ```
+       add n/Alex Yeoh p/87438807 e/alexyeoh@example.com c/CS2103/T
+       add n/Bernice Yu p/99272758 e/berniceyu@example.com c/CS2103/T
+
+       mark 1 d/31/01/2024 12:00 m/attended
+       mark 2 d/31/01/2024 12:00 m/absent
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `absentees d/31/01/2024 12:00`<br>
+       Expected: List of all persons absent on the specified date and time is shown. Number of persons listed is shown in the status message.
+
+    1. Test case: `absentees d/31/01/2024`<br>
+       Expected: No persons are listed. Error details shown in the status message for invalid date or time.
+
+    1. Other incorrect edit commands to try: `absentees`, `absentees x/XXX` where `x/` is an unknown prefix.<br>
+       Expected: Similar to previous.
 
 ### Deleting a person
 
@@ -500,20 +658,118 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No person is deleted. Error details shown in the status message for invalid index.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Deleting a person's grade
+
+1. Deleting a person's grade while all persons are being shown
+
+    1. Prerequisites: One person with midterm grades in the list obtained from using the following commands:
+       ```
+       add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T
+       addGrade 1 n/midterm s/90 w/40
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `deleteGrade 1 n/midterm`<br>
+       Expected: Midterm grade is deleted from the first person. Details of the deleted grade shown in the status message.
+
+    1. Test case: `deleteGrade 1 n/midterm`<br>
+       Expected: No grade is deleted. Error details shown in the status message for grade not found.
+
+    1. Other incorrect delete commands to try: `deleteGrade`, `deleteGrade 1 x/XXX` where `x/` is an unknown prefix.<br>
+       Expected: Similar to previous.
+
+### Deleting a person's attendance
+
+1. Deleting a person's attendance while all persons are being shown
+
+    1. Prerequisites: One person with attendance records in the list obtained from using the following commands:
+       ```
+       add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T
+       mark 1 d/31/01/2024 12:00 m/attended
+       ```
+       Then list all persons using the `list` command.
+
+    1. Test case: `unmark 1 d/31/01/2024 12:00`<br>
+       Expected: Attendance is deleted from the first person. Details of the deleted attendance shown in the status message.
+
+    1. Test case: `unmark 1 d/31/01/2024 12:00`<br>
+       Expected: No attendance is deleted. Error details shown in the status message for attendance not found.
+
+    1. Other incorrect delete commands to try: `unmark`, `unmark 1 x/XXX` where `x/` is an unknown prefix.<br>
+       Expected: Similar to previous.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Back up the existing `TAHub.json` file under the data directory.
 
-1. _{ more test cases …​ }_
+    2. Since the data file is corrupted, the application will show a blank list of contacts.
+
+    3. Adding any new contacts now, will override the old file.
+
+    4. You may attempt to repair the old corrupted file, by cross-checking the old corrupted file against the new, uncorrupted file created when a new contact is added after step 3.
+
+    5. Make sure to follow the constraints laid out in the user guide for each attribute of a `Person`.
+
+    6. If the data file is successfully repaired, running `TAHub.jar` should result in the old data being displayed back in the application.
+
+---
+<div style="page-break-after: always;"></div>
+
+## **Appendix: Planned enhancements**
+
+Team size: 5
+
+1. **Allow more characters to be put in names**:
+   The current validation rule for names is to allow all combinations of alphanumeric characters, spaces, slashes, and the character @.
+   While we have attempted to cover most cases by allowing slashes and @, there are other special characters we have not accounted for, such as commas, hyphens, and apostrophes.
+   We plan to allow these characters so that users can put in their names exactly according to their legal name.
+
+2. **Make input validation for names more strict**:
+   On the other hand, simply allowing all combinations of characters in names may lead to users inputting nonsensical names.
+   While this is not strictly a problem, we plan to integrate extra validation rules for names, e.g. ensuring that slashes are used in appropriate contexts like in 's/o' or 'd/o'.
+   This will help users avoid adding invalid names by mistake into the address book.
+
+3. **Add support for filtering based on course names for related commands**:
+   Some commands like `aggGrade` may benefit from a feature to filter persons based on their courses, especially for TAs that teach more than one courses.
+   In `aggGrade`, it would be useful for TAs to calculate the mean grade for a specific course, as opposed to all courses that they teach.
+   Therefore, we plan to add either an extension to `aggGrade` or a new command (or both) to allow filtering based on course names.
+
+4. **Allow course names to contain prefixes**:
+   While the `Course` class allow any non-empty string value to be used as a course name, this is not entirely true as course names
+   containing prefixes, i.e. characters matching the regex `[a-z]/.*`, can cause issues with the parser. For example, using course name
+   `COURSE e/invalid` will always result in an error because the parser recognizes the `e/invalid` substring as an email prefix, as opposed to part of the course name.
+   However, this is a rare scenario and there is a simple workaround by adding a space before the slash character.
+   In the next iterations, we plan to fix this issue or come up with an alternative to allow course names with these special characters.
+
+5. **Consistent use of status and error messages**:
+   Currently, the messages for each command can differ in format quite significantly.
+   For example, the `edit` command will always show the entire details of the edited person upon a successful command, while the `addGrade` command only repeats the test name added and the person being added.
+   We plan to align the format of these messages to make it easier for users to understand the output of each command.
+
+6. **Make error messages more informative**:
+   Most error messages currently are quite generic and sometimes do not provide much information on what went wrong.
+   It would be useful if the error could point to the exact part of the command that caused the error, and suggest possible solutions to the user.
+   This is what we plan to do in the next iterations.
+
+7. **Make date and time parsing less strict**:
+   Currently, the date and time parsing is quite strict, requiring the user to input the date and time in a specific format.
+   We plan to make the parsing less strict, allowing the user to input the date and time in a more natural way, e.g. `31-01-2024 1200` or `Jan 31, 2024, 12pm` instead of `31/01/2024 12:00`.
+
+8. **Consistent use of terminology**:
+   Currently, DATE_TIME and DATETIME are used in different commands despite having the same meaining. We plan to ensure consistent use of terminology to make it easier for users to understand the command usage formats.
+
+9. **Enable truncation of listed records**:
+   When a student record contains a large number of attendances or grades, the UI would appear very cluttered. By enable truncation of information, users would be able to minimize the record when they are not focused on a record enabling them to view more records at once.
+
+10. **Allow multi-word tags**:
+    Currently, tags are limited to alphanumeric characters, which restricts how users can label each tag. We plan to remove this restriction to allow users to create more meaningful labels for students.
