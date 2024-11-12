@@ -130,6 +130,9 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    /**
+     * Sets all persons in the list to be non-client.
+     */
     public void setAllPersonNotClient() {
         for (Person person : internalList) {
             person.setIsClient(false);
