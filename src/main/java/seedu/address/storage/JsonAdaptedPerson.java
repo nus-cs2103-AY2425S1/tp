@@ -37,6 +37,7 @@ class JsonAdaptedPerson {
     private final String industry; // Specific to Company
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
+    //@@author ruiming97
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */

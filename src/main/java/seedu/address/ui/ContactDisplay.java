@@ -18,6 +18,7 @@ import seedu.address.model.person.student.Student;
 public class ContactDisplay extends UiPart<Region> {
     @FXML
     public static final String LINE_BREAK = "_____________________________________________________________";
+    //@@author leroychiu20
     @FXML
     public static final String CONDENSED_HELP_MESSAGE = "Link to the user guide: helpwindow\n"
             + "Pops up a link to the user guide for the user to easily access.\n"
@@ -75,6 +76,7 @@ public class ContactDisplay extends UiPart<Region> {
             + "\n" + "Format: clear" + "\n" + LINE_BREAK + "\n"
             + "Exiting the program : exit\n"
             + "Exits the program.\n" + "\n" + "Format: exit\n";
+    //@@author JiaYi-Gallium369
     public static final String FXML = "ContactDisplay.fxml";
     @FXML
     private VBox cardPane;
@@ -99,6 +101,7 @@ public class ContactDisplay extends UiPart<Region> {
     @FXML
     private ScrollPane scrollPane;
 
+    //@@author JiaYi-Gallium369
     /**
      * Constructs a ContactDisplay with default placeholder labels.
      */
