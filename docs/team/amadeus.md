@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Amadeus's Project Portfolio Page
+title: Amadeus Eka Kesuma's Project Portfolio Page
 ---
 
 ### Project: AddressBook Level 3
