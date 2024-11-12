@@ -35,6 +35,14 @@
 - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
    * [Launch and shutdown](#launch-and-shutdown)
    * [Deleting a student](#deleting-a-student)
+   * [Adding a student](#adding-a-student)
+   * [Editing a student](#editing-a-student)
+   * [Adding a lesson to a student](#adding-a-lesson-to-a-student)
+   * [Deleting a lesson from a student](#deleting-a-lesson-from-a-student)
+   * [Adding a remark to a student](#adding-a-remark-to-a-student)
+   * [Deleting a remark from a student](#deleting-a-remark-from-a-student)
+   * [Displaying a student](#displaying-a-student)
+   * [Navigating through command history](#navigating-through-command-history)
    * [Saving data](#saving-data)
 
 <!-- TOC end -->
@@ -443,107 +451,107 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-  * 3a1. Tuteez shows an error message
+  * 3a1. Tuteez shows an error message.
 
-      Use case resumes at step 2
+      Use case resumes at step 2.
   
-* 3b. The given name does not exist
+* 3b. The given name does not exist.
 
-  * 3b1. Tuteez shows an error message
+  * 3b1. Tuteez shows an error message.
         
-      Use case resumes at step 2
+      Use case resumes at step 2.
 
 **Use case: UC4 - Add a lesson to a student**
 
 **MSS**
 
-1. User requests to list students
-1. Tuteez shows a list of students <u>(UC2)</u>
-1. User types keyword followed by index of the student and then lesson day and time
-1. Tuteez adds lesson to student
+1. User requests to list students.
+1. Tuteez shows a list of students <u>(UC2)</u>.
+1. User types keyword followed by index of the student and then lesson day and time.
+1. Tuteez adds lesson to student.
 
 **Extensions**
 
-* 3a. The lesson clashes with an existing lesson(s)
+* 3a. The lesson clashes with an existing lesson(s).
 
-   * 3a1. Tuteez shows error message with timings of the lessons that it clashes with
+   * 3a1. Tuteez shows error message with timings of the lessons that it clashes with.
 
-   Use case resumes at step 2
+   Use case resumes at step 2.
 
-* 3b. The lesson has invalid day or times
+* 3b. The lesson has invalid day or times.
 
-   * 3b1. Tuteez shows error message specifying the error
+   * 3b1. Tuteez shows error message specifying the error.
 
-   Use case resumes at step 2
+   Use case resumes at step 2.
 
-* 3c. The given index is invalid
+* 3c. The given index is invalid.
 
-   * 3c1. Tuteez shows an error message
+   * 3c1. Tuteez shows an error message.
 
-   Use case resumes at step 2
+   Use case resumes at step 2.
 
 ** Use case: UC5 - Delete a lesson from a student**
 
 **MSS**
 
-1. User requests to list students
-2. Tuteez shows a list of students <u>(UC2)</u>
-3. User types keyword followed by index of the student and then lesson index to delete
-4. Tuteez deletes the lesson from the student
+1. User requests to list students.
+2. Tuteez shows a list of students <u>(UC2)</u>.
+3. User types keyword followed by index of the student and then lesson index to delete.
+4. Tuteez deletes the lesson from the student.
 
 **Extensions**
 
-* 3a. The given student index is invalid
+* 3a. The given student index is invalid.
   
-    * 3a1. Tuteez shows an error message
+    * 3a1. Tuteez shows an error message.
   
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
-* 3b. The given lesson index is invalid
+* 3b. The given lesson index is invalid.
 
-    * 3b1. Tuteez shows an error message
+    * 3b1. Tuteez shows an error message.
   
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
 **Use case: UC6 - Add a remark to a student**
 
 **MSS**
 
-1. User requests to list students
-2. Tuteez shows a list of students <u>(UC2)</u>
-3. User types keyword followed by index of the student and then the remark to be added
-4. Tuteez adds the remark to the student
+1. User requests to list students.
+2. Tuteez shows a list of students <u>(UC2)</u>.
+3. User types keyword followed by index of the student and then the remark to be added.
+4. Tuteez adds the remark to the student.
 
 **Extensions**
 
-* 3a. The given student index is invalid
+* 3a. The given student index is invalid.
 
-    * 3a1. Tuteez shows an error message
+    * 3a1. Tuteez shows an error message.
   
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
 **Use case: UC7 - Delete a remark from a student**
 
 **MSS**
 
-1. User requests to list students
-2. Tuteez shows a list of students <u>(UC2)</u>
-3. User types keyword followed by index of the student and then the remark index to delete
-4. Tuteez deletes the remark from the student
+1. User requests to list students.
+2. Tuteez shows a list of students <u>(UC2)</u>.
+3. User types keyword followed by index of the student and then the remark index to delete.
+4. Tuteez deletes the remark from the student.
 
 **Extensions**
 
-* 3a. The given student index is invalid
+* 3a. The given student index is invalid.
 
-    * 3a1. Tuteez shows an error message
+    * 3a1. Tuteez shows an error message.
   
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
-* 3b. The given remark index is invalid
+* 3b. The given remark index is invalid.
 
-    * 3b1. Tuteez shows an error message
+    * 3b1. Tuteez shows an error message.
   
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
@@ -576,7 +584,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
-Group size: 5 memebers
+Group size: 5 members
 
 1. Student identification: 
    - Our app uniquely identifies students by name. In future updates, we plan to use a combination of name **and** phone number for unique identification.
@@ -601,10 +609,10 @@ Group size: 5 memebers
    - In future updates, we can provide users some way to indicate certain target words as a group and apply `and` constraint.
 1. Remarks added one at a time:
    - `addrmk` only allows users to add one remark at a time
-   - In future updates, allow users to add multiple
+   - In future updates, allow users to add multiple remarks
 1. Remarks deleted one at a time:
    - `delrmk` only allows users to delete one remark at a time
-   - In future updates, allow users to delete multiple
+   - In future updates, allow users to delete multiple remarks
 
 ## **Appendix: Instructions for manual testing**
 
