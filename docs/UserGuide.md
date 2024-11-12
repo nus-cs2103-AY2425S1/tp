@@ -21,7 +21,7 @@ If you can type fast, GamerBook Pro Max can get your contact management tasks do
   <page-nav-print />
 </div>
 
-<div style="page-break-after: always;"></div>
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -64,7 +64,6 @@ If you can type fast, GamerBook Pro Max can get your contact management tasks do
 
 Refer to the [Commands](#commands) below for more details.
 <br>
-<div style="page-break-after: always;"></div>
 
 -------------------------------------------------
 
@@ -190,8 +189,6 @@ Each suggestion includes the command name, command format and any required detai
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ## Command Summary
 
 | Action                                                   | Format, Examples                                                                                                                                                                                                               |
@@ -216,8 +213,6 @@ Each suggestion includes the command name, command format and any required detai
 | [**Load**](#loading-the-data-file-load)                  | `load`                                                                                                                                                                                                                         |
 
 --------------------------------------------------------------------------------------------------------------------
-
-<div style="page-break-after: always;"></div>
 
 ## Commands
 
