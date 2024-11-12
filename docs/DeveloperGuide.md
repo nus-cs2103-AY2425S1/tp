@@ -462,40 +462,172 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Ensure you have Java `17` or above installed on your computer.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-2/tp/releases).
+
+   1. Copy the file to the folder you want to use as the _home folder_ for your CareConnect application.
+
+   1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar careconnect.jar`
+      command to run the application.<br>
 
 1. Saving window preferences
+   1. Note that CareConnect is best viewed in a **desktop** environment with **full screen**. You may see some
+      content being cut-off if the window size is too small.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
+
+### Adding a person
+1. Adding a person while all persons are being shown.
+
+   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+      Expected: A new person named "John Doe" is added to the list. 
+   
+   2. Test case: `add n/John Doe p/98765432`
+      Expected: No person is added due to missing parameters. Error details shown in the status 
+      message.
+      
+
+### Editing a person
+1. Editing a person while all persons are being shown.
+
+   1. Prerequisites: Having at least one contact listed. No other contacts with the same 
+      name used for the edit.
+
+   1. Test case: `edit 1 n/John Smith`<br>
+      Press `y` to confirm.<br>
+      Expected: The name of the first person is updated to "John Smith". 
+
+   1. Test case: `edit x` (where x is larger than the number of listed contacts)<br>
+      Expected: No person is edited. Error details shown in the status message.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are being shown.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites:  Having at least one contact listed.
 
    1. Test case: `delete 1`<br>
+      Press `y` to confirm.<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Other incorrect delete commands to try: `delete x` (where x is larger than the number of listed contacts)<br>
+      Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+### Adding a tag
 
-1. _{ more test cases …​ }_
+1. Adding a tag for a person
+
+    1. Prerequisites: Having at least one contact listed. The tag "friend" is not already 
+       present in the first person's tag list.
+   
+    1. Test case: `tag 1 t/friend`<br>
+       Expected: A tag "friend" is added to the first person in the list.
+
+    1. Test case: `tag 1 t/friend!`<br>
+       Expected: No tag is added due to incorrect tag format. Error message shown in the 
+         status message.
+
+### Removing a tag
+
+1. Removing a tag for a person
+
+    1. Prerequisites: Having at least one contact listed. The tag "friend" is already 
+present in the first person's tag list. The tag "family" is not present in the first person's tag list.
+
+    1. Test case: `untag 1 t/friend`<br>
+       Press `y` to confirm.<br>
+       Expected: The tag "friend" is removed from the first person in the list.
+
+    1. Test case: `untag 1 t/family`<br>
+       Expected: No tag is removed due to non-existent tag. Error message shown in the status 
+       message.
+
+### Setting an appointment
+
+1. Setting an appointment for a person.
+
+   1. Prerequisites: Having at least one contact listed.
+   
+   1. Test case: `setappointment 1 d/2022-10-10`<br>
+      Expected: An appointment on 2022-10-10 is set for the first person in the list.
+
+   1. Test case: `setappointment 1 d/2022/10/10`<br>
+      Expected: No appointment is set due to incorrect date format. Error message shown in the 
+      status message.
+
+### Finding a person
+
+1. Finding and listing only persons with matching information.
+
+   1. Prerequisites: Having at least one contact with name, tag, or address that contains the 
+      substring used for the search. 
+
+   Change the substrings according to the profiles available in your contacts.
+   1. Test case: `find n/Jo`<br>
+      Expected: Only persons with "Jo" in their name are shown. 
+
+   1. Test case: `find t/friend`<br>
+      Expected: Only persons with "friend" in their tag names are shown.
+
+   1. Test case: `find`
+      Expected: Displayed list should not change. Error message shown in the status message.
+
+### Adding a log for a person
+
+1. Adding a log for a person with a date.
+
+   1. Prerequisites: Having at least one contact listed.
+
+   1. Test case: `addlog 1 r/John visited the clinic today d/2022-10-11 14:00`<br>
+      Expected: A log "John visited the clinic today" dated 2022-10-11 14:00 is added to the first person in the 
+      list.
+
+   1. Test case: `addlog x r/John visited the clinic today!` (where x is larger than the number of listed contacts)<br>
+      Expected: No person is deleted. Error details shown in the status message.
+
+### Deleting a log for a person
+
+1. Deleting an exiting log for a person.
+
+   1. Prerequisites: Having at least one contact listed with at least one log.
+
+   1. Test case: `deletelog 1 l/1`<br> 
+      Press `y` to confirm.<br>
+      Expected: The first log of the first person is deleted. Details of the deleted log shown in the status message.
+
+   1. Test case: `deletelog x y` (where x is larger than the number of listed contacts **or** y is 
+      larger than the number of logs for the first person)<br>
+      Expected: No log is deleted. Error details shown in the status message.
+
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+CareConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.
+json`. 
+- Advanced testers are welcome to update data directly by editing that data file.
+- If changes to the data file makes its format invalid, CareConnect will discard all data and 
+start with an empty data file at the next run. <br>
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+To test this, you can intentionally edit the data file to make it invalid, and then run the app 
+to see if it continues to start properly with an empty data file without the contact named Alice 
+Pauline.
+- Copy the following into your data/addressbook.json file:
+```json
+{
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253"
+    }
+  ]
+}
+```
 
-1. _{ more test cases …​ }_
+<div style="page-break-after: always"></div>
+
