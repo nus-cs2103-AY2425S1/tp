@@ -200,7 +200,7 @@ The `add` command allows user to add students' contact into KonTActs.
 
 The Sequence Diagram below shows how the logic component handles the user input.
 
-<puml src="diagrams/AddSequenceDiagram.puml" width="650"/>
+<puml src="diagrams/AddSequenceDiagram.puml" width="550"/>
 
 Note: While the diagram shows the lifeline of objects even after their deletion, this is a limitattion of plantUML.
 
