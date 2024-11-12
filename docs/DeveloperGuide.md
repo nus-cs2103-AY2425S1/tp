@@ -373,6 +373,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: View and Edit Person Details**
+
+**Preconditions:**
+- HR staff is logged in.
+- HR staff has selected a specific employee from the employee list.
+
+**MSS**
+
+1.  HR staff selects an employee from the employee list in the MainWindow.
+2.  HR Helper opens the PersonDetailsWindow by pressing Enter (ENTER) key, displaying the selected employee's details in editable fields.
+3.  HR staff navigates between input fields using keyboard shortcuts:
+4.  HR staff edits the desired fields as needed.
+5.  HR staff presses the Enter (ENTER) key to save changes .
+6.  HR Helper validates the input
+7.  HR Helper updates the employee's details in the system.
+8.  HR Helper closes the PersonDetailsWindow, returning focus to the MainWindow.
+
+    Use case ends.
+
+
+**Extensions**
+
+* 5a. HR staff presses the Escape (ESC) key to cancel editing.
+
+  * 5a1. HR Helper closes the PersonDetailsWindow without saving any changes.
+    Use case ends.
+
+
+* 5b. HR staff enters invalid input (e.g., empty required fields or incorrect format).
+
+  * 5b1. HR Helper detects invalid input during validation.
+  * 5b2. HR Helper displays an error message prompting HR staff to correct the input.
+  * 5b3. HR staff corrects the input.
+
+    Use case resumes from step 4.
+
+
+* 5c. HR staff attempts to save changes, but the employee record no longer exists (e.g., deleted by another user).
+
+  * 5c1. HR Helper displays an error message indicating that the employee was not found.
+  * 5c2. HR Helper closes the PersonDetailsWindow.
+
+    Use case ends.
+
+    
+
 **Use case: Count employees**
 
 **Preconditions**: HR staff is logged in.
@@ -421,6 +467,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes at step 2.
 
+**Use case: Mark a person as favorite**
+
+**MSS**
+
+1.  HR staff requests to mark a specific person in the list as a favorite.
+2.  HRHelper marks the person as a favorite.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The user does not have the authority to mark the person as favorite.
+
+  Use case ends.
+
+* 2a. The person is already marked as favorite.
+
+    * 2a1. HRHelper notifies HR staff that the person is already a favorite.
+
+  Use case ends.
+
+**Use case: Sort persons by tag**
+
+**MSS**
+
+1.  HR staff requests to sort persons by a specified tag (e.g., department or manager). 
+2.  HRHelper sorts and displays the list based on the specified tag.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 1b. The given tag is invalid.
+
+    * 1b1. HRHelper shows an error message.
+
+  Use case resumes at step 1.
 
 **Use case: Search an employee**
 
@@ -531,9 +618,9 @@ Team size: 5
 2. HR staff can track maternity leave of up to 6 months.
 3. Allow for the `count` command to count number of favorited employees.
 4. Enhance the GUI to make it more visually appealing.
-5. add enhancement here
-6. add enhancement here
-7. add enhancement here
+5. Allow for the `sort` command to sort not only by tag but also by other fields.
+6. Allow for the `favorite` command to view only favorited employees.
+7. Implement Undo/Redo features for person details window to improve the user experience
 8. add enhancement here
 9. add enhancement here
 10. add enhancement here
