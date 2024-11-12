@@ -13,6 +13,15 @@
 
 ## **Acknowledgements**
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)
+
+GitHub CoPilot was used by the following team members:
+- [junyi73](Used it as an auto-complete tool throughout the project)
+- [jeanyang04](Used it as an auto-complete tool throughout the project)
+- [slidings](Used it as an auto-complete tool throughout the project)
+
+ChatGPT was used by the following team members:
+- [slidings](Used it to generate the logo for the app)
+- [zhiyi12345](Used it to autocomplete a few test cases and java documentation)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
