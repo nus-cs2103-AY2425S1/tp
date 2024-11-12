@@ -5,22 +5,56 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+    Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+    Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+    Class "<<interface>>\nModel" as Model
+    Class AddressBook
+    Class ModelManager
+    Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+    Class UniquePersonList
 
-Class I #FFFFFF
+    Class UniqueAppointmentList
+
+    Class Person {
+        - Name name
+        - Phone phone
+        - Email email
+        - Address address
+        - Set<Tag> tags
+    }
+
+    Class Doctor {
+        - Specialty specialty
+        + Doctor(Name, Phone, Email, Address, Specialty, Set<Tag>)
+    }
+
+    Class Patient {
+            - Gender gender
+            - DateOfBirth dateofbirth
+            + Patient(Name, Phone, Email, Address, Gender, DateOfBirth, Set<Tag>)
+    }
+
+    Class Appointment {
+            - Doctor doctor
+            - Patient patient
+            - Date date
+            - Time time
+    }
+
+    Class Address
+    Class Email
+    Class Name
+    Class Phone
+    Class Tag
+    Class Specialty
+    Class DateOfBirth
+    Class Gender
+
+    Class Date
+    Class Time
+
+    Class I #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
@@ -42,6 +76,21 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> DateOfBirth
+Person *--> Specialty
+Person *--> Gender
+
+AddressBook *--> "1" UniqueAppointmentList
+UniqueAppointmentList --> "~* all" Appointment
+Appointment *--> "1" Date
+Appointment *--> "1" Time
+
+Doctor -right-|> Person
+Doctor *--> "1" Specialty
+
+Patient -left-|> Person
+Patient *--> "1" DateOfBirth
+Patient *--> "1" Gender
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -51,4 +100,5 @@ Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+ModelManager --> "~* filtered" Appointment
 @enduml

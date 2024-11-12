@@ -2,10 +2,12 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalDoctors.DANIEL;
+import static seedu.address.testutil.TypicalPatients.CARL;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -15,8 +17,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.doctor.Doctor;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.testutil.DoctorBuilder;
+import seedu.address.testutil.PatientBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
@@ -157,19 +163,75 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
-        List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+    public void setPersons_listWithDuplicateDoctors_throwsDuplicatePersonException() {
+        List<Person> listWithDuplicateDoctors = Arrays.asList(DANIEL, DANIEL);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicateDoctors));
+    }
+
+    @Test
+    public void setPersons_listWithDuplicatePatients_throwsDuplicatePersonException() {
+        List<Person> listWithDuplicatePatients = Arrays.asList(CARL, CARL);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePatients));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-            -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+                -> uniquePersonList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
+    }
+
+    @Test
+    public void contains_patientInList_returnsTrue() {
+        uniquePersonList.addPatient(CARL);
+        assertTrue(uniquePersonList.containsPatient(CARL));
+    }
+
+    @Test
+    public void contains_patientWithSameIdentityFieldsInList_returnsTrue() {
+        uniquePersonList.addPatient(CARL);
+        Patient editedCarl = new PatientBuilder(CARL).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(uniquePersonList.containsPatient(editedCarl));
+    }
+
+    @Test
+    public void add_nullPatient_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.addPatient(null));
+    }
+
+    @Test
+    public void add_duplicatePatient_throwsDuplicatePersonException() {
+        uniquePersonList.addPatient(CARL);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.addPatient(CARL));
+    }
+
+    @Test
+    public void contains_doctorInList_returnsTrue() {
+        uniquePersonList.addDoctor(DANIEL);
+        assertTrue(uniquePersonList.containsDoctor(DANIEL));
+    }
+
+    @Test
+    public void contains_doctorWithSameIdentityFieldsInList_returnsTrue() {
+        uniquePersonList.addDoctor(DANIEL);
+        Doctor editedDaniel = new DoctorBuilder(DANIEL).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(uniquePersonList.containsDoctor(editedDaniel));
+    }
+
+    @Test
+    public void add_nullDoctor_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.addDoctor(null));
+    }
+
+    @Test
+    public void add_duplicateDoctor_throwsDuplicatePersonException() {
+        uniquePersonList.addDoctor(DANIEL);
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.addDoctor(DANIEL));
     }
 }

@@ -39,6 +39,27 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code sentence} contains the {@code name}.
+     *  Ignores case, as long as sentence contains name.
+     *  <br>examples:<pre>
+     *      containsNameIgnoreCase("ABc def", "abc") == true //contains abc
+     *      containsNameIgnoreCase("ABc def", "DEF") == true //contains DEF
+     *      containsNameIgnoreCase("ABc def", "ABde") == false //does not contain ABde
+     *      </pre>
+     * @param sentence cannot be null
+     * @param name cannot be null, cannot be empty
+     */
+    public static boolean containsNameIgnoreCase(String sentence, String name) {
+        requireNonNull(sentence);
+        requireNonNull(name);
+
+        String preppedName = name.trim();
+        checkArgument(!preppedName.isEmpty(), "Name parameter cannot be empty");
+
+        return sentence.toLowerCase().contains(preppedName.toLowerCase());
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
@@ -61,6 +82,27 @@ public class StringUtil {
         try {
             int value = Integer.parseInt(s);
             return value > 0 && !s.startsWith("+"); // "+1" is successfully parsed by Integer#parseInt(String)
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
+
+    /**
+     * Returns true if {@code s} represents a valid signed integer.
+     * A valid signed integer can be positive, negative, or zero.
+     * e.g. "1", "-1", "0", {@code Integer.MAX_VALUE}, {@code Integer.MIN_VALUE} <br>
+     * Will return false for any other non-null string input
+     * e.g. empty string, "1.5" (contains decimal), "abc" (contains letters), "1a" (contains both digits and letters),
+     * @param s The string to check for valid integer format.
+     * @return true if {@code s} represents a valid signed integer, otherwise false.
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isInteger(String s) {
+        requireNonNull(s);
+
+        try {
+            Integer.parseInt(s);
+            return true;
         } catch (NumberFormatException nfe) {
             return false;
         }

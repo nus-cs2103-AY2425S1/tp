@@ -9,51 +9,50 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
+### Tania Thng
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/taniathng.png" width="200px">
 
-* Role: Project Advisor
+[[github](http://github.com/taniathng)] [[portfolio](team/taniathng.md)]
+* Role: Team Leader
+* Responsibilities: Organize team tasks.
 
-### Jane Doe
+### Chiang Qin Kang
+<img src="images/chiangqinkang.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
+[[github](http://github.com/chiangqinkang)]
+[[portfolio](team/chiangqinkang.md)]
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+* Role: Deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
-* Role: Team Lead
-* Responsibilities: UI
+### Samuel Lee
 
-### Johnny Doe
+<img src="images/sam-theman88.png" width="200px">
 
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/sam-theman88)]
+[[portfolio](team/sam-theman88.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation, Team Morale
 
-### James Doe
+### Brian Ma
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bmanara.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/bmanara)] [[portfolio](team/bmanara.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing + Integration
+
+
+### MiloTruck
+
+<img src="images/milotruck.png" width="200px">
+
+[[github](http://github.com/milotruck)]
+[[portfolio](team/milotruck.md)]
+
+* Role: Developer
+* Responsibilities: Code quality

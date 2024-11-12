@@ -1,0 +1,37 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "speciality" : "Pediatrics",
+    "dateOfBirth" : null,
+    "gender" : null,
+    "tags": [ "friends" ]
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "fiona@example.com",
+    "address" : "Little Tokyo",
+    "speciality" : null,
+    "dateOfBirth" : "21-11-1993",
+    "gender" : "F",
+    "tags" : [ ]
+  }],
+  "appointments": [
+    {
+      "id": "1",
+      "doctorName": "Alice Pauline",
+      "patientName": "Fiona Kunz",
+      "date": "20-10-2024",
+      "time": "1000"
+    },
+    {
+      "id": "1",
+      "doctorName": "Alice Pauline",
+      "patientName": "Fiona Kunz",
+      "date": "20-10-2024",
+      "time": "1000"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -8,6 +9,10 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.doctor.Speciality;
+import seedu.address.model.patient.DateOfBirth;
+import seedu.address.model.patient.Gender;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,17 +29,82 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Appointment> appointments = new HashSet<>();
+
+    // Doctor-specific data fields
+    private final Speciality speciality;
+
+    // Patient-specific data fields
+    private final DateOfBirth dateOfBirth;
+    private final Gender gender;
 
     /**
-     * Every field must be present and not null.
+     * Constructor to initialize all fields. Only person fields must not be null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(
+        Name name,
+        Phone phone,
+        Email email,
+        Address address,
+        Speciality speciality,
+        DateOfBirth dateOfBirth,
+        Gender gender,
+        Set<Tag> tags
+    ) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+
+        this.speciality = speciality;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+    }
+
+    /**
+     * Constructor with the person fields.
+     */
+    public Person(
+        Name name,
+        Phone phone,
+        Email email,
+        Address address,
+        Set<Tag> tags
+    ) {
+        this(name, phone, email, address, null, null, null, tags);
+    }
+
+    /**
+     * Constructor with the speciality field.
+     */
+    public Person(
+        Name name,
+        Phone phone,
+        Email email,
+        Address address,
+        Speciality speciality,
+        Set<Tag> tags
+    ) {
+        this(name, phone, email, address, speciality, null, null, tags);
+        requireNonNull(speciality);
+    }
+
+    /**
+     * Constructor with the dateOfBirth and gender fields.
+     */
+    public Person(
+        Name name,
+        Phone phone,
+        Email email,
+        Address address,
+        DateOfBirth dateOfBirth,
+        Gender gender,
+        Set<Tag> tags
+    ) {
+        this(name, phone, email, address, null, dateOfBirth, gender, tags);
+        requireAllNonNull(dateOfBirth, gender);
     }
 
     public Name getName() {
@@ -53,12 +123,50 @@ public class Person {
         return address;
     }
 
+    public Speciality getSpeciality() {
+        return speciality;
+    }
+
+    public DateOfBirth getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable appointment set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Appointment> getAppointments() {
+        return Collections.unmodifiableSet(appointments);
+    }
+
+    /**
+     * Add an appointment to the set of appointments.
+     * @param appointment The appointment to add.
+     * @return Whether the set did not already contain the appointment.
+     */
+    public boolean addAppointment(Appointment appointment) {
+        return appointments.add(appointment);
+    }
+
+    /**
+     * Remove an appointment from the set of appointments.
+     * @param appointment The appointment to remove.
+     * @return Whether the appointment was removed.
+     */
+    public boolean removeAppointment(Appointment appointment) {
+        return appointments.remove(appointment);
     }
 
     /**

@@ -3,6 +3,11 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.doctor.Doctor;
+import seedu.address.model.doctor.Speciality;
+import seedu.address.model.patient.DateOfBirth;
+import seedu.address.model.patient.Gender;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -25,6 +30,9 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private String speciality;
+    private String dateOfBirth;
+    private String gender;
     private Set<Tag> tags;
 
     /**
@@ -47,6 +55,20 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+
+        if (personToCopy instanceof Doctor) {
+            speciality = ((Doctor) personToCopy).getSpeciality().value;
+            dateOfBirth = null;
+            gender = null;
+        } else if (personToCopy instanceof Patient) {
+            speciality = null;
+            dateOfBirth = ((Patient) personToCopy).getDateOfBirth().toString();
+            gender = ((Patient) personToCopy).getGender().value;
+        } else {
+            speciality = null;
+            dateOfBirth = null;
+            gender = null;
+        }
     }
 
     /**
@@ -89,8 +111,43 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Speciality} of the {@code Doctor} that we are building.
+     */
+    public PersonBuilder withSpeciality(String speciality) {
+        this.speciality = speciality;
+        return this;
+    }
+
+    /**
+     * Sets the {@code DateOfBirth} of the {@code Patient} that we are building.
+     */
+    public PersonBuilder withDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+        return this;
+    }
+
+    /**
+     * Sets the {@code Gender} of the {@code Patient} that we are building.
+     */
+    public PersonBuilder withGender(String gender) {
+        this.gender = gender;
+        return this;
+    }
+
+
+    /**
+     * Builds and returns a {@code Person} object based on the current state of this {@code PersonBuilder}.
+     * @return a {@code Person}, {@code Doctor}, or {@code Patient} object based on the provided details
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        if (speciality != null) {
+            return new Doctor(name, phone, email, address, new Speciality(speciality), tags);
+        } else if (dateOfBirth != null && gender != null) {
+            return new Patient(name, phone, email, address, new DateOfBirth(dateOfBirth), new Gender(gender), tags);
+        } else {
+            return new Person(name, phone, email, address, tags);
+        }
     }
 
 }

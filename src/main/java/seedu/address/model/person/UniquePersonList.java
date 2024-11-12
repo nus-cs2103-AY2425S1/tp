@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.doctor.Doctor;
+import seedu.address.model.patient.Patient;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -37,12 +39,52 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Return true if the list contains an equivalent patient as the given argument.
+     */
+    public boolean containsPatient(Patient toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSamePatient);
+    }
+
+    /**
+     * Return true if the list contains an equivalent doctor as the given argument.
+     */
+    public boolean containsDoctor(Doctor toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameDoctor);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
+            throw new DuplicatePersonException();
+        }
+        internalList.add(toAdd);
+    }
+
+    /**
+     * Adds a patient to the list.
+     * The patient must not already exist in the list.
+     */
+    public void addPatient(Patient toAdd) {
+        requireNonNull(toAdd);
+        if (containsPatient(toAdd)) {
+            throw new DuplicatePersonException();
+        }
+        internalList.add(toAdd);
+    }
+
+    /**
+     * Adds a doctor to the list.
+     * The doctor must not already exist in the list.
+     */
+    public void addDoctor(Doctor toAdd) {
+        requireNonNull(toAdd);
+        if (containsDoctor(toAdd)) {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
@@ -140,8 +182,17 @@ public class UniquePersonList implements Iterable<Person> {
     private boolean personsAreUnique(List<Person> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
-                    return false;
+                Person first = persons.get(i);
+                Person second = persons.get(j);
+                // Check if they are both patients or doctors first.
+                if (first instanceof Patient && second instanceof Patient) {
+                    if (((Patient) first).isSamePatient((Patient) second)) {
+                        return false;
+                    }
+                } else if (first instanceof Doctor && second instanceof Doctor) {
+                    if (((Doctor) first).isSameDoctor((Doctor) second)) {
+                        return false;
+                    }
                 }
             }
         }

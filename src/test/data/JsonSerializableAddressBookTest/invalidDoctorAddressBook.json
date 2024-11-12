@@ -1,0 +1,14 @@
+{
+  "persons": [ {
+      "name" : "Benson Meier",
+      "phone" : "98765432",
+      "email" : "invalid@email!3e",
+      "address" : "311, Clementi Ave 2, #02-25",
+      "speciality" : "Dentist",
+      "dateOfBirth" : null,
+      "gender" : null,
+      "tags" : [ "owesMoney", "friends" ]
+    }
+  ],
+  "appointments": []
+}

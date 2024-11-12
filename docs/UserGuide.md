@@ -3,10 +3,33 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+MediContacts is a **desktop app for managing contacts of patients and doctors**, as well as **keeping track of their appointments.** Hence our app is targeted at and built for receptionists working in small clinics, who need to manage thousands of patients, doctors, and appointments.
+
+It is **optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediContacts can not only get your contact management tasks done faster than traditional systems adopted by clinics, but also efficiently keep track of appointments between registered doctors and patients.
 
 * Table of Contents
 {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Command summary
+
+Action | Format (with examples)
+--------|------------------
+[**Help**](#viewing-help-help) | `help`
+[**Add Doctor**](#adding-a-doctor-add-doctor) | `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​` <br><br> e.g. `add-doctor n/Jane Doe p/91234567 e/janedoe@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
+[**Add Patient**](#adding-a-patient-add-patient) | `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​` <br><br> e.g. `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Sengkang Drive 4 d/23-04-1950 g/M t/elderly`
+[**Add Appointment**](#adding-an-appointment-add-appt) | `add-appt pn/PATIENT_NAME dn/DOCTOR_NAME d/DATE t/TIME` <br><br> e.g. `add-appt pn/John Doe dn/Jane Doe d/23-04-2024 t/1100`
+[**Delete Appointment**](#deleting-an-appointment-delete-appt) | `delete-appt UNIQUE_ID` <br><br> e.g. `delete-appt 1231`
+[**List**](#listing-all-persons-list) | `list`
+[**List Doctors**](#listing-all-doctors-list-doctor) | `list-doctor`
+[**List Patients**](#listing-all-patients-list-patient) | `list-patient`
+[**Find**](#finding-persons-by-name-find) | `find KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find Jane Doe`
+[**Find Doctor**](#finding-doctors-by-name-find-doctor) | `find-doctor KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-doctor Jane Doe`
+[**Find Patient**](#finding-patients-by-name-find-patient) | `find-patient KEYWORD [MORE_KEYWORDS]` <br><br> e.g. `find-patient John Doe`
+[**Delete**](#deleting-a-person-delete) | `delete INDEX` <br><br> e.g. `delete 3`
+[**Clear**](#clearing-all-entries-clear) | `clear`
+[**Exit**](#exiting-the-program-exit) | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -14,28 +37,49 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your MediContacts App.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediContacts.jar` command to run the application. You may refer to the following video tutorials on how to run JAR files:
+    - [For Windows](https://www.youtube.com/watch?v=hv0UhoaA0eo) (Watch from 0:47 onwards)
+    - [For macOS](https://www.youtube.com/watch?v=GspNQbJLfag) (Watch from 2:23 onwards)
+    - [For Linux](https://www.youtube.com/watch?v=DVD9DIxs9Lo) (Watch full video)
+
+    A GUI similar to that below should appear in a few seconds. Note how the app will initially contain some sample data.<br>
+   
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type the command in the command box and press _Enter_ to execute it. e.g. typing `help` and pressing _Enter_ will open the help window.<br>
+   Here are some example commands you can try out:
 
-   * `list` : Lists all contacts.
+   * `list`: Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `list-doctor`: Lists all doctors.
+   
+   * `list-patient`: Lists all patients.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `add-doctor n/Jane Doe p/98765432 e/janedoe@example.com a/123 Clementi Ave 3 s/Orthopedics`: Adds a doctor named Jane Doe to the address book.
+   
+   * `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M`: Adds a patient named John Doe to the address book.
 
-   * `clear` : Deletes all contacts.
+   * `add-appt pn/John Doe dn/Jane Doe d/23-12-2024 t/1100`: Adds an appointment between a patient named John Doe and a doctor named Jane Doe on 23rd December 2024 (1100hrs).
 
-   * `exit` : Exits the app.
+   * `delete-appt 1231996014`: Deletes the appointment with the unique ID `1231996014`. Refer to the UI screenshot above to know where to identify appointment IDs.  
 
-1. Refer to the [Features](#features) below for details of each command.
+   * `find John`: Finds contacts whose names contain the keyword `John`.
+
+   * `find-doctor Jane`: Finds doctors whose names contain the keyword `Jane`.
+
+   * `find-patient John`: Finds patients whose names contain the keyword `John`.
+
+   * `delete 3`: Deletes the 3rd contact currently displayed in the list.
+   
+   * `clear`: Deletes all contacts.
+
+   * `exit`: Exits the app.
+
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -46,10 +90,10 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add-patient n/NAME`, `NAME` is a parameter which can be supplied as `add-patient n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -63,91 +107,197 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+### Adding a doctor: `add-doctor`
 
-### Adding a person: `add`
+Adds a doctor to the address book.
 
-Adds a person to the address book.
+Format: `add-doctor n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SPECIALTY [t/TAG]…​`
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+* Doctors are uniquely identified by their names hence their names must be unique in order for them to be added.
+* The check for uniqueness is case-sensitive. e.g. `Jane Doe` is considered different from `jane doe`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The parameter `NAME` only accepts alphabetic characters and spaces. The app will reject the input if it contains any other character or is blank.<br>
+Hence for common abbreviations with special characters such as `s/o` or `d/o`, use `s o`, `son of`, `d o`, or `daughter of` instead. 
 </div>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+**Examples:**
+* `add-doctor n/Jane Doe p/98765432 e/janedoe@example.com a/123 Clementi Ave 3 s/Orthopedics`
+* `add-doctor n/Mark Tong p/91234567 e/mt@example.com a/456 Clementi Ave 3 s/Cardiology t/colleague`
 
-### Listing all persons : `list`
+### Adding a patient: `add-patient`
+
+Adds a patient to the address book.
+
+Format: `add-patient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DATE_OF_BIRTH g/GENDER [t/TAG]…​`
+
+* Patients are uniquely identified by their names hence their names must be unique in order for them to be added.
+* The check for uniqueness is case-sensitive. e.g. `John Doe` is considered different from `john doe`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The parameter `NAME` only accepts alphabetic characters and spaces. The app will reject the input if it contains any other character or is blank.<br>
+Hence for common abbreviations with special characters such as `s/o` or `d/o`, use `s o`, `son of`, `d o`, or `daughter of` instead. 
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The parameter `DATE` only accepts a valid date which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 will be automatically corrected.
+(e.g. 30-02-2024 will return 29-02-2024)
+</div>
+
+**Examples:**
+* `add-patient n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Ave 3 d/23-04-1987 g/M`
+* `add-patient n/Kennedy Koh p/91234567 e/kk@example.com a/456 Clementi Ave 3 d/01-05-1950 g/M t/elderly`
+
+### Adding an appointment: `add-appt`
+
+Adds an appointment between a doctor and patient, at a specified date and time, to the address book.
+
+Format: `add-appt pn/PATIENT_NAME dn/DOCTOR_NAME d/DATE t/TIME`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The parameter `PATIENT_NAME` and `DOCTOR_NAME` are case-sensitive, and must be an exact match of respective names in the address book. The app will reject the input if it contains unknown doctors or patients.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The parameter `DATE` only accepts a valid date which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 will be automatically corrected.
+(e.g. 30-02-2024 will return 29-02-2024)
+</div>
+
+**Examples:**
+* `add-appt pn/John Doe dn/Jane Doe d/23-04-2024 t/1100`
+
+### Deleting an appointment: `delete-appt`
+
+Deletes the specified appointment from the address book.
+
+Format: `delete-appt UNIQUE_ID`
+
+* Deletes the appointment tagged to the `UNIQUE_ID`.
+
+**Examples:**
+* `delete-appt 1231`
+
+### Listing all persons: `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Listing all doctors: `list-doctor`
 
-Edits an existing person in the address book.
+Shows a list of all doctors in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `list-doctor`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+### Listing all patients: `list-patient`
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Shows a list of all patients in the address book.
 
-### Locating persons by name: `find`
+Format: `list-patient`
+
+### Finding persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The app will only search for persons with matching names.
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* Partial matches will be successful. e.g. `Hans B` will match `Hans Bo`
+* The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
+* The search is done using all keywords together as a single input, and not using each keyword separately.<br>
+  e.g. `Hans B` will match both `Hans Bo` and `Hans Bone`, but `H B` will not match either one
+* Only persons matching the entire input will be returned (i.e. `AND` search).<br>
+  e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Keywords provided must only consist of alphabets. Any other character provided will result in an empty list being returned.
+</div>
 
-### Deleting a person : `delete`
+**Examples:**
+* `find jane` returns `Jane Doe`
+* `find doe` returns `John Doe` and `Jane Doe`<br>
+  ![result for 'find john jane'](images/findJohnJaneResult.png)
+
+### Finding doctors by name: `find-doctor`
+
+Finds doctors whose names contain any of the given keywords.
+
+Format: `find-doctor KEYWORD [MORE_KEYWORDS]`
+
+* The app will only search for doctors with matching names.
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* Partial matches will be successful. e.g. `Hans B` will match `Hans Bo`
+* The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
+* The search is done using all keywords together as a single input, and not using each keyword separately.<br>
+  e.g. `Hans B` will match both `Hans Bo` and `Hans Bone`, but `H B` will not match either one
+* Only doctors matching the entire input will be returned (i.e. `AND` search).<br>
+  e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Keywords provided must only consist of alphabets. Any other character provided will give an invalid argument error.
+</div>
+
+**Examples:**
+* `find-doctor jane` returns `Jane Doe`.
+* `find-doctor jane doe` returns `Jane Doe`.
+
+### Finding patients by name: `find-patient`
+
+Finds patients whose names contain any of the given keywords.
+
+Format: `find-patient KEYWORD [MORE_KEYWORDS]`
+
+* The app will only search for patients with matching names.
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* Partial matches will be successful. e.g. `Hans B` will match `Hans Bo`
+* The order of the keywords matter. e.g. `Hans Bo` will not match `Bo Hans`
+* The search is done using all keywords together as a single input, and not using each keyword separately.<br>
+  e.g. `Hans B` will match both `Hans Bo` and `Hans Bone`, but `H B` will not match either one
+* Only patients matching the entire input will be returned (i.e. `AND` search).<br>
+  e.g. `Hans Bo` will not match `Hans Gruber` or `Bo Yang`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Keywords provided must only consist of alphabets. Any other character provided will give an invalid argument error.
+</div>
+
+**Examples:**
+* `find-patient john` returns `John Doe`.
+* `find-patient john doe` returns `John Doe`.
+
+### Deleting a person: `delete`
 
 Deletes the specified person from the address book.
 
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the currently displayed list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Before deleting a doctor or patient, ensure that there are no appointments associated with them. Otherwise, deleting that doctor or patient will give an error, prompting the user to delete all appointments associated with them first.
+</div>
 
-### Clearing all entries : `clear`
+**Examples:**
+* `list-patient` followed by `delete 2` deletes the 2nd patient in the address book.
+* `find-doctor Jane` followed by `delete 1` deletes the 1st doctor in the results of the `find-doctor` command.
+
+### Clearing all entries: `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -155,18 +305,35 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+MediContacts data are saved in the hard disk automatically after any command modifies the data. There is no need for users to save manually.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The app can only save a maximum of 10,000 appointments. If the limit is reached, the app may react in unexpected ways.
+Therefore, ensure that the data file is regularly archived to prevent data loss and any unexpected behaviour.
+</div>
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+MediContacts data are saved automatically as a JSON file `[WORKING DIRECTORY]/data/addressbook.json`, where [WORKING DIRECTORY] is the directory the user is running the JAR file. Advanced users are welcomed to update the data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, MediContacts will discard all data and start with an empty data file at the next run. Hence, it is recommended to save a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the app to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you will update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
+
+### Marking appointments: `mark` `[coming in v2.0]`
+
+_Details coming soon ..._
+
+### Unmarking appointments: `unmark` `[coming in v2.0]`
+
+_Details coming soon ..._
+
+### Listing appointments: `list-appt` `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -174,8 +341,8 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates there. Do this with the file that contains the data of your MediContacts app in your previous computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -185,15 +352,3 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`

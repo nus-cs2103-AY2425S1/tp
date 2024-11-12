@@ -24,6 +24,8 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_WITH_APPOINTMENTS =
+            "Unable to delete person as they still have appointments. Delete them first.";
 
     private final Index targetIndex;
 
@@ -41,6 +43,11 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        if (!personToDelete.getAppointments().isEmpty()) {
+            throw new CommandException(MESSAGE_DELETE_PERSON_WITH_APPOINTMENTS);
+        }
+
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
