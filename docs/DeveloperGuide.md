@@ -657,13 +657,11 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 9. The application must include comprehensive logging and error handling to facilitate debugging and system maintenance.
 10. The system should be capable of running efficiently on devices with limited resources (e.g., 8GB RAM, 4-core CPU).
 
-11. *{More to be added}*
 
 ### Glossary
 
 * **Volunteer**: An individual who participates in a community event without monetary compensation.
 * **Event**: A planned activity organised by a community or non-profit organisation, requiring volunteer coordination.
-* **Recurring Events**: Events that occur repeatedly on a set schedule.
 * **CLI (Command-Line Interface)**: A text-based interface where users input commands to interact with the application.
 * **NFR (Non-Functional Requirement)**: System attributes like performance, scalability, and usability that don’t affect specific functional behaviors.
 * **Duplicate Handling**: A system feature that prevents the creation of identical entries.
@@ -688,13 +686,13 @@ testers are expected to do more *exploratory* testing.
 
     2. Double-click the jar file to launch VolunSync. <br/>
        Expected: The GUI is displayed with a set of sample contacts as shown below. The window size may not be optimum.
-       <br/><img src="images/Ui.png" width="400" />
+       <br/><img src="images/VolunSyncUi.png" width="400" />
 
     3. Should double-clicking the jar file not launch the application, you may wish to try [running the jar file from the command line](UserGuide.md#quick-start)
 
 2. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
     2. Re-launch the app by double-clicking the jar file. <br/>
        Expected: The most recent window size and location should be retained.
@@ -841,13 +839,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all events using the `list` command. Multiple events should be shown in the list.
 
-    2. Test case: `/e find n/ Sail`<br>
+    2. Test case: `/e find Sail`<br>
        Expected: The event with the name containing the keyword "Sail" is shown in the list. The status message should reflect the successful search for the event.
 
-    3. Test case: `/e find n/ [non-existent keyword]`<br>
+    3. Test case: `/e find [non-existent keyword]`<br>
        Expected: No event is found. The status message should reflect the absence of any events with the keyword, and all events should be shown in the list.
 
-    4. Other incorrect find commands to try: `find`, `/e find n/`, `...`<br>
+    4. Other incorrect find commands to try: `find`, `/e find `, `...`<br>
        Expected: Similar to previous.
 
 ### Finding a volunteer by keyword
@@ -856,13 +854,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all volunteers using the `list` command. Multiple volunteers should be shown in the list.
 
-    2. Test case: `/v find n/ Aramado`<br>
+    2. Test case: `/v find Aramado`<br>
        Expected: The volunteer with the name containing the keyword "Aramado" is shown in the list. The status message should reflect the successful search for the volunteer.
 
-    3. Test case: `/v find n/ [non-existent keyword]`<br>
+    3. Test case: `/v find [non-existent keyword]`<br>
        Expected: No volunteer is found. The status message should reflect the absence of any volunteers with the keyword, and all volunteers should be shown in the list.
 
-    4. Other incorrect find commands to try: `find`, `/v find n/`, `...`<br>
+    4. Other incorrect find commands to try: `find`, `/v find `, `...`<br>
        Expected: Similar to previous.
 
 <div style="page-break-after: always;"></div>
