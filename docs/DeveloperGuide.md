@@ -252,7 +252,7 @@ _Note: The error messages will vary depending on which check fails._
 
 The `view` command is used to view a specific contact on the contact display pane. To execute the command, users specify the `INDEX` of the contact to be viewed.
 
-#### Current implementation
+#### Current Implementation
 
 Here's an overview of what happens when the `view 1` command is being input by the user:
 ![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
@@ -267,7 +267,7 @@ The activity diagram is as follows:
 
 The `find` command is used to find contacts whose name match the specified keyword given by the user.
 
-#### Current implementation
+#### Current Implementation
 
 To execute the `find` command, users must enter a valid `KEYWORD` parameter, by ensuring that the `KEYWORD` parameter is not empty.
 
