@@ -287,8 +287,8 @@ Team Size: 5
 
     We plan to relax the restrictions on phone numbers to allow for international phone numbers, which can be longer than 8 digits. This will allow for a wider range of phone numbers to be added to EduConnect.
 6. Make gender keyword case-insensitive
-7. Allow editing of attendance for students
-8. Update find to be able to find with partial info (e.g. /find name han can find "Hans")
+7. **Ability to edit attendance for students**: The current `edit` command does not support editing the attendance parameter. We plan to enhance the `edit` command to include the ability to directly modify the student's attendance field to a specified value, provided it adheres to the required constraints of the attendance parameter. The command format will be `edit INDEX [/attendance ATTENDANCE]`.
+8. **Update `find` command to support partial matching**: The current `find` command only supports exact matches for search parameters, which limits its flexibility. We plan to enhance the `find` command to allow partial matches, enabling users to search for entries using incomplete.
 9. **Prevent duplicate subjects to be added**: The current implementation for adding a contact allows for duplicate subjects to be added for a contact. We plan to prevent the addition of duplicate contacts by filtering out subjects that already exist in the contact's subject list.
 10. **Allow certain special characters in names**: The current implementation for adding a contact prevents the use of any special characters in names. We plan to allow the incorporation of characters such as '/' and '-' in names to accommodate a wider range of names. 
 
