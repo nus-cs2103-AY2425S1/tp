@@ -700,7 +700,7 @@ This command allows you to shut down and exit the program.
 
 ### Constraints on Adding a Lesson
 
-Unfortunately, as of `V1.5` there are a few important constraints regarding lessons:  
+Unfortunately, as of `V1.6` there are a few important constraints regarding lessons:  
 
   1. Lessons are not allowed to overflow into the next day.
   1. Group tuition is currently not supported, so adding overlapping or clashing lessons is not available yet.
@@ -719,7 +719,7 @@ You can forward to [future updates](#future-features) for group tuition support!
 
 ### Current Limitations
 
-As of `V1.5`, our app has a few limitations outlined below. Rest assured, we plan to resolve them in [future updates](#future-features)
+As of `V1.6`, our app has a few limitations outlined below. Rest assured, we plan to resolve them in [future updates](#future-features)
 
 1. Remarks can only be added and deleted one at a time.
 2. If you wish to edit a remark, first delete the incorrect one, then add the updated version.
