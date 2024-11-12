@@ -6,9 +6,14 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
+import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents a Person in the address book.
@@ -24,16 +29,19 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final PublicAddressesComposition publicAddressesComposition;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  PublicAddressesComposition publicAddresses, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, publicAddresses, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.publicAddressesComposition = publicAddresses;
         this.tags.addAll(tags);
     }
 
@@ -51,6 +59,130 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Set<PublicAddress> getPublicAddressesByNetwork(Network network) {
+        return publicAddressesComposition.getByNetwork(network);
+    }
+
+    /**
+     * Returns the public address with the specified label in the network.
+     *
+     * @param network
+     * @param label
+     * @return
+     */
+    public Set<PublicAddress> getPublicAddressesByNetworkAndLabel(Network network, String label) {
+        return publicAddressesComposition.getByLabelAndNetwork(label, network);
+    }
+
+    /**
+     * Returns true if the person has a public address in the network
+     *
+     * @param publicAddressString
+     * @return
+     */
+    public Boolean hasPublicAddressStringAmongAllNetworks(String publicAddressString) {
+        return publicAddressesComposition.hasPublicAddress(publicAddressString);
+    }
+
+
+    public PublicAddressesComposition getPublicAddressObjectByPublicAddressMap(String publicAddressString) {
+        return publicAddressesComposition.filterByPublicAddress(publicAddressString);
+    }
+
+    /**
+     * Returns a set of public addresses that matches the label.
+     *
+     * @param label The label to match against the public addresses.
+     * @return A set containing the desired public addresses.
+     */
+    public Set<PublicAddress> getPublicAddressesByLabel(String label) {
+        return publicAddressesComposition.getByLabel(label);
+    }
+
+    /**
+     * Returns a set of public addresses that matches the label for a specific network.
+     *
+     * @param label   The label to match against the public addresses.
+     * @param network The network to search in.
+     * @return A set containing the desired public addresses.
+     */
+    public Set<PublicAddress> getPublicAddressesByLabelAndNetwork(String label, Network network) {
+        return publicAddressesComposition.getByLabelAndNetwork(label, network);
+    }
+
+    /**
+     * Gets the current Public address map
+     *
+     * @return publicAddresses
+     */
+    public PublicAddressesComposition getPublicAddressesComposition() {
+        return publicAddressesComposition.copy();
+    }
+
+    /**
+     * Checks if there is a public address associated with the specified network and label.
+     *
+     * @param network The network to search for
+     * @param label   The label to match against the public addresses
+     * @return true if a public address with the specified label exists for the given network, false otherwise
+     */
+    public boolean hasPublicAddressWithLabelWithinNetwork(Network network, String label) {
+        return publicAddressesComposition.containsPublicAddressLabel(network, label);
+    }
+
+    /**
+     * Returns a new {@code Person} object with the added public address.
+     *
+     * @param newPublicAddress The new public address to be added
+     * @return A new {@code Person} object with the added public address
+     */
+    public Person withAddedPublicAddress(PublicAddress newPublicAddress) {
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.add(newPublicAddress);
+        return new Person(name, phone, email, address, updatedPublicAddresses, tags);
+    }
+
+    /**
+     * Returns a new {@code Person} object with the updated public address.
+     *
+     * @param newPublicAddress The new public address to be replaced
+     * @return A new {@code Person} object with the updated public address
+     */
+    public Person withUpdatedPublicAddress(PublicAddress newPublicAddress) {
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.update(newPublicAddress);
+        return new Person(name, phone, email, address, updatedPublicAddresses, tags);
+    }
+
+    /**
+     * Returns a new {@code Person} object with the public addresses from the network removed.
+     *
+     * @param network The network to remove the public address
+     * @param label The label of the public address to be removed
+     * @return A new {@code Person} object with the public addresses removed
+     */
+    public Person withoutPublicAddressByNetworkAndLabel(Network network, String label) {
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.remove(label, network);
+        return new Person(name, phone, email, address, updatedPublicAddresses, tags);
+    }
+
+    /**
+     * Returns a new {@code Person} object with the public addresses from the network removed.
+     *
+     * @param network The network to remove the public address
+     * @return A new {@code Person} object with the public addresses removed
+     */
+    public Person withoutPublicAddressesByNetwork(Network network) {
+        PublicAddressesComposition updatedPublicAddresses = publicAddressesComposition.remove(network);
+        return new Person(name, phone, email, address, updatedPublicAddresses, tags);
+    }
+
+    private Set<PublicAddress> updateAddressSet(Set<PublicAddress> addresses, PublicAddress newAddress) {
+        return addresses.stream()
+            .map(addr -> addr.label.equals(newAddress.label)
+                ? newAddress
+                : addr)
+            .collect(Collectors.toSet());
     }
 
     /**
@@ -71,7 +203,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -85,33 +217,34 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+            && phone.equals(otherPerson.phone)
+            && email.equals(otherPerson.email)
+            && address.equals(otherPerson.address)
+            && publicAddressesComposition.equals(otherPerson.publicAddressesComposition)
+            && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, publicAddressesComposition, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .toString();
+            .add("name", name)
+            .add("phone", phone)
+            .add("email", email)
+            .add("address", address)
+            .add("publicAddresses", publicAddressesComposition)
+            .add("tags", tags)
+            .toString();
     }
 
 }

@@ -5,10 +5,15 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
+import seedu.address.model.addresses.PublicAddressFactory;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -25,6 +30,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -96,6 +102,39 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String publicAddress} into a {@code PublicAddress}.
+     */
+    public static PublicAddress parsePublicAddress(String publicAddress,
+                                                   String paLabel, String network) throws ParseException {
+        requireNonNull(publicAddress);
+        requireNonNull(paLabel);
+
+        String trimmedPublicAddress = publicAddress.trim();
+        String trimmedPaLabel = paLabel.trim();
+        Network parsedNetwork = parseNetwork(network);
+
+        try {
+            return PublicAddressFactory.createPublicAddress(parsedNetwork, trimmedPublicAddress, trimmedPaLabel);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
+    }
+
+    /**
+     * Parses Label for BTC Address by cleaning the string input given by the user
+     *
+     * @param label
+     * @return
+     */
+    public static String parsePublicAddressLabel(String label) throws ParseException {
+        requireNonNull(label);
+        if (!PublicAddress.isValidPublicAddressLabel(label)) {
+            throw new ParseException(PublicAddress.MESSAGE_LABEL_CONSTRAINTS);
+        }
+        return label.strip();
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -121,4 +160,23 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String network} into a {@code Network}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code network} is invalid.
+     */
+    public static Network parseNetwork(String network) throws ParseException {
+        requireNonNull(network);
+        String trimmedNetwork = network.trim().toUpperCase();
+        Logger logger = LogsCenter.getLogger(ParserUtil.class);
+        logger.info(trimmedNetwork);
+        try {
+            return Network.valueOf(trimmedNetwork);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Network.MESSAGE_CONSTRAINTS);
+        }
+    }
+
 }

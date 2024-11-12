@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract Command {
+    + {abstract} execute(Model model)
+}
+abstract AbstractEditCommand {
+    - index
+    - editPersonDescriptor
+    - {static} createEditedPerson(...)
+    + execute(Model model)
+    + execute(Model model, BiFunction...)
+    - getPersonToEdit(Model model)
+    - saveEditedPerson(Model model, ...)
+}
+class EditCommand
+class AddPublicAddressCommand {
+    - editPersonDescriptor
+}
+Command <|-- AbstractEditCommand
+AbstractEditCommand <|- EditCommand
+AddPublicAddressCommand -|> AbstractEditCommand
+abstract "abstract class"
+class "class"
+
+@enduml

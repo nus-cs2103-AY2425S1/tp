@@ -9,14 +9,20 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddPublicAddressCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletePublicAddressCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditPublicAddressCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterByNetworkCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RetrievePublicAddressCommand;
+import seedu.address.logic.commands.SearchPublicAddressCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -51,36 +57,26 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        default:
+        return switch (commandWord) {
+        case AddCommand.COMMAND_WORD -> new AddCommandParser().parse(arguments);
+        case AddPublicAddressCommand.COMMAND_WORD -> new AddPublicAddressCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD -> new EditCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD -> new DeleteCommandParser().parse(arguments);
+        case DeletePublicAddressCommand.COMMAND_WORD -> new DeletePublicAddressCommandParser().parse(arguments);
+        case ClearCommand.COMMAND_WORD -> new ClearCommand();
+        case FindCommand.COMMAND_WORD -> new FindCommandParser().parse(arguments);
+        case ListCommand.COMMAND_WORD -> new ListCommand();
+        case ExitCommand.COMMAND_WORD -> new ExitCommand();
+        case HelpCommand.COMMAND_WORD -> new HelpCommand();
+        case SearchPublicAddressCommand.COMMAND_WORD -> new SearchPublicAddressCommandParser().parse(arguments);
+        case RetrievePublicAddressCommand.COMMAND_WORD -> new RetrievePublicAddressCommandParser().parse(arguments);
+        case EditPublicAddressCommand.COMMAND_WORD -> new EditPublicAddressCommandParser().parse(arguments);
+        case FilterByNetworkCommand.COMMAND_WORD -> new FilterByNetworkCommandParser().parse(arguments);
+        default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+        };
     }
 
 }
