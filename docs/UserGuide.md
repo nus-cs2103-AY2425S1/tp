@@ -4,7 +4,7 @@ title: CareLink User Guide
 ---
 
 - Table of Contents
-  {:toc}
+{:toc}
 
 ## Introduction
 
