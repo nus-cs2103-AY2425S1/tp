@@ -206,7 +206,7 @@ Case statuses are also color-coded and appear next to a client’s name in the l
 
 <span style="color: #C46210; font-size: 16px;">⬤</span> Non-Urgent Status
 
-Clients with **NA** status (no follow-up required) have no status label on the UI but are represented in green (<span style="color: #009E60; font-size: 18px;">⬤</span>) on the status pie chart to indicate that their cases are resolved or need no attention.
+Clients with **NA** status (no follow-up required) have no status label on the UI but are represented in green (<span style="color: #009E60; font-size: 16px;">⬤</span>) on the status pie chart to indicate that their cases are resolved or need no attention.
 
 [↑ Return to Table of Contents](#table-of-contents)
 
@@ -273,7 +273,6 @@ add n/ John Doe e/ john@example.com
 * **Arguments:** `John Doe` and `john@example.com` are the actual values being input for the respective flags.
 * **Note:** This command is provided as an example for learning purposes only. Additional mandatory flags are needed to make it fully functional, which will be explained in the sections that follow.
 
-<div style="page-break-after: always;"></div>
 
 ## 5.2 Commands
 A command is the action that AgentAssist will perform, such as adding, deleting, or editing a client's contact.
@@ -1028,6 +1027,7 @@ Each credit card tier and client status is visually distinguished in the UI with
 5. **Using non-English text input can cause bugs**. This release fully supports only standard English text input and does not support the extended Latin alphabet or non-English characters. Using accented characters (e.g., é, ñ), non-Latin scripts (e.g., Chinese), or right-to-left text (e.g., Arabic) may lead to unexpected behavior, including display issues, data processing errors, or even command parsing failures. Expanded support for international characters and languages is planned for future releases.
 6. **For index based commands**, negative inputs and inputs that are too large result in inconsistent error messages. We are actively working on resolving this inconsistency in future releases.
 7. **For the edit command**, edits that do not result in changes to client details are currently considered valid. We are working on adding warnings to notify users of unchanged edits in future releases.
+8. **For the Status Pie Chart**, if the application window size is too small, the legend will disappear. We are aware of this, and this is a limitation of JavaFX.
 
 [↑ Return to Table of Contents](#table-of-contents)
 
