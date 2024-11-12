@@ -405,7 +405,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. PlanPal shows an error message.
     * 2a2. User re-enters a valid event name.
 
-      Use case resumes from step 3.
+      Use case resumes from step 1.
 
 **UC06: Assign a contact to an event**
 
