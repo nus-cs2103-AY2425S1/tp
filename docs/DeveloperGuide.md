@@ -537,7 +537,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Error Message**: A notification provided to the user when an invalid input or action is detected. For example, entering a student ID in the wrong format will prompt an error message such as "Please enter a valid student ID!"
 
 <div style="page-break-after: always;"></div>
---------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
