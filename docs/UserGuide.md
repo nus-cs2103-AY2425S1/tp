@@ -289,12 +289,7 @@ Talentcy data are saved automatically as a JSON file `[JAR file location]/data/t
 
 **Caution:**
 If your changes to the data file makes its format invalid, Talentcy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the Talentcy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in the future]`
-
-_Details coming soon ..._
 
 -------------------------------------------------------------------------------------------------------------------- 
 
