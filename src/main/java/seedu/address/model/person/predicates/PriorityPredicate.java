@@ -7,7 +7,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Tests that a {@code Person}'s {@code Address} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Priority} matches any of the keywords given.
  */
 public class PriorityPredicate implements Predicate<Person> {
     private final List<String> keywords;

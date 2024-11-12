@@ -7,7 +7,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Tests that a {@code Person}'s {@code income} is greater than or equal to all the values given.
+ * Tests that a {@code Person}'s {@code Income} is less than or equal to all the values given.
  */
 public class IncomePredicate implements Predicate<Person> {
     private final List<String> incomes;

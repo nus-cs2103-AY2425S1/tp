@@ -11,6 +11,8 @@
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Acknowledgements**
 
 * This project is based on the AddressBook Level 3 project created by the [SE-EDU initiative](https://se-education.org).
@@ -205,6 +207,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
+<div style="page-break-after: always;"></div>
+
 ### Data archiving
 
 The data archiving feature allows users to mark contacts as archived rather than permanently deleting them.
@@ -217,7 +221,7 @@ to handle both archiving and unarchiving actions. Instead of directly modifying 
 a new `Person` instance is created with the updated archive status.
 
 <puml src="diagrams/ArchiveSequenceDiagram.puml" width="650" />
-----------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -255,7 +259,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | social worker | view the information of different people I have added | retrieve their information more quickly.                          |
 | `* * *`  | social worker | delete the information of people                      | remove the data of people that I no longer need to keep track of. |
 | `* * *`  | social worker | edit a person's information                           | keep their information up-to-date for future use.                 |
-| `* *`    | social worker | tag a person                                          | manage and organize people according to their needs.              |
+| `* *`    | social worker | tag a person                                          | identify and manage people according to their needs.              |
 | `* *`    | social worker | filter through the list of people                     | navigate the persons list more efficiently.                       |
 | `* *`    | social worker | sort people                                           | view people in a more suitable order.                             |
 | `* *`    | social worker | compile important personal details                    | quickly disseminate information to these people.                  |
@@ -324,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. SocialBook detects missing or invalid input.
 
-    * 1a1. SocialBook informs user that the index is invalid.
+    * 1a1. SocialBook informs user that the input is invalid.
 
     * 1a2. User corrects the input and enters the command again.
 
@@ -394,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. SocialBook detects missing or invalid input.
 
-    * 1a1. SocialBook informs user that the index is invalid.
+    * 1a1. SocialBook informs user that the input is invalid.
 
     * 1a2. User corrects the input and enters the command again.
   
@@ -415,7 +419,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions:**
 * 2a. SocialBook detects missing or invalid input.
 
-    * 2a1. SocialBook informs user that the index is invalid.
+    * 2a1. SocialBook informs user that the input is invalid.
 
     * 2a2. User corrects the input and enters the command again.
   
@@ -438,7 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. SocialBook detects missing or invalid input.
 
-    * 1a1. SocialBook informs user that the index is invalid.
+    * 1a1. SocialBook informs user that the input is invalid.
   
     * 1a2. User corrects the input and enters the command again.
   
@@ -458,7 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions:**
 * 2a. SocialBook detects missing or invalid input.
 
-    * 2a1. SocialBook informs user that the index is invalid.
+    * 2a1. SocialBook informs user that the input is invalid.
   
     * 2a2. User corrects the input and enters the command again.
   
@@ -485,7 +489,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **API**: Application programming interfaces, which defines the standards and protocols that allow different software components to communicate with one another.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **CLI**: A text-based interface that allows users to interact with software or operating systems by typing commands, offering precise control over tasks.
+* **CLI (Command Line Interface)**: A text-based interface that allows users to interact with software or operating systems by typing commands, offering precise control over tasks.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -653,7 +657,7 @@ testers are expected to do more *exploratory* testing.
    1. By default, these files are located in the `data` folder.
    2. Whenever a command is executed (e.g., `add`, `list`, `editappt`), the data is saved automatically to the respective files.
 
-2. **Dealing with missing data files**
+2. **Dealing with missing data files**:
 
    1. To simulate a missing file, navigate to the `data` folder (in the same location as `socialbook.jar`) and delete either `socialbook.json` or `appointments.json` (or both).
    2. Re-launch the application:<br>
@@ -661,7 +665,7 @@ testers are expected to do more *exploratory* testing.
       * If only `appointments.json` is missing, the app will continue to run with an empty appointment list.
       * If both `socialbook.json` and `appointments.json` are missing, the app will repopulate with sample data for persons only, while appointments will remain empty.
 
-3. **Dealing with corrupted data entries**
+3. **Dealing with corrupted data entries**:
 
    1. To simulate a corrupted data entry, open either `socialbook.json` or `appointments.json` in the `data` folder and change a compulsory field to an invalid value (e.g., set a phone number to `-1`).
    2. Re-launch SocialBook.
@@ -675,32 +679,32 @@ testers are expected to do more *exploratory* testing.
 **Team Size: 5**
 
 ### 1. **Adding appointments that span multiple days:**
-- **Currently:** To add appointments that span multiple days, you can add multiple consecutive appointments for each day to cover the entire period. However, this process is tedious and time-consuming.
-- **Plan:** To support multi-day appointments, allowing users to add them in one step.
+- **Current Implementation:** To add appointments that span multiple days, you can add multiple consecutive appointments for each day to cover the entire period. However, this process is tedious and time-consuming.
+- **Plan:** We will support adding of multi-day appointments when using the `addappt` command, so that users can add them in one step to save time and effort.
 ### 2. **Imposing constraints on archived people:**
-- **Currently:** Archived people and their appointments can still be modified, and these appointments are still displayed in the appointment list and calendar.
-- **Plan:** To restrict this by preventing modifications to archived people and hiding/showing their appointments only when required, similar to how `list` works. For example, to view archived people, you can do `list archive/`.
+- **Current Implementation:** Archived people and their appointments can still be modified, and these appointments are still displayed in the appointment list and calendar.
+- **Plan:** We will restrict this by preventing modifications to archived people and hiding/showing their appointments only when required, similar to how `list` works. For example, to view archived people, you can currently do `list archive/`. `listappt` can be modified to follow this implementation too.
 ### 3. **Enhancing duplicate detection:**
-- **Currently:** Duplicates are taken as persons with the exact same full name.
-- **Plan:** To enhance duplicate detection, we will disallow other details such as phone numbers or emails to be duplicated instead as these are always unique and should not be allowed to be repeated.
+- **Current Implementation:** Duplicates are taken as persons with the exact same full name. However, it can be possible that two persons share the same full name.
+- **Plan:** We will enhance duplicate detection by disallowing other fields such as phone numbers and emails to be duplicated instead as these are always unique and should not be allowed to be repeated.
 ### 4. **Enhancing validation checks:**
-- **Currently:** The validation checks for some fields are not very strict. For instance, the address can be anything that is not blank. This means the same address is treated as different if the user input differs by even 1 whitespace.
-- **Plan:** To improve on validation checks for fields like this to minimise the possibilities of user errors like adding a single whitespace and ensure standardization of the representation of these fields.
+- **Current Implementation:** The validation checks for some fields are not very strict. For instance, the address can be anything that is not blank. This means the same address is treated as different if the user input differs by even 1 whitespace.
+- **Plan:** We will improve on validation checks for fields like this to minimise the possibilities of user errors like adding a single whitespace, and ensure standardization of the representation of these fields.
 ### 5. **Viewing the details of the different schemes:**
-- **Currently:** It is difficult for users to know what are the requirements for a person to be eligible for a scheme and to find out the exact details of the scheme such as the benefits.
-- **Plan:** To allow the user to view these details about available schemes in SocialBook using the `scheme` command, so that the details are easily retrievable while checking which schemes a person is eligible for.
+- **Current Implementation:** It is difficult for users to know what are the requirements for a person to be eligible for a scheme and to find out the exact details of the scheme such as the benefits.
+- **Plan:** We will allow the user to view these details about available schemes using the `scheme` command, so that the details are mentioned together with the results of which schemes a person is eligible for.
 ### 6. **Adding images to a person:**
-- **Currently:** SocialBook only shows text based information about the persons added.
-- **Plan:** To allow the user to attach a photo of the person which will be reflected in the UI to make identifying each person easier.
+- **Current Implementation:** SocialBook only shows text based information about the persons added.
+- **Plan:** We will allow the user to attach a photo of the person which will be reflected in the UI to make identifying each person easier.
 ### 7. **Make the command result box in UI bigger:**
-- **Currently:** The result of commands is displayed in a box that may be too small for some results. For instance, executing the statistics command results in all statistics being displayed but to view all the results, the user has to scroll through, which causes some minor inconvenience.
-- **Plan:** To allow the user to resize this command result box so that they can make it bigger if they feel it is inconvenient to scroll for such command results.
+- **Current Implementation:** The result of an executed command is displayed in a box that may be too small for some results. For instance, executing the `statistics` command results in all statistics being displayed but to view all the results, the user has to scroll through, which can cause some minor inconvenience.
+- **Plan:** We will allow the user to resize this command result box so that they can make it bigger if they feel it is inconvenient to scroll for such command results.
 ### 8. **Imposing constraints on extreme inputs:**
-- **Currently:** When a user is adding/editing the details of a person, they are free to make the text inputs as long as possible or the numerical inputs as large as possible. For instance, a name of 1000 characters or an income of more than 1,000,000 can be added, which is unrealistic.
-- **Plan:** To restrict these behaviours to a reasonable extent by imposing more realistic constraints on these inputs, such as limiting the maximum income to a more expected upper limit like 10,000.
+- **Current Implementation:** When a user is adding/editing the details of a person, they are free to make the text inputs as long as possible or the numerical inputs as large as possible. For instance, a name of 1000 characters or an income of more than 1,000,000 can be added, which is unrealistic.
+- **Plan:** We will restrict these behaviours to a reasonable extent by imposing more realistic constraints on these inputs, such as limiting the maximum income to a more reasonable upper limit like 100,000.
 ### 9. **Representing entire families:**
-- **Currently:** A person represents a family that requires assistance and that person is regarded as the point of contact with the family.
-- **Plan:** To allow the user to add all people that are part of a family together, so that everyone in a family is represented together. A UI change that could accompany this is showing a family view and then a separate view of the people that make up a family when that family is clicked on.
+- **Current Implementation:** A person represents a family that requires assistance and that person is regarded as the point of contact with that family.
+- **Plan:** We will allow the user to add all people that are part of a family in a way that everyone in the same family is represented together. For instance, each person could keep track of a family index and every person sharing the same index will belong to the same family. A UI change that could accompany this is showing a family view and then a separate view of the people that make up a family when that family is clicked on.
 ### 10. **Modifying available schemes:**
-- **Currently:** We have added two schemes that are available within SocialBook, which a person may be eligible for.
-- **Plan:** To extend this feature by allowing the user to add or delete schemes into SocialBook, so that they can add new schemes that are introduced in future or delete outdated schemes.
+- **Current Implementation:** We have added two schemes that are available within SocialBook, which a person may be eligible for.
+- **Plan:** We will extend this feature by allowing the user to add or delete schemes, so that they can add new schemes that are introduced in future or delete outdated schemes.
