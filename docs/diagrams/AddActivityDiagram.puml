@@ -6,7 +6,9 @@ start
 
 if () then ([mandatory flags are all present
 and no invalid flag is used])
+    :Tokenize arguments;
     if () then ([All flag values are valid])
+        :Check database of existing clients;
         if () then ([No existing client with identical name,
         phone number, and email])
             :New client with specified details is added;
@@ -19,7 +21,8 @@ and no invalid flag is used])
         not met its respective requirement;
     endif
 else ([else])
-    :Show error message stating which flags are missing;
+    :Show error message stating
+    which flags are missing;
 endif
 
 stop

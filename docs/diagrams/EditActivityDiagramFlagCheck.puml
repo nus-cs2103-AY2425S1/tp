@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+title Edit Activity Diagram (Perform flag values check)
+start
+if () then ([Values for specified flags are all valid])
+    :Check if index is within range of currently displayed list;
+                if () then ([Index provided is within range])
+                    :Edit client pertaining to given index;
+                else ([else])
+                    :Show error message that the specified index is out of range;
+                endif
+            else ([else])
+            :Show error message stating
+            which flags have wrong values;
+            endif
+
+stop
+
+@enduml
