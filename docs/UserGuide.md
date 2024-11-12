@@ -392,6 +392,9 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
 **Q: Why can I input non-alphanumeric characters into logs?**<br>
 **A:** _Our priority is to mainly support alphanumeric characters only, but remains functionally flexible enough to support non-alphanumeric characters (like emojis or other languages). As such you should only use it only when necessary and with caution as it could break cause unexpected behaviours._
 
+**Q: Why can't patient contacts be deleted automatically after being tagged as 'DISCHARGED'?**<br>
+**A:** _The system is designed to keep a record of all patients, even after they have been discharged. This is to ensure that the patient's information is still accessible for future reference, or possible revisit. It is only when the data is requested to be deleted explicitly by the patient, only then it should be removed._
+
 
 --------------------------------------------------------------------------------------------------------------------
 
