@@ -1,0 +1,71 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam arrowThickness 1.1
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PutOrderCommandParser" as PutOrderCommandParser LOGIC_COLOR
+participant ":PutOrderCommand" as PutOrderCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+box Person PERSON_COLOR_T1
+participant ":Person" as Person PERSON_COLOR
+end box
+
+[-> LogicManager : execute("put cake n/Alex")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("put cake n/Alex")
+activate AddressBookParser
+
+create PutOrderCommandParser
+AddressBookParser -> PutOrderCommandParser : parse("cake n/Alex")
+activate PutOrderCommandParser
+
+create PutOrderCommand
+PutOrderCommandParser -> PutOrderCommand : new PutOrderCommand("cake", Alex)
+activate PutOrderCommand
+
+
+alt Order Exists
+    PutOrderCommand -> Model : hasOrder(order)
+    activate Model
+    Model --> PutOrderCommand : true
+    deactivate Model
+
+    alt Person Exists
+        PutOrderCommand -> Model : findPersonByName(Name)
+        activate Model
+        Model --> PutOrderCommand : Person
+        deactivate Model
+        PutOrderCommand --> Person : putOrder(Order)
+        PutOrderCommand -> LogicManager : new CommandResult(MESSAGE_SUCCESS)
+    else Person Does Not Exist
+        PutOrderCommand -> Model : findPersonByName(Name)
+        activate Model
+        Model --> PutOrderCommand : null
+        deactivate Model
+        PutOrderCommand -> LogicManager : throw CommandException(MESSAGE_PERSON_NOT_FOUND)
+    end
+
+else Order Does Not Exist
+    PutOrderCommand -> Model : hasOrder(order)
+    activate Model
+    Model --> PutOrderCommand : false
+    deactivate Model
+    PutOrderCommand -> LogicManager : throw CommandException(MESSAGE_ORDER_NOT_FOUND)
+end
+
+deactivate PutOrderCommand
+deactivate PutOrderCommandParser
+deactivate AddressBookParser
+[<-- LogicManager
+deactivate LogicManager
+@enduml
