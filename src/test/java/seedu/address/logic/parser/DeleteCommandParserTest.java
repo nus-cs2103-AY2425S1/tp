@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -31,7 +32,6 @@ public class DeleteCommandParserTest {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
     }
 
-    @Disabled
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "j/XYZ1235", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -46,42 +46,50 @@ public class DeleteCommandParserTest {
                 DeleteCommand.MESSAGE_USAGE));
         assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "-1", String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "0", String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                 DeleteCommand.MESSAGE_USAGE));
     }
 
-    //test return Delete Command by name, name and email
-    @Disabled
-    @Test
-    public void parseOtherAttributes_nameAndPhone_returnsDeleteCommand() throws ParseException {
-        //tests whether deletecommand returned when a certain name and phone are inputted is the same as the expected
-        Name name = new Name("Alex Yeoh");
-        Phone phone = new Phone("87438807");
-        String args = " n/Alex Yeoh p/87438807";
-        DeleteCommand expectedCommand = new DeleteCommand(name, phone);
-        assertParseSuccess(parser, args, expectedCommand);
 
-    }
-
-    @Disabled
-    @Test
-    public void parseOtherAttributes_nameAndEmail_returnsDeleteCommand() throws ParseException {
-        //tests whether deletecommand returned when a certain name and phone are inputted is the same as the expected
-        Name name = new Name("Alex Yeoh");
-        Email email = new Email("alexyeoh@gmail.com");
-        String args = " n/Alex Yeoh e/alexyeoh@gmail.com";
-        DeleteCommand expectedCommand = new DeleteCommand(name, email);
-        assertParseSuccess(parser, args, expectedCommand);
-    }
-
-    @Disabled
     @Test
     public void parseOtherAttributes_nameOnly_returnsDeleteCommand() throws ParseException {
         //tests whether deletecommand returned when a certain name and phone are inputted is the same as the expected
         Name name = new Name("Alex Yeoh");
         String args = " n/Alex Yeoh";
+        String args2 = " n/ Alex Yeoh";
+        String args3 = " n/ Alex Yeoh ";
         DeleteCommand expectedCommand = new DeleteCommand(name);
         assertParseSuccess(parser, args, expectedCommand);
+        assertParseSuccess(parser, args2, expectedCommand);
+        assertParseSuccess(parser, args3, expectedCommand);
+    }
+
+    @Test
+    public void parseOtherAttributes_emailOnly_returnsDeleteCommand() throws ParseException {
+        //tests whether deletecommand returned when a certain name and phone are inputted is the same as the expected
+        Email name = new Email("alexyeoh@example.com");
+        String args = " e/alexyeoh@example.com";
+        String args2 = " e/ alexyeoh@example.com";
+        String args3 = " e/alexyeoh@example.com ";
+        DeleteCommand expectedCommand = new DeleteCommand(name);
+        assertParseSuccess(parser, args, expectedCommand);
+        assertParseSuccess(parser, args2, expectedCommand);
+        assertParseSuccess(parser, args3, expectedCommand);
+    }
+
+    @Test
+    public void parseOtherAttributes_phoneOnly_returnsDeleteCommand() throws ParseException {
+        //tests whether deletecommand returned when a certain name and phone are inputted is the same as the expected
+        Phone name = new Phone("12345678");
+        String args = " p/12345678";
+        String args2 = " p/ 12345678";
+        String args3 = " p/12345678 ";
+        DeleteCommand expectedCommand = new DeleteCommand(name);
+        assertParseSuccess(parser, args, expectedCommand);
+        assertParseSuccess(parser, args2, expectedCommand);
+        assertParseSuccess(parser, args3, expectedCommand);
     }
 
 }

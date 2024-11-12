@@ -39,7 +39,7 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
   * [Known issues](#known-issues)
   * [Command summary](#command-summary)
 <!-- TOC -->
-<page-nav-print />
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -53,15 +53,16 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Talentcy app.
 
-4. **Windows**:
-
+4. **Windows**:Navigate to the home folder and right-click within the area highlighted in green in the image below. Select "Open in Terminal" from the menu. When the terminal window opens, enter java -jar Talentcy.jar to start the application.
+   <p align="center">
+   <img src="images/Windows_open_terminal.jpg" alt="Windows_open_terminal" width="350"/>
+   </p>
 
    **MacOS**: 
        Right click on the homefolder. Then select "New terminal at Folder". A terminal will pop up. Type `java -jar Talentcy.jar` and press enter.
        <p align="center">
        <img src="images/Mac_open_terminal.png" alt="Mac_open_terminal" width="350"/>
        </p>
-        <p align="center"><em>Right-clicking the home folder and selecting "New Terminal at Folder" on MacOS</em></p>
 
    **Linux**:
        Open the folder where you placed the Talentcy.jar file.
@@ -77,9 +78,10 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 
     * `list` : Lists all contacts.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/A r/good ethic` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/A r/good ethic` : Adds a person
+    * named `John Doe` to the Address Book.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd person shown in the current list.
 
     * `clear` : Deletes all contacts.
 
@@ -102,11 +104,14 @@ When you open the app, a GUI will appear with a few sample contacts already load
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional.<br>
     e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/have pHD` or as `n/John Doe`.
+* If a list of optional items separated by | are together wrapped in curly braces and 1 or 1..*, exactly 1 item and at least 1 or more items are needed. 
+    e.g. `{[n/NAME] | [p/PHONE] | [e/EMAIL]}1` means only one of the fields is needed.
+    e.g. `[n/NAME] | [p/PHONE] | [e/EMAIL]}1..*` means at least one or more of the fields is needed.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+</box>
 
 ### Viewing help : `help`
 
@@ -121,16 +126,15 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG [r/REMARK]`
+Format: `add n/NAME p/PHONE e/EMAIL j/JOB CODE t/TAG [r/REMARK]`
 
-<box type="tip" seamless>
-
+* Only one interview stage tag will be attached to a person at any point of time.
+* If no remark is provided, or if user inputs uses `r/`, then remark is empty by default.
 **Tip:** Only one interview stage tag will be attached to a contact at any point of time.
-<box>
+<box type="tip" seamless>
 
 Please refer to this table
 for list of valid tags:
-
 
 | Tag | Interview Stage                 | Definition                                                                  |
 |-----|---------------------------------|-----------------------------------------------------------------------------|
@@ -146,6 +150,7 @@ for list of valid tags:
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com j/XYZ1010 t/N`
 * `add n/Betsy Crowe t/BP e/betsycrowe@example.com j/AB1301 p/1234567`
+* `add n/John t/A e/johnnie@example.com j/CS2103 p/444888 r/Good at drawing`
 
 ### Listing all persons : `list`
 
@@ -159,22 +164,23 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG] [r/REMARK]`
+Format: `edit INDEX {[n/NAME] | [p/PHONE] | [e/EMAIL] | [j/JOB CODE] | [t/TAG] | [r/REMARK]}1..*`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be updated.
 * Existing values will be updated to the input values.
-  * You can use the `edit` command to reapply the same values to a person without making any changes.
+* You can use the `edit` command to reapply the same values to a person without making any changes.
+* Using `r/` will replace existing remark to an empty remark.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 
 ### Locating persons by criteria given: `find`
 
-Finds persons by criteria given
+Finds persons by at least one criteria given.
 
 Format:
-`find [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG] [r/REMARK]`
+`find {[n/NAME] | [p/PHONE] | [e/EMAIL] | [j/JOB CODE] | [t/TAG] | [r/REMARK]}1..*`
 
 * The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo`, `Hans Bobo`, and `Rohans Bobo`, but not `Bo Hans`
 * All fields are case-insensitive
@@ -190,26 +196,22 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book by finding exact match of a field
+Deletes the specified person from the address book by finding exact match of a field using one criterion.
 
 Format:
-`delete INDEX`
-`delete n/NAME`
-`delete e/EMAIL`
-`delete p/PHONE`
+`delete {[INDEX] | [n/NAME] | [e/EMAIL] | [p/PHONE]}1`
 
-
-* Deletes the person at the specified `INDEX`/`NAME`/`PHONE`/`EMAIL`
+* Deletes the person at the specified `INDEX`or `NAME`or `PHONE`or `EMAIL`
 
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If there are contacts with duplicate names, user must use `delete e/EMAIL` or `delete p/PHONE`
+* If there are persons with duplicate names, user must use `delete e/EMAIL` or `delete p/PHONE`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `delete n/Betsy` will delete contact with the full name Betsy.
-* `delete e/betsy@gmail.com` will delete the contact with the email betsy@gmail.com
+* `delete n/Betsy` will delete person with the full name Betsy.
+* `delete e/betsy@gmail.com` will delete the person with the email betsy@gmail.com
 
 
 ### Showing applicant statistics: `stats`
@@ -217,7 +219,7 @@ Examples:
 Format: 
 `stats`
 
-Shows the following statistics of the contact book at the time the command is called:
+Shows the following statistics of the address book at the time the command is called:
 - Total number of applicants.
 - Percentage of applicants in each interview stage regardless of job code.
 - Number of applicants for each job code and each interview stage for that job code.
@@ -230,9 +232,9 @@ Examples:
 Marks persons as "rejected" by updating their tags based on specified job code, tag, or a combination of both.
 
 Format:
-`massreject [j/JOB CODE] [t/TAG]`
+`massreject {[j/JOB CODE] | [t/TAG]}1..*`
 
-* Updates contacts' tags to `r` (rejected) based on the specified criteria.
+* Updates person's tags to `r` (rejected) based on the specified criteria.
 * You can filter by job code only, tag only, or a combination of both.
 * If only a job code is provided, persons with the `a` (accepted) tag will be excluded from the update.
 * If both job code and tag are provided, they must exactly match the job code and tag.
@@ -298,7 +300,7 @@ _Details coming soon ..._
 
 <box type="info" seamless>
 
-**Notes about each valid input field:**<br>
+**Notes about each valid input field:**
 
 ### NAME
 - Must be between 1 and 50 characters, excluding leading and trailing whitespaces.
@@ -328,7 +330,7 @@ _Details coming soon ..._
 - All characters after the "@" symbol will be converted to lowercase (e.g., "hhh@GMAil.com" will become "hhh@gmail.com").
 - Checking for valid email domain is not in scope.
 
-### JOBCODE
+### JOB CODE
 - Must be at most 50 characters.
 - Only alphanumeric characters (A-Z, a-z, 0-9) and single dashes (-) are allowed.
 - The first and last character must be alphanumeric.
@@ -358,11 +360,48 @@ for list of valid tags:
 ### REMARK
 - Must be at most 50 characters, excluding leading and trailing whitespaces.
 
-<box type="warning" seamless>
+--------------------------------------------------------------------------------------------------------------------
 
-**Caution:**
-If you wish to add a remark that a person is unavailable, you may enter `edit INDEX r/this is n/a`.  Note that this will be interpreted as two commands—one for editing the remark and another for editing the name.
+## Context Menu Options
+
+Context menu options allow users to perform typical text actions, which are available in the command box and feedback box. To see the context menu options, click right on the command box or feedback box.
+
+<box type="info" seamless>
+
+**Descriptions of each context menu option in command box:**<br>
+
+### Undo
+- Reverses the most recent text editing action within the command box, restoring text that was removed or modified.
+- Note that this applies to the text editing action, not undoing the command applied to the app.
+
+### Redo
+- Reapplies the last undone text editing action if "Undo" was used, restoring changes that were reversed.
+
+### Cut
+- Removes the selected text from the command box and copies it to the clipboard, allowing you to paste it elsewhere.
+
+### Copy
+- Copies the selected text to the clipboard without removing it from the command box.
+
+### Paste
+- Inserts text from the clipboard into the command box at the cursor’s location or replaces selected text.
+
+### Delete
+- Deletes the selected text from the command box without copying it to the clipboard.
+
+### Select All
+- Highlights all text within the command box, making it easier to apply other actions like cut, copy, or delete.
+
 </box>
+
+
+**Descriptions of each context menu option in feedback box:**<br>
+
+### Copy
+- Copies the selected text to the clipboard without removing it from the feedback box.
+
+### Select All
+- Highlights all text within the feedback box, making it easier to apply other actions like cut, copy, or delete.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -383,12 +422,30 @@ If you wish to add a remark that a person is unavailable, you may enter `edit IN
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG r/REMARK` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`
-**Clear**  | `clear`
-**Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete n/NAME e/EMAIL` e.g. `delete n/Alex Yeoh e/alexyeoh@gmail.com` <br> `delete n/NAME p/PHONE` e.g. `delete n/Alex Yeoh p/88306733`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find n/FULL_NAME` `find j/JOB_CODE` `find t/TAG` `find n/FULL_NAME p/PHONE` `find n/FULL_NAME e/EMAIL`
-**List**   | `list`
-**Help**   | `help`
+| Action       | Format, Examples                                                                                                                                                 
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| **Add**      | `add n/NAME p/PHONE e/EMAIL j/JOB CODE t/TAG [r/REMARK]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`                    
+| **Clear**    | `clear`                                                                                                                                                          
+| **Delete**   | `delete {[INDEX] \| [n/NAME] \| [e/EMAIL] \| [p/PHONE]}1`<br> e.g. `delete 3`<br> `delete n/Alex Yeoh`<br> `delete e/alexyeoh@gmail.com`<br> `delete p/88306733` 
+| **Edit**     | `edit INDEX {[n/NAME] \| [p/PHONE] \| [e/EMAIL] \| [j/JOB CODE] \| [t/TAG] \| [r/REMARK]}1..*`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`             
+| **Exit**     | `exit`                                                                                                                                                           
+| **Find**     | `find {[n/NAME] \| [p/PHONE] \| [e/EMAIL] \| [j/JOB CODE] \| [t/TAG] \| [r/REMARK]}1..*`<br> e.g. `find n/John j/123 ABC` `find p/12345678`                      
+| **List**     | `list`                                                                                                                                                           
+| **Mass Reject**| `massreject {[j/JOB CODE] \| [t/TAG]}1..*`<br> e.g. `massreject j/CS2103` `massreject t/BP j/123ABC`                                                             
+| **Sort**     | `sort [n/] [p/] [e/] [j/] [t/]` <br> e.g. `sort` `sort n/ e/` `sort p/`                                                                                          
+| **Statistics**| `stats`                                                                                                                                                          
+| **Help**     | `help`                                                                                                                                                           
+
+
+                                                                                                                                               
+     
+## Glossary
+**Java**: A  programming language used to create applications that can run on many types of computers.
+
+**CLI** (Command-Line Interface): A text-based user interface used to interact with a computer program by typing commands.
+
+**GUI** (Graphical User Interface): A user interface that enables interaction with a program through graphical elements like buttons, icons, and windows.
+
+**Parameter**: A piece of information you give to a program or command to tell it exactly what users want it to do.
+
+**Alphanumeric**: Characters only made up of both letters and numbers.

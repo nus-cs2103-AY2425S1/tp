@@ -14,7 +14,7 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
+Class JobCode
 Class Email
 Class Name
 Class Phone
@@ -43,7 +43,7 @@ Person *--> Phone
 Person *--> Email
 Person *--> JobCode
 Person *--> Tag
-Person *--> "*" Remark
+Person *--> Remark
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

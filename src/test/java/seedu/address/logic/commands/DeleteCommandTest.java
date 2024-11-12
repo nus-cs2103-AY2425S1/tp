@@ -33,7 +33,6 @@ public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    @Disabled
     @Test
     public void execute_validIndexUnfilteredList_success() {
         //tests deleting person with valid index in an unfiltered list
@@ -49,7 +48,6 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
-    @Disabled
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         //tests deleting person with invalid index in an unfiltered list
@@ -59,7 +57,6 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    @Disabled
     @Test
     public void execute_validIndexFilteredList_success() {
         //tests deleting person with valid index in filtered list
@@ -77,7 +74,6 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
-    @Disabled
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         //tests deleting person with invalid index in filtered list
@@ -115,7 +111,6 @@ public class DeleteCommandTest {
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
-    @Disabled
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
@@ -149,45 +144,6 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
-    @Disabled
-    @Test
-    public void execute_validDeleteByNamePhone_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-
-        // Use the same formatting as DeleteCommand
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-
-        String name = "Benson Meier";
-        String phone = "98765432";
-        DeleteCommand deleteCommand = new DeleteCommand(new Name(name), new Phone(phone));
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Disabled
-    @Test
-    public void execute_validDeleteByNameEmail_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
-
-        // Use the same formatting as DeleteCommand
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-
-        String name = "Carl Kurz";
-        String email = "heinz@example.com";
-        DeleteCommand deleteCommand = new DeleteCommand(new Name(name), new Email(email));
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Disabled
     @Test
     public void execute_deleteByNameNotFound_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -197,7 +153,6 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
-    @Disabled
     @Test
     public void execute_deleteByNameWithDuplicates_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -205,38 +160,54 @@ public class DeleteCommandTest {
                 .withEmail("testduplicate@gmail.com").withJobCode("123ABC").build();
         model.addPerson(duplicatePerson);
         DeleteCommand deleteCommand = new DeleteCommand(new Name("Carl Kurz"));
-        String expectedMessage = "Multiple contacts with the same full name found. Please specify more using "
-                + "this format:\n" + "delete" + " n/NAME e/EMAIL OR "
-                + "delete" + " n/NAME p/PHONE";
+        String expectedMessage = "Multiple contacts with the same full name found. Please delete "
+                + "using email or phone by following "
+                + "this format:\n" + "delete" + " e/EMAIL\n"
+                + "delete" + " p/PHONE";
         assertCommandFailure(deleteCommand, model, expectedMessage);
-
     }
 
-    @Disabled
     @Test
-    public void execute_deleteByNameEmailNotFound_throwsCommandException() {
+    public void execute_validDeleteByEmail_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+        String email = "heinz@example.com";
+        DeleteCommand deleteCommand = new DeleteCommand(new Email(email));
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteByEmailNotFound_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Person duplicatePerson = new PersonBuilder().withName("Carl Kurz").withPhone("11111111")
-                .withEmail("testduplicate@gmail.com").withJobCode("123ABC").build();
-        model.addPerson(duplicatePerson);
-        Name invalidName = new Name("Invalid Person");
-        Email invalidEmail = new Email("invalidEmail@gmail.com");
-        DeleteCommand deleteCommand = new DeleteCommand(invalidName, invalidEmail);
+        Email invalidEmail = new Email("invalidemail@example.com");
+        DeleteCommand deleteCommand = new DeleteCommand(invalidEmail);
+        String expectedMessage = "No matching contacts found";
+        assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_validDeleteByPhone_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+        String phone = "98765432";
+        DeleteCommand deleteCommand = new DeleteCommand(new Phone(phone));
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteByPhoneNotFound_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Phone invalidPhone = new Phone("00000000");
+        DeleteCommand deleteCommand = new DeleteCommand(invalidPhone);
         String expectedMessage = "No matching contacts found.";
         assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
-    @Disabled
-    @Test
-    public void execute_deleteByNamePhoneNotFound_throwsCommandException() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Person duplicatePerson = new PersonBuilder().withName("Carl Kurz").withPhone("11111111")
-                .withEmail("testduplicate@gmail.com").withJobCode("123ABC").build();
-        model.addPerson(duplicatePerson);
-        Name invalidName = new Name("Invalid Person");
-        Phone invalidPhone = new Phone("99999999");
-        DeleteCommand deleteCommand = new DeleteCommand(invalidName, invalidPhone);
-        String expectedMessage = "No matching contacts found.";
-        assertCommandFailure(deleteCommand, model, expectedMessage);
-    }
+
 }

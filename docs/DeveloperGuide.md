@@ -126,14 +126,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 
 ### Storage component
@@ -158,16 +151,21 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Find feature
-The `find` feature follows the sequence diagram here:
+The Find feature follows the sequence diagram here:
 <puml src="diagrams/FindSequenceDiagram.puml" width="550" />
 
 ### Mass Reject feature
-The `mass reject` feature follows the sequence diagram here:
+The Mass Reject feature follows the sequence diagram here:
 <puml src="diagrams/MassRejectSequenceDiagram.puml" width="550" />
 
+### Delete feature
+The Delete feature has 2 types of sequence. 
+
+Deleting by index follows this sequence diagram:
+<puml src="diagrams/DeletePredicateSequenceDiagram.puml" width="550" />
 
 ### Statistics feature
-The `statistics` feature follows the sequence diagram here:
+The Statistics feature follows the sequence diagram here:
 <puml src="diagrams/StatisticsSequenceDiagram.puml" width="550" />
 
 Like `ListCommand`, it does not require the use of its own parser, as it only calls upon the FilteredList of the
@@ -268,9 +266,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Planned Enhancements**
@@ -337,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                              | I want to …​                                                                 | So that I can…​                                                                                   |
 |----------|--------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| `* * *`  | user                                 | see the list of all contacts                                                 | see the contact of every applicants                                                               |
+| `* * *`  | user                                 | see the list of all contacts                                                 | see the contact details of every applicants                                                       |
 | `* * *`  | user                                 | add a new contact                                                            | keep track of applicant's contact details                                                         |
 | `* * *`  | user                                 | delete a contact                                                             | remove contact of applicants who is no longer in the recruitment process                          |
 | `* * *`  | user                                 | find a contact by his/her name                                               | see particular applicant's contact detail without having to go through the entire list            |
@@ -582,20 +577,32 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 3. Should work on any mainstream OS as long as it has Java `17` or above installed.
 4. The system should execute commands (such as adding, deleting, or listing contacts) within 1 second under normal loads (e.g., up to 1,000 contacts).
 5. Should be able to hold up to 1,000 persons without noticeable sluggishness in performance for typical usage.
-6. The system should support up to 1,000 concurrent users without performance degradation.
-7. A user with above-average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-8. The system must be user-friendly and usable by individuals with no prior experience with contact management systems.
-9. Volatility: Transaction data should be stored persistently and remain available for a minimum of 10 years.
-10. Complete user documentation, including installation and setup instructions, must be provided.
-11. The system should be designed to allow for the addition of new modules without requiring a full redesign.
-12. The system should gracefully handle incorrect or incomplete inputs by providing meaningful error messages without crashing.
+6. A user with above-average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+7. The system must be user-friendly and usable by individuals with no prior experience with contact management systems. 
+8. Volatility: Transaction data should be stored persistently and remain available for a minimum of 10 years. 
+9. Complete user documentation, including installation and setup instructions, must be provided. 
+10. The system should be designed to allow for the addition of new modules without requiring a full redesign. 
+11. The system should gracefully handle incorrect or incomplete inputs by providing meaningful error messages without crashing.
 
 
 ### Glossary
 
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Contact**: An entry in Talentcy address book that contains information about a particular person such as name, phone number, email address, and any other relevant details
-* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG is a command to add a contact to the address book)
+* **Applicant**: An individual who has submitted job application to the company. 
+* **Job Code** : A code that represents the company's specific job role. 
+* **Tag** : Interview stages that applicants will go through for a job before they could get hired. The following are the default tags and abbreviations in the address book:
+
+| Tag | Interview Stage                 | Definition                                                                  |
+|-----|---------------------------------|-----------------------------------------------------------------------------|
+| N   | New                             | New applicant                                                               |
+| TP  | Technical Interview in Progress | Technical interview is in the process of being scheduled for the applicant  |
+| TC | Technical Interview Confirmed | Technical interview has been schedule for the applicant                     |                                           
+| BP | Behavioral Interview in Progress | Behavioral interview is in the process of being scheduled for the applicant |
+| BC | Behavioral Interview Confirmed | Behavioral interview has been scheduled for the applicant                   |
+| A| Accepted| Applicant has been accepted by the company                                  |
+| R | Rejected | Applicant has been rejected by the company                                  |
+
+* **Person**: A single entry in Talency address book that contains information about a particular applicant such as name, phone number, email address, and any other relevant details.
+* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG is a command to add a contact to the address book).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -616,38 +623,108 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Talentcy.jar` command to run the application. <br>
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by opening command terminal in the folder containing the jar file, then use `java -jar Talentcy.jar`.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+
+### Adding a Person
+
+1. Adding a Person
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/N r/Good skills`  
+       Expected: Assuming no duplicates, a new contact named John Doe is added to the list. The status message displays details of the added contact.
+    2. Test case: `add n/ p/ e/ j/ t/`  
+       Expected: No person is added. An error message displays in the status, indicating missing fields.
+    3. Other incorrect add commands to try: `add n/John`, `add p/98765432`, `add e/notemail`, `add t/Went to NUS`  
+       Expected: Error messages display for each incomplete command, and no contact is added.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. At least one person in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First person is deleted from the list. Details of the deleted person is shown in the status message.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+      Expected: Error messages displayed, and no person is deleted.
 
-1. _{ more test cases …​ }_
+2. Deleting a person based on its attribute
 
-### Saving data
+    1. Prerequisites: At least one person stored in the app.
 
-1. Dealing with missing/corrupted data files
+   2. Test case: `delete n/John Doe`
+        Expected: Assuming there are only one person with the name `John Doe` in the list, that person will be deleted from the list. Details of the deleted person is shown in status message.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   3. Test case: `delete p/80981234`
+        Expected: Assuming a person with phone number 80981234 exists in the list, that person will be deleted. Details of the deleted person is shown in status message.
+   4. Test case: `delete e/pu09com`
+        Expected: No person is deleted. Error message is shown in the status bar.
+   5. Other incorrect delete commands to try: `delete John Doe`, `delete p/x` (where a person with phone number x doesn't exist in the list).
+        Expected: No person is deleted. Error message is shown in the status bar.
 
-1. _{ more test cases …​ }_
+### Finding Persons by Criteria
+
+1. Finding Persons with Specific Criteria
+    1. Prerequisites: Ensure there are persons with various entry of fields.
+    2. Test case:`find n/John`  
+       Expected: Displays a list of person(s) with "John" in their names, case-insensitive. Empty list will be displayed if a person with that specific criteria(s) is not found.
+    3. Test case: `find t/TP n/Jane`  
+       Expected: Shows a list of person(s) with "Jane" in their name and tagged as `Technical Interview in Progress`. Empty list will be displayed if a person with that specific criteria(s) is not found. 
+    4. Incorrect add commands to try: `find`, `find John`, `find p/notphone`  
+       Expected: Error message is shown in the status bar. List of persons shown will remain the same.
+
+### Sorting Persons by Fields
+
+1. Sorting by Fields
+    1. Prerequisites: Ensure there are multiple persons with various entry of fields.
+    2. Test case: `sort n/`  
+       Expected: Sorts the persons alphabetically by name.
+    3. Test case: `sort t/ j/`  
+       Expected: Sorts first by tag, then by job code within each tag group.
+    4. Test case: `sort j/ n/`  
+       Expected: Sorts first by job code, then by name within each job code group.
+
+#### Bulk Rejecting by Criteria
+
+1. Bulk Rejecting Contacts
+    1. Prerequisites: Ensure there are persons with various job codes and tags, including the `Accepted` tag.
+    2. Test case: `massreject j/SWE2024 t/TP`  
+       Expected: Marks all persons with job code `SWE2024` and tag `TP` (if any) as rejected, displaying a confirmation status.
+    3. Test case: `massreject j/AWE2023`  
+       Expected: Marks all persons with job code `AWE2023` as rejected, except for the person(s) that has an `Accepted` tag.`.
+
+---
+
+#### Viewing Applicant Statistics
+
+1. Viewing Statistics
+    1. Prerequisites: Ensure there are multiple persons with diverse tags and job codes.
+    2. Test case: `stats`  
+       Expected: Displays the total number of applicants, the percentage of applicants in each interview stage, and the breakdown of applicants by job code.
+
+
+#### Saving Data with Missing/Corrupted Files
+
+1. Handling Missing or Corrupted Data Files**
+   1. Prerequisites: Ensure `talentcy.json` has multiple entries, and back up the file before testing.
+    2. Test Case: Invalid Data Format
+       Simulation: Edit one field from a person entry in the JSON file (e.g. change the phone field to non-numeric), then launch the app.
+       Expected: The app discards **all** data and starts with an empty list.
+
+   3. Test Case: Missing `talentcy.json` File
+      Simulation: Delete `talentcy.json`, then launch the app.
+      Expected: The app creates a new `talentcy.json`, the app starts on clean slate (i.e. with sample data only).
+
+      
+
