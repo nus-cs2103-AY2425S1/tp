@@ -169,7 +169,10 @@ Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CLASS] [s/SEX
   * e.g. `filter s/F p/99999999` returns female students with the phone number 99999999.
 
 * **Multiple Predicates with Multiple Values**: both an `OR` and an`AND` search is run.
-  * e.g. **Student 1**: Name - Alex; Phone number - 99999999, **Student 2**: Name - Bernice; Phone Number - 92443567, **Student 3**: Name - Christine; Phone Number: 88888888
+  * Eg. Below are 3 students' details. 
+    * **Student 1**: Name - Alex; Phone number - 99999999
+    * **Student 2**: Name - Bernice; Phone Number - 92443567
+    * **Student 3**: Name - Christine; Phone Number: 88888888
   * `filter n/Alex Bernice p/99999999 92443567` matches Alex and Bernice, as both students out of 6 students have at least one matching name and phone number, as seen below.
 ![Filter2 - Sucess.png](images%2FFilter2%20-%20Sucess.png)<br>
   
@@ -208,6 +211,10 @@ Format: `addEcName INDEX en/[ECNAME]`
 
 **Tip:** You can delete the emergency contact's name by leaving the `ECNAME` field empty.
 </box>
+<box type="tip" seamless>
+
+**Tip:** Note: EcName refers to `emergency contact name`
+</box>
 
 * Adds the emergency contact's name `ECNAME` to the person at the specified `INDEX`
 * Deletes the emergency contact's name at the specified `INDEX`
@@ -228,6 +235,10 @@ Format: `addEcNumber INDEX ep/[ECNUMBER]`
 <box type="tip" seamless>
 
 **Tip:** You can delete the emergency contact's number by leaving the `ECNUMBER` field empty.
+</box>
+<box type="tip" seamless>
+
+**Tip:** Note: EcNumber refers to `emergency contact number`
 </box>
 
 * Adds the emergency contact's number `ECNUMBER` to the person at the specified `INDEX`
