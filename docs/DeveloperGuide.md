@@ -318,7 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. PlanPal detects that the event name is missing or invalid.
     * 2a1. PlanPal shows an error message.
 
-      Use case resumes from step 1.
+      Use case ends
 
 **UC06: Assign a contact to an event**
 
