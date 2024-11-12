@@ -39,7 +39,7 @@ NameContainsKeywordsPredicate --> FindCommandParser
 deactivate NameContainsKeywordsPredicate
 
 create FindCommand
-FindCommandParser -> FindCommand : p
+FindCommandParser -> FindCommand :
 activate FindCommand
 
 FindCommand --> FindCommandParser :
