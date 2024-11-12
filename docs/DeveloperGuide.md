@@ -901,7 +901,7 @@ UI to provide a better user experience. This includes making the UI more respons
 visual cues to guide users.<br><br>
 Examples of improvements:<br>
 **Responsive Design**: Ensure the UI adapts to different screen sizes, providing a consistent experience across 
-monitors of different sizes.<br>
+monitors of different sizes and ensure that there are no text cut-offs for any font size or style used.<br>
 **Improved Layout**: Organize the UI elements more logically, making it easier for users to find and use features.<br>
 **Visual Cues**: Add star icons for starred contacts, and other visual indicators to help users understand the functionality of different UI elements.
 
