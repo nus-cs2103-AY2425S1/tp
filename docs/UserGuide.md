@@ -1,7 +1,7 @@
 ---
   layout: default.md
   title: "User Guide"
-  pageNav: 3
+  pageNav: 4
 ---
 
 # ContactCS User Guide
@@ -116,7 +116,6 @@ Alerts you to potential issues or problems that may arise.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-
 <box type="info" seamless>
 
 **Info: Notes about the command format**<br>
@@ -251,14 +250,7 @@ The subsequent pairs should not have a `+` sign before them. i.e. `r/+CS1101S +M
 </box>
 
 <box type="warning" seamless>
-
-  **Reminder**: the other meaning of ``+``
-
-* Items in **square** brackets and with `+` after them can be used zero or more times.<br>
-  e.g. `[t/TAG]+` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Items in **round** brackets and with `+` after them can be used one or more times.<br>
-  e.g. `(t/TAG)+` can be used as `t/friend`, `t/friend t/family` etc.
+  Please note that the first + should be typed as is while the second + is the multiplicity syntax explained here.
 </box>
 
 ##### Deleting existing module-role pairs
@@ -588,14 +580,12 @@ to be 500 characters which should be enough for most users.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. If you type ``/`` in the input field for the add or edit command, apart from the input field for the name, it might cause the input to be wrongly parsed into other fields.
-4. **There is an unused space below the command history box**. 
+3. **There is an unused space below the command history box**. 
 ![unused space](images/UiUnusedSpace.png)<br>
-As shown in the screenshot above, marked by the red box. This will be fixed in the next version.
-
 As shown in the screenshot above, marked by the red box.
 4. **When you add a duplicate contact with same phone number**, the app will allow it if the phone number is the same but with different country codes or descriptions.
 For example, adding a contact with the phone number `+65 6601 7878 (24 hrs)` and then adding another contact with the phone number `6601 7878` will be allowed as long as the emails are different.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
