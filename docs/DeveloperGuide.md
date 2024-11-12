@@ -333,7 +333,7 @@ Use case ends.
 - **1b.** Name is blank, contains invalid symbol or beyond 70 characters
     - **1b1.** Error message displayed in result display.
         - Use case ends.
-- **1c.** Phone is not 8 digits, and does not begin with '8' or '9'
+- **1c.** Phone is not 8 digits, and does not begin with '6', '8' or '9'
     - **1c1.** Error message displayed in result display.
         - Use case ends.
 - **1d.** Email is blank, or does not match email regex.
@@ -653,7 +653,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file <br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -877,7 +878,7 @@ Success action: When wedding is successfully added, the details of the added wed
 #### Inputting CLIENT using NAME
 1. Since `addw` using `c/NAME` searches for the client from the entire list of contacts, rather than only the partial list, it is works either way.
 
-    1. Test case: `addw n/Church Wedding c/Alice`
+    1. Test case: `addw n/Church Wedding c/Alice`<br>
        Expected (No duplicated Alice): Wedding added with contact having name field containing Alice set to be client. Details of the added wedding is displayed on the status message.<br>
        Expected (Duplicated Alice): No wedding added. Person list is filtered to show contacts with names containing Alice. Status message prompts user to re-input CLIENT using index according to the newly filtered list.<br>
        Expected (No Alice): No wedding added. Error message shown in status message, as the NAME does not belong to anyone in the address book.
@@ -1091,16 +1092,16 @@ Success action: When a person is successfully assigned:
 
 1. Removing wedding jobs assigned to a person while all weddings are being shown
 
-    1. Prerequisites: List all persons and weddings using the `list` command. Multiple persons and weddings in the list.<br><br>
+    1. Prerequisites: List all persons and weddings using the `list` command. Multiple persons and weddings in the list.<br>
 
     1. Test case: `delete 1 w/1`<br>
-       Expected: First wedding is unassigned from first person. Details of the unassigned contact shown in the status message. <br><br>
+       Expected: First wedding is unassigned from first person. Details of the unassigned contact shown in the status message. <br>
 
     1. Test case: `delete 0 w/1`<br>
-       Expected: No person to unassign wedding job. `delete` command format is shown in the status message.<br><br>
+       Expected: No person to unassign wedding job. `delete` command format is shown in the status message.<br>
 
-    1. Test case: `delete 1 w/x` (where x is outside of the range of wedding list or a non-numeric character)<br>
-       Expected: Error message prompting the user to choose an index within the range shown.<br><br>
+    1. Test case: `delete 1 w/x` (where x is outside the range of wedding list or a non-numeric character)<br>
+       Expected: Error message prompting the user to choose an index within the range shown.<br>
 
 1. Removing wedding jobs assigned to a person while a partial list of weddings is shown.
 
