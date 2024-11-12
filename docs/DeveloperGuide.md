@@ -291,7 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | software developer | blacklist a client                           | avoid working with certain clients in future                       |
 | `* *`    | software developer | view clients on the blacklist                | view all the clients I intend to avoid                             |
 | `* *`    | software developer | whitelist a blacklisted client               | consider working with said client again                            |
-| `* *`    | software developer | view clients on the whitelist                | view all clients that i have no issues working with                |
+| `* *`    | software developer | view clients on the whitelist                | view all clients that I have no issues working with                |
 | `* *`    | software developer | archive a client                             | store information of old clients without cluttering my client list |
 | `* *`    | software developer | unarchive a client                           | bring the information of archived clients back to the client list  |
 | `* *`    | software developer | see reminders for the next earliest deadline | focus on the most urgent task first                                |
