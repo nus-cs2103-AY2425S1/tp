@@ -267,7 +267,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String sortBy } into a {@code SortBy}.
+     * Parses a {@code String sortBy } into a {@code DeliverySortBy}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code sortBy} is invalid.

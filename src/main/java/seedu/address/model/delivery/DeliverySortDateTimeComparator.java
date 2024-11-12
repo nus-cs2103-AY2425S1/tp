@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import seedu.address.logic.parser.SortOrder;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a comparator for deliveries that compares based on date and time.
  */
@@ -28,6 +30,8 @@ public class DeliverySortDateTimeComparator extends DeliverySortComparator {
      */
     @Override
     public int compare(Delivery delivery1, Delivery delivery2) {
+        requireNonNull(delivery1);
+        requireNonNull(delivery2);
         LocalDateTime delivery1DateTime = delivery1.getDeliveryDate().time;
         LocalDateTime delivery2DateTime = delivery2.getDeliveryDate().time;
         if (super.getIsSortByAscending()) {

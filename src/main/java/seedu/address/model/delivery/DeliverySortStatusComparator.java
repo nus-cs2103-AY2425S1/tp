@@ -2,6 +2,8 @@ package seedu.address.model.delivery;
 
 import seedu.address.logic.parser.SortOrder;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a comparator for deliveries that compares based on status.
  */
@@ -25,6 +27,8 @@ public class DeliverySortStatusComparator extends DeliverySortComparator {
      */
     @Override
     public int compare(Delivery delivery1, Delivery delivery2) {
+        requireNonNull(delivery1);
+        requireNonNull(delivery2);
         Status delivery1Status = delivery1.getDeliveryStatus();
         Status delivery2Status = delivery2.getDeliveryStatus();
         if (super.getIsSortByAscending()) {

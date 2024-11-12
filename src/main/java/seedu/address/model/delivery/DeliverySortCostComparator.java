@@ -2,6 +2,8 @@ package seedu.address.model.delivery;
 
 import seedu.address.logic.parser.SortOrder;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a comparator for deliveries that compares based on cost.
  */
@@ -25,6 +27,8 @@ public class DeliverySortCostComparator extends DeliverySortComparator {
      */
     @Override
     public int compare(Delivery delivery1, Delivery delivery2) {
+        requireNonNull(delivery1);
+        requireNonNull(delivery2);
         double delivery1Cost = Double.parseDouble(delivery1.getDeliveryCost().value);
         double delivery2Cost = Double.parseDouble(delivery2.getDeliveryCost().value);
         if (super.getIsSortByAscending()) {

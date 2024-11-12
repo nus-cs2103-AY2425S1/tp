@@ -5,6 +5,8 @@ import java.util.Comparator;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.SortOrder;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents a delivery comparator.
  */
@@ -15,6 +17,7 @@ public abstract class DeliverySortComparator implements Comparator<Delivery> {
      * Creates a DeliverySortComparator to sort the deliveries in the specified {@code sortOrder}.
      */
     public DeliverySortComparator(SortOrder sortOrder) {
+        requireNonNull(sortOrder);
         this.sortOrder = sortOrder;
     }
 
