@@ -617,7 +617,7 @@ Furthermore, certain edits can cause MedDict to behave in unexpected ways (e.g.,
 | **[List](#listing-all-persons-list)**                           | `list` <br> Shows all persons in address book                                                                                             |
 | **[Edit](#editing-a-person-edit)**                              | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                        |
 | **[Get ID](#getting-id-of-doctor-or-patient-by-name-get)**      | `get KEYWORD` <br> e.g., `get john`                                                                                                       |
-| **[Add Appointment](#adding-an-appointment-adda)**              | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`           |
+| **[Add Appointment](#adding-an-appointment-adda)**              | `addA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME r/REMARK` <br> e.g., `addA z/0 z/1 x/2024-12-31 15:23 r/Third physiotherapy session`           |
 | **[View History](#view-history-of-a-person-view)**              | `view z/ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                        |
 | **[Check Appointment](#check-appointments-of-a-person-checka)** | `checkA z/ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                 |
 | **[Mark Appointment](#mark-appointment-of-a-doctor-mark)**      | `mark z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME` <br> e.g., `mark z/0 z/1 x/2024-12-31 15:23`                                                  |
