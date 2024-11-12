@@ -23,8 +23,8 @@ public class DeliverySortStatusComparator extends DeliverySortComparator {
      * @param delivery1 the first delivery to be compared.
      * @param delivery2 the second delivery to be compared.
      * @return a negative integer, zero, or a positive integer as the first delivery's status is less than,
-     *      equal to, or greater than the second delivery's status alphabetically if the sort order is ascending.
-     *      If the sort order is descending, the integer returned is inverted.
+     *         equal to, or greater than the second delivery's status alphabetically if the sort order is ascending.
+     *         If the sort order is descending, the integer returned is inverted.
      */
     @Override
     public int compare(Delivery delivery1, Delivery delivery2) {
