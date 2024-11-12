@@ -58,7 +58,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -159,87 +159,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `liststudents`. Commands that do not modify the address book, such as `liststudents`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
 
 ### Consultation Management
 
@@ -255,9 +174,9 @@ The consultation feature comprises these key components:
 * `AddConsultCommand`: Handles adding new consultations
 * `AddConsultCommandParser`: Parses user input for consultation commands
 
-[//]: # (The class diagram below shows the structure of the consultation feature:)
+The class diagram below shows the structure of the consultation feature:
 
-[//]: # (<img src="images/ConsultationClassDiagram.png" width="450" />)
+<img src="images/Consultation/ConsultCommands.png" width="450" />
 
 #### Implementation
 
@@ -296,6 +215,13 @@ consult.removeStudent(student);
 // Getting immutable student list
 List<Student> students = consult.getStudents(); // Returns unmodifiable list
 ```
+The sequence diagram below shows how the `addStudent(student)` method is performed in the `Consultation` class.
+
+<img src="images/Consultation/addStudent_for_consult.png" width="450" />
+
+The command first checks if the student is already in the consultation. If the student was already in the consultation, and exception is thrown and the student is not added.
+
+However, if the student was not previously in the consultation, the student is now added to the list of students in the consultation.
 
 **3. Command Processing**
 
@@ -308,10 +234,22 @@ The system supports these consultation management commands:
 Command examples:
 ```
 addconsult d/2024-10-20 t/14:00
-addtoconsult 1 n/John Doe n/Harry Ng
+addtoconsult 1 n/John Doe i/3
 deleteconsult 1
 removefromconsult 1 n/John Doe
 ```
+The sequence diagram below shows how the command `addtoconsult 1 n/John Doe i/3` is executed.
+
+<img src="images/Consultation/SequenceDiagramAddToConsultCommand.png" />
+
+The commands for Consultations are executed using the `Logic` component:
+
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `AddToConsultCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (in this case, the `AddToConsultCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to add a student to the consultation).<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
 
 **Aspect 1: Date and Time Representation**
 
@@ -332,6 +270,134 @@ removefromconsult 1 n/John Doe
 * **Alternative 2**: Fully immutable list
     * Pros: Simpler thread-safety
     * Cons: Higher memory usage for modifications
+
+### Lesson Management
+
+The lesson management feature enables TAs to schedule and manage lessons with students. This section describes the implementation details of the lesson system.
+
+#### Architecture
+
+The lesson feature comprises these key components:
+
+* `Lesson`: Core class representing a lessons
+* `Date`: Represents and validates lesson dates
+* `Time`: Represents and validates lesson times
+* `StudentLessonInfo`: Represents student info used for lessons. This includes the student's attendance and participation score for a lesson.
+* `AddLessonCommand`: Handles adding new lessons
+* `AddLessonCommandParser`: Parses user input for `AddLessonCommand`
+
+The class diagram below shows the structure of the lesson feature:
+
+<img src="images/Lessons/LessonsAndRelatedCommands.png" width="450" />
+
+#### Implementation
+
+The lesson management system is implemented through several key mechanisms:
+
+**1. Date and Time Validation**
+
+The system enforces strict validation for lesson scheduling:
+* Dates must be in `YYYY-MM-DD` format and represent valid calendar dates
+* Times must be in 24-hour `HH:mm` format
+* Both use Java's built-in `LocalDate` and `LocalTime` for validation
+
+Example:
+```java
+Date date = new Date("2024-10-20"); // Valid
+Time time = new Time("14:00");      // Valid
+Date invalidDate = new Date("2024-13-45"); // Throws IllegalArgumentException
+```
+
+**2. Lesson Management**
+
+The `Lesson` class manages:
+* Immutable date and time properties
+* Thread-safe student information list management
+* Equality based on date, time, and student information
+
+Core operations:
+```java
+// Creating a lesson
+Lesson lesson = new Lesson(date, time, studentLessonInfoList);
+
+// Adding/removing students
+lesson.addStudent(student);
+lesson.removeStudent(student);
+
+// Setting attendance
+lesson.setAttendance(student, attendance);
+
+// Setting pariticipation score
+lesson.setParticipation(student, participationScore);
+
+// Getting immutable student info list, returns unmodifiable list
+List<StudentLessonInfo> studentInfoList = lesson.getStudentLessonInfoList(); 
+```
+
+**3. Command Processing**
+
+The system supports these lesson management commands:
+- `addlesson`: Creates new lesson
+- `addtolesson`: Adds students to existing lesson
+- `deletelesson`: Removes lesson
+- `listlessons`: Lists all lessons
+- `removefromlesson`: Removes students from lesson
+- `marka`: Marks the attendance of  students in a lesson (can mark as present or absent)
+- `markp`: Sets the participation score of students in a lesson
+
+Command examples:
+```
+addlesson d/2024-10-20 t/14:00
+addtolesson 1 n/John Doe i/3
+deletelesson 1
+removefromlesson 1 n/John Doe
+markp 1 n/John Doe pt/25
+marka 1 n/John Doe n/Jane Doe a/y
+```
+The sequence diagram below shows how the command `addtolesson 1 n/John Doe i/3` is executed.
+
+<img src="images/Lessons/SequenceDiagramAddToLessonCommand.png" />
+
+The commands for Lessons are executed using the `Logic` component, making it similar to the sequence diagram in the consultation section above.
+
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `AddToLessonCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (in this case, the `AddToLessonCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to add a student to the lesson).<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+
+The next sequence diagram shows how the `MarkLessonAttendanceCommand` is executed to update the attendance of students in a lesson.
+
+<img src="images/Lessons/MarkAttendanceCommandSequenceDiagram.png" />
+
+The flow of the program when `MarkLessonAttendanceCommand.execute` is called is as follows:
+
+1. When the execute method is called, the command first gets the `targetLesson` from the model.
+2. The command then creates a new `Lesson` object (called `newLesson`) from the `targetLesson`. This creates a copy of the current `targetLesson`.
+3. Now, for each student, the command sets the student's attendance using the `setAttendance` method in the `Lesson` class.
+4. Finally, the command replaces the `targetLesson` in the model with the `newLesson`.
+
+
+**Aspect 1: Date and Time Representation**
+
+* **Alternative 1 (current choice)**: Separate `Date` and `Time` classes
+  * Pros: Clear separation of concerns, focused validation
+  * Cons: Two objects to manage instead of one
+
+* **Alternative 2**: Combined `DateTime` class
+  * Pros: Unified handling of temporal data
+  * Cons: More complex validation, reduced modularity
+
+**Aspect 2: StudentInfo List Management**
+
+* **Alternative 1 (current choice)**: Immutable view with mutable internal list
+  * Pros: Thread-safe external access, flexible internal updates
+  * Cons: Complex implementation
+
+* **Alternative 2**: Fully immutable list
+  * Pros: Simpler thread-safety
+  * Cons: Higher memory usage for modifications
 
 
 ### Data Import / Export Feature
@@ -419,6 +485,89 @@ Date,Time,Students
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+### \[Proposed\] Undo/redo feature
+
+#### Proposed Implementation
+
+The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+
+![UndoRedoState0](images/UndoRedoState0.png)
+
+Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+
+![UndoRedoState1](images/UndoRedoState1.png)
+
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+
+![UndoRedoState2](images/UndoRedoState2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</div>
+
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+
+![UndoRedoState3](images/UndoRedoState3.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
+</div>
+
+The following sequence diagram shows how an undo operation goes through the `Logic` component:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+Similarly, how an undo operation goes through the `Model` component is shown below:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</div>
+
+Step 5. The user then decides to execute the command `liststudents`. Commands that do not modify the address book, such as `liststudents`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+
+![UndoRedoState4](images/UndoRedoState4.png)
+
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+
+![UndoRedoState5](images/UndoRedoState5.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<img src="images/CommitActivityDiagram.png" width="250" />
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire address book.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
+
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
