@@ -758,7 +758,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: 
        * Student with ID S00001 exists in the system.
-       * Another student with NRIC S2684225J exists in the system.<b>
+       * Another student with NRIC S2684225J exists in the system.<br>
       
    2. Test case: `edit s00001 i\S2684225J`<br>
        Expected: Error message indicating that another student with the same NRIC already exists in the system.
