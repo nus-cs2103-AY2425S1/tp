@@ -16,8 +16,9 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        String regex = "\\b" + keyword.toLowerCase() + "\\b";
         return person.getModules().stream()
-                .anyMatch(module -> module.toString().toLowerCase().contains(keyword.toLowerCase()));
+                .anyMatch(module -> module.toString().toLowerCase().matches(".*" + regex + ".*"));
     }
 
     @Override

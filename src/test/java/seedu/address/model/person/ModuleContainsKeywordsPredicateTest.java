@@ -45,9 +45,6 @@ public class ModuleContainsKeywordsPredicateTest {
 
         predicate = new ModuleContainsKeywordsPredicate("cs1010");
         assertTrue(predicate.test(new PersonBuilder().addUngradedModule("CS1010").build()));
-
-        predicate = new ModuleContainsKeywordsPredicate("1010");
-        assertTrue(predicate.test(new PersonBuilder().addUngradedModule("CS1010").build()));
     }
 
     @Test

@@ -43,10 +43,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
-            String[] modules = argMultimap.getValue(PREFIX_MODULE).get().split(" ");
+            if (argMultimap.getValue(PREFIX_NAME).isPresent() || argMultimap.getValue(PREFIX_PHONE).isPresent()
+                || argMultimap.getValue(PREFIX_EMAIL).isPresent() || argMultimap.getValue(PREFIX_ADDRESS).isPresent()
+                || argMultimap.getValue(PREFIX_COURSE).isPresent() || argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
+
+            String[] modules = argMultimap.getValue(PREFIX_MODULE).get().trim().replaceAll("\\s+", " ").split(" ");
             if (modules.length != 2) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
+
             editPersonDescriptor.setModuleChanges(new Module(modules[0].toUpperCase()),
                     new Module(modules[1].toUpperCase()));
         } else {

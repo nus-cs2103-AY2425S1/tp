@@ -37,11 +37,11 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": 2 possible usages"
-            + " 1. Edits the details of the person identified "
-            + "by the studentId assigned to the corresponding student. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: ID (must be a valid and existing 8-digit ID) "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": 2 possible usages\n"
+            + "1. Edits the details of the person identified "
+            + "by the studentId assigned to the corresponding student. \n"
+            + "    Existing values will be overwritten by the input values.\n"
+            + "    Parameters: ID "
             + "[ID] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -49,13 +49,15 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_COURSE + " COURSE] "
             + "[" + PREFIX_ROLE + "ROLE] ...\n"
-            + "Example: " + COMMAND_WORD + " 12345678 "
+            + "    Example: " + COMMAND_WORD + " 12345678 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
-            + " 2. Edits a module of the person identified. "
-            + "Existing values will be overwritten by the input module.\n"
-            + "Parameters: ID (must be a valid and existing 8-digit ID "
-            + PREFIX_MODULE + " OLD_MODULE NEW_MODULE";
+            + PREFIX_EMAIL + "johndoe@example.com\n"
+            + "2. Edits a module of the person identified. \n"
+            + "    Existing values will be overwritten by the input module.\n"
+            + "    Parameters: ID "
+            + PREFIX_MODULE + "OLD_MODULE NEW_MODULE\n"
+            + "    Example: " + COMMAND_WORD + " 12345678 "
+            + PREFIX_MODULE + "CS2103T CS2101";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
