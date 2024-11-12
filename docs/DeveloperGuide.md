@@ -221,7 +221,7 @@ This section will go through some additional information about each component in
 - At any point in time, the user can press the `UP` and `DOWN` arrow keys to navigate the history of past inputs. 
 
 <div class="note" markdown="span"> 
-:bulb: The history of past inputs is refreshed every single time EZSTATES is closed and re-opened. 
+The history of past inputs is refreshed every single time EZSTATES is closed and re-opened. 
 <br>
 Additionally, the history preserves
 all inputs given by the user, including duplicate and invalid inputs.
@@ -261,9 +261,6 @@ Certain fields that the user can input in EZSTATES are allowed values that can e
 display them. This design choice can be seen in fields such as the `client name`.
 <br>
 <br>
-<div style="text-align: center;">
-    <img src="images/img_16.png" alt="OverflownText" style="max-width:100%;">
-</div>
 <br>
 Our team has accounted for this as we do not wish to enforce arbitrary limits on the user. To account for this, we have 
 implemented proper UI/UX design to wrap the overflown text. Additionally, the `moreinfo` command allows users to view the 
