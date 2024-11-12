@@ -1936,7 +1936,7 @@ For example, "John Doe" and "John  Doe" (the same name but with an extra space),
 The **planned enhancement** would be to update the parser to normalise input by stripping all extra whitespace, leaving only a single space between keywords, before creating the respective command objects.
 This will ensure that entries with excessive spaces are treated as duplicates where appropriate.
 
-3. **Vendor validation for when unassigning Tasks from Person**: Currently, there is a missing validation in `unassign-task` command that negates the check of whether a Person is a Vendor, resulting 
+3. **Vendor validation when unassigning Tasks from Person**: Currently, there is a missing validation in `unassign-task` command that negates the check of whether a Person is a Vendor, resulting 
 in an incorrect error message to be shown. When a user tries to execute the `unassign-task` command on a Person who is not a Vendor and thus cannot even have tasks assigned to it, 
 the error message indicates that there are no tasks in the person's list, rather than indicating that the person is not a Vendor.
 However, there is no functionality flaw and the application runs as intended.
