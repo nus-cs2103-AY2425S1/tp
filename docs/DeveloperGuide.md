@@ -532,6 +532,22 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a person
+
+1. Adding a person to NetBook.
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com o/NUS d/23-09-2024 
+    t/friends t/owesMoney pr/low r/likes apple `<br>
+       Expected: Contact with the given details is added to the list. Details of the added contact are shown in the
+    status message.
+
+    1. Test case: `add`<br>
+       Expected: No person is added. Error details shown in the status message.
+
+    1. Other incorrect delete commands to try: `add n/John doe`, `add n/John Doe p/98765432 e/johnd@example.com
+       o/NUS d/2024-23-09`, `...`<br>
+       Expected: Similar to previous.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -542,7 +558,7 @@ testers are expected to do more *exploratory* testing.
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -576,7 +592,7 @@ testers are expected to do more *exploratory* testing.
        Expected: List is sorted by priority from high to low.
 
     1. Test case: `sort name`<br>
-       Expected: List doesn't change. Error details shown in the status message. Status bar remains the same.
+       Expected: List doesn't change. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `sort`, `sort s`, `...` (where s is not one of the four default parameters)<br>
        Expected: Similar to previous.
