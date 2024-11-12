@@ -59,7 +59,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The **_Architecture Diagram_** given above explains the high-level design of the App.
+The **_Architecture Diagram_** given above explains the high-level design of CareLink.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -175,7 +175,7 @@ The `Model` component,
 - stores the address book data i.e., all Person objects in a UniquePersonList object. Each Person can have multiple roles (patient and/or caregiver) and contains their personal details, appointments, and relationships.
 - stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list, which is exposed to outsiders as an unmodifiable `ObservableList<Person>`. The UI can be bound to this list so that it automatically updates when the data changes.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
-- manages relationships between patients and caregivers through a system of NRIC references. A Person can be both a patient and a caregiver, with each role stored in a Set<Role>. Patient-caregiver relationships are tracked using Set<Nric> fields for both caregivers and patients.
+- manages relationships between patients and caregivers through a system of NRIC references. A Person can be both a patient and a caregiver, with each role stored in a `Set<Role>`. Patient-caregiver relationships are tracked using `Set<Nric>` fields for both caregivers and patients.
 - manages all appointments through an `AppointmentManager` object that prevents conflicting appointments and maintains appointment-person relationships
 - stores appointments for each `Person` in a `Set<Appointment>` that can be filtered and retrieved by time
 
@@ -221,7 +221,6 @@ Step 2. When a user adds an appointment through the `addapp` command, the follow
 
 1. The `ModelManager` retrieves the person using their NRIC.
 2. The appointment is validated for:
-
 - Start time being before end time
 - Start time being in the future
 - The person existing in the system
@@ -289,7 +288,7 @@ The centralized appointment management through `AppointmentManager` ensures that
 - Geriatrician can type fast
 - Prefers CLI over GUI
 - Needs to manage several patients
-  **Value proposition**: We specifically target Geriatricians by tailoring to their requirements of managing elderly patients when it comes to tracking chronic conditions, coordinating care, and maintaining regular follow-ups.
+- **Value proposition**: We specifically target Geriatricians by tailoring to their requirements of managing elderly patients when it comes to tracking chronic conditions, coordinating care, and maintaining regular follow-ups.
 
 ### User Stories
 
@@ -324,11 +323,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 _User stories for the MVP:_ Stories 4, 6 and 9 are for the MVP
 _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
-### Use Cases
+### **Use Cases**
 
 ---
 
-### **Use Case 1: Add a New Person**
+### Use Case 1: Add a New Person
 
 - **System**: CareLink
 - **Use Case**: UC01 - Add New Patient
@@ -361,7 +360,7 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
-### **Use Case 2: Find Person Details**
+### Use Case 2: Find Person Details
 
 - **System**: CareLink
 - **Use Case**: UC02 - Find Patient Details
@@ -392,7 +391,7 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
-### **Use Case 3: Adding a Caregiver and Linking to an Existing Patient**
+### Use Case 3: Adding a Caregiver and Linking to an Existing Patient
 
 - **System**: CareLink
 - **Use Case**: UC03 - Link Caregiver to an Existing Patient
@@ -432,7 +431,7 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
-### **Use Case 4: Update Person Details**
+### Use Case 4: Update Person Details
 
 - **System**: CareLink
 - **Use Case**: UC04 - Update Patient Details
@@ -466,7 +465,7 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
-### **Use Case 5: Delete Person Details**
+### Use Case 5: Delete Person Details
 
 - **System**: CareLink
 - **Use Case**: UC05 - Delete Patient Details
@@ -495,7 +494,7 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
-### **Use Case 6: Find Data by Medical Condition**
+### Use Case 6: Find Data by Medical Condition
 
 - **System**: CareLink
 - **Use Case**: UC06 - Find Data by Medical Condition
@@ -531,7 +530,7 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
-### **Use Case 7: Find Data by Patients**
+### Use Case 7: Find Data by Patients
 
 - **System**: CareLink
 - **Use Case**: UC07 - Find Data by Patients
@@ -567,7 +566,7 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
-### **Use Case 8: Schedule Appointments**
+### Use Case 8: Schedule Appointments
 
 - **System**: CareLink
 - **Use Case**: UC08 - Schedule Appointments
@@ -621,7 +620,7 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
-### **Use Case 9: Edit Existing Appointments**
+### Use Case 9: Edit Existing Appointments
 
 - **System**: CareLink
 - **Use Case**: UC09 - Edit Existing Appointments
@@ -677,7 +676,7 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
-### **Use Case 10: Delete Appointments**
+### Use Case 10: Delete Appointments
 
 - **System**: CareLink
 - **Use Case**: UC10 - Delete Appointments
@@ -727,7 +726,7 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
-### **Use Case 11: Add Note to Person**
+### Use Case 11: Add Note to Person
 
 - **System**: CareLink
 - **Use Case**: UC11 - Add Note to Person
@@ -767,7 +766,7 @@ _User stories for the final version:_ Stories 1 - 13 are for the final version.
 
 ---
 
-### **Use Case 12: Clear All Entries with Confirmation**
+### Use Case 12: Clear All Entries with Confirmation
 
 - **System**: CareLink
 - **Use Case**: UC12 - Clear All Entries with Confirmation

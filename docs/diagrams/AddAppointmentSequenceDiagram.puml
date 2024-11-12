@@ -29,6 +29,6 @@ deactivate AppManager
 Model --> AddAppCommand: success/failure
 deactivate Model
 
-AddAppCommand -> User: showSuccessMessage()/showErrorMessage()
+AddAppCommand --> User: showSuccessMessage()/showErrorMessage()
 deactivate AddAppCommand
 @enduml
