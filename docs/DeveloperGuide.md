@@ -35,7 +35,7 @@ title: Developer Guide
    * [Appendix C: Use Cases](#appendix-c-use-cases)
    * [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
    * [Appendix E: Glossary](#appendix-e-glossary)
-   * [Appendix F: Instructions for manual testing](#appendix-f-instructions-for-manual-testing)
+   * [Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)
    * [Appendix G: Planned Enhancements](#appendix-g-planned-enhancements)
    * [Appendix H: Effort](#appendix-h-effort)
 
@@ -1120,7 +1120,7 @@ Displays appointments that matches with the specified `HealthService`.
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Appendix F: Instructions for manual testing
+### Appendix F: Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
 
@@ -1230,7 +1230,7 @@ testers are expected to do more *exploratory* testing.
     * **Test case (invalid `Nric` field):** `add n|Jane i|T012345X p|90901282 s|F d|2002-10-10`
     * **Expected:** An error message is shown indicating that the `Nric` field is invalid and a prompt of what a valid `Nric` should be.
 
-#### Adding a patient with all fields: `addf`
+#### Adding a Patient With All Fields: `addf`
 
 **Command:** `addf`
 
@@ -1318,7 +1318,7 @@ testers are expected to do more *exploratory* testing.
 
 
 
-#### Deleting a patient: `delete`
+#### Deleting a Patient: `delete`
 
 **Command:** `delete`
 
@@ -1351,7 +1351,7 @@ testers are expected to do more *exploratory* testing.
    * **Expected:** No patient is deleted. Invalid command error details shown in the status message.
 
 
-#### Booking an upcoming appointment: `bookappt`
+#### Booking an Upcoming Appointment: `bookappt`
 
 **Command:** `bookappt`
 
@@ -1389,7 +1389,7 @@ testers are expected to do more *exploratory* testing.
     * **Test case:** `bookappt `
     * **Expected:** Error message is generated to show no valid parameters.
 
-#### Deleting an appointment: `deleteappt`
+#### Deleting an Appointment: `deleteappt`
 
 **Command:** `deleteappt`
 
@@ -1439,7 +1439,7 @@ testers are expected to do more *exploratory* testing.
 
 
 
-#### Viewing detailed information on a patient: `view`
+#### Viewing Detailed Information on a Patient: `view`
 
 **Command:** `view`
 
