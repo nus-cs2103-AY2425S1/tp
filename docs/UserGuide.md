@@ -662,7 +662,7 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
           - System displays a list of matching entries with indices.
           - User must re-enter the command using the index.
         - **No Matches**:
-          - Displays "No matches found" message.
+          - Displays relevant error message.
 - **Examples**:<br>
   ![Multiple matches example](images/multiple_match.png)<br>
   *When multiple matches are found, the system displays a list with indices*
