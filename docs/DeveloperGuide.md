@@ -1798,7 +1798,7 @@ applied to edited data, but specific expected results will differ. <br><br>
     2. **Test case**: `unmark-task 1` <br>
        **Expected**: `Task` 1 is marked as incomplete. Details of incomplete task are shown in the status message.
 
-    3. Similar test cases to Test cases 3, 4, and 5 in `Marking` a `Task` as complete can be tested for unmark-task. Expected results are similar. 
+    3. Similar test cases to Test cases 3, 4, and 5 in marking a `Task` as complete can be tested for unmark-task. Expected results are similar. 
 
 <br>
 
