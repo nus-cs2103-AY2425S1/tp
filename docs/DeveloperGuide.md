@@ -447,6 +447,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC6 - Clearing the app**
 
 **MSS**
@@ -493,6 +495,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System displays students sorted correctly
 
     Use case ends
+
+<div style="page-break-after: always;"></div>
 
    **Extensions**
 
