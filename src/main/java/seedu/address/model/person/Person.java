@@ -230,8 +230,6 @@ public class Person {
 
         Person otherPerson = (Person) other;
 
-        boolean roleEquals = (role.isEmpty() ? otherPerson.role.isEmpty() : role.get().equals(otherPerson.role.get()));
-
         boolean ownWeddingEquals = (ownWedding == null && otherPerson.ownWedding == null)
                 || ownWedding != null && ownWedding.equals(otherPerson.ownWedding);
 
@@ -239,8 +237,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                // && role.equals(otherPerson.role)
-                // && ownWeddingEquals
+                && role.equals(otherPerson.role)
                 && weddingJobs.equals(otherPerson.weddingJobs);
         //TODO HERE
         // commented them out since they give null pointer exception
