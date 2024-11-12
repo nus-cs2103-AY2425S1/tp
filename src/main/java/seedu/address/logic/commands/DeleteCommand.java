@@ -65,7 +65,7 @@ public class DeleteCommand extends Command {
      * @return A CommandResult containing a success message with details of the deleted persons.
      * @throws CommandException if any index in the indexList is out of bounds or if duplicates are found.
      */
-    public CommandResult handlePersonDeletion(Model model) throws CommandException {
+    private CommandResult handlePersonDeletion(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         validateIndexes(lastShownList.size(), indexList, false);
@@ -83,7 +83,7 @@ public class DeleteCommand extends Command {
      * @return A CommandResult containing a success message with details of the deleted deliveries.
      * @throws CommandException if any index in the indexList is out of bounds or if duplicates are found.
      */
-    public CommandResult handleDeliveryDeletion(Model model) throws CommandException {
+    private CommandResult handleDeliveryDeletion(Model model) throws CommandException {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
         List<Delivery> deliveryList = model.getFilteredDeliveryList();
@@ -105,7 +105,7 @@ public class DeleteCommand extends Command {
      * @param lastShownList The list of persons to delete from.
      * @return A list of persons that were deleted.
      */
-    public List<Person> deletePersons(Model model, List<Person> lastShownList) {
+    private List<Person> deletePersons(Model model, List<Person> lastShownList) {
         List<Person> personToDeleteList = new ArrayList<>();
         for (Index targetIndex : indexList) {
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
@@ -122,7 +122,7 @@ public class DeleteCommand extends Command {
      * @param deliveryList The list of deliveries to delete from.
      * @return A list of deliveries that were deleted.
      */
-    public List<Delivery> deleteDeliveries(Person inspectedPerson, List<Delivery> deliveryList) {
+    private List<Delivery> deleteDeliveries(Person inspectedPerson, List<Delivery> deliveryList) {
         List<Delivery> deliveryToDeleteList = new ArrayList<>();
         for (Index targetIndex : indexList) {
             Delivery deliveryToDelete = deliveryList.get(targetIndex.getZeroBased());
