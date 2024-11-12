@@ -154,10 +154,6 @@ It inherits from both `Storage` and `UserPrefStorage`, which means it can be tre
 
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
-
-Classes used by multiple components are in the `hallpointer.address.commons` package.
-
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -274,6 +270,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**:
 
 - **2a. Hall Pointer detects an error in the entered data**.
+
   - 2a1. Hall Pointer displays an error message with relevant details.
   - 2a2. CCA Leader re-enters corrected data.
   - Steps 2a1-2a2 are repeated until all data is correct.
@@ -622,6 +619,5 @@ Team Size: 5
    > - Example: An `add_points` command could let users award or modify points for members directly, without requiring a session link, accommodating various tracking needs.
 
    This enhancement would allow users to manage point allocations more flexibly, streamlining adjustments and providing greater control over point tracking.
-
 
 ---
