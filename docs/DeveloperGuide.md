@@ -536,10 +536,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: Ensure that there is at least one person in NetBook. This can be confirmed with the `list` command.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -547,15 +547,33 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Editing a person
+
+1. Editing a person while all persons are being shown
+
+    1. Prerequisites: Ensure that there is at least one person in NetBook. This can be confirmed with the `list` 
+    command.
+
+    1. Test case: `edit 1 n/[valid name e.g. Johnson]` <br>
+    Expected: The first person in the list is edited to have the given name. Details of the edited contact shown
+    in status message. 
+
+    1. Test case: `edit 1 n/[invalid name e.g. !!hnson]` <br>
+    Expected: No contact is edited. Error details shown in the status message.
+
+    1. Other incorrect edit commandsd to try: `edit`, `edit x n/[valid name e.g. Johnson]`, `...` (where x is larger
+    than list size) <br>
+    Expected: Similar to previous
+
 ### Sorting the list
 
 1. Sorting the list while all persons are being shown
 
     1. Test case: `sort recent`<br>
-       Expected: List is sorted by last seen date from recent to distant. Timestamp in the status bar is updated.
+       Expected: List is sorted by last seen date from recent to distant.
 
     1. Test case: `sort high`<br>
-       Expected: List is sorted by priority from high to low. Timestamp in the status bar is updated.
+       Expected: List is sorted by priority from high to low.
 
     1. Test case: `sort name`<br>
        Expected: List doesn't change. Error details shown in the status message. Status bar remains the same.
