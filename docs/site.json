@@ -1,8 +1,8 @@
 {
   "baseUrl": "",
   "titlePrefix": "UniLink",
-  "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "titleSuffix": "",
+  "faviconPath": "images/UniLink-Logo.png",
   "style": {
     "codeTheme": "light"
   },
