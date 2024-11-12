@@ -1289,6 +1289,8 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
+Team size: 5
+
 ### Ui
 * Ui can be adjusted such that long names and phone numbers will not be truncated when added into StudentManagerPro.
 
