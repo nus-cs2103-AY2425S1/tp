@@ -9,6 +9,9 @@ import static seedu.hiredfiredpro.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.hiredfiredpro.logic.parser.CliSyntax.PREFIX_SKILLS;
 import static seedu.hiredfiredpro.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.hiredfiredpro.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.hiredfiredpro.model.person.Person.DEFAULT_TAG_PENDING;
+import static seedu.hiredfiredpro.model.person.Person.TAG_HIRED;
+import static seedu.hiredfiredpro.model.person.Person.TAG_REJECTED;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -16,6 +19,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.hiredfiredpro.commons.core.index.Index;
 import seedu.hiredfiredpro.commons.util.CollectionUtil;
@@ -110,7 +114,18 @@ public class EditCommand extends Command {
         InterviewScore updatedInterviewScore = editPersonDescriptor.getInterviewScore()
                 .orElse(personToEdit.getInterviewScore());
 
+        Set<Tag> currentTags = personToEdit.getTags();
+        Set<Tag> statusTags = currentTags.stream()
+                .filter(tag -> tag.equalsIgnoreCase(TAG_HIRED) || tag.equalsIgnoreCase(TAG_REJECTED)
+                        || tag.equalsIgnoreCase(DEFAULT_TAG_PENDING))
+                .collect(Collectors.toSet());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        updatedTags = updatedTags.stream()
+                .filter(tag ->!(tag.equalsIgnoreCase(TAG_HIRED)) && !(tag.equalsIgnoreCase(TAG_REJECTED))
+                        && !(tag.equalsIgnoreCase(DEFAULT_TAG_PENDING)))
+                .collect(Collectors.toSet());
+        updatedTags.addAll(statusTags);
+
         Person editedPerson = new Person(updatedName, updatedJob, updatedPhone, updatedEmail, updatedSkills,
                 updatedInterviewScore, updatedTags);
         if (personToEdit.isHired()) {

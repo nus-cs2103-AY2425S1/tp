@@ -29,6 +29,11 @@ public interface Model {
     Person findPersonByNameAndJob(Name name, Job job);
 
     /**
+     * Returns an unmodifiable view of the sorted and filtered person list
+     */
+    ObservableList<Person> getSortedFilteredPersonList();
+
+    /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.hiredfiredpro.commons.util.ToStringBuilder;
 import seedu.hiredfiredpro.model.skill.Skill;
@@ -46,10 +47,7 @@ public class Person {
         this.email = email;
         this.skills.addAll(skills);
         this.interviewScore = interviewScore;
-        this.tags.addAll(tags);
-        if (!isHired() && !isRejected()) {
-            this.tags.add(DEFAULT_TAG_PENDING);
-        }
+        this.tags.addAll(validateStatus(tags));
     }
 
     public Name getName() {
@@ -102,6 +100,28 @@ public class Person {
     public void removeTag(Tag tag) {
         tags.remove(tag);
     }
+
+    /**
+     * Validates the status tags within the provided set of tags.
+     * Ensures there is only one valid status tag ("hired", "rejected", or "pending") in the set.
+     * If no status tags are found, or if multiple are found, it clears any existing status tags,
+     * sets the status tag to "pending" by default and returns the validated set of tags.
+     */
+    public Set<Tag> validateStatus(Set<Tag> tags) {
+        Set<Tag> statusTags = tags.stream()
+                .filter(tag -> tag.equalsIgnoreCase(TAG_HIRED) || tag.equalsIgnoreCase(TAG_REJECTED)
+                        || tag.equalsIgnoreCase(DEFAULT_TAG_PENDING))
+                .collect(Collectors.toSet());
+        if (statusTags.size() == 1) {
+            return tags;
+        }
+        Set<Tag> validatedTags = new HashSet<>(tags);
+        validatedTags.removeAll(statusTags);
+        validatedTags.add(DEFAULT_TAG_PENDING);
+
+        return validatedTags;
+    }
+
 
     /**
      * Returns true if both persons have the same name and same job.
