@@ -171,7 +171,8 @@ How the parsing works:
 
 <div markdown="span" class="alert alert-info">:information_source: **Note**: This model class diagram is simplified for readability. The implementation of the `Buyer`, `MeetUp` and `Property` models are given below.
 
-<img src="images/BuyerMeetupModelClassDiagram.png" width="550" />  
+<img src="images/BuyerMeetupModelClassDiagram.png" width="550" /> <br>
+
 <img src="images/PropertyModelClassDiagram.png" width="450" />
 </div>
 
@@ -254,7 +255,7 @@ A real estate agent who...
 * frequently needs to track client information such as their budget
 * hopes to schedule and manage appointments with the clients
 * hopes to ensure smooth communication with clients by sending updates on listings and appointment reminders
-* prefer desktop apps over other types
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps

@@ -31,6 +31,7 @@ Class MeetUp
 
 MeetUpList *--> "1" UniqueMeetUpList
 UniqueMeetUpList --> "~* all" MeetUp
+ModelManager --> "~* filtered" MeetUp
 }
 
 Package "Property" {
