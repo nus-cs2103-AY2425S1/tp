@@ -7,9 +7,9 @@ title: User Guide
 Cher is a streamlined, user-friendly application designed specifically for private school teachers who manage attendance
 and contact information manually. By digitizing these tasks, Cher helps educators save time, improve accuracy, and stay
 organized without the complexity of a full learning management system. With a simple command-based interface, Cher enables quick attendance marking,
-easy access to student and guardian contacts, and efficient data entry that caters to fast typists.
+easy access to student and parent contacts, and efficient data entry that caters to fast typists.
 This targeted tool empowers teachers to focus more on student engagement and less on administrative work,
-making classroom management easier and more effective.
+making contact and attendance management easier and more effective.
 
 * Table of Contents
 {:toc}
@@ -17,7 +17,7 @@ making classroom management easier and more effective.
 
 ## Target Users of Cher
 
-Cher is tailored specifically for **private school teachers** who are still managing attendance and contact information manually. This app is designed for educators who handle multiple classes and need a reliable, efficient way to track attendance and manage student contact information. Typical users include:
+Cher is tailored specifically for **private secondary school teachers** who are still managing attendance and contact information manually. This app is designed for educators who handle multiple classes and need a reliable, efficient way to track attendance and manage student contact information. Typical users include:
 
 - **Private school teachers** who wish to digitize their class management processes without the complexities of full-scale learning management systems.
 - **Tutors and small-class instructors** who handle individual or small-group sessions and need a straightforward tool to record student attendance and contact details.
@@ -71,7 +71,7 @@ By catering to private school teachers who are still using manual processes, Che
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -93,7 +93,7 @@ By catering to private school teachers who are still using manual processes, Che
 
 ### Viewing help : `help`
 
-Shows the comprehensive User Guide page and displays a floating window allowing the user to copy the URL of the user guide page.
+Shows the help window and displays a floating window allowing the user to copy the URL of the user guide page.
 
 ![help message](images/helpWindow.png)
 

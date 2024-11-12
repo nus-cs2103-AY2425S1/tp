@@ -458,7 +458,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed (>50 words per minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The user interface should be intuitive for users with minimal technical expertise.
-5.  Commands should be intuitive and simple such that a command can be typed and executed witin 30 seconds
+5.  Commands should be intuitive and simple such that a command can be typed and executed within 30 seconds
 6.  Command structures should be logical, consistent and memorable.
 7.  All texts should be of appropriate size (at least 11 pt) and hence, easily-readable for users of all ages.
 8.  The color scheme of the user interface should be high-contrast to accommodate for users of all accessibility levels.
@@ -754,7 +754,7 @@ Execute the following:
 1. Open the Help Window:
    1. Prerequisites: Ensure that the main window is open and the application is running.
    2. Test case: Press F1 or click the "Help" menu item, then click the dropdown menu button.
-      - Expected: The help window should appear, displaying the message: "Refer to the user guide: https://ay2425s1-cs2103t-w13-1.github.io/tp/UserGuide.html". No errors should be shown, and the user guide should be loaded in the web view.
+      - Expected: The help window should appear, displaying the message: "Refer to the user guide: https://ay2425s1-cs2103t-w13-1.github.io/tp/UserGuide.html". No errors should be shown.
 
 2. Focus on an already opened Help Window:
    1. Prerequisites: Ensure that the help window is open.
