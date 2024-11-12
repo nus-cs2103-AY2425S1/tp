@@ -9,7 +9,7 @@
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+<br/><br/>
 
 ## **Acknowledgements**
 
@@ -17,13 +17,13 @@ This app is based on AddressBook-Level3, courtesy of [SE-EDU](https://se-educati
 
 Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5), [Jackson](https://github.com/FasterXML/jackson)
 
---------------------------------------------------------------------------------------------------------------------
+<br/><br/>
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -50,6 +50,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
@@ -67,6 +69,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -83,6 +87,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -117,6 +123,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -139,6 +147,7 @@ The `Model` component,
 
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -155,7 +164,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -252,8 +261,7 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the contact being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -263,7 +271,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
 
@@ -629,7 +636,7 @@ Use case ends.
       Use case ends.
 
 <br></br>
-**Use case: UC16 - Assign a contact to a wedding**
+**Use case: UC17 - Assign a contact to a wedding**
 
 **MSS**
 
@@ -657,7 +664,7 @@ Use case ends.
 
 <br></br>
 
-**Use case: UC17 - Unassign a contact from a wedding**
+**Use case: UC18 - Unassign a contact from a wedding**
 
 **MSS**
 
@@ -699,7 +706,7 @@ Use case ends.
 * **CLI**: Command Line Interface
 * **GUI**: Graphic User Interface
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -711,8 +718,6 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
-
-<br></br>
 
 ### Contact Management
 
@@ -798,7 +803,6 @@ testers are expected to do more *exploratory* testing.
       **Expected:** The application will start with an empty contact list there is no data available or if the data has been corrupted.
       <br></br>
 
---------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Effort**
 
 To summarise, PlanPerfect extends the AB3 framework considerably by not only enhancing and adding new
@@ -826,7 +830,8 @@ management and changed the UI to increase its complexity and better reflect an i
   wedding management.
 - Achieving a passing code coverage of 76% reflecting thorough testing of core features.
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Planned Enhancements**
 
 Team size: 5
