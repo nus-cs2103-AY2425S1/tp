@@ -49,6 +49,7 @@ public class AddTeacherCommandParser implements Parser<AddTeacherCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
             PREFIX_ADDRESS, PREFIX_GENDER, PREFIX_CLASSES);
+        // Parse individual components
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -56,9 +57,7 @@ public class AddTeacherCommandParser implements Parser<AddTeacherCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
-
-        // TODO: Reformat AddStudentCommandParser.parseClasses to some ParserUtil class
-        Set<String> classes = AddStudentCommandParser.parseClasses(argMultimap.getValue(PREFIX_CLASSES).get());
+        Set<String> classes = ParserUtil.parseClasses(argMultimap.getValue(PREFIX_CLASSES).get());
 
         // Create the Teacher object
         Teacher teacher = new Teacher(name, gender, phone, email, address, tagList, subjectList, classes);

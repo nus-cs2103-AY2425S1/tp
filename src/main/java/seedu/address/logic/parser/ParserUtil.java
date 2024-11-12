@@ -10,7 +10,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
@@ -24,6 +23,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_EMPTY_CLASSES = "Classes cannot be empty.";
+    private static final String CLASS_NAME_VALIDATION_REGEX = "[A-Za-z0-9]+";
+    private static final String MESSAGE_INVALID_CLASS = "Classes should be valid!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -136,9 +138,8 @@ public class ParserUtil {
     public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
         requireNonNull(subjects);
 
-        // TODO: Reformat and remove magic literal
         if (subjects.isEmpty()) {
-            throw new ParseException("Subjects cannot be empty.");
+            throw new ParseException(Subject.MESSAGE_EMPTY_SUBJECTS);
         }
 
         final Set<Subject> subjectSet = new HashSet<>();
@@ -183,30 +184,34 @@ public class ParserUtil {
      */
     public static Set<String> parseClasses(String classes) throws ParseException {
         requireNonNull(classes);
-        String trimmedClasses = classes.trim();
 
-        // TODO: Reformat and remove magic literal
-        if (trimmedClasses.isEmpty()) {
-            throw new ParseException("Classes cannot be empty.");
-        }
-        String[] classArray = trimmedClasses.split(",");
         Set<String> classSet = new HashSet<>();
-        for (String className : classArray) {
-            classSet.add(className.trim());
+        String[] classArray = classes.split(",");
+
+        // Check if no class arguments were provided
+        if (classArray.length == 1 && classArray[0].isEmpty()) {
+            throw new ParseException(MESSAGE_EMPTY_CLASSES);
         }
+
+        for (String className : classArray) {
+            // Trim to remove unnecessary spaces
+            String trimmedClassName = className.trim();
+
+            // Validate each class name
+            if (!isValidClassName(trimmedClassName)) {
+                throw new ParseException(MESSAGE_INVALID_CLASS);
+            }
+
+            classSet.add(trimmedClassName);
+        }
+
         return classSet;
     }
 
     /**
-     * Parses a {@code Integer daysAttended} into a {@code DaysAttended}.
-     *
-     * @throws ParseException if the given {@code daysAttended} is invalid.
+     * Validates a class name.
      */
-    public static DaysAttended parseDaysAttended(Integer daysAttended) throws ParseException {
-        requireNonNull(daysAttended);
-        if (!DaysAttended.isValidDaysAttended(daysAttended)) {
-            throw new ParseException(DaysAttended.MESSAGE_CONSTRAINTS);
-        }
-        return new DaysAttended(daysAttended);
+    public static boolean isValidClassName(String className) {
+        return className.matches(CLASS_NAME_VALIDATION_REGEX);
     }
 }

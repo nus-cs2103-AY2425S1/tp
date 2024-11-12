@@ -84,10 +84,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
 
             if (keywordMap.containsKey(prefix)) {
                 // If switching `currentList` without adding anything in yet
-                if (currentList != null && currentList.isEmpty()) {
-                    throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
-                }
-
+                checkCurrentListNotEmpty(currentList);
                 currentList = keywordMap.get(prefix);
             } else if (currentList != null) {
                 currentList.add(keyword);
@@ -97,9 +94,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // Final check if last `currentList` is empty
-        if (currentList != null && currentList.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
-        }
+        checkCurrentListNotEmpty(currentList);
 
         namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
         phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
@@ -109,6 +104,12 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         tagsPredicate = new TagContainsKeywordsPredicate(tagsKeywords);
         subjectsPredicate = new SubjectContainsKeywordsPredicate(subjectsKeywords);
         classesPredicate = new ClassContainsKeywordsPredicate(classesKeywords);
+    }
+
+    private void checkCurrentListNotEmpty(List<String> currentList) throws ParseException {
+        if (currentList != null && currentList.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+        }
     }
 
     @Override
