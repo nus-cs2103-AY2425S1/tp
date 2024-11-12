@@ -513,4 +513,44 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect mark commands to try: `markabsentall`, `markabsentall x/ x/`, `markat`, `markat x/ x/ x/`, `...` (where x is any invalid prefix) <br>
    Expected: Similar to previous case
 
+## Appendix: Planned Enhancements
 
+### List students by other fields
+
+Currently, users may only list students by name. We plan to expand this to include other relevant fields such as tutorial group and assignments
+
+### View assignment details
+
+Currently, users cannot view assignment deadlines. We plan to implement a feature which can allow users to view assignment details.
+
+### Input for grade is case-sensitive
+
+Currently, the input for grade is case-sensitive which may be inconvenient for the user. We plan to make the input for grade case-insensitive.
+
+### Input for name in `view` is case-sensitive
+
+Currently, the input for name in `view` is case-sensitive which may be inconvenient for the user. We plan to make thg input for name in `view` case-insensitive. 
+
+### Prevent duplicate phone numbers.
+
+Currently, users can input duplicate phone numbers for different students. This is likely to be an error from the user and we plan to prompt the user about this error in the future.
+
+### Allow names to include certain special characters.
+
+Currently, names can only contain alphanumeric characters and characters like '/' are not allowed. We plan to allow characters like '/' to allow a wider range of names to be entered.
+
+### Sort the displayed list of students
+
+Currently, there is no way to sort the displayed list of students. We plan to add ways for the user to sort the displayed list of students (e.g. sorting by number of ungraded assignment)
+
+### Limit the length of inputs
+
+Currently, entering extremely large inputs may cause the UI to truncate the display of these fields. Inputs beyond a reasonable length are likely an error. We plan to limit the length of input to prevent truncation errors.
+
+### Increase specificity of deadline
+
+Currently, deadlines do not have a timestamp. We plan to allow deadlines to include a timestamp.
+
+### Track submission dates for assignments
+
+Currently, assignment does not track its associated submission date. We plan to allow users to input a relevant submission date.
