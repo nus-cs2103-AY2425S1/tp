@@ -248,7 +248,7 @@ Examples:
 
 The example below demonstrates how to use CareLink to link a patient and a caregiver:
 
-If you are following our guide, add the following commands to first add the two people to link:
+If you have cleared your data before testing out this feature, add the following commands to first add the two people to link:
 
 - `add n/Alex Y nric/S6283947C p/88888888 e/Alex@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/patient`
 - `add n/Bernice nric/S6382947A p/98765432 e/bernice@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/caregiver`
