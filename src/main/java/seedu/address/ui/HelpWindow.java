@@ -111,14 +111,14 @@ public class HelpWindow extends UiPart<Stage> {
                         "edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/ <INCOME>] "
                                 + "[t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE>] "
                                 + "[s/ <STATUS>]",
-                        "edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 "
+                        "edit 69 n/ TAN LESHEW p/ 97337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 "
                                 + "t/ bronze ra/ Specialist in eye care s/ urgent"),
                 new CommandSummary("List All Clients",
                         "list",
                         "list"),
                 new CommandSummary("Filter Client List",
-                        "filter [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/ <INCOME>] "
-                                + "[t/ <TIER>] [r/ <REMARK>] [s/ <STATUS>]",
+                        "filter [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] "
+                                + "[i/ (=/</>) <INCOME>] [t/ <TIER>] [r/ <REMARK>] [s/ <STATUS>]",
                         "filter n/ TAN LESHEW t/ gold"),
                 new CommandSummary("View Client Details",
                         "view <INDEX>",
