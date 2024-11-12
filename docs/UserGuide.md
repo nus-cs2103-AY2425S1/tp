@@ -580,7 +580,7 @@ Furthermore, certain edits can cause MedDict to behave in unexpected ways (e.g.,
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When using sample dataset**, if you were to use addR on the sample dataset, on some devices, there were occasional occurrences of a bug where while trying to add remarks to a person, it would add the remarks to all people in the sample database. Thus, to avoid this, we recommend you to use the `clear` command and try out the different commands on a fresh dataset of your own creation.
+3. **When using sample dataset**, if you were to use `addR` on the sample dataset, on some devices, there were occasional occurrences of a bug where it would add the remarks to all people in the sample database. Thus, to avoid this, we recommend you to use the `clear` command and try out the different commands on a fresh dataset of your own creation.
 
 <div style="page-break-after: always;"></div>
 
