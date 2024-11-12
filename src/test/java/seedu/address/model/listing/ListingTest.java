@@ -13,8 +13,6 @@ import seedu.address.testutil.ListingBuilder;
 public class ListingTest {
     @Test
     public void isSameListing() {
-        // name address and seller
-
         // same object -> returns true
         assertTrue(PASIR_RIS.isSameListing(PASIR_RIS));
 
@@ -38,7 +36,6 @@ public class ListingTest {
 
     @Test
     public void equals() {
-
         // same values -> return true
         Listing listingCopy = new ListingBuilder(PASIR_RIS).build();
         assertTrue(PASIR_RIS.equals(listingCopy));

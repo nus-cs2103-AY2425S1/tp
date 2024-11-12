@@ -22,20 +22,22 @@ class MainUiTest extends ApplicationTest {
 
     @Test
     void main_giveWarning_success() {
+        StringBuilder logOutput = new StringBuilder();
+        Logger logger = Logger.getLogger(Main.class.getName());
+        logger.addHandler(new java.util.logging.ConsoleHandler() {
+            @Override
+            public void publish(java.util.logging.LogRecord record) {
+                logOutput.append(record.getMessage()).append("\n");
+            }
+        });
+
         try {
             Main.main(new String[]{});
-            StringBuilder logOutput = new StringBuilder();
-            Logger logger = Logger.getLogger(Main.class.getName());
-            logger.addHandler(new java.util.logging.ConsoleHandler() {
-                @Override
-                public void publish(java.util.logging.LogRecord record) {
-                    logOutput.append(record.getMessage()).append("\n");
-                }
-            });
+
             assertEquals(logOutput.toString(),
                     "The warning about Unsupported JavaFX configuration below (if any) can be ignored.");
         } catch (IllegalStateException e) {
-            //do nothing
+            logger.warning("Caught IllegalStateException: " + e.getMessage());
         }
     }
 

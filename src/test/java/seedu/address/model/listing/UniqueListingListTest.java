@@ -19,147 +19,164 @@ import seedu.address.testutil.ListingBuilder;
 
 public class UniqueListingListTest {
 
-    private final UniqueListingList uniqueListingList = new UniqueListingList();
+    private final UniqueListingList UNIQUE_LISTING_LIST = new UniqueListingList();
 
     @Test
     public void contains_nullListing_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueListingList.contains(null));
+        assertThrows(NullPointerException.class, () -> UNIQUE_LISTING_LIST.contains(null));
     }
 
     @Test
     public void contains_listingNotInList_returnsFalse() {
-        assertFalse(uniqueListingList.contains(PASIR_RIS));
+        assertFalse(UNIQUE_LISTING_LIST.contains(PASIR_RIS));
     }
 
     @Test
     public void contains_listingInList_returnsTrue() {
-        uniqueListingList.add(PASIR_RIS);
-        assertTrue(uniqueListingList.contains(PASIR_RIS));
+        UNIQUE_LISTING_LIST.add(PASIR_RIS);
+
+        assertTrue(UNIQUE_LISTING_LIST.contains(PASIR_RIS));
     }
 
     @Test
     public void contains_listingWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueListingList.add(PASIR_RIS);
+        UNIQUE_LISTING_LIST.add(PASIR_RIS);
         Listing editedListing = new ListingBuilder(PASIR_RIS).build();
-        assertTrue(uniqueListingList.contains(editedListing));
+
+        assertTrue(UNIQUE_LISTING_LIST.contains(editedListing));
     }
 
     @Test
     public void add_nullListing_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueListingList.add(null));
+        assertThrows(NullPointerException.class, () -> UNIQUE_LISTING_LIST.add(null));
     }
 
     @Test
     public void add_duplicateListing_throwsDuplicateListingException() {
-        uniqueListingList.add(PASIR_RIS);
-        assertThrows(DuplicateListingException.class, () -> uniqueListingList.add(PASIR_RIS));
+        UNIQUE_LISTING_LIST.add(PASIR_RIS);
+
+        assertThrows(DuplicateListingException.class, () -> UNIQUE_LISTING_LIST.add(PASIR_RIS));
     }
 
     @Test
     public void setListing_nullTargetListing_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueListingList.setListing(null, PASIR_RIS));
+        assertThrows(NullPointerException.class, () -> UNIQUE_LISTING_LIST.setListing(null, PASIR_RIS));
     }
 
     @Test
     public void setListing_nullEditedListing_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueListingList.setListing(PASIR_RIS, null));
+        assertThrows(NullPointerException.class, () -> UNIQUE_LISTING_LIST.setListing(PASIR_RIS, null));
     }
 
     @Test
     public void setListing_targetListingNotInList_throwsListingNotFoundException() {
-        assertThrows(ListingNotFoundException.class, () -> uniqueListingList.setListing(PASIR_RIS, PASIR_RIS));
+        assertThrows(ListingNotFoundException.class, () -> UNIQUE_LISTING_LIST.setListing(PASIR_RIS, PASIR_RIS));
     }
 
     @Test
     public void setListing_editedListingIsSameListing_success() {
-        uniqueListingList.add(PASIR_RIS);
-        uniqueListingList.setListing(PASIR_RIS, PASIR_RIS);
+        UNIQUE_LISTING_LIST.add(PASIR_RIS);
+        UNIQUE_LISTING_LIST.setListing(PASIR_RIS, PASIR_RIS);
+
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
         expectedUniqueListingList.add(PASIR_RIS);
-        assertEquals(uniqueListingList, expectedUniqueListingList);
+
+        assertEquals(UNIQUE_LISTING_LIST, expectedUniqueListingList);
     }
 
     @Test
     public void setListing_editedListingHasSameIdentity_success() {
-        uniqueListingList.add(PASIR_RIS);
+        UNIQUE_LISTING_LIST.add(PASIR_RIS);
         Listing editedListing = new ListingBuilder(PASIR_RIS).build();
-        uniqueListingList.setListing(PASIR_RIS, editedListing);
+        UNIQUE_LISTING_LIST.setListing(PASIR_RIS, editedListing);
+
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
         expectedUniqueListingList.add(editedListing);
-        assertEquals(uniqueListingList, expectedUniqueListingList);
+
+        assertEquals(UNIQUE_LISTING_LIST, expectedUniqueListingList);
     }
 
     @Test
     public void setListing_editedListingHasDifferentIdentity_success() {
-        uniqueListingList.add(PASIR_RIS);
-        uniqueListingList.setListing(PASIR_RIS, TAMPINES);
+        UNIQUE_LISTING_LIST.add(PASIR_RIS);
+        UNIQUE_LISTING_LIST.setListing(PASIR_RIS, TAMPINES);
+
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
         expectedUniqueListingList.add(TAMPINES);
-        assertEquals(uniqueListingList, expectedUniqueListingList);
+
+        assertEquals(UNIQUE_LISTING_LIST, expectedUniqueListingList);
     }
 
     @Test
     public void setListing_editedListingHasNonUniqueIdentity_throwsDuplicateListingException() {
-        uniqueListingList.add(PASIR_RIS);
-        uniqueListingList.add(TAMPINES);
-        assertThrows(DuplicateListingException.class, () -> uniqueListingList.setListing(PASIR_RIS, TAMPINES));
+        UNIQUE_LISTING_LIST.add(PASIR_RIS);
+        UNIQUE_LISTING_LIST.add(TAMPINES);
+
+        assertThrows(DuplicateListingException.class, () -> UNIQUE_LISTING_LIST.setListing(PASIR_RIS, TAMPINES));
     }
 
     @Test
     public void remove_nullListing_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueListingList.remove(null));
+        assertThrows(NullPointerException.class, () -> UNIQUE_LISTING_LIST.remove(null));
     }
 
     @Test
     public void remove_listingDoesNotExist_throwsListingNotFoundException() {
-        assertThrows(ListingNotFoundException.class, () -> uniqueListingList.remove(PASIR_RIS));
+        assertThrows(ListingNotFoundException.class, () -> UNIQUE_LISTING_LIST.remove(PASIR_RIS));
     }
 
     @Test
     public void remove_existingListing_removesListing() {
-        uniqueListingList.add(PASIR_RIS);
-        uniqueListingList.remove(PASIR_RIS);
+        UNIQUE_LISTING_LIST.add(PASIR_RIS);
+        UNIQUE_LISTING_LIST.remove(PASIR_RIS);
+
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
-        assertEquals(expectedUniqueListingList, uniqueListingList);
+
+        assertEquals(expectedUniqueListingList, UNIQUE_LISTING_LIST);
     }
 
     @Test
     public void setListings_nullUniqueListingList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueListingList.setListings((UniqueListingList) null));
+        assertThrows(NullPointerException.class, () -> UNIQUE_LISTING_LIST.setListings((UniqueListingList) null));
     }
 
     @Test
     public void setListings_uniqueListingList_replacesOwnListWithProvidedUniqueListingList() {
-        uniqueListingList.add(PASIR_RIS);
+        UNIQUE_LISTING_LIST.add(PASIR_RIS);
+
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
         expectedUniqueListingList.add(TAMPINES);
-        uniqueListingList.setListings(expectedUniqueListingList);
-        assertEquals(expectedUniqueListingList, uniqueListingList);
+
+        UNIQUE_LISTING_LIST.setListings(expectedUniqueListingList);
+        assertEquals(expectedUniqueListingList, UNIQUE_LISTING_LIST);
     }
 
     @Test
     public void setListings_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueListingList.setListings((List<Listing>) null));
+        assertThrows(NullPointerException.class, () -> UNIQUE_LISTING_LIST.setListings((List<Listing>) null));
     }
 
     @Test
     public void setListings_list_replacesOwnListWithProvidedList() {
-        uniqueListingList.add(PASIR_RIS);
+        UNIQUE_LISTING_LIST.add(PASIR_RIS);
         List<Listing> listingList = Collections.singletonList(TAMPINES);
-        uniqueListingList.setListings(listingList);
+        UNIQUE_LISTING_LIST.setListings(listingList);
+
         UniqueListingList expectedUniqueListingList = new UniqueListingList();
         expectedUniqueListingList.add(TAMPINES);
-        assertEquals(expectedUniqueListingList, uniqueListingList);
+
+        assertEquals(expectedUniqueListingList, UNIQUE_LISTING_LIST);
     }
 
     @Test
     public void setListings_listWithDuplicateListings_throwsDuplicateListingException() {
         List<Listing> listWithDuplicateListings = Arrays.asList(PASIR_RIS, PASIR_RIS);
-        assertThrows(DuplicateListingException.class, () -> uniqueListingList.setListings(listWithDuplicateListings));
+
+        assertThrows(DuplicateListingException.class, () -> UNIQUE_LISTING_LIST.setListings(listWithDuplicateListings));
     }
 
     @Test
     public void toStringMethod() {
-        assertEquals(uniqueListingList.asUnmodifiableObservableList().toString(), uniqueListingList.toString());
+        assertEquals(UNIQUE_LISTING_LIST.asUnmodifiableObservableList().toString(), UNIQUE_LISTING_LIST.toString());
     }
 }

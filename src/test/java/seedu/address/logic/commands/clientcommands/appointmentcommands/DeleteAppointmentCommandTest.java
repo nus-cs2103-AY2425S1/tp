@@ -5,19 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonWithName;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalNames;
-
-import java.util.List;
-import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,32 +22,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.name.Name;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 public class DeleteAppointmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new Listings());
-
-    @Test
-    public void execute_validBuyerName_success() {
-        Person personToDeleteAppointment = CARL;
-        DeleteAppointmentCommand deleteAppointmentCommand =
-                new DeleteAppointmentCommand(INDEX_THIRD_PERSON);
-
-        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
-                personToDeleteAppointment.getName());
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
-        Person personWithoutAppointment = new Buyer(personToDeleteAppointment.getName(),
-                    personToDeleteAppointment.getPhone(),
-                    personToDeleteAppointment.getEmail(),
-                    personToDeleteAppointment.getTags(),
-                    Appointment.EMPTY_APPOINTMENT);
-        expectedModel.setPerson(personToDeleteAppointment, personWithoutAppointment);
-
-        assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
-    }
 
     @Test
     public void execute_validBuyerIndex_success() {
@@ -77,7 +51,7 @@ public class DeleteAppointmentCommandTest {
     }
 
     @Test
-    public void execute_validSellerName_success() {
+    public void execute_validSellerIndex_success() {
         Person personToDeleteAppointment = ALICE;
         DeleteAppointmentCommand deleteAppointmentCommand =
                 new DeleteAppointmentCommand(INDEX_FIRST_PERSON);
@@ -86,11 +60,12 @@ public class DeleteAppointmentCommandTest {
                 personToDeleteAppointment.getName());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
-        Person personWithoutAppointment = new Buyer(personToDeleteAppointment.getName(),
+        Person personWithoutAppointment = new Seller(personToDeleteAppointment.getName(),
                 personToDeleteAppointment.getPhone(),
                 personToDeleteAppointment.getEmail(),
                 personToDeleteAppointment.getTags(),
                 Appointment.EMPTY_APPOINTMENT);
+
         expectedModel.setPerson(personToDeleteAppointment, personWithoutAppointment);
 
         assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
@@ -105,13 +80,10 @@ public class DeleteAppointmentCommandTest {
     }
 
     @Test
-    public void execute_invalidNameFilteredList_throwsCommandException() {
-        Random random = new Random();
-        List<Name> typicalNames = getTypicalNames();
-        int randomIndex = random.nextInt(typicalNames.size() - 2);
-        showPersonWithName(model, typicalNames.get(randomIndex));
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Index invalidIndex = Index.fromZeroBased(model.getFilteredPersonList().size() + 1);
+        Index invalidIndex = INDEX_SECOND_PERSON;
 
         DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(invalidIndex);
 

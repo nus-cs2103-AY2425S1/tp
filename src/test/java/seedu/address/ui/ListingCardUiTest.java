@@ -41,9 +41,9 @@ public class ListingCardUiTest extends ApplicationTest {
 
     private ListingCard listingCard;
     private Listing sampleListing;
-    private final Seller sampleSeller = (Seller) createSampleSeller();
-    private final Buyer sampleBuyerOne = (Buyer) createSampleBuyerOne();
-    private final Buyer sampleBuyerTwo = (Buyer) createSampleBuyerTwo();
+    private final Seller SAMPLE_SELLER = createSampleSeller();
+    private final Buyer FIRST_SAMPLE_BUYER = createFirstSampleBuyer();
+    private final Buyer SECOND_SAMPLE_BUYER = createSecongSampleBuyer();
 
 
     @BeforeEach
@@ -144,8 +144,8 @@ public class ListingCardUiTest extends ApplicationTest {
      */
     private Listing createSampleListing() {
         Set<Person> buyersSet = new HashSet<>();
-        buyersSet.add(sampleBuyerOne);
-        buyersSet.add(sampleBuyerTwo);
+        buyersSet.add(FIRST_SAMPLE_BUYER);
+        buyersSet.add(SECOND_SAMPLE_BUYER);
 
         return new Listing(
                 new Name("Sample Listing"),
@@ -153,7 +153,7 @@ public class ListingCardUiTest extends ApplicationTest {
                 new Price("500000", new BigDecimal(500000)),
                 new Area("100"),
                 Region.NORTH,
-                sampleSeller,
+                SAMPLE_SELLER,
                 buyersSet
         );
     }
@@ -163,7 +163,7 @@ public class ListingCardUiTest extends ApplicationTest {
      */
     private Listing createSampleTruncatedListing() {
         Set<Person> buyersSet = new HashSet<>();
-        buyersSet.add(createSampleTruncatedBuyerOne());
+        buyersSet.add(createTruncatedSampleBuyer());
 
         return new Listing(
                 new Name("Sample Listinggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"),
@@ -180,7 +180,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Seller object for testing.
      */
-    private Person createSampleSeller() {
+    private Seller createSampleSeller() {
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag("clients"));
 
@@ -196,7 +196,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Seller object for testing (with truncation).
      */
-    private Person createSampleTruncatedSeller() {
+    private Seller createSampleTruncatedSeller() {
         Set<Tag> tagSet = new HashSet<>();
 
         return new Seller(
@@ -211,7 +211,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Buyer object for testing.
      */
-    private Person createSampleBuyerOne() {
+    private Buyer createFirstSampleBuyer() {
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag("friends"));
         tagSet.add(new Tag("colleagues"));
@@ -228,7 +228,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Buyer object for testing (with truncation).
      */
-    private Person createSampleTruncatedBuyerOne() {
+    private Buyer createTruncatedSampleBuyer() {
         Set<Tag> tagSet = new HashSet<>();
 
         return new Buyer(
@@ -243,7 +243,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Buyer object for testing.
      */
-    private Person createSampleBuyerTwo() {
+    private Buyer createSecongSampleBuyer() {
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag("friends"));
 

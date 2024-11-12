@@ -22,23 +22,24 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final AddressBook ADDRESS_BOOK = new AddressBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), ADDRESS_BOOK.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> ADDRESS_BOOK.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        ADDRESS_BOOK.resetData(newData);
+
+        assertEquals(newData, ADDRESS_BOOK);
     }
 
     @Test
@@ -48,76 +49,79 @@ public class AddressBookTest {
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> ADDRESS_BOOK.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> ADDRESS_BOOK.hasPerson(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(ADDRESS_BOOK.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        ADDRESS_BOOK.addPerson(ALICE);
+
+        assertTrue(ADDRESS_BOOK.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+        ADDRESS_BOOK.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).buildBuyer();
-        assertTrue(addressBook.hasPerson(editedAlice));
+
+        assertTrue(ADDRESS_BOOK.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> ADDRESS_BOOK.getPersonList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
-        assertEquals(expected, addressBook.toString());
+        String expected = AddressBook.class.getCanonicalName() + "{persons=" + ADDRESS_BOOK.getPersonList() + "}";
+
+        assertEquals(expected, ADDRESS_BOOK.toString());
     }
     @Test
     public void equals() {
-        assertTrue(addressBook.equals(addressBook));
+        assertTrue(ADDRESS_BOOK.equals(ADDRESS_BOOK));
 
-        assertFalse(addressBook.equals(null));
+        assertFalse(ADDRESS_BOOK.equals(null));
 
-        assertFalse(addressBook.equals(5));
+        assertFalse(ADDRESS_BOOK.equals(5));
 
         AddressBook addressBookCopy = new AddressBook();
-        assertTrue(addressBook.equals(addressBookCopy));
+        assertTrue(ADDRESS_BOOK.equals(addressBookCopy));
 
-        addressBook.addPerson(ALICE);
+        ADDRESS_BOOK.addPerson(ALICE);
         addressBookCopy.addPerson(new PersonBuilder(ALICE).buildBuyer());
-        assertTrue(addressBook.equals(addressBookCopy));
+        assertTrue(ADDRESS_BOOK.equals(addressBookCopy));
 
         AddressBook differentAddressBook = new AddressBook();
         differentAddressBook.addPerson(new PersonBuilder().withName("Bob").buildBuyer());
-        assertFalse(addressBook.equals(differentAddressBook));
+        assertFalse(ADDRESS_BOOK.equals(differentAddressBook));
     }
 
     @Test
     public void hashCodeTest() {
-        assertEquals(addressBook.hashCode(), addressBook.hashCode());
+        assertEquals(ADDRESS_BOOK.hashCode(), ADDRESS_BOOK.hashCode());
 
         AddressBook addressBookCopy = new AddressBook();
-        assertEquals(addressBook.hashCode(), addressBookCopy.hashCode());
+        assertEquals(ADDRESS_BOOK.hashCode(), addressBookCopy.hashCode());
 
-        addressBook.addPerson(ALICE);
+        ADDRESS_BOOK.addPerson(ALICE);
         addressBookCopy.addPerson(new PersonBuilder(ALICE).buildBuyer());
-        assertEquals(addressBook.hashCode(), addressBookCopy.hashCode());
+        assertEquals(ADDRESS_BOOK.hashCode(), addressBookCopy.hashCode());
 
         AddressBook differentAddressBook = new AddressBook();
         differentAddressBook.addPerson(new PersonBuilder().withName("Bob").buildBuyer());
-        assertFalse(addressBook.hashCode() == differentAddressBook.hashCode());
+        assertFalse(ADDRESS_BOOK.hashCode() == differentAddressBook.hashCode());
     }
 
 

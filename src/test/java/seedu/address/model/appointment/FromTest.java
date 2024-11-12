@@ -8,7 +8,11 @@ import org.junit.jupiter.api.Test;
 
 public class FromTest {
 
-    public static final String INVALID_FORMAT = "9am";
+    private static final String INVALID_FORMAT = "9am";
+    private static final String INVALID_FROM = "25:00";
+    private static final String VALID_FROM = "0800";
+    private static final String OTHER_FROM = "0900";
+
     @Test
     public void constructor_nullValues_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new From(null));
@@ -21,7 +25,7 @@ public class FromTest {
 
     @Test
     public void equals() {
-        From from = new From("0800");
+        From from = new From(VALID_FROM);
         // null value -> returns false
         assertFalse(from.equals(null));
 
@@ -32,17 +36,15 @@ public class FromTest {
         assertTrue(from.equals(from));
 
         // same value -> returns true
-        From otherDate = new From("0800");
+        From otherDate = new From(VALID_FROM);
         assertTrue(from.equals(otherDate));
 
         // different value -> returns false
-        otherDate = new From("0900");
+        otherDate = new From(OTHER_FROM);
         assertFalse(from.equals(otherDate));
     }
     @Test
     public void parseTime_invalidFormat_throwsIllegalArgumentException() {
-        String invalidTime = "25:00";
-
-        assertThrows(IllegalArgumentException.class, () -> new From(invalidTime));
+        assertThrows(IllegalArgumentException.class, () -> new From(INVALID_FROM));
     }
 }

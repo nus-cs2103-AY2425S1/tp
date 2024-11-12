@@ -32,7 +32,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newBuyer_success() {
-        Buyer validBuyer = (Buyer) new PersonBuilder().buildBuyer();
+        Buyer validBuyer = new PersonBuilder().buildBuyer();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
         expectedModel.addPerson(validBuyer);
@@ -44,7 +44,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newSeller_success() {
-        Seller validSeller = (Seller) new PersonBuilder().buildSeller();
+        Seller validSeller = new PersonBuilder().buildSeller();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new Listings());
         expectedModel.addPerson(validSeller);

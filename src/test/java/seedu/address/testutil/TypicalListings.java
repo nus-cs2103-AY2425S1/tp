@@ -81,12 +81,6 @@ public class TypicalListings {
         return listings;
     }
 
-    public static List<Name> getTypicalNames() {
-        return new ArrayList<>(Arrays.asList(PASIR_RIS.getName(), TAMPINES.getName(), KENT_RIDGE.getName(),
-                BUONA_VISTA.getName(), SENGKANG.getName(), PUNGGOL.getName(),
-                SENTOSA.getName()));
-    }
-
     public static List<Listing> getTypicalPropertyListing() {
         return new ArrayList<>(Arrays.asList(PASIR_RIS, TAMPINES, KENT_RIDGE,
                 BUONA_VISTA, SENGKANG, PUNGGOL, SENTOSA));

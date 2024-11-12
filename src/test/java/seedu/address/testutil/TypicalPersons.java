@@ -56,8 +56,6 @@ public class TypicalPersons {
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).buildSeller();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
-
     private TypicalPersons() {} // prevents instantiation
 
     /**
@@ -73,10 +71,5 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
-    }
-    public static List<Name> getTypicalNames() {
-        return new ArrayList<>(Arrays.asList(ALICE.getName(), BENSON.getName(), CARL.getName(),
-                                            DANIEL.getName(), ELLE.getName(), FIONA.getName(),
-                                            GEORGE.getName()));
     }
 }
