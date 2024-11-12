@@ -537,13 +537,15 @@ automating tasks such as testing, building and deployment with each code update 
 Github Actions utilises `.yaml` configuration files and can be found in the `.github/workflows` folder.
 <br><br>
 Github Actions operate in this manner: 
-1. Trigger: Github Actions workflows are triggered but events such as `push` and `pull_request`
+<br>
+
+1. Trigger: Github Actions workflows are triggered but events such as `push` and `pull_request`.
 2. Jobs and Runners: A workflow consists of one or more jobs, each containing a series of steps.
-Each job runs on a Github-hosted runner (a virtual machine or environment) to perform the defined tasks.
+Each job runs on a Github-hosted runner (a virtual machine or environment) to perform the defined tasks.<br>
 3. Steps: Within each job, steps are defined to execute certain tasks, such as installing dependencies, running tests, or 
-building the application.
+building the application.<br>
 4. Feedback: After a workflow completes, Github Actions provide feedback on the success or failure of each job.
-Developers receive notifications for failed workflows, allowing them to quickly address issues before merging or deploying code.
+Developers receive notifications for failed workflows, allowing them to quickly address issues before merging or deploying code.<br>
 5. Deployment: Once a workflow has succeeded, Github Actions can deploy the application, ensuring that only thoroughly tested
 code reaches users.
 
@@ -566,7 +568,7 @@ The dependencies used for automated UI testing is [JUnit 5]() and [TestFX]().
 Automated Github testing is trigged or every push and pull request made to the Github remote repository and is conducted
 on all 3 major OSes: MacOS, Windows and Ubuntu. 
 
-<span class="alert">
+<span class="alert" markdown="span">
 Automated UI testing is disabled for Ubunutu on the Github Testing workflow due to the inability to create a virtual testin
 environment.
 </span>
@@ -576,6 +578,8 @@ environment.
 Code coverage reports are provided to developers in two methods: JaCoCoTest reports and CodeCov reports.
 
 JaCoCoTest reports are generated using `build.gradle` and CodeCov reports are generated on every Github Workflow.
+
+As of v1.5.2 release, the test coverage for EZSTATES is [95%]().
 
 Usage: 
 1. JaCoCoTest reports
@@ -590,24 +594,22 @@ set of tests, especially before merging any significant changes. The HTML report
 
 2. CodeCov reports
 - Configuration: To configure CodeCov, a `.yaml` workflow file is set up within the `.github/workflows` directory of the repository.
-
-<div class="note" markdown="span"> 
-A CodeCov token is required to set up CodeCov reports on Github and it should be stored as a Github Secret
-for authentication. 
-</div>
-
 - Running reports: CodeCov reports are automatically generated and uploaded with each push or pull_request event as configured in the GitHub Actions workflow. 
 After each run, the workflow will produce a detailed reporton CodeCov, accessible through links provided in the Github pull request page.
 - Usage: CodeCov reports provide information on whether coverage has improved or decreased and highlight specific lines or files affected by new or modified code.
 Additionally, CodeCov offers visualization tools for in-depth inspection of coverage across functions and classes, allowing developers to target untested areas in their testing efforts.
-
+<br><br>
+<div class="note" markdown="span"> 
+A CodeCov token is required to set up CodeCov reports on Github and it should be stored as a Github Secret
+for authentication. 
+</div>
 ## Features and Implementation
 
 ### Client Management
 
 ![PersonClassDiagram](images/dg/PersonClassDiagram.png)
 
-All clients are `Person` objects in EZSTATES. A `Person` is an abstract class which consists of 6 essential fields and 1
+All clients are `Persons` in EZSTATES. A `Person` is an abstract class which consists of 6 essential fields and 1
 essential abstract method `getRole()`.
 
 **Role**
@@ -639,42 +641,237 @@ created.
     **Overview**
     <br><br>
     ![BuyerClassDiagram](images/dg/BuyerClassDiagram.png)
-    The `buyer` command adds a `Buyer` to EZSTATES. A `Buyer` object inherits the `Person` class and is associated with a 
+    The `buyer` command adds a `Buyer` to EZSTATES. `Buyer` inherits the `Person` class and is associated with a 
     `BUYER` role.
     <br><br>
     **Implementation**
-    ![AddBuyerSequenceDiagram](images/dg/AddBuyerSequenceDiagram.png)
-        <br><br>
-1. User runs a `buyer` command with valid inputs
-2. Command is parsed by `EzstatesParser` and a `AddClientProfileParser` is created to parse the `buyer` command which creates a 
-`AddBuyerProfileCommand` that 
-3. 
+    <div style="text-align: center;">
+    <img src="images/dg/AddBuyerSequenceDiagram.png" alt="AddBuyerSequenceDiagram" style="width:80%; max-width:1000px;">
+    </div>
+   <br>
+   <br>
+   
+   1. User runs a `buyer` command with valid inputs.  
+   2. Command is parsed by `EzstatesParser` and a `AddClientProfileParser` is created to parse the `buyer` command which creates a 
+   `AddBuyerProfileCommand` that implicitly creates `AddClientProfileCommand`. 
+   3. `AddClientProfileCommand` handles the logic to detect duplicate `Buyer`. A `buyer` is added to the `Model` if it is a new `buyer`, else a 
+   `CommandException` is thrown.
+   4. Finally, `AddClientProfileCommand` returns a `CommandResult`, which encapsulates a response to the user's input.
 
-3. #### Add seller
+2. #### Add seller
+   **Overview**
+   <br>
+    The `seller` command adds a `Seller` to EZSTATES. `Seller` inherits the `Person` class and is associated with a 
+    `SELLER` role.
+    <br><br>
+   **Implementation**
+    <br>
+    The execution of `seller` command mirrors the execution of the `buyer` command.
+   1. User runs a `seller` command with valid inputs.
+   2. Command is parsed by `EzstatesParser` and a `AddClientProfileParser` is created to parse the `buyer` command which creates a
+   `AddSellerProfileCommand` that implicitly creates `AddSellerProfileCommand`.
+   3. `AddClientProfileCommand` handles the logic to detect duplicate `Seller`. A `seller` is added to the `Model` if it is a new `seller`, else a
+      `CommandException` is thrown.
+   4. Finally, `AddClientProfileCommand` returns a `CommandResult` with a corresponding success message.
+   
 #### Edit client
+
+**Overview**
+The `editclient` command edits a `client`. 
+
+**Implementation**
+<div style="text-align: center;">
+    <img src="images/dg/EditClientSequenceDiagram.png" alt="EditClientSequenceDiagram" style="width:80%; max-width:1000px;">
+    </div>
+
+1. User runs a `editclient` command with valid `INDEX` and valid prefixes.
+2. Command is parsed by `EzstatesParser` and a `EditClientCommandParser` is created to parse the `editclient` command which 
+creates `EditClientCommand`.
+3. `EditClientCommand` retrives the list of `Persons` from `Model` and attempts to set a new `Person` using
+`setPerson()`.
+4. `setPerson()` creates a new edited `Person` with the edited fields. If this new `Person` already exists, a `CommandException`
+is thrown, else it the original `Person` is removed from the `Model` and the new one is added.
+5. Finally, `EditClientCommand` returns a `CommandResult` with a corresponding successs message.
+
+<div class="note" markdown="span"> 
+
+Why create a new `Person` instead of editing the original `Person`? 
+
+All objects including `Person` objects in EZSTATES are desgined to be **immutable**. 
+
+When objects are **immutable**, modifying one instance does not risk unintentionally 
+altering other references to that instance elsewhere in the program. 
+This behavior prevents side effects, especially when other components hold references to `Person` objects,
+as modifying shared instances can lead to unexpected and hard-to-track bugs.
+This also ensures that intended side effects are accounted for, such as editing a client who is associated to 
+a listing.
+</div>
+
 #### Find client
+
+**Overview**
+<br>
+The `find` command finds and lists all `Persons` whose name contains any of the input keywords.
+
+**Implementation**
+<div style="text-align: center;">
+    <img src="images/dg/FindClientSequenceDiagram.png" alt="AddBuyerSequenceDiagram" style="width:80%; max-width:1000px;">
+    </div>
+
+1. User runs a `find` command with keywords.
+2. Command is parsed by `EzstatesParser` and a `FindClientCommandParser` is created to parse the keywords which creates
+`FindClientCommand` and a `NameContainsKeyWordsPredicate`, that contains a list of the user's keywords.
+3. `FindClientCommand` updates the `Model` with the given predicate to filter the list of `Persons` that contain any of the keywords.
+4. Finally, `FindClientCommand` returns a `CommandResult` with a corresponding success message.
+
 #### Delete client
+**Overview**
+<br>
+The `deleteclient` command deletes a `Person` according to the `INDEX` that is on the `PersonListPanel`.
+
+**Implementation**
+<div style="text-align: center;">
+    <img src="images/DeleteSequenceDiagram.png" alt="DeleteSequenceDiagram" style="width:80%; max-width:1000px;">
+    </div>
+
+1. User runs a `deleteclient` command with an `INDEX` as argument.
+2. Command is parsed by `EzstatesParser` and a `DeleteClientCommandParser` is created to parse the argument which creates
+a `DeleteClientCommand`.
+3. `DeleteClientCommand` retrives the list of `Persons` from `Model` if it exists and then deletes the `Person` once the
+user confirms his deletion.
+4. Finally, `DeleteClientCommand` returns a `CommandResult` with a corresponding success message.
+
 #### Show client
+**Overview**
+<br>
+The `showclient` command displays all clients in EZSTATES to the user.
+
+**Implementation**
+<div style="text-align: center;">
+    <img src="images/dg/ShowClientSequenceDiagram.png" alt="ShowClientSequenceDiagram" style="width:80%; max-width:1000px;">
+    </div>
+
+1. User runs a `showclient` command.
+2. Command is parsed by `EzstatesParser`, which creates a `ShowClientCommand`, skipping the creation of a specific `Parser` instance.
+3. `ShowClientCommand` retrieves the list of `Persons` from the `Model` with `PREDIATE_SHOW_ALL_PERSONS` such that the `Model` returns
+all `Persons`.
+4. If there are no `Persons` in the list, a `CommandException` is thrown, else a `CommandResult` is returned with a 
+corresponding success message.
+
 #### Clear 
+**Overview**
+<br>
+The `clear` command clears all `Persons` and `Listings` from EZSTATES.
+
+**Implementation**
+<div style="text-align: center;">
+    <img src="images/dg/ClearCommandSequenceDiagram.png" alt="ClearCommandSequenceDiagram" style="width:80%; max-width:1000px;">
+    </div>
+
+1. User runs a `clear` command.
+2. Command is parsed by `EzstatesParser`, which creates a `CLearCommand`, skipping the creation of a speicifc `Parser` instance.
+3. `ClearCommand` always sets the `Model's` storage to a new `AddressBook` which stores `Persons` and a new `Listings` which stores `Listings`.
+4. A `CommandResult` is returned with a corresponding success message.
 
 ### Appointment Management
-#### Add appointment
-#### Delete appointment
-#### Today
+**Overview**
+<br>
+The `editclient` edits a `client`.
 
-### Listing Managmenet
+**Implementation**
+
+#### Add appointment
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
+
+#### Delete appointment
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
+
+#### Today
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
+
+### Listing Management
+
 #### Add listing
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
+
 #### Edit listing
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
+
 #### Add buyers to listing
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
+
 #### Remove buyers from listing
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
+
 #### Delete listing
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
+
 #### Show listing
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
+
 #### Clear listing
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
 
 ### Utility
+
 #### Chat Window
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
 #### Help
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
 #### Exit
+**Overview**
+<br>
+The `editclient` edits a `client`.
+
+**Implementation**
 
 ## Git Commit Script
 
@@ -931,7 +1128,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6.  The application achieves at least 85% test coverage.
 7.  The user should not require an internet connection to use the application.
 8.  The user should not experience sluggish operations when using the application.
-9.  The user guide should be well-documentated and user friendly such that a new user can use the application efficiently.
+9.  The user guide should be well-documentated and user-friendly such that a new user can use the application efficiently.
 
 *{More to be added}*
 

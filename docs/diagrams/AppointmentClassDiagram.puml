@@ -1,0 +1,34 @@
+@startuml
+title Appointment Class Diagram
+
+class Appointment {
+    + EMPTY_APPOINTMENT: Appointment
+    - date: Date
+    - from: From
+    - to: To
+    + isValidPeriod(from: From, to: To): boolean
+    + isToday(): boolean
+}
+
+class Date {
+    + EMPTY_DATE: Date
+    - value: LocalDate
+    + isValidDate(test: String): boolean
+}
+
+class From {
+    + EMPTY_FROM: From
+    - value: LocalTime
+    + isValidTime(test: String): boolean
+}
+
+class To {
+    + EMPTY_TO: To
+    - value: LocalTime
+    + isValidTime(test: String): boolean
+}
+
+Appointment *--> "1" Date : Composition
+Appointment *--> "1" From : Composition
+Appointment *--> "1" To : Composition
+@enduml

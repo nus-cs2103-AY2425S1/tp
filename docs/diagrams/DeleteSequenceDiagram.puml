@@ -1,6 +1,9 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+title Delete Client Profile Sequence Diagram
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -10,14 +13,21 @@ participant "d:DeleteClientProfileCommand" as DeleteClientProfileCommand LOGIC_C
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
+note left of LogicManager
+cmd:
+"deleteclient 1"
+args:
+"1"
+end note
+
 box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute(cmd)
 activate LogicManager
 
-LogicManager -> EzstatesParser : parseCommand("delete 1")
+LogicManager -> EzstatesParser : parseCommand(cmd)
 activate EzstatesParser
 
 create DeleteClientProfileCommandParser
@@ -27,44 +37,42 @@ activate DeleteClientProfileCommandParser
 DeleteClientProfileCommandParser --> EzstatesParser
 deactivate DeleteClientProfileCommandParser
 
-EzstatesParser -> DeleteClientProfileCommandParser : parse("1")
+EzstatesParser -> DeleteClientProfileCommandParser : parse(args)
 activate DeleteClientProfileCommandParser
 
 create DeleteClientProfileCommand
 DeleteClientProfileCommandParser -> DeleteClientProfileCommand
 activate DeleteClientProfileCommand
-
-DeleteClientProfileCommand --> DeleteClientProfileCommandParser :
+DeleteClientProfileCommand --> DeleteClientProfileCommandParser
 deactivate DeleteClientProfileCommand
 
 DeleteClientProfileCommandParser --> EzstatesParser : d
 deactivate DeleteClientProfileCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteClientProfileCommandParser -[hidden]-> EzstatesParser
-destroy DeleteClientProfileCommandParser
-
 EzstatesParser --> LogicManager : d
 deactivate EzstatesParser
 
 LogicManager -> DeleteClientProfileCommand : execute(m:Model)
 activate DeleteClientProfileCommand
 
-DeleteClientProfileCommand -> Model : deletePerson(Bob:Person)
+DeleteClientProfileCommand -> Model : getFilteredPersonList()
 activate Model
+Model --> DeleteClientProfileCommand
+deactivate Model
 
+DeleteClientProfileCommand -> Model : deletePerson(personToDelete)
+activate Model
 Model --> DeleteClientProfileCommand
 deactivate Model
 
 create CommandResult
 DeleteClientProfileCommand -> CommandResult
 activate CommandResult
-
 CommandResult --> DeleteClientProfileCommand
 deactivate CommandResult
 
 DeleteClientProfileCommand --> LogicManager : r
 deactivate DeleteClientProfileCommand
 
-[<--LogicManager
+[<-- LogicManager : r
 deactivate LogicManager
 @enduml

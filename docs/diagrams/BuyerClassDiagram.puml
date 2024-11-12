@@ -43,11 +43,11 @@ enum Role {
     SELLER
 }
 
-Person *-- Name : Composition
-Person *-- Phone : Composition
-Person *-- Email : Composition
-Person *-- Appointment : Composition
-Person *-- Tag : Composition
+Person *--> "1" Name : Composition
+Person *--> "1" Phone : Composition
+Person *--> "1" Email : Composition
+Person *--> "1" Appointment : Composition
+Person *--> "*" Tag : Composition
 Buyer --|> Person
 Buyer --> Role : Association
 

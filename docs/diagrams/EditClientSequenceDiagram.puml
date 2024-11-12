@@ -1,0 +1,90 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+title Edit Client Sequence Diagram
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant ":EditClientCommandParser" as EditClientCommandParser LOGIC_COLOR
+participant "e:EditClientCommand" as EditClientCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+note left of LogicManager
+cmd:
+"editclient 1 e/johndoe@example.com p/91234567"
+prefixes:
+"1 e/johndoe@example.com p/91234567"
+end note
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(cmd)
+activate LogicManager
+
+LogicManager -> EzstatesParser : parseCommand(cmd)
+activate EzstatesParser
+
+create EditClientCommandParser
+EzstatesParser -> EditClientCommandParser
+activate EditClientCommandParser
+
+EditClientCommandParser --> EzstatesParser
+deactivate EditClientCommandParser
+
+EzstatesParser -> EditClientCommandParser : parse(prefixes)
+activate EditClientCommandParser
+
+create EditClientCommand
+EditClientCommandParser -> EditClientCommand
+activate EditClientCommand
+
+EditClientCommand --> EditClientCommandParser
+deactivate EditClientCommand
+
+EditClientCommandParser --> EzstatesParser : e
+deactivate EditClientCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+EditClientCommandParser -[hidden]-> EzstatesParser
+destroy EditClientCommandParser
+
+EzstatesParser --> LogicManager : e
+deactivate EzstatesParser
+
+LogicManager -> EditClientCommand : execute(m:Model)
+activate EditClientCommand
+
+EditClientCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> EditClientCommand : List<Person>
+deactivate Model
+
+EditClientCommand -> Model : setPerson(personToEdit:Person, editedPerson:Person)
+activate Model
+
+alt edited person exists
+    Model --> EditClientCommand :
+    deactivate Model
+else new edit
+    Model --> EditClientCommand
+    deactivate Model
+
+    create CommandResult
+    EditClientCommand -> CommandResult
+    activate CommandResult
+
+    CommandResult --> EditClientCommand
+    deactivate CommandResult
+
+    EditClientCommand --> LogicManager : r
+    deactivate EditClientCommand
+end
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml
