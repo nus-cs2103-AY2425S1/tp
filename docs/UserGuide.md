@@ -316,10 +316,6 @@ If your changes to the data file makes its format invalid, SeeRee2.0 **may** dis
 Furthermore, certain edits can cause the SeeRee2.0 to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -331,6 +327,8 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When resizing the application to a smaller size or having multiple meetings in the same day**, the scrollbars of the schedule panel will cause a white box to appear in the UI. The remedy is to increase the size of the application if applicable. Proposed solution for this is discussed in planned enhancement of the DeveloperGuide. 
+4. **If you maximize the application** and then close and reopen the application, the application will not stay maximized. The remedy is to manually maximize the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
