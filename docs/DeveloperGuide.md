@@ -665,28 +665,19 @@ Team Size: 5
    3. These restrictions will be enforced at both the command parsing level (to provide immediate feedback) and the model level (to ensure consistency).
    4. If the input exceeds the maximum length, the user will receive an error message explaining the character limit.
 
-7. **Ensure Minimum Window Size for Improved Layout** 
-   1. There is currently no restriction on the window size, which can result in an overly compact layout that cuts off important information in smaller windows, leading to ellipticals showing rather than Doctor or Patient. 
-   2. We plan to set a minimum window size for the application to ensure that all components are displayed without truncation.
-
-8. **Increasing the maximum number of appointments.** 
+7. **Increasing the maximum number of appointments.** 
    1. Currently, the maximum number of appointments that can be stored is 10,000.
    2. We plan to increase this limit to a number that cannot be realistically reached, while ensuring the appointment IDs are still concise.
-  
-9. **Ensure Minimum Window Size for Improved Layout** 
-   1. There is currently no restriction on the window size, which can result in an overly compact layout that cuts off important information in smaller windows, leading to ellipticals showing rather than Doctor or Patient. 
-   2. We plan to set a minimum window size for the application to ensure that all components are displayed without truncation.
-
-10. **Sort Appointment by Date** 
+8. **Sort Appointment by Date** 
     1. Currently, the application displays appointments in an unsorted order, which may reduce the usability and effectiveness of the application. To enhance user experience, appointments will be automatically sorted by date. This enhancement will help receptionist view upcoming appointments more easily. 
     2. Sorting of appointments will be in ascending order (earliest to latest).
 
-11. **Fix UI bug regarding date of birth**
+9. **Fix UI bug regarding date of birth**
     1. Intended Behaviour: For months with less than 31 days, entering a date that is too large but below 32 will be automatically corrected. (e.g. 30-02-2024 will return 29-02-2024)
     2. Current Behaviour: Entering a date that is too large but below 32 will not be automatically corrected in the UI. (e.g. 30-02-2024 will return 30-02-2024). But, the date will be stored correctly in storage, hence restarting the app will show the corrected date.
     3. We plan to fix the UI to display the corrected date immediately after the user enters the date.
 
-12. **Add feature to update patient and doctor records `edit-patient` and `edit-doctor`**
+10. **Add feature to update patient and doctor records `edit-patient` and `edit-doctor`**
     1. Currently, there is no feature to update patient and doctor records. This feature will allow users to update patient and doctor records when there are changes in their details.
     2. The update feature will allow users to update patient and doctor details such as name, phone number, email, address, date of birth
 
