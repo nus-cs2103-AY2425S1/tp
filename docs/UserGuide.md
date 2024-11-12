@@ -204,15 +204,14 @@ Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL | p/PHONE_NUMBER e/EMAIL) [r/MODUL
 The command accepts either one phone number, one email, or both.
 </box>
 
-* `NAME` can take any values and can not be blank. Refer to the [input format section](#input-format) to find out more.
-* `PHONE_NUMBER` is almost a free-form text field with minimal validation. Refer to the [input format section](#input-format) to find out more.
-* ContactCS expects the ``MODULECODE`` to be formatted as valid NUS module codes such as 'CS2040S' or 'MA1521', without spaces or additional characters.
-* `ROLETYPE` refers to one of the following: `student`, `ta`, `tutor`, `prof`, `professor`.
-* The `r/MODULECODE[-ROLETYPE]` parameter means that the person has the role for this module (e.g. `r/CS1101S-student` means that the person is a student of CS1101S).
-* In `r/MODULECODE[-ROLETYPE]`, `[-ROLETYPE]` is optional. In such cases, this means that the person is a student of that module (e.g `r/MA1521` means that the person is a student of MA1521).
-* If the same module is added multiple times, then it is assumed to be an error in user input, because a person should not have multiple roles (student, tutor, professor) at the same time (e.g. `r/CS1101S-student r/CS1101S-prof` is not allowed).
+* `NAME` can take any values and can not be blank.
+* `PHONE_NUMBER` is almost a free-form text field with minimal validation.
+* `MODULECODE` should be valid NUS module codes such as 'CS2040S' or 'MA1521'.
+* `ROLETYPE` can be one of the following: `student`, `ta`, `tutor`, `prof`, `professor`. It defaults to `student` if not specified.
+* The full `r/MODULECODE[-ROLETYPE]` parameter means that the person has the role for this module (e.g. `r/CS1101S-student` means that the person is a student of CS1101S).
+* If the same module is added multiple times, then it is assumed to be an error in user input, because a person should not have multiple roles at the same time (e.g. `r/CS1101S-student r/CS1101S-prof` is not allowed).
 * Note: A professor is not considered a teaching assistant (TA).
-* Email addresses are considered valid even if they do not contain a period(``.``). For example, ``example@domain`` is considered valid.
+* `EMAIL` should be a valid email address.
 * `ADDRESS` can take any values and can not be blank.
 * `TAG` can take any alphanumeric values and can not be blank.
 * `DESCRIPTION` can take any values but cannot exceed 500 characters.
@@ -237,9 +236,9 @@ For more explanation on the format and design of each input field, refer to the 
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/CS1101S`. John is a CS1101S student.
+* `add n/John Doe p/98765432 e/johnd@example.com r/CS1101S`.
   ![result for adding John Doe](images/addJohnDoeResult.png)
-* `add n/Jane Doe p/81234567 e/janed@example.com r/CS1101S-TA r/CS2040S`. Jane is a CS1101S tutor and a CS2040S student.
+* `add n/Jane Doe p/81234567 e/janed@example.com r/CS1101S-TA r/CS2040S`.
 
 ### Listing all persons: `list`
 
@@ -259,6 +258,12 @@ The module-role pairs can be edited by adding and deleting.
 
 Format: `edit INDEX r/+(MODULECODE[-ROLETYPE])+`
 
+<box type="warning" seamless>
+
+Please note that the first + should be typed as is while the second + is the multiplicity syntax explained [here](#features).
+
+</box>
+
 * Adds new roles to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one module-role pair must be provided.
@@ -277,10 +282,6 @@ The subsequent pairs should not have a `+` sign before them. i.e. `r/+CS1101S +M
 - You only need to specify one `r/`. i.e. `r/+CS1101S r/+MA1521-TA` is unnecessary and will cause an error.
 </box>
 
-<box type="warning" seamless>
-  Please note that the first + should be typed as is while the second + is the multiplicity syntax explained here.
-</box>
-
 ##### Deleting existing module-role pairs
 
 Format: `edit INDEX r/-(MODULECODE[-ROLETYPE])+`
@@ -296,11 +297,11 @@ Examples:
 * `edit 1 r/-CS2103T` deletes any role related to module `CS2103T` from the first person.
 * `edit 1 r/-CS1101S-Student MA1521-TA` deletes the role "Student of CS1101S" and "TA of MA1521" from the first person.
 
-<box type="tip" seamless>
+<box type="caution" seamless>
 
-**Tip:**
-- Omitting the role type intentionally leads to two different behaviors for adding and deleting roles:
-  - For adding roles, the role type is assumed to be `Student`.
+**Caution:**
+- Omitting the role type leads to two different behaviors for adding and deleting roles:
+  - For adding roles, the role type will be `Student` by default.
   - For deleting roles, **any role associated with the module code** will be deleted, regardless of the role type.
 
 </box>
@@ -324,17 +325,12 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-<box type="caution" seamless>
-
-**Caution:**
-If you input multiple indices separated by spaces, e.g.`edit 1 2 n/...`, the app will treat `1 2` as a single index which is invalid.
-</box>
 
 ### Locating persons: `find`
 
 The find command allows you to locate persons by their names, module-role pairs, tags or any combinations of them.
 
-#### By name
+#### Finding by name
 
 Finds persons whose names contain any of the given keywords.
 
@@ -342,18 +338,18 @@ Format: `find (n/KEYWORD)+`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Each keyword can contain multiple words. e.g. `John Doe`
-* The keyword must exist contiguously in the name. e.g. `John Doe` will not match `John David Doe`
+* Each keyword must exist contiguously in the name in order to match. e.g. `John Doe` will not match `John David Doe`
 * Only the name is searched.
 * Partial words will be matched as well. e.g. `Han` will match `Hans`
 * Persons whose names matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `find n/Hans n/Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `find n/Hans n/Bo` will match `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex n/david li` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find n/alex n/david'](images/findAlexDavidResult.png)
 
-#### By module-role
+#### Finding by module-role
 
 Finds persons whose module-role pairs contain any of the given keywords.
 
@@ -370,7 +366,7 @@ Examples:
 
   ![result for 'find r/cs2103t-prof r/cs1101s'](images/findModuleRoleExample.png)
 
-#### By tag
+#### Finding by tag
 
 Finds persons whose tags contain any of the given keywords.
 
@@ -386,32 +382,29 @@ Examples:
 
     ![result for 'find t/classmates t/friends'](images/findTagExample.png)
 
-#### By combinations of names, module-roles and tags
+#### Finding by combinations of names, module-roles and/or tags
 
 Finds persons whose names, module-role pairs and tags contain any combination of the given keywords.
 
-Format: `find (n/KEYWORD | r/KEYWORD | t/KEYWORD)+`
+Format: `find [chained] (n/KEYWORD | r/KEYWORD | t/KEYWORD)+`
 
-* Persons matching at least one name keyword (if provided) AND at least one module-role keyword (if provided) AND at least one tag keyword (if provided) will be returned (i.e. AND search).
+* Persons matching at least one name keyword (if provided) AND at least one module-role keyword (if provided) AND at least one tag keyword (if provided) will be returned.
 
-Example:
-* `find n/Martin n/Boyd r/cs1101s-prof r/cs1231s-prof t/favorite` return all persons whose name are either (`Martin` **or** `Boyd`) **and** (`CS1101S Professor` **or** `CS1231S Professor`) **and** (having tag name `favorite`).
-
-  ![result for 'find n/Martin n/Boyd r/cs1101s-prof r/cs1231s-prof t/favorite'](images/findCombinedConditionExample.png)
+* If `chained` is specified, _chained find_ will be used.
 
 <box type="info" seamless>
 
-**Info: Chained Find**
-The Chained Find feature allows you to narrow down previous search results by applying additional filters,
-making it easier to locate specific entries that meet multiple criteria.<br>
+  **Chained Find**
+  The Chained Find feature allows you to narrow down previous search results by applying additional filters,
+  making it easier to locate specific entries that meet multiple criteria.<br>
 
 **How to Use Chained Find**
 
 * Start with an Initial Search:
-  * Begin by using the find command with your first search criterion.
+    * Begin by using the find command with your first search criterion.
 
 * Apply Additional Filters with find chained:
-  * Use the find chained command immediately after the initial search to further filter the displayed results based on new criteria.
+    * Use the find chained command immediately after the initial search to further filter the displayed results based on new criteria.
 
 **Example**
 * Step 1: type `find n/John` and hit enter. You will see all entries with "John" in their names;
@@ -419,8 +412,10 @@ making it easier to locate specific entries that meet multiple criteria.<br>
 
 </box>
 
-#### By other fields
-_coming in v2.0_
+Example:
+* `find n/Martin n/Boyd r/cs1101s-prof r/cs1231s-prof t/favorite` return all persons whose name are either `Martin` **or** `Boyd`, **and** assumes either `CS1101S Professor` **or** `CS1231S Professor`, **and** has the tag `favorite`.
+
+  ![result for 'find n/Martin n/Boyd r/cs1101s-prof r/cs1231s-prof t/favorite'](images/findCombinedConditionExample.png)
 
 ### Deleting persons: `delete`
 
@@ -516,22 +511,26 @@ _Details coming soon ..._
 
 In our application, we understand that everyone's names can have various characters and symbols, thus we decided that as long as it is not a blank string, it is considered acceptable.
 
-### Concept of a phone number
+### `PHONE_NUMBER` field
 
-In our application, the concept of a phone number is defined as:
+The `PHONE_NUMBER` field (specified in the `add` or `edit` commands) is defined as a string where, if split by spaces, at least one of the resulting tokens is a _valid phone number_.
 
-1. a string without any whitespace,
-2. with at least 2 digits,
-3. without any alphabet characters,
-4. and may contain additional characters such as but not limited to "+", "-", "(", and ")".
+<box type="info" seamless>
+
+**Definition of a valid phone number**
+
+In our application, the concept of a valid phone number is defined as:
+
+1. a string without any whitespace, and
+2. with at least 2 digits, and
+3. without any alphabet characters, and
+4. may contain additional special characters such as but not limited to "+", "-", "(", and ")".
 
 Some valid phone numbers include `+6581234567`, `81234567`, or `+44-1234567`.
 
 Some invalid phone numbers include `+6 5 8 1 2 3 4 5 6 7`, or `8123p4567`.
 
-### `PHONE_NUMBER` field
-
-The `PHONE_NUMBER` field (specified in the `add` or `edit` commands) is defined as a string where, if split by spaces, at least one of the resulting tokens is a valid phone number.
+</box>
 
 Some valid `PHONE_NUMBER` values include `81234567`, `81234567 (handphone)`, or `81234567 (office 1) 91234567 (office 2)`.
 Since a contact may have different phone numbers at the same time, such as mobile, office, home etc, and any length of annotation to differentiate between them,
@@ -541,7 +540,13 @@ we decide not to enforce any input length restriction on this field, to offer yo
 
 **Caution:**
 To allow more flexibility in the input format, we have to sacrifice some validation checks. As such, it is important to ensure that the phone number you input is correct.
+
 </box>
+
+### `EMAIL` field
+The `EMAIL` field accepts any string that is a valid email address.
+
+Note that the email address does not need to contain a period(``.``) to be considered valid. For example, ``example@domain`` is considered valid.
 
 ### `MODULE_ROLE` field
 
@@ -549,31 +554,49 @@ The `MODULE_ROLE` field represents the role of a contact, such as CS1101S Studen
 It consists of two sub-fields: `MODULECODE` and `ROLETYPE`.
 
 #### `MODULECODE` field
-The `MODULECODE` field refers to the module codes of modules in NUS, and is defined by at least one alphabet followed by at least one number
-and lastly ended by an optional sequence of numbers.
+The `MODULECODE` field refers to the module codes of modules in NUS, and is defined as at least one letter followed by at least one number
+and lastly ended by an optional sequence of letters.
+
+This field is case-insensitive.
 
 Some valid module code inputs include `CS1231S`, `CS1231`, `CFG2002MY` and `DMA1201CH`.
 
+<box type="info" seamless>
+
 Take note that even though the modules that can be taken by NUS Y1 CS Students are quite limited, we recognize that they may take on double majors/minors, or courses from
 DYOC (Design Your Own Course) Scheme, hence we do not enforce strict validation to check whether the provided module code represents a valid NUS CS module and only checks on its
-basic format. Since DYOC courses may have potentially longer module code, we do not enforce input length restrction either.
+basic format. Since some courses (e.g. DYOC, Global Industry Insights) may have potentially longer module code, we do not enforce input length restriction either.
+The onus is on you to ensure that the module code provided is a real module code in NUS.
+
+</box>
 
 #### `ROLETYPE` field
-The `ROLETYPE` field refers to the role related to the module code provided, such as student, professor and tutor.
-Some valid role type inputs include:
-* leave blank or student for student role(default value)
-* ta or tutor for tutor role
-* prof or professor for professor role
+The `ROLETYPE` field refers to the role assumed by a person in a module, and currently can be any of `student`, `professor` or `tutor`.
+
+This field is case-insensitive.
+
+<box type="info" seamless>
+
+**Acronyms can be used for easier input:**
+* "TA" is equivalent to "Tutor"
+* "prof" is equivalent to "Professor"
+
+</box>
+
+<box type="caution" seamless>
 
 Take note that each role type only represents a single role, and you should define the role type of a person based on
-the most accurate description of this person' role. For example, if a professor is also the tutor of the course, it is
+the most accurate description of this person's role. For example, if a professor is also the tutor of the course, it is
 better to specify the role of this contact as the professor of this course instead of tutor. Similarly, even though it is
 unlikely for a contact to be a professor and a student at the same time, we do not enforce strict validation on this to give
 you more flexibility in annotating your contact and avoid potential input issues in rare scenario due to overzealous validation.
 
+</box>
+
 ### `ADDRESS` field
 
 The `ADDRESS` field can be used to refer to the address of any location related to a contact, such as home, office, consultation venue etc.
+
 Since the length of address input may differ drastically because of the nature of the location and the complexity in its address name structure,
 we do not enforce restriction on the input length and as long as the input is not blank, it is considered as a valid address.
 
@@ -581,14 +604,16 @@ Some valid `ADDRESS` values include `COM3-01-20`, `#05-03, Blk 211, Any Place St
 
 ### `TAG` field
 
-The `TAG` field allows you to classify contacts in the address book easily, and you can use find by tag feature to query them more easily.
-For more detail on find by tag feature, refer to [find contacts by tag section](#by-tag) for more details.
+The `TAG` field allows you to group contacts. you can later use the find by tag feature to query them more easily.
 
-Some valid `TAG` values include `friends`, `office` and `classmates`.
+For more detail on find by tag feature, refer to [find contacts by tag section](#by-tag).
+
+Examples of `TAG` values include `friends`, `office` and `classmates`.
 
 ### `DESCRIPTION` field
 
 The `DESCRIPTION` field aims to provide you a simple way to annotate a contact with some basic information for easy reference in the future.
+
 For example, you can use it to record down how you feel about a professor's way of teaching, or remember the important birthday of a friend in NUS SOC
 or even zoom link of a lecture/tutorial session taught by a professor/tutor.As you can see, we try to provide as much flexibility to you as possible to
 allow you to record any short pieces of information about the contact, but we also want it to be short. Hence, we restrict the input size of the description
@@ -611,8 +636,6 @@ to be 500 characters which should be enough for most users.
 3. **There is an unused space below the command history box**.
 ![unused space](images/UiUnusedSpace.png)<br>
 As shown in the screenshot above, marked by the red box.
-4. **When you add a duplicate contact with same phone number**, the app will allow it if the phone number is the same but with different country codes or descriptions.
-For example, adding a contact with the phone number `+65 6601 7878 (24 hrs)` and then adding another contact with the phone number `6601 7878` will be allowed as long as the emails are different.
 
 --------------------------------------------------------------------------------------------------------------------
 
