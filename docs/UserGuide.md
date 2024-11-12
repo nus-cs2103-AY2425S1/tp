@@ -6,7 +6,7 @@ pageNav: 3
 
 # data_coNdUctorS User Guide
 
-data_coNdUctorS is a **desktop address book application for managing contact details of members in NUS Co-Curricular Activity (CCA) groups**. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, data_coNdUctorS can get your contact management tasks done faster than traditional GUI apps.
+data_coNdUctorS is a **desktop address book application for managing contact details of members in NUS Co-Curricular Activity (CCA) groups**. It is optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, data_coNdUctorS can get your contact management tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -51,7 +51,7 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F09-1/tp/releases/tag/v1.5).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F09-1/tp/releases/tag/v1.6).
 
 3. Copy the file to the folder you want to use as the _home folder_ for the application.
 
