@@ -62,4 +62,11 @@ public class AppointmentDateTest {
         AppointmentDate appointmentDate2 = new AppointmentDate(LocalDate.of(2024, 10, 18));
         assertFalse(appointmentDate1.equals(appointmentDate2));
     }
+
+    @Test
+    public void compareTo_sameDate_returnsZero() {
+        AppointmentDate appointmentDate1 = new AppointmentDate(LocalDate.of(2024, 10, 17));
+        AppointmentDate appointmentDate2 = new AppointmentDate(LocalDate.of(2024, 10, 17));
+        assertTrue(appointmentDate1.compareTo(appointmentDate2) == 0);
+    }
 }

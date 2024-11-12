@@ -25,16 +25,6 @@ public class LogEntry {
     }
 
     /**
-     * Constructs a {@code LogEntry}.
-     *
-     * @param formattedEntry Contains special next line that should be passed around in storageEntry form
-     */
-    public LogEntry formattedLogEntry(String formattedEntry) {
-        return new LogEntry(convertToStorageString(formattedEntry));
-    }
-
-
-    /**
      * Returns the log entry.
      */
     public String getEntry() {

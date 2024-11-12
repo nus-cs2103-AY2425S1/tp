@@ -179,12 +179,6 @@ public class ModelManager implements Model {
         this.setPerson(personToUpdate, updatedPerson);
     }
 
-    @Override
-    public boolean hasLog(Person target, Log log) {
-        requireAllNonNull(target, log);
-        return target.getLogs().contains(log);
-    }
-
     //========== Util Methods ================================================================================
 
 

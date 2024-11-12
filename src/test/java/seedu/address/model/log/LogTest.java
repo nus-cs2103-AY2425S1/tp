@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 
 public class LogTest {
     private final LocalDate testDate = LocalDate.of(2024, 10, 17);
+    private final LocalDate date1 = LocalDate.of(2024, 10, 17);
+    private final LocalDate date2 = LocalDate.of(2024, 10, 18);
     private final String testEntry = "This is a test log entry for the appointment.";
     @Test
     public void constructor_nullEntry_throwsNullPointerException() {
@@ -112,10 +114,34 @@ public class LogTest {
     }
 
     @Test
+    public void getTruncatedEntry_shortEntry_returnsUnchanged() {
+        String shortEntry = "This is a short log entry.";
+        Log log = new Log(new AppointmentDate(testDate), new LogEntry(shortEntry));
+        assertEquals(shortEntry, log.getTruncatedEntry());
+    }
+
+    @Test
     public void toDetailedString_returnsCorrectDetailedString() {
         Log log = new Log(new AppointmentDate(testDate), new LogEntry(testEntry));
         String expectedDetailedString = "Appointment Date: 17 Oct 2024\n"
                 + "Entry: This is a test log entry for the appointment.";
         assertEquals(expectedDetailedString, log.toDetailedString());
+    }
+
+    @Test
+    public void compareTo_sameDate_returnsZero() {
+        Log log1 = new Log(new AppointmentDate(date1), new LogEntry("Entry 1"));
+        Log log2 = new Log(new AppointmentDate(date1), new LogEntry("Entry 2"));
+        assertEquals(0, log1.compareTo(log2));
+    }
+
+    @Test
+    public void getAppointmentDateString_returnsCorrectFormattedDate() {
+        AppointmentDate appointmentDate = new AppointmentDate("20 May 2024");
+        LogEntry entry = new LogEntry(testEntry);
+        Log log = new Log(appointmentDate, entry);
+        String result = log.getAppointmentDateString();
+        String expectedFormattedDate = "20 May 2024";
+        assertEquals(expectedFormattedDate, result);
     }
 }
