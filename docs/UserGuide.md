@@ -350,6 +350,8 @@ Exceptionally long names will be cut off on the display, but you can read the st
 detail command.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a student : `delete`
 
 Removes a student from the tuition center management system.
