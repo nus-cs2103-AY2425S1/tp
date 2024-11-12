@@ -556,10 +556,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `edit 1 n/[valid name e.g. Johnson]` <br>
     Expected: The first person in the list is edited to have the given name. Details of the edited contact shown
-    in status message. Error details shown in the status message.
+    in status message. 
 
     1. Test case: `edit 1 n/[invalid name e.g. !!hnson]` <br>
-    Expected: No contact is edited
+    Expected: No contact is edited. Error details shown in the status message.
 
     1. Other incorrect edit commandsd to try: `edit`, `edit x n/[valid name e.g. Johnson]`, `...` (where x is larger
     than list size) <br>
