@@ -1129,6 +1129,17 @@ Team size: 5
 * **Sample Input:** User enters `... d/2024-05-12 25:61`
 * **Expected Output:** The result display box shows `Invalid time format. Please enter a valid time between 00:00 and 23:59.`
 
+6. **Update patient name in appointment when patient's name is edited**
+* **Flaw:** When users edit a `person` with a new name, his/her appointments still refer to the old name.
+* **Enhancement:** During the EditPersonCommand, also edit any appointments with this patient to point to the new Person object.
+* **Sample Input:** Suppose there is a person indexed 1 named John. Execute `edit person 1 n/Jonathan`.
+* **Expected Output:** Any appointments with John should now refer to Jonathan.
+
+7. **You can only add appointments without sickness or medicine, but not edit them**
+* **Flaw:** When users edit an `appointment` such that sickness or medicine is null, the GUI invalidates this input even though these fields are optional.
+* **Enhancement:** Change input validation for sickness and medicine to allow for null values.
+* **Sample Input:** `edit appt 1 s/ m/`
+* **Expected Output:** Appointment indexed 1 should have sickness and medicine shown as null.
 
 <br>
 
