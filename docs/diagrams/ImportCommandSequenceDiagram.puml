@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ArrowColor blue
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "i:ImportCommand" as ImportCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+
+box STORAGE STORAGE_COLOR_T1
+participant "converter:CsvToJsonConverter" as CsvToJsonConverter STORAGE_COLOR
+participant "importer:JsonImporter" as JsonImporter STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("import")
+
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("import")
+activate AddressBookParser
+
+create ImportCommand
+AddressBookParser -> ImportCommand : ImportCommand()
+activate ImportCommand
+
+ImportCommand --> AddressBookParser : i
+deactivate ImportCommand
+
+AddressBookParser --> LogicManager : i
+deactivate AddressBookParser
+
+LogicManager -> ImportCommand : execute(model)
+activate ImportCommand
+
+create CsvToJsonConverter
+ImportCommand -> CsvToJsonConverter: new CsvToJsonConverter(directory)
+activate CsvToJsonConverter
+
+CsvToJsonConverter --> ImportCommand
+deactivate CsvToJsonConverter
+
+ImportCommand -> CsvToJsonConverter :convertAllCsvFiles()
+ref over CsvToJsonConverter : Conversion
+CsvToJsonConverter --> ImportCommand: List<File> jsonFiles
+
+create JsonImporter
+ImportCommand -> JsonImporter : new JsonImporter(List<File> jsonFiles)
+activate JsonImporter
+
+JsonImporter --> ImportCommand
+deactivate JsonImporter
+
+ImportCommand -> JsonImporter: importAllJsonFiles(model)
+ref over JsonImporter : Importing
+JsonImporter --> ImportCommand : newModel
+
+create CommandResult
+ImportCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ImportCommand : r
+deactivate CommandResult
+
+ImportCommand --> LogicManager : r
+deactivate ImportCommand
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

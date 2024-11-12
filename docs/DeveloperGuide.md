@@ -118,7 +118,9 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
+
 <puml src="diagrams/ModelClassDiagram.puml" width="100%" />
+
 
 
 The `Model` component,
@@ -141,7 +143,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="700" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -187,6 +189,7 @@ The optional fields allow users to include more detailed information, making the
 
 <puml src="diagrams/AddSequenceDiagram.puml" width="100%" />
 
+
 #### Design Considerations
 
 * **Field Flexibility**
@@ -231,6 +234,41 @@ The command format is as follows:<br>
     * Invalid theme inputs raises clear errors, guiding users on valid options.
     * `ThemePreference` manages file I/O errors with warnings, defaulting to "LIGHT" if any issues arise with loading or saving preferences.
 
+### Import feature
+
+#### Implementation
+
+The import command allows users to import multiple contacts from a .csv file. The command allows for convenient distribution and importing of contacts. Contact distributors (e.g. course coordinators) can compile many contacts at a time (e.g. course TAs), with appropriate contact information and distributte them to users.<br>
+
+The command format is as follows:<br>
+`import​`
+
+#### Key Components and Operations
+
+* **Converter (CsvToJsonConverter)**
+    * The `Converter` component processes the `.csv` files to convert each file into a `.json` file. It first requests all the fields that compose a Person class. It then reads the `.csv` file headers for headers that match these fields (case-insensitive). 
+    * It will then read the `.csv` file line by line, to parse each line under a valid header into a properly formatted `.json` object, which is then added to a jsonFile. 
+    * It writes the contents of the `.csv` file into a `.json` file with the same name.
+    * After converting all `.csv` files, these individual `.json` files are put into an `ArrayList` of `.json` files and returned
+    * If the input format is invalid, a `ConverterException` is raised with an error message.
+      * This can occur in the case that the `.csv` is empty, or invalid, or the Import folder is empty or missing
+* **Importer (jsonImporter)**
+    * The importer constructor takes in a `List<File>` that should contain the `.json` files to be imported.
+    * Upon calling `importAllJsonFiles()`, the importer will loop through each `.json` file in the list, parse them, then convert them to `AddressBook.class`, and add each `.json` file to the `model`.
+
+<puml src="diagrams/ImportCommandSequenceDiagram.puml" width="1100" />
+<puml src="diagrams/ConversionSequenceDiagram.puml" width="400" />
+<puml src="diagrams/ImportSequenceDiagram.puml" width="1100" />
+
+#### Design Considerations
+
+* **Error Handling**
+    * Empty/Invalid contact information should be skipped or left empty, depending on whether the missing/invalid information is compulsory
+      * Non-compulsory fields such as `phone`, `email`, and `telegramHandle` require at least one entry, the rest can be left empty
+      * Upon encountering empty/invalid compulsory fields, such as `name` or `contactType`, these entries will be skipped by the `Converter`
+    * Missing Import folder should be re-initialised everytime the app is restarted
+    * Empty Import folder will result in an error being thrown
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -250,10 +288,10 @@ The command format is as follows:<br>
 
 **Target user profile**:
 
-* university student who
-  * meets people from many different places (e.g. different classes, CCAs, student accomodation, etc.)
-  * have a need to manage a significant number of contacts
-  * prefer desktop apps over other types
+* National University of Singapore (NUS) student who
+  * meets people from many different places (e.g. different classes, CCAs, student accommodation, etc.)
+  * has a need to manage a significant number of contacts
+  * prefers desktop apps over other types
   * can type fast
   * prefers typing to mouse interactions
   * is reasonably comfortable using CLI apps
@@ -364,8 +402,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 4a. The entered data is invalid
+
     * 4a1. UniLink shows an error message indicating fields that could be invalid.
     * 4a2. User re-enters the new data
+
 
   Steps 4a1-4a2 are repeated until the data entered is correct.
 
@@ -451,6 +491,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. No contacts match the specified contact type
 
     Use case ends.
+
+**Use case: UC008 - Import contacts from .csv file**
+
+**MSS**
+1. User adds one or more .csv file(s) to Import folder
+2. User requests to import contacts from .csv file(s)
+3. UniLink imports contacts
+
+**Extensions**
+
+* 1a. There is no Import folder
+  * 1a1. UniLink shows error message
+  * 1a2. User restarts program to re-initialise Import folder
+
+    Use case resumes from step 1
+
+
+* 1b. The .csv file is empty 
+  * 1b1. UniLink shows error message
+  * 1b2. User attempts to import another .csv file
+
+    Use case resumes from step 1
+
+* 3a. One (or more) of the contacts are invalid (Do not have valid contact info/ missing name/ missing contact type)
+  * 3a1. UniLink skips over invalid contacts
+
+    Use case resumes from step 3
+
+
+* 3b. There are duplicate contacts/ contacts in .csv file already exist in addressbook
+  * 3b1. UniLink skips over duplicate contacts
+
+    Use case resumes from step 3
 
 ### Non-Functional Requirements
 

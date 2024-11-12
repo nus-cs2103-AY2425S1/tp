@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ArrowColor blue
+group sd Conversion
+participant "Converter:CsvToJsonConverter" as Converter STORAGE_COLOR
+
+[-> Converter:convertAllCsvFiles()
+activate Converter
+
+Converter -> Converter: findAllCsvFiles
+
+loop until all csv files converted
+Converter -> Converter:convertCsvFile
+Converter -> Converter:jsonFiles.add(csvFileConvertedtoJson)
+end
+
+Converter -->[ :List<File> jsonFiles
+deactivate Converter
+end
+
+@enduml
