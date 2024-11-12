@@ -1,12 +1,13 @@
 ---
+
   layout: default.md
-    title: "Developer Guide"
-    pageNav: 3
+  title: "Developer Guide"
+  pageNav: 3
+  
 ---
 
 # VolunTier Developer Guide
 
-<!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -16,7 +17,7 @@
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * The feature Undo, Redo and History (including the code) was reused with minimal changes from [AddressBook-Level4](https://github.com/se-edu/addressbook-level4.git) ([UG](https://se-education.org/addressbook-level4/UserGuide.html), [DG](https://se-education.org/addressbook-level4/DeveloperGuide.html)).
 * The feature Import was implemented using the third-party library OpenCSV.
-* GitHub CoPilot was used by Ivan Jerrick Koh, Siah Wee Keat, Evan and Li Mingyang to write trivial test cases in test files and JavaDocs for trivial methods.
+* GitHub CoPilot was used by Ivan Jerrick Koh to write trivial test cases in test files and JavaDocs for trivial methods.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -124,7 +125,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="650" />
 
 
 The `Model` component,
@@ -138,7 +139,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="750" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -164,19 +165,18 @@ The import process reads the CSV file, validates the data, and converts each row
 which is then added to the model if it meets specified constraints. If any rows fail validation or contain duplicates,
 they are skipped, and detailed feedback is provided to the user.
 
-
-
 The `ImportCommand` makes use of the `CsvImport` helper class, which is responsible for parsing and validating CSV data.
 Here's how the command works:
 
 Step 1. File Path Input: The command accepts a file path as an argument, specifying the location of the CSV file to import.
+
 Step 2. CSV Parsing: The CsvImport class reads and processes the CSV file, verifying headers, formatting, and constraints.
+
 Step 3. Duplicate and Constraint Validation: Rows with duplicate entries or invalid values (e.g., empty fields for required information) are tracked and not added to the address book.
+
 Step 4. Result Messaging: After import, the command returns a message indicating how many records were successfully added, along with details about any failed rows or duplicates.
 
-
 The Import mechanism is facilitated by `CsvImport` which is responsible for parsing and validating CSV data.
-
 
 * `CsvImport#read()` - Reads the CSV file and imports the data into the provided model.
 
@@ -186,9 +186,8 @@ The Import mechanism is facilitated by `CsvImport` which is responsible for pars
 
 * Tracking Duplicates and Failures: The class maintains duplicates and failedRows lists to track any rows that fail due to duplicate entries or constraint violations.
 
-
-### View Tutee Chart feature
-The View Tutee Chart (VTC) feature in [`ViewTutorChartCommand`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewTutorChartCommand.java)
+### View Tutor Chart feature
+The View Tutor Chart (VTC) feature in [`ViewTutorChartCommand`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewTutorChartCommand.java)
 displays tutors in a bar chart, sorted by their tutoring hours in ascending order.
 
 The ViewTutorChartCommand class retrieves all tutors from the Model, sorts them in ascending order by tutoring hours, and generates a message alongside a bar chart displaying this data in the UI.
@@ -224,7 +223,7 @@ Step 2. The user executes `delete 5` command to delete the 5th person in the add
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add \n David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -272,7 +271,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add \n David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -291,7 +290,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+    * Cons: We must ensure that the implementation of each individual command is correct.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -344,7 +343,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | supervisor | update a tutee's address                                       | keep the details accurate                                                 |
 | `* * *`  | supervisor | update a tutor's total volunteer hours                         | keep track of the number of hours they have put into volunteering         |
 | `* * *`  | supervisor | view a tutor's total volunteer hours                           | track their productivity and contributions over time                      |
-| `* * *`  | supervisor | view a tutor or tutee's scheduled tutoring sessions            | avoid scheduling sessions that clash                                      |
 | `* * *`  | supervisor | interact with the application's GUI easily                     | enjoy the application and use it intuitively                              |
 | `* * *`  | supervisor | find a tutor or tutee by name                                  | locate details of tutors or tutees without going through the entire list  |
 | `* * *`  | supervisor | undo the last command executed                                 | easily correct mistakes without re-entering the data manually             |
@@ -376,7 +374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
@@ -386,15 +384,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User <u>views list of persons (UC1)</u>
 2.  User requests to delete a specific person in the list
-3. VolunTier deletes the person
+3.  VolunTier deletes the person
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. VolunTier shows an error message.
+    * 2a1. VolunTier shows an error message.
 
       Use case resumes at step 2.
 
@@ -430,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User <u>views list of persons (UC1)</u>
 2.  User requests to update the details (e.g., contact details, address) of a specific person on the list
-3.  VolunTier displays the person's current details
+3.  VolunTier displays the person's current detailsx
 4.  User provides the updated details
 5.  VolunTier updates the person's details in the database
 6.  VolunTier confirms that the details has been successfully updated
@@ -478,6 +476,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a3. VolunTier shows an error message specifying the invalid entries.
   
   Use case resumes at step 2.
+
+
+**Use case: UC5 - Import a list of persons**
+
+**MSS**
+
+1.  User requests to import a list of persons from a CSV file
+2.  VolunTier prompts the user to input the file path of the CSV file
+3.  User provides the file path
+4.  VolunTier reads the CSV file and imports the list of persons
+5.  VolunTier confirms that the persons have been successfully imported
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The file path is invalid.
+
+    * 3a1. VolunTier shows an error message.
+
+  Use case resumes at step 2.
+
+* 3b. The format of the file is incorrect.
+
+    * 3b1. VolunTier shows an error message.
+
+* 4a. The CSV file has some invalid entries.
+
+    * 4a1. VolunTier confirms that the valid entries have been successfully imported.
+
+    * 4a2. VolunTier shows an error message specifying the invalid entries.
+
+  Use case resumes at step 2.
+
 
 
 ### Non-Functional Requirements
@@ -530,7 +562,6 @@ testers are expected to do more *exploratory* testing.
 1. Adding a tutor with no email
    1a. Test case: “addTutor \n John Lim \p 81234578 \a ADDRESS, 123456”
    Expected: No tutor is added. Error is thrown, saying invalid command format.
-
 
 ### Deleting a person
 
@@ -599,10 +630,27 @@ testers are expected to do more *exploratory* testing.
    Add a tutor with the command `addTutor \n Alice \p 81234567 \e alice@gmail.com \a Block 123, Alice Street, 123456 \h 20 \s math`. <br>
    Add a tutee with the command `addTutee \n Bob \p 98765432 \e bob@gmail.com \a Block 123, Bob Street, 223456 \h 20 \s math`.
 
-   1b. Test case: `addLesson 1 2 math`<br>
+   1b. Test case: `addLesson 1 2 \s math`<br>
    Expected: New lesson is added to the list. Details of the new lesson shown in the status message.
 
-   1c. Test case: `addLesson 1 2 math`<br>
-   Expected: No lesson is added. Error details shown in the status message for duplicate lesson.
+   1c. Test case: `addLesson 1 2 \s math`<br>
+   Expected: No lesson is added. Error details shown in the status message for duplicate lessons.
 
+--------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Customizable Subject Management**
+    - Allow users to add and manage subjects beyond the current options of Math, Science, and English. This feature would provide flexibility for organizations that tutor in other subjects or wish to customize subject names.
+
+2. **Improve `vtc` Tutor Hours Chart Rendering**
+    - Enhance the tutor hours chart in `vtc` to address JavaFX’s limitation with duplicate names. Currently, random index numbers are added to each tutor entry to ensure uniqueness. In future updates, we aim to explore more effective solutions to clearly differentiate tutors with identical names, maintaining clarity in the chart.
+
+3.
+
+4. **Timetable Function for Adding Lessons**
+    - Enhance the addLesson feature to allow date and time scheduling, and display a timetable when a person is viewed. The timetable would be updated with lessons scheduled, enabling users to view available slots and assign lessons to specific times, ensuring efficient use of tutors’ and tutees’ time. The timetable could also display conflicts or availability to simplify the scheduling process and avoid overlaps.
+
+Introduce a timetable feature for each tutor and tutee, allowing for structured scheduling directly within the app. This feature would enable users to view available slots and assign lessons to specific times, ensuring efficient use of tutors’ and tutees’ time. The timetable could also display conflicts or availability to simplify the scheduling process and avoid overlaps.
