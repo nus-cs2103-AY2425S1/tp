@@ -300,29 +300,32 @@ without having to dig through paperwork / NUSync.
 
 Priorities: High (must have) - `HIGH`, Medium (nice to have) - `MED`, Low (unlikely to have) - `LOW`
 
-| Priority | As a …​         | I want to …​                                                                      | So that I can…​                                                             |
-|----------|-----------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| `HIGH`   | first-time user | view a user guide to understand CLI commands                                      | understand the basic functions and navigation of the app                    |
-| `HIGH`   | first-time user | add a new participant                                                             | start building my participant list from scratch                             |
-| `HIGH`   | first-time user | view a summary of all participants grouped by their sport categories              | get an overview of participant distribution                                 |
-| `HIGH`   | first-time user | search for participants by name, phone number or email                            | locate details of participants without having to go through the entire list |
-| `HIGH`   | familiar user   | update a participant's details                                                    | keep participant records current and accurate                               |
-| `HIGH`   | familiar user   | assign participants to specific events                                            | track their involvement and ensure proper scheduling                        |
-| `HIGH`   | familiar user   | group participants by their faculty membership                                    | manage and organize participants according to faculty membership            |
-| `HIGH`   | familiar user   | delete a participant                                                              | remove outdated or incorrect participant records                            |
-| `MED`    | first-time user | view detailed information about a participant on a separate tab from main search  | ensure I have accurate and complete information on a participant            |
-| `MED`    | first-time user | view a sample event schedule with participants' relevant details shown            | understand how to manage and track participants' involvement                |
-| `MED`    | familiar user   | search for participants based on multiple criteria                                | find specific groups of participants efficiently                            |
-| `MED`    | familiar user   | view a summary of a participant’s involvement in past sub-events                  | understand their history and performance in previous events                 |
-| `MED`    | expert user     | create custom participant fields specific to different types of events            | tailor the application to various event requirements                        |
-| `MED`    | expert user     | customize CLI command shortcuts and aliases for frequently used actions           | enhance productivity and streamline workflows                               |
-| `MED`    | expert user     | use advanced search filters to find participants                                  | find participants based on specific information with precision              |
-| `LOW`    | familiar user   | view a report of participants based on their sport category or faculty membership | understand how participants are distributed                                 |
-| `LOW`    | familiar user   | view edit history of participant details                                          | track updates and maintain data integrity                                   |
-| `LOW`    | expert user     | set up automated notifications for participants based on their roles              | keep them informed without manual follow-up                                 |
-| `LOW`    | expert user     | bulk update participant details or event assignments                              | efficiently manage changes for large numbers of participants                |
-| `LOW`    | expert user     | generate complex, customized reports combining multiple data points               | gain detailed insights into event management                                |
-| `LOW`    | expert user     | schedule regular backups of participant database                                  | ensure data is protected and recoverable in case of issues                  |
+| Priority | As a …​          | I want to …​                                                                         | So that I can…​                                                             |
+|----------|------------------|--------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| `HIGH`   | first-time user  | view a user guide to understand CLI commands                                         | understand the basic functions and navigation of the app                    |
+| `HIGH`   | first-time user  | add a new participant                                                                | start building my participant list from scratch                             |
+| `HIGH`   | first-time user  | view a summary of all participants grouped by their sport categories                 | get an overview of participant distribution                                 |
+| `HIGH`   | first-time user  | search for participants by name, phone number or email                               | locate details of participants without having to go through the entire list |
+| `HIGH`   | familiar user    | update a participant's details                                                       | keep participant records current and accurate                               |
+| `HIGH`   | familiar user    | assign participants to specific events                                               | track their involvement and ensure proper scheduling                        |
+| `HIGH`   | familiar user    | group participants by their faculty membership                                       | manage and organize participants according to faculty membership            |
+| `HIGH`   | familiar user    | delete a participant                                                                 | remove outdated or incorrect participant records                            |
+| `HIGH`   | familiar user    | update an event's details                                                            | keep events records current and accurate                                    |
+| `HIGH`   | familiar user    | delete an event                                                                      | remove outdated or incorrect event records                                  |
+| `HIGH`   | familiar user    | search for events via keywords                                                       | locate details of events without having to go through the entire list       |
+| `MED`    | first-time user  | view detailed information about a participant on a separate tab from main search     | ensure I have accurate and complete information on a participant            |
+| `MED`    | first-time user  | view a sample event schedule with participants' relevant details shown               | understand how to manage and track participants' involvement                |
+| `MED`    | familiar user    | search for participants based on multiple criteria                                   | find specific groups of participants efficiently                            |
+| `MED`    | familiar user    | view a summary of a participant’s involvement in past events                         | understand their history and performance in previous events                 |
+| `MED`    | expert user      | create custom participant fields specific to different types of events               | tailor the application to various event requirements                        |
+| `MED`    | expert user      | customize CLI command shortcuts and aliases for frequently used actions              | enhance productivity and streamline workflows                               |
+| `MED`    | expert user      | use advanced search filters to find participants                                     | find participants based on specific information with precision              |
+| `LOW`    | familiar user    | view a report of participants based on their sport category or faculty membership    | understand how participants are distributed                                 |
+| `LOW`    | familiar user    | view edit history of participant details                                             | track updates and maintain data integrity                                   |
+| `LOW`    | expert user      | set up automated notifications for participants based on their roles                 | keep them informed without manual follow-up                                 |
+| `LOW`    | expert user      | bulk update participant details or event assignments                                 | efficiently manage changes for large numbers of participants                |
+| `LOW`    | expert user      | generate complex, customized reports combining multiple data points                  | gain detailed insights into event management                                |
+| `LOW`    | expert user      | schedule regular backups of participant database                                     | ensure data is protected and recoverable in case of issues                  |
 
 
 ### Use cases
