@@ -629,35 +629,35 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                         | So that I can…​                                                |
-|---------| ------------------------------------------ |----------------------------------------------------------------------|----------------------------------------------------------------|
-| `* * *` | manager                                    | add a customer’s detail via a one-line CLI command                   | quickly add new customers without >1 step                      |
-| `* * *` | manager                                    | retrieve a customer’s detail via a one-line CLI command              | view their details without having to scroll through pages      |
-| `* * *` | manager                                    | delete customer data in one-line CLI                                 | delete customers that I want to not deliver to anymore         |
-| `* * *` | manager                                    | search for customers by name                                         | quickly access customer profiles during phone orders           |
-| `* * *` | manager                                    | search for customers by phone number                                 | quickly access customer profiles during phone orders           |
-| `* *`   | manager                                    | edit customer data in one-line CLI                                   | update any part of user data in 1 step                         |
-| `* *`   | manager                                    | bulk-create multiple customers through a file                        | quickly populate the system                                    |
-| `* *`   | manager                                    | bulk update multiple customers                                       | effectively manage large sets of customers                     |
-| `* *`   | manager                                    | assign tags to customers easily by setting abbreviations to tagnames | waste time typing out tag names that are already predetermined |
-| `* *`   | manager                                    | be able to see order history of a customer                           | apply targeted advertising                                     |
-| `* *`   | manager                                    | be able to see order frequency of a customer                         | prepare suitable amount of ingredient beforehand               |
-| `*`     | manager                                    | add order to the application                                         | track what is being served at the restaurant                   |
-| `*`     | manager                                    | archive customer data instead of a hard delete                       | avoid losing this information permanently                      |
-| `*`     | manager                                    | unarchive a customer                                                 | continue serving this customer                                 |
-| `*`     | manager                                    | list customers by recent order dates                                 | quickly identify who is a repeat customer                      |
-| `*`     | manager                                    | list customers by order frequency                                    | identify regular customers for reward programmes               |
-| `*`     | manager                                    | export customer data as a CSV                                        | provide the data to other people to use                        |
-| `*`     | manager                                    | convert a CSV file into a readable state file                        | have a backup                                                  |
-| `*`     | manager                                    | export CSV data using specific criteria                              | reduce the effort needed by others to parse the data           |
-| `*`     | manager                                    | validate attributes when adding a customer                           | avoid entering invalid data                                    |
-| `*`     | manager                                    | validate attributes when updating a customer                         | avoid entering invalid data                                    |
-| `*`     | manager                                    | categorise customers as VIP, regular, or new                         | know who to target for promotions                              |
-| `*`     | manager                                    | tag customers with dietary restrictions                              | personalise orders and maintain customer service               |
-| `*`     | manager                                    | create a tag                                                         | tag customers with a different issue                           |
-| `*`     | manager                                    | tag customers with multiple different tags                           | store a pattern of customers                                   |
-| `*`     | manager                                    | bulk tag customers with dietary restrictions                         | save time                                                      |
-| `*`     | manager                                    | group customers by tag                                               | easily find and manage customers for promotions                |
+| Priority | As a …​                                    | I want to …​                                                         | So that I can…​                                                    |
+|---------| ------------------------------------------ |----------------------------------------------------------------------|--------------------------------------------------------------------|
+| `* * *` | manager                                    | add a customer’s detail via a one-line CLI command                   | quickly add new customers without >1 step                          |
+| `* * *` | manager                                    | retrieve a customer’s detail via a one-line CLI command              | view their details without having to scroll through pages          |
+| `* * *` | manager                                    | delete customer data in one-line CLI                                 | delete customers that I want to not deliver to anymore             |
+| `* * *` | manager                                    | search for customers by name                                         | quickly access customer profiles during phone orders               |
+| `* * *` | manager                                    | search for customers by phone number                                 | quickly access customer profiles during phone orders               |
+| `* *`   | manager                                    | edit customer data in one-line CLI                                   | update any part of user data in 1 step                             |
+| `* *`   | manager                                    | bulk-create multiple customers through a file                        | quickly populate the system                                        |
+| `* *`   | manager                                    | bulk update multiple customers                                       | effectively manage large sets of customers                         |
+| `* *`   | manager                                    | assign tags to customers easily by setting abbreviations to tagnames | not waste time typing out tag names that are already predetermined |
+| `* *`   | manager                                    | be able to see order history of a customer                           | apply targeted advertising                                         |
+| `* *`   | manager                                    | be able to see order frequency of a customer                         | prepare suitable amount of ingredient beforehand                   |
+| `*`     | manager                                    | add order to the application                                         | track what is being served at the restaurant                       |
+| `*`     | manager                                    | archive customer data instead of a hard delete                       | avoid losing this information permanently                          |
+| `*`     | manager                                    | unarchive a customer                                                 | continue serving this customer                                     |
+| `*`     | manager                                    | list customers by recent order dates                                 | quickly identify who is a repeat customer                          |
+| `*`     | manager                                    | list customers by order frequency                                    | identify regular customers for reward programmes                   |
+| `*`     | manager                                    | export customer data as a CSV                                        | provide the data to other people to use                            |
+| `*`     | manager                                    | convert a CSV file into a readable state file                        | have a backup                                                      |
+| `*`     | manager                                    | export CSV data using specific criteria                              | reduce the effort needed by others to parse the data               |
+| `*`     | manager                                    | validate attributes when adding a customer                           | avoid entering invalid data                                        |
+| `*`     | manager                                    | validate attributes when updating a customer                         | avoid entering invalid data                                        |
+| `*`     | manager                                    | categorise customers as VIP, regular, or new                         | know who to target for promotions                                  |
+| `*`     | manager                                    | tag customers with dietary restrictions                              | personalise orders and maintain customer service                   |
+| `*`     | manager                                    | create a tag                                                         | tag customers with a different issue                               |
+| `*`     | manager                                    | tag customers with multiple different tags                           | store a pattern of customers                                       |
+| `*`     | manager                                    | bulk tag customers with dietary restrictions                         | save time                                                          |
+| `*`     | manager                                    | group customers by tag                                               | easily find and manage customers for promotions                    |
 
 
 ### Use cases
@@ -691,10 +691,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extension**
 * 2a. List is empty
-  * 
+  * Use Case Ends
 * 3a. Manager request does not adhere to field's restrictions
   * 3a1. NomNomNotifier shows an error message
   * Use Case resumes at 3
+* 3b. Manager tags customers using pre-assigned shortcut
+  * 3b1. Abbreviation is mapped to pre-assigned tag name
+  * Use Case resumes at step 4
 
 **Use case: Search for a customer**
 
@@ -719,26 +722,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Manager requests to list customers
 2.  NomNomNotifier shows a list of customers
 3.  Manager requests to delete a specific customers in the list
-4.  NomNomNotifier deletes the customers
-5. Use case ends.
+4.  NomNomNotifier deletes the customers 
+5.  Use case ends
 
 **Extensions**
 
 * 2a. The list is empty. 
     * Use case ends.
-
 * 3a. The given index is invalid.
-
-    * 3a1. NomNomNotifier shows an error message.
-
-      Use case resumes at step 2.
+    * 3a1. NomNomNotifier shows an error message. 
+    * Use case resumes at step 2.
 
 **Use Case: Creating a shortcut**
 
 **MSS**
 
 1. Manager requests to add shortcut
-2. NomNomNotifier adds the shortcut with alias and tag name to UniqueShortcut list
+2. NomNomNotifier adds the shortcut with alias and tag name
 3. Use Case ends
 
 **Extension**
@@ -755,14 +755,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Manager requests to delete shortcut
-2. NomNomNotifier deletes the shortcut with specified alias and tag name in UniqueShortCut list
+2. NomNomNotifier deletes the shortcut with specified alias and tag name
 3. Use Case ends
 
 **Extension**
 * 1a. Shortcut format is invalid
     * 1a1. NomNomNotifier shows error message
     * Use Case ends
-* 1b. ShortCut does not exist in NomNomNotifier
+* 1b. ShortCut with same alias and tag name does not exist in NomNomNotifier
     * 1b1. NomNomNotifier shows error message
     * Use Case ends
      
@@ -834,7 +834,7 @@ Team Size: 5
 2. **Enforce Prefix Usage (`t/`) on Filter Command:**
     
     The current behaviour regarding the filter feature, involves the multiple keywords being parsed into `TagsContainKeywordPredicate` which uses the `contain` method against all current tags and filtering the people based on the keywords. As Tag Names are allowed to have spaces, possible tags could be "No Pork" and "Pork Lover". 
-    When using the filter feature for "Pork Lover" as input, the result would show people containing both tags as both contain the keyword: "Pork". This may limit the usage of this feature. As such, we plan to use prefix `t/` within the filter command so that the entire keyword "Pork Lover" can be parsed, with relevant customer details being listed. 
+    When using the filter feature for "Pork Lover" as input, the result would show people containing both tags as both contain the keyword: "Pork". This may limit the effectiveness of this feature. As such, we plan to use prefix `t/` within the filter command so that the entire keyword "Pork Lover" can be parsed, with relevant customer details being listed. 
 
 
 3. **Enhance the unique identifier of a `Person` to be both name and phone number**
@@ -842,13 +842,14 @@ Team Size: 5
     The current behaviour includes the unique identifier of a Person to the name attribute. However, we acknowledge that people can have the same name. As such, this enhancement would entail
     the name and phone number to be unique identifier for a `Person`. We understand that this may interfere with order put command. This would also entail the inclusion of a phone number field when using the `put` command. 
 
+
 4. **Being able to edit/delete order history of a customer**
  
    Add editHistory and deleteHistory command that allows order history of a customer to be modified, to enhance flexibility of the application
 
 
 5. **Being able to export customer order history into csv file**
-
+    
     Add downloadOrderHistory to export all customer data alongside the order history, so that the manager can mass process all the customer data for other purpose such as targeted advertising using machine learning
 
 
@@ -866,10 +867,10 @@ Team Size: 5
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * 	CLI (Command-Line Interface): A text-based interface where users can type commands to interact with the system
-* Customer: An individual whose details (e.g., name, phone number, email) are stored in the system for tracking purposes
-* Tag: A label or keyword that can be associated with a customer to categorize or describe them (e.g., “vegetarian”, “loyalty-programme”)
-* Parameter: Information provided by the user as part of a command, such as name, email, or phone number
-* CSV (Comma-Separated Values): A common format for storing and exchanging tabular data, where each row represents a record, and each field is separated by a comma
+* **Customer**: An individual whose details (e.g., name, phone number, email) are stored in the system for tracking purposes
+* **Tag**: A label or keyword that can be associated with a customer to categorize or describe them (e.g., “vegetarian”, “loyalty-programme”)
+* **Parameter**: Information provided by the user as part of a command, such as name, email, or phone number
+* **CSV** (Comma-Separated Values): A common format for storing and exchanging tabular data, where each row represents a record, and each field is separated by a comma
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -888,16 +889,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. cd into that empty folder and run the command : `java -jar NomNomNotifier.jar`
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by running the command: `java -jar NomNomNotifier.jar` .<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -914,15 +915,18 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Within the same directory of NomNomNotifier.jar, if the data file with `addressbook.json` is corrupted (eg. input restrictions for fields is breached), the next time NomNomNotifier is relaunched, an empty list will be displayed on the GUI.
+   2. If customers are added to that empty list, changes made to the empty list will overwrite the corrupted `addressbook.json` file
 
-1. _{ more test cases …​ }_
- 
+1. Dealing with missing data file
+   2. Within the same directory of NomNomNotifier.jar, if the data file with `addressbook.json` is missing or deleted, the next time NomNomNotifier is relaunched, a sample list of customers will be showned.
+   3. When new data is stored or existing data is changed through existing commands (eg. add, edit, add shortcut, add order), a new `addressbook.json` file will be created
+
 
 
