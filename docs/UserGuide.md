@@ -76,9 +76,9 @@ When you open the app, a GUI will appear with a few sample contacts already load
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional.<br>
     e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/have pHD` or as `n/John Doe`.
-* If a list of optional items separated by | are together wrapped in curly braces and 1 or 1..*, exactly 1 item and at least 1 or more items are needed. 
-    e.g. `{[n/NAME] | [p/PHONE] | [e/EMAIL]}1` means only one of the fields is needed.
-    e.g. `[n/NAME] | [p/PHONE] | [e/EMAIL]}1..*` means at least one or more of the fields is needed.
+* If a list of optional items separated by | are together wrapped in curly braces, exactly one item or at least one item are needed, depending on the presence of + after the curly braces. 
+    e.g. `{[n/NAME] | [p/PHONE] | [e/EMAIL]}` means exactly one of the fields is needed.
+    e.g. `{[n/NAME] | [p/PHONE] | [e/EMAIL]}+` means at least one of the fields is needed.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
@@ -137,7 +137,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX {[n/NAME] | [p/PHONE] | [e/EMAIL] | [j/JOB CODE] | [t/TAG] | [r/REMARK]}1..*`
+Format: `edit INDEX {[n/NAME] | [p/PHONE] | [e/EMAIL] | [j/JOB CODE] | [t/TAG] | [r/REMARK]}+`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be updated.
@@ -153,7 +153,7 @@ Examples:
 Finds persons by at least one criteria given.
 
 Format:
-`find {[n/NAME] | [p/PHONE] | [e/EMAIL] | [j/JOB CODE] | [t/TAG] | [r/REMARK]}1..*`
+`find {[n/NAME] | [p/PHONE] | [e/EMAIL] | [j/JOB CODE] | [t/TAG] | [r/REMARK]}+`
 
 * The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo`, `Hans Bobo`, and `Rohans Bobo`, but not `Bo Hans`
 * All fields are case-insensitive
@@ -172,7 +172,7 @@ Examples:
 Deletes the specified person from the address book by finding exact match of a field using one criterion.
 
 Format:
-`delete {[INDEX] | [n/NAME] | [e/EMAIL] | [p/PHONE]}1`
+`delete {[INDEX] | [n/NAME] | [e/EMAIL] | [p/PHONE]}`
 
 * Deletes the person at the specified `INDEX`or `NAME`or `PHONE`or `EMAIL`
 
@@ -205,7 +205,7 @@ Examples:
 Marks persons as "rejected" by updating their tags based on specified job code, tag, or a combination of both.
 
 Format:
-`massreject {[j/JOB CODE] | [t/TAG]}1..*`
+`massreject {[j/JOB CODE] | [t/TAG]}+`
 
 * Updates person's tags to `r` (rejected) based on the specified criteria.
 * You can filter by job code only, tag only, or a combination of both.
@@ -401,12 +401,12 @@ Context menu options allow users to perform typical text actions, which are avai
 |--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | **Add**      | `add n/NAME p/PHONE e/EMAIL j/JOB CODE t/TAG [r/REMARK]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`                    
 | **Clear**    | `clear`                                                                                                                                                          
-| **Delete**   | `delete {[INDEX] \| [n/NAME] \| [e/EMAIL] \| [p/PHONE]}1`<br> e.g. `delete 3`<br> `delete n/Alex Yeoh`<br> `delete e/alexyeoh@gmail.com`<br> `delete p/88306733` 
-| **Edit**     | `edit INDEX {[n/NAME] \| [p/PHONE] \| [e/EMAIL] \| [j/JOB CODE] \| [t/TAG] \| [r/REMARK]}1..*`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`             
+| **Delete**   | `delete {[INDEX] \| [n/NAME] \| [e/EMAIL] \| [p/PHONE]}`<br> e.g. `delete 3`<br> `delete n/Alex Yeoh`<br> `delete e/alexyeoh@gmail.com`<br> `delete p/88306733` 
+| **Edit**     | `edit INDEX {[n/NAME] \| [p/PHONE] \| [e/EMAIL] \| [j/JOB CODE] \| [t/TAG] \| [r/REMARK]}+`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`             
 | **Exit**     | `exit`                                                                                                                                                           
-| **Find**     | `find {[n/NAME] \| [p/PHONE] \| [e/EMAIL] \| [j/JOB CODE] \| [t/TAG] \| [r/REMARK]}1..*`<br> e.g. `find n/John j/123 ABC` `find p/12345678`                      
+| **Find**     | `find {[n/NAME] \| [p/PHONE] \| [e/EMAIL] \| [j/JOB CODE] \| [t/TAG] \| [r/REMARK]}+`<br> e.g. `find n/John j/123 ABC` `find p/12345678`                      
 | **List**     | `list`                                                                                                                                                           
-| **Mass Reject**| `massreject {[j/JOB CODE] \| [t/TAG]}1..*`<br> e.g. `massreject j/CS2103` `massreject t/BP j/123ABC`                                                             
+| **Mass Reject**| `massreject {[j/JOB CODE] \| [t/TAG]}+`<br> e.g. `massreject j/CS2103` `massreject t/BP j/123ABC`                                                             
 | **Sort**     | `sort [n/] [p/] [e/] [j/] [t/]` <br> e.g. `sort` `sort n/ e/` `sort p/`                                                                                          
 | **Statistics**| `stats`                                                                                                                                                          
 | **Help**     | `help`                                                                                                                                                           

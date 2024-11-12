@@ -179,7 +179,7 @@ public class EditCommandParserTest {
                 + PHONE_DESC_BOB + JOBCODE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_REJECTED;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_JOBCODE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG, PREFIX_JOBCODE));
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_JOBCODE_DESC + INVALID_EMAIL_DESC
