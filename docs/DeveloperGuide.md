@@ -243,6 +243,7 @@ ___
 
 **Extensions**:
 - **1a.** VV detects that the supplier is missing or invalid.
+
     - **1a1.** VV displays an error message.  
       Use case ends.
 
@@ -271,6 +272,7 @@ ___
     - **1c1.** VV displays an error message.
       Use case ends.
 
+___
 **System**: Vendor Vault (VV)
 
 **Use Case**: UC04 - Find Supplier by given parameters
@@ -302,6 +304,7 @@ ___
 1. User requests to sort suppliers by a specified field in a specified order.
 2. VV sorts the suppliers and displays the sorted list of suppliers.  
    Use case ends.
+
    **Extensions**:
 - **1a.** VV detects an invalid command format.
     - **1a1.** VV displays an error message.  
@@ -369,6 +372,7 @@ ___
 2. VV displays a confirmation message and then shows an updated list of all deliveries.  
    Use case ends.
 
+**Extensions**:
 - **1a.** VV detects an invalid command format.
     - **1a1.** VV displays an error message.  
       Use case ends.
@@ -893,6 +897,7 @@ Team size: 5
    * **Tasks**:
      * We plan to allow for adding a supplier name with special characters.
      * e.g. "add -s n/John Doe & Sons p/98765432
+     * e.g. "add -s n/John Doe s/o connor p/98765432
 
 
 9. **Enhancement 9**: Better input checks for invalid date in commands that require date input.
