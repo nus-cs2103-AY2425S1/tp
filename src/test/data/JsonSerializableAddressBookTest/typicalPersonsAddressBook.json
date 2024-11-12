@@ -4,43 +4,57 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "telegram" : "alicePauline",
+    "roles" : [ ],
+    "attendance": [ ],
+    "favouriteStatus": "NOT_FAVOURITE"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "telegram" : "bensonMeier",
+    "roles" : [ ],
+    "attendance": [ ],
+    "favouriteStatus": "NOT_FAVOURITE"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tags" : [ ]
+    "telegram" : "carlKurz",
+    "roles" : [ ],
+    "attendance": [ ],
+    "favouriteStatus": "NOT_FAVOURITE"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tags" : [ "friends" ]
+    "telegram" : "danMeier",
+    "roles" : [ ],
+    "attendance": [ ],
+    "favouriteStatus": "NOT_FAVOURITE"
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822224",
     "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tags" : [ ]
+    "telegram" : "elleMeyer",
+    "roles" : [ ],
+    "attendance": [ ],
+    "favouriteStatus": "NOT_FAVOURITE"
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94822427",
     "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tags" : [ ]
+    "telegram" : "fionaKunz",
+    "roles" : [ ],
+    "attendance": [ ],
+    "favouriteStatus": "NOT_FAVOURITE"
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94822442",
     "email" : "anna@example.com",
-    "address" : "4th street",
-    "tags" : [ ]
+    "telegram" : "georgeBest",
+    "roles" : [ ],
+    "attendance": [ ],
+    "favouriteStatus": "NOT_FAVOURITE"
   } ]
 }

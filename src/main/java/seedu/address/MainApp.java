@@ -21,6 +21,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.profile.exceptions.IllegalProfileNameException;
+import seedu.address.model.profile.exceptions.IllegalProfilePathException;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -36,7 +38,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 3, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -48,7 +50,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing CCAConnect ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -170,17 +172,33 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting CCAConnect " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("============================ [ Stopping CCAConnect ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
+
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (IllegalProfilePathException | IllegalProfileNameException e) {
+            logger.severe("Contacts could not be saved due to: " + e.getMessage());
+            return;
+        } catch (IOException e) {
+            logger.severe("Failed to save contacts " + StringUtil.getDetails(e));
+        }
+
+        try {
+            storage.deleteOrphanedProfiles(model.getUserPrefs());
+        } catch (IOException e) {
+            logger.severe("Failed to delete contacts " + StringUtil.getDetails(e));
+        }
+
     }
 }

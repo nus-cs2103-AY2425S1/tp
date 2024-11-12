@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import java.net.URL?>
+
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.ScrollPane?>
+<VBox fx:id="view" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" VBox.vgrow="ALWAYS">
+    <Label id="viewTitle" fx:id="viewTitle" />
+    <GridPane>
+    <HBox alignment="BASELINE_LEFT" prefWidth="1250">
+        <Label id="viewName" fx:id="viewName"/>
+    </HBox>
+    </GridPane>
+    <HBox alignment="BASELINE_LEFT">
+        <Label id="viewLabel" text="Phone Number: "/>
+        <Label id="viewPhone" fx:id="viewPhone"/>
+    </HBox>
+    <HBox alignment="BASELINE_LEFT">
+        <Label id="viewLabel" text="Email Address: "/>
+        <Label id="viewEmail" fx:id="viewEmail"/>
+    </HBox>
+    <HBox alignment="BASELINE_LEFT">
+        <Label id="viewLabel" text="Telegram Handle: "/>
+        <Label id="viewTelegram" fx:id="viewTelegram"/>
+    </HBox>
+    <HBox alignment="BASELINE_LEFT">
+        <Label id="viewLabel" text="Roles: "/>
+        <FlowPane fx:id="viewRoles" />
+    </HBox>
+    <HBox alignment="TOP_LEFT" style="-fx-background-color: transparent">
+        <Label id="viewLabel" text="Sessions Attended: "/>
+        <ScrollPane id="viewScroll" fx:id="viewScroll" maxHeight="200" style="-fx-background-color: transparent; -fx-background: transparent">
+            <FlowPane fx:id="viewAttendance" VBox.vgrow="ALWAYS"/>
+        </ScrollPane>
+    </HBox>
+    <stylesheets>
+        <URL value="@ViewPersonCard.css"/>
+    </stylesheets>
+</VBox>

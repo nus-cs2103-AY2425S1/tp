@@ -19,6 +19,8 @@
 !define LOGIC_COLOR_T3 #1616B0
 !define LOGIC_COLOR_T4 #101086
 
+!define COMMON_COLOR_T1 #D0A8FF
+
 !define MODEL_COLOR #9D0012
 !define MODEL_COLOR_T1 #F97181
 !define MODEL_COLOR_T2 #E41F36
@@ -75,5 +77,5 @@ skinparam DefaultTextAlignment center
 skinparam packageStyle Rectangle
 
 hide footbox
-hide members
+hide empty members
 hide circle

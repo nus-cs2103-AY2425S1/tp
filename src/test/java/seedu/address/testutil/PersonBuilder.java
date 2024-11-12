@@ -3,12 +3,15 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FavouriteStatus;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Telegram;
+import seedu.address.model.role.Member;
+import seedu.address.model.role.Role;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -19,13 +22,16 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_TELEGRAM = "amyBee";
+    public static final String DEFAULT_FAVOURITE_STATUS = "NOT_FAVOURITE";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
-    private Set<Tag> tags;
+    private Telegram telegram;
+    private Set<Role> roles;
+    private Set<Attendance> attendance;
+    private FavouriteStatus favouriteStatus = FavouriteStatus.NOT_FAVOURITE;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -34,8 +40,10 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
+        telegram = new Telegram(DEFAULT_TELEGRAM);
+        roles = new HashSet<>();
+        attendance = new HashSet<>();
+        favouriteStatus = FavouriteStatus.valueOf(DEFAULT_FAVOURITE_STATUS);
     }
 
     /**
@@ -45,8 +53,9 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        tags = new HashSet<>(personToCopy.getTags());
+        telegram = personToCopy.getTelegram();
+        roles = new HashSet<>(personToCopy.getRoles());
+        attendance = new HashSet<>(personToCopy.getAttendance());
     }
 
     /**
@@ -58,18 +67,20 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withRoles(String ... roles) {
+        this.roles = SampleDataUtil.getRoleSet(roles);
         return this;
     }
+
+    // TODO: make a withAttendance method like withRoles to help test attendance
 
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withTelegram(String telegram) {
+        this.telegram = new Telegram(telegram);
         return this;
     }
 
@@ -89,8 +100,34 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Add or remove role {@code Member} to the {@code Role} of the {@code Person} based on input {@code b}.
+     */
+    public PersonBuilder isMember(boolean b) {
+        this.roles.remove(new Member());
+        if (b) {
+            this.roles.add(new Member());
+        }
+        return this;
     }
 
+    /**
+     * Add {@code attendance} to the {@code Attendance} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAttendance(Attendance attendance) {
+        this.attendance.add(attendance);
+        return this;
+    }
+
+    /**
+     * Sets the {@code FavouriteStatus} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFavourite() {
+        this.favouriteStatus = FavouriteStatus.FAVOURITE;
+        return this;
+    }
+
+    public Person build() {
+        return new Person(name, phone, email, telegram, roles, attendance, favouriteStatus);
+    }
 }

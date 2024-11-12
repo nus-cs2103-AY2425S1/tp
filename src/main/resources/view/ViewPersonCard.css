@@ -1,0 +1,73 @@
+#viewTitle {
+    -fx-font-style: italic;
+    -fx-text-fill: white;
+    -fx-font-size: 35px;
+    -fx-font-weight: bolder;
+}
+
+#viewLabel {
+    -fx-text-fill: #CCCCCC;
+    -fx-font-size: 20px;
+    -fx-font-weight: bolder;
+}
+
+#viewName {
+    -fx-text-fill: white;
+    -fx-font-size: 30px;
+}
+
+#viewPhone {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+#viewEmail {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+#viewTelegram {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+#viewRole {
+    -fx-padding: 1px;
+    -fx-background-color: linear-gradient(to bottom, #509995, #225876);
+    -fx-background-radius: 12px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: white;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+}
+
+#memberRole {
+    -fx-padding: 1px;
+    -fx-background-color: linear-gradient(to bottom, #4ACCDD, #B5B5CD);
+    -fx-background-radius: 12px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: white;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+}
+
+#viewSesh {
+    -fx-padding: 1px;
+    -fx-background-color: #6789B4;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: white;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+}
+
+#viewNA {
+    -fx-font-size: 20px;
+    -fx-text-fill: #DDDDDD;
+}
+
+
+

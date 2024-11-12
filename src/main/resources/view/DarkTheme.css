@@ -307,9 +307,32 @@
     -fx-padding: 8 1 8 1;
 }
 
+#role {
+    -fx-padding: 1px;
+    -fx-background-color: linear-gradient(to bottom, #509995, #225876);
+    -fx-background-radius: 12px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: white;
+    -fx-font-size: 13px;
+}
+
+#memberRole {
+    -fx-padding: 1px;
+    -fx-background-color: linear-gradient(to bottom, #4ACCDD, #B5B5CD);
+    -fx-background-radius: 12px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: white;
+    -fx-font-size: 13px;
+}
+
 #cardPane {
-    -fx-background-color: transparent;
     -fx-border-width: 0;
+}
+
+.favCardPane {
+    -fx-background-color: linear-gradient(to bottom, #225876, #397885);
 }
 
 #commandTypeLabel {

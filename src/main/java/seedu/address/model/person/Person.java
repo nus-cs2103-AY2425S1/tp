@@ -8,7 +8,9 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.role.Member;
+import seedu.address.model.role.Role;
 
 /**
  * Represents a Person in the address book.
@@ -20,21 +22,26 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Telegram telegram;
+    private final FavouriteStatus isFavourite;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Role> roles = new HashSet<>();
+    private final Set<Attendance> attendance = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Telegram telegram,
+                  Set<Role> roles, Set<Attendance> attendance, FavouriteStatus isFavourite) {
+        requireAllNonNull(name, phone, email, telegram, roles, isFavourite);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this.telegram = telegram;
+        this.roles.addAll(roles);
+        this.attendance.addAll(attendance);
+        this.isFavourite = isFavourite;
     }
 
     public Name getName() {
@@ -49,16 +56,38 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Telegram getTelegram() {
+        return telegram;
+    }
+
+    public FavouriteStatus getFavouriteStatus() {
+        return isFavourite;
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable role set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
+    }
+
+    /**
+     * Check if Person is a Member
+     * @return true if Person has a role "Member"
+     */
+    public boolean isMember() {
+        Set<Role> roles = this.getRoles();
+        return roles.contains(new Member());
+    }
+
+    /**
+     * Returns an immutable attendance set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted
+     * @return the attendance set encapsulated by Person
+     */
+    public Set<Attendance> getAttendance() {
+        return Collections.unmodifiableSet(attendance);
     }
 
     /**
@@ -71,7 +100,14 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getTelegram().equals(getTelegram());
+    }
+
+    /**
+     *
+     */
+    public boolean doesNameHaveConsecutiveWhitespaces() {
+        return this.name.hasConsecutiveWhitespaces();
     }
 
     /**
@@ -93,14 +129,14 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && telegram.equals(otherPerson.telegram)
+                && roles.equals(otherPerson.roles);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, telegram, roles);
     }
 
     @Override
@@ -109,8 +145,8 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("telegram", telegram)
+                .add("roles", roles)
                 .toString();
     }
 

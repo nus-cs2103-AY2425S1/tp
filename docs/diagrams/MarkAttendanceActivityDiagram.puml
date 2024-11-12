@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User inputs telegram handles and date to mark attendance
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([user input is valid])
+    :Get list of Members from filteredPersonList of model;
+    :Create copy of existing member
+    Add attendance of the specified date to each member;
+    :Update corresponding members in address book;
+else ([else])
+endif
+stop
+@enduml

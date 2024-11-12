@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.profile.Profile.extractProfileNameFromPathOrThrow;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -13,6 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.profile.exceptions.IllegalProfileNameException;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -29,6 +31,10 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     public Path getAddressBookFilePath() {
         return filePath;
+    }
+
+    public void updateAddressBookFilePath(Path filePath) {
+        this.filePath = filePath;
     }
 
     @Override
@@ -60,7 +66,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException, IllegalProfileNameException {
         saveAddressBook(addressBook, filePath);
     }
 
@@ -69,10 +75,14 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveAddressBook(
+            ReadOnlyAddressBook addressBook,
+            Path filePath
+    ) throws IOException, IllegalProfileNameException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
+        extractProfileNameFromPathOrThrow(filePath);
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
     }

@@ -1,16 +1,23 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
 import java.util.Comparator;
+import java.util.Set;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.person.FavouriteStatus;
 import seedu.address.model.person.Person;
+import seedu.address.model.role.Member;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -26,6 +33,8 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
+    private final StringProperty attendanceDisplay;
+
     @FXML
     private HBox cardPane;
     @FXML
@@ -33,13 +42,15 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label attendance;
+    @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label telegram;
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane roles;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -47,13 +58,66 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        if (person.getFavouriteStatus().equals(FavouriteStatus.FAVOURITE)) {
+            cardPane.getStyleClass().add("favCardPane");
+        } else {
+            cardPane.getStyleClass().remove("favCardPane");
+        }
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
+        telegram.setText("@" + person.getTelegram().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        attendance.setVisible(person.isMember());
+        attendanceDisplay = this.hasAttendedToday(person)
+                ? new SimpleStringProperty(" " + String.valueOf((char) 9745))
+                : new SimpleStringProperty(" " + String.valueOf((char) 9744));
+        attendance.textProperty().bind(attendanceDisplay);
+        person.getRoles().stream()
+                .sorted(Comparator.comparing(role -> role.roleName))
+                .forEach(role -> roles.getChildren().add(new Label(role.roleName)));
+        roles.getChildren().stream().forEach(label -> label.setId("role"));
+        roles.getChildren().stream().map(node -> (Label) node)
+                .filter(label -> label.getText().equals(Member.MEMBER_ROLE))
+                .forEach(label -> label.setId("memberRole"));
+    }
+
+    /**
+     * Function to check if a person has attended a session today
+     * @param person Person of interest
+     * @return boolean value to indicate if person has attended a session today
+     */
+    public boolean hasAttendedToday(Person person) {
+        Set<Attendance> attendedDates = person.getAttendance();
+        LocalDate today = LocalDate.now();
+        return attendedDates.contains(new Attendance(today.toString()));
+    }
+
+    public HBox getCardPane() {
+        return this.cardPane;
+    }
+
+    public Label getNameLabel() {
+        return this.name;
+    }
+
+    public Label getIdLabel() {
+        return this.id;
+    }
+
+    public Label getAttendanceLabel() {
+        return this.attendance;
+    }
+
+    public Label getPhoneLabel() {
+        return this.phone;
+    }
+
+    public Label getTelegramLabel() {
+        return this.telegram;
+    }
+
+    public Label getEmailLabel() {
+        return this.email;
     }
 }

@@ -14,6 +14,8 @@ import seedu.address.model.UserPrefs;
  */
 public interface Storage extends AddressBookStorage, UserPrefsStorage {
 
+    void deleteOrphanedProfiles(ReadOnlyUserPrefs userPrefs) throws IOException;
+
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
 
@@ -22,6 +24,9 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
 
     @Override
     Path getAddressBookFilePath();
+
+    @Override
+    void updateAddressBookFilePath(Path filePath);
 
     @Override
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;

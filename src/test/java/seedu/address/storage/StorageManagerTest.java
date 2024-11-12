@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,8 +25,10 @@ public class StorageManagerTest {
     private StorageManager storageManager;
 
     @BeforeEach
-    public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+    public void setUp() throws IOException {
+        Path dataDirectory = testFolder.resolve("data");
+        Files.createDirectories(dataDirectory);
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(dataDirectory.resolve("ab.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }

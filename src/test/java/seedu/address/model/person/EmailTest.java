@@ -57,6 +57,7 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("PeterJack.1190@example.com")); // period in local part
         assertTrue(Email.isValidEmail("PeterJack+1190@example.com")); // '+' symbol in local part
         assertTrue(Email.isValidEmail("PeterJack-1190@example.com")); // hyphen in local part
+        assertTrue(Email.isValidEmail("PeterJack%1190@example.com")); // '%' symbol in local part
         assertTrue(Email.isValidEmail("a@bc")); // minimal
         assertTrue(Email.isValidEmail("test@localhost")); // alphabets only
         assertTrue(Email.isValidEmail("123@145")); // numeric local part and domain name

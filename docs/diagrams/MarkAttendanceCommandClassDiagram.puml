@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+skinparam classAttributeIconSize 0
+
+' Class Diagram for MarkAttendance Feature
+
+class AddressBook {
+    - FilteredList<Person> filteredPersons
+    + void setPerson(Person target, Person updatedPerson)
+    + FilteredList<Person> getFilteredPersonList()
+}
+
+class Model
+
+class Person {
+    + boolean isMember()
+}
+
+class Attendance {
+    - LocalDate session
+}
+
+class Role
+
+class Member
+
+class AttendanceMarkingCommand {
+    + List<String> displayMembers()
+}
+
+class MarkAttendanceCommand {
+    - List<Telegram> telegrams
+    - Attendance attendance
+    + CommandResult execute(Model model)
+}
+
+
+' Relationships
+AttendanceMarkingCommand .right.|> Command
+MarkAttendanceCommand .up.|> AttendanceMarkingCommand
+ModelManager .left.|> Model
+ModelManager o-- AddressBook
+AddressBook o-left- Person
+MarkAttendanceCommand -right-> Model : uses
+Member .right.|> Role
+Person -left-> "*" Role : contains
+Person --> "*" Attendance : contains
+@enduml

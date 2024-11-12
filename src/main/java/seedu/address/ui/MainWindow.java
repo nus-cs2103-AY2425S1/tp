@@ -8,7 +8,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +37,17 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ViewPersonCard viewPersonCard;
+    private StatusBarFooter statusBarFooter;
+
+    @FXML
+    private VBox personList;
+
+    @FXML
+    private VBox viewPersonSection;
+
+    @FXML
+    private Pane viewPersonCardPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -110,17 +124,33 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        // personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getSortedPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Opens up ViewPersonCard of specified person
+     */
+    void openViewPersonCard(Person person) {
+        viewPersonSection.setVisible(true);
+        viewPersonSection.setManaged(true);
+
+        personList.setVisible(false);
+        personList.setManaged(false);
+
+        viewPersonCardPlaceholder.getChildren().clear();
+        this.viewPersonCard = new ViewPersonCard(person);
+        viewPersonCardPlaceholder.getChildren().add(viewPersonCard.getRoot());
     }
 
     /**
@@ -173,6 +203,12 @@ public class MainWindow extends UiPart<Stage> {
      * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+        viewPersonSection.setVisible(false);
+        viewPersonSection.setManaged(false);
+
+        personList.setVisible(true);
+        personList.setManaged(true);
+
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -184,6 +220,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isView()) {
+                openViewPersonCard(commandResult.getViewPerson());
+            }
+
+            if (commandResult.isProfileSwitched()) {
+                statusBarFooter.setSaveLocationStatus(logic.getAddressBookFilePath());
             }
 
             return commandResult;

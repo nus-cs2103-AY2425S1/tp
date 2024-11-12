@@ -21,6 +21,18 @@ jobs:
       - name: Merge to master
         run: git checkout --progress --force ${{ github.sha }}
 
+      # Install xvfb and openjfx only on Linux
+      - name: Install xvfb and openjfx
+        if: runner.os == 'Linux'
+        run: sudo apt-get install -y xvfb openjfx
+
+      # Start xvfb and set DISPLAY environment variable only on Linux
+      - name: Start xvfb
+        if: runner.os == 'Linux'
+        run: |
+          sudo Xvfb :99 -screen 0 1024x768x24 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+
       - name: Run repository-wide tests
         if: runner.os == 'Linux'
         working-directory:  ${{ github.workspace }}/.github
