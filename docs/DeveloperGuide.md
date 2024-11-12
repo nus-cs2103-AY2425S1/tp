@@ -27,7 +27,7 @@ title: Developer Guide
   - [Consistent Case-Insensitive Tag Handling](#2-consistent-case-insensitive-tag-handling)
   - [Modify Industry Field to be Case Insensitive](#3-modify-industry-field-to-be-case-insensitive)
   - [Handling Prefix Collision in All Input Fields](#4-handling-prefix-collision-in-all-input-fields)
-  - [Specify t/ Prefix for Tag Inputs in `filtertag`](#5-specify-t-prefix-for-tag-inputs-in-filtertag)
+  - [Specify `t/` Prefix for Tag Inputs in `filtertag`](#5-specify-t-prefix-for-tag-inputs-in-filtertag)
   - [More Specific Error Messages for Corrupted CSV Files in `import`](#6-more-specific-error-messages-for-corrupted-csv-files-in-import)
   - [Make Error Message for `view` Command More Specific](#7-make-error-message-for-view-command-more-specific)
   - [Allow `deletetag all` Command to Handle an Empty List](#8-allow-deletetag-all-command-to-handle-an-empty-list)
@@ -286,7 +286,7 @@ The activity diagram below shows the flow of the `find` operation.
 
 ### 5. Filtertag Command
 
-The filtertag command is used to find contacts whose tags are the same as the specified keyword.
+The `filtertag` command is used to find contacts whose tags are the same as the specified keyword.
 
 #### Current Implementation
 
@@ -369,7 +369,7 @@ Currently, AdmiNUS misinterprets certain content in input fields if it resembles
 
 Implement an improved parsing mechanism that can intelligently differentiate between actual command prefixes and input data that coincidentally contains these prefixes. The proposed enhancement will apply to all input fields (e.g., name, address, email, etc.), ensuring that users can enter data without encountering errors related to command prefix misinterpretation. By enhancing how prefixes are handled in user inputs, this change will allow for more flexible and user-friendly data entry, eliminating errors when prefixes appear naturally in input text.
 
-### 5. Specify t/ Prefix for Tag Inputs in `filtertag`
+### 5. Specify `t/` Prefix for Tag Inputs in `filtertag`
 
 #### Current Issue: 
 
@@ -387,7 +387,7 @@ The current error message for CSV file corruption in the `import` command is gen
 
 #### Proposed Enhancement: 
 
-Enhance the CSV import error message to specify which fields are missing or incorrectly formatted. For example, `“Error: Missing compulsory field ‘name’ in row 3”` or `“Invalid category in row 5; expected ‘student’ or ‘company’”`. By providing more precise feedback on CSV formatting issues, users will be better equipped to correct their files quickly, minimizing trial and error and streamlining the import process. This enhancement will improve user experience by making error messages actionable and informative.
+Enhance the error message to specify which fields are missing or incorrectly formatted. For example, `“Error: Missing compulsory field ‘name’ in row 3”` or `“Invalid category in row 5; expected ‘student’ or ‘company’”`. By providing more precise feedback on CSV formatting issues, users will be better equipped to correct their files quickly, minimizing trial and error and streamlining the import process. This enhancement will improve user experience by making error messages actionable and informative.
 
 ### 7. Make Error Message for `view` Command More Specific
 
