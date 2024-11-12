@@ -762,4 +762,3 @@ Currently, it requires 2 separate `edit` commands  if the user wants to replace 
 We plan to allow the user to add and delete multiple module roles in a single `edit` command at the same time.
 For example, the user can execute `edit 1 r/-CS1101S-Student r/+CS2103T-TA` to replace the existing module role CS1101S-Student with CS2103T-TA for the first contact in the list.
 
-
