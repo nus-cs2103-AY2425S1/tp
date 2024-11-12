@@ -14,6 +14,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.company.Industry;
 import seedu.address.model.tag.Tag;
 
+//@@author ruiming97
 /**
  * Represents a Student in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.

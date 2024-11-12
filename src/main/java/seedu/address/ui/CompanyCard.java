@@ -9,6 +9,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.company.Company;
 
+//@@author ruiming97
 /**
  * An UI component that displays information of a {@code Company}.
  */

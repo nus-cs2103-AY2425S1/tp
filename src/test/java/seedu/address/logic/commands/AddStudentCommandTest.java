@@ -26,6 +26,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
+//@@author ruiming97
 public class AddStudentCommandTest {
 
     @Test

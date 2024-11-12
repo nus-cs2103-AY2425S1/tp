@@ -3,6 +3,7 @@ package seedu.address.model.person.company;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+//@@author ruiming97
 /**
  * Represents a Company's industry in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidIndustry(String)}
