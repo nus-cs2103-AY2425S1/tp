@@ -204,7 +204,7 @@ A current contact can be assigned as another person's emergency contact. It is a
 
 <puml src="diagrams/EmergencyContact.puml" />
 
-A person will then store an ContactablePerson as their emergency contact.
+A person will then store a ContactablePerson as their emergency contact.
 
 --------------------------------------------------------------------------------------------------------------------
 
