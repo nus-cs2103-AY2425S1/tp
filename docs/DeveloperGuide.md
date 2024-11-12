@@ -132,7 +132,7 @@ The class diagram below provides an overview of Command.
 
 <img src="images/CommandClassDiagram.png"/>
 
-Commands that extends the UndoableCommand class have a concrete implementation of `undo`, which is called during the execution of an UndoCommand. During the execution of an `UndoableCommand`, the changes to the addressbook are stored, and will be used for `undo`.
+Commands that extends the UndoableCommand class have a concrete implementation of `undo`, which is called during the execution of an UndoCommand. During the execution of an `UndoableCommand`, the changes to the guest list are stored, and will be used for `undo`.
 
 ### Model Component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -240,7 +240,7 @@ The following activity diagram summarises what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -270,23 +270,23 @@ The following activity diagram summarises what happens when a user executes a ne
 
 In the current v1.6 iteration, we are aware of certain feature flaws and possible areas for improvements. Below are some of the upcoming works scheduled to be addressed.<br>
 
-### **Fix `filter`, `add` and `undo` commands**
+### Fix `filter`, `add` and `undo` commands
 Currently, running any `filter` command that changes the list displayed, followed by an `add` command that successfully adds a guest changes the displayed list to the full guest list as intended.<br>
 However, the filters inside the filter panel are not removed, which can hinder users from performing filter functions.<br>
 This would also imply that the `undo` command does not operate as intended after the `add` command.<br>
 A workaround is to run the command `list` to reset the filters after adding a guest.
 
-### **Standardise tag colours**
+### Standardise tag colours
 The intention to differentiate tags by colours was to enable users to distinguish tags easily.<br>
 Currently, the colour of the tags changes randomly everytime the app is reopened.<br>
 We understand that experienced users may associate certain colours to certain tags. Thus, we plan to map each tag to a fixed colour, ensuring a standardised tag colour everytime the app is used.
 
-### **Rigorous checks on user inputs**
+### Rigorous checks on user inputs
 Currently, fields like `Phone` accepts only 8 digits, but does not check whether the starting digit is a 6, 8, or 9 (in compliance with Singapore's phone numbers).<br>
 Other commands such as `newtag 1 t/friends` will successfully create a new tag called `friends` while ignoring the redundant input `1`.<br>
 To provide clarity and ease to users, we plan to have more rigorous checks and display clearer messages to the user. For the latter example, "The input '1' is ignored."
 
-### **Empty fields for `Email` and `Phone`**
+### Empty fields for `Email` and `Phone`
 We understand that not both fields are always required. Users can contact guests either through phone or email.<br>
 Hence, we plan to only require one of the two fields to be inputted.
 
