@@ -1,0 +1,57 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+title Clear Listings Sequence Diagram
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant "c:ClearListingsCommand" as ClearListingsCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "l:Listings" as Listings MODEL_COLOR
+end box
+
+[-> LogicManager : execute("clearlistings")
+activate LogicManager
+
+LogicManager -> EzstatesParser : parseCommand("clearlistings")
+activate EzstatesParser
+
+EzstatesParser --> LogicManager : c
+deactivate EzstatesParser
+
+LogicManager -> ClearListingsCommand : execute(m:Model)
+activate ClearListingsCommand
+
+' Create a new empty Listings instance
+create Listings
+ClearListingsCommand -> Listings
+activate Listings
+Listings --> ClearListingsCommand : l
+deactivate Listings
+
+' Set the new Listings in the Model
+ClearListingsCommand -> Model : setListings(l:Listings)
+activate Model
+Model --> ClearListingsCommand
+deactivate Model
+
+' Create a CommandResult to confirm the clear operation
+create CommandResult
+ClearListingsCommand -> CommandResult
+activate CommandResult
+CommandResult --> ClearListingsCommand
+deactivate CommandResult
+
+ClearListingsCommand --> LogicManager : r
+deactivate ClearListingsCommand
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml

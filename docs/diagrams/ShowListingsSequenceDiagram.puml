@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+title Show Listings Sequence Diagram
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant "s:ShowListingsCommand" as ShowListingsCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("showlistings")
+activate LogicManager
+
+LogicManager -> EzstatesParser : parseCommand(cmd)
+activate EzstatesParser
+
+EzstatesParser --> LogicManager :
+deactivate EzstatesParser
+
+LogicManager -> ShowListingsCommand : execute(m:Model)
+activate ShowListingsCommand
+
+ShowListingsCommand -> Model : updateFilteredListingList(PREDICATE_SHOW_ALL_LISTINGS)
+activate Model
+Model --> ShowListingsCommand
+deactivate Model
+
+alt list is empty
+    ShowListingsCommand -> LogicManager
+    deactivate ShowListingsCommand
+else else
+    create CommandResult
+    ShowListingsCommand -> CommandResult
+    activate CommandResult
+    CommandResult --> ShowListingsCommand
+    deactivate CommandResult
+    ShowListingsCommand --> LogicManager : r
+    deactivate ShowListingsCommand
+end
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml
