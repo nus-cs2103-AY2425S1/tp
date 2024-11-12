@@ -641,14 +641,13 @@ Use case resumes at step 3.
 * **AB-3**: The code name for the AddressBook Level 3 application, which serves as the base framework for the student management system being developed.
 * **NUS SOC**: National University of Singapore, School of Computing. The application is designed for tutors within this institution to manage student progress effectively.
 * **Tutor**: The primary user of the application—an NUS School of Computing tutor responsible for tracking students' progress, attendance, and assignments.
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **CLI (Command Line Interface)**: A text-based interface where users interact with the application by typing commands rather than using graphical elements like buttons.
 * **GUI (Graphical User Interface)**: A visual interface that allows users to interact with the application through graphical elements like windows, buttons, and menus.
 * **JSON (JavaScript Object Notation)**: A lightweight data format used for data storage and transmission, typically for configuration or file storage.
 * **Parser**: A component that interprets user commands and converts them into actions or objects that the system can process.
 * **MSS (Main Success Scenario)**: The primary sequence of steps in a use case where everything proceeds as expected without any errors.
-* **JAR File**: Java ARchive file; a package file format that bundles Java class files and associated metadata for distribution.
-* **Prerequisite**: Compulsory requirements to fulfil before every manual testing action
+* **JAR File**: Java Archive file; a package file format that bundles Java class files and associated metadata for distribution.
+* **Prerequisite**: Compulsory requirements to fulfil before every manual testing action.
 
 --------------------------------------------------------------------------------------------------------------------
 
