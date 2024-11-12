@@ -66,7 +66,7 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
    **Linux**:
        Open the folder where you placed the Talentcy.jar file.
        Right-click inside the folder and select "Open in Terminal" (or use the Ctrl + Alt + T shortcut to open the terminal, then navigate to the folder using the cd command).
-       In the terminal, type java -jar Talentcy.jar and press Enter.
+       In the terminal, type `java -jar Talentcy.jar` and press Enter.
 
 A GUI should appear in a few seconds. Shown below is the annotated GUI. Note how the app contains some sample data.<br>
 ![Ui](images/Annotated-GUI.jpg)
@@ -77,7 +77,7 @@ A GUI should appear in a few seconds. Shown below is the annotated GUI. Note how
 
     * `list` : Lists all persons.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/A r/good ethic` : Adds a person
+    * `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/A r/good ethic` : Adds a person.
     * named `John Doe` to the Address Book.
 
     * `delete 3` : Deletes the 3rd person shown in the current list.
