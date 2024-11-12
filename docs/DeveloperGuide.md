@@ -1770,12 +1770,24 @@ applied to edited data, but specific expected results will differ. <br><br>
 <br>
 
 #### Marking Task
-##### ... if there's only 2 tasks
-1. Test case: `mark-task 1 2`<br>
-   Expected: First two task marked. Details of updated tasks shown.
 
-1. Test case: `mark-task 1 2 3 4`<br>
-   Expected: No tasks marked (besides those originally marked). Error details shown.
+1. **Marking a `Task` as complete**
+
+    1. **Prerequisites**: List all tasks using the `list-tasks` command. There is at least one `Task` in the list of `Tasks`.
+
+    2. **Test case**: `mark 1` <br>
+       **Expected**: `Task` 1 is marked as complete. Details of complete task are shown in the status message.
+
+    3. **Test case (following Test case 2)**: **Test case**: `mark 1` (assuming `Task` 1 is already complete) <br>
+       **Expected**: `Task` 1 remains marked as complete. Details of complete task are shown in the status message.
+
+    4. **Test case**: `mtask X` (where X is greater than the number of tasks in the `Task` list) <br>
+       **Expected**: No tasks are marked as complete. Error details shown in the status message indicating that the `Task` is not a valid one.
+
+    4. **Test case**: `mtask 1 2 3` (where there are at least three tasks in the `Task` list) <br>
+       **Expected**: `Tasks` 1, 2, and 3 are marked as complete. Details of complete tasks are shown in the status message.
+
+<br>
 
 #### Unmarking Task
 ##### ... if there's only 2 tasks
