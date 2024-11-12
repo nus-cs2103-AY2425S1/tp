@@ -1730,33 +1730,44 @@ applied to edited data, but specific expected results will differ. <br><br>
 
 <br>
 
-#### Assigning Task
-##### ... if there's only 1 task and 1 vendor in WedLinker and vendor does not have that task assigned to them
-1. Test case: `assign-task 1 1`<br>
-   Expected: 1st contact is put in `Task1`'s guest list and 1st contact has `Task1` on its contact card.
+#### Assigning Tasks
 
-1. Test case: `assign-task 0 0`<br>
-   Expected: No tasks are assigned. Error details shown.
+1. **Assigning a `Task` to a `Person`**
 
-1. Test case: `assign-task 2 2`<br>
-   Expected: No tasks are assigned. Error details shown.
+    1. **Prerequisites**: List all tasks using the `list-tasks` command. There is at least one `Task` in the list of `Tasks`. List all contacts using the
+       `list` command. There is are at least two contacts in the `Person` list, one of whom is a `Vendor`.
 
-##### ... if there's only 1 task and 1 vendor in WedLinker and vendor has that task already assigned to them
-1. Test case: `assign-task 1 1`<br>
-   Expected: No tasks are assigned to any contacts. Error details shown.
+    2. **Test case**: `assign-task 1 1` (assuming contact 1 is a `Vendor` that does not have `Task` 1 assigned to them yet) <br>
+       **Expected**: The first contact has `Task` on their contact card. Details of the assigned task are shown in the status message.
 
-##### ... if there's only 1 task and 0 vendors
-1. Test case: `assign-task 1 1`<br>
-   Expected: No tasks are assigned. Error details shown.
+    3. **Test case (following Test case 2)**: `assign-task 1 1` (assuming contact 1 is a `Vendor` who now has `Task` 1 assigned to them) <br>
+       **Expected**: No tasks are assigned. Error details shown in the status message indicating that the `Task` is already assigned.
 
-#### Unassigning Task
-##### ... if first contact has first task
-1. Test case: `unassign-task 1 1`<br>
-   Expected: First task unassigned. Details of updated contact shown.
+    4. **Test case**: `assign-task 2 1` (assuming contact 2 is **not** a `Vendor`) <br>
+       **Expected**: No tasks are assigned. Error details shown in the status message indicating that `Person` 2 is not a `Vendor`.
 
-##### ... if first contact does not have first task
-1. Test case: `unassign-task 1 1`<br>
-   Expected: No tasks are unassigned. Error details shown.
+    5. **Test case**: `assign-task 1 X` (assuming contact 1 is a `Vendor`, and X is greater than the number of tasks in the `Task` list) <br>
+       **Expected**: No tasks are assigned. Error details shown in the status message indicating that the `Task` is not a valid one.
+
+<br>
+
+#### Unassigning Tasks
+
+1. **Unassigning a `Task` from a `Person`**
+
+    1. **Prerequisites**: List all tasks using the `list-tasks` command. There is at least one `Task` in the list of `Tasks`. List all contacts using the
+       `list` command. There is are at least two contacts in the `Person` list, one of whom is a `Vendor`.
+
+    2. **Test case**: `unassign-task 1 2` (assuming contact 1 is a `Vendor` that has one `Task` assigned to them) <br>
+       **Expected**: No tasks are unassigned. Error details shown in the status message indicating that the `Vendor` does not have the `Task`.
+
+    3. **Test case (following Test case 2)**: `assign-task 1 1` (assuming contact 1 is a `Vendor` that has one `Task` assigned to them) <br>
+       **Expected**: The first contact is unassigned their first `Task` on their contact card. Details of the unassigned task are shown in the status message.
+
+    4. **Test case**: `assign-task 2 1` (assuming contact 2 is **not** a `Vendor`) <br>
+       **Expected**: No tasks are unassigned. Error details shown in the status message indicating that `Person` 2 does not have any `Task` assigned.
+
+<br>
 
 #### Marking Task
 ##### ... if there's only 2 tasks
