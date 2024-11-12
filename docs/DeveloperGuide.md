@@ -118,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="550" />
+<puml src="diagrams/ModelClassDiagram.puml" width="1100" />
 
 
 The `Model` component,
@@ -127,14 +127,6 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="550" />
-
-</box>
 
 
 ### Storage component
@@ -451,6 +443,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. No contacts match the specified contact type
 
     Use case ends.
+
+**Use case: UC008 - Import contacts from .csv file**
+
+**MSS**
+1. User adds one or more .csv file(s) to Import folder
+2. User requests to import contacts from .csv file(s)
+3. UniLink imports contacts
+
+**Extensions**
+
+* 1a. There is no Import folder
+  * 1a1. UniLink shows error message
+  * 1a2. User restarts program to re-initialise Import folder
+  * 1a3. Use case resumes from step 1
+
+* 1b. The .csv file is empty
+  * 1b1. UniLink shows error message
+  * 1b2. User attempts to import another .csv file
+  * 1b3. Use case resumes from step 1
+
+* 3a. One (or more) of the contacts are invalid (Do not have valid contact info/ missing name/ missing contact type)
+  * 3a1. UniLink skips over invalid contacts
+  * 3a2. Use case resumes from step 3
+
+* 3b. There are duplicate contacts/ contacts in .csv file already exist in addressbook
+  * 3b1. UniLink skips over duplicate contacts
+  * 3b2. Use case resumes from step 3
 
 ### Non-Functional Requirements
 

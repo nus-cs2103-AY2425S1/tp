@@ -23,6 +23,8 @@ Class TelegramHandle
 Class Remark
 Class Tag
 
+note "A person must have at least one of Phone, Email or TelegramHandle" as N2
+
 Class I #FFFFFF
 }
 
@@ -56,7 +58,6 @@ Name -[hidden]right-> Phone
 
 ModelManager --> "~* filtered" Person
 
-note right of Person
-    A person must have at least one of Phone, Email or TelegramHandle
-end note
+
+N2 .. Person
 @enduml
