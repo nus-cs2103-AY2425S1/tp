@@ -10,7 +10,7 @@ UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
 
-Person ---> "12" Tutorial
+Person *--> "12" Tutorial
 Person *--> "1" Name
 Person *--> "1" StudentId
 Person *--> "1" Phone
