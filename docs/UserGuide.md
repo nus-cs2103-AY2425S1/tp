@@ -178,7 +178,7 @@ Suggestions provide visible hints about the expected command format as the comma
 
 While commands can be written in any order, the suggestion feature only follows the default order which puts related parameters together, analogous to how the contact details are displayed in the app.
 
-You may notice that suggestion and autocomplete features almost always work, even without default ordering, but this is currently a feature-in-progress for future enhancement.
+You may notice that suggestion and autocomplete features almost always work, even without default ordering, but this is currently a feature-in-progress for future enhancement. There are some edge cases that do not work. (e.g. 1st default parameter must always be in order `add n/` to work)
 
 Additionally, suggestions for parameters will never be duplicated unless users manually deviates from autocomplete or suggestion by the system.
 
