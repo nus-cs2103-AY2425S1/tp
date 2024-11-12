@@ -342,6 +342,7 @@ Step 2: The `export` command exports all data currently contained by DorManagerP
 The following sequence diagram shows how an `export` command goes through the `Logic` component:
 
 <puml src="diagrams/ExportSequenceDiagram.puml" alt="ExportSequenceDiagram" />
+<br>
 
 <box type="info" seamless>
 
@@ -352,7 +353,7 @@ The following sequence diagram shows how an `export` command goes through the `L
 The following activity diagram summarizes what happens when a user executes an `export` command:
 
 <puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" />
-
+<br>
 
 #### Design considerations:
 
@@ -391,6 +392,7 @@ Step 2. The `import` command locates the save file via the file path and reads t
 The following sequence diagram shows how an `import fp/./data/SaveFile3.json` command goes through the `Logic` component:
 
 <puml src="diagrams/ImportSequenceDiagram.puml" alt="ImportSequenceDiagram" />
+<br>
 
 <box type="info" seamless>
 
@@ -402,6 +404,7 @@ The lifeline for `ImportCommandParser` should end at the destroy marker (X) but 
 The following activity diagram summarizes what happens when a user executes an `import` command:
 
 <puml src="diagrams/ImportActivityDiagram.puml" alt="ImportActivityDiagram" />
+<br>
 
 ### Design considerations:
 
