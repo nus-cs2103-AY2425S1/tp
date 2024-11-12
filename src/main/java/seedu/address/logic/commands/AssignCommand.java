@@ -34,6 +34,7 @@ public class AssignCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Assigned delivery %1$s to %2$s";
     public static final String MESSAGE_NOT_IN_INSPECT = "Assign command can only be used in the inspect window!";
     public static final String MESSAGE_NOT_EMPLOYEE = "Entered person is not an employee";
+    public static final String MESSAGE_NOT_VALID_PERSON = "This person doesn't exist";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "This delivery has already been assigned to this person";
     private final Index index;
     private final Name toAssign;
@@ -60,7 +61,12 @@ public class AssignCommand extends Command {
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             model.updateFilteredPersonList(new NameContainsKeywordsPredicate(List.of(nameKeywords)));
 
+            if (model.getFilteredPersonList().isEmpty()) {
+                throw new CommandException(MESSAGE_NOT_VALID_PERSON);
+            }
+
             Person person = model.getFilteredPersonList().get(0);
+
             if (person.isClient()) {
                 throw new CommandException(MESSAGE_NOT_EMPLOYEE);
             }
