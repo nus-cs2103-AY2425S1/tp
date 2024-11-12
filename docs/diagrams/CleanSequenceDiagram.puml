@@ -22,13 +22,6 @@ create CleanCommand
 AddressBookParser -> CleanCommand
 activate CleanCommand
 
-create GradYearPredicate
-CleanCommand -> GradYearPredicate
-activate GradYearPredicate
-
-GradYearPredicate --> CleanCommand
-deactivate GradYearPredicate
-
 CleanCommand --> AddressBookParser
 deactivate CleanCommand
 
@@ -38,6 +31,13 @@ deactivate AddressBookParser
 LogicManager -> CleanCommand : execute(m)
 activate CleanCommand
 
+create GradYearPredicate
+CleanCommand -> GradYearPredicate
+activate GradYearPredicate
+
+GradYearPredicate --> CleanCommand : p
+deactivate GradYearPredicate
+
 CleanCommand -> Model : deletePersonByPredicate(p)
 activate Model
 Model --> CleanCommand
@@ -45,13 +45,6 @@ deactivate Model
 
 CleanCommand --> LogicManager : result
 deactivate CleanCommand
-
-LogicManager -> Model: pushToUndoStack(c)
-activate Model
-
-Model --> LogicManager
-deactivate Model
-
 CleanCommand -[hidden]-> LogicManager : result
 
 

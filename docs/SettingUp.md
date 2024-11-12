@@ -44,6 +44,7 @@ If you plan to use Intellij IDEA (highly recommended):
 
    **Tip:**
    Optionally, you can follow the guide [_[se-edu/guides] Using Checkstyle_](https://se-education.org/guides/tutorials/checkstyle.html) to find how to use the CheckStyle within IDEA e.g., to report problems _as_ you write code.
+
    </box>
 
 1. **Set up CI**
@@ -53,4 +54,5 @@ If you plan to use Intellij IDEA (highly recommended):
 1. **Learn the design**
 
    When you are ready to start coding, we recommend that you get some sense of the overall design by reading about [AddressBook’s architecture](DeveloperGuide.md#architecture).
+
 
