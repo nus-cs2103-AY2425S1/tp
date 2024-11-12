@@ -1766,3 +1766,11 @@ i.e. if user undoes a `add_g` command, the user will be and informed that they a
 redirected to the `list_g` panel.
 
 Similarly, if the user then runs `redo`, they will be informed that they are redoing the `add_g` command.
+
+### 8. Bug fix - Edit Task for All Groups
+
+Currently, the command will reset the status of the task for all groups to PENDING/OVERDUE.
+
+#### Fix
+
+We will fix it such that the command respects the status of the task for each group.
