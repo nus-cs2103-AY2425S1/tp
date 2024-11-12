@@ -418,6 +418,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+<br>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will not be pushed to the undo stack. Thus, the undo stack remains unchanged.
 
@@ -426,6 +427,7 @@ Step 6. The user executes `clear`, which is pushed to the undo stack.
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/CommitActivityDiagram.puml" height="600" width="600"/>
+<br>
 
 #### Design considerations:
 
