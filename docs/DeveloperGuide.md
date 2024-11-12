@@ -584,7 +584,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Listing all Udders
 
-1. Listing all Udders from a filtered list of Udders
+1. Listing all Udders after performing a `find` command
 
     1. Prerequisites: Filter Udders using `find n/John`. There exists other Udders filtered out.
 
