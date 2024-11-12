@@ -15,32 +15,32 @@ title: Developer Guide
    5. [Storage component](#storage-component)
    6. [Common classes](#common-classes)
 4. [Implementation](#implementation)
-  1. [Group feature](#group-feature)
-  2. [DeleteGroup feature](#delete-group-feature)
-  3. [Tag feature](#tag-feature)
-  4. [Proposed Undo/redo feature](#proposed-undoredo-feature)
-    1. [Proposed Implementation](#proposed-implementation)
-    2. [Design considerations](#design-considerations)
+   1. [Group feature](#group-feature)
+   2. [DeleteGroup feature](#delete-group-feature)
+   3. [Tag feature](#tag-feature)
+   4. [Proposed Undo/redo feature](#proposed-undoredo-feature)
+      1. [Proposed Implementation](#proposed-implementation)
+      2. [Design considerations](#design-considerations)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
-  1. [Product scope](#product-scope)
-  2. [User Stories](#user-stories)
-  3. [Use cases](#use-cases)
-  4. [Non-Functional Requirements](#non-functional-requirements)
-  5. [Glossary](#glossary)
+   1. [Product scope](#product-scope)
+   2. [User Stories](#user-stories)
+   3. [Use cases](#use-cases)
+   4. [Non-Functional Requirements](#non-functional-requirements)
+   5. [Glossary](#glossary)
 7. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-  1. [Launch and shutdown](#launch-and-shutdown)
-  2. [Deleting a person](#deleting-a-person)
-  3. [Saving data](#saving-data)
+   1. [Launch and shutdown](#launch-and-shutdown)
+   2. [Deleting a person](#deleting-a-person)
+   3. [Saving data](#saving-data)
 8. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
-  1. [Ability to export specific groups to CSV files](#enhancement-1-ability-to-export-explicit-groups-to-csv-files)
-  2. [Ability to change export filename or file path](#enhancement-2-ability-to-change-export-filename-or-file-path)
-  3. [Ability to import groups](#enhancement-3-ability-to-import-groups)
-  4. [Better student duplication handling](#enhancement-4-better-student-duplication-handling)
-  5. [Support for special characters in name and class fields](#enhancement-5-support-for-special-characters-in-name-and-class-fields)
-  6. [Increasing support to host more student information](#enhancement-6-increasing-support-to-host-more-student-information)
-  7. [Increased filter options for students](#enhancement-7-increased-filter-options-for-students)
-  8. [Support for precise student name searching](#enhancement-8-support-for-precise-student-name-searching)
+   1. [Ability to export specific groups to CSV files](#enhancement-1-ability-to-export-explicit-groups-to-csv-files)
+   2. [Ability to change export filename or file path](#enhancement-2-ability-to-change-export-filename-or-file-path)
+   3. [Ability to import groups](#enhancement-3-ability-to-import-groups)
+   4. [Better student duplication handling](#enhancement-4-better-student-duplication-handling)
+   5. [Support for special characters in name and class fields](#enhancement-5-support-for-special-characters-in-name-and-class-fields)
+   6. [Increasing support to host more student information](#enhancement-6-increasing-support-to-host-more-student-information)
+   7. [Increased filter options for students](#enhancement-7-increased-filter-options-for-students)
+   8. [Support for precise student name searching](#enhancement-8-support-for-precise-student-name-searching)
 ---
 
 ## **Acknowledgements**
@@ -949,8 +949,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -966,16 +964,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
 
 
 ---
