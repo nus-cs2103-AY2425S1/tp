@@ -236,6 +236,21 @@ This is illustrated in the activity diagram below:
 * addGrade checks whether the assignment exists in the database, if the score is valid and if the person exists in the contacts.
 * If the conditions are satisfied, the assignment is added to the `HashMap` in the person object which stores all the added assignments of that person.
 
+### MarkCommand
+
+<puml src="diagrams/MarkCommandActivityDiagram.puml" width="750" />
+
+
+* The `MarkCommand` is used by KonTActs to allow TAs to mark the attendance for a student.
+* It follows the activity diagram as shown above where it first checks if the person exists.
+* If the person exists, it will check if the weeksPresent contains the week to be marked.
+* If the weeksPresent does not contain the week to be marked yet, it will add it in and return a success message. Else it will throw a mark already success message to tell the TA that the attendance for the TA for that week has been marked.
+
+**Example Usage**
+1. User inputs the command "mark n/John Doe w/1".
+2. KonTActs will set the week 1 attendance for John Doe to be true.
+3. The update is then displayed in the UI, along with a success message.
+
 ---
 
 ### Command History implementation

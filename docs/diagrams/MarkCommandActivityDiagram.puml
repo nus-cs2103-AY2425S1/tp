@@ -1,0 +1,23 @@
+@startuml
+start
+:User keys in MarkCommand with name and week;
+
+:Retrieve person from Model using name;
+
+if () then ([Person not found])
+  :Throw MESSAGE_INVALID_PERSON_DISPLAYED_NAME;
+  stop
+else ([Else])
+  :Retrieve weeksPresent for the person;
+  if () then ([Week already marked])
+    :Return MESSAGE_MARK_ALREADY_SUCCESS;
+    stop
+  else ([Else])
+    :Add week to weeksPresent;
+    :Update person with new weeksPresent;
+    :Save updated person back to Model;
+    :Return MESSAGE_MARK_SUCCESS;
+    stop
+  endif
+endif
+@enduml
