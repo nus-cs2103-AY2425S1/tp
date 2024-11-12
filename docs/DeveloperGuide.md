@@ -568,7 +568,7 @@ Execute the following:
     1. Prerequisites: <br>
        List all persons using the `list` command.
     2. Test case: `sort k` <br>
-       Expected: Feedback box will show error: `Invalid command format! sort: Sorts the list by given predicate. <br>
+       Expected: Feedback box will show error: `Invalid command format! sort: Sorts the list by given predicate. 
        Parameters: [name] [role] [phone] [email] [address] Example: sort name` <br>
        Contact entries will remain unsorted.
 
