@@ -30,8 +30,10 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "asc";
 
     public static final String MESSAGE_SUCCESS = "Successfully sorted";
-    public static final String ASCENDING = "asc";
-    public static final String DESCENDING = "desc";
+    public static final String ASC = "asc";
+    public static final String DESC = "desc";
+    public static final String ASCENDING = "ascending";
+    public static final String DESCENDING = "descending";
     private String order;
     private Boolean toSortBySchedule;
     /**
@@ -42,6 +44,8 @@ public class SortCommand extends Command {
      *      If false, it will be sorted alphabetically by name.
      */
     public SortCommand(String order, Boolean toSortBySchedule) {
+        requireNonNull(toSortBySchedule);
+        assert order.equals(ASC) || order.equals(DESC);
         this.order = order;
         this.toSortBySchedule = toSortBySchedule;
     }
@@ -56,7 +60,6 @@ public class SortCommand extends Command {
         if (other == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(other instanceof SortCommand)) {
             return false;

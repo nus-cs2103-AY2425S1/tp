@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Own a home-based nail salon? Or are you a private tutor? Perhaps a single-person bakery? 
+Own a home-based nail salon? Or are you a private tutor? Perhaps a single-person bakery?
 Is the amount of contacts to manage becoming overwhelming? You've come to the right place!
 
 BlitzBiz is a **desktop app for managing contacts** for micro-business owners.
@@ -17,10 +17,10 @@ BlitzBiz is capable of tracking multiple modes of contact and schedule related m
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer (the Oracle version can be accessed [here](https://www.oracle.com/java/technologies/downloads/#jdk23-windows)). 
+1. Ensure you have Java `17` or above installed in your computer (the Oracle version can be accessed [here](https://www.oracle.com/java/technologies/downloads/#jdk23-windows)).
 For Mac users, please ensure you have this specific distribution, which can be installed by following this guide [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-1/tp/releases/tag/v1.4).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your BlitzBiz application.
 
@@ -66,7 +66,7 @@ For example, if the jar file was stored in the `Downloads` folder, the command w
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items in angular brackets means **at least one** of the items must be provided.<br>
-  e.g. `<p/PHONE_NUMER a/ADDRESS>` can be used as `p/91234567`, `a/My Street`, or `p/91234567 a/My Street`, but not ` `.
+  e.g. `<p/PHONE_NUMBER a/ADDRESS>` can be used as `p/91234567`, `a/My Street`, or `p/91234567 a/My Street`, but not ` ` (both arguments are missing). <br>
 
 * Items together in curly square brackets means **one and only one** of them must be given as input.<br>
   e.g. `{n/NAME t/TAG}` can be used as `n/John Doe` or as `t/friends`.
@@ -86,6 +86,10 @@ For example, if the jar file was stored in the `Downloads` folder, the command w
 ### Contact Management
 
 This segment introduces functions that are involved with adding, editing or deleting contacts and their details.
+To better understand the constraints of the different fields involved, please head over to our [Argument Constraints Summary](#argument-constraints-summary).
+Don't worry, you can quickly navigate back to the command you were at by clicking the hyperlink in the `Relevant Commands` column!
+
+Jump over to [Viewing and Searching](#viewing-and-searching) or [Utility Features](#utility-features)
 
 #### Adding a person : `add`
 
@@ -98,15 +102,17 @@ Format: `add n/NAME <p/PHONE_NUMBER e/EMAIL a/ADDRESS cs/CAROUSELL_HANDLE fb/FAC
 **:information_source: Notes about the `add` command:**<br>
 
 * A contact **must** have a name.
+* Contacts with duplicate names (exact matches) are strictly not allowed.
 * A contact **must** have **at least one** of phone, email, address, or any social media handle
   * Social media handles consists of only Carousell, Facebook and Instagram.
+  * Note the leading (at the front) and trailing (at the back) whitespaces (spaces) will be removed for each argument. After the removal of the whitespaces, if the resulting argument provided is an empty string, the parameter is treated as not being provided
+  * E.g. `a/ ` (address provided is a whitespace character ` `), after removing the whitespaces, the address provided is an empty string. The address parameter is then deemed to not have been provided.
 * Each contact can have **at most one** social media handle
   * If multiple social media handles are provided in the `add` command, only the first in the order of (Carousell, Facebook, Instagram) will be added.
-  * E.g. if a handle for Carousell, `cs/CAROUSELL_HANDLE`, and Instagram, `ig/INSTAGRAM_HANDLE`, was provided in this command, the handle for Carousell will be taken instead of the handle for Facebook.
+  * E.g. if a handle for Carousell, `cs/CAROUSELL_HANDLE`, and Instagram, `ig/INSTAGRAM_HANDLE`, was provided in this command, the handle for Carousell will be taken instead of the handle for Instagram.
 * Adding a schedule is optional, but if a schedule is added, it **must** have a schedule date.
   * If a schedule date is not provided, the fields of schedule name, `sn`, and schedule time, `st` will be ignored.
-  * The `SCHEDULE_DATE` must be in the format `yyyy-MM-dd`.
-  * The `SCHEDULE_TIME` must be in the format `hh:mm`.
+* For more details on the argument's constraints, head over to [Argument Constraints Summary](#argument-constraints-summary)
 
 </div>
 
@@ -117,14 +123,10 @@ Format: `add n/NAME <p/PHONE_NUMBER e/EMAIL a/ADDRESS cs/CAROUSELL_HANDLE fb/FAC
 </div>
 
 Examples:
-* Adding a contact with a phone number, email address, physical address. <br>
-`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* Adding a contact with only a social media handle. <br>
+* Adding a contact with multiple fields, such as phone number, email address, physical address. <br>
+`add n/John Doe p/98765432 e/johnd@example.com a/John Street, Block 123, #01-01`
+* Adding a contact with only a social media handle. Tag is added to contact as well. <br>
 `add n/Adam An t/customer ig/theAdamAn`
-* Adding a contact with a tag. <br>
-`add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/supplier`
-* Adding a contact with only an email address. <br>
-`add n/Charlie Chan t/investor e/charlieChan@example.com`
 * Adding a contact with a schedule. <br>
 `add n/Danny t/student p/91234567 sd/2024-12-12 st/16:00`
 
@@ -140,20 +142,21 @@ Format: `edit INDEX <n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG…​>`
 
 * Edits the person at the specified `INDEX`.
 The index refers to the index number shown in the displayed person list.
-View our [Viewing and Searching](#viewing-and-searching) section for more information. 
+View our [Viewing and Searching](#viewing-and-searching) section for more information.
 The index **must be a positive integer** 1, 2, 3, …​.
 * **At least one** of the fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+* For more details on the argument's constraints, head over to [Argument Constraints Summary](#argument-constraints-summary)
 
 </div>
 <div markdown="span" class="alert alert-warning">
 
 :exclamation: **Caution:**
-You **cannot** edit `schedule` and `socialMedia` information using the `edit` command.
-Please use the [`schedule`](#scheduling-contacts--schedule) and [`socialMedia`](#adding-social-media--socialmedia) commands instead.
+You **cannot** edit schedule and social media information using the `edit` command.
+Please use the [`schedule`](#scheduling-contacts--schedule) to edit schedule information and the [`socialMedia`](#adding-social-media--socialmedia) commands to edit social media information instead.
 
 </div>
 
@@ -168,7 +171,7 @@ Examples:
 Adds or updates the social media handle to an existing person.
 Perfect for contacts who keep changing their handles.
 
-Format: `socialMedia INDEX [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
+Format: `socialMedia INDEX <ig/USERNAME fb/USERNAME cs/USERNAME>`
 
 <div markdown="block" class="alert alert-info">
 
@@ -186,17 +189,10 @@ Format: `socialMedia INDEX [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
 
 </div>
 
-
 Examples:
-*  Adds the handle `[ig-charlotteo]` to the third contact Charlotte. <br>
-   `socialMedia 3 ig/charlotteo` <br>
-   ![result for 'rename tag1'](images/socialMediaResult1.png)
 *  Updates the first contact Alex's social media to `[cs-alexsells]`. <br>
    `socialMedia 1 cs/alexsells` <br>
    ![result for 'rename tag2'](images/socialMediaResult2.png)
-*  Updates the second contact Bernice's social media to `[fb-berniceyu]`. <br>
-   `socialMedia 2 fb/berniceyu` <br>
-   ![result for 'social media 3'](images/socialMediaResult3.png)
 
 #### Scheduling Contacts : `schedule`
 
@@ -230,10 +226,10 @@ but no `SCHEDULE_TIME` provided will have their schedule time's treated as `00:0
 
 Examples:
 * Schedules an appointment on 2024-10-22 at 16:00 for the contact at index 1 <br>
-`schedule 1 sn/appointment sd/2024-10-22 st/16:00` <br> 
+`schedule 1 sn/appointment sd/2024-10-22 st/16:00` <br>
   ![result for making schedule](images/makeSchedule.png)
 * Clears the schedule for the contact at index 1, if any. <br>
-`schedule 1` <br> 
+`schedule 1` <br>
   ![result for clearing schedule](images/clearSchedule.png)
 
 #### Renaming a Tag : `renameTag`
@@ -253,6 +249,12 @@ Format: `renameTag ot/OLDTAG nt/NEWTAG`
 * If there are any contacts with both `[OLDTAG]` and `[NEWTAG]`, the `[OLDTAG]` will not be renamed as this will lead to duplicated tags.
 
 </div>
+
+Examples:
+* Suppose we have a group of contacts with an existing tag `supplier`. We want to update all of these tags to `exSupplier`. <br>
+`renameTag ot/supplier nt/exSupplier` <br>
+![renameTag example](images/renameTagExample.png)
+
 
 #### Deleting a person : `delete`
 
@@ -278,6 +280,8 @@ Format: `delete INDEX`
 
 This segment describes functions that help with finding and looking for a specific contact or group of contacts.
 For commands that involve providing an `INDEX`, such as `edit`, `schedule`, `socialMedia` and `delete`, modifying the displayed list is crucial for editing the correct contact.
+
+Jump over to [Contact Management](#contact-management) or [Utility Features](#utility-features)
 
 #### Listing all persons : `list`
 
@@ -317,27 +321,16 @@ Format: `sort {n/[ORDER], sch/[ORDER]}`
 Examples:
 * Sort by persons names alphabetically in ascending order <br>
   `sort n/`
-* Sort by schedule in ascending order <br>
-  `sort sch/`
-* Sort by persons names alphabetically in ascending order. <br>
-  `sort n/ascending` <br>
-  ![result for 'sort and sort ascending'](images/sortResult.png)
-* Sort by persons names alphabetically in descending order. <br>
-  `sort n/descending`<br>
-  ![result for 'sort descending'](images/sortDescendingResult.png)
 * Sort by schedule in ascending order. <br>
   `sort sch/ascending` <br>
   ![result for 'sort and sort ascending'](images/sortByScheduleAsc.png)
-* Sort by schedule in descending order. <br>
-  `sort sch/descending` <br>
-  ![result for 'sort descending'](images/sortByScheduleDesc.png)
 
 #### Filter persons by tag : `filter`
 
 Filters the list of contacts and displays those with the provided tag(s).
 Use this feature to view all contacts with the same group of tag(s).
 
-Format: `filter [t/TAG]...`
+Format: `filter t/TAG [t/TAG]...`
 
 <div markdown="block" class="alert alert-info">
 
@@ -351,12 +344,8 @@ Format: `filter [t/TAG]...`
 </div>
 
 Examples:
-* `filter t/friends` will filter for contacts that has tag `friends`<br>
-  ![result for 'filter_friends'](images/filterFriendsResult.png)
-* `filter t/friends t/colleagues` will filter for contacts that has both tags `friends` and `colleagues`<br>
+* `filter t/friends t/colleagues` will filter for contacts that has both tags `friends` and `colleagues`. In this example, only one contact has both tags provided.<br>
   ![result for 'filter_friends'](images/filterMultipleTags.png)
-* `filter t/bestFriends` will display an empty list if there are no contacts with tag `bestFriends`<br>
-  ![result for 'filter bestFriends'](images/filterBestFriendsResult.png)
 
 #### Locating persons by name : `find`
 
@@ -388,7 +377,7 @@ Examples:
 Need to know who you have a schedule with this week?
 Use our `search` feature, which searches for a list of persons within a given range of schedule.
 
-Format: `search [b/START_DATETIME] [en/END_DATETIME]`
+Format: `search <b/START_DATETIME en/END_DATETIME>`
 
 <div markdown="block" class="alert alert-info">
 
@@ -408,16 +397,18 @@ Format: `search [b/START_DATETIME] [en/END_DATETIME]`
 
 Examples:
 * Search for the list of persons with schedules after 2024-11-11 12:00. <br>
-`search b/2024-11-11 12:00` 
+`search b/2024-11-11 12:00`
 * Search for the list of persons with schedules before 2024-11-12 12:00. <br>
-`search en/2024-11-12 12:00` 
-* Search for the list of persons with schedules between 2024-11-11 12:00 and 2024-11-12 12:00. <br>
-`search b/2024-11-11 12:00 en/2024-11-12 12:00` <br> 
-  ![result for 'search b/2024-11-11 12:00 en/2024-11-12 12:00'](images/searchCommandSuccess.png)
+`search en/2024-11-12 12:00`
+* Search for the list of persons with schedules between 2024-10-21 04:00 and 2024-10-27 23:59. <br>
+`search b/2024-10-21 04:00 en/2024-10-27 23:59` <br>
+  ![result for 'search b/2024-10-21 04:00 en/2024-10-27 23:59'](images/searchCommandSuccess.png)
 
 ### Utility Features
 
 This segment describes features of BlitzBiz that helps users with using the app in general.
+
+Jump over to [Contact Management](#contact-management) or [Viewing and Searching](#viewing-and-searching)
 
 #### Viewing help : `help`
 
@@ -431,13 +422,14 @@ Format: `help`
 
 Used `delete` on the wrong person by accident? Well don't worry get their information back with the `restore` command!
 
-format: `restore`
+Format: `restore`
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the `restore` command:**<br>
 
 * Restores the last person deleted from the address book by the [`delete`](#deleting-a-person--delete) command.
+* The restored person will be added to the end of the current list.
 * Only works if person has been deleted by the 'delete' command within the session.
 * Does not work if same person has been added to the address book after deletion using add command.
 
@@ -445,7 +437,7 @@ format: `restore`
 
 Examples:
 * Restore the most recently deleted person, in this case, the 2nd person Bernice Yu. <br>
-`restore` <br> 
+`restore` <br>
   ![result for 'restore'](images/restoreResult1.png)
 
 #### Backing up save file : `backup`
@@ -458,11 +450,13 @@ Format: `backup`
 
 **:information_source: Notes about the `backup` command:**<br>
 
-* Creates a backup save of the current BlitzBiz data
+* Creates a backup save of the current BlitzBiz data.
 * Backup BlitzBiz data will be saved as a JSON file at `[JAR file location]/backup/addressbook.json`.
-* If a `addressbook.json` file already exists in the backup folder it will be overwritten.
+* The `backup` command cannot be used if there is no data file at the data storage location `[JAR file location]/data/addressbook.json`.
+* The `backup` command does not work if it is the first command after downloading BlitBiz.
+* If an `addressbook.json` file already exists in the backup folder it will be overwritten.
 * The backup file can be used in order to restore the BlitzBiz data in case of data loss, or to transfer the data to another device.
-* Users can safely move or copy the backup file to another device, without worrying above negative consequences.
+* Users can safely move or copy the backup file to another device, without worrying about negative consequences.
 
 </div>
 
@@ -490,27 +484,61 @@ BlitzBiz data is saved in the hard disk automatically after any command that cha
 
 #### Editing the data file
 
-BlitzBiz data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data
-directly by editing that data file.  
-
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, BlitzBiz will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file using the backup command  before editing it.<br>
 Furthermore, certain edits can cause the app to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+We strongly recommend that newer users or users unfamiliar with JSON file formats **do not** manually edit the data files. 
 </div>
 
-### Upcoming features
-#### Archiving data files `[coming in v2.0]`
+BlitzBiz data is saved automatically as a JSON file (a type of file that organises and stores data) `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data
+directly by editing that data file.
 
-_Details coming soon ..._
+## Upcoming features
+
+### More functionality for Names
+Know two different "Wen Jie"s or "Amanda Tan"s? We will add more flexibility with names in our next iteration!
+We also want to allow names with special characters to be more inclusive.
+
+### More functionality for Social Media Accounts
+Did someone delete their account? We will be adding a feature for you to delete the handles from their contacts!
+
+### Country Code in Phone Numbers
+Have contacts from different parts of the world?
+We aim to bring even more flexibility for the phone numbers by including country codes and a wider range of phone number lengths!
+
+### Error Message Readability
+We understand some of our error messages can be quite long.
+We hope to help you identify more specifically the issues you are facing with more specific and targeted error messages!
+
+### Multiple Similar Fields per Contact
+Know someone with multiple phone numbers? Maybe they have a business and office phone. Perhaps a customer with multiple social media handles?
+In our next iteration, we want to expand the number of phone numbers, emails, addresses and social media handles you can add to each contact!
+
+### More Functionality for `edit` 
+Not sure if you have already updated a contact's information?
+We will inform you if the edits you make to a contact did not edit any information!
+
+### More Functionality for Emails
+Emails in the next iteration will be required to have at least two domain labels (e.g. `gmail.com`).
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: To safely transfer your data, install the app in the other computer. Use the `backup` command on your original computer and transfer the `addressbook.json` file at `[JAR file location]/backup`
 to `[JAR file location]/data` in your new computer.
 
+**Q**: What should I do if I cannot start up the application?<br>
+**A**: We advise you to download the latest release of our app [here](https://github.com/AY2425S1-CS2103T-W12-1/tp/releases).<br>
+Note that the contacts saved in the previous application needs to be manually transferred to this new application.
+For instructions on how to transfer data, please view the FAQ about `How do I transfer my data to another computer?` above.
+
+**Q**: I have manually updated the data file to add more contacts. However, after starting up the application, I do not see any contacts. What should I do?<br>
+**A**: We advise users to view the warnings listed under [Editing the data file](#editing-the-data-file).
+Users are advised to ensure that all fields of each contact are compliant with the corresponding constraints.
+Please refer to the [Arguments Constraints Summary](#argument-constraints-summary) table for more details.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -523,22 +551,39 @@ to `[JAR file location]/data` in your new computer.
 
 ## Command summary
 
-| Action                                                  | Format, Examples                                                                                                                                                                                                                                                                                  |
-|---------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-person--add)**                        | `add n/NAME <p/PHONE_NUMBER e/EMAIL a/ADDRESS [cs/CAROUSELL_HANDLE] [fb/FACEBOOK_HANDLE] [ig/INSTAGRAM_HANDLE]> [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **[Edit](#editing-a-person--edit)**                     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                       |
-| **[Social Media](#adding-social-media--socialmedia)**   | `socialMedia INDEX [ig/USERNAME]`<br> e.g., `socialMedia 1 ig/myUsername`                                                                                                                                                                                                                         |
-| **[Schedule](#scheduling-contacts--schedule)**          | `schedule INDEX [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME]` <br> e.g., `schedule 1 sn/appointment sd/2024-12-12 st/12:00`                                                                                                                                                           |
-| **[Rename Tag](#renaming-a-tag--renameTag)**            | `renameTag ot/OLDTAG nt/NEWTAG`<br> e.g., `renameTag ot/manager nt/boss`                                                                                                                                                                                                                          |
-| **[Delete](#deleting-a-person--delete)**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                               |
-| **[List](#listing-all-persons--list)**                  | `list`                                                                                                                                                                                                                                                                                            |
-| **[Sort](#sort-persons-by-name--sort)**                 | `sort {n/[ORDER] sch/[ORDER]}`<br> e.g., `sort asc`                                                                                                                                                                                                                                               |
-| **[Filter](#filter-persons-by-tag--filter)**            | `filter [t/TAG]…​`<br> e.g., `filter t/friends`                                                                                                                                                                                                                                                   |
-| **[Find](#locating-persons-by-name--find)**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                        |
-| **[Search](#search-persons-by-schedule-range--search)** | `search [b/START_DATETIME] [en/END_DATETIME]`<br> e.g., `search b/2024-11-11 12:00 en/2024-11-12 12:00`                                                                                                                                                                                           |
-| **[Help](#viewing-help--help)**                         | `help`                                                                                                                                                                                                                                                                                            |
-| **[Restore](#restoring-a-deleted-person--restore)**     | `restore`                                                                                                                                                                                                                                                                                         |
-| **[Backup](#backing-up-save-file--backup)**             | `backup`                                                                                                                                                                                                                                                                                          |
-| **[Clear](#clearing-all-entries--clear)**               | `clear`                                                                                                                                                                                                                                                                                           |
-| **[Exit](#exiting-the-program--exit)**                  | `exit`                                                                                                                                                                                                                                                                                            |
+| Action                                                  | Format, Examples                                                                                                                                                                                                                                                                            |
+|---------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-person--add)**                        | `add n/NAME <p/PHONE_NUMBER e/EMAIL a/ADDRESS cs/CAROUSELL_HANDLE fb/FACEBOOK_HANDLE ig/INSTAGRAM_HANDLE> [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **[Edit](#editing-a-person--edit)**                     | `edit INDEX <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG…​>`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                        |
+| **[Social Media](#adding-social-media--socialmedia)**   | `socialMedia INDEX <ig/USERNAME fb/USERNAME cs/USERNAME>`<br> e.g., `socialMedia 1 ig/myUsername`                                                                                                                                                                                           |
+| **[Schedule](#scheduling-contacts--schedule)**          | `schedule INDEX [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME]` <br> e.g., `schedule 1 sn/appointment sd/2024-12-12 st/12:00`                                                                                                                                                     |
+| **[Rename Tag](#renaming-a-tag--renametag)**            | `renameTag ot/OLDTAG nt/NEWTAG`<br> e.g., `renameTag ot/manager nt/boss`                                                                                                                                                                                                                    |
+| **[Delete](#deleting-a-person--delete)**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                         |
+| **[List](#listing-all-persons--list)**                  | `list`                                                                                                                                                                                                                                                                                      |
+| **[Sort](#sort-persons-by-name--sort)**                 | `sort {n/[ORDER] sch/[ORDER]}`<br> e.g., `sort n/asc`                                                                                                                                                                                                                                       |
+| **[Filter](#filter-persons-by-tag--filter)**            | `filter t/TAG [t/TAG]…​`<br> e.g., `filter t/friends`                                                                                                                                                                                                                                       |
+| **[Find](#locating-persons-by-name--find)**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                  |
+| **[Search](#search-persons-by-schedule-range--search)** | `search <b/START_DATETIME en/END_DATETIME>`<br> e.g., `search b/2024-11-11 12:00 en/2024-11-12 12:00`                                                                                                                                                                                       |
+| **[Help](#viewing-help--help)**                         | `help`                                                                                                                                                                                                                                                                                      |
+| **[Restore](#restoring-a-deleted-person--restore)**     | `restore`                                                                                                                                                                                                                                                                                   |
+| **[Backup](#backing-up-save-file--backup)**             | `backup`                                                                                                                                                                                                                                                                                    |
+| **[Clear](#clearing-all-entries--clear)**               | `clear`                                                                                                                                                                                                                                                                                     |
+| **[Exit](#exiting-the-program--exit)**                  | `exit`                                                                                                                                                                                                                                                                                      |
 
+
+## Argument constraints summary
+
+| Argument                                                                | Prefix Label                | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Relevant Commands                                                                                                    |
+|-------------------------------------------------------------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| **Name**                                                                | `n/`                        | Must only contain alphanumeric characters (letters and numbers only) <br> Must be at most 50 characters long                                                                                                                                                                                                                                                                                                                                                                                                                                          | [`add`](#adding-a-person--add) <br> [`edit`](#editing-a-person--edit)                                                |
+| **Phone**                                                               | `p/`                        | Must only contain numeric characters <br> Must be between 8 and 15 characters long, both inclusive                                                                                                                                                                                                                                                                                                                                                                                                                                                    | [`add`](#adding-a-person--add) <br> [`edit`](#editing-a-person--edit)                                                |
+| **Email**                                                               | `e/`                        | The local part (before the `@`) must only contain alphanumeric characters (letters and numbers only), and these special characters, not including the parenthesis (`+._-`) <br> The special characters cannot be beside one another <br> The domain part (after the `@`) consists of domain names separated by `.` <br> Each domain name must be at least 2 characters long, only contain alphanumeric characters or hyphens (which cannot be the first or the last character) <br> The total length of the email must be at most 254 characters long | [`add`](#adding-a-person--add) <br> [`edit`](#editing-a-person--edit)                                                |
+| **Address**                                                             | `a/`                        | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | [`add`](#adding-a-person--add) <br> [`edit`](#editing-a-person--edit)                                                |
+| **Carousell Handle** <br> **Facebook Handle** <br> **Instagram Handle** | `cs/` <br> `fb/` <br> `ig/` | Must only contain alphanumeric characters (letters and numbers only), full stops, hyphens, and underscores <br> Must be at most 30 characters long                                                                                                                                                                                                                                                                                                                                                                                                    | [`add`](#adding-a-person--add) <br> [`socialMedia`](#adding-social-media--socialmedia)                               |
+| **Schedule Name**                                                       | `sn/`                       | Must only contain alphanumeric characters (letters and numbers only)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | [`add`](#adding-a-person--add) <br> [`schedule`](#scheduling-contacts--schedule)                                     |
+| **Schedule Date**                                                       | `sd/`                       | Must be in the format `yyyy-MM-dd`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | [`add`](#adding-a-person--add) <br> [`schedule`](#scheduling-contacts--schedule)                                     |
+| **Schedule Time**                                                       | `st/`                       | Must be in the format `hh:mm`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | [`add`](#adding-a-person--add) <br> [`schedule`](#scheduling-contacts--schedule)                                     |
+| **Tag** <br> **Old Tag** <br> **New Tag**                               | `t/` <br> `ot/` <br> `nt/`  | Must only contain alphanumeric characters (letters and numbers only)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | [`add`](#adding-a-person--add) <br> [`edit`](#editing-a-person--edit) <br> [`renameTag`](#renaming-a-tag--renametag) |
+| **Order** <br> (as described in `sort`)                                 | N/A                         | Must only be one of `asc`, `desc`, `ascending`, `descending` <br> Order is case insensitive                                                                                                                                                                                                                                                                                                                                                                                                                                                           | [`sort`](#sort-persons-by-name--sort)                                                                                |
+| **Keyword** <br> (as described in `find`)                               | N/A                         | N/A                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | [`find`](#locating-persons-by-name--find)                                                                            |
+| **Start DateTime** <br> **End DateTime**                                | `b/` <br> `en/`             | Must be in the format `yyyy-MM-dd hh:mm`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | [`search`](#search-persons-by-schedule-range--search)                                                                |
