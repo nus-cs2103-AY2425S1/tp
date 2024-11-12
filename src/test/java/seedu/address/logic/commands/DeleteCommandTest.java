@@ -26,6 +26,7 @@ import seedu.address.model.person.Person;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private static IdentityNumber PROPER_NOT_FOUND_NRIC = new IdentityNumber("F2760624P");
 
     /**
      * Test for successfully deleting a person by identity number.
@@ -74,6 +75,28 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_PERSON_NOT_FOUND);
     }
+
+    /**
+     * Tests validation of input of Delete Command when deleting by index number.
+     */
+    @Test
+    public void validate_outOfBoundIndex_throwsCommandException() {
+        Index outOfIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        DeleteCommand deleteCommandByIndex = new DeleteCommand(outOfIndex);
+
+        assertCommandFailure(deleteCommandByIndex, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    /**
+     * Tests validation of input of Delete Command when deleting by Index Number with NRIC but no person with the
+     * NRIC is found.
+     */
+    @Test
+    public void validate_notFoundProperNRIC_throwsCommandException() {
+        DeleteCommand deleteCommandByNRIC = new DeleteCommand(PROPER_NOT_FOUND_NRIC);
+        assertCommandFailure(deleteCommandByNRIC, model, Messages.MESSAGE_PERSON_NOT_FOUND);
+    }
+
 
     @Test
     public void equals() {
