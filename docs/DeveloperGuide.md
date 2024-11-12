@@ -17,9 +17,6 @@ We thank [Lenzork](https://github.com/Lenzork),an external contributor, for his 
 
 --------------------------------------------------------------------------------------------------------------------
 
-<!-- * Table of Contents -->
-<page-nav-print />
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
