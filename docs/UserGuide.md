@@ -71,7 +71,7 @@ By catering to private school teachers who are still using manual processes, Che
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -456,21 +456,21 @@ Furthermore, certain edits can cause the Cher to behave in unexpected ways (e.g.
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME s/SEX r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho s/M r/student p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Secondary 1`
-**Clear** | `clear`
-**Delete** | `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`<br> e.g., `delete 3`
-**Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
-**Batch-Edit**| `batch-edit t/OLDTAG t/NEWTAG`<br> e.g. `batch-delete t/friends t/frens`
-**Edit** | `edit INDEX [n/NAME] [s/SEX] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`<br> e.g., `find n/James Jake`
-**Sort** | `sort [name] [role] [phone] [email] [address] `<br> Only one optional field should be given <br> e.g., `sort name`
-**Select** | `select INDEX [MORE_INDEXES]...`<br> e.g., `select 1 2`
-**Mark** | `mark INDEX` <br> e.g., `mark 2`
-**Unmark** | `unmark INDEX` <br> e.g., `unmark 3`
-**Batch-Mark** | `batch-mark`
-**Batch-Unmark** | `batch-unmark`
-**Reset-Attendance** | `reset-att`
-**List** | `list`
-**Help** | `help`
+| Action               | Format, Examples                                                                                                                                                                          |
+|----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**              | `add n/NAME s/SEX r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho s/M r/student p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Secondary 1` |
+| **Clear**            | `clear`                                                                                                                                                                                   |
+| **Delete**           | `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`<br> e.g., `delete 3`                                                                                                        |
+| **Batch-Delete**     | `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`                                                                                          |
+| **Batch-Edit**       | `batch-edit t/OLDTAG t/NEWTAG`<br> e.g. `batch-delete t/friends t/frens`                                                                                                                  |
+| **Edit**             | `edit INDEX [n/NAME] [s/SEX] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                       |
+| **Find**             | `find [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`<br> e.g., `find n/James Jake`                                                                                                 |
+| **Sort**             | `sort [name] [role] [phone] [email] [address] `<br> Only one optional field should be given <br> e.g., `sort name`                                                                        |
+| **Select**           | `select INDEX [MORE_INDEXES]...`<br> e.g., `select 1 2`                                                                                                                                   |
+| **Mark**             | `mark INDEX` <br> e.g., `mark 2`                                                                                                                                                          |
+| **Unmark**           | `unmark INDEX` <br> e.g., `unmark 3`                                                                                                                                                      |
+| **Batch-Mark**       | `batch-mark`                                                                                                                                                                              |
+| **Batch-Unmark**     | `batch-unmark`                                                                                                                                                                            |
+| **Reset-Attendance** | `reset-att`                                                                                                                                                                               |
+| **List**             | `list`                                                                                                                                                                                    |
+| **Help**             | `help`                                                                                                                                                                                    |
