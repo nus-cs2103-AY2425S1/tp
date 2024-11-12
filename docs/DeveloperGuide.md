@@ -414,6 +414,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+* 2c. The given command format is invalid.
+
+    * 2c1. Tuteez shows invalid command format error message.
+
+  Use case resumes at step 2.
+
 
 **Use case: UC2 - List all students**
 
@@ -442,15 +448,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 1a. The list is empty.
 
-  * 3a1. Tuteez shows an error message.
+  Use case ends.
+
+* 3a. The given student index is invalid.
+
+  * 3a1. Tuteez shows an invalid student index error message.
 
       Use case resumes at step 2.
   
 * 3b. The given name does not exist.
 
-  * 3b1. Tuteez shows an error message.
+  * 3b1. Tuteez shows student name not found error message.
         
       Use case resumes at step 2.
 
@@ -466,6 +476,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
+* 1a. The list is empty.
+
+  Use case ends.
+
 * 3a. The lesson clashes with an existing lesson(s).
 
    * 3a1. Tuteez shows error message with timings of the lesson(s) that it clashes with.
@@ -478,13 +492,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case resumes at step 2.
 
-* 3c. The given index is invalid.
+* 3c. The given command format is invalid.
 
-   * 3c1. Tuteez shows an error message.
+    * 3c1. Tuteez shows invalid command format error message.
+
+    Use case resumes at step 2.
+
+* 3c. The given student index is invalid.
+
+   * 3c1. Tuteez shows an invalid student error message.
 
    Use case resumes at step 2.
 
-** Use case: UC5 - Delete a lesson from a student**
+**Use case: UC5 - Delete a lesson from a student**
 
 **MSS**
 
@@ -496,6 +516,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
+* 1a. The list is empty.
+
+  Use case ends.
+
 * 3a. The given student index is invalid.
   
     * 3a1. Tuteez shows an error message.
@@ -506,6 +530,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 3b1. Tuteez shows an error message.
   
+    Use case resumes at step 2.
+
+* 3c. The given command format is invalid.
+
+    * 3c1. Tuteez shows invalid command format error message.
+
     Use case resumes at step 2.
 
 **Use case: UC6 - Add a remark to a student**
@@ -520,10 +550,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
+* 1a. The list is empty.
+
+    Use case ends.
+
 * 3a. The given student index is invalid.
 
     * 3a1. Tuteez shows an error message.
   
+    Use case resumes at step 2.
+
+* 3b. The given remark is invalid.
+
+    * 3b1. Tuteez shows an invalid remark error message.
+
+    Use case resumes at step 2.
+
+* 3c. The given command format is invalid.
+
+    * 3c1. Tuteez shows invalid command format error message.
+
     Use case resumes at step 2.
 
 **Use case: UC7 - Delete a remark from a student**
@@ -538,6 +584,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
+* 1a. The list is empty.
+
+    Use case ends.
+
 * 3a. The given student index is invalid.
 
     * 3a1. Tuteez shows an error message.
@@ -549,6 +599,78 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. Tuteez shows an error message.
   
     Use case resumes at step 2.
+
+* 3c. The given command format is invalid.
+
+    * 3c1. Tuteez shows invalid command format error message.
+    
+    Use case resumes at step 2.
+
+**Use case: UC8 - Editing a student**
+
+**MSS**
+
+1. User requests to list students.
+2. Tuteez shows a list of students <u>(UC2)</u>.
+3. User requests to edit, selecting student by index and specifying the details to delete.
+4. Tuteez edits the student's details.
+5. Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given student index is invalid.
+
+    * 3a1. Tuteez shows an error message.
+
+    Use case resumes at step 2.
+
+* 3b. The given command format is invalid (e.g., missing name or phone number field).
+
+    * 3b1. Tuteez shows invalid command format error message.
+
+    Use case resumes at step 2.
+
+* 3c. The edited name matches the name of another student in the list.
+
+    * 3c1. Tuteez shows an error message indicating name conflict.
+  
+    Use case resumes at step 2.
+
+* 3d. The field specified for editing contains invalid input.
+
+    * 3d1. Tuteez shows an error message specifying the problematic field.
+
+    Use case resumes at step 2.
+
+**Use case: UC8 - Displaying a student**
+
+**MSS**
+
+1. User requests to list students.
+2. Tuteez shows a list of students <u>(UC2)</u>.
+3. User requests to display a student, selecting the student by name or index.
+4. Tuteez displays student details in the right panel.
+5. Use case ends.
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given student index is invalid.
+
+    * 3a1. Tuteez shows an invalid student index error message.
+
+  Use case resumes at step 2.
+
+* 3b. The given student name is invalid.
+
+    * 3b1. Tuteez shows invalid student name error message.
+
+  Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
