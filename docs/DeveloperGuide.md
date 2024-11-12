@@ -223,7 +223,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. GAB shows an error message.
     * 1a2. User enters new data.
     * Steps 1a1-1a2 are repeated until the right add restaurant command format is recognised.
-      Use case resumes at step 2.
+      <br> Use case resumes at step 2.
 
 ---
 
