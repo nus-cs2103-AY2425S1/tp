@@ -164,7 +164,6 @@ Format: `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL [s/SKILL]… i/INTERVIEW_SCORE 
 
 **Caution:** Attempting to add variations of `hired`, `rejected` or `pending` as additional tags will still only result in a single status tag defaulting to `pending`.
 </box>
-<br><br>
 
 Examples:
 * `add n/John Doe j/Software Engineer p/98765432 e/johnd@example.com i/5.0 t/Remote`
@@ -208,7 +207,6 @@ Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVI
 
 **Caution:** Attempting to edit the tags to include variations of `hired`, `rejected` or `pending` as additional tags will be ignored while maintaining the original status tag.
 </box>
-<br><br>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st candidate to be `91234567` and `johndoe@example.com` respectively.
