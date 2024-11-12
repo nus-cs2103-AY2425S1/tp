@@ -207,7 +207,7 @@ The `add` command is used to add new clients into the existing list of clients. 
 This is a high-level view of what occurs when the `add` command is executed: 
 ![AddSequenceDiagram.png](images%2FAddSequenceDiagram.png)
 
-There are a total of 3 checks that occur:
+Three checks are performed:
 - **Flag Validation:** Checks that all required flags are present and that there are no invalid flags.
 - **Value Validation:** Checks that the values provided for each specified flag are valid.
 - **Duplicate Check:** Checks that there is no existing client with the same details (same `name`, `phone` and `email`) to prevent duplicate entries.
