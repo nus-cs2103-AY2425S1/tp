@@ -568,10 +568,10 @@ The dependencies used for automated UI testing is [JUnit 5]() and [TestFX]().
 Automated Github testing is trigged or every push and pull request made to the Github remote repository and is conducted
 on all 3 major OSes: MacOS, Windows and Ubuntu. 
 
-<span class="alert" markdown="span">
-Automated UI testing is disabled for Ubunutu on the Github Testing workflow due to the inability to create a virtual testin
+<div markdown="span" class="alert alert-info">:information_source: 
+**Note:** Automated UI testing is disabled for Ubunutu on the Github Testing workflow due to the inability to create a virtual testin
 environment.
-</span>
+</div>
 
 ### Code coverage reports
 
@@ -831,52 +831,68 @@ with appointments scheduled for today.
 
 ### Listing Management
 
+![ListingClassDiagram](images/dg/ListingClassDiagram.png)
+
+A `Listing` contains the necessary information of a property made by a `Seller`. 
+
+A `Listing` contains the mandatory fields: 
+1. `name`: The name of a `listing`, defined by the `Name` class.
+2. `price`: The price of a `listing`, defined by the `Price` class.
+3. `area`: The area of the property in the `listing` , defined by the `Area` class.
+4. `region`: The `region` of the property in the `listing`, defined by the `Region` enumerations.
+5. `address`: The `address` of the property in the `listing`, definted by the `Address` class.
+6. `seller`: The `seller` of the property in the `listing`.
+
+A `listing` can also contain `buyers`, but can have any non-negative amount of `buyers`.
+
 #### Add listing
 **Overview**
 <br>
-The `editclient` edits a `client`.
+The `listing` command adds a `listing` to EZSTATES.
 
 **Implementation**
+![AddListingCommandSequence](images/dg/AddListingCommandSequence.png)
+
 
 #### Edit listing
 **Overview**
 <br>
-The `editclient` edits a `client`.
+The `editlisting` edits a `listing`.
 
 **Implementation**
 
 #### Add buyers to listing
 **Overview**
 <br>
-The `editclient` edits a `client`.
+The `addlistingbuyers` command adds buyers to a `listing`.
 
 **Implementation**
 
 #### Remove buyers from listing
 **Overview**
 <br>
-The `editclient` edits a `client`.
+The `removelistingbuyers` command adds buyers to a `listing`.
 
 **Implementation**
 
 #### Delete listing
 **Overview**
 <br>
-The `editclient` edits a `client`.
+The `deletelistings` command deletes a `listing`.
 
 **Implementation**
 
 #### Show listing
 **Overview**
 <br>
-The `editclient` edits a `client`.
+The `showlistings` command shows all `listings`.
 
 **Implementation**
 
 #### Clear listing
 **Overview**
 <br>
-The `editclient` edits a `client`.
+The `clearlisting` clears all `listings`.
 
 **Implementation**
 
