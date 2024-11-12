@@ -34,7 +34,7 @@ public class AssignCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Assigned delivery %1$s to %2$s";
     public static final String MESSAGE_NOT_IN_INSPECT = "Assign command can only be used in the inspect window!";
     public static final String MESSAGE_NOT_EMPLOYEE = "Entered person is not an employee";
-        public static final String MESSAGE_NOT_VALID_PERSON = "This person doesn't exist";
+    public static final String MESSAGE_NOT_VALID_PERSON = "This person doesn't exist";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "This delivery has already been assigned to this person";
     private final Index index;
     private final Name toAssign;
