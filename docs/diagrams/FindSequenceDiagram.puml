@@ -67,7 +67,7 @@ create CommandResult
 FindCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> FindCommand
+CommandResult --> FindCommand : r
 deactivate CommandResult
 
 FindCommand --> LogicManager : r
