@@ -1,5 +1,7 @@
 package seedu.address.model.order;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -19,6 +21,7 @@ public class OrderHistory {
      * @param order To be placed
      */
     public OrderHistory(Order order) {
+        requireNonNull(order);
         this.order = order;
         this.time = LocalDateTime.now();
     }
@@ -29,6 +32,8 @@ public class OrderHistory {
      * @param time of the order placed
      */
     public OrderHistory(Order order, LocalDateTime time) {
+        requireNonNull(order);
+        requireNonNull(time);
         this.order = order;
         this.time = time;
     }
