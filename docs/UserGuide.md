@@ -107,8 +107,6 @@ Here is a quick look at the various sections in this user guide:
 - **[Command Summary](#command-summary)**: A quick reference guide summarising all the commands available in Tuteez. <br>
 - **[Command Parameters](#command-parameters)**: A quick reference guide for acceptable parameters in Tuteez with examples.
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 <br>
@@ -143,8 +141,6 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 | **Advanced User**   | Feel free to skip directly to the [Command Summary](#command-summary) for a quick overview of all commands available in Tuteez.                     |
 
 <br>
-
---------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -194,10 +190,6 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 
 6. You may refer to the [Beginner's Tutorial](#beginner-s-tutorial) to get a hands-on walkthrough of the application, or refer to the [Features](#features) section below for details of each command.
 
-<br>
-
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 <br>
@@ -213,10 +205,6 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 | **Right Panel** | <ul><li>Provides the full view of a student's information when you use the `display` command. </li><li> Shows all the student's lesson details and remarks you have left them. </li><br><div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">ℹ️ **Info**:  Refer to the [Displaying Student Information](#displaying-student-information-display) section for more details on the `display` command. </div></ul>                                          |
 | **Results Box** | <ul><li>Displays the results of the commands you have entered.</li><li>If the command was successfully executed, the corresponding message will be shown.</li><li>If the command failed to execute, an error message will be shown.</li></ul>                                                                                                                                                                                                                                  |
 | **Command Box** | <ul><li>The area where you can enter commands to interact with the application. </li></ul>                                                                                                                                                                                                                                                                                                                                                                                     |
-
-<br>
-
---------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
@@ -339,10 +327,6 @@ Congratulations! You've successfully completed the beginner's tutorial for Tutee
 You're now ready to move on to more advanced features and commands that Tuteez has to offer.
 Simply visit the [Features](#features) section to learn more about the various commands available to you.
 
-<br>
-
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 <br>
@@ -401,7 +385,11 @@ You can add a new student and their personal details to your list of students.
 
 ℹ️ **Info**:  You cannot add lessons that clash, meaning lessons cannot be scheduled on the same day and overlap in timing. If a clash is detected, the app will notify you with an error message. To see more details on valid lessons, check out the [constraints on adding a lesson](#constraints-on-adding-a-lesson)
 </div>
+<br>
+<div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
 
+ℹ️ **Info**: Duplicate detection of students are done by **name**, hence you cannot add a student with the same name as an existing student in tuteez. A workaround is to add numbers to the back of the name (e.g. John Doe 2).
+</div>
 <br>
 <div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
 
@@ -428,6 +416,11 @@ You can delete a specified student from Tuteez.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** such as 1, 2, 3, …​
 
+<div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
+
+ℹ️ **Info**: Duplicate detection of students are done by **name**. Therefore, you cannot change a student's name to match the name of an existing student in Tuteez, unless it is the same student being edited. A workaround is to add numbers to the back of the name (e.g. John Doe 2).
+</div>
+<br>
 <div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
 
 💡 **Tip**: You can also use the abbreviated command `del` as a shortcut for `delete`.
@@ -483,7 +476,7 @@ You can easily keep track of student details by adding a remark for a specific s
 **Format**: `addremark INDEX r/REMARK` to add a remark to the student at the specified `INDEX`.
 
 * Adds a new remark to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** such as 1, 2, 3, …​
-* You can add any text as a remark, and remarks are displayed in the order they were added.
+* You can add any text as a remark except for " r/", and remarks are displayed in the order they were added.
 
 <div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
 
@@ -505,7 +498,7 @@ You can delete a remark for a specific student in Tuteez.
 
 **Format**: `deleteremark INDEX ri/REMARK_INDEX` to add a remark to the student at the specified `INDEX`.
 
-* Deletes an existing remark from the student at the specified `REMARK_INDEX`. The remark index refers to the order in which the remarks were added.
+* Deletes an existing remark from the student at the specified `REMARK_INDEX`. The remark index refers to the order in which the remarks were added. The index **must be a positive integer** such as 1, 2, 3, …​
 * When deleting, if the `REMARK_INDEX` is not valid, an error will be shown on your screen.
 
 <div style="background-color: lightyellow; padding: 4px; border-radius: 4px;">
@@ -594,24 +587,30 @@ Examples:
 
 ### Searching for Students: `find`
 
-You can find students whose names, addresses, tags or lessons contain any of the given keywords. 
+You can find students whose names, addresses, tags or lessons contain any of the given keywords. Searching by these fields is effective, as they are more likely to yield relevant matches based on how students are grouped or organized in the system.
 When you are searching for lessons, you can search for lesson day and/or lesson time.
 
 **Format**: `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON_DAY_KEYWORDS] [lt/LESSON_TIME_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
+* Keyword must not be empty, else an error will be thrown
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * For name keywords, only the name is searched. For address keywords, only the address is searched etc.
 * For words, only full words will be matched e.g. `Han` will not match `Hans`
 * Lesson day keywords must be a **day** of the week (case-insensitive), or the first 3 letters of a day e.g. `mon tue wed`
 * Lesson time keywords must be in **24-hour format** `HHMM-HHMM`. Lessons with overlapping time-ranges will be matched e.g. `0800-1000` will overlap with `0900-1100`
 * Persons with at least one parameter matching at least one of its keyword will be returned (i.e. `OR` search).
-* For example, `find n/John t/Science English` will return students `John Doe` with tag `Math`, `Alice Richardson` with tag `Science` and `Mary Jane` with tag `English`
+
+<div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
+
+ℹ️ **Info**: After using the find command, running another command may reset the left panel to default view. This is a feature flaw that will be resolved in future iterations.
+</div>
 
 Examples:
-* `find n/alex david` returns `Alex Yeoh`, `David Li`, as shown below:<br>
+* `find n/alex david` returns `Alex Yeoh`, `David Li`
 * `find a/jurong` returns students with address `Jurong Lake #09-11` and `jurong west #13-21`
 * `find ld/monday lt/1000-1100` returns students with lessons `monday 0800-0900` and `tuesday 0900-1030`
+* `find n/John t/Science English` returns students `John Doe` with tag `Math`, `Alice Richardson` with tag `Science` and `Mary Jane` with tag `English`
 
 [Take me back to Table of Contents](#table-of-contents)
 <br>
@@ -692,8 +691,6 @@ This command allows you to shut down and exit the program.
 <br>
 
 <div style="page-break-after: always;"></div>
-
---------------------------------------------------------------------------------------------------------------------
 
 <br>
 
@@ -860,15 +857,22 @@ Action              | Format                                                    
 ## Command Parameters
 To assist you in navigating Tuteez and _CLI_ with ease, here are the acceptable values for each parameter:
 
-| Parameter    | Format                                                                                                                                                   | Example            |
-|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
-| NAME         | Start the name with a letter, and you’re welcome to include letters, numbers, spaces, and these special characters: -, ', ., ,, (, ), &, /               | John Doe           |
-| PHONE_NUMBER | Enter a phone number with numbers only, that is at least 3 digits long                                                                                   | 912345678          |
-| EMAIL        | Email should follow the format local-part@domain                                                                                                         | johndoe@gmail.com  |
-| ADDRESS      | Addresses can contain any characters                                                                                                                     | Jurong West #09-11 |
-| TAG          | Tag names can include letters, numbers, and spaces                                                                                                       | Primary 4          |
-| REMARK       | The `r/` (remark) field can include all texts (including emojis), but cannot include "r/" in the text                                                    | Doing well! 💯     |
-| LESSON       | The `l/` (lesson) field should include the day of the week (case-insensitive) followed by the time in the 24-hour format HHMM-HHMM, separated by a space | monday 1500-1700   |
+| Parameter           | Format                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Example            |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| NAME                | Start the name with a letter, and you’re welcome to include letters, numbers, spaces, and these special characters: -, ', ., ,, (, ), &, /                                                                                                                                                                                                                                                                                                                                                                     | John Doe           |
+| PHONE_NUMBER        | Enter a phone number with numbers only, that is at least 3 digits long                                                                                                                                                                                                                                                                                                                                                                                                                                         | 912345678          |
+| EMAIL               | Email should follow the format local-part@domain and meet the following requirements:<br>1. The local-part should contain only alphanumeric characters and the following special characters: +_.-. It may not start or end with any special character.<br>2. The domain should contain domain labels separated by periods, and each label must:<br>- start and end with an alphanumeric character,<br>- be at least 2 characters long in the last label,<br>- contain only alphanumeric characters or hyphens. | johndoe@gmail.com  |
+| ADDRESS             | Addresses can contain any characters                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Jurong West #09-11 |
+| TAG                 | Tag names can include letters, numbers, and spaces                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Primary 4          |
+| REMARK              | Can include all texts (including emojis), but cannot include " r/" in the text and cannot be blank                                                                                                                                                                                                                                                                                                                                                                                                             | Doing well! 💯     |
+| LESSON              | Should include the day of the week (case-insensitive) followed by the time in the 24-hour format HHMM-HHMM, separated by a space                                                                                                                                                                                                                                                                                                                                                                               | monday 1500-1700   |
+| REMARK_INDEX        | Should include a single, positive number                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 1                  |
+| LESSON_INDEX        | Should include a single, positive number                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 1                  |
+| NAME_KEYWORD        | Should not be blank or whitespace                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 1                  |
+| ADDRESS_KEYWORD     | Should not be blank or whitespace                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 1                  |
+| TAG_KEYWORD         | Should not be blank or whitespace                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 1                  |
+| LESSON_DAY_KEYWORD  | Should include the day of the week (case-insensitive) or the first three letters of the day of the week                                                                                                                                                                                                                                                                                                                                                                                                        | monday             |
+| LESSON_TIME_KEYWORD | Should include the time in the 24-hour format HHMM-HHMM, separated by a space                                                                                                                                                                                                                                                                                                                                                                                                                                  | 1500-1700          |
 
 [Take me back to Table of Contents](#table-of-contents)
 <br>
