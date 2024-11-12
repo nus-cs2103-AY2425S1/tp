@@ -52,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete n/Alex`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `del n/Alex`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -79,7 +79,7 @@ The **API** of this component is specified in [<u>`Ui.java`</u>](https://github.
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [<u>`MainWindow`</u>](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [<u>`MainWindow.fxml`</u>](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFX UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [<u>`MainWindow`</u>](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [<u>`MainWindow.fxml`</u>](https://github.com/AY2425S1-CS2103T-W13-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -119,7 +119,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -130,9 +130,11 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the wedding book data i.e., all `Wedding` objects (which are contained in a `UniqueWeddingList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Wedding` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Wedding>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 ### Storage component
 
@@ -141,9 +143,9 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage`, `WeddingBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* can save address book data, wedding book data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `WeddingBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 ### Common classes
 
@@ -204,7 +206,7 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 * The `tag-del` command does not require a confirmation prompt.
   * This is because the operation is reversible and does not have a significant impact on the data.
-  * We akin it to adding a label to a contact, which can be removed without any significant consequences.
+  * It is akin to adding a label to a contact, which can be removed without any significant consequences.
   * Pros: Saves time by not requiring a confirmation prompt for a reversible operation.
   * Cons: Users may not be satisfied that deletion operations are not consistent throughout with a confirmation prompt.
 
@@ -232,13 +234,13 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 **Currently:** To prevent accidental deletions and clearing of data in KnottyPlanners, a user confirmation is currently required to ensure that the action is intentional.
 
-**Plan:** To include a force deletion or clearing command that enables the user to remove the data without KnottyPlanners requiring a confirmation from them.
+**Plan:** To include a force deletion or clearing command that enables the user to remove the data without KnottyPlanners requiring a confirmation from them, to increase efficiency.
 
 **3. Improved Filtering**
 
 **Currently:** The filter command in KnottyPlanners supports filtering by the name or job fields only.
 
-**Plan:** To allow users to filter with other fields such as phone number, address and email. To allow users to filter with other fields such as phone number, address and email.
+**Plan:** To allow users to filter with other fields such as phone number, address and email.
 
 **4. Allow Copying of Information**
 
@@ -254,7 +256,7 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 **6. Index Referencing**
 
-**Currently:** KnottyPlanner requires users to select the `Person` from their names in order to reduce ambiguity. However, this can result in inefficiency when handling extremely long names.
+**Currently:** KnottyPlanners requires users to select the `Person` from their names in order to reduce ambiguity. However, this can result in inefficiency when handling extremely long names.
 
 **Plan:** To allow users to reference the contact or wedding based on their index in the list, in addition to our current implementation. This ensures that the efficiency of KnottyPlanners is maintained.
 
@@ -272,7 +274,7 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 **9. Comprehensive Language Support**
 
-**Currently:** KnottyPlanners support names in English language without special characters such as "^" or non-English names.
+**Currently:** KnottyPlanners supports names in English language without special characters such as "^" or non-English names.
 
 **Plan:** To have a more comprehensive language allowance for names with special characters and non-English names, making KnottyPlanners more inclusive. To maintain checks for incorrect entry of data, KnottyPlanners will then prompt the user if special characters have been used.
 
@@ -290,30 +292,30 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 * Can type fast and prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
-**Value proposition**: Manage contacts of all stakeholders of multiple weddings with ease and convenience
+**Value proposition**: Manage contacts of all stakeholders of multiple weddings with ease and convenience.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                      | So that I can…​                                                                          |
-|----------|-----------------|---------------------------------------------------|------------------------------------------------------------------------------------------|
-| `* * *`  | Wedding Planner | Add contact details                               | I can store contacts in my address book                                                  |
-| `* * *`  | Wedding Planner | Delete contacts                                   | I can remove contacts I no longer need                                                   |
-| `* * *`  | Wedding Planner | List all contacts                                 | I can view all my clients and wedding vendors                                            |
-| `* *`    | Wedding Planner | Edit contact details                              | I can keep information as up-to-date and accurate as possible.                           |
-| `* *`    | Wedding Planner | Filter contacts by name and/or job                | I can quickly find the contact(s) I need                                                 |
-| `* *`    | Wedding Planner | Create weddings                                   | I can manage all details specific to that wedding                                        |
-| `* *`    | Wedding Planner | Delete weddings                                   | I can remove weddings once they have happened                                            |
-| `* *`    | Wedding Planner | List all weddings                                 | I can view all my weddings that I am planning                                            |
-| `* *`    | Wedding Planner | View all contacts associated with a wedding       | I can easily view which stakeholders are involved in that wedding                        |
-| `* *`    | Wedding Planner | Tag my contacts to a wedding                      | I can group relevant stakeholders and attendees of a wedding together                    |
-| `* *`    | Wedding Planner | Un-tag my contacts from a wedding                 | I can remove relevant stakeholders and attendees who will no associate with that wedding | |
-| `*`      | Wedding Planner | Create and manage guest lists for each wedding    | I can track RSVPs and dietary preferences                                                |
-| `*`      | Wedding Planner | Track vendor bookings for each wedding            | I can ensure all necessary services are confirmed                                        |
-| `*`      | Wedding Planner | Rate or review vendors after each event           | I can assess their performance for future recommendations                                | |
-| `*`      | Wedding Planner | Set reminders to contact specific vendors/clients | I can correspond with them on time without missing any important deadlines.              |
+| Priority | As a …​         | I want to …​                                      | So that I can…​                                                                                |
+|----------|-----------------|---------------------------------------------------|------------------------------------------------------------------------------------------------|
+| `* * *`  | Wedding Planner | Add contact details                               | I can store contacts in my address book                                                        |
+| `* * *`  | Wedding Planner | Delete contacts                                   | I can remove contacts I no longer need                                                         |
+| `* * *`  | Wedding Planner | List all contacts                                 | I can view all my clients and wedding vendors                                                  |
+| `* *`    | Wedding Planner | Edit contact details                              | I can keep information as up-to-date and accurate as possible.                                 |
+| `* *`    | Wedding Planner | Filter contacts by name and/or job                | I can quickly find the contact(s) I need                                                       |
+| `* *`    | Wedding Planner | Create weddings                                   | I can manage all details specific to that wedding                                              |
+| `* *`    | Wedding Planner | Delete weddings                                   | I can remove weddings once they are over                                                       |
+| `* *`    | Wedding Planner | List all weddings                                 | I can view all weddings that I am planning                                                     |
+| `* *`    | Wedding Planner | View all contacts associated with a wedding       | I can easily view which stakeholders are involved in that wedding                              |
+| `* *`    | Wedding Planner | Tag my contacts to a wedding                      | I can group relevant stakeholders and attendees of a wedding together                          |
+| `* *`    | Wedding Planner | Un-tag my contacts from a wedding                 | I can remove relevant stakeholders and attendees who are no longer associated with that wedding | |
+| `*`      | Wedding Planner | Create and manage guest lists for each wedding    | I can track RSVPs and dietary preferences                                                      |
+| `*`      | Wedding Planner | Track vendor bookings for each wedding            | I can ensure all necessary services are confirmed                                              |
+| `*`      | Wedding Planner | Rate or review vendors after each event           | I can assess their performance for future recommendations                                      | |
+| `*`      | Wedding Planner | Set reminders to contact specific vendors/clients | I can correspond with them on time without missing any important deadlines                     |
 
 ### Use cases
 
@@ -488,7 +490,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. KnottyPlanners shows an empty list.
 
-  Use case ends.
+      Use case ends.
 
 **Use case: UC07 - Search for a specific contact by job**
 
@@ -511,7 +513,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. KnottyPlanners shows an empty list.
 
-  Use case ends.
+      Use case ends.
 
 **Use case: UC08 - Edit a contact's details**
 
@@ -626,9 +628,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  The system should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using keyboard commands than using the mouse.
-4.  The system should return a response to commands that are inputted by the user within three seconds.
+2.  The system should be able to hold up to 1000 persons without noticeable sluggishness in performance for typical usage.
+3.  A user with above average typing speed (60 wpm) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using keyboard commands than using the mouse.
+4.  The system should return a response to commands that are input by the user within 3 seconds.
 5.  The codebase should be compliant with KnottyPlanners architecture and logic to facilitate easier testing and debugging.
 6.  The system should be operational and responsive 24/7.
 
@@ -636,7 +638,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Contact:** An individual or organization associated with wedding planning, such as a client or vendor.
 * **Job:** Role of a person during the weddings, e.g., caterers, florists, or photographer.
-* **Wedding Tag:** A label assigned to a contact to associate them with a specific wedding event, can be assigned to
+* **Tag:** Refers to a wedding tag, a label assigned to a contact to associate them with a specific wedding event, can be assigned to
 multiple contacts involved in the same wedding event.
 * **AddressBook:** The main data model that represents the collection of all 'Person' objects within KnottyPlanners.
 * **WeddingBook:** The data model that represents the collection of all 'Wedding' objects within KnottyPlanners.
@@ -663,7 +665,7 @@ testers are expected to do more *exploratory* testing using the User Guide.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
@@ -679,7 +681,7 @@ testers are expected to do more *exploratory* testing using the User Guide.
 1. Adding a person
 
     1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, Blk 123, #01-04 j/Photographer`
-       Expected: Success message with John Doe's details shown. Ui displays person list.
+       Expected: Success message with John Doe's details shown. UI displays person list.
     2. Incorrect add command to try: `add n/John Doe p/98765432 e/johnd@example.com`<br>
        Expected: Error message due to invalid command shown.
 
@@ -687,9 +689,9 @@ testers are expected to do more *exploratory* testing using the User Guide.
 
 1. Deleting a person that exists in AddressBook
    1. Test case: `del n/Alex` followed by `y`<br>
-      Expected: Confirmation Prompt with Alex's details shown. Alex is then deleted. Ui displays person list.
+      Expected: Confirmation Prompt with Alex's details shown. Alex is then deleted. UI displays person list.
    2. Test case: `del n/Jonus` followed by `n`<br>
-      Expected: Delete operation cancelled and no person is deleted. Ui displays person list.
+      Expected: Delete operation cancelled and no person is deleted. UI displays person list.
    3. Incorrect delete command to try: `del`, `del 123123`<br>
       Expected: Error message due to invalid command shown.
 
@@ -698,7 +700,7 @@ testers are expected to do more *exploratory* testing using the User Guide.
 1. Editing a person that exists in AddressBook
 
     1. Test case: `edit n/Alex new/John Doe` <br>
-       Expected: Success message with edited details shown. Ui displays person list.
+       Expected: Success message with edited details shown. UI displays person list.
     2. Incorrect edit command to try: `edit n/Alex t/Alex & John Doe`<br>
        Expected: Error message stating tags cannot be edited shown. 
 
@@ -707,16 +709,16 @@ testers are expected to do more *exploratory* testing using the User Guide.
 1. Filtering a person based on name and job
 
     1. Test case: `filter n/John j/Photographer` <br>
-       Expected: Success message with number of persons filtered. Ui displays filtered person list with name `John` and job `Photographer`.
+       Expected: Success message with number of persons filtered. UI displays filtered person list with either name `John` or job `Photographer` or both name `John` and job `Photographer`.
     2. Incorrect edit command to try: `filter John`<br>
-       Expected: Error message due to invalid command shown
+       Expected: Error message due to invalid command shown.
 
 ### Adding a wedding
 
 1. Adding a wedding
 
     1. Test case: `add-wed w/James Hauw & Rachel Loh v/Pan Pacific Hotel d/11/03/2025` <br>
-       Expected: Success message with wedding details shown. Ui displays wedding list.
+       Expected: Success message with wedding details shown. UI displays wedding list.
     2. Incorrect add wedding command to try: `add-wed v/Pan Pacific Hotel d/11/03/2025`<br>
        Expected: Error message due to invalid command shown.
     3. Other incorrect add wedding to try: `add-wed w/James Hauw and Rachel Loh v/Pan Pacific Hotel d/11/03/2025`<br>
@@ -727,9 +729,9 @@ testers are expected to do more *exploratory* testing using the User Guide.
 1. Deleting a wedding that exists in WeddingBook
 
     1. Test case: `del-wed  w/Jonus Ho & Izzat Syazani` followed by `y`<br>
-       Expected: Confirmation Prompt with wedding details shown. Wedding is then deleted. Ui displays wedding list.
+       Expected: Confirmation prompt with wedding details shown. Wedding is then deleted. UI displays wedding list.
     2. Test case: `del-wed  w/Jonus Ho & Izzat Syazani` followed by `n`<br>
-       Expected: Delete operation cancelled and no wedding is deleted. Ui displays wedding list.
+       Expected: Delete operation cancelled and no wedding is deleted. UI displays wedding list.
     3. Incorrect delete command to try: `del-wed`, `del-wed Jonus & Izzat`<br>
        Expected: Error message due to invalid command shown.
 
@@ -738,7 +740,7 @@ testers are expected to do more *exploratory* testing using the User Guide.
 1. Adding a tag of an existing wedding in WeddingBook to a person
 
     1. Test case: `tag-add n/Jonus t/James Hauw & Rachel Loh` <br>
-       Expected: Success message stating that person is added to a wedding. Ui displays person list.
+       Expected: Success message stating that person is added to a wedding. UI displays person list.
     2. Incorrect add wedding command to try: `tag-add n/Jonus w/James Hauw & Rachel Loh`<br>
        Expected: Error message due to invalid command shown.
    
@@ -747,7 +749,7 @@ testers are expected to do more *exploratory* testing using the User Guide.
 1. Deleting a tag of an existing wedding in WeddingBook of a person
 
     1. Test case: `tag-del n/Jonus t/James Hauw & Rachel Loh` <br>
-       Expected: Success message stating that person is removed from a wedding. Ui displays person list.
+       Expected: Success message stating that person is removed from a wedding. UI displays person list.
     2. Incorrect add wedding command to try: `tag-del n/Jonus w/James Hauw & Rachel Loh`<br>
        Expected: Error message due to invalid command shown.
 
@@ -756,17 +758,17 @@ testers are expected to do more *exploratory* testing using the User Guide.
 1. Showing person list
 
     1. Test case: `list` <br>
-       Expected: Success message with total number of persons. Ui displays person list.
+       Expected: Success message with total number of persons. UI displays person list.
    
 2. Showing wedding list
 
    1. Test case: `list-wed` <br>
-      Expected: Success message with total number of weddings. Ui displays wedding list.
+      Expected: Success message with total number of weddings. UI displays wedding list.
 
 3. Showing help window
 
    1. Test case: `help` <br>
-      Expected: Ui displays help window.
+      Expected: UI displays help window.
 
 
 ### Saving data
