@@ -294,12 +294,11 @@ Team Size: 5
     We plan to enhance the `edit` command to include the ability to directly modify the student's attendance field to a specified value, provided it adheres to the required constraints of the attendance parameter. The command format will be `edit INDEX [/attendance ATTENDANCE]`.
 8. **Update `find` command to support partial matching**: The current `find` command only supports exact matches for search parameters, which limits its flexibility.
 
-    We plan to enhance the `find` command to allow partial matches, enabling users to search for entries using incomplete.
+   We plan to enhance the `find` command to allow partial matches, enabling users to search for entries using incomplete information. For instance, entering `find /name han` would return results such as "Hans Gruber" and "Johanna Smith.".
 9. **Prevent duplicate subjects to be added**: The current implementation for adding a contact allows for duplicate subjects to be added for a contact.
 
     We plan to prevent the addition of duplicate contacts by filtering out subjects that already exist in the contact's subject list.
 10. **Allow certain special characters in names**: The current implementation for adding a contact prevents the use of any special characters in names.
-
     We plan to allow the incorporation of characters such as '/' and '-' in names to accommodate a wider range of names. 
 
 --------------------------------------------------------------------------------------------------------------------
