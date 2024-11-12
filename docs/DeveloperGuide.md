@@ -274,7 +274,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**:
 
 - **2a. Hall Pointer detects an error in the entered data**.
-
   - 2a1. Hall Pointer displays an error message with relevant details.
   - 2a2. CCA Leader re-enters corrected data.
   - Steps 2a1-2a2 are repeated until all data is correct.
@@ -501,7 +500,7 @@ testers are expected to do more _exploratory_ testing.
    3. Test case: `delete_member 0`<br>
       **Expected:** No member is deleted. Error details shown in the status message.
 
-   4. Other incorrect delete commands to try: `delete_member`, `delete_member x`, `...` (where `x` is larger than the list size).<br>
+   4. Other incorrect delete commands to try: `delete_member`, `delete_member z`, `...` (where `z` is an integer larger than the list size).<br>
       **Expected:** Similar to previous.
 
 3. Updating a member
@@ -565,32 +564,29 @@ Team Size: 5
 
    **Example Requirement**:
 
-   > Room identifier should be in the format `block-floor-room`, allowing non-numeric values for `block` and `room number`:
+   > Room identifier should be in the format `block-floor-room number`, allowing non-numeric values for `block`, `floor` and `room number`:
    >
    > - Example: `A-G-101B`, where `A` represents the block, `G` represents the floor, and `101B` represents the room number.
 
    This change will add flexibility by supporting alphanumeric characters in the block and room sections.
 
 2. **Partial Search for Session Names**
-   Currently, users can only search for sessions by entering the exact first word of the session name using the `find_sessions` command. This can be inconvenient for users who want to list all sessions or search using only part of the session name. We can mitigate this by introducing a new command `find_sessions_partial`.
+   Currently, users can only search for sessions by entering the exact first word of the session name using the `find_sessions` command. This can be inconvenient for users who want to list all sessions or search using only part of the session name. We can mitigate this by updating the `find_sessions` command to allow for partial search.
 
    **Example Requirement**:
 
-   > The `find_sessions_partial` command should allow partial name searches so users can input only the first part of the session name to retrieve all matching sessions.
+   > The `find_sessions` command should allow partial name searches so users can input only the first part of the session name to retrieve all matching sessions.
    >
    > - Example: Searching with the keyword "BAD" would show all sessions starting with "BAD," rather than requiring the exact first word.
 
    This enhancement will improve user experience by making session searches more flexible and efficient.
 
-3. **Flexible Member Search by Additional Fields and Partial Matching**  
-   Currently, users can only search for members by their full names, which can be challenging when managing a large number of members. Additionally, searching by room or other important fields, like the Telegram handle, is not supported.
+3. **Flexible Member Search by Additional Fields**  
+   Currently, searching for members by room or other important fields, like the Telegram handle, is not supported.
 
    **Example Requirement**:
 
-   > Expand the `find_members` command to support searching by additional fields, such as `block/floor/room number` and `Telegram handle`.
-   > Allow partial name matching in `find_members` to accommodate long names.
-   >
-   > - Example: Users should be able to input a part of a member’s name, and the system will display all matching results.
+   > Expand the `find_members` command to support searching by additional fields, such as `block/floor/room number`, `Telegram handle` and `Tags`.
 
    These enhancements will improve the usability of the `find_members` command, making it easier to locate members efficiently by various identifiers or by partial names.
 
@@ -606,7 +602,7 @@ Team Size: 5
    This enhancement will streamline user interaction, making the application more efficient and user-friendly, especially for power users.
 
 5. **`update_session` Command for Session Edits**
-   Currently, session details—including members, session name, date, and points—are fixed upon creation and cannot be modified, which is problematic when adjustments are necessary. The current solution is to delete the session and create a new session with the updated details.
+   Currently, session details—including members, session name, date, and points—are fixed upon creation and cannot be modified, which is problematic when adjustments are necessary. The current solution is to delete the session and create a new session with the updated details. This can be enhanced through the creation of an `update_session` command.
 
    **Example Requirement**:
 
@@ -616,26 +612,16 @@ Team Size: 5
 
    This enhancement will improve flexibility and reduce the need for users to recreate sessions from scratch when updates are required.
 
-6. **Filter and Sort Members by Tags**
-   The tag feature allows users to categorize members into different teams or groups, but it can become challenging to locate specific groups as the number of members increases.
-
-   **Example Requirement**:
-
-   > Implement a filter and sort feature for tags to help users manage members by groups or teams.
-   >
-   > - Example: `filter_members_by_tag Team A` would display only members tagged as "Team A," while `sort_members_by_tag` would group all members with similar tags together.
-
-   By adding these features, users can better manage and view group associations at scale.
-
-7. **Allow Manual Point Adjustments**
+6. **Allow Manual Point Adjustments**
    Currently, points can only be awarded or adjusted through sessions. This setup can be restrictive for users who need to manage points directly, without creating a session.
 
    **Example Requirement**:
 
-   > Introduce a command to manually add or adjust points for individual members, allowing flexible point management outside of sessions.
+   > Update the `update_member` command to manually add or adjust points for individual members, allowing flexible point management outside of sessions.
    >
    > - Example: An `add_points` command could let users award or modify points for members directly, without requiring a session link, accommodating various tracking needs.
 
    This enhancement would allow users to manage point allocations more flexibly, streamlining adjustments and providing greater control over point tracking.
+
 
 ---
