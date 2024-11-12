@@ -51,6 +51,7 @@ SocialBook is a **desktop app designed for social workers in Singapore, optimize
 * Names can contain any characters at all, including spaces, hyphens, and other special characters.
 * Names will be stored in their case-sensitive form, but capitalisation will be ignored when checking for duplicate names.
     * Eg. Adding a contact as "john Doe" will save them as such, but trying to add a "John Doe" with the same phone number will be marked as a duplicate person and rejected.
+    * Also, names are checked in full, meaning that 'john doe' is not the same as 'john  doe'
     * To avoid unexpected behaviour with this, it is recommended that users save contacts with consistent capitalisation rules.
 
 ### Phone
@@ -276,7 +277,7 @@ The default view for all contact cards will display less information to avoid vi
 
 Format: `view INDEX`
 
-* This command permits the user to `view` multiple contacts at once. Using the `view` command on a contact that's already expanded will collapse it back to its default view.
+* This command permits the user to `view` more information about a contact. Using the `view` command on a contact that's already expanded will collapse it back to its default view.
 * Viewing is done by index, and **not** the person's name or any other field. Attempting to `view` by name, address, or any other fields will result in an error.
 * View is intended for short term ad-hoc usage, and the view states of contact cards will not persist between sessions.
 
