@@ -51,9 +51,6 @@ public class NameMatchesWeddingPredicate implements Predicate<Wedding> {
         }
         return keywords.stream()
                 .allMatch(keyword -> wedding.getName().fullName.toLowerCase().contains(keyword.toLowerCase()));
-
-//        return !keywords.isEmpty() && keywords.stream()
-//                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(wedding.getName().fullName, keyword));
     }
 
     /**
