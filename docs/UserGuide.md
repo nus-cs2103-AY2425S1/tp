@@ -528,6 +528,8 @@ group 2 students will be sorted.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Filtering students : `filter`
 
 Shows a list of students filtered by year group or subject.
@@ -553,6 +555,8 @@ After filtering, you can use `list` command to return to the full list of studen
 The `filter` function can be useful for tracking the number of students, as the number of students in the filtered list 
 will be displayed.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Filtering by year group followed by `tracksubject` allows you to see what subjects are taken by the students in the current year group.
@@ -608,6 +612,8 @@ Please ensure to close the tracker to view the most current information.
 
 ![TrackSubject Success Message](images/tracksubject.png)
 
+<div style="page-break-after: always;"></div>
+
 ## Utility Features
 ### Clearing all entries : `clear`
 
@@ -621,6 +627,8 @@ This action is irreversible. All student entries will be deleted permanently.
 Format: `clear`
 
 ![Clear Success Message](images/clear.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Getting help : `help`
 
@@ -637,6 +645,8 @@ Exits the program.
 Format: `exit`
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 # Data Management in AcademyAssist
 
