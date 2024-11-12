@@ -89,7 +89,7 @@ public class AssignCommandTest {
         // Create the expected person with the new role
         Person expectedPerson = new PersonBuilder(personToAssign).withRole(newRole).build();
 
-        // Setup the expected model
+        // Set up the expected model
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToAssign, expectedPerson);
 

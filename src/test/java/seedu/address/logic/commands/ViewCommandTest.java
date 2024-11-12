@@ -96,13 +96,16 @@ public class ViewCommandTest {
 
         ArrayList<Person> persons = new ArrayList<>(Arrays.asList(alice, benson, carl, george, carlJr));
         ArrayList<Wedding> weddings = new ArrayList<>(Arrays.asList(aliceWedding, georgeWedding));
+
         AddressBook addressBook = new AddressBook();
         for (Person person : persons) {
             addressBook.addPerson(person);
         }
+
         for (Wedding wedding : weddings) {
             addressBook.addWedding(wedding);
         }
+
         return addressBook;
     }
 

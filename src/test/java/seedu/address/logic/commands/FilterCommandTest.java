@@ -58,7 +58,6 @@ public class FilterCommandTest {
         // Execute command
         CommandResult result = filterCommand.execute(model);
 
-
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
         assertEquals(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
                 model.getFilteredPersonList().size()), result.getFeedbackToUser());

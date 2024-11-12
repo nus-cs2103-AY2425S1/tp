@@ -163,12 +163,14 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_personAssignedToWeddings_removeWeddingJobsSuccess() throws CommandException {
-        // Setup a person with assigned wedding jobs
+        // Set up a person with assigned wedding jobs
         Person personToDelete = model.getFilteredPersonList().get(0);
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
         Wedding amyWeddingCopy = new WeddingBuilder(AMY_WEDDING).build();
         amyWeddingCopy.setClient(new PersonBuilder(BENSON).build());
         model.addWedding(amyWeddingCopy);
+
         Wedding elleWeddingCopy = new WeddingBuilder(ELLE_WEDDING).build();
         elleWeddingCopy.setClient(new PersonBuilder(FIONA).build());
         model.addWedding(elleWeddingCopy);
@@ -186,6 +188,7 @@ public class DeleteCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToDelete, expectedPerson);
         CommandResult result = deleteCommand.execute(model);
+
         assertEquals(String.format(MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS,
                         Messages.format(expectedPerson),
                         Messages.format(expectedPerson.getWeddingJobs())
@@ -196,13 +199,15 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_personNotAssignedToSpecifiedWeddings_throwsCommandException() {
-        // Setup a person some unassigned wedding jobs
+        // Set up a person some unassigned wedding jobs
         Person person = model.getFilteredPersonList().get(0);
         Person personToDelete = new PersonBuilder(person).build();
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
         Wedding amyWeddingCopy = new WeddingBuilder(AMY_WEDDING).build();
         amyWeddingCopy.setClient(new PersonBuilder(BENSON).build());
         model.addWedding(amyWeddingCopy);
+
         Wedding elleWeddingCopy = new WeddingBuilder(ELLE_WEDDING).build();
         elleWeddingCopy.setClient(new PersonBuilder(FIONA).build());
         model.addWedding(elleWeddingCopy);
@@ -225,7 +230,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidWeddingIndex_throwsCommandException() {
-        // Setup a wedding and assign it to a person
+        // Set up a wedding and assign it to a person
         Person person = model.getFilteredPersonList().get(0);
         Person personToDelete = new PersonBuilder(person).build();
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -272,8 +277,7 @@ public class DeleteCommandTest {
         String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteCommand.toString());
 
-        String targetKeyword = VALID_NAME_AMY;
-        NameMatchesKeywordPredicate predicate = preparePredicate(targetKeyword);
+        NameMatchesKeywordPredicate predicate = preparePredicate(VALID_NAME_AMY);
         deleteCommand = new DeleteCommand(null, predicate, null);
         expected = DeleteCommand.class.getCanonicalName() + "{targetKeywords=" + predicate.toString() + "}";
         assertEquals(expected, deleteCommand.toString());

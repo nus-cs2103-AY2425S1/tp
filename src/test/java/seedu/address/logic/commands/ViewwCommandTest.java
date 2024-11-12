@@ -87,10 +87,12 @@ public class ViewwCommandTest {
 
         ArrayList<Person> persons = new ArrayList<>(Arrays.asList(alice, benson, carl, george));
         ArrayList<Wedding> weddings = new ArrayList<>(Arrays.asList(aliceWedding, georgeWedding));
+
         AddressBook addressBook = new AddressBook();
         for (Person person : persons) {
             addressBook.addPerson(person);
         }
+
         for (Wedding wedding : weddings) {
             addressBook.addWedding(wedding);
         }

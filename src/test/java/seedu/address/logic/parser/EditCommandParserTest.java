@@ -20,6 +20,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.WEDDING_DESC_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -88,8 +89,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_ROLE_DESC, EditCommand.MESSAGE_NOT_EDITED); // invalid role field
         assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
                 EditCommand.MESSAGE_NOT_EDITED);
-
-        // todo: include that for ownWedding and weddingJobs
+        assertParseFailure(parser, "1" + WEDDING_DESC_INDEX, EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
