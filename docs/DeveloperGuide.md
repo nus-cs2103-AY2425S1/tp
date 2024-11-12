@@ -717,7 +717,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a student
 
-1. Deleting a student while all students are being shown.
+1. Deleting a student while all students are being shown
 
    1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
 
@@ -730,7 +730,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. Deleting a student from a filtered list.
+1. Deleting a student from a filtered list
 
     1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
 
@@ -747,14 +747,14 @@ testers are expected to do more *exploratory* testing.
 
 ### Getting a reminder
 
-1. Getting a reminder when there are lessons scheduled for today.
+1. Getting a reminder when there are lessons scheduled for today
 
     1. Prerequisite: There should be **at least 1 lesson** scheduled for today.
 
     1. Test case: `remind`<br>
          Expected: UGTeach displays success message with details such as student's name, time of the lesson and the subject to be taught.
 
-1. Getting a reminder when there are no lessons scheduled for today.
+1. Getting a reminder when there are no lessons scheduled for today
 
     1. Prerequisite: There should be **no lessons** scheduled for today.
 
@@ -763,7 +763,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Using pay command
 
-1. Using pay command while all students are being shown.
+1. Using pay command while all students are being shown
 
     1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
 
@@ -776,7 +776,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `pay 0 hr/1`<br>
        Expected: No changes. UGTeach displays error message of invalid command format.
 
-1. Using pay command from a filtered list.
+1. Using pay command from a filtered list
 
     1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
 
@@ -791,7 +791,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Using owe command
 
-1. Using owe command while all students are being shown.
+1. Using owe command while all students are being shown
 
     1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
 
@@ -806,7 +806,7 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
-2. Using owe command from a filtered list.
+2. Using owe command from a filtered list
 
     1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
 
@@ -821,8 +821,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Using settle command
 
-1. Using settle command while all students are being shown.
-
+1. Using settle command while all students are being shown
     1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
 
     1. Test case: `settle 1 amount/10`<br>
@@ -838,7 +837,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes, assuming that the amount entered is more than the amount owed.
        UGTeach displays error message that entered amount is more than amount owed.
 
-1. Using settle command from a filtered list.
+1. Using settle command from a filtered list
 
     1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
 
