@@ -426,8 +426,7 @@ Team size: 5 people
 
 9. Currently, the UI does not show the list of tutorials and assignments permanently. This causes some inconvenience to the users, as they have to constantly list assignments and tutorials. Hence, we plan to add the tutorial and assignment list display in future versions for the ease of usage.
 
-10. In current implementation, list commands for students, assignments and tutorials do not show specific messages when there is no student/assignment/tutorial in the list. For example, executing the command `list` when the student list is empty shows a successful message indicating that all students are listed. We plan to make it more specific by showing a message saying that there is no student in the list etc. Same applies to `listAsg` and `listTut`.
-
+10. In the current implementation, certain commands could be enhanced to provide more specific feedback for empty lists and invalid inputs. For instance, when executing list commands for students, assignments, or tutorials (list, listAsg, listTut), a generic success message appears even if the respective list is empty, which could be more informative. Displaying a message such as "No students/assignments/tutorials in the list" would provide clearer feedback for users. Additionally, mark attendance and delete attendance commands currently give a general error message ("Date should be valid and in correct format (yyyy-MM-dd)!") when an invalid date is entered (e.g., "2024-02-32"). Enhancing this feedback to distinguish between invalid formats and dates would improve user experience by clearly indicating whether the error is due to format issues or an invalid date.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -544,7 +543,7 @@ Use case ends.
 
 #### Extensions
 
-2a. User enters an invalid attendance date (incorrect date format: yyyy-MM-dd)
+2a. User enters an invalid attendance date (correct date format: yyyy-MM-dd)
 * 2a1. TrackMate informs the user of the accepted date format for attendance.
 * 2a2. User re-enters the date. Steps 2a1–2a2 are repeated until a valid status is given.
 
@@ -642,14 +641,13 @@ Use case resumes at step 3.
 * **AB-3**: The code name for the AddressBook Level 3 application, which serves as the base framework for the student management system being developed.
 * **NUS SOC**: National University of Singapore, School of Computing. The application is designed for tutors within this institution to manage student progress effectively.
 * **Tutor**: The primary user of the application—an NUS School of Computing tutor responsible for tracking students' progress, attendance, and assignments.
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **CLI (Command Line Interface)**: A text-based interface where users interact with the application by typing commands rather than using graphical elements like buttons.
 * **GUI (Graphical User Interface)**: A visual interface that allows users to interact with the application through graphical elements like windows, buttons, and menus.
 * **JSON (JavaScript Object Notation)**: A lightweight data format used for data storage and transmission, typically for configuration or file storage.
 * **Parser**: A component that interprets user commands and converts them into actions or objects that the system can process.
 * **MSS (Main Success Scenario)**: The primary sequence of steps in a use case where everything proceeds as expected without any errors.
 * **JAR File**: Java ARchive file; a package file format that bundles Java class files and associated metadata for distribution.
-* **Prerequisite**: Compulsory requirements to fulfil before every manual testing action
+* **Prerequisite**: Compulsory requirements to fulfil before every manual testing action.
 
 --------------------------------------------------------------------------------------------------------------------
 
