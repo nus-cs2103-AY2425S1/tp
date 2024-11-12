@@ -50,15 +50,15 @@ Alerts you to potential issues or problems that may arise.
      ```
    * If Java 17 is installed, you should see an output similar to: `java version "17.0.1" `
    * If you do not have Java 17, you can download it from [Oracle's official website](https://www.oracle.com/java/technologies/downloads/#java17).
-<br>
+<br><br>
 2. Download the application
    * Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F12-1/tp/releases).
-<br>
+<br><br>
 3. Set up the home folder
    * Choose a folder where you want to store your ContactCS data.
    * Copy the downloaded `.jar` file to this folder.
    * This folder will serve as the "home folder" for your ContactCS.
-<br>
+<br><br>
 4. Run the application
    * Open a command terminal.
    * Navigate (`cd`) to the folder where you placed the `.jar` file.
@@ -97,7 +97,7 @@ Alerts you to potential issues or problems that may arise.
      java -jar contactcs.jar
      ```
    A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.<br>![UiStartUp](images/UiStartUp.png)
-<br>
+<br><br>
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -110,11 +110,39 @@ Alerts you to potential issues or problems that may arise.
    * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
-<br>
+<br><br>
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Overview of GUI
+Once ContactCS is running, you’ll see the main interface divided into several key panels, as illustrated below. Here’s an overview of each panel:
 
+* Command Box: You can type and execute commands here .
+
+* Result Display Box: Shows the outcome of the commands you enter, including success messages, errors, and other feedback.
+
+* Contact List: Displays the list of contacts, allowing easy access to contact information.
+
+* Command History Window: Contains a history of commands that modify the contact list, enabling you to quickly refer to recent modifications.
+
+* Menu (File/Help): Provides options such as exiting the application and accessing help documentation.
+
+* Data Storage Location Footer: Shows the directory where the contact data are saved, providing quick access to storage information.
+<br><br>
+![Annotated GUI](images/AnnotatedGui.png)
+
+<box type="info" seamless>
+
+**Info: Notes about the command history**<br>
+The **Command History Window** only displays commands that directly modify the contact list, including:
+* `add` - Adds a new contact.
+* `edit` - Edits details of an existing contact.
+* `delete` - Removes specified contacts.
+* `clear` - Clears all contacts from the list.
+
+Commands that do not alter the contact data, such as `list`, `find`, `help`, and `exit`, are **not** shown in the command history window.
+This helps keep the command history focused on actions that impact the contact list.
+</box>
 ## Features
 <box type="info" seamless>
 
