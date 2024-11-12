@@ -83,9 +83,11 @@ public class Attendance {
 
     /**
      * Gets the attendance list of this {@link Attendance} object.
+     *
+     * @return A copy of the internal {@code attendanceList}.
      */
     public List<AttendanceSession> getAttendanceList() {
-        return attendanceList;
+        return new ArrayList<>(attendanceList);
     }
 
     /**
