@@ -52,12 +52,12 @@ public class CommandTestUtil {
     public static final String VALID_TUT_ID = "T1001";
 
     public static final String TUT_NAME_DESC = " " + CliSyntax.PREFIX_TUT_NAME + VALID_TUT_NAME;
-    public static final String TUT_ID_DESC = " " + CliSyntax.PREFIX_ID + VALID_TUT_ID;
+    public static final String TUT_ID_DESC = " " + CliSyntax.PREFIX_TUTORIALID + VALID_TUT_ID;
 
     public static final String INVALID_TUT_NAME_DESC = " "
                                 + CliSyntax.PREFIX_TUT_NAME + "T@ut"; // '@' not allowed in names
     public static final String INVALID_TUT_ID_DESC = " "
-                        + CliSyntax.PREFIX_ID + "abc"; // non-numeric characters not allowed for ID
+                        + CliSyntax.PREFIX_TUTORIALID + "abc"; // non-numeric characters not allowed for ID
 
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

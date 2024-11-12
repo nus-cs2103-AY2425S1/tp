@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALID;
 
 import java.util.stream.Stream;
 
@@ -22,15 +22,15 @@ public class DeleteTutorialCommandParser implements Parser<DeleteTutorialCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteTutorialCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUT_ID);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIALID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TUT_ID) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_TUTORIALID) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteTutorialCommand.MESSAGE_USAGE));
         }
 
         Tutorial tutorial = Tutorial.of(new TutName("random"),
-                ParserUtil.parseTutorialId(argMultimap.getValue(PREFIX_TUT_ID).get()));
+                ParserUtil.parseTutorialId(argMultimap.getValue(PREFIX_TUTORIALID).get()));
 
         return new DeleteTutorialCommand(tutorial);
 

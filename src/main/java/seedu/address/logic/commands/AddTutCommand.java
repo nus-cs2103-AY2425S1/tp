@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUT_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,10 +20,10 @@ public class AddTutCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tutorial to the address book. "
             + "Parameters: "
             + PREFIX_TUT_NAME + "TUTORIAL_NAME "
-            + PREFIX_TUT_ID + "TUT_ID\n"
+            + PREFIX_TUTORIALID + "TUT_ID\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TUT_NAME + "CS1010 "
-            + PREFIX_TUT_ID + "T1001";
+            + PREFIX_TUTORIALID + "T1001";
     private final Tutorial toAdd;
 
     /**
