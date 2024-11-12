@@ -13,7 +13,7 @@ In this guide, you will find detailed instructions on setting up your developmen
 We encourage you to explore each section thoroughly to maximize your understanding and contribution to the project. Feel free to modify any sections or add specific details relevant to your project!
 
 --------------------------------------------------------------------------------------------------------------------
-g
+
 
 ## **Acknowledgements**
 
