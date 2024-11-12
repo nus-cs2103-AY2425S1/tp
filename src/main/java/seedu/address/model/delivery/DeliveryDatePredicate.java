@@ -5,13 +5,13 @@ import java.util.function.Predicate;
 /**
  * Tests if a {@code Delivery}'s date matches the given date.
  */
-
 public class DeliveryDatePredicate implements Predicate<Delivery> {
     private final DateTime targetDate;
 
     /**
-     * Creates a DeliveryDatePredicate instance based on the given targetDateTime
-     * @param targetDateTime DateTime as specified by user used to filter deliveries
+     * Creates a DeliveryDatePredicate instance based on the given targetDateTime.
+     *
+     * @param targetDateTime DateTime as specified by user used to filter deliveries.
      */
     public DeliveryDatePredicate(DateTime targetDateTime) {
         this.targetDate = targetDateTime;

@@ -31,10 +31,14 @@ public interface Logic {
      */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of suppliers */
+    /**
+     * Returns an unmodifiable view of the filtered list of suppliers
+     */
     ObservableList<Supplier> getFilteredSupplierList();
 
-    /** Returns an unmodifiable view of the filtered list of deliveries */
+    /**
+     * Returns an unmodifiable view of the filtered list of deliveries
+     */
     ObservableList<Delivery> getFilteredDeliveryList();
 
     /**

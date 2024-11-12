@@ -15,7 +15,10 @@ public class MarkDeliveryCommandParser implements Parser<MarkDeliveryCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the MarkDeliveryCommand
      * and returns a MarkDeliveryCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @param args User input after the command word.
+     * @return A new MarkDeliveryCommand instance with the index and status of delivery.
+     * @throws ParseException If the user input does not conform the expected format.
      */
     public MarkDeliveryCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();

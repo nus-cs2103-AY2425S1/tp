@@ -30,6 +30,9 @@ public class FindDeliveryCommandParser implements Parser<FindDeliveryCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindDeliveryCommand
      * and returns a FindDeliveryCommand object for execution.
+     *
+     * @param args User input after the command word.
+     * @return A new FindDeliveryCommand instance with the combined predicates.
      * @throws ParseException if the user input does not conform to the expected format.
      */
     public FindDeliveryCommand parse(String args) throws ParseException {
@@ -99,7 +102,6 @@ public class FindDeliveryCommandParser implements Parser<FindDeliveryCommand> {
             }
         }
 
-        // Combine all predicates into one using Predicate.and()
         Predicate<Delivery> combinedPredicate = predicates.stream()
                 .reduce(Predicate::and)
                 .orElse(x -> true); // If no predicates are found, fallback to a true predicate

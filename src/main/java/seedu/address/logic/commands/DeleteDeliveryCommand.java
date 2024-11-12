@@ -24,6 +24,11 @@ public class DeleteDeliveryCommand extends DeleteCommand {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteDeliveryCommand to delete the specified delivery at {@code targetTndex}.
+     *
+     * @param targetIndex Index of delivery to be deleted.
+     */
     public DeleteDeliveryCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -37,14 +42,11 @@ public class DeleteDeliveryCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }
 
-        // Get the delivery at the specified index
         Delivery deliveryToDelete = model.getModifiedDeliveryList().get(targetIndex.getZeroBased());
 
-        // Delete the delivery
         model.deleteDelivery(deliveryToDelete);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
 
-        // Return success message
         return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS, Messages.format(deliveryToDelete)));
     }
 

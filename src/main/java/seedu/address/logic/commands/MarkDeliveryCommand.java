@@ -26,7 +26,10 @@ public class MarkDeliveryCommand extends MarkCommand {
     private final Status status;
 
     /**
-     * Creates an MarkDeliveryCommand to mark the specified delivery at {@code index} with new status {@code status}
+     * Creates a MarkDeliveryCommand to mark the specified delivery at {@code index} with new status {@code status}.
+     *
+     * @param index Index of delivery to be marked.
+     * @param status Updated status to mark delivery with
      */
     public MarkDeliveryCommand(Index index, Status status) {
         requireNonNull(index);
