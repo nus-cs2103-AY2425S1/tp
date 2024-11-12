@@ -531,11 +531,11 @@ testers are expected to do more *exploratory* testing.
    2. Close the application and re-launch it by running the .jar file again.
 
    3. Test case: Press the up arrow key (↑) in the command box.
-      - Expected:Commands from the previous session(s) appear, allowing navigation through the command history from earlier sessions.
+      - Expected: Commands from the previous session(s) appear, allowing navigation through the command history from earlier sessions.
 
 3. Testing command history limits
    1. Enter 50 commands in succession (e.g., `listemployees`, `delete 1`, repeated or varied).
-      - Expected:Only the 50 most recent commands are saved. Attempting to access a 51st older command with the up arrow key will not be possible.
+      - Expected: Only the 50 most recent commands are saved. Attempting to access a 51st older command with the up arrow key will not be possible.
 
 ### Other commands
 
