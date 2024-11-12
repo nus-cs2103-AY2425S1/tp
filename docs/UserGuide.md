@@ -343,7 +343,7 @@ Use this command format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/
 - Edits the person with the specified `NRIC`. The `NRIC` must be a valid Singapore National Identification Card Number.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+- When editing tags, the existing tags of the person will be replaced. i.e adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
@@ -772,6 +772,8 @@ Make sure each NRIC adheres to the following format and constraints:
 
    - **Workaround**: While we actively fix this, you can relink your patients and caregivers using the `link` command just as easily. We would recommend to add a note to the person when you first link the person to keep a record, as well as easily relink if required.
 
+10. **Role Removed When Using `edit` Command with Empty `role/` Argument**: Using the `edit` command with the `role/` prefix and an empty argument currently removes the role from a person’s profile, even though each person must have a role.
+    - **Workaround**: Always specify a role (either `PATIENT` or `CAREGIVER`) when using the `edit` command with the `role/` prefix to avoid removing the role.
 ---
 
 ## Complete Command summary

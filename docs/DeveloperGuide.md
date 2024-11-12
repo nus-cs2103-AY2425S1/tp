@@ -1223,7 +1223,7 @@ In future versions of CareLink, the following enhancements are planned to improv
    - **Current Workaround**: Users can relink the patients and the caregivers after editing the information.
    - **Planned Enhancement**: Introduce a warning message if the user attempts to edit fields critical to links (e.g., roles). For non-critical changes (e.g., contact details or tags), links will remain intact.
 
-2. **Consistent NRIC Masting**
+2. **Consistent NRIC Masking**
 
    - **Current Issue**: NRICs are masked inconsistently in various parts of the application (e.g., some success messages show the full NRIC while others partially mask it).
    - **Planned Enhancement**: Implement uniform NRIC masking throughout the application. Specific use cases (e.g., detailed logs) where full NRIC visibility is necessary will be carefully evaluated.
@@ -1247,5 +1247,14 @@ In future versions of CareLink, the following enhancements are planned to improv
 6. **Enhanced Phone Number Validation**
    - **Current Issue**: Phone numbers are not validated currently, which can result in user accidentally typing the wrong phone number without realising. The field currently accepts a minimum of 3 digits, which is shorter than standard international phone numbers.
    - **Planned Enhancement**: Validate phone numbers according to local and international standards, requiring a minimum of 7 digits and ensuring numbers are valid for practical use cases.
-
+7. **Improved Handling of Tag Editing**
+   - **Current Issue**: Currently, when using the `edit` command with the `t/` prefix for tags, any tags specified in the command replace the person’s existing tags. This can lead to unintended loss of tag information if users only want to add or update specific tags.
+   - **Planned Enhancement**: Introduce new functionality to give users more flexibility with tags:
+     - **Append Tags**: Allow users to add new tags to existing ones without overwriting current tags.
+     - **Full Edit**: Retain the existing functionality of completely replacing tags when needed.
+8. **Improved Handling of Role Editing**
+   - **Current Issue**: Currently, using the `edit` command with the `role/` prefix followed by an empty argument will remove the role from a person’s profile. However, each person should always have a role, and removing it entirely can lead to incomplete or invalid data.
+   - **Planned Enhancement**: Modify the `edit` command to enforce the role requirement:
+     - **Mandatory Role**: Prevent the role from being left blank. If the `role/` prefix is used without a specified role, the command will prompt the user to enter a valid role (either `PATIENT` or `CAREGIVER`).
+     - **Role Replacement Only**: Allow users to update the role but not to clear it entirely, ensuring each person’s profile remains complete and valid.
 ---

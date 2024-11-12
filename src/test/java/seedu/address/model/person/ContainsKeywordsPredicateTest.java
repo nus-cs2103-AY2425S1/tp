@@ -80,16 +80,6 @@ public class ContainsKeywordsPredicateTest {
         // Non-matching keyword
         predicate = new ContainsKeywordsPredicate(List.of(new NameSearchCriteria(List.of("Carol"))));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
-
-        // Keywords match phone, email and address, but does not match name
-        //ArgumentMultimap mapForNotMatchingNameKeywords = new ArgumentMultimap();
-        //mapForNotMatchingNameKeywords.put(PREFIX_PHONE, "12345");
-        // mapForNotMatchingNameKeywords.put(PREFIX_EMAIL, "alice@email.com");
-        // mapForNotMatchingNameKeywords.put(PREFIX_ADDRESS, "Main");
-        // mapForNotMatchingNameKeywords.put(PREFIX_ADDRESS, "Streer");
-        // predicate = new ContainsKeywordsPredicate(List.of(new NameSearchCriteria(List.of)));
-        // assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-        //        .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 
     @Test
