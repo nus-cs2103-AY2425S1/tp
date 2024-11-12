@@ -646,7 +646,7 @@ created.
     <br><br>
     **Implementation**
     <div style="text-align: center;">
-    <img src="images/dg/AddBuyerSequenceDiagram.png" alt="AddBuyerSequenceDiagram" style="width:80%; max-width:1000px;">
+    <img src="images/dg/AddBuyerSequenceDiagram.png" alt="AddBuyerSequenceDiagram" style="max-width:1400px;">
     </div>
    <br>
    <br>
@@ -681,7 +681,7 @@ The `editclient` command edits a `client`.
 
 **Implementation**
 <div style="text-align: center;">
-    <img src="images/dg/EditClientSequenceDiagram.png" alt="EditClientSequenceDiagram" style="width:80%; max-width:1000px;">
+    <img src="images/dg/EditClientSequenceDiagram.png" alt="EditClientSequenceDiagram" style="max-width:1400px;">
     </div>
 
 1. User runs a `editclient` command with valid `INDEX` and valid prefixes.
@@ -715,7 +715,7 @@ The `find` command finds and lists all `Persons` whose name contains any of the 
 
 **Implementation**
 <div style="text-align: center;">
-    <img src="images/dg/FindClientSequenceDiagram.png" alt="AddBuyerSequenceDiagram" style="width:80%; max-width:1000px;">
+    <img src="images/dg/FindClientSequenceDiagram.png" alt="AddBuyerSequenceDiagram" style="max-width:1400px;">
     </div>
 
 1. User runs a `find` command with keywords.
@@ -731,7 +731,7 @@ The `deleteclient` command deletes a `Person` according to the `INDEX` that is o
 
 **Implementation**
 <div style="text-align: center;">
-    <img src="images/DeleteSequenceDiagram.png" alt="DeleteSequenceDiagram" style="width:80%; max-width:1000px;">
+    <img src="images/DeleteSequenceDiagram.png" alt="DeleteSequenceDiagram" style="max-width:1400px;">
     </div>
 
 1. User runs a `deleteclient` command with an `INDEX` as argument.
@@ -748,7 +748,7 @@ The `showclient` command displays all clients in EZSTATES to the user.
 
 **Implementation**
 <div style="text-align: center;">
-    <img src="images/dg/ShowClientSequenceDiagram.png" alt="ShowClientSequenceDiagram" style="width:80%; max-width:1000px;">
+    <img src="images/dg/ShowClientSequenceDiagram.png" alt="ShowClientSequenceDiagram" style="max-width:1400px;">
     </div>
 
 1. User runs a `showclient` command.
@@ -765,7 +765,7 @@ The `clear` command clears all `Persons` and `Listings` from EZSTATES.
 
 **Implementation**
 <div style="text-align: center;">
-    <img src="images/dg/ClearCommandSequenceDiagram.png" alt="ClearCommandSequenceDiagram" style="width:80%; max-width:1000px;">
+    <img src="images/dg/ClearCommandSequenceDiagram.png" alt="ClearCommandSequenceDiagram" style="max-width:1400px;">
     </div>
 
 1. User runs a `clear` command.
@@ -776,7 +776,9 @@ The `clear` command clears all `Persons` and `Listings` from EZSTATES.
 ### Appointment Management
 **Overview**
 <br>
-The `editclient` edits a `client`.
+<div style="text-align: center;">
+    <img src="images/dg/AppointmentClassDiagram.png" alt="AppointmentClassDiagram" style="width:80%; max-width:1000px;">
+    </div>
 
 **Implementation**
 
