@@ -127,7 +127,7 @@ Once ContactCS is running, you’ll see the main interface divided into several 
 
 * Menu (File/Help): Provides options such as exiting the application and accessing help documentation.
 
-* Data Storage Location Footer: Shows the directory where patient and appointment data are saved, providing quick access to storage information.
+* Data Storage Location Footer: Shows the directory where the contact data are saved, providing quick access to storage information.
 <br><br>
 ![Annotated GUI](images/AnnotatedGui.png)
 
