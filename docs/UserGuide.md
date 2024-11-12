@@ -764,7 +764,7 @@ Make sure each NRIC adheres to the following format and constraints:
 
    - **Impact**: This inconsistency is purely visual and does not affect system functionality or data integrity.
 
-8. **Model Not Updated After `find` or `findapp` Commands**: When executing certain commands immediately following `find` or `findapp` commands, the UI would continue to display the result from `find` or `findapp`commands.
+8. **UI Not Updated After `find` or `findapp` Commands**: When executing certain commands immediately following `find` or `findapp` commands, the UI would continue to display the result from `find` or `findapp`commands.
 
    - **Workaround**: Use the `list` command immediately after `find` or `findapp` commands to refresh and update the model.
 
