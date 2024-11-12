@@ -73,8 +73,15 @@ Format: `help`
 ### Adding a restaurant: `add`
 
 Adds a restaurant to the address book.
+Note: Any restaurant filters will be reset upon running this command.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PRICE [r/RATING] [t/TAG]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Names should only contain alphanumeric characters and spaces, and it should not be blank.
+Note: Characters outside the English alphabet are currently not supported.
+Please use an English transliteration.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 The rating is an integer value between 0 to 10. Rating can be empty.
@@ -98,6 +105,7 @@ Format: `list`
 ### Editing a restaurant : `edit`
 
 Edits an existing restaurant in the address book.
+Note: Any restaurant filters will be reset upon running this command.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRICE] [r/RATING] [t/TAG]…​`
 
@@ -108,7 +116,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRICE] [r/RATIN
 * You can remove all the restaurant’s tags by typing `t/` without
     specifying any tags after it.
 
-Examples:
+Examples (Assuming the restaurant list has at least 2 restaurants):
 *  `edit 1 p/98765432 e/swensens@plsreply.com` Edits the phone number and email address of the 1st restaurant to be `98765432` and `swensens@plsreply.com` respectively.
 *  `edit 2 n/Mala Hot Pot t/` Edits the name of the 2nd restaurant to be `Mala Hot Pot` and clears all existing tags.
 
@@ -126,7 +134,7 @@ Format: `tags KEYWORD [MORE_KEYWORDS]`
 * Restaurants matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Chinese Western` will return `Swensens`, `Mala Hot Pot`
 
-Examples:
+Examples (Assuming there are restaurants with the following tags):
 * `tags Halal` returns `Swensens` and `Mala Hot Pot`
 * `tags Chinese` returns `Mala Hot Pot`
 * `tags Halal Chinese` returns `Swensens` and `Mala Hot Pot`<br>
@@ -144,7 +152,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Restaurants matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Mala Swensens` will return `Swensens`, `Mala Hot Pot`
 
-Examples:
+Examples (Assuming there are restaurants with the following names):
 * `find Swensens Mala` returns `Swensens` and `Mala Hot Pot`
 * `find mala` returns `Mala Hot Pot`<br>
 
@@ -152,6 +160,7 @@ Examples:
 ### Deleting a restaurant : `delete`
 
 Deletes the specified restaurant from the address book.
+Note: Any restaurant filters will be reset upon running this command.
 
 Format: `delete INDEX`
 
@@ -159,7 +168,7 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed restaurant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+Examples (Assuming the restaurant list has at least 2 restaurants):
 * `list` followed by `delete 2` deletes the 2nd restaurant in the address book.
 * `find Mala` followed by `delete 1` deletes the 1st restaurant in the results of the `find` command.
 
@@ -175,8 +184,11 @@ Format: `rate INDEX r/[RATING]`
 * The rating can be empty
 
 Examples:
-*  `rate 1 r/2` Edits the rating of the 1st restaurant to be `2`.
-*  `rate 2 r/ ` Edits the rating of the 2nd restaurant to be `No Rating`.
+*  `rate 1 r/2` Sets the rating of the 1st restaurant to be `2`.
+*  `rate 2 r/` Sets the rating of the 2nd restaurant to be `No Rating`.
+
+Alternative:
+*  `edit 1 r/2` Edits the rating of the 2nd restaurant to be `2`.
 
 ### Searching for restaurants by price: `price`
 
@@ -204,7 +216,7 @@ Format: `fav INDEX`
 * The index refers to the index number shown in the displayed restaurant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+Examples (Assuming the restaurant list has at least 1 restaurant):
 *  `fav 1` Favourite the 1st restaurant.
 
 ### Un-favourite a restaurant : `unfav`
@@ -218,7 +230,7 @@ Format: `unfav INDEX`
 * The index refers to the index number shown in the displayed restaurant list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+Examples (Assuming the restaurant list has at least 1 restaurant):
 *  `unfav 1` Un-favourites the 1st restaurant.
 
 ### Clearing all entries : `clear`
@@ -242,8 +254,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with the initial sample data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
