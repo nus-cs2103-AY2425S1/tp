@@ -7,7 +7,6 @@ pageNav: 3
 # EduContacts Developer Guide
 
 <!-- * Table of Contents -->
-## Table of Contents
 
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
@@ -41,7 +40,7 @@ pageNav: 3
     - [Planned Enhancements](#appendix-planned-enhancements)
         - [1. Overly General Error Message for Duplicate Command Word](#1-overly-general-error-message-for-duplicate-command-word)
         - [2. Overly General Error Message for Duplicate IDs in Commands](#2-overly-general-error-message-for-duplicate-ids-in-commands)
-        - [3. Address `help` Command Popup Window Stability Issue](#3-address-help-command-popup-window-stability-issue)
+        - [3. Address help Command Popup Window Stability Issue](#3-address-help-command-popup-window-stability-issue)
         - [4. StudentID as Duplicate Detection Mechanism](#4-studentid-as-duplicate-detection-mechanism)
         - [5. Support for Multiple Filter Conditions](#5-support-for-multiple-filter-conditions)
         - [6. Toggle for Partial vs Full Matching in Filter Command](#6-toggle-for-partial-vs-full-matching-in-filter-command)
@@ -651,6 +650,8 @@ testers are expected to do more *exploratory* testing.
 * **Test case:** Click the "Help" button in the application GUI.
 * **Expected:** The help window opens, displaying a comprehensive list of available commands and their usage.
 
+---
+
 #### Add Command
 
 **Adding a valid person**
@@ -994,7 +995,7 @@ By addressing this enhancement in a future iteration, the changes can better ali
 
 The following are new features planned that add additional functionality to our application. (Not to be confused with [Planned Enhancements](#appendix-planned-enhancements))
 
-#### `Undo` command
+#### Undo command
 * **Description:** Allows users to revert the most recent change made to the application’s data.
 * **Benefits**
   * Provides users with the flexibility to correct mistakes quickly without manually re-entering data or commands.

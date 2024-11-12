@@ -42,7 +42,6 @@ public class EditCommand extends Command {
             + "by the studentId assigned to the corresponding student. \n"
             + "    Existing values will be overwritten by the input values.\n"
             + "    Parameters: ID "
-            + "[ID] "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
