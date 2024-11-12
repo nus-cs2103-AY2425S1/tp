@@ -1,0 +1,9 @@
+{
+  "clients": [ {
+    "name": "Hans Muster",
+    "company": "Apple Co.",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "address": "4th street"
+  } ]
+}

@@ -31,9 +31,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ClientListPanel clientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private TransactionListPanel transactionListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +43,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane clientListPanelPlaceholder;
+
+    @FXML
+    private StackPane transactionListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +114,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        clientListPanel = new ClientListPanel(logic.getFilteredClientList());
+        clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
+
+        transactionListPanelPlaceholder.setVisible(false);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -163,8 +169,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ClientListPanel getClientListPanel() {
+        return clientListPanel;
     }
 
     /**
@@ -177,6 +183,23 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (logic.isViewTransactions()) {
+                clientListPanelPlaceholder.setVisible(false);
+                clientListPanelPlaceholder.setManaged(false);
+
+                transactionListPanel = new TransactionListPanel(logic.getFilteredTransactionList());
+                transactionListPanelPlaceholder.getChildren().clear();
+                transactionListPanelPlaceholder.getChildren().add(transactionListPanel.getRoot());
+
+                transactionListPanelPlaceholder.setVisible(true);
+                transactionListPanelPlaceholder.setManaged(true);
+            } else {
+                transactionListPanelPlaceholder.setVisible(false);
+                transactionListPanelPlaceholder.setManaged(false);
+                clientListPanelPlaceholder.setVisible(true);
+                clientListPanelPlaceholder.setManaged(true);
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

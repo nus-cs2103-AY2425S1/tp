@@ -1,18 +1,30 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.DateTimeUtil.DEFAULT_MONTH_FORMATTER;
+import static seedu.address.logic.Messages.MESSAGE_AMOUNT_OUT_OF_RANGE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.Company;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.Transaction;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,6 +33,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final Logger logger = LogsCenter.getLogger(ParserUtil.class);
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -48,6 +61,21 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String company} into a {@code Company}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code company} is invalid.
+     */
+    public static Company parseCompany(String company) throws ParseException {
+        requireNonNull(company);
+        String trimmedCompany = company.trim();
+        if (!Company.isValidCompany(trimmedCompany)) {
+            throw new ParseException(Company.MESSAGE_CONSTRAINTS);
+        }
+        return new Company(trimmedCompany);
     }
 
     /**
@@ -120,5 +148,82 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String amount} into a {@code Double}.
+     *
+     * @throws ParseException If the given {@code amount} is invalid.
+     */
+    public static Double parseAmount(String amountStr) throws ParseException {
+        requireNonNull(amountStr);
+        String trimmedAmount = amountStr.trim();
+        Double amount;
+
+        if (!Transaction.isValidAmount(trimmedAmount)) {
+            logger.fine("ParseException caused by invalid amount.");
+            throw new ParseException(Transaction.MESSAGE_CONSTRAINTS);
+        }
+
+        try {
+            amount = Double.parseDouble(trimmedAmount);
+        } catch (NumberFormatException e) {
+            logger.fine("ParseException caused by invalid amount or incorrect amount format.");
+            throw new ParseException(Messages.MESSAGE_INVALID_AMOUNT);
+        }
+
+        verifyAmountIsWithinRange(amount);
+
+        return amount;
+    }
+
+    /**
+     * Throws a {@code ParseException} If the amount is out of range.
+     */
+    public static void verifyAmountIsWithinRange(double amount) throws ParseException {
+        double minAmount = -1000000000;
+        double maxAmount = 1000000000;
+
+        if (amount < minAmount || amount > maxAmount) {
+            logger.fine("ParseException caused by amount out of range.");
+            throw new ParseException(MESSAGE_AMOUNT_OUT_OF_RANGE);
+        }
+
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     *
+     * @throws ParseException If the given {@code date} is invalid.
+     */
+    public static LocalDate parseDate(String dateStr) throws ParseException {
+        requireNonNull(dateStr);
+        String trimmedDate = dateStr.trim();
+        LocalDate date;
+        try {
+            date = LocalDate.parse(trimmedDate, DateTimeUtil.DEFAULT_DATE_PARSER);
+        } catch (DateTimeParseException e) {
+            logger.fine("ParseException caused by invalid date or incorrect date format.");
+            throw new ParseException(String.format(MESSAGE_INVALID_DATE_FORMAT), e);
+        }
+        return date;
+    }
+
+    /**
+     * Parses a {@code String yearMonthStr} into a {@code YearMonth}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code yearMonthStr} is invalid.
+     */
+    public static YearMonth parseYearMonth(String yearMonthStr) throws ParseException {
+        requireNonNull(yearMonthStr);
+        String trimmedYearMonth = yearMonthStr.trim();
+        YearMonth yearMonth;
+        try {
+            yearMonth = YearMonth.parse(trimmedYearMonth, DEFAULT_MONTH_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_MONTH_FORMAT);
+        }
+        return yearMonth;
     }
 }
