@@ -1077,7 +1077,7 @@ Use case ends.
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Admin**: Admin at the tuition center who is in charge of all administrative processes
-* **System**: The Eduvault application
+* **System**: The EduVault application
 * **Student**: Current students who attend the tuition centre
 
 
