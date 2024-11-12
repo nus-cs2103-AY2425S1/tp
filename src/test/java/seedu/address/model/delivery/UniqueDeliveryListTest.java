@@ -32,19 +32,19 @@ public class UniqueDeliveryListTest {
 
     @Test
     public void contains_deliveryInList_returnsTrue() {
-        uniqueDeliveryList.add(BREAD);
+        uniqueDeliveryList.addDelivery(BREAD);
         assertTrue(uniqueDeliveryList.contains(BREAD));
     }
 
     @Test
     public void add_nullSupplier_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueDeliveryList.add(null));
+        assertThrows(NullPointerException.class, () -> uniqueDeliveryList.addDelivery(null));
     }
 
     @Test
     public void add_duplicateDelivery_throwsDuplicateDeliveryException() {
-        uniqueDeliveryList.add(APPLE);
-        assertThrows(DuplicateDeliveryException.class, () -> uniqueDeliveryList.add(APPLE));
+        uniqueDeliveryList.addDelivery(APPLE);
+        assertThrows(DuplicateDeliveryException.class, () -> uniqueDeliveryList.addDelivery(APPLE));
     }
 
     @Test
@@ -64,36 +64,36 @@ public class UniqueDeliveryListTest {
 
     @Test
     public void setDelivery_editedDeliveryIsSameDelivery_success() {
-        uniqueDeliveryList.add(APPLE);
+        uniqueDeliveryList.addDelivery(APPLE);
         uniqueDeliveryList.setDelivery(APPLE, APPLE);
         UniqueDeliveryList expectedUniqueDeliveryList = new UniqueDeliveryList();
-        expectedUniqueDeliveryList.add(APPLE);
+        expectedUniqueDeliveryList.addDelivery(APPLE);
         assertEquals(expectedUniqueDeliveryList, uniqueDeliveryList);
     }
 
     @Test
     public void setDelivery_editedDeliveryHasDifferentIdentity_success() {
-        uniqueDeliveryList.add(APPLE);
+        uniqueDeliveryList.addDelivery(APPLE);
         uniqueDeliveryList.setDelivery(APPLE, BREAD);
         UniqueDeliveryList expectedUniqueDeliveryList = new UniqueDeliveryList();
-        expectedUniqueDeliveryList.add(BREAD);
+        expectedUniqueDeliveryList.addDelivery(BREAD);
         assertEquals(expectedUniqueDeliveryList, uniqueDeliveryList);
     }
 
     @Test
     public void remove_nullDelivery_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueDeliveryList.remove(null));
+        assertThrows(NullPointerException.class, () -> uniqueDeliveryList.removeDelivery(null));
     }
 
     @Test
     public void remove_deliveryDoesNotExist_throwsDeliveryNotFoundException() {
-        assertThrows(DeliveryNotFoundException.class, () -> uniqueDeliveryList.remove(APPLE));
+        assertThrows(DeliveryNotFoundException.class, () -> uniqueDeliveryList.removeDelivery(APPLE));
     }
 
     @Test
     public void remove_existingDelivery_removesDelivery() {
-        uniqueDeliveryList.add(APPLE);
-        uniqueDeliveryList.remove(APPLE);
+        uniqueDeliveryList.addDelivery(APPLE);
+        uniqueDeliveryList.removeDelivery(APPLE);
         UniqueDeliveryList expectedUniqueDeliveryList = new UniqueDeliveryList();
         assertEquals(expectedUniqueDeliveryList, uniqueDeliveryList);
     }
@@ -105,9 +105,9 @@ public class UniqueDeliveryListTest {
 
     @Test
     public void setDeliveries_uniqueDeliveryList_replacesOwnListWithProvidedUniqueDeliveryList() {
-        uniqueDeliveryList.add(APPLE);
+        uniqueDeliveryList.addDelivery(APPLE);
         UniqueDeliveryList expectedUniqueDeliveryList = new UniqueDeliveryList();
-        expectedUniqueDeliveryList.add(BREAD);
+        expectedUniqueDeliveryList.addDelivery(BREAD);
         uniqueDeliveryList.setDeliveries(expectedUniqueDeliveryList);
         assertEquals(expectedUniqueDeliveryList, uniqueDeliveryList);
     }
@@ -119,11 +119,11 @@ public class UniqueDeliveryListTest {
 
     @Test
     public void setDeliveries_list_replacesOwnListWithProvidedList() {
-        uniqueDeliveryList.add(APPLE);
+        uniqueDeliveryList.addDelivery(APPLE);
         List<Delivery> deliveryList = Collections.singletonList(BREAD);
         uniqueDeliveryList.setDeliveries(deliveryList);
         UniqueDeliveryList expectedUniqueDeliveryList = new UniqueDeliveryList();
-        expectedUniqueDeliveryList.add(BREAD);
+        expectedUniqueDeliveryList.addDelivery(BREAD);
         assertEquals(expectedUniqueDeliveryList, uniqueDeliveryList);
     }
 

@@ -15,7 +15,7 @@ public class Cost {
     // are valid
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
 
-    public final String value;
+    private final String value;
 
     /**
      * Constructs a {@code Cost}.
@@ -43,6 +43,10 @@ public class Cost {
 
     public String displayString() {
         return "$" + value;
+    }
+
+    public String getCost() {
+        return this.value;
     }
 
     @Override

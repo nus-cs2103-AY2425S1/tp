@@ -183,9 +183,11 @@ public class ParserUtil {
     public static DateTime parseDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         String trimmedDateTime = dateTime.trim();
+
         if (!DateTime.isValidTime(trimmedDateTime)) {
             throw new ParseException(DateTime.MESSAGE_CONSTRAINTS);
         }
+
         return new DateTime(trimmedDateTime);
     }
 

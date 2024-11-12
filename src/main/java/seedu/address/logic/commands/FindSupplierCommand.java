@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.supplier.Supplier;
 
 /**
- * Finds and lists all suppliers in vendor whose name contains any of the argument keywords.
+ * Finds and lists all suppliers in VendorVault whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindSupplierCommand extends FindCommand {
@@ -39,8 +39,6 @@ public class FindSupplierCommand extends FindCommand {
      * Constructs a {@code FindSupplierCommand} with the specified list of predicates.
      *
      * @param listOfPredicates a list of predicates used to filter suppliers.
-     *                         Each predicate corresponds to a specific criterion
-     *                         (e.g., name, company, product).
      */
     public FindSupplierCommand(List<Predicate<Supplier>> listOfPredicates) {
         requireNonNull(listOfPredicates);

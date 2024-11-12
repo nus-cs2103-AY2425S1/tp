@@ -54,8 +54,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the contents of the delivery list with {@code deliveries}.
      * {@code deliveries} must not contain duplicate deliveries.
+     *
+     *  @param deliveries The list of {@code Delivery} objects to replace the current list of deliveries.
      */
-    public void setDeliveries(List<Delivery> deliveries) {
+    public void setDeliveriesInAddressBook(List<Delivery> deliveries) {
         this.deliveries.setDeliveries(deliveries);
     }
 
@@ -64,26 +66,31 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setDeliveries(newData.getDeliveryList());
+        setDeliveriesInAddressBook(newData.getDeliveryList());
         setSuppliers(newData.getSupplierList());
     }
 
     //// delivery-level operations
 
     /**
-     * Returns true if a delivery with the same identity as {@code delivery} exists in the address book.
+     * Returns true if a delivery with the same identity as {@code Delivery} exists in the address book.
+     *
+     * @param delivery The {@code Delivery} to check for in the address book, it must not be null
+     * @return True if the delivery exists in the address book
      */
-    public boolean hasDelivery(Delivery delivery) {
+    public boolean hasDeliveryInAddressBook(Delivery delivery) {
         requireNonNull(delivery);
         return deliveries.contains(delivery);
     }
 
     /**
      * Adds a delivery to the address book.
-     * The delivery must not already exist in the address book.
+     * The delivery must not already exist in the address book
+     *
+     * @param delivery The {@code Delivery} to add to the address book. Must not be {@code null}.
      */
-    public void addDelivery(Delivery d) {
-        deliveries.add(d);
+    public void addDeliveryToAddressBook(Delivery delivery) {
+        deliveries.addDelivery(delivery);
     }
 
 
@@ -91,8 +98,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from the delivery list in the {@code AddressBook}.
      * {@code key} must exist in the delivery list of the address book.
      */
-    public void removeDelivery(Delivery key) {
-        deliveries.remove(key);
+    public void removeDeliveryFromAddressBook(Delivery key) {
+        deliveries.removeDelivery(key);
     }
 
     /**

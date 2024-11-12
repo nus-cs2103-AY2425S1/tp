@@ -38,6 +38,14 @@ public class CostTest {
         assertTrue(Cost.isValidCost("100"));
         assertTrue(Cost.isValidCost("100.00"));
         assertTrue(Cost.isValidCost("0.99"));
+
+        //Boundary Testing
+        assertTrue(Cost.isValidCost("0.01"));
+        assertTrue(Cost.isValidCost("999999.99"));
+        assertTrue(Cost.isValidCost("999.99"));
+        assertFalse(Cost.isValidCost("999.999"));
+        assertFalse(Cost.isValidCost("0"));
+
     }
 
     @Test

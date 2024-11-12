@@ -12,8 +12,8 @@ public class DeliverySortCostComparator extends DeliverySortComparator {
 
     @Override
     public int compare(Delivery delivery1, Delivery delivery2) {
-        double delivery1Cost = Double.parseDouble(delivery1.getDeliveryCost().value);
-        double delivery2Cost = Double.parseDouble(delivery2.getDeliveryCost().value);
+        double delivery1Cost = Double.parseDouble(delivery1.getDeliveryCost().getCost());
+        double delivery2Cost = Double.parseDouble(delivery2.getDeliveryCost().getCost());
         if (super.getIsSortByAscending()) {
             return Double.compare(delivery1Cost, delivery2Cost);
         } else {
