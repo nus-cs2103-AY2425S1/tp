@@ -118,8 +118,6 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`]&#40;https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java&#41;
-
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
