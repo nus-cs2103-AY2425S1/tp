@@ -192,6 +192,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+---
+
 ### Add contacts
 
 **Overview**
@@ -220,6 +222,8 @@ Note: While the diagram shows the lifeline of objects even after their deletion,
 2. KonTActs will create a contact of Tom with the given details before adding it to the contact list.
 3. The contact is then displayed in the UI, along with a success message.
 
+---
+
 ### Add Grade implementation
 
 **Logic**: 
@@ -236,6 +240,8 @@ This is illustrated in the activity diagram below:
 * addGrade checks whether the assignment exists in the database, if the score is valid and if the person exists in the contacts.
 * If the conditions are satisfied, the assignment is added to the `HashMap` in the person object which stores all the added assignments of that person.
 
+---
+
 ### MarkCommand
 
 <puml src="diagrams/MarkCommandActivityDiagram.puml" width="750" />
@@ -250,6 +256,25 @@ This is illustrated in the activity diagram below:
 1. User inputs the command "mark n/John Doe w/1".
 2. KonTActs will set the week 1 attendance for John Doe to be true.
 3. The update is then displayed in the UI, along with a success message.
+
+---
+
+### Export Command implementation
+**API** [`Export.java`](https://github.com/AY2425S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/storage/Export.java)
+
+The `ExportCommand` is used by KonTActs to allow users to export contact data as a CSV file that can be
+easily shared or imported. The ExportCommand operates on the existing list of contacts and
+exports them to the specified file location.
+
+- The command validates the file path and handle any errors during the export process.
+- Error message will be displayed if any errors are encountered.
+- ExportCommand retrieves all contact data from KonTActs and formats the data it into a CSV file.
+- After the export is completed (file is saved at desired location), a confirmation message will be displayed.
+
+A visual representation is shown below of how a typical user might use the `ExportCommand`,
+
+
+<puml src="diagrams/Export.puml" width="550"></puml>
 
 ---
 
@@ -284,6 +309,7 @@ A visual representation is shown below of how a typical user might use the `Comm
 </center>
 
 {{ newPage }}
+
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 

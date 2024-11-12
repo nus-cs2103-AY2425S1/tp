@@ -1,0 +1,11 @@
+@startuml
+start
+:User executes Export Command;
+if () then ([File Path is valid and user\n have write permission])
+    :Information of current contacts in \nKontacts exported as CSV file to\ndesired location.;
+    :Export Command returns a message \nindicating successful import.;
+else ([else])
+:Export Command returns an error message to the user.;
+endif
+stop
+@enduml
