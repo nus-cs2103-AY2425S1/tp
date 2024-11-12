@@ -394,8 +394,8 @@ Step 2. The `import` command locates the save file via the file path and reads t
 </box>
 
 The following sequence diagram shows how an `import fp/./data/SaveFile3.json` command goes through the `Logic` component:
-<puml src="diagrams/ImportSequenceDiagram.puml"
-alt="ImportSequenceDiagram" />
+
+<puml src="diagrams/ImportSequenceDiagram.puml" alt="ImportSequenceDiagram" />
 
 <box type="info" seamless>
 
