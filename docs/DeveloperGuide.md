@@ -496,21 +496,20 @@ Those without any stars are user stories that were considered but will not be im
 |  `* *`   | first-time user           | see some sample contacts already available in the app                                                                | I can try out the different features without needing to add my own data (e.g allocating people to wedding, allocating task to contacts).                            |
 |  `* *`   | careless, first-time user | reload the sample contacts into the app                                                                              | I can continue trying out different features without needing to add my own data in case I accidentally cleared the contacts.                                        |
 |  `* *`   | first-time user           | see a help message linking to a guide on the features and how the features can be used                               | I can easily try out all the different features with correct formats by referring to the linked guide.                                                              |
-|  `* *`   | lazy user                 | want to use command keyword shortcuts                                                                                | I can quickly use commands without needing to type the full command word.                                                                                           |
-|  `* *`   | lazy user                 | want to bypass certain restrains of the command                                                                      | I can quickly use commands to bypass controls in a safe manner.                                                                                                     |
+|  `* *`   | lazy user                 | want to use shortcuts for the existing commands                                                                      | I can quickly access features without needing to type the full command word.                                                                                        |
+|  `* *`   | lazy user                 | want to bypass certain restraints on commands                                                                        | I can quickly access features while bypassing controls in a safe manner.                                                                                            |
 |  `* *`   | user                      | assign tasks to certain contacts                                                                                     | I can track which tasks have been assigned to each contact.                                                                                                         |
 |  `* *`   | user                      | update the status of tasks of contacts                                                                               | I can track whether tasks have been completed or not.                                                                                                               |
 |  `* *`   | busy user                 | add multiple wedding events                                                                                          | I can track contacts for multiple weddings at once.                                                                                                                 |
 |  `* *`   | busy user                 | assign each contact to a wedding                                                                                     | I can easily see which contacts are relevant to each wedding.                                                                                                       |
 |  `* *`   | user                      | assign dates to a wedding                                                                                            | I can keep track of when different weddings are scheduled.                                                                                                          |
-|  `* *`   | user                      | filter contacts by wedding                                                                                           | I can keep track of which contacts are relevant for each wedding.                                                                                                   |
-|   `*`    | user                      | add a tag to each guest indicating their table number                                                                | track the table each guest is seated at.                                                                                                                            |
 |   `*`    | forgetful user            | create links between different contacts, such as assigning a vendor to a bride or groom in a wedding                 | I can easily navigate from key stakeholders in the wedding that I remember better to vendors who I might not remember as well.                                      |
-|   `*`    | user                      | exclude tags from search and filter                                                                                  | I can focus on contacts that are relevant to certain events or requirements without being overwhelmed by unnecessary information.                                   |
 |   `*`    | user                      | re-assign tasks to another contact                                                                                   | I can account for vendors suddenly being unavailable.                                                                                                               |
 |   `*`    | user                      | store multiple contact methods                                                                                       | I can contact the vendors through different means.                                                                                                                  |
+|          | user                      | exclude tags from search and filter                                                                                  | I can focus on contacts that are relevant to certain events or requirements without being overwhelmed by unnecessary information.                                   |
+|          | user                      | add a tag to each guest indicating their table number                                                                | I can track the table each guest is seated at.                                                                                                                      |
 |          | user                      | assign a rating out of 5 to each vendor                                                                              | I can track the experience with this vendor for future reference.                                                                                                   | 
-|          | user                      | send out (standardised formatted) information (text/email) from the application                                      | I can efficiently send out information without any mistakes.                                                                                                        |
+|          | user                      | send out information in standardised formatting by text or email from the application                                | I can efficiently send out information without any mistakes.                                                                                                        |
 |          | user                      | share the contact details to relevant third-parties for bookings (eg: venue bookings, suit/dress rental, etc.)       | I can easily send out all relevant information (including dietary restriction, and other tags) to all the third-parties.                                            | 
 |          | busy user                 | autocomplete existing tags when user is inputting tag information                                                    | I can quickly assign roles for people that might be working with others I have already input into the system and not have to type the same roles in multiple times. |
 |          | user                      | assign availability to vendors                                                                                       | I can check who will be available for a particular wedding.                                                                                                         |
@@ -519,7 +518,7 @@ Those without any stars are user stories that were considered but will not be im
 |          | user                      | see a list of all tasks and reminders I have assigned to contacts in its own window                                  | I can quickly and easily see what my earliest priorities are and act on them quickly.                                                                               |
 |          | user                      | see a calendar view of tasks, reminders, and weddings I have assigned                                                | I can see the whole timelines of my planned weddings and see how much time there is between tasks.                                                                  |
 |          | user                      | set privacy setting for different contacts                                                                           | I can keep personal and sensitive information private when sharing address book.                                                                                    |
-|          | careless user             | receive a prompt that requires me to key in a confirmation that I want to delete a contact or clear the address book | I will not lose all my contacts when I accidentally type delete/ clear.                                                                                             |
+|          | careless user             | receive a prompt that requires me to key in a confirmation that I want to delete a contact or clear the address book | I can avoid losing all my contacts when I accidentally type delete/ clear.                                                                                          |
 |          | user                      | add certain vendors as favorites                                                                                     | I can remember which vendors performed well and see if they are favorites.                                                                                          |
 |          | user                      | access a list of all my favorite vendors                                                                             | I can easily check who the best vendors were that I previously engaged with.                                                                                        |
 |          | user                      | generate a checklist of all the contacts for a particular wedding, grouped by roles                                  | I can keep track of who is meant to be present at the wedding.                                                                                                      |
@@ -1402,7 +1401,7 @@ applied to edited data, but specific expected results will differ. <br>
 
 <br>
 
-#### Unssigning vendors
+#### Unassigning vendors
 
 <box type="info" seamless>
 
@@ -1686,36 +1685,44 @@ Based on the current implementation of WedLinker, there are known bugs and limit
 feature freeze. The plans to improve our features are as follows: 
 
 1. **Resolve name overflow for Tags and Weddings**: Currently, there is a small GUI bug that occurs when the names of Tags and Weddings are excessively long, causing them to overflow, which causes cosmetic flaws.
-The planned enhancement would be to truncate the name with an ellipses `...`.
+The **planned enhancement** would be to truncate the name with an ellipses `...`, particularly by limiting the children of the list panels (e.g., the left pane that shows the list of People is a list panel) to adhere
+to the width restrictions of the parent.
 
 2. **Duplicate validation for Person, Wedding, Task and Tag entities**: Currently, there is a duplicate validation bug that allows the creation of certain "duplicate" Person, Wedding, Task and Tag objects.
 For example, "John Doe" and "John  Doe" (the same name but with an extra space), are not recognised as duplicates in WedLinker although they are likely to refer to the same entity in the real world.
-The planned enhancement would be to update the parser to normalise input by stripping all extra whitespace, leaving only a single space between keywords, before creating the respective command objects.
+The **planned enhancement** would be to update the parser to normalise input by stripping all extra whitespace, leaving only a single space between keywords, before creating the respective command objects.
 This will ensure that entries with excessive spaces are treated as duplicates where appropriate.
 
 3. **Vendor validation for when unassiging Tasks from Person**: Currently, there is a missing validation in `unassign-task` command that negates the check of whether a Person is a Vendor, resulting 
 in an incorrect error message to be shown. When a user tries to execute the `unassign-task` command on a Person who is not a Vendor and thus cannot even have tasks assigned to it, 
 the error message indicates that there are no tasks in the person's list, rather than indicating that the person is not a Vendor.
 However, there is no functionality flaw and the application runs as intended.
-The planned enhancements would be to add validation to ensure the target person is a Vendor and show a more indicative error
+The **planned enhancements** would be to add validation to ensure the target person is a Vendor and show a more indicative error
 message.
 
 4. **Make `unassign-wedding` case-insensitive**: The `unassign-wedding PERSON_INDEX w/WEDDING_NAME` command is case-sensitive for the `WEDDING_NAME`. This means that the command will only unassign a Wedding if the case of the `WEDDING_NAME` exactly matches case of the word as stored in WedLinker.
 This limits the speed with which users can use the application, and does not 
 align with the case sensitivity defined for Weddings in the `Wedding::isSameWedding(Wedding)` function, nor does it reflect real-world case-sensitivity of wedding names.
-The planned enhancement would be to ensure that when unassigning weddings, case is ignored and the `Wedding::isSameWedding(Wedding)` function is used
+The **planned enhancement** would be to ensure that when unassigning weddings, case is ignored and the `Wedding::isSameWedding(Wedding)` function is used
 to check for ensure proper matching of Wedding regardless of case.
 
 5. **Make `untag` case-insensitive**: The `untag PERSON_INDEX t/TAG_NAME` command is case-sensitive for the `TAG_NAME`.
 This means that the command will only untag a Tag if the case of the `TAG_NAME` exactly matches case of the word as stored in WedLinker.
 This limits the speed with which users can use the application and does not
 align with the case sensitivity defined for Tag in the `Tag::isSameTag(Tag)` function, nor does it reflect real-world case-sensitivity of tag names.
-The planned enhancement would be to ensure that when untagging Person objects, case is ignored and the `Tag::isSameTag(Tag)` function is used
+The **planned enhancement** would be to ensure that when untagging Person objects, case is ignored and the `Tag::isSameTag(Tag)` function is used
 to check for ensure proper matching of Tag regardless of case.
 
 6. **Allow searching contacts with blank fields**: Currently, the `find` command does not support searching for contacts with blank field values.
 For example, using the command `find a/`, where the address field is empty, will display an error on the GUI telling the user that the field to be searched cannot be empty. 
 However, contacts can currently be added with all fields, other from name, blank. Thus, there may be valid cases where users want to search for contacts with certain blank fields. 
-The planned enhancement would be to modify the `find` command to allow users to search for contacts with blank fields.
+The **planned enhancement** would be to modify the `find` command to allow users to search for contacts with blank fields.
 When no keywords are provided after a prefix (e.g., `find a/`), the application should return a list of contacts where the corresponding field is blank.
+
+7. **Allow processing of multiple partner tags for `assign-wedding`**: The `assign-wedding` command accepts the parameters `w/WEDDING_NAME [p1/] [p2/]`, where the partner tags
+optionally assign the person being assigned as a partner for the wedding specified by `WEDDING_NAME`. Currently, if multiple partner tags are entered, regardless of their order,
+the person is assigned as the first partner in the given wedding. However, users might want to be notified of a mistake they are making in assigning a partner for a wedding
+if they accidentally include both tags, especially as this might overwrite an existing partner for the wedding.
+The **planned enhancement** would be to add processing that checks for two partner tags and either considers the orders of the tag (and assigns the person as whichever partner tag is specified
+first), or that signals an error to the user in the command they enter.
 
