@@ -652,11 +652,11 @@ testers are expected to do more *exploratory* testing.
 
 Team size: 5
 
-1. Overload `listt` to not take in an index in transaction list view, to view the whole transactions list for the selected client.
+1. Overload `listt` to not take in an index in transaction list view, to view the whole transactions list for the selected client. Currently, `listt INDEX` can only be used in the client list view, and will display the transaction list view. This is inconvenient when the user wants to stay in the transaction list and still want to view the full list, perhaps after searching for some transactions (because he/she would have to return to the client list using `list`, then `listt INDEX` to get back to the transaction list in full. Future implementation allows `listt INDEX` to operate as currently, but also accept `listt` without `INDEX` to work in the transaction list view and show the full transaction list of the current client.
 
-2. Improve `find` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)).
+2. Improve `find` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)). Existing implementation strictly searches for full word, case-insensitively. Future implementation uses regex to allow far more flexible searching, such as `(?i)^cla.*r.*ce$` to match all strings starting with `cla`, containing `r` somewhere in the middle, ending with `ce`, case-insensitively (so it might match `Clarance`, `clairice`, `Clarice`, etc.)
 
-3. Improve `findt` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)).
+3. Improve `findt` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)). Existing implementation strictly searches for full word, case-insensitively. Future implementation uses regex to allow far more flexible searching, such as `(?i)^cla.*r.*ce$` to match all strings starting with `cla`, containing `r` somewhere in the middle, ending with `ce`, case-insensitively (so it might match `Clarance`, `clairice`, `Clarice`, etc.)
 
 4. Improve `find` to take in additional logic info to specify what fields to search for. Existing implementation searches for name OR company. Future enhancement will allow user to specify the search with greater granularity e.g company OR address, (name AND email AND company) OR tags, etc.
 
