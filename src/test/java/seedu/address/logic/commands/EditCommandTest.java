@@ -25,8 +25,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -47,6 +49,12 @@ public class EditCommandTest {
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+        Student editedStudent = new StudentBuilder().build();
+        Model expectedModel2 = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel2.setPerson(model.getFilteredPersonList().get(0), editedStudent);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel2);
+
     }
 
     @Test

@@ -19,8 +19,14 @@ public class UiManager implements Ui {
 
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
+    public static final String LOG_STARTING_UI = "Starting UI...";
+    public static final String LOG_FATAL_ERROR_DURING_INITIALIZING = "Fatal error during initializing";
+
+    public static final String PATH_VIEW_CHER_LIGHT_THEME_CSS = "view/CherLightTheme.css";
+
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+
+    private static final String ICON_APPLICATION = "/images/cher_icon.png";
 
     private Logic logic;
     private MainWindow mainWindow;
@@ -34,7 +40,7 @@ public class UiManager implements Ui {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting UI...");
+        logger.info(LOG_STARTING_UI);
 
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
@@ -46,7 +52,7 @@ public class UiManager implements Ui {
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
-            showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
+            showFatalErrorDialogAndShutdown(LOG_FATAL_ERROR_DURING_INITIALIZING, e);
         }
     }
 
@@ -65,7 +71,7 @@ public class UiManager implements Ui {
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
                                                String contentText) {
         final Alert alert = new Alert(type);
-        alert.getDialogPane().getStylesheets().add("view/DarkTheme.css");
+        alert.getDialogPane().getStylesheets().add(PATH_VIEW_CHER_LIGHT_THEME_CSS);
         alert.initOwner(owner);
         alert.setTitle(title);
         alert.setHeaderText(headerText);

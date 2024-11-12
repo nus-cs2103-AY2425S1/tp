@@ -8,9 +8,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -31,6 +32,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label sex;
+    @FXML
+    private Label role;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
@@ -41,6 +46,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    @FXML
+    private Label attendance;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -49,9 +57,21 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        String rawSex = person.getSex().sexName;
+        String captializedSex = rawSex.toUpperCase();
+        sex.setText(captializedSex);
+        String rawRole = person.getRole().roleName;
+        String capitalizedRole = rawRole.substring(0, 1).toUpperCase() + rawRole.substring(1);
+        role.setText(capitalizedRole);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        if (person instanceof Student) {
+            Student student = (Student) person;
+            attendance.setText("Attendance: " + student.getAttendanceCount().toString());
+        } else {
+            attendance.setText("");
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

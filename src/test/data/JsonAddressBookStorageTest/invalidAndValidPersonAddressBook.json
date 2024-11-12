@@ -1,13 +1,19 @@
 {
   "persons": [ {
     "name": "Valid Person",
+    "sex": "F",
+    "role": "student",
     "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "attendanceCount": "3"
   }, {
     "name": "Person With Invalid Phone Field",
+    "sex": "M",
+    "role": "parent",
     "phone": "948asdf2424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "attendanceCount": "NA"
   } ]
 }
