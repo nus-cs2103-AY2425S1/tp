@@ -533,7 +533,7 @@ New UI Arriving Soon!
 1. **Search by Sub-Strings**  
 Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow you to search for sub-strings within names.
 
-2. **Force execution of commands that require confirmation**  
+2. **Force execution of commands that require confirmation**
 To bypass confirmation for commands like `add`, `edit`, `delete` and `clear`, we plan to add a flag that allows you to force the execution of these commands.
 
 3. **Individual session logs can be viewed in detail via a command**
@@ -543,8 +543,10 @@ Currently, you have to either use your mouse to click on individual logs to view
 Currently we only support convenient import and export from our app. We plan to use CSV files for better compatibility with other software programs.
 
 5. **Removal of Appointment date**
-   The appointment date field will be removed, as future commands will automatically tag session logs with the current date and time from the device, improving logging efficiency and eliminating the need for manual entry.
+The appointment date field will be removed, as future commands will automatically tag session logs with the current date and time from the device, improving logging efficiency and eliminating the need for manual entry.
 
 6. **Implementation of Edit and Delete Log Commands**
-   As we enhance the tracking of changes in session logs, our goal is to ensure full compliance with the code of conduct required by medical applications. We will only introduce edit and delete log commands once we are certain that they meet all necessary regulatory standards.
+As we enhance the tracking of changes in session logs, our goal is to ensure full compliance with the code of conduct required by medical applications. We will only introduce edit and delete log commands once we are certain that they meet all necessary regulatory standards.
 
+7. **Support for special characters in names**
+We plan to support special characters in names, such as hyphens, apostrophes and slashes, to ensure that all names are accurately represented in the application.
