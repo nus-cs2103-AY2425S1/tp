@@ -88,7 +88,7 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
       - [Install Java on Windows](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-microsoft-windows-platforms.html)
       - [Install Java on Mac](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-macos.html)
     - <strong>[Note]</strong>: If you’re using an older version of Java, certain features might not work as expected. Updating to the latest version is recommended.
-2. **Download TalentSG**: Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-2/tp/releases/tag/v1.5).
+2. **Download TalentSG**: Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-2/tp/releases).
 ![downloadPage.png](images%2FdownloadPage.png)<strong>[Tip]</strong>: To avoid typing the full path every time, place the TalentSG.jar file in a frequently accessed folder or create an alias for it on your system.
    <br><br>
 3. **Set Up Home Folder**: Copy the `TalentSG.jar` file to the Desktop to launch.
