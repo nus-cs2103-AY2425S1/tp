@@ -4,6 +4,8 @@ title: Developer Guide
 ---
 
 ## Table of Contents
+
+- [Table of Contents](#table-of-contents)
 - [Acknowledgements](#acknowledgements)
 - [Setting up, getting started](#setting-up-getting-started)
 - [Design](#design)
@@ -22,7 +24,14 @@ title: Developer Guide
   - [Non-Functional Requirements](#non-functional-requirements)
   - [Glossary](#glossary)
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+  - [Launch and shutdown](#launch-and-shutdown)
+  - [Deleting an employee](#deleting-an-employee)
+  - [Other commands](#other-commands)
+  - [Saving data](#saving-data)
 - [Appendix: Effort](#appendix-effort)
+  - [Challenges and Difficulty](#challenges-and-difficulty)
+  - [Reuse](#reuse)
+  - [Achievements](#achievements)
 
 ---
 
@@ -31,7 +40,6 @@ title: Developer Guide
 - HRConnect is a brownfield project based on [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)).
 - Certain parts of `Project` and `Assignment` related features contain altered code from the original [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)).
 - Parts of the [User Guide](https://ay2425s1-cs2103t-t15-4.github.io/tp/UserGuide.html) and Developer Guide of HRConnect are based on those for the original [AddressBook Level-3](https://github.com/se-edu/addressbook-level3) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)).
-
 
 [Return to Top](#table-of-contents)
 
@@ -160,6 +168,7 @@ The `Model` component,
 - stores the address book data i.e., all `Employee` objects (which are contained in a `UniqueEmployeeList` object).
 - stores the currently 'selected' `Employee` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Employee>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+- stores a `CommandTextHistory` object that represents the user's command history.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list and a `Skill` list in the `AddressBook`, which `Employee` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Employee` needing their own `Tag` objects. Likewise, `AddressBook` only requires one `Skill` object per unique skill, instead of each `Employee` needing their own `Skill` objects.<br>
@@ -178,8 +187,8 @@ The `Model` component,
 
 The `Storage` component,
 
-- can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-- inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- can save the address book data, user preference data and command text history in JSON format, and read them back into corresponding objects.
+- inherits from both `AddressBookStorage`, `UserPrefStorage` and `CommandTextHistoryStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 [Return to Top](#table-of-contents)
@@ -209,7 +218,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 Team size: 5
 
 1. **Improve UI resizing:** Currently, with smaller window sizes (including default size of window on first startup), part of the UI can be cut off. We plan to improve UI dynamic resizing to support more window sizes.
-2. **Improve UI design:** The current UI is functional but lacking in aesthetics. We plan to redesign the UI to improve readability and reduce confusion for users. 
+2. **Improve UI design:** The current UI is functional but lacking in aesthetics. We plan to redesign the UI to improve readability and reduce confusion for users.
 3. **Clear all assignments feature:** We plan to add a `clearassignments` command which allows users to delete all assignments.
 4. **Make sample data more relevant:** Some of the example commands and sample data contain information that are not relevant to human resource management tasks. (For instance, some employees are tagged as 'friends', 'family', etc.) We plan to replace these with more fitting examples.
 5. **Allow users to specify other fields in `listprojectmembers`:** Currently, users can only specify project name, but this could result in project members from multiple projects with the same name being shown. We plan to improve this command by allowing users to specify fields such as project ID instead, such as `listprojectmembers pid/1`. Since project IDs uniquely identify a project, users will be able to see only project members from that project specified.
@@ -217,7 +226,7 @@ Team size: 5
 7. **Update UI after `assign`:** Currently, when users execute `listprojectmembers` and then execute `assign`, the Assignments panel may still continue to show the filtered list of assignments. We plan to clear existing filters after each `assign` command, so users can see the full list of assignments.
 8. **Allow users to specify both list index or ID for certain commands:** For some commands such as `delete`, the list index (position of the item in display list) is used. However, for other commands such as `assign`, ID is used. For flexibility and to reduce confusion, we plan to let users specify which to use through prefixes (`pid/`, `id/`, `li/`(list index) etc.)
 9. **Improve formatting of command success / error messages:** Certain success messages (such as that for the `assign` command) are too long / go off-screen and become hard to read. We plan to format these messages better to increase readability.
-10. **Better error message for employee / project / assignment IDs that are too large:** As IDs are currently stored as `int`, storing IDs with too large of a number (e.g. ten digits of '9') leads to overflow. However, the error message only reminds the user they should use numeric IDs. We plan to update the error message to mention the numerical limit to IDs. 
+10. **Better error message for employee / project / assignment IDs that are too large:** As IDs are currently stored as `int`, storing IDs with too large of a number (e.g. ten digits of '9') leads to overflow. However, the error message only reminds the user they should use numeric IDs. We plan to update the error message to mention the numerical limit to IDs.
 
 [Return to Top](#table-of-contents)
 
@@ -473,8 +482,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the .jar file and store it in an empty folder.
 
-   2.  Open a command terminal, use the command `cd [folder path]` to navigate into the folder you put the `.jar` file in, and use the command `java -jar HRConnect.jar` to run the application.
-       * Expected: Shows the GUI with a set of sample contacts, projects, and assignments. The window size may not be optimum.
+   2. Open a command terminal, use the command `cd [folder path]` to navigate into the folder you put the `.jar` file in, and use the command `java -jar HRConnect.jar` to run the application.
+      * Expected: Shows the GUI with a set of sample contacts, projects, and assignments. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -516,13 +525,13 @@ testers are expected to do more *exploratory* testing.
    1. With the app open or closed, find the data file in the folder you placed the .jar file, as `data/hrconnect.json`.
    2. Delete the file.
    3. If the app is not open, launch the app by double-clicking the jar file.
-   4. Create or delete any Employee, Project, or Assignment. 
+   4. Create or delete any Employee, Project, or Assignment.
       - Expected: A new data file is created at `data/hrconnect.json` containing the information in the app at the time.
 
 2. Transferring data
 
    1. Prerequisites: Make some changes to the sample data (so it is different from the default entries, e.g. `addproject`).
-   3. Copy the data folder at `data` (including `hrconnect.json` inside) into an empty folder.
+   2. Copy the data folder at `data` (including `hrconnect.json` inside) into an empty folder.
    3. Copy the .jar file into this same folder (not into `data`!).
    4. Run the .jar file.
       - Expected: The changes you made are still displayed in the app.
@@ -536,14 +545,16 @@ testers are expected to do more *exploratory* testing.
 HRConnect is based on the [AddressBook Level-3 (AB3)](https://github.com/se-edu/addressbook-level3) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html)).
 
 ### Challenges and Difficulty
-Both AB3 and HRConnect deal with their stored data as entities (`Person` for AB3, `Employee`, `Project` and `Assignment` for HRConnect).  
+
+Both AB3 and HRConnect deal with their stored data as entities (`Person` for AB3, `Employee`, `Project` and `Assignment` for HRConnect).
 
 However, HRConnect ended up as a significantly larger project due to the multiple entities involved (instead of only one). HRConnect also ended up more complicated in general due to the interactions between these entities. For instance, Assignment represents a link between an Employee and a Project, and we also had to deal with handling them in case of deletions to Employees or Projects.
 
 Integration was also a challenge at the start, mainly due to some members' unfamiliarity with GitHub and Git. There were a few merge conflicts that we were able to resolve. However, we were able to mitigate much of the pain points by splitting the work up into relatively defined portions.
 
 ### Reuse
-In the earlier stages of the project, some effort was saved by reusing certain parts of AB3 code. For instance, the code for adding and deleting projects was a heavily modified version of the original AB3 commands. 
+
+In the earlier stages of the project, some effort was saved by reusing certain parts of AB3 code. For instance, the code for adding and deleting projects was a heavily modified version of the original AB3 commands.
 
 Due to the increasing size of our project, we have since refactored certain parts (e.g. all three `list` commands) for better code structure.
 
@@ -551,7 +562,7 @@ Due to the increasing size of our project, we have since refactored certain part
 
 We had a clear and defined vision of the requirements and features from the start, which helped with executing the implementation (coding) portion of the project.
 
-We are happy to say we were able to match all of our milestones, even the earlier ones. 
+We are happy to say we were able to match all of our milestones, even the earlier ones.
 
 We were also able to achieve a high level of test coverage for each Pull Request, and our features are confirmed to work well for the average target user so far.
 
