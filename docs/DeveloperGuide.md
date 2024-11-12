@@ -31,6 +31,7 @@
    * [Use cases](#use-cases)
    * [Non-Functional Requirements](#non-functional-requirements)
    * [Glossary](#glossary)
+- [**Appendix: Effort**](#appendix-effort)
 - [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
 - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
    * [Launch and shutdown](#launch-and-shutdown)
@@ -51,7 +52,8 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -124,8 +126,8 @@ How command execution works:
 1. When the user types a command and presses Enter, the `CommandBox` retrieves the command text from the `TextField`.
 2. If the command is not empty, it is passed to the `CommandExecutor` for execution.
 3. Upon successful execution:
-   - The command is added to the `CommandHistory` for tracking previous commands
-   - The text field is cleared
+   - The command is added to the `CommandHistory` for tracking previous commands.
+   - The text field is cleared.
 4. If a `CommandException` or `ParseException` occurs:
    - The error style class is added to the text field to indicate error.
    - The command text will not be added to the `CommandHistory`.
@@ -355,20 +357,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​              | I want to …​                                                                                                                          | So that I can…​                                                                                                 |
 |---------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| `* * *` | new user             | add my students' contact details                                                                                                      | easily access and communicate with them or their guardians                                                      
+| `* * *` | new user             | add my students' contact details                                                                                                      | easily access and communicate with them or their guardians                                                      |
 | `* * *` | new user             | search for a student's name                                                                                                           | find relevant student(s) easily                                                                                 |
 | `* * *` | new user             | delete students' entries                                                                                                              | remove students that I am no longer teaching                                                                    |
-| `* * *` | new user             | easily access my tutoring schedule with each student                                                                                  | stay organised and manage my records more effectively                                                           
+| `* * *` | new user             | easily access my tutoring schedule with each student                                                                                  | stay organised and manage my records more effectively                                                           |
 | `* * *` | new user             | be automatically alerted if there are scheduling conflicts when adding a new student whose tuition time overlaps with another student | quickly adjust their schedule and avoid double-booking                                                          |
 | `* * *` | new user             | organise my students' contact details                                                                                                 | find my students' by certain categories easily                                                                  |
 | `* * *` | new user             | have an option to store the address of the students                                                                                   | easily go to the student's house if the tuition session is in person                                            |
 | `* * *` | impatient user       | be able to add a task within 15 seconds                                                                                               | use the app in a rush                                                                                           |
 | `* * *` | impatient user       | be able to load up the app with the main user interface within 1-2 seconds                                                            | use the app seamlessly                                                                                          |
 | `* * *` | intermediate user    | schedule classes that repeats every week                                                                                              | not  keep scheduling classes on the same day(s)                                                                 |
-| `* * *` | intermediate user    | filter the entries by teaching date, such as “today” or “tomorrow” or "next 3 days"                                                   | quickly view and manage the students I am teaching on specific days                                             |
+| `* * *` | intermediate user    | search the entries by teaching date, such as “monday” or “mon”                                                                        | quickly view and manage the students I am teaching on specific days                                             |
 | `* * *` | intermediate user    | be able to prevent duplicate student entries                                                                                          | avoid confusion when managing students with similar names                                                       |
 | `* * *` | expert user          | leave notes on a student's entry to track their learning progress                                                                     | monitor and adjust my teaching strategies effectively                                                           |
-| `* * *` | expert user          | be able to use keyboard shortcuts                                                                                                     | quickly add, delete and update students information                                                             ||           |                                            | leave notes on a student's entry to track their learning progress                             |                                                                      |
+| `* * *` | expert user          | be able to use keyboard shortcuts                                                                                                     | quickly add, delete and update students information                                                             |
 | `* *`   | new user             | have a guided tour or input guide                                                                                                     | know how to add students to the address book                                                                    |
 | `* *`   | new user             | clear all the app data quickly                                                                                                        | delete data that was used when experimenting with the app.                                                      |
 | `* *`   | new user             | customise my own style of formatting by choosing from a few different options                                                         | not  follow a single formatting option instructed by the product                                                |
@@ -403,36 +405,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User types keyword followed by student details into the textbox.
-2. Tuteez acknowledges that a new student has been added.
+1. User requests to add a student, entering relevant student details.
+2. System acknowledges that a new student has been added.
 3. Use case ends.
 
 **Extensions**
 
-* 2a. Tuteez detects an identical name.
+* 1a. System detects an identical name.
 
-    * 2a1. Tuteez rejects the new addition and show error message.
+    * 1a1. System rejects the new addition and informs user about the error.
 
-    Use case ends.
+    Use case resumes at step 1.
 
-* 2b. Tuteez detects clashing lesson.
+* 1b. System detects clashing lesson.
 
-    * 2b1. Tuteez rejects the new addition and show error message.
+    * 1b1. System rejects the new addition and informs user about the clashing lessons.
 
-    Use case ends.
+    Use case resumes at step 1.
+
+* 1c. The given command format is invalid.
+
+    * 1c1. System rejects the new addition and informs user about the invalid command format.
+
+  Use case resumes at step 1.
 
 
 **Use case: UC2 - List all students**
 
 **MSS**
 
-1. User types keyword.
-2. Tuteez displays a list of all students.
+1. User requests to list all students.
+2. System displays a list of all students.
 3. Use case ends.
 
 **Extensions**
 
-* 2a. The list of all students is empty.
+* 1a. The list of all students is empty.
 
     Use case ends.
 
@@ -441,130 +449,249 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list students.
-2.  Tuteez shows a list of students <u>(UC2)</u>.
-3.  User types keyword followed by delete index or name.
-4.  Tuteez deletes the person.
+2.  System shows a list of students <u>(UC2)</u>.
+3.  User requests to delete student using index or name.
+4.  System deletes the person.
 5.  Use case ends.
 
 
 **Extensions**
 
-* 3a. The given index is invalid.
+* 1a. The list is empty.
 
-  * 3a1. Tuteez shows an error message.
+  Use case ends.
 
-      Use case resumes at step 2.
+* 3a. The given student index is invalid.
+
+  * 3a1. System informs user of invalid student index.
+
+      Use case resumes at step 3.
   
 * 3b. The given name does not exist.
 
-  * 3b1. Tuteez shows an error message.
+  * 3b1. System informs user that student name is not found.
         
-      Use case resumes at step 2.
+      Use case resumes at step 3.
 
 **Use case: UC4 - Add a lesson to a student**
 
 **MSS**
 
 1. User requests to list students.
-1. Tuteez shows a list of students <u>(UC2)</u>.
-1. User types keyword followed by index of the student and then lesson day and time.
-1. Tuteez adds lesson to student.
+1. System shows a list of students <u>(UC2)</u>.
+1. User requests to add lesson, selecting student by index and entering lesson day and time.
+1. System adds lesson to student.
+1. Use case ends.
 
 **Extensions**
 
+* 1a. The list is empty.
+
+  Use case ends.
+
 * 3a. The lesson clashes with an existing lesson(s).
 
-   * 3a1. Tuteez shows error message with timings of the lessons that it clashes with.
+   * 3a1. System informs user of the clashing lesson(s).
 
-   Use case resumes at step 2.
+   Use case resumes at step 3.
 
-* 3b. The lesson has invalid day or times.
+* 3b. The lesson has invalid day or time.
 
-   * 3b1. Tuteez shows error message specifying the error.
+   * 3b1. System informs user of invalid day or time.
 
-   Use case resumes at step 2.
+   Use case resumes at step 3.
 
-* 3c. The given index is invalid.
+* 3c. The given command format is invalid.
 
-   * 3c1. Tuteez shows an error message.
+    * 3c1. System informs user of invalid command format.
 
-   Use case resumes at step 2.
+    Use case resumes at step 3.
 
-** Use case: UC5 - Delete a lesson from a student**
+* 3d. The given student index is invalid.
+
+   * 3d1. System informs user of invalid student index.
+
+   Use case resumes at step 3.
+
+**Use case: UC5 - Delete a lesson from a student**
 
 **MSS**
 
 1. User requests to list students.
-2. Tuteez shows a list of students <u>(UC2)</u>.
-3. User types keyword followed by index of the student and then lesson index to delete.
-4. Tuteez deletes the lesson from the student.
+2. System shows a list of students <u>(UC2)</u>.
+3. User requests to delete lesson, selecting student by index and specifying the lesson index to delete.
+4. System deletes the lesson from the student.
+5. Use case ends.
 
 **Extensions**
 
+* 1a. The list is empty.
+
+  Use case ends.
+
 * 3a. The given student index is invalid.
   
-    * 3a1. Tuteez shows an error message.
+    * 3a1. System informs user of invalid student index.
   
-    Use case resumes at step 2.
+    Use case resumes at step 3.
 
 * 3b. The given lesson index is invalid.
 
-    * 3b1. Tuteez shows an error message.
+    * 3b1. System informs user of invalid lesson index.
   
-    Use case resumes at step 2.
+    Use case resumes at step 3.
+
+* 3c. The given command format is invalid.
+
+    * 3c1. System informs user of invalid command format.
+
+    Use case resumes at step 3.
 
 **Use case: UC6 - Add a remark to a student**
 
 **MSS**
 
 1. User requests to list students.
-2. Tuteez shows a list of students <u>(UC2)</u>.
-3. User types keyword followed by index of the student and then the remark to be added.
-4. Tuteez adds the remark to the student.
+2. System shows a list of students <u>(UC2)</u>.
+3. User requests to add remark, selecting student by index and specifying the remark to be added.
+4. System adds the remark to the student.
+5. Use case ends.
 
 **Extensions**
 
+* 1a. The list is empty.
+
+    Use case ends.
+
 * 3a. The given student index is invalid.
 
-    * 3a1. Tuteez shows an error message.
+    * 3a1. System informs user of invalid student index
   
-    Use case resumes at step 2.
+    Use case resumes at step 3.
+
+* 3b. The given remark is invalid.
+
+    * 3b1. System informs user of invalid remark.
+
+    Use case resumes at step 3.
+
+* 3c. The given command format is invalid.
+
+    * 3c1. System informs user of invalid command format.
+
+    Use case resumes at step 3.
 
 **Use case: UC7 - Delete a remark from a student**
 
 **MSS**
 
 1. User requests to list students.
-2. Tuteez shows a list of students <u>(UC2)</u>.
-3. User types keyword followed by index of the student and then the remark index to delete.
-4. Tuteez deletes the remark from the student.
+2. System shows a list of students <u>(UC2)</u>.
+3. User requests to delete remark, selecting student by index and specifying the remark index to delete.
+4. System deletes the remark from the student.
+5. Use case ends.
 
 **Extensions**
 
+* 1a. The list is empty.
+
+    Use case ends.
+
 * 3a. The given student index is invalid.
 
-    * 3a1. Tuteez shows an error message.
+    * 3a1. System informs user of invalid student index.
   
-    Use case resumes at step 2.
+    Use case resumes at step 3.
 
 * 3b. The given remark index is invalid.
 
-    * 3b1. Tuteez shows an error message.
+    * 3b1. System informs user of invalid remark index.
   
-    Use case resumes at step 2.
+    Use case resumes at step 3.
+
+* 3c. The given command format is invalid.
+
+    * 3c1. System informs user of invalid command format.
+    
+    Use case resumes at step 3.
+
+**Use case: UC8 - Editing a student**
+
+**MSS**
+
+1. User requests to list students.
+2. System shows a list of students <u>(UC2)</u>.
+3. User requests to edit, selecting student by index and specifying the details to delete.
+4. System edits the student's details.
+5. Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given student index is invalid.
+
+    * 3a1. System informs user of invalid student index.
+
+    Use case resumes at step 3.
+
+* 3b. The given command format is invalid (e.g., missing name or phone number field).
+
+    * 3b1. System informs user of invalid command format.
+
+    Use case resumes at step 3.
+
+* 3c. The edited name matches the name of another student in the list.
+
+    * 3c1. System informs user of naming conflict.
+  
+    Use case resumes at step 3.
+
+* 3d. The field specified for editing contains invalid input.
+
+    * 3d1. System informs user of the problematic field.
+
+    Use case resumes at step 3.
+
+**Use case: UC8 - Displaying a student**
+
+**MSS**
+
+1. User requests to list students.
+2. System shows a list of students <u>(UC2)</u>.
+3. User requests to display a student, selecting the student by name or index.
+4. System displays student details in the right panel.
+5. Use case ends.
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given student index is invalid.
+
+    * 3a1. System informs user of invalid student index.
+
+  Use case resumes at step 3.
+
+* 3b. The given student name is invalid.
+
+    * 3b1. System informs user of invalid student name.
+
+  Use case resumes at step 3.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage (UI should respond within 1s).
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The system should respond to user commands within 15 seconds.
 5.  The application should launch within 2 seconds.
-6.  The application should not store sensitive information (e.g., NRIC numbers) without explicit user consent.
-7.  The application should demonstrate stability during long-term usage without crashing or freezing.
-8.  The application should be usable by novice users without extensive training.
-9.  The application should handle errors gracefully, providing meaningful feedback to users in case of failures.
-10. Comprehensive user and technical documentation should be provided
+6.  The application should demonstrate stability during long-term usage like after 2 hours without crashing or freezing.
+7.  The application should be usable by novice users without extensive training.
+8.  The application should handle errors gracefully, providing meaningful feedback to users in case of failures.
+9.  The user guide and the developer guide should be PDF-friendly (No expandable panels, embedded videos, animated GIFs etc.).
 
 
 ### Glossary
@@ -582,22 +709,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CLI**: Command Line Interface, a type of text-based user interface that allows users to interact with the application by typing commands
 * **GUI**: Graphical User Interface, a type of visual user interface that allows users to interact with the application through graphical elements like buttons and menus
 --------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
+
+This project presented a significant challenge due to the complexity and precision required at each development stage. Building a responsive and visually cohesive UI was one of the main hurdles. Ensuring that all elements fit together seamlessly took considerable time and required constant adjustments. Achieving a layout that is both user-friendly and adaptable to different screen sizes was especially challenging, as even minor alignment issues could disrupt the overall flow of the interface.
+
+Implementing specific features, such as displaying the next lesson on the student card, added another layer of difficulty. This feature necessitated setting up a timer that refreshes every minute, which required careful attention to performance so that the app wouldn’t slow down or consume excessive resources. Managing this timer involved designing an efficient refresh mechanism that updates only what’s necessary, minimizing memory use while providing real-time updates.
+
+Handling clashing lesson schedules introduced further complexity. We had to account for numerous edge cases—students with overlapping or consecutive classes. Designing a robust conflict-checking system meant anticipating all potential scheduling scenarios and validating inputs carefully, adding to the development time and requiring extensive testing.
+
+In addition, adding custom features like remarks and lesson tracking posed challenges in both design and functionality. Error handling had to be highly specific and informative, meaning that we could not rely on generic error messages. Each action, whether adding a lesson or a remark, needed unique error handling to guide users effectively without overwhelming them with unnecessary information. Crafting these targeted error messages involved considering possible user errors and ensuring that each message communicated the issue clearly while remaining concise.
+
+The effort invested in this project was substantial, as we went beyond the base features of AB3, adding numerous enhancements and custom functionalities. Specifically, we added a **lessons** feature to track and manage student schedules, developed a system to handle **clashing lessons** and ensure no overlaps, integrated a **remarks** feature for notes on students, and created a **display** command to quickly pull up detailed student information. We overhauled the UI to create a more intuitive and visually appealing interface, which required meticulous attention to design and usability. Additionally, we modified many existing commands in AB3 like add and edit.
+
+We also put significant focus on refining error handling. Every error message was crafted to be clear, informative, and specific to each potential issue, guiding users more effectively through the app. Balancing all these improvements while maintaining a high standard of quality and consistency demanded extensive effort, but it enabled us to deliver a more robust and user-friendly experience.
 
 ## **Appendix: Planned Enhancements**
 Group size: 5 members
 
 1. Student identification: 
    - Our app uniquely identifies students by name. In future updates, we plan to use a combination of name **and** phone number for unique identification.
-      - Two students cannot share the same name and the same phone number
+      - Two students cannot share the same name and the same phone number.
       - Allowing different names with the same phone number accommodates cases where tutors of younger students may store siblings under different names but with a shared contact number, typically a parent’s.
 1. Optimise add command:
    - Our app does not support adding remarks while adding new student. 
-   - In future updates, we can add this feature to grant our users more flexibility
+   - In future updates, we can add this feature to grant our users more flexibility.
 1. Optimise edit command:
    - Our app does not support direct editing of lessons or remarks. 
    - In future updates, we plan to enable users to edit existing lessons and remarks without needing to delete and re-add them.
-1. Name of student truncated on left:
-   - If a student’s name exceeds the character limit, it will be truncated in the left panel view. Users can use the display command to view the student’s full name when needed.
+1. Find parameter checking:
+   - For name, tag and address keywords, the parser only checks that they are not blank.
+   - In future updates, we plan to alert users when the keywords are invalid (ie valid when only contains certain characters).
 1. Find command Behavior:
    - After using the find command to locate student(s), executing most other commands will reset the left panel to the default view, as if the `list` command was called. 
    - In future updates, we will rectify this issue.
@@ -605,14 +746,18 @@ Group size: 5 members
    - We do not allow remarks to contain `r/`. 
    - In future updates, allow `r/`.
 1. Find behavior:
-   - The find command uses the `or` constraint, while this can provide more flexibility there are cases where users want to search for long sequence of `Strings` such as "Serangoon Gardens Rd". ]
+   - The find command uses the `or` constraint, while this can provide more flexibility there are cases where users want to search for long sequence of `Strings` such as "Serangoon Gardens Rd".
    - In future updates, we can provide users some way to indicate certain target words as a group and apply `and` constraint.
 1. Remarks added one at a time:
-   - `addrmk` only allows users to add one remark at a time
-   - In future updates, allow users to add multiple remarks
+   - `addrmk` only allows users to add one remark at a time.
+   - In future updates, allow users to add multiple.
 1. Remarks deleted one at a time:
-   - `delrmk` only allows users to delete one remark at a time
-   - In future updates, allow users to delete multiple remarks
+   - `delrmk` only allows users to delete one remark at a time.
+   - In future updates, allow users to delete multiple.
+1. Right panel enhancement:
+   - Currently, the right panel automatically scrolls to the top each time the user edits any student details.
+   - In the future, we plan to refine this feature so that the panel scrolls directly to the section where the user made edits, providing a more seamless and user-friendly experience.
+
 
 ## **Appendix: Instructions for manual testing**
 
@@ -647,10 +792,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `delete 1`.<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete`<br>
+   1. Test case: `delete`.<br>
       Expected: No student is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete 0`, `delete x` (where x is larger than the list size) <br>
@@ -660,10 +805,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: The student list contains only a student with the name "John".
 
-    1. Test case: `delete john`<br>
+    1. Test case: `delete john`.<br>
        Expected: John will be deleted from the list. Details of john will be shown in the status message.
    
-    1. Test case: `delete Alice`<br>
+    1. Test case: `delete Alice`.<br>
        Expected: No student is deleted. An error will be displayed in the status message.
 
 ### Adding a student
@@ -672,21 +817,21 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students using the `list` command. No student with the name "John" in the list.
 
-   1. Test case: `add n/john p/82223238`<br>
+   1. Test case: `add n/john p/82223238`.<br>
       Expected: A new student will be added to the list. The details of the student will be shown in the status message.
 
 1. Adding a student with a duplicate name
     
     1. Prerequisites: The student list contains only a student with the name "John".
     
-    1. Test case: `add n/john p/82223238`<br>
+    1. Test case: `add n/john p/82223238`.<br>
         Expected: No person is added. A duplicate student error will be displayed in the status message.
 
 1. Adding a student with a clashing lesson
     
     1. Prerequisites: The student list contains only a student with the name "John" with only a lesson on "MONDAY 0900-1000".
     
-    1. Test case: `add n/Alice p/82223938 l/monday 0900-1000`<br>
+    1. Test case: `add n/Alice p/82223938 l/monday 0900-1000`.<br>
         Expected: No person is added. A clashing lesson error will be displayed in the status message.
 
 ### Editing a student
@@ -695,13 +840,13 @@ testers are expected to do more *exploratory* testing.
    
     1. Prerequisites: List all students using the `list` command. There are already students in the student list. No student with the name "Alice" in the list.
 
-    1. Test case: `edit 1 n/Alice`<br>
+    1. Test case: `edit 1 n/Alice`.<br>
         Expected: Name of the first student in the list will be updated to "Alice".
    
-    1. Test case: `edit`<br>
+    1. Test case: `edit`.<br>
        Expected: No student is edited. Error details shown in the status message.
    
-    1. Other incorrect edit commands to try: `edit 0`, `edit x` (where x is larger than the list size) <br>
+    1. Other incorrect edit commands to try: `edit 0 n/Alice`, `edit x n/Alice` (where x is larger than the list size) <br>
        Expected: Invalid student index error is shown in the status message.
 
 ### Adding a lesson to a student
@@ -710,13 +855,13 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all students using the `list` command. There is only one student in the student list.
     
-    1. Test case: `addlesson 1 l/monday 0900-1100` <br>
+    1. Test case: `addlesson 1 l/monday 0900-1100`. <br>
         Expected: A lesson on "MONDAY 0900-1100" will be added to the student. The student's details should be displayed on the right panel. Lesson successfully added is shown in the status message.
     
-    3. Test case: `addlesson 1 l/monday 1200-1300 l/monday 1200-1300` <br>
+    3. Test case: `addlesson 1 l/monday 1200-1300 l/monday 1200-1300`. <br>
         Expected: No lesson is added. A clashing lesson error will be displayed in the status message.
 
-    4. Test case: `addlesson 1 l/tuesday 1000-1100 l/tuesday 1100-1200` <br>
+    4. Test case: `addlesson 1 l/tuesday 1000-1100 l/tuesday 1100-1200`. <br>
         Expected: Lessons on "TUESDAY 1000-1100" and "TUESDAY 1100-1200" will be added to the student. The student's details should be displayed on the right panel. Lessons successfully added are shown in the status message.
 
 ### Deleting a lesson from a student
@@ -725,13 +870,13 @@ testers are expected to do more *exploratory* testing.
     
     1. Prerequisites: List all students using the `list` command. There is only one student in the student list with only one lesson on "MONDAY 0900-1000".
     
-    1. Test case: `deletelesson 1 li/1` <br>
+    1. Test case: `deletelesson 1 li/1`.<br>
        Expected: The lesson "MONDAY 0900-1000" will be deleted from the student. The student's details should be displayed on the right panel. Lesson successfully deleted is shown in the status message.
 
-    3. Test case: `deletelesson` <br>
+    3. Test case: `deletelesson`. <br>
        Expected: No lesson is deleted. Error details shown in the status message.
 
-    4. Other incorrect deletelesson commands to try: `deletelesson 0`, `deletelesson x` (where x is larger than the list size) <br>
+    4. Other incorrect deletelesson commands to try: `deletelesson 0 li/1`, `deletelesson x li/1` (where x is larger than the list size) <br>
        Expected: Invalid lesson index error is shown in the status message.
 
 ### Adding a remark to a student
