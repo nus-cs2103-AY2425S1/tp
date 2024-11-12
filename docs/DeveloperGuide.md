@@ -343,7 +343,7 @@ The following activity diagram summarizes what happens when a user executes a `c
     * Pros: Shows users the full result of `clean`.
     * Cons: Forgets the results of the `find` command.
 
-* **Alternative 2 (current implementation):** Retain the search results of `find` and only display those contacts. 
+* **Alternative 2 (current implementation):** Retain the search results of `find` and only display those contacts.
     * Pros: Allow users to retain their serach results from `find`.
     * Cons: Users cannot see the full extent of `clean` until they return to the default view with `list`.
 
