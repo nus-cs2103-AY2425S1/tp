@@ -15,40 +15,40 @@ import seedu.address.testutil.TypicalPersons;
 
 public class ListingsTest {
 
-    private final Listings LISTINGS = new Listings();
-    private final Listing SAMPLE_LISTING = new ListingBuilder().withName("Sample Listing").build();
+    private final Listings listings = new Listings();
+    private final Listing sampleListing = new ListingBuilder().withName("Sample Listing").build();
 
     @Test
     public void equals() {
-        assertTrue(LISTINGS.equals(LISTINGS));
+        assertTrue(listings.equals(listings));
 
-        assertFalse(LISTINGS.equals(null));
+        assertFalse(listings.equals(null));
 
-        assertFalse(LISTINGS.equals("string"));
+        assertFalse(listings.equals("string"));
 
         Listings sameListings = new Listings();
-        sameListings.addListing(SAMPLE_LISTING);
-        LISTINGS.addListing(SAMPLE_LISTING);
-        assertTrue(LISTINGS.equals(sameListings));
+        sameListings.addListing(sampleListing);
+        listings.addListing(sampleListing);
+        assertTrue(listings.equals(sameListings));
 
         Listings differentListings = new Listings();
         differentListings.addListing(new ListingBuilder().withName("Different Listing")
                 .withAddress("Different Address").build());
-        assertFalse(LISTINGS.equals(differentListings));
+        assertFalse(listings.equals(differentListings));
     }
 
     @Test
     public void hashCodeTest() {
-        assertEquals(LISTINGS.hashCode(), LISTINGS.hashCode());
+        assertEquals(listings.hashCode(), listings.hashCode());
 
         Listings sameListings = new Listings();
-        sameListings.addListing(SAMPLE_LISTING);
-        LISTINGS.addListing(SAMPLE_LISTING);
-        assertEquals(LISTINGS.hashCode(), sameListings.hashCode());
+        sameListings.addListing(sampleListing);
+        listings.addListing(sampleListing);
+        assertEquals(listings.hashCode(), sameListings.hashCode());
 
         Listings differentListings = new Listings();
         differentListings.addListing(new ListingBuilder().withName("Different Listing").build());
-        assertFalse(LISTINGS.hashCode() == differentListings.hashCode());
+        assertFalse(listings.hashCode() == differentListings.hashCode());
     }
 
     @Test

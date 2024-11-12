@@ -39,7 +39,7 @@ public class AddAppointmentCommandTest {
     private static final String OTHER_FROM = "10:00";
     private static final String OTHER_TO = "11:00";
 
-    private final Appointment VALID_APPOINTMENT = new Appointment(
+    private static final Appointment VALID_APPOINTMENT = new Appointment(
             new Date(VALID_DATE),
             new From(VALID_FROM),
             new To(VALID_TO)
@@ -147,7 +147,8 @@ public class AddAppointmentCommandTest {
         assertFalse(firstAddAppointmentCommand.equals(secondAddAppointmentCommand));
 
         // same index, different appointment -> returns false
-        Appointment differentAppointment = new Appointment(new Date(OTHER_DATE), new From(OTHER_FROM), new To(OTHER_TO));
+        Appointment differentAppointment = new Appointment(new Date(OTHER_DATE),
+                new From(OTHER_FROM), new To(OTHER_TO));
         AddAppointmentCommand firstAddAppointmentCommandWithDifferentAppointment =
                 new AddAppointmentCommand(INDEX_FIRST_PERSON, differentAppointment);
         assertFalse(firstAddAppointmentCommand.equals(firstAddAppointmentCommandWithDifferentAppointment));

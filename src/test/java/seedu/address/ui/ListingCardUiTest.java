@@ -39,11 +39,11 @@ import seedu.address.model.tag.Tag;
 
 public class ListingCardUiTest extends ApplicationTest {
 
+    private static final Seller SAMPLE_SELLER = createSampleSeller();
+    private static final Buyer FIRST_SAMPLE_BUYER = createFirstSampleBuyer();
+    private static final Buyer SECOND_SAMPLE_BUYER = createSecongSampleBuyer();
     private ListingCard listingCard;
     private Listing sampleListing;
-    private final Seller SAMPLE_SELLER = createSampleSeller();
-    private final Buyer FIRST_SAMPLE_BUYER = createFirstSampleBuyer();
-    private final Buyer SECOND_SAMPLE_BUYER = createSecongSampleBuyer();
 
 
     @BeforeEach
@@ -142,7 +142,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Listing object for testing.
      */
-    private Listing createSampleListing() {
+    private static Listing createSampleListing() {
         Set<Person> buyersSet = new HashSet<>();
         buyersSet.add(FIRST_SAMPLE_BUYER);
         buyersSet.add(SECOND_SAMPLE_BUYER);
@@ -161,7 +161,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Listing object for testing (with truncation).
      */
-    private Listing createSampleTruncatedListing() {
+    private static Listing createSampleTruncatedListing() {
         Set<Person> buyersSet = new HashSet<>();
         buyersSet.add(createTruncatedSampleBuyer());
 
@@ -180,7 +180,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Seller object for testing.
      */
-    private Seller createSampleSeller() {
+    private static Seller createSampleSeller() {
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag("clients"));
 
@@ -196,7 +196,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Seller object for testing (with truncation).
      */
-    private Seller createSampleTruncatedSeller() {
+    private static Seller createSampleTruncatedSeller() {
         Set<Tag> tagSet = new HashSet<>();
 
         return new Seller(
@@ -211,7 +211,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Buyer object for testing.
      */
-    private Buyer createFirstSampleBuyer() {
+    private static Buyer createFirstSampleBuyer() {
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag("friends"));
         tagSet.add(new Tag("colleagues"));
@@ -228,7 +228,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Buyer object for testing (with truncation).
      */
-    private Buyer createTruncatedSampleBuyer() {
+    private static Buyer createTruncatedSampleBuyer() {
         Set<Tag> tagSet = new HashSet<>();
 
         return new Buyer(
@@ -243,7 +243,7 @@ public class ListingCardUiTest extends ApplicationTest {
     /**
      * Helper method to create a sample Buyer object for testing.
      */
-    private Buyer createSecongSampleBuyer() {
+    private static Buyer createSecongSampleBuyer() {
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(new Tag("friends"));
 
