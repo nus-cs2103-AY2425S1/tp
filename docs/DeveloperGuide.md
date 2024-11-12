@@ -636,9 +636,7 @@ testers are expected to do more *exploratory* testing.
 </div>
 
 ### Launch and shutdown
-
 1. Initial launch
-
    1. Download the jar file and copy into an empty folder.
    2. Open the “Command Prompt” (for Windows) or “Terminal” (for Mac/Linux).
    3. Type `cd` followed by the folder location where you saved the EduConnect file.
@@ -647,9 +645,7 @@ testers are expected to do more *exploratory* testing.
         Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
-
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
    2. Re-launch the app by following the instructions from 1ii onwards.<br>
        Expected: The most recent window size and location is retained.
 
@@ -678,9 +674,7 @@ testers are expected to do more *exploratory* testing.
       **Expected**: Similar to previous case. No teacher is added. If all required fields are provided but an invalid format was used, specific error details for that will be given. For example, "Phone numbers should only contain numbers, and it should be exactly 8 digits long".
 
 ### Deleting a person
-
 1. Deleting a person while all persons are being shown
-
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    2. Test case: `delete 1`<br>
       **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message.
@@ -743,6 +737,7 @@ testers are expected to do more *exploratory* testing.
       **Expected**: All the persons in EduConnect are sorted by their attendance in descending order. Teachers (who don't have attendance) are pushed to the end.
    6. Test case: `sort x` (where x is some random input that isn't any of the earlier test cases)<br>
       **Expected**: EduConnect is not sorted. Error details shown in the status message.
+
 2. Sorting EduConnect while only some persons are shown
    1. Prerequisites: Possibly only some persons are shown, using the `find` command. Not all persons may be shown.
    2. Similar test cases as before but only the filtered persons are sorted and shown in the GUI.
