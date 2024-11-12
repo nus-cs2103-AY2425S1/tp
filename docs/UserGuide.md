@@ -104,7 +104,17 @@ If you are on the PDF, use the table of contents below to navigate the site.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+</box>
+
+<box type="warning">
+
+When running commands that use `i/INDEX`, the index used references the unfiltered lists so always run the relevant `list` commands first!
+
+e.g. `add_t tn/Merry Christmas td/2024-12-24 0000` will return a filtered view of the task. 
+
+However, if you wish to edit the new task, you must run `list_t` first to edit it globally or `list_t gn/GROUP_NAME` if you wish to edit it for a group.
+
+</box>
 
 ---
 
