@@ -275,7 +275,7 @@ The sequence diagram above illustrates the flow for the `/accept` command. Simil
 `AddressBookParser` first obtains the index from the user's input.  
 `AddressBookParser` ensures that there is only one parameter found, which is a number. If no valid parameter is found, `AddressBookParser` throws a `ParseException`. Otherwise, it creates a new instance of `StatusCommand` based on the user input, with the `StatusCommand` containing the target index and specified status.
 
-Upon execution, `StatusCommand` retrieves the internship application to be updated and calls `m::setItem` to update the status within the list.
+Upon execution, `StatusCommand` retrieves the internship application to be updated and calls `m::setItem` to update the status of the internship application.
 > **_NOTE:_** The sequence diagram shows a simplified execution of the StatusCommand.
 
 <br></br>
