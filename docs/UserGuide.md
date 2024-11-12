@@ -361,7 +361,7 @@ Furthermore, certain edits can cause the SocialBook to behave in unexpected ways
 This is due to the way that parsing is handled: any text matching special prefixes will be identified as such.
 To work around this, please prepend a `_`, or any other accepted special character, in front of any input fields that contain a special prefix.
 5. Entering an invalid emergency contact will produce the same error message as an invalid phone number. When receiving an error message about phone numbers, check both the `ec/` and `p/` field, if both are present.
-6. When adding multiple tags in `add` and `edit`, there is no check for duplicates.
+6. Tags with the same name but with different cases are considered two different tags i.e `free` and `FREE` are not considered duplicates.
 
 --------------------------------------------------------------------------------------------------------------------
 
