@@ -226,8 +226,8 @@ Team size: 5
 
 **Target user profile**:
 
-- HR professional of a tech company with many employees with different skill sets and roles
-- works in a team of HR professionals
+- Project managers of a tech company with many employees with different skill sets and roles
+- works in a team of other project managers
 - manages recruitment and manpower allocation for company projects
 - has a need to manage a significant number of contacts
 - prefer desktop apps over other types
@@ -237,7 +237,7 @@ Team size: 5
 
 **Value proposition**:
 
-HRConnect provides fast access to employee, project, and candidate contact details, optimized for HR professionals who prefer a CLI. It allows quick updates, talent pool organization, and candidate tracking, all through a streamlined, command-based interface designed for speed and efficiency. It also helps with assignment of HR staff to HR events and cases.
+HRConnect provides fast access to employee, project, and candidate contact details, optimized for project managers who prefer a CLI. It allows talent pool organization, project management, and manpower allocation, all through a streamlined, command-based interface designed for speed and efficiency.
 
 [Return to Top](#table-of-contents)
 
@@ -277,7 +277,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user in-charge of employee up-skilling                       | track employees' learning of new skills                                          | monitor employees' progress in learning new skills                                  |
 | `*`      | user in-charge many manpower allocations                     | assign multiple employees to different projects using batch commands             | manage manpower at scale                                                            |
 | `*`      | user returning after a long break                            | see recent changes made to the records                                           | get back up to speed quickly                                                        |
-| `*`      | HR team lead                                                 | delegate manpower allocation tasks to team members                               | manage the HR team efficiently                                                      |
+| `*`      | team lead                                                 | delegate manpower allocation tasks to other project managers                               | manage the team efficiently                                                      |
 
 [Return to Top](#table-of-contents)
 
