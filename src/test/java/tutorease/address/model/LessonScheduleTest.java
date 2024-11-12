@@ -91,8 +91,10 @@ public class LessonScheduleTest {
     @Test
     public void deleteLesson_validLesson_removesData() throws ParseException {
         Lesson lesson = new LessonBuilder().build();
+
         lessonSchedule.addLesson(lesson);
         lessonSchedule.deleteLesson(lesson);
+
         assertFalse(lessonSchedule.hasLesson(lesson));
     }
 
@@ -105,8 +107,10 @@ public class LessonScheduleTest {
     public void copyLessonSchedule_validLessonSchedule_returnsCopy() throws ParseException {
         LessonSchedule newData = new LessonSchedule();
         Lesson lesson = new LessonBuilder().build();
+
         newData.addLesson(lesson);
         LessonSchedule copy = new LessonSchedule(newData);
+
         assertEquals(newData, copy);
     }
 
@@ -127,8 +131,10 @@ public class LessonScheduleTest {
         LessonSchedule lessonSchedule = new LessonSchedule();
         LessonSchedule lessonScheduleCopy = new LessonSchedule();
         Lesson lesson = new LessonBuilder().build();
+
         lessonSchedule.addLesson(lesson);
         lessonScheduleCopy.addLesson(lesson);
+
         assertEquals(lessonSchedule, lessonSchedule);
         assertNotEquals(lessonSchedule, lesson);
         assertNotEquals(lessonSchedule, new LessonSchedule());
