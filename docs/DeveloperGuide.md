@@ -617,6 +617,10 @@ testers are expected to do more *exploratory* testing.
 * **Test case:** `add 12345678 n/John Doe p/91234567 e/johndoe@example.com a/123 Example Street c/Computer Science r/Student`
 * **Expected:** The addition fails, and an error message about the duplicate Student ID is shown.
 
+**Adding an person with invalid Student ID**
+* **Test case:** add 2345678 n/John Doe p/91234567 e/johndoe@example.com a/123 Example Street c/Computer Science r/Student
+* **Expected:** The addition fails, and an error message about the invalid Student ID format is shown.
+
 ---
 
 #### Edit Command
@@ -664,6 +668,11 @@ testers are expected to do more *exploratory* testing.
 * **Prerequisites:** The person already has "CS2103T" as a module.
 * **Test case:** `module 12345678 m/CS2103T`
 * **Expected:** The addition fails, and an error message about the duplicate module is shown.
+
+**Adding an invalid module**
+* **Prerequisites:** List contains a person with Student ID 13131313.
+* **Test case:** module 13131313 m/CS 2103T
+* **Expected:** The addition fails, and an error message about the invalid module format is shown.
 
 ---
 
