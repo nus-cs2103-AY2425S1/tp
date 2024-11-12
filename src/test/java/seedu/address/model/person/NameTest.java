@@ -35,8 +35,9 @@ public class NameTest {
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
-        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("PRINCESS PEACH")); // with all capital letters
+        assertTrue(Name.isValidName("Peter Jack")); // with capital letters
+        assertTrue(Name.isValidName("PETER JACK")); // with all capital letters
+        assertTrue(Name.isValidName("PETER JACK WEI LING")); //with many spaces
     }
 
     @Test
