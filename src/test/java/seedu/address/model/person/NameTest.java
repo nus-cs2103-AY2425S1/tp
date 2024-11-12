@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -29,13 +30,19 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("  peter")); // leading whitespaces
+        assertFalse(Name.isValidName("Lord Chapter Master Grandmaster Calgar Anduro Jackson Ultramarine"
+                + " David Roger Jackson Ray Jr 2nd dean")); // 101 characters > 100 allowed
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
+        assertTrue(Name.isValidName("peter   ")); // trailing whitespaces
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("Lord Chapter Master Grandmaster Calgar Anduro Jackson Ultramarine"
+                + " David Roger Jackson Ray Jr 2nd dee")); // 100 characters
     }
 
     @Test
@@ -56,5 +63,33 @@ public class NameTest {
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
+    }
+
+    @Test
+    public void compareTo_lowerLexicographicalOrder() {
+        Name name1 = new Name("Alice");
+        Name name2 = new Name("Bob");
+        assertTrue(name1.compareTo(name2) < 0);
+    }
+
+    @Test
+    public void compareTo_higherLexicographicalOrder() {
+        Name name1 = new Name("Alice");
+        Name name2 = new Name("Bob");
+        assertTrue(name2.compareTo(name1) > 0);
+    }
+
+    @Test
+    public void compareTo_higherLexicographicalOrderSameLength() {
+        Name name1 = new Name("Alice");
+        Name name2 = new Name("Alicf");
+        assertTrue(name2.compareTo(name1) > 0);
+    }
+
+    @Test
+    public void toStringMethod() {
+        String name = "Clement";
+
+        assertEquals(new Name(name).toString(), name);
     }
 }

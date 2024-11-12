@@ -9,51 +9,51 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Chua Jun Yu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chuajunyu.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/chuajunyu)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Git expert
 
-### Johnny Doe
+### Chen Shaoheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/cshao02.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/cshao02)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Documentation, Testing
 
-### James Doe
+### Brian Choon
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/brianchoon.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/brianchoon)] [[portfolio](team/brianchoon.md)]
+
+* Role: Developer
+* Responsibilities: Feature In-Charge, IntelliJ Expert
+
+### Then Jan Kai
+
+<img src="images/jan-kai1.png" width="200px">
+
+[[github](http://github.com/jan-kai1)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Scheduling + Integration
+
+### Dhruv Sharma
+
+<img src="images/shardhrv.png" height="200" width="200px">
+
+[[github](http://github.com/shardhrv)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality, Deliverables

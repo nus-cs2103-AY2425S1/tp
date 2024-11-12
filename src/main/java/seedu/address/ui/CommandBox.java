@@ -3,6 +3,7 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,6 +18,9 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private CommandBuffer commandBuffer;
+
+    private boolean isCurrentViewingHistory = false;
 
     @FXML
     private TextField commandTextField;
@@ -27,6 +31,16 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.commandBuffer = new CommandBuffer();
+        // create a listener for the up and down key events
+        commandTextField.setOnKeyPressed(event -> {
+            setStyleToDefault();
+            if (event.getCode() == KeyCode.UP) {
+                handleUpKey();
+            } else if (event.getCode() == KeyCode.DOWN) {
+                handleDownKey();
+            }
+        });
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -42,11 +56,31 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
+            commandBuffer.addCommand(commandText);
             commandExecutor.execute(commandText);
-            commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+        } finally {
+            commandTextField.setText("");
+            isCurrentViewingHistory = false;
         }
+    }
+
+    /**
+     * Handles the Up Arrow button pressed event.
+     */
+    private void handleUpKey() {
+        String legacyCommand = commandBuffer.handleUpInput(isCurrentViewingHistory);
+        commandTextField.setText(legacyCommand);
+        isCurrentViewingHistory = true;
+    }
+
+    /**
+     * Handles the Down Arrow button pressed event.
+     */
+    private void handleDownKey() {
+        String legacyCommand = commandBuffer.handleDownInput();
+        commandTextField.setText(legacyCommand);
     }
 
     /**

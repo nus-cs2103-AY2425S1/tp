@@ -1,0 +1,181 @@
+{
+  "events": [
+    {
+      "name": "Tech Conference 2024",
+      "attendees": [
+        {
+          "name": "Alice Pauline",
+          "phone": "94351253",
+          "email": "alice@example.com",
+          "address": "123, Jurong West Ave 6, #08-111",
+          "telegramUsername": "alice",
+          "roles": ["attendee"],
+          "uniqueId": "dcd85b56-c7a7-45b5-b40e-b9dd0711af9a"
+        },
+        {
+          "name": "Fiona Kunz",
+          "phone": "9482427",
+          "email": "lydia@example.com",
+          "address": "little tokyo",
+          "telegramUsername": "fiona",
+          "roles": ["attendee"],
+          "uniqueId": "cfda6ed9-cd4b-44bc-9cd3-17ee85f6af5c"
+        }
+      ],
+      "vendors": [
+        {
+          "name": "Daniel Meier",
+          "phone": "87652533",
+          "email": "cornelia@example.com",
+          "address": "10th street",
+          "telegramUsername": "daniel",
+          "roles": ["vendor"],
+          "uniqueId": "2f4ff54d-4b85-430f-91da-aac2df8dae38"
+        }
+      ],
+      "sponsors": [
+        {
+          "name": "Benson Meier",
+          "phone": "98765432",
+          "email": "johnd@example.com",
+          "address": "311, Clementi Ave 2, #02-25",
+          "telegramUsername": "benson",
+          "roles": ["sponsor"],
+          "uniqueId": "cdd2e0fd-628d-4f02-aaae-68c91442d878"
+        },
+        {
+          "name": "Carl Kurz",
+          "phone": "95352563",
+          "email": "heinz@example.com",
+          "address": "wall street",
+          "telegramUsername": "carlkurz",
+          "roles": ["sponsor"],
+          "uniqueId": "43c93603-0f82-497f-bd8c-d8386ba6afe2"
+        }
+      ],
+      "volunteers": [
+        {
+          "name": "Elle Meyer",
+          "phone": "9482224",
+          "email": "werner@example.com",
+          "address": "michegan ave",
+          "telegramUsername": "ellemeyer",
+          "roles": ["volunteer"],
+          "uniqueId": "f9b7ddbd-f119-4fff-a515-dc2d21680486"
+        }
+      ]
+    },
+    {
+      "name": "Art Exhibition 2024",
+      "attendees": [
+        {
+          "name": "Bob Choo",
+          "phone": "22222222",
+          "email": "bob@example.com",
+          "address": "Block 123, Bobby Street 3",
+          "telegramUsername": "bobby",
+          "roles": ["attendee"],
+          "uniqueId": "a61e4e77-0067-4801-a4c8-55d396efb6d1"
+        }
+      ],
+      "vendors": [
+        {
+          "name": "Amy Bee",
+          "phone": "11111111",
+          "email": "amy@example.com",
+          "address": "Block 312, Amy Street 1",
+          "telegramUsername": "amybee",
+          "roles": ["vendor"],
+          "uniqueId": "037f7441-67bf-4ba4-a767-d8ed593c4b9a"
+        },
+        {
+          "name": "George Best",
+          "phone": "9482442",
+          "email": "anna@example.com",
+          "address": "4th street",
+          "telegramUsername": "george",
+          "roles": ["vendor"],
+          "uniqueId": "130984d2-984d-44a9-b12b-876186ea1cfa"
+        }
+      ],
+      "sponsors": [
+        {
+          "name": "Benson Meier",
+          "phone": "98765432",
+          "email": "johnd@example.com",
+          "address": "311, Clementi Ave 2, #02-25",
+          "telegramUsername": "benson",
+          "roles": ["sponsor"],
+          "uniqueId": "cdd2e0fd-628d-4f02-aaae-68c91442d878"
+        }
+      ],
+      "volunteers": [
+        {
+          "name": "Hoon Meier",
+          "phone": "8482424",
+          "email": "stefan@example.com",
+          "address": "little india",
+          "telegramUsername": "hoon123",
+          "roles": ["volunteer"],
+          "uniqueId": "787dbf35-728c-49af-be68-4ee28a1ba8e3"
+        },
+        {
+          "name": "Ida Mueller",
+          "phone": "8482131",
+          "email": "hans@example.com",
+          "address": "chicago ave",
+          "telegramUsername": "idamueller",
+          "roles": ["volunteer"],
+          "uniqueId": "ab2605cd-c764-4d76-a38a-39575ecce1b0"
+        }
+      ]
+    },
+    {
+      "name": "Sports Festival",
+      "attendees": [
+        {
+          "name": "Alice Pauline",
+          "phone": "94351253",
+          "email": "alice@example.com",
+          "address": "123, Jurong West Ave 6, #08-111",
+          "telegramUsername": "alice",
+          "roles": ["attendee"],
+          "uniqueId": "dcd85b56-c7a7-45b5-b40e-b9dd0711af9a"
+        }
+      ],
+      "vendors": [
+        {
+          "name": "Daniel Meier",
+          "phone": "87652533",
+          "email": "cornelia@example.com",
+          "address": "10th street",
+          "telegramUsername": "daniel",
+          "roles": ["vendor"],
+          "uniqueId": "2f4ff54d-4b85-430f-91da-aac2df8dae38"
+        }
+      ],
+      "sponsors": [
+        {
+          "name": "Benson Meier",
+          "phone": "98765432",
+          "email": "johnd@example.com",
+          "address": "311, Clementi Ave 2, #02-25",
+          "telegramUsername": "benson",
+          "roles": ["sponsor"],
+          "uniqueId": "cdd2e0fd-628d-4f02-aaae-68c91442d878"
+        }
+      ],
+      "volunteers": [
+        {
+          "name": "Elle Meyer",
+          "phone": "9482224",
+          "email": "werner@example.com",
+          "address": "michegan ave",
+          "telegramUsername": "ellemeyer",
+          "roles": ["volunteer"],
+          "uniqueId": "f9b7ddbd-f119-4fff-a515-dc2d21680486"
+        }
+      ]
+    }
+  ]
+}

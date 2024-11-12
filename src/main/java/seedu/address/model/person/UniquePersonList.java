@@ -37,6 +37,50 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns String array with first field that is the same as the given argument, 2nd is value of field.
+     * Only called after confirmed person in list
+     */
+    public String[] findSameField(Person toCheck) {
+        requireNonNull(toCheck);
+        for (Person person : internalList) {
+            boolean doBothHaveTelegramUsername = person.hasTelegramUsername() && toCheck.hasTelegramUsername();
+            if (person.isSamePhone(toCheck)) {
+                return new String[] {"phone", person.getPhone().value};
+            } else if (person.isSameEmail(toCheck)) {
+                return new String[] {"email", person.getEmail().value};
+            } else if (doBothHaveTelegramUsername && person.isSameTelegram(toCheck)) {
+                return new String[] {"telegram", person.getTelegramUsername().telegramUsername};
+            }
+        }
+        //should not reach here
+        return null;
+    }
+
+    /**
+     * Returns the number of same persons as the given argument.
+     */
+    public int countSamePerson(Person toCheck) {
+        requireNonNull(toCheck);
+        return (int) internalList.stream().filter(toCheck::isSamePerson).count();
+    }
+
+    /**
+     * Returns true if the list contains an person with an equivalent phone number as the given argument.
+     */
+    public boolean containsPhone(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSamePhone);
+    }
+
+    /**
+     * Returns true if the list contains an person with an equivalent email as the given argument.
+     */
+    public boolean containsEmail(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameEmail);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

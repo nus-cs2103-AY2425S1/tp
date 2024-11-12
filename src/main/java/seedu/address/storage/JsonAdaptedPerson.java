@@ -1,9 +1,11 @@
 package seedu.address.storage;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -15,7 +17,11 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.TelegramUsername;
+import seedu.address.model.role.Role;
+
+
+
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -28,21 +34,32 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String telegramUsername;
+    private final String uniqueId;
+
+    private final List<JsonAdaptedRole> roles = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("telegramUsername") String telegramUsername,
+                             @JsonProperty("uniqueid") String uniqueId,
+                             @JsonProperty("roles") JsonAdaptedRole... roles) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        this.telegramUsername = telegramUsername;
+        this.uniqueId = uniqueId;
+
+        if (roles != null) {
+            for (JsonAdaptedRole role : roles) {
+                this.roles.add(role);
+            }
         }
     }
 
@@ -54,9 +71,12 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        telegramUsername = source.getTelegramUsername().telegramUsername;
+        uniqueId = source.getUniqueId().toString();
+        roles.addAll(source.getRoles().stream()
+                .map(JsonAdaptedRole::new)
                 .collect(Collectors.toList()));
+
     }
 
     /**
@@ -65,9 +85,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        final List<Role> personRoles = new ArrayList<>();
+        for (JsonAdaptedRole role : roles) {
+            personRoles.add(role.toModelType());
         }
 
         if (name == null) {
@@ -102,8 +122,18 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-    }
+        final TelegramUsername modelTelegramUsername = new TelegramUsername(telegramUsername);
 
+        if (uniqueId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, UUID.class.getSimpleName()));
+        }
+
+        // As UUID takes in a byte[], the uniqueId string needs to be converted
+        final byte[] bytes = uniqueId.getBytes(StandardCharsets.UTF_8);
+        final UUID modelUniqueId = UUID.nameUUIDFromBytes(bytes);
+
+        final Set<Role> modelRoles = new HashSet<>(personRoles);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+                modelTelegramUsername, modelRoles, modelUniqueId);
+    }
 }

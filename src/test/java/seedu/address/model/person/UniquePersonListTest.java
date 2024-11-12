@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -18,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
+
 
 public class UniquePersonListTest {
 
@@ -42,8 +42,7 @@ public class UniquePersonListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(uniquePersonList.contains(editedAlice));
     }
 
@@ -85,8 +84,7 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniquePersonList.add(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         uniquePersonList.setPerson(ALICE, editedAlice);
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(editedAlice);
@@ -171,5 +169,184 @@ public class UniquePersonListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
+    }
+
+    @Test
+    public void findSameField_samePhone() {
+        String phoneNumber = "98765432";
+
+        Person person = new PersonBuilder().withName("Alan")
+                .withAddress("George Street").withEmail("alan@example.com")
+                .withPhone(phoneNumber)
+                .withTelegramUsername("alanalan").withRoles("attendee").build();
+
+        uniquePersonList.add(person);
+
+        Person otherPerson = new PersonBuilder().withName("Glenn")
+                .withAddress("King Town").withEmail("glenn@example.com")
+                .withPhone(phoneNumber)
+                .withTelegramUsername("glenn").withRoles("vendor").build();
+
+        String[] expectedValue = new String[] {"phone", phoneNumber};
+
+        // same keyword "phone"
+        assertEquals(uniquePersonList.findSameField(otherPerson)[0], expectedValue[0]);
+
+        // same phone number
+        assertEquals(uniquePersonList.findSameField(otherPerson)[1], expectedValue[1]);
+
+        assertEquals(uniquePersonList.findSameField(otherPerson).length, expectedValue.length);
+    }
+
+    @Test
+    public void findSameField_sameEmail() {
+        String email = "bigboss@example.com";
+
+        Person person = new PersonBuilder().withName("Alan")
+                .withAddress("George Street").withEmail(email)
+                .withPhone("98765432")
+                .withTelegramUsername("alanalan").withRoles("attendee").build();
+
+        uniquePersonList.add(person);
+
+        Person otherPerson = new PersonBuilder().withName("Glenn")
+                .withAddress("King Town").withEmail(email)
+                .withPhone("99888777")
+                .withTelegramUsername("glenn").withRoles("vendor").build();
+
+        String[] expectedValue = new String[] {"email", email};
+
+        // same keyword "email"
+        assertEquals(uniquePersonList.findSameField(otherPerson)[0], expectedValue[0]);
+
+        // same email
+        assertEquals(uniquePersonList.findSameField(otherPerson)[1], expectedValue[1]);
+
+        assertEquals(uniquePersonList.findSameField(otherPerson).length, expectedValue.length);
+    }
+
+    @Test
+    public void findSameField_sameTelegram() {
+        String telegram = "physics_legend";
+
+        Person person = new PersonBuilder().withName("Alan")
+                .withAddress("George Street").withEmail("alan@example.com")
+                .withPhone("98765432")
+                .withTelegramUsername(telegram).withRoles("attendee").build();
+
+        uniquePersonList.add(person);
+
+        Person otherPerson = new PersonBuilder().withName("Glenn")
+                .withAddress("King Town").withEmail("glenn@example.com")
+                .withPhone("99888777")
+                .withTelegramUsername(telegram).withRoles("vendor").build();
+
+        String[] expectedValue = new String[] {"telegram", telegram};
+
+        // same keyword "telegram"
+        assertEquals(uniquePersonList.findSameField(otherPerson)[0], expectedValue[0]);
+
+        // same telegram handle
+        assertEquals(uniquePersonList.findSameField(otherPerson)[1], expectedValue[1]);
+
+        assertEquals(uniquePersonList.findSameField(otherPerson).length, expectedValue.length);
+    }
+
+    @Test
+    public void equals() {
+        UniquePersonList uniquePersonList = new UniquePersonList();
+
+        // same values -> returns true
+        assertTrue(uniquePersonList.equals(new UniquePersonList()));
+
+        // same object -> returns true
+        assertTrue(uniquePersonList.equals(uniquePersonList));
+
+        // null -> returns false
+        assertFalse(uniquePersonList.equals(null));
+
+        // different types -> returns false
+        assertFalse(uniquePersonList.equals(5.0f));
+
+        uniquePersonList.add(ALICE);
+
+        // different values -> returns false
+        assertFalse(uniquePersonList.equals(new UniquePersonList()));
+
+    }
+
+    @Test
+    public void countSamePerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.countSamePerson(null));
+    }
+
+    @Test
+    public void countSamePerson_noPersonsSame() {
+        assertEquals(uniquePersonList.countSamePerson(ALICE), 0);
+
+        uniquePersonList.add(BOB);
+
+        assertEquals(uniquePersonList.countSamePerson(ALICE), 0);
+    }
+
+    @Test
+    public void countSamePerson_onePersonSame() {
+        uniquePersonList.add(ALICE);
+
+        assertEquals(uniquePersonList.countSamePerson(ALICE), 1);
+
+        uniquePersonList.add(BOB);
+
+        assertEquals(uniquePersonList.countSamePerson(ALICE), 1);
+    }
+
+    @Test
+    public void containsPhone_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.containsPhone(null));
+    }
+
+    @Test
+    public void containsPhone_false() {
+        assertEquals(uniquePersonList.containsPhone(ALICE), false);
+
+        uniquePersonList.add(BOB);
+
+        assertEquals(uniquePersonList.containsPhone(ALICE), false);
+    }
+
+    @Test
+    public void containsPhone_true() {
+        uniquePersonList.add(ALICE);
+
+        assertEquals(uniquePersonList.containsPhone(ALICE), true);
+
+        uniquePersonList.add(BOB);
+
+        assertEquals(uniquePersonList.containsPhone(ALICE), true);
+    }
+
+    @Test
+    public void containsEmail_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.containsEmail(null));
+    }
+
+    @Test
+    public void containsEmail_false() {
+        assertEquals(uniquePersonList.containsEmail(ALICE), false);
+
+        uniquePersonList.add(BOB);
+
+        assertEquals(uniquePersonList.containsEmail(ALICE), false);
+    }
+
+    @Test
+    public void containsEmail_true() {
+        uniquePersonList.add(ALICE);
+
+        assertEquals(uniquePersonList.containsEmail(ALICE), true);
+
+        uniquePersonList.add(BOB);
+
+        assertEquals(uniquePersonList.containsEmail(ALICE), true);
     }
 }

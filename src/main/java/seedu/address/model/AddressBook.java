@@ -60,11 +60,43 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
+     * Returns the number of persons in the address book with the same identity as {@code person}.
+     */
+    public int countSamePersons(Person person) {
+        requireNonNull(person);
+        return persons.countSamePerson(person);
+    }
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns the fields that are the same as the given person.
+     */
+    public String[] findSameField(Person person) {
+        requireNonNull(person);
+        return persons.findSameField(person);
+    }
+
+    /**
+     * Returns true if a person with the same phone number as {@code person} exists in the address book.
+     */
+    public boolean hasPhone(Person person) {
+        requireNonNull(person);
+        return persons.containsPhone(person);
+    }
+
+    /**
+     * Returns true if a person with the same email as {@code person} exists in the address book.
+     */
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return persons.containsEmail(person);
     }
 
     /**

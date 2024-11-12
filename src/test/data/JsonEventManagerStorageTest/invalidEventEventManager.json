@@ -1,0 +1,20 @@
+{
+  "events": [
+    {
+      "name": "Invalid Event",
+      "attendees": [
+        {
+          "name": "Invalid Name !@#",
+          "phone": "9482424",
+          "email": "invalid@example.com",
+          "address": "4th street",
+          "telegramUsername": "invaliduser",
+          "roles": ["attendee"]
+        }
+      ],
+      "vendors": [],
+      "sponsors": [],
+      "volunteers": []
+    }
+  ]
+}

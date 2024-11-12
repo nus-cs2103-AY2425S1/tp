@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam DefaultFontColor black
+
+Actor user
+participant ":Logic Manager" as L #lightblue
+participant ":AddressBookParser" as A #red
+participant ":NewEventCommandParser" as P #pink
+participant "command :AddEventCommand" as B #yellow
+participant ":EventManager" as C #green
+
+user -> L: "new Event X"
+activate L
+
+L-> A: parseCommand("new Event X")
+activate A
+
+create P
+A -> P: NewEventCommandParser()
+activate P
+
+P --> A:
+deactivate P
+
+A -> P: parse("Event X")
+activate P
+
+create B
+P -> B: AddEventCommand()
+activate B
+
+B --> P:
+deactivate B
+P --> A: command
+deactivate P
+A --> L: command
+deactivate A
+L -> B:  execute()
+activate B
+B -> C: addEvent(event)
+activate C
+C --> B
+deactivate C
+
+B --> L: CommandResult
+deactivate B
+L --> user: CommandResult
+
+deactivate L
+@enduml

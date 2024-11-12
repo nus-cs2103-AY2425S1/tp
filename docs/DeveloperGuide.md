@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* ChatGPT - These AI tools were used by Dhruv to automate the creation of similar test cases with slight changes. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -70,9 +70,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<img src="images/UiClassDiagram.png" width="1300"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `EventListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -93,7 +93,8 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+
+<img src="images/DeleteSequenceDiagram.png" width="1200"/>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -117,32 +118,26 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="650" />
 
 
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the event data in a `EventManager` object, which contains all `Event` objects (which are contained in a `EventList` object).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" width="750" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save address book data, event manager data, and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `EventManagerStorage`, and `UserPrefsStorage`, meaning it can be treated as any of these (if only the functionality of one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -155,93 +150,20 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Events: Adding Event
+<img src="images/AddEventCommandSequenceDiagram.png" width="1300" />
 
-#### Proposed Implementation
+Above shows the sequence diagram when a user wants to add an event.
+1. The user types the command `new EVENT_NAME`
+2. Logic Manager receives the text input and passes it to addressBookParser
+3. AddressBookParser creates a new NewEventCommandParser and calls its parse method
+4. NewEventCommandParser creates a new AddEventCommand object, which is then passed back to Logic Manager
+5. Logic Manager calls the execute method of the AddEventCommand object
+6. AddEventCommand object calls the addEvent method of eventManager
+7. AddEventCommand object returns a CommandResult object to Logic Manager
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -261,72 +183,354 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
+Student event planners at NUS who:
+* need to manage contacts like attendees, vendors, sponsors and volunteers for their events.
+* need a centralized platform to organize, track and access contact information and details of event
 * prefer desktop apps over other types
-* can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: For student planners who need a seamless way to manage contacts, our address book provides a centralized platform to organize, track, and access the contact information and details of attendees, vendors, sponsors and volunteers, thus enabling effortless coordination of logistics and ensures smooth communication for every event
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority   | As a …​                                                                                                | I want to …​                                                                                                                              | So that I can…​                                                                                                                                    |
+|------------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`    | Student Event Planner who handles contact information of many people                                   | Add contact details of event attendees, vendors, sponsors and volunteers                                                                  | store their contact details and have a platform to view the contact information of the relevant parties all in one place                           |
+| `* * *`    | Student event planner who can type fast and prefer typing over other means of input                    | Perform the functions of the app solely by typing                                                                                         | speed up the process of accessing and managing information                                                                                         |
+| `* * *`    | Student Event Planner                                                                                  | Delete a person                                                                                                                           | keep my contacts up-to-date                                                                                                                        |
+| `* * *`    | Student Event Planner                                                                                  | View the list of all contacts and number of contacts                                                                                      | quickly get an overview of contact information of all attendees, vendors, sponsors and volunteer saved so far                                      |
+| `* * *`    | Student event planner who has to contact vendors, sponsors, attendees and volunteers via various means | Save their name, phone number, email address, telegram handle, address                                                                    | efficiently keep track of their contact details and reach out to them through the appropriate channels                                             |
+| `* * *`    | Student event planner                                                                                  | Update contact details of attendees, vendors, sponsors and volunteers                                                                     | keep their most current information or rectify a mistake                                                                                           |
+| `* * *`    | Busy student event planner who has to deal with large number of contacts                               | Search for contacts by name                                                                                                               | find contact information of specific people quickly when I need to                                                                                 |
+| `* * `     | Student event planner managing various roles of events                                                 | Search for contacts by role                                                                                                               | quickly locate and communicate with specific groups of people relevant to my event planning needs                                                  |
+| `* * `     | Student event planner who manages multiple events                                                      | Add new events                                                                                                                            | keep track of events and categorise contacts based on the events they are involved in                                                              |
+| `* * `     | Student Event planner who is helping to plan multiple events                                           | Add contacts (such as attendees, vendors, sponsors, and volunteers) to specific events                                                    | easily track who is involved in each event and streamline communication and planning for each contact group                                        |
+| `* * `     | Student event planner coordinating multiple events                                                     | Find and view contacts associated with a specific event                                                                                   | quickly access and manage the attendees, volunteers, vendors, and sponsors relevant to that event without searching through all contacts           |
+| `* * `     | Student event planner managing event contact lists                                                     | Remove a contact from a specific event                                                                                                    | keep the event’s contact list accurate and up-to-date if an attendee, volunteer, vendor, or sponsor no longer needs to be involved                 |
+| `* * `     | Student event planner organising multiple events                                                       | Delete an event                                                                                                                           | maintain a clean and relevant list of events and remove outdated or canceled events                                                                |
+| `* * `     | Student event planner who occasionally needs to reset or start fresh                                   | Clear all events                                                                                                                          | remove outdated information in bulk and prepare the platform for a new set of events without manually deleting each one                            |
+| `* * `     | Student event planner managing diverse contacts                                                        | Use Search Mode to search for contacts based on multiple criteria (such as name, phone number, email, address, Telegram handle, and role) | quickly find relevant contacts that I need                                                                                                         |
+| `* * `     | Student event planner who needs to add contacts to events efficiently                                  | Add multiple contacts (attendees, vendors, sponsors, and volunteers) to an event simultaneously                                           | quickly organize event contacts and save time by grouping relevant contacts together                                                               |
+| `* * `     | Student event planner managing a large contact list                                                    | Exclude certain contacts (such as those already added to an event) from search results                                                    | focus on finding only the contacts who still need to be added, avoiding redundancy and saving time                                                 |
+| `* `       | Student event planner managing a large contact list                                                    | See which contacts are currently excluded from search results                                                                             | easily verify which contacts have already been added to events and avoid adding them again by mistake                                              |
+| `* `       | Student event planner managing event contacts                                                          | Remove all contacts from the excluded list                                                                                                | have those contacts reappear in search results and add them to events if necessary, ensuring I can efficiently manage my contact list when needed  |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `PlanPal` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**UC01: Add a contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User specifies the command that they want to add a new user
+2.  User specifies the information of the user they want to add
+3.  PlanPal shows a success message
+4.  PlanPal shows the new User Object that has been created
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Tagging a contact with a role
+  * 2a1. User specifies what role the contact belongs to
+    
+    Use case resumes from 3.
+
+* 2b. Adding Telegram Contact
+  * 2b1. User specifies the Telegram username that the contact belongs to
+
+    Use case resumes from 3.
+
+**UC02: Listing Contacts**
+
+**MSS**
+1. User specifies a command to request to list persons
+2. PlanPal shows the list of all contacts
+   Use case ends.
+
+**Extensions:**
+* 1a PlanPal detects error in process to list user
+  * 1a1 PlanPal shows an error message that the command was called wrongly
+
+    Use case ends.
+
+
+**UC03: Delete a contact**
+
+**MSS**
+
+1.  User requests to list persons(UC02)
+2.  User requests to delete a specific person in the list
+3.  PlanPal deletes the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b.  PlanPal detects that the command given is invalid
+    * 2b1. PlanPal shows an error message
 
-    * 3a1. AddressBook shows an error message.
+      Use case ends.
 
-      Use case resumes at step 2.
+**UC04 List Contacts by Role**
 
-*{More to be added}*
+**MSS**
+
+1. User requests to filter contacts by role
+2. PlanPal displays a list of contacts matching the specified role
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. PlanPal detects that the command given is invalid
+    * 1a1. PlanPal shows an error message indicating that the command syntax is incorrect
+
+      Use case resumes at step 1.
+
+* 2a. No contacts are found for the specified role
+    * 2a1. PlanPal displays a message that no users were found
+
+      Use case ends.
+
+**UC05: Add a new event**
+
+**MSS**
+1. User specifies the command to create a new event.
+2. User specifies the name of the event.
+3. PlanPal creates the event and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+* 2a. PlanPal detects that the event name is missing or invalid.
+    * 2a1. PlanPal shows an error message.
+
+      Use case ends.
+
+**UC06: Assign a contact to an event**
+
+**MSS**
+1. User specifies the event they wish to assign contacts to.
+2. User selects the contact(s) to assign and specifies their role in the event.
+3. PlanPal assigns the contact(s) to the event and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+* 2a. User specifies a contact that does not exist.
+    * 2a1. PlanPal displays an error message indicating the contact is invalid.
+
+      Use case ends.
+
+* 2b. The contact does not have the role specified.
+    * 2b1. PlanPal displays an error message indicating that the contact does not have the specified role.
+
+      Use case ends.
+
+
+* 2c. The event does not exist.
+  * 2c1. PlanPal displays an error message indicating the event is invalid.
+
+      Use case ends.
+
+**UC07: Search for contacts using a filter**
+
+**MSS**
+1. User enters a command to search for contacts.
+2. User specifies a filter (e.g., name, role, event).
+3. PlanPal displays the filtered list of contacts.
+
+   Use case ends.
+
+**Extensions**
+* 2a. No contacts match the search criteria.
+    * 2a1. PlanPal displays a message indicating no contacts were found.
+
+      Use case ends.
+
+**UC08: Edit contact details**
+
+**MSS**
+1. User specifies the contact they wish to edit.
+2. User specifies the updated information for the contact.
+3. PlanPal updates the contact and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+* 2a. User enters invalid information (e.g., telegram name longer than 32 characters).
+    * 2a1. PlanPal displays an error message.
+
+      Use case ends.
+
+**UC09: Remove a contact from an event**
+
+**MSS**
+1. User specifies the event they want to modify and the contact they wish to remove from the event.
+2. PlanPal removes the contact from the event and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The specified contact is not part of the event.
+    * 1a1. PlanPal displays an error message indicating the contact was not found in the event.
+
+      Use case ends.
+
+* 1b. The event does not exist.
+  * 1b1. PlanPal displays an error message indicating the event is invalid.
+
+    Use case ends.
+
+**UC10: Clear all events**
+
+**MSS**
+1. User specifies the command to clear all events.
+2. PlanPal deletes all events and displays a success message.
+
+   Use case ends.
+
+**UC11: Enter Search Mode**
+
+**MSS**
+1. User specifies the command to enter search mode.
+2. PlanPal activates search mode.
+
+   Use case ends.
+
+**Extensions**
+* 1a. User is already in search mode.
+    * 1a1. PlanPal displays a message indicating the user is already in search mode.
+
+      Use case ends.
+
+**UC12: Perform a search in Search Mode**
+
+**Preconditions**: User is in search mode.
+
+**MSS**
+1. User specifies search criteria (e.g., name, role, email).
+2. PlanPal filters the list of contacts based on the criteria and displays the results.
+
+   Use case ends.
+
+**Extensions**
+* 1a. User provides invalid or incomplete search criteria.
+    * 1a1. PlanPal displays an error message and prompts the user to provide valid criteria.
+
+      Use case ends.
+
+* 2a. No contacts match the search criteria.
+    * 2a1. PlanPal displays a message indicating no matches were found.
+
+      Use case ends.
+
+**UC13: Add a contact to the excluded list**
+
+**Preconditions**: User is in search mode.
+
+**MSS**
+1. User specifies the command to exclude a contact.
+2. User selects a contact from the current search results.
+3. PlanPal adds the contact to the excluded list and removes it from the search results, displaying a success message.
+
+   Use case ends.
+
+**Extensions**
+* 2a. User specifies an invalid or non-existent contact.
+    * 2a1. PlanPal displays an error message indicating the contact is invalid.
+
+      Use case ends.
+
+**UC14: Clear currently excluded contacts in search mode**
+
+
+**Preconditions**: User is in search mode.
+
+**MSS**
+1. User clears the excluded contacts list.
+2. PlanPal clears all currently exclude contacts and displays a success message.
+3. Previously excluded contacts are now included in the search results.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The excluded contacts list is empty.
+    * 1a1. PlanPal displays an error message indicating that there are no excluded contacts.
+
+      Use case ends.
+
+**UC15: View excluded contacts**
+
+**Preconditions**: User is in search mode.
+
+**MSS**
+1. User specifies the command to view excluded contacts.
+2. PlanPal displays a list of all excluded contacts.
+
+   Use case ends.
+
+**Extensions**
+* 1a. No contacts have been excluded.
+    * 1a1. PlanPal displays a message indicating no contacts are excluded.
+
+      Use case ends.
+
+**UC16: Exit Search Mode**
+
+**Preconditions**: User is in search mode.
+
+**MSS**
+1. User specifies the command to exit search mode.
+2. PlanPal exits search mode and returns to the default interface displaying the full contact list.
+
+   Use case ends.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. PlanPal must have a consistent command-line interface design adhering to standard CLI usability conventions
+2. PlanPal should not have multiple users on a shared computer
+3. PlanPal should only support a single user
+4. PlanPal data should be stored locally
+5. PlanPal should not rely on external database
+6. PlanPal should work on Windows, Linux and OS-X systems
+7. PlanPal should not depend on a remote server
+8. Third party frameworks/libraries/services used must be free, open source and have permissive licence terms
+10. Do not require installation by user
+11. PlanPal should work well for standard screen resolutions 1920x1080 and higher and for screen scales 150%
+12. PlanPal should be packaged into a single JAR file
+13. JAR file should not be above 100MB
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **PlanPal**: A software system designed to manage contact information specifically for student event planners, supporting functions like adding, updating, and deleting contacts, with data stored locally.
+* **CLI (Command Line Interface)**: A text-based user interface where the user interacts with the system by typing commands.
+* **GUI (Graphical User Interface)**: A icon-based user interface where the user interacts with the system through visual indicators and graphical icons.
+* **Contact**: An individual or entity whose information is stored in PlanPal, typically including name, phone number, email, address, role, and optionally a Telegram handle.
+* **Role**: A category assigned to a contact to indicate their relationship to an event, such as "attendee," "vendor," "volunteer," or "sponsor".
+* **Telegram Handle**: A unique username used on the Telegram messaging platform, which can be optionally stored as part of a contact's information in PlanPal.
+* **User Object**: The data structure in PlanPal that holds the information of a contact, including details like name, phone number, email, address, role, and Telegram handle.
+* **Single User**: PlanPal is designed to support only one user per system. It is not intended for multiple users on the same computer.
+* **Local Storage**: PlanPal stores all contact data on the user's local machine, without relying on external databases or cloud storage.
+* **Standard Screen Resolution**: PlanPal is optimized for display on screens with a resolution of 1920x1080 or higher, and it supports screen scaling up to 150% for better visibility on high-resolution displays.
+* **JAR File**: A Java Archive file that contains all the compiled code, libraries, and resources required for PlanPal to run.
+* **Index**: A numerical identifier used to specify a contact in a list for actions like deletion or updating. The index corresponds to the contact's position in the displayed list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -339,44 +543,164 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### **Launch and shutdown**
 
-1. Initial launch
+1. **Initial launch**
+    1. Download the jar file and copy it into an empty folder.
+    2. Open a command terminal, navigate to the folder containing the jar file, and run `java -jar planpal.jar`.
+    3. Expected: The GUI opens with sample contacts preloaded. The window size may not be optimum.
 
-   1. Download the jar file and copy into an empty folder
+2. **Saving window preferences**
+    1. Resize the window to an optimum size. Move the window to a different location.
+    2. Close the application by typing `exit`.
+    3. Re-launch the app by running `java -jar planpal.jar` in the terminal.
+    4. Expected: The most recent window size and location are retained.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+3. **Closing the app**
+    1. Type `exit` in the command box and press Enter.
+    2. Expected: The application closes without errors.
 
-1. Saving window preferences
+---
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+### **Contact management**
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+1. **Adding a new contact**
+    1. Test case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Rd, #04-01 t/johndoe r/vendor`
+        - Expected: A new contact "John Doe" is added. Details of the added contact are displayed in the status message.
+    2. Test case: `add n/John Doe`
+        - Expected: Error message displayed indicating missing mandatory fields.
 
-1. _{ more test cases …​ }_
+2. **Editing a contact**
+    1. Prerequisite: At least one contact exists in the list.
+    2. Test case: `edit 1 p/91234567 e/johndoe_new@example.com`
+        - Expected: Updates the phone number and email of the first contact. The updated details are displayed in the contact list.
+    3. Test case: `edit 1`
+        - Expected: Error message indicating no fields were specified for updating.
 
-### Deleting a person
+3. **Finding contacts**
+    1. Test case: `find-name John`
+        - Expected: Displays all contacts whose name contains "John" (case-insensitive).
+    2. Test case: `find-role vendor`
+        - Expected: Displays all contacts with the "vendor" role.
+    3. Test case: `find-role unknown`
+        - Expected: Does not change the contacts displayed, instead prints out the available roles for search
 
-1. Deleting a person while all persons are being shown
+4. **Deleting a contact**
+    1. Prerequisite: At least two contacts exist in the list.
+    2. Test case: `delete 2`
+        - Expected: Deletes the second contact in the list. Status message displays the details of the deleted contact.
+    3. Test case: `delete 0`
+        - Expected: Error message indicating invalid command.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+---
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+### **Event management**
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. **Adding a new event**
+    1. Test case: `new Career Fair`
+        - Expected: Adds a new event named "Career Fair" to the event list.
+    2. Test case: `new`
+        - Expected: Error message indicating invalid command.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+2. **Adding a contact to an event**
+    1. Prerequisite: An event and at least one contact exist.
+    2. Test case: `event-add ei/1 a/1`
+        - Expected: Adds the first contact to the first event with the "attendee" role. Status message confirms the addition.
+    3. Test case: `event-add ei/1`
+        - Expected: Error message indicating invalid command.
 
-1. _{ more test cases …​ }_
+3. **Removing a contact from an event**
+    1. Prerequisite: A contact has been added to an event.
+    2. Test case: `remove ei/1 ci/1`
+        - Expected: Removes the contact from the specified event. Status message confirms the removal.
+    3. Test case: `remove ei/1`
+        - Expected: Error message indicating invalid command.
 
-### Saving data
+4. **Deleting an event**
+    1. Prerequisite: At least one event exists in the list.
+    2. Test case: `erase 1`
+        - Expected: Deletes the first event. Status message confirms the deletion.
+    3. Test case: `erase`
+        - Expected: Error message indicating invalid command.
 
-1. Dealing with missing/corrupted data files
+5. **Find contacts by event**
+    1. Prerequisite: At least one event exists in the list.
+    2. Test case: `find-event 1`
+        - Expected: Displays all contacts in the first event.
+    3. Test case: `find-event`
+        - Expected: Error message indicating invalid command.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+6. **Clear all events**
+   1. Test case: `clear-event`
+        - Expected: All events are deleted.
 
-1. _{ more test cases …​ }_
+---
+
+### **Search Mode**
+
+1. **Entering and using search mode**
+    1. Test case: `search-mode`
+        - Expected: Application enters search mode, displaying an empty search results panel.
+    2. Test case: `search n/John`
+        - Expected: Adds contacts that match the name "John" to the search results panel.
+
+2. **Excluding contacts**
+    1. Prerequisite: At least one contact is displayed in the search results.
+    2. Test case: `exclude ci/1`
+        - Expected: Removes the first contact from the search results. Status message confirms exclusion.
+
+3. **Clearing exclusions**
+    1. Prerequisite: At least one contact is excluded.
+    2. Test case: `clear-excluded`
+        - Expected: All excluded contacts are restored to the search results.
+       
+4. **Checking exclusions**
+    1. Test case: `check-excluded`
+        - Expected: All excluded contacts are displayed in the result display.
+
+5. **Add all contacts from search results to event**
+   1. Prerequisite: At least one contact is present in the search results panel, there is at least 1 event, the contacts in the search results panel all have at least one role and are not already inside the event to be added to.
+   2. Test case: `add-all 1`
+       - Expected: Adds all contacts from the search results panel to the first event.
+
+6. **Exiting search mode**
+    1. Test case: `exit-search`
+        - Expected: Application returns to normal mode.
+
+---
+
+### **Data management**
+
+1. **Automatic saving**
+    1. Test case: Add a new contact or edit an existing one. Close the application and re-launch it.
+        - Expected: Changes persist and are visible after re-launch.
+
+---
+### **Planned Enhancements**
+Team size: 5
+1. **Clear Search Results in Search Mode**: Currently there is no way to clear existing search conditions in `search-mode`.
+   This enhancement will add a command to allow users to clear the current search results and revert to the beginning of activating `search-mode` again.
+2. **find-role search for users with no Roles**: Currently, the `find-role` command is unable to search for users with no roles.
+   This enhancement will allow search for users with no roles.
+3. **Top Level Domain (TLD) input validation for emails**: Currently, it is possible to create emails of `x@xx` format, even though 
+   the domain part of the email should have at least 2 domain labels, the last one being the Top Level Domain (TLD) in
+   real life (i.e. the minimal format should be `@xx.xx`). We could have better input validation to enforce that there must be at least 2 domain labels.
+4. **Allow users to define custom roles for contacts**: Currently, contacts can only have attendee, sponsor, vendor and volunteer roles or have no roles, which may
+   be too restrictive. We could allow users to add additional roles to contacts such as "emcee", "performer", "VIP" etc so that 
+   they get a classification instead of being labelled as no roles just because they do not fit in one of the 4 pre-determined roles. These user defined roles
+   will continue to work the same way as the 4 pre-determined roles.
+5. **Search within an event**: Currently, all searches are done on the general list of contacts. We could expand `find-event` to include a search for contacts within an event
+   e.g. find-event ei/1 n/john to find a contact with name "john" within event 1 so that users can find a contact for a specific event more quickly.
+6. **Add description to event**: Currently, users are only able to create events with an event name. We could allow users to add
+   description to events when they create a new event e.g. new n/EVENT_NAME d/EVENT_DESCRIPTION so that they can add additional important details like the date and location of the event.
+7. **Make remove contact from event message more specific**: Currently, if user types "remove ei/1 ci/0", the app says "Invalid command format!
+   remove ei/EVENT_INDEX ci/CONTACT_INDEX : Removes a contact from an event" which is not specific enough. We plan to make the error message say "Contact Index should be a positive integer" instead.
+8. **Make event-add and add-all error message more specific and less misleading**: Currently, when "event-add" command or "add-all" command in search mode is called to add multiple contacts to an event at the same time, if one of the contacts to be added to event does not have the role that he or she is being added to,
+   PlanPal shows an error message informing the user of the contact that does not have the role. However, some of the contacts may get added to the event. We plan to make the
+   error message include which contacts got added to the event so that users know that certain contacts got added and which contacts did not get added to the event.
+9. **Implement more graceful handling of invalid JSON data**: Currently, manual editing of JSON data is allowed. However, if invalid data is entered, the event list or address list could be completely cleared or the app 
+   may fail unexpectedly. We plan to implement more graceful handling of invalid JSON data so that invalid data entries can be ignored, allowing for operation with the remaining valid data.
+10. **Allow input fields to have longer length limits**: Currently, we limit the lengths of all the input fields such as event name,
+    contact name, phone number, address and email to a reasonable limit such that they are visible within the UI. However, it is possible that there are rare cases where the
+    length of real life information exceeds the input length limits we have imposed. We could allow greater input lengths by making our UI more robust in viewing
+    inputs that are very lengthy.
