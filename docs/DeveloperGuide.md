@@ -332,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. Wrong edit command format.
     * 1a1. GAB shows an error message.
     * 1a2. User enters new data.
-    * Steps 1a1-1a2 are repeated until the right add vendor command format is recognised.
+    * Steps 1a1-1a2 are repeated until the right edit vendor command format is recognised.
       Use case resumes at step 2.
 
 ---
