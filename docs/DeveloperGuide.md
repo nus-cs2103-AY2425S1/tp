@@ -20,6 +20,8 @@
 * ChatGPT was used to check for errors and generate some test cases.
   * It was used to generate the first two test cases in RemoveGradeCommandParserTest.java
   * It was also used for the usage of `.getStyleClass()` & `.add()` methods in PersonCard.java to display the information clearly.
+  * It was consulted to get a plan of how `PersonComparator` can be implemented.
+  * It was consulted to fix and improve the UI.
 * We referred to our TA (Wu Xiaoyun) team's usage of "newPage" and "newPageBetween" [here](https://github.com/AY2324S2-CS2103T-F13-1/tp) to set our pagination for the User and Developer Guide.
 
 ---
