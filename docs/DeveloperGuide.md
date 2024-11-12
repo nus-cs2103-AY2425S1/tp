@@ -187,7 +187,6 @@ Student event planners at NUS who:
 * need to manage contacts like attendees, vendors, sponsors and volunteers for their events.
 * need a centralized platform to organize, track and access contact information and details of event
 * prefer desktop apps over other types
-* can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
