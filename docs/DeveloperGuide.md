@@ -20,6 +20,7 @@ title: Developer Guide
 - [Planned Enhancements](#planned-enhancements)
   - [Disallow Duplicate Phone Number Across Contacts](#1-disallow-duplicate-phone-numbers-across-contacts)
   - [Consistent Case-Insensitive Tag Handling](#2-consistent-case-insensitive-tag-handling)
+  - [Improve Error Priority for Edit Command](#10-improve-error-priority-for-edit-command)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
@@ -260,6 +261,14 @@ The current tag handling system in the app is inconsistent regarding case sensit
 
 #### Proposed Enhancement:
 Standardise the tag handling logic to be case-insensitive across all commands. This means that tags with the same letters but different capitalisations (e.g., `OwesMoney`, `owesmOney`, `OWESMONEY`) will be treated as identical tags in all scenarios, including adding contacts, adding tags, deleting tags and filtering tags. By making this adjustment, the program will align with standard user expectations of case-insensitivity, creating a more intuitive and consistent experience for users.
+
+### 10. Improve Error Priority for Edit Command
+
+#### Current Issue:
+When attempting to edit fields restricted to specific contact types (such as `STUDENT_ID` and `INDUSTRY`), the application currently prioritises validating the input format before checking if the field is editable for the specified contact type. This results in a situation where users are first prompted to correct the format, even if they should ultimately be informed that the field cannot be edited for that contact type. For example, attempting to edit a student’s `INDUSTRY` field will first trigger a format error message rather than directly informing the user that the `INDUSTRY` field cannot be edited for students.
+
+#### Proposed Enhancement:
+Adjust the error-checking sequence in the edit command to prioritise checks on editability based on contact type before format validation. This means users will receive a direct message if they attempt to edit fields restricted for a contact type (e.g., "Industry field cannot be edited for a student contact"), reducing unnecessary steps and making the error feedback more user-friendly.
 
 ---
 
