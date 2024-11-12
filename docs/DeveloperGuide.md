@@ -33,7 +33,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -46,7 +46,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -78,7 +78,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -95,7 +95,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -125,7 +125,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -137,20 +137,20 @@ The `Model` component,
 * wraps the _filtered_ list in a `SortedList<Person>`, where sorting order is determined by a `Comparator<Person>`, selected by the user.
 * exposes `SortedList<Person>` to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F11-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 ### Common classes
 
@@ -207,7 +207,7 @@ and call `Model::setPerson` to update the specified person in the `addressbook` 
 
 The following activity diagram summarizes what happens when a user executes a mark command:
 
-<img src="images/MarkAttendanceActivityDiagram.png" width="250" />
+![MarkAttendanceActivityDiagram](images/MarkAttendanceActivityDiagram.png)
 
 The following sequence diagram shows how a mark operation goes through the `Logic` component:
 
@@ -270,7 +270,7 @@ There are two instances where a profile's JSON file will be created if it does n
 2. When the user exits the program: If the program is closed via the GUI’s 'close' button, then `MainWindow` triggers the file creation chain instead.
 
 ##### Design Considerations
-##### Aspect: What key to store to identify a profile
+###### Aspect: What key to store to identify a profile
 - Alternative 1 (Current Choice): Identify by profile name
   - Pros:
     - Easy for developers to modify profile names rather than file paths.
@@ -327,27 +327,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user          | add new contacts with the few keystrokes                                    | add new contacts efficiently                                            |
 | `* * *`  | user          | edit the details of a contact                                               | keep the contact list up to date                                        |
 | `* * *`  | user          | delete a contact entry if needed                                            | remove any individuals who are no longer relevant to my organisation    |
-| `* *`    | user          | add multiple contacts with one command                                      | save time and streamline the contact entry process                      |
 | `* *`    | user          | sort the contacts by alphabetical order of their names                      | quickly scan through and find the relevant contact                      |
 | `* *`    | user          | assign contacts to a group/role name                                        | group individuals into relevant sections for better clarity             |
 | `* *`    | user          | search for multiple contacts by querying its role                           | get the information of all the contacts related to the relevant role    |
 | `* *`    | user          | mark attendance of several members on specific date                         | accurately record their participation status in CCA activities          |
-| `* *`    | user          | have a separate profile for different purpose                               | organize my contacts based on various context                           |
 | `* *`    | user          | transfer my profile                                                         | easily access and use my profile on other machines                      |
-| `* *`    | user          | add notes to any contact                                                    | remember important details about them                                   |
-| `* *`    | user          | import my contacts from an external file                                    | quickly add contacts obtained from Google Forms or others               |
-| `* *`    | user          | export my contacts to an external file                                      | share contacts with others or manage them externally                    |
 | `* *`    | user          | see all members in a separate view                                          | check members and mark their attendance more easily                     |
 | `* *`    | user          | remove mark of attendance of several members on specific date               | accurately record their participation status in CCA activities          |
 | `* *`    | user          | mark certain contacts as favourites                                         | easily find and access frequently used contacts                         |
-| `* *`    | user          | see a profile picture for each contact                                      | recall the person from the picture                                      |
 | `*`      | user          | sort the contact list based on how often I access each contact)             | quickly find contacts I use most frequently without extensive searching |
 | `*`      | seasoned user | leverage compound and nested queries/commands                               | get the exact results that I require, in fewer commands                 |
-| `*`      | user          | secure my account with authentication                                       | only authorised users can access the information                        |
-| `*`      | user          | log activity history with each contact                                      | keep track of my latest interactions and follow-ups                     |
 | `*`      | user          | perform advanced searches using multiple criteria (e.g. role, last contact) | find specific contacts more efficiently                                 |
 | `*`      | user          | customise the appearance of my address book (e.g. colour schemes, themes…)  | match my preferences                                                    |
-| `*`      | user          | colour-code my contacts based on categories                                 | visually distinguish between different types of contacts                |
 
 
 ### Use cases
@@ -362,7 +353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User enters appropriate ‘view’ command to search for John Doe’s contact information.
 2. System opens up new page with John Doe’s contact information.
 
-Use Case ends.
+    Use Case ends.
 
 **Extensions**
 
@@ -602,6 +593,7 @@ ___
 * **Regex**: A regular expression, which is a sequence of characters that specifies a match pattern
 * **Member**: A member is a special type of contact that has the role `Member` in its `roles`
 - **Profile**: A collection of contacts in the system, identified by a profile name
+
 ___
 
 ## **Appendix: Instructions for manual testing**
@@ -619,7 +611,7 @@ testers are expected to do more *exploratory* testing.
 
 **Test Case 1**:
 1. Launch the application.
-2. Enter `add n/tester p/99999999 e/test@test.com t/test123 r/member`
+2. Enter `add n/tester p/99999999 e/test@test.com t/test123 r/member`.
 
 **Expected Result**:
 - The new contact is added to the list and displayed.
@@ -637,7 +629,7 @@ testers are expected to do more *exploratory* testing.
 
 **Test Case 1**:
 1. Identify the index of the contact you want to edit, `X`.
-2. Enter `edit X n/New Name`
+2. Enter `edit X n/New Name`.
 
 **Expected Result**:
 - Contact at index `X` has a new contact name, `New Name`.
@@ -680,13 +672,13 @@ testers are expected to do more *exploratory* testing.
 **Description**: Sorts the items in the list based on a specified criterion (`asc`, `desc` or `og`).
 
 **Test Case 1**:
-1. Enter `sort asc`
+1. Enter `sort asc`.
 
 **Expected Result**:
 - The items in the list are sorted in ascending order (based on name).
 
 **Test Case 2**:
-1. Enter `sort tallest`
+1. Enter `sort tallest`.
 
 **Expected Result**:
 - Error message `Sort order parameter can only be asc or desc or og.` displayed.
@@ -696,8 +688,8 @@ testers are expected to do more *exploratory* testing.
 **Description**: Finds items in the list that match a specified search query.
 
 **Test Case 1**:
-1. Identify criterion you wish to find contacts with (e.g., `r/member`)
-2. Enter `find r/member`
+1. Identify criterion you wish to find contacts with (e.g., `r/member`).
+2. Enter `find r/member`.
 
 **Expected Result**:
 - Only contacts that have `Member` in their role are displayed.
@@ -708,58 +700,58 @@ testers are expected to do more *exploratory* testing.
 
 **Test Case 1**:
 1. Identify the telegram handle of the contact you wish to view (e.g., `test123`).
-2. Enter `view t/test123`
+2. Enter `view t/test123`.
 
 **Expected Result**:
 - The contact details of the specified contact are displayed.
 
 **Test Case 2**:
-1. Identify invalid telegram handle you wish to view (e.g., `test` (less than 5 characters) or `test!23` (contains invalid character))).
-2. Enter `view t/test` or `view t/test!23`
+1. Identify invalid telegram handle you wish to view, e.g. `test` (less than 5 characters) or `test!23` (contains invalid character).
+2. Enter `view t/test` or `view t/test!23`.
 
 **Expected Result**:
 - Error message specifying exact error in telegram input displayed.
 
 ### Switch Feature
-**Description**: switches the current profile to the specified profile
+**Description**: switches the current profile to the specified profile.
 
-**Test Case 1**
-1. Assuming the current profile is 'addressbook'
-2. Enter `switch alice`
+**Test Case 1**:
+1. Assuming the current profile is 'addressbook'.
+2. Enter `switch alice`.
 
-**Expected Result**
-- The current profile is swapped to 'alice'
+**Expected Result**:
+- The current profile is swapped to 'alice'.
 
-**Test Case 2**
-1. Assuming the current profile is 'addressbook'
-2. Enter `switch addressbook`
+**Test Case 2**:
+1. Assuming the current profile is 'addressbook'.
+2. Enter `switch addressbook`.
 
-**Expected Result**
-- Error message specifying that `Already on 'addressbook'`
+**Expected Result**:
+- Error message specifying that `Already on 'addressbook'`.
 
 
 ### Delete profile Feature
-**Description**: Deletes an existing profile from the system
+**Description**: Deletes an existing profile from the system.
 
-**Test Case 1**
-1. Assuming the profile 'alice' already exists
-2. Enter `deleteProfile alice`
+**Test Case 1**:
+1. Assuming the profile 'alice' already exists.
+2. Enter `deleteProfile alice`.
 
-**Expected Result**
-- The profile 'alice' is removed
+**Expected Result**:
+- The profile 'alice' is removed.
 
-**Test Case 2**
-1. Assuming the current profile is 'addressbook'
-2. Enter `deleteProfile adressbook`
+**Test Case 2**:
+1. Assuming the current profile is 'addressbook'.
+2. Enter `deleteProfile adressbook`.
 
-**Expected Result**
+**Expected Result**:
 - Error message specifying that `Unable to delete the profile currently in use. Please switch to a different profile before attempting deletion.`
 
-**Test Case 3**
-1. Assuming the profile 'alice' does not exist
-2. Enter `deleteProfile alice`
+**Test Case 3**:
+1. Assuming the profile 'alice' does not exist.
+2. Enter `deleteProfile alice`.
 
-**Expected Result**
+**Expected Result**:
 - Error message specifying that `Profile not found. Unable to delete a non-existing profile.`
 
 ### General Testing Notes
@@ -784,11 +776,13 @@ We plan to make the error message more specific to let the user know of which ex
 Currently, the `role` field is restricted to a maximum of 20 characters. This was done to prevent clutter in the UI, since the team felt that it was sufficient at this point to impose a restriction that should not affect the vast majority of named roles.
 In the future, we plan to implement UI truncation measures to allow for users to specify roles that are longer than the current limit.
 
-4. Update error message of `mark` and `unmark` command when input contains telegram of non-member contact: <br/>
-   Current error message just warns user the input contains non-member telegram handle,
-   we plan to list the name of the non-member contacts in error message for more convenient marking in the next step.
+4. Update error message of `mark` and `unmark` command when input contains telegram of non-member contact:<br/>
+The current error message just warns user the input contains non-member telegram handle.
+We plan to list the name of the non-member contacts in error message for more convenient marking in the next step.
 
-5. Add command to view members with attendance on the input date.
+5. Add new command to view attendance of all members by date:<br/>
+Currently, there is no functionality that lets users view members' attendance by date.
+We plan to implement such a command in the future, to improve search efficiency.
 
 6. Increase specificity of error message when an invalid index is used for `edit` command:<br/>
-The current error message when an invalid index is passed as argument to `edit` command is 'invalid command format ...' which we plan to change it to inform users that specifically their input index is invalid.
+The current error message when an invalid index is passed as an argument to `edit` command is 'invalid command format ...', which we plan to change in order to inform users that specifically their input index is invalid.
