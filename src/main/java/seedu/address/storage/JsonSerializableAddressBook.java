@@ -55,6 +55,7 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+
         for (JsonAdaptedSupplier jsonAdaptedSupplier : suppliers) {
             Supplier supplier = jsonAdaptedSupplier.toModelType();
             if (addressBook.hasSupplier(supplier)) {
@@ -65,10 +66,10 @@ class JsonSerializableAddressBook {
 
         for (JsonAdaptedDelivery jsonAdaptedDelivery : deliveries) {
             Delivery delivery = jsonAdaptedDelivery.toModelType();
-            if (addressBook.hasDelivery(delivery)) {
+            if (addressBook.hasDeliveryInAddressBook(delivery)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_DELIVERY);
             }
-            addressBook.addDelivery(delivery);
+            addressBook.addDeliveryToAddressBook(delivery);
         }
 
         return addressBook;

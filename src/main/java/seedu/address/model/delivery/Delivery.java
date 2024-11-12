@@ -104,6 +104,9 @@ public class Delivery {
 
     /**
      * Returns true if both deliveries have the same package details, sender.
+     *
+     * @param otherDelivery the delivery to compare with this delivery
+     * @return true if both deliveries have the same details and sender
      */
     public boolean isSameDelivery(Delivery otherDelivery) {
         if (otherDelivery == this) {

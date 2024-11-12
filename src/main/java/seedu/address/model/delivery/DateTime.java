@@ -18,17 +18,17 @@ public class DateTime implements Comparable<DateTime> {
     public static final DateTimeFormatter FORMATTER_TIME =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-    public final LocalDateTime time;
+    private final LocalDateTime dateTime;
 
     /**
      * Constructs a {@code DateTime}.
      *
-     * @param time A valid time following the format of dd-MM-yyyy HH:mm.
+     * @param dateTime A valid time following the format of dd-MM-yyyy HH:mm.
      */
-    public DateTime(String time) {
-        requireNonNull(time);
-        checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        this.time = parseTime(time.trim());
+    public DateTime(String dateTime) {
+        requireNonNull(dateTime);
+        checkArgument(isValidTime(dateTime), MESSAGE_CONSTRAINTS);
+        this.dateTime = parseTime(dateTime.trim());
     }
 
     /**
@@ -41,7 +41,7 @@ public class DateTime implements Comparable<DateTime> {
      *         or greater than the other dateTime.
      */
     public int compareTo(DateTime otherDateTime) {
-        return time.compareTo(otherDateTime.time);
+        return dateTime.compareTo(otherDateTime.dateTime);
     }
 
     /**
@@ -51,9 +51,9 @@ public class DateTime implements Comparable<DateTime> {
         return canParse(test, FORMATTER_TIME);
     }
 
-    private static boolean canParse(String time, DateTimeFormatter formatter) {
+    private static boolean canParse(String dateTime, DateTimeFormatter formatter) {
         try {
-            LocalDateTime.parse(time, formatter);
+            LocalDateTime.parse(dateTime, formatter);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -63,14 +63,14 @@ public class DateTime implements Comparable<DateTime> {
     /**
      * Parses a given string into a LocalDateTime object.
      *
-     * @param time String to be parsed.
+     * @param dateTime String to be parsed.
      * @return LocalDateTime object parsed from the string.
      */
-    private static LocalDateTime parseTime(String time) {
-        if (canParse(time, FORMATTER_TIME)) {
-            return LocalDateTime.parse(time, FORMATTER_TIME);
+    private static LocalDateTime parseTime(String dateTime) {
+        if (canParse(dateTime, FORMATTER_TIME)) {
+            return LocalDateTime.parse(dateTime, FORMATTER_TIME);
         } else {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS); //Should not reach here due to previous validation
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
     }
 
@@ -81,7 +81,7 @@ public class DateTime implements Comparable<DateTime> {
      * @return True if delivery instance has DateTime earlier than input DateTime.
      */
     public boolean isEarlierThan(DateTime deliveryDateTime) {
-        return this.time.isBefore(deliveryDateTime.time);
+        return this.dateTime.isBefore(deliveryDateTime.dateTime);
     }
 
     /**
@@ -91,17 +91,23 @@ public class DateTime implements Comparable<DateTime> {
      * @return True if instance of DateTime is later than input.
      */
     public boolean isLaterThan(DateTime deliveryDateTime) {
-        return this.time.isAfter(deliveryDateTime.time);
+        return this.dateTime.isAfter(deliveryDateTime.dateTime);
     }
 
     @Override
     public String toString() {
-        return time.format(FORMATTER_TIME);
+        return dateTime.format(FORMATTER_TIME);
     }
 
 
     public String displayFormater() {
-        return time.format(DateTimeFormatter.ofPattern("d MMMM yyyy h:mm a"));
+        return dateTime.format(DateTimeFormatter.ofPattern("d MMMM yyyy h:mm a"));
+    }
+
+    public LocalDateTime getDateTime() {
+
+        assert dateTime != null;
+        return this.dateTime;
     }
 
     @Override
@@ -115,11 +121,11 @@ public class DateTime implements Comparable<DateTime> {
         }
 
         DateTime otherDateTime = (DateTime) other;
-        return time.equals(otherDateTime.time);
+        return dateTime.equals(otherDateTime.dateTime);
     }
 
     @Override
     public int hashCode() {
-        return time.hashCode();
+        return dateTime.hashCode();
     }
 }

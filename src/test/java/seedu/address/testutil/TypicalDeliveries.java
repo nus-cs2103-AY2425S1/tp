@@ -45,7 +45,7 @@ public class TypicalDeliveries {
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Delivery delivery : getTypicalDeliveries()) {
-            ab.addDelivery(delivery);
+            ab.addDeliveryToAddressBook(delivery);
         }
         return ab;
     }

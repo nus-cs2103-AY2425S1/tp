@@ -77,7 +77,7 @@ public class SampleDataUtil {
             sampleAb.addSupplier(sampleSupplier);
         }
         for (Delivery sampleDelivery : getSampleDeliveries()) {
-            sampleAb.addDelivery(sampleDelivery);
+            sampleAb.addDeliveryToAddressBook(sampleDelivery);
         }
         return sampleAb;
     }

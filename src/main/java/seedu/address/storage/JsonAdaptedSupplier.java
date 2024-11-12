@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Supplier}.
  */
-class JsonAdaptedSupplier {
+public class JsonAdaptedSupplier {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Supplier's %s field is missing!";
 

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,6 +26,11 @@ public class DeleteDeliveryCommand extends DeleteCommand {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteDeliveryCommand to delete the specified delivery at {@code targetTndex}.
+     *
+     * @param targetIndex Index of delivery to be deleted.
+     */
     public DeleteDeliveryCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -32,20 +39,30 @@ public class DeleteDeliveryCommand extends DeleteCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Ensure delivery list has items
-        if (targetIndex.getZeroBased() >= model.getModifiedDeliveryList().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
-        }
+        Delivery deliveryToDelete = getDeliveryToDelete(model);
+        assert deliveryToDelete != null;
 
-        // Get the delivery at the specified index
-        Delivery deliveryToDelete = model.getModifiedDeliveryList().get(targetIndex.getZeroBased());
-
-        // Delete the delivery
         model.deleteDelivery(deliveryToDelete);
         model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
 
-        // Return success message
         return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS, Messages.format(deliveryToDelete)));
+    }
+
+    /**
+     * Retrieves delivery to be deleted.
+     *
+     * @param model Model which the command should operate on.
+     * @return existing Delivery that needs to be deleted.
+     * @throws CommandException If index given exceeds the number of deliveries.
+     */
+    private Delivery getDeliveryToDelete(Model model) throws CommandException {
+        List<Delivery> deliveryList = model.getModifiedDeliveryList();
+        assert deliveryList != null;
+
+        if (targetIndex.getZeroBased() >= deliveryList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
+        }
+        return model.getModifiedDeliveryList().get(targetIndex.getZeroBased());
     }
 
     @Override

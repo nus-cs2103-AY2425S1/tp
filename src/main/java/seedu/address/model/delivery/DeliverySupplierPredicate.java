@@ -10,6 +10,11 @@ import seedu.address.model.supplier.Supplier;
 public class DeliverySupplierPredicate implements Predicate<Delivery> {
     private final Supplier supplier;
 
+    /**
+     * Creates a DeliverySupplierPredicate instance based on the given supplier.
+     *
+     * @param supplier Supplier used to filter deliveries.
+     */
     public DeliverySupplierPredicate(Supplier supplier) {
         this.supplier = supplier;
     }
@@ -23,7 +28,7 @@ public class DeliverySupplierPredicate implements Predicate<Delivery> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeliverySupplierPredicate // instanceof handles nulls
-                && supplier.isSameSupplier(((DeliverySupplierPredicate) other).supplier)); // state check
+                && supplier.isSameSupplier(((DeliverySupplierPredicate) other).supplier));
     }
 }
 

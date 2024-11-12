@@ -12,7 +12,8 @@ public class DeliveryProductPredicate implements Predicate<Delivery> {
 
     /**
      * Creates a DeliveryProductPredicate instance based on the given targetProduct.
-     * @param targetProduct Product used to filter deliveries
+     *
+     * @param targetProduct Product used to filter deliveries.
      */
     public DeliveryProductPredicate(Product targetProduct) {
         this.targetProduct = targetProduct;

@@ -145,17 +145,17 @@ public class ModelManager implements Model {
     @Override
     public boolean hasDelivery(Delivery delivery) {
         requireNonNull(delivery);
-        return addressBook.hasDelivery(delivery);
+        return addressBook.hasDeliveryInAddressBook(delivery);
     }
 
     @Override
     public void deleteDelivery(Delivery target) {
-        addressBook.removeDelivery(target);
+        addressBook.removeDeliveryFromAddressBook(target);
     }
 
     @Override
     public void addDelivery(Delivery target) {
-        addressBook.addDelivery(target);
+        addressBook.addDeliveryToAddressBook(target);
         updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES); // Refresh the list after adding
     }
 
