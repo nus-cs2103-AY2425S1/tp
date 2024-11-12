@@ -20,6 +20,11 @@ AI generated content was verified by a human.
 We referenced the general format of the User Guide and Developer Guide from this repo:
 https://github.com/AY2324S1-CS2103T-T11-2/tp/blob/master/docs/
 
+| AI Tool | How it was used                                                    | Used by            |
+|---------|--------------------------------------------------------------------|--------------------|
+| Claude  | Generate JavaDoc comments based some sample self-written comments. | Alexander Liswandy |
+| Claude  | Suggest and add missing test scenarios to existing test suite.     | Alexander Liswandy |
+
 ---
 
 ## **Setting up, getting started**
