@@ -17,7 +17,7 @@ Class Employee
 Class Address
 Class Email
 Class EmployeeId
-Class Name
+Class EmployeeName
 Class Phone
 Class Skill
 Class Tag
@@ -29,6 +29,7 @@ Class UniqueAssignmentList
 Class Assignment
 Class AssignmentId
 Class Id
+Class Name
 Class I #FFFFFF
 }
 
@@ -51,7 +52,7 @@ AddressBook *-down-> "1" UniqueAssignmentList
 
 UniqueEmployeeList --> "~* all" Employee
 Employee *--> EmployeeId
-Employee *--> Name
+Employee *--> EmployeeName
 Employee *--> Phone
 Employee *--> Email
 Employee *--> Address
@@ -69,12 +70,14 @@ Assignment *--> AssignmentId
 EmployeeId -down-|> Id
 ProjectId -down-|> Id
 AssignmentId -down-|> Id
+EmployeeName -down-|> Name
+ProjectName -down-|> Name
 
 Employee -[hidden]up--> I
 UniqueEmployeeList -[hidden]right-> I
 
-EmployeeId -[hidden]right-> Name
-Name -[hidden]right-> Phone
+EmployeeId -[hidden]right-> EmployeeName
+EmployeeName -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
