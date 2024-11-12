@@ -71,7 +71,7 @@
     * [7.3 Handling Multiple Students with Identical Names]({{ baseUrl }}/DeveloperGuide.html#7-3-handling-multiple-students-with-identical-names)
     * [7.4 Restriction on Using Reserved Prefixes within Parameters]({{ baseUrl }}/DeveloperGuide.html#7-4-restriction-on-using-reserved-prefixes-within-parameters)
     * [7.5 Remove Note Display if Blank]({{ baseUrl }}/DeveloperGuide.html#7-5-remove-note-display-if-blank)
-    * [7.6 Autoscale Person List When Manually Adjusting Size]({{ baseUrl }}/DeveloperGuide.html#7-6-autoscale-person-list-when-manually-adjusting-size)
+    * [7.6 Autoscale Student List When Manually Adjusting Size]({{ baseUrl }}/DeveloperGuide.html#7-6-autoscale-student-list-when-manually-adjusting-size)
     * [7.7 Restrict Task Deadlines to Dates After the Current Date]({{ baseUrl }}/DeveloperGuide.html#7-7-restrict-task-deadlines-to-dates-after-the-current-date)
     * [7.8 Allow Lesson Times to Span Across Multiple Days]({{ baseUrl }}/DeveloperGuide.html#7-8-allow-lesson-times-to-span-across-multiple-days)
 * Tutorials

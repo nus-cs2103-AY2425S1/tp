@@ -56,7 +56,7 @@
 * [7.3 Handling Multiple Students with Identical Names](#7-3-handling-multiple-students-with-identical-names)
 * [7.4 Restriction on Using Reserved Prefixes within Parameters](#7-4-restriction-on-using-reserved-prefixes-within-parameters)
 * [7.5 Remove Note Display if Blank](#7-5-remove-note-display-if-blank)
-* [7.6 Autoscale Person List When Manually Adjusting Size](#7-6-autoscale-person-list-when-manually-adjusting-size)
+* [7.6 Autoscale Student List When Manually Adjusting Size](#7-6-autoscale-student-list-when-manually-adjusting-size)
 * [7.7 Restrict Task Deadlines to Dates After the Current Date](#7-7-restrict-task-deadlines-to-dates-after-the-current-date)
 * [7.8 Allow Lesson Times to Span Across Multiple Days](#7-8-allow-lesson-times-to-span-across-multiple-days)
 
@@ -1051,9 +1051,9 @@ providing a cleaner and more efficient user experience by removing unnecessary e
 
 ***
 
-### 7.6 Autoscale Person List When Manually Adjusting Size
-Currently, when users adjust the size of the person list window, the content does not automatically rescale, leading to
-potential readability and usability issues. A future version will include an autoscaling feature for the person list,
+### 7.6 Autoscale Student List When Manually Adjusting Size
+Currently, when users adjust the size of the student list window, the content does not automatically rescale, leading to
+potential readability and usability issues. A future version will include an autoscaling feature for the student list,
 ensuring that content dynamically adjusts to fit the window's new size. This enhancement will improve the flexibility
 and adaptability of the user interface.
 
