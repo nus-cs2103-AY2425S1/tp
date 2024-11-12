@@ -45,10 +45,10 @@ public class EventUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_EVENT_NAME).append(name.eventName).append(" "));
         descriptor.getDescription().ifPresent(description -> sb.append(PREFIX_EVENT_DESCRIPTION)
                 .append(description.eventDescription).append(" "));
-        descriptor.getStartDate().ifPresent(startDate ->
-                sb.append(PREFIX_EVENT_START_DATE).append(startDate.toString()).append(" "));
-        descriptor.getEndDate().ifPresent(endDate ->
-                sb.append(PREFIX_EVENT_END_DATE).append(endDate.toString()).append(" "));
+        descriptor.getDuration().ifPresent(duration -> {
+            sb.append(PREFIX_EVENT_START_DATE).append(duration.getStartDate().toString()).append(" ");
+            sb.append(PREFIX_EVENT_END_DATE).append(duration.getEndDate().toString()).append(" ");
+        });
         return sb.toString();
     }
 
