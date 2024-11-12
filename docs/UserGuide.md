@@ -252,7 +252,7 @@ Examples:
 
 ### Sorting the person list : `sort`
 
-Sorts the list of persons being viewed by name or date of last visit in ascending or descending order.
+Sorts the list of persons being viewed by name (prefix: n) or date of last visit (prefix: d) in ascending or descending order.
 
 Format: `sort PARAMETER_PREFIX/ORDER`
 
