@@ -265,7 +265,7 @@ The main basic commands for *TAHub Contacts*.
 <a name="help">
   <panel header="#### Viewing help : `help`" expanded no-close no-switch>
 
-  Shows a message explaning how to access the help page.
+  Shows a message explaining how to access the help page.
 
   ![help message](images/helpMessage.png)
 
