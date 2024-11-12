@@ -1,60 +1,61 @@
 package seedu.address.model.util;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
+import seedu.address.model.event.Location;
+import seedu.address.model.volunteer.Email;
+import seedu.address.model.volunteer.Name;
+import seedu.address.model.volunteer.Phone;
+import seedu.address.model.volunteer.Volunteer;
+import seedu.address.model.volunteer.VolunteerDates;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+    public static Volunteer[] getSampleVolunteers() {
+        return new Volunteer[] {
+            new Volunteer(new Name("Alex Yeoh"), new Phone("12345678"), new Email("AlexYeoh@gmail.com"),
+                    new VolunteerDates("2022-02-02")),
+            new Volunteer(new Name("Bob Tan"), new Phone("23456789"), new Email("bob@gmail.com"),
+                    new VolunteerDates("2022-03-02")),
+            new Volunteer(new Name("Cathy Lee"), new Phone("12345633"), new Email("cathy@gmail.com"),
+                    new VolunteerDates("2022-02-23")),
+            new Volunteer(new Name("David Ng"), new Phone("33345678"), new Email("david@gmail.com"),
+                    new VolunteerDates("2022-04-02")),
+            new Volunteer(new Name("Emily Lim"), new Phone("12232678"), new Email("emily@gmail.com"),
+                    new VolunteerDates("2022-02-02"))
+        };
+    }
+
+    public static Event[] getSampleEvents() {
+        return new Event[] {
+            new Event(new EventName("Charity Run"), new Location("12 Crescent Road"),
+                    new seedu.address.model.event.Date("2002-02-02"), new seedu.address.model.event.Time("00:01"),
+                    new seedu.address.model.event.Time("12:23")),
+            new Event(new EventName("Food Donation Drive"), new Location("Bishan Park"),
+                    new seedu.address.model.event.Date("2004-03-02"), new seedu.address.model.event.Time("12:01"),
+                    new seedu.address.model.event.Time("12:23")),
+            new Event(new EventName("Blood Donation Drive"), new Location("Red Cross Centre"),
+                    new seedu.address.model.event.Date("2014-04-02"), new seedu.address.model.event.Time("15:00"),
+                    new seedu.address.model.event.Time("17:23")),
+            new Event(new EventName("Graduation"), new Location("LT 28"),
+                    new seedu.address.model.event.Date("2024-03-02"), new seedu.address.model.event.Time("07:00"),
+                    new seedu.address.model.event.Time("14:23")),
         };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+        for (Volunteer sampleVolunteer : getSampleVolunteers()) {
+            sampleAb.addVolunteer(sampleVolunteer);
+        }
+        for (Event sampleEvent : getSampleEvents()) {
+            sampleAb.addEvent(sampleEvent);
         }
         return sampleAb;
-    }
-
-    /**
-     * Returns a tag set containing the list of strings given.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
     }
 
 }

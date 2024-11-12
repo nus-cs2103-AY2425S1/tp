@@ -1,0 +1,13 @@
+{
+  "volunteers": [ ],
+  "events": [
+    {
+      "eventName": "Blood Donation@@ Drive",
+      "date": "2024-02-14",
+      "startTime": "08:30",
+      "endTime": "16:00",
+      "location": "Red Cross Center",
+      "description": "Organizing a blood donation drive",
+      "volunteers": []
+    }]
+}

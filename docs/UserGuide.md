@@ -3,197 +3,599 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+## What is VolunSync?
+Welcome to VolunSync! We've created this friendly Human Resource Management System (HRMS) specially for nonprofits to help manage their wonderful volunteers. Think of VolunSync as your helpful assistant that makes it easy to coordinate volunteers and organize events all in one place.
 
-* Table of Contents
-{:toc}
+## Before You Start
+
+<div class="alert alert-block alert-danger">
+:exclamation: <b>IMPORTANT:</b><br>
+<b>DO NOT</b> modify the data files in the `data` folder. Doing so may result in unexpected behaviour when using VolunSync and you may lose your data permanently.
+</div>
+
+<div style="page-break-after: always;"></div>
+
+## Learn About Commands Supported By VolunSync
+
+The command words are shown beside their corresponding commands below. The command words should be used before the parameters when entering commands in VolunSync.
+
+1. [Command Format Guidelines](#command-format-guidelines)
+1. [General Commands](#general-commands)
+   1. [Viewing help](#viewing-help--help) `help`
+   1. [Listing all volunteers and events](#listing-all-volunteers-and-events--list) `list`
+   1. [Export database to a CSV file](#export-database-to-a-csv-file--export) `export`
+   1. [Closing the program](#closing-the-program--exit) `exit`
+1. [Managing Volunteers](#volunteer-related-commands)
+   1. [Adding a volunteer](#adding-a-volunteer-v-new) `/v new`
+   1. [Finding volunteers by name](#finding-volunteers-by-name--v-find) `/v find`
+   1. [Deleting a volunteer](#deleting-a-volunteer--v-del) `/v del`
+   1. [Listing all events participated in by a volunteer](#listing-all-events-a-volunteer-is-participating-in-v-view) `/v view`
+   1. [Adding available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free) `/v free`
+   1. [Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree) `/v unfree`
+   1. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign) `assign`
+   1. [Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign) `unassign`
+1. [Managing Events](#event-related-commands)
+   1. [Adding an event](#adding-an-event-e-new) `/e new`
+   1. [Finding events by name](#finding-events-by-name--e-find) `/e find`
+   1. [Deleting an event](#deleting-an-event--e-del-) `/e del`
+   1. [Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view) `/e view`
+   1. [Filtering volunteers by availability for an event](#filtering-volunteers-by-availability-for-an-event-e-filter) `/e filter`
+1. [Commands Summary](#command-summary)
+
+## Other Resources
+1. [FAQ](#faq)
+1. [Known Issues](#known-issues)
+1. [About Saving Your Work](#about-saving-your-work)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+Let's get you started with VolunSync! Just follow these simple steps:
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. **Check if you have Java**
+   First, let's make sure your computer has Java **17** or newer:
+   - Open a terminal or command prompt and run the following command:
+     - On Windows: Press `Windows + R`, type `cmd`, and hit Enter.
+     - On Mac/Linux: Open the Terminal from your Applications.
+       ```bash
+       java -version
+       ```
+   - If you see a version like `java version "17.x.x"` or higher, you're all set!
+   - If Java is not installed or the version is lower than 17:
+      - Download and install the latest Java Development Kit (JDK) **17** from [Oracle's official site](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) or [OpenJDK](https://openjdk.org/).
+      - Follow the installation instructions provided for your operating system.
+   - After installation, re-run `java -version` to confirm the setup.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. **Download VolunSync**
+   - Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-2/tp/releases).
+   - Put the downloaded file in any folder where you'd like to keep VolunSync
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+3. **Start VolunSync**
+    - Open your computer's command window
+    - Type `cd` followed by the location of your VolunSync application (e.g. `C:/Users/Your_Name/Your_Folder`)
+    - Type `java -jar` and the name of the file (like `java -jar volunsync-v1.5.jar`) into the terminal or command prompt and hit `Enter`.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+4. **You're Ready!**
+   - When you see this window, you're all set to begin:
+![Ui](images/VolunSyncUi.png)
 
-   * `list` : Lists all contacts.
+5. **Try It Out**
+    Type the command in the command box and press Enter to execute it.<br>
+     Some example commands you can try:
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `list` : Lists all volunteers and events in the VolunSync database.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` : Creates a new record for a volunteer named `John Doe` to the VolunSync database.
 
-   * `clear` : Deletes all contacts.
+    * `/v del 3` : Deletes the third volunteer on the list of volunteers.
 
-   * `exit` : Exits the app.
+    * `/e new n/Food collection l/NTUC d/2024-11-29 s/00:00 e/23:59 des/Collecting unsold food from NTUC for distribution` : Creates a new record for an event named `Food collection` to the VolunSync database.
 
-1. Refer to the [Features](#features) below for details of each command.
+    * `/e del 3` : Deletes the third event from the list of events.
+
+    * `exit` : Exits the app.
+
+1. Refer to the [Command Format](#command-format-guidelines) below for details of each command.
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+<div style="page-break-after: always;"></div>
+
+## Command Format Guidelines
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Helpful Tips for Using Commands:**
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+Let's go over some simple guidelines that will help you use VolunSync easily:
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* When you see `UPPERCASE` words, that's where you'll put your own information.
+  For example, in `n/NAME`, you might type `n/John Doe`
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Don't worry about the order! If a command asks for `n/NAME p/PHONE_NUMBER`, you can type them in any order:
+  `p/91234567 n/John Doe` works just as well
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Square brackets `[ ]` mean optional items.
+  For example, in an event description [des/DESCRIPTION], you can skip it if you don't need it
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* No need to worry about extra spaces at the start or end of your typing - VolunSync handles that for you
+
+* When counting characters (like for names or descriptions), spaces count too:
+<pre> "AB"   = 2 characters
+ "A B"  = 3 characters
+ "A  B" = 4 characters
+</pre>
+
+* Simple commands like `help` will work even if you accidentally type extra things after them
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* When copying multi-line commands from this guide, make sure the spaces between lines remain intact, especially if you're using a PDF version.
+
+* INDEX parameters accept a maximum positive value of `2147483647` any larger value would result in an invalid command format. It also has to be a positive value.
+
 </div>
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+## General Commands
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Need a hand? Just type `help` to open this guide in your web browser for easy reference anytime.<br>
+Alternatively you can click the help button at the top of the window or press the F1 key.
 
 Format: `help`
 
+![Showing Help](images/VolunSyncUiShowHelpButton.png)
 
-### Adding a person: `add`
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
-Adds a person to the address book.
+<div style="page-break-after: always;"></div>
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+### Listing all volunteers and events : `list`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
+Want to see everyone and everything? The `list` command shows all your volunteers and events.<br>
+It's especially useful after you've been searching or filtering - it brings back the full view.
 
 Format: `list`
 
-### Editing a person : `edit`
+![Ui](images/VolunSyncUi.png)
 
-Edits an existing person in the address book.
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+<div style="page-break-after: always;"></div>
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+### Export database to a CSV file : `export`
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Exports all records within the database to a Comma Separated Value (.csv) file. This allows you to print the records or transfer the data to another computer for external use. Note that the **import function is not yet implemented**, so exported files cannot be directly re-imported into VolunSync at this time.
 
-### Locating persons by name: `find`
+Format : `export`
 
-Finds persons whose names contain any of the given keywords.
+1. Look for a folder called `/output` in the folder where you keep VolunSync
+2. You'll find two files:
+    - `events.csv` - Contains all your event information
+    - `volunteers.csv` - Contains all your volunteer information
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+![Export File](images/ExportCommand.png)
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+### Closing the program : `exit`
 
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
+Ready to finish up? Just type `exit` to close VolunSync safely.
 
 Format: `exit`
 
-### Saving the data
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+<div style="page-break-after: always;"></div>
 
-### Editing the data file
+## Volunteer-related Commands
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+### Adding a volunteer: `/v new`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Welcome a new volunteer to your team by adding their details to the database.
+
+Format: `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE`
+
+What you'll need:
+- Name: Non-accented alphanumeric and spaces only, 1-100 characters.
+- Phone Number: Digits only, 3-15 characters.
+- Email: Must follow username@domain format.
+- Date: Format YYYY-MM-DD (e.g. 2024-01-01)
+
+<div class="alert alert-block alert-warning">
+:exclamation: <b>NOTE:</b><br>
+You cannot add a volunteer with the same name as an existing volunteer.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+Examples:
+* `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` <br/>creates a volunteer record for `John Doe` with the specified details
 
-_Details coming soon ..._
+Running the command successfully, you should see:
+
+![New Volunteer Demo](images/NewVolunteer.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Finding volunteers by name : `/v find`
+
+Looking for a particular volunteer? This command helps you find them by name.<br>
+If there are no volunteers whose names match the keyword in the database, the entire list of volunteers will be displayed.
+
+Format: `/v find KEYWORD`
+
+* It doesn't matter if you use capital or small letters
+* It finds parts of names too - typing "Tan" can find "Stanley" or "Tanya"
+* If no one is found, you'll be informed via an error message, and you'll see all volunteers again
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
+
+Examples:
+* `/v find ng` returns `David Ng`, `Alice Wong` and `Jason Wang`
+
+![Finding Volunteers](images/commandDemo/FindVolunteerDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+### Deleting a volunteer : `/v del`
+
+When a volunteer leaves, you can remove their record.<br>
+It will delete the volunteer at the specified `VOLUNTEER_INDEX` from the database.
+
+Format: `/v del VOLUNTEER_INDEX`
+
+* The `INDEX` is the number you see to the left of their name in the list
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Deleting a volunteer removes the volunteer from the list of participants of all events which the volunteer
+is involved in.
+</div>
+
+Examples:
+* `/v del 2` deletes the second volunteer in the displayed volunteer list.
+
+![Delete Volunteer Demo](images/commandDemo/DeleteVolunteerDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Listing all events a volunteer is participating in: `/v view`
+
+Want to see which events a volunteer is joining? This command shows you everything they're signed up for.
+It will display all events the volunteer at the specified `INDEX` under the `Volunteers` display is participating in.<br/>
+
+Format: `/v view VOLUNTEER_INDEX`
+
+* The `INDEX` is the number you see to the left of their name in the list
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
+
+Examples:
+
+* `/v view 1` displays the events the first volunteer is participating in.
+
+![View Volunteer Demo](images/commandDemo/ViewVolunteerDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Adding available dates to a volunteer: `/v free`
+
+Update when a volunteer is available to help.<br>
+It will add available dates to the volunteer with the specified `VOLUNTEER_INDEX`.
+
+Format: `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
+
+* The `INDEX` is the number you see to the left of their name in the list
+* Use `YYYY-MM-DD` format (like `2024-01-01`)
+* For multiple dates, separate them with commas (like `2024-11-28, 2024-11-29, 2024-11-30`)
+
+Examples:
+* `/v free i/1 d/2023-10-28, 2023-10-29` adds 2023-10-28 and 2023-10-29 as available dates to the first volunteer on the volunteer list.
+
+![Free Volunteer Demo](images/commandDemo/FreeVolunteerDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Removing available dates from a volunteer: `/v unfree`
+
+Need to mark dates when a volunteer isn't available anymore?
+It will remove available dates from the volunteer with the specified `VOLUNTEER_INDEX`.
+
+Format: `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`
+
+* The `INDEX` is the number you see to the left of their name in the list
+* Use `YYYY-MM-DD` format (like `2024-01-01`)
+* For multiple dates, separate them with commas (like `2024-11-28, 2024-11-29, 2024-11-30`)
+
+Examples:
+* `/v unfree i/1 d/2023-10-28, 2023-10-29` removes 2024-11-28 and 2024-11-29 as available dates from the first volunteer on the volunteer list.
+
+![Unfree Volunteer Demo](images/commandDemo/UnfreeVolunteerDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Assigning a volunteer to event: `assign`
+
+Connect volunteers with events they'd like to join.
+It will add a volunteer with the specified `VOLUNTEER_INDEX` to the list of participants of the event with the specified `EVENT_INDEX`.
+
+Format: `assign v/VOLUNTEER_INDEX e/EVENT_INDEX`
+
+* The `INDEX` refers to the numbers shown on the left of both the volunteer and event names on their respective lists
+
+Examples:
+* `assign v/3 e/2` assigns the third volunteer on the volunteer list to the list of participants of the second event on the event list.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+The system checks if the volunteer is free on that date, and if they are already signed up for another event at the same time.<br>
+If that is the case, they cannot be assigned to this event.
+</div>
+
+![Assign Volunteer Demo](images/commandDemo/AssignVolunteerDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Unassigning a volunteer from an event: `unassign`
+
+If a volunteer needs to step back from an event, you can remove them from the list of participants.
+It will remove a volunteer with the specified `VOLUNTEER_INDEX` to the list of participants of the event with the specified `EVENT_INDEX`.
+
+Format: `unassign v/VOLUNTEER_INDEX e/EVENT_INDEX`
+
+* The `INDEX` refers to the numbers shown on the left of both the volunteer and event names on their respective lists
+
+Examples:
+* `unassign v/2 e/2` removes the second volunteer on the volunteer list from the list of participants of the second event on the event list.
+
+![Unassign Volunteer Demo](images/commandDemo/UnassignVolunteerDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Listing all events a volunteer is participating in: `/v view`
+
+Want to see which events a volunteer is joining? This command shows you everything they're signed up for.
+It will display all events the volunteer at the specified `INDEX` under the `Volunteers` display is participating in.<br/>
+
+Format: `/v view VOLUNTEER_INDEX`
+
+* The `INDEX` is the number you see to the left of their name in the list
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
+
+Examples:
+
+* `/v view 1` displays the events the first volunteer is participating in.
+
+![View Volunteer Demo](images/commandDemo/ViewVolunteerDemo.png)
+
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## Event-related Commands
+
+### Adding an event: `/e new`
+
+Planning a new activity? Here's how to add it to VolunSync.<br>
+It will add an event to the database with the specified details.
+
+Format: `/e new n/EVENT_NAME l/LOCATION d/DATE s/START_TIME e/END_TIME [des/DESCRIPTION]`
+
+What you'll need:
+- Event Name: Non-accented alphanumeric characters and spaces only, 1-50 characters.
+- Location: Non-accented alphanumeric characters and spaces only, 1-100 characters.
+- Date: Format YYYY-MM-DD (e.g. 2024-01-01),
+- Start Time: 24-hour Format HH:mm (e.g., 12:00). Note that 24:00 is not a valid time.
+- End Time: 24-hour Format HH:mm (e.g., 15:00). Note that 24:00 is not a valid time. Start time must be before end time.
+- Description: Non-accented alphanumeric characters and spaces only, maximum of 100 characters. Optional; if blank, omit the des/ prefix.
+
+<div class="alert alert-block alert-warning">
+:exclamation: <b>NOTE:</b><br>
+You cannot add an event with the same name as an existing volunteer.
+</div>
+
+Examples:
+* `/e new n/Blood Donation Drive l/Red Cross Center d/2024-02-14 s/08:30 e/16:00 des/Organizing a blood donation drive` <br/>creates an event record for Blood Donation Drive with the specified details
+* `/e new n/Buffet Lunch l/Blk 123 Woodlands Avenue 12 d/2024-08-09 s/12:00 e/15:00` <br/>creates an event record for Buffet Lunch with the specified details
+
+![New Event Demo](images/commandDemo/NewEventDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Finding events by name : `/e find`
+
+Looking for a particular event? This command helps you find it by its name.
+
+Format: `/e find KEYWORD`
+
+* It doesn't matter if you use capital or small letters
+* It finds partial matches too - typing `food` can find `Food Drive` or `Seafood Party`
+* If nothing matches, you'll be informed via an error message, and you'll see all events again
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
+
+Examples:
+* `/e find beach` returns `Beach Cleanup` and `beach clean2`
+
+![Finding Events](images/commandDemo/FindEventDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Deleting an event : `/e del `
+
+Need to remove an event from the calendar?
+It will delete the event with the specified `EVENT_INDEX` from the database.
+
+Format: `/e del EVENT_INDEX`
+
+* The `INDEX` is the number you see to the left of the event name in the list
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Deleting an event causes that event to be removed from all participants' list of events which they are involved in.
+</div>
+
+Examples:
+* `/e del 2` deletes the second event in the event list.
+
+![Delete Event Demo](images/commandDemo/DeleteEventDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Listing all volunteers participating in an event: `/e view`
+Want to see who's coming to an event?
+It will display all volunteers participating in the event at the specified `INDEX` under the `Volunteers` display.<br/>
+
+Format: `/e view EVENT_INDEX`
+
+* The `INDEX` is the number you see to the left of the event name in the list
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
+
+Examples:
+* `/e view 1` displays the volunteers participating in the first event in the event list.
+
+![View Event Demo](images/commandDemo/ViewDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Filtering volunteers by availability for an event: `/e filter`
+Need to find volunteers who are free for a specific event?
+It will filter the volunteer list to only show volunteers who can be assigned to the event specified by `INDEX`.
+
+Format: `/e filter INDEX`
+
+* The `INDEX` is the number you see to the left of the event name in the list
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
+
+
+
+Examples:
+* `/e filter 1` returns volunteers available to be assigned to the first event on the event list.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Volunteers who are already assigned to the specified event, not available on the day of the event or are assigned to another event happening at the same time will not be shown.
+</div>
+
+![Finding Events](images/commandDemo/FindEventDemo.png)
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+## About Saving Your Work
+
+Don't worry about saving - VolunSync automatically saves everything you do! Every change you make is safely stored on your computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: Can I undo an action that I just made?<br>
+**A**: Not yet, but we're working on adding an `undo` feature in our next update. Stay tuned!
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **Using Multiple Screens?**
+   If you move VolunSync to a second screen and later disconnect it:
+    - The program might open off-screen next time
+    - To fix this, just find and delete the `preferences.json` file
+    - Start VolunSync again, and it'll open on your main screen
+
+1. **Trying To Modify Data Files?**
+   - **Don't** modify the data files in the `data` folder
+   - Doing so may result in unexpected behaviour when using VolunSync, such as the app crashing
+   - You may lose your data permanently
+
+These known issues are actively being worked on, and we are continuously improving VolunSync to provide a better experience. Please stay tuned for future updates!
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+### General Commands
+
+| Action                                                                         | Format   |
+|--------------------------------------------------------------------------------|----------|
+| **[List all Volunteers and Events](#listing-all-volunteers-and-events--list)** | `list`   |
+| **[Export database to a CSV file](#export-database-to-a-csv-file--export)**    | `export` |
+| **[View help](#viewing-help--help)**                                           | `help`   |
+| **[Exit the program](#exiting-the-program--exit)**                             | `exit`   |
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Volunteer Commands
+
+| Action                                                                                                              | Format                                                   | Examples                                                      |
+|---------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|---------------------------------------------------------------|
+| **[Add a volunteer](#adding-a-volunteer-v-new)**                                                                    | `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE` | `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` |
+| **[Find volunteers by name](#finding-volunteers-by-name--v-find)**                                                  | `/v find KEYWORD`                                        | `/v find Anne`                                                |
+| **[Delete a volunteer](#deleting-a-volunteer--v-del)**                                                              | `/v del VOLUNTEER_INDEX`                                 | `/v del 1`                                                    |
+ | **[Listing all events participated in by a volunteer](#listing-all-events-a-volunteer-is-participating-in-v-view)** | `/v view VOLUNTEER_INDEX`                                | `/v view 1`                                                   |
+| **[Add available dates to a volunteer](#adding-available-dates-to-a-volunteer-v-free)**                             | `/v free i/VOLUNTEER_INDEX d/AVAILABLE_DATES`            | `/v free i/1 d/2024-11-28, 2024-11-29`                        |
+| **[Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree)**                | `/v unfree i/VOLUNTEER_INDEX d/AVAILABLE_DATES`          | `/v unfree i/1 d/2024-11-28, 2024-11-29`                      |
+| **[Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)**                                        | `assign v/VOLUNTEER_INDEX e/ EVENT_INDEX`                | `assign v/1 e/2`                                              |
+| **[Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign)**                        | `unassign v/VOLUNTEER_INDEX e/ EVENT_INDEX`              | `unassign v/1 e/2`                                            |
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+### Event Commands
+
+| Action                                                                                                               | Format                                                                                  | Examples                                                                         |
+|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| **[Adding an event](#adding-an-event-e-new)**                                                                        | `/e new n/EVENT_NAME l/LOCATION d/DATE s/START_TIME e/END_TIME [des/DESCRIPTION]`       | `/e new n/Coding Exam l/LT 28 d/2024-12-12 s/19:00 e/21:00 des/Final Exam`       |
+| **[Deleting an event](#deleting-an-event--e-del-)**                                                                  | `/e del EVENT_INDEX`                                                                    | `/e del 1`                                                                       |
+| **[Finding events by name](#finding-events-by-name--e-find)**                                                        | `/e find KEYWORD`                                                                       | `/e find Forest`                                                                 |
+| **[Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)**     | `/e view EVENT_INDEX`                                                                   | `/e view 1`                                                                      |
+| **[Filtering volunteers by availability for an event](#filtering-volunteers-by-availability-for-an-event-e-filter)** | `/e filter EVENT_INDEX`                                                                 | `/e filter 1`                                                                    |
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+

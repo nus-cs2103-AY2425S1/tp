@@ -6,7 +6,10 @@ plugins {
     id 'jacoco'
 }
 
-mainClassName = 'seedu.address.Main'
+application {
+    mainClass.set('seedu.address.Main')
+    applicationDefaultJvmArgs = ['-ea']  // Enable assertions
+}
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
@@ -66,7 +69,9 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveBaseName = 'volunsync'
+    archiveVersion = 'v1.5'
+    archiveClassifier = ''
 }
 
 defaultTasks 'clean', 'test'

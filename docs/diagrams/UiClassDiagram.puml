@@ -9,10 +9,14 @@ Class "<<interface>>\nUi" as Ui
 Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
+Class FilePathBar
+Class MenuBar
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
+Class VolunteerListPanel
+Class EventListPanel
+Class VolunteerCard
+Class EventCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -30,28 +34,34 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
+MainWindow *-down-> "1" MenuBar
+MainWindow *-down-> "1" FilePathBar
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" VolunteerListPanel
+MainWindow *-down-> "1" EventListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
+VolunteerListPanel -down-> "*" VolunteerCard
+EventListPanel -down-> "*" EventCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+VolunteerListPanel --|> UiPart
+VolunteerCard --|> UiPart
+EventCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-PersonCard ..> Model
+VolunteerCard .left.> Model
+EventCard .left.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+VolunteerListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter

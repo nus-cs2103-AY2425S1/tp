@@ -1,0 +1,22 @@
+{
+  "volunteers": [ ],
+  "events": [
+    {
+      "eventName" : "Blood Don##ation Drive",
+      "date" : "2024-02-14",
+      "startTime" : "08:30",
+      "endTime" : "16:00",
+      "location" : "Red Cross Center",
+      "description" : "Organizing a blood donation drive",
+      "volunteers" : [ ]
+    }, {
+      "eventName" : "beach clean2",
+      "date" : "2023-10-15",
+      "startTime" : "00:00",
+      "endTime" : "10:00",
+      "location" : "here",
+      "description" : "",
+      "volunteers" : [ ]
+    }
+  ]
+}

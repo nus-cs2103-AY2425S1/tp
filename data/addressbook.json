@@ -1,0 +1,77 @@
+{
+  "volunteers" : [ {
+    "name" : "David Ng",
+    "phone" : "93456789",
+    "email" : "davidng@example.com",
+    "availableDate" : "2023-10-27",
+    "involvedIn" : [ ]
+  }, {
+    "name" : "John Doe",
+    "phone" : "98765432",
+    "email" : "johndoe@example.com",
+    "availableDate" : "2023-10-20",
+    "involvedIn" : [ ]
+  }, {
+    "name" : "Alice Wong",
+    "phone" : "99117846",
+    "email" : "Alice@gmail.com",
+    "availableDate" : "2023-10-28",
+    "involvedIn" : [ ]
+  }, {
+    "name" : "Jason Wang",
+    "phone" : "12341234",
+    "email" : "lol@lol.com",
+    "availableDate" : "2023-10-28",
+    "involvedIn" : [ ]
+  } ],
+  "events" : [ {
+    "eventName" : "Beach Cleanup",
+    "date" : "2023-10-25",
+    "startTime" : "08:00",
+    "endTime" : "12:00",
+    "location" : "East Coast Park",
+    "description" : "Annual beach cleaning event",
+    "volunteers" : [ ]
+  }, {
+    "eventName" : "Charity Run",
+    "date" : "2023-10-28",
+    "startTime" : "06:00",
+    "endTime" : "11:00",
+    "location" : "Marina Bay",
+    "description" : "5km run to raise funds for charity",
+    "volunteers" : [ ]
+  }, {
+    "eventName" : "Food Donation Drive",
+    "date" : "2023-10-27",
+    "startTime" : "10:00",
+    "endTime" : "15:00",
+    "location" : "City Hall",
+    "description" : "",
+    "volunteers" : [ ]
+  }, {
+    "eventName" : "Tree Planting",
+    "date" : "2023-10-27",
+    "startTime" : "09:00",
+    "endTime" : "13:00",
+    "location" : "Bishan Park",
+    "description" : "Tree planting event to promote sustainability",
+    "volunteers" : [ ]
+  }, {
+    "eventName" : "Blood Donation Drive",
+    "date" : "2023-10-26",
+    "startTime" : "08:30",
+    "endTime" : "16:00",
+    "location" : "Red Cross Center",
+    "description" : "Organizing a blood donation drive",
+    "volunteers" : [ ]
+  }, {
+    "eventName" : "Beach Day",
+    "date" : "2023-10-25",
+    "startTime" : "08:00",
+    "endTime" : "12:00",
+    "location" : "East Coast Park",
+    "description" : "",
+    "volunteers" : [ ]
+  } ]
+}
+

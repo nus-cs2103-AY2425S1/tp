@@ -1,0 +1,61 @@
+{
+  "volunteers": [
+
+  ],
+  "events": [
+    {
+      "eventName": "Meeting with Client",
+      "location": "123 Orchard Road",
+      "date": "2024-10-30",
+      "startTime": "09:00",
+      "endTime": "11:00",
+      "description": "Discuss new project plans",
+      "volunteers" : [ ]
+    },
+    {
+      "eventName": "Team Lunch",
+      "location": "456 Jurong East",
+      "date": "2024-11-01",
+      "startTime": "12:00",
+      "endTime": "14:00",
+      "description": "Casual lunch with team",
+      "volunteers" : [ ]
+    },
+    {
+      "eventName": "Project Demo",
+      "location": "789 Bukit Timah Road",
+      "date": "2024-12-10",
+      "startTime": "15:00",
+      "endTime": "17:00",
+      "description": "Final project demo for the client",
+      "volunteers" : [ ]
+    },
+    {
+      "eventName": "Conference",
+      "location": "Convention Center",
+      "date": "2025-01-15",
+      "startTime": "10:00",
+      "endTime": "18:00",
+      "description": "Annual tech conference",
+      "volunteers" : [ ]
+    },
+    {
+      "eventName": "Volunteer Planning",
+      "location": "Community Hall",
+      "date": "2025-02-20",
+      "startTime": "14:00",
+      "endTime": "16:00",
+      "description": "Planning for upcoming charity event",
+      "volunteers" : [ ]
+    },
+    {
+      "eventName": "Meeting with Client",
+      "location": "123 Orchard Road",
+      "date": "2024-10-30",
+      "startTime": "09:00",
+      "endTime": "11:00",
+      "description": "",
+      "volunteers" : [ ]
+    }
+  ]
+}

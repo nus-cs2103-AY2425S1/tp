@@ -1,0 +1,22 @@
+{
+  "volunteers": [ ],
+  "events": [
+    {
+      "eventName" : "beach clean2",
+      "date" : "2023-10-15",
+      "startTime" : "00:00",
+      "endTime" : "10:00",
+      "location" : "here",
+      "description" : "",
+      "volunteers" : [ ]
+    },{
+      "eventName" : "beach clean2",
+      "date" : "2023-10-15",
+      "startTime" : "00:00",
+      "endTime" : "10:00",
+      "location" : "here",
+      "description" : "",
+      "volunteers" : [ ]
+    }
+  ]
+}
