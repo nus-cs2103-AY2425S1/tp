@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
@@ -10,22 +11,22 @@ import seedu.address.commons.util.ToStringBuilder;
  * Represents the result of a command execution.
  */
 public class CommandResult {
-
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
     /** The application should exit. */
-    private final boolean exit;
+    private final boolean shouldExit;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean shouldExit) {
+        requireAllNonNull(feedbackToUser, showHelp, shouldExit);
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
-        this.exit = exit;
+        this.shouldExit = shouldExit;
     }
 
     /**
@@ -45,7 +46,7 @@ public class CommandResult {
     }
 
     public boolean isExit() {
-        return exit;
+        return shouldExit;
     }
 
     @Override
@@ -62,12 +63,12 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && shouldExit == otherCommandResult.shouldExit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, shouldExit);
     }
 
     @Override
@@ -75,7 +76,7 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
-                .add("exit", exit)
+                .add("shouldExit", shouldExit)
                 .toString();
     }
 

@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.SortSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -33,15 +37,72 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_personWithAllFields_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        Person personWithAllFields = new PersonBuilder().build();
+        CommandResult commandResult = new AddCommand(personWithAllFields).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.formatFull(personWithAllFields)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(personWithAllFields), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithoutEmail_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person personWithoutEmail = new PersonBuilder(ALICE).withEmail().build();
+        CommandResult commandResultWithoutEmail = new AddCommand(personWithoutEmail).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.formatFull(personWithoutEmail)),
+                commandResultWithoutEmail.getFeedbackToUser());
+        assertEquals(Arrays.asList(personWithoutEmail), modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithoutAddress_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person personWithoutAddress = new PersonBuilder(BENSON).withAddress().build();
+        CommandResult commandResultWithoutAddress = new AddCommand(personWithoutAddress).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.formatFull(personWithoutAddress)),
+                commandResultWithoutAddress.getFeedbackToUser());
+        assertEquals(Arrays.asList(personWithoutAddress),
+                modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithoutDateOfLastVisit_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person personWithoutDateOfLastVisit = new PersonBuilder(DANIEL).withDateOfLastVisit().build();
+        CommandResult commandResultWithoutDateOfLastVisit = new AddCommand(personWithoutDateOfLastVisit)
+                .execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.formatFull(personWithoutDateOfLastVisit)),
+                commandResultWithoutDateOfLastVisit.getFeedbackToUser());
+        assertEquals(Arrays.asList(personWithoutDateOfLastVisit),
+                modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithoutEmailOrAddressOrDateOfLastVisit_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person personWithoutEmailOrAddressOrDateOfLastVisit = new PersonBuilder(CARL)
+                .withEmail()
+                .withAddress()
+                .withDateOfLastVisit().build();
+        CommandResult commandResultWithoutEmailOrAddressOrDateOfLastVisit =
+                new AddCommand(personWithoutEmailOrAddressOrDateOfLastVisit)
+                .execute(modelStub);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages
+                        .format(personWithoutEmailOrAddressOrDateOfLastVisit)),
+                commandResultWithoutEmailOrAddressOrDateOfLastVisit.getFeedbackToUser());
+        assertEquals(Arrays.asList(personWithoutEmailOrAddressOrDateOfLastVisit),
+                modelStub.personsAdded);
     }
 
     @Test
@@ -109,6 +170,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public SortSettings getSortSettings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSortSettings(SortSettings sortSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
@@ -155,6 +226,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPersonList(String parameter, boolean isAscending) {
             throw new AssertionError("This method should not be called.");
         }
     }

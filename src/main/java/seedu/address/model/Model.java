@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.SortSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +15,9 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluates to false. */
+    Predicate<Person> PREDICATE_SHOW_NONE_PERSONS = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -28,6 +33,16 @@ public interface Model {
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
+
+    /**
+     * Sets the user prefs' Sort settings.
+     */
+    void setSortSettings(SortSettings sortSettings);
+
+    /**
+     * Returns the user prefs' Sort settings.
+     */
+    SortSettings getSortSettings();
 
     /**
      * Sets the user prefs' GUI settings.
@@ -84,4 +99,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sort the filtered person's list according to {@code Person} parameters
+     */
+    void sortPersonList(String parameter, boolean isAscending) throws CommandException;
 }

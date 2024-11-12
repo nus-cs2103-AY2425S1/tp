@@ -5,11 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -19,14 +16,16 @@ import seedu.address.model.ReadOnlyAddressBook;
  */
 public class JsonAddressBookStorage implements AddressBookStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
-
     private Path filePath;
 
+    /**
+     * Constructs a {@code JsonAddressBookStorage} with the given file path.
+     */
     public JsonAddressBookStorage(Path filePath) {
         this.filePath = filePath;
     }
 
+    @Override
     public Path getAddressBookFilePath() {
         return filePath;
     }
@@ -45,18 +44,13 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(filePath,
+                JsonSerializableAddressBook.class);
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
 
-        try {
-            return Optional.of(jsonAddressBook.get().toModelType());
-        } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
-            throw new DataLoadingException(ive);
-        }
+        return Optional.of(jsonAddressBook.get().toModelType());
     }
 
     @Override

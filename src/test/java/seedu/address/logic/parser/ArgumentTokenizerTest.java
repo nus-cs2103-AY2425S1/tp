@@ -12,7 +12,7 @@ public class ArgumentTokenizerTest {
     private final Prefix unknownPrefix = new Prefix("--u");
     private final Prefix pSlash = new Prefix("p/");
     private final Prefix dashT = new Prefix("-t");
-    private final Prefix hatQ = new Prefix("^Q");
+    private final Prefix hatQ = new Prefix("^q");
 
     @Test
     public void tokenize_emptyArgsString_noValues() {
@@ -90,7 +90,7 @@ public class ArgumentTokenizerTest {
         assertArgumentAbsent(argMultimap, hatQ);
 
         // All three arguments are present
-        argsString = "Different Preamble String ^Q111 -t dashT-Value p/pSlash value";
+        argsString = "Different Preamble String ^q111 -t dashT-Value p/pSlash value";
         argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
         assertPreamblePresent(argMultimap, "Different Preamble String");
         assertArgumentPresent(argMultimap, pSlash, "pSlash value");
@@ -118,7 +118,7 @@ public class ArgumentTokenizerTest {
     @Test
     public void tokenize_multipleArgumentsWithRepeats() {
         // Two arguments repeated, some have empty values
-        String argsString = "SomePreambleString -t dashT-Value ^Q ^Q -t another dashT value p/ pSlash value -t";
+        String argsString = "SomePreambleString -t dashT-Value ^q ^q -t another dashT value p/ pSlash value -t";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
         assertPreamblePresent(argMultimap, "SomePreambleString");
         assertArgumentPresent(argMultimap, pSlash, "pSlash value");
@@ -128,11 +128,11 @@ public class ArgumentTokenizerTest {
 
     @Test
     public void tokenize_multipleArgumentsJoined() {
-        String argsString = "SomePreambleStringp/ pSlash joined-tjoined -t not joined^Qjoined";
+        String argsString = "SomePreambleStringp/ pSlash joined-tjoined -t not joined^qjoined";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
         assertPreamblePresent(argMultimap, "SomePreambleStringp/ pSlash joined-tjoined");
         assertArgumentAbsent(argMultimap, pSlash);
-        assertArgumentPresent(argMultimap, dashT, "not joined^Qjoined");
+        assertArgumentPresent(argMultimap, dashT, "not joined^qjoined");
         assertArgumentAbsent(argMultimap, hatQ);
     }
 

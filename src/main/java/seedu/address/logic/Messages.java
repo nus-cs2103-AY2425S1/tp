@@ -19,33 +19,101 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    // List Command Error Message
+    public static final String LIST_MESSAGE_INVALID_COMMAND = "Please ensure your command is valid!";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
     public static String getErrorMessageForDuplicatePrefixes(Prefix... duplicatePrefixes) {
         assert duplicatePrefixes.length > 0;
 
-        Set<String> duplicateFields =
-                Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
+        Set<String> duplicateFields = Stream.of(duplicatePrefixes).map(Prefix::toString)
+                .collect(Collectors.toSet());
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
     }
 
     /**
      * Formats the {@code person} for display to the user.
+     * Only provides minimal information required.
      */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        addName(builder, person);
+        addPhone(builder, person);
+        addTags(builder, person);
+        addDateOfLastVisit(builder, person);
+
         return builder.toString();
+    }
+
+    /**
+     * Formats the {@code person} for display to the user.
+     * Provides all the information about the user.
+     */
+    public static String formatFull(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        addName(builder, person);
+        addPhone(builder, person);
+        addEmail(builder, person);
+        addAddress(builder, person);
+        addTags(builder, person);
+        addDateOfLastVisit(builder, person);
+        addEmergencyContact(builder, person);
+        addRemark(builder, person);
+        return builder.toString();
+    }
+
+    private static void addName(StringBuilder sb, Person person) {
+        sb.append(person.getName());
+    }
+
+    private static void addPhone(StringBuilder sb, Person person) {
+        sb.append("; Phone: ").append(person.getPhone());
+    }
+
+    private static void addDateOfLastVisit(StringBuilder sb, Person person) {
+        if (!person.hasDateOfLastVisit()) {
+            return;
+        }
+        sb.append("; Last visit: ").append(person.getDateOfLastVisit().get());
+    }
+
+    private static void addEmail(StringBuilder sb, Person person) {
+        if (!person.hasEmail()) {
+            return;
+        }
+        sb.append("; Email: ").append(person.getEmail().get());
+    }
+
+    private static void addAddress(StringBuilder sb, Person person) {
+        if (!person.hasAddress()) {
+            return;
+        }
+        sb.append("; Address: ").append(person.getAddress().get());
+    }
+
+    private static void addTags(StringBuilder sb, Person person) {
+        if (person.getTags().isEmpty()) {
+            return;
+        }
+        sb.append("; Tags: ");
+        person.getTags().forEach(sb::append);
+    }
+
+    private static void addEmergencyContact(StringBuilder sb, Person person) {
+        if (!person.hasEmergencyContact()) {
+            return;
+        }
+        sb.append("; Emergency Contact: ").append(person.getEmergencyContact().get());
+    }
+
+    private static void addRemark(StringBuilder sb, Person person) {
+        if (!person.hasRemark()) {
+            return;
+        }
+        sb.append("; Remark: ").append(person.getRemark().value);
     }
 
 }

@@ -15,6 +15,8 @@ import seedu.address.model.person.Person;
  */
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
+    private static final int DISPLAYED_INDEX_OFFSET = 1;
+
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
@@ -26,24 +28,29 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
         personListView.setItems(personList);
+        // cell factory creates new ListCell objects for each item in the ListView.
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Person}.
+     * Graphics may be displayed as a {@code PersonCard} or a {@code PersonCardFull},
+     * depending on whether the user has requested to view all information on that {@code Person}.
      */
     class PersonListViewCell extends ListCell<Person> {
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
-
+            int currCellIndexInt = getIndex();
             if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
+            } else if (person.hasFullViewToggled()) {
+                // if the user had requested this person to be viewed in full, return a PersonCardFull instead
+                setGraphic(new PersonCardFull(person, getIndex() + DISPLAYED_INDEX_OFFSET).getRoot());
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new PersonCard(person, currCellIndexInt + DISPLAYED_INDEX_OFFSET).getRoot());
             }
         }
     }
-
 }

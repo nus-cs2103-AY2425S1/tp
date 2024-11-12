@@ -5,42 +5,63 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "dateOfLastVisit" : "01-01-2024",
+    "emergencyContact" : "92173902",
+    "remark" : ""
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : [ "owes money", "friends" ],
+    "dateOfLastVisit" : "01-02-2024",
+    "emergencyContact" : "92173902",
+    "remark" : ""
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "tags" : [ ],
+    "dateOfLastVisit" : "01-04-2024",
+    "emergencyContact" : "",
+    "remark" : ""
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "dateOfLastVisit" : "02-04-2024",
+    "emergencyContact" : "",
+    "remark" : ""
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822249",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "tags" : [ ],
+    "dateOfLastVisit" : "10-07-2024",
+    "emergencyContact" : "",
+    "remark" : ""
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94824270",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "tags" : [ ],
+    "dateOfLastVisit" : "23-08-2024",
+    "emergencyContact" : "",
+    "remark" : ""
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94824421",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
+    "tags" : [ ],
+    "dateOfLastVisit" : "05-09-2023",
+    "emergencyContact" : "",
+    "remark" : ""
   } ]
 }
