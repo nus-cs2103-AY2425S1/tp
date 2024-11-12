@@ -19,6 +19,7 @@ title: Developer Guide
   - [Product scope](#product-scope)
   - [User Stories](#user-stories)
   - [Use Cases](#use-cases)
+- [Planned Enhancements](#planned-enhancements)
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1257,7 +1258,9 @@ otherwise)
 ### Editing and deleting log entries
 * Currently RealConnect does not support editing or deleting history logs. This feature is designed as such due to the nature of logging, of which modification or postmortem addition is not encouraged. However to tolerate user mistakes such as accidental wrong input, editing and deleting of log will be implemented and added to RealConnect.
 ### Editing and deleting of properties
+* Currently, users can only add properties to contacts, but they cannot edit existing properties or delete any contact's properties. As RealConnect is primarily a tool for real estate agents, this limitation is recognized as a feature gap, as properties often need updates or corrections due to market changes or evolving client requirements. To address this, RealConnect will implement property editing and deletion functions, allowing agents to maintain more accurate and current property records. These updates aim to improve flexibility and support efficient management of listings in an agent's portfolio.
 ### More flexible date input formatting
+* Currently, RealConnect only supports the date format `yyyy-mm-dd`, which may be restrictive for some users. To improve usability, the platform will expand its accepted date formats to include more common variations, such as `dd-mm-yyyy`, `dd Month yyyy` (e.g., `22 May 2001`), and potentially region-specific formats. This enhancement will provide users with greater flexibility and make the platform more accessible to diverse user groups, reducing the chance of input errors due to date formatting.
 ### Confirmation upon unusual input when adding properties
 * Currently RealConnect accepts any non-negative integer values for property attributes number of bathrooms and bedrooms. Additional confirmation dialog will be implemented in the future to prompt the user to confirm unusually large input like 2000 bathrooms, to mitigate the chance of user mistakes.
 ### Allow closing App by clicking close button
@@ -1369,6 +1372,11 @@ Prerequisites: Have a contact list with multiple entries.
 
   2. Test Case: `sort desc`  
      **Expected:** Contacts are sorted in descending order (Z-A).
+
+#### Negative test cases
+
+1. Test Case: `sort` 
+   <br>**Expected:** Error message as order of sort not provided.
 
 ### Remarking a Person
 
@@ -1494,9 +1502,9 @@ Prerequisites: Have a contact list with multiple entries.
 1. Invalid Input Cases: Test with invalid input formats (yyyy-mm-dd).  
    **Expected:** Error message is displayed indicating missing information.
 2.   Test case:`birthday 1 b/ 2002-11-9`
-<br>**Expected:** Error message is displayed indicating missing information.
+<br>**Expected:** Error message is displayed indicating invalid format.
 2.   Test case:`birthday 1 b/ 2002/10/19`
-     <br>**Expected:** Error message is displayed indicating missing information.
+     <br>**Expected:** Error message is displayed indicating invalid format.
 
 ### Reminder for Birthday
 
