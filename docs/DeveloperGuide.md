@@ -31,6 +31,7 @@
    * [Use cases](#use-cases)
    * [Non-Functional Requirements](#non-functional-requirements)
    * [Glossary](#glossary)
+- [**Appendix: Effort**](#appendix-effort)
 - [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
 - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
    * [Launch and shutdown](#launch-and-shutdown)
@@ -709,6 +710,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CLI**: Command Line Interface, a type of text-based user interface that allows users to interact with the application by typing commands
 * **GUI**: Graphical User Interface, a type of visual user interface that allows users to interact with the application through graphical elements like buttons and menus
 --------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
+
+This project presented a significant challenge due to the complexity and precision required at each development stage. Building a responsive and visually cohesive UI was one of the main hurdles. Ensuring that all elements fit together seamlessly took considerable time and required constant adjustments. Achieving a layout that is both user-friendly and adaptable to different screen sizes was especially challenging, as even minor alignment issues could disrupt the overall flow of the interface.
+
+Implementing specific features, such as displaying the next lesson on the student card, added another layer of difficulty. This feature necessitated setting up a timer that refreshes every minute, which required careful attention to performance so that the app wouldn’t slow down or consume excessive resources. Managing this timer involved designing an efficient refresh mechanism that updates only what’s necessary, minimizing memory use while providing real-time updates.
+
+Handling clashing lesson schedules introduced further complexity. We had to account for numerous edge cases—students with overlapping or consecutive classes. Designing a robust conflict-checking system meant anticipating all potential scheduling scenarios and validating inputs carefully, adding to the development time and requiring extensive testing.
+
+In addition, adding custom features like remarks and lesson tracking posed challenges in both design and functionality. Error handling had to be highly specific and informative, meaning that we could not rely on generic error messages. Each action, whether adding a lesson or a remark, needed unique error handling to guide users effectively without overwhelming them with unnecessary information. Crafting these targeted error messages involved considering possible user errors and ensuring that each message communicated the issue clearly while remaining concise.
+
+The effort invested in this project was substantial, as we went beyond the base features of AB3, adding numerous enhancements and custom functionalities. Specifically, we added a **lessons** feature to track and manage student schedules, developed a system to handle **clashing lessons** and ensure no overlaps, integrated a **remarks** feature for notes on students, and created a **display** command to quickly pull up detailed student information. We overhauled the UI to create a more intuitive and visually appealing interface, which required meticulous attention to design and usability. Additionally, we modified many existing commands in AB3 like add and edit.
+
+We also put significant focus on refining error handling. Every error message was crafted to be clear, informative, and specific to each potential issue, guiding users more effectively through the app. Balancing all these improvements while maintaining a high standard of quality and consistency demanded extensive effort, but it enabled us to deliver a more robust and user-friendly experience.
 
 ## **Appendix: Planned Enhancements**
 Group size: 5 members
@@ -723,8 +737,9 @@ Group size: 5 members
 1. Optimise edit command:
    - Our app does not support direct editing of lessons or remarks. 
    - In future updates, we plan to enable users to edit existing lessons and remarks without needing to delete and re-add them.
-1. Name of student truncated on left:
-   - If a student’s name exceeds the character limit, it will be truncated in the left panel view. Users can use the display command to view the student’s full name when needed.
+1. Find parameter checking:
+   - For name, tag and address keywords, the parser only checks that they are not blank.
+   - In future updates, we plan to alert users when the keywords are invalid (ie valid when only contains certain characters).
 1. Find command Behavior:
    - After using the find command to locate student(s), executing most other commands will reset the left panel to the default view, as if the `list` command was called. 
    - In future updates, we will rectify this issue.
@@ -740,7 +755,7 @@ Group size: 5 members
 1. Remarks deleted one at a time:
    - `delrmk` only allows users to delete one remark at a time.
    - In future updates, allow users to delete multiple.
-1.Right panel enhancement:
+1. Right panel enhancement:
    - Currently, the right panel automatically scrolls to the top each time the user edits any student details.
    - In the future, we plan to refine this feature so that the panel scrolls directly to the section where the user made edits, providing a more seamless and user-friendly experience.
 
