@@ -283,20 +283,20 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: Essential (must have), Novel (nice to have), Typical (unlikely to have)
 
-| Priority  | As a    | I want to                                                      | So that I can                                                |
-|:----------|:--------|:---------------------------------------------------------------|:-------------------------------------------------------------|
-| Essential | Teacher | add lessons                                                    | manage my weekly lesson schedule                             |
-| Essential | Teacher | delete lessons                                                 | keep my weekly lesson schedule updated                       |
-| Essential | Teacher | keep track of lesson start and end times                       | manage my weekly lesson timings                              |
-| Essential | Teacher | manage student address                                         | be able to mail the student things                           |
-| Essential | Teacher | manage student phone number                                    | know who to contact and how to contact                       |
-| Essential | Teacher | manage student email                                           | send email attachments                                       |
-| Essential | Teacher | tag students based on how much help they need                  | give each student the appropriate amount of help             |
-| Essential | Teacher | mark all students who have paid                                | quickly mark all my students who has paid                    |
-| Essential | Teacher | unmark all students, so that they are listed as 'has not paid' | quickly mark students as unpaid, when the new month comes in |
-| Essential | Teacher | manage how much each student pays in tuition fees              | remember how much to bill my student every month             |
-| Essential | Teacher | easily total how much money is paid or not paid yet            | easily see how much revenue I have earned or not earned      |
-| Novel     | Teacher | have ideas for gifts                                           | buy gifts for my students.                                   |
+| Priority  | As a    | I want to                                           | So that I can                                                |
+|:----------|:--------|:----------------------------------------------------|:-------------------------------------------------------------|
+| Essential | Teacher | add lessons                                         | manage my weekly lesson schedule                             |
+| Essential | Teacher | delete lessons                                      | keep my weekly lesson schedule updated                       |
+| Essential | Teacher | keep track of lesson start and end times            | manage my weekly lesson timings                              |
+| Essential | Teacher | manage student address                              | be able to mail the student things                           |
+| Essential | Teacher | manage student phone number                         | know who to contact and how to contact                       |
+| Essential | Teacher | manage student email                                | send email attachments                                       |
+| Essential | Teacher | tag students based on how much help they need       | give each student the appropriate amount of help             |
+| Essential | Teacher | mark all students who have paid                     | quickly mark all my students who have paid                   |
+| Essential | Teacher | mark all students as unpaid                         | quickly mark students as unpaid, when the new month comes in |
+| Essential | Teacher | manage how much each student pays in tuition fees   | remember how much to bill my student every month             |
+| Essential | Teacher | easily total how much money is paid or not paid yet | easily see how much revenue I have earned or not earned      |
+| Novel     | Teacher | have ideas for gifts                                | buy gifts for my students.                                   |
 *{More to be added}*
 
 # Use cases
@@ -507,7 +507,7 @@ Use case ends.
 
 ### **Extension:**
 
-**1a.** **Teacher requested to view invalid student**
+**1a.** **Teacher requests to view invalid student**
 
 **1a1.** System notifies the teacher that the student is not present in her set of students.
 
@@ -517,7 +517,31 @@ Steps 1a1-1a2 are repeated until an existing student is selected.
 
 Use case resumes from Step 2.
 
-## UC9: Delete student
+## UC9: Find students
+
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+**Precondition:** The teacher is logged into the app. <br>
+
+**MSS:**
+
+1. Teacher requests to see students enrolled under him/her whose name contains a specific set of keywords.
+2. System displays the students enrolled under him/her whose name contains the specific set of keywords.
+   Use case ends.
+
+### **Extension:**
+
+**1a.** **Teacher requests for a name which does not belong to any of his/her students**
+
+**1a1.** System notifies the teacher that there are no students with a matching name.
+
+**1a2.** System requests the teacher for the correct student name.
+
+Steps 1a1-1a2 are repeated until an existing student is selected.
+
+Use case resumes from Step 2
+
+## UC10: Delete student
 
 **System:** EduLog <br>
 **Actor:** Teacher <br>
@@ -541,7 +565,30 @@ Use case resumes from Step 2.
 
 Use case ends.
 
-## UC10: Display gift
+## UC11: Delete all students
+
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+**Precondition:** The teacher is logged into the app. <br>
+**Postcondition:** All students are removed from the teacher’s list of students. <br>
+
+**MSS:**
+
+1. Teacher views the students enrolled under him/her through U1. View Students
+2.  Teacher requests to delete all students.
+3. System confirms that all student has been removed.
+
+   Use case ends.
+
+### **Extension:**
+
+**3a.** **No students exist in the list of the teacher’s students:**
+
+**3a1.** System notifies the teacher that no students are present in her set of students.
+
+Use case ends.
+
+## UC12: Display gift
 
 **System:** EduLog <br>
 **Actor:** Teacher <br>
@@ -553,7 +600,7 @@ Use case ends.
 2. System displays a suggested gift.
 Use case ends.
 
-## UC11: Mark Student
+## UC13: Mark Student
 
 **System:** EduLog <br>
 **Actor:** Teacher <br>
@@ -572,7 +619,7 @@ Use case ends.
 
 **2a1.** System notifies the teacher that the student is not present in his/her set of students.
 
-## UC12: Unmark Student
+## UC14: Unmark Student
 
 **System:** EduLog <br>
 **Actor:** Teacher <br>
@@ -591,7 +638,7 @@ Use case ends.
 
 **2a1.** System notifies the teacher that the student is not present in his/her set of students.
 
-## UC 13: Mark all students
+## UC15: Mark all students
 **System:** EduLog <br>
 **Actor:** Teacher <br>
 
@@ -601,7 +648,7 @@ Use case ends.
 2. The system marks all students. 
 Use case ends.
 
-## UC 14: Unmark all students
+## UC16: Unmark all students
 **System:** EduLog <br>
 **Actor:** Teacher <br>
 
@@ -611,7 +658,7 @@ Use case ends.
 2. The system unmarks all students.
    Use case ends.
 
-## UC15: Calculate Revenue
+## UC17: Calculate Revenue
 
 **System:** Edulog <br>
 **Actor:** Teacher <br>
