@@ -167,6 +167,14 @@ Classes used by multiple components are in the `careconnect.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Autocomplete Command
+
+A `KeyEvent` listener is added to the `commandTextField` within the `CommandBox` to detect when the Tab key is pressed. When this event occurs, it triggers an autocomplete action. This action passes the current text from `commandTextField` to `Logic#autocompleteCommand(String)` via the `MainWindow#autocompleteCommand(String)` method to find appropriate autocomplete suggestions.
+
+The `LogicManager`, which is a concrete implementation of `Logic`, holds a reference to an `Autocompleter` instance, responsible for generating autocomplete suggestions. Additionally, `LogicManager` maintains a list of all valid command options. To handle the autocomplete request, `LogicManager` calls `Autocompleter#autocompleteWithLexicalPriority(String, List)`, which searches for the lexicographically smallest command suggestion among the available options that match the specified prefix.
+
+If a matching suggestion is found, `Autocompleter` returns it. If no match is found, `Autocompleter` throws an `AutocompleteException`. The result—either a valid suggestion or an exception—is then returned to `MainWindow`, where exception handling is managed. If a valid suggestion is provided, `MainWindow` updates the `commandTextField` with the suggested command, appending a space to facilitate further typing. If no suggestion is available (i.e., an exception occurs), feedback is displayed to inform the user that no matching options were found.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
