@@ -639,7 +639,7 @@ Similar to [<ins>UC09](#use-case-uc09add-phone-number-to-contact) except duplica
       Use case ends.
 
 * 3b. User specified to force the tagging of a contact.
-    * 3b1. System displays the newly added tag, in the tag list. 
+    * 3b1. System displays the specified tag, in the tag list. 
       
       Use case resumes at step 4.
 
@@ -732,7 +732,7 @@ Similar to [<ins>UC14](#use-case-uc14search-for-contacts-by-name) except searchi
 * 2a. The wedding list is empty.
   Use case ends.
 
-* 3a. The contact is already assigned to the specified wedding.
+* 3a. The contact is already assigned to the specifsied wedding.
     * 3a1. System displays an error message.
 
       Use case resumes at step 2.
@@ -799,7 +799,7 @@ Similar to [<ins>UC14](#use-case-uc14search-for-contacts-by-name) except searchi
 
       Use case resumes at step 1.
   
-* 2b. The contact is already an assigned Vendor.
+* 2b. The contact is already a Vendor.
     * 2a1. System displays an error message.
 
       Use case resumes at step 1.
@@ -810,8 +810,8 @@ Similar to [<ins>UC14](#use-case-uc14search-for-contacts-by-name) except searchi
 **MSS**
 
 1. User <ins>lists all contacts [(UC01)](#use-case-uc01list-all-contacts)</ins>.
-2. User requests to unassign the Vendor designation from a contact.
-3. System displays the contact as no longer being designated as a Vendor, in the list of contacts.
+2. User requests to unassign the contact as a vendor.
+3. System shows the contact is no longer a vendor in the list of contacts.
 
    Use case ends.
 
