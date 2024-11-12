@@ -197,6 +197,44 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### 1. Student Command
+
+The student command in AdmiNUS is used to add a new student entry to the list of contacts. This command requires specific attributes such as student ID, name, phone number, email, address, and optional tags. The system will validate each input and check for duplicate entries to prevent the addition of a student with identical details.
+
+#### Current Implementation
+
+This is a high-level view of what occurs when the `student` command is executed:
+
+<img src="./images/StudentCommandSequenceDiagram.png">
+
+Student command performs the following checks in order:
+
+* **Flag Validation**: Ensures all mandatory flags (e.g., name, student ID, phone, email, address) are present, and no invalid flags are included.
+* **Value Validation**: Confirms that each provided value for specified flags adheres to the expected format.
+* **Duplicate Check**: Verifies that no existing student has the same student id.
+
+### 2. Company Command
+
+The `company` command is used to add a new company contact into the list. This command requires attributes such as the company name, phone number, email, address, industry, and optional tags. Similar to the student command, the system validates each input and checks for duplicates to ensure unique entries.
+
+#### Current Implementation
+
+This is a high-level view of what occurs when the `company` command is executed:
+
+<img src="./images/CompanyCommandSequenceDiagram.png">
+
+Company command performs the following checks in order:
+
+* **Flag Validation**: Ensures all mandatory flags (e.g., name, phone, email, address, industry) are present, and no invalid flags are used.
+* **Value Validation**: Confirms that each provided value for specified flags meets the required format.
+* **Duplicate Check**: Verifies that no existing company has the same combination of name and industry
+
+The following diagrams provides a high-level view of the logic flow for both `student` and `company` command:
+
+_paste the img here_
+
+*Note: The error messages will vary depending on which check fails.*
+
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -250,8 +288,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | impatient user                               | manage up to 1000 contacts with fast response time                                 | ensure smooth usage even when managing a large contact list                        |
 | `*`      | busy user                                    | quickly import contacts from other platforms (e.g., phone, social media, email)    | avoid manually inputting every new contact into AdmiNUS                            |
 | `*`      | busy admin user                              | easily export the contact list                                                     | share or back up the contact list for other admin team members or departments      |
-
-_{More to be added}_
 
 ### Use cases
 
@@ -703,7 +739,7 @@ testers are expected to do more *exploratory* testing.
 ### Adding tag(s) to contact
 
 1. **Adding tags to an existing contact**
-   - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+   - **Prerequisites**: Ensure that AdmiNUS is running and at least one contact(s) are listed.
    - **Test case**: `tag 1 t/Y2 t/computerScience`  
      **Expected**: Tags added to the first contact currently shown in the list. Status message updates. Timestamp updated.
    - **Test case**: `tag 0 t/invalid`  
@@ -714,7 +750,7 @@ testers are expected to do more *exploratory* testing.
 ### Deleting tag(s) from contact
 
 1. **Deleting tags from an existing contact**
-   - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed, where all contacts have the tag `contacted`.
+   - **Prerequisites**: Ensure that AdmiNUS is running and at least one contact(s) are listed, where all contacts have the tag `contacted`.
    - **Test case**: `deletetag 1 t/Y2 t/computerScience`  
      **Expected**: Tags removed from the first contact currently shown in the list. Status message updates. Timestamp updated.
    - **Test case**: `deletetag 0 t/invalid`  
