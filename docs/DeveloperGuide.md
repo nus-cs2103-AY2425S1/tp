@@ -601,3 +601,7 @@ Team size : 5
      indexing was used instead of having to input both the candidate's name and the job position.(e.g. "view 1" instead
      of "view n/John Doe j/Software Engineer)
 
+  5. Enhanced error messages: Some commands give a general error message even when there are multiple type of invalid inputs.
+     As such, we will provide more specific error messages across the platform, guiding users with clear, actionable feedback when 
+     inputs are incorrect or incomplete. This will improve usability and reduce the likelihood of repeated errors.
+
