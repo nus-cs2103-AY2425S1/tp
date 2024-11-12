@@ -140,13 +140,13 @@ Shows a message explaning how to access the help page.
 
 Adds a patient to the app.
 * **After using `add`, type `confirm` to complete the action**. You can also use `cancel` if you change your mind. 
-* Note that typing any other commands other than `confirm` or `cancel` will cancel this operation.
+* Note that confirmation will expire after 1 operation. Typing any other commands other than `confirm` or `cancel` will cancel this operation.
 
 **Format:** `add n/NAME i/IDENTITY_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS​`
 
-* **NAME** only supports alphanumeric characters and spaces as it is only meant for identifying patients.
+* **NAME** only supports alphanumeric characters and spaces as it is only meant for you to identify patients. For example names containing s/o, you can replace it with 'son of'.
 
-* **IDENTITY_NUMBER** has to be a **_valid NRIC_** (It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a valid checksum letter (e.g. S1234567D).";))
+* **IDENTITY_NUMBER** has to be a **_valid NRIC_** (It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a valid checksum letter (e.g. S1234567D).
 
 * **PHONE_NUMBER** must be a valid Singapore mobile number. Our application only accepts mobile numbers, which should be 8 digits long and start with either '8' or '9' (e.g., 81234567 or 91234567).
 
@@ -177,6 +177,8 @@ Creates a new log entry for a specific patient. This command is typically used t
 2) `\n` characters will be interpreted as new lines in the `l/LOG_ENTRY` fields of both `addlog` and `addentry`. This format will be preserved in the detailed view of the log entry.
 3) Log entries that contains purely `\n` characters will be treated as a non-text entry which will disallow you from saving it as a log.
 4) Adding an older log is allowed, considering you may want to move your logs from a physical notebook to the application.
+5) Adding a same log with different case will not be treated as a duplicate log entry. This is to allow for error correction in the log entry. For example, if you have entered `john checked in at clinic` and you want to correct it to `John checked in at clinic`, you can do so without any issues. But normally we do not expect the same log entry to be entered twice.
+
 </box>
 
 <div style="page-break-after: always;"></div>
@@ -217,6 +219,8 @@ Examples:
 
 Edits an existing patient in the app by patient's specified INDEX.
 * **After using `edit`, type `confirm` to complete the action**. You can also use `cancel` if you change your mind.
+* Confirmation will expire after 1 operation. If you do not input confirm or cancel, the operation will be cancelled by default.
+
 
 **Format:** `edit INDEX [n/NAME] [i/NRIC] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS]​`
 
@@ -263,6 +267,7 @@ Deletes the specified patient from the app.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * **After using `delete`, type `confirm` to complete the deletion**. You can also use `cancel` if you change your mind.
+* Confirmation will expire after 1 operation. If you do not input confirm or cancel, the operation will be cancelled by default.
 
 Examples:
 * `delete i/S1234567D` deletes the patient with NRIC S1234567D in the address book.
@@ -278,6 +283,7 @@ Clears all entries from MindMap **after confirming the action**.
 **Format:** `clear`
 
 * **After using `clear`, type `confirm` to proceed with the clearing of all entries**. You can also use `cancel` if you change your mind.
+* Confirmation will expire after 1 operation. If you do not input confirm or cancel, the operation will be cancelled by default.
 > **⚠️ Warning:** This deletes **ALL** of the patient contacts and their respective session logs. This action is non-reversible.
 <br>
 <br>
@@ -388,6 +394,9 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
 **Q: Why can I input non-alphanumeric characters into logs?**<br>
 **A:** _Our priority is to mainly support alphanumeric characters only, but remains functionally flexible enough to support non-alphanumeric characters (like emojis or other languages). As such you should only use it only when necessary and with caution as it could break cause unexpected behaviours._
 
+**Q: Why can't patient contacts be deleted automatically after being tagged as 'DISCHARGED'?**<br>
+**A:** _The system is designed to keep a record of all patients, even after they have been discharged. This is to ensure that the patient's information is still accessible for future reference, or possible revisit. It is only when the data is requested to be deleted explicitly by the patient, only then it should be removed._
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -407,18 +416,21 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
    When using the Tab key to navigate, individual items in lists (like the patient list) cannot be accessed.  
    > **Workaround**: Currently, there is no workaround for this.
  
-4. **New Line Handling in Log Entry**
+4. **New Line Handling in Log Entry**   
    Entering "\n" in `addlog` or `addentry` will be treated as a new line. This feature is intended to allow flexible log formatting.
     > **Workaround**: This feature is intended
 
-6. **Possible misleading error message when using invalid index**
+6. **Possible misleading error message when using invalid index**   
    Specifically, when entering `delete 0`, it will cause the system to display a invalid command format error, instead of a invalid index error.
     >**Workaround**: This is intended as stated in the command format, `INDEX` must be a positive integer and 0 is not a positive integer, therefore is not valid.
 
-7. **Possible misleading error message when entering invalid command**
+7. **Possible misleading error message when entering invalid command**    
    When entering an invalid command like: ` add n/John Doe i/S7783844I invalidStuff p/98765432 e/johnd@example.com a/311, Clementi s/NEW`, the system will display an invalid NRIC error. Due to how commands are parsed in MindMap, invalid input will be treated as part of their previous prefix component. (In this case, the invalid input is treated as part of `IDENTITY_NUMBER`)
-    >**Workaround**: Check for possible invalid input near the indicated parts of the command.
+    >**Workaround**: Check for possible invalid input near the parts indicated by the error.
 
+8. **Possible misleading error message when entering extremely large indexes into delete**    
+   When entering an invalid index like: `delete 100000000000`, the system will display an invalid command format error, instead of a invalid index error.
+    >**Workaround**: Avoid using absurdly large indexes when using the delete command, which is impossible to reach in the current context.
 
 
 <div style="page-break-after: always;"></div>
@@ -518,21 +530,23 @@ New UI Arriving Soon!
 
 <div style="page-break-after: always;"></div>
 
-1. **Search by Sub-Strings**  
+1. **Search by Sub-Strings**    
 Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow you to search for sub-strings within names.
 
-2. **Force execution of commands that require confirmation**  
+2. **Force execution of commands that require confirmation**     
 To bypass confirmation for commands like `add`, `edit`, `delete` and `clear`, we plan to add a flag that allows you to force the execution of these commands.
 
-3. **Individual session logs can be viewed in detail via a command**
+3. **Individual session logs can be viewed in detail via a command**     
 Currently, you have to either use your mouse to click on individual logs to view them in detail or hit the `tab` key multiple times with arrow key inputs. We aim to implement a command that enables you to view individual session logs in detail directly.
 
-4. **Better import and export features**
+4. **Better import and export features**     
 Currently we only support convenient import and export from our app. We plan to use CSV files for better compatibility with other software programs.
 
-5. **Removal of Appointment date**
-   The appointment date field will be removed, as future commands will automatically tag session logs with the current date and time from the device, improving logging efficiency and eliminating the need for manual entry.
+5. **Removal of Appointment date**     
+The appointment date field will be removed, as future commands will automatically tag session logs with the current date and time from the device, improving logging efficiency and eliminating the need for manual entry.
 
-6. **Implementation of Edit and Delete Log Commands**
-   As we enhance the tracking of changes in session logs, our goal is to ensure full compliance with the code of conduct required by medical applications. We will only introduce edit and delete log commands once we are certain that they meet all necessary regulatory standards.
+6. **Implementation of Edit and Delete Log Commands**     
+As we enhance the tracking of changes in session logs, our goal is to ensure full compliance with the code of conduct required by medical applications. We will only introduce edit and delete log commands once we are certain that they meet all necessary regulatory standards.
 
+7. **Support for special characters in names**     
+We plan to support special characters in names, such as hyphens, apostrophes and slashes, to ensure that all names are accurately represented in the application.
