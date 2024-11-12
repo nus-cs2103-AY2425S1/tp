@@ -185,7 +185,7 @@ Additionally, the inclusion of a status attribute for clients enhances customer 
 
 The `Tier` and `Status` fields are implemented as classes containing `enum` values, which restrict the possible options for these fields and improve data consistency.
 
-![TierStatusAttributes](images/TierStatusAttributes.png)
+<img src="images/TierStatusAttributes.png" width="510">
 
 Using `enum` values for `Tier` aligns with a real-world banking scenario where a predefined set of credit card tiers is available. This structure also accommodates clients who may have applied but been declined for a credit card, providing agents with an at-a-glance view of a client’s status and relevant product options.
 
@@ -193,9 +193,9 @@ Moreover, using enums for `Tier` simplifies updates to the list of predefined se
 
 When updating the `Tier` `enum`, ensure that related CSS files (`ClientDetailPanel.css` and `ClientListCard.css`) are also updated. These files specify color settings for each tier, and you may need to rename the CSS classes to align with the new enum values. 
 - Below is an example of a CSS update after renaming an enum value to `TEST`:
-    ![img_1.png](images/CssFileSetting.png)  
+    <img src="images/CssFileSetting.png" width="300">
 - This is the result in the UI after updating the CSS:  
-    ![img_2.png](images/UIChangeAfterCSSFileChange.png)
+    <img src="images/UIChangeAfterCSSFileChange.png" width="200">
 
 Similarly, `Status` is implemented using `enum` values to define a set of predefined client statuses. Each status has a corresponding color in the UI, offering agents visual cues to prioritize their follow-ups effectively:
 
@@ -252,7 +252,7 @@ Here is a high-level view of the methods involved when the user inputs `delete 1
 
 This follows the activity diagram shown below:
 
-![DeleteActivityDiagram.png](images%2FDeleteActivityDiagram.png)
+<img src="images/DeleteActivityDiagram.png" width="510">
 
 The user confirmation prompt shown here is also used in the `clear` command. This prompt is intended to help prevent accidental data loss by allowing users to confirm their decision, providing an opportunity to reconsider or correct any unintended command input.
 
@@ -263,8 +263,9 @@ The `filter` command is used to view a specific subset of clients by applying sp
 
 #### Current Implementation
 The following diagrams provide a high-level overview of the `filter` command's logic flow:
-![FilterActivityDiagramInputValidation.png](images/FilterActivityDiagramInputValidation.png)
-![FilterActivityDiagramFilterAndDisplay.png](images/FilterActivityDiagramFilterAndDisplay.png)
+<img src="images/FilterActivityDiagramInputValidation.png" width="590">
+<img src="images/FilterActivityDiagramFilterAndDisplay.png" width="410">
+
 **Note:** The sequence diagram has been omitted due to its complexity.
 
 The filter command performs two primary checks:
