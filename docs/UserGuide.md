@@ -302,6 +302,11 @@ Format: `deletet INDEX`
 **Note:** `deletet` can only be used in transaction list view.
 </box>
 
+<box type="tip" seamless>
+
+**Tip:** `deletet` and `addt` allows you to modify the transaction list at will. Future versions will support a command to directly edit an existing transaction.
+</box>
+
 Examples:
 * `listt 1` followed by `deletet 1` loads the transaction list for the first client, then deletes the first transaction.
 
