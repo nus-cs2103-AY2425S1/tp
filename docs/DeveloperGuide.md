@@ -244,6 +244,12 @@ The sequence diagram shows how an entity command is executed:
 
 <box type="info" seamless>
 
+**Note:** The lifeline for `xyzCommandParser` should end at the destroy marker (X) but due to a limitation 
+of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+<box type="info" seamless>
+
 **Note:** There are two entities, `Person` and `Appointment`.
 - The entity referred in `FindEntityCommand` refers to `FindPersonCommand` and `FindAppointmentCommand`.
 - Similarly, the entity referred in `AddEntityCommand` refers to `AddPersonCommand` and `AddAppointmentCommand`.
