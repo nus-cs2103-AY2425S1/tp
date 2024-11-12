@@ -13,8 +13,12 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well }_
+Github Copilot/Claude/ChatGPT was used generally on a whole to either generate test cases, add comments, autocomplete
+parts of code.
+AI generated content was verified by a human.
+
+We referenced the general format of the User Guide and Developer Guide from this repo:
+https://github.com/AY2324S1-CS2103T-T11-2/tp/blob/master/docs/
 
 | AI Tool | How it was used                                                    | Used by            |
 |---------|--------------------------------------------------------------------|--------------------|
@@ -442,8 +446,6 @@ otherwise)
 3. User requests to delete a specific person in the list
 4. AddressBook deletes the person
 
-~~~~
-
 **Extensions**
 
 - 2a. The list is empty.
@@ -452,17 +454,18 @@ otherwise)
 
 - 3a. The given index is invalid.
 
-  - 3a1. AddressBook shows an error message.
+    - 3a1. AddressBook shows an error message.
 
-    Use case resumes at step 2.
+      Use case resumes at step 2.
 
 _{More to be added}_
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+   able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_
 
@@ -472,6 +475,18 @@ _{More to be added}_
 - **Private contact detail**: A contact detail that is not meant to be shared with others
 
 ---
+
+## **Appendix: Planned Enhancements**
+
+In the current state, if a very long name is entered, the command box will be very long, text wrapping should be
+implemented.
+
+In the current state, for the searchpa command if users enter extraneous inputs according to user guide, Dltbook will
+serve a error message like but this error message does not accurately reflect the error caused by extraneous input.
+for example if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9 w/main" is entered but the prefix w/
+is not recognized globally, a error of "Public Address for length BTC/ETH/SOL should be less than 44 characters" occurs.
+of if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5sv n/s" is entered, the error message of "Public
+Address contains only alphanumeric characters" occurs
 
 ## **Appendix: Instructions for manual testing**
 
@@ -488,16 +503,17 @@ testers are expected to do more _exploratory_ testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
+       optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
+    1. Re-launch the app by double-clicking the jar file.<br>
+       Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
 
@@ -505,16 +521,17 @@ testers are expected to do more _exploratory_ testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+       Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -522,6 +539,8 @@ testers are expected to do more _exploratory_ testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+~~~~
