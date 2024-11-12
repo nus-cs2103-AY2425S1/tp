@@ -356,7 +356,7 @@ Adds a new wedding to the address book.
     - `addw n/Garden Wedding c/John Doe v/Botanical Gardens`
         - Adds a wedding for "John Doe" if there's only one match.<br>
 
-Visual Example:
+Visual Example:<br>
 ![Adding a wedding example](images/addw_example.png)<br>
 *Example of successfully adding a new wedding with all fields specified*
 
