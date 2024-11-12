@@ -1122,7 +1122,7 @@ on why the command is invalid. The error message could be more specific to state
    - Planned enhancement: Separate error messages for each command (`/accept`, `/pending`, and `/reject`) within the status command to clarify which specific action encountered an error. This will help users understand and correct command-specific errors more effectively. <br></br>
    - Justification: By providing distinct error messages for each command, we improve the user experience by making error feedback more specific and actionable. Users will be able to identify errors related to each command easily, reducing potential confusion and enhancing usability. <br></br>
 
-7. **Improve chart UI**
+7. **Improve chart UI** <br>
    <img src="images/chart-ui-bug.png" alt="chart-ui-bug"> <br></br>
    - Current behaviour: When there are multiple statuses with zero internship applications, not all status labels are shown. <br></br>
    - Planned enhancement: Remove chart labels for statuses with zero internship applications. <br></br>
