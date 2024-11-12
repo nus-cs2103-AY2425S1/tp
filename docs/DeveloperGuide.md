@@ -1779,50 +1779,61 @@ applied to edited data, but specific expected results will differ. <br><br>
 <h3 class="features">Tag Features</h3>
 
 #### Creating Tag
-##### ... if `Tag1` is not in the list of tags
-1. Test case: `create-tag w/Tag1`<br>
-   Expected: `Tag1` is added to list of tags. Details of the added tag are shown.
+1. **Creating a tag when `Tag 1` is not in the list of `Tags`.**
 
-##### ... if `Tag1` is in the list of tags
-1. Test case: `create-tag w/Tag1`<br>
-   Expected: No tags are added to list of tags. Error details shown.
+   1. **Test case**: `create-tag w/Tag1`<br>
+      **Expected**: `Tag1` is added to list of `Tags`. Details of the added tag are shown.
 
-1. Test case: `create-tag w/tag1`<br>
-   Expected: No tags are added to list of tags. Error details shown.
+2. **Creating a tag when `Tag 1` is in the list of `Tags`.**
+
+   1. **Test case**: `create-tag w/Tag1`<br>
+      **Expected**: No tags are added to list of `Tags`. Error details shown.
+
+   2. **Test case**: `create-tag w/tag1`<br>
+      **Expected**: No tags are added to list of `Tags`. Error details shown.
 
 #### Deleting Tag
-##### ... if `Tag1` is in the list of tags
-1. Test case: `delete-tag w/Tag1`<br>
-   Expected: `Tag1` is removed from list of tags. Details of the removed tag are shown.
+1. **Deleting a tag when `Tag 1` is in the list of `Tags`.**
 
-##### ... if `Tag1` is not in the list of tags
-1. Test case: `delete-tag w/Tag1`<br>
-   Expected: No tags are removed from list of tags. Error details shown.
+   1. **Test case**: `delete-tag w/Tag1`<br>
+      **Expected**: `Tag1` is removed from list of `Tags`. Details of the removed tag are shown.
+
+2. **Deleting a tag when `Tag 1` is not in the list of `Tags`.**
+   1. **Test case**: `delete-tag w/Tag1`<br>
+      **Expected**: No tags are removed from list of `Tags`. Error details shown.
 
 #### Tagging contact
-##### ... if `Tag1` is in the list and if the first contact is not tagged with `Tag1`
-1. Test case: `tag 1 t/Tag1`<br>
-   Expected: 1st contact is tagged with `Tag1`. Details of the updated contact are shown.
+1. **Tagging the first contact when `Tag 1` is in the list of `Tags` and the first contact is not tagged with `Tag1`.**
 
-##### ... if `Tag1` is in the list and if the first contact is already tagged with `Tag1`
-1. Test case: `tag 1 t/Tag1`<br>
-   Expected: No contacts are tagged. Error details shown.
+    1. **Test case**: `tag 1 t/Tag1`<br>
+       **Expected**: 1st contact is tagged with `Tag1`. Details of the updated contact are shown.
 
-##### ... if `Tag1` is not in the list
-1. Test case: `tag 1 t/Tag1`<br>
-   Expected: No contact is tagged. Error details shown.
+2. **Tagging the first contact when `Tag 1` is in the list of `Tags` and the first contact is already tagged with `Tag1`.**
+    1. **Test case**: `tag 1 t/Tag1`<br>
+       **Expected**: No contacts are tagged. Error details shown.
 
-1. Test case: `tag 1 t/Tag1 f/`<br>
-   Expected: 1st contact is tagged with newly created `Tag1`. Details of the updated contact are shown.
+3. **Tagging the first contact when `Tag1` is in the list of `Tags` and the first contact is already tagged with `Tag1`.**
+   1. **Test case**: `tag 1 t/Tag1`<br>
+      **Expected**: No contacts are tagged. Error details shown.
+   
+4. **Tagging the first contact when `Tag1` is not in the list of `Tags`.**
+
+   1. **Test case**: `tag 1 t/Tag1`<br>
+      **Expected**: No contact is tagged. Error details shown.
+
+   2. **Test case**: `tag 1 t/Tag1 f/`<br>
+      **Expected**: 1st contact is tagged with newly created `Tag1`. Details of the updated contact are shown.
 
 #### Untagging contact
-##### ... if first contact is tagged with `Tag1`
-1. Test case: `untag 1 w/Tag1`<br>
-   Expected: `Tag1` is removed from their contact card.
+1. **Untagging the first contact when the first contact is tagged with `Tag1`.**
 
-##### ... if first contact is not tagged with `Tag1`
-1. Test case: `untag 1 w/Tag1`<br>
-   Expected: No contacts are untagged. Error details shown.
+   1. **Test case**: `untag 1 w/Tag1`<br>
+      **Expected**: `Tag1` is removed from their contact card.
+
+2. **Untagging the first contact when the first contact is not tagged with `Tag1`.**
+
+   1. **Test case**: `untag 1 w/Tag1`<br>
+      **Expected**: No contacts are untagged. Error details shown.
 
 ---
 
