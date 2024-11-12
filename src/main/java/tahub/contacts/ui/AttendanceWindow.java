@@ -159,8 +159,8 @@ public class AttendanceWindow extends UiPart<Stage> {
             @Override
             protected void updateItem(StudentCourseAssociation sca, boolean empty) {
                 super.updateItem(sca, empty);
-                setText(empty || sca == null ? null :
-                                sca.getCourse().courseCode + ": " + sca.getCourse().courseName);
+                setText(empty || sca == null ? null
+                                : sca.getCourse().courseCode + ": " + sca.getCourse().courseName);
             }
         });
 
