@@ -43,6 +43,11 @@ public class QuantityTest {
         assertTrue(Quantity.isValidQuantity("300   mL")); // valid milliliters quantity with random spaces
         assertTrue(Quantity.isValidQuantity("300 units")); // valid milliliters quantity with random spaces
 
+        // boundary quantities
+        assertTrue(Quantity.isValidQuantity("1 g"));
+        assertTrue(Quantity.isValidQuantity("1000000 kg"));
+        assertFalse(Quantity.isValidQuantity("-100 g"));
+        assertFalse(Quantity.isValidQuantity(" 100 g "));
     }
 
     @Test

@@ -16,11 +16,11 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_SUPPLIERS_FOUND_OVERVIEW =
-            "%1$d suppliers found by matching with the given keyword(s)!";
-    public static final String MESSAGE_DELIVERIES_FOUND_OVERVIEW = "%1$d deliveries found!";
-    public static final String MESSAGE_SUPPLIER_SORTED_OVERVIEW = "%1$d suppliers sorted by %2$s in %3$s order!";
-    public static final String MESSAGE_DELIVERY_SORTED_OVERVIEW = "%1$d deliveries sorted by %2$s in %3$s order!";
-    public static final String MESSAGE_DELIVERIES_LISTED_OVERVIEW = "%1$d deliveries listed!";
+            "%1$d supplier(s) found by matching with the given keyword(s)!";
+    public static final String MESSAGE_DELIVERIES_FOUND_OVERVIEW = "%1$d delivery(s) found!";
+    public static final String MESSAGE_SUPPLIER_SORTED_OVERVIEW = "%1$d supplier(s) sorted by %2$s in %3$s order!";
+    public static final String MESSAGE_DELIVERY_SORTED_OVERVIEW = "%1$d delivery(s) sorted by %2$s in %3$s order!";
+    public static final String MESSAGE_DELIVERIES_LISTED_OVERVIEW = "%1$d delivery(s) listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX = "The delivery index provided is invalid.";

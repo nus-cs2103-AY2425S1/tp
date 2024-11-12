@@ -3,19 +3,20 @@ package seedu.address.model.delivery;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
- * Represents the position of the supplier inside the addressbook that is involved in the delivery.
+ * Represents the position of the supplier in the currently displayed list of VendorVault
+ * that is involved in the delivery.
  */
 public class SupplierIndex {
     public static final String MESSAGE_CONSTRAINTS =
             "SUPPLIER_INDEX should be a positive number greater than 0"
                     + " and smaller than the total number of suppliers added\n"
                     + "and must not be blank.";
-    public final int index;
+    private final int index;
 
     /**
      * Constructs a {@code SupplierIndex}.
      *
-     * @param index A index string.
+     * @param index Index String value.
      */
     public SupplierIndex(String index) {
         requireNonNull(index);
@@ -24,10 +25,10 @@ public class SupplierIndex {
     }
 
     /**
-     * Returns true if the given string represents a positive-ingeger.
+     * Returns true if the given string represents an integer.
      *
-     * @param test String value of Supplier_index provided by user.
-     * @return True if test is an nteger and false otherwise.
+     * @param test String value of SupplierIndex provided by user.
+     * @return True if input is an integer and false otherwise.
      */
     public static boolean isValidIndex(String test) {
         try {
@@ -37,11 +38,20 @@ public class SupplierIndex {
         }
         return true;
     }
+
+    /**
+     * Represents the String value of SupplierIndex.
+     */
     @Override
     public String toString() {
         return "" + index;
     }
-
+    /**
+     * Returns true if index of both objects are same.
+     *
+     * @param other Object to be compared with.
+     * @return True if object is an instance of SupplierIndex and has the same integer index value.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -56,6 +66,11 @@ public class SupplierIndex {
         return index == otherSupplierIndex.index;
     }
 
+    /**
+     * Creates a hash of the index value.
+     *
+     * @return Hash value of integer index value.
+     */
     @Override
     public int hashCode() {
         return ((Integer) index).hashCode();

@@ -1,7 +1,10 @@
 package seedu.address.model.supplier.predicates;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.supplier.Supplier;
+
 
 /**
  * Tests that a {@code Supplier}'s {@code Product} matches any of the keywords given.
@@ -19,6 +22,7 @@ public class ProductContainsKeywordPredicate extends SupplierPredicate {
 
     @Override
     public boolean test(Supplier supplier) {
+        requireNonNull(supplier);
         // Partial String matching unlike the normal AB3
         return supplier.getProducts().stream()
                         .anyMatch(product -> product.toString().toLowerCase().contains(keyword.toLowerCase()));

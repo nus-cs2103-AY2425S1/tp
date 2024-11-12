@@ -50,8 +50,8 @@ public class JsonAdaptedDelivery {
         this.sender = new JsonAdaptedSupplier(source.getDeliverySender());
         this.status = source.getDeliveryStatus().toString();
         this.deliveryTime = source.getDeliveryDate().toString();
-        this.cost = source.getDeliveryCost().value;
-        this.quantity = source.getDeliveryQuantity().value;
+        this.cost = source.getDeliveryCost().getCost();
+        this.quantity = source.getDeliveryQuantity().getQuantity();
     }
 
     /**
@@ -67,7 +67,7 @@ public class JsonAdaptedDelivery {
         if (!Product.isValidProductName(product)) {
             throw new IllegalValueException(Product.MESSAGE_CONSTRAINTS);
         }
-        final Product productObj = new Product(this.product);
+        final Product modelProduct = new Product(this.product);
 
 
         if (sender == null) {
@@ -75,14 +75,14 @@ public class JsonAdaptedDelivery {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Supplier.class.getSimpleName()));
         }
         // Check if sender is valid ?? --> JsonAdaptedSupplier class will check for us
-        final Supplier senderObj = this.sender.toModelType();
+        final Supplier modelSender = this.sender.toModelType();
 
 
         if (status == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
         }
         // Status is enum is there is no need for a check?
-        final Status statusObj = Status.valueOf(this.status.toUpperCase());
+        final Status modelStatus = Status.valueOf(this.status.toUpperCase());
 
 
         if (deliveryTime == null) {
@@ -92,7 +92,7 @@ public class JsonAdaptedDelivery {
         if (!DateTime.isValidTime(this.deliveryTime)) {
             throw new IllegalValueException(DateTime.MESSAGE_CONSTRAINTS);
         }
-        final DateTime deliveryDateTimeObj = new DateTime(this.deliveryTime);
+        final DateTime modelDeliveryDataTime = new DateTime(this.deliveryTime);
 
 
         if (cost == null) {
@@ -101,7 +101,7 @@ public class JsonAdaptedDelivery {
         if (!Cost.isValidCost(cost)) {
             throw new IllegalValueException(Cost.MESSAGE_CONSTRAINTS);
         }
-        final Cost costObj = new Cost(cost);
+        final Cost modelCost = new Cost(cost);
 
 
         if (quantity == null) {
@@ -111,9 +111,9 @@ public class JsonAdaptedDelivery {
         if (!Quantity.isValidQuantity(quantity)) {
             throw new IllegalValueException(Quantity.MESSAGE_CONSTRAINTS);
         }
-        final Quantity quantityObj = new Quantity(quantity);
+        final Quantity modelQuantity = new Quantity(quantity);
 
-        return new Delivery(productObj, senderObj, statusObj, deliveryDateTimeObj, costObj,
-                quantityObj);
+        return new Delivery(modelProduct, modelSender, modelStatus, modelDeliveryDataTime, modelCost,
+                modelQuantity);
     }
 }

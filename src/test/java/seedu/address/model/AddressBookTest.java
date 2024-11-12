@@ -104,7 +104,7 @@ public class AddressBookTest {
         Delivery delivery = new DeliveryBuilder().build();
         Delivery updatedDelivery = new DeliveryBuilder().withStatus(Status.DELIVERED).build();
 
-        addressBook.addDelivery(delivery);
+        addressBook.addDeliveryToAddressBook(delivery);
         addressBook.setDelivery(delivery, updatedDelivery);
 
         assertEquals(updatedDelivery, addressBook.getDeliveryList().get(0));

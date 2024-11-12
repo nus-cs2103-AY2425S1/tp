@@ -3,6 +3,7 @@ package seedu.address.model.delivery;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestUtil.prepareBeforePredicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,14 +13,11 @@ public class DeliveryIsUpcomingBeforePredicateTest {
     @Test
     public void equals() {
         DateTime firstPredicateDateTime = new DateTime("19-12-2022 16:00");
-        DateTime secondPredicateDateTime = new DateTime("18-06-2023 17:00");
         Status firstPredicateStatus = Status.PENDING;
-        Status secondPredicateStatus = Status.DELIVERED;
-
-        DeliveryIsUpcomingBeforePredicate firstPredicate = new
-                DeliveryIsUpcomingBeforePredicate(firstPredicateDateTime, firstPredicateStatus);
-        DeliveryIsUpcomingBeforePredicate secondPredicate = new
-                DeliveryIsUpcomingBeforePredicate(secondPredicateDateTime, secondPredicateStatus);
+        DeliveryIsUpcomingBeforePredicate firstPredicate = prepareBeforePredicate("19-12-2022 16:00",
+                Status.PENDING);
+        DeliveryIsUpcomingBeforePredicate secondPredicate = prepareBeforePredicate("18-06-2023 17:00",
+                Status.DELIVERED);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));

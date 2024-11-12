@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Delivery's quantity in the delivery book.
+ * Represents a Delivery's product quantity in the delivery book.
  */
 public class Quantity {
 
@@ -15,7 +15,7 @@ public class Quantity {
 
     public static final String VALIDATION_REGEX = "^([1-9]\\d*)(\\s+)(kg|g|L|mL|units)$";
 
-    public final String value;
+    private final String value;
 
     /**
      * Constructs a {@code Quantity}.
@@ -24,14 +24,13 @@ public class Quantity {
      */
     public Quantity(String quantity) {
         requireNonNull(quantity);
-
-        // Check validity before performing the formatting
         checkArgument(isValidQuantity(quantity), MESSAGE_CONSTRAINTS);
+
         value = quantityFormatter(quantity);
     }
 
     /**
-     * Checks that input is a number bigger than 0 and contains units
+     * Checks that input is a number bigger than 0 and contains specific valid units (kg,g,L,mL,units)
      *
      * @param test Input quantity provided by user.
      * @return True if test contains a number bigger than 0 followed by units.
@@ -42,6 +41,12 @@ public class Quantity {
 
     @Override
     public String toString() {
+        return value;
+    }
+
+    public String getQuantity() {
+
+        assert value != null;
         return value;
     }
 

@@ -28,7 +28,10 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
 
 
     /**
-     * Returns true if the list contains an equivalent delivery as the given argument.
+     * Returns true if the list contains a delivery that is equivalent to the specified delivery.
+     *
+     * @param toCheck the delivery to check for its existence in the current list
+     * @return true if an equivalent delivery already exists in the list, false otherwise
      */
     public boolean contains(Delivery toCheck) {
         requireNonNull(toCheck);
@@ -38,9 +41,12 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
     /**
      * Adds a delivery to the list.
      * The delivery must not already exist in the list.
+     *
+     * @param toAdd the delivery to add to the list
+     * @throws DuplicateDeliveryException if the delivery already exists in the list
      */
 
-    public void add(Delivery toAdd) {
+    public void addDelivery(Delivery toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateDeliveryException();
@@ -49,16 +55,29 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
     }
 
     /**
-     * Removes the equivalent delivery from the list.
+     * Removes the specified delivery from the list.
      * The delivery must exist in the list.
+     *
+     * @param toRemove the delivery to remove from the list
+     * @throws DeliveryNotFoundException if the delivery does not exist in the list
      */
-    public void remove(Delivery toRemove) {
+    public void removeDelivery(Delivery toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new DeliveryNotFoundException();
         }
     }
 
+    /**
+     * Replaces the specified target delivery in the list with an edited delivery.
+     * The target delivery must exist in the list, and the identity of the edited delivery
+     * must not be the same as an existing delivery in the list.
+     *
+     * @param target the delivery to be replaced
+     * @param editedDelivery the new delivery to replace the target with
+     * @throws DeliveryNotFoundException if the target delivery does not exist in the list
+     * @throws DuplicateDeliveryException if the editedDelivery already exists in the list
+     */
     public void setDelivery(Delivery target, Delivery editedDelivery) {
         requireAllNonNull(target, editedDelivery);
 
@@ -78,9 +97,13 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
+
     /**
      * Replaces the contents of this list with {@code deliveries}.
      * {@code deliveries} must not contain duplicate deliveries.
+     *
+     * @param deliveries the list of deliveries to set as the new contents of this list
+     * @throws DuplicateDeliveryException if the given list contains any duplicate deliveries
      */
 
     public void setDeliveries(List<Delivery> deliveries) {
@@ -129,6 +152,12 @@ public class UniqueDeliveryList implements Iterable<Delivery> {
         return internalList.toString();
     }
 
+    /**
+     * Returns true if {@code deliveries} contains only unique deliveries.
+     *
+     * @param deliveries the list of deliveries to check for uniqueness
+     * @return true if the list contains only unique deliveries
+     */
     private boolean deliveriesAreUnique(List<Delivery> deliveries) {
         for (int i = 0; i < deliveries.size() - 1; i++) {
             for (int j = i + 1; j < deliveries.size(); j++) {
