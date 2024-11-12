@@ -265,7 +265,7 @@ The main basic commands for *TAHub Contacts*.
 <a name="help">
   <panel header="#### Viewing help : `help`" expanded no-close no-switch>
 
-  Shows a message explaning how to access the help page.
+  Shows a message explaining how to access the help page.
 
   ![help message](images/helpMessage.png)
 
@@ -720,7 +720,7 @@ the data**. You don’t need to save manually!
 
 <box type="info" seamless>
 
-*This already makes us umambiguously superior to Microsoft Office (when saving locally).*
+*This already makes us unambiguously superior to Microsoft Office (when saving locally).*
 </box>
 
 #### Editing the data file
@@ -785,7 +785,7 @@ revert the change?<br>
 **A**: Unfortunately, we have **not** implemented an undo command for TAHub contacts.
 :pensive:
 <br>
-So be careful especially when you're using desctructive (deletion) commands!
+So be careful especially when you're using destructive (deletion) commands!
 
 </a>
 
