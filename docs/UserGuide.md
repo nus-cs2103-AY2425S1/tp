@@ -304,7 +304,7 @@ Format: `deletet INDEX`
 
 <box type="tip" seamless>
 
-**Tip:** `deletet` and `addt` allows you to modify the transaction list at will. Future versions will support a command to directly edit an existing transaction.
+**Tip:** `deletet` and `addt` allow you to modify the transaction list at will. Future versions will support a command to directly edit an existing transaction.
 </box>
 
 Examples:
