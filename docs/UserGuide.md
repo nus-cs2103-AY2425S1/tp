@@ -481,7 +481,7 @@ Exits the application.
 
 #### Editing the Data File
 
-Advanced users can edit the data file directly to modify the address book data.
+Advanced users can edit the data file directly to modify the address book data. However, exercise caution when doing so.
 
 - **File Location**:
     - `[JAR file location]/data/addressbook.json`
@@ -490,7 +490,8 @@ Advanced users can edit the data file directly to modify the address book data.
         - Make a copy of the data file before editing.
     - **Validity**:
         - Incorrect file formats or invalid data can cause the application to discard all data and start with an empty data file upon the next run.
-        - Certain edits can cause the application to behave unexpectedly (e.g., entering values outside acceptable ranges).
+          - Changing ownWedding field of a person to 0 will only result in wedding having no client and would not corrupt the file.
+          - However, changing the hashcode of the `weddingJobs` to an incorrect value will result in a corrupted file and restart the application with an empty data file.
 - **Recommendation**:
     - Edit the data file only if you are confident in updating it correctly.
 
@@ -504,7 +505,7 @@ Advanced users can edit the data file directly to modify the address book data.
     - The application provides specific error messages to guide users in correcting their commands.
 - **Case Sensitivity**:
   - Commands must be **lowercase** (`add, addw, edit, editw etc.`)
-  - Parameters (`n/..., e/...` ) are **case-insensitive** as per the validation rules.
+  - Parameters prefixes (`n/..., e/...` ) are **case-sensitive**.
 
 [↥ Back to Top](#bridal-boss-user-guide)
 
@@ -570,15 +571,15 @@ Advanced users can edit the data file directly to modify the address book data.
 #### Email Addresses
 
 - **Format**:
-    - Must be in the form `local-part@domain.toplevel`
+    - Must be in the form `local-part@domain`
 - **Local-part Rules**:
     - Can contain alphanumeric characters and `+`, `_`, `.`, `-`
     - Cannot start or end with a special character
     - Example: `user.name`, `john.doe-123`, `user+tag`
 - **Domain Rules**:
-    - Must include a top-level domain (e.g., `.com`, `.org`, `.edu`, `.sg`)
     - Domain labels (parts between dots) must:
-        - Start and end with alphanumeric characters
+        - Start with an alphanumeric character 
+        - End with at least 2 alphanumeric characters
         - Can contain hyphens between alphanumeric characters
         - Each label must contain at least one character
     - Examples of valid domains:
@@ -593,11 +594,10 @@ Advanced users can edit the data file directly to modify the address book data.
     - `user.name+tag@my-company.com`
     - `sales@company-name.com.sg`
 - **Invalid Examples**:
-    - `user@domain` (missing top-level domain)
-    - `user@e-a` (missing top-level domain)
+    - `user@e-a` (does not end with 2 alphanumeric characters)
     - `user@-domain.com` (domain label starts with hyphen)
     - `user@domain-.com` (domain label ends with hyphen)
-    - `user@.com` (empty domain label)
+    - `user@.com` (domain label must contain at least one alphanumeric character)
 #### Roles
 
 - **Format**:
