@@ -38,7 +38,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person or phone number already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person or phone number already"
+                                                            + "exists in the address book";
 
     public static final String MESSAGE_INVALID_NAME = "Invalid name: Names cannot contain special patterns "
             + "or characters. Only alphabetic characters, spaces, hyphens, and apostrophes are allowed.";

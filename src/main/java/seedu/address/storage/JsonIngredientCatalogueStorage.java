@@ -48,7 +48,8 @@ public class JsonIngredientCatalogueStorage implements IngredientCatalogueStorag
             IngredientCatalogue.setInstance(sampleCatalogue);
             return Optional.of(sampleCatalogue);
         }
-        Optional<IngredientCatalogue> ingredientCatalogueOptional = JsonUtil.readJsonFile(filePath, IngredientCatalogue.class);
+        Optional<IngredientCatalogue> ingredientCatalogueOptional = JsonUtil.readJsonFile(filePath,
+                IngredientCatalogue.class);
         ingredientCatalogueOptional.ifPresent(IngredientCatalogue::setInstance);
         return ingredientCatalogueOptional;
     }

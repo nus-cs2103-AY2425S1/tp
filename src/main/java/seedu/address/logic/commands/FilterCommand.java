@@ -20,7 +20,7 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons whose tags contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + PREFIX_TAG + "TAG [MORE_TAGS]...\n"
+            + PREFIX_TAG + "TAG " + PREFIX_TAG + "[MORE_TAGS]...\n"
             + "Example: " + COMMAND_WORD + " t/Customer t/Supplier";
 
     private final PersonContainsTagsPredicate predicate;

@@ -76,7 +76,7 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
 ## **Step 3: Try Your First Commands**
 
-Now that BakeBuddy is running, let's add your first items. In the BakeBuddy window, you'll see a space to type commands at the top.
+Now that BakeBuddy is running, let's maximize your screen for the best viewing experience. In the BakeBuddy window, you'll see a space to type commands at the top.
 
 1. First, check out the [Glossary](#glossary-and-command-formats) and [List of Commands](#list-of-commands) sections to understand what BakeBuddy can do
 2. Review the [FAQ](#faq) to clear any initial doubts
@@ -183,8 +183,8 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 * `REMARK`: Additional comments
 
 **Format Notes:**
-* `[parameter]`: Optional parameter
-* `parameter...`: Parameter can be repeated
+* `[PARAMETER]`: Optional parameter
+* `PARAMETER...`: Parameter can be repeated
 * Parameters can be entered in any order
 * Commands and parameter prefixes are case-sensitive
 
@@ -196,15 +196,15 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 
 ## **General Contact Management**
 
-| Command                                   | Format                                                                      | Example                                                              |
-|-------------------------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------|
-| [Add Contact](#add-contact-command)       | `addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]...`         | `addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road` |
-| [Delete Contact](#delete-contact-command) | `deleteContact INDEX`                                                       | `deleteContact 1`                                                    |
-| [Edit Contact](#edit-contact-command)     | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` | `editContact 1 p/91150335`                                           |
-| [Filter Contact](#filter-contact-command) | `filterContact t/TAG [MORE_TAGS]...`                                        | `filterContact t/Customer`                                           |
-| [Find](#find-contact-command)             | `find KEYWORD [MORE_KEYWORDS]...`                                           | `find Charlotte Bernice`                                             |
-| [List](#list-command)                     | `list`                                                                      | `list`                                                               |
-| [Remark](#remark-command)                 | `remark INDEX r/REMARK`                                                     | `remark 1 r/Regular customer`                                        |
+| Command                                   | Format                                                                        | Example                                                              |
+|-------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| [Add Contact](#add-contact-command)       | `addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]...`           | `addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road` |
+| [Delete Contact](#delete-contact-command) | `deleteContact INDEX`                                                         | `deleteContact 1`                                                    |
+| [Edit Contact](#edit-contact-command)     | `editContact INDEX PARAMETER [MORE_PARAMETERS]...` | `editContact 1 p/91150335`                                           |
+| [Filter Contact](#filter-contact-command) | `filterContact t/TAG [t/MORE_TAGS]...`                                        | `filterContact t/Customer`                                           |
+| [Find](#find-contact-command)             | `find KEYWORD [MORE_KEYWORDS]...`                                             | `find Charlotte Bernice`                                             |
+| [List](#list-command)                     | `list`                                                                        | `list`                                                               |
+| [Remark](#remark-command)                 | `remark INDEX r/REMARK`                                                       | `remark 1 r/Regular customer`                                        |
 
 ## **Customer and Supplier Contact Management**
 
@@ -417,6 +417,19 @@ addCustomerOrder n/John p/91234567 o/1 2 r/Collector: Mary (sister),
 Collection: 25/12/2024 6pm
 ```
 This system helps maintain clean contact records while still allowing flexibility in order collection arrangements.
+
+<div style="page-break-after: always;"></div>
+
+## **Q15: Why do I still see deleted pastries/ingredients in my orders?**
+**A:** When a pastry or ingredient is removed from the catalogue, orders containing these items will retain their names:
+- This preserves the order history and ensures you can track past transactions
+- The system maintains a record of what was actually ordered, even if the item is no longer available
+- While you cannot add new orders with deleted items, existing orders remain unchanged for accounting purposes
+
+For example, if you delete "Croissant" from your pastry catalogue:
+- All past customer orders for croissants will still show "Croissant" in their order details
+- New orders cannot include croissants until the item is added back to the catalogue
+- This helps maintain accurate business records while preventing new orders of discontinued items
 
 <div style="page-break-after: always;"></div>
 
@@ -677,7 +690,7 @@ exit
 Filter and list contacts in the address book based on specified tags.
 
 ```bash
-filterContact t/TAG [MORE_TAGS]...
+filterContact t/TAG [t/MORE_TAGS]...
 ```
 - **Parameters:**
    - `t/TAG`: A tag to filter contacts by. Multiple tags can be specified by repeating the "t/" prefix with different tag values.
@@ -715,6 +728,14 @@ find Charlotte Bernice
 
 <div style="page-break-after: always;"></div>
 
+## **Help Command**
+Displays a link to our user guide that provides detailed information on how to use the application.
+
+***Example:***
+```bash
+help
+````
+
 ## **List Command**
 Lists all contacts in the bakery's address book.
 
@@ -723,14 +744,6 @@ Lists all contacts in the bakery's address book.
 list
 ````
 ![listcommandui.png](images/listcommandui.png)
-
-## **Help Command**
-Displays a link to our user guide that provides detailed information on how to use the application.
-
-***Example:***
-```bash
-help
-````
 
 <div style="page-break-after: always;"></div>
 

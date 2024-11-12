@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.CustomerOrderList;
 import seedu.address.model.order.OrderStatus;
+import seedu.address.model.person.Person;
 
 /**
  * Marks a customer order as pending.
@@ -45,6 +48,11 @@ public class UnmarkCustomerOrderCommand extends Command {
 
         customerOrderList.removeOrder(targetIndex - 1);
         customerOrderList.addOrder(customerOrder);
+
+        // Update personList
+        Person personToEdit = customerOrder.getOriginalPerson();
+        model.setPerson(personToEdit, personToEdit);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         String resultMessage = MESSAGE_UNMARK_ORDER_SUCCESS + "\n" + customerOrder.toString();
         return new CommandResult(resultMessage);

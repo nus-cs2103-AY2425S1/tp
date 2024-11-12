@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -7,6 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.order.OrderStatus;
 import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.order.SupplyOrderList;
+import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
 /**
@@ -54,6 +57,11 @@ public class MarkSupplyOrderCommand extends Command {
 
         supplyOrderList.removeOrder(targetIndex - 1);
         supplyOrderList.addOrder(supplyOrder);
+
+        // Update personList
+        Person personToEdit = supplyOrder.getOriginalPerson();
+        model.setPerson(personToEdit, personToEdit);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         String resultMessage = MESSAGE_MARK_ORDER_SUCCESS + "\n" + supplyOrder.toString();
         return new CommandResult(resultMessage);

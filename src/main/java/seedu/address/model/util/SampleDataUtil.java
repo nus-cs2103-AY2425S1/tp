@@ -64,26 +64,17 @@ public class SampleDataUtil {
 
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Customer(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"),
-                    new Remark("I love cakes"), getTagSet("Customer")),
+                    new Information("I love cakes"), new Remark(), getTagSet("Customer")),
             sampleCustomer(),
             sampleSupplier(),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    new Remark("I watch football"), getTagSet("Customer")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    new Remark("Ingredients are cool"), getTagSet("Supplier")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    new Address("Blk 47 Tampines Street 20, #17-35"),
-                    new Remark("I do not like sweet stuff"), getTagSet("Customer")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"),
-                    new Remark("I want to invest in your bakery business"), getTagSet("Supplier")),
+                    new Remark("I want to invest in your bakery business"), getTagSet("Investor")),
             new Person(new Name("Joel Tio"), new Phone("98102923"), new Email("joel.tio@gmail.com"),
                     new Address("548 Bukit Timah Road"),
-                    new Remark("I am lactose intolerant"), getTagSet("Customer", "Friend"))
+                    new Remark("I am lactose intolerant"), getTagSet("GrabDelivery"))
         };
     }
 
