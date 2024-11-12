@@ -324,9 +324,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case:** UC7 - Adding tags
 
 **MSS:**
-1. User adds tag after <u>initiating the update command (UC6).</u>
+1. User adds tag via edit command after <u>initiating the update command (UC6).</u>
 2. GAB displays the updated vendor.
    <br> Use case ends.
+
+**Extensions:**
+* 1a. Wrong edit command format.
+    * 1a1. GAB shows an error message.
+    * 1a2. User enters new data.
+    * Steps 1a1-1a2 are repeated until the right add vendor command format is recognised.
+      Use case resumes at step 2.
 
 ---
 
