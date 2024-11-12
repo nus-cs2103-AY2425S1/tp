@@ -105,16 +105,16 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/tagSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `TagCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `TagCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `TagCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to set the person with the new tag).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -290,6 +290,9 @@ We aim to enhance the robustness of duplicate detection. Currently, the system c
 We are also planning to improve the log scrolling experience. Currently, users may experience issues where not all parts of a log entry are visible due to two scenarios:
 - **Long Logs**: When logs are lengthy, scrolling through them with the arrow keys causes the view to jump to the next log instead of continuing within the current log.
 - **End-of-Log Visibility**: If the last log is active, and part of it is hidden from view, users cannot scroll further down to see the entire entry, as there are no additional logs to continue the scroll.
+
+### Allow special character in names
+Currently, names can only contain alphanumeric characters and spaces. As a result, valid real names like "XXX S/O YYY", "Robert Downey Jr." will be flagged as invalid names, preventing the user from adding contacts with these names into the application. 
 
 To address these issues, we plan to refine the scrolling behavior to ensure smooth navigation within individual logs, regardless of length, and to enable full visibility of the last log entry when selected.
 
