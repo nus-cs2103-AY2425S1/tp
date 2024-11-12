@@ -18,12 +18,14 @@ public class CommandHistoryTest {
 
     @Test
     public void add_nullCommand_throwsException() {
-        // Check that adding a null command throws an exception
+        // EP test: Adding a null command throws an exception
         assertThrows(AssertionError.class, () -> commandHistory.add(null));
     }
 
     @Test
     public void add_correctlyAddsCommands() {
+        // EP test: Adding valid commands to history.
+        // Checks if commands are added correctly and navigable in reverse order.
         commandHistory.add("command1");
         commandHistory.add("command2");
 
@@ -35,8 +37,23 @@ public class CommandHistoryTest {
         commandHistory.add("command3");
         assertEquals("command3", commandHistory.getPreviousCommand()); // Should return command3
     }
+
+    @Test
+    public void getPreviousCommand_noCommandsAdded_returnsNull() {
+        // BVA Test: getPreviousCommand when history is empty
+        assertNull(commandHistory.getPreviousCommand());
+    }
+
+    @Test
+    public void getNextCommand_noCommandsAdded_returnsEmptyString() {
+        // BVA Test: getNextCommand when history is empty
+        assertEquals("", commandHistory.getNextCommand());
+    }
+
     @Test
     public void getPreviousCommand_correctlyGetsPreviousCommands() {
+        // EP Test: Retrieving commands in order of addition.
+        // Checks correct navigation through previous commands.
         commandHistory.add("command1");
         commandHistory.add("command2");
         commandHistory.add("command3");
@@ -45,17 +62,21 @@ public class CommandHistoryTest {
         assertEquals("command3", commandHistory.getPreviousCommand());
         assertEquals("command2", commandHistory.getPreviousCommand());
         assertEquals("command1", commandHistory.getPreviousCommand());
+        // Boundary value: No more previous commands, so should return null
         assertNull(commandHistory.getPreviousCommand());
     }
 
     @Test
     public void getNextCommand_correctlyGetsNextCommands() {
+        // EP Test: Retrieving next command after navigating backwards.
+        // Verifies correct behavior of getNextCommand following previous commands.
         commandHistory.add("command1");
         commandHistory.add("command2");
         assertEquals("command2", commandHistory.getPreviousCommand());
         assertEquals("command1", commandHistory.getPreviousCommand());
         assertEquals("command2", commandHistory.getNextCommand());
-        assertEquals("", commandHistory.getNextCommand()); // No more next commands
+        // Boundary value: No more next commands
+        assertEquals("", commandHistory.getNextCommand());
     }
 
     @Test

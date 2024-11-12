@@ -69,8 +69,6 @@ public class DisplayCard extends UiPart<Region> {
 
     private void setDisplayLessons(Person person) {
         assert(person != null);
-        // This code might need to change once the method for getting sorted lessons
-        // is implemented in the person class.
         List<Lesson> sortedLessons = person.getLessons().stream()
                 .sorted(new Lesson.LessonComparator())
                 .toList();
