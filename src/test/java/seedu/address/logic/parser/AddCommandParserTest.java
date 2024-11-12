@@ -43,7 +43,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.employee.Name;
+import seedu.address.model.employee.EmployeeName;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EmployeeBuilder;
@@ -172,7 +172,7 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, EMPLOYEE_ID_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, EmployeeName.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, EMPLOYEE_ID_DESC_BOB + NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB
@@ -192,7 +192,7 @@ public class AddCommandParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, EMPLOYEE_ID_DESC_BOB + INVALID_NAME_DESC + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC, Name.MESSAGE_CONSTRAINTS);
+                + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC, EmployeeName.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + EMPLOYEE_ID_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB

@@ -8,7 +8,7 @@ import seedu.address.logic.commands.EditCommand.EditEmployeeDescriptor;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
-import seedu.address.model.employee.Name;
+import seedu.address.model.employee.EmployeeName;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -41,10 +41,10 @@ public class EditEmployeeDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditEmployeeDescriptor} that we are building.
+     * Sets the {@code EmployeeName} of the {@code EditEmployeeDescriptor} that we are building.
      */
     public EditEmployeeDescriptorBuilder withName(String name) {
-        descriptor.setName(new Name(name));
+        descriptor.setName(new EmployeeName(name));
         return this;
     }
 

@@ -18,7 +18,7 @@ import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.EmployeeId;
-import seedu.address.model.employee.Name;
+import seedu.address.model.employee.EmployeeName;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
@@ -47,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EMPLOYEE_ID, PREFIX_NAME,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         EmployeeId employeeId = ParserUtil.parseEmployeeId(argMultimap.getValue(PREFIX_EMPLOYEE_ID).get());
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        EmployeeName name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());

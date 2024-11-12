@@ -22,7 +22,7 @@ public class ProjectNameTest {
     @Test
     public void isValidName() {
         // null name
-        assertThrows(NullPointerException.class, () -> ProjectName.isValidName(null));
+        assertThrows(AssertionError.class, () -> ProjectName.isValidName(null));
 
         // invalid name
         assertFalse(ProjectName.isValidName("")); // empty string

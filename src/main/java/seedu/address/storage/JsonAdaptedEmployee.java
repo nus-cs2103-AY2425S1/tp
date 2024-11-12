@@ -14,7 +14,7 @@ import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.EmployeeId;
-import seedu.address.model.employee.Name;
+import seedu.address.model.employee.EmployeeName;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
@@ -60,7 +60,7 @@ class JsonAdaptedEmployee {
      */
     public JsonAdaptedEmployee(Employee source) {
         employeeId = source.getEmployeeId().value;
-        name = source.getName().fullName;
+        name = source.getName().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -73,9 +73,11 @@ class JsonAdaptedEmployee {
     }
 
     /**
-     * Converts this Jackson-friendly adapted employee object into the model's {@code Employee} object.
+     * Converts this Jackson-friendly adapted employee object into the model's
+     * {@code Employee} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted employee.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted employee.
      */
     public Employee toModelType() throws IllegalValueException {
         final List<Tag> employeeTags = new ArrayList<>();
@@ -98,12 +100,13 @@ class JsonAdaptedEmployee {
         final EmployeeId modelEmployeeId = new EmployeeId(employeeId);
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EmployeeName.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!EmployeeName.isValidName(name)) {
+            throw new IllegalValueException(EmployeeName.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final EmployeeName modelName = new EmployeeName(name);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));

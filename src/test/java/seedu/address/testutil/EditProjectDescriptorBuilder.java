@@ -34,7 +34,7 @@ public class EditProjectDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditProjectDescriptor} that we are building.
+     * Sets the {@code ProjectName} of the {@code EditProjectDescriptor} that we are building.
      */
     public EditProjectDescriptorBuilder withName(String name) {
         descriptor.setName(new ProjectName(name));

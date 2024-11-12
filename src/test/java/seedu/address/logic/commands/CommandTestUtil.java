@@ -186,7 +186,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredEmployeeList().size());
 
         Employee employee = model.getFilteredEmployeeList().get(targetIndex.getZeroBased());
-        final String[] splitName = employee.getName().fullName.split("\\s+");
+        final String[] splitName = employee.getName().value.split("\\s+");
         model.updateFilteredEmployeeList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredEmployeeList().size());
@@ -200,7 +200,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredProjectList().size());
 
         Project project = model.getFilteredProjectList().get(targetIndex.getZeroBased());
-        final String[] splitName = project.getName().fullName.split("\\s+");
+        final String[] splitName = project.getName().value.split("\\s+");
         model.updateFilteredProjectList(new ProjectNameContainsKeywordsPredicate(Arrays.asList(splitName[1])));
         // we pick splitName[1] as [0] is just "Project", which is contained in all example project names
 

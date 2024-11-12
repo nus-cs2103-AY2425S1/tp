@@ -19,7 +19,7 @@ public class Employee {
 
     // Identity fields
     private final EmployeeId employeeId;
-    private final Name name;
+    private final EmployeeName name;
     private final Phone phone;
     private final Email email;
 
@@ -31,7 +31,7 @@ public class Employee {
     /**
      * Every field must be present and not null.
      */
-    public Employee(EmployeeId employeeId, Name name, Phone phone, Email email,
+    public Employee(EmployeeId employeeId, EmployeeName name, Phone phone, Email email,
             Address address, Set<Tag> tags, Set<Skill> skills) {
         requireAllNonNull(employeeId, name, phone, email, address, tags);
         this.employeeId = employeeId;
@@ -47,7 +47,7 @@ public class Employee {
         return employeeId;
     }
 
-    public Name getName() {
+    public EmployeeName getName() {
         return name;
     }
 

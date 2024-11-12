@@ -7,7 +7,7 @@ import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
 import seedu.address.model.employee.EmployeeId;
-import seedu.address.model.employee.Name;
+import seedu.address.model.employee.EmployeeName;
 import seedu.address.model.employee.Phone;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
@@ -25,7 +25,7 @@ public class EmployeeBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private EmployeeId employeeId;
-    private Name name;
+    private EmployeeName name;
     private Phone phone;
     private Email email;
     private Address address;
@@ -37,7 +37,7 @@ public class EmployeeBuilder {
      */
     public EmployeeBuilder() {
         employeeId = new EmployeeId(DEFAULT_EMPLOYEE_ID);
-        name = new Name(DEFAULT_NAME);
+        name = new EmployeeName(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -67,10 +67,10 @@ public class EmployeeBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code Employee} that we are building.
+     * Sets the {@code EmployeeName} of the {@code Employee} that we are building.
      */
     public EmployeeBuilder withName(String name) {
-        this.name = new Name(name);
+        this.name = new EmployeeName(name);
         return this;
     }
 

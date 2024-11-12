@@ -325,12 +325,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, commandTextHistory, userPrefs)));
 
         // different filteredEmployeeList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = ALICE.getName().value.split("\\s+");
         modelManager.updateFilteredEmployeeList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, commandTextHistory, userPrefs)));
 
         // different filteredProjectList -> returns false
-        keywords = ALPHA.getName().fullName.split("\\s+");
+        keywords = ALPHA.getName().value.split("\\s+");
         modelManager.updateFilteredProjectList(
                 new ProjectNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, commandTextHistory, userPrefs)));
