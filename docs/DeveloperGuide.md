@@ -268,7 +268,7 @@ The `GroupCommand` will then call `excecute()`, which checks whether there is a 
 
 <div markdown="span" class="alert alert-info">
 
-**Note:** If the `groupName` and `students` provided is invalid, a `CommandException` will be thrown.
+:information_source: **Note:** If the `groupName` and `students` provided is invalid, a `CommandException` will be thrown.
 
 </div>
 
