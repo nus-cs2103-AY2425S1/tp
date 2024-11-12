@@ -541,7 +541,7 @@ testers are expected to do more _exploratory_ testing.
 1. Prerequisites: Persons and its relevant public addresses and labels exist in the list.
 
 3. Try `deletepa 1 c/BTC l/Main wallet`<br>
-   Expected: Deletes the public address of the contact at index 1 with the label "Main wallet". 
+   Expected: Deletes the public address of the contact at index 1 with the label "Main wallet".
 
 3. Try `deletepa 1 c/BTC`<br>
     Expected: Deletes all the BTC public addresses of the contact at index 1.
@@ -552,6 +552,5 @@ Good job!🥳 You have tested the basic functionalities of the app. We recommend
 more functionalities.
 
 </box>
-
 
 ~~~~
