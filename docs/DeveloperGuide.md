@@ -1501,6 +1501,12 @@ applied to edited data, but specific expected results will differ. <br><br>
 <br>
 
 #### Assigning Wedding
+
+1. **Assigning a `Wedding` in the `Wedding list`**
+
+    1. **Prerequisites**: List all weddings using the `list-weddings` command. At least 1 wedding exists in the system.
+       List all persons using the `list` command. At least 1 `Person` exists in the list.
+
 ##### ... if `John's Wedding` is in the list and if the first contact is not already in John's Wedding
 1. Test case: `assign-wedding 1 w/John's Wedding`<br>
    Expected: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
