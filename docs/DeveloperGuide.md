@@ -523,7 +523,6 @@ We plan to adjust the overlap detection mechanism in the `findtime` command so t
 
 ### Enhanced Error Messaging for FindTime Command
 
-**Current Issue**:  
 When users enter an incorrect, overnight time format in the `findtime` command, the application currently displays a generic "invalid format" message. This can be unclear for users, as it does not specify that the issue is specifically with the overnight time format.
 
 **Enhancement Plan**:  
@@ -534,7 +533,6 @@ This adjustment will improve usability by providing more informative feedback, a
 
 ### Contact Card Title Overflow Handling
 
-**Current Issue**:  
 Currently, when a contact card contains a title or name with an excessively long string, it extends beyond the available width, which may lead to display issues and poor user experience, especially in narrow or non-optimal window sizes. This issue is unlikely to arise with typical names, but could occur with unusually long titles.
 
 **Enhancement Plan**:  
