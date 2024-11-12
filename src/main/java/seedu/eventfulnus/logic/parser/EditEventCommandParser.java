@@ -19,8 +19,8 @@ import seedu.eventfulnus.commons.core.index.Index;
 import seedu.eventfulnus.logic.commands.EditEventCommand;
 import seedu.eventfulnus.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.eventfulnus.logic.parser.exceptions.ParseException;
+import seedu.eventfulnus.model.Faculty;
 import seedu.eventfulnus.model.person.Person;
-import seedu.eventfulnus.model.person.role.Faculty;
 
 /**
  * Parses input arguments and creates a new {@link EditEventCommand} object.

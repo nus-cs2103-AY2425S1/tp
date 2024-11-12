@@ -1,4 +1,4 @@
-package seedu.eventfulnus.model.person.role.athlete;
+package seedu.eventfulnus.model.person.role;
 
 /**
  * Represents a Sport that an Athlete can participate in.

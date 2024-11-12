@@ -15,13 +15,13 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.eventfulnus.logic.parser.exceptions.ParseException;
+import seedu.eventfulnus.model.Faculty;
 import seedu.eventfulnus.model.person.Email;
 import seedu.eventfulnus.model.person.Name;
 import seedu.eventfulnus.model.person.Phone;
-import seedu.eventfulnus.model.person.role.Faculty;
 import seedu.eventfulnus.model.person.role.Role;
+import seedu.eventfulnus.model.person.role.Sport;
 import seedu.eventfulnus.model.person.role.athlete.Athlete;
-import seedu.eventfulnus.model.person.role.athlete.Sport;
 import seedu.eventfulnus.model.person.role.committee.Branch;
 import seedu.eventfulnus.model.person.role.committee.Position;
 import seedu.eventfulnus.model.person.role.volunteer.VolunteerRole;

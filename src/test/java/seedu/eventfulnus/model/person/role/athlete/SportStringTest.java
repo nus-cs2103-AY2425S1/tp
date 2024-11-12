@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.eventfulnus.model.person.role.Sport;
+import seedu.eventfulnus.model.person.role.SportString;
+
 class SportStringTest {
     @Test
     void getSportString_validSport_returnsCorrectString() {
