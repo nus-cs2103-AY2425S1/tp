@@ -91,6 +91,7 @@ public class ContactRecordTest {
         assertTrue(ContactRecord.isCurrentOrPastDate(LocalDate.now().minusDays(1)));
     }
 
+    //@@author GabrielCWT
     @Test
     public void createCurrentRecord() {
         LocalDate currentDate = LocalDate.now();

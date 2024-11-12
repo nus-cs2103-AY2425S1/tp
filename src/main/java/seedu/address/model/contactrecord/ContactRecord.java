@@ -1,3 +1,4 @@
+//@@author GabrielCWT
 package seedu.address.model.contactrecord;
 
 import static java.util.Objects.requireNonNull;

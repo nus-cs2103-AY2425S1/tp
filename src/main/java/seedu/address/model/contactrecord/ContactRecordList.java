@@ -1,3 +1,4 @@
+//@@author GabrielCWT
 package seedu.address.model.contactrecord;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class ContactRecordList extends ArrayList<ContactRecord> {
         super();
     }
 
+    //@@ author Zenkoh1
     /**
      * Creates a ContactRecordList with the given ContactRecords.
      * @param contactRecordsToAdd
@@ -45,6 +47,7 @@ public class ContactRecordList extends ArrayList<ContactRecord> {
         return super.add(contactRecord);
     }
 
+    //@@author GabrielCWT
     /**
      * Adds all the ContactRecords in the given ContactRecordList to this ContactRecordList.
      * @param contactRecordList
