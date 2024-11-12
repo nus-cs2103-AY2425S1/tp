@@ -54,7 +54,7 @@ For TAs who type quickly, ConTActs provides a faster, more streamlined solution 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-- **Tutorials** are labelled starting from **1**, regardless of when they commence.
+- Tutorials are labelled starting from `1`, regardless of when they commence.
 
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/CS1101S` or as `n/John Doe`.
@@ -299,7 +299,7 @@ ConTActs data are saved in the hard disk automatically after any command that ch
 ConTActs data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ConTActs will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, ConTActs will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br><br>
 Furthermore, certain edits can cause the ConTActs to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -345,12 +345,21 @@ Click on each command to jump to their subsection.
 | `EMAIL`      | Acceptable format: **local-part**@**domain**<br><br>**local-part**:<br> - Alphanumeric and special characters: (`+_.-`), not starting / ending with any special characters <br><br>**domain**:<br> - End with a domain label at least 2 characters long<br> - Have each domain label start and end with alphanumeric characters<br> - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any |
 | `TAG`        | Alphanumeric                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Additional Information on Name, Email and Tags Usage:**<br>
+
+- **Duplicate Names Handling**: <br> To avoid duplicate entries, `ConTActs` does not permit identical names. In rare cases where students have the exact same name, add unique identifiers (e.g., `John Doe 1`) or use partial names (e.g., `John` and `John Doe`) to differentiate between entries.
+- **Case Sensitivity for Emails and Tags**: <br> `ConTActs` treats emails and tags as case-sensitive, meaning entries like `USER@EXAMPLE.COM` and `user@example.com` or `CS2103T` and `cs2103t` are considered distinct. If desired, use a consistent capitalisation format across all emails and tags.
+</div>
+
 ---
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **Multiple Screens**: Moving the application to a secondary screen and later switching to using only the primary screen will cause the GUI to open off-screen. To remedy this, delete the `preferences.json` file created by the application before running it again.
+2. **Missing Help Window**: If you minimise the Help Window and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. To remedy this, manually restore the minimised Help Window.
+3. **Special End Characters in Emails**: While emails ending with special characters (e.g., `+`, `-`, `_`) are generally valid, `ConTActs` does not support them currently. If a student's email ends with a special character, use their NUS Net Email instead.
 
 ---
 [Back to Top](#top)
