@@ -204,7 +204,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | create a company                     | group and organize contacts and job listings         |
 | `* * *`  | user    | delete a company                     | remove company information that I no longer need     |
 | `* * *`  | user    | view company details                 | view relevant information of a company together      |
-
+| `* *`    | user    | edit a contact                       | update the contact details                           |
+| `* *`    | user    | edit a job listing                   | update the job listing details                       |
+| `* *`    | user    | edit a company                       | update the company details                           |
+| `* *`    | user    | find a contact via a keyword         | quickly get to a specific contact                    |
+| `* *`    | user    | find a job listing via a keyword     | quickly get to a specific job listing                |
+| `* *`    | user    | find a company via a keyword         | quickly get to a specific company                    |
 
 ### Use cases
 
@@ -307,6 +312,47 @@ and the **Actor** is the `user`, unless specified otherwise)
 * 4a. The list is empty.
 
   Use case ends.
+
+**Use case: Match a contact to a job listing**
+
+**MSS**
+
+1.  User requests to list contacts
+2.  TalentConnect shows a list of contacts
+3.  User requests to list job listings
+4.  TalentConnect shows a list of job listings
+5.  User requests to match specific a contact to a specific job listing
+6.  TalentConnect returns a success message that the contact and job listing specified have been matched 
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The contact list is empty.
+
+  Use case ends.
+
+* 3a. The job list is empty.
+
+  Use case ends.
+
+* 5a. The given contact index is invalid.
+
+    * 5a1. TalentConnect shows an error message.
+
+      Use case resumes at step 4.
+
+* 5b. The given job listing index is invalid.
+
+    * 5b1. TalentConnect shows an error message.
+
+      Use case resumes at step 4.
+
+* 5c. The contact specified cannot be matched to the job listing specified.
+
+    * 5c1. TalentConnect shows an error message.
+
+      Use case resumes at step 4.
 
 **Use case: Add contact** 
 
@@ -422,41 +468,61 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a contact
 
 1. Deleting a contact while all contacts are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all contacts using the `list contact` command. Multiple persons in the list.
 
-   1. Test case: `delete contact 1`<br>
+   2. Test case: `delete contact 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete contact 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete contact 0`<br>
+      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete test x`, `...` (where x is larger than the list size)<br>
+   4. Test case: `delete contact x` (where x is larger than the contact list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+   5. Other incorrect delete commands to try: `delete`, `delete test ...` <br>
+      Expected: Similar to previous.
+
+
+### Match a contact to a job listing
+
+1. Matching a contact to a job listing while all contacts and job are being shown
+
+    1. Prerequisites: List all contacts using the `list contact` command and list all job listings using the `list job` command. Each list has at least one entry.
+
+    2. Test case: `match 1 1`<br>
+       Expected: First contact from the list is match to first job listing from the list. Details of the matched contact and job listing shown in the status message.
+
+    3. Test case: `match 1`<br>
+       Expected: No contact and job listing are matched. Error details shown in the status message.
+
+    4. Test case: `match 0 1`<br>
+       Expected: Similar to previous.
+
+    5. Test case: `match x 1` (where x is larger than the contact list size)<br>
+       Expected: Similar to previous.
+
+    6. Other incorrect delete commands to try: `match`, `match contact 1` <br>
+       Expected: Similar to previous.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. To simulate a corrupted file, you could add the word `Hello World!` in any contact's phone field in the JSON file. <br>
+      Expected: The app detected corrupted file and start with an empty address book.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -465,11 +531,13 @@ testers are expected to do more *exploratory* testing.
 Team size: 5
 
 * **Improve `screen job` functionality**: Currently, this command is only able to screen contacts that have roles which is a sub-string of the job name. 
-We plan to expand on this functionality by allowing users to add parameters to modify the way screen works. Examples being to 
-screen by how well the contact's skill match up to the job's requirements or to specify whether partial role matches are fine. 
+We plan to expand on this functionality by allowing users to add parameters to modify the criteria used in the screening process or to specify how strict the screening is. 
+Examples include to screen by skills of contacts and requirements for the job, or to allow filtering of contacts whose roles contain partial elements of the job name.
+* **Enable support for job quota for `Job`**
+* **Enable support for more billing date formats (from end of month)**
 * **Enable support for `find job`**:   
 * **Enable support for `find company`**  
 * **Enable support for `edit job`**  
 * **Enable support for `edit company`**  
-* **Enable support for job quota for `Job`**  
-* **Enable support for more billing date formats (from end of month)**
+* **Improve `help` functionality**: Display a basic list of commands without the need to visit the documentation website.
+* **Improve `list` functionality**: Enable option to only show unmatched contacts and jobs who aren't filled yet (after quota)
