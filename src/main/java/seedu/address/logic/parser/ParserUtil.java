@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_BLANK_FIELD;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -145,7 +145,7 @@ public class ParserUtil {
      * Parses {@code Collection<String> roles} into a {@code Set<Role>}.
      */
     public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
-        Set<Role> roleSet = new HashSet<>();
+        Set<Role> roleSet = new TreeSet<>();
         for (String roleName : roles) {
             roleSet.add(parseRole(roleName));
         }

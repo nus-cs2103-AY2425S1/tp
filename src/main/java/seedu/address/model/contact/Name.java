@@ -102,16 +102,10 @@ public class Name {
 
     private static String convertCase(String word) {
         assert !word.contains(SINGLE_WHITESPACE); // word here contains no whitespace characters
-        //assert word.toLowerCase().equals(word); // word input should already be in lower case
 
         if (word.equalsIgnoreCase(SON_OF) || word.equalsIgnoreCase(DAUGHTER_OF)) {
             return word.toUpperCase();
         }
-
-        /*
-        if (word.contains(SON_OF.toLowerCase()) || word.contains(DAUGHTER_OF.toLowerCase())) {
-            return splitAndMergeWithCaps(word);
-        }*/
 
         if (word.startsWith(OPEN_BRACKET)) {
             assert word.length() >= 2; // word is not just an open bracket
@@ -124,20 +118,6 @@ public class Name {
         return Character.toUpperCase(word.charAt(0)) + word.substring(1);
         // @@author
     }
-
-    /*
-    private static String splitAndMergeWithCaps(String word) {
-        assert word.contains(SON_OF.toLowerCase()) || word.contains(DAUGHTER_OF.toLowerCase());
-        String specialChar = identifyValidSpecialChar(word);
-        String[] stringArray = word.split(specialChar.toLowerCase(), 2);
-        assert !stringArray[0].isEmpty();
-        if (stringArray.length == 1) {
-            return stringArray[0].charAt(0) + specialChar;
-        }
-        assert stringArray.length == 2;
-        return stringArray[0] + specialChar + stringArray[1];
-    }*/
-
 
     /**
      * Compares the name of another contact in alphabetical order.

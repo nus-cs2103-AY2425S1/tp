@@ -27,23 +27,38 @@
     <div class="nav-component slim-scroll">
       <site-nav>
 * [Home]({{ baseUrl }}/index.html)
+        
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
-  * [Features]({{ baseUrl }}/UserGuide.html#features)
+  * [Feature Details]({{ baseUrl }}/UserGuide.html#feature-details)
+    * [General Notes about Command Format]({{ baseUrl }}/UserGuide.html#general-notes-about-command-format)
+    * [Adding a Contact: add]({{ baseUrl }}/UserGuide.html#adding-a-contact-add)
+    * [Editing a Contact: edit]({{ baseUrl }}/UserGuide.html#editing-a-contact-edit)
+    * [Deleting a Contact: delete]({{ baseUrl }}/UserGuide.html#deleting-a-contact-delete)
+    * [Finding Contacts by Contact Details: find]({{ baseUrl }}/UserGuide.html#finding-contacts-by-contact-details-find)
+    * [Listing all Contacts: list]({{ baseUrl }}/UserGuide.html#listing-all-contacts-list)
+    * [Viewing Help: help]({{ baseUrl }}/UserGuide.html#viewing-help-help)
+    * [Clearing all Entries: clear]({{ baseUrl }}/UserGuide.html#clearing-all-entries-clear)
+    * [Exiting the Program: exit]({{ baseUrl }}/UserGuide.html#exiting-the-program-exit)
+    * [Displaying Contacts in Pages -- Pagination]({{ baseUrl }}/UserGuide.html#displaying-contacts-in-pages----pagination)
+    * [Showing Total Number of Contacts -- Footer Status Bar]({{ baseUrl }}/UserGuide.html#showing-total-number-of-contacts----footer-status-bar)
+    * [Saving the Data]({{ baseUrl }}/UserGuide.html#saving-the-data)
+    * [Editing the Data File]({{ baseUrl }}/UserGuide.html#editing-the-data-file)
+  * [What is Considered as Invalid Contacts]({{ baseUrl }}/UserGuide.html#what-is-considered-as-invalid-contacts)
+  * [Contact Fields Constraints]({{ baseUrl }}/UserGuide.html#contact-fields-constraints)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
-  * [Command Summary]({{ baseUrl }}/UserGuide.html#faq)
+  * [Known Issues]({{ baseUrl }}/UserGuide.html#known-issues)
+    
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
   * [Acknowledgements]({{ baseUrl }}/DeveloperGuide.html#acknowledgements)
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
   * [Design]({{ baseUrl }}/DeveloperGuide.html#design)
   * [Implementation]({{ baseUrl }}/DeveloperGuide.html#implementation)
-  * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
+  * [Documentation, Logging, Testing, Configuration, Dev-Ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
-  * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
-* Tutorials
-  * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
-  * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
-  * [Removing Fields]({{ baseUrl }}/tutorials/RemovingFields.html)
+  * [Appendix: Instructions for Manual Testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
+  * [Appendix: Planned Enhancements]({{ baseUrl }}/DeveloperGuide.html#appendix-planned-enhancements)
+    
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>

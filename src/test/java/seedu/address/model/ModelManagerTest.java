@@ -16,9 +16,14 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContainsKeywordsPredicate;
+import seedu.address.model.contact.exceptions.DuplicateContactException;
+import seedu.address.model.contact.exceptions.DuplicateFieldException;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.ContactBuilder;
 
+//@@author
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
@@ -89,14 +94,45 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasContact(ALICE));
     }
 
+    //@@author cth06-Github
     @Test
     public void getAllContactList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getAllContactList().remove(0));
     }
+    //@@author
 
     @Test
     public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContactList().remove(0));
+    }
+
+    @Test
+    public void setContact_duplicateNickname_throwsDuplicateFieldException() {
+        final String nickname = "Benson";
+        Contact aliceContact = new ContactBuilder(ALICE).build();
+        Contact bensonContact = new ContactBuilder(BENSON)
+                .withNickname(nickname)
+                .build();
+        AddressBook addressBook = new AddressBookBuilder()
+                .withContact(aliceContact)
+                .withContact(bensonContact)
+                .build();
+        ModelManager modelManager = new ModelManager(addressBook, new UserPrefs());
+        Contact editedContact = new ContactBuilder(ALICE).withNickname(nickname).build();
+        assertThrows(DuplicateFieldException.class, () -> modelManager.setContact(aliceContact, editedContact));
+    }
+
+    @Test
+    public void setContact_duplicateNameAndNickname_throwsDuplicateContactException() {
+        Contact aliceContact = new ContactBuilder(ALICE).build();
+        Contact bensonContact = new ContactBuilder(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder()
+                .withContact(aliceContact)
+                .withContact(bensonContact)
+                .build();
+        ModelManager modelManager = new ModelManager(addressBook, new UserPrefs());
+        Contact editedContact = new ContactBuilder(ALICE).withName(BENSON.getName().fullName).build();
+        assertThrows(DuplicateContactException.class, () -> modelManager.setContact(aliceContact, editedContact));
     }
 
     @Test

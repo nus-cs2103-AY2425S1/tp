@@ -20,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Role;
 
+//@@author
 /**
  * Parses input arguments and creates a new EditCommand object
  */
@@ -90,6 +91,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editContactDescriptor::setAndSortRoles);
     }
 
+    //@@author cth06-Github
     private EditCommand createEditCommandByName(String strPreamble, EditContactDescriptor editContactDescriptor)
             throws ParseException {
         try {
@@ -100,6 +102,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             // considered invalid name if it isn't an Integer
         }
     }
+    //@@author
 
     private boolean isInteger(String args) {
         return ParserUtil.isInteger(args);

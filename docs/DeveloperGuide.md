@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# Data coNdUctorS Developer Guide
+# data_coNdUctorS Developer Guide
 
 ## Table of Contents
 - [Acknowledgements](#acknowledgements)
@@ -20,7 +20,7 @@
   - [Pagination](#pagination)
     - [Implementation of Constructor](#implementation-of-constructor)
     - [Steps to Update the List when there is a Change](#steps-to-update-the-list-when-there-is-a-change)
-  - [Status Bar Footer](#status-bar-footer----how-to-reflect-the-total-number-of-contacts)
+  - [Status Bar Footer](#status-bar-footer-how-to-reflect-the-total-number-of-contacts)
 - [Documentation, Logging, Testing, Configuration, Dev-Ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product Scope](#product-scope)
@@ -49,20 +49,136 @@
   - [Additional Notes](#additional-notes)
 - [Appendix: Planned Enhancements](#appendix-planned-enhancements)
   - [Advanced Error Messages](#advanced-error-messages)
-  - [Case Insensitivity for All Contact Fields](case-insensitivity-for-all-contact-fields)
-  - [Display Index of Newly Added Contact](display-index-of-newly-added-contact)
-
+  - [Case Insensitivity for All Contact Fields](#case-insensitivity-for-all-contact-fields)
+  - [Display Index of Newly Added Contact](#display-index-of-newly-added-contact)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 
 ## **Acknowledgements**
 
 - Sample data for testing purpose developed by [Wu Zengfu](AboutUs.md#wu-zengfu): https://github.com/wuzengfu/tp_util
 - JavaFX Pagination documentation: https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Pagination.html
-- ChatGPT used for Code for responsive design and JavaDoc comments (Chua Tse Hui, Winston, Ernest uses it)
 - Inspired by Code given for camel Case conversion (Chua Tse Hui uses it): https://www.baeldung.com/java-string-to-camel-case 
+- Understands how to sort a set for implementing a set of Roles (Chua Tse Hui uses it): https://stackoverflow.com/questions/17826854/creating-a-sorted-set
+- ChatGPT used to assist in many ways (Chua Tse Hui, Winston, Ernest uses it)
+
+### ChatGPT usage - Winston and Ernest
+- To assist in writing Javadocs. 
+- To assist in writing parts of User Guide and Developer Guide and test code 
+
+### ChatGPT usage - Tse Hui
+**Used to assist in writting a snippet of code in `ContactCard.java`** <br>
+Input: 
+> add a listener that says when the label width exceeds the current card pane, increase the label width size to the current card pane width
+
+A snippet of the Output:
+> To implement a listener that adjusts the width of a `Label` to match the width of its container ( `CardPane` or any parent `Pane` ) when the `Label` exceeds the current width of the container, you can follow these steps: 
+> 1. **Add a listener to the parent container's width.** When the width of the parent changes, check if the `Label` exceeds it, and if so, set the `Label`'s width to match the parent's width. 
+> 2. Use `widthProperty()` to monitor changes in the width of the parent container (e.g., `CardPane` or `Pane`)
+
+```
+public class LabelResizeExamp1e extends Application { 
+@Override 
+public void start(Stage primaryStage) { 
+    // Create a Label with initial text 
+    Label label = new Label("Hello, JavaFX!"); 
+    label.setSty1e("-fx-background-color: lightblue;"); 
+
+    // Create a CardPane (or any parent container) 
+    StackPane cardPane = new StackPane();
+    cardPane.setPrefSize(300, 200); // Set an initial size for the card pane 
+    cardPane.getChi1dren().add(label);
+     
+    // Add a Listener to monitor the width of the cardPane (parent container) 
+    cardPane.widthProperty().addListener(new ChangeListener<Number>() { 
+        @Override
+        public void changed(ObservableValue<? extends Number> observable, 
+                Number oldValue, Number newValue) {
+            double parentWidth = newValue.doubleValue(); // Get the new width of the card pane
+            double labelWidth = label.getWidth(); // Get the current width of the card pane
+            
+                // Check if the label's with exceeds the parent width, and adjust if necessary
+                if (labelWidth > parentWidth) {
+                    label.setPrefWidth(parentWidth); // Set the label width to match the parent width
+                    }
+                });
+            }
+        });
+
+        // Simulate dynamically resizing the CardPane after a short delay 
+        new Thread(() -> { 
+            try { 
+                Thread. sleep(2000); // Wait for 2 seconds 
+            // Change the width of the cardPane (simulate resizing) 
+            cardPane. setPrefWidth(500) ; 
+            } catch (InterruptedException e) { 
+                e.printStackTrace(); 
+            }
+        }).start(); 
+
+    // Set up the Scene and Stage 
+    Scene scene = new Scene(cardPane); 
+    primaryStage.set Title("Label Width Adjustment Example"); 
+    primaryStage.setScene(scene); 
+    primaryStage.show(); 
+    public static void main(String[] args) { 
+        launch(args); 
+    }
+}
+```
+<br>**Used to assist in writting a Regex in `Name.java`** <br>
+
+Input: <br>
+> how to do open bracket regex
+
+Snippet of output: <br>
+> **In Java:** <br>
+If you're using this regex in Java, you'll need to escape the backslash itself because Java string literals treat backslashes as escape characters. This means that in Java, you would need to use:
+```"\\("```
+<br> This escapes the backslash properly so that it matches a literal open parenthesis.
+
+Input: <br>
+> how to do alphabets with whitespaces regex 
+ 
+Snippet of output:<br>
+> 4. Example in Java:<br>
+> In Java, you would write the regex as a string, and because backslashes are escape characters in Java string literals, you need to escape each backslash by adding another backslash:
+<br> ```String regex = "^[A-Za-z\\s]+$";```
+
+<br>**Used to assist in drawing class diagram in the via PlantUML files before further processing** <br>
+Input: <br>
+> how to use plantUML to create class diagram
+
+<br> Snippet of Output: <br>
+> Here are examples for some common UML diagrams: <br>
+> **Class Diagram**
+
+```
+@startuml
+class Car {
+  - String model
+  - int year
+  + void drive()
+  + void stop()
+}
+
+class Engine {
+  - String type
+}
+
+Car "1" -- "1" Engine : has
+@enduml
+```
+
+> `@startuml` and `@enduml` are used to define the start and end of the PlantUML diagram.
+class defines a class, and you can use modifiers like `-` for private and `+` for public.
+`"1" -- "1"` represents a relationship between `Car` and `Engine` (like a one-to-one relationship).
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
 
@@ -74,14 +190,14 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="360" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
-g
+
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
@@ -94,6 +210,8 @@ The bulk of the app's work is done by the following four components:
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+
+<div style="page-break-after: always;"></div>
 
 **How the architecture components interact with each other**
 
@@ -112,6 +230,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -129,13 +249,15 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Contact` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic Component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="450"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
@@ -145,6 +267,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
+
+<div style="page-break-after: always;"></div>
 
 How the `Logic` component works:
 
@@ -156,16 +280,18 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="750"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model Component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="750" />
 
 
 The `Model` component,
@@ -175,12 +301,13 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
 
 ### Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="720" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -192,6 +319,9 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 
 ## **Implementation**
 
@@ -230,13 +360,19 @@ triggering `ArrayIndexOutOfBoundException`.
 4. Get the sublist to be rendered based on the calculated `fromIndex` and `endIndex`.
 5. Render the updated sublist.
 
-### Status Bar Footer -- how to reflect the total number of contacts 
-The `ModelManager` class now also stores `private final ObservableList<Contact> allContacts` on top of the `FilteredList`. This `allContacts` can be obtained subsequently by the `LogicManager` with a method provided by the ModelManager. A listener is added so that the statusbarFotoer will listen for any changes made to the `allContacts` and if so update the number accordingly.
+### Status Bar Footer: how to reflect the total number of contacts 
+The `ModelManager` class also stores `allContacts` attribute, on top of the `filteredList` attribute present initially. It represents the full list of contacts which the model can keep track on. 
+A listener is added to allow StatusBarFooter to indirectly listen for any changes made to the `allContacts`. If changes are detected, the StatusBarFooter can update the total number of contacts accordingly.
+
+<img src="img_2.png" alt="Description of image" style="max-width: 25rem; height: auto;">
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Documentation, Logging, Testing, Configuration, Dev-Ops**
 
+Please refer to the following documents for further information:
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
@@ -299,7 +435,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user who values data privacy | set a password for the app                                                                                                                                                               | restrict access to only authorised individuals.                                                                                  |
 
 
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Use Cases
 
@@ -336,6 +475,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
      Use case ends.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Use Case: Deleting a Contact
 
@@ -375,6 +516,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Use Case: Editing a Contact
 
@@ -421,6 +564,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Use Case: Finding a Contact by Details
 
@@ -476,6 +621,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
+
 ### Non-Functional Requirements
 
    - The application should function on any mainstream operating system (Windows, macOS, and Linux) that supports Java 17 or above.
@@ -505,6 +653,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ### Glossary
 
@@ -538,6 +688,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Instructions for Manual Testing**
 
 This section provides a guide for performing manual testing on the data_coNdUctorS application. Each test case includes expected results and possible error messages for invalid inputs.
@@ -553,237 +705,246 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and Shutdown
 
-1. Initial launch
+Initial launch
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ---
 
 ### Adding a Contact
 
-1. Adding a valid contact
+- Adding a valid contact
 
-   1. Prerequisites: Application is open, and user is on the main contact list screen.
+   - Prerequisites: Application is open with no contacts in the list. (Execute `clear` to clear all contacts.)
    
-   1. Test case: `add n/John Doe th/johnd123 e/john.doe@example.com ss/undergraduate 1 r/Admin nn/johny`<br>
-      Expected: A new contact named "John Doe" is added to the contact list. Status message shows "Contact added successfully."
-      
-   1. Test case: `add n/John Doe th/johnd123 e/john.doe@example.com ss/undergraduate 1 r/Admin nn/johny` executed twice <br>
-      Expected: No contact is added. Error message will be displayed due to duplicate fields
+   - Test case: `add n/John Doe th/johnd123 e/john.doe@example.com ss/undergraduate 1 r/Admin nn/johny`<br>
+     Expected: A new contact named "John Doe" is added to the contact list. Status message shows "Contact added successfully."
 
-   1. Test case: `add n/John Doe th/johnd123 e/john.doe(at)example.com ss/undergraduate 1 r/Admin`<br>
-      Expected: No contact is added. Error message displayed due to incorrect email format
+   - Test case: `add n/John Doe th/johnd123 e/john.doe@example.com ss/undergraduate 1 r/Admin nn/johny` executed twice <br>
+     Expected: No contact is added. Error message will be displayed due to duplicate fields
 
-   1. Other incorrect add commands to try: `add`, `add n/`, `add th/username e/email.com`<br>
-      Expected: Error message displayed indicating missing or incorrect parameters.
+   - Test case: `add n/John Doe th/johnd123 e/john.doe(at)example.com ss/undergraduate 1 r/Admin`<br>
+     Expected: No contact is added. Error message displayed due to incorrect email format
+
+   - Other incorrect add commands to try: `add`, `add n/`, `add th/username e/email.com`<br>
+     Expected: Error message displayed indicating missing or incorrect parameters.
 
 ---
 
 ### Listing All Contacts
 
-1. Listing contacts with no additional parameters
+- Listing contacts with no additional parameters
 
-   1. Prerequisites: Application is open with multiple contacts in the list.
+   - Prerequisites: Application is open with multiple contacts in the list.
    
-   1. Test case: `list`<br>
-      Expected: All contacts are displayed in the list view. Status message shows "Listed all contacts."
+   - Test case: `list`<br>
+     Expected: All contacts are displayed in the list view. Status message shows "Listed all contacts."
 
-   1. Other variations to try: `list all`, `list contacts` or any variation of `all` and/or `contacts` after `list`<br>
-      Expected: Similar outcome to `list` command. All contacts are displayed.
+   - Other variations to try: `list all`, `list contacts` or any variation of `all` and/or `contacts` after `list`<br>
+     Expected: Similar outcome to `list` command. All contacts are displayed.
 
 ---
+
+<div style="page-break-after: always;"></div>
+
 
 ### Deleting a Contact
 
-1. Deleting a contact while **ALL** contacts are being shown
+- Deleting a contact while **ALL** contacts are being shown
 
-   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   - Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
-   1. Test case: `delete 1`<br>
+   - Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   - Test case: `delete 0`<br>
       Expected: No contact is deleted. Error details shown in the status message.
 
-   1. Test case: `delete UNIQUE_FULL_NAME`<br>
-      Expected: If UNIQUE_FULL_NAME is in the addressbook and there is only one FULL_NAME, deletes that contact.
+   - Test case: `delete UNIQUE_FULL_NAME`<br>
+      Expected: If UNIQUE_FULL_NAME is in the Address Book and there is only one FULL_NAME, deletes that contact.
 
-   1. Test case: `delete NOT_UNIQUE_FULL_NAME`<br>
-      Expected: If NOT_UNIQUE_FULL_NAME is in the addressbook but not unique, no contact is deleted and error details shown in the status message for user to delete via index.
+   - Test case: `delete NOT_UNIQUE_FULL_NAME`<br>
+      Expected: If NOT_UNIQUE_FULL_NAME is in the Address Book but not unique, no contact is deleted and error details shown in the status message for user to delete via index.
 
-   1. Test case: `delete FULL_NAME_NOT_IN_LIST`<br>
-      Expected: If FULL_NAME_NOT_IN_LIST is not in addressbook, no contact is deleted even if the name is present in the addressbook and error details shown in the status message.
+   - Test case: `delete FULL_NAME_NOT_IN_LIST`<br>
+      Expected: If FULL_NAME_NOT_IN_LIST is not in Address Book, no contact is deleted and error details shown in the status message.
 
-   1. Test case: `delete NOT_FULL_NAME`<br>
+   - Test case: `delete NOT_FULL_NAME`<br>
       Expected: No contact is deleted and error details shown to delete by the full name of delete by index.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+   - Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: No contact is deleted. Error details shown in the status message for missing or invalid fields
 
-1. Deleting a contact while **SOME** contacts are being shown
+- Deleting a contact while **SOME** contacts are being shown
 
-   1. Prerequisites: Find some contacts using the `find` command. Multiple contacts in the filtered list.
+   - Prerequisites: Find some contacts using the `find` command. Multiple contacts in the filtered list.
 
-   1. Test case: `delete 1`<br>
+   - Test case: `delete 1`<br>
       Expected: Similar to above.
 
-   1. Test case: `delete 0`<br>
+   - Test case: `delete 0`<br>
       Expected: Similar to above.
       
-   1. Test case: `delete UNIQUE_FULL_NAME`<br>
-      Expected: If UNIQUE_FULL_NAME is in the filtered list and there is only one FULL_NAME, deletes that contact.
+   - Test case: `delete UNIQUE_FULL_NAME`<br>
+      Expected: If UNIQUE_FULL_NAME is in the filtered Address Book and there is only one FULL_NAME, deletes that contact.
 
-   1. Test case: `delete NOT_UNIQUE_FULL_NAME`<br>
-      Expected: If NOT_UNIQUE_FULL_NAME is in the filtered list but not unique, no contact is deleted and error details shown in the status message for user to delete via index.
+   - Test case: `delete NOT_UNIQUE_FULL_NAME`<br>
+      Expected: If NOT_UNIQUE_FULL_NAME is in the filtered Address Book but not unique, no contact is deleted and error details shown in the status message for user to delete via index.
 
-   1. Test case: `delete FULL_NAME_NOT_IN_LIST`<br>
-      Expected: If FULL_NAME_NOT_IN_LIST is not in filtered list, no contact is deleted even if the name is present in the addressbook and error details shown in the status message.
+   - Test case: `delete FULL_NAME_NOT_IN_LIST`<br>
+      Expected: If FULL_NAME_NOT_IN_LIST is not in filtered Address Book, no contact is deleted even if the name is present in the unfiltered Address Book and error details shown in the status message.
 
-   1. Test case: `delete NOT_FULL_NAME`<br>
+   - Test case: `delete NOT_FULL_NAME`<br>
       Expected: No contact is deleted and error details shown to delete by the full name of delete by index.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete NOT_FULL_NAME`<br>
+   - Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete NOT_FULL_NAME`<br>
       Expected: Similar to above.
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a Contact
 
-1. Editing a contact while **ALL** contacts are being shown
+- Editing a contact while **ALL** contacts are being shown
 
-   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   - Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
    
-   1. Test case: `edit 1 n/Jane Smith th/jane_smith`<br>
+   - Test case: `edit 1 n/Jane Smith th/jane_smith`<br>
       Expected: First contact’s name changes to "Jane Smith" and Telegram handle to "jane_smith." Status message shows "Contact edited successfully."
 
-   1. Test case: `edit 99 n/Jane Smith`<br>
+   - Test case: `edit 99 n/Jane Smith`<br>
       Expected: No contact is edited. Error message displayed: "Error: Contact not found. Please provide a valid index."
 
-   1. Test case: `edit UNIQUE_FULL_NAME th/john_doe`<br>
-      Expected: If UNIQUE_FULL_NAME is in the addressbook and there is only one FULL_NAME, edits that contact.
+   - Test case: `edit UNIQUE_FULL_NAME th/john_doe`<br>
+      Expected: If UNIQUE_FULL_NAME is in the Address Book and there is only one FULL_NAME, edits that contact.
 
-   1. Test case: `edit NOT_UNIQUE_FULL_NAME th/john_doe`<br>
-      Expected: If NOT_UNIQUE_FULL_NAME is in the addressbook but not unique, no contact is edited and error details shown in the status message for user to edit via index.
+   - Test case: `edit NOT_UNIQUE_FULL_NAME th/john_doe`<br>
+      Expected: If NOT_UNIQUE_FULL_NAME is in the Address Book but not unique, no contact is edited and error details shown in the status message for user to edit via index.
 
-   1. Test case: `edit FULL_NAME_NOT_IN_LIST th/john_doe`<br>
-      Expected: If FULL_NAME_NOT_IN_LIST is not in addressbook, no contact is edited even if the name is present in the addressbook and error details shown in the status message.
+   - Test case: `edit FULL_NAME_NOT_IN_LIST th/john_doe`<br>
+      Expected: If FULL_NAME_NOT_IN_LIST is not in Address Book, no contact is edited and error details shown in the status message.
 
-   1. Test case: `edit NOT_FULL_NAME th/john_doe`<br>
+   - Test case: `edit NOT_FULL_NAME th/john_doe`<br>
       Expected: No contact is edited and error details shown to edit by the full name of edit by index.
 
-   1. Other incorrect edit commands to try: `edit`, `edit 1`, `edit 1 e/invalidemail.com`<br>
+   - Other incorrect edit commands to try: `edit`, `edit 1`, `edit 1 e/invalidemail.com`<br>
       Expected: Error message displayed for missing or invalid fields.
       
-1. Editing a contact while **SOME** contacts are being shown
+- Editing a contact while **SOME** contacts are being shown
 
-   1. Prerequisites: Find some contacts using the `find` command. Multiple contacts in the filtered list.
+   - Prerequisites: Find some contacts using the `find` command. Multiple contacts in the filtered list.
    
-   1. Test case: `edit 1 n/Jane Smith th/jane_smith`<br>
+   - Test case: `edit 1 n/Jane Smith th/jane_smith`<br>
       Expected: Similar to above.
 
-   1. Test case: `edit 99 n/Jane Smith`<br>
+   - Test case: `edit 99 n/Jane Smith`<br>
       Expected: Similar to above.
 
-   1. Test case: `edit UNIQUE_FULL_NAME th/john_doe`<br>
-      Expected: If UNIQUE_FULL_NAME is in the filtered list and there is only one FULL_NAME, edits that contact.
+   - Test case: `edit UNIQUE_FULL_NAME th/john_doe`<br>
+      Expected: If UNIQUE_FULL_NAME is in the filtered Address Book and there is only one FULL_NAME, edits that contact.
 
-   1. Test case: `edit NOT_UNIQUE_FULL_NAME th/john_doe`<br>
-      Expected: If NOT_UNIQUE_FULL_NAME is in the filtered list but not unique, no contact is edited and error details shown in the status message for user to edit via index.
+   - Test case: `edit NOT_UNIQUE_FULL_NAME th/john_doe`<br>
+      Expected: If NOT_UNIQUE_FULL_NAME is in the filtered Address Book but not unique, no contact is edited and error details shown in the status message for user to edit via index.
 
-   1. Test case: `edit FULL_NAME_NOT_IN_LIST th/john_doe`<br>
-      Expected: If FULL_NAME_NOT_IN_LIST is not in filtered list, no contact is edited even if the name is present in the addressbook and error details shown in the status message.
+   - Test case: `edit FULL_NAME_NOT_IN_LIST th/john_doe`<br>
+      Expected: If FULL_NAME_NOT_IN_LIST is not in filtered Address Book, no contact is edited even if the name is present in the unfiltered Address Book and error details shown in the status message.
 
-   1. Test case: `edit NOT_FULL_NAME th/john_doe`<br>
+   - Test case: `edit NOT_FULL_NAME th/john_doe`<br>
       Expected: No contact is edited and error details shown to edit by the full name of edit by index. 
 
-   1. Other incorrect edit commands to try: `edit`, `edit 1`, `edit 1 e/invalidemail.com`<br>
+   - Other incorrect edit commands to try: `edit`, `edit 1`, `edit 1 e/invalidemail.com`<br>
       Expected: Similar to above.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Finding a Contact
 
-1. Finding a contact by name and role
+- Finding a contact by details
 
-   1. Prerequisites: Multiple contacts with different names and roles are present in the contact list.
+   - Prerequisites: Multiple contacts are present in the contact list.
    
-   1. Test case: `find n/John r/Admin`<br>
+   - Test case: `find n/John r/Admin`<br>
       Expected: Contacts matching "John" with role "Admin" are displayed in the list. Status message shows "Found contacts matching criteria."
 
-   1. Test case: `find n/FULL_NAME_NOT_IN_LIST r/Admin`<br>
+   - Test case: `find n/NAME_NOT_IN_LIST r/Admin`<br>
       Expected: No contacts are displayed. Status message shows "No contacts found matching the criteria."
 
-   1. Other incorrect find commands to try `find`, `find n/NOT_FULL_NAME r/ROLE_NOT_IN_LIST`<br>
+   - Other incorrect find commands to try `find`, `find n/NAME_NOT_IN_LIST r/ROLE_NOT_IN_LIST`<br>
       Expected: If no contacts match, a message appears indicating no contacts found. If an invalid role is entered, an error message displays: "Error: Invalid role specified."
 
 ---
  
 ### Saving Data
 
-1. Automatic Data Saving
+- Automatic Data Saving
 
-   1. Prerequisites: Application is running, and a contact has been added, edited, or deleted.
+   - Prerequisites: Application is running, and a contact has been added, edited, or deleted.
    
-   1. Test case: Close and reopen the application.<br>
+   - Test case: Close and reopen the application.<br>
       Expected: The changes made to contacts persist after reopening. The saved contacts appear as they were before closing the app.
 
-2. Data File Integrity
+- Data File Integrity
 
-   1. Prerequisites: The data file (`addressbook.json`) is accessible for manual editing.
+   - Prerequisites: The data file (`addressbook.json`) is accessible for manual editing.
    
-   1. Test case: Manually edit the JSON file to include an invalid format or structure (e.g., remove a required field).<br>
+   - Test case: Manually edit the JSON file to include an invalid format or structure (e.g., remove a required field).<br>
       Expected: Upon launching, the application detects the corrupted data and either resets to an empty state or prompts an error message like "Error: Invalid data format detected. Data reset to empty state."
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### GUI Components
 
-1. Pagination
+- Pagination
 
-   1. Prerequisites: Add enough contacts to exceed a single page (e.g., 11 or more contacts as each page displays 10).
+   - Prerequisites: Add enough contacts to exceed a single page (e.g., 11 or more contacts as each page displays 10).
    
-   1. Test case: Use pagination controls (next, previous) or page navigation to view contacts on multiple pages.<br>
+   - Test case: Use pagination controls (next, previous) or page navigation to view contacts on multiple pages.<br>
       Expected: Pagination controls work as expected, allowing the user to navigate through the contact list. The status bar reflects the current page and total contacts.
 
-2. Footer Status Bar
+- Footer Status Bar
 
-   1. Prerequisites: Add or delete a contact to observe changes in the footer.
+   - Prerequisites: Add or delete a contact to observe changes in the footer.
    
-   1. Test case: Add a contact, then delete a different contact.<br>
+   - Test case: Add a contact, then delete a different contact.<br>
       Expected: The footer updates in real-time, displaying the current total contacts and the path of the data file. Status message shows the results of the last action.
 
 ---
 
 ### Additional Notes
 
-1. Testing Edge Cases
+- Testing Edge Cases
 
-   1. Prerequisites: Application is running with an open contact list.
+   - Prerequisites: Application is running with an open contact list.
    
-   1. Test case: Add or edit a contact with special characters in fields, very long inputs, or boundary values (e.g., maximum allowed length for fields).<br>
+   - Test case: Add or edit a contact with special characters in fields, very long inputs, or boundary values (e.g., maximum allowed length for fields).<br>
       Expected: The application handles special characters, lengthy inputs, and boundary values without crashing or error. If any input exceeds limits, a message such as "Error: Input exceeds allowed length" is shown.
 
-2. Common Mistakes
+- Common Mistakes
 
-   1. Prerequisites: Application is open and ready for input.
+   - Prerequisites: Application is open and ready for input.
    
-   1. Test case: Enter commonly mistaken commands or leave required fields blank (e.g., `delete` with no index, `find` with no criteria).<br>
+   - Test case: Enter commonly mistaken commands or leave required fields blank (e.g., `delete` with no index, `find` with no criteria).<br>
       Expected: Error messages are clear and descriptive, guiding the user to correct the input format. Status bar remains unaffected by failed commands.
 
-3. Data Reset
+- Data Reset
 
-   1. Prerequisites: The application has saved data that the user wishes to reset.
+   - Prerequisites: The application has saved data that the user wishes to reset.
    
-   1. Test case: Delete or replace the data JSON file and restart the application.<br>
+   - Test case: Delete or replace the data JSON file and restart the application.<br>
       Expected: The app initialises with an empty contact list, and a message indicates that no saved data was found, prompting a fresh start.
 
 ---
@@ -791,6 +952,7 @@ testers are expected to do more *exploratory* testing.
 This appendix provides a comprehensive approach to testing the data_coNdUctorS app, ensuring each core feature and edge case is addressed. Error messages will appear on the screen if incorrect inputs are entered, helping users to correct their input efficiently.
 
 
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Planned Enhancements
 
@@ -800,39 +962,40 @@ This section outlines the planned future enhancements for the data_coNdUctorS ap
 
 ### Advanced Error Messages
 
-1. Informing the User what is their specific issue with the command that they have inputted.
+Informing the User what is their specific issue with the command that they have inputted.
 
-   1. Goal: Quality of Life for users to understand which part of the command they inputted wrongly so they don't have to waste time.
+* Goal: Quality of Life for users to understand which part of the command they inputted wrongly so they don't have to waste time.
   
-   1. Example 1: Editing a contact with the same `NAME` and `NICKNAME` as an existing contact will result in an error message: "This Contact already exists in the address book". This is not very clear so in the future, we could display the said contact to the user and inform them which fields are duplicated.
+* Example 1: Editing a contact with the same `NAME` and `NICKNAME` as an existing contact will result in an error message: "This Contact already exists in the address book". This is not very clear so in the future, we could display the said contact to the user and inform them which fields are duplicated.
    
-   1. Example 2: Executing this command `add n/John Doe th/johnny_9876_haha e/johnd@example.com ss/undergraduate 3 r/Admin r/President [nn/altName]` will output an error message saying invalid Role. Instead, should tell the user that the Role they implemented is `President [` which is not recognised as a role.
+* Example 2: Executing this command `add n/John Doe th/johnny_9876_haha e/johnd@example.com ss/undergraduate 3 r/Admin r/President [nn/altName]` will output an error message saying invalid Role. Instead, should tell the user that the Role they implemented is `President [` which is not recognised as a role.
       
-   1. Expected Outcome: Users will waste less time debugging their inputs, especially for large address books.
+* Expected Outcome: Users will waste less time debugging their inputs, especially for large address books.
 
 ---
 
 ### Case Insensitivity for All Contact Fields
 
- 1. Some Contact fields are case-sensitive so errors arise during duplicate contacts being loaded into the address book
+Some Contact fields are case-sensitive so errors arise during duplicate contacts being loaded into the address book
 
-   1. Goal: Reduce accidental duplicates to enhance the user experience when interacting with the contact list.
+* Goal: Reduce accidental duplicates to enhance the user experience when interacting with the contact list.
 
-   1. Case 1: `Nickname` is case-sensitive (e.g., `nn/alice` and `nn/Alice` are considered distinct). After this enhancement, `nn/alice` and `nn/Alice` will be treated as identical, reducing potential conflicts caused by casing differences. Contacts will be flagged as having the same identity if both `Name` and `Nickname` match in a case-insensitive manner.
+* Case 1: `Nickname` is case-sensitive (e.g., `nn/alice` and `nn/Alice` are considered distinct). After this enhancement, `nn/alice` and `nn/Alice` will be treated as identical, reducing potential conflicts caused by casing differences. Contacts will be flagged as having the same identity if both `Name` and `Nickname` match in a case-insensitive manner.
 
-   1. Case 2: `Telegram Handle` and `Email` are also case-sensitive. In the enhanced version, these fields will also become case-insensitive, ensuring no two contacts can have the same `Telegram Handle`, `Email`, or `Nickname`, even if they differ only by letter casing.
+* Case 2: `Telegram Handle` and `Email` are also case-sensitive. In the enhanced version, these fields will also become case-insensitive, ensuring no two contacts can have the same `Telegram Handle`, `Email`, or `Nickname`, even if they differ only by letter casing.
 
-   1. Expected Outcome: Reduce errors and confusion due to case variations. Ensure that no two contacts have the same `Telegram Handle`, `Email`, or `Nickname` regardless of case, thereby improving data integrity.
+* Expected Outcome: Reduce errors and confusion due to case variations. Ensure that no two contacts have the same `Telegram Handle`, `Email`, or `Nickname` regardless of case, thereby improving data integrity.
+
 ---
 
 ### Display Index of Newly Added Contact
 
-1. Users may be uncertain about where a newly added contact appears within the contact list.
+Users may be uncertain about where a newly added contact appears within the contact list.
 
-   1. Goal: Clearly indicate the index of the newly added contact so that users can easily locate and verify the contact’s information without unnecessary searching.
+* Goal: Clearly indicate the index of the newly added contact so that users can easily locate and verify the contact’s information without unnecessary searching.
 
-   1. Example: When a contact is added, the UI will default to displaying the first page. However, since contacts are listed in alphabetical order, the new contact may not be visible on this page if it appears further down the list. Users may end up scrolling through multiple pages to locate the newly added contact, especially if they are unfamiliar with other contacts in the system.
+* Example: When a contact is added, the UI will default to displaying the first page. However, since contacts are listed in alphabetical order, the new contact may not be visible on this page if it appears further down the list. Users may end up scrolling through multiple pages to locate the newly added contact, especially if they are unfamiliar with other contacts in the system.
 
-   1. Expected Outcome: Users can instantly see the index of the added contact, allowing them to navigate directly to its location without spending extra time searching through the list.
+* Expected Outcome: Users can instantly see the index of the added contact, allowing them to navigate directly to its location without spending extra time searching through the list.
 
 

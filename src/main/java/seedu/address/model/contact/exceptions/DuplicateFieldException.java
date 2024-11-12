@@ -5,11 +5,10 @@ package seedu.address.model.contact.exceptions;
  * UniqueContactList
  */
 public class DuplicateFieldException extends RuntimeException {
-    public DuplicateFieldException() {
-        super("Operation would result in adding a field that conflicts with another contact");
-    }
+    public static final String DEFAULT_MESSAGE =
+            "Operation would result in adding a field that conflicts with another contact";
 
-    public DuplicateFieldException(String field) {
-        super("Operation would result in adding a field that conflicts with another contact: " + field);
+    public DuplicateFieldException() {
+        super(DEFAULT_MESSAGE);
     }
 }

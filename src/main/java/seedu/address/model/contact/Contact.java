@@ -22,7 +22,11 @@ public class Contact {
 
     // Data fields
     private final StudentStatus studentStatus;
+
+    // @@author cth06-Github-reused
+    // Solution taken from https://stackoverflow.com/questions/17826854/creating-a-sorted-set
     private final Set<Role> roles = new TreeSet<>(); // allows ordered representation
+    // @@author
     private final Nickname nickname;
 
     /**

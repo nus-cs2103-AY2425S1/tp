@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.ContactBuilder;
 
+//@@author
 public class ContactTest {
 
     @Test

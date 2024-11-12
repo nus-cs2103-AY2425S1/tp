@@ -17,7 +17,7 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all contacts";
     public static final String MESSAGE_FUNCTION = "List is to show all contacts, as opposed to find command.";
     public static final String MESSAGE_COMMAND_FORMAT = styleCommand(
-            COMMAND_WORD + WHITESPACE + "[all]... [contacts]...");
+            COMMAND_WORD + WHITESPACE + "[all]... [contacts]... [allcontacts]");
     public static final String NO_UNACCEPTABLE_WORDS = " There shouldn't be any words after "
             + "the list command word except for a few special cases. ";
     public static final String MESSAGE_WRONG_ARGUMENTS =

@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.UniqueContactList;
 
+//@@author
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameContact comparison)

@@ -22,6 +22,7 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContainsKeywordsPredicate;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
+//@@author
 /**
  * Contains helper methods for testing commands.
  */
