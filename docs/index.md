@@ -18,15 +18,15 @@
   <img alt="WedLinker UI" src="images/Ui.png" width="700" onclick="openModal(this)" />
 </div>
 
-**WedLinker is a desktop application designed for professional wedding planners to seamlessly manage a variety of 
+**WedLinker is a desktop application designed for professional wedding planners to seamlessly manage a variety of
 vendors and clients across different locations for a wedding.**
 
 While the application has a GUI, most of the user interactions happens using a CLI (Command Line Interface).
-This allows for efficient and streamlined management of wedding-related contacts through text-based commands. 
+This allows for efficient and streamlined management of wedding-related contacts through text-based commands.
 
-WedLinker provides a centralised address book that simplifies the complexities of coordinating multiple vendors, 
-venues and clients. It enhances communication and streamlines event planning tasks, making the wedding planning process 
-more organised and efficient. 
+WedLinker provides a centralised address book that simplifies the complexities of coordinating multiple vendors,
+venues and clients. It enhances communication and streamlines event planning tasks, making the wedding planning process
+more organised and efficient.
 
 
 * If you are interested in using WedLinker, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).

@@ -18,9 +18,9 @@ The following java classes in the directory `tp\src\main\java\seedu\address\mode
 - Task, Todo, Deadline, Event <br>
 
 ChatGPT by OpenAI was used by DanzaSeah to:
-- Rephrase the JavaDocs of Task and Tag related classes to be more concise and clear, 
-- Seek suggestions for organising and improving existing test cases, 
-- Come up with better or more appropriate class and method names. 
+- Rephrase the JavaDocs of Task and Tag related classes to be more concise and clear,
+- Seek suggestions for organising and improving existing test cases,
+- Come up with better or more appropriate class and method names.
 
 External Java libraries were also used in the project for various functionalities:
 - JavaFX: for the GUI
@@ -1053,7 +1053,7 @@ testers are expected to do more *exploratory* testing.
 
 <box type="important">
     Note the difference between similar command shortcuts. 'untask' unmarks a task as done, while 'unatask' unassigns a task from a vendor.
-    Similarly, 'ltags' can be used to list all tags, while 'ltasks' can be used to list all tasks (note the plural for both commands, 'tags' and 'tasks').  
+    Similarly, 'ltags' can be used to list all tags, while 'ltasks' can be used to list all tasks (note the plural for both commands, 'tags' and 'tasks').
 </box>
 
 <br>
@@ -1317,7 +1317,7 @@ applied to edited data, but specific expected results will differ. <br>
 
        Expected: `Person` list remains unchanged. System displays error describing source of problem with the command.
 
-<br> 
+<br>
 
 2. Editing a person when a filtered list is being shown.
 
