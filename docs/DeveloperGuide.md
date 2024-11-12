@@ -244,6 +244,12 @@ The sequence diagram shows how an entity command is executed:
 
 <box type="info" seamless>
 
+**Note:** The lifeline for `xyzCommandParser` should end at the destroy marker (X) but due to a limitation 
+of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+<box type="info" seamless>
+
 **Note:** There are two entities, `Person` and `Appointment`.
 - The entity referred in `FindEntityCommand` refers to `FindPersonCommand` and `FindAppointmentCommand`.
 - Similarly, the entity referred in `AddEntityCommand` refers to `AddPersonCommand` and `AddAppointmentCommand`.
@@ -1099,7 +1105,7 @@ Team size: 5
 * **Sample Input:** User enters: `sort`
 * **Expected Output:** The result display box shows `Unknown Command. Did you mean: list, find, clear, add, edit, delete, exit, or help?`
 
-2. **Modify date parsing to check for leap years**
+2. **Modify date parsing to check for leap years.**
 * **Flaw:** When a user enters February 29 for a non-leap year, the date automatically adjusts to February 
   28, which may be confusing.
 * **Enhancement:** Modify the date parsing logic to check for leap years.
@@ -1108,44 +1114,50 @@ Team size: 5
 * **Sample Input:** User enters `2023-02-29` for an appointment date.
 * **Expected Output:** The result display box shows `Invalid date: 2023 is not a leap year, so February 29 is not valid.`
 
-3. **Modify date parsing to check for valid dates**
+3. **Modify date parsing to check for valid dates.**
 * **Flaw:** Entering an invalid date such as January 32 returns an error message that says "Invalid date-time format," which is unclear since the format itself is correct.
 * **Enhancement:** Modify the date parsing logic to check for valid dates, such as ensuring that the day is within the range of the month.
 * **Sample Input:** User enters `2023-03-32` for an appointment date.
 * **Expected Output:** The result display box shows `Invalid date: The day is out of range for the month`.
 
 
-4. **Modify index parsing to check for valid indexes**
+4. **Modify index parsing to check for valid indexes.**
 * **Flaw:** For `edit` commands utilising `INDEX` as a field, when users input an index larger than the 
   list size of `Person` or `Appointment`, the application does not check for the validity of the index.
 * **Enhancement:** Implement a check to ensure that the index provided by the user is within the valid range 
   of the list size. If the index is invalid, display an error message to the user.
-* **Sample Input:** `edit person 100000`
+* **Sample Input:** User enters `edit person 100000`
 * **Expected Output:** The result display box shows `Invalid index! Please enter a valid index within the list size.`
 
-5. **Modify date parsing to check for valid times**
+5. **Modify date parsing to check for valid times.**
 * **Flaw:** Entering an invalid times such as `2024-05-12 25:61` returns an error message that says "Invalid date-time format," which is unclear since the format is correct.
 * **Enhancement:** Modify the date parsing logic to check for valid times, such as ensuring that the time is between 00:00 and 23:59.
 * **Sample Input:** User enters `... d/2024-05-12 25:61`
 * **Expected Output:** The result display box shows `Invalid time format. Please enter a valid time between 00:00 and 23:59.`
 
-6. **Update patient name in appointment when patient's name is edited**
+6. **Update patient name in appointment when patient's name is edited.**
 * **Flaw:** When users edit a `person` with a new name, his/her appointments still refer to the old name.
-* **Enhancement:** During the EditPersonCommand, also edit any appointments with this patient to point to the new Person object.
+* **Enhancement:** During the `EditPersonCommand`, also edit any appointments with this patient to point to the new `Person` object.
 * **Sample Input:** Suppose there is a person indexed 1 named John. Execute `edit person 1 n/Jonathan`.
 * **Expected Output:** Any appointments with John should now refer to Jonathan.
 
-7. **You can only add appointments without sickness or medicine, but not edit them**
-* **Flaw:** When users edit an `appointment` such that sickness or medicine is null, the GUI invalidates this input even though these fields are optional.
+7. **You can only add appointments without sickness or medicine, but not edit them.**
+* **Flaw:** When users edit an `appointment`, such that the sickness or medicine field is null, the GUI invalidates this input even though these fields are optional.
 * **Enhancement:** Change input validation for sickness and medicine to allow for null values.
-* **Sample Input:** `edit appt 1 s/ m/`
+* **Sample Input:** User enters `edit appt 1 s/ m/`
 * **Expected Output:** Appointment indexed 1 should have sickness and medicine shown as null.
 
-8. **Error messages should specify time format**
-* **Flaw:** When inputing an invalid time such as 25:00, it would be helpful if the error message shows that invalid format for time has been provided incase some people are unfamiliar with 24-hour time. 
-* **Enhancement:** Change the error message for cases where time format is incorrect.
-* **Sample Input:** `edit appt 3 d/2024-12-05 25:00`
-* **Expected Output:** Invalid date-time format. Expected format: yyyy-MM-dd HH:mm for example 2024-04-24 13:00 is 24th March 2024, 1:00 PM.
+8. **Error messages should specify time format.**
+* **Flaw:** When users input an invalid time such as `25:00`, it would be helpful if the error message shows that invalid format for time has been provided. This would provide more information for those who 
+  may be unfamiliar with 24-hour time format.
+* **Enhancement:** Change the error message for cases where the time format is incorrect.
+* **Sample Input:** User enters `edit appt 3 d/2024-12-05 25:00`
+* **Expected Output:** The result display box shows `Invalid date-time format. Expected format: yyyy-MM-dd HH:mm. For example, 2024-04-24 13:00, which would be 24th March 2024, 1:00 PM.
+
+9. **The sequence diagram for the entity commands should include interactions with the `Model` class**
+* **Flaw:** The current sequence diagram (EntityCommandSequenceDiagram.puml) for the entity commands does 
+  not include interactions with the `Model` class. 
+* **Enhancement:** Update the sequence diagram to include interactions with the `Model` class. Reference frames can be included to show the interactions with the `Model` class for different commands.
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
