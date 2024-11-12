@@ -816,12 +816,16 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `search a/`  
        Expected: All contacts will be listed.
+
     2. Test case: `search e/`  
        Expected: All contacts will be listed. 
+
     3. Test case: `search n/`  
        Expected: All contacts will be listed.
+
     4. Test case: `search p/`  
        Expected: All contacts will be listed.
+
     5. Test case: `search t/`  
        Expected: All contacts will be listed.
 
@@ -829,12 +833,16 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `search a/street`  
        Expected: Contacts with the substring street(case-insensitive) in their address will be listed.
+
     2. Test case: `search e/example`  
        Expected: Contacts with the substring `example` (case-insensitive) in their email address will be listed. 
+
     3. Test case: `search n/John`  
        Expected: Contacts with the substring `John` (case-insensitive) in their name will be listed. 
+
     4. Test case: `search p/123`  
        Expected: Contacts with the substring `123` in their phone number will be listed. 
+
     5. Test case: `search t/friend`  
        Expected: Contacts with the tag `friend` (case-insensitive) will be listed.
 
@@ -842,12 +850,16 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `search a/street ave`  
        Expected: Contacts with the substring street or ave(case-insensitive) in their address will be listed.
+
     2. Test case: `search e/example domain`  
        Expected: Contacts with the substring `example` or `domain` (case-insensitive) in their email address will be listed. 
+
     3. Test case: `search n/John Doe`  
        Expected: Contacts with the substring `John` or `Doe` (case-insensitive) in their name will be listed. 
+
     4. Test case: `search p/123 456`  
        Expected: Contacts with the substring `123` or `456` in their phone number will be listed. 
+
     5. Test case: `search t/friend colleague`  
        Expected: Contacts with the tag `friend` or `colleague` (case-insensitive) will be listed.
 
