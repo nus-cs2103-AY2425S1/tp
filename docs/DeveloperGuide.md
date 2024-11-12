@@ -222,6 +222,7 @@ Step 2. When a user adds an appointment through the `addapp` command, the follow
 
 1. The `ModelManager` retrieves the person using their NRIC.
 2. The appointment is validated for:
+
 - Start time being before end time
 - Start time being in the future
 - The person existing in the system
@@ -1159,6 +1160,26 @@ testers are expected to do more *exploratory* testing.
 - **Expected**:
   - Appointment is updated to the new date and time.
   - Success message confirms the update.
+
+#### Updating the Status of an Appointment
+
+1. **Updating Status to Completed**
+
+- **Prerequisites**: Ensure an appointment exists on `01/01/2025` at `10:00`.
+- **Test case**: `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/completed`
+- **Expected**:
+  - Appointment status is updated to "COMPLETED".
+  - Success message confirms the status update.
+
+2. **Updating Status to Pending**
+
+- **Prerequisites**: Ensure an appointment exists on `01/01/2025` at `10:00`.
+- **Test case**: `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/pending`
+- **Expected**:
+  - Appointment status is updated to "PENDING".
+  - Success message confirms the status update.
+
+---
 
 #### Deleting an Appointment
 
