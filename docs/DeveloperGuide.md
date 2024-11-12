@@ -94,7 +94,7 @@ Certain components will require the instance of the `Model` itself. For example,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="750"/>
+<img src="images/LogicClassDiagram.png" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete S00001")` API call as an example.
 
