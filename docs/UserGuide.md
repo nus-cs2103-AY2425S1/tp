@@ -350,6 +350,7 @@ Click on each command to jump to their subsection.
 **:information_source: Additional Information on Name, Email and Tags Usage:**<br>
 
 - **Duplicate Names Handling**: <br> To avoid duplicate entries, `ConTActs` does not permit identical names. In rare cases where students have the exact same name, add unique identifiers (e.g., `John Doe 1`) or use partial names (e.g., `John` and `John Doe`) to differentiate between entries.
+
 - **Case Sensitivity for Emails and Tags**: <br> `ConTActs` treats emails and tags as case-sensitive, meaning entries like `USER@EXAMPLE.COM` and `user@example.com` or `CS2103T` and `cs2103t` are considered distinct. If desired, use a consistent capitalisation format across all emails and tags.
 </div>
 
