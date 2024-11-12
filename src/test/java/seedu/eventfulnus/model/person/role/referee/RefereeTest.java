@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.eventfulnus.model.person.role.Faculty;
-import seedu.eventfulnus.model.person.role.athlete.Sport;
+import seedu.eventfulnus.model.Faculty;
+import seedu.eventfulnus.model.person.role.Sport;
 
 public class RefereeTest {
     @Test

@@ -12,11 +12,11 @@ import javafx.util.Pair;
 import seedu.eventfulnus.commons.util.ToStringBuilder;
 import seedu.eventfulnus.logic.commands.EditEventCommand;
 import seedu.eventfulnus.model.AddressBook;
+import seedu.eventfulnus.model.Faculty;
 import seedu.eventfulnus.model.ModelManager;
 import seedu.eventfulnus.model.person.Person;
-import seedu.eventfulnus.model.person.role.Faculty;
-import seedu.eventfulnus.model.person.role.athlete.Sport;
-import seedu.eventfulnus.model.person.role.athlete.SportString;
+import seedu.eventfulnus.model.person.role.Sport;
+import seedu.eventfulnus.model.person.role.SportString;
 
 /**
  * Represents an {@code Event} in the {@link AddressBook} of the {@link ModelManager}.

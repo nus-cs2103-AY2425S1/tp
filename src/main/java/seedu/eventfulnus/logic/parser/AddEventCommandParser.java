@@ -15,11 +15,11 @@ import java.util.stream.Stream;
 import javafx.util.Pair;
 import seedu.eventfulnus.logic.commands.AddEventCommand;
 import seedu.eventfulnus.logic.parser.exceptions.ParseException;
+import seedu.eventfulnus.model.Faculty;
 import seedu.eventfulnus.model.event.Event;
 import seedu.eventfulnus.model.event.Venue;
 import seedu.eventfulnus.model.person.Person;
-import seedu.eventfulnus.model.person.role.Faculty;
-import seedu.eventfulnus.model.person.role.athlete.Sport;
+import seedu.eventfulnus.model.person.role.Sport;
 
 /**
  * Parses input arguments and creates a new AddEventCommand object.

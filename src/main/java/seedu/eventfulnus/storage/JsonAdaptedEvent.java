@@ -11,13 +11,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.util.Pair;
 import seedu.eventfulnus.commons.exceptions.IllegalValueException;
 import seedu.eventfulnus.logic.parser.ParserUtil;
+import seedu.eventfulnus.model.Faculty;
 import seedu.eventfulnus.model.event.Event;
 import seedu.eventfulnus.model.event.Venue;
 import seedu.eventfulnus.model.person.Person;
-import seedu.eventfulnus.model.person.role.Faculty;
-import seedu.eventfulnus.model.person.role.athlete.Sport;
-import seedu.eventfulnus.model.person.role.athlete.SportString;
-
+import seedu.eventfulnus.model.person.role.Sport;
+import seedu.eventfulnus.model.person.role.SportString;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -107,7 +106,7 @@ public class JsonAdaptedEvent {
         if (venue == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName()));
         }
-        final Venue eventVenue = new Venue(venue);
+        final Venue eventVenue = ParserUtil.parseVenue(venue);
 
         if (dateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

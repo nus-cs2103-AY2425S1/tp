@@ -14,14 +14,14 @@ import org.junit.jupiter.api.Test;
 import javafx.util.Pair;
 import seedu.eventfulnus.logic.Messages;
 import seedu.eventfulnus.logic.commands.exceptions.CommandException;
+import seedu.eventfulnus.model.Faculty;
 import seedu.eventfulnus.model.Model;
 import seedu.eventfulnus.model.ModelManager;
 import seedu.eventfulnus.model.UserPrefs;
 import seedu.eventfulnus.model.event.Event;
 import seedu.eventfulnus.model.event.Venue;
 import seedu.eventfulnus.model.person.Person;
-import seedu.eventfulnus.model.person.role.Faculty;
-import seedu.eventfulnus.model.person.role.athlete.Sport;
+import seedu.eventfulnus.model.person.role.Sport;
 import seedu.eventfulnus.testutil.TypicalAddressBook;
 
 

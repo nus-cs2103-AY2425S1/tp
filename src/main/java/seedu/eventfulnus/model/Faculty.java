@@ -1,4 +1,4 @@
-package seedu.eventfulnus.model.person.role;
+package seedu.eventfulnus.model;
 
 /**
  * Faculty represents a faculty in NUS which Athletes belong to.

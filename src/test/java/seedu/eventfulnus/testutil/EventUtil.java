@@ -12,7 +12,7 @@ import seedu.eventfulnus.logic.commands.AddEventCommand;
 import seedu.eventfulnus.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.eventfulnus.model.event.Event;
 import seedu.eventfulnus.model.person.Person;
-import seedu.eventfulnus.model.person.role.athlete.SportString;
+import seedu.eventfulnus.model.person.role.SportString;
 
 /**
  * A utility class for {@link Event}.
