@@ -495,6 +495,33 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       - Expected: Similar to previous.
 
+### Command history
+1. Navigating through command history with the up/down arrow keys
+
+    1. Prerequisites: Enter several different commands (e.g., listemployees, addproject ProjectX, delete 1), so that there is a history of commands available.
+
+    1. Test case: Press the up arrow key (↑) in the command box.
+        - Expected: The previous command appears in the command box.
+       
+    1. Test case: Press the up arrow key (↑) repeatedly to cycle through older commands.
+        - Expected: Each press navigates one step back in the command history. The earliest command is reached when pressing the up arrow no longer changes the displayed command.
+   1. Test case: Press the down arrow key (↓) to navigate forward in the command history.
+        - Expected: Each press navigates one step forward in the command history. The most recent command is reached when pressing the down arrow no longer changes the displayed command.
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      - Expected: Similar to previous.
+2. Persisting command history across sessions
+    1. Prerequisites: Ensure there are commands in the history from a previous session.
+
+    1. Close the application and re-launch it by running the
+   
+    1. Test case: Press the up arrow key (↑) in the command box.
+        - Expected:Commands from the previous session(s) appear, allowing navigation through the command history from earlier sessions.
+
+3.	Testing command history limits
+      1.	Enter 50 commands in succession (e.g., listemployees, delete 1, repeated or varied).
+            - Expected:Only the 50 most recent commands are saved. Attempting to access a 51st older command with the up arrow key will not be possible.
+
+
 ### Other commands
 
 1. Using / Testing other commands in HRConnect
