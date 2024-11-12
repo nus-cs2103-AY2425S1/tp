@@ -508,6 +508,9 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add commands to try: `add`, `add i/1`, `...`(missing one or more compulsory fields)<br>
        Expected: Similar to previous.
 
+    1. Test case: `add n/Adib j/Developer p/12345678 e/example@example i/1 t/hired t/reJecteD t/Pending` (adding additional status tags)
+       Expected: The additional status tags are omitted and a default "pending" status tag still remains.
+
 ### Deleting a candidate
 
 1. Deleting a candidate while all candidates are being shown
@@ -593,13 +596,12 @@ Team size : 5
      allowing only alphabetic characters. (e.g. "John Doe 1" will not be accepted as a valid name entry)
 
   3. Enhance find command to take job and skills as parameters: Users are only able to search for candidates by name currently. 
-     We plan to allow users to search by job title and, making it easier to locate candidates with specific job positions
-     and skills
+     We plan to allow users to search by job title and skills, making it easier to locate candidates with specific job positions
+     and skills.
 
-  4. Enhance the view command such that it can also use indexing to view a candidate's status: We plan
-     to make the view command format much simpler by adopting a similar command format from the delete command where
-     indexing was used instead of having to input both the candidate's name and the job position.(e.g. "view 1" instead
-     of "view n/John Doe j/Software Engineer)
+  4. Enhance the view/hire/reject command such that it can also use indexing: We plan to make the view/hire/reject command format 
+     much simpler by adopting a similar command format from the delete command where indexing was used instead of having 
+     to input both the candidate's name and the job position.(e.g. "view 1" instead of "view n/John Doe j/Software Engineer)
 
   5. Enhanced error messages: Some commands give a general error message even when there are multiple type of invalid inputs.
      As such, we will provide more specific error messages across the platform, guiding users with clear, actionable feedback when 
