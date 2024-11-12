@@ -29,6 +29,8 @@ EduContacts is a **desktop app for educators in tertiary institutions in Singapo
     - [Finding a person: `find`](#finding-a-person-find)
     - [Clearing all entries : `clear`](#clearing-all-entries-clear)
     - [Exiting the program : `exit`](#exiting-the-program-exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
 4. [FAQ](#faq)
 5. [Known issues](#known-issues)
 6. [Command summary](#command-summary)
@@ -117,6 +119,7 @@ EduContacts is a **desktop app for educators in tertiary institutions in Singapo
    ```bash
    delete 12345678
    ```
+   
    Deletes a person contact with student ID `12345678`.
 
    ```bash
@@ -138,7 +141,7 @@ EduContacts is a **desktop app for educators in tertiary institutions in Singapo
 
 <box type="tip" seamless>
 
-**Tip:** Use the UP and DOWN arrow keys to scroll through previous commands in the Command Box. This feature helps you reuse recent commands without retyping, making it faster for you to correct or repeat commands!
+**Tip:** Use the UP and DOWN arrow keys to scroll through previous commands in the command box. This feature helps you reuse recent commands without retyping, making it faster for you to correct or repeat commands!
 </box>
 
 6. Refer to the [Features](#features) below for details of each command.
@@ -148,20 +151,19 @@ EduContacts is a **desktop app for educators in tertiary institutions in Singapo
 ## Summary of a `Person`
 
 This table will explain the fields that a `Person` in EduContacts possesses and its respective constraints. Each person
-in EduContacts is assumed to be Singaporean. You should not leave any fields blank when adding a `Person` to EduContacts, except for `Module`.
+in EduContacts is assumed to have a Singapore-based contact. No fields should be left blank when adding a `Person` to EduContacts, except for `Module`.
 
 Field      | Details
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **StudentID**   | The student ID that belongs to the `Person`. The input for this field can only contain digits and should be exactly 8 digits long. <br><br> This field also serves as the unique identifier for a `Person`.
 **Name**   | The name that belongs to the `Person`. The input for this field can only contain alphanumeric characters and whitespaces.
 **Course** | The course that the `Person` studies. The input for this field can only contain alphabetical characters and whitespaces.
-**Email**  | The email that belongs to the `Person`. The input for this field should be of the format local-part@domain. <br><br> The local-part should only contain alphanumeric characters and these special characters: `+ _ . -` The local-part may not start or end with any special characters. This is followed by a '@' and then a domain name. <br><br> The domain name is made up of domain labels separated by periods. <br><br> The domain name must: <br> - End with a domain label at least 2 characters long <br> - Have each domain label start and end with alphanumeric characters <br> - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+**Email**  | The email that belongs to the `Person`. The input for this field should be of the format local-part@domain. <br><br> The local-part should only contain alphanumeric characters and these special characters: `+ _ . -` The local-part may not start or end with any special characters. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. <br><br> The domain name must: <br> - End with a domain label at least 2 characters long <br> - Have each domain label start and end with alphanumeric characters <br> - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 **Address**   | The address that belongs to the `Person`. The first character for the input for this field can only contain alphanumeric characters and these special characters: `# , -`. <br><br> After the first character, any additional characters are allowed, including whitespace and further text.
 **Phone Number**  | The phone number that belongs to the `Person`. The input for this field can only contain digits and must at least be 8 digits long.
 **Module** | A module that the `Person` takes. A `Person` can have multiple modules. The input for this field can only contain alphanumeric characters. <br><br> A module can also be assigned a `Grade`, which must be one of the following: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`
-**Role**   | The role assigned to the `Person`. A person can either be a "Student" or "Tutor".
+**Role**   | The role assigned to the `Person`. A person can either be a `Student` or `Tutor`.
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -219,12 +221,7 @@ Format:
 ```bash
 add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE
 ```
-
-<box type="info" seamless>
-
-**Note:**  The phone number must be at least 8 digits long, and is a valid Singapore phone number.
-
-</box>
+When adding a Person to EduContacts, please refer to the [table above](#summary-of-a-person) for the constraints of each field.
 
 Examples:
 * `add 87654321 n/Betsy Crowe r/Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/12345678 c/Business Analytics` will add a person named `Betsy Crowe` with student ID of `87654321` to EduContacts.
@@ -233,7 +230,7 @@ Examples:
 
   ![result for 'add command result'](images/addCommandResult.png)
 
-<br>
+<div style="page-break-after: always;"></div>
 
 ### Listing all persons : `list`
 
@@ -277,8 +274,8 @@ Usages:
 ```bash
 edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 ```
-  * Updates the details of the person identified by the studentId assigned to the corresponding student. 
-  * At least one of the optional fields must be provided: name, phone, email, address, course, role. Note that studentId cannot be edited as it is the person's identifier.
+  * Updates the details of the person identified by the student ID assigned to the corresponding student. 
+  * At least one of the optional fields must be provided: name, phone, email, address, course, role. Note that student ID cannot be edited as it is the person's identifier.
   * Existing values will be overwritten by the input values.
 
 **2. Edit person's module:**
@@ -287,9 +284,11 @@ edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 ```bash
 edit ID m/ OLD_MODULE NEW_MODULE
 ```
-  * Updates a module of the person identified by the studentId.
+  * Updates a module of the person identified by the student ID.
   * Existing module (`OLD_MODULE`) will be overwritten by the input module (`NEW_MODULE`).
   * Editing of `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `COURSE` and `ROLE` using this format is not supported.
+
+<br>
 
 Examples:
 
@@ -313,14 +312,14 @@ Adds a grade to a person's module.
 grade ID m/MODULE g/GRADE
 ```
 
-* Adds a grade to a person according to the specified studentId and Module.
+* Adds a grade to a person according to the specified student ID and Module.
 * Module specified must exist prior to execution grade command.
 * Acceptable grades: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`.
 * Existing grade will be updated to the input grade.
 
 Examples:
-* `grade 23876767 m/CS2103T g/A` will assign an `A` grade to the `CS2103T` module of a person with studentId of `23876767`.
-* `grade 14141414 m/CS1101S g/B+` will assign an `B+` grade to the `CS1101S` module of a person with studentId of `14141414`.
+* `grade 23876767 m/CS2103T g/A` will assign an `A` grade to the `CS2103T` module of a person with student ID of `23876767`.
+* `grade 14141414 m/CS1101S g/B+` will assign an `B+` grade to the `CS1101S` module of a person with student ID of `14141414`.
 
 <br>
 
@@ -352,7 +351,9 @@ filter m/KEYWORD
 <!-- -->
 
   * `m/` prefix is used.
-  * Partial matching is supported, allowing users to input parts of module codes. e.g. `m/CS21` will match modules like "CS2103T" and "CS2101."
+  * Only full module codes will be matched, e.g. `m/CS2103T` will match the module `CS2103T`, and not `m/CS21`."
+
+<div style="page-break-after: always;"></div>
 
 **3. Filter by course:**
 
@@ -393,32 +394,36 @@ To return to display the full list of persons, use the `list` command.
 
 Deletes the specified person/module from EduContacts. This command has 2 formats.
 
-Format 1:
+**1. Delete `Person` from EduContacts**
+
+Format:
 ```bash
 delete ID
 ```
 
-* Deletes person with the specified studentId.
+* Deletes person with the specified student ID.
 
 Examples:
 
-* `delete 15151515` will delete a person with studentId of `15151515` from EduContacts.
-* `delete 71271222` will delete a person with studentId of `71271222` from EduContacts (the response message of this command is shown in the screenshot below).
+* `delete 15151515` will delete a person with student ID of `15151515` from EduContacts.
+* `delete 71271222` will delete a person with student ID of `71271222` from EduContacts (the response message of this command is shown in the screenshot below).
 
   ![result for 'delete_71271222'](images/deleteCommandResult.png)
 
-Format 2:
+**2. Delete `Module` from `Person`**
+
+Format:
 ```bash
 delete ID m/MODULE
 ```
 
 * Deletes a module from the person with the specified studentId.
 
-Examples: 
-* `delete 13131313 m/CS2103T` will delete the module `CS2103T` from a person with studentId of `13131313` (the result of this command is shown in the screenshot below).
+Example: 
+* `delete 13131313 m/CS2103T` will delete the module `CS2103T` from a person with student ID of `13131313` (the result of this command is shown in the screenshot below).
 
   ![result for 'delete_13131313'](images/deleteModuleResult.png)
-<div style="page-break-after: always;"></div>
+
 
 ### Finding a person : `find`
 
@@ -429,7 +434,7 @@ Format: `find ID`
 * Finds student with the specified `ID`.
 
 Examples:
-* `find 12345678` will find a person with studentId of `12345678` and display their details.
+* `find 12345678` will find a person with student ID of `12345678` and display their details.
 
 <br>
 
@@ -460,7 +465,6 @@ Format:
 exit
 ```
 
-<br>
 
 ### Saving the data
 
@@ -480,7 +484,7 @@ Furthermore, certain edits can cause the EduContacts to behave in unexpected way
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+
 
 ## FAQ
 
@@ -502,8 +506,8 @@ Furthermore, certain edits can cause the EduContacts to behave in unexpected way
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **For `help` command:**
-   * If you minimize the Help Window and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window. 
-   * On some platforms (especially MacOS), when using the application in full screen,
+   * If you minimise the Help Window and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window. 
+   * On some platforms (especially MacOS), when you use the application in full screen,
    running the `help` command and closing the popup window repeatedly in quick succession may cause the application
    to hang or crash. Users have to terminate the application by entering `CTRL` + `C` in the terminal used to run the application, and run the application again. **DATA MIGHT BE LOST**.
    * The development team is working on a more permanent fix for this issue.
@@ -519,9 +523,9 @@ Furthermore, certain edits can cause the EduContacts to behave in unexpected way
 | **Clear**      | `clear`                                                                                                                                                                          |
 | **Delete**     | `delete ID`<br> e.g., `delete 12345678` <br> <br> `delete ID m/MODULE` <br> e.g., `delete 12345678 m/CS2103T`                                                                    |
 | **Edit**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`                                        |
-| **Grade**      | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`                                                                                                             |
-| **Add Module** | `module ID m/MODULE` <br> e.g., `add 12345678 m/CS2103T`                                                                                                                         |
+| **Add Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`                                                                                                             |
+| **Add Module** | `module ID m/MODULE` <br> e.g., `module 12345678 m/CS2103T`                                                                                                                      |
 | **Filter**     | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`                                                                                                          |
 | **Find**       | `find ID`<br> e.g., `find 12345678`                                                                                                                                              |
 | **List**       | `list`                                                                                                                                                                           |
-
+| **Help**       | `help` 
