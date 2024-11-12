@@ -4,6 +4,11 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+class Company {
+    -isFavourite: Boolean
+}
+show Company members
+
 AddressBook *-right-> "1" UniqueCompanyList
 AddressBook *-right-> "1" UniqueTagList
 UniqueTagList -[hidden]down- UniqueCompanyList
