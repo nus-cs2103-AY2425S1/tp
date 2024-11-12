@@ -277,13 +277,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**: Celebrity Talent Managers
 
-* have a need to manage a significant number of contacts (talents, contractors, etc)
+* have a need to manage a significant number of contacts (celebrities, industry professionals, etc)
 * prefer desktop apps over other types
 * can type fast
 * prefer typing to mouse interactions
 * are reasonably comfortable using CLI apps
 
-**Value proposition**: TalentHub offers celebrity managers a **secure, offline tool** to manage **various contacts and stakeholders, and schedule events** efficiently. With editable fields, it streamlines coordination while ensuring **privacy and data control** in a high-stakes environment.
+**Value proposition**: TalentHub offers celebrity talent managers a **secure, offline tool** to manage **various contacts and stakeholders, and schedule events** efficiently. With editable fields, it streamlines coordination while ensuring **privacy and data control** in a high-stakes environment.
 
 ### User stories
 
@@ -787,10 +787,10 @@ Use case ends.
 
 ### Glossary
 
-* **AddressBook**: A structured data set containing contact and event information for Talents managed by Talent Managers.
-* **Events**: Social and networking events organized by third parties, such as award shows and brand events.
+* **AddressBook**: A structured data set containing contact and event information for Celebrities managed by Talent Managers.
+* **Events**: Any type of activity organized by third parties which Celebrities are attending (e.g. Award Shows, Brand Events).
 * **Index**: The position of individual contacts or events in lists referenced by specific commands.
-* **Industry Professional**: Individuals that Talents interact with or service providers from whom Talents may need to procure services during events.
+* **Industry Professional**: Individuals that Celebrities interact with or service providers from whom Celebrities may need to procure services during events (e.g. Make-up artists, Directors).
 * **Logic Component**: A part of the architecture responsible for handling and parsing user commands.
 * **Mainstream OS**: Windows, Linux, macOS.
 * **Model Component**: Manages the applications responsible for handling and parsing user commands.
@@ -798,12 +798,11 @@ Use case ends.
 * **ObservableList**: A list that is monitored for changes, triggering updates to any UI components bound to it.
 * **Parser**: A component that interprets and processes commands inputted by the user.
 * **Person**: Refers to a contact object within TalentHub.
-* **Points of Contact (POCs)**: A list of persons involved in an event whom the talent manager may need to contact, such as a hairdresser, stylist, or chauffeur.
+* **Points of Contact (POCs)**: A list of persons involved in an event whom the talent manager may need to contact (e.g. Hairdresser, Stylist, Chauffeur).
 * **Sequence Diagram**: A type of UML diagram that shows the order of interactions between objects in a particular scenario.
 * **Storage Component**: Manages reading from and writing to the persistent storage.
 * **Tag**: A descriptor associated with a contact, grouping them by common characteristics.
-* **Talent Manager**: Industry professionals involved in managing and planning Talent schedules.
-* **Talents**: Well-known or emerging individuals active in the entertainment industry.
+* **(Celebrity) Talent Manager**: A person involved in managing and planning Celebrity schedules.
 * **Undo/Redo Feature**: Functionality that allows users to revert or reapply actions within the application.
 * **VersionedAddressBook**: A class responsible for implementing the undo/redo feature by maintaining different states of the TalentHub
 

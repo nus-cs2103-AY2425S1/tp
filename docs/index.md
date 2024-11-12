@@ -8,7 +8,7 @@ title: TalentHub
 
 ![Ui](images/Ui.png)
 
-**TalentHub is a desktop app designed for Celebrity Talent Managers, to help with the management of celebrity and relevant industrial contacts.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**TalentHub** is a desktop app designed for **Celebrity Talent Managers**, to help with the management of **Celebrities and relevant industrial contacts.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using TalentHub, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing TalentHub, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
