@@ -26,11 +26,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (IdentityNumber.isValidIdentityNumber(trimmedArgs)) {
-            //TODO: Implement FindCommand with the identity number.
-            // FindCommand with the identity number.
-        }
-
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
         return new FindCommand(new NameOrIdentityNumberContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
