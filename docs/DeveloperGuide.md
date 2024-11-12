@@ -47,7 +47,6 @@
     * [Saving data](#saving-data)
     * [Exit HireMe](#exit-hireme-application)
   * [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
-  * [**Appendix: Known Issues**](#appendix-known-issues)
 <!-- TOC -->
 <page-nav-print />
 
@@ -700,8 +699,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 - **Application Status**:
     - **PENDING**: The internship application is currently in progress.
     - **REJECTED**: The user has rejected or been rejected from this internship application.
-    - **ACCEPTED**: The user has accepted the offer for this internship.
-
+    - **ACCEPTED**: The user has accepted the offer for this internship. <br></br>
 
 - **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
 
@@ -842,19 +840,19 @@ testers are expected to do more *exploratory* testing.
 
    1. Missing/Invalid Company Name test case: `/add n/ r/Software Engineer Intern e/google@gmail.com d/31/10/24` <br>
       Expected: An error message stating what is considered a valid Company Name.<br>
-      1. Other invalid Company Names include: `<oding lab`, `|-|appy Days`, `@pple`.<br>
+      1. Other invalid Company Names include: `<oding lab`, `|-|appy Days`, `@pple`.<br></br>
 
    2. Missing/Invalid Role test case: `/add n/Google r/ e/google@gmail.com d/31/10/24` <br>
       Expected: An error message stating what is considered a valid Role.<br>
-      1. Other invalid Roles include: `Software_Engineer_Intern`, `Cl-erk`.<br>
+      1. Other invalid Roles include: `Software_Engineer_Intern`, `Cl-erk`.<br></br>
 
    3. Missing/Invalid Email test case: `/add n/Google r/Software Engineer Intern e/ d/31/10/24`<br>
       Expected: An error message stating what is considered a valid Email.
-      1. Other invalid Emails include: `@gmail.com`, `google.com`, `domainLabelTooShort@gmail.x`.<br>
+      1. Other invalid Emails include: `@gmail.com`, `google.com`, `domainLabelTooShort@gmail.x`.<br></br>
 
    4. Missing/Invalid Date test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com d/`<br>
       Expected: An error message stating what is considered a valid Date.
-      1. Other invalid Dates include: Dates in the future (Relative to device's clock), `30/02/2024`, `31/04/2024`.<br>
+      1. Other invalid Dates include: Dates in the future (Relative to device's clock), `30/02/2024`, `31/04/2024`.<br></br>
 
    5. Adding internship application with missing field(s)
       1. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com`<br>
@@ -1076,7 +1074,7 @@ testers are expected to do more *exploratory* testing.
 1. Exit via Window's close button
 
    1. Test case: Close the window by clicking on the Window's close button.<br>
-      Expected: The window should close.
+      Expected: The window should close. <br></br>
 
 2. Exit via exit command
 
@@ -1125,7 +1123,7 @@ on why the command is invalid. The error message could be more specific to state
    - Justification: By providing distinct error messages for each command, we improve the user experience by making error feedback more specific and actionable. Users will be able to identify errors related to each command easily, reducing potential confusion and enhancing usability. <br></br>
 
 7. **Improve chart UI**
-   <img src="images/chart-ui-bug.png" alt="chart-ui-bug">
+   <img src="images/chart-ui-bug.png" alt="chart-ui-bug"> <br></br>
    - Current behaviour: When there are multiple statuses with zero internship applications, not all status labels are shown. <br></br>
    - Planned enhancement: Remove chart labels for statuses with zero internship applications. <br></br>
    - Justification: This ensures a consistent and user-friendly chart view which makes it easier for users to interpret the chart. <br></br>
@@ -1151,7 +1149,3 @@ on why the command is invalid. The error message could be more specific to state
     - Current behaviour: Internship applications data is stored in a single data file `hireme.json`. <br></br>
     - Planned enhancement: A backup file that replicates the data in `hireme.json`. <br></br>
     - Justification: Having only a single data file to store internship applications data means having a single point of failure when the data in corrupted or lost. A backup file that synchronously replicates the data in `hireme.json` ensures data redundancy. <br></br>
-
-## **Appendix: Known Issues**
-
-1. If the user opens the application on a first monitor, then moves the application window to a second monitor and closes the application, then when the user tries to open the application again, the application would not work after opening. The current work around is that the user will then have to move the application window back to the first monitor for the application to work. 
