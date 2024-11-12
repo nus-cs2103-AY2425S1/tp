@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 
 public class HelpWindowUiTest extends ApplicationTest {
 
-    private static final Logger testLogger = Logger.getLogger(HelpWindow.class.getName());
+    private static final Logger TEST_LOGGER = Logger.getLogger(HelpWindow.class.getName());
     private HelpWindow helpWindow;
     private Desktop mockDesktop;
 
@@ -124,8 +124,8 @@ public class HelpWindowUiTest extends ApplicationTest {
         doThrow(new IOException("Simulated IOException")).when(mockDesktop).browse(new URI(HelpWindow.USERGUIDE_URL));
 
         ConsoleHandler consoleHandler = new ConsoleHandler();
-        testLogger.addHandler(consoleHandler);
-        testLogger.setLevel(Level.WARNING);
+        TEST_LOGGER.addHandler(consoleHandler);
+        TEST_LOGGER.setLevel(Level.WARNING);
 
         interact(() -> {
             helpWindow.show();
@@ -135,7 +135,7 @@ public class HelpWindowUiTest extends ApplicationTest {
 
         verify(mockDesktop).browse(new URI(HelpWindow.USERGUIDE_URL));
 
-        testLogger.removeHandler(consoleHandler);
+        TEST_LOGGER.removeHandler(consoleHandler);
     }
 
     @Test
@@ -143,8 +143,8 @@ public class HelpWindowUiTest extends ApplicationTest {
         doThrow(new IOException("Simulated IOException")).when(mockDesktop).browse(new URI(HelpWindow.USERGUIDE_URL));
 
         ConsoleHandler consoleHandler = new ConsoleHandler();
-        testLogger.addHandler(consoleHandler);
-        testLogger.setLevel(Level.WARNING);
+        TEST_LOGGER.addHandler(consoleHandler);
+        TEST_LOGGER.setLevel(Level.WARNING);
 
         interact(() -> {
             helpWindow.show();
@@ -154,7 +154,7 @@ public class HelpWindowUiTest extends ApplicationTest {
 
         verify(mockDesktop).browse(new URI(HelpWindow.USERGUIDE_URL));
 
-        testLogger.removeHandler(consoleHandler);
+        TEST_LOGGER.removeHandler(consoleHandler);
     }
 
 }

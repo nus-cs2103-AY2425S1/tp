@@ -38,6 +38,7 @@ public class AddressBookTest {
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
         AddressBook newData = getTypicalAddressBook();
         addressBook.resetData(newData);
+
         assertEquals(newData, addressBook);
     }
 
@@ -64,6 +65,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
+
         assertTrue(addressBook.hasPerson(ALICE));
     }
 
@@ -71,6 +73,7 @@ public class AddressBookTest {
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).buildBuyer();
+
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 
@@ -82,6 +85,7 @@ public class AddressBookTest {
     @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
+
         assertEquals(expected, addressBook.toString());
     }
     @Test

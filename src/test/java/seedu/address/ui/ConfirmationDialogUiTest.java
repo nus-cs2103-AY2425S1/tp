@@ -32,6 +32,7 @@ public class ConfirmationDialogUiTest extends ApplicationTest {
         robot.clickOn("#commandTextField");
         robot.write("seller n/Tester p/98765432 e/test@testing.com");
         robot.type(KeyCode.ENTER);
+
         robot.clickOn("#commandTextField");
         robot.write("listing n/Testing Site pr/123456 ar/123 add/123 AVENUE "
                 + "reg/east sel/7");

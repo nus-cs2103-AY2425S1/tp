@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showListingAtIndex;
-import static seedu.address.logic.commands.CommandTestUtil.showListingWithName;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_LISTING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LISTING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LISTING;
@@ -34,8 +33,6 @@ import seedu.address.testutil.EditListingDescriptorBuilder;
 import seedu.address.testutil.ListingBuilder;
 
 public class EditListingCommandTest {
-    private static final Listing FIRST_LISTING = PASIR_RIS;
-    private static final Listing FIFTH_LISTING = SENGKANG;
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalListings());
 
     @Test
@@ -89,7 +86,7 @@ public class EditListingCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showListingWithName(model, PASIR_RIS.getName());
+        showListingAtIndex(model, INDEX_FIRST_LISTING);
         Listing editedListing = new ListingBuilder(SIMEI).withBuyers(PASIR_RIS.getBuyers()
                 .toArray(new Person[0])).build();
         EditListingDescriptor descriptor = new EditListingDescriptorBuilder(editedListing).build();
@@ -100,7 +97,7 @@ public class EditListingCommandTest {
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
                 new Listings(model.getListings()));
-        showListingWithName(expectedModel, PASIR_RIS.getName());
+        showListingAtIndex(model, INDEX_FIRST_LISTING);
 
         expectedModel.setListing(PASIR_RIS, editedListing);
         expectedModel.updateFilteredListingList(listings -> true);

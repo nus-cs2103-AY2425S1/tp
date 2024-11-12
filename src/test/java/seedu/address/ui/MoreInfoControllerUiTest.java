@@ -19,7 +19,6 @@ import seedu.address.MainApp;
 
 public class MoreInfoControllerUiTest extends ApplicationTest {
     private MainApp app;
-    private String index;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -33,8 +32,6 @@ public class MoreInfoControllerUiTest extends ApplicationTest {
             robot.clickOn("#commandBoxPlaceholder");
             robot.write("buyer n/Jackson p/98294924 e/jackson@gmail.com");
             robot.type(KeyCode.ENTER);
-        } else {
-            Label nameArea = robot.lookup("#name").query();
         }
 
     }
@@ -48,9 +45,11 @@ public class MoreInfoControllerUiTest extends ApplicationTest {
         robot.clickOn("#commandBoxPlaceholder");
         robot.write("moreinfo 1");
         robot.type(KeyCode.ENTER);
+
         assertTrue(robot.lookup("#remarkInput").tryQuery().isPresent(),
                 "Command opens more info window successfully");
         robot.type(KeyCode.ESCAPE);
+
         assertTrue(robot.lookup("#remarkInput").tryQuery().isEmpty(),
                 "More info window closes successfully");
     }
@@ -61,9 +60,11 @@ public class MoreInfoControllerUiTest extends ApplicationTest {
         robot.clickOn("#commandBoxPlaceholder");
         robot.write("moreinfo 1");
         robot.type(KeyCode.ENTER);
+
         robot.clickOn("#remarkInput");
         robot.write("Test");
         robot.type(KeyCode.ENTER);
+
         Label remark = robot.lookup("#clientRemarksLabel").query();
         assertEquals("Test", remark.getText(), "The remark should be correctly set to 'Test'");
     }

@@ -23,6 +23,7 @@ public class FindListingCommandTest {
     private Model model = new ModelManager(new AddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
     private Model expectedModel =
             new ModelManager(new AddressBook(), new UserPrefs(), TypicalListings.getTypicalListings());
+
     @Test
     public void equals() {
         ListingContainsKeywordsPredicate firstPredicate =
@@ -55,7 +56,9 @@ public class FindListingCommandTest {
         String expectedMessage = String.format(MESSAGE_LISTINGS_LISTED_OVERVIEW, 0);
         ListingContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindListingCommand command = new FindListingCommand(predicate);
+
         expectedModel.updateFilteredListingList(predicate);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredListingList());
     }
@@ -66,7 +69,9 @@ public class FindListingCommandTest {
         ListingContainsKeywordsPredicate predicate =
                 preparePredicate("Kent Ridge Buona Vista");
         FindListingCommand command = new FindListingCommand(predicate);
+
         expectedModel.updateFilteredListingList(predicate);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(TypicalListings.KENT_RIDGE, TypicalListings.BUONA_VISTA),
                 model.getFilteredListingList());
@@ -76,6 +81,7 @@ public class FindListingCommandTest {
     public void toStringMethod() {
         ListingContainsKeywordsPredicate predicate = new ListingContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindListingCommand findListingCommand = new FindListingCommand(predicate);
+
         String expected = FindListingCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findListingCommand.toString());
     }
