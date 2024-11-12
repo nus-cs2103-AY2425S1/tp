@@ -648,6 +648,8 @@ Not all commands use cases are included as commands, such as `clear` and `exit` 
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 #### Use Case: Find Contacts By Patient Name
 
 **System:** MedConnect
@@ -675,6 +677,8 @@ Not all commands use cases are included as commands, such as `clear` and `exit` 
   **Use case ends.**
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Use Case: Find Contacts By Doctor Name
 
@@ -808,6 +812,8 @@ Not all commands use cases are included as commands, such as `clear` and `exit` 
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 #### Use Case: Undo Last Command
 
 **System:** MedConnect
@@ -827,7 +833,10 @@ Not all commands use cases are included as commands, such as `clear` and `exit` 
 - **2a1.** MedConnect informs the user that there are no actions to undo.
 
   **Use case ends.**
+
 ---
+
+<div style="page-break-after: always;"></div>
 
 #### Use Case: Redo Last Undone Command
 
