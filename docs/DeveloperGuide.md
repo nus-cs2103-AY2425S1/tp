@@ -519,7 +519,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC10 - Edit event**
+**Use case: UC10 - Delete event by index**
+
+**MSS:**
+1. User requests to list events.
+2. App shows a list of events.
+3. User requests to delete a specific event by index in the displayed list.
+4. App deletes the event at the specified index.  
+   Use case ends.
+
+**Extensions:**
+* 3a. The given index is invalid (i.e. non-positive index or index exceeding size of list).
+    * 3a1. App shows an error message to tell the user that the given index is invalid.  
+      Use case ends.
+* 3b. No index is provided.
+    * 3b1. App shows an error message to tell the user that the command format is invalid.  
+      Use case ends.
+
+---
+
+**Use case: UC11 - Delete event by name**
+
+**MSS:**
+1. User requests to delete a specific event by name in the list.
+2. App deletes the event with the specified event name.  
+   Use case ends.
+
+**Extensions:**
+* 1a. The given event name does not exist.
+    * 1a1. App shows an error message to tell the user that the given event name does not exist.  
+      Use case ends.
+* 1b. No event name is provided.
+    * 1b1. App shows an error message to tell the user that the command format is invalid.  
+      Use case ends.
+
+---
+
+**Use case: UC12 - Edit event**
 
 **MSS:**
 
@@ -549,33 +585,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC11 - Unassign event from person**
-
-**MSS:**
-1. User requests to unassign an event from a person by providing an event name or an event index, and a person name or a person index.
-2. App unassigns the event specified from the person specified.  
-   Use case ends.
-
-**Extensions:**
-* 1a. The given event name does not match any of the existing events.
-    * 1a1. App shows an error message to tell the user that the given event name does not exist.  
-      Use case ends.
-* 1b. The given event index does not exist, i.e. there are only 3 events in the displayed list, but the user inputs an index of 4.
-    * 1b1. App shows an error message to tell the user that the given event index is invalid.  
-      Use case ends.
-* 1c. The given person name does not match any of the existing persons.
-    * 1c1. App shows an error message to tell the user that the given person name does not exist.  
-      Use case ends.
-* 1d. The given person index does not exist, i.e. there are only 3 persons in the displayed list, but the user inputs an index of 4.
-    * 1d1. App shows an error message to tell the user that the given person index is invalid.  
-      Use case ends.
-* 1e. The given person was not previously assigned to the given event.
-    * 1e1. App shows an error message to tell the user that the given person is not assigned to the given event.  
-      Use case ends.
-
----
-
-**Use Case: UC12 - Assign Event to Person**
+**Use Case: UC13 - Assign Event to Person**
 
 **MSS:**
 1. User requests to assign an event to a person by providing an event name or an event index, and a person name or a person index.
@@ -601,7 +611,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC13 - Export Contacts**
+**Use case: UC14 - Unassign event from person**
+
+**MSS:**
+1. User requests to unassign an event from a person by providing an event name or an event index, and a person name or a person index.
+2. App unassigns the event specified from the person specified.  
+   Use case ends.
+
+**Extensions:**
+* 1a. The given event name does not match any of the existing events.
+    * 1a1. App shows an error message to tell the user that the given event name does not exist.  
+      Use case ends.
+* 1b. The given event index does not exist, i.e. there are only 3 events in the displayed list, but the user inputs an index of 4.
+    * 1b1. App shows an error message to tell the user that the given event index is invalid.  
+      Use case ends.
+* 1c. The given person name does not match any of the existing persons.
+    * 1c1. App shows an error message to tell the user that the given person name does not exist.  
+      Use case ends.
+* 1d. The given person index does not exist, i.e. there are only 3 persons in the displayed list, but the user inputs an index of 4.
+    * 1d1. App shows an error message to tell the user that the given person index is invalid.  
+      Use case ends.
+* 1e. The given person was not previously assigned to the given event.
+    * 1e1. App shows an error message to tell the user that the given person is not assigned to the given event.  
+      Use case ends.
+
+---
+
+**Use Case: UC15 - Export Contacts**
 
 **MSS:**
 1. User requests to export contacts.
@@ -618,7 +654,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use Case: UC14 - Import Contacts from CSV**
+**Use Case: UC16 - Import Contacts from CSV**
 
 **MSS:**
 1. User requests to import contacts by providing a file name.
@@ -710,16 +746,39 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   2. Test case: `delete 1`  
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+    2. Test case: `delete 1`  
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   3. Test case: `delete 0`  
-      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `delete 0`  
+       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)  
-      Expected: Similar to previous.
+    4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)  
+       Expected: Similar to previous.
+
+2. Deleting a person while all persons are being shown using the sample address book given.
+
+    1. Prerequisites: No `clubconnect.json` file in the data folder (To populate the app with a sample address book).
+
+    2. Test case: `delete David Li`  
+       Expected: Contact with name `David Li` is deleted from the list. Details of the deleted contact shown in the status message. This contact is provided by the sample address book when you first open the app.
+
+    3. Test case: `delete irfan ibrahim`  
+       Expected: Contact with name `Irfan Ibrahim` is deleted from the list. Details of the deleted contact shown in the status message. This contact is provided by the sample address book when you first open the app.
+
+    4. Test case: `delete roy`  
+       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+
+3. Deleting a person while in a filtered displayed list.
+
+    1. Prerequisites: Start with the sample address book and use a command that filters the current displayed contact list (Eg `search n/charlotte`).
+
+    2. Test case: `delete 2`  
+       Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+
+    3. Test case: `delete 1`  
+       Expected: Contact with name `Charlotte Oliveiro` is deleted from the list. Details of the deleted contact shown in the status message. This contact is provided by the sample address book when you first open the app.
 
 ### Deleting multiple persons
 1. Deleting multiple valid contacts by indices.
@@ -827,6 +886,34 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add_event n/Meeting d/Duplicate Meeting f/2024-01-01 t/2024-01-01`  
       Expected: No event is added. Error details (Duplicate Event) shown in the status message.
 
+### Deleting an event
+
+1. Deleting an event while all events are being shown
+
+    1. Prerequisites: List all events using the `list_events` command. Multiple events in the list.
+
+    2. Test case: `delete_event 1`  
+       Expected: First event is deleted from the list. Details of the deleted event shown in the status message.
+
+    3. Test case: `delete_event 0`  
+       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect `delete_event` commands to try: `delete_event`, `delete_event x` (where x is larger than the list size)  
+       Expected: Similar to previous.
+
+2. Deleting an event while all events are being shown using the sample address book given.
+
+    1. Prerequisites: No `clubconnect.json` file in the data folder (To populate the app with a sample address book). List all events using the `list_events` command.
+
+    2. Test case: `delete_event CS2103T Project Meeting`  
+       Expected: Event with name `CS2103T Project Meeting` is deleted from the list. Details of the deleted event shown in the status message. This event is provided by the sample address book when you first open the app.
+
+    3. Test case: `delete_event orbital`  
+       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `delete_event orbital workshop`  
+       Expected: Event with name `Orbital Workshop` is deleted from the list. Details of the deleted event shown in the status message. This event is provided by the sample address book when you first open the app.
+
 ### Editing an event
 
 1. Editing an existing event.
@@ -864,128 +951,127 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `edit_event 1 n/Existing Event Name d/Updated description f/2024-10-02 t/2024-10-11` 
       Expected: No changes are made. Error details (Duplicate Event) shown in the status message.
 
+### Assigning an Event to a Person
+
+1. Assigning an existing event to an existing person
+
+    1. Prerequisites: Ensure that the first person in the contact list is named `Alice` and the first event in the event list is named `Meeting`. Ensure that `Alice` is not already assigned to `Meeting` before each test case. More than 1 person and event should be present.
+
+    2. Test case: `assign_event p/1 ev/1`  
+       Expected: `Alice` is assigned to `Meeting`, and a confirmation message displays the successful assignment.
+
+    3. Test case: `assign_event p/1 ev/meeting`  
+       Expected: `Alice` is assigned to `Meeting`, and a confirmation message displays the successful assignment.
+
+    4. Test case: `assign_event p/alice ev/1`  
+       Expected: `Alice` is assigned to `Meeting`, and a confirmation message displays the successful assignment.
+
+    5. Test case: `assign_event p/alice ev/meeting`  
+       Expected: `Alice` is assigned to `Meeting`, and a confirmation message displays the successful assignment.
+
+    6. Test case: `assign_event p/2 ev/1`  
+       Expected: The person at index 2 is assigned to `Meeting`, and a confirmation message displays the successful assignment.
+
+2. Person or Event does not exist
+
+    1. Prerequisites: Ensure that person `Bob` and event `Workshop` do not exist in the app. Ensure that person `Alice` and event `Meeting` exist in the app.
+
+    2. Test case: `assign_event p/bob ev/meeting`  
+       Expected: No person is assigned to `Meeting`. Error details (Person does not exist) shown in the status message.
+
+    3. Test case: `assign_event p/alice ev/workshop`  
+       Expected: No person is assigned to any event. Error details (Event does not exist) shown in the status message.
+
+    4. Test case: `assign_event p/0 ev/1`  
+       Expected: No person is assigned to the first event. Error details (Invalid Command Format) shown in the status message.
+
+    5. Test case: `assign_event p/1 ev/0`  
+       Expected: No person is assigned to any event. Error details (Invalid Command Format) shown in the status message.
+
+    6. Test case: `assign_event p/1 ev/999999`  
+       Expected: No person is assigned to any event. Error details (Invalid Event Index) shown in the status message.
+
+3. Person already assigned to the Event
+
+    1. Prerequisites: Ensure that `Alice` is already assigned to `Meeting`.
+
+    2. Test case: `assign_event p/1 ev/1`  
+       Expected: No new assignment is made. Error details (Person already assigned to Event) shown in the status message.
+
+    3. Test case: `assign_event p/alice ev/meeting`  
+       Expected: No new assignment is made. Error details (Person already assigned to Event) shown in the status message.
 
 ### Unassigning an event from a person
 
 1. Unassigning an existing event from an existing person
 
-   1. Prerequisites: Ensure that the first person in the contact list is named `Alice` and the first event in the event list is named `Meeting`. Ensure that only `Alice` is assigned to `Meeting` before each test case. More than 1 person and event should be present.
+    1. Prerequisites: Ensure that the first person in the contact list is named `Alice` and the first event in the event list is named `Meeting`. Ensure that only `Alice` is assigned to `Meeting` before each test case. More than 1 person and event should be present.
 
-   2. Test case: `unassign_event p/1 ev/1`  
-      Expected: `Alice` is unassigned from `Meeting` in the status message.
+    2. Test case: `unassign_event p/1 ev/1`  
+       Expected: `Alice` is unassigned from `Meeting` in the status message.
 
-   3. Test case: `unassign_event p/1 ev/meeting`  
-      Expected: `Alice` is unassigned from `Meeting` in the status message.
+    3. Test case: `unassign_event p/1 ev/meeting`  
+       Expected: `Alice` is unassigned from `Meeting` in the status message.
 
-   4. Test case: `unassign_event p/alice ev/1`  
-      Expected: `Alice` is unassigned from `Meeting` in the status message.
+    4. Test case: `unassign_event p/alice ev/1`  
+       Expected: `Alice` is unassigned from `Meeting` in the status message.
 
-   5. Test case: `unassign_event p/alice ev/meeting`  
-      Expected: `Alice` is unassigned from `Meeting` in the status message.
+    5. Test case: `unassign_event p/alice ev/meeting`  
+       Expected: `Alice` is unassigned from `Meeting` in the status message.
 
-   6. Test case: `unassign_event p/2 ev/1`  
-      Expected: No person is unassigned from `Meeting`. Error details (Person not assigned to Event) shown in the status message.
+    6. Test case: `unassign_event p/2 ev/1`  
+       Expected: No person is unassigned from `Meeting`. Error details (Person not assigned to Event) shown in the status message.
 
 2. Event / Person does not exist
 
-   1. Prerequisites: Ensure that person `Bob` and event `Workshop` do not exist in the app. Ensure that person `Alice` and event `Meeting` exists in the app.
+    1. Prerequisites: Ensure that person `Bob` and event `Workshop` do not exist in the app. Ensure that person `Alice` and event `Meeting` exists in the app.
 
-   2. Test case: `unassign_event p/bob ev/meeting`  
-     Expected: No person is unassigned from `Meeting`. Error details (Person does not exist) shown in the status message.
+    2. Test case: `unassign_event p/bob ev/meeting`  
+       Expected: No person is unassigned from `Meeting`. Error details (Person does not exist) shown in the status message.
 
-   3. Test case: `unassign_event p/alice ev/workshop`  
-     Expected: No person is unassigned from any event. Error details (Event does not exist) shown in the status message.
+    3. Test case: `unassign_event p/alice ev/workshop`  
+       Expected: No person is unassigned from any event. Error details (Event does not exist) shown in the status message.
 
-   4. Test case: `unassign_event p/0 ev/1`  
-     Expected: No person is unassigned from the first event. Error details (Invalid Command Format) shown in the status message.
+    4. Test case: `unassign_event p/0 ev/1`  
+       Expected: No person is unassigned from the first event. Error details (Invalid Command Format) shown in the status message.
 
-   5. Test case: `unassign_event p/1 ev/0`  
-     Expected: No person is unassigned from any event. Error details (Invalid Command Format) shown in the status message.
+    5. Test case: `unassign_event p/1 ev/0`  
+       Expected: No person is unassigned from any event. Error details (Invalid Command Format) shown in the status message.
 
-   6. Test case: `unassign_event p/1 ev/999999`  
-     Expected: No person is unassigned from any event. Error details (Invalid Event Index) shown in the status message.
-
-### Assigning an Event to a Person
-
-1. Assigning an existing event to an existing person
-
-    1. **Prerequisites**: Ensure that the first person in the contact list is named `Alice` and the first event in the event list is named `Meeting`. Ensure that `Alice` is not already assigned to `Meeting` before each test case. More than 1 person and event should be present.
-
-    2. **Test case**: `assign_event p/1 ev/1`  
-       **Expected**: `Alice` is assigned to `Meeting`, and a confirmation message displays the successful assignment.
-
-    3. **Test case**: `assign_event p/1 ev/meeting`  
-       **Expected**: `Alice` is assigned to `Meeting`, and a confirmation message displays the successful assignment.
-
-    4. **Test case**: `assign_event p/alice ev/1`  
-       **Expected**: `Alice` is assigned to `Meeting`, and a confirmation message displays the successful assignment.
-
-    5. **Test case**: `assign_event p/alice ev/meeting`  
-       **Expected**: `Alice` is assigned to `Meeting`, and a confirmation message displays the successful assignment.
-
-    6. **Test case**: `assign_event p/2 ev/1`  
-       **Expected**: The person at index 2 is assigned to `Meeting`, and a confirmation message displays the successful assignment.
-
-2. Person or Event does not exist
-
-    1. **Prerequisites**: Ensure that person `Bob` and event `Workshop` do not exist in the app. Ensure that person `Alice` and event `Meeting` exist in the app.
-
-    2. **Test case**: `assign_event p/bob ev/meeting`  
-       **Expected**: No person is assigned to `Meeting`. Error details (Person does not exist) shown in the status message.
-
-    3. **Test case**: `assign_event p/alice ev/workshop`  
-       **Expected**: No person is assigned to any event. Error details (Event does not exist) shown in the status message.
-
-    4. **Test case**: `assign_event p/0 ev/1`  
-       **Expected**: No person is assigned to the first event. Error details (Invalid Command Format) shown in the status message.
-
-    5. **Test case**: `assign_event p/1 ev/0`  
-       **Expected**: No person is assigned to any event. Error details (Invalid Command Format) shown in the status message.
-
-    6. **Test case**: `assign_event p/1 ev/999999`  
-       **Expected**: No person is assigned to any event. Error details (Invalid Event Index) shown in the status message.
-
-3. Person already assigned to the Event
-
-    1. **Prerequisites**: Ensure that `Alice` is already assigned to `Meeting`.
-
-    2. **Test case**: `assign_event p/1 ev/1`  
-       **Expected**: No new assignment is made. Error details (Person already assigned to Event) shown in the status message.
-
-    3. **Test case**: `assign_event p/alice ev/meeting`  
-       **Expected**: No new assignment is made. Error details (Person already assigned to Event) shown in the status message.
+    6. Test case: `unassign_event p/1 ev/999999`  
+       Expected: No person is unassigned from any event. Error details (Invalid Event Index) shown in the status message.
 
 ### Exporting Contacts to CSV
 
 1. Exporting when the export file does not exist
 
-    1. **Prerequisites**: Ensure the `data` directory exists. Ensure that `ExportedContacts.csv` does not exist in the `data` directory before each test case.
+    1. Prerequisites: Ensure the `data` directory exists. Ensure that `ExportedContacts.csv` does not exist in the `data` directory before each test case.
 
-    2. **Test case**: `export`
-        - **Expected**: A success message confirms that contacts have been exported. Verify that `ExportedContacts.csv` now exists in the `data` directory.
+    2. Test case: `export`
+        - Expected: A success message confirms that contacts have been exported. Verify that `ExportedContacts.csv` now exists in the `data` directory.
 
 ### Importing Contacts from CSV
 
 1. Importing from an existing, correctly formatted file
 
-    1. **Prerequisites**: Ensure the `data` directory contains a file named `contacts.csv` with correctly formatted contact information (headers: `Name,Phone Number,Email Address,Address,Tags`). Ensure that some of the contacts in `contacts.csv` are not already in the address book.
+    1. Prerequisites: Ensure the `data` directory contains a file named `contacts.csv` with correctly formatted contact information (headers: `Name,Phone Number,Email Address,Address,Tags`). Ensure that some of the contacts in `contacts.csv` are not already in the address book.
 
-    2. **Test case**: `import contacts.csv`
-        - **Expected**: A success message confirms that contacts from `contacts.csv` have been imported. Verify that the new contacts are now added to the address book, and existing contacts remain unchanged.
+    2. Test case: `import contacts.csv`
+        - Expected: A success message confirms that contacts from `contacts.csv` have been imported. Verify that the new contacts are now added to the address book, and existing contacts remain unchanged.
 
 2. Importing from a non-existent file
 
-    1. **Prerequisites**: Ensure that the `data` directory exists but does not contain a file named `nonexistent.csv`.
+    1. Prerequisites: Ensure that the `data` directory exists but does not contain a file named `nonexistent.csv`.
 
-    2. **Test case**: `import nonexistent.csv`
-        - **Expected**: No contacts are imported. An error message displays: "The specified file does not exist."
+    2. Test case: `import nonexistent.csv`
+        - Expected: No contacts are imported. An error message displays: "The specified file does not exist."
 
 3. Importing from a file with an incorrect format
 
-    1. **Prerequisites**: Ensure the `data` directory contains a file named `incorrect.csv` with improperly formatted content (e.g., missing headers or incorrect number of columns).
+    1. Prerequisites: Ensure the `data` directory contains a file named `incorrect.csv` with improperly formatted content (e.g., missing headers or incorrect number of columns).
 
-    2. **Test case**: `import incorrect.csv`
-        - **Expected**: No contacts are imported. An error message displays: "The format of the specified file is incorrect."
+    2. Test case: `import incorrect.csv`
+        - Expected: No contacts are imported. An error message displays: "The format of the specified file is incorrect."
 
 ### Saving data
 
