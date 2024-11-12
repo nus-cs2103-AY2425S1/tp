@@ -165,6 +165,12 @@ Shows a list of all persons in the ConcertPhonebook.
 
 Format: `listp`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
+`FIND` commands can be used to display any truncated information. <br>
+
+</div>
+
 ### Listing all concerts : `listc`
 
 Shows a list of all concerts in the ConcertPhonebook.

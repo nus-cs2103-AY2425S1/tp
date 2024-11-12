@@ -28,12 +28,18 @@ public class ListConcertCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListConcertCommand(), model, ListConcertCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandResult expectedResult = new CommandResult(ListConcertCommand.MESSAGE_SUCCESS,
+                false, false, false,
+                false, true, false);
+        assertCommandSuccess(new ListConcertCommand(), model, expectedResult, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
+        CommandResult expectedResult = new CommandResult(ListConcertCommand.MESSAGE_SUCCESS,
+                false, false, false,
+                false, true, false);
         showConcertAtIndex(model, INDEX_FIRST_CONCERT);
-        assertCommandSuccess(new ListConcertCommand(), model, ListConcertCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListConcertCommand(), model, expectedResult, expectedModel);
     }
 }

@@ -85,7 +85,9 @@ public class FindConcertContactCommandTest {
     public void execute_personKeyword_noConcertContactsFound() {
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW, 0),
-                    false, false, true);
+                false, false, true,
+                false, false, true,
+                false, false, false);
         FindConcertContactCommand command = new FindConcertContactCommand(INDEX_THIRD_PERSON,
                 null);
         Person p = getTypicalAddressBook().getPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
@@ -100,7 +102,9 @@ public class FindConcertContactCommandTest {
     public void execute_personKeyword_multipleConcertContactsFound() {
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW, 2),
-                    false, false, true);
+                false, false, true,
+                false, false, true,
+                false, false, false);
         FindConcertContactCommand command = new FindConcertContactCommand(INDEX_FIRST_PERSON, null);
         Person p = getTypicalAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(p);
@@ -114,7 +118,9 @@ public class FindConcertContactCommandTest {
     public void execute_concertKeyword_noConcertContactsFound() {
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW, 0),
-                false, false, true);
+                false, false, true,
+                false, false, true,
+                false, false, false);
         FindConcertContactCommand command = new FindConcertContactCommand(null, INDEX_THIRD_CONCERT);
         Concert c = getTypicalAddressBook().getConcertList().get(INDEX_THIRD_CONCERT.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(c);
@@ -128,7 +134,9 @@ public class FindConcertContactCommandTest {
     public void execute_concertKeyword_multipleConcertContactsFound() {
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW, 2),
-                false, false, true);
+                false, false, true,
+                false, false, true,
+                false, false, false);
         FindConcertContactCommand command = new FindConcertContactCommand(null, INDEX_FIRST_CONCERT);
         Concert c = getTypicalAddressBook().getConcertList().get(INDEX_FIRST_CONCERT.getZeroBased());
         Predicate<ConcertContact> predicate = cc -> cc.isAssociated(c);
@@ -142,7 +150,9 @@ public class FindConcertContactCommandTest {
     public void execute_personAndConcertKeyword_noConcertContactsFound() {
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW, 0),
-                false, false, true);
+                false, false, true,
+                false, false, true,
+                false, false, false);
         FindConcertContactCommand command = new FindConcertContactCommand(
                 INDEX_FIRST_PERSON,
                 INDEX_THIRD_CONCERT);
@@ -159,7 +169,9 @@ public class FindConcertContactCommandTest {
     public void execute_personAndConcertKeyword_oneConcertContactFound() {
         CommandResult expectedCommandResult = new CommandResult(
                 String.format(MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW, 1),
-                false, false, true);
+                false, false, true,
+                false, false, true,
+                false, false, false);
         FindConcertContactCommand command = new FindConcertContactCommand(
                 INDEX_FIRST_PERSON,
                 INDEX_FIRST_CONCERT);

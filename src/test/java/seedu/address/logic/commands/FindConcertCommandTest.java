@@ -58,21 +58,25 @@ public class FindConcertCommandTest {
 
     @Test
     public void execute_zeroNameKeywords_noConcertFound() {
-        String expectedMessage = String.format(MESSAGE_CONCERTS_LISTED_OVERVIEW, 0);
+        CommandResult expectedResult = new CommandResult(String.format(MESSAGE_CONCERTS_LISTED_OVERVIEW, 0),
+                false, true, false,
+                false, false, false);
         NameContainsKeywordsPredicate<Concert> predicate = prepareNamePredicate(" ");
         FindConcertCommand command = new FindConcertCommand(predicate);
         expectedModel.updateFilteredConcertList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredConcertList());
     }
 
     @Test
     public void execute_multipleNameKeywords_multipleConcertsFound() {
-        String expectedMessage = String.format(MESSAGE_CONCERTS_LISTED_OVERVIEW, 2);
+        CommandResult expectedResult = new CommandResult(String.format(MESSAGE_CONCERTS_LISTED_OVERVIEW, 2),
+                false, true, false,
+                false, false, false);
         NameContainsKeywordsPredicate<Concert> predicate = prepareNamePredicate("Coachella Glastonbury");
         FindConcertCommand command = new FindConcertCommand(predicate);
         expectedModel.updateFilteredConcertList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedResult, expectedModel);
         assertEquals(Arrays.asList(COACHELLA, GLASTONBURY), model.getFilteredConcertList());
     }
 

@@ -22,7 +22,25 @@ public class ConcertContactListPanel extends UiPart<Region> {
     public ConcertContactListPanel(ObservableList<ConcertContact> concertContactList) {
         super(FXML);
         concertContactListView.setItems(concertContactList);
-        concertContactListView.setCellFactory(listView -> new ConcertContactListViewCell());
+        concertContactListView.setCellFactory(listView -> new ConcertContactListViewCell(false));
+    }
+
+    /**
+     * Sets the list to show full details of its {@code ConcertContact} cards.
+     */
+    public void showFullConcertContact() {
+        concertContactListView.setCellFactory(
+                listView -> new ConcertContactListPanel.ConcertContactListViewCell(true));
+        concertContactListView.refresh();
+    }
+
+    /**
+     * Sets the list to hide full details of its {@code ConcertContact} cards.
+     */
+    public void hideFullConcertContact() {
+        concertContactListView.setCellFactory(
+                listView -> new ConcertContactListPanel.ConcertContactListViewCell(false));
+        concertContactListView.refresh();
     }
 
     /**
@@ -30,6 +48,18 @@ public class ConcertContactListPanel extends UiPart<Region> {
      * {@code ConcertContactCard}.
      */
     class ConcertContactListViewCell extends ListCell<ConcertContact> {
+        private final boolean showFullDetails;
+
+        /**
+         * Creates a {@code ConcertContactListViewCell} with {@param showFullDetails} to indicate whether the details
+         * of the {@code ConcertContactCard} should be truncated or wrapped to a new line.
+         *
+         * @param showFullDetails
+         */
+        protected ConcertContactListViewCell(boolean showFullDetails) {
+            this.showFullDetails = showFullDetails;
+        }
+
         @Override
         protected void updateItem(ConcertContact concertContact, boolean empty) {
             super.updateItem(concertContact, empty);
@@ -38,7 +68,8 @@ public class ConcertContactListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ConcertContactCard(concertContact, getIndex() + 1).getRoot());
+                setGraphic(new ConcertContactCard(concertContact, getIndex() + 1, showFullDetails)
+                        .getRoot());
             }
         }
     }

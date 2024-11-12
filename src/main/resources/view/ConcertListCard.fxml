@@ -17,13 +17,13 @@
                 <Insets top="5" right="5" bottom="5" left="15"/>
             </padding>
             <HBox spacing="0.5" alignment="CENTER_LEFT">
-                <Label fx:id="id" styleClass="cell_big_label" wrapText="true">
+                <Label fx:id="id" styleClass="cell_big_label">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE"/>
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true"/>
+                <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
             </HBox>
             <GridPane hgap="10">
                 <!-- Label Titles !-->
@@ -34,9 +34,9 @@
 
                 <!-- Label Details !-->
                 <Label fx:id="date" styleClass="cell_small_label" text="\$date"
-                       GridPane.columnIndex="1" GridPane.rowIndex="0" wrapText="true"/>
+                       GridPane.columnIndex="1" GridPane.rowIndex="0"/>
                 <Label fx:id="address" styleClass="cell_small_label" text="\$address"
-                       GridPane.columnIndex="1" GridPane.rowIndex="1" wrapText="true"/>
+                       GridPane.columnIndex="1" GridPane.rowIndex="1"/>
             </GridPane>
         </VBox>
     </GridPane>

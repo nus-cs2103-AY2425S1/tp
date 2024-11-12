@@ -29,6 +29,8 @@ public class ListConcertContactCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         CommandResult expectedCommandResult = new CommandResult(ListConcertContactCommand.MESSAGE_SUCCESS,
+                false, false, true,
+                false, false, false,
                 false, false, true);
         assertCommandSuccess(new ListConcertContactCommand(), model, expectedCommandResult, expectedModel);
     }
@@ -36,6 +38,8 @@ public class ListConcertContactCommandTest {
     @Test
     public void execute_listIsFiltered_showsEverything() {
         CommandResult expectedCommandResult = new CommandResult(ListConcertContactCommand.MESSAGE_SUCCESS,
+                false, false, true,
+                false, false, false,
                 false, false, true);
         showConcertContactAtIndex(model, INDEX_FIRST_CONCERTCONTACT);
         assertCommandSuccess(new ListConcertContactCommand(), model, expectedCommandResult, expectedModel);
