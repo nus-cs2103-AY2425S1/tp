@@ -37,7 +37,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/src/main/java/seedu/eventfulnus/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/src/main/java/seedu/eventfulnus/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -69,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI Component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/src/main/java/seedu/eventfulnus/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `EventListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/src/main/java/seedu/eventfulnus/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic Component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/src/main/java/seedu/eventfulnus/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -146,7 +146,7 @@ The `Role` component,
 
 ### Storage Component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/src/main/java/seedu/eventfulnus/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -272,12 +272,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-Sports Event (e.g. IFG) Organisers that need to manage and contact:
+National University of Singapore's Inter-Faculty Games organisers 
+(NUS Students' Sport Club) that need to manage and contact:
 - Audience
 - Athletes
 - Committee Members
 - Referees
-- Photography
+- Sponsors
+- Volunteers
 and more.
 
 This person prefers CLI over GUI and has many event participants to keep track of.
@@ -572,8 +574,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }
-
 
 ### Adding a person
 
@@ -586,7 +586,6 @@ testers are expected to do more *exploratory* testing.
       1. Test case: `add n/Bob p/98765432
          Expected: No person is added. Error details shown in the status message. Status bar remains the same.
 
-1. _{ more test cases …​ }_
 
 ### Editing a person
 
@@ -614,7 +613,6 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 ### Adding an event
 
@@ -627,7 +625,6 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `addevent sp/Chess t/COM v/usc`
       Expected: No event is added. Error details shown in the status message. Status bar remains the same.
 
-2. _{ more test cases …​ }_
 
 ### Editing an event
 
@@ -640,7 +637,6 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `editevent 0 sp/Chess t/COM v/usc`
       Expected: No event is updated. Error details shown in the status message. Status bar remains the same.
 
-2. _{ more test cases …​ }_
 
 ### Deleting an event
 
@@ -657,40 +653,36 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `deleteevent`, `deleteevent x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. { more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Planned Enhancements
 Team size: 5
+
 1. Allow differentiation between Team 1 and Team 2 in AddEvent Command. 
 For future versions, we plan to allow the user to specify Team 2 before Team 1.
 This can be done by adding different prefixes for each team (e.g. such as t1/ and t2/).
 Note that when adding or editing events, duplication checks would occur regardless of the order of team 1 and team 2.
+
 2. Allow user to edit participant list without having to replace the entire list.
 Currently, if a user edits the participant list, the entire list is replaced. 
 We plan on fixing this through new command that allow appended edits to both events and persons.
+
 3. Multi-word search
 Currently, when a user searches for a multi-word keyword, it treats them like separate keywords. 
 We plan to fix this, such that the search treats the multi-word keyword (e.g Swimming Men) as a single keyword. 
 This can be done through the use of delimiters (e.g. commas) to separate the keywords.
+
 4. Multiple faculties in one event
 In events, such as swimming, relays, multiple faculties (i.e. more than 2) can compete against one another.
 Currently, this feature is not supported by out app, as an event is limited to two.
 Specific commands can be implemented for certain sports.
 In future versions, we plan to allow multiple faculties to compete in one event.
+
 5. Name Feature should accept multiple languages
 Currently, our app only accepts standard English names.
 We plan to allow the user to input names in multiple languages by making the name field less restrictive.
+
 6. Import/Export data from/to CSV file
 We plan to allow users to import/export their data from/to a CSV file for easy sharing and backup.
 7. Indentation for Use Case Extensions
