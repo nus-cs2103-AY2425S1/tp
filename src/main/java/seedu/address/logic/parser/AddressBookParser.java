@@ -9,14 +9,32 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddCustomerCommand;
+import seedu.address.logic.commands.AddCustomerOrderCommand;
+import seedu.address.logic.commands.AddIngredientCommand;
+import seedu.address.logic.commands.AddPastryCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
+import seedu.address.logic.commands.AddSupplyOrderCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteCustomerOrderCommand;
+import seedu.address.logic.commands.DeleteSupplyOrderCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkCustomerOrderCommand;
+import seedu.address.logic.commands.MarkSupplyOrderCommand;
+import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.RemoveIngredientCommand;
+import seedu.address.logic.commands.RemovePastryCommand;
+import seedu.address.logic.commands.UnmarkCustomerOrderCommand;
+import seedu.address.logic.commands.UnmarkSupplyOrderCommand;
+import seedu.address.logic.commands.ViewIngredientCatalogueCommand;
+import seedu.address.logic.commands.ViewPastryCatalogueCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -56,6 +74,13 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case AddSupplierCommand.COMMAND_WORD:
+            return new AddSupplierCommandParser().parse(arguments);
+
+        // Add this case for the "add customer" command
+        case AddCustomerCommand.COMMAND_WORD:
+            return new AddCustomerCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -68,14 +93,62 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
+        case RemarkCommand.COMMAND_WORD:
+            return new RemarkCommandParser().parse(arguments);
+
+        case AddPastryCommand.COMMAND_WORD:
+            return new AddPastryCommandParser().parse(arguments);
+
+        case RemovePastryCommand.COMMAND_WORD:
+            return new RemovePastryCommandParser().parse(arguments);
+
+        case AddIngredientCommand.COMMAND_WORD:
+            return new AddIngredientCommandParser().parse(arguments);
+
+        case RemoveIngredientCommand.COMMAND_WORD:
+            return new RemoveIngredientCommandParser().parse(arguments);
+
+        case AddCustomerOrderCommand.COMMAND_WORD:
+            return new AddCustomerOrderCommandParser().parse(arguments);
+
+        case AddSupplyOrderCommand.COMMAND_WORD:
+            return new AddSupplyOrderCommandParser().parse(arguments);
+
+        case DeleteCustomerOrderCommand.COMMAND_WORD:
+            return new DeleteCustomerOrderCommandParser().parse(arguments);
+
+        case DeleteSupplyOrderCommand.COMMAND_WORD:
+            return new DeleteSupplyOrderCommandParser().parse(arguments);
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ViewIngredientCatalogueCommand.COMMAND_WORD:
+            return new ViewIngredientCatalogueCommand();
+
+        case ViewPastryCatalogueCommand.COMMAND_WORD:
+            return new ViewPastryCatalogueCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
+
+        case MarkCustomerOrderCommand.COMMAND_WORD:
+            return new MarkCustomerOrderCommandParser().parse(arguments);
+
+        case UnmarkCustomerOrderCommand.COMMAND_WORD:
+            return new UnmarkCustomerOrderCommandParser().parse(arguments);
+
+        case MarkSupplyOrderCommand.COMMAND_WORD:
+            return new MarkSupplierOrderCommandParser().parse(arguments);
+
+        case UnmarkSupplyOrderCommand.COMMAND_WORD:
+            return new UnmarkSupplyOrderCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

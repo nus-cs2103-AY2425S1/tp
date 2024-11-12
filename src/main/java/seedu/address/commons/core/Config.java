@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Config values used by the app
+ * Config values used by the app.
  */
 public class Config {
 
@@ -17,6 +17,8 @@ public class Config {
     // Config values customizable through config file
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
+    private Path ingredientCatalogueFilePath = Paths.get("data/ingredientCatalogue.json");
+    private Path pastryCatalogueFilePath = Paths.get("data/pastryCatalogue.json");
 
     public Level getLogLevel() {
         return logLevel;
@@ -34,25 +36,42 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
+    public Path getIngredientCatalogueFilePath() {
+        return ingredientCatalogueFilePath;
+    }
+
+    public void setIngredientCatalogueFilePath(Path ingredientCatalogueFilePath) {
+        this.ingredientCatalogueFilePath = ingredientCatalogueFilePath;
+    }
+
+    public Path getPastryCatalogueFilePath() {
+        return pastryCatalogueFilePath;
+    }
+
+    public void setPastryCatalogueFilePath(Path pastryCatalogueFilePath) {
+        this.pastryCatalogueFilePath = pastryCatalogueFilePath;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Config)) {
             return false;
         }
 
         Config otherConfig = (Config) other;
         return Objects.equals(logLevel, otherConfig.logLevel)
-                && Objects.equals(userPrefsFilePath, otherConfig.userPrefsFilePath);
+                && Objects.equals(userPrefsFilePath, otherConfig.userPrefsFilePath)
+                && Objects.equals(ingredientCatalogueFilePath, otherConfig.ingredientCatalogueFilePath)
+                && Objects.equals(pastryCatalogueFilePath, otherConfig.pastryCatalogueFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(logLevel, userPrefsFilePath);
+        return Objects.hash(logLevel, userPrefsFilePath, ingredientCatalogueFilePath, pastryCatalogueFilePath);
     }
 
     @Override
@@ -60,7 +79,8 @@ public class Config {
         return new ToStringBuilder(this)
                 .add("logLevel", logLevel)
                 .add("userPrefsFilePath", userPrefsFilePath)
+                .add("ingredientCatalogueFilePath", ingredientCatalogueFilePath)
+                .add("pastryCatalogueFilePath", pastryCatalogueFilePath)
                 .toString();
     }
-
 }

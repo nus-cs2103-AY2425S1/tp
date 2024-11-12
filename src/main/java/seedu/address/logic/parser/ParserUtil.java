@@ -2,8 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -11,8 +14,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Information;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,7 +48,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
-        requireNonNull(name);
+        if (name == null) {
+            return new Name("Guest");
+        }
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
@@ -72,14 +80,42 @@ public class ParserUtil {
      * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
+        if (address == null) {
+            return new Address();
+        }
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
     }
+    /**
+     * Parses a {@code String ingredientsSuppliedString} into an {@code Ingredients} object.
+     * Splits the string by commas and trims whitespaces.
+     *
+     * @throws ParseException if the given {@code ingredientsSuppliedString} is invalid.
+     */
+    public static Ingredients parseIngredients(String ingredientsSuppliedString) throws ParseException {
+        if (ingredientsSuppliedString == null) {
+            return new Ingredients(new ArrayList<>());
+        }
+        String trimmedIngredients = ingredientsSuppliedString.trim();
 
+        if (trimmedIngredients.isEmpty()) {
+            throw new ParseException("Ingredients supplied cannot be empty.");
+        }
+
+        List<String> ingredientNames = Arrays.asList(trimmedIngredients.split("\\s*,\\s*"));
+        List<Ingredient> ingredientList = new ArrayList<>();
+
+        int ingredientId = 1; // For now, we use hardcoded IDs.
+        for (String ingredientName : ingredientNames) {
+            Ingredient ingredient = new Ingredient(ingredientId++, ingredientName, 0.0); // Assuming cost is 0 for MVP
+            ingredientList.add(ingredient);
+        }
+
+        return new Ingredients(ingredientList);
+    }
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
@@ -87,12 +123,33 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
+        if (email == null) {
+            return new Email();
+        }
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+
+
+    /**
+     * Parses a {@code String information} into an {@code Information}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code information} is invalid.
+     */
+    public static Information parseInformation(String information) throws ParseException {
+        if (information == null) {
+            return new Information();
+        }
+        String trimmedInformation = information.trim();
+        if (!Information.isValidInformation(trimmedInformation)) {
+            throw new ParseException(Information.MESSAGE_CONSTRAINTS);
+        }
+        return new Information(trimmedInformation);
     }
 
     /**

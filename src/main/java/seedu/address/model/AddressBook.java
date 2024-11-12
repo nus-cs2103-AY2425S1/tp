@@ -3,10 +3,15 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -16,7 +21,8 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-
+    private final SupplyOrderList supplyOrders;
+    private final CustomerOrderList customerOrders;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -26,6 +32,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        supplyOrders = new SupplyOrderList();
+        customerOrders = new CustomerOrderList();
     }
 
     public AddressBook() {}
@@ -47,6 +55,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
     }
+
+
+    public void setOrders(List<Order> orders) {}
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -94,8 +105,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-    //// util methods
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -103,10 +112,33 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .toString();
     }
 
+    public Optional<Person> findPersonByPhone(Phone phone) {
+        return persons.findPersonByPhone(phone);
+    }
+
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+
+    /**
+     * Returns the list of customer orders.
+     *
+     * @return The current customer order list.
+     */
+    public CustomerOrderList getCustomerOrderList() {
+        return customerOrders;
+    }
+
+    /**
+     * Returns the list of supply orders.
+     *
+     * @return The current supply order list.
+     */
+    public SupplyOrderList getSupplierOrderList() {
+        return supplyOrders;
+    }
+
 
     @Override
     public boolean equals(Object other) {

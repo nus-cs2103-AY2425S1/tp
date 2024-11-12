@@ -22,7 +22,15 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.order.CustomerOrder;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.SupplyOrder;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.Pastry;
+import seedu.address.model.product.PastryCatalogue;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -87,7 +95,7 @@ public class AddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private abstract class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -135,6 +143,46 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPastry(Pastry pastry) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public PastryCatalogue getPastryCatalogue() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCustomerOrder(CustomerOrder order) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addSupplyOrder(SupplyOrder order) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public IngredientCatalogue getIngredientCatalogue() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CustomerOrderList getCustomerOrderList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public SupplyOrderList getSupplyOrderList() {
             throw new AssertionError("This method should not be called.");
         }
 

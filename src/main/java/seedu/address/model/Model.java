@@ -5,7 +5,15 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.order.CustomerOrder;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.SupplyOrder;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.Pastry;
+import seedu.address.model.product.PastryCatalogue;
 
 /**
  * The API of the Model component.
@@ -25,22 +33,22 @@ public interface Model {
     ReadOnlyUserPrefs getUserPrefs();
 
     /**
-     * Returns the user prefs' GUI settings.
+     * Returns the user prefs GUI settings.
      */
     GuiSettings getGuiSettings();
 
     /**
-     * Sets the user prefs' GUI settings.
+     * Sets the user prefs GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs address book file path.
      */
     Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
@@ -84,4 +92,64 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    //=========== Pastry and Ingredient Management ========================================================
+
+    /**
+     * Adds a pastry to the pastry catalogue.
+     *
+     * @param pastry The pastry to add.
+     */
+    void addPastry(Pastry pastry);
+
+    /**
+     * Returns the pastry catalogue.
+     *
+     * @return The current pastry catalogue.
+     */
+    PastryCatalogue getPastryCatalogue();
+
+    /**
+     * Adds an ingredient to the ingredient catalogue.
+     *
+     * @param ingredient The ingredient to add.
+     */
+    void addIngredient(Ingredient ingredient);
+
+    /**
+     * Returns the ingredient catalogue.
+     *
+     * @return The current ingredient catalogue.
+     */
+    IngredientCatalogue getIngredientCatalogue();
+
+    //=========== Order Management ========================================================================
+
+    /**
+     * Adds a customer order.
+     *
+     * @param customerOrder The customer order to add.
+     */
+    void addCustomerOrder(CustomerOrder customerOrder);
+
+    /**
+     * Adds a supply order.
+     *
+     * @param supplyOrder The supply order to add.
+     */
+    void addSupplyOrder(SupplyOrder supplyOrder);
+
+    /**
+     * Returns the list of customer orders.
+     *
+     * @return The current customer order list.
+     */
+    CustomerOrderList getCustomerOrderList();
+
+    /**
+     * Returns the list of supply orders.
+     *
+     * @return The current supply order list.
+     */
+    SupplyOrderList getSupplyOrderList();
 }

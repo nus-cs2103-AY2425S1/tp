@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":Logic" as logic LOGIC_COLOR
+Participant ":Model" as model MODEL_COLOR
+
+user -[USER_COLOR]> ui : "viewPastryCatalogue"
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> logic : execute("viewPastryCatalogue")
+activate logic LOGIC_COLOR
+
+logic -[LOGIC_COLOR]> model : getPastryCatalogue()
+activate model MODEL_COLOR
+
+model --[MODEL_COLOR]> logic : return pastryCatalogue
+deactivate model
+
+
+logic --[LOGIC_COLOR]> ui : return pastryCatalogue
+deactivate logic
+
+ui--[UI_COLOR]> user : return pastryCatalogue
+deactivate ui
+@enduml

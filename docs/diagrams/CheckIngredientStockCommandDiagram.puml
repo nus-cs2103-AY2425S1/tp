@@ -1,0 +1,29 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+' Abstract command class
+Class "{abstract}\nCommand" as Command {
+  +execute(Model): CommandResult
+}
+
+' CheckIngredientStockCommand class with attributes and methods
+Class CheckIngredientStockCommand {
+  +COMMAND_WORD: String
+  +MESSAGE_USAGE: String
+  +MESSAGE_INGREDIENT_AVAILABLE: String
+  +MESSAGE_INGREDIENT_UNAVAILABLE: String
+  +MESSAGE_INGREDIENT_NOT_FOUND: String
+  -ingredientName: String
+  +execute(Model): CommandResult
+}
+
+' CommandException class
+Class CommandException
+
+' Relationships
+CheckIngredientStockCommand -up-|> Command
+Command ..> CommandException: throws >
+CheckIngredientStockCommand .right.> CommandException: throws >
+
+@enduml

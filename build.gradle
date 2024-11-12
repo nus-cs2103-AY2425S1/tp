@@ -16,6 +16,10 @@ repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
+run {
+    enableAssertions = true
+}
+
 checkstyle {
     toolVersion = '10.2'
 }
@@ -38,6 +42,10 @@ task coverage(type: JacocoReport) {
         html.required = true
         xml.required = true
     }
+}
+
+run {
+    jvmArgs '-ea'
 }
 
 dependencies {
@@ -66,7 +74,18 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'BakeBuddy.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
+run{
+    enableAssertions = true
+}
 defaultTasks 'clean', 'test'
+
+run {
+    enableAssertions = true
+}

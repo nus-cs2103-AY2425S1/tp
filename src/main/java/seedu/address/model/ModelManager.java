@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -11,7 +12,17 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.order.CustomerOrder;
+import seedu.address.model.order.CustomerOrderList;
+import seedu.address.model.order.SupplyOrder;
+import seedu.address.model.order.SupplyOrderList;
 import seedu.address.model.person.Person;
+import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.Pastry;
+import seedu.address.model.product.PastryCatalogue;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,22 +33,60 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final PastryCatalogue pastryCatalogue;
+    private final IngredientCatalogue ingredientCatalogue;
+    private final SupplyOrderList supplyOrderList;
+    private final CustomerOrderList customerOrderList;
+    private final ObservableList<SupplyOrder> supplyOrderObservableList;
+    private final ObservableList<CustomerOrder> customerOrderObservableList;
+    private final Storage storage; // Add Storage as a field
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Constructs a {@code ModelManager} using the provided address book, user preferences, ingredient catalogue,
+     * pastry catalogue, storage, customer order list, and supply order list.
+     * Initializes the internal structures and associates orders with their respective persons in the address book.
+     *
+     * @param addressBook The read-only address book containing person data.
+     * @param userPrefs The read-only user preferences.
+     * @param ingredientCatalogue The catalogue containing ingredients.
+     * @param pastryCatalogue The catalogue containing pastries.
+     * @param storage The storage manager to handle saving and loading data.
+     * @param customerOrderList The list of customer orders.
+     * @param supplyOrderList The list of supply orders.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
+                        IngredientCatalogue ingredientCatalogue, PastryCatalogue pastryCatalogue,
+                        Storage storage, CustomerOrderList customerOrderList, SupplyOrderList supplyOrderList) {
+        requireAllNonNull(addressBook, userPrefs, ingredientCatalogue, pastryCatalogue,
+                storage, customerOrderList, supplyOrderList);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.supplyOrderList = supplyOrderList;
+        this.customerOrderList = customerOrderList;
+        this.supplyOrderObservableList = supplyOrderList.getOrders();
+        this.customerOrderObservableList = customerOrderList.getOrders();
+
+        // Initialize catalogues and storage
+        this.ingredientCatalogue = ingredientCatalogue;
+        this.pastryCatalogue = pastryCatalogue;
+        this.storage = storage;
+
+        // Associate orders with persons after all objects are initialized
+        associateOrdersWithPersons();
     }
 
+    /**
+     * Constructs a {@code ModelManager} with default parameters initialized to empty or default values.
+     * Initializes an empty address book, user preferences, and default ingredient and pastry catalogues.
+     * Also initializes the storage manager and creates empty customer and supply order lists.
+     */
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), IngredientCatalogue.getInstance(),
+                new PastryCatalogue(), new StorageManager(), new CustomerOrderList(), new SupplyOrderList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -107,16 +156,35 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+
+    /**
+     * Associates customer and supply orders with their respective persons in the address book based on phone numbers.
+     * This method iterates through the customer and supply orders and links each order with the person in the
+     * address book that matches the phone number provided in the order. If a matching person is found,
+     * the order is associated with that person, and the order is added to the person's list of orders.
+     */
+    public void associateOrdersWithPersons() {
+        for (CustomerOrder customerOrder : customerOrderList.getOrders()) {
+            addressBook.findPersonByPhone(customerOrder.getPerson().getPhone())
+                    .ifPresent(person -> {
+                        customerOrder.setOriginalPerson(person);
+                        person.addOrder(customerOrder);
+                    });
+        }
+
+        for (SupplyOrder supplyOrder : supplyOrderList.getOrders()) {
+            addressBook.findPersonByPhone(supplyOrder.getPerson().getPhone())
+                    .ifPresent(person -> {
+                        supplyOrder.setOriginalPerson(person);
+                        person.addOrder(supplyOrder);
+                    });
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
@@ -133,16 +201,73 @@ public class ModelManager implements Model {
         if (other == this) {
             return true;
         }
-
-        // instanceof handles nulls
         if (!(other instanceof ModelManager)) {
             return false;
         }
-
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    //=========== Pastry and Ingredient Methods =============================================================
+
+    @Override
+    public void addPastry(Pastry pastry) {
+        pastryCatalogue.addPastry(pastry.getName(), pastry.getCost(), pastry.getIngredients());
+        if (storage != null) {
+            try {
+                storage.savePastryCatalogue(pastryCatalogue);
+                logger.info("Pastry catalogue saved successfully after adding pastry: " + pastry.getName());
+            } catch (IOException e) {
+                logger.warning("Failed to save pastry catalogue: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public PastryCatalogue getPastryCatalogue() {
+        return pastryCatalogue;
+    }
+
+    @Override
+    public void addIngredient(Ingredient ingredient) {
+        ingredientCatalogue.addIngredient(ingredient);
+        if (storage != null) {
+            try {
+                storage.saveIngredientCatalogue(ingredientCatalogue);
+                logger.info("Ingredient catalogue saved successfully after adding ingredient: " + ingredient.getName());
+            } catch (IOException e) {
+                logger.warning("Failed to save ingredient catalogue: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public IngredientCatalogue getIngredientCatalogue() {
+        return ingredientCatalogue;
+    }
+
+    //=========== Order Management Methods ==================================================================
+
+    @Override
+    public void addCustomerOrder(CustomerOrder customerOrder) {
+        customerOrderList.addOrder(customerOrder);
+    }
+
+    @Override
+    public void addSupplyOrder(SupplyOrder supplyOrder) {
+        supplyOrderList.addOrder(supplyOrder);
+    }
+
+    @Override
+    public CustomerOrderList getCustomerOrderList() {
+        return customerOrderList;
+    }
+
+    @Override
+    public SupplyOrderList getSupplyOrderList() {
+        return supplyOrderList;
     }
 
 }

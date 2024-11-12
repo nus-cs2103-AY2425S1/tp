@@ -1,0 +1,42 @@
+@startuml
+actor User
+participant ":AddCustomerOrderCommand" as ACC
+participant ":Model" as M
+participant ":PastryCatalogue" as PC
+participant ":Person" as P
+participant ":CustomerOrder" as CO
+
+User -> ACC: addCustomerOrder()
+activate ACC
+ACC -> M: getPastryCatalogue()
+activate M
+loop for each id in idList
+    M -> PC: getProductById(id)
+    activate PC
+    PC --> M: product
+    deactivate PC
+end
+ACC -> M: getFilteredPersonList()
+M --> ACC: personList
+deactivate M
+alt person exists
+    ACC -> P: getPhone()
+    activate P
+    ACC -> P: addOrder(customerOrder)
+    deactivate P
+else
+    ACC -> P: getGuest(name, phone)
+    activate P
+    ACC -> M: addPerson(person)
+    activate M
+    ACC -> P: addOrder(customerOrder)
+    deactivate M
+    deactivate P
+end
+ACC -> CO: new CustomerOrder(person, productList, OrderStatus.PENDING, remark)
+activate CO
+ACC -> M: addCustomerOrder(customerOrder)
+deactivate CO
+ACC --> User: CommandResult
+deactivate ACC
+@enduml
