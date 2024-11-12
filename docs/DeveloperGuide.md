@@ -476,7 +476,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-* 3d.  The more than 1 field to sort by is provided.
+* 3d.  More than 1 field to sort by is provided.
 
     * 3d1. ConTActs shows an error message indicating the sort command takes only 1 field to sort by.
 
