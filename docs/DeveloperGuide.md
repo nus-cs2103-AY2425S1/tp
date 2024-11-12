@@ -410,21 +410,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. Tuteez detects an identical name.
+* 1a. Tuteez detects an identical name.
 
     * 1a1. Tuteez rejects the new addition and informs user about the error.
 
     Use case resumes at step 1.
 
-* 2b. Tuteez detects clashing lesson.
+* 1b. Tuteez detects clashing lesson.
 
-    * 2b1. Tuteez rejects the new addition and informs user about the clashing lessons.
+    * 1b1. Tuteez rejects the new addition and informs user about the clashing lessons.
 
     Use case resumes at step 1.
 
-* 2c. The given command format is invalid.
+* 1c. The given command format is invalid.
 
-    * 2c1. Tuteez rejects the new addition and informs user about the invalid command format.
+    * 1c1. Tuteez rejects the new addition and informs user about the invalid command format.
 
   Use case resumes at step 1.
 
@@ -439,7 +439,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list of all students is empty.
+* 1a. The list of all students is empty.
 
     Use case ends.
 
@@ -460,15 +460,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 4a. The given student index is invalid.
+* 3a. The given student index is invalid.
 
-  * 4a1. Tuteez informs user of invalid student index.
+  * 3a1. Tuteez informs user of invalid student index.
 
       Use case resumes at step 3.
   
-* 4b. The given name does not exist.
+* 3b. The given name does not exist.
 
-  * 4b1. Tuteez informs user that student name is not found.
+  * 3b1. Tuteez informs user that student name is not found.
         
       Use case resumes at step 3.
 
@@ -488,27 +488,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 4a. The lesson clashes with an existing lesson(s).
+* 3a. The lesson clashes with an existing lesson(s).
 
-   * 4a1. Tuteez informs user of the clashing lesson(s).
-
-   Use case resumes at step 3.
-
-* 4b. The lesson has invalid day or time.
-
-   * 4b1. Tuteez informs user of invalid day or time.
+   * 3a1. Tuteez informs user of the clashing lesson(s).
 
    Use case resumes at step 3.
 
-* 4c. The given command format is invalid.
+* 3b. The lesson has invalid day or time.
 
-    * 4c1. Tuteez informs user of invalid command format.
+   * 3b1. Tuteez informs user of invalid day or time.
+
+   Use case resumes at step 3.
+
+* 3c. The given command format is invalid.
+
+    * 3c1. Tuteez informs user of invalid command format.
 
     Use case resumes at step 3.
 
-* 4d. The given student index is invalid.
+* 3d. The given student index is invalid.
 
-   * 4d1. Tuteez informs user of invalid student index.
+   * 3d1. Tuteez informs user of invalid student index.
 
    Use case resumes at step 3.
 
@@ -528,21 +528,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 4a. The given student index is invalid.
+* 3a. The given student index is invalid.
   
-    * 4a1. Tuteez informs user of invalid student index.
-  
-    Use case resumes at step 3.
-
-* 4b. The given lesson index is invalid.
-
-    * 4b1. Tuteez informs user of invalid lesson index.
+    * 3a1. Tuteez informs user of invalid student index.
   
     Use case resumes at step 3.
 
-* 4c. The given command format is invalid.
+* 3b. The given lesson index is invalid.
 
-    * 4c1. Tuteez informs user of invalid command format.
+    * 3b1. Tuteez informs user of invalid lesson index.
+  
+    Use case resumes at step 3.
+
+* 3c. The given command format is invalid.
+
+    * 3c1. Tuteez informs user of invalid command format.
 
     Use case resumes at step 3.
 
@@ -562,21 +562,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 4a. The given student index is invalid.
+* 3a. The given student index is invalid.
 
-    * 4a1. Tuteez informs user of invalid student index
+    * 3a1. Tuteez informs user of invalid student index
   
     Use case resumes at step 3.
 
-* 4b. The given remark is invalid.
+* 3b. The given remark is invalid.
 
-    * 4b1. Tuteez informs user of invalid remark.
+    * 3b1. Tuteez informs user of invalid remark.
 
     Use case resumes at step 3.
 
-* 4c. The given command format is invalid.
+* 3c. The given command format is invalid.
 
-    * 4c1. Tuteez informs user of invalid command format.
+    * 3c1. Tuteez informs user of invalid command format.
 
     Use case resumes at step 3.
 
@@ -596,21 +596,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 4a. The given student index is invalid.
+* 3a. The given student index is invalid.
 
-    * 4a1. Tuteez informs user of invalid student index.
+    * 3a1. Tuteez informs user of invalid student index.
   
     Use case resumes at step 3.
 
-* 4b. The given remark index is invalid.
+* 3b. The given remark index is invalid.
 
-    * 4b1. Tuteez informs user of invalid remark index.
+    * 3b1. Tuteez informs user of invalid remark index.
   
     Use case resumes at step 3.
 
-* 4c. The given command format is invalid.
+* 3c. The given command format is invalid.
 
-    * 4c1. Tuteez informs user of invalid command format.
+    * 3c1. Tuteez informs user of invalid command format.
     
     Use case resumes at step 3.
 
@@ -630,27 +630,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 4a. The given student index is invalid.
+* 3a. The given student index is invalid.
 
-    * 4a1. Tuteez informs user of invalid student index.
-
-    Use case resumes at step 3.
-
-* 4b. The given command format is invalid (e.g., missing name or phone number field).
-
-    * 4b1. Tuteez informs user of invalid command format.
+    * 3a1. Tuteez informs user of invalid student index.
 
     Use case resumes at step 3.
 
-* 4c. The edited name matches the name of another student in the list.
+* 3b. The given command format is invalid (e.g., missing name or phone number field).
 
-    * 4c1. Tuteez informs user of naming conflict.
+    * 3b1. Tuteez informs user of invalid command format.
+
+    Use case resumes at step 3.
+
+* 3c. The edited name matches the name of another student in the list.
+
+    * 3c1. Tuteez informs user of naming conflict.
   
     Use case resumes at step 3.
 
-* 4d. The field specified for editing contains invalid input.
+* 3d. The field specified for editing contains invalid input.
 
-    * 4d1. Tuteez informs user of the problematic field.
+    * 3d1. Tuteez informs user of the problematic field.
 
     Use case resumes at step 3.
 
@@ -668,15 +668,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 4a. The given student index is invalid.
+* 3a. The given student index is invalid.
 
-    * 4a1. Tuteez informs user of invalid student index.
+    * 3a1. Tuteez informs user of invalid student index.
 
   Use case resumes at step 3.
 
-* 4b. The given student name is invalid.
+* 3b. The given student name is invalid.
 
-    * 4b1. Tuteez informs user of invalid student name.
+    * 3b1. Tuteez informs user of invalid student name.
 
   Use case resumes at step 3.
 
