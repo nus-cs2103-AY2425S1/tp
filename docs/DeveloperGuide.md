@@ -188,7 +188,7 @@ The `Model` component handles the data and state management for the app, storing
     * **Data Storage**:
         * Maintains address book data, including lists of `Person`, `Wedding`, `Tag` and `Task` objects.
     * **Filtered Views**:
-        * Provides filtered lists of `Person` objects (e.g., search results), exposing these as unmodifiable `ObservableList`s. This allows the UI to automatically update in response to changes.
+        * Provides filtered lists of `Person` objects (e.g., search results), exposing these as an unmodifiable `ObservableList`. This allows the UI to automatically update in response to changes.
     * **User Preferences**:
         * Stores user preferences in a `UserPref` object, which is accessible externally as `ReadOnlyUserPref`.
     * **Independence**:
@@ -955,7 +955,7 @@ Similar to [<ins>UC30](#use-case-uc30delete-contact) except deleting tag and two
 
 **MSS**
 
-1. User <ins>lists all contacts (UC01)</ins>.
+1. User <ins>lists all contacts [(UC01)](#use-case-uc01list-all-contacts)</ins>.
 2. User requests to edit the details of a person and specifies what they want to change the details to.
 3. System changes the existing details to the specified details and shows list of persons with new details.
 
