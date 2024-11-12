@@ -547,6 +547,23 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Editing a person
+
+1. Editing a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `edit 1 n/[valid name e.g. Johnson]` <br>
+    Expected: The first person in the list is edited to have the given name. Details of the edited contact shown
+    in status message. Error details shown in the status message.
+
+    1. Test case: `edit 1 n/[invalid name e.g. !!hnson]` <br>
+    Expected: No contact is edited
+
+    1. Other incorrect edit commandsd to try: `edit`, `edit x n/[valid name e.g. Johnson]`, `...` (where x is larger
+    than list size) <br>
+    Expected: Similar to previous
+
 ### Sorting the list
 
 1. Sorting the list while all persons are being shown
