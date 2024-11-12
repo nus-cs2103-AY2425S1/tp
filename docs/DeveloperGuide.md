@@ -241,20 +241,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | gamer    | tag my contacts with different groups | manage my contacts into teams                                                |
 | `* *`    | gamer    | tag contacts as inactive              | hide inactive contacts without deleting their  information                   |
 | `* *`    | gamer    | add links to contacts                 | quickly find a contact's socials and other links                             |
-| `*`      | gamer    | aff custom fields to each contact     | add various details to each contact, such as timezone, skill level, etc.     |
+| `*`      | gamer    | add custom fields to each contact     | add various details to each contact, such as timezone, skill level, etc.     |
 
-<!--
-*{More to be added}*
--->
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
 #### Use Case: UC1 - Add a Contact
 **MSS**
-1. User requests to add contact
-2. GamerBook adds the contact
+1. User requests to add contact with corresponding details.
+2. GamerBook adds the contact to the list of all contacts.  
 Use case ends.
 
 **Extensions**
@@ -396,46 +391,72 @@ Use case ends.
   
       Use case ends.
 
-*{More to be added}*
 -->
 
 ### Non-Functional Requirements
+
 #### Compatibility
-Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+- The application should work on any _mainstream OS_ with Java `17` or above installed, ensuring that it is accessible across Windows, Linux, Unix, and macOS platforms.
+- The application should avoid any OS-dependent libraries, ensuring full functionality on each supported OS without requiring additional setup or dependencies.
+- The system should work across different screen sizes and resolutions without causing layout issues or compromising usability.
 
 #### Performance
-Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-   (eg. addition, deletion, and search operations)
+- The system should handle up to 100 persons without noticeable sluggishness in **typical usage** scenarios such as **addition**, **deletion**, and **search operations**.
+- Response times should still remain within acceptable limits (under two seconds for most commands).
+- Memory usage should be optimized to prevent excessive consumption and ensure smooth operation, especially on systems with limited resources.
 
 #### Usability
-The application should provide clear and concise error messages and usage instructions to assist the user in operating the system effectively.
+- The application should provide clear, concise **error messages** and **usage instructions** to assist users in understanding and correcting mistakes.
+- The **user interface (UI)** should be intuitive and should not require a steep learning curve, allowing new users to understand core functionalities with minimal guidance.
+- The system should be optimized for users who prefer **keyboard shortcuts** and **commands** over mouse-based interactions, ensuring quick and efficient navigation.
 
 #### Efficiency
-A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+- A user with above-average typing speed for regular English text (i.e., not code or system admin commands) should be able to complete most tasks faster using **commands** than the mouse.
+- The application should have a minimal delay between user input and system response, promoting a seamless and responsive experience.
 
 #### Security
-The application should ensure that user data is securely stored and that sensitive information (like social media links) is not exposed unintentionally.
+- Access to the address book data should be restricted to each local device running the application, preventing others from reading or modifying the data without user consent.
 
 #### Data Integrity
-The application should implement mechanisms to prevent data corruption and ensure that contacts are not lost during operations.
+- Contacts and other critical data should be backed up regularly to prevent accidental loss.
+- The system should ensure data consistency, even in cases of unexpected shutdowns or crashes, allowing data recovery or restoration.
 
 #### Scalability
-The system should be designed to accommodate future enhancements, such as additional fields for contacts or new functionalities without requiring significant rework.
+- The system should be designed to accommodate future enhancements without requiring significant rework, such as additional fields for contacts (e.g., birthday, favorite game) or new functionalities (e.g., contact grouping, tags).
+- New commands and features should be easy to integrate, following a **modular structure** to allow for efficient code maintenance and expansion.
 
 #### Accessibility
-The user interface should be intuitive, user-friendly, and support accessibility features to cater to users with diverse needs and abilities.
-<!--
-*{More to be added}*
+- The **user interface** should be intuitive, user-friendly, and support accessibility features such as keyboard navigation.
+- The application should function effectively across a range of screen resolutions, from 1280x720 up to 4K, without causing usability or layout issues.
+- The application should be compatible with standard screen readers and other assistive technologies to ensure usability for visually impaired users.
+
+#### Maintainability
+- The codebase should primarily follow the **Object-Oriented programming paradigm**, allowing for clear and organized code structure.
+- A **modular structure** should be maintained, with components organized in a way that allows new features to be added without impacting existing functionality.
+- Documentation should be thorough, including clear guidelines for developers to maintain or extend the application, and should cover typical maintenance tasks.
+
+#### Reliability and Stability
+- The application should not crash under normal operations and should handle errors gracefully, providing users with options to recover from issues without data loss.
+- Backup and restore functionality should be available to ensure data recovery in the event of unexpected failures.
+
+#### Quality
+- The application should be user-friendly enough for novices while still providing advanced functionalities for experienced users.
+- All features should undergo usability testing to confirm that they meet user expectations and support effective, efficient interactions.
+- The design should prioritize clarity and simplicity to prevent user frustration or confusion.
+
 -->
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Command**: A text-based instruction entered by the user to perform a specific action (e.g., adding, deleting, or searching for contacts).
+* **User Interface (UI)**: The visual part of the application through which the user interacts, including menus, buttons, and input fields.
+* **Error Message**: A message displayed to inform the user about an incorrect action or input, providing guidance on corrective steps.
+* **Java `17`**: The required Java Development Kit (JDK) version to run the application, ensuring compatibility with essential libraries and dependencies.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -458,60 +479,66 @@ testers are expected to do more *exploratory* testing.
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by running `java -jar gamerbook.jar` again.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
 
-### Deleting a person
+### Commands Testing
 
-1. Deleting a person while all persons are being shown
+1. Refer to the [User Guide](UserGuide.md) for a list of commands and their expected inputs.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+2. Test each command by trying a variety of inputs, including:
+    1. Valid inputs as specified in the user guide to verify correct behavior.
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    2. Edge cases or unusual inputs (e.g., long strings, special characters) to assess how the application handles unexpected data.
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Invalid inputs (e.g., incorrect syntax or missing arguments) to confirm that the application displays helpful error messages.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-2. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_
+3. Document any unexpected behavior or issues encountered during testing, including steps to reproduce the issue if applicable.
 
 ------------------------------------------------------------
 
-## **Appendix: Planned Enhancement**
+## **Appendix: Planned Enhancements**
 
-### Preferred Time: Make Overnight Ranges Functional
+### Preferred Time: Supporting Overnight Ranges
 
-Preferred Time currently doesn't accept overnight range, e.g. "2300-0100" is currently not accepted.
-So users cannot add, edit overnight ranges to contacts. Using `findtime` command with overnight ranges
-also triggers "invalid command..." error.
+Currently, the **Preferred Time** feature does not support overnight ranges, such as "2300-0100". This limitation prevents users from adding or editing overnight gaming times for contacts, and using the `findtime` command with overnight ranges results in an "invalid command" error.
 
-We plan to adjust the requirement so that overnight ranges will be accepted, which offers users more convenience
-as many gamers play late night to early hours in the morning. People usually don't have time during the day to game.
+**Enhancement Plan**:  
+We aim to modify the Preferred Time feature to accept overnight ranges, allowing users to specify late-night to early-morning availability conveniently. This change is particularly beneficial for gamers who prefer playing during nighttime hours when they have more free time.
 
-Current workaround with the issue:    
-For range input `2300-0100`, users can break down to `2300-2359` and `0000-0100`. This shall work as valid inputs and `add`, 
-`edit`, and `findtime` should be able to work properly with this.
+**Current Workaround**:  
+For users needing an overnight range (e.g., `2300-0100`), a workaround is to split the range into two separate intervals, such as `2300-2359` and `0000-0100`. These intervals are valid inputs and will allow the `add`, `edit`, and `findtime` commands to function as intended.
 
-### FindTime Command: Adjustment on Boundary Overlapping
+### FindTime Command: Boundary Overlap Adjustment
 
-FindTime Command `findtime` is currently border sensitive.   
-e.g.:   
-`findtime 2200-2300` will return you all the person cards whose preferred times overlap with `2200-2300`,
-with range `2100-2200` and `2300-2330` counted as overlapping. Which should not be the case, as there is 
-only overlap at the boundary.
+The `findtime` command currently considers ranges that touch at boundaries as overlapping, which leads to unintended results. For instance:
 
-We plan to adjust the overlapping mechanism so that ranges meet only at the boundary will not be counted as overlapping.
+- Executing `findtime 2200-2300` currently returns all contacts whose preferred times overlap with `2200-2300`, including contacts with times `2100-2200` or `2300-2330`. This inclusion is inaccurate, as there is only a boundary overlap and not an actual time overlap.
 
+**Enhancement Plan**:  
+We plan to adjust the overlap detection mechanism in the `findtime` command so that ranges touching only at boundaries are not considered overlapping. This change will improve the accuracy of search results, ensuring that only times with actual overlap are included.
+
+### Enhanced Error Messaging for FindTime Command
+
+**Current Issue**:  
+When users enter an incorrect, overnight time format in the `findtime` command, the application currently displays a generic "invalid format" message. This can be unclear for users, as it does not specify that the issue is specifically with the overnight time format.
+
+**Enhancement Plan**:  
+We plan to improve the error message for the `findtime` command to specify that the error is due to an overnight time. This will make the feedback more consistent with error messages shown in other commands.
+
+**Benefit**:  
+This adjustment will improve usability by providing more informative feedback, allowing users to quickly identify and correct the formatting issue, reducing potential frustration and increasing overall command clarity.
+
+### Contact Card Title Overflow Handling
+
+**Current Issue**:  
+Currently, when a contact card contains a title or name with an excessively long string, it extends beyond the available width, which may lead to display issues and poor user experience, especially in narrow or non-optimal window sizes. This issue is unlikely to arise with typical names, but could occur with unusually long titles.
+
+**Enhancement Plan**:  
+To improve the display of contact cards, we plan to implement one of the following strategies:
+- **Truncating long titles**: Set a fixed upper width limit for contact card titles. Any title exceeding this limit will be truncated and appended with "..." (ellipsis) to indicate there is more content.
+- **Text wrapping**: Alternatively, we could apply CSS text wrapping to allow long titles to break into multiple lines, ensuring that the text is fully visible and does not extend beyond the card.
+
+**Benefit**:  
+This enhancement will prevent titles from overflowing and maintain a clean, consistent look for the contact cards. While the likelihood of encountering titles with such long names is low, this fix will improve usability and aesthetic appeal, especially for titles with long character names.
