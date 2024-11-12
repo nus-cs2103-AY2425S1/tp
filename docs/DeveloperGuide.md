@@ -19,7 +19,7 @@
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting up and getting started_]&#40;SettingUp.md&#41;.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -117,7 +117,8 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+
+**API** : [`Model.java`]&#40;https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java&#41;
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -141,7 +142,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`]&#40;https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java&#41;
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -176,7 +177,7 @@ Step 1. The user executes `add n/John Doe p/+65 98765432 e/johnd@example.com r/0
  > **Note:** An error message will be displayed if attempting to add a contact with duplicate `NAME`, `PHONE` or `EMAIL`.
 
 
-Step 2. The `add` command adds a contact with the name John Doe, phone number +65 98765432, email johnd@example.com, room number #01-1008, address John street, tag "Floor 1" to the address book. 
+Step 2. The `add` command adds a contact with the name John Doe, phone number +65 98765432, email johnd@example.com, room number #01-1008, address John street, tag "Floor 1" to the address book.
 
 The following sequence diagram shows how an `add` command goes through the `Logic` component:
 
@@ -188,7 +189,7 @@ The following sequence diagram shows how an `add` command goes through the `Logi
 
 The following activity diagram summarizes what happens when a user executes a `add` command:
 
-<puml src="diagrams/AddActivityDiagram.puml" height="800" width="1000" />
+<puml src="diagrams/AddActivityDiagram.puml" height="800" width="900" />
 
 ### Edit feature
 
@@ -218,7 +219,7 @@ The following sequence diagram shows how an `edit` command goes through the `Log
 
 The following activity diagram summarizes what happens when a user executes a `edit` command:
 
-<puml src="diagrams/EditActivityDiagram.puml" height="800" width="1000" />
+<puml src="diagrams/EditActivityDiagram.puml" height="800" width="900" />
 
 ### Delete Command
 
@@ -284,7 +285,7 @@ The following activity diagram summarizes what happens when a user executes a `c
     * Pros: Shows users the full result of `clean`.
     * Cons: Forgets the results of the `find` command.
 
-* **Alternative 2 (current implementation):** Retain the search results of `find` and only display those contacts. 
+* **Alternative 2 (current implementation):** Retain the search results of `find` and only display those contacts.
     * Pros: Allow users to retain their serach results from `find`.
     * Cons: Users cannot see the full extent of `clean` until they return to the default view with `list`.
 
@@ -303,9 +304,9 @@ tag of friends, a name called Alex, a room number of 08-0805, and a phone number
 
 > **Note** : These parameters can be combined in any sequence, allowing for versatile parameter configurations. 
 
-Step 2. The parser interprets the user command and constructs the corresponding predicates for the `FindCommand` command object.
+Step 3. The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search.
 
-Step 3. The `FindCommand` get executed and updates the filteredPersonList within the model, reflecting the search results based on the specified criteria.
+results based on the specified criteria.
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
 
@@ -349,7 +350,7 @@ Given below is an example usage scenario and how the `import` command behaves at
 
 Step 1. The user executes `import fp/./data/SaveFile3.json`
 
-Step 2. The 
+Step 2. The
 
 The following sequence diagram shows how a `import` command goes through the `Logic` component:
 
@@ -538,7 +539,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to edit or add additional information for a specific profile. This can be the name, phone number, email address, address, emergency contact details, graduation year or tags. 
+1. User requests to edit or add additional information for a specific profile. This can be the name, phone number, email address, address, emergency contact details, graduation year or tags.
 2. DorManagerPro updates the profile with the new or updated information.
 
    Use case ends.
@@ -592,7 +593,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1b. DorManagerPro cannot find any students who have graduated.
     * 1b1. DorManagerPro displays an error message informing the user all students in the address book have yet to graduate.
-    
+
   Use case ends.
 
 * *a. At any time, User chooses to stop deleting all graduated students.
@@ -834,7 +835,7 @@ Given below are instructions to test the app manually.
    1. Test case: `find` <br>
       Expected: An error message is shown stating that the command format is incorrect and showing the user the correct format.
    2. Test case: `find t/` <br>
-      Expected: Listing out everyone is the contact list.  
+      Expected: Listing out everyone is the contact list.
 2. Finding a person with all possible parameters specified.
    1. Prerequisites: There is a contact in the list with a name `John Doe`, a phone number of `98765432`, a room number of `08-0805`, and a tag of `friends`.
    2. Test case:  `find n/John Doe p/98765432 r/08-0805 t/friends` <br>
@@ -915,7 +916,7 @@ Given below are instructions to test the app manually.
 
 5. Adding a person with duplicate phone.
    1. Prerequisites: There is at least one person in the address book.
-   2. Test case: 
+   2. Test case:
       1. Step 1: `add n/John Doe p/12345678 e/johnd@example.com` <br>
       2. Step 2: `add n/Alex Yeoh p/12345678 e/heyhey@example.com` <br>
          Expected: An error message appears informing the user that there is already someone with that phone number in the address book.
@@ -970,7 +971,7 @@ Given below are instructions to test the app manually.
 
 1. Deleting all graduated students when all persons are being shown.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list, with at least 1 person with GRADUATION_YEAR field earlier than the current year.
-   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br> 
+   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br>
       Expected: All persons with GRADUATION_YEAR field YEAR - 1 or earlier deleted from the address book. Status message informs the user that graduated students have been deleted, and deleted persons visibly disappear from the list of all students.
    3. Test case: `clean dasd`, executed in YEAR, where YEAR is the current year. <br>
       Expected: Similar to (ii). All trailing characters in a valid command is ignored.
@@ -984,7 +985,7 @@ Given below are instructions to test the app manually.
       4. We execute `list` and see that Alex is deleted. ![step 4](images/CleanManualTestingAfterFindStep4.png)
 3. Attempting to delete all graduated students when there are none.
    1. Prerequisites: No persons present in the address book with GRADUATION_YEAR field earlier than the current year.
-   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br> 
+   2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br>
       Expected: An error message displayed informing the user that there are no graduated students to be deleted.
 
 
@@ -992,9 +993,7 @@ Given below are instructions to test the app manually.
 
 Team size: 5
 
-1. **Add more precise functionality to the `clean` command**. The `clean` command currently does not allow removal of 
-students who have graduated in the current year, as it can only detect the graduation year but not the month. We plan to 
-add support for storing a more specific graduation date, such that we can accurately remove students who have graduated immediately after their graduation.
+1. **Add more precise functionality to the `clean` command**. The `clean` command currently does not allow removal of students who have graduated in the current year, as it can only detect the graduation year but not the month. We plan to add support for storing a more specific graduation date, such that we can accurately remove students who have graduated immediately after their graduation.
 
 2. **Add support for setting EmergencyName, EmergencyPhone and GraduationYear using the `add` command.**
 The `add` command currently does not allow setting emergency contact details and graduation year of students.
@@ -1002,7 +1001,7 @@ The only way to set these fields is through the `edit` command, which can be inc
 We plan to add support for setting EmergencyName, EmergencyPhone and GraduationYear to the `add` command.
 
 3. **Add more features to the help command pop up window.** The `help` command pop up window currently only shows instructions for three commands, `add`, `edit` and `delete`. We plan
-to add instructions for all other features to make it easier to familiarise themselves with the commands without going to the external User Guide. 
+to add instructions for all other features to make it easier to familiarise themselves with the commands without going to the external User Guide.
 
 4. **Add support to file path formatting in `import`.** Currently, the FILE_PATH parameter for the `import` command only takes in forward slashes, `/`, when taking in user input, e.g. `import fp/./data/SaveFile.json` would be a valid file path for `import`, but `import fp/.\data\SaveFile.json` would not be valid. We plan to add support to `\` as a delimiter between folders and files in the future to be more intuitive for users of all Operating Systems, especially those that use backslashes in file paths like Windows.
 
@@ -1016,7 +1015,7 @@ DorManagerPro could not access the file at FILE_PATH. This could be because the 
 ### Overview
 
 As we have adapted AB3 for university dorm managers, our main efforts were in adding support for other necessary fields, enhancing the duplicate handling and data validation, and providing extra functions to streamline data saving, adding, updating and to safeguard against mistakes.
-This posed substantial difficulties for us, as we had to work within the AB3 model and implement the multiple features to be compatible with the rest of the app. 
+This posed substantial difficulties for us, as we had to work within the AB3 model and implement the multiple features to be compatible with the rest of the app.
 
 Here are some of the achievements of DorManagerPro:
 * Fields
@@ -1038,7 +1037,7 @@ Lines of Code: 24608
 #### Challenge 1: Implementing undo functionality for import command
 
 The undo functionality was initially implemented by extending an abstract class `ConcreteCommand` with the `undo` abstract method.
-However, the import command is an undoable command that also extends the `FileAccessCommand` class. 
+However, the import command is an undoable command that also extends the `FileAccessCommand` class.
 This posed a challenge as the import command could not extend two classes at once because Java does not allow multiple inheritance.
 To overcome this, we had to refactor the `ConcreteCommand` class to an interface `Undoable` and let all undoable commands implement this interface.
 This allowed us to implement the `undo` method in the import command.
@@ -1050,6 +1049,6 @@ The workaround our team decided on was to create a new class `FileAccessCommand`
 
 ### Challenge 3: Removal of address field as a compulsory field
 
-While AddressBook3 initially had address as a compulsory field when adding a person to the contact list, our team felt that in the context of DorManagerPro, addresses could instead be optional. In most cases, all the residents would by default live in the dorm managed by the user, and by extension have a common address. 
+While AddressBook3 initially had address as a compulsory field when adding a person to the contact list, our team felt that in the context of DorManagerPro, addresses could instead be optional. In most cases, all the residents would by default live in the dorm managed by the user, and by extension have a common address.
 We then had to contemplate between the outright removal of the field or only making it optional. We decided to make it optional as it could still provide helpful information such as the students permanent residence outside the dorm in case the user had to contact them.
 Regardless, it was still quite a challenge to make the once compulsory field optional since it was so intertwined with the original AddressBook3.
