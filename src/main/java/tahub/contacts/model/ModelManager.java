@@ -31,7 +31,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final UniqueCourseList courseList;
     private final FilteredList<Person> filteredPersons;
-    private final List<Runnable> listeners = new ArrayList<> ();
+    private final List<Runnable> listeners = new ArrayList<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.

@@ -46,7 +46,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
-        this.listeners = new ArrayList<> ();
+        this.listeners = new ArrayList<>();
 
         // Add a listener to the model to forward notifications to our listeners
         model.addListener(() -> {

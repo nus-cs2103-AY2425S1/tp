@@ -135,8 +135,8 @@ public class AttendanceWindow extends UiPart<Stage> {
                                     logic.getStudentScas(person).getByMatric(person.getMatricNumber().value);
 
                             // Store current selection's course code
-                            String currentCourseCode = currentSca != null ?
-                                    currentSca.getCourse().courseCode.toString() : null;
+                            String currentCourseCode = currentSca != null
+                                    ? currentSca.getCourse().courseCode.toString() : null;
 
                             // Create new ComboBox with fresh data
                             ComboBox<StudentCourseAssociation> newComboBox = new ComboBox<>();
