@@ -118,8 +118,6 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`]&#40;https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java&#41;
-
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
@@ -141,8 +139,6 @@ The `Model` component,
 
 
 ### Storage component
-
-**API** : [`Storage.java`]&#40;https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java&#41;
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -345,8 +341,7 @@ Step 2: The `export` command exports all data currently contained by DorManagerP
 
 The following sequence diagram shows how an `export` command goes through the `Logic` component:
 
-<puml src="diagrams/ExportSequenceDiagram.puml"
- alt="ExportSequenceDiagram" />
+<puml src="diagrams/ExportSequenceDiagram.puml" alt="ExportSequenceDiagram" />
 
 <box type="info" seamless>
 
