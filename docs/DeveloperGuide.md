@@ -301,38 +301,38 @@ The following activity diagram summarizes what happens when a user executes a ne
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                                | I want to …​                                                                   | So that …​                                                                          |
-|------|--------------------------------------------------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| `* * *` | Teaching Assistant                                     | add a new student's contact                                                    | I can keep track of all my students in my course                                    |
-| `* * *` | Teaching Assistant                                     | view a student's contact information                                           | I can contact a student directly if required                                        |
-| `* * *` | Teaching Assistant                                     | view a students' grades                                                        | I can have a comprehensive overview of each students' performance                   |
-| `* * *` | Teaching Assistant                                     | record student grades                                                          | I can keep accurate records of their performance                                    |
-| `* * *` | Teaching Assistant                                     | query different statistics about student's grades (e.g. mean, median, etc.)    | I can analyze their performance                                                     |
-| `* * *` | Teaching Assistant                                     | list out all students                                                          | I can see who's contacts I have saved                                               |
-| `* * *` | Teaching Assistant                                     | view students' attendance                                                      | I can keep track of when a student has not shown up to class                        |
-| `* * *` | Teaching Assistant                                     | mark students' attendance                                                      | I can keep track of who goes to class                                               |
-| `* *` | Teaching Assistant                                     | import student contact information from a csv                                  | I can quickly add multiple students at once                                         |
-| `* *` | Experienced teaching assistant                         | Migrate/get used to the app easily                                             | it doesn't take so much time to get used to the new app to increase my productivity |
-| `* *` | Teaching Assistant                                     | tag my students with different labels                                          | it is easy for me to find/search them based on their tags                           |
-| `* *` | Teaching Assistant                                     | link with my Canvas account                                                    | I can save time exporting grades                                                    |
-| `* *` | Busy Teaching Assistant                                | view a help message                                                            | I can quickly learn how to use the app                                              |
-| `* *` | Teaching Assistant                                     | separate my work (TA) contacts with my personal contact                        | I can have privacy and a line between work and life                                 |
-| `* *` | Teaching Assistant that values privacy                 | sort students by performance metrics like attendance or participation          | I can identify students who may need additional support.                            |
-| `* *` | Helpful Teaching Assistant                             | set up notifications for missing assignment or attendance                      | I can address potential issues with students                                        |
-| `* *` | Teaching Assistant                                     | track communication history with each student                                  | I can refer to past discussions when addressing their needs                         |
-| `* *` | Teaching Assistant                                     | sort student details by name                                                   | I can view student details in alphabetical order                                    |
-| `* *` | Teaching Assistant                                     | sort student details by grades                                                 | I can view students who are struggling with the course                              |
-| `* *` | Teaching Assistant                                     | set up alerts for low attendance or poor participation                         | I can help struggling students early in the course                                  |
-| `* *` | Responsible Teaching Assistant                         | attach remarks for each student                                                | I can keep track of additional things to remember for each student                  |
-| `* *` | Teaching Assistant                                     | add a custom column/property on the student database                           | I can personalize my contacts based on my own needs                                 |
-| `* *` | Teaching Assistant                                     | view assignment submission status for each student                             | I can find which students have not submitted assignments                            |
-| `* *` | Teaching Assistant                                     | create notes for each student                                                  | I can track any special considerations                                              |
-| `* *` | SoC Teaching Assistant                                 | Link my account with github                                                    | I can review my students' code                                                      |
-| `*`  | Teaching Assistant                                     | view feedback from my students                                                 | I can improve my teaching                                                           |
-| `*`  | Teaching Assistant                                     | view only feedback scores lower than 2/5                                       | I can focus on improving on areas that are more important                           |
-| `*`  | Teaching Assistant                                     | collect students contact information                                           | I can keep track and make use of it if required                                     |
-| `*`  | Teaching assistant with bad student management ability | automate student management                                                    | I can manage my students better                                                     |
-| `*`  | Teaching Assistant                                     | draft an email to the student with a summary of their grades and participation | notify students about their progress                                                |
-| `*`  | Teaching Assistant                                     | access and archive past year exam papers                                       | I can distribute the practice papers to students                                    |
+|----------|--------------------------------------------------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *`  | Teaching Assistant                                     | add a new student's contact                                                    | I can keep track of all my students in my course                                    |
+| `* * *`  | Teaching Assistant                                     | view a student's contact information                                           | I can contact a student directly if required                                        |
+| `* * *`  | Teaching Assistant                                     | view a students' grades                                                        | I can have a comprehensive overview of each students' performance                   |
+| `* * *`  | Teaching Assistant                                     | record student grades                                                          | I can keep accurate records of their performance                                    |
+| `* * *`  | Teaching Assistant                                     | query different statistics about student's grades (e.g. mean, median, etc.)    | I can analyze their performance                                                     |
+| `* * *`  | Teaching Assistant                                     | list out all students                                                          | I can see who's contacts I have saved                                               |
+| `* * *`  | Teaching Assistant                                     | view students' attendance                                                      | I can keep track of when a student has not shown up to class                        |
+| `* * *`  | Teaching Assistant                                     | mark students' attendance                                                      | I can keep track of who goes to class                                               |
+| `* *`    | Teaching Assistant                                     | import student contact information from a csv                                  | I can quickly add multiple students at once                                         |
+| `* *`    | Experienced teaching assistant                         | Migrate/get used to the app easily                                             | it doesn't take so much time to get used to the new app to increase my productivity |
+| `* *`    | Teaching Assistant                                     | tag my students with different labels                                          | it is easy for me to find/search them based on their tags                           |
+| `* *`    | Teaching Assistant                                     | link with my Canvas account                                                    | I can save time exporting grades                                                    |
+| `* *`    | Busy Teaching Assistant                                | view a help message                                                            | I can quickly learn how to use the app                                              |
+| `* *`    | Teaching Assistant                                     | separate my work (TA) contacts with my personal contact                        | I can have privacy and a line between work and life                                 |
+| `* *`    | Teaching Assistant that values privacy                 | sort students by performance metrics like attendance or participation          | I can identify students who may need additional support.                            |
+| `* *`    | Helpful Teaching Assistant                             | set up notifications for missing assignment or attendance                      | I can address potential issues with students                                        |
+| `* *`    | Teaching Assistant                                     | track communication history with each student                                  | I can refer to past discussions when addressing their needs                         |
+| `* *`    | Teaching Assistant                                     | sort student details by name                                                   | I can view student details in alphabetical order                                    |
+| `* *`    | Teaching Assistant                                     | sort student details by grades                                                 | I can view students who are struggling with the course                              |
+| `* *`    | Teaching Assistant                                     | set up alerts for low attendance or poor participation                         | I can help struggling students early in the course                                  |
+| `* *`    | Responsible Teaching Assistant                         | attach remarks for each student                                                | I can keep track of additional things to remember for each student                  |
+| `* *`    | Teaching Assistant                                     | add a custom column/property on the student database                           | I can personalize my contacts based on my own needs                                 |
+| `* *`    | Teaching Assistant                                     | view assignment submission status for each student                             | I can find which students have not submitted assignments                            |
+| `* *`    | Teaching Assistant                                     | create notes for each student                                                  | I can track any special considerations                                              |
+| `* *`    | SoC Teaching Assistant                                 | Link my account with github                                                    | I can review my students' code                                                      |
+| `*`      | Teaching Assistant                                     | view feedback from my students                                                 | I can improve my teaching                                                           |
+| `*`      | Teaching Assistant                                     | view only feedback scores lower than 2/5                                       | I can focus on improving on areas that are more important                           |
+| `*`      | Teaching Assistant                                     | collect students contact information                                           | I can keep track and make use of it if required                                     |
+| `*`      | Teaching assistant with bad student management ability | automate student management                                                    | I can manage my students better                                                     |
+| `*`      | Teaching Assistant                                     | draft an email to the student with a summary of their grades and participation | notify students about their progress                                                |
+| `*`      | Teaching Assistant                                     | access and archive past year exam papers                                       | I can distribute the practice papers to students                                    |
 
 <div style="page-break-after: always;"></div>
 
@@ -352,12 +352,12 @@ Use case ends.
 
 **Extensions:**
 
-* **1a.** TAHub detects invalid input (e.g., invalid email or phone number).  
-  * 1a1. TAHub requests correction of the invalid input.  
-  Use case ends.
-* **1b.** TAHub detects that the contact already exists  
-  * 1b1. TAHub ignores the entry and notifies the TA.  
-    Use case ends.
+* **1a.** TAHub detects invalid input (e.g., invalid email or phone number).
+    * 1a1. TAHub requests correction of the invalid input.  
+      Use case ends.
+* **1b.** TAHub detects that the contact already exists
+    * 1b1. TAHub ignores the entry and notifies the TA.  
+      Use case ends.
 
 ---
 
@@ -375,9 +375,9 @@ Use case ends.
 
 **Extensions:**
 
-* **1a.** TA does not enter a name   
-  * 1a1. TAHub notifies the TA with an error message (e.g. "Invalid command format").  
-    Use case ends.
+* **1a.** TA does not enter a name
+    * 1a1. TAHub notifies the TA with an error message (e.g. "Invalid command format").  
+      Use case ends.
 
 ---
 
@@ -396,12 +396,12 @@ Use case ends.
 
 **Extensions:**
 
-* **1a.** TAHub detects invalid input for the grade  
-  * 1a1. TAHub requests correction of the invalid input.  
-    Use case ends.
-* **1b.** TA attempts to record a grade for a test that has already been recorded.  
-  * 1b1. TAHub overwrites the previous grade and notifies the TA.  
-    Use case ends.
+* **1a.** TAHub detects invalid input for the grade
+    * 1a1. TAHub requests correction of the invalid input.  
+      Use case ends.
+* **1b.** TA attempts to record a grade for a test that has already been recorded.
+    * 1b1. TAHub overwrites the previous grade and notifies the TA.  
+      Use case ends.
 
 ---
 
@@ -420,16 +420,14 @@ Use case ends.
 **Extensions:**
 
 * **1a.** TAHub detects an invalid date or time.
-  * 1a1. TAHub displays an error message (e.g. "Invalid date or time") and requests correction of the input.  
-  Use case ends.
-
+    * 1a1. TAHub displays an error message (e.g. "Invalid date or time") and requests correction of the input.  
+      Use case ends.
 * **1b.** TAHub detects date is not in the correct format.
-  * 1b1. TAHub displays an error message (e.g. "Date must be in the format: dd/MM/yyyy HH:mm") and requests correction of the input.  
-  Use case ends.
-
+    * 1b1. TAHub displays an error message (e.g. "Date must be in the format: dd/MM/yyyy HH:mm") and requests correction of the input.  
+      Use case ends.
 * **1c.** TAHub detects incorrect command usage.
-  * 1c1. TAHub displays an error message (e.g. "Invalid command format") and requests correction of the input.  
-  Use case ends.
+    * 1c1. TAHub displays an error message (e.g. "Invalid command format") and requests correction of the input.  
+      Use case ends.
 
 ---
 
@@ -448,13 +446,13 @@ Use case ends.
 
 **Extensions:**
 
-* **1a.** TAHub detects invalid input for the date.  
-  * 1a1. TAHub requests correction of the invalid input.  
-  * 1a2. TA provides corrected input.  
-    Use case ends.
-* **1b.** TA attempts to record attendance for a date where attendance has already been marked.  
-  * 1b1. TAHub overwrites the previous attendance and notifies the TA.  
-    Use case ends.
+* **1a.** TAHub detects invalid input for the date.
+    * 1a1. TAHub requests correction of the invalid input.
+    * 1a2. TA provides corrected input.  
+      Use case ends.
+* **1b.** TA attempts to record attendance for a date where attendance has already been marked.
+    * 1b1. TAHub overwrites the previous attendance and notifies the TA.  
+      Use case ends.
 
 ---
 
@@ -465,6 +463,8 @@ Use case ends.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be a standalone application and must not depend on any external or remote servers.
 5. Should respond to user input (e.g., adding a student contact, viewing information) within two seconds under normal operating conditions.
+
+<div style="page-break-after: always;"></div>
 
 ### Glossary
 
