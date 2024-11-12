@@ -1061,6 +1061,7 @@ We plan to modify `find p/` to allow searching by country code or area code only
 
 As we have adapted AB3 for university dorm managers, our main efforts were in adding support for other necessary fields, enhancing the duplicate handling and data validation, and providing extra functions to streamline data saving, adding, updating and to safeguard against mistakes.
 This posed substantial difficulties for us, as we had to work within the AB3 model and implement the multiple features to be compatible with the rest of the app.
+Thus, the was of considerable effort.
 
 Here are some of the achievements of DorManagerPro:
 * Fields
@@ -1074,8 +1075,6 @@ Here are some of the achievements of DorManagerPro:
   * It is now possible to delete all students who have graduated at once in one command.
 
 Lines of Code: 24608
-
-[comment]: Should we also estimate difficulty level and effort required??
 
 ### Challenges faced
 
