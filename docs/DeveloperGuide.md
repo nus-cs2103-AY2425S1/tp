@@ -685,10 +685,10 @@ Execute the following:
    2. Test case: `batch-delete t/tag3` <br>
       Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
    
-   4. Test case: `batch-delete t/tag1 t/tag2` <br>
+   3. Test case: `batch-delete t/tag1 t/tag2` <br>
       Expected: `test person 3` will be deleted. Feedback box will show detail of deleted person.
       
-   6. Test case: `batch-delete t/tag1` <br>
+   4. Test case: `batch-delete t/tag1` <br>
       Expected: `test person 1`, `test person 2` will be deleted as `test person 3` is already deleted from the
       previous test case `iii`. Feedback box will show detail of deleted person.
 
@@ -699,23 +699,19 @@ Execute the following:
        Execute the following:
         - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
         - add n/test person 2 s/m r/student p/12543789 a/address e/sdgs@dfsh.dsfvc  t/tag1
-        - add n/test person 2 s/m r/student p/12543579 a/address e/sdgs@dfsh.dsfvc  t/tag1
         - add n/test person 3 s/m r/student p/26343642 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
         - List all persons using the `list` command.
           
     2. Test case: `batch-edit t/tag3 t/tag4` <br>
        Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
    
-    4. Test case: `batch-edit t/tag1 t/tag3` <br>
-       Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`. 
-
     3. Test case: `batch-edit t/tag1 t/tag3` <br>
        Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`.
 
        Contact entries will show a list of contacts that currently has `[tag3]`; `test person 1`, `test person 2`,
        `test person 3`, for this test assuming other contacts does not have the `[tag1]` as their tag.
        
-    6. Test case: `batch-edit t/tag2 t/tag4` <br>
+    4. Test case: `batch-edit t/tag2 t/tag4` <br>
        Expected: Feedback box will show message: `Tag Changed: [tag2] -> [tag4]` <br>
        Contact entries will show a list of contacts that currently has `[tag4]`; `test person 3`.
 
