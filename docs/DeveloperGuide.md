@@ -439,8 +439,6 @@ Use case ends.
 - All features should undergo usability testing to confirm that they meet user expectations and support effective, efficient interactions.
 - The design should prioritize clarity and simplicity to prevent user frustration or confusion.
 
--->
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
