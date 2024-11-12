@@ -248,8 +248,8 @@ Finds Udders by specified keywords for each field.
 </box>
 
 **Examples:**
-* `find n/John` returns Udders: `John Mayer` and `John Nissins`<br>.
-* `find t/friend` returns `Alex Yeoh` and `Bernice Yu`<br>.
+* `find n/John` returns Udders: `John Mayer` and `John Nissins`.<br>
+* `find t/friend` returns `Alex Yeoh` and `Bernice Yu`.<br>
 
 ![result for 'find n/John'](images/findCommand4.png)
 
