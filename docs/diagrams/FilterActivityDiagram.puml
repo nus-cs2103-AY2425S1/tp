@@ -1,0 +1,23 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User executes 'filter' command;
+
+if () then ([command input wrongly])
+  :Help message shown to user;
+else
+  if () then ([filter by yearGroup])
+    :List filtered by yearGroup;
+  else ([filter by subject])
+    :List filtered by subject;
+  endif
+  :User executes 'list' command;
+  :All students shown
+  ordered by studentId;
+endif
+
+stop
+@enduml
