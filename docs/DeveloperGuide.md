@@ -255,7 +255,7 @@ A real estate agent who...
 * frequently needs to track client information such as their budget
 * hopes to schedule and manage appointments with the clients
 * hopes to ensure smooth communication with clients by sending updates on listings and appointment reminders
-* prefer desktop apps over other types
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
