@@ -620,8 +620,8 @@ Furthermore, certain edits can cause MedDict to behave in unexpected ways (e.g.,
 | **[Add Appointment](#adding-an-appointment-adda)**              | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`           |
 | **[View History](#view-history-of-a-person-view)**              | `view z/ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                        |
 | **[Check Appointment](#check-appointments-of-a-person-checka)** | `checkA z/ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                 |
-| **[Mark Appointment](#mark-appointment-of-a-doctor-mark)**      | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/0 z/1`                                                             |
-| **[Delete Appointment](#delete-appointment-deletea)**           | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/0 z/1`                                            |
+| **[Mark Appointment](#mark-appointment-of-a-doctor-mark)**      | `mark z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME` <br> e.g., `mark z/0 z/1 x/2024-12-31 15:23`                                                  |
+| **[Delete Appointment](#delete-appointment-deletea)**           | `deleteA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME` <br> e.g., `deleteA z/1 z/3 x/2024-12-31 15:23`                                            |
 | **[Clear](#clearing-all-entries-clear)**                        | `clear` <br> Clears all entries                                                                                                           |
 | **[Exit](#exiting-the-program-exit)**                           | `exit` <br> Exits the program                                                                                                             |
 
