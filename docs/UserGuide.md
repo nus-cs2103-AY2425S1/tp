@@ -93,7 +93,7 @@ By catering to private school teachers who are still using manual processes, Che
 
 ### Viewing help : `help`
 
-Shows the comprehensive User Guide page and displays a floating window allowing the user to copy the URL of the user guide page.
+Shows the help window and displays a floating window allowing the user to copy the URL of the user guide page.
 
 ![help message](images/helpWindow.png)
 
