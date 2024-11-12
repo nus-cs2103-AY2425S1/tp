@@ -65,6 +65,8 @@ Each of the four main components (also shown in the diagram above),
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
+<box type="important" seamless> XYZCommand can also be structured as an abstract class to serve as a base for a set of related child commands that would be implemented individually as concrete classes.
+</box>
 
 The sections below give more details of each component.
 
@@ -292,6 +294,8 @@ Priorities: Essential (must have), Novel (nice to have), Typical (unlikely to ha
 | Essential | Teacher | manage student phone number                         | know who to contact and how to contact                       |
 | Essential | Teacher | manage student email                                | send email attachments                                       |
 | Essential | Teacher | tag students based on how much help they need       | give each student the appropriate amount of help             |
+| Essential | Teacher | mark a student as paid                              | keep track of which student has paid                         |
+| Essential | Teacher | marks a student as unpaid                           | keep track of which student has not paid                     |
 | Essential | Teacher | mark all students who have paid                     | quickly mark all my students who have paid                   |
 | Essential | Teacher | mark all students as unpaid                         | quickly mark students as unpaid, when the new month comes in |
 | Essential | Teacher | manage how much each student pays in tuition fees   | remember how much to bill my student every month             |
@@ -565,27 +569,27 @@ Use case resumes from Step 2
 
 Use case ends.
 
-## UC11: Delete all students
+## UC11: Reset EduLog
 
-**System:** EduLog <br>
-**Actor:** Teacher <br>
 **Precondition:** The teacher is logged into the app. <br>
-**Postcondition:** All students are removed from the teacher’s list of students. <br>
+**Postcondition:** EduLog is reset. All students and lessons are cleared. <br>
 
 **MSS:**
 
-1. Teacher views the students enrolled under him/her through U1. View Students
-2.  Teacher requests to delete all students.
-3. System confirms that all student has been removed.
-
+1. Teacher requests to reset EduLog.
+2. System confirms that all students and lessons have been removed.
    Use case ends.
 
 ### **Extension:**
 
-**3a.** **No students exist in the list of the teacher’s students:**
+**1a.** **No students exist in the list of the teacher’s students:**
 
-**3a1.** System notifies the teacher that no students are present in her set of students.
+**1a1.** System notifies the teacher that no students are present in her set of students.
+Use case ends.
 
+**1b.** **No lessons exist in the list of the teacher’s lessons:**
+
+**1b1.** System notifies the teacher that no lessons are present in her set of lessons.
 Use case ends.
 
 ## UC12: Display gift
