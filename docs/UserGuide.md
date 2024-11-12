@@ -104,7 +104,7 @@ _Figure 1: CareLink main window with sample data_
 - Adds a new person:<br>
 
   ```
-  add n/John Lee p/91234567 e/johnlee@email.com a/123 Medical Drive nric/S9876543A role/patient
+  add n/John Lee nric/S9369777D p/91234567 e/johnlee@email.com a/123 Medical Drive nric/S9876543A role/patient
   ```
 
 - Views help:<br>
@@ -245,15 +245,22 @@ Use this command format: `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC`
 Examples:
 
 - `link patient/S6283947C caregiver/S6382947A`
-- `link caregiver/S6382947A patient/S7193475F`
 
 The example below demonstrates how to use CareLink to link a patient and a caregiver:
+
+If you are following our guide, add the following commands to first add the two people to link:
+
+- `add n/Alex Y nric/S6283947C p/88888888 e/Alex@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/patient`
+- `add n/Bernice nric/S6382947A p/98765432 e/bernice@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/caregiver`
+
 ![Link command example](images/linkcommandexample.png)
 _Figure 4: Example of using the `link` command to link a patient to a caregiver_
 
 When the command succeeds, the patient will be linked to the caregiver and the following message will be displayed:
 ![Link command success](images/linkcommandsucceed.png)
 _Figure 5: Success message displayed after linking a patient with a caregiver_
+
+- `link caregiver/S6382947A patient/S7193475F`
 
 **Possible Errors:**
 
@@ -273,7 +280,6 @@ Use this command format: `deletelink patient/PATIENT_NRIC caregiver/CAREGIVER_NR
 Examples:
 
 - `deletelink patient/S6283947C caregiver/S6382947A`
-- `deletelink caregiver/S6382947A patient/S7193475F`
 
 The example below demonstrates how to delete a link between a patient and a caregiver:
 ![Deletelink command example](images/DeleteLinkCommand.png)
@@ -282,6 +288,8 @@ _Figure 6: Example of using the `deletelink` command to remove a link between a 
 When the command succeeds, you see a message confirming the link was removed:
 ![Deletelink command success](images/DeleteLinkCommandSuccess.png)
 _Figure 7: Success message displayed after deleting a link between a patient and a caregiver_
+
+- `deletelink caregiver/S6382947A patient/S7193475F`
 
 #### Adding Notes to a Person: `addnote`
 
@@ -292,6 +300,15 @@ Use this command format: `addnote nric/NRIC note/NOTES`
 Examples:
 
 - `addnote nric/S6283947C note/stopped taking XYZ medication on ABC day`
+
+The example below shows how to add notes to a person using CareLink:
+![AddNote command example](images/AddNoteExample.png)
+_Figure 8: Example of using the `addnote` command to add a note to a patient's record_
+
+When the command succeeds, the notes will be added to the person and the following message will be displayed:
+![AddNote command success](images/AddNoteSuccessExample.png)
+_Figure 9: Success message displayed after adding a note to a patient's record_
+
 - `addnote nric/S7012345B note/is caregiver for patient XYZ only until ABC day`
 
 <div class="alert alert-warning">
@@ -301,14 +318,6 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To view all notes for a person, use the `find` command with their NRIC or name. Notes are shown only in the search results to keep the main display clean and focused.
 </div>
-
-The example below shows how to add notes to a person using CareLink:
-![AddNote command example](images/AddNoteExample.png)
-_Figure 8: Example of using the `addnote` command to add a note to a patient's record_
-
-When the command succeeds, the notes will be added to the person and the following message will be displayed:
-![AddNote command success](images/AddNoteSuccessExample.png)
-_Figure 9: Success message displayed after adding a note to a patient's record_
 
 Possible Errors:
 
@@ -704,20 +713,20 @@ Make sure each NRIC adheres to the following format and constraints:
 
 ## Complete Command summary
 
-| Action                 | Format, Examples                                                                                                                                                                                                |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain role/patient`                            |
-| **Link**               | `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `link patient/S7193475F caregiver/S6482983A`                                                                                                     |
-| **Deletelink**         | `deletelink patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `deletelink patient/S7193475F caregiver/S6482983A`                                                                                         |
-| **Addnote**            | `addnote nric/NRIC note/NOTES` <br> e.g. `addnote nric/S6283947C note/stopped taking XYZ medication on ABC day`                                                                                                 |
-| **Clear**              | `clear confirm`                                                                                                                                                                                                 |
-| **Delete**             | `delete NRIC`<br> e.g `delete S6483749D`                                                                                                                                                                        |
-| **Edit**               | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g`edit S1234567D n/James Lee e/jameslee@example.com`                                                                                |
-| **Find**               | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g `find n/Alex nric/S1234567D`                                                                                                                         |
-| **Find Appointment**   | `findapp [sdate/START_DATE] [start/START_TIME] [edate/END_DATE] [end/END_TIME]`<br> e.g `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00`                                                       |
-| **Add Appointment**    | `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`<br> e.g `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00`                                                                                      |
-| **Edit Appointment**   | `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`<br> e.g `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025 newstart/08:00 newend/09:00` |
-| **Update Appointment** | `updatestatus nric/NRIC d/DATE start/START_TIME status/STATUS` <br> e.g `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/completed`                                                                 |
-| **Delete Appointment** | `deleteapp nric/NRIC d/DATE start/START_TIME`<br> e.g `deleteapp nric/S9876543B d/15/03/2025 start/14:30`                                                                                                       |
-| **List**               | `list`                                                                                                                                                                                                          |
-| **Help**               | `help`                                                                                                                                                                                                          |
+| Action                        | Format, Examples                                                                                                                                                                                                |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**                       | `add n/NAME nric/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS role/ROLE [t/TAG]…` <br> e.g `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain role/patient`        |
+| **Link**                      | `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `link patient/S7193475F caregiver/S6482983A`                                                                                                     |
+| **Deletelink**                | `deletelink patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `deletelink patient/S7193475F caregiver/S6482983A`                                                                                         |
+| **Addnote**                   | `addnote nric/NRIC note/NOTES` <br> e.g. `addnote nric/S6283947C note/stopped taking XYZ medication on ABC day`                                                                                                 |
+| **Clear**                     | `clear confirm`                                                                                                                                                                                                 |
+| **Delete**                    | `delete NRIC`<br> e.g `delete S6483749D`                                                                                                                                                                        |
+| **Edit**                      | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g`edit S1234567D n/James Lee e/jameslee@example.com`                                                                                |
+| **Find**                      | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g `find n/Alex nric/S1234567D`                                                                                                                         |
+| **Find Appointment**          | `findapp [sdate/START_DATE] [start/START_TIME] [edate/END_DATE] [end/END_TIME]`<br> e.g `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00`                                                       |
+| **Add Appointment**           | `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`<br> e.g `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00`                                                                                      |
+| **Edit Appointment**          | `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`<br> e.g `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025 newstart/08:00 newend/09:00` |
+| **Update Appointment Status** | `updatestatus nric/NRIC d/DATE start/START_TIME status/STATUS` <br> e.g `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/completed`                                                                 |
+| **Delete Appointment**        | `deleteapp nric/NRIC d/DATE start/START_TIME`<br> e.g `deleteapp nric/S9876543B d/15/03/2025 start/14:30`                                                                                                       |
+| **List**                      | `list`                                                                                                                                                                                                          |
+| **Help**                      | `help`                                                                                                                                                                                                          |
