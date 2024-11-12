@@ -78,7 +78,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The `UI` consists of `MainWindow` and its parts like `CommandBox`, `ResultDisplay`, `PersonListPanel`, and `StatusBarFooter`. All these, including `MainWindow`, inherit from the abstract `UiPart` class, capturing common traits among the visible GUI classes.
 
-The `CommandBox` integrates with `commandpopup` to provide auto-suggestion functionality. It monitors changes in the `AutoSuggestionTextField` and dynamically generates `CommandTextFlows` that are displayed to the user.
+The `CommandBox` integrates with the `commandpopup` component to provide auto-suggestion functionality. It monitors changes in the `AutoSuggestionTextField` and dynamically generates `CommandTextFlows` that are displayed to the user.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
