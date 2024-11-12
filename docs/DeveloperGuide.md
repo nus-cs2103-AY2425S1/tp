@@ -87,7 +87,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 
 - At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 - At shut down, it shuts down the other components and invokes cleanup methods where necessary.
@@ -120,7 +120,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -276,6 +276,21 @@ The activity diagram below shows the flow of the `find` operation.
 
 <img src="images/FindActivityDiagram.png" width="750" />
 
+
+### 5. Track Command
+
+The `track` command is used to track and display contacts by predefined categories such as `student` or `company`, to effectively manage the visibility of different groups of contacts.
+
+#### Current implementation
+Here is a high-level view of the logic flow when the `track` command is executed:
+![TrackActivityDiagram](images/TrackActivityDiagram.png)
+
+The track command performs the following checks:
+- Category is present, not consisting of multiple words, and is from the predefined categories (`student` or `company`).
+- Contact list is non-empty for the command to be executable.
+
+_Note: The error messages will vary depending on which check fails, to ensure users receive clear feedback._
+
 ---
 
 ## Planned Enhancements
@@ -301,6 +316,26 @@ The current tag handling system in the app is inconsistent regarding case sensit
 #### Proposed Enhancement:
 
 Standardise the tag handling logic to be case-insensitive across all commands. This means that tags with the same letters but different capitalisations (e.g., `OwesMoney`, `owesmOney`, `OWESMONEY`) will be treated as identical tags in all scenarios, including adding contacts, adding tags, deleting tags and filtering tags. By making this adjustment, the program will align with standard user expectations of case-insensitivity, creating a more intuitive and consistent experience for users.
+
+### 3. Modify Industry Field to be Case-Insensitive
+
+#### Current Issue:
+
+The industry field is treated as case-sensitive when adding or editing company contacts. This means that "Technology" and "technology" would be stored as separate entries in the backend, even though they are visually identical in the Graphical User Interface (GUI). Such discrepancies can lead to data inconsistencies, making it challenging for users to accurately filter or search for contacts, particularly when multiple capitalization variants exist.
+
+#### Proposed Enhancement:
+
+Modify the industry field to be case-insensitive to ensure consistency across all entries. By treating entries such as "Technology" and "technology" as identical, this enhancement will help prevent unnecessary duplication and reduce confusion. The goal is to provide a consistent user experience by aligning both backend data handling and the GUI representation.
+
+### 4. Handling Prefix Collision in All Input Fields:
+
+#### Current Issue:
+
+Currently, AdmiNUS misinterprets certain content in input fields if it resembles reserved command prefixes (e.g., `t/`, `n/`, `a/`). When users include such prefixes in fields like the address or name, AdmiNUS mistakes them for actual command parameters, which leads to parsing errors and prevents successful command execution. For example, adding an address with `t/` in it (`"311 Clementi Ave 2, t/2, #2-25"`) results in AdmiNUS attempting to parse it as a tag field, which is not intended. This issue affects any field where the input might incidentally include a reserved prefix.
+
+#### Proposed Enhancement:
+
+Implement an improved parsing mechanism that can intelligently differentiate between actual command prefixes and input data that coincidentally contains these prefixes. The proposed enhancement will apply to all input fields (e.g., name, address, email, etc.), ensuring that users can enter data without encountering errors related to command prefix misinterpretation. By enhancing how prefixes are handled in user inputs, this change will allow for more flexible and user-friendly data entry, eliminating errors when prefixes appear naturally in input text.
 
 ### 7. Make Error Message for View Command More Specific
 
