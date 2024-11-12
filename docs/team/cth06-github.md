@@ -5,8 +5,8 @@
 
 ### Project: data_coNdUctorS
 
-**ChatGPT Usage as mentioned in the Developer Guide**
-Input:
+**ChatGPT Usage as mentioned in the Developer Guide, used by Tse Hui**
+<br> Input:
 > add a listener that says when the label width exceeds the current card pane, increase the label width size to the current card pane width
 
 A snippet of the Output:
