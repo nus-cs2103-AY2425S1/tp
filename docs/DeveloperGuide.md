@@ -15,6 +15,11 @@ title: Developer Guide
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [Implementation](#implementation)
+  - [Student Command](#1-student-command)
+  - [Company Command](#2-company-command)
+- [Planned Enhancements](#planned-enhancements)
+  - [Disallow Duplicate Phone Number Across Contacts](#1-disallow-duplicate-phone-numbers-across-contacts)
+  - [Consistent Case-Insensitive Tag Handling](#2-consistent-case-insensitive-tag-handling)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
@@ -231,9 +236,30 @@ Company command performs the following checks in order:
 
 The following diagrams provides a high-level view of the logic flow for both `student` and `company` command:
 
-_paste the img here_
+<img src="./images/StudentCompanyCommandActivityDiagram-Add_Student_Company_Activity_Diagram.png">
 
 *Note: The error messages will vary depending on which check fails.*
+
+---
+
+## Planned Enhancements
+Group size: 5
+
+### 1. Disallow Duplicate Phone Numbers Across Contacts
+
+#### Current Issue:
+Currently, the app allows users to add multiple contacts (both students and companies) with the same phone number. This can lead to potential confusion or data inconsistency, as users may unintentionally add duplicate contacts with identical phone numbers. In real-world scenarios, it is highly unlikely that two different individuals or entities would share the same phone number, making this behavior unnecessary and potentially misleading.
+
+#### Proposed Enhancement:
+Implement a restriction that prevents users from adding new contacts with phone numbers that already exist in the app. This restriction will apply to both student and company contacts, ensuring that each phone number is unique within the contact list. This change aims to enhance data integrity and user experience by reducing redundancy and aligning with real-world expectations where phone numbers are unique identifiers.
+
+### 2. Consistent Case-Insensitive Tag Handling
+
+#### Current Issue:
+The current tag handling system in the app is inconsistent regarding case sensitivity across different commands. For example, when adding or deleting contacts, the `t/[TAG]` parameter is case-sensitive, meaning Paid and paid would be treated as separate tags. However, the `tag` command treats tags as case-insensitive, so attempting to add `paid` to a contact that already has the tag `Paid` will result in no action, as it recognises `paid` and `Paid` as the same tag. This inconsistency can lead to user confusion, as the system does not follow a unified approach to case sensitivity.
+
+#### Proposed Enhancement:
+Standardise the tag handling logic to be case-insensitive across all commands. This means that tags with the same letters but different capitalisations (e.g., `OwesMoney`, `owesmOney`, `OWESMONEY`) will be treated as identical tags in all scenarios, including adding contacts, adding tags, deleting tags and filtering tags. By making this adjustment, the program will align with standard user expectations of case-insensitivity, creating a more intuitive and consistent experience for users.
 
 ---
 
