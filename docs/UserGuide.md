@@ -325,8 +325,9 @@ Filters and lists persons whose fields match the specified keywords.
     - `filter e/john@gmail.com` returns persons with emails containing `john@gmail.com`.
     - `filter p/91234567` returns the person with phone number `91234567`.
     - `filter n/John r/vendor` returns persons with names containing `John` or with role `vendor`.
-    - `filter e/john@gmail.com a/Jurong` returns persons with emails containing "john@gmail.com" or address containing "Jurong".
+    - `filter e/john@gmail.com a/Jurong` returns persons with emails containing "john@gmail.com" or address containing "Jurong".<br>
 
+Visual Example:
 ![Multi-field filter results](images/filter_persons_by_multiple_fields.png)<br>
 *`filter e/alex@gmail.com r/florist` Example of filtering results showing matched persons, weddings remain empty/unfiltered*
 
@@ -355,6 +356,7 @@ Adds a new wedding to the address book.
     - `addw n/Garden Wedding c/John Doe v/Botanical Gardens`
         - Adds a wedding for "John Doe" if there's only one match.<br>
 
+Visual Example:
 ![Adding a wedding example](images/addw_example.png)<br>
 *Example of successfully adding a new wedding with all fields specified*
 
@@ -446,6 +448,8 @@ Assigns a role and/or weddings to a person.
       - Removes the role of person at index 1.
     -  `assign John Doe r/photographer w/2`
         - If there's only one match for "John Doe", assigns them the role "photographer" and to wedding at index 2.<br>
+
+Visual Examples:
 **Error Example**:<br>
 ![Assignment error example](images/error_example_assign.png)<br>
 *Example of error when trying to assign a client to their own wedding*
