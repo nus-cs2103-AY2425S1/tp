@@ -32,7 +32,7 @@ ModelManager .up.|> Model
 ModelManager -down-> "   1" AddressBook
 ModelManager -up-> "1" UserPrefs
 
-ModelManager --left-> "        * filtered" Delivery
+ModelManager --left-> "       * filtered" Delivery
 ModelManager --left-> "  * sorted" Delivery
 ModelManager --right-> "      filtered *" Supplier
 ModelManager --right-> "      sorted *" Supplier
