@@ -132,6 +132,12 @@ public class ParserUtil {
     public static AppointmentDate parseAppointmentDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
+        if (!AppointmentDate.hasValidDay(date)) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
+        }
+        if (!AppointmentDate.isValidDay(trimmedDate)) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS_INVALID_DATE);
+        }
         if (!AppointmentDate.isValidDateString(trimmedDate)) {
             throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
         }
