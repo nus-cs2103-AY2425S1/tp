@@ -1201,3 +1201,7 @@ Success action: When a person is successfully assigned:
             - App detects missing client data
             - Shows error message about corrupted data
             - Starts with empty address book
+
+## Acknowledgements
+- GitHub copilot was used to generate some parts of the code.
+- Generative AI was used for writing some unit tests, regex validation, generation of javadoc and code completion.
