@@ -230,7 +230,7 @@ When the command succeeds, you’ll see the following message confirming that th
 ![add Patient Succeeds](images/addPatientSucceed.png)
 _Figure 3: Success message displayed after adding a patient_
 
-Possible Errors:
+**Possible Errors:**
 
 - `This person already exists in the address book` - Displayed when trying to add a person with an NRIC that already exists.
 - `Roles should only be 'PATIENT' or 'CAREGIVER'` - Displayed when an invalid role is provided.
@@ -319,7 +319,7 @@ _Figure 9: Success message displayed after adding a note to a patient's record_
 To view all notes for a person, use the `find` command with their NRIC or name. Notes are shown only in the search results to keep the main display clean and focused.
 </div>
 
-Possible Errors:
+**Possible Errors:**
 
 - `Person not found` - When the person's NRIC entered cannot be found in the system
 
@@ -349,7 +349,7 @@ Use this command format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/
 - `edit S6483749D n/Betsy Crower t/`
   Edits the person with NRIC `S6483749D` to be `Betsy Crower` and clears all existing tags.
 
-Possible Errors:
+**Possible Errors:**
 
 - `Incorrect NRIC. Person not found` - When the specified NRIC doesn't exist in CareLink
 - `At least one field to edit must be provided.` - When no fields to edit are specified
@@ -359,6 +359,8 @@ Possible Errors:
 
 Use this command to find persons based on specified criteria and prefixes.
 
+Use this command format: `find [n/NAME] [nric/NRIC] [p/PHONE] [e/EMAIL] [role/ROLE] [t/TAG]…​`
+
 <div class="alert alert-warning">
 <i>:warning:</i> <b>Warning:</b> All search parameters (NRIC, phone, email, role) must exactly match the stored data, except for name which allows partial matches. For example:
 - NRIC 'S1234567D' will match 'S1234567D' only
@@ -367,39 +369,6 @@ Use this command to find persons based on specified criteria and prefixes.
 - The NRIC must be a valid Singapore NRIC that follows the official format ('S/T' for citizens/PRs, 'F/G' for foreigners, followed by 7 digits and a checksum letter)
 
 </div>
-
-#### Deleting a person : `delete`
-
-**Use this command to delete the specified person from CareLink.**
-
-Use this format: `delete NRIC`
-
-- Deletes the person with the specified `NRIC`.
-- The NRIC **must be a valid Singapore National ID** (eg. S1234567D)​
-
-Examples:
-
-- `find n/David` returns `David LI` with NRIC `S6483749D`
-- `delete S6483749D` deletes the person with the NRIC `S6483749D` in the address book.
-
-The example of using the delete command in CareLink is shown below.
-
-> :bulb: **Tip:** Notice the NRIC used in the example belongs to `David LI`.
-
-![delete command example](images/deleteDavid.png)
-_Figure 13: Example of using the `delete` command to remove a person from CareLink_
-
-When the command succeeds, you can notice that David is removed and hence no longer displayed.
-![result for 'delete S6483749D'](images/deleteDavidResult.png)
-_Figure 14: Display after a successful delete command, showing the removed person is no longer listed_
-
-**Possible Errors:**
-
-- `The patient NRIC provided is not found` - When the specified NRIC does not exist in CareLink
-
-#### Finding a person : `find`
-
-**Format**: `find [n/NAME] [nric/NRIC] [p/PHONE] [e/EMAIL] [role/ROLE] [t/TAG]…​`
 
 - The search is case-insensitive. e.g `n/alex` will match `Alex`.
 - The order of the prefixes and keywords does not matter. e.g `n/Alex nric/S1234567D` is equivalent to `nric/S1234567D n/Alex`.
@@ -436,12 +405,41 @@ When the command succeeds, the persons found will be displayed with comprehensiv
 ![Find command success](images/findcommandsucceed.png)
 _Figure 11: List of persons displayed after using the `find` command with specified criteria_
 
-Possible Errors:
+**Possible Errors:**
 
 - `Invalid command format! `
   find: Finds all persons based on the specified criteria and displays them as a list with index numbers. Search is case-insensitive.
   Parameters: [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...
   At least one parameter must be provided. You do not need to include all parameters.
+
+#### Deleting a person : `delete`
+
+Use this command to find persons based on specified criteria and prefixes.
+
+Use this format: `delete NRIC`
+
+- Deletes the person with the specified `NRIC`.
+- The NRIC **must be a valid Singapore National ID** (eg. S1234567D)​
+
+Examples:
+
+- `find n/David` returns `David LI` with NRIC `S6483749D`
+- `delete S6483749D` deletes the person with the NRIC `S6483749D` in the address book.
+
+The example of using the delete command in CareLink is shown below.
+
+> :bulb: **Tip:** Notice the NRIC used in the example belongs to `David LI`.
+
+![delete command example](images/deleteDavid.png)
+_Figure 13: Example of using the `delete` command to remove a person from CareLink_
+
+When the command succeeds, you can notice that David is removed and hence no longer displayed.
+![result for 'delete S6483749D'](images/deleteDavidResult.png)
+_Figure 14: Display after a successful delete command, showing the removed person is no longer listed_
+
+**Possible Errors:**
+
+- `The patient NRIC provided is not found` - When the specified NRIC does not exist in CareLink
 
 ### Managing Appointments
 
@@ -662,8 +660,7 @@ When using date ranges for searching appointments, ensure your end date comes af
 
 > :warning: **Warning:** This command will permanently delete all entries from the address book. Ensure that you want to proceed before executing this command.
 
-**Format**:
-`clear confirm`
+Use this command format: `clear confirm`
 
 - You must type `confirm` explicitly to execute this command. Any other input will not clear the address book.
 
