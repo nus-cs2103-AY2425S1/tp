@@ -1183,7 +1183,7 @@ Success action: When a person is successfully assigned:
             2. Manually modify wedding references (change hashcodes)
             3. Save file and restart application
         * Expected:
-            - Changing ownWedding field of a person to 0 will only result in weddings having no client and would not corrupt the file.
+            - Changing ownWedding field of a person to 0 will only result in wedding having no client and would not corrupt the file.
             - App detects corrupted relationships
             - Shows error message: "Address book data is corrupted: Found weddings without corresponding clients"
             - Starts with empty address book
