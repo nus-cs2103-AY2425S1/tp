@@ -58,7 +58,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -159,6 +159,313 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### Consultation Management
+
+The consultation management feature enables TAs to schedule and manage consultation sessions with students. This section describes the implementation details of the consultation system.
+
+#### Architecture
+
+The consultation feature comprises these key components:
+
+* `Consultation`: Core class representing a consultation session
+* `Date`: Represents and validates consultation dates
+* `Time`: Represents and validates consultation times
+* `AddConsultCommand`: Handles adding new consultations
+* `AddConsultCommandParser`: Parses user input for consultation commands
+
+The class diagram below shows the structure of the consultation feature:
+
+<img src="images/Consultation/ConsultCommands.png" width="450" />
+
+#### Implementation
+
+The consultation management system is implemented through several key mechanisms:
+
+**1. Date and Time Validation**
+
+The system enforces strict validation for consultation scheduling:
+* Dates must be in `YYYY-MM-DD` format and represent valid calendar dates
+* Times must be in 24-hour `HH:mm` format
+* Both use Java's built-in `LocalDate` and `LocalTime` for validation
+
+Example:
+```java
+Date date = new Date("2024-10-20"); // Valid
+Time time = new Time("14:00");      // Valid
+Date invalidDate = new Date("2024-13-45"); // Throws IllegalArgumentException
+```
+
+**2. Consultation Management**
+
+The `Consultation` class manages:
+* Immutable date and time properties
+* Thread-safe student list management
+* Equality based on date, time, and enrolled students
+
+Core operations:
+```java
+// Creating a consultation
+Consultation consult = new Consultation(date, time, students);
+
+// Adding/removing students
+consult.addStudent(student);
+consult.removeStudent(student);
+
+// Getting immutable student list
+List<Student> students = consult.getStudents(); // Returns unmodifiable list
+```
+The sequence diagram below shows how the `addStudent(student)` method is performed in the `Consultation` class.
+
+<img src="images/Consultation/addStudent_for_consult.png" width="450" />
+
+The command first checks if the student is already in the consultation. If the student was already in the consultation, and exception is thrown and the student is not added.
+
+However, if the student was not previously in the consultation, the student is now added to the list of students in the consultation.
+
+**3. Command Processing**
+
+The system supports these consultation management commands:
+- `addconsult`: Creates new consultation sessions
+- `addtoconsult`: Adds students to existing consultations
+- `deleteconsult`: Removes consultation sessions
+- `removefromconsult`: Removes students from consultations
+
+Command examples:
+```
+addconsult d/2024-10-20 t/14:00
+addtoconsult 1 n/John Doe i/3
+deleteconsult 1
+removefromconsult 1 n/John Doe
+```
+The sequence diagram below shows how the command `addtoconsult 1 n/John Doe i/3` is executed.
+
+<img src="images/Consultation/SequenceDiagramAddToConsultCommand.png" />
+
+The commands for Consultations are executed using the `Logic` component:
+
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `AddToConsultCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (in this case, the `AddToConsultCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to add a student to the consultation).<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+
+**Aspect 1: Date and Time Representation**
+
+* **Alternative 1 (current choice)**: Separate `Date` and `Time` classes
+    * Pros: Clear separation of concerns, focused validation
+    * Cons: Two objects to manage instead of one
+
+* **Alternative 2**: Combined `DateTime` class
+    * Pros: Unified handling of temporal data
+    * Cons: More complex validation, reduced modularity
+
+**Aspect 2: Student List Management**
+
+* **Alternative 1 (current choice)**: Immutable view with mutable internal list
+    * Pros: Thread-safe external access, flexible internal updates
+    * Cons: Complex implementation
+
+* **Alternative 2**: Fully immutable list
+    * Pros: Simpler thread-safety
+    * Cons: Higher memory usage for modifications
+
+### Lesson Management
+
+The lesson management feature enables TAs to schedule and manage lessons with students. This section describes the implementation details of the lesson system.
+
+#### Architecture
+
+The lesson feature comprises these key components:
+
+* `Lesson`: Core class representing a lessons
+* `Date`: Represents and validates lesson dates
+* `Time`: Represents and validates lesson times
+* `StudentLessonInfo`: Represents student info used for lessons. This includes the student's attendance and participation score for a lesson.
+* `AddLessonCommand`: Handles adding new lessons
+* `AddLessonCommandParser`: Parses user input for `AddLessonCommand`
+
+The class diagram below shows the structure of the lesson feature:
+
+<img src="images/Lessons/LessonsAndRelatedCommands.png" width="450" />
+
+#### Implementation
+
+The lesson management system is implemented through several key mechanisms:
+
+**1. Date and Time Validation**
+
+The system enforces strict validation for lesson scheduling:
+* Dates must be in `YYYY-MM-DD` format and represent valid calendar dates
+* Times must be in 24-hour `HH:mm` format
+* Both use Java's built-in `LocalDate` and `LocalTime` for validation
+
+Example:
+```java
+Date date = new Date("2024-10-20"); // Valid
+Time time = new Time("14:00");      // Valid
+Date invalidDate = new Date("2024-13-45"); // Throws IllegalArgumentException
+```
+
+**2. Lesson Management**
+
+The `Lesson` class manages:
+* Immutable date and time properties
+* Thread-safe student information list management
+* Equality based on date, time, and student information
+
+Core operations:
+```java
+// Creating a lesson
+Lesson lesson = new Lesson(date, time, studentLessonInfoList);
+
+// Adding/removing students
+lesson.addStudent(student);
+lesson.removeStudent(student);
+
+// Setting attendance
+lesson.setAttendance(student, attendance);
+
+// Setting pariticipation score
+lesson.setParticipation(student, participationScore);
+
+// Getting immutable student info list, returns unmodifiable list
+List<StudentLessonInfo> studentInfoList = lesson.getStudentLessonInfoList(); 
+```
+
+**3. Command Processing**
+
+The system supports these lesson management commands:
+- `addlesson`: Creates new lesson
+- `addtolesson`: Adds students to existing lesson
+- `deletelesson`: Removes lesson
+- `listlessons`: Lists all lessons
+- `removefromlesson`: Removes students from lesson
+- `marka`: Marks the attendance of  students in a lesson (can mark as present or absent)
+- `markp`: Sets the participation score of students in a lesson
+
+Command examples:
+```
+addlesson d/2024-10-20 t/14:00
+addtolesson 1 n/John Doe i/3
+deletelesson 1
+removefromlesson 1 n/John Doe
+markp 1 n/John Doe pt/25
+marka 1 n/John Doe n/Jane Doe a/y
+```
+The sequence diagram below shows how the command `addtolesson 1 n/John Doe i/3` is executed.
+
+<img src="images/Lessons/SequenceDiagramAddToLessonCommand.png" />
+
+The commands for Lessons are executed using the `Logic` component, making it similar to the sequence diagram in the consultation section above.
+
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `AddToLessonCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (in this case, the `AddToLessonCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to add a student to the lesson).<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+
+The next sequence diagram shows how the `MarkLessonAttendanceCommand` is executed to update the attendance of students in a lesson.
+
+<img src="images/Lessons/MarkAttendanceCommandSequenceDiagram.png" />
+
+The flow of the program when `MarkLessonAttendanceCommand.execute` is called is as follows:
+
+1. When the execute method is called, the command first gets the `targetLesson` from the model.
+2. The command then creates a new `Lesson` object (called `newLesson`) from the `targetLesson`. This creates a copy of the current `targetLesson`.
+3. Now, for each student, the command sets the student's attendance using the `setAttendance` method in the `Lesson` class.
+4. Finally, the command replaces the `targetLesson` in the model with the `newLesson`.
+
+
+**Aspect 1: Date and Time Representation**
+
+* **Alternative 1 (current choice)**: Separate `Date` and `Time` classes
+  * Pros: Clear separation of concerns, focused validation
+  * Cons: Two objects to manage instead of one
+
+* **Alternative 2**: Combined `DateTime` class
+  * Pros: Unified handling of temporal data
+  * Cons: More complex validation, reduced modularity
+
+**Aspect 2: StudentInfo List Management**
+
+* **Alternative 1 (current choice)**: Immutable view with mutable internal list
+  * Pros: Thread-safe external access, flexible internal updates
+  * Cons: Complex implementation
+
+* **Alternative 2**: Fully immutable list
+  * Pros: Simpler thread-safety
+  * Cons: Higher memory usage for modifications
+
+
+### Data Import / Export Feature
+
+The import/export feature allows TAs to archive and transfer their data in CSV format. This functionality is implemented for both students and consultations.
+
+#### Implementation
+
+The feature is implemented through four main command classes:
+* `ExportCommand`: Exports student data to CSV
+* `ExportConsultCommand`: Exports consultation data to CSV
+* `ImportCommand`: Imports student data from CSV
+* `ImportConsultCommand`: Imports consultation data from CSV
+
+Each export command follows this workflow:
+1. Validates filename input
+2. Creates `data` directory if needed
+3. Writes data to CSV in `data` directory
+4. Copies file to home directory
+5. Handles file overwrite with force flag
+
+Each import command follows this workflow:
+1. Validates input file existence and format
+2. Parses CSV header
+3. Processes entries line by line
+4. Validates each entry
+5. Logs errors to `error.csv`
+
+Example sequences:
+```
+Student CSV format:
+Name,Phone,Email,Courses
+John Doe,12345678,john@example.com,CS2103T;CS2101
+
+Consultation CSV format:
+Date,Time,Students
+2024-10-20,14:00,John Doe;Jane Doe
+```
+
+#### Design Considerations
+
+**Aspect: File Format**
+* **Alternative 1 (current choice)**: CSV format
+    * Pros: Widely compatible, human-readable, easy to edit
+    * Cons: Limited structure, requires careful escaping
+* **Alternative 2**: JSON format
+    * Pros: Maintains data structure, less escaping needed
+    * Cons: Less human-readable, harder to edit manually
+
+**Aspect: Error Handling**
+* **Alternative 1 (current choice)**: Log errors to separate file
+    * Pros: Clear error reporting, allows partial imports
+    * Cons: Requires managing additional files
+* **Alternative 2**: Fail entire import on any error
+    * Pros: Ensures data consistency
+    * Cons: Less flexible, requires perfect input
+
+**Aspect: File Location**
+* **Alternative 1 (current choice)**: Both data and home directory
+    * Pros: Convenient access, automatic backup
+    * Cons: Duplicate files, more complex implementation
+* **Alternative 2**: Single location
+    * Pros: Simpler implementation
+    * Cons: Less convenient for users
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -241,164 +548,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-### Consultation Management
-
-The consultation management feature enables TAs to schedule and manage consultation sessions with students. This section describes the implementation details of the consultation system.
-
-#### Architecture
-
-The consultation feature comprises these key components:
-
-* `Consultation`: Core class representing a consultation session
-* `Date`: Represents and validates consultation dates
-* `Time`: Represents and validates consultation times
-* `AddConsultCommand`: Handles adding new consultations
-* `AddConsultCommandParser`: Parses user input for consultation commands
-
-[//]: # (The class diagram below shows the structure of the consultation feature:)
-
-[//]: # (<img src="images/ConsultationClassDiagram.png" width="450" />)
-
-#### Implementation
-
-The consultation management system is implemented through several key mechanisms:
-
-**1. Date and Time Validation**
-
-The system enforces strict validation for consultation scheduling:
-* Dates must be in `YYYY-MM-DD` format and represent valid calendar dates
-* Times must be in 24-hour `HH:mm` format
-* Both use Java's built-in `LocalDate` and `LocalTime` for validation
-
-Example:
-```java
-Date date = new Date("2024-10-20"); // Valid
-Time time = new Time("14:00");      // Valid
-Date invalidDate = new Date("2024-13-45"); // Throws IllegalArgumentException
-```
-
-**2. Consultation Management**
-
-The `Consultation` class manages:
-* Immutable date and time properties
-* Thread-safe student list management
-* Equality based on date, time, and enrolled students
-
-Core operations:
-```java
-// Creating a consultation
-Consultation consult = new Consultation(date, time, students);
-
-// Adding/removing students
-consult.addStudent(student);
-consult.removeStudent(student);
-
-// Getting immutable student list
-List<Student> students = consult.getStudents(); // Returns unmodifiable list
-```
-
-**3. Command Processing**
-
-The system supports these consultation management commands:
-- `addconsult`: Creates new consultation sessions
-- `addtoconsult`: Adds students to existing consultations
-- `deleteconsult`: Removes consultation sessions
-- `removefromconsult`: Removes students from consultations
-
-Command examples:
-```
-addconsult d/2024-10-20 t/14:00
-addtoconsult 1 n/John Doe n/Harry Ng
-deleteconsult 1
-removefromconsult 1 n/John Doe
-```
-
-**Aspect 1: Date and Time Representation**
-
-* **Alternative 1 (current choice)**: Separate `Date` and `Time` classes
-    * Pros: Clear separation of concerns, focused validation
-    * Cons: Two objects to manage instead of one
-
-* **Alternative 2**: Combined `DateTime` class
-    * Pros: Unified handling of temporal data
-    * Cons: More complex validation, reduced modularity
-
-**Aspect 2: Student List Management**
-
-* **Alternative 1 (current choice)**: Immutable view with mutable internal list
-    * Pros: Thread-safe external access, flexible internal updates
-    * Cons: Complex implementation
-
-* **Alternative 2**: Fully immutable list
-    * Pros: Simpler thread-safety
-    * Cons: Higher memory usage for modifications
-
-
-### Data Import / Export Feature
-
-The import/export feature allows TAs to archive and transfer their data in CSV format. This functionality is implemented for both students and consultations.
-
-#### Implementation
-
-The feature is implemented through four main command classes:
-* `ExportCommand`: Exports student data to CSV
-* `ExportConsultCommand`: Exports consultation data to CSV
-* `ImportCommand`: Imports student data from CSV
-* `ImportConsultCommand`: Imports consultation data from CSV
-
-Each export command follows this workflow:
-1. Validates filename input
-2. Creates `data` directory if needed
-3. Writes data to CSV in `data` directory
-4. Copies file to home directory
-5. Handles file overwrite with force flag
-
-Each import command follows this workflow:
-1. Validates input file existence and format
-2. Parses CSV header
-3. Processes entries line by line
-4. Validates each entry
-5. Logs errors to `error.csv`
-
-Example sequences:
-```
-Student CSV format:
-Name,Phone,Email,Courses
-John Doe,12345678,john@example.com,CS2103T;CS2101
-
-Consultation CSV format:
-Date,Time,Students
-2024-10-20,14:00,John Doe;Jane Doe
-```
-
-#### Design Considerations
-
-**Aspect: File Format**
-* **Alternative 1 (current choice)**: CSV format
-    * Pros: Widely compatible, human-readable, easy to edit
-    * Cons: Limited structure, requires careful escaping
-* **Alternative 2**: JSON format
-    * Pros: Maintains data structure, less escaping needed
-    * Cons: Less human-readable, harder to edit manually
-
-**Aspect: Error Handling**
-* **Alternative 1 (current choice)**: Log errors to separate file
-    * Pros: Clear error reporting, allows partial imports
-    * Cons: Requires managing additional files
-* **Alternative 2**: Fail entire import on any error
-    * Pros: Ensures data consistency
-    * Cons: Less flexible, requires perfect input
-
-**Aspect: File Location**
-* **Alternative 1 (current choice)**: Both data and home directory
-    * Pros: Convenient access, automatic backup
-    * Cons: Duplicate files, more complex implementation
-* **Alternative 2**: Single location
-    * Pros: Simpler implementation
-    * Cons: Less convenient for users
-
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 

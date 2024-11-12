@@ -1,0 +1,45 @@
+@startuml
+
+!include ../style.puml
+
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+title Add Consult Command and Parser UML Diagram
+package Logic {
+
+    package Commands {
+        Class "{abstract}\nCommand" as Command
+        Class AddConsultCommand
+        Class CommandResult
+    }
+
+    package "Parser Classes" {
+        Class AddConsultCommandParser
+    }
+}
+
+package Model {
+    Class Consultation
+    Class Student
+    Class Date
+    Class Time
+}
+
+' Command relationships
+Command <|-- AddConsultCommand
+Command ..> CommandResult : creates >
+
+' Parser relationships
+AddConsultCommandParser ..> AddConsultCommand : creates >
+
+' Model relationships
+Consultation *-- "*" Student
+Consultation *-- "1" Date
+Consultation *-- "1" Time
+
+' Group visibility for logical structure
+CommandResult ..> Consultation : creates >
+
+@enduml
