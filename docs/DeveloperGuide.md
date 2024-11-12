@@ -241,6 +241,21 @@ The following diagrams provides a high-level view of the logic flow for both `st
 
 *Note: The error messages will vary depending on which check fails.*
 
+### 4. Find command
+The `find` command is used to find contacts whose name match the specified keyword given by the user.
+
+#### Current implementation
+
+To execute the `find` command, users must enter a valid `KEYWORD` parameter, by ensuring that the `KEYWORD` parameter is not empty.
+
+The sequence diagram below shows a high-level view of how the `find` operation works when the user inputs `find bob`.
+
+<img src="images/FindSequenceDiagram.png" width="750" />
+
+The activity diagram below shows the flow of the `find` operation.
+
+<img src="images/FindActivityDiagram.png" width="750" />
+
 ---
 
 ## Planned Enhancements
@@ -261,6 +276,22 @@ The current tag handling system in the app is inconsistent regarding case sensit
 
 #### Proposed Enhancement:
 Standardise the tag handling logic to be case-insensitive across all commands. This means that tags with the same letters but different capitalisations (e.g., `OwesMoney`, `owesmOney`, `OWESMONEY`) will be treated as identical tags in all scenarios, including adding contacts, adding tags, deleting tags and filtering tags. By making this adjustment, the program will align with standard user expectations of case-insensitivity, creating a more intuitive and consistent experience for users.
+
+### 8. `Deletetag all` command does not work as intended on an empty list.
+
+#### Current Issue:
+If the user manages to end up with an empty list, by entering the input `clear` for example, followed by the command `deletetag all t/TAG`, the user is shown a message `Deleted the tags TAG from all contacts in the list`, even though this did not actually happen. This could bring confusion to users.
+
+#### Proposed Enhancement:
+Instead, we plan to show an error message whenever the user tries to use the `deletetag all` command on an empty list. The error message will be similar to `Cannot delete tags from an empty list!`. This will give the user a clear idea and bring less confusion.
+
+### 9. Restrict phone number field to 8 numbers
+
+#### Current Issue:
+Currently, the phone number field accepts inputs as long as they are numbers and at least 3 digits long. However, given that our target audience is NUS club administrators, it would be appropriate for phone numbers to have at least 8 digits.
+
+#### Proposed Enhancement:
+Perform input check for phone numbers to at least make sure it has 8 digits.
 
 ### 10. Improve Error Priority for Edit Command
 
