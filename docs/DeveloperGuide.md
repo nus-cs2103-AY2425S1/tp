@@ -410,16 +410,22 @@ Team size: 5 people
 2. If you try to enter a name that contains `/` the application will show error message about invalid format for `NAME` but someone can have `/` in their legal name e.g `Prabhat S/O Radhe`, this limitation arises due to usage of `/` character for Internal use within the application. We plan to implement a stronger parser function in the future version to tackle with this legal name restriction on the character of  `/`.
 
 3. In the current UI implementation, when some fields get too long where they exceed the width of the panel/window, some expected behaviors occur. For example, `Name:` is replaced by `...` and the text is not wrapped properly. We plan to solve this issue by adding a sliding window in the future.
-4. For some commands, duplicated tags are not handled properly. For example, deleteTut and all assignment-related commands have unexpected behaviour when multiple tags are specified.
-   Example command: `addAsg n/Assignment 1 d/2024-01-01 2359 d/2024-02-04 1200` creates an assignment with deadline `2024-02-04 1200` instead of alerting the user that multiple prefixes are provided.
-   We are planning to solve all of these unexpected behaviours in future versions by adding a layer of checking of prefixes.
+
+4. For some commands, duplicated tags are not handled properly. For example, deleteTut and assignment-related commands have unexpected behavior when multiple tags are specified.
+   Example command:
+   `addAsg n/Assignment 1 d/2024-01-01 2359 d/2024-02-04 1200` ignores the first deadline tag and creates an assignment with deadline `2024-02-04 1200` only instead of alerting the user that multiple prefixes are provided. This behavior applies to other tags and some other commands as stated above.
+   We are planning to solve all of these unexpected behaviors in future versions by adding a layer of checking of prefixes.
 
 5. After editing student details in the student panel card on the right, the student card on the left will not display instantly. Users will need to re-click the student panel card to refresh the student card. In future implementations, we plan to make the student card instantly responsive to enhance user experience.
+
 6. Assignment title, student ID and tutorial ID are currently case-sensitive as we have the format for the user to follow. Assignment title, student ID and tutorial ID will be implemented as case-insensitive in the future version to enhance the flexibility of the application command.
+
 7. Currently, examples of tutorial names given in our application are misleading as we use different module codes even though it is only catered to one module. We plan to use clearer examples for tutorial names in the future by fixing it to the context of one module (e.g. CS2103T).
-8. The error output of certain commands in current implementation is not specific or incorrect. For example, the error output for
-   `addStu n/Samson s/A123456789` should be ‘incorrect format for student ID’. However, the current UI implementation will display the error message: “invalid command format”, which is not specific.
+
+8. The error output of certain commands when a compulsory field missing in current implementation is not specific enough. For example, the error output for `addStu s/A1234567X` will be better to be ‘name field is missing’. However, the current UI implementation will display the error message: “Invalid command format”, which may not be specific enough. This example applies to other commands that require a compulsory field or fields.
+
 9. Currently, the UI does not show the list of tutorials and assignments permanently. This causes some inconvenience to the users, as they have to constantly list assignments and tutorials. Hence, we plan to add the tutorial and assignment list display in future versions for the ease of usage.
+
 10. In current implementation, list commands for students, assignments and tutorials do not show specific messages when there is no student/assignment/tutorial in the list. For example, executing the command `list` when the student list is empty shows a successful message indicating that all students are listed. We plan to make it more specific by showing a message saying that there is no student in the list etc. Same applies to `listAsg` and `listTut`.
 
 
