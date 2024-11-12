@@ -823,7 +823,7 @@ Currently, MedConnect is able to remove leading and trailing whitespaces from na
 
 ### Handling long fields
 
-Currently, MedConnect does not handle long fields well. For example, if a user enters a long name, the name may be cut off in the GUI. Our planned enhancement is to implement a feature that allows users to view the full details of each field by hovering over the field in the GUI. This will allow users to view the full field (e.g. full name) should the field be too long to be displayed in the GUI without having to click on the person's card.
+Currently, MedConnect does not handle long fields well. For example, if a user enters a long name, the name may be cut off in the GUI. Our planned enhancement is to implement a feature that allows users to view the full details of each field by hovering over the field in the GUI or clicking to expand the details for the field in the card. This will allow users to view the full field (e.g. full name) should the field be too long to be displayed in the GUI.
 
 ### Multiple Language Support
 
