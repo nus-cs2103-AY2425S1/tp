@@ -327,7 +327,7 @@ results based on the specified criteria.
 
 ### Export feature
 
-## Implementation
+#### Implementation
 
 The `export` command extends `FileAccessCommand` and by extension, `Command`. The `export` command exports the contacts in DorManagerPro to a JSON file in the data folder of the app. 
 
@@ -345,8 +345,7 @@ Step 2: The `export` command exports all data currently contained by DorManagerP
 
 The following sequence diagram shows how an `export` command goes through the `Logic` component:
 
-<puml src="diagrams/ExportSequenceDiagram.puml"
- alt="ExportSequenceDiagram" />
+<puml src="diagrams/ExportSequenceDiagram.puml" alt="ExportSequenceDiagram" />
 
 <box type="info" seamless>
 
@@ -357,7 +356,6 @@ The following sequence diagram shows how an `export` command goes through the `L
 The following activity diagram summarizes what happens when a user executes an `export` command:
 
 <puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" />
-
 
 ### Design considerations:
 
