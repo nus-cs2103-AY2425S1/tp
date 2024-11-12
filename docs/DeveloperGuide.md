@@ -165,7 +165,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="700" />
 
 The `Storage` component,
 
@@ -359,11 +359,11 @@ The sequence of the `delete` command is as follows:<br>
 
 The following sequence diagram shows how the `delete` command works:
 
-<puml src="diagrams/DeleteParseSequenceDiagram.puml" width="1000" />
+<puml src="diagrams/DeleteParseSequenceDiagram.puml" width="700" />
 
 <div style="page-break-after: always;"></div>
 
-<puml src="diagrams/DeleteExecuteSequenceDiagram.puml" width="1000" />
+<puml src="diagrams/DeleteExecuteSequenceDiagram.puml" width="450" />
 
 <br>
 
@@ -397,11 +397,13 @@ The sequence of the `link` command is as follows:<br>
 6. If the Parent `name` is valid and `Model` contains the person, the `LinkCommand` creates a new Parent by calling `LinkCommand#createLinkedParent`.
 7. `LinkCommand` updates the Student and Parent in the address book by calling `Model:setPerson`.
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram shows how the `link` command works:
 
-<puml src="diagrams/LinkParseSequenceDiagram.puml" width="550"/>
+<puml src="diagrams/LinkParseSequenceDiagram.puml" width="450" />
 
-<puml src="diagrams/LinkExecuteSequenceDiagram.puml" width="1000" />
+<puml src="diagrams/LinkExecuteSequenceDiagram.puml" width="450" />
 
 <br>
 
@@ -434,15 +436,13 @@ The sequence of the `find` command is as follows:<br>
 
 The following sequence diagram shows how the `find` command works:
 
-<puml src="diagrams/FindParseSequenceDiagram.puml" width="700" />
+<puml src="diagrams/FindParseSequenceDiagram.puml" width="600" />
 
-<puml src="diagrams/FindExecuteSequenceDiagram.puml" width="600" />
+<puml src="diagrams/FindExecuteSequenceDiagram.puml" width="500" />
 
 <br>
 
 ---
-
-<div style="page-break-after: always;"></div>
 
 ### Pin Command
 
@@ -471,9 +471,9 @@ The sequence of the `pin` command is as follows:<br>
 
 The following sequence diagram shows how the `pin` command works:
 
-<puml src="diagrams/PinParseSequenceDiagram.puml" width="425" />
+<puml src="diagrams/PinParseSequenceDiagram.puml" width="450" />
 
-<puml src="diagrams/PinExecuteSequenceDiagram.puml" width="675" />
+<puml src="diagrams/PinExecuteSequenceDiagram.puml" width="700" />
 
 <br>
 
@@ -637,8 +637,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | tutor who receives payments from parents                                    | add payment statuses to each student                                                         | I can manage my finance-related tasks efficiently                                                                                   |
 | `*`      | private tutor involved in long-term academic planning                       | keep a history of each student's progress and achievements                                   | I can monitor their growth over time and adjust my teaching strategies accordingly                                                  |
 | `*`      | expert user of the addressbook                                              | set macros for filters/sort                                                                  | I would be able to quickly organise without typing long commands                                                                    |
-
-<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -1371,3 +1369,4 @@ Team Size: 5. Hence, maximum number of planned enhancements is **10**.
 ### 10. Improve UI to view contacts in a separate window
 * **Current Situation**: If the name of the contact exceeds 14 characters, users can only view the name via commands. (pin etc.)
 * **Proposed Improvement**: Create a new command that displays full details of the contact in a new window.
+
