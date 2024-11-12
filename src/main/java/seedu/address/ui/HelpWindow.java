@@ -61,7 +61,7 @@ public class HelpWindow extends UiPart<Stage> {
         new CommandHelpCard(
             AddCommand.COMMAND_WORD, AddCommand.MESSAGE_USAGE_DELIVERY, AddCommand.ADD_DELIVERY_EXAMPLE
         ),
-        new CommandHelpCard(ArchiveCommand.COMMAND_WORD, ArchiveCommand.MESSAGE_USAGE, "archive 1"),
+        new CommandHelpCard(ArchiveCommand.COMMAND_WORD, ArchiveCommand.MESSAGE_USAGE_DELIVERY, "archive 1"),
         // Update when AssignCommand is added
         new CommandHelpCard(
             "assign",
@@ -85,7 +85,7 @@ public class HelpWindow extends UiPart<Stage> {
         new CommandHelpCard(
             SortCommand.COMMAND_WORD_DESCENDING, SortCommand.MESSAGE_USAGE_DESCENDING_INSPECT, "dsort by/ cost"
         ),
-        new CommandHelpCard(UnarchiveCommand.COMMAND_WORD, UnarchiveCommand.MESSAGE_USAGE, "unarchive 1")
+        new CommandHelpCard(UnarchiveCommand.COMMAND_WORD, UnarchiveCommand.MESSAGE_USAGE_DELIVERY, "unarchive 1")
     ));
 
     private static HelpWindow theOne;

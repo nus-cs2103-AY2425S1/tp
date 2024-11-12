@@ -23,8 +23,13 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
             List<Index> indexes = ParserUtil.parseIndex(args);
             return new ArchiveCommand(indexes);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE), pe);
+            if (AddressBookParser.getInspect()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE_DELIVERY), pe);
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE_PERSON), pe);
+            }
         }
     }
 
