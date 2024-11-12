@@ -148,7 +148,7 @@ Examples:
 
 ### Adding a Tutee: `addTutee`
 
-Adds a Tutee to VolunTier.
+Adds a tutee to VolunTier.
 
 Format: `addTutee \n NAME \p PHONE_NUMBER \e EMAIL \a ADDRESS [\h HOURS] [\s SUBJECT]…​`
 

@@ -131,7 +131,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidRole_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(1, VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_HOURS, "Invalid", VALID_SUBJECTS);
-        String expectedMessage = "Role must be either Tutor or Tutee";
+        String expectedMessage = "Role must be either Tutor or Tutee.";
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 }

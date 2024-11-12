@@ -186,6 +186,7 @@ public class ModelManager implements Model {
     public void commitAddressBook() {
         versionedAddressBook.commit();
     }
+
     //@@author
 
     @Override

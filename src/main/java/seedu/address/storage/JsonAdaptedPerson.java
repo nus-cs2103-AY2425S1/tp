@@ -142,7 +142,7 @@ public class JsonAdaptedPerson {
         String phone = this.getPhone();
         String email = this.getEmail();
         String address = this.getAddress();
-        String hours = this.getHours();
+        String hours = this.getHours() == null || this.getHours().isEmpty() ? "0" : this.getHours();
         String role = this.getRole();
 
         final List<Subject> personSubjects = new ArrayList<>();
@@ -182,9 +182,6 @@ public class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (hours == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Hours.class.getSimpleName()));
-        }
         if (!Hours.isValidHours(hours)) {
             throw new IllegalValueException(Hours.MESSAGE_CONSTRAINTS);
         }
@@ -199,7 +196,7 @@ public class JsonAdaptedPerson {
         } else if (role == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Role"));
         } else {
-            throw new IllegalValueException("Role must be either Tutor or Tutee");
+            throw new IllegalValueException("Role must be either Tutor or Tutee.");
         }
     }
 
