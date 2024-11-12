@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+hide Footbox
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LM LOGIC_COLOR
+participant ":AddressBookParser" as ABP LOGIC_COLOR
+participant ":ViewCommandParser" as VCP LOGIC_COLOR
+participant "v:ViewCommand" as VC LOGIC_COLOR
+participant "r:CommandResult" as CR LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+end box
+
+box UI UI_COLOR_T1
+participant ":MainWindow" as MW UI_COLOR
+participant ":PersonListPanel" as PLP UI_COLOR
+end box
+
+->LM ++ : execute("view 1")
+LM -> ABP ++ : parseCommand("view 1")
+ABP -> VCP **
+activate VCP
+VCP --> ABP
+deactivate VCP
+ABP -> VCP : parse("1")
+activate VCP
+VCP -> VC **
+activate VC
+return v
+return v
+return v
+destroy VCP
+LM -> VC ++ : execute(model)
+VC -> Model ++ : getFilteredPersonList()
+return
+VC -> Model : get(targetIndex)
+return personToView
+VC -> CR **
+activate CR
+return r
+return r
+LM <-- CR : CommandResult
+LM -> MW : displayResult(CommandResult)
+MW -> PLP : displayPersonDetails(personToView)
+
+@enduml

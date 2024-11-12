@@ -2,9 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESIREDROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -22,10 +27,15 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DesiredRole;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Skills;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,17 +46,28 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+        + "by the index number used in the displayed person list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_NAME + "NAME] "
+        + "[" + PREFIX_PHONE + "PHONE] "
+        + "[" + PREFIX_EMAIL + "EMAIL] "
+        + "[" + PREFIX_ADDRESS + "ADDRESS] "
+        + "[" + PREFIX_DESIREDROLE + "DESIREDROLE] "
+        + "[" + PREFIX_SKILLS + "SKILLS] "
+        + "[" + PREFIX_EXPERIENCE + "EXPERIENCE] "
+        + "[" + PREFIX_STATUS + "STATUS] "
+        + "[" + PREFIX_NOTE + "NOTE] "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_PHONE + "91234567 "
+        + PREFIX_EMAIL + "johndoe@example.com "
+        + PREFIX_DESIREDROLE + "Project Manager "
+        + PREFIX_SKILLS + "Java, Python "
+        + PREFIX_EXPERIENCE + "Software Engineer at ABC Corp 2015-2020 "
+        + PREFIX_STATUS + "Interviewed "
+        + PREFIX_NOTE + "Confident "
+        + PREFIX_TAG + "friends";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -56,12 +77,17 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
+
+        assert index != null : "Index must not be null";
+        assert index.getOneBased() > 0 : "Index must be a positive integer";
+
+        assert editPersonDescriptor != null : "Edit Person Descriptor should not be null";
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
@@ -72,6 +98,7 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        // Check if the index is out of bounds
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -85,6 +112,9 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        assert editedPerson != null : "Edited person should not be null";
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -93,39 +123,38 @@ public class EditCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+        assert personToEdit != null : "Person to edit cannot be null.";
+        assert editPersonDescriptor != null : "EditPersonDescriptor cannot be null.";
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        DesiredRole updatedDesiredRole = editPersonDescriptor.getDesiredRole().orElse(personToEdit.getDesiredRole());
+        Skills updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
+        Experience updatedExperience = editPersonDescriptor.getExperience().orElse(personToEdit.getExperience());
+        Status updatedStatus = editPersonDescriptor.getStatus().orElse(personToEdit.getStatus());
+        Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDesiredRole, updatedSkills,
+            updatedExperience, updatedStatus, updatedNote, updatedTags);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
-            return false;
-        }
-
-        EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        return other == this // short circuit if same object
+            || (other instanceof EditCommand // instanceof handles nulls
+            && index.equals(((EditCommand) other).index)
+            && editPersonDescriptor.equals(((EditCommand) other).editPersonDescriptor));
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
-                .toString();
+            .add("index", index)
+            .add("editPersonDescriptor", editPersonDescriptor)
+            .toString();
     }
 
     /**
@@ -137,9 +166,15 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private DesiredRole desiredRole;
+        private Skills skills;
+        private Experience experience;
+        private Status status;
+        private Note note;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -150,6 +185,11 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setDesiredRole(toCopy.desiredRole);
+            setSkills(toCopy.skills);
+            setExperience(toCopy.experience);
+            setStatus(toCopy.status);
+            setNote(toCopy.note);
             setTags(toCopy.tags);
         }
 
@@ -157,7 +197,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, desiredRole,
+                skills, experience, status, note, tags);
         }
 
         public void setName(Name name) {
@@ -192,6 +233,46 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setDesiredRole(DesiredRole desiredRole) {
+            this.desiredRole = desiredRole;
+        }
+
+        public Optional<DesiredRole> getDesiredRole() {
+            return Optional.ofNullable(desiredRole);
+        }
+
+        public void setSkills(Skills skills) {
+            this.skills = skills;
+        }
+
+        public Optional<Skills> getSkills() {
+            return Optional.ofNullable(skills);
+        }
+
+        public void setExperience(Experience experience) {
+            this.experience = experience;
+        }
+
+        public Optional<Experience> getExperience() {
+            return Optional.ofNullable(experience);
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
+        }
+
+        public void setNote(Note note) {
+            this.note = note;
+        }
+
+        public Optional<Note> getNote() {
+            return Optional.ofNullable(note);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -215,28 +296,38 @@ public class EditCommand extends Command {
                 return true;
             }
 
-            // instanceof handles nulls
             if (!(other instanceof EditPersonDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            EditPersonDescriptor e = (EditPersonDescriptor) other;
+
+            return Objects.equals(name, e.name)
+                && Objects.equals(phone, e.phone)
+                && Objects.equals(email, e.email)
+                && Objects.equals(address, e.address)
+                && Objects.equals(desiredRole, e.desiredRole)
+                && Objects.equals(skills, e.skills)
+                && Objects.equals(experience, e.experience)
+                && Objects.equals(status, e.status)
+                && Objects.equals(note, e.note)
+                && Objects.equals(tags, e.tags);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
-                    .toString();
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("desiredRole", desiredRole)
+                .add("skills", skills)
+                .add("experience", experience)
+                .add("status", status)
+                .add("note", note)
+                .add("tags", tags)
+                .toString();
         }
     }
 }

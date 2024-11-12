@@ -23,18 +23,44 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final DesiredRole desiredRole;
+    private final Skills skills;
+    private final Experience experience;
+    private final Status status;
+    private final Note note;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  DesiredRole desiredRole, Skills skills, Experience experience,
+                  Status status, Note note, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, desiredRole, skills, experience, status, note, tags);
+
+        assert name != null : "Name should not be null";
+        assert phone != null : "Phone should not be null";
+        assert email != null : "Email should not be null";
+        assert address != null : "Address should not be null";
+        assert desiredRole != null : "DesiredRole should not be null";
+        assert skills != null : "Skills should not be null";
+        assert experience != null : "Experience should not be null";
+        assert status != null : "Status should not be null";
+        assert note != null : "Note should not be null";
+        assert tags != null : "Tags should not be null";
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.desiredRole = desiredRole;
+        this.skills = skills;
+        this.experience = experience;
+        this.status = status;
+        this.note = note;
         this.tags.addAll(tags);
+
+        assert !tags.contains(null) : "Tags should not contain null values";
     }
 
     public Name getName() {
@@ -51,6 +77,26 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public DesiredRole getDesiredRole() {
+        return desiredRole;
+    }
+
+    public Skills getSkills() {
+        return skills;
+    }
+
+    public Experience getExperience() {
+        return experience;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public Note getNote() {
+        return note;
     }
 
     /**
@@ -71,7 +117,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+            && otherPerson.getName().equals(getName()) && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -84,34 +130,41 @@ public class Person {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Person)) {
             return false;
         }
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+            && phone.equals(otherPerson.phone)
+            && email.equals(otherPerson.email)
+            && address.equals(otherPerson.address)
+            && desiredRole.equals(otherPerson.desiredRole)
+            && skills.equals(otherPerson.skills)
+            && experience.equals(otherPerson.experience)
+            && status.equals(otherPerson.status)
+            && note.equals(otherPerson.note)
+            && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, desiredRole, skills, experience, status, note, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .toString();
+            .add("name", name)
+            .add("phone", phone)
+            .add("email", email)
+            .add("address", address)
+            .add("desiredRole", desiredRole)
+            .add("skills", skills)
+            .add("experience", experience)
+            .add("status", status)
+            .add("note", note)
+            .add("tags", tags)
+            .toString();
     }
-
 }

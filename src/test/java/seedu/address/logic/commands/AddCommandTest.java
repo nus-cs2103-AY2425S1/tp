@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -10,6 +11,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -157,6 +160,11 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Map<String, Long> getSummaryData() {
+            return new HashMap<>(); // Return an empty map as a stub implementation
+        }
     }
 
     /**
@@ -174,6 +182,11 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public Map<String, Long> getSummaryData() {
+            return new HashMap<>(); // Stub implementation
         }
     }
 
@@ -198,6 +211,11 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public Map<String, Long> getSummaryData() {
+            return new HashMap<>(); // Stub implementation
         }
     }
 

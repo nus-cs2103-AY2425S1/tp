@@ -76,7 +76,7 @@ public class JsonAddressBookStorageTest {
         original.removePerson(ALICE);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(new AddressBook(readBack), original);
 
         // Save and read without specifying file path
         original.addPerson(IDA);

@@ -18,8 +18,7 @@
       <stylesheets>
         <URL value="@HelpWindow.css" />
       </stylesheets>
-
-      <HBox alignment="CENTER" fx:id="helpMessageContainer">
+      <HBox alignment="BOTTOM_RIGHT" fx:id="helpMessageContainer">
         <children>
           <Label fx:id="helpMessage" text="Label">
             <HBox.margin>
@@ -39,6 +38,7 @@
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </padding>
       </HBox>
+
     </Scene>
   </scene>
 </fx:root>

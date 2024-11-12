@@ -5,55 +5,52 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `seer@comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Tung Yan Zuo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/darren-tung.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[Github](http://github.com/darren-tung)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Oversee CS2101 & CS2103T's task & responsibilities
 
-### Johnny Doe
+### Dominic Lei Zeyuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dominic2412.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[Github](https://github.com/dominic2412)]
+- Role: User Guide Coordinator
+- Responsibilities: Oversee the User Guide and delegate responsibilities for others to work on it
 
-* Role: Developer
-* Responsibilities: Data
 
-### Jean Doe
+### Stanley Tang Zhiheng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/stanleytangzh.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[Github](http://github.com/stanleytangzh)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: QA Tester
+* Responsibilities: Main person in charge of finding bugs, categorising the bugs in a QA document and adding test cases
 
-### James Doe
+### Rithani Saravanakumar
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rithanisk.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[Github](http://github.com/rithanisk)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Developer Guide Coordinator
+* Responsibilities: Oversee the Developer Guide and delegate responsibilities for others to work on it
+
+### Aditya Joshi
+
+<img src="images/thisisaditya17.png" width="200px">
+
+[[Github](http://github.com/thisisaditya17)]
+
+* Role: UI developer & QA Tester
+* Responsibilities: Create a new UI and fix any issue regarding it
+

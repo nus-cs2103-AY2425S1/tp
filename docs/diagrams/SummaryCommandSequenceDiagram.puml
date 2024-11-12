@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+hide Footbox
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LM LOGIC_COLOR
+participant ":AddressBookParser" as ABP LOGIC_COLOR
+participant ":SummaryCommandParser" as SCP LOGIC_COLOR
+participant "s:SummaryCommand" as SC LOGIC_COLOR
+participant "r:CommandResult" as CR LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AB MODEL_COLOR
+participant ":Person" as Person MODEL_COLOR
+end box
+
+->LM ++ : execute("summary")
+LM -> ABP ++ : parseCommand("summary")
+ABP -> SCP : parse()
+activate SCP
+SCP -> SC **
+activate SC
+return s
+return s
+return s
+destroy SCP
+LM -> SC ++ : execute(model)
+SC -> Model : getAddressBook()
+Model --> SC : AddressBook instance
+SC -> AB : getPersonList()
+AB --> SC : personList
+
+SC -> CR **
+activate CR
+return r
+return r
+LM <-- CR : CommandResult
+
+@enduml

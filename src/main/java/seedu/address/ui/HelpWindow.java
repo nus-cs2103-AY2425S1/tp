@@ -15,8 +15,13 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t09-2.github.io/tp/UserGuide.html";
+
+    public static final String HELP_MESSAGE_COMMANDS = "Below are the list of commands TalentSG supports:\n\n"
+            + "Add    |    Edit    |    List    |    Delete    |    View    |    Find    |    Filter    |    Clear  "
+            + "  |    Summary    |    Help    |    Exit\n\n";
+    public static final String HELP_MESSAGE = HELP_MESSAGE_COMMANDS + "For additional information, "
+            + "please refer to the user guide:\n " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -45,7 +50,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the help window.
+     * Shows the help window. If the window is minimized, restore it.
      * @throws IllegalStateException
      *     <ul>
      *         <li>
@@ -64,8 +69,12 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
-        getRoot().show();
-        getRoot().centerOnScreen();
+        Stage stage = getRoot();
+        if (stage.isIconified()) {
+            stage.setIconified(false); // Restore if minimized
+        }
+        stage.show();
+        stage.centerOnScreen();
     }
 
     /**

@@ -40,6 +40,7 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
+        assert email != null : "Email cannot be null";
         checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
         value = email;
     }

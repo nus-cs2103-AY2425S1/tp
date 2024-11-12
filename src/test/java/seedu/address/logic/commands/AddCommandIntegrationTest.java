@@ -28,21 +28,32 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+        // Ensure this person is unique and includes all fields: skills, experience, status, note, and desiredRole
+        Person validPerson = new PersonBuilder()
+            .withName("Unique Name")
+            .withPhone("99999999")
+            .withEmail("uniqueperson@example.com")
+            .withAddress("123 Some Street")
+            .withSkills("Java, Python")
+            .withExperience("2 years at Meta")
+            .withStatus("Interviewed")
+            .withNote("Confident speaker")
+            .withDesiredRole("Software Engineer")
+            .build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
         assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                expectedModel);
+            String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+            expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+            AddCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }

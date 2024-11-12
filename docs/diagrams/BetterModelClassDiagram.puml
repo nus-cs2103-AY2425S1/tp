@@ -14,8 +14,13 @@ UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
+Person *--> "1" DesiredRole
+Person *--> "1" Experience
+Person *--> "1" Skills
+Person *--> "1" Status
+Person *--> "0..1" Note
 @enduml

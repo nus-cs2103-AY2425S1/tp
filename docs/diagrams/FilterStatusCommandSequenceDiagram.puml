@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+hide Footbox
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LM LOGIC_COLOR
+participant ":AddressBookParser" as ABP LOGIC_COLOR
+participant ":FilterStatusCommandParser" as FSCP LOGIC_COLOR
+participant "f:FilterStatusCommand" as FSC LOGIC_COLOR
+participant "r:CommandResult" as CR LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+->LM ++  : execute("filter Rejected")
+LM -> ABP ++ : parseCommand("filter Rejected")
+ABP -> FSCP **
+activate FSCP
+FSCP --> ABP
+deactivate FSCP
+ABP -> FSCP : parse("Rejected")
+activate FSCP
+FSCP -> FSC **
+activate FSC
+return f
+return f
+return f
+destroy FSCP
+LM -> FSC ++ : execute(model)
+FSC -> Model ++ : updateFilteredPersonList(predicate)
+return
+FSC -> CR **
+activate CR
+return r
+return r
+return
+
+@enduml
