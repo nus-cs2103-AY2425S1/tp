@@ -622,4 +622,5 @@ For reference, our group has 5 members.
 6. Update the error message displayed to the user by the `remark` command upon attempt to index with 0. The current error message for `remark 0 r/Hates frisbees` states "invalid command format" when it should mention that the index provided is invalid.
 7. Update the error message displayed to the user by the `delete` command upon attempt to index with 0. The current error message for `delete 0` states "invalid command format" when it should mention that the index provided is invalid.
 8. Update the error message displayed to the user by the `view` command upon attempt to index with 0. The current error message for `view 0` states "invalid command format" when it should mention that the index provided is invalid.
-9. Include an example of sorting by date of last visit (`d/`) in the command format message of the `sort` command.
+9. Include an example of sorting by date of last visit (`d/`) in the command format message of the `sort` command. 
+10. Improve clarity of emergency contact error message for invalid input. Currently, entering an invalid emergency contact will give an error message about phone numbers. This can be confusing when editing a phone number and emergency contact simultaneously. The message will be edited to more explicitly mention emergency contact and the specific issue. 
