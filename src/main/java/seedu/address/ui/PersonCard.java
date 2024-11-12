@@ -39,7 +39,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label favoriteStar;
+    @FXML
     private FlowPane tags;
+    @FXML
+    private Label department;
+    @FXML
+    private Label leave;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -55,5 +61,8 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        favoriteStar.setVisible(person.isFavorite());
+        department.setText("(" + person.getDepartment().department + ")");
+        leave.setText("Leave left: " + person.getLeave().value);
     }
 }

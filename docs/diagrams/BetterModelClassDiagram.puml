@@ -18,4 +18,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Favorite
+Person *--> Department
+Person *--> Leave
 @enduml

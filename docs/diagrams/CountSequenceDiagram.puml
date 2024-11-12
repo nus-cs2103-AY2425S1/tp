@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":CountCommandParser" as CountCommandParser LOGIC_COLOR
+participant "d:CountCommand" as CountCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("count")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("count tag/tag")
+activate AddressBookParser
+
+create CountCommandParser
+AddressBookParser -> CountCommandParser
+activate CountCommandParser
+
+CountCommandParser --> AddressBookParser
+deactivate CountCommandParser
+
+AddressBookParser -> CountCommandParser : parse("tag")
+activate CountCommandParser
+
+create CountCommand
+CountCommandParser -> CountCommand
+activate CountCommand
+
+CountCommand --> CountCommandParser :
+deactivate CountCommand
+
+CountCommandParser --> AddressBookParser : d
+deactivate CountCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+CountCommandParser -[hidden]-> AddressBookParser
+destroy CountCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> CountCommand : execute(m)
+activate CountCommand
+
+CountCommand -> Model : size()
+activate Model
+
+Model --> CountCommand
+deactivate Model
+
+create CommandResult
+CountCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> CountCommand
+deactivate CommandResult
+
+CountCommand --> LogicManager : r
+deactivate CountCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

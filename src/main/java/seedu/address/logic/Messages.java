@@ -45,7 +45,14 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
-        return builder.toString();
+        if (person.isFavorite()) {
+            builder.append("(Favorite)");
+        }
+        builder.append("; Department: ")
+                .append(person.getDepartment());
+        builder.append("; Leave: ")
+                .append(person.getLeave());
+        return builder.toString().trim();
     }
 
 }

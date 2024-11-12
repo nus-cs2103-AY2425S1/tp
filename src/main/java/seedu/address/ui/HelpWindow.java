@@ -15,9 +15,24 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t16-1.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
+    /**
+     * Add Additional Help Messages
+     */
+    private static final String ADD_PERSON_HELP = "Add a person: Use the command 'add' followed by the details.";
+    private static final String LIST_PERSONS_HELP = "List all persons: Use the command 'list' to view all contacts.";
+    private static final String EDIT_PERSON_HELP = "Edit a person: Use the command 'edit' followed by the person's ID.";
+    private static final String FIND_PERSON_HELP = "Find persons by keywords: "
+            + "Use the command 'find' followed by the name.";
+    private static final String DELETE_PERSON_HELP = "Delete a person: Use the command 'delete' followed by the index.";
+    private static final String CLEAR_ENTRIES_HELP = "Clear all entries: "
+            + "Use the command 'clear' to remove all contacts.";
+    private static final String EXIT_HELP = "Exit the program: Use the command 'exit' to close the application.";
+    private static final String COUNT_HELP = "Count shown entries: "
+            + "Use the command 'count' to find count of shown entries";
+    private static final String FAVORITE_HELP = "Favorite a person: Use the command 'favorite' followed by the index.";
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
@@ -34,7 +49,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        logger.info("Initializing HelpWindow with custom root stage");
+        initializeHelpMessage();
     }
 
     /**
@@ -42,51 +58,65 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
+        logger.info("Initializing HelpWindow with new stage");
+    }
+
+    /**
+     * Initializes the help message to display in the help window.
+     */
+    private void initializeHelpMessage() {
+        logger.fine("Setting up help message content");
+        StringBuilder helpContent = new StringBuilder();
+        helpContent.append(HELP_MESSAGE).append("\n\n");
+        helpContent.append(ADD_PERSON_HELP).append("\n");
+        helpContent.append(LIST_PERSONS_HELP).append("\n");
+        helpContent.append(EDIT_PERSON_HELP).append("\n");
+        helpContent.append(FIND_PERSON_HELP).append("\n");
+        helpContent.append(DELETE_PERSON_HELP).append("\n");
+        helpContent.append(CLEAR_ENTRIES_HELP).append("\n");
+        helpContent.append(COUNT_HELP).append("\n");
+        helpContent.append(FAVORITE_HELP).append("\n");
+        helpContent.append(EXIT_HELP).append("\n");
+
+        helpMessage.setText(helpContent.toString());
+        logger.fine("Help message content initialized successfully");
     }
 
     /**
      * Shows the help window.
-     * @throws IllegalStateException
-     *     <ul>
-     *         <li>
-     *             if this method is called on a thread other than the JavaFX Application Thread.
-     *         </li>
-     *         <li>
-     *             if this method is called during animation or layout processing.
-     *         </li>
-     *         <li>
-     *             if this method is called on the primary stage.
-     *         </li>
-     *         <li>
-     *             if {@code dialogStage} is already showing.
-     *         </li>
-     *     </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.info("Showing help window");
         getRoot().show();
         getRoot().centerOnScreen();
+        logger.fine("Help window displayed and centered on screen");
     }
 
     /**
      * Returns true if the help window is currently being shown.
      */
     public boolean isShowing() {
-        return getRoot().isShowing();
+        boolean showing = getRoot().isShowing();
+        logger.fine("Help window showing status checked: " + showing);
+        return showing;
     }
 
     /**
      * Hides the help window.
      */
     public void hide() {
+        logger.info("Hiding help window");
         getRoot().hide();
+        logger.fine("Help window hidden");
     }
 
     /**
      * Focuses on the help window.
      */
     public void focus() {
+        logger.fine("Setting focus to help window");
         getRoot().requestFocus();
+        logger.fine("Help window focus requested");
     }
 
     /**
@@ -94,9 +124,11 @@ public class HelpWindow extends UiPart<Stage> {
      */
     @FXML
     private void copyUrl() {
+        logger.info("Copying user guide URL to clipboard");
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+        logger.fine("User guide URL copied to clipboard successfully");
     }
 }

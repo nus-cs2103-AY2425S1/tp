@@ -1,49 +1,84 @@
 ---
-layout: page
-title: User Guide
+  layout: default.md
+  title: "User Guide"
+  pageNav: 3
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# HR Helper User Guide
 
-* Table of Contents
-{:toc}
+**Overview of User Guide**
+
+<!-- * Table of Contents -->
+<page-nav-print />
+
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 1 Introduction
+HR Helper is a **desktop app for managing employees, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+HR Helper is mainly targeted at **fledgling companies** (e.g start-ups), who want to have an easy-to-use, intuitive human resource manager.
+With its gentle learning curve and versatility, it can be easily picked up by anyone, and used by any type of company.
+
+Whether it be 5 staff members or 500 employees, HR Helper has the capability to accommodate a wide range of company sizes and is sure to be an asset to your companies' management system!
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 2 About
+
+This user guide provides an overview for HR staff on the usage of HR Helper.
+
+It starts off with the simple steps you need to take to install the app, to ensure you have a smooth experience getting
+started.
+
+Afterward, it runs through the various commands available at your disposable to so you can use the app to its fullest 
+potential.
+
+Finally, frequently asked questions as well as known issues will be displayed so you can clarify any queries you might 
+have.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 3 Starting HR Helper
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-1/tp/releases/tag/v1.6).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your HR Helper.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HRHelper.v1.6.jar` command to run the application.
+
+1. A login window similar to the below should appear in a few seconds. Login to HR Helper.<br>
+   ![image](images/authentication.png){width=1200}
+
+1. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![image](images/Ui.png){width=1200}
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+   
+2. Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all employees.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney f/ d/HR l/12 1` : Adds an employee named `John Doe` to the HR Helper list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd employee shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all employees.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 4 Features of HR Helper
 
-<div markdown="block" class="alert alert-info">
+<box type="info" seamless>
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -61,57 +96,177 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+</box>
 
-### Viewing help : `help`
+{{ newPage }}
 
-Shows a message explaning how to access the help page.
+--------------------------------------------------------------------------------------------------------------------
 
-![help message](images/helpMessage.png)
+### 4.1 Authentication
+
+Login to HR Helper with your username and password.
+
+Format:
+
+![image](images/HRHelperLoginOutput.png){width=1200}
+
+<box type="tip" seamless>
+
+**Tip:** Press `Enter` to go to the next field!
+</box>
+
+Examples:
+* For this version, the username is `admin` and password is `12345678`.
+
+<box type="warning" seamless>
+
+**Warning:** Keep your credentials secure.
+</box>
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.2 Viewing help : `help`
+
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
+<box type="tip" seamless>
 
-### Adding a person: `add`
-
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+**Tip:** Use the help command anytime to quickly refresh on command usage.
+</box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+![image](images/helpMessage.png){width=1200}
 
-Shows a list of all persons in the address book.
+<box type="warning" seamless>
+
+**Warning:** Navigating to the link will not close HR Helper. Do not leave your device unattended.
+</box>
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.3 Adding an employee : `add`
+
+Adds an employee to the HR Helper.
+
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/FAVORITE] [d/DEPARTMENT] [l/LEAVE]`
+
+<box type="tip" seamless>
+
+**Tip:** An employee can have any number of tags (including 0)
+</box>
+
+Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/true d/Operations l/12`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Road p/1234567 t/lazy f/true d/Marketing l/10`
+
+![image](images/add.png){width=1200}
+
+<box type="warning" seamless>
+
+**Warning:** Duplicate employees with the same name cannot be added.
+</box>
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.4 Listing all employees : `list`
+
+Shows a list of all employees in HR Helper.
 
 Format: `list`
 
-### Editing a person : `edit`
+<box type="tip" seamless>
 
-Edits an existing person in the address book.
+**Tip:** `list` can be used to show all employees after using the `find` command.
+</box>
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Example:
+* `list` shows all employees.
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+![image](images/list.png){width=1200}
+
+<box type="warning" seamless>
+
+**Warning:** Use this command before other commands like delete or edit to ensure you’re modifying the correct entry.
+</box>
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.5 Counting employees : `count`
+
+Counts number of employees.
+
+Format: `count`(for counting the filtered list), `count tag/TAG`(for counting employees with given TAG)
+
+* If counting the entire list, use `count`.
+* If counting employees with specified TAG, add TAG to end of the command.
+
+<box type="tip" seamless>
+
+**Tip:** Use count with tags to quickly assess team sizes within specific departments or roles
+</box>
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `count`
+* `count tag/Communications`
 
-### Locating persons by name: `find`
+![image](images/count.png){width=1200}
 
-Finds persons whose names contain any of the given keywords.
+<box type="warning" seamless>
+
+**Warning:** When using count t/TAG, ensure that the TAG exists and is spelled accurately; otherwise, the command may return zero results.
+</box>
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.6 Editing an employee : `edit`
+
+Edits an existing employee in the HR Helper.
+
+Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boolean] [d/DEPARTMENT] [l/LEAVE]`
+
+* Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the employee will be removed i.e adding of tags is not cumulative.
+* You can remove all the employee’s tags by typing `t/` without
+    specifying any tags after it.
+
+<box type="tip" seamless>
+
+**Tip:** To remove all tags, use t/ without specifying tags (e.g., edit 1 t/).
+</box>
+
+Examples:
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st employee to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
+
+![image](images/edit.png){width=1200}
+
+<box type="warning" seamless>
+
+**Warning:** Changes overwrite current data. Double-check inputs before saving.
+</box>
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.7 Locating employees by name : `find`
+
+Finds employees whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -119,81 +274,274 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Employees matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+<box type="tip" seamless>
+
+**Tip:** Use partial keywords to broaden your search (e.g., find Jo matches John and Joan).
+</box>
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+![image](images/find.png){width=1200}
+
+<box type="warning" seamless>
+
+**Warning:** The find command only searches names. Ensure that names are correctly spelled.
+</box>
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.8 Deleting an employee : `delete`
+
+Deletes the specified employee from HR Helper.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the employee at the specified `INDEX`.
+* The index refers to the index number shown in the displayed employee list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<box type="tip" seamless>
+
+**Tip:** Use delete carefully, especially after sorting or filtering, as index positions may change.
+</box>
+
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd employee in HR Helper.
+* `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
-### Clearing all entries : `clear`
+![image](images/delete.png){width=1200}
 
-Clears all entries from the address book.
+<box type="warning" seamless>
+
+**Warning:** This action is irreversible. Use list before delete to confirm the index.
+</box>
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.9 Sorting Employees : `sort`
+
+Sorts the displayed employees based on specified tags.
+
+Format: `sort TAG`
+
+* Sorts the employees according to the specified tags.
+
+<box type="tip" seamless>
+
+**Tip:** For large lists, use sort with commonly used tags to improve data visibility.
+</box>
+
+Examples:
+* `sort friend` Sorts and displays all employees tagged as friend.
+
+![image](images/sort.png){width=1200}
+
+<box type="warning" seamless>
+
+**Warning:** Sorting by multiple tags may combine various groups, which can affect other commands relying on order.
+</box>
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.10 Favoriting an employee : `favorite`
+
+Favorites the specified employee from HR Helper.
+
+Format: `favorite INDEX`
+
+* Favorites the employee at the specified `INDEX`.
+* The index refers to the index number shown in the displayed employee list.
+* The index **must be a positive integer** 1, 2, 3, …​
+  
+<box type="tip" seamless>
+
+**Tip:** Use favorite for high-priority employees, making them easier to locate with filtering or sorting.
+</box>
+
+Examples:
+* `list` followed by `favorite 2` favorites the 2nd employee in HR Helper.
+* `find Betsy` followed by `favorite 1` favorites the 1st employee in the results of the `find` command.
+
+![image](images/favorite.png){width=1200}
+
+<box type="warning" seamless>
+
+**Warning:** Avoid favoriting too many employees, as an excessive number of favorites can make it challenging to identify key employees quickly.
+</box>
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.11 Clearing all entries : `clear`
+
+Clears all entries from HR Helper.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+<box type="tip" seamless>
 
-Exits the program.
+**Tip:** Use clear only when resetting the database is intentional.
+</box>
+
+Examples:
+* `clear` resets the database in HR Helper.
+
+![image](images/clear.png){width=1200}
+
+<box type="warning" seamless>
+
+**Warning:** This action is irreversible. Back up data if necessary before clearing.
+</box>
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.12 Exiting HR Helper : `exit`
+
+Exits HR Helper.
 
 Format: `exit`
 
-### Saving the data
+<box type="tip" seamless>
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+**Tip:** Use exit only after confirming that all changes have been saved, as the program automatically saves data with each command.
+</box>
 
-### Editing the data file
+<box type="warning" seamless>
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+**Warning:** Exiting abruptly may interrupt ongoing processes. Use the exit command instead of closing the window directly to ensure a clean shutdown.
+</box>
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+### 4.13 Employee Details Window
+
+The **Employee Details Window** allows HR personnel to view and edit detailed information about each employee efficiently. This guide provides a concise overview of how to use this feature effectively.
+
+- **Keyboard Shortcut:**
+    - Select a employee from the **Employee List**.
+    - Press the `Enter` key to open the **Employee Details Window**.
+
+![image](images/persondetailswindow.png){width=1200}
+
+
+- **Name:** Editable text field displaying the employee's full name.
+- **Phone:** Editable text field for the employee's contact number.
+- **Email:** Editable text field for the employee's email address.
+- **Address:** Editable text field for the employee's residential or mailing address.
+- **Department:** Editable text field indicating the employee's department within the organization.
+- **Leave:** Editable text field showing the remaining leave days available to the employee.
+- **Favorite:** Checkbox to mark the employee as a favorite for quick access.
+
+**Editing Information**
+
+- **Modify Fields:**
+    - Press `Enter` on keyboard on any text field (e.g., **Name**, **Phone**) to edit the information.
+    - For the **Favorite** checkbox, press `space` bar to toggle the favorite status.
+  
+- **Navigate Between Fields:**
+    - **Tab Key / Down Arrow (`↓`):** Move to the next field.
+    - **Shift + Tab Key / Up Arrow (`↑`):** Move to the previous field.
+
+- **Save Changes:**
+    - Press the `Enter` key to save all modifications.
+    - The window will close, and changes will reflect in the **Employee List**.
+
+- **Cancel Changes:**
+    - Press the `Esc` key to discard all changes and close the window without saving.
+
+**Validation and Error Handling**
+
+- **Mandatory Fields:**
+    - All fields are required. Ensure no field is left empty before saving.
+
+- **Format Requirements:**
+    - **Phone:** Must be a valid phone number format.
+    - **Email:** Must follow standard email formatting (e.g., `example@domain.com`).
+
+- **Error Messages:**
+    - If invalid data is entered, an error dialog will appear prompting correction.
+    - Follow the on-screen instructions to rectify any issues.
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+### 4.14 Saving the data
+
+HR Helper data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### 4.15 Editing the data file
+
+HR Helper data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<box type="warning" seamless>
+
+**Warning:** If your changes to the data file makes its format invalid, HR Helper will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause HR Helper to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
+
+### 4.16 Importing/Exporting the data file
+
+HR Helper data can be exported as a csv.
+
+Format: `DRIVE:/PATH/TO/FILE.csv`
+
+Examples:
+C:/files/data/people.csv
+E:/fakefolder/hr.csv
+D:/data.csv
+
+![image](images/DataWindow.png){width=1200}
+
+{{ newPage }}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 5 Command summary
+
+| Action       | Format                                                                               | Examples                                                                                                |
+|--------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                              | e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**    | `clear`                                                                              |                                                                                                         |
+| **Count**    | `count`: counts entire employee list<br> `count tag/TAG`: counts people in given tag | e.g. `count tag/Colleagues`                                                                             |
+| **Delete**   | `delete INDEX`                                                                       | e.g. `delete 3`                                                                                         |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`               | e.g. `edit 2 n/James Lee e/jameslee@example.com`                                                        |
+| **Favorite** | `favorite INDEX`                                                                     | e.g. `favorite 3`                                                                                       |
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`                                                       | e.g. `find James Jake`                                                                                  |
+| **Help**     | `help`                                                                               |                                                                                                         |
+| **List**     | `list`                                                                               |                                                                                                         |
+| **Sort**     | `sort TAG`                                                                           | e.g. `sort managers`                                                                                    |
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 6 FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HR Helper home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## 7 Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When using `count` command**, follow the convention of `tag/TAG` and `name/NAME`, rather than the `t/TAG` and `n/NAME` used for other commands. Do be careful of this inconsistency.
+4. **Does not track maternity leave up to 6 months**, which is not part of annual leave.
 
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`

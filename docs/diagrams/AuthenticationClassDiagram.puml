@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor AUTHENTICATION_COLOR_T4
+skinparam classBackgroundColor AUTHENTICATION_COLOR
+
+package Authentication as AuthenticationPackage {
+Class Authentication
+Class Credentials
+Class Hashing
+}
+
+Class LoginWindow #1D8900
+LoginWindow .left.> Authentication
+
+Authentication *-down-> "1" Credentials
+Credentials --> Hashing
+
+}
+@enduml

@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Leave;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -28,22 +30,33 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final Boolean isFavorite;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String department;
+    private final String leave;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("address") String address,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("isFavorite") Boolean isFavorite,
+                             @JsonProperty("department") String department,
+                             @JsonProperty("leave") String leave) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.isFavorite = isFavorite; // Initialize the favorite status
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.department = department;
+        this.leave = leave;
     }
 
     /**
@@ -54,9 +67,12 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        isFavorite = source.isFavorite();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        department = source.getDepartment().department;
+        leave = source.getLeave().value;
     }
 
     /**
@@ -103,7 +119,26 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if (department == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Department.class.getSimpleName()));
+        }
+        if (!Department.isValidDepartment(department)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Department modelDepartment = new Department(department);
+
+        if (leave == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Leave.class.getSimpleName()));
+        }
+        if (!Leave.isValidLeave(leave)) {
+            throw new IllegalValueException(Leave.MESSAGE_CONSTRAINTS);
+        }
+        final Leave modelLeave = new Leave(leave);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                isFavorite, modelDepartment, modelLeave);
     }
 
 }
