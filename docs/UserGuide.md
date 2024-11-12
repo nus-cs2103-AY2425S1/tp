@@ -258,6 +258,7 @@ If you have cleared your data before testing out this feature, add the following
 _Figure 5: Example of using the `link` command to link a patient to a caregiver_
 
 When the command succeeds, the patient will be linked to the caregiver and the following message will be displayed:
+
 ![Link command success](images/linkcommandsucceed.png)
 _Figure 6: Success message displayed after linking a patient with a caregiver_
 
@@ -287,6 +288,7 @@ The example below demonstrates how to delete a link between a patient and a care
 _Figure 7: Example of using the `deletelink` command to remove a link between a patient and a caregiver_
 
 When the command succeeds, you see a message confirming the link was removed:
+
 ![Deletelink command success](images/DeleteLinkCommandSuccess.png)
 _Figure 8: Success message displayed after deleting a link between a patient and a caregiver_
 
@@ -303,10 +305,12 @@ Examples:
 - `addnote nric/S6283947C note/stopped taking XYZ medication on ABC day`
 
 The example below shows how to add notes to a person using CareLink:
+
 ![AddNote command example](images/AddNoteExample.png)
 _Figure 9: Example of using the `addnote` command to add a note to a patient's record_
 
 When the command succeeds, the notes will be added to the person and the following message will be displayed:
+
 ![AddNote command success](images/AddNoteSuccessExample.png)
 _Figure 10: Success message displayed after adding a note to a patient's record_
 
@@ -403,6 +407,7 @@ To navigate through multiple results more efficiently, try using the `Tab` key t
 </div>
 
 The example of using the find command in CareLink appears below:
+
 ![Find command example](images/findcommandexample.png)
 _Figure 11: Example of using the `find` command to locate a person in CareLink_
 
@@ -468,10 +473,12 @@ Use this command format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 - `addapp nric/S6283947C d/01/01/2025 start/10:00 end/11:00` Use this command to add a one-hour appointment on January 1st, 2025
 
 The example of using the `addapp` command in CareLink appears below:
+
 ![Add Appointment command example](images/addappointmentcommand.png)
 _Figure 15: Example of using the `addapp` command to add an appointment for a person in CareLink_
 
 When the command succeeds, the appointment will be added, which can be found using the [`findapp` command](#locating-appointments-by-date-time-range-findapp)
+
 ![Add Appointment success](images/addappointmentcommandsuccess.png)
 _Figure 16: Success mesage displayed after using the `addapp` command_
 
@@ -518,10 +525,12 @@ Use this command format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] 
 - `editapp nric/S6283947C d/01/01/2025 start/10:00 newd/02/01/2025` Changes the appointment date, but the timings remain the same.
 
 The example of using the `editapp` command in CareLink appears below:
+
 ![Edit Appointment example](images/editappointmentcommand.png)
 _Figure 17: Example of using the `editapp` command to edit an appointment in CareLink_
 
 When the command succeeds, the appointment will be edited, which can be found using the [`findapp` command](#locating-appointments-by-date-time-range-findapp)
+
 ![Edit Appointment success](images/editappointmentcommandsuccess.png)
 _Figure 18: Success mesage displayed after using the `editapp` command_
 
@@ -560,10 +569,12 @@ Use this command format: `updatestatus nric/NRIC d/DATE start/START_TIME status/
 - `updatestatus nric/S6283947C d/02/01/2025 start/10:00 status/completed` updates the status to completed for the appointment on January 2nd, 2025 at 10:00.
 
 The example of using the `updatestatus` command in CareLink appears below:
+
 ![Update Appointment Status example](images/updatestatuscommand.png)
 _Figure 19: Example of using the `updatestatus` command to update status of an appointment in CareLink_
 
 When the command succeeds, the status of the appointment will be edited, which can be confirmed using the [`findapp` command](#locating-appointments-by-date-time-range-findapp)
+
 ![Update Appointment Status success](images/updatestatuscommandsuccess.png)
 _Figure 20: Success mesage displayed after using the `updatestatus` command_
 
@@ -598,10 +609,12 @@ Examples:
 - `deleteapp nric/S6283947C d/02/01/2025 start/10:00` deletes the appointment on January 2nd, 2025 at 10:00
 
 The example of using the `deleteapp` command in CareLink appears below:
+
 ![Delete Appointment example](images/deleteappointmentcommand.png)
 _Figure 21: Example of using the `deleteapp` command to delete an appointment in CareLink_
 
 When the command succeeds, the appointment will be deleted, which can be found using the [`findapp` command](#locating-appointments-by-date-time-range-findapp)
+
 ![Delete Appointment success](images/deleteappointmentcommandsuccess.png)
 _Figure 22: Success mesage displayed after using the `deleteapp` command_
 
