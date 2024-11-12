@@ -2,16 +2,19 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -19,16 +22,20 @@ import seedu.address.model.person.Person;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    private static final Logger logger = LogsCenter.getLogger(JsonSerializableAddressBook.class);
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons and tasks.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                       @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
+
         this.persons.addAll(persons);
+        this.tasks.addAll(tasks);
     }
 
     /**
@@ -38,6 +45,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        tasks.addAll(source.getTaskList().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,14 +55,39 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            try {
+                Person person = jsonAdaptedPerson.toModelType();
+                if (addressBook.hasPerson(person)) {
+                    logger.warning("Duplicate person found and ignored: " + person);
+                    continue;
+                }
+                addressBook.addPerson(person);
+            } catch (IllegalValueException ive) {
+                logger.warning("Illegal value found in JSON data for person and ignored: " + jsonAdaptedPerson
+                        + ", error: " + ive.getMessage());
             }
-            addressBook.addPerson(person);
         }
+
+        for (JsonAdaptedTask jsonAdaptedTask : tasks) {
+            try {
+                Task task = jsonAdaptedTask.toModelType();
+                Person patient = task.getPatient();
+                if (addressBook.hasTask(task)) {
+                    logger.warning("Duplicate task found and ignored: " + task);
+                } else if (!addressBook.hasPerson(patient)) {
+                    logger.warning("Patient linked to the following task does not exist: " + task);
+                } else {
+                    addressBook.addTask(task);
+                }
+            } catch (IllegalValueException ive) {
+                // Log and ignore the invalid entry
+                logger.warning("Illegal value found in JSON data for task and ignored: " + jsonAdaptedTask
+                        + ", error: " + ive.getMessage());
+            }
+        }
+
         return addressBook;
     }
-
 }

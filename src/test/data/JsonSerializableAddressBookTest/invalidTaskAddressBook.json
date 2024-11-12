@@ -1,0 +1,43 @@
+{
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "tags": []
+    }
+  ],
+  "tasks": [
+    {
+      "description": "",
+      "isComplete": true,
+      "patient": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "123, Jurong West Ave 6, #08-111",
+        "tags": []
+      }
+    },
+    {
+      "description": "Visit doctor",
+      "patient": null
+    } ,
+    {
+      "description": "Buy medication",
+      "isComplete": true,
+      "patient": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "123, Jurong West Ave 6, #08-111",
+        "emergency contact name": "No Name Entered",
+        "emergency contact number": "000",
+        "tags": [
+          "friends"
+        ]
+      }
+    }
+  ]
+}

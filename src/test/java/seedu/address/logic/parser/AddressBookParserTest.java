@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.PriorityCommandParser.MESSAGE_INVALID_PRIORITY_LEVEL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -13,21 +16,35 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteEmergencyContactCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EmergencyContactCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindTaskCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListIncompleteCommand;
+import seedu.address.logic.commands.ListTaskCommand;
+import seedu.address.logic.commands.MarkTaskCommand;
+import seedu.address.logic.commands.PriorityCommand;
+import seedu.address.logic.commands.UnmarkTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+
 
 public class AddressBookParserTest {
 
@@ -89,6 +106,43 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_listTask() throws Exception {
+        assertTrue(parser.parseCommand(ListTaskCommand.COMMAND_WORD) instanceof ListTaskCommand);
+        assertTrue(parser.parseCommand(ListTaskCommand.COMMAND_WORD + " 3") instanceof ListTaskCommand);
+    }
+
+    @Test
+    public void parseCommand_emergencyContact() throws Exception {
+        final EmergencyContact emergencyContact = new EmergencyContact(new Name("Lily"), new Phone("12345678"));
+        EmergencyContactCommand command = (EmergencyContactCommand) parser.parseCommand(
+                EmergencyContactCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_NAME + emergencyContact.getName() + " "
+                        + PREFIX_PHONE + emergencyContact.getNumber());
+        assertEquals(new EmergencyContactCommand(INDEX_FIRST_PERSON, emergencyContact), command);
+    }
+
+    @Test
+    public void parseCommand_deleteEmergencyContact() throws Exception {
+        DeleteEmergencyContactCommand command = (DeleteEmergencyContactCommand) parser.parseCommand(
+                DeleteEmergencyContactCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteEmergencyContactCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_mark() throws Exception {
+        MarkTaskCommand command = (MarkTaskCommand) parser.parseCommand(
+                MarkTaskCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new MarkTaskCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_unmark() throws Exception {
+        UnmarkTaskCommand command = (UnmarkTaskCommand) parser.parseCommand(
+                UnmarkTaskCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnmarkTaskCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
@@ -96,6 +150,61 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("unknownCommand"));
     }
+
+    @Test
+    public void parseCommand_addTask() throws Exception {
+        String taskDescription = "Buy medication";
+        Index index1 = INDEX_FIRST_PERSON;
+
+        AddTaskCommand expectedCommand = new AddTaskCommand(index1, taskDescription);
+
+        String userInput = AddTaskCommand.COMMAND_WORD + " 1" + " d/" + taskDescription;
+
+        AddTaskCommand command = (AddTaskCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_priorityMissingLevel_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_PRIORITY_LEVEL, ()
+                        -> parser.parseCommand(PriorityCommand.COMMAND_WORD
+                        + " " + INDEX_FIRST_PERSON.getOneBased() + " l/"));
+    }
+
+    @Test
+    public void parseCommand_listIncomplete() throws Exception {
+        assertTrue(parser.parseCommand(ListIncompleteCommand.COMMAND_WORD) instanceof ListIncompleteCommand);
+        assertTrue(parser.parseCommand(ListIncompleteCommand.COMMAND_WORD + " 3")
+                instanceof ListIncompleteCommand);
+    }
+
+    @Test
+    public void parseCommand_findTask() throws Exception {
+        Index index = INDEX_FIRST_PERSON;
+
+        FindTaskCommand expectedCommand = new FindTaskCommand(index);
+
+        FindTaskCommand command = (FindTaskCommand) parser.parseCommand(
+                FindTaskCommand.COMMAND_WORD + " " + index.getOneBased());
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommandFindTaskInvalidFormatThrowsParseException() {
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTaskCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(FindTaskCommand.COMMAND_WORD + " abc"));
+    }
+
+    @Test
+    public void parseCommandFindTaskMissingIndexThrowsParseException() {
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTaskCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(FindTaskCommand.COMMAND_WORD + " "));
+
+    }
+
 }

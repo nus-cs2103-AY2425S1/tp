@@ -1,0 +1,56 @@
+{
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "emergency contact name": "Billy",
+      "emergency contact number": "77777777",
+      "tags": [ "friends" ],
+      "priorityLevel": 3
+    }
+  ],
+  "tasks": [
+    {
+      "description": "Buy medication",
+      "isComplete": true,
+      "patient": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "123, Jurong West Ave 6, #08-111",
+        "emergency contact name": "Billy",
+        "emergency contact number": "77777777",
+        "tags": [ "friends" ],
+        "priorityLevel": 3
+      }
+    }, {
+      "description": "Buy medication",
+      "isComplete": true,
+      "patient": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "123, Jurong West Ave 6, #08-111",
+        "emergency contact name": "Billy",
+        "emergency contact number": "77777777",
+        "tags": [ "friends" ],
+        "priorityLevel": 3
+      }
+    }, {
+      "description": "Visit doctor",
+      "isComplete": false,
+      "patient": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "123, Jurong West Ave 6, #08-111",
+        "emergency contact name": "Billy",
+        "emergency contact number": "77777777",
+        "tags": [ "friends" ],
+        "priorityLevel": 3
+      }
+    }
+  ]
+}

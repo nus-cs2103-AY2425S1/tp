@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -52,6 +53,20 @@ public class AddCommandTest {
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
+
+    @Test
+    public void resetPersonPriority_priorityLevelReset_success() {
+        ModelStubWithPerson modelStub = new ModelStubWithPerson(new PersonBuilder().withPriorityLevel(2).build());
+        Person originalPerson = modelStub.getResetPerson();
+        modelStub.resetPersonPriority(originalPerson);
+        assertTrue(modelStub.wasPriorityResetCalled(), "Priority reset should be called on the model stub.");
+
+        // Adjusted assertion to compare the integer value of PriorityLevel
+        assertEquals(3, modelStub.getResetPerson().getPriorityLevel().getValue(),
+                "Priority level should be reset to 3.");
+    }
+
+
 
     @Test
     public void equals() {
@@ -88,6 +103,7 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        private boolean priorityWasReset = false;
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -124,6 +140,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -139,7 +160,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAssociatedTasks(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -154,7 +190,40 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTaskList(Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void resetPersonPriority(Person target) {
+            priorityWasReset = true;
+        }
+
+        public boolean wasPriorityReset() {
+            return priorityWasReset;
+        }
+
+        @Override
+        public void setTask(Task target, Task editedTask) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateTasksForPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updatePersonAndTasks(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -164,16 +233,36 @@ public class AddCommandTest {
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
+        private boolean priorityResetCalled = false; // track if resetPersonPriority was called
+        private Person resetPerson; // mutable field to hold the modified person
+
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
             this.person = person;
+            this.resetPerson = person; // initially, the reset person is the same as the original
         }
 
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public void resetPersonPriority(Person target) {
+            if (this.person.equals(target)) {
+                this.priorityResetCalled = true; // indicate that the method was called
+                this.resetPerson = new PersonBuilder(person).withPriorityLevel(3).build();
+            }
+        }
+
+        public boolean wasPriorityResetCalled() {
+            return priorityResetCalled;
+        }
+
+        public Person getResetPerson() {
+            return resetPerson;
         }
     }
 
@@ -182,6 +271,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private boolean priorityResetCalled = false;
 
         @Override
         public boolean hasPerson(Person person) {
@@ -198,6 +288,23 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void resetPersonPriority(Person target) {
+            // Check if the target person exists in the list and reset the priority
+            for (Person person : personsAdded) {
+                if (person.equals(target)) {
+                    this.priorityResetCalled = true;
+                    Person resetPerson = new PersonBuilder(person).withPriorityLevel(3).build();
+                    personsAdded.set(personsAdded.indexOf(person), resetPerson);
+                    break;
+                }
+            }
+        }
+
+        public boolean wasPriorityResetCalled() {
+            return priorityResetCalled;
         }
     }
 
