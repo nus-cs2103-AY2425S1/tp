@@ -1,5 +1,5 @@
 @startuml
-title Person Class Diagram
+title Buyer Class Diagram
 
 abstract class Person {
     - name: Name
@@ -8,6 +8,11 @@ abstract class Person {
     - appointment: Appointment
     - tags: Set<Tag>
     - remark: String
+    + getRole(): Role
+}
+
+class Buyer {
+    - role: Role = Role.BUYER
     + getRole(): Role
 }
 
@@ -33,10 +38,17 @@ class Tag {
     - tagName: String
 }
 
+enum Role {
+    BUYER
+    SELLER
+}
+
 Person *-- Name : Composition
 Person *-- Phone : Composition
 Person *-- Email : Composition
 Person *-- Appointment : Composition
 Person *-- Tag : Composition
+Buyer --|> Person
+Buyer --> Role : Association
 
 @enduml

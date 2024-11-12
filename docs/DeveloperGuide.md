@@ -592,7 +592,7 @@ set of tests, especially before merging any significant changes. The HTML report
 - Configuration: To configure CodeCov, a `.yaml` workflow file is set up within the `.github/workflows` directory of the repository.
 
 <div class="note" markdown="span"> 
-A CodeCov token is required to set up CodeCov reports on Github and it should be stored as a Github secret
+A CodeCov token is required to set up CodeCov reports on Github and it should be stored as a Github Secret
 for authentication. 
 </div>
 
@@ -610,6 +610,11 @@ Additionally, CodeCov offers visualization tools for in-depth inspection of cove
 All clients are `Person` objects in EZSTATES. A `Person` is an abstract class which consists of 6 essential fields and 1
 essential abstract method `getRole()`.
 
+**Role**
+- The `Role` class specifies what responsibilites a client has.
+- The class is designed using Enumerations.
+- As of v1.5.2, EZSTATES supports 2 `Roles`: `BUYER` and `SELLER`.
+
 **Essential Fields**: 
 1. `name`: The name of a Person, defined by the `Name` class.
 2. `phone`: The phone number of a Person, defined by the `Phone` class.
@@ -621,22 +626,31 @@ essential abstract method `getRole()`.
 **Essential Methods**:
 1. `getRole()`: Classes that represent clients must inherit the abstract `Person` class and are required to implement the `getRole()` method. 
 This ensures that all clients have a specified `role`. `Roles` help developers differentiate various tasks and associations
-with features such as `listings` and getRole()` is a basic getter to facilitate this logic.
+with features such as `listings` and `getRole()` is a basic getter to facilitate this logic.
 
 #### Add client
 
 As mentioned in the [`Logic`](#logic-component) segment, a command is passed to the `LogicManager` and then parsed in the
 `EzstatesParser` where the relevant `XYZCommandParser` is created and subsequently the `XYZCommand` is created. To facilitate
-the usage of `roles`, a centralized `AddClientParser` and `AddClientProfileCommand` is used when a client with any role is being
+the usage of `roles`, a centralized `AddClientProfileParser` and `AddClientProfileCommand` is used when a client with any role is being
 created.
 
 1. #### Add buyer
     **Overview**
-    <br> 
-    The `buyer` command adds a `Buyer` to EZSTATES. A `Buyer` 
+    <br><br>
+    ![BuyerClassDiagram](images/dg/BuyerClassDiagram.png)
+    The `buyer` command adds a `Buyer` to EZSTATES. A `Buyer` object inherits the `Person` class and is associated with a 
+    `BUYER` role.
+    <br><br>
+    **Implementation**
     ![AddBuyerSequenceDiagram](images/dg/AddBuyerSequenceDiagram.png)
-        
-   2. #### Add seller
+        <br><br>
+1. User runs a `buyer` command with valid inputs
+2. Command is parsed by `EzstatesParser` and a `AddClientProfileParser` is created to parse the `buyer` command which creates a 
+`AddBuyerProfileCommand` that 
+3. 
+
+3. #### Add seller
 #### Edit client
 #### Find client
 #### Delete client

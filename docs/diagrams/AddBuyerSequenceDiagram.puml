@@ -9,9 +9,9 @@ title Add Buyer Sequence Diagram
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
-participant ":AddClientParser" as AddClientParser LOGIC_COLOR
-participant "b:AddBuyerProfile" as AddBuyerProfile LOGIC_COLOR
-participant "a:AddClientProfile" as AddClientProfile LOGIC_COLOR
+participant ":AddClientProfileParser" as AddClientProfileParser LOGIC_COLOR
+participant "b:AddBuyerProfileCommand" as AddBuyerProfileCommand LOGIC_COLOR
+participant "a:AddClientProfileCommand" as AddClientProfileCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -32,64 +32,64 @@ activate LogicManager
 LogicManager -> EzstatesParser : parseCommand(cmd)
 activate EzstatesParser
 
-create AddClientParser
-EzstatesParser -> AddClientParser
-activate AddClientParser
+create AddClientProfileParser
+EzstatesParser -> AddClientProfileParser
+activate AddClientProfileParser
 
-AddClientParser --> EzstatesParser
-deactivate AddClientParser
+AddClientProfileParser --> EzstatesParser
+deactivate AddClientProfileParser
 
-EzstatesParser -> AddClientParser : parse(prefixes)
-activate AddClientParser
+EzstatesParser -> AddClientProfileParser : parse(prefixes)
+activate AddClientProfileParser
 
-create AddBuyerProfile
-AddClientParser -> AddBuyerProfile
-activate AddBuyerProfile
+create AddBuyerProfileCommand
+AddClientProfileParser -> AddBuyerProfileCommand
+activate AddBuyerProfileCommand
 
-AddBuyerProfile --> AddClientParser
-deactivate AddBuyerProfile
+AddBuyerProfileCommand --> AddClientProfileParser
+deactivate AddBuyerProfileCommand
 
-AddClientParser --> EzstatesParser : b
-deactivate AddClientParser
+AddClientProfileParser --> EzstatesParser : b
+deactivate AddClientProfileParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-AddClientParser -[hidden]-> EzstatesParser
-destroy AddClientParser
+AddClientProfileParser -[hidden]-> EzstatesParser
+destroy AddClientProfileParser
 
 EzstatesParser --> LogicManager : b
 deactivate EzstatesParser
 
-LogicManager -> AddBuyerProfile : execute(m:Model)
-activate AddBuyerProfile
+LogicManager -> AddBuyerProfileCommand : execute(m:Model)
+activate AddBuyerProfileCommand
 
-AddBuyerProfile -> AddClientProfile : execute(m:Model)
-activate AddClientProfile
+AddBuyerProfileCommand -> AddClientProfileCommand : execute(m:Model)
+activate AddClientProfileCommand
 
-AddClientProfile -> Model : hasPerson(Bob:Buyer)
+AddClientProfileCommand -> Model : hasPerson(Bob:Buyer)
 activate Model
 
 alt buyer exists
-    Model --> AddClientProfile : true
+    Model --> AddClientProfileCommand : true
     deactivate Model
-    AddClientProfile --> AddBuyerProfile
-    deactivate AddBuyerProfile
+    AddClientProfileCommand --> AddBuyerProfileCommand
+    deactivate AddBuyerProfileCommand
 else new buyer
-    Model --> AddClientProfile : false
+    Model --> AddClientProfileCommand : false
     deactivate Model
-    AddClientProfile -> Model : addPerson(Bob:Buyer)
+    AddClientProfileCommand -> Model : addPerson(Bob:Buyer)
     activate Model
-    Model --> AddClientProfile
+    Model --> AddClientProfileCommand
     deactivate Model
 
     create CommandResult
-    AddClientProfile -> CommandResult
+    AddClientProfileCommand -> CommandResult
     activate CommandResult
-    CommandResult --> AddClientProfile
+    CommandResult --> AddClientProfileCommand
     deactivate CommandResult
 
-    AddClientProfile --> AddBuyerProfile : r
-    deactivate AddClientProfile
-    AddBuyerProfile --> LogicManager : r
-    deactivate AddBuyerProfile
+    AddClientProfileCommand --> AddBuyerProfileCommand : r
+    deactivate AddClientProfileCommand
+    AddBuyerProfileCommand --> LogicManager : r
+    deactivate AddBuyerProfileCommand
 end
 
 [<-- LogicManager : r
