@@ -148,11 +148,14 @@ Here is a partial and representative class diagram of the `Storage` component:
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
-The `Storage` component has the responsibility of saving HallPointer data and user preferences data to disk in JSON format, and then parsing them back into the corresponding objects when the application is re-opened.
+The `Storage` component has the following responsibilities:
 
-It inherits from both `Storage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- Saving HallPointer data and user preferences data to disk in JSON format.
+- Parsing the saved JSON data back into the corresponding objects when the application is re-opened.
 
-- depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+It inherits from both `Storage` and `UserPrefStorage`, allowing it to be treated as either one, depending on the functionality needed.
+
+- Depends on some classes in the `Model` component, as its job is to save and retrieve objects that belong to the `Model`.
 
 ---
 
