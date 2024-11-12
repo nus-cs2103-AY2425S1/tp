@@ -80,26 +80,26 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the address book with the provided information.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]`
 
+* The only required fields for a person are a name and a phone number, 
+so you can create a contact with just those 2 fields. Providing an email, address, date of last visit, emergency contact, or tags is optional.
+* This `add` command allows users to fill in all information fields about a person, **except for the "remarks" field**.
+  * The "remarks" field is intended for long-form information about a person, so it is recommended that the addition of remarks be done with the `remark` command or `edit` command (which are explained below).
+  * More information about the fields within a contact is located [here](#contact-field-requirements).
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0).<br>
 
 </box>
-<box type="tip" seamless>
-
-**Tip:** The only required fields for a person are a name and a phone number, so you can create a contact with just those 2 fields. Providing an email, address, date of last visit, emergency contact or tags is optional.
-
-</box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/02-01-2024`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/62345678 t/criminal d/03-28-2024`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/62345678 t/criminal d/28-03-2024`
 * `add p/92345678 n/Jane Smith d/01-01-2024 ec/98765432`
-* `add p/92345678 n/Jane Smith d/01-01-2024`
+* `add p/92345678 n/Sam Smith`
 
 ### Listing all persons : `list`
 
@@ -293,11 +293,12 @@ _Details coming soon ..._
 
 ### Email
 * Emails are optional for contacts, and are denoted by the `e/` prefix.
-* Email addresses are confined to the limits of the traditional email format: **`localPart@domain.label`**. This includes a few restrictions:
-  * The `localPart` and `domain` components of the email must be alphanumeric, with no special characters.
-  * The `localPart` and `domain` components of the email must be separated by a `@`.
-  * The `label` component must be alphanumeric, and contain at least 2 characters.
-  * The `domain` and `label` component must be separated by a `.`.
+* Email addresses are confined to the limits of the traditional email format: **`localPart@domainName`**. This includes a few restrictions:
+  * The `localPart` component of the email can only contain alphanumeric characters and the following 4 special characters: **`+`, `-`, `.`, `_`**. But take note that it cannot start or end with these special characters. 
+  * The `domainName` component of the email will consist of one or more domain labels, separated by periods (`.`).
+  * Every domain label can only contain alphanumeric characters, or hyphens (`-`). They must also start and end with alphanumeric characters, so no starting or ending email addresses with hyphens!
+  * The last domain label in the `domainName` must be at least 2 characters long.
+  * The `localPart` and `domainName` components of the email must be separated by a `@`.
 * To indicate no email for a contact, you can `add` a contact without the `e/` prefix, or with a `e/` followed by whitespace.
 
 ### Date of Last Visit
@@ -337,8 +338,12 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SocialBook home folder.
+**Q1**: How do I transfer my data to another Computer?<br>
+- Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SocialBook home folder.
+
+**Q2**: Why can't I include a remark when using the `add` command to add a person to the address list?<br>
+- The "remarks" field is meant for long form notes about a person. This is likely to be quite cumbersome to enter at the same time that a person is being added for the first time.
+- Users are recommended to first `add` the person to the address list, and then subsequently use the `edit` or `remark` commands to write remarks about a contact. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -346,6 +351,11 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. When **editing contacts** with the `edit` or `remark` command, the result display panel will not show the updated or changed information. Use the `view` command on the person of interest to view the updated details.
+4. Some of the commands that edit contacts (such as `add` and `edit`) may have difficulty parsing input if some input fields match the prefixes for contact fields (such as `n/`, `p/`, `a/`, `e/`, `d/`, `ec/`, `t/`, and `r/`). 
+This is due to the way that parsing is handled: any text matching special prefixes will be identified as such.
+To work around this, please prepend a `_`, or any other accepted special character, in front of any input fields that contain a special prefix.
+5. Entering an invalid emergency contact will produce the same error message as an invalid phone number. When receiving an error message about phone numbers, check both the `ec/` and `p/` field, if both are present.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -353,7 +363,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague d/07-23-2024`
+**Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague d/23-07-2024`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT] [r/REMARK]` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
