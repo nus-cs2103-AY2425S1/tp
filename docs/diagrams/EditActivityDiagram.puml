@@ -1,21 +1,23 @@
 @startuml
+sprite $rake [16x16/8] {
+0000000000000000
+0000000jj0000000
+0000000jj0000000
+0005555jj5555000
+000jjeejjeejj000
+000jj00jj00jj000
+000jj00jj00jj000
+0000000000000000
+}
 title Edit Activity Diagram
 start
 :Edit command is given;
 if () then ([Index provided is positive])
+    :Tokenize arguments;
     if () then ([At least one flag is specified ])
         if () then (['remark new' and 'remark append' flags
         are not used simultaneously])
-            if () then ([Values for specified flags are all valid])
-                if () then ([Index provided is within range])
-                    :Edit client pertaining to given index;
-                else ([else])
-                    :Show error message that the specified index is out of range;
-                endif
-            else ([else])
-            :Show error message stating
-            which flags have wrong values;
-            endif
+            :Perform flag values check <$rake>;
         else ([else])
         :Show error message that 'remark new' and 'remark append'
         flags cannot be used together;
