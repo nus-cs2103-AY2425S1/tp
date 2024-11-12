@@ -19,12 +19,17 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReadOnlyScheduleList;
+import seedu.address.model.ScheduleList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonScheduleStorage;
+import seedu.address.storage.JsonSerializableAddressBook;
+import seedu.address.storage.JsonSerializableScheduleStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.ScheduleStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -36,7 +41,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 2, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -58,11 +63,12 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ScheduleStorage scheduleStorage = new JsonScheduleStorage(config.getScheduleStorageFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, scheduleStorage);
 
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage, userPrefs, scheduleStorage);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, scheduleStorage);
 
         ui = new UiManager(logic);
     }
@@ -72,11 +78,15 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, UserPrefs userPrefs, ScheduleStorage scheduleStorage) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyScheduleList> scheduleListOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyScheduleList initialScheduleList;
+
+        // load addresbook
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -84,13 +94,50 @@ public class MainApp extends Application {
                         + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            if (JsonSerializableAddressBook.hasErrorConvertingToModelType()) {
+                storage.handleCorruptedAddressbookFile();
+            }
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        // load schedulelist
+        try {
+            scheduleListOptional = scheduleStorage.readScheduleList();
+            if (scheduleListOptional.isEmpty()) {
+                logger.info("Creating a new data file "
+                        + scheduleStorage.getScheduleListFilePath());
+                if (SampleDataUtil.getWasSampleAddressBookGenerated()) {
+                    initialScheduleList = SampleDataUtil.getSampleScheduleList(initialData);
+                    logger.info("Populated with sample ScheduleList.");
+                } else {
+                    initialScheduleList = new ScheduleList();
+                    logger.info("Populated with an empty ScheduleList.");
+                }
+            } else {
+                assert(scheduleListOptional.isPresent());
+                initialScheduleList = scheduleListOptional.get();
+            }
+            if (JsonSerializableScheduleStorage.hasErrorConvertingToModelType()) {
+                scheduleStorage.handleCorruptedFile();
+            }
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + scheduleStorage.getScheduleListFilePath()
+                    + " could not be loaded. Will be starting with an empty ScheduleList.");
+            initialScheduleList = new ScheduleList();
+        }
+
+        // save initial data
+        try {
+            storage.saveAddressBook(initialData);
+            scheduleStorage.saveScheduleList(initialScheduleList);
+        } catch (IOException e) {
+            logger.warning("Failed to save initial data to the file: " + StringUtil.getDetails(e));
+        }
+
+        return new ModelManager(initialData, userPrefs, initialScheduleList);
     }
 
     private void initLogging(Config config) {

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -24,6 +25,8 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final UUID uid;
+    private final Favourite favourite;
 
     /**
      * Every field must be present and not null.
@@ -35,10 +38,32 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.uid = UUID.randomUUID();
+        this.favourite = new Favourite(false);
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, UUID uid, Favourite favourite) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.uid = uid;
+        this.favourite = favourite;
+    }
     public Name getName() {
         return name;
+    }
+
+    /**
+     * Returns true if the person's name contains the keyword.
+     */
+    public boolean nameContainsKeyword(String keyword) {
+        return name.fullName.toLowerCase().contains(keyword.toLowerCase());
     }
 
     public Phone getPhone() {
@@ -53,12 +78,25 @@ public class Person {
         return address;
     }
 
+    public UUID getUid() {
+        return uid;
+    }
+    public Favourite getFavourite() {
+        return favourite;
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns true if the person has the specified tag.
+     */
+    public boolean hasTag(String tag) {
+        return tags.stream().anyMatch(t -> t.tagName.toLowerCase().equals(tag.toLowerCase()));
     }
 
     /**
@@ -72,6 +110,15 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * This defines a weaker notion of equality between two persons based on UUID.
+     * @param uid The UUID to compare with.
+     * @return True if the UUID is the same as the person's UUID.
+     */
+    public boolean isSamePersonUid(UUID uid) {
+        return this.uid.equals(uid);
     }
 
     /**
@@ -112,6 +159,12 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .toString();
+    }
+    public String toNameString() {
+        return name.fullName;
+    }
+    public Person setFavouritePerson() {
+        return new Person(name, phone, email, address, tags, uid, new Favourite(true));
     }
 
 }

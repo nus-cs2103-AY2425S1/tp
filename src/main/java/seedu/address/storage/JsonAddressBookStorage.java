@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.Random;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -77,4 +78,14 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
     }
 
+    @Override
+    public void handleCorruptedAddressbookFile() {
+        try {
+            FileUtil.copyFile(this.filePath,
+                    Path.of(this.filePath.toString() + "." + new Random().nextInt() + ".bak"));
+            logger.info("Corrupted addressbook.json file backed up");
+        } catch (IOException e) {
+            logger.warning("Unable to back up corrupted addressbook.json file. " + e.getMessage());
+        }
+    }
 }

@@ -105,4 +105,31 @@ public class AddressBookTest {
         }
     }
 
+    @Test
+    public void equals_true() {
+        // same object -> returns true
+        assertTrue(addressBook.equals(addressBook));
+        // same values -> returns true
+        AddressBook addressBookCopy = (AddressBook) new AddressBook();
+        assertTrue(addressBook.equals(addressBookCopy));
+    }
+
+    @Test
+    public void equals_false() {
+        // different types -> returns false
+        assertFalse(addressBook.equals(1));
+        // null -> returns false
+        assertFalse(addressBook.equals(null));
+        // different person -> returns false
+        AddressBook otherAddressBook = new AddressBook();
+        otherAddressBook.addPerson(ALICE);
+        assertFalse(addressBook.equals(otherAddressBook));
+    }
+
+    @Test
+    public void hashCode_equals() {
+        AddressBook otherAddressBook = new AddressBook();
+        assertEquals(addressBook.hashCode(), otherAddressBook.hashCode());
+    }
+
 }

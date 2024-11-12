@@ -3,8 +3,11 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +19,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Meeting;
+import seedu.address.model.schedule.SameWeekAsDatePredicate;
+import seedu.address.storage.ScheduleStorage;
 import seedu.address.storage.Storage;
 
 /**
@@ -32,13 +38,15 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private final ScheduleStorage scheduleStorage;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, ScheduleStorage scheduleStorage) {
         this.model = model;
         this.storage = storage;
+        this.scheduleStorage = scheduleStorage;
         addressBookParser = new AddressBookParser();
     }
 
@@ -52,6 +60,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            scheduleStorage.saveScheduleList(model.getScheduleList());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -69,6 +78,23 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return model.getPersonList();
+    }
+
+    @Override
+    public ObservableList<ObservableList<Meeting>> getCurrentMeetingList() {
+        LocalDate today = LocalDate.now();
+        Predicate<Meeting> currentWeekPredicate = new SameWeekAsDatePredicate(today);
+        model.changeWeeklySchedule(currentWeekPredicate);
+        return model.getDailyScheduleOfWeek();
+    }
+
+    public ObservableValue<String> getDateOfWeek() {
+        return model.getWeekOfSchedule();
     }
 
     @Override

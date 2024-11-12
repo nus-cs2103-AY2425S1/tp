@@ -1,59 +1,59 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
+
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Brendan Soh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/brendan8899.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Brendan8899)]
+[[portfolio](team/brendan.md)]
+
+* Role: Software Developer
+
+### Lim Kai Wei
+
+<img src="images/limkaiwei.png" width="200px">
+
+[[github](https://github.com/LimKaiWei)]
+[[portfolio](team/limkaiwei.md)]
+
+* Role: Developer
+* Responsibilities: Backend
+
+### Jewi Teo
+
+<img src="images/jewiteo.png" width="200px">
+
+[[github](http://github.com/jewiteo)]
+[[portfolio](team/jewiteo.md)]
+
+* Role: Developer
+* Responsibilities: UI
+
+### Non Kittilakkananon
+
+<img src="images/tata32000.png" width="200px">
+
+[[github](https://github.com/tata32000)]
+[[portfolio](team/tata32000.md)]
+
+### Quek Bing Heng
+
+<img src="images/quekbingheng.png" width="200px">
+
+[[github](https://github.com/QuekBingHeng)]
+[[portfolio](team/quekbingheng.md)]
 
 * Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Responsibilities: Backend

@@ -145,6 +145,11 @@ public class ArgumentTokenizerTest {
 
         assertNotEquals(aaa, "aaa");
         assertNotEquals(aaa, new Prefix("aab"));
+
+        // argumentMultimap should be equal to itself
+        ArgumentMultimap argumentMultimap = new ArgumentMultimap();
+        argumentMultimap.put(aaa, "value");
+        assertTrue(argumentMultimap.equals(argumentMultimap));
     }
 
 }

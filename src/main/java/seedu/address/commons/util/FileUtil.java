@@ -80,4 +80,13 @@ public class FileUtil {
         Files.write(file, content.getBytes(CHARSET));
     }
 
+    /**
+     * @param source file
+     * @param target file
+     * @throws IOException
+     */
+    public static void copyFile(Path source, Path target) throws IOException {
+        Files.copy(source, target);
+    }
+
 }

@@ -7,11 +7,17 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Meeting;
+import seedu.address.model.schedule.SameWeekAsDatePredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,9 +28,41 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ScheduleList scheduleList;
+    private final FilteredList<Meeting> weeklySchedule;
+
+    private final SimpleStringProperty weekOfDate;
+
+    private final ObservableList<ObservableList<Meeting>> dailySchedulesOfWeek;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     */
+    public ModelManager(
+            ReadOnlyAddressBook addressBook,
+            ReadOnlyUserPrefs userPrefs,
+            ReadOnlyScheduleList scheduleList) {
+        requireAllNonNull(addressBook, userPrefs);
+
+        logger.fine("Initializing with address book: "
+                + addressBook + " and user prefs "
+                + userPrefs + "and stored schedule" + scheduleList);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.scheduleList = new ScheduleList(scheduleList);
+        weeklySchedule = new FilteredList<>(this.scheduleList.getMeetingList());
+        dailySchedulesOfWeek = this.initialiseDailyScheduleOfWeek();
+        weekOfDate = new SimpleStringProperty();
+    }
+
+    /**
+     * Constructs a {@code ModelManager} with the given {@code ReadOnlyAddressBook} and {@code ReadOnlyUserPrefs}.
+     * Initializes the address book, user preferences, filtered list of persons, and an empty schedule list.
+     *
+     * @param addressBook The address book used to initialize the model manager. Cannot be null.
+     * @param userPrefs   The user preferences used to initialize the model manager. Cannot be null.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
@@ -34,10 +72,15 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.scheduleList = new ScheduleList();
+        weeklySchedule = new FilteredList<>(this.scheduleList.getMeetingList());
+        dailySchedulesOfWeek = this.initialiseDailyScheduleOfWeek();
+        weekOfDate = new SimpleStringProperty();
     }
 
+
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new ScheduleList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -110,6 +153,56 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+    @Override
+    public void favouritePerson(Person target) {
+        requireAllNonNull(target);
+        addressBook.favouritePerson(target);
+    }
+
+    //=========== ScheduleList ================================================================================
+    @Override
+    public void setScheduleList(ReadOnlyScheduleList scheduleList) {
+        this.scheduleList.resetData(scheduleList);
+    }
+
+    @Override
+    public ReadOnlyScheduleList getScheduleList() {
+        return scheduleList;
+    }
+
+    @Override
+    public void deleteMeeting(Meeting target) {
+        scheduleList.removeMeeting(target);
+    }
+
+    @Override
+    public void addMeeting(Meeting meeting) {
+        scheduleList.addMeeting(meeting);
+        // updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void setMeeting(Meeting target, Meeting editedMeeting) {
+        requireAllNonNull(target, editedMeeting);
+
+        scheduleList.setMeeting(target, editedMeeting);
+    }
+
+    /**
+     * Returns true if the given meeting conflicts with any existing meetings in the schedule list.
+     *
+     * @param newMeeting The meeting to check for conflicts.
+     * @return True if a conflict exists, false otherwise.
+     */
+    @Override
+    public boolean hasMeeting(Meeting newMeeting) {
+        return scheduleList.hasMeeting(newMeeting);
+    }
+
+    @Override
+    public boolean hasPersonInMeeting(Person person) {
+        return scheduleList.hasPersonInMeeting(person);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -120,6 +213,11 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return this.addressBook.getPersonList();
     }
 
     @Override
@@ -143,6 +241,57 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    //=========== Weekly Meeting List Accessors =============================================================
+    @Override
+    public ObservableList<Meeting> getWeeklySchedule() {
+        return weeklySchedule;
+    }
+
+    @Override
+    public void changeWeeklySchedule(Predicate<Meeting> predicate) {
+        requireNonNull(predicate);
+        weeklySchedule.setPredicate(predicate);
+        this.changeWeekOfDate(predicate);
+    }
+
+    @Override
+    public ObservableList<ObservableList<Meeting>> getDailyScheduleOfWeek() {
+        return this.dailySchedulesOfWeek;
+    }
+
+    @Override
+    public Meeting getMeeting(Index i) {
+        return weeklySchedule.get(i.getZeroBased());
+    }
+
+    private ObservableList<ObservableList<Meeting>> initialiseDailyScheduleOfWeek() {
+        ObservableList<ObservableList<Meeting>> dailyScheduleOfWeek = FXCollections.observableArrayList();
+        for (int i = 1; i < 8; i++) {
+            dailyScheduleOfWeek.add(weeklySchedule);
+        }
+        return dailyScheduleOfWeek;
+    }
+
+    @Override
+    public ObservableValue<String> getWeekOfSchedule() {
+        return weekOfDate;
+    }
+
+    private void changeWeekOfDate(Predicate<Meeting> pred) {
+        StringBuilder weekOfDateString = new StringBuilder();
+        weekOfDateString.append("Date Shown: ");
+        if (pred instanceof SameWeekAsDatePredicate) {
+            SameWeekAsDatePredicate p = (SameWeekAsDatePredicate) pred;
+            weekOfDateString.append(p.getStartDateOfWeek().toString())
+                    .append(" - ")
+                    .append(p.getLastDateOfWeek());
+        } else {
+            weekOfDateString.append("All Meetings");
+        }
+
+        weekOfDate.setValue(weekOfDateString.toString());
     }
 
 }

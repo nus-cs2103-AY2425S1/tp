@@ -14,15 +14,19 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyScheduleList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Meeting;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -124,12 +128,30 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addMeeting(Meeting meeting) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasMeeting(Meeting meeting) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public void setScheduleList(ReadOnlyScheduleList newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public ReadOnlyScheduleList getScheduleList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -144,7 +166,20 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteMeeting(Meeting target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void favouritePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void setMeeting(Meeting meeting, Meeting editedMeeting) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -154,7 +189,42 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ObservableList<Meeting>> getDailyScheduleOfWeek() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableValue<String> getWeekOfSchedule() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Meeting> getWeeklySchedule() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void changeWeeklySchedule(Predicate<Meeting> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonInMeeting(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Meeting getMeeting(Index i) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -200,5 +270,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }
