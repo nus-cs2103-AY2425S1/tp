@@ -7,8 +7,7 @@
 # DorManagerPro Developer Guide
 
 <!-- * Table of Contents -->
-
-[//]: # (<page-nav-print />)
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -111,7 +110,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-[//]: # (<puml src="diagrams/ParserClasses.puml" width="600"/>)
+<puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -119,9 +118,9 @@ How the parsing works:
 
 ### Model component
 
-[//]: # (**API** : [`Model.java`]&#40;https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java&#41;)
+**API** : [`Model.java`]&#40;https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java&#41;
 
-[//]: # (<puml src="diagrams/ModelClassDiagram.puml" width="450" />)
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
@@ -136,16 +135,16 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-[//]: # (<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />)
+<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
 </box>
 
 
 ### Storage component
 
-[//]: # (**API** : [`Storage.java`]&#40;https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java&#41;)
+**API** : [`Storage.java`]&#40;https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java&#41;
 
-[//]: # (<puml src="diagrams/StorageClassDiagram.puml" width="550" />)
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -184,7 +183,7 @@ Step 2. The `add` command adds a contact with the name John Doe, phone number +6
 
 The following sequence diagram shows how an `add` command goes through the `Logic` component:
 
-[//]: # (<puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />)
+<puml src="diagrams/AddSequenceDiagram.puml" alt="AddSequenceDiagram" />
 
 <box type="info" seamless>
 
@@ -194,7 +193,8 @@ The following sequence diagram shows how an `add` command goes through the `Logi
 
 The following activity diagram summarizes what happens when a user executes a `add` command:
 
-<puml src="diagrams/AddActivityDiagram.puml" height="600" width="600" />
+<puml src="diagrams/AddActivityDiagram.puml" height="800" width="900" />
+
 
 ### Edit feature
 
@@ -218,7 +218,7 @@ Step 2. The `edit` command updates the details of the contact with index 1 to ha
 
 The following sequence diagram shows how an `edit` command goes through the `Logic` component:
 
-[//]: # (<puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />)
+<puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
 
 <box type="info" seamless>
 
@@ -228,7 +228,7 @@ The following sequence diagram shows how an `edit` command goes through the `Log
 
 The following activity diagram summarizes what happens when a user executes a `edit` command:
 
-[//]: # (<puml src="diagrams/EditActivityDiagram.puml" height="800" width="1000" />)
+<puml src="diagrams/EditActivityDiagram.puml" height="800" width="900" />
 
 ### Undo feature
 
@@ -269,7 +269,7 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
-[//]: # (<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />)
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
 
 <box type="info" seamless>
 
@@ -279,7 +279,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
-[//]: # (<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />)
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will not be pushed to the undo stack. Thus, the undo stack remains unchanged.
 
@@ -287,7 +287,7 @@ Step 6. The user executes `clear`, which is pushed to the undo stack.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-[//]: # (<puml src="diagrams/CommitActivityDiagram.puml" height="600" width="600"/>)
+<puml src="diagrams/CommitActivityDiagram.puml" height="600" width="600"/>
 
 #### Design considerations:
 
@@ -335,8 +335,10 @@ The following sequence diagram shows how a `clean` command goes through the `Log
 
 The following activity diagram summarizes what happens when a user executes a `clean` command:
 
+
 <puml src="diagrams/CleanActivityDiagram.puml" width="250" />
 
+<puml src="diagrams/CleanActivityDiagram.puml" height="600" width="900" />
 
 #### Design considerations:
 
@@ -822,13 +824,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<<<<<<< HEAD
+<box type="info" seamless>
+
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-=======
-<box type="info" seamless>
->>>>>>> origin
 
+</box>
 
 ### Launch and shutdown
 
