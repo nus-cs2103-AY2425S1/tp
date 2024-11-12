@@ -14,7 +14,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Relationship;
 
 public class JsonAdaptedEmergencyContactTest {
-    private static final String INVALID_ECNAME = "R@chel";
+    private static final String INVALID_ECNAME = "R#chel";
     private static final String INVALID_ECPHONE = "+651234";
     private static final String INVALID_ECRS = "Pet";
     private static final String INVALID_ECRS_CHARACTERS = "@s5!ho";

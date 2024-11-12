@@ -94,9 +94,7 @@ public class Person {
     public Set<EmergencyContact> removeEmergencyContact(EmergencyContact emergencyContactToRemove) {
         Set<EmergencyContact> updatedEmergencyContacts = new LinkedHashSet<>();
         for (EmergencyContact emergencyContact : emergencyContacts) {
-            if (emergencyContact.equals(emergencyContactToRemove)) {
-                continue;
-            } else {
+            if (!emergencyContact.equals(emergencyContactToRemove)) {
                 updatedEmergencyContacts.add(emergencyContact);
             }
         }
@@ -152,7 +150,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**

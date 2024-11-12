@@ -111,6 +111,7 @@ public class DeleteCommand extends Command {
         if (emergencyContactIndex.isPresent()) {
             return executeDeleteEmergencyContact(emergencyContactIndex.get(), personToDelete, model);
         }
+
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
@@ -174,8 +175,8 @@ public class DeleteCommand extends Command {
                 return false;
             }
 
-            DeleteCommandDescriptor otherDeletCommandDescriptor = (DeleteCommandDescriptor) other;
-            return Objects.equals(emergencyContactIndex, otherDeletCommandDescriptor.emergencyContactIndex);
+            DeleteCommandDescriptor otherDeleteCommandDescriptor = (DeleteCommandDescriptor) other;
+            return Objects.equals(emergencyContactIndex, otherDeleteCommandDescriptor.emergencyContactIndex);
         }
 
         @Override

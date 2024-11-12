@@ -116,11 +116,11 @@
     -fx-border-width: 1;
 }
 
-.emergencyContactListView-odd {
+.alternateColourListView-odd {
     -fx-background-color: #3c3e3f;
 }
 
-.emergencyContactListView-even {
+.alternateColourListView-even {
     -fx-background-color: #515658;
 }
 

@@ -30,6 +30,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -150,6 +151,24 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder(personInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
+    public void execute_duplicateEmergencyContactFilteredList_failure() {
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        // edit person in filtered list into a duplicate in address book
+        Person personInList = expectedModel.getAddressBook().getPersonList().get(6);
+        assert personInList.getEmergencyContacts().size() > 1;
+        EmergencyContact emergencyContact = personInList.getFirstEmergencyContact();
+        EditPersonDescriptorBuilder editPersonDescriptorBuilder = new EditPersonDescriptorBuilder()
+                .withEmergencyContactIndex(INDEX_SECOND_PERSON)
+                .withEmergencyContactName(emergencyContact.getName().fullName)
+                .withEmergencyContactPhone(emergencyContact.getPhone().value)
+                .withEmergencyContactRelationship(emergencyContact.getRelationship().relationship);
+        EditCommand editCommand = new EditCommand(Index.fromOneBased(7),
+                editPersonDescriptorBuilder.build());
+
+        assertCommandFailure(editCommand, model, AddEmergencyContactCommand.MESSAGE_DUPLICATE_EMERGENCY_CONTACT);
     }
 
     @Test

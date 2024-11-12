@@ -40,6 +40,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_PHONE;
@@ -56,6 +59,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DoctorName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -91,7 +95,8 @@ public class AddCommandParserTest {
     @Test
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ECNAME_DESC_BOB + ECPHONE_DESC_BOB + ECRS_DESC_BOB + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_BOB + ECNAME_DESC_BOB + ECPHONE_DESC_BOB + ECRS_DESC_BOB
+                + DOC_NAME_DESC_BOB + DOC_PHONE_DESC_BOB + DOC_EMAIL_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -115,7 +120,7 @@ public class AddCommandParserTest {
                         + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
                         PREFIX_EMERGENCY_CONTACT_NAME, PREFIX_EMERGENCY_CONTACT_PHONE,
-                        PREFIX_EMERGENCY_CONTACT_RELATIONSHIP));
+                        PREFIX_EMERGENCY_CONTACT_RELATIONSHIP, PREFIX_DOC_NAME, PREFIX_DOC_PHONE, PREFIX_DOC_EMAIL));
 
         // invalid value followed by valid value
 
@@ -219,7 +224,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + ECNAME_DESC_BOB + ECPHONE_DESC_BOB + ECRS_DESC_BOB
                 + INVALID_DOC_NAME_DESC + DOC_PHONE_DESC_BOB + DOC_EMAIL_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, DoctorName.MESSAGE_CONSTRAINTS);
 
         // invalid doctor phone
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

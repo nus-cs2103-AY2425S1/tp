@@ -65,7 +65,7 @@ public class EmergencyContact {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -97,6 +97,6 @@ public class EmergencyContact {
 
     @Override
     public String toString() {
-        return "Name: " + name + " Phone: " + phone + " Relationship: " + relationship;
+        return "Name: " + name + "; Phone: " + phone + "; Relationship: " + relationship + ";";
     }
 }

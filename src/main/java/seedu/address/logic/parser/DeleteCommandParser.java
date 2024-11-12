@@ -26,7 +26,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_EMERGENCY_CONTACT_TO_EDIT);
 
         Index personIndex;
-
         try {
             personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -38,8 +37,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         DeleteCommandDescriptor deleteCommandDescriptor = new DeleteCommandDescriptor();
 
         if (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).isPresent()) {
-            deleteCommandDescriptor.setEmergencyContactIndex(
-                    ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).get()));
+            try {
+                Index emergencyContactIndex = ParserUtil.parseIndex(argMultimap.getValue(
+                        PREFIX_EMERGENCY_CONTACT_TO_EDIT).get());
+                deleteCommandDescriptor.setEmergencyContactIndex(emergencyContactIndex);
+            } catch (ParseException pe) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            }
         }
 
         return new DeleteCommand(personIndex, deleteCommandDescriptor);

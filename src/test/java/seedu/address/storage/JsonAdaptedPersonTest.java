@@ -18,7 +18,7 @@ import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 public class JsonAdaptedPersonTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "R#chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
@@ -26,7 +26,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ECPHONE = "Q@+4567";
     private static final String INVALID_ECRS = "M0th@r";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_DOCTOR_NAME = "J@hn Doe";
+    private static final String INVALID_DOCTOR_NAME = "J+hn Doe";
     private static final String INVALID_DOCTOR_PHONE = "+123456";
     private static final String INVALID_DOCTOR_EMAIL = "johndoe.com";
 

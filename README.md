@@ -1,3 +1,5 @@
+# MedConnect
+
 [![CI Status](https://github.com/AY2425S1-CS2103T-T13-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T13-1/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T13-1/tp/graph/badge.svg)](https://codecov.io/github/AY2425S1-CS2103T-T13-1/tp)
 
@@ -14,4 +16,4 @@ For the detailed documentation of this project, see the **[MedConnect Product We
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)]
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)

@@ -47,12 +47,16 @@ public class EmergencyContactSelectionController {
         emergencyContactListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 // Clear selection in other ListViews
-                for (ListView<EmergencyContact> otherEmergencyContactListView : emergencyContactListViews) {
-                    if (otherEmergencyContactListView != emergencyContactListView) {
-                        otherEmergencyContactListView.getSelectionModel().clearSelection();
-                    }
-                }
+                clearListViewSelections(emergencyContactListView);
             }
         });
+    }
+
+    private void clearListViewSelections(ListView<EmergencyContact> emergencyContactListView) {
+        for (ListView<EmergencyContact> otherEmergencyContactListView : emergencyContactListViews) {
+            if (otherEmergencyContactListView != emergencyContactListView) {
+                otherEmergencyContactListView.getSelectionModel().clearSelection();
+            }
+        }
     }
 }

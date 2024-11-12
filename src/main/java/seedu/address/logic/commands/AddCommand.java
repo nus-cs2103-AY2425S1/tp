@@ -46,15 +46,16 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_EMERGENCY_CONTACT_NAME + "Beatrice Bean "
             + PREFIX_EMERGENCY_CONTACT_PHONE + "91324856 "
-            + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "Parent "
+            + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "Son "
             + PREFIX_DOC_NAME + "Tan Wei Ming "
             + PREFIX_DOC_PHONE + "62345678 "
             + PREFIX_DOC_EMAIL + "tanweiming@gmail.com "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "needs mobility support "
+            + PREFIX_TAG + "short-term stay";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON =
+        "A person with the same phone number already exists in the address book";
 
     private final Person toAdd;
 

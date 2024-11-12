@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -47,11 +48,11 @@ public class LoadArchiveCommandTest {
     }
 
     @Test
-    public void execute_archiveFileNotFound_success() throws IOException {
+    public void execute_archiveFileNotFound_failure() throws IOException {
         Files.deleteIfExists(archiveDir);
         Filename filename = new Filename("no_archive.json");
         String expectedMessage = String.format(LoadArchiveCommand.MESSAGE_NOT_FOUND, filename);
-        assertCommandSuccess(new LoadArchiveCommand(filename), model, expectedMessage, model);
+        assertCommandFailure(new LoadArchiveCommand(filename), model, expectedMessage);
     }
 
     @Test
@@ -62,7 +63,7 @@ public class LoadArchiveCommandTest {
         Files.createFile(archiveFilepath);
 
         String expectedMessage = String.format(LoadArchiveCommand.MESSAGE_FAILURE, filename);
-        assertCommandSuccess(new LoadArchiveCommand(filename), model, expectedMessage, model);
+        assertCommandFailure(new LoadArchiveCommand(filename), model, expectedMessage);
     }
 
     @Test

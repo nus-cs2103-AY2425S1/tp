@@ -15,7 +15,7 @@ public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
     public static final String MESSAGE_SUCCESS = "Address book has undone previous command!";
-    public static final String MESSAGE_FAILURE = "Address book failed to be undone. Please try again later.";
+    public static final String MESSAGE_FAILURE = "There is no current command to be undone!";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

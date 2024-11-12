@@ -58,28 +58,38 @@ public class EditCommandParser implements Parser<EditCommand> {
                 PREFIX_EMERGENCY_CONTACT_NAME, PREFIX_EMERGENCY_CONTACT_PHONE, PREFIX_EMERGENCY_CONTACT_RELATIONSHIP,
                 PREFIX_DOC_NAME, PREFIX_DOC_PHONE, PREFIX_DOC_EMAIL);
 
-        if (!isEmergencyContactIndexProvided(args, argMultimap)) {
-            throw new ParseException(EditCommand.MESSAGE_EMERGENCY_CONTACT_FIELDS_INVALID);
-        }
-
-        if (!isEmergencyContactFieldsProvided(args, argMultimap)) {
-            throw new ParseException(EditCommand.MESSAGE_EMERGENCY_CONTACT_NOT_EDITED);
-        }
+        verifyEmergencyContactFields(args, argMultimap);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        setEditPersonDescriptorPersonFields(editPersonDescriptor, argMultimap);
+        setEditPersonDescriptorEmergencyContactFields(editPersonDescriptor, argMultimap);
+        setEditPersonDescriptorDoctorFields(editPersonDescriptor, argMultimap);
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+
+        return new EditCommand(index, editPersonDescriptor);
+    }
+
+    private void setEditPersonDescriptorDoctorFields(EditPersonDescriptor editPersonDescriptor,
+                                                               ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_DOC_NAME).isPresent()) {
+            editPersonDescriptor.setDoctorName(ParserUtil.parseDoctorName(
+                    argMultimap.getValue(PREFIX_DOC_NAME).get()));
         }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        if (argMultimap.getValue(PREFIX_DOC_PHONE).isPresent()) {
+            editPersonDescriptor.setDoctorPhone(ParserUtil.parsePhone(
+                    argMultimap.getValue(PREFIX_DOC_PHONE).get()));
         }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        if (argMultimap.getValue(PREFIX_DOC_EMAIL).isPresent()) {
+            editPersonDescriptor.setDoctorEmail(ParserUtil.parseEmail(
+                    argMultimap.getValue(PREFIX_DOC_EMAIL).get()));
         }
+    }
+
+    private void setEditPersonDescriptorEmergencyContactFields(EditPersonDescriptor editPersonDescriptor,
+                                                               ArgumentMultimap argMultimap) throws ParseException {
         if (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).isPresent()) {
             editPersonDescriptor.setIndexOfEmergencyContactToEdit(
                     ParserUtil.parseIndex(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).get()));
@@ -96,25 +106,32 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setEmergencyContactRelationship(ParserUtil.parseRelationship(
                     argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP).get()));
         }
-        if (argMultimap.getValue(PREFIX_DOC_NAME).isPresent()) {
-            editPersonDescriptor.setDoctorName(ParserUtil.parseDoctorName(
-                    argMultimap.getValue(PREFIX_DOC_NAME).get()));
+    }
+
+    private void setEditPersonDescriptorPersonFields(EditPersonDescriptor editPersonDescriptor,
+                                                     ArgumentMultimap argMultimap) throws ParseException {
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
-        if (argMultimap.getValue(PREFIX_DOC_PHONE).isPresent()) {
-            editPersonDescriptor.setDoctorPhone(ParserUtil.parsePhone(
-                    argMultimap.getValue(PREFIX_DOC_PHONE).get()));
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
-        if (argMultimap.getValue(PREFIX_DOC_EMAIL).isPresent()) {
-            editPersonDescriptor.setDoctorEmail(ParserUtil.parseEmail(
-                    argMultimap.getValue(PREFIX_DOC_EMAIL).get()));
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+    }
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+    private void verifyEmergencyContactFields(String args, ArgumentMultimap argMultimap) throws ParseException {
+        if (!isEmergencyContactIndexProvided(args, argMultimap)) {
+            throw new ParseException(EditCommand.MESSAGE_EMERGENCY_CONTACT_FIELDS_INVALID);
         }
-
-        return new EditCommand(index, editPersonDescriptor);
+        if (!isEmergencyContactFieldsProvided(args, argMultimap)) {
+            throw new ParseException(EditCommand.MESSAGE_EMERGENCY_CONTACT_NOT_EDITED);
+        }
     }
 
     private Boolean isEmergencyContactFieldsProvided(String args, ArgumentMultimap argMultimap) {

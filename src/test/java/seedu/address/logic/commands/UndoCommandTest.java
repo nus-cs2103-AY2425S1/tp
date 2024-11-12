@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -57,8 +59,8 @@ class UndoCommandTest {
 
     @Test
     public void execute_multipleUndo_success() throws Exception {
-        Person person1 = new PersonBuilder().withName("Alice").build();
-        Person person2 = new PersonBuilder().withName("Bob").build();
+        Person person1 = new PersonBuilder().withPhone(VALID_PHONE_AMY).build();
+        Person person2 = new PersonBuilder().withPhone(VALID_PHONE_BOB).build();
 
         model.addPerson(person1);
         model.addPerson(person2);
