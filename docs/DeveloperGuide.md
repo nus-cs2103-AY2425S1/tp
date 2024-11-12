@@ -1502,27 +1502,43 @@ applied to edited data, but specific expected results will differ. <br><br>
 
 #### Assigning Wedding
 
-1. **Assigning a `Wedding` in the `Wedding list`**
+1. **Assigning a `Wedding` in the `Wedding list` to a `Person` not assigned to the `Wedding`**
 
     1. **Prerequisites**: List all weddings using the `list-weddings` command. At least 1 wedding exists in the system.
        List all persons using the `list` command. At least 1 `Person` exists in the list.
 
-##### ... if `John's Wedding` is in the list and if the first contact is not already in John's Wedding
-1. Test case: `assign-wedding 1 w/John's Wedding`<br>
-   Expected: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
+    2. **Test case**: `assign-wedding 1 w/John's Wedding`<br>
+       **Expected**: The first contact is put in `John's Wedding`'s guest list and the first contact is assigned `John's Wedding` on its contact card.
 
-1. Test case: `assign-wedding 1 w/John's Wedding p1/`<br>
-   Expected: 1st contact is put as `John's Wedding`'s Partner 1 and 1st contact has `John's Wedding` on its contact card.
+    3. **Test case**: `assign-wedding 1 w/John's Wedding p1/` (assuming `John's Wedding` does not yet have a partner 1 assigned) <br>
+       **Expected**: The first contact is set as `John's Wedding`'s `Partner 1` and the first contact is assigned `John's Wedding` on its contact card.
 
-1. Test case: `assign-wedding 1 w/John's Wedding p2/`<br>
-   Expected: 1st contact is put as `John's Wedding`'s Partner 2 and 1st contact has `John's Wedding` on its contact card.
+    4. **Test case**: `assign-wedding 2 w/John's Wedding p1/` (assuming `John's Wedding` **does** have a partner 1 assigned) <br>
+       **Expected**: The first contact is set as `John's Wedding`'s `Partner 1` and the first contact is assigned `John's Wedding` on its contact card.
+        `John's Wedding` is unassigned from the contact card of the contact that was previously assigned as `Partner 1`.
 
-1. Test case: `assign-wedding 1 w/John's Wedding p1/ p2/`<br>
-   Expected: 1st contact is put as `John's Wedding`'s Partner 1 and 1st contact has `John's Wedding` on its contact card.
+    5. Similar test cases to 3 and 4 can be attempted with the `[p2/]` prefix instead to test assigning weddings to contacts as `Partner 2`.
+       **Expected**: Similar to expected results for 3 and 4.
 
-##### ... if `John's Wedding` is in the list and if the first contact is already in John's Wedding
-1. Test case: `assign-wedding 1 w/John's Wedding`<br>
-   Expected: No weddings are assigned to any contacts. Error details shown.
+    6. **Test case**: `assign-wedding 1 w/Wedding August 19th 2029` (assuming that `Wedding August 19th 2029` is not in the `Wedding` list) <br>
+       **Expected**: No weddings are assigned to any contacts. Error details shown in status message indicating that the `Wedding` does not exist.
+
+    7. **Test case**: `assign-wedding 1 w/Wedding August 19th 2029 f/` (assuming that `Wedding August 19th 2029` is not in the `Wedding` list) <br>
+       **Expected**: The wedding `Wedding August 19th 2029` is created and shown in the `Wedding` list. The first contact is put in `Wedding August 19th 2029`'s guest
+       list and the first contact is assigned `Wedding August 19th 2029` on its contact card.
+
+<br>
+
+2. **Assigning a `Wedding` in the `Wedding list` to a `Person` assigned to the `Wedding`**
+
+   1. **Prerequisites**: List all weddings using the `list-weddings` command. At least 1 wedding exists in the system.
+      List all persons using the `list` command. At least 1 `Person` exists in the list that does not have one `Wedding` assigned to them.
+
+   2. **Test case**: `assign-wedding 1 w/John's Wedding p1/` (assuming `John's Wedding` already has person 1 assigned either in guest list, partner 1, or partner 2) <br>
+      **Expected**: No weddings are assigned to any contacts. Error details shown in status message indicating that the `Wedding` is already assigned to the `Person`.
+
+<br>
+
 
 ##### ... if `John's Wedding` is not in the list
 1. Test case: `assign-wedding 1 w/John's Wedding`<br>
