@@ -2,7 +2,9 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
+import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
 
 import java.nio.file.Path;
 
@@ -11,9 +13,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.BuyerList;
+import seedu.address.model.MeetUpList;
+import seedu.address.model.PropertyList;
+import seedu.address.model.ReadOnlyBuyerList;
+import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.model.ReadOnlyPropertyList;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.buyer.JsonBuyerListStorage;
+import seedu.address.storage.meetup.JsonMeetUpListStorage;
+import seedu.address.storage.property.JsonPropertyListStorage;
 
 public class StorageManagerTest {
 
@@ -24,9 +33,11 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonBuyerListStorage buyerListStorage = new JsonBuyerListStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonMeetUpListStorage meetUpListStorage = new JsonMeetUpListStorage(getTempFilePath("ml"));
+        JsonPropertyListStorage propertyListStorage = new JsonPropertyListStorage(getTempFilePath("prop"));
+        storageManager = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage, propertyListStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,21 +59,76 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void addressBookSave() throws Exception {
         /*
-         * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * Note: This is an integration test that verifies the StorageManager is properly wired to
+         * {@link JsonBuyerListStorage} class, {@link JsonMeetUpListStorage} class and {@link JsonPropertyListStorage}
+         * class through {@link StorageManager#saveAddressBook}..
+         *
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        BuyerList originalBuyerList = getTypicalBuyerList();
+        MeetUpList originalMeetUpList = getTypicalMeetUpList();
+        PropertyList originalPropertyList = getTypicalPropertyList();
+        storageManager.saveAddressBook(originalBuyerList, originalMeetUpList, originalPropertyList);
+        ReadOnlyBuyerList retrievedBuyerList = storageManager.readBuyerList().get();
+        ReadOnlyMeetUpList retrievedMeetUpList = storageManager.readMeetUpList().get();
+        ReadOnlyPropertyList retrievedPropertyList = storageManager.readPropertyList().get();
+        assertEquals(originalBuyerList, new BuyerList(retrievedBuyerList));
+        assertEquals(originalMeetUpList, new MeetUpList(retrievedMeetUpList));
+        assertEquals(originalPropertyList, new PropertyList(retrievedPropertyList));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void buyerListReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonBuyerListStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonBuyerListStorageTest} class.
+         */
+        BuyerList original = getTypicalBuyerList();
+        storageManager.saveBuyerList(original);
+        ReadOnlyBuyerList retrieved = storageManager.readBuyerList().get();
+        assertEquals(original, new BuyerList(retrieved));
     }
 
+    @Test
+    public void getBuyerListFilePath() {
+        assertNotNull(storageManager.getMeetUpListFilePath());
+    }
+
+    @Test
+    public void meetUpListReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonMeetUpListStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonMeetUpListStorageTest} class.
+         */
+        MeetUpList original = getTypicalMeetUpList();
+        storageManager.saveMeetUpList(original);
+        ReadOnlyMeetUpList retrieved = storageManager.readMeetUpList().get();
+        assertEquals(original, new MeetUpList(retrieved));
+    }
+
+    @Test
+    public void getPropertyListFilePath() {
+        assertNotNull(storageManager.getPropertyListFilePath());
+    }
+
+    @Test
+    public void propertyListReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonPropertyListStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonPropertyListStorageTest} class.
+         */
+        PropertyList original = getTypicalPropertyList();
+        storageManager.savePropertyList(original);
+        ReadOnlyPropertyList retrieved = storageManager.readPropertyList().get();
+        assertEquals(original, new PropertyList(retrieved));
+    }
+
+    @Test
+    public void getMeetUpListFilePath() {
+        assertNotNull(storageManager.getMeetUpListFilePath());
+    }
 }

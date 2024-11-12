@@ -1,10 +1,12 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
+skinparam stereotypePosition top
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "AbcliParser" as AbcliParser<<class>>LOGIC_COLOR
+participant ":BuyerCommandParser" as BuyerCommandParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
@@ -17,17 +19,20 @@ end box
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> AbcliParser : parseCommand("delete 1")
+activate AbcliParser
+
+AbcliParser -> BuyerCommandParser : parseCommand("delete", "1")
+activate BuyerCommandParser
 
 create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
+BuyerCommandParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
+DeleteCommandParser --> BuyerCommandParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+BuyerCommandParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -37,19 +42,22 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser :
 deactivate DeleteCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> BuyerCommandParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
+DeleteCommandParser -[hidden]-> BuyerCommandParser
 destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+BuyerCommandParser --> AbcliParser : d
+deactivate BuyerCommandParser
+
+AbcliParser --> LogicManager : d
+deactivate AbcliParser
 
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : deleteBuyer(1)
 activate Model
 
 Model --> DeleteCommand

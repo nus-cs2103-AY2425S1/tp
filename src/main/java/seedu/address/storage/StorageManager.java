@@ -7,25 +7,43 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBuyerList;
+import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.model.ReadOnlyPropertyList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.buyer.BuyerListStorage;
+import seedu.address.storage.meetup.MeetUpListStorage;
+import seedu.address.storage.property.PropertyListStorage;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of BuyerList data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private BuyerListStorage buyerListStorage;
     private UserPrefsStorage userPrefsStorage;
+    private MeetUpListStorage meetUpListStorage;
+    private PropertyListStorage propertyListStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code BuyerListStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        this.addressBookStorage = addressBookStorage;
+    public StorageManager(BuyerListStorage buyerListStorage, UserPrefsStorage userPrefsStorage,
+            MeetUpListStorage meetUpListStorage, PropertyListStorage propertyListStorage) {
+        this.buyerListStorage = buyerListStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.meetUpListStorage = meetUpListStorage;
+        this.propertyListStorage = propertyListStorage;
+    }
+
+    @Override
+    public void saveAddressBook(ReadOnlyBuyerList buyerList, ReadOnlyMeetUpList meetUpList,
+                         ReadOnlyPropertyList propertyList) throws IOException {
+        this.saveBuyerList(buyerList);
+        this.saveMeetUpList(meetUpList);
+        this.savePropertyList(propertyList);
     }
 
     // ================ UserPrefs methods ==============================
@@ -46,33 +64,90 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ BuyerList methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getBuyerListFilePath() {
+        return buyerListStorage.getBuyerListFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyBuyerList> readBuyerList() throws DataLoadingException {
+        return readBuyerList(buyerListStorage.getBuyerListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyBuyerList> readBuyerList(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return buyerListStorage.readBuyerList(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveBuyerList(ReadOnlyBuyerList buyerList) throws IOException {
+        saveBuyerList(buyerList, buyerListStorage.getBuyerListFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveBuyerList(ReadOnlyBuyerList buyerList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        buyerListStorage.saveBuyerList(buyerList, filePath);
     }
 
+    // ================ MeetUp methods ==============================
+
+    @Override
+    public Path getMeetUpListFilePath() {
+        return meetUpListStorage.getMeetUpListFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyMeetUpList> readMeetUpList() throws DataLoadingException {
+        return readMeetUpList(meetUpListStorage.getMeetUpListFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyMeetUpList> readMeetUpList(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return meetUpListStorage.readMeetUpList(filePath);
+    }
+
+    @Override
+    public void saveMeetUpList(ReadOnlyMeetUpList meetUpList) throws IOException {
+        saveMeetUpList(meetUpList, meetUpListStorage.getMeetUpListFilePath());
+    }
+
+    @Override
+    public void saveMeetUpList(ReadOnlyMeetUpList meetUpList, Path filePath) throws IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        meetUpListStorage.saveMeetUpList(meetUpList, filePath);
+    }
+
+    // ================ Property methods ==============================
+
+    @Override
+    public Path getPropertyListFilePath() {
+        return propertyListStorage.getPropertyListFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyPropertyList> readPropertyList() throws DataLoadingException {
+        return readPropertyList(propertyListStorage.getPropertyListFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyPropertyList> readPropertyList(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return propertyListStorage.readPropertyList(filePath);
+    }
+
+    @Override
+    public void savePropertyList(ReadOnlyPropertyList propertyList) throws IOException {
+        savePropertyList(propertyList, propertyListStorage.getPropertyListFilePath());
+    }
+
+    @Override
+    public void savePropertyList(ReadOnlyPropertyList propertyList, Path filePath) throws IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        propertyListStorage.savePropertyList(propertyList, filePath);
+    }
 }

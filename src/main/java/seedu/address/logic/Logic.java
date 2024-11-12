@@ -7,8 +7,12 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyBuyerList;
+import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.model.ReadOnlyPropertyList;
+import seedu.address.model.buyer.Buyer;
+import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.property.Property;
 
 /**
  * API of the Logic component
@@ -24,19 +28,58 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the BuyerList.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getBuyerList()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyBuyerList getBuyerList();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the unfiltered list of buyers */
+    ObservableList<Buyer> getUnfilteredBuyerList();
+
+    /** Returns an unmodifiable view of the filtered list of buyers */
+    ObservableList<Buyer> getFilteredBuyerList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' buyer list file path.
      */
-    Path getAddressBookFilePath();
+    Path getBuyerListFilePath();
+
+    /**
+     * Returns the MeetUpList.
+     *
+     * @see seedu.address.model.Model#getMeetUpList()
+     */
+    ReadOnlyMeetUpList getMeetUpList();
+
+    /** Returns an unmodifiable view of the unfiltered list of meet-ups */
+    ObservableList<MeetUp> getUnfilteredMeetUpList();
+
+    /** Returns an unmodifiable view of the filtered list of meet ups */
+    ObservableList<MeetUp> getFilteredMeetUpList();
+
+    /**
+     * Returns the user prefs' meet up list file path.
+     */
+    Path getMeetUpListFilePath();
+
+    /**
+     * Returns the MeetUpList.
+     *
+     * @see seedu.address.model.Model#getMeetUpList()
+     */
+    ReadOnlyPropertyList getPropertyList();
+
+    /** Returns an unmodifiable view of the unfiltered list of properties */
+    ObservableList<Property> getUnfilteredPropertyList();
+
+    /** Returns an unmodifiable view of the filtered list of meet ups */
+    ObservableList<Property> getFilteredPropertyList();
+
+    /**
+     * Returns the user prefs' meet up list file path.
+     */
+    Path getPropertyListFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

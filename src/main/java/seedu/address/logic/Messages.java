@@ -5,19 +5,33 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.person.Person;
+import seedu.address.model.buyer.Buyer;
+import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.property.Property;
 
 /**
  * Container for user visible messages.
  */
 public class Messages {
+    // general
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_PARSER_MODE = "The parser mode provided is invalid";
+
+    // Buyer
+    public static final String MESSAGE_INVALID_BUYER_DISPLAYED_INDEX = "The buyer index provided is invalid";
+    public static final String MESSAGE_BUYERS_LISTED_OVERVIEW = "%1$d buyers listed!";
+
+    // MeetUp
+    public static final String MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX = "The meet-up index provided is invalid";
+    public static final String MESSAGE_MEETUPS_LISTED_OVERVIEW = "%1$d meet-ups listed!";
+
+    // Property
+    public static final String MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX = "The property index provided is invalid";
+    public static final String MESSAGE_PROPERTIES_LISTED_OVERVIEW = "%1$d properties listed!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -32,20 +46,53 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code buyer} for display to the user.
      */
-    public static String format(Person person) {
+    public static String format(Buyer buyer) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(buyer.getName())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(buyer.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
+                .append(buyer.getEmail())
+                .append("; Budget: ")
+                .append(buyer.getBudget())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        buyer.getTags().forEach(builder::append);
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code meetup} for display to the user.
+     */
+    public static String format(MeetUp meetup) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(meetup.getSubject())
+                .append("; Info: ")
+                .append(meetup.getInfo())
+                .append("; From: ")
+                .append(meetup.getFrom())
+                .append("; To: ")
+                .append(meetup.getTo())
+                .append("; Added Buyers: ");
+        meetup.getAddedBuyers().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code property} for display to the user.
+     */
+    public static String format(Property property) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(property.getLandlordName())
+                .append("; Phone: ")
+                .append(property.getPhone())
+                .append("; Address: ")
+                .append(property.getAddress())
+                .append("; Asking price: ")
+                .append(property.getAskingPrice())
+                .append("; Property type: ")
+                .append(property.getPropertyType());
+        return builder.toString();
+    }
 }

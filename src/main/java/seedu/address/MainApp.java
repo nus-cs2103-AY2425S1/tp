@@ -15,19 +15,29 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
+import seedu.address.model.BuyerList;
+import seedu.address.model.MeetUpList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.PropertyList;
+import seedu.address.model.ReadOnlyBuyerList;
+import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.model.ReadOnlyPropertyList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.model.util.SampleBuyerDataUtil;
+import seedu.address.model.util.SampleMeetUpDataUtil;
+import seedu.address.model.util.SamplePropertyDataUtil;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.buyer.BuyerListStorage;
+import seedu.address.storage.buyer.JsonBuyerListStorage;
+import seedu.address.storage.meetup.JsonMeetUpListStorage;
+import seedu.address.storage.meetup.MeetUpListStorage;
+import seedu.address.storage.property.JsonPropertyListStorage;
+import seedu.address.storage.property.PropertyListStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -36,7 +46,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 5, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -48,7 +58,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing ABCLI ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,8 +67,10 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        BuyerListStorage buyerListStorage = new JsonBuyerListStorage(userPrefs.getBuyerListFilePath());
+        MeetUpListStorage meetUpListStorage = new JsonMeetUpListStorage(userPrefs.getMeetUpListFilePath());
+        PropertyListStorage propertyListStorage = new JsonPropertyListStorage(userPrefs.getPropertyListFilePath());
+        storage = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage, propertyListStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -68,29 +80,61 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s buyer list and {@code userPrefs}. <br>
+     * The data from the sample buyer list will be used instead if {@code storage}'s buyer list is not found,
+     * or an empty buyer list will be used instead if errors occur when reading {@code storage}'s buyer list.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using buyer data file : " + storage.getBuyerListFilePath());
+        logger.info("Using meetUp data file : " + storage.getMeetUpListFilePath());
+        logger.info("Using property data file : " + storage.getPropertyListFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyBuyerList> buyerListOptional;
+        Optional<ReadOnlyMeetUpList> meetUpListOptional;
+        Optional<ReadOnlyPropertyList> propertyListOptional;
+        ReadOnlyBuyerList initialData;
+        ReadOnlyMeetUpList initialMeetUpList;
+        ReadOnlyPropertyList initialPropertyList;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+            buyerListOptional = storage.readBuyerList();
+            if (!buyerListOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getBuyerListFilePath()
+                        + " populated with a sample BuyerList.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = buyerListOptional.orElseGet(SampleBuyerDataUtil::getSampleBuyerList);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getBuyerListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty BuyerList.");
+            initialData = new BuyerList();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        try {
+            meetUpListOptional = storage.readMeetUpList();
+            if (!meetUpListOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getMeetUpListFilePath()
+                        + " populated with a sample MeetUpList.");
+            }
+            initialMeetUpList = meetUpListOptional.orElseGet(SampleMeetUpDataUtil::getSampleMeetUpList);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getMeetUpListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty MeetUpList.");
+            initialMeetUpList = new MeetUpList();
+        }
+
+        try {
+            propertyListOptional = storage.readPropertyList();
+            if (!propertyListOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getPropertyListFilePath()
+                        + " populated with a sample PropertyList.");
+            }
+            initialPropertyList = propertyListOptional.orElseGet(SamplePropertyDataUtil::getSamplePropertyList);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getPropertyListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty PropertyList.");
+            initialPropertyList = new PropertyList();
+        }
+
+        return new ModelManager(initialData, userPrefs, initialMeetUpList, initialPropertyList);
     }
 
     private void initLogging(Config config) {
@@ -170,13 +214,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting ABCLI " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("============================ [ Stopping ABCLI ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

@@ -19,21 +19,34 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Change view to MeetUpList */
+    private final boolean showMeetUpList;
+
+    /** Change view to Budget Book */
+    private final boolean showBuyerList;
+
+    /** Change view to Property List */
+    private final boolean showPropertyList;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
+            boolean showMeetUpList, boolean showBuyerList, boolean showPropertyList) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showMeetUpList = showMeetUpList;
+        this.showBuyerList = showBuyerList;
+        this.showPropertyList = showPropertyList;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
+     * buyer list to true, and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +59,18 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowMeetUpList() {
+        return showMeetUpList;
+    }
+
+    public boolean isShowBuyerList() {
+        return showBuyerList;
+    }
+
+    public boolean isShowPropertyList() {
+        return showPropertyList;
     }
 
     @Override
@@ -62,7 +87,10 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showMeetUpList == otherCommandResult.showMeetUpList
+                && showBuyerList == otherCommandResult.showBuyerList
+                && showPropertyList == otherCommandResult.showPropertyList;
     }
 
     @Override
