@@ -280,16 +280,29 @@ Team Size: 5
 3. **Save theme preference upon exit**: Currently, if a user changes themes to light mode and exits EduConnect, that theme preference is not saved. That means when they reopen the app, it will use the dark mode theme (despite closing on light mode).
 
     We plan to rework the app such that it actually saves the theme preference upon exit, meaning that whatever theme a user exits with is the theme that is used automatically upon reopening the app.
-4. Prevent teacher command from accepting "/nok", "/attendance" and "/emergency" prefix
-5. Relax restrictions on phone number to allow international phone numbers
-6. Make gender keyword case-insensitive 
+4. **Prevent `edit` command from accepting "/nok", "/attendance" and "/emergency" prefix for `teacher`**: The current implementation of the `edit` command allows for the use of `/nok`, `/attendance` and `/emergency` prefixes for `teacher` contacts. This is not necessary as these fields are not applicable to teachers. 
+
+    We plan to prevent the use of these prefixes for `teacher` contacts, ensuring that only the relevant fields can be edited for teachers.
+5. **Relax restrictions on phone number to allow international phone numbers**: The current implementation of the `add` command restricts phone numbers to be 8 digits long. This is not suitable for international phone numbers, which can be longer than 8 digits. 
+
+    We plan to relax the restrictions on phone numbers to allow for international phone numbers, which can be longer than 8 digits. This will allow for a wider range of phone numbers to be added to EduConnect.
+6. **Make `gender` parameter case-insensitive**: The current parameter of `gender` requires the user to input strictly `male` or `female`. This is not user-friendly as users may input `Male` or `Female` instead. 
+
+    We plan to make the `gender` parameter case-insensitive and accept both `male` and `female` and also `m` and `f` in any case as valid inputs to allow for a more user-friendly experience.
 7. **Ability to edit attendance for students**: The current `edit` command does not support editing the attendance parameter. We plan to enhance the `edit` command to include the ability to directly modify the student's attendance field to a specified value, provided it adheres to the required constraints of the attendance parameter. The command format will be `edit INDEX [/attendance ATTENDANCE]`.
-8. **Update `find` command to support partial matching**: The current `find` command only supports exact matches for search parameters, which limits its flexibility. We plan to enhance the `find` command to allow partial matches, enabling users to search for entries using incomplete information. For instance, entering `find /name han` would return results such as "Hans Gruber" and "Johanna Smith.".
+8. **Update `find` command to support partial matching**: The current `find` command only supports exact matches for search parameters, which limits its flexibility. We plan to enhance the `find` command to allow partial matches, enabling users to search for entries using incomplete.
 9. **Prevent duplicate subjects to be added**: The current implementation for adding a contact allows for duplicate subjects to be added for a contact. We plan to prevent the addition of duplicate contacts by filtering out subjects that already exist in the contact's subject list.
 10. **Allow certain special characters in names**: The current implementation for adding a contact prevents the use of any special characters in names. We plan to allow the incorporation of characters such as '/' and '-' in names to accommodate a wider range of names. 
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Effort**
+
+The main difficulty faced by the team was understanding the existing codebase and adapting it to the new requirements. The team had to spend a significant amount of time understanding the existing codebase and how the different components interacted with each other. This was a significant challenge as the team had no prior experience with the existing codebase and had to learn how the different components worked together.
+Fortunately the existing AB3 developer guide provided a good starting point for the team to understand the existing codebase and how the different components interacted with each other. The team was able to leverage the existing developer guide to understand the codebase and how the different components worked together. This helped the team to get up to speed quickly and start working on the new requirements.
+Through the developer guide, the team was able to abstract `Person` to `Student` and `Teacher` for example and implement the new requirements. The team was able to leverage the existing codebase to implement the new requirements and add new features to the app.
+<br><br>
+The learning curve of JavaFX and the implementation of the GUI was another challenge in itself. The team had no prior knowledge of JavaFX beyond the basics learnt from their iP projects and thus had to learn JavaFX from scratch had to spend a significant amount of time learning JavaFX and implementing the GUI, which slowed down the development process.
+Additionally, significant changes had to be made to the json storage file which was another hurdle. The team had to understand how the json storage file worked and how to make changes to it without breaking the existing functionality. This was a significant challenge as the team had no prior experience with json storage files and had to learn how to make changes to it without breaking the existing functionality. 
 
 --------------------------------------------------------------------------------------------------------------------
 
