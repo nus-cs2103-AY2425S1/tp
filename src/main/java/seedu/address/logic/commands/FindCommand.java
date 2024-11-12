@@ -1,37 +1,50 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
+import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
+
+import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all persons or appointments in address book whose name contains any of the argument keywords.
+ * Keyword matching is case-insensitive.
  */
-public class FindCommand extends Command {
+public abstract class FindCommand<T> extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+        + ": Finds all entities whose data contain any of "
+        + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+        + "Parameters: ENTITY_TYPE (person/appt) KEYWORD [MORE_KEYWORDS]...\n"
+        + "Example: " + COMMAND_WORD + " " + PERSON_ENTITY_STRING + " n/John\n"
+        + "Example: " + COMMAND_WORD + " " + APPOINTMENT_ENTITY_STRING + " n/John d/2024-10-20";
 
-    private final NameContainsKeywordsPredicate predicate;
+    protected final Predicate<T> predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    /**
+     * Creates a {@code FindCommand} with the specified predicate.
+     * */
+    public FindCommand(Predicate<T> predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * Executes the find command.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes the result of executing the command.
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        findEntity(model);
+        return new CommandResult(getSuccessMessage(model));
     }
 
     @Override
@@ -41,11 +54,10 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindCommand<?> otherFindCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
         return predicate.equals(otherFindCommand.predicate);
     }
 
@@ -55,4 +67,20 @@ public class FindCommand extends Command {
                 .add("predicate", predicate)
                 .toString();
     }
+
+
+    /**
+     * Finds the person/appointment from the list
+     *
+     * @param model {@code Model} which the FindCommand should operate on.
+     */
+    protected abstract void findEntity(Model model);
+
+    /**
+     * Returns the message to be displayed after finding all persons or appointments matching the query.
+     *
+     * @param model {@code Model} which the FindCommand should operate on.
+     * @return Success message
+     */
+    protected abstract String getSuccessMessage(Model model);
 }

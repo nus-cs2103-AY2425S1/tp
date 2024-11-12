@@ -14,18 +14,19 @@ public class CommandResult {
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    private final boolean isHelpSelected;
 
     /** The application should exit. */
-    private final boolean exit;
+    private final boolean isExitSelected;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
+     *
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean isHelpSelected, boolean isExitSelected) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+        this.isHelpSelected = isHelpSelected;
+        this.isExitSelected = isExitSelected;
     }
 
     /**
@@ -41,11 +42,11 @@ public class CommandResult {
     }
 
     public boolean isShowHelp() {
-        return showHelp;
+        return isHelpSelected;
     }
 
     public boolean isExit() {
-        return exit;
+        return isExitSelected;
     }
 
     @Override
@@ -55,27 +56,28 @@ public class CommandResult {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CommandResult)) {
+        if (!(other instanceof CommandResult otherCommandResult)) {
             return false;
         }
 
-        CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+        boolean isSameFeedbackToUser = feedbackToUser.equals(otherCommandResult.feedbackToUser);
+        boolean isSameIsHelpSelected = isHelpSelected == otherCommandResult.isHelpSelected;
+        boolean isSameIsExitSelected = isExitSelected == otherCommandResult.isExitSelected;
+
+        return isSameFeedbackToUser && isSameIsHelpSelected && isSameIsExitSelected;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, isHelpSelected, isExitSelected);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
-                .add("showHelp", showHelp)
-                .add("exit", exit)
+                .add("showHelp", isHelpSelected)
+                .add("exit", isExitSelected)
                 .toString();
     }
 

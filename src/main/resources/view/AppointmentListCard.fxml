@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane HBox.hgrow="ALWAYS">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="120" GridPane.columnIndex="0">
+      <padding>
+        <Insets bottom="5" left="15" right="15" top="5" />
+      </padding>
+      <HBox alignment="CENTER_LEFT" spacing="0.5">
+        <Label fx:id="id" styleClass="cell_big_name_label">
+          <minWidth>
+            <Region fx:constant="USE_PREF_SIZE" />
+          </minWidth>
+        </Label>
+        <Label fx:id="appointmentType" styleClass="cell_big_name_label" text="\$first" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Label styleClass="cell_id_prefix_label" text="AID:" />
+        <Label fx:id="appointmentId" styleClass="cell_id_label" text="\$appointmentId" />
+      </HBox>
+      <HBox spacing="5">
+        <Label styleClass="cell_small_label" text="Date/Time:" />
+        <Label fx:id="dateTime" styleClass="cell_small_value" text="\$dateTime" />
+      </HBox>
+      <HBox spacing="5">
+        <Label styleClass="cell_small_label" text="Patient Name:" />
+        <Label fx:id="personName" styleClass="cell_small_value" text="\$personName" />
+        <Label fx:id="personId" styleClass="cell_id_label" text="\$personId" />
+      </HBox>
+      <HBox spacing="5">
+        <Label styleClass="cell_small_label" text="Sickness:" />
+        <Label fx:id="sickness" styleClass="cell_small_value" text="\$sickness" />
+      </HBox>
+      <HBox spacing="5">
+        <Label styleClass="cell_small_label" text="Medicine:" />
+        <Label fx:id="medicine" styleClass="cell_small_value" text="\$medicine" />
+      </HBox>
+    </VBox>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
+  </GridPane>
+</HBox>

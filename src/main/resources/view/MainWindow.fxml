@@ -1,60 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
 
-<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="DocTrack" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/doctrack.png" />
   </icons>
   <scene>
     <Scene>
-      <stylesheets>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
-      </stylesheets>
 
       <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-          </Menu>
-        </MenuBar>
+            <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="340.0" styleClass="menu-bar">
+               <children>
+              <MenuBar fx:id="menuBar" HBox.hgrow="ALWAYS">
+                <Menu mnemonicParsing="false" styleClass="menu-button" text="File">
+                  <MenuItem mnemonicParsing="false" onAction="#handleExit" styleClass="menu-button" text="Exit" />
+                </Menu>
+                <Menu mnemonicParsing="false" styleClass="menu-button" text="Help">
+                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" styleClass="menu-button" text="Help" />
+                </Menu>
+              </MenuBar>
+                  <ImageView fitHeight="28.0" fitWidth="137.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/doctrack.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <StackPane fx:id="commandBoxPlaceholder" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
+               <styleClass>
+                  <String fx:value="pane-with-border" />
+                  <String fx:value="command-box" />
+               </styleClass>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" VBox.vgrow="NEVER">
           <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
+            <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
+               <styleClass>
+                  <String fx:value="pane-with-border" />
+                  <String fx:value="command-result-box" />
+               </styleClass>
         </StackPane>
 
-        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
+            <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
-          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          <StackPane fx:id="listPanelPlaceholder" VBox.vgrow="ALWAYS" />
         </VBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
+         <stylesheets>
+            <URL value="@LightTheme.css" />
+            <URL value="@Extensions.css" />
+         </stylesheets>
     </Scene>
   </scene>
 </fx:root>

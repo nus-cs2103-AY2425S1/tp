@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import java.util.Optional;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 
@@ -14,4 +16,14 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns the person with corresponding personId if
+     * it exists in the person observable list.
+     */
+    Optional<Person> findPerson(int personId);
+
+    /**
+     * Returns the next person ID
+     */
+    int getNextPersonId();
 }

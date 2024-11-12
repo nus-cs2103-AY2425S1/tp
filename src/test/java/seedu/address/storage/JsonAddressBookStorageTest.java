@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICE_P;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -27,6 +27,7 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void readAddressBook_nullFilePath_throwsNullPointerException() {
+        // EP: Null file path input
         assertThrows(NullPointerException.class, () -> readAddressBook(null));
     }
 
@@ -36,32 +37,37 @@ public class JsonAddressBookStorageTest {
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
         return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
-                : null;
+            ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
+            : null;
     }
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
+        // EP: File does not exist, expect empty result
         assertFalse(readAddressBook("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
+        // EP: File is not in JSON format
         assertThrows(DataLoadingException.class, () -> readAddressBook("notJsonFormatAddressBook.json"));
     }
 
     @Test
     public void readAddressBook_invalidPersonAddressBook_throwDataLoadingException() {
+        // EP: JSON file has an invalid person entry
         assertThrows(DataLoadingException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
     }
 
     @Test
     public void readAddressBook_invalidAndValidPersonAddressBook_throwDataLoadingException() {
+        // EP: JSON file contains both valid and invalid person entries
         assertThrows(DataLoadingException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
     }
 
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+        // EP: Typical address book data saved and read in expected order
         Path filePath = testFolder.resolve("TempAddressBook.json");
         AddressBook original = getTypicalAddressBook();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
@@ -73,7 +79,8 @@ public class JsonAddressBookStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
-        original.removePerson(ALICE);
+
+        original.removePerson(ALICE_P);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
@@ -88,6 +95,7 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
+        // EP: Null address book input, expect NullPointerException
         assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
     }
 
@@ -97,7 +105,7 @@ public class JsonAddressBookStorageTest {
     private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
         try {
             new JsonAddressBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
@@ -105,6 +113,7 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
+        // EP: Null file path input for saving, expect NullPointerException
         assertThrows(NullPointerException.class, () -> saveAddressBook(new AddressBook(), null));
     }
 }

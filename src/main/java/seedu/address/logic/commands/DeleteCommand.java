@@ -1,69 +1,90 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
+import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes an entity identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public abstract class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the entity identified by the index number used in the displayed list.\n"
+            + "Parameters: "
+            + "ENTITY_TYPE (person/appt) "
+            + "INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " " + APPOINTMENT_ENTITY_STRING + " 1\n"
+            + "Example: " + COMMAND_WORD + " " + PERSON_ENTITY_STRING + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    protected final Index targetIndex;
 
-    private final Index targetIndex;
-
+    /**
+     * Constructs a DeleteCommand with the specified index.
+     *
+     * @param targetIndex Index of entity to be deleted.
+     */
     public DeleteCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<?> lastShownList = getFilteredList(model);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(getInvalidIndexMessage());
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        Object entityToDelete = lastShownList.get(targetIndex.getZeroBased());
+        deleteEntity(model, entityToDelete);
+        return new CommandResult(String.format(getSuccessMessage(), formatEntity(entityToDelete)));
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
+    /**
+     * Gets the filtered list of entities in the model.
+     *
+     * @param model Model to get the list from.
+     * @return Filtered list of entities.
+     */
+    protected abstract List<?> getFilteredList(Model model);
 
-        // instanceof handles nulls
-        if (!(other instanceof DeleteCommand)) {
-            return false;
-        }
+    /**
+     * Deletes the entity from the model.
+     *
+     * @param model Model to delete entity from.
+     * @param entity Entity to delete.
+     */
+    protected abstract void deleteEntity(Model model, Object entity);
 
-        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
-    }
+    /**
+     * Returns the success message to display upon deleting entity.
+     *
+     * @return Success message.
+     */
+    protected abstract String getSuccessMessage();
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
-                .toString();
-    }
+    /**
+     * Returns the invalid index message when the index is out of bounds.
+     *
+     * @return Invalid index message.
+     */
+    protected abstract String getInvalidIndexMessage();
+
+    /**
+     * Formats the entity for displaying in the success message.
+     *
+     * @param entity Entity to format.
+     * @return Formatted entity.
+     */
+    protected abstract String formatEntity(Object entity);
 }

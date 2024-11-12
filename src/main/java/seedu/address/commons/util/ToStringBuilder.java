@@ -48,6 +48,6 @@ public class ToStringBuilder {
      */
     @Override
     public String toString() {
-        return stringBuilder.toString() + OBJECT_SUFFIX;
+        return stringBuilder + OBJECT_SUFFIX;
     }
 }

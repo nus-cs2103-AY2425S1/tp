@@ -4,11 +4,16 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -24,16 +29,19 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private AppointmentListPanel appointmentListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final HelpWindow helpWindow;
+    private HBox hbox = new HBox();
+    private VBox personVBox = new VBox();
+    private VBox appointmentVBox = new VBox();
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +50,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -78,6 +86,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -111,13 +120,38 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        appointmentListPanel = new AppointmentListPanel(logic.getFilteredAppointmentList());
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personVBox.getChildren().addAll(personListPanel.getRoot());
+        appointmentVBox.getChildren().addAll(appointmentListPanel.getRoot());
+
+        hbox.setAlignment(Pos.CENTER);
+        HBox.setHgrow(personVBox, Priority.ALWAYS);
+        HBox.setHgrow(appointmentVBox, Priority.ALWAYS);
+
+        listPanelPlaceholder.getChildren().add(hbox);
+        hbox.setMinWidth(listPanelPlaceholder.getWidth());
+
+        VBox.setVgrow(personListPanel.getRoot(), Priority.ALWAYS);
+        VBox.setVgrow(appointmentListPanel.getRoot(), Priority.ALWAYS);
+
+        personVBox.setMaxWidth(Double.MAX_VALUE);
+        personVBox.setPrefWidth(Region.USE_COMPUTED_SIZE);
+        personVBox.setMaxHeight(Double.MAX_VALUE);
+        appointmentVBox.setMaxWidth(Double.MAX_VALUE);
+        appointmentVBox.setPrefWidth(Region.USE_COMPUTED_SIZE);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        hbox.getChildren().add(personVBox);
+        hbox.getChildren().add(appointmentVBox);
+        hbox.setMaxHeight(Double.MAX_VALUE);
+        VBox.setVgrow(hbox, Priority.ALWAYS);
+
+        StatusBarFooter addressBookFooter = new StatusBarFooter(
+            logic.getAddressBookFilePath(), logic.getAppointmentBookFilePath());
+        statusbarPlaceholder.getChildren().add(addressBookFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
@@ -157,7 +191,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+            (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();

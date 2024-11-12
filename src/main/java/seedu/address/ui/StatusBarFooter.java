@@ -15,14 +15,24 @@ public class StatusBarFooter extends UiPart<Region> {
     private static final String FXML = "StatusBarFooter.fxml";
 
     @FXML
-    private Label saveLocationStatus;
+    private Label addressBookSaveLocationStatus;
+
+    @FXML
+    private Label appointmentBookSaveLocationStatus;
 
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
      */
-    public StatusBarFooter(Path saveLocation) {
+    public StatusBarFooter(Path addressBookLocation, Path appointmentBookLocation) {
         super(FXML);
-        saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+        addressBookSaveLocationStatus.setText(
+            String.format("Address Book: %s",
+                Paths.get(".").resolve(addressBookLocation).toString())
+        );
+        appointmentBookSaveLocationStatus.setText(
+            String.format("Appointment Book: %s",
+                Paths.get(".").resolve(appointmentBookLocation).toString())
+        );
     }
 
 }

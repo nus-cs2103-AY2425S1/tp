@@ -25,6 +25,7 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_nullFilePath_throwsNullPointerException() {
+        // EP: null file path
         assertThrows(NullPointerException.class, () -> readUserPrefs(null));
     }
 
@@ -35,6 +36,7 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void readUserPrefs_missingFile_emptyResult() throws DataLoadingException {
+        // EP: missing file
         assertFalse(readUserPrefs("NonExistentFile.json").isPresent());
     }
 
@@ -45,20 +47,22 @@ public class JsonUserPrefsStorageTest {
 
     private Path addToTestDataPathIfNotNull(String userPrefsFileInTestDataFolder) {
         return userPrefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER.resolve(userPrefsFileInTestDataFolder)
-                : null;
+            ? TEST_DATA_FOLDER.resolve(userPrefsFileInTestDataFolder)
+            : null;
     }
 
     @Test
     public void readUserPrefs_fileInOrder_successfullyRead() throws DataLoadingException {
         UserPrefs expected = getTypicalUserPrefs();
         UserPrefs actual = readUserPrefs("TypicalUserPref.json").get();
+        // EP: typical well-formatted file
         assertEquals(expected, actual);
     }
 
     @Test
     public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed() throws DataLoadingException {
         UserPrefs actual = readUserPrefs("EmptyUserPrefs.json").get();
+        // EP: file with missing values (should use default values)
         assertEquals(new UserPrefs(), actual);
     }
 
@@ -66,7 +70,7 @@ public class JsonUserPrefsStorageTest {
     public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataLoadingException {
         UserPrefs expected = getTypicalUserPrefs();
         UserPrefs actual = readUserPrefs("ExtraValuesUserPref.json").get();
-
+        // EP: file with extra values (extra values should be ignored)
         assertEquals(expected, actual);
     }
 
@@ -79,11 +83,13 @@ public class JsonUserPrefsStorageTest {
 
     @Test
     public void savePrefs_nullPrefs_throwsNullPointerException() {
+        // EP: null UserPrefs object
         assertThrows(NullPointerException.class, () -> saveUserPrefs(null, "SomeFile.json"));
     }
 
     @Test
     public void saveUserPrefs_nullFilePath_throwsNullPointerException() {
+        // EP: null file path
         assertThrows(NullPointerException.class, () -> saveUserPrefs(new UserPrefs(), null));
     }
 
@@ -93,7 +99,7 @@ public class JsonUserPrefsStorageTest {
     private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) {
         try {
             new JsonUserPrefsStorage(addToTestDataPathIfNotNull(prefsFileInTestDataFolder))
-                    .saveUserPrefs(userPrefs);
+                .saveUserPrefs(userPrefs);
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file", ioe);
         }

@@ -26,7 +26,9 @@ public class StorageManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonAppointmentBookStorage appointmentBookStorage = new JsonAppointmentBookStorage(
+                getTempFilePath("appb"));
+        storageManager = new StorageManager(addressBookStorage, userPrefsStorage, appointmentBookStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -44,6 +46,7 @@ public class StorageManagerTest {
         original.setGuiSettings(new GuiSettings(300, 600, 4, 6));
         storageManager.saveUserPrefs(original);
         UserPrefs retrieved = storageManager.readUserPrefs().get();
+        // EP: typical UserPrefs object
         assertEquals(original, retrieved);
     }
 
@@ -62,6 +65,7 @@ public class StorageManagerTest {
 
     @Test
     public void getAddressBookFilePath() {
+        // EP: test address book file path retrieval (non-null check)
         assertNotNull(storageManager.getAddressBookFilePath());
     }
 

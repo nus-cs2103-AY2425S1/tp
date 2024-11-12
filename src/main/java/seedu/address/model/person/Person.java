@@ -2,8 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,40 +15,76 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
+    private final int personId;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final PersonDescriptor personDescriptor;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+    public Person(Name name, Phone phone, Email email, Address address, Status status, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, status, tags);
+        this.personDescriptor = new PersonDescriptor(
+                name, phone, email, address, status, tags
+        );
+
+        // Increment the static counter and assign a unique ID to the person
+        this.personId = 0;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Status status, Set<Tag> tags,
+                  int personId) {
+        requireAllNonNull(name, phone, email, address, status, tags, personId);
+        this.personDescriptor = new PersonDescriptor(
+                name, phone, email, address, status, tags
+        );
+
+        // Increment the static counter and assign a unique ID to the person
+        this.personId = personId;
+    }
+
+    /**
+     * Builds a person given a personId and a personDescriptor.
+     *
+     * @param personId The personId of the person.
+     * @param personDescriptor The personDescriptor of the person.
+     */
+    public Person(int personId, PersonDescriptor personDescriptor) {
+        requireAllNonNull(personId, personDescriptor);
+        this.personId = personId;
+        this.personDescriptor = personDescriptor;
+    }
+
+    public PersonDescriptor getPersonDescriptor() {
+        return personDescriptor;
+    }
+
+    public int getPersonId() {
+        return personId;
     }
 
     public Name getName() {
-        return name;
+        return personDescriptor.getName();
     }
 
     public Phone getPhone() {
-        return phone;
+        return personDescriptor.getPhone();
     }
 
     public Email getEmail() {
-        return email;
+        return personDescriptor.getEmail();
     }
 
     public Address getAddress() {
-        return address;
+        return personDescriptor.getAddress();
+    }
+
+    public Status getStatus() {
+        return personDescriptor.getStatus();
     }
 
     /**
@@ -58,7 +92,7 @@ public class Person {
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+        return personDescriptor.getTags();
     }
 
     /**
@@ -66,13 +100,17 @@ public class Person {
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return personDescriptor.isSamePerson(otherPerson.personDescriptor);
     }
+
+    /**
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSamePerson(PersonDescriptor otherPerson) {
+        return personDescriptor.isSamePerson(otherPerson);
+    }
+
 
     /**
      * Returns true if both persons have the same identity and data fields.
@@ -85,32 +123,29 @@ public class Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Person otherPerson)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        return personDescriptor.equals(otherPerson.personDescriptor);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(personId, personDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
+                .add("personId", personId)
+                .add("name", getName())
+                .add("phone", getPhone())
+                .add("email", getEmail())
+                .add("address", getAddress())
+                .add("status", getStatus())
+                .add("tags", getTags())
                 .toString();
     }
 

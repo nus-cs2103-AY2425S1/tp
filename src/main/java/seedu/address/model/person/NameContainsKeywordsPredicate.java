@@ -16,12 +16,33 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         this.keywords = keywords;
     }
 
+    /**
+     * Returns the keywords used in this predicate.
+     *
+     * @return the keywords used in this predicate.
+     */
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
+    /**
+     * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+     *
+     * @param person the person to test
+     * @return true if the person's name matches any of the keywords given, false otherwise
+     */
     @Override
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }
 
+    /**
+     * Returns true if the keywords used in this predicate are the same as the keywords used in the other predicate.
+     *
+     * @param other the other predicate to compare
+     * @return true if the keywords used in this predicate are the same as the keywords used in the other predicate
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -29,11 +50,10 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 
