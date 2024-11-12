@@ -340,41 +340,6 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ---
 
-## **Appendix: Instructions for Manual Testing**
-
-Given below are instructions to test the app manually.
-
-<box type="info" seamless>
-
-**Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more _exploratory_ testing.
-
-</box>
-
-1. First, launch the app by entering the folder and running `java -jar DLTbook.jar`.
-
-2. The app should start and display the main window with a list of sample contacts.
-
-3. Try adding a public address to a user by entering
-   `add 1 c/BTC l/default pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.
-
-4. Try retrieving the public address by entering `retrievepa l/default` or `retrievepa l/default c/BTC`.
-
-5. Try editing the public address by entering `editpa 1 c/BTC l/default pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.
-
-6. Try searching for the public address by entering `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.
-
-7. Try deleting the public address by entering `deletepa 1 c/BTC` or `deletepa 1 c/BTC l/default`.
-
-8. Try filtering the persons with public addresses network by entering `filter c/BTC`.
-
-<box type = "success">
-
-Good job!🥳 You have tested the basic functionalities of the app. We recommend you to explore the app further to test
-more functionalities.
-
-</box>
-
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -389,7 +354,10 @@ more functionalities.
 - is a user of DLTs
 - has many contacts in address book with many DLT public addresses to manage
 
-**Value proposition**: manage DLT public address of contacts faster than a typical mouse/GUI driven app
+**Value proposition**: 
+
+- Manage DLT public address of contacts faster than a typical mouse/GUI driven app
+- Easy storage and access of public addresses of contacts
 
 ### User stories
 
@@ -442,8 +410,6 @@ otherwise)
 3. User requests to delete a specific person in the list
 4. AddressBook deletes the person
 
-~~~~
-
 **Extensions**
 
 - 2a. The list is empty.
@@ -468,8 +434,26 @@ _{More to be added}_
 
 ### Glossary
 
-- **Mainstream OS**: Windows, Linux, Unix, MacOS
-- **Private contact detail**: A contact detail that is not meant to be shared with others
+| Term                               | Definition                                                                                                                                                                                           |
+|------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Blockchain**                     | A system in which a record of transactions made in bitcoin or another cryptocurrency is maintained across several computers that are linked in a peer-to-peer network.                               |
+| **Blockchain Network/DLT Network** | A decentralized digital ledger that records transactions across multiple computers. Acts like a currency, but it's digital and secure. (e.g., Bitcoin, Ethereum, Solana).                            |
+| **BTC**                            | Bitcoin, a decentralized digital currency without a central bank or single administrator that can be sent from user to user on the peer-to-peer bitcoin network without the need for intermediaries. |
+| **CLI**                            | Command Line Interface, a text-based interface used to interact with software and operating systems by typing commands.                                                                              |
+| **DLT**                            | Distributed Ledger Technology, the technological infrastructure and protocols that allow simultaneous access, validation, and record updating across a networked database.                           |
+| **ETH**                            | Ethereum, a decentralized, open-source blockchain with smart contract functionality, Ether (ETH) is the native cryptocurrency.                                                                       |
+| **GUI**                            | Graphical User Interface, allows users to interact with electronic devices through graphical icons and visual indicators.                                                                            |
+| **JAR**                            | Java Archive, a package file format typically used to aggregate many Java class files and associated metadata and resources into one file for distribution.                                          |
+| **JSON**                           | JavaScript Object Notation, a lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate.                                            |
+| **Public Address**                 | A unique series of alphanumerical characters that is shared with others to receive cryptocurrencies (similar to an account number).                                                                  |
+| **SOL**                            | Solana, a high-performance blockchain supporting builders around the world creating crypto apps that scale, Solana (SOL) native cryptocurrency.                                                      |                                                                                                                                                                    |
+| **Mainstream OS**                  | Windows, Linux, Unix, MacOS                                                                                                                                                                          |
+| **Private contact detail**         | A contact detail that is not meant to be shared with others                                                                                                                                          |
+
+---
+
+## **Appendix: Planned Enhancement**
+
 
 ---
 
@@ -490,38 +474,73 @@ testers are expected to do more _exploratory_ testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Open a terminal, and navigate to the folder you put the JAR file in.
 
-1. Saving window preferences
+   3. Launch the app by using the command `java -jar DLTbook.jar` in your terminal.
+   Expected: Shows the GUI with a set of sample applicants and interviews. The window size may not be optimum.
+
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by using the command `java -jar DLTbook.jar` in your terminal.<br>
       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a Public Address
 
-### Deleting a person
+1. Prerequisites: Persons exist in the list.
 
-1. Deleting a person while all persons are being shown
+2. Try `addpa 1 c/ETH l/default pa/0x0b1c9e1fb5e13c797c7f0134641810e9a7ca14d2`<br>
+   Expected: Public Address is added to the person. Details of the added public address shown in the status message. The list is updated with the new public address inside contacts at INDEX 1.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Retrieving a Public Address
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. Prerequisites: Persons and its relevant public addresses exist in the list.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+2. Try `retrievepa l/default`<br>
+   Expected: Retrieves all public addresses with labels containing "default" for all contacts and networks.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+3. Try `retrievepa l/default n/Alex`<br>
+     Expected:  Retrieves all public addresses with labels containing "default" for contacts whose names contain "Alex".
 
-1. _{ more test cases …​ }_
+4. Try `retrievepa l/main c/btc n/bernice`<br>
+        Expected:  Retrieves all BTC public addresses with labels containing "main" for contacts whose names contain "bernice".
 
-### Saving data
+### Editing a Public Address
 
-1. Dealing with missing/corrupted data files
+1. Prerequisites: Persons and its relevant public addresses and labels exist in the list.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+2. Try `editpa 1 c/BTC l/Main wallet pa/bc1phkt4pgl42lad3mm2srne73y8a7zgam3cumrzmc`<br>
+    Expected: Edits the contact at index 1's BTC public address labelled as "Main wallet" to the new value bc1phkt4pgl42lad3mm2srne73y8a7zgam3cumrzmc.<br>
 
-1. _{ more test cases …​ }_
+### Search for a Public Address
+
+1. Prerequisites: Persons and its relevant public addresses and labels exist in the list.
+
+2. Try `searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9 `<br>
+   Expected: Searches for a public address bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9 and displays the contacts and wallets to which it belongs.
+
+### Filter for contacts by network
+
+1. Prerequisites: Persons and its relevant public addresses and labels exist in the list.
+
+2. Try `filterpa c/BTC`<br>
+   Expected: Filters a list of contacts with the public addresses of BTC and displays it with their respective list number.
+
+### Deleting a Public Address
+
+1. Prerequisites: Persons and its relevant public addresses and labels exist in the list.
+
+3. Try `deletepa 1 c/BTC l/Main wallet`<br>
+   Expected: Deletes the public address of the contact at index 1 with the label "Main wallet". 
+
+3. Try `deletepa 1 c/BTC`<br>
+    Expected: Deletes all the BTC public addresses of the contact at index 1.
+
+<box type = "success">
+
+Good job!🥳 You have tested the basic functionalities of the app. We recommend you to explore the app further to test
+more functionalities.
+
+</box>
+
