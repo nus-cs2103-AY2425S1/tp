@@ -119,8 +119,9 @@ How the parsing works:
 
 Output after parsing:
 * If an invalid command is input, a help message is shown to a user to specify the proper use of the command.
-* Depending on the parameters input by the user, the same command type can result in different output. 
+* Depending on the parameters input by the user, the same command type can result in different outputs. 
   * For example, the `filter` command can filter by either `subject` or `yearGroup` as shown below.
+  * Calling the `list` command reverts the shown list to show all students again.
 
 <img src="images/FilterActivityDiagram.png" width="600"/>
 
