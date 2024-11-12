@@ -27,7 +27,7 @@ We encourage you to explore each section thoroughly to maximize your understandi
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
-
+<br><br>
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
