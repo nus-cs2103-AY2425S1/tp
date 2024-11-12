@@ -31,17 +31,16 @@ title: Developer Guide
 7. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
    1. [Launch and shutdown](#launch-and-shutdown)
    2. [Deleting a person](#deleting-a-person)
-   3. [Saving data](#saving-data)
 8. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
-   1. [Ability to export specific groups to CSV files](#enhancement-1-ability-to-export-explicit-groups-to-csv-files)
-   2. [Ability to change export filename or file path](#enhancement-2-ability-to-change-export-filename-or-file-path)
-   3. [Ability to import groups](#enhancement-3-ability-to-import-groups)
-   4. [Better student duplication handling](#enhancement-4-better-student-duplication-handling)
-   5. [Support for special characters in name and class fields](#enhancement-5-support-for-special-characters-in-name-and-class-fields)
-   6. [Increasing support to host more student information](#enhancement-6-increasing-support-to-host-more-student-information)
-   7. [Increased filter options for students](#enhancement-7-increased-filter-options-for-students)
-   8. [Support for precise student name searching](#enhancement-8-support-for-precise-student-name-searching)
-   
+    1. [Ability to export specific groups to CSV files](#enhancement-1-export-specific-groups-to-csv-files)
+    2. [Ability to change export filename or file path](#enhancement-2-custom-export-filename-and-file-path)
+    3. [Ability to import groups](#enhancement-3-import-groups-from-csv-files)
+    4. [Better student duplication handling](#enhancement-4-improved-handling-of-duplicate-student-names)
+    5. [Support for special characters in name and class fields](#enhancement-5-support-special-characters-in-names-and-class-fields)
+    6. [Increasing support to host more student information](#enhancement-6-support-additional-student-information)
+    7. [Increased filter options for students](#enhancement-7-advanced-filtering-options-for-students)
+    8. [Support for precise student name searching](#enhancement-8-precise-student-name-searching)
+
 ---
 
 ## **Acknowledgements**
@@ -1087,6 +1086,8 @@ Enhanced filtering enables efficient student management, helping users find stud
 - Add a `filter` command to allow searching and sorting by various attributes like grades, attendance, and class.
 
 ---
+
+
 
 ### **Enhancement 8: Precise Student Name Searching**
 
