@@ -995,7 +995,7 @@ Use case ends.
     * 2b2. System prompts admin to input information again.
     * 2b3. Admin inputs information again.
 
-      Repeat 2b1 to 2b3 until Admin inputs student that exists.
+      Repeat 2b1 to 2b3 until Admin inputs tutorial that exists.
     * 2b4. System marks attendance for the tutorial and displays success status.
 
   Use case ends.
