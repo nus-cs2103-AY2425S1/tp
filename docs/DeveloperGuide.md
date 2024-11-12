@@ -96,6 +96,7 @@ Here's a (partial) class diagram of the `Logic` component:
 <puml src="diagrams/LogicClassDiagram.puml" alt="Structure of the Logic Component"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+**This example can be used as a guide for all EduLog commands**.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 <box type="info" seamless>
