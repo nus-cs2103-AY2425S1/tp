@@ -309,8 +309,8 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 * 1a. User leaves the sort field empty.
     - 1a1. Cher detects error in user input and shows correct input format. <br>
       Use case ends.
-* 2a. User enters invalid field.
-    - 2a1. Cher detects error in user input and shows correct input format. <br>
+* 1b. User enters invalid field.
+    - 1b1. Cher detects error in user input and shows correct input format. <br>
       Use case ends.
 
 #### Use case: UC7 - Batch edit
@@ -529,44 +529,56 @@ Execute the following:
    - add n/anna s/f r/parent p/23456121 a/Jurong e/sutd@dfsh.dsfvc  t/tag1 
    - add n/Benet s/m r/student p/34682621 a/Pungol e/rjc@dfsh.dsfvc  t/tag1 t/tag2 
    - List all persons using the `list` command.
-2. Sorting list by name
+2. Sorting list by name <br>
+
    1. Test case: `sort name` <br>
       Expected: Feedback box will show message: `Sorted by name` <br>
       Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in 
-      the name, in the following order: anna, Benet, Charlie
-3. Sorting list by role
+      the name, in the following order: anna, Benet, Charlie <br>
+   
+3. Sorting list by role <br>
+
    1. Prerequisites: <br>
-      List all persons using the `list` command.
+      List all persons using the `list` command. <br>
+   
    2. Test case: `sort role` <br>
       Expected: Feedback box will show message: `Sorted by role` <br>
       Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in
-      the role, (parents followed by students) in the following order: anna, Charlie, Benet
+      the role, (parents followed by students) in the following order: anna, Charlie, Benet <br>
+   
 4. Sorting list by phone
     1. Prerequisites: <br>
-       List all persons using the `list` command.
+       List all persons using the `list` command. <br>
+   
     2. Test case: `sort phone` <br>
        Expected: Feedback box will show message: `Sorted by phone` <br>
        Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in
-       the phone, in the following order: anna, Benet, Charlie
+       the phone, in the following order: anna, Benet, Charlie <br>
+   
 5. Sorting list by email
     1. Prerequisites: <br>
-       List all persons using the `list` command.
+       List all persons using the `list` command. <br>
+   
     2. Test case: `sort email` <br>
        Expected: Feedback box will show message: `Sorted by email` <br>
        Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in
-       the email, in the following order: Charlie, Benet, anna 
+       the email, in the following order: Charlie, Benet, anna <br>
+   
 6. Sorting list by address
     1. Prerequisites: <br>
-       List all persons using the `list` command.
+       List all persons using the `list` command. <br>
+   
     2. Test case: `sort address` <br>
        Expected: Feedback box will show message: `Sorted by address` <br>
        Contact entries will show list sorted in case-insensitive order based on ASCII value of each character in
-       the address, in the following order: Charlie, anna, Benet
+       the address, in the following order: Charlie, anna, Benet <br>
+   
 7. Sorting list by invalid field
     1. Prerequisites: <br>
-       List all persons using the `list` command.
+       List all persons using the `list` command. <br>
+   
     2. Test case: `sort k` <br>
-       Expected: Feedback box will show error: `Invalid command format! sort: Sorts the list by given predicate. <br>
+       Expected: Feedback box will show error: `Invalid command format! sort: Sorts the list by given predicate. 
        Parameters: [name] [role] [phone] [email] [address] Example: sort name` <br>
        Contact entries will remain unsorted.
 
@@ -659,6 +671,7 @@ Execute the following:
 
 
 ### Batch deleting a group of people
+
 1. Deleting a group of people.
    
    1. Prerequisites: <br>
@@ -679,6 +692,7 @@ Execute the following:
       previous test case `iii`. Feedback box will show detail of deleted person.
 
 ### Batch editing a group of people's tag
+
 1. Changing a common tag among group of people.
     1. Prerequisites: <br>
        Execute the following:
@@ -776,4 +790,24 @@ Execute the following:
       4. Other incorrect find commands to try: `find`, `find x`, `...` (where x is larger than the list size)<br>
          Expected: List of persons shown remains unchanged.
          Feedback box shows error details regarding incorrect input format.
+
+## **Appendix: Planned Enhancements**
+
+### Select Command
+* We plan on updating select command such that it can select a range of people. For example, `select 5-10` will select the 5th to 10th persons.
+
+
+### Sort Command
+* In the future, we plan on implementing sorting by multiple attributes rather than just one.
+
+
+### Find Command
+* We plan on adding functionality for partial matches for phone number, address, and email, following the same format as the current partial name search.
+* In the future, we will also implement finding by multiple attributes rather than just one.
+
+### Delete Command
+* We plan on adding a confirmation prompt before Cher deletes the contact.
+* If no matches are found, rather than returning an empty list, we plan on displaying the current list along with an error message indicating no users were found. 
+* We also plan on implementing deleting by multiple attributes rather than just one.
+
 

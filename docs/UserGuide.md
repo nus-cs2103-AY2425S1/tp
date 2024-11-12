@@ -224,7 +224,7 @@ Deletes the specified person from Cher.
 Format: `delete [INDEX] [n/KEYWORDS] [p/PHONE] [a/ADDRESS] [t/TAG]…​`
 
 #### General Rules
-* At least one of the optional fields must be provided.
+* One of the optional fields must be provided.
 * Used to delete an individual contact
 * For attributes where duplicates may exist (such as names, addresses, and tags), if multiple matches are found, a list of possible matches will be displayed, allowing the user to choose.
 * If no contacts matching the user input are found, an empty list is returned.
@@ -266,7 +266,9 @@ Examples:
 * If multiple persons have the address `123 Clementi Ave 3` are found , a list of these persons is displayed.
 
 #### Tags (`delete t/TAG…`)
+
 * Case-sensitive search
+* Multiple tags can be used for filtering
 * Only the persons with tags that match all the exact tag names provided will be deleted.
 * If multiple persons match the provided tags, Cher will display a list of matches for selection.
 
