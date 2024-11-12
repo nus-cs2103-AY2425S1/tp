@@ -3,9 +3,12 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACTTYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODNAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEHANDLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -83,6 +86,18 @@ public class PersonTest {
 
         // different telegram handle -> returns false
         editedAlice = new PersonBuilder(ALICE).withTelegramHandle(VALID_TELEHANDLE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different contact type -> returns false
+        editedAlice = new PersonBuilder(ALICE).withContactType(VALID_CONTACTTYPE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different module name -> returns false
+        editedAlice = new PersonBuilder(ALICE).withModuleName(VALID_MODNAME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different remark -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRemark(VALID_REMARK_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

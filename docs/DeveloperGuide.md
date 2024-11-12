@@ -118,7 +118,9 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W12-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="1100" />
+
+<puml src="diagrams/ModelClassDiagram.puml" width="100%" />
+
 
 
 The `Model` component,
@@ -127,6 +129,14 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<box type="info" seamless>
+
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+
+<puml src="diagrams/BetterModelClassDiagram.puml" width="750" />
+
+</box>
 
 
 ### Storage component
@@ -177,7 +187,8 @@ The optional fields allow users to include more detailed information, making the
   * The information is stored using the `JsonAddressBookStorage#saveAddressBook()` method which calls the `JsonSerializableAddressBook`
     constructor, to create an object that can be serialized in JSON format.
 
-<puml src="diagrams/AddSequenceDiagram.puml" width="1100" />
+<puml src="diagrams/AddSequenceDiagram.puml" width="100%" />
+
 
 #### Design Considerations
 
@@ -212,7 +223,7 @@ The command format is as follows:<br>
 * **Storage (ThemePreference)**
     * `ThemePreference` loads the saved theme from `themePreference.json`, or defaults to 'LIGHT' if none is found.
 
-<puml src="diagrams/SwitchThemeSequenceDiagram.puml" width="1100" />
+<puml src="diagrams/SwitchThemeSequenceDiagram.puml" width="100%" />
 
 #### Design Considerations
 
@@ -402,7 +413,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 4b. The edited contact results in a duplicate
   * 4b1. UniLink shows an error message indicating that a duplicate contact already exists.
-  
+
   Use case ends.
 
 **Use case: UC004 - View contact list**
@@ -663,7 +674,7 @@ testers are expected to do more *exploratory* testing.
 
     3. Launch the app by double-clicking the jar file.<br>
        Expected: The app loads with no contacts.
-                                 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**
@@ -687,3 +698,72 @@ additional features.
 
 In summary, this project required considerable effort due to the added functionality, custom UI work, and enhanced search features. The limited reuse of existing libraries meant most of the code had to be written and adapted by our team, adding to the overall effort invested.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+**Team Size: 5**
+
+1. **Prevent duplicate entries when using the `edit` command:** 
+* Current Issue: When using the edit command, users can edit contact details such that two contacts can have the same Telegram handle, phone number and/or email. 
+* Example: When users do the following commands in order, both contacts will have the same Telegram handle.
+  * `add n/Amy One ct/personal t/@amyone`
+  * `add n/Amy Two ct/personal t/@amytwo`
+  * `edit 2 t/@amyone`
+* Proposed Change: Ensure that duplicate entries cannot be added if it already exists in the address book.
+
+2. **Long inputs make it hard to read certain contact details**
+* Current Issue: When users type in fields with long character lengths, some contact details may be truncated in the display panel, making it hard for users to view.
+* Example: The command `edit r/` with 200 characters will show truncated text up to window size
+* Proposed Change: Introduce horizontal scrolling within the contact panel, allowing users to scroll to view all contact details.
+
+3. **Prevent duplicate fields with case insensitivity**
+* Current Issue: It is possible for two different contacts to have the same email address or telegram handle if the fields are typed in different cases. This leads to duplicate entries.
+* Example: The following commands will not lead to any error despite the two contacts having the same email address (in different cases)
+  * `add n/Amy ct/work e/amy123@example.com`
+
+  * `add n/Bob ct/work e/AMY123@EXAMPLE.COM`
+* Proposed Change: Introduce case-insensitive validation when contacts are added or edited. If a duplicate email or telegram handle is detected, the action will be prevented with an accompanying error message.
+
+4. **Add labels for each field for better readability**
+* Current Issue: When fields are left blank, the space where the data is supposed to be will be empty. It may be hard to differentiate certain fields as well, such as a phone number and a remark with a string of numbers. 
+* Example: This is how the contact is displayed when the following command is entered:<br>
+`add n/Amy ct/work p/87654321 r/12345`<br>
+![img.png](images/emptySpaceUiBug.png)
+* Proposed Change: Add labels next to each field in the contact, so that contact fields are clear and empty fields are made obvious. This will help to improve readability and reduce confusion. 
+
+5. **Change background colour of UI from white to theme colour** 
+* Current Issue: For the current UI, when there are only a few contacts (contacts do not fill the screen), the background of the contact list is shown in white. This can be especially disconcerting for the 'dark' mode, as it looks very bright in contrast to the dark theme.
+* Example: `find alex` returns only 1 person when using the default addressbook.json, resulting in a white background in the contact list.
+* Proposed Change: Change the contact list background to match the background colour of the app.
+
+6. **Allow for deletion of optional fields**
+* Current Issue: The only way to remove optional fields of a contact currently is to delete the entire contact and re-add the contact with all the fields except the one being deleted. There is no way of simply deleting an optional field.
+* Example: A user wants to remove the remark field from a contact named John Doe who has the details: `n/John Doe p/98765432 e/johndoe@example.com r/Met at conference`. Currently, the only way to remove the remark field is to delete the entire contact and re-add it without the remark field.
+* Proposed Change: Allow for deletion of optional fields of a contact using the `edit` command (e.g. `edit 1 r/` can delete the remark of the contact)
+
+7. **Provide feedback for skipped contacts during import**
+* Current Issue: Currently, when the import function encounters any invalid contacts, it skips over these unimported contacts without providing feedback. This leaves users unaware of which contacts were not imported and why they were skipped.
+* Example: If a contact in the .csv file is missing the contactType or if the contactType is invalid, the import function will skip over that contact without any notification or reason provided.
+* Proposed Change: Enhance the import function to provide detailed feedback for skipped contacts. This feedback should specify which contacts could not be imported and include the reasons for each case.
+
+8. **Make error messages more specific and standardised**
+* Current Issue: For most errors in formatting, the app shows a generic error message: Invalid command format! This may be hard for users to find out exactly what is wrong with their format.
+* Example: When a user enters the command `add n/Amy ct/work t/colleague`, the following error message is displayed.<br>
+  `Invalid command format!`<br>
+  `add: Adds a person to the address book.`<br>
+  `Parameters: n/NAME ct/CONTACT TYPE [h/TELEGRAM HANDLE] [p/PHONE] [e/EMAIL] [m/MODULE NAME] [r/REMARK] [t/TAG]...`<br>
+  `Example: add ct/work n/John Doe h/@johndoe m/CS1101S p/98765432 e/johnd@example.com r/likes to eat chocolate t/friends t/owesMoney`<br>
+  `Note: At least one field out of phone, email and telegram handle must be provided`<br>
+  This response is both lengthy and lacks specific guidance. Users may have difficulty identifying the exact issue, such as the missing contact field (i.e.telegram handle, phone or email) requirement.
+* Proposed Change: Introduce more specific error messages for different command format errors.
+
+9. **Allow special characters in names**
+* Current Issue: UniLink's current system may not fully recognize or handle names with special characters, potentially limiting the accurate representation of names that use hyphens, cultural identifiers, or symbols.
+* Example: Users may need to input names like "Aubree-Rose," "Aishah d/o Rahman," or names with unique characters such as "John Smith!" but encounter limitations or rejections.
+* Proposed Change: Enhance the `add` and `edit` commands to accommodate names with special characters, including hyphens, cultural identifiers (e.g., "d/o," "s/o"), and symbols. This update will allow users to input and maintain detailed and accurate records, ensuring all details are captured precisely.
+
+10. **Change `find` to `findname` for clarity**
+* Current Issue: The `find` command may cause confusion, as it only searches by names. This can be unclear because there are also separate `findtele` and `findtag` commands that search for Telegram handles and tags respectively.
+* Example: `find alex`, this find command for names is inconsistent compared to findtele and findtag.
+* Proposed Change: Change the name of the `find` command to `findname` to standardise with the other find commands.
