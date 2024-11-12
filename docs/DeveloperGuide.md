@@ -51,9 +51,9 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-`Main` (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+`Main` (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T14-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shutdown.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+* At shutdown, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
@@ -176,7 +176,7 @@ AgentAssist is designed to support credit card sales, making it essential to hav
 
 Additionally, the inclusion of a status attribute for clients enhances customer service by indicating whether follow-up action is required. This feature helps agents keep track of promised actions, reducing missed commitments and ensuring a reliable client experience.
 
-#### Current implementation
+#### Current Implementation
 
 The `Tier` and `Status` fields are implemented as classes containing `enum` values, which restrict the possible options for these fields and improve data consistency.
 
@@ -203,7 +203,7 @@ By assigning specific colors to each status, the UI helps agents prioritize thei
 ### 2. Add Command
 The `add` command is used to add new clients into the existing list of clients. However, the command will prevent adding any clients who are considered 'duplicates' of existing clients.
 
-#### Current implementation
+#### Current Implementation
 This is a high-level view of what occurs when the `add` command is executed: 
 ![AddSequenceDiagram.png](images%2FAddSequenceDiagram.png)
 
@@ -220,7 +220,7 @@ Note: The error messages shown will differ based on which check fails. The check
 ### 3. Edit Command
 The `edit` command is used to add a client's contact to the existing list of clients saved in AgentAssist.
 
-#### Current implementation
+#### Current Implementation
 Here is a high-level view of the logic flow when the `edit` command is executed:
 ![EditActivityDiagram.png](images%2FEditActivityDiagram.png)
 
@@ -256,7 +256,7 @@ The user confirmation prompt shown here is also used in the `clear` command. Thi
 ### 5. Filter Command
 The `filter` command is used to view a specific subset of clients by applying specific filtering criteria to the client list. 
 
-#### Current implementation
+#### Current Implementation
 The following diagrams provide a high-level overview of the `filter` command's logic flow:
 ![FilterActivityDiagramInputValidation.png](images/FilterActivityDiagramInputValidation.png)
 ![FilterActivityDiagramFilterAndDisplay.png](images/FilterActivityDiagramFilterAndDisplay.png)
@@ -299,7 +299,7 @@ Team Size: 5
 **Current Issue:** Names containing symbols like `@` and parentheses (e.g., `John @ Doe` or `Jane (Admin) Smith`) are currently incompatible with the `add`, `edit`, and `filter` commands because support for these characters has not been implemented yet. Although such cases are rare, the current name validation regex excludes these symbols.
 
 **Technical Impact:**
-- There are no anticipated issues with allowing these symbols in names. The main reason for the lack of support is the low frequency of such cases, making it a lower priority for development.
+- There are no anticipated issues with allowing these symbols in names. TThe main reason for not supporting these symbols is the low frequency of such cases, making it a lower priority for development.
 
 **Status:** Scheduled for future release as an enhancement to improve flexibility in name handling, allowing a broader range of symbols in user inputs.
 
@@ -323,7 +323,7 @@ Team Size: 5
 
 These images illustrate varying error message formats of the `edit` command. 
 
-While some messages provide the full command hint, others offer minimal guidance, leading to an inconsistent user experience. This inconsistency extends beyond the `edit` command, as other error messages of other commands also vary in its level of information. In certain cases, error messages merely identify the issue without offering additional guidance, while others incorporate helpful usage hints.
+While some messages provide the full command hint, others offer minimal guidance, leading to an inconsistent user experience. This inconsistency extends beyond the `edit` command, as other error messages of other commands also vary in its level of detail. In certain cases, error messages merely identify the issue without offering additional guidance, while others incorporate helpful usage hints.
 
 Additionally, certain command hints could benefit from more clarity on constraints, especially for the `edit` command, which currently does not indicate that the `rn/` and `ra/` flags cannot be used simultaneously.
 
