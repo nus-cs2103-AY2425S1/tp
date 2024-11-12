@@ -33,8 +33,8 @@ public class VolunteerAddDateCommand extends Command {
     private static final String MESSAGE_ADD_DATE_VOLUNTEER_SUCCESS =
             "Added dates to %s's list of available dates.";
 
-    private final Index targetIndex;
-    private final String dateList;
+    protected final Index targetIndex;
+    protected final String dateList;
 
     /**
      * Constructor. Takes in a non-zero, non-negative index and a list of dates formatted as a single string.

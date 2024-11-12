@@ -67,13 +67,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      * file, in the event that the json file is corrupted or tampered with.
      */
     public void validateAllVolunteers() {
-        for (Event event : eventManager.getEvents()) {
-            for (String volunteerName : event.getVolunteers()) {
-                if (!volunteerManager.hasVolunteer(volunteerName)) {
-                    event.unassignVolunteer(volunteerName);
+        boolean hasUnassignedVolunteer;
+        do {
+            hasUnassignedVolunteer = false;
+            for (Event event : eventManager.getEvents()) {
+                for (String volunteerName : event.getVolunteers()) {
+                    if (!volunteerManager.hasVolunteer(volunteerName)) {
+                        event.unassignVolunteer(volunteerName);
+                        hasUnassignedVolunteer = true;
+                        break;
+                    }
+                }
+                if (hasUnassignedVolunteer) {
+                    break;
                 }
             }
-        }
+        } while (hasUnassignedVolunteer);
     }
 
     /**
@@ -83,13 +92,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      * file, in the event that the json file is corrupted or tampered with.
      */
     public void validateAllEvents() {
-        for (Volunteer volunteer : volunteerManager.getVolunteers()) {
-            for (String eventName : volunteer.getEvents()) {
-                if (!eventManager.hasEvent(eventName)) {
-                    volunteer.removeEvent(eventName);
+        boolean hasRemovedEvent;
+        do {
+            hasRemovedEvent = false;
+            for (Volunteer volunteer : volunteerManager.getVolunteers()) {
+                for (String eventName : volunteer.getEvents()) {
+                    if (!eventManager.hasEvent(eventName)) {
+                        volunteer.removeEvent(eventName);
+                        hasRemovedEvent = true;
+                        break;
+                    }
+                }
+                if (hasRemovedEvent) {
+                    break;
                 }
             }
-        }
+        } while (hasRemovedEvent);
     }
 
     /**

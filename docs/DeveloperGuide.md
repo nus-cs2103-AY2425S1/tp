@@ -107,11 +107,11 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `VolunteerDeleteCommandParser`) and uses it to parse the command.
-    - However, if it is a command that creates a new event (e.g. /v new), AddressBookParser creates an instance of `VolunteerCommandParser`, which then creates the `VolunteerNewCommandParser` to parse the command.
-2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a volunteer).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `EventNewCommandParser`) and uses it to parse the command.
+    - For example, if it is a command that creates a new event (e.g. /e new), AddressBookParser creates an instance of `EventCommandParser`, which then creates the `EventNewCommandParser` to parse the command using other classes shown in the diagram below.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `EventNewCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to create a new event).<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object, `Model` and other classes within the model package e.g `AddressBook`, `EventManager`) to achieve.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 <div style="page-break-after: always;"></div>
@@ -121,8 +121,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="668"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `EventCommandParser`) which uses the other classes shown above such as the ParserUtil to parse the user command and create a `XYZCommand` object (e.g., `EventNewCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `EventNewCommandParser`, `EventDeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 <div style="page-break-after: always;"></div>
 
@@ -135,7 +135,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Event` and `Volunteer` objects (which are contained in a `UniqueEventList` and `UniqueVolunteerList` object respectively).
-* stores the currently 'selected' `Event` and `Volunteer` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Event>` and `ObservableList<Volunteer` respectively, that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'displayed' `Event` and `Volunteer` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Event>` and `ObservableList<Volunteer` respectively, that can be 'observed'. (The UI is bound to this list so that the UI automatically updates when the data in the list change e.g. due to additions or deletions.)
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -180,7 +180,7 @@ Classes used by multiple components are in the [`seedu.address.commons`](https:/
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: This application serves to streamline volunteer and for volunteer organisations.
+**Value proposition**: This application serves to streamline human resource management for volunteer organisations.
 It provides essential tools to track volunteers and events efficiently, enabling organisations to
 maintain accurate records and enhance their operational capabilities.
 
@@ -189,29 +189,32 @@ maintain accurate records and enhance their operational capabilities.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                  | I want to …​                           | So that I can…​                                                                      |
-|----------|------------------------------------------|----------------------------------------|--------------------------------------------------------------------------------------|
-| `* * *`  | HR department employee                   | Remove volunteers                      | Keep volunteer records up to date                                                    |
-| `* * *`  | HR department employee                   | View volunteers                        | Quickly access and review the list of all volunteers                                 |
-| `* * *`  | HR department employee                   | Export volunteer information           | Generate reports for internal use                                                    |
-| `* * *`  | Events director                          | Create events                          | Organize new events to engage volunteers                                             |
-| `* * *`  | Events director                          | Remove events                          | Keep the events list clean and up to date                                            |
-| `* * *`  | Events director                          | View events                            | Get an overview of upcoming and past events                                          |
-| `* * *`  | Events director                          | Add volunteer to event                 | Assign volunteers to specific events                                                 |
-| `* * *`  | HR department employee                   | Add event to volunteer                 | Track the events a volunteer has participated in                                     |
-| `* * *`  | Events director                          | Remove volunteer from event            | Keep the list of volunteers attending the event updated                              |
-| `* * *`  | HR department employee                   | Remove event from volunteer            | Keep the events list for the volunteer clean and up to date                          |
-| `* *`    | HR department employee                   | Edit volunteer information             | Update volunteer details such as availability, hours, etc.                           |
-| `* *`    | Events director                          | Filter volunteers by availability      | Find available volunteers for a particular event                                     |
-| `* *`    | Events director, HR department employee  | Search/filter event by name            | Locate specific events quickly                                                       |
-| `* *`    | Events director                          | View volunteers for a particular event | Find out how many volunteers have signed up for the event                            |
-| `* *`    | Events director, HR department employee  | Search volunteers by name              | Find a specific volunteer by their name                                              |
-| `* *`    | HR department employee                   | Track volunteer hours                  | Monitor and log the hours each volunteer has worked                                  |
-| `*`      | General user                             | View event details per volunteer       | See which events a volunteer participated in                                         |
-| `*`      | HR department employee                   | View volunteer participation history   | Track volunteer engagement with past events                                          |
-| `*`      | General user                             | Toggle view options for events         | Customize how events are displayed in the app                                        |
-| `*`      | General user                             | Toggle Dark mode                       | Enhance the app's user experience for those who prefer a darker interface            |
-| `*`      | General user                             | Toggle Accessibility features          | Improve usability for visually impaired users through larger fonts and color changes |
+| Priority | As a …​                                 | I want to …​                                    | So that I can…​                                                                      |
+|----------|-----------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------------------|
+| `* * *`  | General user                            | View help                                       | Access a quick guide to efficiently use the program                                  |
+| `* * *`  | General user                            | Exit the program                                | Complete tasks and leave the program smoothly                                        |
+| `* * *`  | Events director                         | Create events                                   | Store details of the events                                                          |
+| `* * *`  | Events director                         | Remove events                                   | Keep the events list clean and up to date                                            |
+| `* * *`  | HR department employee                  | Create volunteers                               | Store new volunteers information                                                     |
+| `* * *`  | HR department employee                  | Remove volunteers                               | Keep volunteer records clean and up to date                                          |
+| `* * *`  | HR department employee                  | List all volunteers and events                  | Quickly access and review records of all volunteers and events                       |
+| `* * *`  | HR department employee                  | Export volunteers information                   | Generate reports from volunteer data for internal use                                |
+| `* * *`  | HR department employee                  | Export events information                       | Generate reports from event data for internal use                                    |
+| `* * *`  | Events director                         | Assign volunteer to event                       | Add specific volunteers to events as needed                                          |
+| `* * *`  | Events director                         | Unassign volunteer from event                   | Keep the list of participating volunteers in an event up to date                     |
+| `* * *`  | Events director                         | View involved events for a particular volunteer | See what events the volunteer is involved in                                         |
+| `* * *`  | Events director                         | View volunteers for a particular event          | See who is participating in specific events                                          |
+| `* *`    | Events director                         | Filter volunteers by availability               | Find available volunteers for a particular event                                     |
+| `* *`    | HR department employee                  | Add available dates to volunteers               | Know when the volunteer is free and can be assigned to a specific event              |
+| `* *`    | HR department employee                  | Remove available dates from volunteers          | Keep the list of available dates up to date                                          |
+| `* *`    | Events director, HR department employee | Search/filter event by name                     | Locate specific events quickly                                                       |
+| `* *`    | Events director, HR department employee | Search/filter volunteer by name                 | Locate specific volunteers quickly                                                   |
+| `*`      | General user                            | View event details per volunteer                | See which events a volunteer participated in                                         |
+| `*`      | HR department employee                  | View volunteer participation history            | Track volunteer engagement with past events                                          |
+| `*`      | General user                            | Toggle view options for events                  | Customize how events are displayed in the app                                        |
+| `*`      | General user                            | Dark mode                                       | Enhance the app's user experience for those who prefer a darker interface            |
+| `*`      | General user                            | Accessibility features                          | Improve usability for visually impaired users through larger fonts and color changes |
+
 
 <div style="page-break-after: always;"></div>
 
@@ -228,42 +231,51 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **MSS**:
 1. User enters the volunteer's details.
-2. User submits the volunteer's details to the system.
+2. User submits the information to the system.
 3. System checks if all required information is present and valid, and that no existing volunteer has the same name as the new volunteer.
 4. System creates the new event and confirms creation to the user.
    Use Case Ends.
 
 **Extensions**:
-- 3a. Information provided is incomplete or invalid.
-    - 3ai. System notifies user prompts the user to edit the provided details.<br>
+
+- 3a. Information provided is invalid or incomplete.
+    - 3ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 - 3b. Volunteer with the same name already exists.
-    - 3bi. System notifies user prompts the user to edit the provided details.<br>
+    - 3bi. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 - 4a. Volunteer creation fails.
-    - 4ai. System notifies user prompts the user to edit the provided details.<br>
+    - 4ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 **Guarantees**:
-- New volunteer is stored in the system if all required information is present and valid.
+- New volunteer is stored in the system if all required information is present, valid and if no other volunteer with the same name already exists.
 
 #### UC02. Find Volunteer by Name
 
 **Description**: Search for a volunteer by their name.
 
-**Preconditions**: Some Volunteers must exist in the system.
+**Preconditions**: At least one volunteer must exist in the system.
 
 **MSS**:
+
 1. User enters a keyword to search for.
-2. System looks up all volunteers whose names contain the keyword.
-3. System notifies the number of matches found and displays the list of volunteers whose names contains the keyword.<br/>
+2. User submits the information to the system.
+3. System checks if all required information is present and valid.
+4. System searches for all volunteers whose names contain the keyword.
+5. System notifies the number of matches found and displays the list of volunteers whose names contains the keyword.<br/>
    Use Case Ends.
 
 **Extensions**:
-- 2a. No volunteers whose names contains the keyword are found.
-    - 2ai. System notifies user and displays all volunteers.<br>
+
+- 3a. Information provided is invalid or incomplete.
+    - 3ai. System notifies the user and prompts them to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 4a. No volunteers whose names contains the keyword are found.
+    - 4ai. System notifies the user and displays all volunteers.<br>
       Use Case Ends.
 
 #### UC03. Delete Volunteer
@@ -273,14 +285,19 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 **Preconditions**: Volunteer must exist in the system.
 
 **MSS**:
-1. User selects the volunteer to delete.
-2. User confirms deletion.
-3. System deletes the volunteer and confirms deletion to the user.<br>
+1. User queries all volunteers.
+2. System displays list of all volunteers.
+3. User selects the volunteer to delete. 
+4. User submits the information to the system.
+5. System checks if all required information is present and valid.
+6. System checks for all events the volunteer is assigned to and unassigns them.
+7. System deletes the volunteer and confirms deletion to the user.<br>
    Use Case Ends.
 
 **Extensions**:
-- 1a. Volunteer does not exist in the system.
-    - 1ai. System notifies user, and prompts the user to select a valid volunteer. Returns to step 1.
+- 5a. Information provided is invalid or incomplete.
+    - 5ai. System notifies the user and prompts them to edit the provided details.<br>
+      Use Case Ends.<br><br>
 
 #### UC04. Add a Free Day to a Volunteer
 
@@ -289,28 +306,28 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 **Preconditions**: Volunteer must exist in the system.
 
 **MSS**:
-1. User selects the volunteer to add free day(s) to.
-2. User selects the date(s) to add as a free day.
-3. User submits the information to the system.
-4. System checks if the volunteer is already available on the selected date(s).
-5. System adds the free day to the volunteer's schedule and confirms addition.<br>
+1. User queries all volunteers.
+2. System displays list of all volunteers.
+3. User selects the volunteer to add free day(s) to.
+4. User selects the date(s) to add as a free day.
+5. User submits the information to the system.
+6. System checks if all required information is present and valid.
+7. System checks if the volunteer is already available on the selected date(s).
+8. System adds the free day to the volunteer's schedule and confirms addition.<br>
    Use Case Ends.
 
 **Extensions**:
-- 3a. Volunteer does not exist in the system.
-    - 1ai. System notifies user prompts the user to edit the provided details.<br>
+
+- 6a. Information provided is invalid or incomplete.
+    - 6ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 3b. Information provided is incomplete or invalid.
-    - 3bi. System notifies user prompts the user to edit the provided details.<br>
+- 7a. Volunteer is already available on one or more of the selected date(s).
+    - 7ai. System notifies the user. Volunteer's available dates do not change. <br>
       Use Case Ends.<br><br>
 
-- 4a. Volunteer is already available on the selected date(s).
-    - 4ai. System notifies user prompts the user to edit the provided details.<br>
-      Use Case Ends.<br><br>
-
-- 5a. Free day addition fails.
-    - 5ai. System notifies user prompts the user to edit the provided details.<br>
+- 8a. Free day addition fails.
+    - 8ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 #### UC05. Remove a Free Day from a Volunteer
@@ -321,38 +338,38 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **MSS**:
 
-1. User selects the volunteer to remove free day(s) from.
-2. User selects the date(s) to remove as a free day.
-3. User submits the information to the system.
-4. System checks if the volunteer is available on the selected date(s).
-5. System checks if the volunteer has any events assigned to them on the days that are no longer going to be free.
-6. System removes the free day from the volunteer's schedule and confirms removal.<br/>
+1. User queries all volunteers.
+2. System displays list of all volunteers.
+3. User selects the volunteer to remove free day(s) from.
+4. User selects the date(s) to remove as a free day.
+5. User submits the information to the system.
+6. System checks if all required information is present and valid.
+7. System checks if the volunteer is available on the selected date(s).
+8. System checks if the volunteer has any events assigned to them on the days that are no longer going to be free.
+9. System removes the free day from the volunteer's schedule and confirms removal.<br/>
    Use Case Ends.
 
 **Extensions**:
-- 3a. Volunteer does not exist in the system.
-    - 3ai. System notifies user prompts the user to edit the provided details.<br>
+
+- 6a. Information provided is invalid or incomplete.
+    - 6ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 3b. Information provided is incomplete or invalid.
-    - 3bi. System notifies user prompts the user to edit the provided details.<br>
+- 7a. Volunteer is not available on the selected date(s).
+    - 7ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 4a. Volunteer is not available on the selected date(s).
-    - 4ai. System notifies user prompts the user to edit the provided details.<br>
-      Use Case Ends.<br><br>
-
-- 5a. Volunteer is assigned to events on the days that the user is trying to remove as free.
-  - 5ai. System notifies user, prompts the user to unassign the volunteer from the affected events first. <br>
+- 8a. Volunteer is assigned to events on the days that the user is trying to remove as free.
+  - 8ai. System notifies the user and prompts them to unassign the volunteer from the affected events first. <br>
     Use Case Ends. <br><br>
 
-- 6a. Free day removal fails.
-    - 6ai. System notifies user prompts the user to edit the provided details.<br>
+- 9a. Free day removal fails.
+    - 9ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 #### UC06. Assign Volunteer to Event
 
-**Description**: Assign a volunteer to a specific event.
+**Description**: Assign a specific volunteer to a specific event.
 
 **Preconditions**: Event and Volunteer exists in the system.
 
@@ -361,30 +378,42 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 2. System displays list of all volunteers and events.
 3. User selects the desired volunteer and event to assign the volunteer to.
 4. User submits the information to the system.
-5. System adds the volunteer to the event and confirms addition.<br/>
+5. System checks if all required information is present and valid.
+6. System checks if the volunteer is already assigned to the event, free on the day of the even and if they are already assigned to any other event with clashing timing.
+7. System adds the volunteer to the event and confirms addition.<br/>
    Use Case Ends.
 
 **Extensions**:
-- 4a. The volunteer and/or event does not exist in the system.
-    - 4ai. System notifies user prompts the user to edit the provided details.<br>
+
+- 5a. Information provided is invalid or incomplete.
+    - 5ai. System notifies the user, prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 4b. Volunteer is already assigned to the event.
-    - 4bi. System notifies user.
-    - 4bii. Volunteer remains assigned to the event.<br>
+- 6a. Volunteer is already assigned to the event.
+    - 6ai. System notifies user.
+    - 6aii. Volunteer remains assigned to the event.<br>
       Use Case Ends.<br><br>
 
-- 4c. Volunteer is assigned to another event that clashes with the timing of the event the user is attempting to assign.
-    - 4ci. System notifies user of the clash.
-    - 4cii. Volunteer is not assigned to the event.<br>
+- 6b. Volunteer is not free on the day of the event.
+    - 6bi. System notifies the user.
+    - 6bii. Volunteer is not assigned to the event.<br>
+      Use Case Ends.<br><br>
+
+- 6c. Volunteer is assigned to another event that clashes with the timing of the event the user is attempting to assign.
+    - 6ci. System notifies user of the clash.
+    - 6cii. Volunteer is not assigned to the event.<br>
       Use Case Ends.
 
+- 7a. Assignment fails.
+    - 7ai. System notifies the user and prompts them to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
 **Guarantees**:
-- Volunteer is associated with the event in the system if the volunteer is not assigned to another event occurring at the same time.
+- Volunteer is associated with the event in the system if the volunteer passes all the relevant system checks.
 
 #### UC07. Un-assign Volunteer from Event
 
-**Description**: Un-assign a volunteer from a specific event.
+**Description**: Un-assign a specific volunteer from a specific event.
 
 **Preconditions**: Event and Volunteer exists in the system.
 
@@ -394,18 +423,25 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 2. System displays list of all volunteers and events.
 3. User selects the desired volunteer and event to un-assign the volunteer from.
 4. User submits the information to the system.
-5. System removes the volunteer from the event and confirms removal.<br/>
+5. System checks if all required information is present and valid.
+6. System checks if the volunteer is assigned to the event.
+7. System removes the volunteer from the event and confirms removal.<br/>
    Use Case Ends.
 
 **Extensions**:
-- 4a. The volunteer and/or event does not exist in the system.
-    - 4ai. System notifies user prompts the user to edit the provided details.<br>
+
+- 5a. Information provided is invalid or incomplete.
+    - 5ai. System notifies the user, prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 4a. Volunteer is not assigned to the event.
-    - 4bi. System notifies user.
-    - 4bii. Volunteer remains unassigned from the event.<br>
+- 6a. Volunteer is not assigned to the event.
+    - 6bi. System notifies user.
+    - 6bii. Volunteer remains unassigned from the event.<br>
       Use Case Ends.
+
+- 7a. Un-assignment fails.
+    - 7ai. System notifies the user and prompts them to edit the provided details.<br>
+      Use Case Ends.<br><br>
 
 #### UC08. List All Events a Volunteer is Assigned to
 
@@ -415,18 +451,22 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **MSS**:
 
-1. User selects the volunteer to view assigned events.
-2. User submits the information to the system.
-3. System displays the list of events the volunteer is assigned to.<br/>
+1. User queries all volunteers.
+2. System displays list of all volunteers.
+3. User selects the volunteer to view assigned events.
+4. User submits the information to the system.
+5. System checks if all required information is present and valid.
+6. System displays the list of events the volunteer is assigned to.<br/>
    Use Case Ends.
 
 **Extensions**:
 
-- 2a. Volunteer does not exist in the system.
-    - 2ai. System notifies user prompts the user to edit the provided details.<br>
+- 5a. Information provided is invalid or incomplete.
+    - 5ai. System notifies the user and prompts them to edit the provided details.<br>
       Use Case Ends.<br><br>
-- 3a. Volunteer is not assigned to any events.
-    - 3ai. System displays an empty list.<br>
+
+- 6a. Volunteer is not assigned to any events.
+    - 6ai. System displays an empty list.<br>
       Use Case Ends.
 
 #### UC09. Create Event
@@ -438,16 +478,17 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 **MSS**:
 1. User enters the event's details.
 2. User submits the event's details to the system.
-3. System checks if all required information is present, and that all information is valid.
+3. System checks if all required information is present, valid and if no other event with the same name already exists.
 4. System creates the new event and confirms creation to the user.
 
 **Extensions**:
+
 - 3a. Information provided is incomplete or invalid.
     - 3ai. System displays error and prompts the user to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 - 3b. Event with the same name already exists.
-    - 3bi. System notifies user and prompts the user to edit the provided details.<br>
+    - 3bi. System notifies the user and prompts the user to edit the provided details.<br>
       Use Case Ends.<br><br>
 
 - 4a. Event creation fails.
@@ -461,14 +502,22 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 **Preconditions**: Some Events must exist in the system.
 
 **MSS**:
+
 1. User enters a keyword to search for.
-2. System looks up all events with names containing the keyword.
-3. System notifies the number of matches found and displays the list of events whose names contains the keyword.<br>
+2. User submits the information to the system.
+3. System checks if all required information is present and valid.
+4. System searches for all events with names containing the keyword.
+5. System notifies the number of matches found and displays the list of events whose names contains the keyword.<br>
    Use Case Ends.<br>
 
 **Extensions**:
-- 2a. No events with names containing the keyword are found.
-    - 2ai. System notifies user and displays all events.<br>
+
+- 3a. Information provided is incomplete or invalid.
+    - 3ai. System displays error and prompts the user to edit the provided details.<br>
+      Use Case Ends.<br><br>
+
+- 4a. No events with names containing the keyword are found.
+    - 4ai. System notifies user and displays all events.<br>
       Use Case Ends.
 
 #### UC11. Delete Event
@@ -481,17 +530,18 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 1. User selects the event to delete.
 2. User submits the information to the system.
-3. System deletes the event and confirms deletion to the user.<br>
+3. System checks if all required information is present and valid.
+4. System deletes the event and confirms deletion to the user.<br>
    Use Case Ends.
 
 **Extensions**:
 
-- 2a. Event does not exist in the system.
-    - 2ai. System notifies user and prompts the user to select a valid event.<br>
+- 3a. Information provided is incomplete or invalid.
+    - 3ai. System displays error and prompts the user to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 3a. Event deletion fails.
-    - 3ai. System notifies user and prompts the user to edit the event details.<br>
+- 4a. Event deletion fails.
+    - 4ai. System notifies user and prompts the user to edit the event details.<br>
       Use Case Ends.
 
 #### UC12. List All Volunteers Assigned to an Event
@@ -504,17 +554,18 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 1. User selects the event to view assigned volunteers.
 2. User submits the information to the system.
-3. System displays the list of volunteers assigned to the event.<br>
+3. System checks if all required information is present and valid.
+4. System displays the list of volunteers assigned to the event.<br>
    Use Case Ends.
 
 **Extensions**:
 
-- 2a. Event does not exist in the system.
-    - 2ai. System notifies user and prompts the user to select a valid event.<br>
+- 3a. Information provided is incomplete or invalid.
+    - 3ai. System displays error and prompts the user to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 3a. No volunteers are assigned to the event.
-    - 3ai. System displays an empty list.<br>
+- 4a. No volunteers are assigned to the event.
+    - 4ai. System displays an empty list.<br>
       Use Case Ends.
 
 #### UC13. List All Volunteers Available for an Event
@@ -527,17 +578,18 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 1. User selects the event to view available volunteers.
 2. User submits the information to the system.
-3. System displays the list of volunteers available for the event.<br>
+3. System checks if all required information is present and valid.
+4. System displays the list of volunteers available for the event.<br>
    Use Case Ends.
 
 **Extensions**:
 
-- 2a. Event does not exist in the system.
-    - 2ai. System notifies user and prompts the user to select a valid event.<br>
+- 3a. Information provided is incomplete or invalid.
+    - 3ai. System displays error and prompts the user to edit the provided details.<br>
       Use Case Ends.<br><br>
 
-- 3a. No volunteers are available for the event.
-    - 3ai. System displays an empty list.<br>
+- 4a. No volunteers are available for the event.
+    - 4ai. System displays an empty list.<br>
       Use Case Ends.
 
 #### UC14. Find Help
@@ -610,7 +662,6 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 * **Volunteer**: An individual who participates in a community event without monetary compensation.
 * **Event**: A planned activity organised by a community or non-profit organisation, requiring volunteer coordination.
-* **Donor**: An individual or organization that contributes funds or resources to support community events.
 * **Recurring Events**: Events that occur repeatedly on a set schedule.
 * **CLI (Command-Line Interface)**: A text-based interface where users input commands to interact with the application.
 * **NFR (Non-Functional Requirement)**: System attributes like performance, scalability, and usability that don’t affect specific functional behaviors.
@@ -878,40 +929,40 @@ The following planned enhancements address known feature flaws identified during
     - **Proposed Fix**: Add sorting options to the event list, such as sorting by date, time, or location. Command example: `/e list sort/date`.
     - **Expected Outcome**: Improved usability for managing events.
 
-4. **Allow Find Command To Work With Previous Commands**
-   - **Feature Flaw**: Currently the find command will reset the display list and search for volunteers or events containing the keyword.
-   - **Proposed Solution**: Find should use the current display list as the basis for its search.
-   - **Expected Outcome**: Users should be able to search for a particular volunteer assigned to an event, by using `/e view` first and then `/v find` after.
-
-5. **Enhance Find Command Input Flexibility**
+4. **Enhance Find Command Input Flexibility**
     - **Feature Flaw**: Currently the find command does not support searching for email or phone number.
     - **Proposed Fix**: Update the search functionality to allow for searching email and phone number. For example, searching for `93456` will return `David Ng`.
     - **Expected Outcome**: More flexible search results.
 
-6. **Dynamic UI Updates**
+5. **Dynamic UI Updates**
     - **Feature Flaw**: Unassign Volunteers from Events while viewing said event would still show volunteer is involved
     - **Proposed Fix**: UI would dynamically update the results it shows after every command is run.
     - **Expected Outcome**: UI would display accurate and the most updated information.
 
-7. **Multiple Error Tracking**
+6. **Multiple Error Tracking**
     - **Feature Flaw**: Currently exceptions are thrown at the first error encountered from a user command. 
     - **Proposed Fix**: The error message should show all detectable errors with the command (e.g volunteer is assigned to multiple events on day User is trying to unfree, Volunteer has multiple clashing events for an assign command, etc).
     - **Expected Outcome**: Users would be able to as many issues as possible before re-entering the command without needing to check it one by one.
 
-8. **Add Support For Leap Years**
+7. **Add Support For Leap Years**
     - **Feature Flaw**: Currently the date does not parse leap days accordingly
     - **Proposed Fix**: The program should output the specific error that the leap day is not valid.
     - **Expected Outcome**: Users would know that the invalid error is due to leap day.
 
-9. **Enhance String Validation For Names**
+8. **Enhance String Validation For Names**
    - **Feature Flaw**: Currently same names with different spacing between parts of names are accepted as different names.
    - **Proposed Solution**: The new volunteer command should automatically standardise all spaces in a volunteer's name.
    - **Expected Outcome**: Users should be prevented from accidentally adding duplicate volunteers with different number of spaces within names.
 
-10. **Enhance Output Message Alignment**
-    - **Feature Flaw**: Currently some success and error messages exceed the space available in one line and force the user to scroll the output box horizontally to read the full message.
-    - **Proposed Solution**: The output message should wrap in the output text box.
-    - **Expected Outcome**: Users should be able to read and understand error message with less trouble and confusion.
+9. **Enhance Output Message Alignment**
+   - **Feature Flaw**: Currently some success and error messages exceed the space available in one line and force the user to scroll the output box horizontally to read the full message.
+   - **Proposed Solution**: The output message should wrap in the output text box.
+   - **Expected Outcome**: Users should be able to read and understand error message with less trouble and confusion.
+
+10. **Improve Error Message Specificity**
+    - **Feature Flaw**: Currently assignment errors are not specific.
+    - **Proposed Solution**: Error message should indicate if assignment fails due to overlapping event assignment or due to the volunteer not being free on the day of the event.
+    - **Expected Outcome**: Users should be able to read and instantly understand the reason their assignment command failed so that they can rectify the error without needing to check the possible causes one by one.
 
    
 
