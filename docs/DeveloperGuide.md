@@ -689,7 +689,7 @@ testers are expected to do more *exploratory* testing.
 
 **Adding an invalid grade**
 * **Test case:** `grade 12345678 m/CS2103T g/Z`
-* **Expected:** The addition fails, and an error message about the invalid grade is shown.
+* **Expected:** The addition fails, and an error message about the invalid grade format is shown.
 
 ---
 
