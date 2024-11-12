@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Delivery's cost in the delivery.
  */
-public class Cost {
+public class Cost implements Comparable<Cost> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "COST should be a positive number with up to two decimal places and must not be blank.";
@@ -36,6 +36,22 @@ public class Cost {
         boolean isValid = isNumber && !(Double.parseDouble(test) == 0);
         return isValid;
     }
+
+    /**
+     * Compares this cost with the specified cost for order.
+     * Returns a negative integer, zero, or a positive integer as this cost is less than, equal to,
+     * or greater than the specified cost.
+     *
+     * @param otherCost The cost to be compared.
+     * @return a negative integer, zero, or a positive integer as this cost is less than, equal to,
+     *      or greater than the other cost.
+     */
+    public int compareTo(Cost otherCost) {
+        double deliveryCost = Double.parseDouble(value);
+        double otherDeliveryCost = Double.parseDouble(otherCost.value);
+        return Double.compare(deliveryCost, otherDeliveryCost);
+    }
+
     @Override
     public String toString() {
         return value;
