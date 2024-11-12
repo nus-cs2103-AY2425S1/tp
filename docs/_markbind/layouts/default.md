@@ -43,6 +43,7 @@
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
   * [Appendix: Planned Enhancements]({{ baseUrl }}/DeveloperGuide.html#appendix-planned-enhancements)
+  * [Appendix: Known Issues]({{ baseUrl }}/DeveloperGuide.html#appendix-known-issues)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>

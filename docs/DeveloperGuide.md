@@ -47,6 +47,7 @@
     * [Saving data](#saving-data)
     * [Exit HireMe](#exit-hireme-application)
   * [**Appendix: Planned Enhancements**](#appendix-planned-enhancements)
+  * [**Appendix: Known Issues**](#appendix-known-issues)
 <!-- TOC -->
 <page-nav-print />
 
@@ -1094,8 +1095,8 @@ Given below are enhancements planned for future versions. <br>
    - Justification: This allows the command to be more inclusive of the possible roles and company names in the real world. <br></br>
 
 2. **Improve consistency in `find` feature** 
-   - Current behaviour: The find feature currently allows special characters (e.g., ~\`!@#) to be used as keywords, despite these characters being disallowed in Company Name. This inconsistency can lead to a confusing user experience, as searches with these special characters will not yield any results. <br></br>
-   - Planned enhancement: Implement validation in the find feature to restrict keywords to only valid characters that are allowed in Company Name. This will ensure that users can only search using characters that are present in actual company names. <br></br>
+   - Current behaviour: The find feature currently allows special characters (e.g., ~\`!@#) to be used as keywords, despite these characters being disallowed in `Company Name`. This inconsistency can lead to a confusing user experience, as searches with these special characters will not yield any results. <br></br>
+   - Planned enhancement: Implement validation in the find feature to restrict keywords to only valid characters that are allowed in `Company Name`. This will ensure that users can only search using characters that are present in actual company names. <br></br>
    - Justification: By enforcing consistency between allowed characters in `Company Name` and the `find` feature, we improve the user experience by preventing ineffective searches and aligning expectations for valid search terms. <br></br>
 
 3. **Make error message for `add` command more specific** 
@@ -1109,7 +1110,7 @@ on why the command is invalid. The error message could be more specific to state
    <br></br>
 
 4. **Improve UI to deal with long texts**
-   - Current behaviour: The current application does not allow the user to scroll horizontally across the internship application card. Hence, very long text will be cut off and use are unable to see the full text. <br></br>
+   - Current behaviour: The current application does not allow the user to scroll horizontally across the internship application card. Hence, very long text will be cut off and users are unable to see the full text. <br></br>
    - Planned enhancement: We plan to allow horizontal scrolling for an internship application card when there are long texts. <br></br>
    - Justification: This lets the user see the full text in application. <br></br>
 
@@ -1118,32 +1119,39 @@ on why the command is invalid. The error message could be more specific to state
    - Planned enhancement: A fix for the email validator to accept valid emails with more combinations of special characters. <br></br>
    - Justification: Company emails with uncommon combinations of special characters in their email addresses will be considered invalid and hence, users will not be able to include such internship application in the HireMe tracking system. <br></br>
 
-6. **User confirmation for `clear` command**
-   - Current behaviour: The `clear` command clears all internship applications without asking for user confirmation. <br></br>
-   - Planned enhancement: HireMe to prompt the user for confirmation on `clear` command. If the user confirms, then all internship applications will be cleared. Otherwise, no action will be taken and the internship applications remain. <br></br>
-   - Justification: HireMe does not support any form of undo action and hence, there is no safety mechanism against accidental clearing of internship applications by the user. By having a confirmation, it ensures that `clear` is only carried out deliberately. <br></br>
-   
-7. **Improve error messaging for `status` commands**
+6. **Improve error messaging for `status` commands**
    - Current behaviour: The `/accept`, `/pending`, and `/reject` commands currently return the same generic error message when there’s an error, despite each command serving a distinct purpose. This shared error message does not provide clarity on which specific command failed, potentially confusing the user. <br></br>
    - Planned enhancement: Separate error messages for each command (`/accept`, `/pending`, and `/reject`) within the status command to clarify which specific action encountered an error. This will help users understand and correct command-specific errors more effectively. <br></br>
    - Justification: By providing distinct error messages for each command, we improve the user experience by making error feedback more specific and actionable. Users will be able to identify errors related to each command easily, reducing potential confusion and enhancing usability. <br></br>
 
-8. **Backup file for storage**
-   - Current behaviour: Internship applications data is stored in a single data file `hireme.json`. <br></br>
-   - Planned enhancement: A backup file that replicates the data in `hireme.json`. <br></br>
-   - Justification: Having only a single data file to store internship applications data means having a single point of failure when the data in corrupted or lost. A backup file that synchronously replicates the data in `hireme.json` ensures data redundancy. <br></br>
-   
-9. **Improve chart UI for empty statuses**
-   - Current behaviour: With multiple empty statuses (e.g. zero internship applications with `PENDING`/`ACCEPTED`/`REJECTED`), only one of the status labels will be shown. <br></br>
-   - Planned enhancement: Remove chart labels for empty statuses. <br></br>
+7. **Improve chart UI**
+   <img src="images/chart-ui-bug.png" alt="chart-ui-bug">
+   - Current behaviour: When there are multiple statuses with zero internship applications, not all status labels are shown. <br></br>
+   - Planned enhancement: Remove chart labels for statuses with zero internship applications. <br></br>
    - Justification: This ensures a consistent and user-friendly chart view which makes it easier for users to interpret the chart. <br></br>
    
-10. **Fix popup window crash when on full-screen**
-    - Current behaviour: When the Java application is in full screen and the help or chart window popup is closed, the entire Java application crashes.
-      For example, when the Java application is in full screen, `/help` or `/chart` will open up a help or a chart window respectively. Closing the popup window when the application is in full screen will cause the entire Java application to crash.
+8. **Remove the use of popup windows in HireMe**
+    - Current behaviour 1: When the HireMe application is in full screen and the help or chart window popup is closed, the entire HireMe application crashes. If it does not crash, repeating these steps a few times will cause the crash to occur.
+      For example, when the HireMe application is in full screen, /help or /chart will open up a help or a chart window respectively. Closing the popup window when the application is in full screen will cause the entire HireMe application to crash.
       <br></br>
-    - Planned enhancement: We plan to improve by ensuring that the `help` and `chart` displays open on the main window of the application instead of as a popup. Users can then go back to the list by typing `/list`.
+    - Current behaviour 2: When the help or chart windows are minimized, executing /help or /chart will not reopen the popup windows respectively.
+      For example, similarly, when a user types in /help, minimizes the help window and tries to open it with /help again, the help window does not reopen. This also occurs when the user carries out the same steps with the chart window.
       <br></br>
-    - Justification: This ensures that the application will not suddenly crash when the user is trying to use it for a smoother user experience.
+    - Planned enhancement: We plan to display help and chart content directly in the main application window rather than as popups. Users can return to the main list by typing /list, eliminating these popup issues.
       <br></br>
+    - Justification: This change will prevent crashes, improve reliability and resolve the issues above, creating a smoother user experience in HireMe.
+      <br></br>
+   
+9. **User confirmation for `clear` command**
+    - Current behaviour: The `clear` command clears all internship applications without asking for user confirmation. <br></br>
+    - Planned enhancement: HireMe to prompt the user for confirmation on `clear` command. If the user confirms, then all internship applications will be cleared. Otherwise, no action will be taken and the internship applications remain. <br></br>
+    - Justification: HireMe does not support any form of undo action and hence, there is no safety mechanism against accidental clearing of internship applications by the user. By having a confirmation, it ensures that `clear` is only carried out deliberately. <br></br>
+   
+10. **Backup file for storage**
+    - Current behaviour: Internship applications data is stored in a single data file `hireme.json`. <br></br>
+    - Planned enhancement: A backup file that replicates the data in `hireme.json`. <br></br>
+    - Justification: Having only a single data file to store internship applications data means having a single point of failure when the data in corrupted or lost. A backup file that synchronously replicates the data in `hireme.json` ensures data redundancy. <br></br>
 
+## **Appendix: Known Issues**
+
+1. If the user opens the application on a first monitor, then moves the application window to a second monitor and closes the application, then when the user tries to open the application again, the application would not work after opening. The current work around is that the user will then have to move the application window back to the first monitor for the application to work. 
