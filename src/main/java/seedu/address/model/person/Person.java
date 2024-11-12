@@ -230,18 +230,12 @@ public class Person {
 
         Person otherPerson = (Person) other;
 
-        boolean ownWeddingEquals = (ownWedding == null && otherPerson.ownWedding == null)
-                || ownWedding != null && ownWedding.equals(otherPerson.ownWedding);
-
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && role.equals(otherPerson.role)
                 && weddingJobs.equals(otherPerson.weddingJobs);
-        //TODO HERE
-        // commented them out since they give null pointer exception
-        // need to use Optional
     }
 
     @Override
