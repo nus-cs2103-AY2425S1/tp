@@ -7,11 +7,6 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.13'
 }
 
-javafx {
-    version = '17.0.7'
-    modules = [ 'javafx.web' ] // the javafx web is needed for the help page
-}
-
 mainClassName = 'seedu.address.Main'
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -67,7 +62,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
-
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
 

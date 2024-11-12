@@ -3,9 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -20,7 +20,7 @@ import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 /**
- * Resets the AttendanceCount of a person to 0.
+ * Resets the AttendanceCount of persons to 0.
  */
 public class ResetAttendanceCommand extends Command {
 
@@ -31,37 +31,48 @@ public class ResetAttendanceCommand extends Command {
     public static final String MESSAGE_RESET_ATTENDANCE_SUCCESS = "Attendance set to 0 for: %1$s";
 
     public static final String MESSAGE_BATCH_MARK_NO_STUDENT_LIST = "There is no student in this list";
-    private boolean hasStudent = false;
-    private List<Student> students = new ArrayList<>();
 
 
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-        for (Person p : lastShownList) {
-            if (p instanceof Student) {
-                this.hasStudent = true;
-                Student studentToMark = (Student) p;
-                students.add(studentToMark);
-            }
-        }
+        List<Student> students = filterStudents(model.getFilteredPersonList());
 
-        if (!this.hasStudent) {
+        if (students.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_BATCH_MARK_NO_STUDENT_LIST));
         }
 
-        for (Student p : students) {
-            Student markedStudent = createNewStudentWithZeroAttendance(p);
-            model.setPerson(p, markedStudent);
-        }
-
+        resetStudents(model, students);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         String studentsReset = formatResetStudents(students);
         return new CommandResult(String.format(MESSAGE_RESET_ATTENDANCE_SUCCESS, studentsReset));
 
     }
+
+    /**
+     * Returns a list of students in the list of contacts
+     * @param persons List of Persons
+     */
+    private List<Student> filterStudents(List<Person> persons) {
+        return persons.stream()
+                .filter(x -> x instanceof Student)
+                .map(x -> (Student) x)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Update model with the students with reset attendance.
+     * @param model
+     * @param students
+     */
+    private void resetStudents(Model model, List<Student> students) {
+        for (Student student : students) {
+            Student markedStudent = createNewStudentWithZeroAttendance(student);
+            model.setPerson(student, markedStudent);
+        }
+    }
+
 
     /**
      * Creates and returns a {@code STUDENT} with AttendanceCount of 0.
