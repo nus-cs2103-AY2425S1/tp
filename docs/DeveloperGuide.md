@@ -334,7 +334,7 @@ Use case ends.
 
         Use case ends.
 
-* 4a. User does not confirm addition
+* 4a. User cancels addition
 
     * 4a1. System display a message indicating that the addition was canceled.
 
@@ -370,7 +370,7 @@ Use case ends.
 
       Use case ends.
 
-* 4a. User does not confirm deletion
+* 4a. User cancels deletion
 
     * 4a1. System display a message indicating that the deletion was canceled.
 
@@ -435,7 +435,7 @@ Use case ends.
 
       Use case ends.
 
-* 4a. User does not confirm edit
+* 4a. User cancels edit
 
     * 4a1. System display a message indicating that the edit was canceled.
 
