@@ -27,10 +27,6 @@ public enum RsvpStatus {
         return status;
     }
 
-    public String getFilterFormat() {
-        return "[" + status + "]";
-    }
-
     @Override
     public String toString() {
         return status;

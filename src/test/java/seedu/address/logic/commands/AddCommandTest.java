@@ -89,7 +89,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -266,7 +266,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean checkStatusFilterAlreadyExists() {
+        public boolean checkStatusFilterAlreadyExists(RsvpStatus statusToCheck) {
             throw new AssertionError("This method should not be called.");
         }
 
