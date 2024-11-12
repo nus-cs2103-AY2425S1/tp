@@ -196,7 +196,6 @@ The following activity diagram summarizes what happens when a user executes a `a
 
 <puml src="diagrams/AddActivityDiagram.puml" height="900" width="1000" />
 
-
 ### Edit feature
 
 #### Implementation
@@ -225,7 +224,6 @@ The following sequence diagram shows how an `edit` command goes through the `Log
 **Note:** There are no destroy markers (X) for `EditCommand` as it is preserved in the `undo` command stack.
 
 The following activity diagram summarizes what happens when a user executes a `edit` command:
-
 
 <puml src="diagrams/EditActivityDiagram.puml" height="900" width="1000" />
 
