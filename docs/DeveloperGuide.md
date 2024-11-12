@@ -626,8 +626,9 @@ testers are expected to do more *exploratory* testing.
       Expected: The app launches correctly with a client list populated with sample clients.<br>
 &nbsp;
 &nbsp;
-<div style="page-break-after: always;"></div>
-
+<div style="page-break-before: always; visibility: hidden"> 
+\pagebreak 
+</div>
 2. Corrupted data file
 
    1. Test case: Add in irrelevant key-value pairs in `clientell.json`.<br>
