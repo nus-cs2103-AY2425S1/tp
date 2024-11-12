@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* [AB3](https://github.com/se-edu/addressbook-level3) for the basic structure of the application.
+* This software, User Guide (UG), and Developer Guide (DG) are built based on the [AB3](https://github.com/se-edu/addressbook-level3) project.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -58,7 +58,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -339,7 +339,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
     - 1a1. Cher shows correct input format.<br>
       Use case ends.
 
-#### Use case: UC8 - Select contacts by index
+#### Use case: UC9 - Select contacts by index
 
 **MSS**
 1. User enters the select command with a list of indexes.
@@ -349,14 +349,14 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    Use case ends.
 
 **Extensions**
-* 1a. Cher detects an invalid or out-of-range index.
-    - 1a1. Cher shows an error message with the list of invalid indexes.
+* 1a. Cher detects a command format error.
+    - 1a1. Cher shows an error message and shows the correct input format.<br>
       Use case ends.
 * 1b. User enters an index that is not displayed in the current displayed list.
-    - 1b1. Cher shows an error indicating the index is not displayed.
+    - 1b1. Cher shows an error message and shows the invalid indexes.<br>
       Use case ends.
 
-#### Use case: UC9 - Filter and then select contacts
+#### Use case: UC10 - Filter and then select contacts
 
 **MSS**
 1. User enters a filter command with criteria to narrow down the displayed list of contacts (e.g., by tags or names).
@@ -367,17 +367,13 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 
 **Extensions**
 * 1a. Cher detects an error in user input for the filter criteria.
-    - 1a1. Cher shows an error message and provides the correct filter input format.
+    - 1a1. Cher shows an error message and shows the correct input format.<br>
       Use case ends.
 * 3a. Cher detects an invalid index or indexes outside the filtered list.
-    - 3a1. Cher displays an error message indicating the invalid indexes.
-      Use case ends.
-* 3b. No contacts match the filter criteria.
-    - 3b1. Cher shows a message that no contacts matched the criteria.
+    - 3a1. Cher shows an error message and shows the correct input format.<br>
       Use case ends.
 
-
-#### Use case: UG10 - Mark attendance
+#### Use case: UG11 - Mark attendance
 **MSS**
 1. User enters mark command with the index of a specific contact.
 2. Cher increases the attendance count of the specified contact by 1.
@@ -394,7 +390,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    - 2b1. Cher shows the error message that attendance for the specified contact cannot be marked. <br>
      Use case ends.
 
-#### Use case: UG11 - Unmark attendance
+#### Use case: UG12 - Unmark attendance
 **MSS**
 1. User enters unmark command with the index of a specific contact.
 2. Cher decreases the attendance count of the specified contact by 1.
@@ -411,10 +407,10 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
   - 2b1. Cher shows error message that the attendance of the specified contact cannot be unmarked. <br>
     Use case ends. 
 * 2c. Cher detects that the attendance count of the specified contact is already at 0.
-  - 2c1. Cher shows error message that the attebdance count is already at 0. <br>
+  - 2c1. Cher shows error message that the attendance count is already at 0. <br>
     Use case ends.
 
-#### Use case: UG12 - Reset attendance 
+#### Use case: UG13 - Reset attendance 
 **MSS**
 1. User enters the reset attendance command.
 2. Cher resets the attendance count of all students in list to 0.
@@ -428,7 +424,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
   - 2a1. Cher shows error message that there is no student in the list. <br>
     Use case ends.
 
-#### Use case: UG13 - Mark group attendance
+#### Use case: UG14 - Mark group attendance
 **MSS**
 1. User enters the batch-mark command.
 2. Cher increases the attendance count of all students in the list by 1.
@@ -442,12 +438,12 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
   - 2a1. Cher shows error message that there is no student in the list. <br>
     Use case ends.
 
-#### Use case: UG14 - Unmark group attendance
+#### Use case: UG15 - Unmark group attendance
 **MSS**
 1. User enters the batch-unmark command.
 2. Cher ignores students whose attendance count is already 0 and decreases the attendance count of other students by 1.
 3. Cher [<u>Save to disk</u>](#use-case-uc4---save-to-disk).
-4. Cher shows the sucess message with the names of students whose attendance have been unmarked, including those whose attendance count is initially 0. <br>
+4. Cher shows the success message with the names of students whose attendance have been unmarked, including those whose attendance count is initially 0. <br>
    Use case ends.
 
 **Extensions**
@@ -469,12 +465,15 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 10.  The user should be promptly informed of the outcome of their action (success/failure) via the feedback box.
 
 ### Glossary
+* **API (Application Programming Interface)**: A set of defined interfaces that allow different components or systems to interact with each other. In the context of the architecture, each component (e.g., UI, Logic, Model, Storage) defines its own API to enable communication with other components without exposing implementation details.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Command-Line Interface (CLI)**: A text-based interface that allows users to interact with the system by typing commands
 * **Case-insensitive**: Refers to functionality where uppercase and lowercase letters are treated as the same (e.g., "Peter Tan" is the same as "peter tan")
 * **Novice user**: A user with limited experience or familiarity with the system, requiring guidance and simple, intuitive interfaces to perform tasks effectively
 * **Intermediate user**: A user with some experience and familiarity with the system, capable of performing tasks with minimal guidance but not yet an expert
+* **JavaFX**: A framework used for building rich graphical user interfaces (GUIs) in Java. The UI component of the app is built using JavaFX to handle the user interface elements and interactions.
+* **Model**: The part of the application responsible for managing data and business logic. It is independent of the UI and controls the application's data. The Model component stores and manipulates data like user preferences and contact details.
 * **Use case**: A description of a sequences of actions that the user or system performs, resulting in an observable outcome
 * **Actor**: In the context of use cases, actor refers to the role played by the user
 * **Main Success Scenario (MSS)**: The sequence of interactions that is the most straightforward and assumes that nothing goes wrong
@@ -617,7 +616,7 @@ Execute the following:
    Expected: The attendance field of Alex Yeoh is decremented by 1. Name of the contact, Alex Yeoh, is shown in the status message. The list of all contacts is shown. 
 
    1. Test case: `unmark 2` <br>
-   Expected: Attendance field of Bernice Yu remains at 0. Error details shown in the satus message.
+   Expected: Attendance field of Bernice Yu remains at 0. Error details shown in the status message.
 
    1. Test case: `unmark 3`<br>
    Expected: Error details shown in the status message.
