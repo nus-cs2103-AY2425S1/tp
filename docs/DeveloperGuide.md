@@ -248,7 +248,7 @@ _Note: The error messages will vary depending on which check fails._
 
 ### 3. View Command
 
-The view command is used to view a specific contact on the contact display pane. Users specify the index of the contact to be viewed.
+The `view` command is used to view a specific contact on the contact display pane. To execute the command, users specify the `INDEX` of the contact to be viewed.
 
 #### Current implementation
 
@@ -257,8 +257,9 @@ Here's an overview of what happens when the `view 1` command is being input by t
 The activity diagram is as follows:
 ![ViewActivityDiagram](images/ViewActivityDiagram.png)
 
-- **The View Command checks:**
-  - that the specified index is positive and within the bounds of the contacts list.
+**The View Command checks:**
+
+- that the specified index is positive and within the bounds of the contacts list.
 
 ### 4. Find command
 
