@@ -738,9 +738,9 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `edit 0 n/ <NAME>`<br>
         Expected: An error message is shown to the user. No edits are made to client details. Error details shown in the status message.
    6. Other incorrect edit commands to try:<br>
-      `edit 1 f/<INVALID_VALUE>` (where f is a valid flag),<br>
-      `edit x n/<NAME>` (where x is larger than list size),<br>
-      `edit 1 y/<VALUE>` (where y is an invalid flag) <br>
+      `edit 1 f/ <INVALID_VALUE>` (where f is a valid flag),<br>
+      `edit x n/ <NAME>` (where x is larger than list size),<br>
+      `edit 1 y/ <VALUE>` (where y is an invalid flag) <br>
        Expected: Similar to previous.
 
 2. Editing a client after having filtered based on a criteria
@@ -760,8 +760,8 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `filter i/ x<INCOME>` (where x is an invalid income operator)<br>
       Expected: An error message is shown to the user. Error details shown in the status message.
    6. Other incorrect `filter` commands to try:<br>
-      `filter f/<INVALID_VALUE>` (where f is a valid flag),<br>
-      `edit 1 y/<VALUE>` (where y is an invalid flag) <br>
+      `filter f/ <INVALID_VALUE>` (where f is a valid flag),<br>
+      `edit 1 y/ <VALUE>` (where y is an invalid flag) <br>
       Expected: Similar to previous.
 
 ### Viewing a client
