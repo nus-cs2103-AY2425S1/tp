@@ -330,7 +330,7 @@ lesson.setAttendance(student, attendance);
 // Setting pariticipation score
 lesson.setParticipation(student, participationScore);
 
-// Getting immutable student list, returns unmodifiable list
+// Getting immutable student info list, returns unmodifiable list
 List<StudentLessonInfo> studentInfoList = lesson.getStudentLessonInfoList(); 
 ```
 
