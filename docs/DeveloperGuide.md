@@ -636,39 +636,230 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
+    2. Re-launch the app by double-clicking the jar file.<br>
+       Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete name/John Doe`<br>
-      Expected: Deletes the contact named John Doe. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete name/John Doe`<br>
+       Expected: Deletes the contact named John Doe. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Other incorrect delete commands to try: `delete`, `delete n/ABC`, `...` (where name `ABC` does not exist in the list)<br>
-      Expected: An error message redirecting to the correct format.
+    1. Other incorrect delete commands to try: `delete`, `delete n/ABC`, `...` (where name `ABC` does not exist in the list)<br>
+       Expected: An error message redirecting to the correct format.
 
-1. _{ more test cases …​ }_
+   
+### Adding a person
+
+1. Add a person to KonTActs
+
+   1. Test case: `add name/John Doe email/johndoe@test.com telegram/@johndoe github/johndoe` <br>
+      Expected: Contact with name `John Doe` is added to the list. Details of the added contact shown in the status message.
+   
+   2. Test case: `add name/John Do3 email/johndo3@test.com telegram/johndoe github/john#$doe`
+      Expected: No person is added. Error details shown in the status message.
+   
+   3. Other incorrect add commands to try: `add`, `add ...` (where `...` is any pair of prefix and value)<br>
+      Expected: Similar to previous.
+
+### Editing a contact
+1. Editing a contact field that is shown in the list
+   1. Test case: `edit 1 name/John Tan`
+      Expected: Contact shown at index 1 has name edited to `John Tan`. Details shown in status message.
+   
+   2. Test case: `edit 0 name/John Tan`
+      Expected: No contact is edited. Details of error shown in status message.
+
+   3. Other incorrect edit commands to try: `edit -1 name/John Tan`, `edit x name/John Tan` (where `x` is a number that is not in the shown list)
+      Expected: Similar to previous
+
+### Adding grade to a person
+1. Add grades to a person
+   1. Prerequisites: 
+      1. `assignment.json` in `data` with the following content:
+        ```json
+        {
+          "assignments" : [
+            {
+              "name": "Ex01",
+              "maxScore": 5
+            },{
+              "name": "Ex02",
+              "maxScore": 5
+            },{
+              "name": "Ex03",
+              "maxScore": 5
+            },{
+              "name": "Ex04",
+              "maxScore": 5
+            }
+          ]
+        }
+        ```
+        
+   2. Test case: `addGrade n/John Doe a/Ex04 s/5` <br>
+      Expected: Assignment `Ex04` with score `5` is added to `John Doe`. Details of the added grade shown in the status message.
+   
+   3. Test case: `addGrade/John Doe a/Ex05 s/5` <br>
+      Expected: No grade is added to John Doe. Details of the error message is shown in the status message.
+   
+   4. Other incorrect add grade commands to try: `addGrade`, `addGrade s/x` (where `x` is not a number or `x` is bigger than the max value of the assignment)<br>
+      Expected: Similar to previous.
+   
+### Removing grade from a person
+1. Remove grade from a person
+    1. Prerequisites: Contact `John Doe` with grades(assignment name,score) `Ex01,5` and `Ex02,3` added.
+
+    2. Test case: `removeGrade n/John Doe a/Ex01` <br>
+       Expected: Assignment `Ex01` is removed from `John Doe`. Details shown in the status message.
+
+    3. Test case: `removeGrade/John Doe a/Ex05 s/5` <br>
+       Expected: No grade is removed from John Doe. Details of the error message is shown in the status message.
+
+    4. Other incorrect remove grade commands to try: `removeGrade`, `removeGrade a/x` (where `x` is any value)<br>
+       Expected: Similar to previous.
+   
+### Marking attendance of a person
+1. Marking attendance of a person in KonTActs
+   1. Test case: `mark n/John Doe w/5` <br>
+      Expected: `John Doe` is marked as present for week 5. Details of the marked week is shown in status message and the list.
+   
+   2. Test case: `mark n/John Doe w/999` <br>
+      Expected: Attendance not marked for `John Doe`. Details of the error is shown in the status message.
+   
+   3. Other incorrect mark commands to try: `mark`, `mark n/JohnDoe`<br>
+      Expected: Similar to previous.
+
+### Unmarking attendance of a person
+1. Unmarking attendance of a person in KonTActs
+    1. Test case: `umark n/John Doe w/5` <br>
+       Expected: `John Doe` is marked as absent for week 5. Details of the unmarked week is shown in status message and the list.
+   
+    2. Test case: `unmark n/John Doe w/999` <br>
+       Expected: No attendance unmarked for `John Doe`. 
+   
+    3. Other incorrect unmark commands to try: `unmark`, `unmark n/JohnDoe`<br>
+       Expected: Similar to previous.
+
+### Import CSV
+1. Importing list of persons from a CSV file.
+   1. Prerequisites: `example.csv` in `data`
+      ```
+        "Name","Email","Telegram","Tags","Github","Assignments","WeeksPresent"
+        "Alex Yeoh","alexyeoh@example.com","@alex","[friends]","Alex","",""
+        "Bernice Yu","berniceyu@example.com","@bernice","[colleagues],[friends]","Bernice","",""
+        "Charlotte Oliveiro","charlotte@example.com","@charlotte","[neighbours]","Charlotte","",""
+        "David Li","lidavid@example.com","@david","[family]","david","",""
+        "Irfan Ibrahim","irfan@example.com","@irfan","[classmates]","Irfan","",""
+        "Roy Balakrishnan","royb@example.com","@roy","[colleagues]","Roy","",""
+       ```
+   2. Test case: `import path/data/example.csv`
+      Expected: `example.csv` is imported. 
+   
+   3. Test case: `import path/data/x.csv`
+      Expected: No data is imported. Details of the error is shown in status message.
+   
+   4. Other incorrect import commands to try: `import`, `import path/`<br>
+      Expected: Similar to previous.
+
+### Export CSV
+1. Export list of persons to a CSV file.
+    1. Test case: `export path/data/example.csv`
+       Expected: `example.csv` is exported. Details shown in status message.
+   
+    2. Test case: `export`
+       Expected: No data is exported. Details of the error is shown in status message.
+   
+    3. Other incorrect export commands to try: `export path/`<br>
+       Expected: Similar to previous.
+
+### Filtering for list of persons
+1. Filter for persons based on tag
+   1. Test case: `filter t/friends t/colleague`.
+      Expected: List shows contacts with tags `friends` or `colleague`.
+   
+   2. Test case: `filter`
+      Expected: No change in list. Details of error shown in status message.
+   
+   3. Other incorrect filter commands to try: `filter s/`, `filter t/`<br>
+      Expected: Similar to previous.
+
+### Sorting list of persons
+1. Sort contacts based on field(`github, name, telegram or reset`) of given person
+   1. Test case: `sort name order/asc`
+      Expected: List sorted based on name in ascending order. Details shown in status message. 
+   
+   2. Test case: `sort email order/asc`
+      Expected: List is not sorted. Details of error shown in status message. 
+   
+   3. Other incorrect sort commands to try: `sort order/asc`, `sort order/desc`
+      Expected: Similar to previous.
+
+### Finding persons
+1. Finding persons based on name.
+   1. Prerequisite: `John Doe`, `Alice`, and `Cindy` exists in KonTActs.
+   
+   2. Test case: `find john doe alice`
+      Expected: `John Doe` and `Alice` is found and revealed in the list. Details shown in status message.
+   
+   3. Test case: `find`
+      Expected: No change. Details of error shown in status message.
+   
+### Viewing a person
+1. Viewing a detailed info person
+    1. Test case: `view n/John Doe`
+       Expected: View window for `John Doe` appears. Details shown in status message.
+   
+    2. Test case: `view n/`
+       Expected: No view window appears. Details of error shown in status message.
+   
+    3. Other incorrect view commands to try: `view n`
+       Expected: Similar to previous.
+
+### Launching Github page of person
+1. Open browser and navigate to person's Github page on command
+   1. Prerequisite: `John Doe` with Github username `johndoe` exists.
+   
+   2. Test case: `github n/John Doe`
+      Expected: Github page of `John Doe` is opened in browser. Details is shown in status message.
+      
+### Listing contacts
+1. List all contacts in KonTActs
+   1. Test case: `list`
+      Expected: List of contacts shown. Details shown in status message.
+
+### Clearing contacts
+1. Removing all contacts in KonTActs
+   1. Test case: `clear`
+      Expected: All contacts are removed from KonTActs. Details is shown in status message.
+   
+### Viewing help
+1. View help of every command
+   1. Test case: `help`
+      Expected: A help window is shown with link to documentation.
+
+### Exiting application
+1. Test case: `exit`
+    Expected: Application exits after command.
 
 ### Saving data
+1. Dealing with missing files
 
-1. Dealing with missing/corrupted data files
+    1. Test case: Remove `.json` from `data`. <br>
+       Expected: A sample list of KonTActs will be loaded.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
-
+    2. Test case: Add an invalid value to `kontacts.json`. e.g. `"email":1`<br>
+       Expected: No contacts will be loaded.
 ---
