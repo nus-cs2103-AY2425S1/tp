@@ -718,7 +718,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a delivery
 
-1. Finding an existing delivery by status
+1. Finding an existing delivery by STATUS
 
     1. Prerequisites: Ensure there is at least 1 delivery with status PENDING by listing all deliveries using the `list -d` command.
 
