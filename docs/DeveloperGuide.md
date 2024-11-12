@@ -323,7 +323,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 
 **Extensions**
 * 1a. Cher detects error in user input.
-    - 1a1. Cher shows correct input format. <br>
+    - 2a1. Cher shows correct input format. <br>
       Use case ends.
 
 
@@ -387,11 +387,11 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    Use case ends. 
 
 **Extensions**
-* 2a. Cher detects an error in the input.
-   - 2a1. Cher shows the correct input format. <br>
+* 1a. Cher detects an error in the input.
+   - 1a1. Cher shows the correct input format. <br>
      Use case ends.
-* 2b. Cher detects that the specified contact is not a student.
-   - 2b1. Cher shows the error message that attendance for the specified contact cannot be marked. <br>
+* 1b. Cher detects that the specified contact is not a student.
+   - 1b1. Cher shows the error message that attendance for the specified contact cannot be marked. <br>
      Use case ends.
 
 #### Use case: UG11 - Unmark attendance
@@ -404,14 +404,14 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    User case ends.
 
 **Extensions**
-* 2a. Cher detects an error in the input.
-  - 2a1. Cher shows the correct inout format. <br>
+* 1a. Cher detects an error in the input.
+  - 1a1. Cher shows the correct inout format. <br>
     Use case ends. 
-* 2b. Cher detects that the specified contact is not a student.
-  - 2b1. Cher shows error message that the attendance of the specified contact cannot be unmarked. <br>
+* 1b. Cher detects that the specified contact is not a student.
+  - 1b1. Cher shows error message that the attendance of the specified contact cannot be unmarked. <br>
     Use case ends. 
-* 2c. Cher detects that the attendance count of the specified contact is already at 0.
-  - 2c1. Cher shows error message that the attebdance count is already at 0. <br>
+* 1c. Cher detects that the attendance count of the specified contact is already at 0.
+  - 1c1. Cher shows error message that the attebdance count is already at 0. <br>
     Use case ends.
 
 #### Use case: UG12 - Reset attendance 
@@ -424,8 +424,8 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    Use case ends.
 
 **Extensions**
-* 2a. Cher detects that there is no student in the list.
-  - 2a1. Cher shows error message that there is no student in the list. <br>
+* 1a. Cher detects that there is no student in the list.
+  - 1a1. Cher shows error message that there is no student in the list. <br>
     Use case ends.
 
 #### Use case: UG13 - Mark group attendance
@@ -438,8 +438,8 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    Use case ends.
 
 **Extensions**
-* 2a. Cher detects that there is no student in the list.
-  - 2a1. Cher shows error message that there is no student in the list. <br>
+* 1a. Cher detects that there is no student in the list.
+  - 1a1. Cher shows error message that there is no student in the list. <br>
     Use case ends.
 
 #### Use case: UG14 - Unmark group attendance
@@ -451,7 +451,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    Use case ends.
 
 **Extensions**
-* 2a. Cher detects that there is no student in the list.
+* 1a. Cher detects that there is no student in the list.
   - 1a1. Cher shows error message that there is no student in the list. <br>
     Use case ends. 
 
