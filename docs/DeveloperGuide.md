@@ -776,7 +776,11 @@ We plan to enforce stricter role assignment, ensuring that:
 * A contact can be designated as a Professor across multiple modules. 
 * Alternatively, a contact can be designated as either a Student or a Tutor across multiple modules.
 
-5. **Allows command navigation using up and down arrows.** Currently, the user has to type the command from scratch if he/she wants to execute a previous command again.
+5. **Allow command navigation using up and down arrows.** Currently, the user has to type the command from scratch if he/she wants to execute a previous command again.
 This can be very troublesome if the user wants to execute the same command multiple times, or if the user wants to execute a similar command to the previous one.
 We plan to allow the user to navigate through the command history using the up and down arrows.
 
+6. **Allow multi-word tags for contacts** Currently, tag field only allows alphanumeric inputs for tag creation, which means spaces, underscores(_) and dashes(-) are not
+allowed in the input, and as a result prevents user from creating multi-word tags for contacts. This is not very suitable design because user may want to create multi-word tags
+such as `team leader`, `best friend`, `financial office` etc, and the current validation method does not offer this level of flexibility. Therefore, we plan to loosen the restriction
+on tag creation input to allow space for word separation, so that user can create multi-word tag to contacts for easier management.
