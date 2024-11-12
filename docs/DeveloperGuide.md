@@ -301,8 +301,6 @@ Known bugs:
 
 ### Wedding Feature
 
-#### Implementation
-
 The Wedding Feature allows users to store details of a Wedding in WedLinker. Wedding contains the Contacts involved to facilitate easy planning and consolidation for wedding planners.
 Wedding would support the following functions:
 
@@ -311,6 +309,8 @@ Wedding would support the following functions:
 * `Edit Wedding` — Edits the information for a Wedding. Editable information includes the `Wedding Name`, `Address` and `Date`.
 * `Unassign Wedding` — Unassigns a `Person` from a Wedding.
 * `Delete Wedding` — Deletes the Wedding from WedLinker.
+
+#### Implementation
 
 Given below is an example usage scenario and how Weddings are used in WedLinker.
 
@@ -347,13 +347,13 @@ Known bugs:
 
 ### Vendors
 
-#### Implementation
-
 The `Vendor` Feature allows users to track which `Person` are `Vendors` and assign `Tasks` to them. Only `Vendors` can be assigned `Tasks`.
 Vendor would support the following functions:
 
 * `Assign Vendor` — Assigns an existing `Person` in WedLinker to become a `Vendor`. 
 * `Unassign Vendor` — Unassigns a `Vendor` to become a non-vendor `Person` contact. 
+
+#### Implementation
 
 Given below is an example usage scenario and how Vendors are used in WedLinker.
 
@@ -390,6 +390,8 @@ There are different types of `Task` to support different requirements for the us
 * `Assign Task` —  Assigns an existing `Task` to a `Vendor`. Tasks can only be assigned to `Vendors`.
 * `Unassign Task` —  Unassigns a `Task` from a `Vendor`. 
 * `Delete Task` —  Deletes a `Task` from WedLinker. 
+
+#### Implementation
 
 Given below is an example usage scenario and how Tasks are used in WedLinker.
 
