@@ -117,7 +117,7 @@ Alerts you to potential issues or problems that may arise.
 ## Overview of GUI
 Once ContactCS is running, you’ll see the main interface divided into several key panels, as illustrated below. Here’s an overview of each panel:
 
-* Command Box: This is where you type and execute commands to interact with MediBase3.
+* Command Box: You can type and execute commands here .
 
 * Result Display Box: Shows the outcome of the commands you enter, including success messages, errors, and other feedback.
 
