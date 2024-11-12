@@ -424,7 +424,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
-## What is considered as Invalid Contacts
+## What is Considered as Invalid Contacts
 
 **Identity conflict:** <br/>
 - No two contacts are allowed to share the *same identity* in the address book. <br/>
