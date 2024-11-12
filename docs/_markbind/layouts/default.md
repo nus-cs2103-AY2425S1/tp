@@ -5,8 +5,6 @@
 <header sticky>
   <navbar type="dark">
     <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">DorManagerPro</a>
-     
-<ul class="dropdown-menu navbar-nav">
     <li><a href="{{baseUrl}}/index.html" class="nav-link">Home</a></li>
     <li><a href="{{baseUrl}}/UserGuide.html" class="nav-link">User Guide</a></li>
     <li><a href="{{baseUrl}}/DeveloperGuide.html" class="nav-link">Developer Guide</a></li>
@@ -18,12 +16,13 @@
         <searchbar :data="searchData" placeholder="Search" :on-hit="searchCallback" menu-align-right></searchbar>
       </form>
     </li>
-  </ul>
+
   </navbar>
 </header>
 
 <div id="flex-body">
   <nav id="site-nav">
+    <ul class="dropdown-menu navbar-nav">
     <div class="site-nav-top">
       <div class="fw-bold mb-2" style="font-size: 1.25rem;">Site Map</div>
     </div>
@@ -56,6 +55,7 @@
 
     </site-nav>
   </div>
+  </ul>
   </nav>
   <div id="content-wrapper">
     {{ content }}
