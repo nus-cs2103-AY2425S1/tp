@@ -359,12 +359,12 @@ Format: `delete STUDENT_ID`
 * `STUDENT_ID`: Should begin with S followed by a 5-digit, starting from 00001 to 99999.
   * The ID of a student is automatically assigned when the student contact is first added and can be found by viewing the student's 
   details.
-<div markdown="span" class="alert alert-note">:memo: **Note:**
-The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID S00001` and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 
-(instead of replacing S00001).
 
 <div style="page-break-after: always;"></div>
 
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID S00001` and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 
+(instead of replacing S00001).
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
