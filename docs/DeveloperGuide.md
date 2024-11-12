@@ -711,7 +711,9 @@ testers are expected to do more *exploratory* testing.
        Expected: An error message is shown to user. No client is added. Error details shown in the status message.
 
 2. Add an existing client
+
     1. Prerequisites: There exists a client in AddressBook which has the same name, phone number and email as the client to be added.
+   
     2. Test case: `add n/ <SAME_NAME> p/ <SAME_PHONE> e/ <SAME_EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME>` (where `<SAME_NAME>`, `<SAME_PHONE>` and `<SAME_EMAIL>` are the name, phone number and email of an existing client) <br>
        Expected: An error message indicating that the client already exists is shown to user. No client is added.
 
@@ -731,21 +733,28 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 2. Deleting a client after having filtered based on a criteria
+
    1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
+
    2. Functions similar to above example except that the indexes to be used are based on the new list shown.
 
 ### Editing a client
 
 1. Editing a client while all clients are being shown
     1. Prerequisites: List all clients using the `list` command. At least one client in the list.
+   
     2. Test case: `edit 1 n/ <NAME>`<br>
          Expected: The name of the client in index 1 will be changed to <NAME>.
+   
     3. Test case: `edit 1 n/ <NAME> p/ <PHONE>`<br>
          Expected: The name and the phone of the client in index 1 will be changed to <NAME> and <PHONE> respectively.
+   
    4. Other correct edit commands to try: `edit 1 n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
       Expected: Similar to previous.
+   
    5. Test case: `edit 0 n/ <NAME>`<br>
         Expected: An error message is shown to the user. No edits are made to client details. Error details shown in the status message.
+   
    6. Other incorrect edit commands to try:<br>
       `edit 1 f/ <INVALID_VALUE>` (where f is a valid flag),<br>
       `edit x n/ <NAME>` (where x is larger than list size),<br>
@@ -753,21 +762,29 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 2. Editing a client after having filtered based on a criteria
+
     1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
+   
     2. Functions similar to above example except that the indexes to be used are based on the new list shown.
 
 ### Filter for clients
 1. Filtering for a client based on a criteria
+
    1. Test case: `filter n/ <NAME>`<br>
       Expected: The list will display all clients with names that include <NAME>.
+   
    2. Test case: `filter n/ <NAME> p/ <PHONE>`<br>
       Expected: The list will display all clients with names that include <NAME> and phones that match <PHONE>.
+   
    3. Test case: `filter i/ =<INCOME>`<br>
       Expected: The list will display all clients with incomes that match <INCOME>.
+   
    4. Other correct `filter` commands to try: `filter n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
       Expected: Similar to previous.
+   
    5. Test case: `filter i/ x<INCOME>` (where x is an invalid income operator)<br>
       Expected: An error message is shown to the user. Error details shown in the status message.
+   
    6. Other incorrect `filter` commands to try:<br>
       `filter f/ <INVALID_VALUE>` (where f is a valid flag),<br>
       `edit 1 y/ <VALUE>` (where y is an invalid flag) <br>
@@ -775,30 +792,43 @@ testers are expected to do more *exploratory* testing.
 
 ### Viewing a client
 1. Viewing a client while all clients are being shown
+
     1. Prerequisites: List all clients using the `list` command. At least one client in the list.
+   
     2. Test case: `view 1`<br>
        Expected: The detailed view of the client in index 1 will be shown.
-   3. Test case: `view 0 n/ <NAME>`<br>
-       Expected: An error message is shown to the user. No edits are made to client details. Error details shown in the status message.
+   
+    3. Test case: `view 0 n/ <NAME>`<br>
+        Expected: An error message is shown to the user. No edits are made to client details. Error details shown in the status message.
 
 2. Viewing a client after having filtered based on a criteria
+
     1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
+
     2. Functions similar to above example except that the indexes to be used are based on the new list shown.
 
 ### Closing the detailed view of a client
 1. Closing the view of the currently viewed client
+
    1. Prerequisites: The detailed view of a client is currently open.
+   
    2. Test case: `close`<br>
       Expected: The detailed view closes.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+
    1. Back up the existing `agentassist.json` file under the `data` directory.
+   
    2. Since the data file is corrupted, the application will show a blank list of clients' contacts.
+   
    3. Adding any new contacts now, will override the old file.
+   
    4. You may attempt to repair the old corrupted file, by cross-checking the old corrupted file against the new, uncorrupted file created when a new contact is added after step 3.
+   
    5. Make sure to follow the constraints laid out in the user guide for each attribute of Client.
+   
    6. If the data file is successfully repaired, running `agentassist.jar` should result in the old data being displayed back in the application.
 
 ## **Appendix: Effort**
