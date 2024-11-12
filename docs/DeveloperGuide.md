@@ -544,7 +544,7 @@ GamerBook Pro Max is a project built on the foundation of the original AddressBo
 
 ### Difficulty Level
 
-Adapting from the AddressBook to GamerBook Pro Max presented several challenges. While we retained core functionalities, we needed to significantly customize the app to better serve gamers. This included adding features like preferred game times, favorite games, and stateful command history, as well as implementing a powerful search feature.
+Adapting from the AddressBook to GamerBook Pro Max presented several challenges. While we retained core functionalities, we needed to significantly customize the app to better serve gamers. This included adding features like preferred game times, favorite games, and stateful command history, as well as implementing a powerful undo feature.
 
 The main difficulty lay in the number of advanced features we had to develop and integrate, as each new feature introduced additional complexity. As expected, more features resulted in more potential bugs, making debugging and testing a crucial part of the development process.
 
@@ -554,13 +554,11 @@ The main difficulty lay in the number of advanced features we had to develop and
    Using the Forking Workflow allowed us to work on multiple features in parallel, which was vital given the size of the project. However, it also introduced the overhead of managing forks and dealing with frequent merge conflicts, especially as we worked on overlapping components such as the command history and address book state features.
 
 2. **Feature Complexity**:  
-   Many of the new features, like saving and loading address book states or command suggestions, required a careful design to ensure compatibility and stability across the system. We also had to ensure that stateful features, such as undoing and redoing commands, were correctly implemented and tested.
+   Many of the new features, like saving and loading address book states or command suggestions, required a careful design to ensure compatibility and stability across the system. We also had to ensure that stateful features, such as undoing commands, were correctly implemented and tested.
 
 3. **Testing and Regression**:  
    With the introduction of so many new commands and features, the effort required to write and maintain tests grew exponentially. Writing unit tests for every new feature, along with performing comprehensive regression testing to ensure that existing functionalities were not broken, added significant effort to the development cycle.
 
-4. **Design Decisions**:  
-   Making design decisions, such as implementing a robust time scheduling feature for gaming sessions, required balancing the user experience with technical constraints. We also had to consider scalability and future enhancements, which led to some complex decisions around data storage and retrieval.
 
 ### Effort Required
 
