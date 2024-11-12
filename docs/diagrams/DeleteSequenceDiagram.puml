@@ -6,7 +6,8 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant "DeleteEventCommandParser" as DeleteEventCommandParser LOGIC_COLOR
+participant "d:DeleteEventCommand" as DeleteEventCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -14,10 +15,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete event 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("delete event 1")
 activate AddressBookParser
 
 create DeleteCommandParser
@@ -27,15 +28,28 @@ activate DeleteCommandParser
 DeleteCommandParser --> AddressBookParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+AddressBookParser -> DeleteCommandParser : parse("event 1")
 activate DeleteCommandParser
 
-create DeleteCommand
-DeleteCommandParser -> DeleteCommand
-activate DeleteCommand
+create DeleteEventCommandParser
+DeleteCommandParser -> DeleteEventCommandParser : new
+activate DeleteEventCommandParser
 
-DeleteCommand --> DeleteCommandParser :
-deactivate DeleteCommand
+DeleteEventCommandParser --> DeleteCommandParser :
+deactivate DeleteEventCommandParser
+
+DeleteCommandParser -> DeleteEventCommandParser : parse("1")
+activate DeleteEventCommandParser
+
+create DeleteEventCommand
+DeleteEventCommandParser -> DeleteEventCommand : new
+activate DeleteEventCommand
+
+DeleteEventCommand --> DeleteEventCommandParser :
+deactivate DeleteEventCommand
+
+DeleteEventCommandParser --> DeleteCommandParser : d
+deactivate DeleteEventCommandParser
 
 DeleteCommandParser --> AddressBookParser : d
 deactivate DeleteCommandParser
@@ -46,24 +60,24 @@ destroy DeleteCommandParser
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : execute(m)
-activate DeleteCommand
+LogicManager -> DeleteEventCommand : execute(m)
+activate DeleteEventCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteEventCommand -> Model : deleteEvent(1)
 activate Model
 
-Model --> DeleteCommand
+Model --> DeleteEventCommand
 deactivate Model
 
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteEventCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteCommand
+CommandResult --> DeleteEventCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : r
-deactivate DeleteCommand
+DeleteEventCommand --> LogicManager : r
+deactivate DeleteEventCommand
 
 [<--LogicManager
 deactivate LogicManager

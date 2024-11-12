@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+end box
+participant ":UniqueEventList" as UniqueEventList LOGIC_COLOR_T2
+
+[-> Model : replacePersonInEvents(toReplace, newPerson)
+activate Model
+
+Model -> AddressBook : replacePersonInEvents(toReplace, newPerson)
+activate AddressBook
+
+AddressBook -> UniqueEventList : replacePersonInEvents(toReplace, newPerson)
+activate UniqueEventList
+
+UniqueEventList --> AddressBook
+deactivate UniqueEventList
+
+AddressBook --> Model
+deactivate AddressBook
+
+[<-- Model
+deactivate Model
+
+@enduml

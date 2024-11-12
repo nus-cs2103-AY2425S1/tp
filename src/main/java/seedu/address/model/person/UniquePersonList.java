@@ -14,9 +14,9 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
  * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * persons uses Person#isSamePerson(Person) for equality to ensure that the person being added or updated is
+ * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object)
+ * to ensure that the person with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -58,7 +58,7 @@ public class UniquePersonList implements Iterable<Person> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new PersonNotFoundException(target.getName().fullName);
         }
 
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
@@ -75,8 +75,23 @@ public class UniquePersonList implements Iterable<Person> {
     public void remove(Person toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new PersonNotFoundException(toRemove.getName().fullName);
         }
+    }
+
+    /**
+     * Finds a person using person name
+     * @param toFind
+     * @return Person
+     * @throws PersonNotFoundException
+     */
+    public Person findPerson(Name toFind) throws PersonNotFoundException {
+        for (Person person : internalList) {
+            if (person.getName().isSameName(toFind)) {
+                return person;
+            }
+        }
+        throw new PersonNotFoundException(toFind.toString());
     }
 
     public void setPersons(UniquePersonList replacement) {

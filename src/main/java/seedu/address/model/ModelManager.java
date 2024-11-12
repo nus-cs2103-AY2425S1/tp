@@ -11,7 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.event.Event;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredEvents = new FilteredList<>(this.addressBook.getSortedEventList());
     }
 
     public ModelManager() {
@@ -65,14 +70,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getTalentHubFilePath() {
+        return userPrefs.getTalentHubFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setTalentHubFilePath(Path talentHubFilePath) {
+        requireNonNull(talentHubFilePath);
+        userPrefs.setTalentHubFilePath(talentHubFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -94,8 +99,29 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPhoneNumber(Phone phone) {
+        requireNonNull(phone);
+        return addressBook.hasPhoneNumber(phone);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+    }
+
+    @Override
+    public void clearEventsWithPerson(Person target) {
+        addressBook.clearEventsWithPerson(target);
+    }
+
+    @Override
+    public void clearPersonFromContacts(Person target) {
+        addressBook.clearPersonFromContacts(target);
+    }
+
+    @Override
+    public void replacePersonInEvents(Person target, Person editedPerson) {
+        addressBook.replacePersonInEvents(target, editedPerson);
     }
 
     @Override
@@ -105,10 +131,52 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person findPerson(Name personName) {
+        return addressBook.findPerson(personName);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public boolean hasEventOverlap(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEventOverlap(event);
+    }
+
+    @Override
+    public boolean hasEventOverlap(Event event, Event eventToIgnore) {
+        requireAllNonNull(event, eventToIgnore);
+        return addressBook.hasEventOverlap(event, eventToIgnore);
+    }
+
+    @Override
+    public void addEvent(Event toAdd) {
+        requireNonNull(toAdd);
+        addressBook.addEvent(toAdd);
+    }
+
+    @Override
+    public void removeEvent(Event target) {
+        requireNonNull(target);
+        addressBook.removeEvent(target);
+    }
+
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+        addressBook.setEvent(target, editedEvent);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -128,6 +196,23 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Event List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -142,7 +227,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredEvents.equals(otherModelManager.filteredEvents);
     }
-
 }
