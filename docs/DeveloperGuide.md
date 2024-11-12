@@ -335,10 +335,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | lonely university student   | add interests and hobbies to a contact                                                                  | remember what we have in common                                            |
 | `* * *`  | sociable university student | search for contacts by their interests                                                                  | connect with people with similar interests                                 |
 | `* * *`  | university student          | edit the contact details of an existing contact                                                         | keep their information current as they progress in their studies or career |
-| `* * *`  | university student          | update interests, work experience, or major of a contact                                                | reflect their latest accomplishments and interests                         |
-| `* *`    | university student          | view a contact’s birthday and receive a reminder for it                                                 | stay informed of important dates and maintain personal connections         |
-| `* *`    | university student          | add what year or alumni a contact is in                                                                 | filter my search better                                                    |
-| `*`      | university student          | add social media links (e.g., LinkedIn, Instagram) to a contact                                         | easily connect with them on other platforms                                |
+| `* * *`  | university student          | update interests, work experience, university, or major of a contact                                    | reflect their latest accomplishments and interests                         |
+| `* *`    | university student          | view a contact’s birthday                                                                               | stay informed of important dates and maintain personal connections         |
 
 ---
 <div style="page-break-after: always;"></div>
@@ -387,9 +385,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - **2a1**: System shows an error message (e.g., "Invalid index provided").
   - **2a2**: Use case resumes at step 1.
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
-**Note**: There is no undo operation for deletions.
+**Caution**: There is no undo operation for deletions.
 </box>
 
 <br>
@@ -419,7 +417,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 <box type="info" seamless>
 
 **Notes**:
-- The **UNIVERSITY** field is case-sensitive.
+- The **UNIVERSITY** field is case-insensitive.
 - Partial matches are supported, allowing users to find contacts with university names that contain the specified keyword.
 </box>
 
@@ -483,7 +481,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 </box>
 
 <br>
-<div style="page-break-after: always;"></div>
 
 #### **Use Case: Add Interests or Hobbies**
 **System**: UniVerse  
@@ -726,7 +723,6 @@ This command allows you to add one or more interests to an existing contact.
 
 ***Expected:*** Adds "Swimming" and "Cycling" as interests to the contact at index 1. 
 
-**Display Message:** "New interests added to <name of contact at index 1>: [Cyling, Swimming]" **(only if "Swimming" and "Cycling" were not originally part of the interest list of the contact at index 1.)**
 
 <br>
 
@@ -734,7 +730,6 @@ This command allows you to add one or more interests to an existing contact.
 
 ***Expected:*** Adds "Reading" as an interest to the contact at index 2.
 
-**Display Message:** "New interest added to <name of contact at index 2>: [Reading]" **(only if "Reading" was not originally part of the interest list of the contact at index 2.)**
 
 <br>
 
