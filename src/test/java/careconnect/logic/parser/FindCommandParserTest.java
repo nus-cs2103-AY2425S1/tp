@@ -1,7 +1,6 @@
 package careconnect.logic.parser;
 
 import static careconnect.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static careconnect.logic.Messages.MESSAGE_TOO_SHORT_SEARCH;
 import static careconnect.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static careconnect.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
