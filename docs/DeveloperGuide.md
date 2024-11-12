@@ -669,17 +669,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Prerequisite: Download the jar file and copy into an empty folder
+   * Prerequisite: Download the jar file and copy into an empty folder
 
-    2. Test case: Double-click the jar file
-       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   * Test case: Double-click the jar file
+   
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
-    1. Prerequisite: Resize the window to an optimum size. Move the window to a different location. Close the window.
+   * Prerequisite: Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    2. Test case: Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   * Test case: Re-launch the app by double-clicking the jar file.<br>
+       
+   Expected: The most recent window size and location is retained.
 
 ### Adding a student
 
