@@ -25,6 +25,7 @@ AI Declaration:
 * Nihirra : Used GitHub Copilot and ChatGPT for debugging and assistance with code implementation.
 * Nayana: Utilized ChatGPT for code completion, javadoc and writing test cases.
 * Jason: Utilised ChatGPT for debugging and writing test cases.
+* Aditi: Used ChatGPT for ideas for parse logic, code completion, javadocs, and test cases.
 
 --------------------------------------------------------------------------------------------------------------------
 
