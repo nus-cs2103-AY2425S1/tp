@@ -1,14 +1,22 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventDescription;
+import seedu.address.model.event.EventDuration;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,5 +128,88 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String eventName} into an {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventName} is invalid.
+     */
+    public static EventName parseEventName(String eventName) throws ParseException {
+        requireNonNull(eventName);
+        String trimmedEventName = eventName.trim();
+        if (!EventName.isValidName(trimmedEventName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedEventName);
+    }
+
+    /**
+     * Parses a {@code String eventDescription} into an {@code EventDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventDescription} is invalid.
+     */
+    public static EventDescription parseEventDescription(String eventDescription) throws ParseException {
+        requireNonNull(eventDescription);
+        String trimmedEventDescription = eventDescription.trim();
+        if (!EventDescription.isValidDescription(trimmedEventDescription)) {
+            throw new ParseException(EventDescription.MESSAGE_CONSTRAINTS);
+        }
+        return new EventDescription(trimmedEventDescription);
+    }
+
+    /**
+     * Parses a {@code String eventStartDate and String eventEndDate} into an {@code EventDuration}.
+     *
+     * @throws ParseException if the given {@code eventStartDate} or {@code eventEndDate} is invalid.
+     */
+    public static EventDuration parseEventDuration(String eventStartDate, String eventEndDate) throws ParseException {
+        requireAllNonNull(eventStartDate, eventEndDate);
+        String trimmedEventStartDate = eventStartDate.trim();
+        String trimmedEventEndDate = eventEndDate.trim();
+        LocalDate start;
+        LocalDate end;
+        try {
+            start = LocalDate.parse(trimmedEventStartDate);
+            end = LocalDate.parse(trimmedEventEndDate);
+        } catch (DateTimeParseException exception) {
+            throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS_DATE_STRING);
+        }
+        if (!EventDuration.isValidDuration(start, end)) {
+            throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS_DATE_ORDER);
+        }
+        return new EventDuration(start, end);
+    }
+
+    /**
+     * Parses the given {@code String} representing a file name.
+     *
+     * This method trims any leading or trailing spaces from the file name and checks if the file name is valid.
+     * A file name is considered invalid if it is empty.
+     * If the file name is invalid, a {@code ParseException} is thrown.
+     *
+     * @param fileName The file name to be parsed and validated.
+     * @return The trimmed file name if it is valid.
+     * @throws ParseException if the file name is empty or invalid.
+     */
+    public static String parseFileName(String fileName) throws ParseException {
+        requireNonNull(fileName);
+        String trimmedFileName = fileName.trim();
+        if (fileName.isEmpty()) {
+            throw new ParseException(null);
+        }
+        return trimmedFileName;
+    }
+
+    /**
+     * Parses a List containing keyword arguments,
+     * into a List containing the keywords.
+     */
+    public static List<String> parseSearchKeywords(List<String> keywordArgument) {
+        requireNonNull(keywordArgument);
+        List<String> keywords = Arrays.asList(keywordArgument.get(0).split("\\s+"));
+        return keywords;
     }
 }

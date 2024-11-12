@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,12 +21,15 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final int id;
 
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Integer> eventIds = new HashSet<>();
 
     /**
+     * Constructor for the {@code Person} Class. ID is initialised to -1.
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
@@ -35,6 +39,22 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.id = -1;
+    }
+
+    /**
+     * Constructor for the {@code Person} Class. ID is initialised to the given ID.
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Integer> eventIds, int id) {
+        requireAllNonNull(name, phone, email, address, tags, eventIds);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.eventIds.addAll(eventIds);
+        this.id = id;
     }
 
     public Name getName() {
@@ -53,6 +73,10 @@ public class Person {
         return address;
     }
 
+    public int getId() {
+        return id;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -61,8 +85,31 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Set<Integer> getEventIds() {
+        return Collections.unmodifiableSet(eventIds);
+    }
+
     /**
-     * Returns true if both persons have the same name.
+     * Returns a new {@code Person} object that has the same attributes except the ID.
+     */
+    public Person changeId(int newId) {
+        return new Person(name, phone, email, address, tags, eventIds, newId);
+    }
+
+    public boolean checkAssignedToEvent(Event event) {
+        return eventIds.contains(event.getEventId());
+    }
+
+    public void addEventId(int eventId) {
+        eventIds.add(eventId);
+    }
+
+    public void removeEventId(int eventId) {
+        eventIds.remove(eventId);
+    }
+
+    /**
+     * Returns true if both persons have the same name (Case-insensitive).
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -71,7 +118,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equalsLowerCase(getName());
     }
 
     /**
@@ -100,7 +147,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, id);
     }
 
     @Override
@@ -114,4 +161,26 @@ public class Person {
                 .toString();
     }
 
+    /**
+     * Converts the object's fields into a CSV (Comma-Separated Values) format.
+     * Each field is enclosed in double quotes and separated by commas.
+     *
+     * @return A string representing the object in CSV format, where fields include:
+     *         name, phone, email, address, tags and ID.
+     */
+    public String toCsvFormat() {
+        StringBuilder tagsInCsvFormat = new StringBuilder();
+        for (Tag tag : tags) {
+            tagsInCsvFormat.append(tag.tagName).append(",");
+        }
+        if (tagsInCsvFormat.length() > 0) {
+            tagsInCsvFormat.deleteCharAt(tagsInCsvFormat.length() - 1);
+        }
+
+        return "\"" + name + "\","
+                + "\"" + phone + "\","
+                + "\"" + email + "\","
+                + "\"" + address + "\","
+                + "\"" + tagsInCsvFormat + "\"";
+    }
 }

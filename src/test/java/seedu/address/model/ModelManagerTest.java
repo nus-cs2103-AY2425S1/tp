@@ -5,18 +5,27 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.MEETING;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -89,8 +98,178 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void addPerson_personWithInvalidId_throwsAssertionError() {
+
+        ModelManager modelManager = new ModelManager();
+        Person invalidPerson = new PersonBuilder().withId(-1).build();
+        assertThrows(AssertionError.class, () -> modelManager.addPerson(invalidPerson));
+    }
+
+    @Test
+    public void setPerson_personWithInvalidId_throwsAssertionError() {
+
+        ModelManager modelManager = new ModelManager();
+        Person validPerson = new PersonBuilder().withId(1).build();
+        Person invalidPerson = new PersonBuilder().withId(-1).build();
+        modelManager.addPerson(validPerson);
+        assertThrows(AssertionError.class, () -> modelManager.setPerson(validPerson, invalidPerson));
+    }
+
+    @Test
+    public void findPersonsWithName_nullName_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.findPersonsWithName(null));
+    }
+
+    @Test
+    public void findPersonsWithName_personNotInAddressBook_returnsEmptyList() {
+        assertEquals(modelManager.findPersonsWithName(ALICE.getName()), new ArrayList<>());
+    }
+
+    @Test
+    public void findPersonsWithName_personInAddressBook_returnsPersonList() {
+        modelManager.addPerson(ALICE);
+        List<Person> resultList = new ArrayList<>();
+        resultList.add(ALICE);
+        assertEquals(modelManager.findPersonsWithName(ALICE.getName()), resultList);
+    }
+
+    @Test
+    public void findPersonsWithName_personWithLowerCasedNameInAddressBook_returnsPersonList() {
+        modelManager.addPerson(ALICE);
+        List<Person> resultList = new ArrayList<>();
+        resultList.add(ALICE);
+        Name lowerCasedName = new Name(ALICE.getName().toString().toLowerCase());
+        assertEquals(modelManager.findPersonsWithName(lowerCasedName), resultList);
+    }
+
+    @Test
+    public void findPersonsWithName_personWithUpperCasedNameInAddressBook_returnsPersonList() {
+        modelManager.addPerson(ALICE);
+        List<Person> resultList = new ArrayList<>();
+        resultList.add(ALICE);
+        Name upperCasedName = new Name(ALICE.getName().toString().toUpperCase());
+        assertEquals(modelManager.findPersonsWithName(upperCasedName), resultList);
+    }
+
+    @Test
+    public void findPersonsWithName_personWithPartOfNameInAddressBook_returnsEmptyList() {
+        modelManager.addPerson(ALICE);
+        List<Person> resultList = new ArrayList<>();
+        String nameString = ALICE.getName().toString();
+        Name partOfName = new Name(nameString.substring(0, nameString.length() - 1));
+        assertEquals(modelManager.findPersonsWithName(partOfName), resultList);
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        Event event = new EventBuilder().withEventId(1).build();
+        assertFalse(modelManager.hasEvent(event));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        Event event = new EventBuilder().withEventId(1).build();
+        modelManager.addEvent(event);
+        assertTrue(modelManager.hasEvent(event));
+    }
+
+    @Test
+    public void addEvent_eventWithInvalidId_throwsAssertionError() {
+        boolean assertionsEnabled = false;
+        assert assertionsEnabled = true;
+
+        ModelManager modelManager = new ModelManager();
+        Event invalidEvent = new EventBuilder().withEventId(-1).build();
+        assertThrows(AssertionError.class, () -> modelManager.addEvent(invalidEvent));
+    }
+
+    @Test
+    public void setEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setEvent(null, null));
+    }
+
+    @Test
+    public void findEventsWithName_nullName_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.findEventsWithName(null));
+    }
+
+    @Test
+    public void findEventsWithName_eventNotInAddressBook_returnsEmptyList() {
+        assertEquals(modelManager.findEventsWithName(MEETING.getName()), new ArrayList<>());
+    }
+
+    @Test
+    public void findEventsWithName_eventInAddressBook_returnsEventList() {
+        modelManager.addEvent(MEETING);
+        List<Event> resultList = new ArrayList<>();
+        resultList.add(MEETING);
+        assertEquals(modelManager.findEventsWithName(MEETING.getName()), resultList);
+    }
+
+    @Test
+    public void findEventsWithName_eventWithLowerCasedNameInAddressBook_returnsEventList() {
+        modelManager.addEvent(MEETING);
+        List<Event> resultList = new ArrayList<>();
+        resultList.add(MEETING);
+        EventName lowerCasedName = new EventName(MEETING.getName().toString().toLowerCase());
+        assertEquals(modelManager.findEventsWithName(lowerCasedName), resultList);
+    }
+
+    @Test
+    public void findEventsWithName_eventWithUpperCasedNameInAddressBook_returnsEventList() {
+        modelManager.addEvent(MEETING);
+        List<Event> resultList = new ArrayList<>();
+        resultList.add(MEETING);
+        EventName upperCasedName = new EventName(MEETING.getName().toString().toUpperCase());
+        assertEquals(modelManager.findEventsWithName(upperCasedName), resultList);
+    }
+
+    @Test
+    public void findEventsWithName_eventWithPartOfNameInAddressBook_returnsEmptyList() {
+        modelManager.addEvent(MEETING);
+        List<Event> resultList = new ArrayList<>();
+        String nameString = MEETING.getName().toString();
+        EventName partOfName = new EventName(nameString.substring(0, nameString.length() - 1));
+        assertEquals(modelManager.findEventsWithName(partOfName), resultList);
+    }
+
+    @Test
+    public void hasEventById_eventNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEventById(1));
+    }
+
+    @Test
+    public void hasEventById_eventInAddressBook_returnsTrue() {
+        Event event = new EventBuilder().withEventId(1).build();
+        modelManager.addEvent(event);
+        assertTrue(modelManager.hasEventById(1));
+    }
+
+    @Test
+    public void getEventById_eventNotInAddressBook_returnsNull() {
+        assertEquals(null, modelManager.getEventById(1));
+    }
+
+    @Test
+    public void getEventById_eventInAddressBook_returnsEvent() {
+        Event event = new EventBuilder().withEventId(1).build();
+        modelManager.addEvent(event);
+        assertEquals(event, modelManager.getEventById(1));
+    }
+
+    @Test
+    public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEventList().remove(0));
     }
 
     @Test

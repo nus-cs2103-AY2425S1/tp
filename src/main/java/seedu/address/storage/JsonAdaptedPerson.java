@@ -29,6 +29,8 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final int id;
+    private final List<Integer> eventIds = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,13 +38,18 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("eventIds") List<Integer> eventIds,
+                             @JsonProperty("id") int id) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        this.id = id;
+        if (eventIds != null) {
+            this.eventIds.addAll(eventIds);
         }
     }
 
@@ -57,6 +64,8 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        id = source.getId();
+        eventIds.addAll(source.getEventIds());
     }
 
     /**
@@ -103,7 +112,10 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        final Set<Integer> modelEventIds = new HashSet<>(eventIds);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelEventIds, id);
     }
 
 }

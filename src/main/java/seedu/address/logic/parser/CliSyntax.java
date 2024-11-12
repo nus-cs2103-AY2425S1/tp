@@ -11,5 +11,12 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
-
+    public static final Prefix PREFIX_EVENT_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_EVENT_DESCRIPTION = new Prefix("d/");
+    public static final Prefix PREFIX_EVENT_START_DATE = new Prefix("f/");
+    public static final Prefix PREFIX_EVENT_END_DATE = new Prefix("t/");
+    public static final Prefix PREFIX_FIELD = new Prefix("by/");
+    /* Used in Assign / Unassign Events */
+    public static final Prefix PREFIX_PERSON = new Prefix("p/");
+    public static final Prefix PREFIX_EVENT = new Prefix("ev/");
 }

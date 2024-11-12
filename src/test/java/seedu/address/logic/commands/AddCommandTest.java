@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -85,7 +89,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all of the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -149,6 +153,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public List<Person> findPersonsWithName(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Person> getPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -157,7 +171,74 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteEvent(Event target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Event> findEventsWithName(EventName eventName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEvent(Event target, Event editedEvent) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Event> getFilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void assignEventToPerson(Person person, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unassignEventFromPerson(Person person, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int generateNewPersonId() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int generateNewEventId() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEventById(int id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Event getEventById(int id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
+
 
     /**
      * A Model stub that contains a single person.
@@ -174,6 +255,11 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public int generateNewPersonId() {
+            return 1;
         }
     }
 
@@ -198,6 +284,11 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public int generateNewPersonId() {
+            return 1;
         }
     }
 

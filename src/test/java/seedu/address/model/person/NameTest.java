@@ -29,10 +29,13 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("50")); // numbers only
+        assertFalse(Name.isValidName("50wdwdwdw")); // start with a number
+        assertFalse(Name.isValidName("#%$")); // symbols only
+        assertFalse(Name.isValidName("#$%$wdwdwdwdw")); // start with a symbol
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
-        assertTrue(Name.isValidName("12345")); // numbers only
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
@@ -56,5 +59,29 @@ public class NameTest {
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
+    }
+
+    @Test
+    public void equalsLowerCase() {
+        Name name = new Name("Valid Name");
+
+        // same values -> returns true
+        assertTrue(name.equalsLowerCase(new Name("Valid Name")));
+
+        // same values (case-insensitive) -> returns true
+        assertTrue(name.equalsLowerCase(new Name("Valid Name".toLowerCase())));
+        assertTrue(name.equalsLowerCase(new Name("Valid Name".toUpperCase())));
+
+        // same object -> returns true
+        assertTrue(name.equalsLowerCase(name));
+
+        // null -> returns false
+        assertFalse(name.equalsLowerCase(null));
+
+        // different types -> returns false
+        assertFalse(name.equalsLowerCase(5.0f));
+
+        // different values -> returns false
+        assertFalse(name.equalsLowerCase(new Name("Other Valid Name")));
     }
 }

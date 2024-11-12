@@ -26,6 +26,8 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<Integer> eventIds;
+    private int id;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +38,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        eventIds = new HashSet<>();
+        id = 0;
     }
 
     /**
@@ -47,6 +51,8 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        eventIds = new HashSet<>(personToCopy.getEventIds());
+        id = personToCopy.getId();
     }
 
     /**
@@ -89,8 +95,26 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code id} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withId(int id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
+     * Add one or more EventIds to the {@code EventIds} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEventIds(int... eventIds) {
+        for (int eventId : eventIds) {
+            this.eventIds.add(eventId);
+        }
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, eventIds, id);
     }
 
 }

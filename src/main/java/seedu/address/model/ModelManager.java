@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +27,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
     }
 
     public ModelManager() {
@@ -100,6 +107,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addPerson(Person person) {
+        assert person.getId() != -1 : "Person ID should not be -1 when adding the person to the address book.";
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -107,8 +115,72 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
+        assert editedPerson.getId() != -1 : "Person ID should not be -1 when editing the person in the address book.";
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public List<Person> findPersonsWithName(Name name) {
+        requireNonNull(name);
+        return addressBook.findPersonsWithName(name);
+    }
+
+    @Override
+    public List<Person> getPersonList() {
+        return addressBook.getPersonList();
+    }
+
+    /**
+     * Checks if the specified event exists in the address book.
+     *
+     * @param event The event to be checked. Must not be null.
+     * @return {@code true} if the event exists in the address book, {@code false} otherwise.
+     * @throws NullPointerException if the provided event is null.
+     */
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        assert event.getEventId() != -1 : "Event ID should not be -1 when adding the event to the address book.";
+        addressBook.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    }
+
+    @Override
+    public List<Event> findEventsWithName(EventName eventName) {
+        requireNonNull(eventName);
+        return addressBook.findEventsWithName(eventName);
+    }
+
+    @Override
+    public void assignEventToPerson(Person person, Event event) {
+        requireAllNonNull(person, event);
+        addressBook.assignEventToPerson(person, event);
+    }
+
+    @Override
+    public void unassignEventFromPerson(Person person, Event event) {
+        requireAllNonNull(person, event);
+        addressBook.unassignEventFromPerson(person, event);
+    }
+
+    @Override
+    public int generateNewPersonId() {
+        return addressBook.generateNewPersonId();
+    }
+
+    @Override
+    public int generateNewEventId() {
+        return addressBook.generateNewEventId();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -128,6 +200,43 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Event List Accessors =============================================================
+    /**
+     * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean hasEventById(int eventId) {
+        return addressBook.hasEventById(eventId);
+    }
+
+    @Override
+    public Event getEventById(int eventId) {
+        try {
+            return addressBook.getEventById(eventId);
+        } catch (NoSuchElementException e) {
+            return null; // Return null if no event is found
+        }
+    }
+
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+        addressBook.setEvent(target, editedEvent);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -142,7 +251,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredEvents.equals(otherModelManager.filteredEvents);
     }
 
 }
