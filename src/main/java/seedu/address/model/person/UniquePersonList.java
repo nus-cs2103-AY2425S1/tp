@@ -79,6 +79,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -98,7 +99,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     * Returns the backing person list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;

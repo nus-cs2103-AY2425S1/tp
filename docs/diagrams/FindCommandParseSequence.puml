@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":FindCommandParser" as FindCommandParser LOGIC_COLOR
+participant "PredicateFactory" as PredicateFactory << class >> LOGIC_COLOR
+participant "f:FindCommand" as FindCommand LOGIC_COLOR
+end box
+
+[-> FindCommandParser : parse("n/Alex tut/Science ...")
+activate FindCommandParser
+
+FindCommandParser -> PredicateFactory : createPredicates(argMultimap)
+activate PredicateFactory
+
+create FindCommand
+PredicateFactory -> FindCommand : FindCommand(personPredicates, participationPredicates)
+activate FindCommand
+
+FindCommand --> PredicateFactory
+deactivate FindCommand
+
+PredicateFactory -> FindCommandParser : f
+deactivate PredicateFactory
+
+[<-- FindCommandParser : f
+deactivate FindCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindCommandParser -[hidden]-> PredicateFactory
+destroy FindCommandParser
+@enduml

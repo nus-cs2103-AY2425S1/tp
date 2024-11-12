@@ -2,11 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_PREFIX_NOT_ALLOWED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -32,7 +36,18 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_PAYMENT, PREFIX_ATTENDANCE, PREFIX_TUTORIAL, PREFIX_TAG);
+
+        if (argMultimap.getValue(PREFIX_ATTENDANCE).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_PREFIX_NOT_ALLOWED, PREFIX_ATTENDANCE));
+        }
+        if (argMultimap.getValue(PREFIX_TUTORIAL).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_PREFIX_NOT_ALLOWED, PREFIX_TUTORIAL));
+        }
+        if (argMultimap.getValue(PREFIX_PAYMENT).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_PREFIX_NOT_ALLOWED, PREFIX_PAYMENT));
+        }
 
         Index index;
 
@@ -58,6 +73,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {

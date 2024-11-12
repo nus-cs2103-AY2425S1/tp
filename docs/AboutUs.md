@@ -9,50 +9,48 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### You Zeyuan(Jerry)
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/slipperybara.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Project member
 
-### Jane Doe
+### Zhang Jinhan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jinhanjinhan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/jinhanjinhan)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Software Developer
 
-### Jean Doe
+### Gladwin Tan Ye Kai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gladwintan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/gladwintan)]
+
+* Role: Developer
+
+### Amitha Vuputuri
+
+<img src="images/amitha2210.png" width="200px">
+
+[[github](https://github.com/amitha2210)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Jie Hui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/blazechron.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/BlazeChron)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer

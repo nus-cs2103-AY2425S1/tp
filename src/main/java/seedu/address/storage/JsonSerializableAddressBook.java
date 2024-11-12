@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,15 +22,27 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_TUTORIAL = "Tutorials list contains duplicate tutorial(s).";
+    public static final String MESSAGE_DUPLICATE_PARTICIPATION =
+            "Participation list contains duplicate participation(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedTutorial> tutorials = new ArrayList<>();
+    private final List<JsonAdaptedParticipation> participations = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(
+            @JsonProperty("persons") List<JsonAdaptedPerson> persons,
+            @JsonProperty("tutorials") List<JsonAdaptedTutorial> tutorials,
+            @JsonProperty("participations") List<JsonAdaptedParticipation> participations) {
         this.persons.addAll(persons);
+        this.tutorials.addAll(tutorials);
+        if (participations != null) {
+            this.participations.addAll(participations);
+        }
     }
 
     /**
@@ -38,6 +52,9 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        tutorials.addAll(source.getTutorialList().stream().map(JsonAdaptedTutorial::new).collect(Collectors.toList()));
+        participations.addAll(source.getParticipationList().stream().map(JsonAdaptedParticipation::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +70,22 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+        }
+        for (JsonAdaptedTutorial jsonAdaptedTutorial : tutorials) {
+            Tutorial tutorial = jsonAdaptedTutorial.toModelType();
+            if (addressBook.hasTutorial(tutorial)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TUTORIAL);
+            }
+            addressBook.addTutorial(tutorial);
+        }
+
+        // Participation has to be loaded after Students and Tutorials
+        for (JsonAdaptedParticipation jsonAdaptedParticipation : participations) {
+            Participation participation = jsonAdaptedParticipation.toModelType(addressBook);
+            if (addressBook.hasParticipation(participation)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PARTICIPATION);
+            }
+            addressBook.addParticipation(participation);
         }
         return addressBook;
     }

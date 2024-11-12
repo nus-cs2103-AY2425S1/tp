@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ScrollPane?>
+
+<HBox fx:id="dashboard" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <VBox spacing="6" minWidth="200">
+      <Label text="Students" style="-fx-font-weight: bold; -fx-font-size: 20; -fx-text-fill: #262626; -fx-padding: 0 0 0 0"/>
+      <HBox>
+         <HBox HBox.hgrow="ALWAYS">
+            <Label text="Total" style="-fx-font-size: 16; -fx-text-fill: #262626"/>
+         </HBox>
+         <Label fx:id="total" text="\$total"/>
+      </HBox>
+      <HBox spacing="20" alignment="CENTER_LEFT">
+         <HBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+            <Label text="Fees overdue" style="-fx-font-size: 16; -fx-text-fill: #262626; -fx-padding: 0 10 0 0"/>
+            <HBox HBox.hgrow="NEVER" maxHeight="19"
+                  style="-fx-background-color: #61BBB3; -fx-padding: 4; -fx-background-radius: 20">
+               <ImageView fitHeight="15" fitWidth="15">
+                  <Image url="@/images/payment_icon.png"/>
+               </ImageView>
+            </HBox>
+         </HBox>
+         <Label fx:id="feesOverdue" text="\$fees overdue" />
+      </HBox>
+   </VBox>
+   <HBox HBox.hgrow="ALWAYS" alignment="CENTER_RIGHT" style="-fx-padding: 0 25 0 75">
+      <VBox spacing="7">
+         <HBox alignment="CENTER_LEFT" spacing="7">
+            <Label text="Classes offered" style="-fx-font-weight: bold; -fx-font-size: 16; -fx-text-fill: #262626"/>
+            <HBox HBox.hgrow="NEVER" maxHeight="20" style="-fx-background-color: #54A7C7; -fx-padding: 4; -fx-background-radius: 20">
+               <ImageView fitHeight="16" fitWidth="16">
+                  <Image url="@/images/classes_icon.png"/>
+               </ImageView>
+            </HBox>
+         </HBox>
+         <ScrollPane VBox.vgrow="NEVER" minHeight="70" fx:id="scrollPane" styleClass="tutorial-pane" fitToHeight="true" vbarPolicy="NEVER">
+            <HBox fx:id="tutorials" spacing="15" style="-fx-background-color: white; -fx-padding: 0 0 3 0"/>
+         </ScrollPane>
+      </VBox>
+   </HBox>
+</HBox>

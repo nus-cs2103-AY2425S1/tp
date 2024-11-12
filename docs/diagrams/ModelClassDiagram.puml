@@ -19,6 +19,15 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+CLass Payment
+
+Class Tutorial
+Class UniqueTutorialList
+Class Attendance
+
+Class Participation
+Class UniqueParticipationList
+
 
 Class I #FFFFFF
 }
@@ -41,14 +50,29 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Payment
 Person *--> "*" Tag
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+AddressBook *--> "1" UniqueTutorialList
+UniqueTutorialList -->"0..*" Tutorial
+Participation *--> Tutorial
 
+AddressBook *--> "1" UniqueParticipationList
+UniqueParticipationList -->"0..*" Participation
+Participation *--> Person
+Participation *--> "*" Attendance
+ModelManager -down-> "~* filtered" Tutorial
+
+
+Person -[hidden]up--> AddressBook
+UniquePersonList -[hidden]right-> I
+UniqueParticipationList -[hidden]right-> I
+UniqueTutorialList -[hidden]left-> I
+
+Person -[hidden]left-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+ModelManager -down-> "~* filtered" Person
 @enduml
