@@ -609,6 +609,13 @@ To view the attendance record of a student,
 
 <br>
 
+<box type="tip" seamless>
+
+Note: the course name shown in the message window will be `COURSE QUERY`, rather than 
+the *actual course name* of the course, even for **valid** course codes. This is *intended 
+behavior* and is simply a result of how student-course-tutorial matching is done :)
+</box>
+
 <box type="warning">
 
 Reminder: where used, course **code** and **name**, and tutorial **code** must exist
