@@ -664,8 +664,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Accessibility
 13.  The system should provide keyboard shortcuts and other accessibility features to support users with disabilities.
 
-<div style="page-break-after: always;"></div>
-
 #### Extensibility
 14.  The system should have a modular design that allows for easy addition of new features and integrations in the future.
 
@@ -725,8 +723,6 @@ testers are expected to do more *exploratory* testing.
 
    2. Relaunch the app by double-clicking the JAR file.<br>
        Expected: No help window appears. The most recent window size and location are retained.
-
-<div style="page-break-after: always;"></div>
 
 ### Adding a student 
 
