@@ -3,7 +3,7 @@
 
 * This is **an address book application targeted for private school teachers and educators**.<br>
   Example usages:
-  * as an effecient tool for educators to retrieve student/parents contact information
+  * as an efficient tool for educators to retrieve student/parents contact information
 * The project builds on to enhance the software project for a desktop application (called _AddressBook_) used for managing contact details.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.
