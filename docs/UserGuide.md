@@ -423,9 +423,6 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
    When entering an invalid index like: `delete 100000000000`, the system will display an invalid command format error, instead of a invalid index error.
     >**Workaround**: Avoid using absurdly large indexes when using the delete command, which is impossible to reach in the current context.
 
-9. **Possible misleading error message when entering invalid date**
-   When entering an invalid date like: `addlog i/S1234567D d/100000000000 Feb 2024 l/Checked in at clinic`, the system will display an invalid command format error instead of an invalid date error.
-    >**Workaround**: Avoid using absurdly large dates when typing in dates, which is impossible to reach logically.
 
 <div style="page-break-after: always;"></div>
 
