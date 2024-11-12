@@ -490,7 +490,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: The tutorial group `T01` is added to a class' worth of students. The Students `John Doe` and `Jane Doe` are in the tutorial group. 
    
    2. Test case: `markpresentall tg/T01 dt/2025-01-20` &rarr; `markat n/John Doe dt/2025-01-20 pr/a` &rarr;  `markat n/Jane Doe dt/2025-01-20 pr/a` &rarr; `getattg tg/T01` <br>
-    Expected: On the date column `Jan 20 2025`, all students in the tutorial group are marked `present`, except for `John Doe` and `Jane Doe` who are marked `absent`. The status message shows the name of the last `student` marked `absent`.
+    Expected: On the date column `Jan 20 2025`, all students in the tutorial group `T01` are marked `present`, except for `John Doe` and `Jane Doe` who are marked `absent`. The status message shows the name of the last `student` marked `absent`.
    
    3. Test Case: `markpresentall tg/T11 dt/2025-01-20` <br>
     Expected: The tutorial group `T11` does not exist. Error message shown in the status message. State of command box remains the same, i.e. the command that was typed in remains in the command box.
@@ -505,7 +505,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: The tutorial group `T02` is added to a class' worth of students. The Students `John Doe` and `Jane Doe` are in the tutorial group.
 
    2. Test case: `markabsentall tg/T02 dt/2025-01-20` &rarr; `markat n/John Doe dt/2025-01-20 pr/p` &rarr; `markat n/Jane Doe dt/2025-01-20 pr/p` &rarr; `getattg tg/T02`<br>
-   Expected: On the date column `Jan 20 2025`, all students in the tutorial group are marked `absent`, except for `John Doe` and `Jane Doe` who are marked `present`. The status message shows the name of the last `student` marked `present`.
+   Expected: On the date column `Jan 20 2025`, all students in the tutorial group `T02` are marked `absent`, except for `John Doe` and `Jane Doe` who are marked `present`. The status message shows the name of the last `student` marked `present`.
 
    3. Test case: `markabsentall tg/T11`<br>
    Expected: The tutorial group `T11` does not exist. Error message shown in the status message. State of command box remains the same, i.e. the command that was typed in remains in the command box.
