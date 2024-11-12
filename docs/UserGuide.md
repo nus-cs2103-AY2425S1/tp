@@ -546,14 +546,23 @@ Roles for each contact are displayed in the order listed above.
 **Q**: What happens if I add a contact with the same name but a different nickname?<br>
 **A**: As long as the nickname differs, the contact will be added without conflict. However, identical `Nickname` and `Name` entries are flagged as duplicate identities and will not be allowed.
 
+**Q**: Why are undergraduate 1 to 6 being allowed? Isn't it typical for undergraduates to only have 4 years of study?<br>
+**A**: Some undergraduate students such as those with a double degree programme has a maximum candidature period of 6 years.
+
 **Q**: Why is my command returning an "Invalid Role" error?<br>
 **A**: Ensure roles are entered in the exact format expected by the app. An "Invalid Role" error may indicate that a role was mistyped or included with extra symbols, such as `[ ]`.
 
 **Q**: Can I undo a deletion?<br>
 **A**: Currently, deletions are final and cannot be undone. Always double-check before using the `delete` command to avoid accidental deletions.
 
+**Q**: Can I add or edit or delete multiple contacts within a single command?<br>
+**A**: This functionality is not supported.
+
 **Q**: How can I search for contacts without case sensitivity?<br>
 **A**: Searches are case-insensitive, so you can enter names, nicknames, or other fields without worrying about uppercase or lowercase letters.
+
+**Q**: After executing the find command, why can't the display continue to show the filtered list if I add or edit or delete a contact immediately after?<br>
+**A**: This functionality is not supported. Adding, editing, or deleting a contact will show the full list of contacts with the updated change made as the display (i.e., as if `list` command has been executed after `add`, `edit` or `delete`) .
 
 
 --------------------------------------------------------------------------------------------------------------------
