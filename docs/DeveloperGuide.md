@@ -1171,14 +1171,6 @@ testers are expected to do more *exploratory* testing.
   - Appointment status is updated to "COMPLETED".
   - Success message confirms the status update.
 
-2. **Updating Status to Pending**
-
-- **Prerequisites**: Ensure an appointment exists on `01/01/2025` at `10:00`.
-- **Test case**: `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/pending`
-- **Expected**:
-  - Appointment status is updated to "PENDING".
-  - Success message confirms the status update.
-
 ---
 
 #### Deleting an Appointment
