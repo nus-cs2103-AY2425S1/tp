@@ -221,7 +221,7 @@ Edits the specified meeting with an Udder from the meetings list.
 
 **Format:** `editm INDEX [n/NAME] [st/DD-MM-YYYY] [et/DD-MM-YYYY] [l/LOCATION]`
 
-* Use the `list` command before editing any meeting!
+* Use the `meetings` command before editing any meetings!
 * Edits a meeting with an Udder at the specified meeting `INDEX`.
 * The index refers to the index number shown in the displayed meetings list.
 * At least one field of the meeting must be changed.
