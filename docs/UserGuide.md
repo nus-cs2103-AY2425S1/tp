@@ -144,9 +144,9 @@ Adds a patient to the app.
 
 **Format:** `add n/NAME i/IDENTITY_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS​`
 
-* **NAME** only supports alphanumeric characters and spaces as it is only meant for identifying patients.
+* **NAME** only supports alphanumeric characters and spaces as it is only meant for you to identify patients. For example names containing s/o, you can replace it with 'son of'.
 
-* **IDENTITY_NUMBER** has to be a **_valid NRIC_** (It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a valid checksum letter (e.g. S1234567D).";))
+* **IDENTITY_NUMBER** has to be a **_valid NRIC_** (It must be 9 characters long, starting with 'S', 'T', 'F', or 'G', followed by 7 digits, and ending with a valid checksum letter (e.g. S1234567D).
 
 * **PHONE_NUMBER** must be a valid Singapore mobile number. Our application only accepts mobile numbers, which should be 8 digits long and start with either '8' or '9' (e.g., 81234567 or 91234567).
 
