@@ -11,6 +11,7 @@ Class "<<interface>>\nModel" as Model
 Class AddressBook
 Class ModelManager
 Class UserPrefs
+Class Profile
 
 Class UniquePersonList
 Class Person
@@ -40,6 +41,7 @@ ModelManager -right-> "1" UserPrefs
 ModelManager *-down- "1" SortedList
 ModelManager *-down- "1" FilteredList
 UserPrefs .up.|> ReadOnlyUserPrefs
+UserPrefs *-right "*" Profile
 
 AddressBook *-- "1" UniquePersonList
 UniquePersonList --> "~* all" Person
