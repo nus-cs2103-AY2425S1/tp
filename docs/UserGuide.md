@@ -51,7 +51,7 @@ Go to [Quick Start](#quick-start) to get started, find [FAQ](#faq) for troublesh
 
    * `add n/John Doe c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to the application.
 
-   * `addt 1 d/buy raw materials amt/-100.55 o/Company ABC dt/2024-10-16` : Adds a transaction as shown to to the client indexed 1 in the list.
+   * `addt 1 d/buy raw materials amt/-100.55 o/Company ABC dt/2024-10-16` : Adds a transaction as shown to the client indexed 1 in the list.
 
    * `listt 1` : Lists all transactions of client indexed 1. You should see the transaction you just added. This is the **transaction list view**.
 
@@ -277,6 +277,7 @@ Format: `listt INDEX`
 * Lists the transactions for the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list when using `list` or `find` command.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Transactions are listed from newest to oldest transaction by transaction date.
 
 <box type="warning" seamless>
 
@@ -299,6 +300,11 @@ Format: `deletet INDEX`
 <box type="warning" seamless>
 
 **Note:** `deletet` can only be used in transaction list view.
+</box>
+
+<box type="tip" seamless>
+
+**Tip:** `deletet` and `addt` allow you to modify the transaction list at will. Future versions will support a command to directly edit an existing transaction.
 </box>
 
 Examples:
@@ -406,19 +412,19 @@ Exit | `exit`|Client and transaction list views
 
 This table summarises the non-obvious parameters in natural language.
 
-Parameter | Restrictions | Extreme accepted example | Invalid example 
----------------|---------------|---------------|--------
-Index | Positive integer not exceeding list size | `5` (assuming at least 5 clients/transactions in list) | `0` (not positive)
-Name | Alphanumeric and spaces, but not blank. | `E1234567 john doe vii` | `john s/o doe` (contains `/`)
-Company | Anything, but not blank. | `💁 Inc.`| ` ` (blank)
-Phone | The optional country code in front `(+XXX)` must be 1-3 digits, the optinal notes `[Notes]` behind must be 1-10 of any characters, and the main number must not be blank, with up to 1 space between digits. | `(+123) 9 8 7 [short note]`| `(+1234) [this is too long]` 
-Email |`local-part@domain`, where the local part is alphanumeric with at most 1 of special characters `+_.-` in between alphanumerals (i.e not at start nor end), and domain is alphanumeric with at most 1 of special characters `-.` between alphanumerals. It must end with at least 2 alphanumerals. | `a+b-c.d@a-z.co` | `a++b@c.-d` (too many special characters in between, ends with only 1 alphanumeral)
-Address |Anything, but not blank. | `💁`| ` ` (blank)
-Tag | Alphanumeric, but not blank. | `something`| `some thing` (space, not alphanumeric)
-Transaction description | Anything, but not blank. | `💁`| ` ` (blank)
-Transaction amount | Between ± 1 Billion, to 2 decimal places. When there's a decimal point, there must be at least a digit both before and after it. | `-1000000000.00`| `-.001` (no digit before `.`, and more than 2 decimal places)
-Transaction party | Anything, but not blank. | `💁`| ` ` (blank)
-Transaction date | `yyyy-mm-dd`, a valid date starting from `0000-01-01` to `9999-12-31` | `9999-12-31`| `2025-02-29` (date doesn't exist)
+Parameter | Restrictions                                                                                                                                                                                                                                                                                      | Extreme accepted example | Invalid example 
+---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|--------
+Index | Positive integer not exceeding list size                                                                                                                                                                                                                                                          | `5` (assuming at least 5 clients/transactions in list) | `0` (not positive)
+Name | Alphanumeric and spaces, but not blank.                                                                                                                                                                                                                                                           | `E1234567 john doe vii` | `john s/o doe` (contains `/`)
+Company | Anything, but not blank.                                                                                                                                                                                                                                                                          | `💁 Inc.`| ` ` (blank)
+Phone | The optional country code in front `(+XXX)` must be 1-3 digits, the optinal notes `[Notes]` behind must be 1-10 of any characters, and the main number must not be blank, with up to 1 space between digits.                                                                                      | `(+123) 9 8 7 [short note]`| `(+1234) [this is too long]` 
+Email | `local-part@domain`, where the local part is alphanumeric with at most 1 of special characters `+_.-` in between alphanumerals (i.e not at start nor end), and domain is alphanumeric with at most 1 of special characters `-.` between alphanumerals. It must end with at least 2 alphanumerals. | `a+b-c.d@a-z.co` | `a++b@c.-d` (too many special characters in between, ends with only 1 alphanumeral)
+Address | Anything, but not blank.                                                                                                                                                                                                                                                                          | `💁`| ` ` (blank)
+Tag | Alphanumeric, but not blank.                                                                                                                                                                                                                                                                      | `something`| `some thing` (space, not alphanumeric)
+Transaction description | Anything, but not blank.                                                                                                                                                                                                                                                                          | `💁`| ` ` (blank)
+Transaction amount | Between ± 1 Billion, to 2 decimal places. When there's a decimal point, there must be at least a digit both before and after it.                                                                                                                                                                  | `-1000000000.00`| `-.001` (no digit before `.`, and more than 2 decimal places)
+Transaction party | Anything, but not blank.                                                                                                                                                                                                                                                                          | `💁`| ` ` (blank)
+Transaction date | `yyyy-mm-dd`, a valid date starting from `-9999-01-01` to `9999-12-31`                                                                                                                                                                                                                            | `9999-12-31`| `2025-02-29` (date doesn't exist)
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -434,7 +440,7 @@ Transaction date | `yyyy-mm-dd`, a valid date starting from `0000-01-01` to `999
 **Q**: Can I customize the data file location?<br>
 **A**: Currently, the data file location is fixed to the application directory (i.e it's in the same place as the app file). However, you can copy the data elsewhere (or if you're tech-savvy, create a [symbolic link](https://stackoverflow.com/questions/1951742/how-can-i-symlink-a-file-in-linux) )
 
-**Q**: How do I backup my data?<br>
+**Q**: How do I back up my data?<br>
 **A**: Simply copy the `clientell.json` file to a backup location.
 
 **Q**: What should I do if I accidentally delete a client?<br>

@@ -13,13 +13,23 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project was built on the [AddressBook Level-3](https://se-education.org/addressbook-level3/) as part of a student software engineering project. 
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
+
+--------------------------------------------------------------------------------------------------------------------
+## **Minor definitions**
+
+The documentation uses the terms "client list view" and "transaction list view" to refer to the environment displayed on the UI when the respective list is shown. This table informs you how to switch between these views, which will be useful for later parts of this Developer Guide, such as in some test cases.
+
+Switching between... | Command | Format
+---------------|---------------|------------
+Client to transaction list view | List Transactions | `listt INDEX`
+Transaction to client list view | List Clients | `list`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -130,7 +140,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Client` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Client` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Client` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Client` needing their own `Tag` objects. Note that the `Transaction` list cannot be refactored in the same way, because all transactions are semantically distinct (e.g two copies of a tag are the same, but two transactions with the same descriptions, amounts, date, and parties are separate because they may simply be two transactions on the same day).<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -207,98 +217,6 @@ It implements the following operations:
 The following sequence diagram shows an example execution of command `findt keys`, where `keys` represents any number of keywords.
 
 <puml src="diagrams/FindTransactionsDiagram.puml" />
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -476,6 +394,30 @@ Use case ends.
     * 2a1. Clientell informs the financial consultant that no matches were found.
     * Use case ends.
 
+**Use case: Summarise transactions in given range**
+
+**Preconditions: Financial consultant is in transaction list view**
+
+**MSS**
+
+1. Financial consultant enters the summary command with the start and end months.
+2. Clientell calculates the total amount of transactions in the specified range.
+3. Clientell displays the transactions in the specified range and the total amount.
+Use case ends.
+
+**Extensions**
+
+* 2a. The financial consultant enters an invalid month.
+    * 2a1. Clientell shows an error message.
+    * Use case ends.
+* 2b. The financial consultant enters an incorrect month format.
+    * 2b1. Clientell shows an error message.
+    * Use case ends.
+* 2c. No transactions found in the specified range.
+    * 2c1. Clientell displays no transactions.
+    * 2c2. Clientell displays the total amount as 0.
+    * Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java `17` or above installed.
@@ -511,21 +453,21 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file
+   2. Double-click the jar file
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimal size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. Shutting down
-  1. Test case: `exit`<br>
-     Expected: The app shuts down and the window closes. A JSON file `clientell.json` is generated in the data file directory if there previously wasn't; otherwise, it updates with any new changes.
-  1. Test case: Click the `X` button on the window
-     Expected: Identical to above.
+3. Shutting down
+   1. Test case: `exit`<br>
+      Expected: The app shuts down and the window closes. A JSON file `clientell.json` is generated in the data file directory if there previously wasn't; otherwise, it updates with any new changes.
+   2. Test case: Click the `X` button on the window<br>
+      Expected: Identical to above.
 
 ### Deleting a client
 
@@ -533,26 +475,51 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No client is deleted. Error details informing of invalid command shown in the status message.
   
-  1. Test case: `delete x`, where `x` is exactly 1 more than client list size<br>
+    4. Test case: `delete x`, where `x` is exactly 1 more than client list size<br>
       Expected: No client is deleted. Error detail informing out of range index shown in the status message.
 
-   1. Test case: `delete`<br>
+   5. Test case: `delete`<br>
       Expected: No client is deleted. Error details informing of missing index parameter shown in the status message.
 
-1. Deleting a client in the transaction list view
+2. Deleting a client in the transaction list view
    1. Prerequisites: List all transactions of a client, such as the first, using the `listt 1` command.
   
-    1. Test case: `delete 0`<br>
+    2. Test case: `delete 0`<br>
+      Expected: No client is deleted. Error detail informing of invalid command shown in the status message.
+
+    3. Test case: `delete 1`<br>
       Expected: No client is deleted. Error detail informing of environment discrepancy shown in the status message.
 
-    2. Test case: `delete 1`<br>
-      Expected: No client is deleted. Error detail informing of environment discrepancy shown in the status message.
+
+### Finding clients
+
+1. Finding a client in the client list view
+
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+   2. Test case: `find Alex`<br>
+      Expected: All clients whose name or company contain Alex are shown. Details of the search shown in the status message.
+
+   3. Test case: `find`<br>
+      Expected: Error details informing of invalid command format shown in the status message.
+
+   4. Test case: `find Alex innovative`<br>
+      Expected: All clients whose name or company contain Alex or innovative are shown. Details of the search shown in the status message.
+
+
+2. Finding a client in the transaction list view
+
+   1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+
+   2. Test case: `find Alex`<br>
+      Expected: Error details informing of environment discrepancy shown in the status message.
+
 
 ### Adding a transaction to a client 
 
@@ -566,7 +533,7 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `addt 0 d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17`<br>
        Expected: No transaction is added to any client. UI still shows the full client list. Error details informing of invalid command format shown in the status message.
 
-   4Test case: `addt x d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17` (where x is larger than list size)<br>
+   4. Test case: `addt x d/buy new equipment amt/-1000 o/ABC Motor Group dt/2024-11-17` (where x is larger than list size)<br>
        Expected: Expected: No transaction is added to any client. UI still shows the full client list. Error details informing of invalid index shown in the status message.
 
 2. Adding a transaction in transaction list view.
@@ -599,29 +566,85 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `listt x`<br>
        Expected: UI still shows the transactions list. Error details shown in the status message. Status bar remains the same.
 
+### Finding transactions
+
+1. Finding transactions in the client list view.
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    2. Test case: `findt invest`<br>
+       Expected: Error details informing of environment discrepancy shown in the status message.
+
+2. Finding transactions in the transaction list view.
+
+    1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+
+    2. Test case: `findt invest`<br>
+       Expected: All transactions whose description contain "invest" are shown. Details of the search shown in the status message.
+
+    3. Test case: `findt`<br>
+       Expected: Error details informing of invalid command format shown in the status message. 
+   
+    4. Test case: `findt invest stocks`<br>
+        Expected: All transactions whose description contain "invest" or "stocks" are shown. Details of the search shown in the status message.
+
+### Summarising transactions
+
+1. Summarising transactions in the client list view.
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    2. Test case: `summary s/2024-11 e/2024-12`<br>
+       Expected: Error details informing of environment discrepancy shown in the status message.
+   
+
+2. Summarising transactions in the transaction list view.
+
+   1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+
+   2. Test case: `summary s/2024-12 e/2024-12`<br>
+      Expected: The transactions from `2024-12-01` to `2024-12-31` are shown. The total amount of these transactions is shown in the status message.
+
+   3. Test case: `summary s/2024-11 e/2025-01`<br>
+      Expected: The transactions from `2024-11-01` to `2025-01-31` are shown. The total amount of these transactions is shown in the status message.
+
+   4. Test case: `summary s/2024-11 e/2024-10`<br>
+      Expected: Error details informing of invalid date range shown in the status message.
+
+   5. Test case: `summary s/2024-11 e/2024-13`<br>
+      Expected: Error details informing of invalid month or incorrect format shown in the status message.
+
+   6. Test case: `summary s/11-2024 e/12-2024`<br>
+      Expected: Error details informing of invalid month or incorrect format shown in the status message.
+
+
 ### Saving data
 
 1. Missing data file
 
-   1. Test case: Delete `clientell.json` from the data file directory. If there is no such file, do nothing.
-      Expected: The app launches correctly with a client list populated with sample clients.
+   1. Test case: Delete `clientell.json` from the data file directory. If there is no such file, do nothing.<br>
+      Expected: The app launches correctly with a client list populated with sample clients.<br>
+&nbsp;
+&nbsp;
 
 2. Corrupted data file
 
-  1. Test case: Add in irrelevant key-value pairs in `clientell.json`
-     Expected: The app populates data ignoring all irrelevant key-value pairs.
+   1. Test case: Add in irrelevant key-value pairs in `clientell.json`.<br>
+      Expected: The app populates data ignoring all irrelevant key-value pairs.  
 
-  2. Test case: Add in duplicate key-value pairs in `clientell.json`
-     Expected: The app populates data ignoring all duplicates except the final pair.
+   2. Test case: Add in duplicate key-value pairs in `clientell.json`.<br>
+      Expected: The app populates data ignoring all duplicates except the final pair.
 
-  3. Test case: Modify an existing value to be illegal in `clientell.json`, such as `phone: (+1234)`
-     Expected: The app launches with an empty UI and no data.
+   3. Test case: Modify an existing value to be illegal in `clientell.json`, such as `phone: (+1234)`.<br>
+      Expected: The app launches with an empty UI and no data.
 
 3. Editing while app is active
 
    1. Prerequisite: The app is active
-   1. Test case: Make a legal edit anywhere in `clientell.json`, such as changing the first client's name to `name: "John"`. Then close the app.
+
+   2. Test case: Make a legal edit anywhere in `clientell.json`, such as changing the first client's name to `name: "John"`. Then close the app.<br>
       Expected: The legal edit is overwritten by the new data from the app's most recent session.
+
 
 
 
@@ -631,9 +654,22 @@ testers are expected to do more *exploratory* testing.
 
 Team size: 5
 
-1. Overload `listt` to not take in an index in transaction list view, to view the whole transactions list for the selected client.
-2. Improve `find` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)).
-3. Improve `findt` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)).
+1. Overload `listt` to not take in an index in transaction list view, to view the whole transactions list for the selected client. Currently, `listt INDEX` can only be used in the client list view, and will display the transaction list view. This is inconvenient when the user wants to stay in the transaction list and still want to view the full list, perhaps after searching for some transactions (because he/she would have to return to the client list using `list`, then `listt INDEX` to get back to the transaction list in full. Future implementation allows `listt INDEX` to operate as currently, but also accept `listt` without `INDEX` to work in the transaction list view and show the full transaction list of the current client.
+
+2. Improve `find` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)). Existing implementation strictly searches for full word, case-insensitively. Future implementation uses regex to allow far more flexible searching, such as `(?i)^cla.*r.*ce$` to match all strings starting with `cla`, containing `r` somewhere in the middle, ending with `ce`, case-insensitively (so it might match `Clarance`, `clairice`, `Clarice`, etc.)
+
+3. Improve `findt` to employ fuzzy search via regular expression ([regex](https://en.wikipedia.org/wiki/Regular_expression)). Existing implementation strictly searches for full word, case-insensitively. Future implementation uses regex to allow far more flexible searching, such as `(?i)^cla.*r.*ce$` to match all strings starting with `cla`, containing `r` somewhere in the middle, ending with `ce`, case-insensitively (so it might match `Clarance`, `clairice`, `Clarice`, etc.)
+
 4. Improve `find` to take in additional logic info to specify what fields to search for. Existing implementation searches for name OR company. Future enhancement will allow user to specify the search with greater granularity e.g company OR address, (name AND email AND company) OR tags, etc.
-5. Improve data saving/loading of corrupted files. Currently, corruption in data file causes app to launch with empty book, and any updates in this session, upon the session's termination, will override the existing corrupted data file. Future enhancement will launch the app with a specified error to inform that the data file is corrupted, and disables usage until the corrupted data file is corrected/recovered. This is to ensure the corrupted data file (which may be important and only suffering from a minor typo) is not permanently lost.
+
+5. Improve data saving/loading of corrupted files. Currently, corruption in data file causes app to launch with empty book, and any updates in this session, upon the session's termination, will override the existing corrupted data file. Future enhancement will launch the app with a specified error to inform that the data file is corrupted, and disables usage until the corrupted data file is corrected/recovered. This is to ensure the corrupted data file (which may be important and only suffering from a minor typo) is not permanently lost.<br>
+
 6. Improve implementation of `tags` to support more complex tag relationships. Currently, tags are simply in a list. Future enhancement allows more intricate relationship between tags to better model real world relationships via hierachial structure, likely implemented with nested lists and some global info. For example, it can be specified that the tags `bakery` `hawker` inherent from tag `FnB`, so any tag with `bakery` would also be auto-tagged with `FnB` for other purposes like searching.
+
+7. Overload `add` to add transactions if the relevant fields for adding a transaction is given. Currently, `add` and `addt` are separate commands. In future implementation, `addt` will be subsumed and overloaded in `add` for a more intuitive user experience. For example, if `add` is supplied with `n/NAME` (and other client fields), it adds a client; if supplied with `INDEX` (and other transaction fields), it adds a transaction to the specified indexed client.
+
+8. Overload `find` to find clients and transactions depending on the environment the command is used in. Currently, `find` and `findt` are separate commands. In future implementation, `findt` will be subsumed and overloaded in `find` for a more intuitive user experience. This will also work in conjunction with enhancement 4, in which `find` is enhanced with more customisable, granular logic. For example, if `find` is supplied with usual keywords and used in the client list view, it performs a search in the client list; if supplied with other keywords and used in the transaction list view, it performs a serach on the indexed client's transaction list.
+
+9. Overload `delete` to delete clients and transactions depending on the environment the command is used in. Currently, `delete` and `deletet` are separate commands. In future implementation, `deletet` will be subsumed and overloaded in `delete` for a more intuitive user experience. For example, `delete INDEX` deletes the indexed client while in the client list view, and deletes the indexed transaction while in the transaction list view.
+
+
