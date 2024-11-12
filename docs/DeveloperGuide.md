@@ -210,7 +210,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-**System**: Vendor Vault (VV)
+**System**: VendorVault (VV)
 
 **Use Case**: UC01 - Add Supplier Information
 
@@ -232,7 +232,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 ___
-**System**: Vendor Vault (VV)
+**System**: VendorVault (VV)
 
 **Use Case**: UC02 - Delete Supplier
 
@@ -250,7 +250,7 @@ ___
       Use case ends.
 
 ___
-**System**: Vendor Vault (VV)
+**System**: VendorVault (VV)
 
 **Use Case**: UC03 - Mark Supplier Status
 
@@ -275,7 +275,7 @@ ___
       Use case ends.
 
 ___
-**System**: Vendor Vault (VV)
+**System**: VendorVault (VV)
 
 **Use Case**: UC04 - Find Supplier by given parameters
 
@@ -296,7 +296,7 @@ ___
       Use case ends.
 
 ___
-**System**: Vendor Vault (VV)
+**System**: VendorVault (VV)
 
 **Use Case**: UC05 - Sort Suppliers
 
@@ -307,7 +307,7 @@ ___
 2. VV sorts the suppliers and displays the sorted list of suppliers.  
    Use case ends.
 
-   **Extensions**:
+**Extensions**:
 - **1a.** VV detects an invalid command format.
     - **1a1.** VV displays an error message.  
       Use case ends.
@@ -317,7 +317,7 @@ ___
       Use case ends.
 
 ___
-**System**: Vendor Vault (VV)
+**System**: VendorVault (VV)
 
 **Use Case**: UC06 - Add Deliveries
 
@@ -342,7 +342,7 @@ ___
       Use case ends.
 
 ___
-**System**: Vendor Vault (VV)
+**System**: VendorVault (VV)
 
 **Use Case**: UC07 - Delete Delivery
 
@@ -363,7 +363,7 @@ ___
     - **1b1.** VV displays an error message.  
       Use case ends.
 ___
-**System**: Vendor Vault (VV)
+**System**: VendorVault (VV)
 
 **Use Case**: UC08 - Mark the Status of Deliveries
 
@@ -380,15 +380,15 @@ ___
       Use case ends.
 
 - **1b.** VV detects that one or more parameters are missing or invalid.
-    - **1b1.** VV displays an error message.  
+    - **1b1.** VV displays an error message.
       Use case ends.
 
 - **1c.** VV detects that the current status of the specified delivery is the same as the requested status.
     - **1c1.** VV displays an error message.
       Use case ends.
 
-
-**System**: Vendor Vault (VV)
+___
+**System**: VendorVault (VV)
 
 **Use Case**: UC09 - Find Deliveries by given parameters
 
@@ -409,7 +409,7 @@ ___
       Use case ends.
 
 ___
-**System**: Vendor Vault (VV)
+**System**: VendorVault (VV)
 
 **Use Case**: UC10 - Sort Deliveries
 
@@ -430,7 +430,7 @@ ___
       Use case ends.
 
 ___
-**System**: Vendor Vault (VV)
+**System**: VendorVault (VV)
 
 **Use Case**: UC10 - UpcomingDeliveries
 
