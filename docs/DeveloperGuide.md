@@ -278,23 +278,23 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                            | So that I can…​                                             |
-|----------|---------|---------------------------------------------------------|-------------------------------------------------------------|
-| `* * *`  | user    | add a patient contact                                   | track the details of a specific patient under my care       |
-| `* * *`  | user    | delete a patient contact                                | get rid of patient details that are no longer under my care |
-| `* * *`  | user    | add a session log                                       | record the session details with a specific patient          |
-| `* * *`  | user    | delete session log                                      | remove unwanted session log                                 |
-| `* * *`  | user    | store data locally                                      | keep patient data private                                   |
-| `* *`    | user    | get a manual all the available commands (-help command) | learn all the possible commands to fully utilize the app    |
-| `* *`    | user    | clear the list of patients                              | start from an empty patient list                            |
-| `* *`    | user    | edit session log/ patient information                   | change incorrect or out of date information                 |
-| `* *`    | user    | confirm a command                                       | verify if I really want to do an action                     |
-| `* *`    | user    | cancel a command                                        | reverse an action that I did not intend to do               |
-| `* *`    | user    | be able to classify my patient as discharged/new        | cross reference their progress                              |
-| `* *`    | user    | group session based on patient                          | see each session with a specific patient                    |
-| `* *`    | user    | delete logs related to a patient                        | remove specific patient session log efficiently             |
-| `* *`    | user    | log time, date of sessions                              | to keep track of progress and frequency of patient          |
-| `*`      | user    | search/filter for specific patient using keyword        | quickly find relevant details of patient                    |
+| Priority | As a …​ | I want to …​                                            | So that I can…​                                          |
+|----------|---------|---------------------------------------------------------|----------------------------------------------------------|
+| `* * *`  | user    | add a patient contact                                   | track the details of a specific patient under my care    |
+| `* * *`  | user    | delete a patient contact                                | get rid of patient details                               |
+| `* * *`  | user    | add a session log                                       | record the session details with a specific patient       |
+| `* * *`  | user    | delete session log                                      | remove unwanted session log                              |
+| `* * *`  | user    | store data locally                                      | keep patient data private                                |
+| `* *`    | user    | get a manual all the available commands (-help command) | learn all the possible commands to fully utilize the app |
+| `* *`    | user    | clear the list of patients                              | start from an empty patient list                         |
+| `* *`    | user    | edit session log/ patient information                   | change incorrect or out of date information              |
+| `* *`    | user    | confirm a command                                       | verify if I really want to do an action                  |
+| `* *`    | user    | cancel a command                                        | reverse an action that I did not intend to do            |
+| `* *`    | user    | be able to classify my patient as discharged/new        | cross reference their progress                           |
+| `* *`    | user    | group session based on patient                          | see each session with a specific patient                 |
+| `* *`    | user    | delete logs related to a patient                        | remove specific patient session log efficiently          |
+| `* *`    | user    | log time, date of sessions                              | to keep track of progress and frequency of patient       |
+| `*`      | user    | search/filter for specific patient using keyword        | quickly find relevant details of patient                 |
 
 
 ### Use cases
@@ -494,13 +494,17 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 1`<br>
       Expected: System displays a confirmation message asking if the user is sure. On confirmation, the person is deleted. 
 
+   1. Test case: `delete i/S1234567D`<br>
+      Expected: System displays a confirmation message asking if the user is sure upon checking if the person is in the system. On confirmation, the person is deleted.
+   
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+   
+   2. Other incorrect delete commands to try: `delete i/S1234567A` (NRIC is invalid due to invalid checkstyle)
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 ### Saving data
 
