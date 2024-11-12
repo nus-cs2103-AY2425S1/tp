@@ -742,7 +742,6 @@ main window for a cleaner user interface. To view more detailed information abou
 command followed by the student's ID. This will provide you with all the additional details you need.<br><br>
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 # Upcoming Features
 As part of our ongoing efforts to enhance the functionality of the student management system, we are excited to 
@@ -768,7 +767,6 @@ users to manage student interactions effectively<br><br>
 These planned features are designed to improve the administrative capabilities of our student management system, allowing for more efficient subject management. We welcome your feedback and suggestions as we work towards implementing these enhancements!
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 # Glossary
 1. **Command**: An instruction given by a user to a computer program.
