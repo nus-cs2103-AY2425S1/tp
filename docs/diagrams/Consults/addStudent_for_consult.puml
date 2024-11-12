@@ -1,0 +1,38 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+title addStudent Method Sequence Diagram
+
+box Logic
+participant ":AddToConsultCommand" as client LOGIC_COLOR
+end box
+
+box Model
+participant ":Consultation" as consultation MODEL_COLOR
+end box
+
+
+
+client -> consultation : addStudent(student)
+activate consultation
+
+    consultation -> consultation : hasStudent(student)
+    activate consultation
+
+    consultation -> consultation :
+    deactivate consultation
+
+alt student already in consult
+
+    consultation -> client : nothing is added, exception thrown
+
+else student not in consult
+
+    consultation -> client : student added to consult successfully
+
+end alt
+
+deactivate consultation
+
+@enduml

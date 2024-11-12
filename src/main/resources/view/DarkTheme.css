@@ -24,13 +24,57 @@
     -fx-opacity: 1;
 }
 
+.label-list {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #F0F0F0;
+    -fx-letter-spacing: 1.5px;
+    -fx-opacity: 1;
+    -fx-background-color: #4D4D4D;
+    -fx-background-radius: 10;
+    -fx-border-color: #888888;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 2);
+    -fx-alignment: center;
+}
+
+.label-list:hover {
+    -fx-background-color: #5a5a5a;
+}
+
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
 }
 
+.tab {
+    -fx-padding: 5 15;
+        -fx-background-color: #ffffff;
+        -fx-border-color: #555;
+        -fx-border-radius: 8;
+        -fx-background-radius: 8;
+        -fx-font-weight: bold;
+        -fx-text-fill: #bcbcbc;
+        -fx-effect: dropshadow( gaussian , rgba(0, 0, 0, 0.75) , 10, 0.5 , 0 , 0 );
+}
+
+.tab:hover {
+    -fx-background-color: #5a5a5a;
+}
+
+.tab:selected {
+    -fx-background-color: #4a90e2;  /* Active tab background */
+    -fx-text-fill: white;  /* Active tab text color */
+}
+
 .tab-pane {
     -fx-padding: 0 0 0 1;
+    -fx-background-color: #333;
+}
+
+.tab-header-background {
+    -fx-background-color: #333;  /* Background for the area where the tabs sit */
 }
 
 .tab-pane .tab-header-area {
@@ -140,6 +184,8 @@
      -fx-background-color: derive(#1d1d1d, 20%);
      -fx-border-color: derive(#1d1d1d, 10%);
      -fx-border-top-width: 1px;
+     -fx-border-width: 2;
+     -fx-border-radius: 4;
 }
 
 .status-bar {
@@ -328,7 +374,7 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #studentListPanel, #studentWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
@@ -349,4 +395,60 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#courses {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#courses .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 4);
+}
+
+#students {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#students .label {
+    -fx-text-fill: white;
+    -fx-background-color: #c07c08;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 4);
+}
+
+#cardPane.consultation-card-past-even, #cardPane.lesson-card-past-even {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #B03434, #7D1515);
+}
+
+#cardPane.consultation-card-past-odd, #cardPane.lesson-card-past-odd {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #6B0808, #8D1C1C);
+}
+
+.consultation-card-strikethrough .text, .lesson-card-strikethrough .text {
+    -fx-strikethrough: true;
+}
+
+#students .label.lesson-card-has-attendance {
+    -fx-background-color: #118135;
+}
+
+#students .label.lesson-card-no-attendance {
+    -fx-background-color: #CF4748;
+}
+
+#students .label.participation-score {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-padding: 2 4;
 }

@@ -12,13 +12,23 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
+Class UniqueStudentList
+Class Student
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Course
+
+Class UniqueConsultList
+Class Consultation
+Class Date
+Class Time
+
+Class UniqueLessonList
+Class Lesson
+Class StudentLessonInfo
+Class Attendance
+Class Participation
 
 Class I #FFFFFF
 }
@@ -35,20 +45,35 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+AddressBook *--> "1" UniqueStudentList
+UniqueStudentList --> "~* all" Student
+Student *--> Name
+Student *--> Phone
+Student *--> Email
+Student *--> "0..*" Course
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+AddressBook *--> "1" UniqueConsultList
+UniqueConsultList --> "~* all" Consultation
+Consultation *--> Date
+Consultation *--> Time
+Consultation -down--> "0..*" Student
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+AddressBook *--> "1" UniqueLessonList
+UniqueLessonList --> "~* all" Lesson
+Lesson *--> Date
+Lesson *--> Time
+Lesson -down--> "0..*" StudentLessonInfo
 
-ModelManager --> "~* filtered" Person
+StudentLessonInfo -left-> "1" Student
+StudentLessonInfo -down-> Attendance
+StudentLessonInfo -down-> Participation
+
+Student -[hidden]up--> I
+UniqueStudentList -[hidden]right-> I
+UniqueConsultList -[hidden]left-> I
+UniqueLessonList -[hidden]right-> I
+
+ModelManager -right--> "~* filtered" Student
+ModelManager --> "~* filtered" Consultation
+ModelManager -right--> "~* filtered" Lesson
 @enduml

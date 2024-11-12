@@ -14,10 +14,38 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.consultation.AddConsultCommand;
+import seedu.address.logic.commands.consultation.AddToConsultCommand;
+import seedu.address.logic.commands.consultation.DeleteConsultCommand;
+import seedu.address.logic.commands.consultation.ExportConsultCommand;
+import seedu.address.logic.commands.consultation.ImportConsultCommand;
+import seedu.address.logic.commands.consultation.ListConsultsCommand;
+import seedu.address.logic.commands.consultation.RemoveFromConsultCommand;
+import seedu.address.logic.commands.lesson.AddLessonCommand;
+import seedu.address.logic.commands.lesson.AddToLessonCommand;
+import seedu.address.logic.commands.lesson.DeleteLessonCommand;
+import seedu.address.logic.commands.lesson.ListLessonsCommand;
+import seedu.address.logic.commands.lesson.MarkLessonAttendanceCommand;
+import seedu.address.logic.commands.lesson.MarkLessonParticipationCommand;
+import seedu.address.logic.commands.lesson.RemoveFromLessonCommand;
+import seedu.address.logic.parser.consultation.AddConsultCommandParser;
+import seedu.address.logic.parser.consultation.AddToConsultCommandParser;
+import seedu.address.logic.parser.consultation.DeleteConsultCommandParser;
+import seedu.address.logic.parser.consultation.ExportConsultCommandParser;
+import seedu.address.logic.parser.consultation.ImportConsultCommandParser;
+import seedu.address.logic.parser.consultation.RemoveFromConsultCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.lesson.AddLessonCommandParser;
+import seedu.address.logic.parser.lesson.AddToLessonCommandParser;
+import seedu.address.logic.parser.lesson.DeleteLessonCommandParser;
+import seedu.address.logic.parser.lesson.MarkLessonAttendanceCommandParser;
+import seedu.address.logic.parser.lesson.MarkLessonParticipationCommandParser;
+import seedu.address.logic.parser.lesson.RemoveFromLessonCommandParser;
 
 /**
  * Parses user input.
@@ -46,7 +74,8 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
+        // Note to developers: Change the log level in config.json to enable lower level
+        // (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
@@ -56,11 +85,23 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case AddConsultCommand.COMMAND_WORD:
+            return new AddConsultCommandParser().parse(arguments);
+
+        case RemoveFromConsultCommand.COMMAND_WORD:
+            return new RemoveFromConsultCommandParser().parse(arguments);
+
+        case AddToConsultCommand.COMMAND_WORD:
+            return new AddToConsultCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DeleteConsultCommand.COMMAND_WORD:
+            return new DeleteConsultCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -71,11 +112,47 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ListConsultsCommand.COMMAND_WORD:
+            return new ListConsultsCommand();
+
+        case ExportConsultCommand.COMMAND_WORD:
+            return new ExportConsultCommandParser().parse(arguments);
+
+        case ImportConsultCommand.COMMAND_WORD:
+            return new ImportConsultCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommandParser().parse(arguments);
+
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(arguments);
+
+        case AddLessonCommand.COMMAND_WORD:
+            return new AddLessonCommandParser().parse(arguments);
+
+        case DeleteLessonCommand.COMMAND_WORD:
+            return new DeleteLessonCommandParser().parse(arguments);
+
+        case ListLessonsCommand.COMMAND_WORD:
+            return new ListLessonsCommand();
+
+        case AddToLessonCommand.COMMAND_WORD:
+            return new AddToLessonCommandParser().parse(arguments);
+
+        case RemoveFromLessonCommand.COMMAND_WORD:
+            return new RemoveFromLessonCommandParser().parse(arguments);
+
+        case MarkLessonAttendanceCommand.COMMAND_WORD:
+            return new MarkLessonAttendanceCommandParser().parse(arguments);
+
+        case MarkLessonParticipationCommand.COMMAND_WORD:
+            return new MarkLessonParticipationCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
