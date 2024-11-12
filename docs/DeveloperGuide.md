@@ -469,7 +469,7 @@ testers are expected to do more *exploratory* testing.
 
 
 
-### Deleting a Student
+### Deleting a student
 
 1. Deleting a student while all students are being shown
 
@@ -484,10 +484,10 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `deletes`, `deletes x/`, `...` (where x is any invalid prefix)<br>
        Expected: Similar to previous case.
 
-### Marking Attendance for a Tutorial Group
-1. Marking Attendance for a mostly-present Tutorial Group (2 - 3 Students absent)
+### Marking attendance for a tutorial group
+1. Marking attendance for a mostly-present tutorial group (2 - 3 Students absent)
 
-   1. Prerequisites: The `Tutorial Group` `T01` is added to a class' worth of students. The Students `John Doe` and `Jane Doe` are in the tutorial group. 
+   1. Prerequisites: The tutorial group `T01` is added to a class worth of students. The students `John Doe` and `Jane Doe` are in the tutorial group. 
    
    2. Test case: `markpresentall tg/T01 dt/2025-01-20` &rarr; `markat n/John Doe dt/2025-01-20 pr/a` &rarr;  `markat n/Jane Doe dt/2025-01-20 pr/a` &rarr; `getattg tg/T01` <br>
     Expected: On the date column `Jan 20 2025`, all students in the tutorial group `T01` are marked `present`, except for `John Doe` and `Jane Doe` who are marked `absent`. The status message shows the name of the last `Tutorial Group`'s attendances that were shown.
