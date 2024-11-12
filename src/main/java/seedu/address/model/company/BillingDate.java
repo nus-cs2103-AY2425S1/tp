@@ -11,7 +11,7 @@ public class BillingDate {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Billing date should only be a number between 1 and 28";
-
+    public static final String VALIDATION_REGEX = "^\\d{1,2}$";
     public final String date;
 
     /**
@@ -35,7 +35,7 @@ public class BillingDate {
         requireNonNull(test);
         try {
             int intTest = Integer.parseInt(test);
-            return ((intTest >= 1) && (intTest <= 28));
+            return test.matches(VALIDATION_REGEX) && ((intTest >= 1) && (intTest <= 28));
         } catch (NumberFormatException e) {
             return false;
         }

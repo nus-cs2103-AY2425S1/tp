@@ -53,9 +53,12 @@ faster than traditional GUI apps.
   e.g. in `add contact n/NAME`, `NAME` is a parameter which can be used as `add contact n/John Doe`.
 
 * Commands, not including their parameters, are case-insensitive.<br>
-  e.g. if the command specifies `adD CONTact`, it will be interpreted as `add contact`. 
+  e.g. if the command specifies `adD CONTact ...`, it will be interpreted as `add contact ...`. 
+ 
+* `lower_case` items in square brackets are mandatory keyword, separated by slashes. <br>
+  e.g. `add [contact/job/company]` can be used as  `add contact n/...` or as `add job n/...`, but not `add n/...`.
 
-* Items in square brackets are optional.<br>
+* `UPPER_CASE` items in square brackets are optional parameters.<br>
   e.g. `n/NAME [s/SKILL]` can be used as `n/John Doe s/Python` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
@@ -70,14 +73,14 @@ faster than traditional GUI apps.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+## Contact Management
+Contacts represent candidates applying for job positions. Each contact can have details such as name, phone, email, and relevant skills, aiding in recruitment processes.
 
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
+* Add Contact: `add contact n/NAME p/PHONE e/EMAIL r/ROLE [s/SKILL]…​`
+* Edit Contact: `edit contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SKILL]…​`
+* Find Contact: `find contact KEYWORD [MORE_KEYWORDS]`
+* List Contacts: `list contact`
+* Delete Contact: `delete contact INDEX`
 
 ### Adding a contact : `add contact`
 
@@ -85,8 +88,8 @@ Adds a contact to the address book.
 
 Format: `add contact n/NAME p/PHONE e/EMAIL r/ROLE [s/SKILL]…​`
 
-* A contact's role represents the job that they are applying for, 
-and is used when screening contacts with a certain job.
+* A contact's role represents the job that they are applying for,
+  and is used when screening contacts with a certain job.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A contact can have any number of skills (including 0)
@@ -96,76 +99,7 @@ Examples:
 * `add contact n/John Doe p/98765432 e/johnd@example.com r/Software Engineer`
 * `add contact n/Betsy Crowe s/Python e/betsycrowe@example.com r/Data Scientist p/1234567 s/Excel`
 
-### Adding a job : `add job`
-
-Adds a job to the address book. 
-The company attributed to the job being added must already 
-be in the address book.
-
-Format: `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
-
-Examples:
-* `add job n/Software Engineer c/Google s/100000 d/Looking for an exceptional individual`
-* `add job n/Data Scientist c/Apple s/90000 d/Needs to know AI r/Python`
-
-### Adding a company : `add company`
-
-Adds a company to the address book.
-
-Format: `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE`
-
-* The name of the company is case-insensitive when used to identify duplicates 
-and to associate jobs to companies.
-* The billing date is a number from 1 to 28 that signifies the day of the month
-(with reference to the start of the month) that a company will pay their
-employees' salaries.
-* Future enhancement: accommodate for more billing date formats (reference from end of the month).
-
-Examples:
-* `add company n/Google a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 b/5 p/65218000`
-* `add company n/Apple a/12 Ang Mo Kio Street 64, Singapore 569088 b/25 p/64815511`
-
-### Listing all contacts : `list contact`
-
-Shows all contacts in the address book in the contact list.
-
-Format: `list contact`
-
-<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
-If all contacts are already displayed, nothing will appear to be changed. 
-</div>
-
-### Listing all jobs : `list job`
-
-Shows all jobs in the address book in the job list.
-
-Format: `list job`
-
-<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
-If all jobs are already displayed, nothing will appear to be changed. 
-</div>
-
-### Listing all companies : `list company`
-
-Shows all companies in the address book in the company list.
-
-Format: `list company`
-
-<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
-If all companies are already displayed, nothing will appear to be changed. 
-</div>
-
-### Listing all entities : `list all`
-
-Show all contact, jobs and companies in the address book.
-
-Format: `list all`
-
-<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
-If all contacts, jobs and companies are already displayed, nothing will appear to be changed. 
-</div>
-
-### Editing a contact : `edit`
+### Editing a contact : `edit contact`
 
 Edits an existing contact in the address book.
 
@@ -176,13 +110,13 @@ Format: `edit contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SKILL]…​`
 * Existing values will be updated to the input values.
 * When editing skills, the existing skills of the contact will be removed i.e. adding of skills is not cumulative.
 * You can remove all the contact’s skills by typing `s/` without
-    specifying any skills after it.
+  specifying any skills after it.
 
 Examples:
 *  `edit contact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 *  `edit contact 2 n/Betsy Crower s/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing skills.
 
-### Locating contacts by name : `find`
+### Locating contacts by name : `find contact`
 
 Finds all contacts whose names contain any of the given keywords.
 
@@ -200,6 +134,16 @@ Examples:
 * `find contact alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Listing all contacts : `list contact`
+
+Shows all contacts in the address book in the contact list.
+
+Format: `list contact`
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
+If all contacts are already displayed, nothing will appear to be changed. 
+</div>
+
 ### Deleting a contact : `delete contact`
 
 Deletes the specified contact from the address book.
@@ -214,21 +158,63 @@ Examples:
 * `list contact` followed by `delete contact 2` deletes the 2nd contact in the address book.
 * `find contact Betsy` followed by `delete contact 1` deletes the 1st contact in the results of the `find` command.
 
-### Deleting a job : `delete job`
 
-Deletes the specified job from the address book.
+## Company Management 
+Companies are organizations that provide job positions. Each company can have attributes such as address, billing date, and contact details, facilitating job creation and matching.
 
-Format: `delete job INDEX`
+* Add Company: `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE`
+* View Company: `view company INDEX`
+* List Companies: `list company`
+* Delete Company: `delete company INDEX`
 
-* Deletes the job at the specified `INDEX`.
-* The index refers to the index number shown in the displayed job list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* Deleting a job already matched with a contact removes the match from the contact as well.
+### Adding a company : `add company`
+
+Adds a company to the address book.
+
+Format: `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE`
+
+* The name of the company is case-insensitive when used to identify duplicates
+  and to associate jobs to companies.
+* The billing date is a number from 1 to 28 that signifies the day of the month
+  (with reference to the start of the month) that a company will pay their
+  employees' salaries.
+* Future enhancement: accommodate for more billing date formats (reference from end of the month).
 
 Examples:
-* `list job` followed by `delete job 2` deletes the 2nd job in the address book.
-* If the job at index 2 is matched with contact at index 1, `delete job 2` will remove the 
-match from the contact at index 1.
+* `add company n/Google a/70 Pasir Panjang Rd, #03-71 Mapletree Business City II, Singapore 117371 b/5 p/65218000`
+* `add company n/Apple a/12 Ang Mo Kio Street 64, Singapore 569088 b/25 p/64815511`
+
+### Viewing a company's details : `view company`
+
+Views all jobs and contacts currently associated with the specified company, as well as information about the company.
+
+![ViewCompanyImage](images/ViewCompanyImage.png)
+
+Format: `view company INDEX`
+
+* Views the information of a company at the specified `INDEX`.
+* Views all contacts and jobs associated with a company at the specified `INDEX`.
+* The index refers to the index number shown in the displayed company list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Note: It is not necessary to display all contacts and jobs before using this command; the command will work regardless of whether lists are fully shown.
+
+Examples:
+* If a job is from a company at index 1, `view company 1` will show the job
+  in the job list.
+* If a job is from a company at index 2 and the job is matched with a contact,
+  `view company 2` will show the job in the job list
+  and the contact in the contact list.
+
+### Listing all companies : `list company`
+
+Shows all companies in the address book in the company list.
+
+Format: `list company`
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
+If all companies are already displayed, nothing will appear to be changed. 
+</div>
+
 
 ### Deleting a company : `delete company`
 
@@ -245,25 +231,77 @@ Examples:
 * `list company` followed by `delete company 2` deletes the 2nd company in the address book.
 * If the company at index 1 has a job attributed to it, `delete company 1` will also delete the job.
 
-### Screening contacts by a job's name : `screen job`
+## Job Management
+Jobs are positions offered by companies that contacts can apply for. Jobs contain details like monthly salary, description, and requirements, enabling precise candidate matching.
 
-Screens the list of contacts in the address book with the name of the
-job specified.
+* Add Job: `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
+* List Jobs: `list job`
+* Delete Job: `delete job INDEX`
+* Screen Contacts by Job: `screen job INDEX`
+* Match Contact to Job: `match CONTACT_INDEX JOB_INDEX`
+* Unmatch Contact from Job: `unmatch CONTACT_INDEX JOB_INDEX`
+
+### Adding a job : `add job`
+
+Adds a job to the address book.
+
+Format: `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
+
+* `COMPANY` must match the name of an existing company in the address book, ignoring case sensitivity.
+* Multiple openings for the same job position at a company can be represented using a single job, hence duplicates are not allowed.
+* A job with the same `NAME` and `COMPANY` as an existing job is considered a duplicate and cannot be added.
+* It is acceptable for a job to have the same `NAME` if it has a different `COMPANY` and vice versa.
+
+Examples:
+* `add job n/Software Engineer c/Google s/100000 d/Looking for an exceptional individual`
+* `add job n/Data Scientist c/Apple s/90000 d/Needs to know AI r/Python`
+
+### Listing all jobs : `list job`
+
+Shows all jobs in the address book in the job list.
+
+Format: `list job`
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
+If all jobs are already displayed, nothing will appear to be changed. 
+</div>
+
+
+### Deleting a job : `delete job`
+
+Deletes the specified job from the address book.
+
+Format: `delete job INDEX`
+
+* Deletes the job at the specified `INDEX`.
+* The index refers to the index number shown in the displayed job list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Deleting a job already matched with a contact removes the match from the contact as well.
+
+Examples:
+* `list job` followed by `delete job 2` deletes the 2nd job in the address book.
+* If the job at index 2 is matched with contact at index 1, `delete job 2` will remove the
+  match from the contact at index 1.
+
+### Screening contacts by a job : `screen job`
+
+Screens the list of contacts in the address book with the job specified.
 
 Format: `screen job INDEX`
 
-* Uses the name of the job at the specified `INDEX` to filter the 
-list of contacts to contacts with role matching the name.
-* Contacts that are already matched will not be shown. 
+* Uses the name of the job at the specified `INDEX` to filter the
+  list of contacts to contacts with role matching the name.
+* Contacts that are already matched will not be shown.
+* This allows the user to narrow down a list of contacts that are currently eligible or fit the job.
 * The index refers to the index number shown in the displayed job list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The filter is case-insensitive i.e. `Cleaner` will match `cleaner`.
+* The filter is case-insensitive and can be partial. e.g. Role `software engineer` will match to job name `Junior Java Software Engineer, Depart...`
 
 Examples:
 * If the job at index 1 has name `Software Engineer`, `screen job 1` will
-show a contact with role `Software Engineer`.
-* If the job at index 2 has name `Data Scientist`, `screen job 2` will 
-show a contact with role `data scientist`.
+  show a contact with role `Software Engineer`.
+* If the job at index 2 has name `Data Scientist`, `screen job 2` will
+  show a contact with role `data scientist`.
 
 ### Matching a contact with a job : `match`
 
@@ -272,15 +310,19 @@ Matches a contact to a job.
 Format: `match CONTACT_INDEX JOB_INDEX`
 
 * Matches the contact at the specified `CONTACT_INDEX` and the job
-at the specified `JOB_INDEX` together.
+  at the specified `JOB_INDEX` together.
 * The contact index refers to the index number shown in the displayed contact list.
 * The job index refers to the index number shown in the displayed job list.
 * Both indices **must be positive integers** 1, 2, 3, …​
 * The contact **must not already be matched**.
+* Each contact is only allowed to match with one job.
+* A job is allowed to be matched by multiple contacts, as some jobs have multiple openings.
 
 Examples:
 * `match 1 2` will match the contact at index 1 and job at index 2 together.
 * `match 2 3` will match the contact at index 2 and job at index 3 together.
+
+
 
 ### Undoing a matched contact and job : `unmatch`
 
@@ -289,7 +331,7 @@ Undoes a matching between a contact and job.
 Format: `unmatch CONTACT_INDEX JOB_INDEX`
 
 * Undoes the matching of a contact at the specified `CONTACT_INDEX` and a job
-at the specified `JOB_INDEX`.
+  at the specified `JOB_INDEX`.
 * The contact index refers to the index number shown in the displayed contact list.
 * The job index refers to the index number shown in the displayed job list.
 * Both indices **must be positive integers** 1, 2, 3, …​
@@ -297,35 +339,33 @@ at the specified `JOB_INDEX`.
 
 Examples:
 * `unmatch 2 2` will undo the matching between the contact at index 2 and
-the job at index 2 if they were matched beforehand.
+  the job at index 2 if they were matched beforehand.
 * If `match 1 2` was called previously, calling `unmatch 1 2` will undo the matching
-if the shown list was in the same condition as when the previous command was called.
+  if the shown list was in the same condition as when the previous command was called.
 
-### Viewing a company's details : `view company`
+## Other Commands
+Additional commands offer general functionality to manage and analyze data across TalentConnect, including clearing data, generating statistics, and accessing help.
 
-Views all jobs and contacts currently associated with the specified company, as well as information about the company. 
+* List All Entities: `list all`
+* View Statistics: `stats`
+* Clear Data: `clear`
+* Exit Application: `exit`
+* Help: `help`
 
-![ViewCompanyImage](images/ViewCompanyImage.png)
+### Listing all entities : `list all`
 
-Format: `view company INDEX`
+Show all contact, jobs and companies in the address book.
 
-* Views the information of a company at the specified `INDEX`.
-* Views all contacts and jobs associated with a company at the specified `INDEX`.
-* The index refers to the index number shown in the displayed company list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* Note: It is not necessary to display all contacts and jobs before using this command; the command will work regardless of whether lists are fully shown.
+Format: `list all`
 
-Examples:
-* If a job is from a company at index 1, `view company 1` will show the job
-in the job list.
-* If a job is from a company at index 2 and the job is matched with a contact,
-`view company 2` will show the job in the job list 
-and the contact in the contact list.
+<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
+If all contacts, jobs and companies are already displayed, nothing will appear to be changed. 
+</div>
 
 ### Viewing statistics : `stats`
 
-Shows a summary of the data, including the total number of contacts, jobs, and companies in the address book. 
-Additionally, it provides a breakdown of matched and unmatched contacts, offering insights 
+Shows a summary of the data, including the total number of contacts, jobs, and companies in the address book.
+Additionally, it provides a breakdown of matched and unmatched contacts, offering insights
 into recruitment activity and data utilization.
 
 Format: `stats`
@@ -341,6 +381,16 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
+## Miscellaneous
 
 ### Saving the data
 
