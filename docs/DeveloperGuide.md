@@ -593,3 +593,6 @@ Team size: 5
 9. **Make event-add and add-all error message more specific and less misleading**: Currently, when "event-add" command or "add-all" command in search mode is called to add multiple contacts to an event at the same time, if one of the contacts to be added to event does not have the role that he or she is being added to,
    PlanPal shows an error message informing the user of the contact that does not have the role. However, some of the contacts may get added to the event. We plan to make the
    error message include which contacts got added to the event so that users know that certain contacts got added and which contacts did not get added to the event.
+10. **Implement more graceful handling of invalid JSON data** : Currently, manual editing of JSON data is allowed. However, if invalid data is entered, the event list or address list could be completely cleared or the app
+may fail unexpectedly. We plan to implement more graceful handling of invalid JSON data so that invalid data entries can be ignored, allowing for operation with the remaining valid data.
+
