@@ -35,10 +35,6 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new AddStudentCommand object
  */
 public class AddStudentCommandParser implements Parser<AddStudentCommand> {
-
-    private static final String CLASS_NAME_VALIDATION_REGEX = "[A-Za-z0-9]+";
-    private static final String MESSAGE_INVALID_CLASS = "Classes should be valid!";
-
     /**
      * Parses the given {@code String} of arguments in the context of the AddStudentCommand
      * and returns an AddStudentCommand object for execution.

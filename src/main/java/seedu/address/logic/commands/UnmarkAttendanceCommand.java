@@ -49,6 +49,7 @@ public class UnmarkAttendanceCommand extends Command {
         requireNonNull(targetIndex);
         this.targetIndexArray = new Index[] { targetIndex };
     }
+
     @Override
     public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
