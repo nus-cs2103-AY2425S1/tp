@@ -209,6 +209,8 @@ This section provides a quick overview of the available commands for managing st
 | **Get Help**        | `help`                                                                                    |                                                                                             |
 | **Exit**            | `exit`                                                                                    |                                                                                             |
 
+<div style="page-break-after: always;"></div>
+
 ## Command Parameters Reference
 In this section, you'll find detailed information about the parameters for each command. Each command is broken down into its constituent parameters, including their prefixes, descriptions, and constraints. This reference will guide you in ensuring that your inputs are valid and conform to the required formats.
 
@@ -235,6 +237,8 @@ In this section, you'll find detailed information about the parameters for each 
 | **Exit**                | -                 | -                                                  | No parameters required.                                                                                                                        | -                                                                                                                                                               |
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 # Features
 
