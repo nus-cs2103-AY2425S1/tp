@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a Person (Patient/Doctor) "
             + "based on id provided.\n"
             + COMMAND_WORD + " "
-            + PREFIX_ID + "PATIENT_ID \n"
+            + PREFIX_ID + "ID \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "1234";
 
