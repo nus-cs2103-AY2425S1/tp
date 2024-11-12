@@ -937,7 +937,7 @@ testers are expected to do more *exploratory* testing.
    | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
        |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
    | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
-   | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
+   | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Deleted emergency contact: [PERSON DETAILS]      |
    | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
    | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
    | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
@@ -956,7 +956,7 @@ testers are expected to do more *exploratory* testing.
    | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
        |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
    | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
-   | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
+   | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Deleted emergency contact: [PERSON DETAILS]      |
    | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
    | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
    | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
@@ -993,12 +993,21 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
-Developing MedConnect as a brownfield project from the upgrading of AB3 was challenging for us as a team of relatively junior software engineers who did not have much experience in a software engineering project. For some of our team members, the only prior software engineering experience we had was our Orbital project.
+Developing MedConnect as a brownfield project from the upgrading of AB3 was challenging for us as a team of relatively junior software engineers who did not have much experience in a software engineering project.
+For some of our team members, the only prior software engineering experience we had was our Orbital project.
 
-Initially, we faced many challenges in managing the Git workflow of creating issues, creating branches, merging branches and pull requests. This was because the process was new to most of the group and we carefully took the time to learn the proper workflow and avoid merge conflicts.
+Initially, we faced many challenges in managing the Git workflow of creating issues, creating branches, merging branches and pull requests.
+This was because the process was new to most of the group and we carefully took the time to learn the proper workflow and avoid merge conflicts.
 
-Another challenge we faced was implementing the autocomplete feature. Since MedConnect was directed to be used by fast typists, we brainstormed the idea of having an autocomplete feature to greatly benefit them. However, this idea was quite foreign to all of us and we took a great deal of time in figuring out how to tackle this problem. In due time, we managed to figure out a solution as a team and it is now implemented in the current version of MedConnect.
+Another challenge we faced was implementing the autocomplete feature. Since MedConnect was directed to be used by fast typists, we brainstormed the idea of having an autocomplete feature to greatly benefit them.
+However, this idea was quite foreign to all of us and we took a great deal of time in figuring out how to tackle this problem.
+In due time, we managed to figure out a solution as a team and it is now implemented in the current version of MedConnect.
 
-Finally, for the undo and redo feature, we adapted the proposed implementation provided in the developer guide of AB3. This greatly reduced the effort required for these features as there are many ways to implement them. A more complex solution would be for each command to have its own respective undo and redo implementation. However, we followed the proposed implementation of saving the AddressBook in states and having a pointer that points to the current state. The pointer would move between states upon execution of the undo and redo commands.
+Finally, for the undo and redo feature, we adapted the proposed implementation provided in the developer guide of AB3.
+This greatly reduced the effort required for these features as there are many ways to implement them.
+A more complex solution would be for each command to have its own respective undo and redo implementation.
+However, we followed the proposed implementation of saving the AddressBook in states and having a pointer that points to the current state.
+The pointer would move between states upon execution of the undo and redo commands.
 
-Overall, we faced many challenges as a team that we had to overcome over a short runway. We managed to stay afloat and tackle these challenges through constant communication and good teamwork between team members, helping each other out swiftly and decisively.
+Overall, we faced many challenges as a team that we had to overcome over a short runway.
+We managed to stay afloat and tackle these challenges through constant communication and good teamwork between team members, helping each other out swiftly and decisively.
