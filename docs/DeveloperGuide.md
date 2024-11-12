@@ -1039,8 +1039,8 @@ DorManagerPro could not access the file at FILE_PATH. This could be because the 
 
 6. **Consistent behavior for `find`.** Currently, `find` has some inconsistent behaviour depending on the field that it is being searched by, making it counterintuitive for users. The problems are as following: <br>
 The name search is case-insensitive, but tag search is not. We plan to modify `find t/` tag search to make it case-insensitive. <br>
-In the name search any contacts matching at least any one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. But phone number search requires the number to be exactly same with country code and region code. <br>
-We plan to make the phone search versatile and let user be able to use phone number without country code, or even only with country code to search<br>
+Searching by name filters contacts that match at least one keyword (i.e. `OR` search). E.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`. However, searching by phone number only filters contacts that match exactly to the optional country code, optional area code, and compulsory number. E.g. `98765432` will not return `+65 98765432`.<br>
+We plan to modify `find p/` to allow searching by country code or area code only, and compulsory number only, so as to make this more versatile for users. <br>
 
 ## **Appendix: Effort**
 
