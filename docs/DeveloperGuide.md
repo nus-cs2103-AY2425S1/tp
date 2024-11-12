@@ -488,8 +488,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 1a. The given parameters are invalid.
+* 1a. A provided flag is invalid.
     * 1a1. AgentAssist shows an invalid parameter error message.
+
+      Use case resumes at step 1.
+* 1b. A provided value is invalid.
+    * 1b1. AgentAssist shows the error pertaining to the invalid field.
 
       Use case resumes at step 1.
 
@@ -505,12 +509,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 
-* 1a. The given filter option is invalid.
+* 1a. A provided flag is invalid.
     * 1a1. AgentAssist shows an invalid parameter error message.
 
       Use case resumes at step 1.
-* 1b. No clients in the existing data pass the filter.
-    * 1b1. AgentAssist shows a blank list.
+* 1b. A provided value is invalid.
+    * 1b1. AgentAssist shows the error pertaining to the invalid field.
+
+      Use case resumes at step 1.
+  
+* 1c. No clients in the existing data pass the filter.
+    * 1c1. AgentAssist shows a blank list.
 
       Use case ends.
 
@@ -533,12 +542,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 3.
 
-* 3b. The given edit option is invalid.
+* 3b. A provided flag is invalid.
   * 3b1. AgentAssist shows an invalid parameter error message.
 
     Use case resumes at step 3.
-* 3c. Provided values are invalid.
-  * 3c1. AgentAssist shows the errors pertaining to the fields.
+* 3c. A provide value is invalid.
+  * 3c1. AgentAssist shows the error pertaining to the invalid field.
 
     Use case resumes at step 3.
 
