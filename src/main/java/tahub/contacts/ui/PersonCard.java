@@ -60,16 +60,6 @@ public class PersonCard extends UiPart<Region> {
         this.logic = logic;
         attendanceWindow = new AttendanceWindow(person, logic);
         updateCardContent(displayedIndex);
-
-        // Get all courses the student is enrolled in
-        ObservableList<StudentCourseAssociation> scaList = logic.getStudentScas(person)
-                .getByMatric(person.getMatricNumber().value);
-        // Add course codes as tags
-        for (StudentCourseAssociation sca : scaList) {
-            Label courseLabel = new Label(sca.getCourse().courseCode.toString());
-            courseLabel.getStyleClass().add("course-tag");
-            tags.getChildren().add(courseLabel);
-        }
     }
 
     /**
