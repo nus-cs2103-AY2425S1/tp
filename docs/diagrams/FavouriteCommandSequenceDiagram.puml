@@ -36,6 +36,9 @@ create FavouriteCommand
 FavouriteCommandParser -> FavouriteCommand
 activate FavouriteCommand
 
+FavouriteCommand --> FavouriteCommandParser
+deactivate FavouriteCommand
+
 FavouriteCommandParser --> AddressBookParser : f
 deactivate FavouriteCommandParser
 
@@ -46,6 +49,7 @@ AddressBookParser --> LogicManager
 deactivate AddressBookParser
 
 LogicManager -> FavouriteCommand : execute()
+activate FavouriteCommand
 
 create Person
 FavouriteCommand -> Person : new(other_fields_in_personToEdit, newTagSet_presence_of_FAVOURITE_TAG_toggled)
