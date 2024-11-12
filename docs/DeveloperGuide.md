@@ -193,6 +193,19 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+## Add Grade implementation
+
+**Logic**: 
+1. `AddGradeCommand.java`
+2. `AddGradeCommandParser.java`
+
+The `addGrade` command is used by KonTActs to add an assignment and grade to a contact.
+The added assignments and grades uses `HashMap` to store the assignments and grades in each person object.
+
+This is illustrated in the activity diagram below:
+
+<puml src="diagrams/AddGradeImpl.puml" width="450" />
+
 ---
 
 {{ newPage }}
