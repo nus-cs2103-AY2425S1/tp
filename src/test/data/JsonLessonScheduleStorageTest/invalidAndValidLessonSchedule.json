@@ -1,0 +1,16 @@
+{
+  "lessons": [
+    {
+      "student": "Alice Pauline",
+      "locationIndex": "1",
+      "startDateTime": "15-10-2024 23:47",
+      "endDateTime": "16-10-2024 00:47"
+    },
+    {
+      "student": "Invalid",
+      "locationIndex": "0",
+      "startDateTime": "15-10-2024 23:47",
+      "endDateTime": "16-10-2024 00:47"
+    }
+  ]
+}

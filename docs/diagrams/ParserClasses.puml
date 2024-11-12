@@ -5,12 +5,16 @@ skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
 Class "{abstract}\nCommand" as Command
-Class XYZCommand
+Class XYZContactCommand
+Class XYZLessonCommand
 
 package "Parser classes"{
 Class "<<interface>>\nParser" as Parser
-Class AddressBookParser
-Class XYZCommandParser
+Class TutorEaseParser
+Class ContactCommandParser
+Class LessonCommandParser
+Class XYZContactCommandParser
+Class XYZLessonCommandParser
 Class CliSyntax
 Class ParserUtil
 Class ArgumentMultimap
@@ -19,20 +23,38 @@ Class Prefix
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> AddressBookParser
+HiddenOutside ..> TutorEaseParser
 
-AddressBookParser .down.> XYZCommandParser: <<create>>
+XYZContactCommand -up-|> Command
+XYZLessonCommand -up-|> Command
 
-XYZCommandParser ..> XYZCommand : <<create>>
-AddressBookParser ..> Command : <<use>>
-XYZCommandParser .up.|> Parser
-XYZCommandParser ..> ArgumentMultimap
-XYZCommandParser ..> ArgumentTokenizer
+TutorEaseParser .down.> ContactCommandParser
+TutorEaseParser .down.> LessonCommandParser
+ContactCommandParser .down.> XYZContactCommandParser
+LessonCommandParser .down.> XYZLessonCommandParser
+
+
+XYZContactCommandParser ..> XYZContactCommand
+XYZLessonCommandParser ..> XYZLessonCommand
+TutorEaseParser ..> Command
+
+ContactCommandParser .up.|> Parser
+LessonCommandParser .up.|> Parser
+XYZContactCommandParser .up.|> Parser
+XYZContactCommandParser ..> ArgumentMultimap
+XYZContactCommandParser ..> ArgumentTokenizer
+XYZLessonCommandParser .up.|> Parser
+XYZLessonCommandParser ..> ArgumentMultimap
+XYZLessonCommandParser ..> ArgumentTokenizer
+
 ArgumentTokenizer .left.> ArgumentMultimap
-XYZCommandParser ..> CliSyntax
+XYZContactCommandParser ..> CliSyntax
+XYZLessonCommandParser ..> CliSyntax
+
 CliSyntax ..> Prefix
-XYZCommandParser ..> ParserUtil
+XYZContactCommandParser ..> ParserUtil
+XYZLessonCommandParser ..> ParserUtil
+
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
-XYZCommand -up-|> Command
 @enduml
