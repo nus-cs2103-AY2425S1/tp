@@ -15,17 +15,24 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ProjectStatus;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "-651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_PROJECT_STATUS = "unknown";
+    private static final String INVALID_PAYMENT_STATUS = "unknown";
+    private static final String INVALID_CLIENT_STATUS = "referral";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +40,14 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_PROJECT_STATUS = "in progress";
+    // private static final String VALID_PROJECT_STATUS_2 = "completed";
+    private static final String VALID_PAYMENT_STATUS = "pending";
+    // private static final String VALID_PAYMENT_STATUS_2 = "paid";
+    private static final String VALID_CLIENT_STATUS = "active";
+    private static final String VALID_CLIENT_STATUS_2 = "unresponsive";
+    private static final String VALID_CLIENT_STATUS_3 = "potential";
+    private static final String VALID_CLIENT_STATUS_4 = "old";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -193,4 +208,124 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseProjectStatus_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseProjectStatus((String) null));
+    }
+
+    @Test
+    public void parseProjectStatus_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseProjectStatus(INVALID_PROJECT_STATUS));
+    }
+
+    @Test
+    public void parseProjectStatus_validValueWithoutWhitespace_returnsProjectStatus() throws Exception {
+        ProjectStatus expectedStatus = new ProjectStatus(VALID_PROJECT_STATUS);
+        assertEquals(expectedStatus, ParserUtil.parseProjectStatus(VALID_PROJECT_STATUS));
+    }
+
+    @Test
+    public void parseProjectStatus_validValueWithWhitespace_returnsTrimmedProjectStatus() throws Exception {
+        String statusWithWhitespace = WHITESPACE + VALID_PROJECT_STATUS + WHITESPACE;
+        ProjectStatus expectedStatus = new ProjectStatus(VALID_PROJECT_STATUS);
+        assertEquals(expectedStatus, ParserUtil.parseProjectStatus(statusWithWhitespace));
+    }
+
+    @Test
+    public void parsePaymentStatus_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePaymentStatus((String) null));
+    }
+
+    @Test
+    public void parsePaymentStatus_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePaymentStatus(INVALID_PAYMENT_STATUS));
+    }
+
+    @Test
+    public void parsePaymentStatus_validValueWithoutWhitespace_returnsProjectStatus() throws Exception {
+        PaymentStatus expectedStatus = new PaymentStatus(VALID_PAYMENT_STATUS);
+        assertEquals(expectedStatus, ParserUtil.parsePaymentStatus(VALID_PAYMENT_STATUS));
+    }
+
+    @Test
+    public void parsePaymentStatus_validValueWithWhitespace_returnsTrimmedProjectStatus() throws Exception {
+        String statusWithWhitespace = WHITESPACE + VALID_PAYMENT_STATUS + WHITESPACE;
+        PaymentStatus expectedStatus = new PaymentStatus(VALID_PAYMENT_STATUS);
+        assertEquals(expectedStatus, ParserUtil.parsePaymentStatus(statusWithWhitespace));
+    }
+
+    @Test
+    public void parseClientStatus_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseClientStatus((String) null));
+    }
+
+    @Test
+    public void parseClientStatus_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseClientStatus(INVALID_CLIENT_STATUS));
+    }
+
+    @Test
+    public void parseClientStatus_validValueWithoutWhitespace_returnsClientStatus() throws Exception {
+        ClientStatus expectedStatus = new ClientStatus(VALID_CLIENT_STATUS);
+        assertEquals(expectedStatus, ParserUtil.parseClientStatus(VALID_CLIENT_STATUS));
+    }
+
+    @Test
+    public void parseClientStatus_validValueWithWhitespace_returnsTrimmedClientStatus() throws Exception {
+        String statusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS_2 + WHITESPACE;
+        ClientStatus expectedStatus = new ClientStatus(VALID_CLIENT_STATUS_2);
+        assertEquals(expectedStatus, ParserUtil.parseClientStatus(statusWithWhitespace));
+
+        String activeStatusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS + WHITESPACE;
+        ClientStatus expectedActiveStatus = new ClientStatus(VALID_CLIENT_STATUS);
+        assertEquals(expectedActiveStatus, ParserUtil.parseClientStatus(activeStatusWithWhitespace));
+
+        String potentialStatusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS_3 + WHITESPACE;
+        ClientStatus expectedPotentialStatus = new ClientStatus(VALID_CLIENT_STATUS_3);
+        assertEquals(expectedPotentialStatus, ParserUtil.parseClientStatus(potentialStatusWithWhitespace));
+
+        String oldStatusWithWhitespace = WHITESPACE + VALID_CLIENT_STATUS_4 + WHITESPACE;
+        ClientStatus expectedOldStatus = new ClientStatus(VALID_CLIENT_STATUS_4);
+        assertEquals(expectedOldStatus, ParserUtil.parseClientStatus(oldStatusWithWhitespace));
+    }
+
+    @Test
+    public void parseDeadline_validValues_returnsDeadline() throws Exception {
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_EASY) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_DIFFERENT_DELIMITERS) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_SHORT_STRINGS) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_BORDER_VALUES) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+        for (String deadline : ParserUtilDateTest.VALID_DEADLINES_MIXED) {
+            Deadline expected = new Deadline(deadline);
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+    }
+
+    @Test
+    public void parseDeadline_validValuesWithWhitespace_returnsDeadline() throws Exception {
+        String[] deadlinesWithWhitespace = new String[] {
+            "  10-10-2024",
+            "10-10-2024  ",
+            " 10/10/2024 ",
+            "\t10|10|2024\n",
+        };
+        Deadline expected = new Deadline("10-10-2024");
+        for (String deadline : deadlinesWithWhitespace) {
+            assertEquals(expected, ParserUtil.parseDeadline(deadline));
+        }
+    }
+
 }

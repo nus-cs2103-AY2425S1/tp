@@ -19,13 +19,16 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private ArchivedAddressBookStorage archivedAddressBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          ArchivedAddressBookStorage archivedAddressBookStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.archivedAddressBookStorage = archivedAddressBookStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -75,4 +78,31 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ ArchivedAddressBook methods ==============================
+    @Override
+    public Path getArchivedAddressBookFilePath() {
+        return archivedAddressBookStorage.getArchivedAddressBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyAddressBook> readArchivedAddressBook() throws DataLoadingException {
+        return readAddressBook(archivedAddressBookStorage.getArchivedAddressBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyAddressBook> readArchivedAddressBook(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return archivedAddressBookStorage.readArchivedAddressBook(filePath);
+    }
+
+    @Override
+    public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        saveArchivedAddressBook(addressBook, archivedAddressBookStorage.getArchivedAddressBookFilePath());
+    }
+
+    @Override
+    public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        archivedAddressBookStorage.saveArchivedAddressBook(addressBook, filePath);
+    }
 }

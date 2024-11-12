@@ -49,7 +49,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
-
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -60,8 +59,13 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
+        logic.isUiArchived().addListener((observable, oldValue, newValue) -> {
+            refreshPersonListPanel(); // Refresh whenever archived view is toggled
+        });
+
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+        setWindowMinimumSize(logic.getGuiSettings());
 
         setAccelerators();
 
@@ -116,11 +120,20 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getReminderManager());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * Refresh person list panel for toggling between archived address book UI and main address book UI
+     */
+    public void refreshPersonListPanel() {
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     /**
@@ -133,6 +146,14 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Sets the minimum size based on {@code guiSettings}.
+     */
+    private void setWindowMinimumSize(GuiSettings guiSettings) {
+        primaryStage.setMinHeight(guiSettings.getWindowMinHeight());
+        primaryStage.setMinWidth(guiSettings.getWindowMinWidth());
     }
 
     /**

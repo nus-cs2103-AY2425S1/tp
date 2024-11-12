@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ArchiveCommand;
+import seedu.address.logic.commands.BlacklistCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -16,7 +18,11 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListArchiveCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.UnarchiveCommand;
+import seedu.address.logic.commands.WhitelistCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -71,11 +77,29 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case BlacklistCommand.COMMAND_WORD:
+            return new BlacklistCommandParser().parse(arguments);
+
+        case WhitelistCommand.COMMAND_WORD:
+            return new WhitelistCommandParser().parse(arguments);
+
+        case ArchiveCommand.COMMAND_WORD:
+            return new ArchiveCommandParser().parse(arguments);
+
+        case ListArchiveCommand.COMMAND_WORD:
+            return new ListArchiveCommand();
+
+        case UnarchiveCommand.COMMAND_WORD:
+            return new UnarchiveCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

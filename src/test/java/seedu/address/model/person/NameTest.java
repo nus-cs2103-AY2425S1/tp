@@ -29,6 +29,11 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("David-")); // Hyphen at end of name
+        assertFalse(Name.isValidName("-David")); // Hyphen at start of name
+        assertFalse(Name.isValidName("David--James")); // Multiple hyphens between 2 characters
+        assertFalse(Name.isValidName("David -James")); // Hyphen and space between 2 characters
+        assertFalse(Name.isValidName("David  James")); // Multiple spaces between 2 characters
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
@@ -36,6 +41,10 @@ public class NameTest {
         assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("David-Joseph Robson")); // Hyphenated names
+        assertTrue(Name.isValidName("David-Joseph-Robson")); // Multiple hyphens in name
+        assertTrue(Name.isValidName("1-2-3")); // Hyphens between digits
+        assertTrue(Name.isValidName("David Joseph Robson  ")); // Name with trailing whitespaces
     }
 
     @Test

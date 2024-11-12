@@ -9,51 +9,52 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Tushar Tanwar
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tanwartushar.png" width="200px">
 
 [[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/tanwartushar)]
 
 * Role: Project Advisor
+* Responsibilities: GUI, Commands
 
-### Jane Doe
+### Rahul Agarwal
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rahula1008.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/rahula1008)]
+[[portfolio](http://linkedin.com/in/rahula1008)]
 
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Commands, UX
 
-### Jean Doe
+### Jun Long
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/junlongling.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/junlongling)] [[portfolio](https://www.linkedin.com/in/junlong-ling-030b55200/)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Documentation
+
+### Tang Jun Kiat
+
+<img src="images/jktang14.png" width="200px">
+
+[[github](https://github.com/jktang14)]
+[[portfolio](https://www.linkedin.com/in/tang-jun-kiat-0540582b6/)]
+
+* Role: Developer
+* Responsibilities: Deliverables and deadlines
+
+### Prakamya Singh
+
+<img src="images/dinoman44.png" width="200px">
+
+[[github](https://github.com/Dinoman44)]
+[[portfolio](https://prakamya-singh.vercel.app/)]
+
+* Role: QA (Quality Assurance)
+* Responsibilities: Commands, Code Quality

@@ -18,6 +18,9 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_NOT_IN_MAIN_LIST =
+                "This command can only be used in the main client list!\n"
+                + "Use the 'list' command to navigate back to the main client list first";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -45,6 +48,14 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Project status: ")
+                .append(person.getProjectStatus())
+                .append("; Payment status: ")
+                .append(person.getPaymentStatus())
+                .append("; Client status: ")
+                .append(person.getClientStatus())
+                .append("; Deadline: ")
+                .append(person.getDeadline());
         return builder.toString();
     }
 

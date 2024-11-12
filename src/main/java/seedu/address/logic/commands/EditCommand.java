@@ -2,9 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -22,11 +26,16 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ClientStatus;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ProjectStatus;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Edits the details of an existing person in the address book.
@@ -43,14 +52,23 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_PROJECT_STATUS + "PROJECT_STATUS] "
+            + "[" + PREFIX_PAYMENT_STATUS + "PAYMENT_STATUS] "
+            + "[" + PREFIX_CLIENT_STATUS + "CLIENT_STATUS] "
+            + "[" + PREFIX_DEADLINE + "DEADLINE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_PROJECT_STATUS + "complete "
+            + PREFIX_PAYMENT_STATUS + "paid "
+            + PREFIX_CLIENT_STATUS + "active "
+            + PREFIX_DEADLINE + "20-10-2024";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in either the address book "
+            + "or the archived address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -70,6 +88,12 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        boolean isArchivedList = model.getIsArchivedList();
+
+        // Allow user to use only if currently viewing the main list
+        if (isArchivedList) {
+            throw new CommandException(Messages.MESSAGE_NOT_IN_MAIN_LIST);
+        }
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -79,7 +103,8 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personToEdit.isSamePerson(editedPerson) && (model.hasPerson(editedPerson)
+                || model.hasArchivedPerson(editedPerson))) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -100,8 +125,17 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        ProjectStatus updatedProjectStatus = editPersonDescriptor.getProjectStatus()
+                .orElse(personToEdit.getProjectStatus());
+        PaymentStatus updatedPaymentStatus = editPersonDescriptor.getPaymentStatus()
+                .orElse(personToEdit.getPaymentStatus());
+        ClientStatus updatedClientStatus = editPersonDescriptor.getClientStatus()
+                .orElse(personToEdit.getClientStatus());
+        Deadline updatedDeadline = editPersonDescriptor.getDeadline()
+                .orElse(personToEdit.getDeadline());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedProjectStatus,
+                updatedPaymentStatus, updatedClientStatus, updatedDeadline);
     }
 
     @Override
@@ -138,6 +172,10 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private ProjectStatus projectStatus;
+        private PaymentStatus paymentStatus;
+        private ClientStatus clientStatus;
+        private Deadline deadline;
 
         public EditPersonDescriptor() {}
 
@@ -151,13 +189,18 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setProjectStatus(toCopy.projectStatus);
+            setPaymentStatus(toCopy.paymentStatus);
+            setClientStatus(toCopy.clientStatus);
+            setDeadline(toCopy.deadline);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, projectStatus,
+                    paymentStatus, clientStatus, deadline);
         }
 
         public void setName(Name name) {
@@ -200,6 +243,30 @@ public class EditCommand extends Command {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
+        public void setProjectStatus(ProjectStatus projectStatus) {
+            this.projectStatus = projectStatus;
+        }
+
+        public void setClientStatus(ClientStatus clientStatus) {
+            this.clientStatus = clientStatus;
+        }
+
+        public void setDeadline(Deadline deadline) {
+            this.deadline = deadline;
+        }
+
+        public Optional<ProjectStatus> getProjectStatus() {
+            return Optional.ofNullable(projectStatus);
+        }
+
+        public Optional<ClientStatus> getClientStatus() {
+            return Optional.ofNullable(clientStatus);
+        }
+
+        public Optional<Deadline> getDeadline() {
+            return Optional.ofNullable(deadline);
+        }
+
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
@@ -207,6 +274,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setPaymentStatus(PaymentStatus paymentStatus) {
+            this.paymentStatus = paymentStatus;
+        }
+
+        public Optional<PaymentStatus> getPaymentStatus() {
+            return Optional.ofNullable(paymentStatus);
         }
 
         @Override
@@ -225,7 +300,11 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(projectStatus, otherEditPersonDescriptor.projectStatus)
+                    && Objects.equals(paymentStatus, otherEditPersonDescriptor.paymentStatus)
+                    && Objects.equals(clientStatus, otherEditPersonDescriptor.clientStatus)
+                    && Objects.equals(deadline, otherEditPersonDescriptor.deadline);
         }
 
         @Override
@@ -236,7 +315,12 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("projectStatus", projectStatus)
+                    .add("paymentStatus", paymentStatus)
+                    .add("clientStatus", clientStatus)
+                    .add("deadline", deadline)
                     .toString();
         }
+
     }
 }

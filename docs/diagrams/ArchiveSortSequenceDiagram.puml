@@ -1,0 +1,82 @@
+' Class Diagram showing Model component for Sort
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package "Model" {
+    interface "Model" as Model {
+        +sortPersonList()
+        +getFilteredPersonList()
+        ...
+    }
+
+    class "ModelManager" as ModelManager {
+        +sortPersonList()
+        ...
+    }
+
+    class "AddressBook" as AddressBook {
+        +sortPersons()
+        ...
+    }
+
+    class "UniquePersonList" as UniquePersonList {
+        -internalList: List<Person>
+        +sort(Comparator<Person>)
+        ...
+    }
+}
+
+ModelManager .up.|> Model
+ModelManager --> "1" AddressBook
+AddressBook --> "1" UniquePersonList
+
+note right of ModelManager
+  Sorts person list based on
+  specified criteria (name,
+  deadline, etc.)
+end note
+
+@enduml
+
+' Sequence Diagram showing Model interactions during sort
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":SortCommand" as SortCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant ":AddressBook" as AddressBook MODEL_COLOR
+participant ":UniquePersonList" as UniquePersonList MODEL_COLOR
+end box
+
+[-> SortCommand : execute()
+activate SortCommand
+
+SortCommand -> ModelManager : sortPersonList()
+activate ModelManager
+
+ModelManager -> AddressBook : sortPersons()
+activate AddressBook
+
+AddressBook -> UniquePersonList : sort(comparator)
+activate UniquePersonList
+UniquePersonList --> AddressBook
+deactivate UniquePersonList
+
+AddressBook --> ModelManager
+deactivate AddressBook
+
+ModelManager --> SortCommand : result
+deactivate ModelManager
+
+[<-- SortCommand : CommandResult
+deactivate SortCommand
+
+@enduml

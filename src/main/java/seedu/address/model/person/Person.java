@@ -24,17 +24,29 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final ProjectStatus projectStatus;
+    private final PaymentStatus paymentStatus;
+    private final ClientStatus clientStatus;
+    private final Deadline deadline;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ProjectStatus projectStatus,
+                  PaymentStatus paymentStatus, ClientStatus clientStatus, Deadline deadline) {
+        requireAllNonNull(name, phone, email, address, tags, deadline);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.projectStatus = (projectStatus != null)
+                ? projectStatus : new ProjectStatus("in progress"); // Default value
+        this.paymentStatus = (paymentStatus != null)
+                ? paymentStatus : new PaymentStatus("pending"); // Default value
+        this.clientStatus = (clientStatus != null)
+                ? clientStatus : new ClientStatus("active"); // Default value
+        this.deadline = deadline;
     }
 
     public Name getName() {
@@ -61,8 +73,38 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public ProjectStatus getProjectStatus() {
+        return projectStatus;
+    }
+
+    public PaymentStatus getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public ClientStatus getClientStatus() {
+        return clientStatus;
+    }
+
+    public Deadline getDeadline() {
+        return deadline;
+    }
+
     /**
-     * Returns true if both persons have the same name.
+     * Returns a string representation of the project deadline.
+     * If the deadline has passed and the project is not completed,
+     * then the [OVERDUE] flag is added
+     */
+    public String checkAndGetDeadline() {
+        if (deadline.isOverdue() && !projectStatus.isComplete) {
+            return deadline.toString() + " [OVERDUE]";
+        } else {
+            return deadline.toString();
+        }
+    }
+
+
+    /**
+     * Returns true if both persons have the same name, email and phone.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -71,7 +113,16 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getPhone().equals(getPhone());
+    }
+
+    /**
+     * Returns true if the person has been blacklisted by the user.
+     */
+    public boolean isBlacklisted() {
+        return clientStatus.isBlacklisted();
     }
 
     /**
@@ -94,13 +145,16 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && projectStatus.equals(otherPerson.projectStatus)
+                && paymentStatus.equals(otherPerson.paymentStatus)
+                && clientStatus.equals(otherPerson.clientStatus)
+                && deadline.equals(otherPerson.deadline);
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, projectStatus, paymentStatus, clientStatus, deadline);
     }
 
     @Override
@@ -111,7 +165,10 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("projectStatus", projectStatus)
+                .add("paymentStatus", paymentStatus)
+                .add("clientStatus", clientStatus)
+                .add("deadline", deadline)
                 .toString();
     }
-
 }

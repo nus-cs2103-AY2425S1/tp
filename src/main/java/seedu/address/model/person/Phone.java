@@ -9,10 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers can contain numbers, spaces and hyphens, and it should be at least 3 digits long.\n"
+                    + "Only 1 space or hyphen is allowed between each digit.\n"
+                    + "Phone number can start with not more than one '+' to indicate country code.";
+    public static final String VALIDATION_REGEX = "\\+{0,1}(?=((\\D*\\d){3,}))\\d{1,}([ -]\\d{1,})*\\s*";
+    public static final String PHONE_KEY = "phone";
     public final String value;
 
     /**
@@ -50,7 +52,7 @@ public class Phone {
         }
 
         Phone otherPhone = (Phone) other;
-        return value.equals(otherPhone.value);
+        return value.trim().equals(otherPhone.value.trim());
     }
 
     @Override

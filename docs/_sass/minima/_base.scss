@@ -198,6 +198,7 @@ pre {
  * Wrapper
  */
 .wrapper {
+  min-width: 1000px;
   max-width: calc(#{$content-width} - (#{$spacing-unit}));
   margin-right: auto;
   margin-left: auto;
@@ -242,7 +243,7 @@ pre {
  */
 table {
   margin-bottom: $spacing-unit;
-  width: 100%;
+  width: 80%;
   text-align: $table-text-align;
   color: $table-text-color;
   border-collapse: collapse;
@@ -288,7 +289,7 @@ table {
     text-align: center;
   }
   .site-header:before {
-    content: "AB-3";
+    content: "Clientele+";
     font-size: 32px;
   }
 }

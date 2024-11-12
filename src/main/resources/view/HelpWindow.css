@@ -1,4 +1,18 @@
-#copyButton, #helpMessage {
+* {
+    main-background-color: #F7F7F2;
+    text-color: black;
+}
+
+.root {
+    -fx-background-color: main-background-color;
+    -fx-text-fill: black;
+    -fx-font-family: "Verdana";
+}
+
+#helpMessage {
+    -fx-text-fill: text-color;
+}
+#copyButton {
     -fx-text-fill: white;
 }
 
@@ -15,5 +29,5 @@
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: main-background-color;
 }

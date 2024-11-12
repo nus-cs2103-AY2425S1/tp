@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box LOGIC_COLOR_T1
+participant ":FindCommand" as FindCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+end box
+
+participant "filteredArchivedPersons:FilteredList" LOGIC_COLOR
+participant "filteredPersons:FilteredList" LOGIC_COLOR
+
+[-> FindCommand : execute()
+activate FindCommand
+
+FindCommand -> ModelManager : getIsArchivedList()
+activate ModelManager
+ModelManager --> FindCommand : isArchivedList
+deactivate ModelManager
+
+alt isArchivedList
+    FindCommand -> FindCommand : throw CommandException("MESSAGE_NOT_IN_MAIN_LIST")
+else else
+    FindCommand -> ModelManager : updateFilteredPersonList(predicate)
+    activate ModelManager
+
+alt isArchivedList
+    ModelManager -> "filteredArchivedPersons:FilteredList" : setPredicate(predicate)
+    activate "filteredArchivedPersons:FilteredList"
+    "filteredArchivedPersons:FilteredList" --> ModelManager
+    deactivate "filteredArchivedPersons:FilteredList"
+else else
+    ModelManager -> "filteredPersons:FilteredList" : setPredicate(predicate)
+    activate "filteredPersons:FilteredList"
+        "filteredPersons:FilteredList" --> ModelManager
+        deactivate "filteredPersons:FilteredList"
+end alt
+
+ModelManager --> FindCommand
+deactivate ModelManager
+
+end alt
+
+<-- FindCommand : CommandResult
+deactivate FindCommand
+
+@enduml

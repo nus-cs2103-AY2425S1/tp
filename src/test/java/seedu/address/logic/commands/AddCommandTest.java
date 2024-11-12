@@ -10,10 +10,13 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -23,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ReminderManager;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -157,6 +161,61 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void sortByComparator(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReminderManager getReminderManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public StringProperty getCurrentReminderProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyAddressBook getArchivedAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public BooleanProperty isUiArchived() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setArchivedListMode(boolean isArchived) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addArchivedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasArchivedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getIsArchivedList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setIsArchivedList(boolean value) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteArchivedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -174,6 +233,11 @@ public class AddCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public boolean getIsArchivedList() {
+            return false;
         }
     }
 
@@ -196,8 +260,29 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean getIsArchivedList() {
+            return false;
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void setArchivedListMode(boolean isArchived) {
+            isArchived = isArchived;
+        }
+
+        @Override
+        public void setIsArchivedList(boolean value) {
+            value = value;
+        }
+
+        @Override
+        public boolean hasArchivedPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSamePerson);
         }
     }
 

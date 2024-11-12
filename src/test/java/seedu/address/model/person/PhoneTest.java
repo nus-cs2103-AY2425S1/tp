@@ -30,12 +30,30 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("-934")); // Hyphen at the start
+        assertFalse(Phone.isValidPhone("934-")); // Hyphen at the end
+        assertFalse(Phone.isValidPhone("934--999")); // Double hyphen between digits
+        assertFalse(Phone.isValidPhone("934  999")); // Double space between digits
+        assertFalse(Name.isValidName("999- 934")); // Hyphen and space between 2 characters
+        assertFalse(Phone.isValidPhone("++9344 8293")); // Two pluses
+        assertFalse(Phone.isValidPhone("+9344+8293")); // Plus in the middle of the phone
+        assertFalse(Phone.isValidPhone("344+-8293"));
+        assertFalse(Phone.isValidPhone("344 +8293"));
+        assertFalse(Phone.isValidPhone("+")); // Just a plus
+
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Phone.isValidPhone("999 999")); // Space allowed between numbers
+        assertTrue(Phone.isValidPhone("999-999")); // Hyphen allowed between numbers
+        assertTrue(Phone.isValidPhone("92-9")); // Phone number with at least 3 digits in total
+        assertTrue(Phone.isValidPhone("987 983-834")); // Number with space and hyphen
+        assertTrue(Phone.isValidPhone("987 983-834  ")); // Number with trailing whitespaces
+        assertTrue(Phone.isValidPhone("+65 9344 8293")); // Number with country code
+        assertTrue(Phone.isValidPhone("+6593448293")); // Country code but no spaces
+        assertTrue(Phone.isValidPhone("+65 9344-8293")); // Mix of hyphens, spaces and country code
     }
 
     @Test

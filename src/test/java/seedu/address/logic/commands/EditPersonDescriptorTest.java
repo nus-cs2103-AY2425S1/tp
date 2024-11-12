@@ -6,9 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLIENT_STATUS_POTENTIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_PAID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_STATUS_COMPLETE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
@@ -55,6 +59,20 @@ public class EditPersonDescriptorTest {
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different project status -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withProjectStatus(VALID_PROJECT_STATUS_COMPLETE).build();
+
+        // different payment status -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withPaymentStatus(VALID_PAYMENT_STATUS_PAID).build();
+
+        // different client status -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withClientStatus(VALID_CLIENT_STATUS_POTENTIAL).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different deadline -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withDeadline(VALID_DEADLINE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
@@ -65,7 +83,13 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+                + editPersonDescriptor.getTags().orElse(null) + ", projectStatus="
+                + editPersonDescriptor.getProjectStatus().orElse(null) + ", paymentStatus="
+                + editPersonDescriptor.getProjectStatus().orElse(null) + ", clientStatus="
+                + editPersonDescriptor.getClientStatus().orElse(null) + ", deadline="
+                + editPersonDescriptor.getDeadline().orElse(null) + "}";
+
         assertEquals(expected, editPersonDescriptor.toString());
+
     }
 }

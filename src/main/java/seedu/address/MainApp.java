@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -16,6 +17,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ArchivedAddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -23,7 +25,9 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.ArchivedAddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonArchivedAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -36,7 +40,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 3, 1, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -58,7 +62,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ArchivedAddressBookStorage archivedAddressBookStorage =
+                new JsonArchivedAddressBookStorage(Paths.get("data" , "archivedAddressBook.json"));
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, archivedAddressBookStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -77,20 +83,25 @@ public class MainApp extends Application {
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyAddressBook> archivedAddressBookOptional;
+        ReadOnlyAddressBook initialArchived;
         try {
             addressBookOptional = storage.readAddressBook();
+            archivedAddressBookOptional = storage.readArchivedAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
+            initialArchived = archivedAddressBookOptional.orElseGet(ArchivedAddressBook::new);
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+            initialArchived = new ArchivedAddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, initialArchived);
     }
 
     private void initLogging(Config config) {
