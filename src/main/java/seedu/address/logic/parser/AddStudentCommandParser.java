@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
@@ -17,7 +15,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.person.Address.EMPTY_ADDRESS;
 import static seedu.address.model.person.DaysAttended.DEFAULT_INPUT_VALUE;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -71,7 +68,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(EMPTY_ADDRESS));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
-        Set<String> classes = parseClasses(argMultimap.getValue(PREFIX_CLASSES).get());
+        Set<String> classes = ParserUtil.parseClasses(argMultimap.getValue(PREFIX_CLASSES).get());
         String attendanceString = argMultimap.getValue(PREFIX_ATTENDANCE).orElse(DEFAULT_INPUT_VALUE);
         int attendanceValue;
         try {
@@ -100,29 +97,6 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    /**
-     * Parses the classes string (comma-separated) and returns a set of class names.
-     */
-    public static Set<String> parseClasses(String classes) throws ParseException {
-        requireNonNull(classes);
-
-        Set<String> classSet = new HashSet<>();
-        String[] classArray = classes.split(",");
-
-        for (String className : classArray) {
-            String trimmedClassName = className.trim(); // Trim to remove unnecessary spaces
-
-            // Validate each class name
-            if (!isValidClassName(trimmedClassName)) {
-                throw new ParseException(MESSAGE_INVALID_CLASS);
-            }
-
-            classSet.add(trimmedClassName);
-        }
-
-        return classSet;
     }
 
     /**

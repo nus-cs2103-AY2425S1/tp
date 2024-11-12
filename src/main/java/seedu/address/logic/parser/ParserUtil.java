@@ -24,6 +24,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_EMPTY_CLASSES = "Classes cannot be empty.";
+    private static final String CLASS_NAME_VALIDATION_REGEX = "[A-Za-z0-9]+";
+    private static final String MESSAGE_INVALID_CLASS = "Classes should be valid!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -136,9 +139,8 @@ public class ParserUtil {
     public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
         requireNonNull(subjects);
 
-        // TODO: Reformat and remove magic literal
         if (subjects.isEmpty()) {
-            throw new ParseException("Subjects cannot be empty.");
+            throw new ParseException(Subject.MESSAGE_EMPTY_SUBJECTS);
         }
 
         final Set<Subject> subjectSet = new HashSet<>();
@@ -183,18 +185,30 @@ public class ParserUtil {
      */
     public static Set<String> parseClasses(String classes) throws ParseException {
         requireNonNull(classes);
-        String trimmedClasses = classes.trim();
 
-        // TODO: Reformat and remove magic literal
-        if (trimmedClasses.isEmpty()) {
-            throw new ParseException("Classes cannot be empty.");
-        }
-        String[] classArray = trimmedClasses.split(",");
         Set<String> classSet = new HashSet<>();
+        String[] classArray = classes.split(",");
+
         for (String className : classArray) {
-            classSet.add(className.trim());
+            // Trim to remove unnecessary spaces
+            String trimmedClassName = className.trim();
+
+            // Validate each class name
+            if (!isValidClassName(trimmedClassName)) {
+                throw new ParseException(MESSAGE_INVALID_CLASS);
+            }
+
+            classSet.add(trimmedClassName);
         }
+
         return classSet;
+    }
+
+    /**
+     * Validates a class name.
+     */
+    public static boolean isValidClassName(String className) {
+        return className.matches(CLASS_NAME_VALIDATION_REGEX);
     }
 
     /**

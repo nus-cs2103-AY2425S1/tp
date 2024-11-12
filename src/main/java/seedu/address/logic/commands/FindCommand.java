@@ -28,7 +28,6 @@ public class FindCommand extends Command {
 
     private final PersonContainsKeywordsPredicate predicate;
 
-    // TODO : Add functionality so that we can group multiple tags at once
     public FindCommand(PersonContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }

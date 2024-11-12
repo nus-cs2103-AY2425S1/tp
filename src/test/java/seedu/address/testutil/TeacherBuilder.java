@@ -24,7 +24,7 @@ public class TeacherBuilder {
     public static final String DEFAULT_EMAIL = "alice@example.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SUBJECT = "Mathematics";
-    public static final String DEFAULT_CLASSES = "Class 1, Class 2";
+    public static final String DEFAULT_CLASSES = "A1, C2";
 
     private Name name;
     private Gender gender;

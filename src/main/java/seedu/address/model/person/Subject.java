@@ -11,6 +11,8 @@ public class Subject {
 
     public static final String MESSAGE_CONSTRAINTS = "Subjects should only contain alphanumeric characters and spaces, "
             + "and it should not be blank.";
+
+    public static final String MESSAGE_EMPTY_SUBJECTS = "Subjects cannot be empty.";
     /*
      * The first character of the subject must be an alphanumeric character, and it can be followed by
      * alphanumeric characters or spaces.
