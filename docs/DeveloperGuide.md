@@ -364,7 +364,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   - 5a1. HRConnect shows an error message.
 
-    HRConnect displays the list of projects if the project id is invalid and the list of employees if the employee id is invalid. Use case resumes at step 5.
+    Use case resumes at step 5.
 
 ---
 
