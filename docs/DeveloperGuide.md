@@ -300,8 +300,9 @@ which is intended to streamline input and minimise errors without unnecessarily 
 Currently, the app only accepts phone numbers that are 8 digits long and start with 3, 6, 8 or 9, according to Singapore's standard format for phone numbers. However, we understand that some users may key in their NOK's number, which may not be a Singapore number, as they might be based overseas. In the future, more phone formats can be added, such as including area codes and accepting more digits.
 
 
-10. **Add more date formats:**
-Currently, we found that our priority was to ensure that the date command functionality was working seamlessly before we added more date formats. However, in the future, we plan to accept more date and time formats (e.g. `MM-dd-yyyy HH:mm`) so that the user can conveniently use the one that is most familiar.
+10. **Automatic sorting of appointments by time in `schedule` feature:**
+    Currently, the app displays scheduled entries in the order they are added, without automatic sorting by date and time. This means that users cannot view their appointments for a given day in chronological order, which can make it challenging to keep track of upcoming events as the number of appointments grow.<br>
+    As a planned enhancement, when users input schedule d/DATE, Health Connect will display all appointments for the given day in a filtered list sorted by time, with earlier appointments shown first. This approach will filter the list by appointment date and then sort it by time, offering a clearer overview of the day’s schedule. With this planned sorting enhancement, users will have a more intuitive and streamlined experience, especially when managing multiple upcoming events.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -626,9 +627,10 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a patient 
+1. Deleting a patient<br>
+   For the following test cases, there exists a patient with the following details, name: `Alex Yeoh`, phone: `81239873`, email: `alex@yahoo.com`, address: `311, Clementi Ave West, #02-25`, tag: `Low Risk` and no allergies
 
-    1. Test case: `delete n/Alex Yeoh`<br>
+     1. Test case: `delete n/Alex Yeoh`<br>
        Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: [none]
    
     2. Test case: `delete p/81239873`<br>
