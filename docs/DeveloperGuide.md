@@ -1048,7 +1048,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Ensure the `data` directory exists. Ensure that `ExportedContacts.csv` does not exist in the `data` directory before each test case.
 
     2. Test case: `export`
-        - Expected: A success message confirms that contacts have been exported. Verify that `ExportedContacts.csv` now exists in the `data` directory.
+       Expected: A success message confirms that contacts have been exported. Verify that `ExportedContacts.csv` now exists in the `data` directory.
 
 ### Importing Contacts from CSV
 
@@ -1057,21 +1057,21 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: Ensure the `data` directory contains a file named `contacts.csv` with correctly formatted contact information (headers: `Name,Phone Number,Email Address,Address,Tags`). Ensure that some of the contacts in `contacts.csv` are not already in the address book.
 
     2. Test case: `import contacts.csv`
-        - Expected: A success message confirms that contacts from `contacts.csv` have been imported. Verify that the new contacts are now added to the address book, and existing contacts remain unchanged.
+       Expected: A success message confirms that contacts from `contacts.csv` have been imported. Verify that the new contacts are now added to the address book, and existing contacts remain unchanged.
 
 2. Importing from a non-existent file
 
     1. Prerequisites: Ensure that the `data` directory exists but does not contain a file named `nonexistent.csv`.
 
     2. Test case: `import nonexistent.csv`
-        - Expected: No contacts are imported. An error message displays: "The specified file does not exist."
+       Expected: No contacts are imported. An error message displays: "The specified file does not exist."
 
 3. Importing from a file with an incorrect format
 
     1. Prerequisites: Ensure the `data` directory contains a file named `incorrect.csv` with improperly formatted content (e.g., missing headers or incorrect number of columns).
 
     2. Test case: `import incorrect.csv`
-        - Expected: No contacts are imported. An error message displays: "The format of the specified file is incorrect."
+       Expected: No contacts are imported. An error message displays: "The format of the specified file is incorrect."
 
 ### Saving data
 
