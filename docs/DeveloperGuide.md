@@ -122,7 +122,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W09-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="650" />
+<img src="images/ModelClassDiagram.png" width="750" />
 
 <box type="important" seamless> The unnamed box encosing some of the classess is drawn only to provide visual clarity and does not imply the existence of a package. </box>
 
