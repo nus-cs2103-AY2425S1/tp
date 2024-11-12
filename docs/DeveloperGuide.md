@@ -32,6 +32,13 @@ Refer to the guide [_Setting up and getting started_](https://ay2425s1-cs2103t-f
 
 ## **Design**
 
+**Note:** In this section, we reference specific class names such as `Person`, `AddressBook`, and other terminology
+that may differ from the terms used in other parts of this Developer Guide. The terms used here are intended
+specifically for Design discussions and might not directly correspond to the broader terms used elsewhere in the documentation.
+For clarification:
+* `Person` is generally referred to as an Udder in most other sections of this guide.
+* `AddressBook` refers to FindingbrUdders in other contexts within this guide.
+
 ### Architecture
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
@@ -110,7 +117,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed, such as to delete a person (Udder).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -159,14 +166,17 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 **Note:** In this section, we reference specific class names such as `Person`, `AddressBook`, and other terminology
-that may differ from the terms used in other parts of this Developer Guide. The names used here are intended 
+that may differ from the terms used in other parts of this Developer Guide. The terms used here are intended 
 specifically for code implementation discussions and might not directly correspond to the broader terms used elsewhere in the documentation.
 For clarification:
 * `Person` is generally referred to as an Udder in most other sections of this guide.
 * `AddressBook` refers to FindingbrUdders in other contexts within this guide. 
 
+Please note that Udder and `Person` as well as FindingbrUdders and `AddressBook` <u>will be used interchangably</u> in this section to maintain consistency with the 
+implementation-specific discussions. 
+
 Additionally, for clarity regarding the UI components discussed in this section,
-a screenshot of the user interface - labeled with component names - is included below:
+a screenshot of the user interface - partially labeled with component names - is included below:
 <br>
 
 ![Ui_parts](images/Ui_parts.png)
@@ -223,7 +233,7 @@ We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a
 The `delete` command allows users to delete a `Person` from the `AddressBook`.
 
 #### Key Components
-- `DeleteCommand`: Executes the action of deleting an existing Udder based on user input. This command processes the input parameters to identify the Person object to be removed from FindingbrUdders.
+- `DeleteCommand`: Executes the action of deleting an existing Udder based on user input. This command processes the input parameters to identify the `Person` object to be removed from FindingbrUdders.
 - `AddCommandParser`: Parses user input to create a `DeleteCommand` object.
 - `LogicManager`: Invokes the `DeleteCommand` to execute the deletion of an Udder.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons (Udders).
@@ -236,7 +246,7 @@ To help you understand how the `delete` command works, here is a list of steps i
 
 We will be using the user input `delete 1` as an example.
 
-1. The user inputs the command `delete 1`, intending to delete a person with index 1 in the contact list.
+1. The user inputs the command `delete 1`, intending to delete a person (Udder) with index 1 in the contact list.
 2. The `DeleteCommandParser` interprets the input.
 3. A `DeleteCommand` object is created.
 4. The `LogicManager` invokes the execute method of DeleteCommand.
@@ -262,7 +272,7 @@ where INDEX is required and at least one of the optional fields (such as name, a
 The `edit` command allows users to edit the details of an existing `Person` in the `AddressBook`. 
 
 #### Key Components
-- `EditCommand`: Executes the action of editing an existing Udder based on user input. This command processes the input parameters to update the Person object's details within FindingbrUdders.
+- `EditCommand`: Executes the action of editing an existing Udder based on user input. This command processes the input parameters to update the `Person` object's details within FindingbrUdders.
 - `EditCommandParser`: Parses user input to create an `EditCommand` object.
 - `LogicManager`: Invokes the `EditCommand` to execute the editing of an Udder.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons (Udders).
@@ -275,7 +285,7 @@ To help you understand how the `edit` command works, here is a list of steps ill
 
 We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St r/brUdder m/bza` as an example, whereby the original `Person` object has an address of `John street, block 123, #01-01`.
 
-1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St r/brUdder m/bza`, intending to edit the details of the person at index 1.
+1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St r/brUdder m/bza`, intending to edit the details of the person (Udder) at index 1.
 2. The `EditCommandParser` interprets the input.
 3. An `EditCommand` object is created.
 4. The `LogicManager` invokes the execute method of `EditCommand`.
@@ -304,7 +314,7 @@ The `schedule` command adds a `Meeting` to the `AddressBook` and the `Person` we
 - `ScheduleCommand`: Executes the creation of a `Meeting` and adds it to both the `AddressBook` and the `Person`'s `Meetings`. It takes user input as parameters to construct a `Meeting` object linked to a specified `Person`.
 - `ScheduleCommandParser`: Parses user input to create a `ScheduleCommand` object.
 - `LogicManager`: Invokes the `ScheduleCommand` to execute the scheduling operations.
-- `ModelManager`: Implements the `Model` interface and contains the internal list of persons and meetings.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons (Udders) and meetings.
 - `Person`: Represents an Udder in FindingbrUdders and all information attached to it.
 - `Index`: Represents the index that refers to the target Udder of the `Meeting` to be created.
 - `Meeting`: Represents a scheduled meeting, containing details such as participants, location, start time, and end time.
@@ -348,7 +358,7 @@ The `deletem` command allows users to delete an existing `Meeting` from the `Add
 - `DeleteMeetingCommand`: Executes the deletion of a `Meeting` from both the `AddressBook` and the `Person`'s `Meetings` based on the user's input.
 - `DeleteMeetingCommandParser`: Parses user input to create a `DeleteMeetingCommand` object.
 - `LogicManager`: Invokes the `DeleteMeetingCommand` to execute the deletion operation.
-- `ModelManager`: Implements the `Model` interface and contains the internal list of persons and meetings.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons (Udders) and meetings.
 - `Person`: Represents an Udder in FindingbrUdders, encapsulating their personal information including scheduled meetings.
 - `Index`: Represents the index that refers to the target Udder of the `Meeting` to be created.
 - `Meeting`: Represents a scheduled meeting, containing details such as participants, location, start time, and end time.
@@ -390,7 +400,7 @@ The `editm` command allows users to edit the details of an existing `Meeting` in
 - `EditMeetingCommand`: Executes the operation of editing a meeting based on the user's input. It updates the details of a Meeting object within the `AddressBook` and the `Person`'s `Meetings`.
 - `EditMeetingCommandParser`: Parses user input to create an `EditMeetingCommand` object.
 - `LogicManager`: Invokes the `EditMeetingCommand` to execute the editing operation.
-- `ModelManager`: Implements the `Model` interface and manages the internal list of persons and meetings.
+- `ModelManager`: Implements the `Model` interface and manages the internal list of persons (Udders) and meetings.
 - `Index`: Represents the index that refers to the target Udder of the `Meeting` to be created.
 - `Meeting`: Represents a scheduled meeting, containing details such as participants, location, start time, and end time.
 - `Meetings`: Represents an ArrayList that contains `Meeting` objects.
@@ -453,21 +463,21 @@ Whether you're adding new Udders you meet, updating contact details, or organizi
 - Medium (nice to have) - `* *`
 - Low (unlikely to have) - `*`
 
-| Priority | As a…​                        | I want to…​                      | So that I can…​                                                        |
-|----------|-------------------------------|----------------------------------|------------------------------------------------------------------------|
-| `* * *`  | Udder                         | add a new contact                |                                                                        |
-| `* * *`  | Udder                         | edit an existing contact         | update the added contact with new information                          |
-| `* * *`  | lonely brUdder who seeks help | schedule a meeting               | remind myself of future meetings with another contact                  |
-| `* * *`  | curious Udder                 | view the details of a contact    | learn more about the contacts abilities                                |
-| `* * *`  | Udder                         | list all contacts                |                                                                        |
-| `* * *`  | Udder                         | list all meetings with a contact |                                                                        |
-| `* * *`  | Udder                         | delete a contact                 | remove contacts that I no longer need                                  |
-| `* * *`  | Udder                         | filter through my contacts       | locate details of persons without having to go through the entire list |
-| `* *`    | new Udder                     | get help                         | refer to instructions when I forget how to use the App                 |
-| `* *`    | Udder                         | edit details of a meeting        | update the meeting with new information                                |
-| `* *`    | Udder                         | delete a meeting                 | remove meetings that no longer exists                                  |
-| `*`      | Udder                         | favourite some of my contacts    | find my favourite contacts in an instant                               |
-| `*`      | Udder                         | unfavourite some of my contacts  | remove them from my favourites list                                    |
+| Priority | As a…​                        | I want to…​                      | So that I can…​                                                         |
+|----------|-------------------------------|----------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | Udder                         | add a new contact                |                                                                         |
+| `* * *`  | Udder                         | edit an existing contact         | update the added contact with new information                           |
+| `* * *`  | lonely brUdder who seeks help | schedule a meeting               | remind myself of future meetings with another contact                   |
+| `* * *`  | curious Udder                 | view the details of a contact    | learn more about the contacts abilities                                 |
+| `* * *`  | Udder                         | list all contacts                |                                                                         |
+| `* * *`  | Udder                         | list all meetings with a contact |                                                                         |
+| `* * *`  | Udder                         | delete a contact                 | remove contacts that I no longer need                                   |
+| `* * *`  | Udder                         | filter through my contacts       | locate details of an Udder without having to go through the entire list |
+| `* *`    | new Udder                     | get help                         | refer to instructions when I forget how to use the App                  |
+| `* *`    | Udder                         | edit details of a meeting        | update the meeting with new information                                 |
+| `* *`    | Udder                         | delete a meeting                 | remove meetings that no longer exists                                   |
+| `*`      | Udder                         | favourite some of my contacts    | find my favourite contacts in an instant                                |
+| `*`      | Udder                         | unfavourite some of my contacts  | remove them from my favourites list                                     |
 
 **Update Note:** As of `v1.6` of FindingbrUdders, features with priority label `*` are **not** implemented.
 
@@ -842,8 +852,10 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
+**Team size:** 5
+
 1. **Command Consistency Improvements:**
-    * Standardize the behavior of the `delete` command to reset the person list post-execution, aligning with the current behavior of `add` and `edit` commands. This change will improve user experience by providing consistent feedback and list visibility.
+    * Standardize the behavior of the `delete` command to reset the Person List Panel post-execution, aligning with the current behavior of `add` and `edit` commands. This change will improve user experience by providing consistent feedback and list visibility.
 2. **Email Validation Enhancement:**
     * Refine the email validity checks to include verification of the domain, ensuring that the email not only contains an '@' symbol followed by any alphanumeric characters, but also follows a valid format with a recognized domain. This enhancement aims to reduce incorrect/invalid email entries and improve data integrity.
 3. **Email Search Logic Enhancement:**
@@ -852,15 +864,15 @@ testers are expected to do more *exploratory* testing.
     * Revamp the duplicate detection logic to identify duplicates based on phone numbers and email addresses, ignoring whitespace variations. 
     * Names will no longer be considered for duplicate checks due to the possibility of multiple individuals sharing the same name, thus mimicking real-world scenarios more accurately.
 5. **Cross-Platform UI Consistency:**
-6. **Detail Panel Behavior Correction:**
-    * Adjust the behavior of the Detail Panel to clear its contents when the last person in the person list is deleted, ensuring that no outdated information remains visible, thereby preventing user confusion.
     * Implement font packaging within the software to ensure UI consistency across different operating systems, particularly addressing layout issues on MacOS caused by missing font styles.
+6. **Detail Panel Behavior Correction:**
+    * Adjust the behavior of the Detail Panel to clear its contents when the last Udder in the Person List Panel is deleted, ensuring that no outdated information remains visible, thereby preventing user confusion.
 7. **UI Layout Improvements:**
     * Allow the meeting list to be displayed in the Detail Panel instead of the Result Display Panel for enhanced readability.
-    * Provide options for users to choose which panel (Detail or Person List) to expand, instead of defaulting to expanding only the Person List Panel.
+    * Provide options for users to choose which panel (Detail or Person List Panel) to expand, instead of defaulting to expanding only the Person List Panel.
     * Increase the size of the Result Display Panel for improved user interaction and readability.
 8. **Enhanced Tag Management:**
-    * Improve the management and display of role tags in the Person List Panel to ensure they are not truncated or hidden, regardless of the length of the person's name. This will enhance visibility and accessibility of important categorizations within the user interface.
+    * Improve the management and display of role tags in the Person List Panel to ensure they are not truncated or hidden, regardless of the length of the Udder's name. This will enhance visibility and accessibility of important categorizations within the user interface.
 9. **Meeting Deletion Streamlining:**
     * Streamline the meeting deletion process (`deletem`) by allowing the Detail Panel to display the meetings list, facilitating easier and faster batch deletions without needing to repeatedly execute the meetings command to refresh the index.
 10. **Meeting Date Validation:**
