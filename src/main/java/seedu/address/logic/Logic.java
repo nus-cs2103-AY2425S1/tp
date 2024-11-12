@@ -2,13 +2,17 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * API of the Logic component
@@ -33,6 +37,11 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered list of weddings */
+    ObservableList<Wedding> getFilteredWeddingList();
+
+    ObjectProperty<WeddingName> getCurrentWeddingName();
+
     /**
      * Returns the user prefs' address book file path.
      */
@@ -43,8 +52,15 @@ public interface Logic {
      */
     GuiSettings getGuiSettings();
 
+    ObservableMap<String, String> getTagColorMap();
+
     /**
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Set pending status of clear function
+     */
+    public void setClearPendingStatus(boolean isPending);
 }

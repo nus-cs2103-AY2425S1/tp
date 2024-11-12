@@ -15,8 +15,33 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t12-2.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = """
+        Replace UPPERCASE content with relevant details. Details in Square Brackets are OPTIONAL to provide.\n
+            General Commands:
+                1. help: Show a basic help message with a link to the PlanPerfect User Guide for advanced support.\n
+            Contact Commands:
+                1. add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]: Add a contact with up to 6 tags.
+                2. list: Show all saved contacts.
+                3. edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]: Edit a contact’s personal detail(s).
+                4. tag INDEX t/TAG1 TAG2 ... : Add between 1 to 6 tag(s) to a contact.
+                5. untag INDEX t/TAG1 TAG2 ... : Remove the specified tag(s) from a contact.
+                6. taglist: List all tags currently in use in PlanPerfect.
+                7. find KEYWORD1 KEYWORD2 ... : Find contacts with any of the given keywords in their name.
+                8. filter t/TAG1 TAG2 ... : Filter contacts by the specified tag(s).
+                9. delete INDEX: Delete the contact in the specified index.
+                10. sort: Sort the contacts in the list by name.
+                11. clear: Clear all contacts (following a confirmation message).\n
+            Wedding Commands:
+                1. addw n/WEDDING_NAME d/DATE [c/CONTACT1_INDEX ...]: Add wedding with 0 or more contacts.
+                2. view WEDDING_INDEX: List the contacts assigned to the wedding at the specified index.
+                3. editw WEDDING_INDEX [n/WEDDING_NAME] [d/DATE]: Edit a wedding's detail(s).
+                4. assign WEDDING_INDEX c/CONTACT1_INDEX ... : Assign 1 or more contacts to the specified wedding.
+                5. unassign c/CONTACT1_INDEX ... : Unassign 1 or more contacts from inside a wedding view.
+                6. deletew WEDDING_INDEX: Delete the specified wedding from PlanPerfect (contacts are not deleted).\n
+            Other Commands:
+                1. exit: Exit the program.\n
+        For more detailed help, refer to the PlanPerfect User Guide:""" + ' ' + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";

@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TAG_LIST_SIZE;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,21 +21,47 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final PersonId id;
 
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null. Used for first creation of a person, where id is created.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
+        this.id = new PersonId();
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        if (tags.size() > 6) {
+            throw new IllegalArgumentException(MESSAGE_INVALID_TAG_LIST_SIZE);
+        }
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null. Creates a person object with a given PersonId.
+     */
+    public Person(PersonId id, Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(id, name, phone, email, address, tags);
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        if (tags.size() > 6) {
+            throw new IllegalArgumentException(MESSAGE_INVALID_TAG_LIST_SIZE);
+        }
+        this.tags.addAll(tags);
+
+    }
+
+    public PersonId getId() {
+        return id;
     }
 
     public Name getName() {
@@ -62,7 +89,15 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same name.
+     * Checks if this Person already has a specific Tag
+     * @param target The Tag to check
+     */
+    public boolean hasTag(Tag target) {
+        return tags.contains(target);
+    }
+
+    /**
+     * Returns true if both persons have the same phone number.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -71,7 +106,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -106,6 +141,7 @@ public class Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("id", id)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
@@ -113,5 +149,4 @@ public class Person {
                 .add("tags", tags)
                 .toString();
     }
-
 }

@@ -1,8 +1,10 @@
 {
   "persons": [ {
+    "id" : "969d5233-5ae8-4c56-97b7-b25737afa01f",
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
     "address": "4th street"
-  } ]
+  } ],
+  "weddings" : [ ]
 }

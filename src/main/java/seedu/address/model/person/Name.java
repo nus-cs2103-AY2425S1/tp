@@ -8,15 +8,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
+    public static final int NAME_MAX_LEN = 40;
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+
+    public static final String MESSAGE_LENGTH_LIMIT =
+            "Name too long! Names are supported up to " + NAME_MAX_LEN + " characters";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
 
     public final String fullName;
 
@@ -28,6 +33,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isWithinCharLimit(name), MESSAGE_LENGTH_LIMIT);
         fullName = name;
     }
 
@@ -36,6 +42,10 @@ public class Name {
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public static boolean isWithinCharLimit(String test) {
+        return test.length() <= NAME_MAX_LEN;
     }
 
 

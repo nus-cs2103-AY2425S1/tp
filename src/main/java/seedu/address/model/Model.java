@@ -1,11 +1,17 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.ActiveTags;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * The API of the Model component.
@@ -44,6 +50,8 @@ public interface Model {
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
+    ObservableMap<String, String> getTagColorMap();
+
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
@@ -76,6 +84,50 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Adds a new Wedding specified by a name and date to the AddressBook.
+     * The name of the new Wedding must not be the same as another existing Wedding in the AddressBook.
+     * @param wedding the Wedding to add
+     */
+    void addWedding(Wedding wedding);
+
+    /**
+     * Returns true if a wedding with the same identity as {@code wedding} exists in the address book.
+     */
+    boolean hasWedding(Wedding wedding);
+
+    /**
+     * Removes a Wedding specified by name.
+     * The Wedding must already exist in the AddressBook.
+     * @param wedding the Wedding to remove
+     */
+    void removeWedding(Wedding wedding);
+
+    /**
+     * Replaces the specified wedding with a new one
+     * @param wedding
+     * @param editedWedding
+     */
+    void setWedding(Wedding wedding, Wedding editedWedding);
+
+    /**
+     * Assigns a Person to a Wedding specified by name.
+     * Both the Person and Wedding must already exist in the AddressBook.
+     * The Person must not be currently assigned to the Wedding.
+     * @param wedding
+     * @param toAssign
+     */
+    void assignPerson(Wedding wedding, Person toAssign);
+
+    /**
+     * Unassigns a Person from a Wedding specified by name.
+     * Both the Person and Wedding must already exist in the AddressBook.
+     * The Person must be currently assigned to the Wedding.
+     * @param wedding
+     * @param toUnassign
+     */
+    void unassignPerson(Wedding wedding, Person toUnassign);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -84,4 +136,37 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns an unmodifiable view of the filtered wedding list.
+     * @return
+     */
+    ObservableList<Wedding> getFilteredWeddingList();
+
+    /**
+     * Returns a HashMap of the current active Tags and their occurences
+     * @return
+     */
+
+    ActiveTags getActiveTags();
+
+    /**
+     * Returns a WeddingName of the currently displayed wedding, or null if no wedding is being viewed
+     * WeddingName is used because Wedding objects are immutable could change when a wedding is edited,
+     * while WeddingName is used to determine uniqueness of weddings
+     *
+     * @return currently displayed wedding, or null
+     */
+
+    ObjectProperty<WeddingName> getCurrentWeddingName();
+
+    /**
+     * Sets currentWeddingName attribute to a specified WeddingName or null
+     */
+    void setCurrentWeddingName(WeddingName weddingName);
+
+    /**
+     * Sorts the list of persons in the address book according to the given comparator.
+     */
+    void sortPersonList(Comparator<Person> comparator);
 }

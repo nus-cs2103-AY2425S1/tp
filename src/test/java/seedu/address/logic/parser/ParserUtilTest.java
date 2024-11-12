@@ -6,19 +6,27 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.WeddingDate;
+import seedu.address.model.wedding.WeddingName;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -192,5 +200,105 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseWeddingName_validWeddingName_success() throws Exception {
+        WeddingName expectedWeddingName = new WeddingName("Smith Wedding");
+        assertEquals(expectedWeddingName, ParserUtil.parseWeddingName("Smith Wedding"));
+    }
+
+    @Test
+    public void parseWeddingName_invalidWeddingName_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeddingName(""));
+    }
+
+    @Test
+    public void parseWeddingDate_validWeddingDate_success() throws Exception {
+        WeddingDate expectedWeddingDate = new WeddingDate(LocalDate.of(2025, 1, 1));
+        assertEquals(expectedWeddingDate, ParserUtil.parseWeddingDate("01/01/2025"));
+    }
+
+    @Test
+    public void parsePersonIndexString_validPersonIndexes_success() throws Exception {
+        Set<Index> expectedIndexes = Set.of(Index.fromOneBased(1), Index.fromOneBased(2));
+        assertEquals(expectedIndexes, ParserUtil.parsePersonIndexString("1 2"));
+    }
+
+    @Test
+    public void parsePersonIndexString_invalidPersonIndexes_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonIndexString("invalid"));
+    }
+
+    @Test
+    public void parsePersonIndexString_duplicatePersonIndexes_throwsParseException() {
+        String duplicateIndexes = "1 1 2"; // Providing duplicate indexes
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonIndexString(duplicateIndexes));
+    }
+
+    @Test
+    public void parsePersonIndexString_noDuplicatePersonIndexes_success() throws Exception {
+        String noDuplicateIndexes = "1 2 3";
+        Set<Index> expectedIndexesSet = Set.of(Index.fromOneBased(1), Index.fromOneBased(2), Index.fromOneBased(3));
+        List<Index> expectedIndexes = expectedIndexesSet.stream()
+                .sorted((index1, index2) -> Integer.compare(index1.getZeroBased(), index2.getZeroBased()))
+                .collect(Collectors.toList());
+        Set<Index> actualIndexesSet = ParserUtil.parsePersonIndexString(noDuplicateIndexes);
+        List<Index> actualIndexes = actualIndexesSet.stream()
+                .sorted((index1, index2) -> Integer.compare(index1.getZeroBased(), index2.getZeroBased()))
+                .collect(Collectors.toList());
+        assertEquals(expectedIndexes, actualIndexes);
+    }
+
+    @Test
+    public void parsePersonIndexString_emptyPersonIndexString_throwsParseException() {
+        String emptyPersonIndexString = "";
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonIndexString(emptyPersonIndexString));
+    }
+
+
+
+    @Test
+    public void parseTags_validTags_success() throws Exception {
+        Set<Tag> expectedTags = Set.of(new Tag("friend"), new Tag("colleague"));
+        assertEquals(expectedTags, ParserUtil.parseTags(Arrays.asList("friend", "colleague")));
+    }
+
+    @Test
+    public void parseTags_invalidTag_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList("invalid tag!")));
+    }
+
+    @Test
+    public void parsePersonIndexString_negativeIndex_throwsParseException() {
+        String negativeIndex = "-1 2 3";
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonIndexString(negativeIndex));
+    }
+
+    @Test
+    public void parsePersonIndexString_zeroIndex_throwsParseException() {
+        String zeroIndex = "0 1 2";
+        assertThrows(ParseException.class, () -> ParserUtil.parsePersonIndexString(zeroIndex));
+    }
+
+    @Test
+    public void parseWeddingDate_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeddingDate("01-01-2025"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeddingDate("2025/01/01"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseWeddingDate("January 1, 2025"));
+    }
+
+    @Test
+    public void parseWeddingName_validWeddingNameWithWhitespace_returnsTrimmedWeddingName() throws Exception {
+        String nameWithWhitespace = "  Smith Wedding  ";
+        WeddingName expectedWeddingName = new WeddingName("Smith Wedding");
+        assertEquals(expectedWeddingName, ParserUtil.parseWeddingName(nameWithWhitespace));
+    }
+
+    @Test
+    public void parsePersonListToString_emptyList_returnsEmptyString() {
+        ArrayList<Person> emptyList = new ArrayList<>();
+        String expectedOutput = "";
+        assertEquals(expectedOutput, ParserUtil.parsePersonListToString(emptyList));
     }
 }

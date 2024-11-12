@@ -35,6 +35,12 @@ public class AddressTest {
     }
 
     @Test
+    public void isWithingCharLimit() {
+        assertTrue(Address.isWithinCharLimit("valid"));
+        assertFalse(Address.isWithinCharLimit("longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglong"));
+    }
+
+    @Test
     public void equals() {
         Address address = new Address("Valid Address");
 
