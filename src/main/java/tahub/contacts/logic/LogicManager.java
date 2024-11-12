@@ -3,6 +3,7 @@ package tahub.contacts.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -36,6 +37,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private final List<Runnable> listeners;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -44,6 +46,12 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        this.listeners = new ArrayList<>();
+
+        // Add a listener to the model to forward notifications to our listeners
+        model.addListener(() -> {
+            notifyListeners();
+        });
     }
 
     @Override
@@ -113,5 +121,19 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public void addListener(Runnable listener) {
+        listeners.add(listener);
+    }
+
+    /**
+     * Notifies all registered listeners of a model change
+     */
+    private void notifyListeners() {
+        for (Runnable listener : listeners) {
+            listener.run();
+        }
     }
 }
