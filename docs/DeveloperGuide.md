@@ -234,14 +234,14 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Force Feature
 
-#### Implementation
-
 The Force feature is a quality of life addition for WedLinker. It enables users to bypass certain checks in the `Logic` in a controlled manner to make usage easier.
 The force feature is applicable for the following commands:
 * `Tag`: This creates a `Tag` if it does not exist in WedLinker before tagging the `Person`.
 * `Delete Tag`: This unassigns the target `Tag` from all contacts before deleting it.
 * `Assign Wedding`: This creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
 * `Delete Wedding`: This unassigns all `Person` from the `Wedding` before deleting it.
+
+#### Implementation
 
 The force functionality can be used with the above functions by including f/ at the end of the command. Additional inputs following the f/ are extraneous and would be discarded.
 
