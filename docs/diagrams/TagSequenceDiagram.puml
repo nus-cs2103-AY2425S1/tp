@@ -67,4 +67,5 @@ deactivate TagCommand
  <-- LogicManager
 deactivate LogicManager
 
+scale 2
 @enduml

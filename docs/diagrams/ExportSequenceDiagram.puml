@@ -84,4 +84,5 @@ deactivate ExportCommand
 
 [<--LogicManager
 deactivate LogicManager
+scale 3
 @enduml

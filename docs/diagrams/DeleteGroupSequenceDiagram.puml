@@ -73,4 +73,5 @@ deactivate DeleteGroupCommand
 deactivate LogicManager
 
 autonumber
+scale 2
 @enduml

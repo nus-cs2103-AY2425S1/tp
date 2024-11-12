@@ -272,7 +272,7 @@ The `GroupCommand` will then call `excecute()`, which checks whether there is a 
 
 #### Sequence Diagram
 
-<img src="images/GroupSequenceDiagram.png" width="780" />
+<img src="images/GroupSequenceDiagram.png" width="1080" />
 
 #### Design considerations:
 
@@ -314,7 +314,7 @@ matches the name before calling `deleteGroup(Group)`.
 
 #### Sequence Diagram
 
-<img src="images/DeleteGroupSequenceDiagram.png" width="650" />
+<img src="images/DeleteGroupSequenceDiagram.png" width="1080" />
 
 #### Design considerations:
 
@@ -350,7 +350,7 @@ Step 2. The user executes `export` command. The `ExportCommand` will then call `
 
 #### Sequence Diagram
 
-<img src="images/ExportSequenceDiagram.png" width="650" />
+<img src="images/ExportSequenceDiagram.png" width="1080" />
 
 #### Design considerations:
 
@@ -389,7 +389,7 @@ the list of filtered person, and using the index provided by the user, choose th
 
 #### Sequence Diagram
 
-<img src="images/TagSequenceDiagram.png" width="650" />
+<img src="images/TagSequenceDiagram.png" width="1080" />
 
 #### Design considerations:
 
@@ -966,134 +966,142 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 
----
 ## **Appendix: Planned Enhancements**
 
-This section covers the enhancements we plan to implement in the future.
+This section outlines future enhancements planned for the application.
 
-### Enhancement 1: Ability to export explicit groups to csv files
+---
 
-Feature flaw: <br>
-Currently, the `export` command will export all the data in the GoonBook out without discrimination and has no option to selectively certain data like one specific Group only
+### **Enhancement 1: Export Specific Groups to CSV Files**
 
-Proposed enhancement: <br>
-Implement a feature that allows users to export selected groups to CSV files. This allows users to select which specific group to export depending on the user's preference
+**Current Issue:**  
+The `export` command exports all GoonBook data without filtering options, lacking the ability to export specific groups.
 
-Justification: <br>
-Providing the ability to export group data enhances data portability and enables users to share or back up specific groups as needed.
+**Proposed Enhancement:**  
+Allow users to export selected groups to CSV files, providing a choice based on user preference.
 
-Updated behaviours: <br>
-* Introduce an exportGroup command that exports the chosen groups to a CSV file.
+**Justification:**  
+Selective export enhances data portability, enabling users to share or back up specific groups as needed.
 
-### Enhancement 2: Ability to change export filename or file path
+**Updated Behavior:**  
+- Introduce an `exportGroup` command for exporting chosen groups to a CSV file.
 
-Feature flaw: <br>
-Currently, the `export` command will export all the data in the GoonBook out to only the root path, and no where 
-else, with the unchangeable default name of `exported_data.csv`
+---
 
-Proposed enhancement: <br>
-Implement a feature that allows users to specify their own preferred filename for the exported data, as well as the 
-absolute path for when exporting data
+### **Enhancement 2: Custom Export Filename and File Path**
 
-Justification: <br>
-This gives users flexibility to organize their exported data according to their preferences, improving user experience.
+**Current Issue:**  
+The `export` command defaults to exporting data to the root path with an unchangeable filename, `exported_data.csv`.
 
-Updated behaviours: <br>
-* Modify the export command to accept optional filename or file path parameters.
+**Proposed Enhancement:**  
+Allow users to specify a custom filename and file path when exporting data.
 
-### Enhancement 3: Ability to import groups
+**Justification:**  
+Flexible file naming and location options improve user experience, allowing organization based on user preferences.
 
-Feature flaw: <br>
-Currently, the `import` command will import all the data in a csv file indiscriminately, and is unable to discern 
-how students are split up into groups in the csv files, thus making it unable to show existing groups data in GoonBook.
+**Updated Behavior:**  
+- Modify the `export` command to accept optional filename and file path parameters.
 
-Proposed enhancement: <br>
-Develop a new `importGroup` command that creates group(s) based on data from a CSV file. It would create new students in groups who are not in the database and use existing students if they are already present.
+---
 
-Justification: <br>
-Importing groups from CSV files allows users to easily add large amounts of group data, streamlining the data entry process and facilitating data migration.
+### **Enhancement 3: Import Groups from CSV Files**
 
-Updated behaviours: <br>
-* Implement an importGroup command to import groups and their members from a CSV file.
-* Automatically add new students to the database when importing groups.
+**Current Issue:**  
+The `import` command imports all data from a CSV file indiscriminately, with no way to distinguish group data.
 
-### Enhancement 4: Better student duplication handling
+**Proposed Enhancement:**  
+Add an `importGroup` command that creates groups based on CSV data, adding new students as needed or using existing ones.
 
-Feature flaw: <br>
-Currently, the `addCommand` does not allow for duplicate students, with the same name to be added into GoonBook, 
-which despite its rarity, can still occur in real life.
+**Justification:**  
+This simplifies data entry and supports easy migration of group data into the application.
 
-Proposed enhancement: <br>
-Improve the handling of students with duplicate names by migrating to a different primary key for students.
+**Updated Behavior:**  
+- Implement an `importGroup` command to import groups and members from CSV files.
+- Automatically add new students to the database when importing.
 
-Justification: <br>
-Students may have the same name, so relying on names as unique identifiers is insufficient. Using a different primary key ensures data integrity and accurate identification of students.
+---
 
-Updated behaviours: <br>
-* Introduce a unique identifier (e.g., student ID) for each student.
-* Update commands and data storage to use the new primary key.
+### **Enhancement 4: Improved Handling of Duplicate Student Names**
 
-### Enhancement 5: Support for special characters in name and class fields
+**Current Issue:**  
+The `addCommand` does not allow students with duplicate names, although real-life duplicates may exist.
 
-Feature flaw: <br>
-Currently, the `addCommand` does not have support for student names with specifal characters, such as those with "s/o", since the "/" is a special character
+**Proposed Enhancement:**  
+Implement a unique identifier (e.g., student ID) for each student to handle duplicates better.
 
-Proposed enhancement: <br>
-Add support for special characters in student names and class fields.
+**Justification:**  
+Using names as unique identifiers is unreliable; a unique ID ensures data integrity and accurate student identification.
 
-Justification: <br>
-Students may have legal names that include special characters. Supporting these characters ensures accurate 
-representation of student information and improves the quality of life overall
+**Updated Behavior:**  
+- Introduce a unique student identifier.
+- Update commands and data storage to use the new primary key.
 
-Updated behaviours: <br>
-* Modify input validation to allow special characters in names and class fields.
+---
 
-### Enhancement 6: Increasing support to host more student information
+### **Enhancement 5: Support Special Characters in Names and Class Fields**
 
-Feature flaw: <br>
-Currently, the `Person` object is limited in its attributes, unlike its real life counterpart, which has information such as their grades, attendance or parent's info
+**Current Issue:**  
+The `addCommand` cannot handle special characters in names, such as "s/o" due to character restrictions.
 
-Proposed enhancement: <br>
-Extend the application to store additional student information, such as grades, key notes, and guardian contact details.
+**Proposed Enhancement:**  
+Allow special characters in student names and class fields.
 
-Justification: <br>
-Providing more comprehensive student profiles assists educators in managing and understanding their students better, 
-and supports our goal of easing the workload of tutors even better.
+**Justification:**  
+Support for special characters improves data accuracy and reflects real-life names more accurately.
 
-Updated behaviours: <br>
-* Add new fields to the Person class for grades, notes, and guardian information.
-* Update the UI to display the additional information.
+**Updated Behavior:**  
+- Adjust input validation to permit special characters in names and class fields.
 
-### Enhancement 7: Increased filter options for students
+---
 
-Feature flaw: <br>
-Currently, the `FindCommand` and `FindGroupCommand`are limited in their capability to search to just the keywords in 
-the names, whereas if a person wishes to see students who has a certain tag specifically, he is unable to do so.
+### **Enhancement 6: Support Additional Student Information**
 
-Proposed enhancement: <br>
-Enhance the filtering capabilities to allow users to filter students based on grades, attendance, class, etc.
+**Current Issue:**  
+The `Person` object has limited attributes, missing information such as grades, attendance, and guardian details.
 
-Justification: <br>
-Advanced filtering helps users efficiently locate and manage students who meet certain criteria, improving usability.
+**Proposed Enhancement:**  
+Extend the `Person` class to store additional information like grades, notes, and guardian contact details.
 
-Updated behaviours: <br>
-* Add a filter command to search and sort via specific fields using different additional parameters for grades, attendance, and class.
+**Justification:**  
+Comprehensive profiles assist educators in managing and understanding their students better, reducing tutor workload.
 
-### Enhancement 8: Support for precise student name searching
+**Updated Behavior:**  
+- Add new fields for grades, notes, and guardian information to the `Person` class.
+- Update the UI to display this additional information.
 
-Feature flaw: <br>
-Currently, the `FindCommand` does not have support for searching students with keywords containing white space in 
-between. 
+---
 
-Proposed enhancement: <br>
-Improve the search functionality to support keywords with whitespace, enabling precise student name searches.
+### **Enhancement 7: Advanced Filtering Options for Students**
 
-Justification: <br>
-Currently, the find command cannot handle keywords with spaces, limiting the ability to search for full names like 
-"Gong Yi". This is severely hindering to users who want to search for a very specific name. Enhancing this functionality improves search accuracy.
+**Current Issue:**  
+The `FindCommand` and `FindGroupCommand` are limited to name-based keyword searches, with no filtering by other criteria.
 
-Updated behaviours: <br>
-* Modify the find command to accept phrases enclosed in quotes for exact matches.
-* Update parsing logic to handle whitespace in keywords.
+**Proposed Enhancement:**  
+Expand filtering to allow users to search based on grades, attendance, class, and other attributes.
 
-### Known Issues
+**Justification:**  
+Enhanced filtering enables efficient student management, helping users find students that meet specific criteria.
+
+**Updated Behavior:**  
+- Add a `filter` command to allow searching and sorting by various attributes like grades, attendance, and class.
+
+---
+
+### **Enhancement 8: Precise Student Name Searching**
+
+**Current Issue:**  
+The `FindCommand` does not support keywords with whitespace, making it challenging to search for full names.
+
+**Proposed Enhancement:**  
+Enable search functionality to handle keywords with spaces, allowing precise name searches.
+
+**Justification:**  
+Allowing whitespace in searches improves accuracy, letting users find specific names like "Gong Yi" easily.
+
+**Updated Behavior:**  
+- Update the `find` command to accept phrases enclosed in quotes for exact matches.
+- Enhance parsing to handle whitespace in keywords.
+
+--- 
+
+This updated format uses consistent headings, clearer language, and cleaner formatting, improving readability and organization.
