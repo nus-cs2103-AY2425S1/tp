@@ -326,8 +326,9 @@ Filters and lists persons whose fields match the specified keywords.
     - `filter p/91234567` returns the person with phone number `91234567`.
     - `filter n/John r/vendor` returns persons with names containing `John` or with role `vendor`.
     - `filter e/john@gmail.com a/Jurong` returns persons with emails containing "john@gmail.com" or address containing "Jurong".
-      ![Multi-field filter results](images/filter_persons_by_multiple_fields.png)<br>
-      *`filter e/alex@gmail.com r/florist` Example of filtering results showing matched persons, weddings remain empty/unfiltered*
+
+![Multi-field filter results](images/filter_persons_by_multiple_fields.png)<br>
+*`filter e/alex@gmail.com r/florist` Example of filtering results showing matched persons, weddings remain empty/unfiltered*
 
 [↥ Back to Top](#bridal-boss-user-guide)
 
@@ -353,6 +354,7 @@ Adds a new wedding to the address book.
         - Adds a wedding named "Beach Wedding" for the client at index 1.
     - `addw n/Garden Wedding c/John Doe v/Botanical Gardens`
         - Adds a wedding for "John Doe" if there's only one match.<br>
+
 ![Adding a wedding example](images/addw_example.png)<br>
 *Example of successfully adding a new wedding with all fields specified*
 
@@ -444,7 +446,7 @@ Assigns a role and/or weddings to a person.
       - Removes the role of person at index 1.
     -  `assign John Doe r/photographer w/2`
         - If there's only one match for "John Doe", assigns them the role "photographer" and to wedding at index 2.<br>
-          **Error Examples**:<br>
+**Error Example**:<br>
 ![Assignment error example](images/error_example_assign.png)<br>
 *Example of error when trying to assign a client to their own wedding*
 
@@ -497,7 +499,8 @@ Advanced users can edit the data file directly to modify the address book data.
 - **Error Messages**:
     - The application provides specific error messages to guide users in correcting their commands.
 - **Case Sensitivity**:
-    - Commands are generally case-insensitive, but parameters (especially for exact matches) may be case-sensitive as per the validation rules.
+  - Commands must be **lowercase** (`add, addw, edit, editw etc.`)
+  - Parameters (`n/..., e/...` ) are **case-insensitive** as per the validation rules.
 
 [↥ Back to Top](#bridal-boss-user-guide)
 
@@ -610,7 +613,9 @@ Advanced users can edit the data file directly to modify the address book data.
       - Can only contain alphabets, spaces, apostrophes (') and hyphens (-)
 - **Date**:
     - Must be in `YYYY-MM-DD` format
-    - Must be a valid calendar date
+    - Must be a valid calendar date 
+    - Optional field - only validated when v/ prefix is provided
+
 - **Venue**:
     - Optional field - only validated when v/ prefix is provided
     - When provided, cannot be blank or consist only of whitespace
