@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteEventCommandParser" as DeleteEventCommandParser LOGIC_COLOR
+participant "d:DeleteEventCommand" as DeleteEventCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deleteevent 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deleteevent 1")
+activate AddressBookParser
+
+create DeleteEventCommandParser
+AddressBookParser -> DeleteEventCommandParser
+activate DeleteEventCommandParser
+
+DeleteEventCommandParser --> AddressBookParser
+deactivate DeleteEventCommandParser
+
+AddressBookParser -> DeleteEventCommandParser : parse("1")
+activate DeleteEventCommandParser
+
+create DeleteEventCommand
+DeleteEventCommandParser -> DeleteEventCommand
+activate DeleteEventCommand
+
+DeleteEventCommand --> DeleteEventCommandParser :
+deactivate DeleteEventCommand
+
+DeleteEventCommandParser --> AddressBookParser : d
+deactivate DeleteEventCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteEventCommandParser -[hidden]-> AddressBookParser
+destroy DeleteEventCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteEventCommand : execute(m)
+activate DeleteEventCommand
+
+DeleteEventCommand -> Model : deleteEvent(1)
+activate Model
+
+Model --> DeleteEventCommand
+deactivate Model
+
+create CommandResult
+DeleteEventCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteEventCommand
+deactivate CommandResult
+
+DeleteEventCommand --> LogicManager : r
+deactivate DeleteEventCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
