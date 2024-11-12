@@ -79,17 +79,19 @@ public class Task {
     }
 
     public void setStatus() {
-        ZoneId zid = ZoneId.of("Asia/Singapore");
-        LocalDateTime currentTime = LocalDateTime.now(zid);
-        if (deadline == null) {
-            this.status = Status.PENDING;
-            return;
-        }
-        if (deadline.getTime().isBefore(currentTime)
-            && (this.status == Status.PENDING || this.status == Status.OVERDUE)) {
-            this.status = Status.OVERDUE;
-        } else {
-            this.status = Status.PENDING;
+        if (this.status != Status.COMPLETED) {
+            ZoneId zid = ZoneId.of("Asia/Singapore");
+            LocalDateTime currentTime = LocalDateTime.now(zid);
+            if (deadline == null) {
+                this.status = Status.PENDING;
+                return;
+            }
+            if (deadline.getTime().isBefore(currentTime)
+                && (this.status == Status.PENDING || this.status == Status.OVERDUE)) {
+                this.status = Status.OVERDUE;
+            } else {
+                this.status = Status.PENDING;
+            }
         }
     }
 
