@@ -447,8 +447,6 @@ Use case ends.
 5. The system should include comprehensive user and developer documentation, including instructions for installation, configuration, usage, and troubleshooting.
 6. The application must provide feedback to the user within 600 milliseconds for all interactive actions (e.g., executing a command, saving a record).
 
-*{More to be added}*
-
 ### Glossary
 
 * **NRIC**: National Registration Identity Card, a unique identifier for Singapore residents.
@@ -483,8 +481,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -510,9 +506,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   Test cases:
+   1. _Navigate to the ./data folder created under the same directory of the program and delete the addressbook.json file
+      Expected: The app loads up with the default data.
+   
+   2. _Navigate to the ./data folder created under the same directory of the program and corrupt the addressbook.json file by adding a random character to it.
+      Expected: The app loads up with an empty address book.
 
 
 ## Reference
