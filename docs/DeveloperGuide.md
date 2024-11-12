@@ -301,26 +301,28 @@ How an OweCommand operation goes through the `Model` component is shown below:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                           | I want to …​                                               | So that I can…​                                                         |
-|----------|---------------------------------------------------|------------------------------------------------------------|-------------------------------------------------------------------------|
-| `* * *`  | new user                                          | see usage instructions                                     | refer to instructions when I forget how to use the App                  |
-| `* * *`  | tutor                                             | add a new student                                          | keep track of my student's information                                  |
-| `* * *`  | user                                              | delete an entry                                            | remove entries that I no longer need                                    |
-| `* * *`  | private tutor                                     | view all my students' details                              | have an overview of how many student I am managing                      |
-| `* * *`  | tutor with many students                          | find a student by name                                     | locate details of students without having to go through the entire list |
-| `* *`    | busy undergraduate tutor                          | find students by day                                       | locate details of students that has tuition on a specific day           |
-| `* *`    | new user                                          | see sample entries                                         | understand how the interface will look like with entries added          |
-| `* *`    | user                                              | edit contact details                                       | keep my information up-to-date                                          |
-| `* *`    | busy undergraduate tutor                          | check who owes me tuition fee                              | identify and remind them to pay                                         |
-| `* *`    | busy undergraduate tutor                          | be reminded of my tuition for today                        | remember to teach for today (if any)                                    |
-| `* *`    | busy undergraduate tutor                          | have an overview of the tuition fee earned/ owed as of now | easily keep track of how much more I should receive                     |
-| `* *`    | forgetful user                                    | detect duplicates                                          | avoid manually finding and deleting the duplicates                      |
-| `* *`    | forgetful user                                    | tag my students with the day and time of the tuition       | differentiate between different contacts                                |
-| `*`      | user                                              | hide private contact details                               | minimize chance of someone else seeing them by accident                 |
+| Priority | As a …​                                            | I want to …​                                               | So that I can…​                                                         |
+|----------|----------------------------------------------------|------------------------------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | new user                                           | see usage instructions                                     | refer to instructions when I forget how to use the App                  |
+| `* * *`  | tutor                                              | add a new student                                          | keep track of my student's information                                  |
+| `* * *`  | user                                               | delete an entry                                            | remove entries that I no longer need                                    |
+| `* * *`  | private tutor                                      | view all my students' details                              | have an overview of how many student I am managing                      |
+| `* * *`  | tutor with many students                           | find a student by name                                     | locate details of students without having to go through the entire list |
+| `* * *`  | busy undergraduate tutor                           | record students' payment status                            | how much students have paid or owe me |
+| `* * *`  | busy undergraduate tutor                           | record it when students settle the owed amount             | avoid mistakenly reminding him/her again |
+| `* *`    | busy undergraduate tutor                           | find students by day                                       | locate details of students that has tuition on a specific day           |
+| `* *`    | new user                                           | see sample entries                                         | understand how the interface will look like with entries added          |
+| `* *`    | user                                               | edit contact details                                       | keep my information up-to-date                                          |
+| `* *`    | busy undergraduate tutor                           | check who owes me tuition fee                              | identify and remind them to pay                                         |
+| `* *`    | busy undergraduate tutor                           | be reminded of my tuition for today                        | remember to teach for today (if any)                                    |
+| `* *`    | busy undergraduate tutor                           | have an overview of the tuition fee earned/ owed as of now | easily keep track of how much more I should receive                     |
+| `* *`    | forgetful user                                     | detect duplicates                                          | avoid manually finding and deleting the duplicates                      |
+| `* *`    | forgetful user                                     | tag my students with the day and time of the tuition       | differentiate between different contacts                                |
+| `*`      | user                                               | hide private contact details                               | minimize chance of someone else seeing them by accident                 |
 | `*`      | user with many students in the UGTeach application | sort students by name                                      | locate a student easily                                                 |
-| `*`      | user that types fast                              | be able to undo my actions                                 | revert back if I have made a mistake                                    |
-| `*`      | busy undergraduate tutor                          | have information of both the student and his/her guardian  | contact either of them                                                  |
-| `*`      | tutor with many students                          | to know which guardian is associated with which student    | know which student is under that guardian/ vice-versa                   |
+| `*`      | user that types fast                               | be able to undo my actions                                 | revert back if I have made a mistake                                    |
+| `*`      | busy undergraduate tutor                           | have information of both the student and his/her guardian  | contact either of them                                                  |
+| `*`      | tutor with many students                           | to know which guardian is associated with which student    | know which student is under that guardian/ vice-versa                   |
 
 <div style="page-break-after: always;"></div>
 
