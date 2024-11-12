@@ -368,11 +368,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use Case: Add Client Profile
+#### Use Case: Add Buyer
 
 **MSS**:
-1. User chooses to add a new client profile.
-2. System requests client details (name, contact info, property interest, etc.).
+1. User chooses to add a new buyer.
+2. System requests buyer details (name, contact info, property interest, etc.).
+3. User enters the required information.
+4. System confirms the details and creates the profile.
+5. System displays a success message.
+    - Use case ends.
+
+**Extensions**:
+- **3a.** System detects missing or incorrect data:
+    - **3a1.** System displays am error and requests valid inputs.
+    - **3a2.** User enters the correct data.
+    - Steps 3a1–3a2 are repeated until all data is valid.
+    - Use case resumes from step 4.
+
+---
+
+#### Use Case: Add Seller
+
+**MSS**:
+1. User chooses to add a new seller profile.
+2. System requests seller details (name, contact info, property interest, etc.).
 3. User enters the required information.
 4. System confirms the details and creates the profile.
 5. System displays a success message.
@@ -705,22 +724,121 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+---
 
-1. Deleting a person while all persons are being shown
+1. **Adding a Buyer Profile**  
+   **Use**: `buyer n/John Doe p/91234567 e/johndoe@example.com`  
+   **Expected output**: Buyer profile is added, and a success message is displayed.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+---
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+2. **Adding a Seller Profile**  
+   **Use**: `seller n/Jane Smith p/98765432 e/janesmith@example.com a/456 Oak Ave`  
+   **Expected output**: Seller profile is added, and a success message is displayed.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+---
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+3. **Editing a Client Profile**  
+   **Use**: `editclient 1 n/Jane Doe p/98765432`  
+   **Expected output**: Client profile is edited, and a success message is displayed.
 
-1. _{ more test cases …​ }_
+---
+
+4. **Deleting a Client Profile**  
+   **Use**: `deleteclient 1`  
+   **Expected output**: Client profile is deleted, and a success message is displayed.
+
+---
+
+5. **Adding a Listing**  
+   **Use**: `listing n/Greenwood House pr/500000 ar/1200 add/456 Elm St reg/central sel/3 buy/2`  
+   **Expected output**: Listing is added, and a success message is displayed.
+
+---
+
+6. **Editing a Listing**  
+   **Use**: `d`  
+   **Expected output**: Listing is edited, and a success message is displayed.
+
+---
+
+7. **Deleting a Listing**  
+   **Use**: `deletelisting 1`  
+   **Expected output**: Listing is deleted, and a success message is displayed.
+
+---
+
+8. **Adding Buyers to Listing**  
+   **Use**: `addlistingbuyers 1 buy/2 buy/3`  
+   **Expected output**: Buyers are added to the listing, and a success message is displayed.
+
+---
+
+9. **Removing Buyers from Listing**  
+   **Use**: `removelistingbuyers 1 buy/2`  
+   **Expected output**: Buyers are removed from the listing, and a success message is displayed.
+
+---
+
+10. **Listing All Clients**  
+    **Use**: `showclients`  
+    **Expected output**: All clients are displayed.
+
+---
+
+11. **Listing All Listings**  
+    **Use**: `showlistings`  
+    **Expected output**: All listings are displayed.
+
+---
+
+12. **Finding Clients by Name**  
+    **Use**: `find David`  
+    **Expected output**: All clients matching the specified name are displayed.
+
+---
+
+13. **Finding Listings by Keyword**  
+    **Use**: `findlisting Greenwood`  
+    **Expected output**: All listings matching the specified keyword are displayed.
+
+---
+
+14. **Getting More Information on a Listing**  
+    **Use**: `moreinfo 1`  
+    **Expected output**: Detailed information about the listing is displayed.
+
+---
+
+15. **Clearing All Listings**  
+    **Use**: `clearlistings`  
+    **Expected output**: All listings are cleared, and a success message is displayed.
+
+---
+
+16. **Clearing All Data**  
+    **Use**: `clear`  
+    **Expected output**: All data (clients, listings, etc.) is cleared, and a success message is displayed.
+
+---
+
+17. **Help**  
+    **Use**: `help`  
+    **Expected output**: General instructions for using the application are displayed.
+
+---
+
+18. **Opening the Chat Window**  
+    **Use**: `chatbot`  
+    **Expected output**: The chat window is opened, allowing interaction with the chatbot.
+
+---
+
+19. **Exiting the Application**  
+    **Use**: `exit`  
+    **Expected output**: The application is closed.
+
+---
 
 ### Saving data
 
