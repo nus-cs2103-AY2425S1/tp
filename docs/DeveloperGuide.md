@@ -25,6 +25,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
 
 ### Architecture
@@ -161,7 +163,7 @@ The Mass Reject feature follows the sequence diagram here:
 <puml src="diagrams/MassRejectSequenceDiagram.puml" width="550" />
 
 ### Delete feature
-Deleting by index follows this sequence diagram:
+The Delete feature follows this sequence diagram:
 <puml src="diagrams/DeleteSequenceDiagram.puml" width="550" />
 
 ### Sort feature
@@ -268,8 +270,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Planned Enhancements**
@@ -294,7 +294,7 @@ Team size: 4
    To support more detailed insights, we plan to extend statistics functionality by offering additional predicate filters. This enhancement will allow users to specify criteria (e.g., `stats [j/] [t/]`) for more targeted statistical analysis.
 
 7. **Mass Actions Command**  
-   At present, the `massReject` command allows only batch rejections. We plan to rename this command to `mass` and introduce a predicate/parameter option to enable mass deletions, edits, or rejections. This will streamline bulk actions, making management of large applicant pools more efficient.
+   At present, the `massreject` command allows only batch rejections. We plan to rename this command to `mass` and introduce a predicate/parameter option to enable mass deletions, edits, or rejections. This will streamline bulk actions, making management of large applicant pools more efficient.
 
 8. **Better Handling of Corrupted Data File**
    At present, when data file is corrupted for just one person, all entry in the book is discarded. We plan to handle this better by discarding the persons whose data is corrupted and inform users about it.
@@ -606,7 +606,7 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 | R | Rejected | Applicant has been rejected by the company                                  |
 
 * **Person**: A single entry in Talency address book that contains information about a particular applicant such as name, phone number, email address, and any other relevant details.
-* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG is a command to add a person to the address book).
+* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE e/EMAIL j/JOB CODE t/TAG is a command to add a person to the address book).
 
 --------------------------------------------------------------------------------------------------------------------
 
