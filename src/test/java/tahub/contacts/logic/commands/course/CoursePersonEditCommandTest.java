@@ -24,7 +24,7 @@ public class CoursePersonEditCommandTest {
             new AddressBook(),
             new UserPrefs(),
             new UniqueCourseList(),
-            new StudentCourseAssociationList ());
+            new StudentCourseAssociationList());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
