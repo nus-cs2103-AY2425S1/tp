@@ -1070,19 +1070,19 @@ testers are expected to do more *exploratory* testing.
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Effort**
 
-### **Difficulty Level and Challenges**
+### Difficulty Level and Challenges
 
 The project’s complexity far surpassed typical single-entity systems like AB3, as it dealt with multiple interrelated entities such as doctors, patients, and appointments. Each entity had distinct attributes, behaviors, and interactions, making data management and system design more complicated. One of the major challenges was ensuring consistency in handling various entity types, while maintaining an intuitive and responsive user experience. The increased complexity required more sophisticated logic for tasks like filtering, and linking entities, making debugging and testing far more intensive than in simpler systems.
 
 We also faced challenges when we want to test the different entities and commands when doing unit and integration testing as it gets more complicated to build stubs that contain entities in a correct format.
 
-### **Effort Required**
+### Effort Required
 
 Substantial effort was required to design and implement the core system architecture, which needed to handle the complex relationships between entities without becoming overly rigid or error-prone. A considerable amount of time was invested in designing an extensible data model that could accommodate future requirements and scalability.
 
 The development process involved careful coordination between different aspects of the project, including data storage, UI, and logic. Ensuring that these components interacted seamlessly required numerous iterations and thorough testing, further increasing the overall effort.
 
-### **Achievements**
+### Achievements
 
 Despite the challenges, the project achieved several important milestones. We successfully built a robust system capable of managing and processing doctors' appointements efficiently. The user interface was designed to be simple and efficient while allowing for advanced operations like filtering through complex data sets.
 
