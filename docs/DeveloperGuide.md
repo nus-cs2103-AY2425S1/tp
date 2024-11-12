@@ -693,20 +693,150 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding an Udder
+
+1. Add an Udder to the app
+
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/brUdder m/bza`<br>
+       Expected: New Udder created. Details of the Udder are shown in the Result Display Panel.
+
+    2. Test case: `add n/ p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/brUdder m/bza`<br>
+       Expected: An error mentioning an invalid entry for a name will show in the Result Display Panel.
+
+    3. Other incorrect add commands to try: `add`, `add John Doe`, `add n/John Doe`, `...`<br>
+       Expected: Similar to previous.
+
+### Clearing all Udders
+
+1. Clearing a list of Udders from the app
+
+    1. Prerequisites: List all Udders using the `list` command. There should be multiple Udders in the list to perceive the full intended behaviour.
+
+    2. Test case: `clear`<br>
+       Expected: A message stating that the app has been cleared shown in Result Display Panel.
+
+    3. Test case: `cler`<br>
+       Expected: List of Udders is not cleared. Error details of an unrecognised command shown in the Result Display Panel.
+
 ### Deleting an Udder
 
-1. Deleting an Udder while all udders are being shown
+1. Deleting an Udder while all Udders are being shown
 
-   1. Prerequisites: List all udders using the `list` command. Multiple udders in the list.
+    1. Prerequisites: List all Udders using the `list` command. Multiple Udders in the list.
 
-   2. Test case: `delete 1`<br>
-      Expected: First udder is deleted from the list. Details of the deleted udder shown in the status message. Timestamp in the status bar is updated.
+    2. Test case: `delete 1`<br>
+       Expected: First Udder is deleted from the list. Details of the deleted Udder shown in the Result Display Panel.
 
-   3. Test case: `delete 0`<br>
-      Expected: No udder is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `delete 0`<br>
+       Expected: No Udder is deleted. Error details shown in the status message.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Editing an Udder
+
+1. Editing an Udder shown in the list
+
+   1. Prerequisites: List all Udders using the `list` command. Multiple Udders in the list.
+
+   2. Test case: `edit 1 p/91234567 e/johndoe@example.com`<br>
+      Expected: First Udder is edited. New details of the edited Udder shown in the Result Display Panel.
+
+   3. Test case: `edit 0 p/91234567 e/johndoe@example.com`<br>
+      Expected: No Udder is edited. Error details shown in the Result Display Panel.
+
+   4. Test case: `edit 1 p/00 e/johndoe@example.com`<br>
+      Expected: No Udder is edited. Error details regarding the phone number shown in the Result Display Panel.
+
+   5. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+### Finding an Udder
+
+1. Finding an Udder from an unfiltered list of Udders
+
+    1. Prerequisites: List all Udders using the `list` command. Multiple Udders in the list.
+
+    2. Test case: `find n/John`<br>
+       Expected: All Udders that contain the word "John" in the name is listed in the Person List Panel.
+
+    3. Test case: `find John`<br>
+       Expected: No filtering is done. Error details shown in the Result Display Panel.
+
+    4. Other incorrect delete commands to try: `find`, `find p/`, `...`<br>
+       Expected: Similar to previous.
+
+### Listing all Udders
+
+1. Listing all Udders from a filtered list of Udders
+
+    1. Prerequisites: Filter Udders using `find n/John`. There exists other Udders filtered out.
+
+    2. Test case: `list`<br>
+       Expected: All Udders are listed in the Person List Panel.
+
+    3. Test case: `lst`<br>
+       Expected: Filter will remain. Error details of an unrecognised command shown in the Result Display Panel.
+
+### Scheduling a Meeting
+
+1. Scheduling a meeting with an Udder shown in the list
+
+    1. Prerequisites: List all Udders using the `list` command.
+
+    2. Test case: `schedule 1 st/09-10-2024 09:00 et/09-10-2024 10:00 l/The Terrace`<br>
+       Expected: New meeting created with the first Udder from the list. Details of the meeting shown in the Result Display Panel.
+
+    3. Test case: `schedule 0 st/09-10-2024 09:00 et/09-10-2024 10:00 l/The Terrace`<br>
+       Expected: No meeting is created. Error details shown in the Result Display Panel.
+
+    4. Other incorrect schedule commands to try: `schedule`, `schedule 1 l/The Terrace`, `...`<br>
+       Expected: Similar to previous.
+
+### Listing all Meetings
+
+1. Listing all meetings previously created
+
+    1. Prerequisites: There is at least one meeting with an existing Udder.
+
+   2. Test case: `meetings`<br>
+      Expected: All meetings are listed in the Result Display Panel.
+
+   3. Test case: `meets`<br>
+      Expected: No meetings are listed. Error details of an unrecognised command is shown in the Result Display Panel.
+
+### Deleting a Meeting
+
+1. Deleting an meeting while all meetings are being shown
+
+    1. Prerequisites: List all meetings using the `meetings` command. Multiple meetings in the list.
+
+    2. Test case: `deletem 1`<br>
+       Expected: First meeting is deleted from the list. Details of the deleted meeting shown in the Result Display Panel.
+
+    3. Test case: `deletem 0`<br>
+       Expected: No meeting is deleted. Error details shown in the Result Display Panel.
+
+    4. Other incorrect deletem commands to try: `deletem`, `deletem x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Editing a Meeting
+
+1. Editing a meeting while all meetings are being shown
+
+    1. Prerequisites: List all meetings using the `meetings` command. Multiple Udders in the list.
+
+    2. Test case: `editm 1 st/09-10-2024 10:00`<br>
+       Expected: First meeting is edited. New details of the edited meeting shown in the Result Display Panel.
+
+    3. Test case: `editm 0 st/09-10-2024 10:00`<br>
+       Expected: No meeting is edited. Error details shown in the Result Display Panel.
+
+    4. Test case: `editm 1 st/`<br>
+       Expected: No meeting is edited. Error details regarding the start time format shown in the Result Display Panel.
+
+    5. Other incorrect editm commands to try: `editm`, `editm x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 ---
 
