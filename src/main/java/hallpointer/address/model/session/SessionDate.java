@@ -6,6 +6,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +22,8 @@ public class SessionDate {
                     + "Example: 24 Sep 2024";
 
     // Desired date format
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy")
+        .localizedBy(Locale.ENGLISH);
     // Whitespace processing already done earlier
     public static final Pattern PARSING_PATTERN = Pattern.compile("^([0-9]{1,2}) ([a-zA-Z]{3}) ([0-9]{4})$");
 

@@ -155,7 +155,7 @@ The `Storage` component has the following responsibilities:
 
 It inherits from both `Storage` and `UserPrefStorage`, allowing it to be treated as either one, depending on the functionality needed.
 
-- Depends on some classes in the `Model` component, as its job is to save and retrieve objects that belong to the `Model`.
+It depends on some classes in the `Model` component, as its job is to save and retrieve objects that belong to the `Model`.
 
 ---
 
