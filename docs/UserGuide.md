@@ -93,7 +93,7 @@ Overview of key features:
 A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data:
 
 
-![Ui](images/intro/Ui.png)
+![Ui](images/Ui.png)
 <br>
 
 5. In the application, the box that says **Enter command here ...** is called the command box. This is where you will input in your commands. 
