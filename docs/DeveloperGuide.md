@@ -1230,30 +1230,141 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-We are committed to always improving our product, and we do acknowledge that we can enhance more. Below are some planned enhancements. 
 
-1. Currently, the summary statistics in the UI do not update automatically when the data is modified through add, edit, 
-delete, or clear commands. Users must manually run the summary command to refresh the statistics. To enhance user 
-experience, we plan to implement dynamic rendering, where the summary statistics will automatically update in real-time 
-as soon as any changes are made to the applicant data. This will eliminate the need for users to manually trigger updates.
+### 1. Overview Panel Not Cleared
 
-2. Currently, the filtering functionality in the app is limited to filtering by applicant status. However, many HR 
-professionals work with a variety of job roles simultaneously, and the inability to filter by job role is a significant 
-gap in functionality. To improve the user experience, we plan to expand the filtering capabilities to include filtering 
-by additional parameters, such as Desired Role.
+**Issue**: When using the `clear` command, all candidates are removed from the **Applicants List**, but if a candidate was previously selected, their details remain displayed in the **Overview Panel**.
 
-3. When the applicant list is empty while deleting, filtering, or after running any command, no panel is displayed due to 
-the nature of ListView and adding an empty field isn’t an option due to the regex restrictions. To improve it, a 
-placeholder can be placed when ListView is empty.
+**Expected Behavior**: Ideally, the **Overview Panel** should also be cleared when the list is empty, as no candidates are available for viewing.
 
-4. Currently, after editing an applicant detail, the UI does not update automatically when data is modified through add,
-edit, delete, or clear commands in the overview panel.Users must manually run the view command to refresh the details. 
-Similar to the summary command issue, we can implement dynamic rendering to update details in real-time and eliminate the
-need for users to manually trigger updates.
+**Reason**: This behaviour occurs due to the absence of an observer pattern or listener attached to the **Overview Panel** to automatically update it upon list changes. As a result, the **Overview Panel** does not reset when the **Applicants List** is emptied.
 
-5. Currently, the content displayed in the overview card for each candidate is not perfectly vertically aligned with its
-respective field labels (e.g., "Skills" and "Experience" fields in the screenshot). This cosmetic alignment issue impacts
-the readability and visual consistency of the application.
+**Potential Solution**:
+- Implement an observer pattern where the **Overview Panel** observes changes in the **Applicants List**. If the **Applicants List** is empty (such as after a `clear` command), the **Overview Panel** should reset to an empty state or display a default message.
+
+  > **Suggested Implementation**: Use an observer that listens for changes in the candidate list model and updates the **Overview Panel** accordingly. This would ensure that both `clear` and `delete` commands properly update the **Overview Panel**.
+
+**Current Workaround**: Users can manually select a new candidate (if available) or restart the app to refresh the **Overview Panel**.
+
+---
+
+### 2. Update Overview After Executing Command
+
+**Issue**: When using the `add`, `edit` and `delete` commands, the **Overview Panel** will not display the correct information immediately.
+
+**Expected Behavior**: Ideally, the **Overview Panel** should display the correct information immediately after executing the commands mentioned.
+
+**Reason**: This behaviour occurs due to the absence of an observer pattern or listener attached to the **Overview Panel** to automatically update it upon list changes.
+
+**Potential Solution**:
+- Implement an observer pattern where the **Overview Panel** observes changes in the **Applicants List**. If the **Applicants List** is empty (such as after a `clear` command), the **Overview Panel** should reset to an empty state or display a default message.
+
+  > **Suggested Implementation**: Use an observer that listens for changes in the candidate list model and updates the **Overview Panel** accordingly. This would ensure that the `add`, `edit` and `delete` commands properly update the **Overview Panel**.
+
+**Current Workaround**:
+1. Users can manually click on the summary button.
+2. Type `summary` under the CLI terminal.
+3. Restart the app.
+
+---
+
+### 3. No panel is displayed when commands that results in an empty Applicants List are used
+
+**Issue**: When using commands such as `delete`, `filter`, or any other command that results in an empty **Applicants List**, no panel is displayed.
+
+**Expected Behavior**: Ideally, the **Applicants Panel** should display a placeholder message when there are no applicants in the list after executing commands like `delete` or `filter`.
+
+**Reason**: This behavior is due to the default nature of `ListView`, which hides the display area when the list is empty. Additionally, adding a blank item to `ListView` is restricted by the regex validation requirements.
+
+**Potential Solution**:
+- Set a placeholder message in the `ListView` to display when the list is empty. This would give users feedback indicating that no items are currently available in the **Applicants List**.
+
+  > **Suggested Implementation**: Configure the `ListView`’s `setPlaceholder` method to show a message, such as "No applicants to display," whenever the **Applicants List** is empty.
+
+---
+
+### 4. Dynamic Summary Update
+
+**Issue**: The summary statistics in the **UI** do not update automatically when data is modified through `add`, `edit`, `delete`, or `clear` commands. Users must manually run the `summary` command to refresh the statistics.
+
+**Expected Behavior**: The **Summary Panel** should automatically display updated statistics in real-time as soon as any changes are made to the applicant data.
+
+**Reason**: The lack of dynamic updating is due to the current structure, which does not have an automatic trigger for the **Summary Panel** when data is modified.
+
+**Potential Solution**:
+- Implement dynamic rendering in the **Summary Panel** that listens for changes in the applicant data model, updating the statistics in real-time.
+
+**Current Workaround**: Users can manually trigger the `summary` command to update the statistics.
+
+---
+
+### 5. Enhanced Filtering Options
+
+**Issue**: Currently, the app only allows filtering by applicant status, limiting its usefulness for HR professionals who may want to filter based on other criteria like job roles or skills.
+
+**Expected Behavior**: The filtering functionality should support multiple criteria such as "Desired Role" and "Skills" to allow users to narrow down applicants more effectively.
+
+**Reason**: Expanding filtering criteria will give users more flexibility to view subsets of candidates that match specific requirements.
+
+**Potential Solution**:
+- Extend the filter command to support additional parameters like `Desired Role` and `Skills`, allowing more refined filtering capabilities.
+
+---
+
+### 6. Real-Time Overview Update After Editing Details
+
+**Issue**: The **Overview Panel** does not update automatically when applicant details are modified through `add`, `edit`, `delete`, or `clear` commands. Users must manually run the `view` command to refresh the displayed information.
+
+**Expected Behavior**: The **Overview Panel** should reflect updated information immediately after any modification to an applicant's details.
+
+**Potential Solution**:
+- Implement an observer pattern for the **Overview Panel** to automatically display updated details whenever an applicant’s information is edited.
+
+**Current Workaround**: Users can manually re-select the applicant or restart the application to refresh the details.
+
+---
+
+### 7. Bulk Actions for Candidate Management
+
+**Issue**: Currently, users must perform actions (such as `delete` or `update status`) on candidates individually, which can be time-consuming for larger candidate pools.
+
+**Expected Behavior**: Users should be able to select multiple candidates and perform bulk actions such as updating status, assigning tags, or deleting.
+
+**Potential Solution**:
+- Introduce a bulk action feature that enables users to select multiple candidates and apply actions in one step.
+
+**Current Workaround**: Users need to perform actions individually on each candidate.
+
+---
+
+### 8. Improved Sorting Options in Applicants List
+
+**Issue**: Sorting of applicants is currently limited to a single criterion (e.g., alphabetical order), which restricts HR professionals from organizing candidates by specific factors.
+
+**Expected Behavior**: The **Applicants List** should support sorting by additional fields such as "Experience," "Application Date," and "Desired Role."
+
+**Potential Solution**:
+- Add sorting functionality with multiple parameters to the **Applicants List**, enabling users to sort based on their specific needs.
+
+**Current Workaround**: Users may need to manually search or scroll through the list to find candidates matching specific criteria.
+
+---
+
+### 9. UI Layout Disorganization When Moving Between Monitors
+
+**Issue**: When moving the application window from one monitor to another, the UI layout becomes disorganized, resulting in significant blank spaces.
+
+**Expected Behavior**: The UI layout should remain consistent across monitors, preserving the intended spacing and component alignment.
+
+**Reason**: This issue occurs due to JavaFX's handling of different display settings, such as resolution and scaling, on multiple monitors. JavaFX may not always adapt smoothly to changes in display properties, leading to UI scaling inconsistencies when moving between monitors.
+
+**Potential Solution**:
+1. **Dynamic Layout Recalibration**: Implement a recalibration feature that triggers when a monitor or resolution change is detected. This could be achieved using JavaFX listeners to detect display changes, prompting a layout refresh to adjust to the new display properties.
+
+2. **Adaptive Layout Constraints**: Modify the application to use anchor or percent-based layout constraints instead of absolute positioning, as these are more adaptable to different monitor configurations and can prevent layout inconsistencies.
+
+**Current Workaround**: Users can manually adjust the application window size after moving it to a new monitor to minimize the layout issues.
+
 
 
 ---

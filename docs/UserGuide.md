@@ -41,8 +41,6 @@ This app is a desktop app for managing candidates and job roles, **optimised for
     - [Bug Report](#how-to-report-a-bug)
     - [Archiving Data Files](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
-- [Known Limitation](#known-limitation)
-- [Planned Enhancement](#planned-enhancement)
 - [Glossary](#glossary)
 - [Acknowledgements](#acknowledgements)
 
@@ -620,69 +618,6 @@ _Details coming soon ..._
 **Q**: How do I update to the latest version of TalentSG?<br>
 **A**: Simply download the latest `.jar` file released on our GitHub page.
 
---------------------------------------------------------------------------------------------------------------------
-
-## Known Limitation
-
-### 1. Scroll Bar Usage for Feedback Display 
-
-**Issue**: Result/Feedback display uses a scroll bar. Few users reported feedback information shown is not wrapped.
-
----
-
-## Planned Enhancement
-
-### 1. Overview Panel Not Cleared
-
-**Issue**: When using the `clear` command, all candidates are removed from the **Applicants List**, but if a candidate was previously selected, their details remain displayed in the **Overview Panel**.
-
-**Expected Behavior**: Ideally, the **Overview Panel** should also be cleared when the list is empty, as no candidates are available for viewing.
-
-**Reason**: This behaviour occurs due to the absence of an observer pattern or listener attached to the **Overview Panel** to automatically update it upon list changes. As a result, the **Overview Panel** does not reset when the **Applicants List** is emptied.
-
-**Potential Solution**:
-- Implement an observer pattern where the **Overview Panel** observes changes in the **Applicants List**. If the **Applicants List** is empty (such as after a `clear` command), the **Overview Panel** should reset to an empty state or display a default message.
-
-  > **Suggested Implementation**: Use an observer that listens for changes in the candidate list model and updates the **Overview Panel** accordingly. This would ensure that both `clear` and `delete` commands properly update the **Overview Panel**.
-
-**Note**: This Solution will fix [2. Update Overview After Executing Command](#2-update-overview-after-executing-command)
-
-**Current Workaround**: Users can manually select a new candidate (if available) or restart the app to refresh the **Overview Panel**.
-
-
-### 2. Update Overview After Executing Command
-
-**Issue**: When using the `add`, `edit` and `delete` commands, the **Overview Panel** will not display the correct information immediately. 
-
-**Expected Behavior**: Ideally, the **Overview Panel** should display the correct information immediately after executing the commands mentioned. 
-
-**Reason**: This behaviour occurs due to the absence of an observer pattern or listener attached to the **Overview Panel** to automatically update it upon list changes. As a result, the **Overview Panel** does not reset when the **Applicants List** is emptied.
-
-**Potential Solution**:
-- Implement an observer pattern where the **Overview Panel** observes changes in the **Applicants List**. If the **Applicants List** is empty (such as after a `clear` command), the **Overview Panel** should reset to an empty state or display a default message.
-
-  > **Suggested Implementation**: Use an observer that listens for changes in the candidate list model and updates the **Overview Panel** accordingly. This would ensure that the `add`, `edit` and `delete` commands properly update the **Overview Panel**.
-
-**Note**: This Solution will fix [1. Overview Panel Not Cleared](#1-overview-panel-not-cleared)
-
-**Current Workaround**: <br>
-To Update the Overview
-1. Users can manually click on the [summary button](#summary-summary).
-2. Type [`summary`](#summary-summary) under the CLI terminal.
-3. Restart the app.
-
-### 3.  No panel is displayed when commands that results in an empty Applicants List are used
-
-**Issue**: When using commands such as `delete`, `filter`, or any other command that results in an empty **Applicants List**, no panel is displayed.
-
-**Expected Behavior**: Ideally, the **Applicants Panel** should display a placeholder message when there are no applicants in the list after executing commands like `delete` or `filter`.
-
-**Reason**: This behavior is due to the default nature of `ListView`, which hides the display area when the list is empty. Additionally, adding a blank item to `ListView` is restricted by the regex validation requirements.
-
-**Potential Solution**:
-- Set a placeholder message in the `ListView` to display when the list is empty. This would give users feedback indicating that no items are currently available in the **Applicants List**.
-
-  > **Suggested Implementation**: Configure the `ListView`’s `setPlaceholder` method to show a message, such as "No applicants to display," whenever the **Applicants List** is empty. This would ensure a consistent user experience across commands like `delete`, `filter`, and other list-modifying operations.
 
 
 ---
