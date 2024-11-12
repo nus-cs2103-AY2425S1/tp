@@ -36,7 +36,7 @@ public class AttendRemoveCommand extends Command {
             + PREFIX_COURSE_CODE + "CS1010 "
             + PREFIX_TUTORIAL + "T01 ";
 
-    public static final String MESSAGE_SUCCESS = "New attended session marked for student %1$s";
+    public static final String MESSAGE_SUCCESS = "Removed the last attendance session record for student %1$s";
     public static final String MESSAGE_NO_SCA_FOUND = "Student %1$s could not be found.";
     public static final String MESSAGE_ATTENDANCE_NO_SESSIONS_TO_REMOVE =
             "There are no available attendance sessions to remove.";
