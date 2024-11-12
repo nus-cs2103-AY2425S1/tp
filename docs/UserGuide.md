@@ -168,11 +168,23 @@ Suggestions provide visible hints about the expected command format as the comma
 **Examples** (words in brackets "()", are suggested by the system.)
 * Typing `add` will show the expected format for adding a patient: `add (n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ...)` 
 * Upon typing the slash commands (e.g. `n/` or `p/`), the suggestion only shows the parameter that needs to be filled or the next command once done. e.g `add n/(NAME)`, `add n/Saajid Shaik (p/PHONE)`
-  > Do note that while commands can be written in any order, the suggestion feature only follows the default way which analogous to how the contact details are displayed in the app. 
-  > <br><br>You may notice that suggestion and autocomplete features almost always work, even without default ordering, but this a feature-in-progress for future enhancement.
-  > <br><br>Additionally, suggestions for parameters will never be duplicated unless users manually deviates from autocomplete or suggestion by the system.
-* Inputs that are prefixes to more than 1 command, will result in full syntax suggestions for those commands to be displayed and appended with a `|`. e.g. `fi(nd KEYWORD MORE_KEYWORDS | finddoc KEYWORD MORE_KEYWORDS)`
+* Inputs that are prefixes to more than 1 command, will result in full syntax suggestions for those commands to be displayed and separated with a `|`. e.g. `fi(nd KEYWORD MORE_KEYWORDS | finddoc KEYWORD MORE_KEYWORDS)`
 
+<div style="page-break-after: always;"></div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note**
+
+While commands can be written in any order, the suggestion feature only follows the default order which puts related parameters together, analogous to how the contact details are displayed in the app.
+
+You may notice that suggestion and autocomplete features almost always work, even without default ordering, but this is currently a feature-in-progress for future enhancement.
+
+Additionally, suggestions for parameters will never be duplicated unless users manually deviates from autocomplete or suggestion by the system.
+
+</div>
+
+[↑ Back to top](#table-of-contents)
 
 
 ### Autocompletion
@@ -192,10 +204,10 @@ Since autocomplete can only work on fixed syntaxes, `INDEX`,`KEYWORD` and variab
 
 ![red_error](images/red_autocomplete.png)
 
-
 [↑ Back to top](#table-of-contents)
 
 <div style="page-break-after: always;"></div>
+
 
 ### Viewing help : `help`
 
