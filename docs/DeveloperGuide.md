@@ -348,7 +348,7 @@ Additionally, certain command hints could benefit from more clarity on constrain
 
 These requirements can be restrictive for agents who may prefer more flexible filtering, such as searching by the first few digits of a phone number (useful when multiple contacts share a company extension) or by email domain alone.
 
-**Proposed Enhancement:** Relax parsing requirements for the `income` and `email` fields when used with the `filter` command, allowing any input and matching based on substrings rather than strict validation.
+**Proposed Enhancement:** Relax parsing requirements for the `income` and `email` fields when used with the `filter` command, to allow any input and matching based on substrings rather than strict validation.
 
 **Status:** Scheduled for future release due to current timeline priorities.
 
