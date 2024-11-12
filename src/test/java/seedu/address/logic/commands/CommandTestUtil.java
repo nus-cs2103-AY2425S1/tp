@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -34,6 +36,12 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_LESSON_TIME_AMY = "mon:12:00";
+    public static final String VALID_LESSON_TIME_BOB = "tue:11:00";
+    public static final String VALID_EDUCATION_AMY = "Primary";
+    public static final String VALID_EDUCATION_BOB = "Secondary";
+    public static final String VALID_GRADE_AMY = "0";
+    public static final String VALID_GRADE_BOB = "0";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -47,6 +55,10 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String LESSON_TIME_DESC_AMY = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_AMY;
+    public static final String LESSON_TIME_DESC_BOB = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_BOB;
+    public static final String EDUCATION_DESC_AMY = " " + PREFIX_EDUCATION + VALID_EDUCATION_AMY;
+    public static final String EDUCATION_DESC_BOB = " " + PREFIX_EDUCATION + VALID_EDUCATION_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -63,9 +75,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withLessonTime(VALID_LESSON_TIME_AMY).withEducation(VALID_EDUCATION_AMY).withTags(VALID_TAG_FRIEND)
+                .build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withLessonTime(VALID_LESSON_TIME_BOB).withEducation(VALID_EDUCATION_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
@@ -124,5 +138,23 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the people at the given {@code targetIndices} in the
+     * {@code model}'s address book.
+     */
+    public static void showPersonAtIndices(Model model, List<Index> targetIndices) {
+        List<String> result = new ArrayList<>();
+        for (Index targetIndex : targetIndices) {
+            assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+
+            Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+            final String[] splitName = person.getName().fullName.split("\\s+");
+            result.addAll(Arrays.asList(splitName[0]));
+        }
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(result));
+        assertEquals(targetIndices.size(), model.getFilteredPersonList().size());
+    }
+
 
 }

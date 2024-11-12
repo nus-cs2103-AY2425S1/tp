@@ -13,6 +13,7 @@ Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
+Class StudentCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -37,6 +38,7 @@ MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
+PersonListPanel -down-> "*" StudentCard
 
 MainWindow -left-|> UiPart
 
@@ -44,10 +46,12 @@ ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
+StudentCard --|> PersonCard
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 PersonCard ..> Model
+StudentCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 

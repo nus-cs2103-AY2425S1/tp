@@ -19,6 +19,8 @@ Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
+Class JsonAdaptedStudent extends JsonAdaptedPerson
+Class JsonAdaptedParent extends JsonAdaptedPerson
 Class JsonAdaptedTag
 }
 

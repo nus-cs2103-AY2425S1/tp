@@ -6,15 +6,17 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
  */
-public class PersonBuilder {
+public abstract class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
@@ -26,6 +28,9 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private boolean isPinned;
+    private boolean isArchived;
+
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +41,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        isPinned = false;
+        isArchived = false;
     }
 
     /**
@@ -47,6 +54,20 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        isPinned = personToCopy.isPinned();
+    }
+
+    /**
+     * Creates an instance of the appropriate subtype of PersonBuilder from the given Person.
+     */
+    public static PersonBuilder of(Person person) {
+        if (person instanceof Student student) {
+            return new StudentBuilder(student);
+        }
+        if (person instanceof Parent parent) {
+            return new ParentBuilder(parent);
+        }
+        throw new IllegalArgumentException("Unsupported person type: " + person.getClass());
     }
 
     /**
@@ -89,8 +110,50 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Sets the isPinned of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPinned(boolean isPinned) {
+        this.isPinned = isPinned;
+        return this;
     }
+
+    /**
+     * Sets the isArchived of the {@code Person} that we are building.
+     */
+    public PersonBuilder withArchived(boolean isArchived) {
+        this.isArchived = isArchived;
+        return this;
+    }
+
+    public Name getName() {
+        return name;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public boolean isPinned() {
+        return isPinned;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public abstract Person build();
 
 }

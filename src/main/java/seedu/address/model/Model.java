@@ -5,7 +5,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * The API of the Model component.
@@ -13,6 +16,18 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that evaluates to true if the person is a student */
+    Predicate<Person> PREDICATE_SHOW_ALL_STUDENTS = person -> person instanceof Student;
+
+    /** {@code Predicate} that evaluates to true if the person is a parent */
+    Predicate<Person> PREDICATE_SHOW_ALL_PARENTS = person -> person instanceof Parent;
+
+    /** {@code Predicate} that finds unarchived persons*/
+    Predicate<Person> PREDICATE_SHOW_UNARCHIVED_PERSONS = person -> !person.isArchived();
+
+    /** {@code Predicate} that finds archived persons*/
+    Predicate<Person> PREDICATE_SHOW_ARCHIVED_PERSONS = person -> person.isArchived();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -76,6 +91,26 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Pins the given person to the top of the address book.
+     */
+    void pinPerson(Person person);
+
+    /**
+     * Unpins the given person to the top of the address book.
+     */
+    void unpinPerson(Person person);
+
+    /**
+     * Archives the given person to the top of the address book.
+     */
+    void archivePerson(Person person);
+
+    /**
+     * Unarchives the given person to the top of the address book.
+     */
+    void unarchivePerson(Person person);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -84,4 +119,21 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     *  Returns the predicate of the current filtered person list
+     */
+    Predicate<Person> getFilteredPersonListPredicate();
+
+    /**
+     * Sorts the person list to put all pinned persons at the top of the list.
+     */
+    void sortByPin();
+
+    /**
+     * Sorts the person list according to their name.
+     */
+    void sortByName();
+
+    Person personFromName(Name name);
 }

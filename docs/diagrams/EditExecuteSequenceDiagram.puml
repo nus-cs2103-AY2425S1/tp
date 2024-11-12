@@ -1,0 +1,57 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box "Logic Layer" LOGIC_COLOR_T1
+    participant "e:EditCommand" as EditCommand LOGIC_COLOR
+    participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model Layer" MODEL_COLOR_T1
+    participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> EditCommand : execute(model)
+activate EditCommand
+
+EditCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> EditCommand : lastShownList
+deactivate Model
+
+
+alt Person is not Student and contains education field
+    EditCommand -> EditCommand : throw CommandException(...)
+end
+
+alt Person is not Student and contains lesson time field
+    EditCommand -> EditCommand : throw CommandException(...)
+end
+
+EditCommand -> EditCommand : createEditedPerson(...)
+activate EditCommand
+EditCommand --> EditCommand : editedPerson
+deactivate EditCommand
+
+alt editedPerson is duplicate
+    EditCommand -> EditCommand : throw CommandException(...)
+end
+
+EditCommand -> Model : setPerson(personToEdit, editedPerson)
+activate Model
+deactivate Model
+
+EditCommand -> Model : updateFilteredPersonList()
+activate Model
+deactivate Model
+
+create CommandResult
+EditCommand -> CommandResult : new CommandResult(message)
+activate CommandResult
+CommandResult --> EditCommand : result
+deactivate CommandResult
+
+[<-- EditCommand : result
+deactivate EditCommand
+
+@enduml

@@ -1,63 +1,91 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class encapsulating typical {@code AddressBook} objects containing {@code Student} and
+ * {@Code Parent} objects to be used in tests. Includes parent-child links
  */
 public class TypicalPersons {
 
-    public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+    // Students
+    public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
+            .withAddress("123, Jurong West Ave 6, #08-111")
+            .withEmail("alice@example.com")
             .withPhone("94351253")
+            .withLessonTime("tue:12:00")
+            .withEducation("Primary")
+            .withGrade("0")
+            .withParentName("Elle Meyer")
             .withTags("friends").build();
-    public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
+    public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("johnd@example.com")
+            .withPhone("98765432")
+            .withLessonTime("sun:13:00")
+            .withEducation("Primary")
+            .withGrade("0")
+            .withParentName("Fiona Kunz")
             .withTags("owesMoney", "friends").build();
-    public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
-    public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").build();
-
-    // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
-            .withEmail("hans@example.com").withAddress("chicago ave").build();
-
-    // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+    public static final Student CARL = new StudentBuilder().withName("Carl Kurz")
+            .withPhone("95352563")
+            .withEmail("heinz@example.com")
+            .withAddress("wall street")
+            .withLessonTime("mon:12:00")
+            .withEducation("Primary")
+            .withGrade("0")
+            .withParentName("George Best")
+            .build();
+    public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier")
+            .withPhone("87652533")
+            .withEmail("cornelia@example.com")
+            .withAddress("10th street")
+            .withLessonTime("wed:14:00")
+            .withEducation("Primary")
+            .withGrade("0")
+            .withParentName("George Best")
             .build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    // Parents
+    public static final Parent ELLE = new ParentBuilder().withName("Elle Meyer")
+            .withPhone("9482224")
+            .withEmail("werner@example.com")
+            .withAddress("michegan ave")
+            .withChildren("Alice Pauline")
+            .build();
+    public static final Parent FIONA = new ParentBuilder().withName("Fiona Kunz")
+            .withPhone("9482427")
+            .withEmail("lydia@example.com")
+            .withAddress("little tokyo")
+            .withChildren("Benson Meier")
+            .build();
+    public static final Parent GEORGE = new ParentBuilder().withName("George Best")
+            .withPhone("9482442")
+            .withEmail("anna@example.com")
+            .withAddress("4th street")
+            .withChildren("Carl Kurz", "Daniel Meier")
+            .build();
 
-    private TypicalPersons() {} // prevents instantiation
+    // Names for the Persons above
+    public static final Name ALICE_NAME = new Name("Alice Pauline");
+    public static final Name BENSON_NAME = new Name("Benson Meier");
+    public static final Name CARL_NAME = new Name("Carl Kurz");
+    public static final Name DANIEL_NAME = new Name("Daniel Meier");
+    public static final Name ELLE_NAME = new Name("Elle Meyer");
+    public static final Name FIONA_NAME = new Name("Fiona Kunz");
+    public static final Name GEORGE_NAME = new Name("George Best");
+
+    private TypicalPersons() {
+
+    } // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.
@@ -71,6 +99,55 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
+        // Alice, Benson, Carl and Daniel are Students; Elle, Fiona and George are Parents
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static AddressBook getUnlinkedAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            if (person instanceof Student student) {
+                Student unlinkedStudent = new StudentBuilder(student).withParentName(null).build();
+                ab.addPerson(unlinkedStudent);
+            } else if (person instanceof Parent parent) {
+                Parent unlinkedParent = new ParentBuilder(parent).withChildren().build();
+                ab.addPerson(unlinkedParent);
+            }
+        }
+        return ab;
+    }
+
+    public static AddressBook getArchivedAddressBook() {
+        AddressBook ab = new AddressBook();
+        boolean toArchive = true;
+        for (Person person : getTypicalPersons()) {
+            if (person instanceof Student student) {
+                Person newStudent = new StudentBuilder(student).withArchived(toArchive).build();
+                ab.addPerson(newStudent);
+                toArchive = !toArchive;
+            } else if (person instanceof Parent parent) {
+                Person newParent = new ParentBuilder(parent).withArchived(toArchive).build();
+                ab.addPerson(newParent);
+                toArchive = !toArchive;
+            }
+        }
+        return ab;
+    }
+
+    public static AddressBook getPinnedAddressBook() {
+        AddressBook ab = new AddressBook();
+        boolean toPin = true;
+        for (Person person : getTypicalPersons()) {
+            if (person instanceof Student student) {
+                Person newStudent = new StudentBuilder(student).withPinned(toPin).build();
+                ab.addPerson(newStudent);
+                toPin = !toPin;
+            } else if (person instanceof Parent parent) {
+                Person newParent = new ParentBuilder(parent).withPinned(toPin).build();
+                ab.addPerson(newParent);
+                toPin = !toPin;
+            }
+        }
+        return ab;
     }
 }

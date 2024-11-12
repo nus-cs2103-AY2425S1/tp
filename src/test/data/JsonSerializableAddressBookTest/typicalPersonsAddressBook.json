@@ -5,42 +5,77 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "lessonTime" : "tue:12:00",
+    "education": "Primary",
+    "grade": "0",
+    "parentName": "Test parent",
+    "tags" : [ "friends" ],
+    "type" : "Student"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "lessonTime" : "sun:13:00",
+    "education": "Primary",
+    "grade": "0",
+    "parentName": "Test parent",
+    "tags" : [ "owesMoney", "friends" ],
+    "type" : "Student"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "lessonTime" : "mon:12:00",
+    "education": "Primary",
+    "grade": "0",
+    "parentName": "Test parent",
+    "tags" : [ ],
+    "type" : "Student"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "lessonTime" : "wed:14:00",
+    "education": "Primary",
+    "grade": "0",
+    "parentName": "Test parent",
+    "tags" : [ ],
+    "type" : "Student"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "lessonTime" : "thu:11:59",
+    "education": "Primary",
+    "grade": "0",
+    "parentName": "Test parent",
+    "tags" : [ ],
+    "type" : "Student"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "lessonTime" : "sat:10:00",
+    "education": "Primary",
+    "grade": "0",
+    "parentName": "Test parent",
+    "tags" : [ ],
+    "type" : "Student"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
+    "lessonTime" : "fri:20:00",
+    "education": "Primary",
+    "grade": "0",
+    "parentName": "Test parent",
+    "tags" : [ ],
+    "type" : "Student"
   } ]
 }

@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LinkCommand" as LinkCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+
+end box
+
+[-> LinkCommand : execute(model)
+activate LinkCommand
+
+
+LinkCommand -> Model : personFromName(...)
+activate Model
+Model --> LinkCommand : child
+deactivate Model
+
+LinkCommand -> Model : personFromName(...)
+activate Model
+Model --> LinkCommand : parent
+deactivate Model
+
+
+LinkCommand -> LinkCommand : createLinkedChild(...)
+activate LinkCommand
+LinkCommand --> LinkCommand
+deactivate LinkCommand
+
+
+LinkCommand -> LinkCommand : createLinkedParent(...)
+activate LinkCommand
+LinkCommand --> LinkCommand
+deactivate LinkCommand
+
+
+LinkCommand -> Model : setPerson(castedChild, linkedChild)
+activate Model
+deactivate Model
+
+LinkCommand -> Model : setPerson(castedParent, linkedParent)
+activate Model
+deactivate Model
+
+create CommandResult
+LinkCommand -> CommandResult : new CommandResult(...)
+activate CommandResult
+CommandResult --> LinkCommand : result
+deactivate CommandResult
+
+[<-- LinkCommand : result
+deactivate LinkCommand
+@enduml

@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -95,6 +96,76 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Returns the first person in the list with the specified {@code Name}.
+     */
+    public Person personFromName(Name name) {
+        return internalList.stream().filter(person -> person.getName().equals(name)).findFirst().orElseThrow(
+                PersonNotFoundException::new);
+    }
+
+    /**
+     * Archives the specified person by setting their archived status to true.
+     *
+     * @param person The person to be archived. Must not be null.
+     * @throws NullPointerException If the specified person is null.
+     * @throws PersonNotFoundException If the person is not found in the internal list.
+     */
+    public void archivePerson(Person person) {
+        requireNonNull(person);
+
+        int index = internalList.indexOf(person);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        Person personToArchive = internalList.get(index);
+
+        if (personToArchive.isArchived()) {
+            return;
+        }
+
+        personToArchive.setArchived(true);
+    }
+
+    /**
+     * Unarchives the specified person by setting their archived status to false.
+     *
+     * @param person The person to be unarchived. Must not be null.
+     * @throws NullPointerException If the specified person is null.
+     * @throws PersonNotFoundException If the person is not found in the internal list.
+     */
+    public void unarchivePerson(Person person) {
+        requireNonNull(person);
+
+        int index = internalList.indexOf(person);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        Person personToArchive = internalList.get(index);
+
+        if (!personToArchive.isArchived()) {
+            return;
+        }
+
+        personToArchive.setArchived(false);
+    }
+
+    /**
+     * Sorts the list by placing all the pinned people to the top of the list.
+     */
+    public void sortByPin() {
+        FXCollections.sort(internalList, Comparator.comparing(Person::isPinned).reversed());
+    }
+
+    /**
+     * Sorts the list by name.
+     */
+    public void sortByName() {
+        FXCollections.sort(internalList, Comparator.comparing(Person::getFullName));
     }
 
     /**

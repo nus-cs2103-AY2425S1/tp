@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <GridPane HBox.hgrow="ALWAYS" gridLinesVisible="true" >
+    <columnConstraints>
+      <ColumnConstraints minWidth="20" prefWidth="130" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+      <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+      </padding>
+      <HBox spacing="0.5" alignment="CENTER_LEFT">
+        <ImageView fx:id="pinIcon" fitWidth="24" fitHeight="24">
+          <Image url="@/images/pin_icon.png"/>
+        </ImageView>
+        <Label text="  " />
+        <ImageView fitWidth="16" fitHeight="16">
+          <clip>
+            <Rectangle width="16" height="16" arcWidth="8" arcHeight="8"/>
+          </clip>
+          <Image url="@/images/green_S.png"/>
+        </ImageView>
+        <Label fx:id="id" styleClass="cell_big_label">
+          <minWidth>
+            <!-- Ensures that the label text is never truncated -->
+            <Region fx:constant="USE_PREF_SIZE" />
+          </minWidth>
+        </Label>
+      </HBox>
+
+    </VBox>
+
+    <columnConstraints>
+      <ColumnConstraints minWidth="15" prefWidth="200" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="1" >
+      <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+      </padding>
+
+      <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+      <FlowPane>
+        <Label fx:id="education" />
+        <Label fx:id="grade" />
+        <Label fx:id="lessonTime" />
+      </FlowPane>
+      <ScrollPane fitToWidth="true" fitToHeight="true"
+                  styleClass="scroll-pane" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="true">
+        <content>
+          <FlowPane fx:id="tags" prefWidth="200" styleClass="flow-pane"/>
+        </content>
+      </ScrollPane>
+
+    </VBox>
+
+    <columnConstraints>
+      <ColumnConstraints minWidth="20" prefWidth="40" hgrow="ALWAYS"/>
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="2">
+      <padding>
+        <Insets top="5" right="15" bottom="5" left="15" />
+      </padding>
+      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+    </VBox>
+
+    <columnConstraints>
+      <ColumnConstraints minWidth="20" prefWidth="40" hgrow="ALWAYS" />
+    </columnConstraints>
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="3">
+      <padding>
+        <Insets top="5" right="15" bottom="5" left="15" />
+      </padding>
+      <Label fx:id="parentName" styleClass="cell_small_label" text="\$parentName" />
+      <Label fx:id="parentPhone" styleClass="cell_small_label" text="\$parentPhone" />
+      <Label fx:id="parentEmail" styleClass="cell_small_label" text="\$parentEmail" />
+    </VBox>
+
+  </GridPane>
+</HBox>

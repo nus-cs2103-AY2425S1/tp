@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -86,12 +87,34 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+    public Person personFromName(Name name) {
+        return persons.personFromName(name);
+    }
+
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    public void sortByPin() {
+        persons.sortByPin();
+    }
+
+    public void sortByName() {
+        persons.sortByName();
+    }
+
+    // Archive related Methods
+
+    public void archivePerson(Person person) {
+        persons.archivePerson(person);
+    }
+
+    public void unarchivePerson(Person person) {
+        persons.unarchivePerson(person);
     }
 
     //// util methods

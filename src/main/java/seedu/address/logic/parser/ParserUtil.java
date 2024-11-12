@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -11,8 +13,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Education;
+import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,6 +26,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDICES =
+            "One of the provided indices is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_EMPTY_INDICES = "No valid indices provided.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -120,5 +128,73 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String grade} into a {@code Grade}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code grade} is invalid.
+     */
+    public static Grade parseGrade(String grade) throws ParseException {
+        requireNonNull(grade);
+        String trimmedGrade = grade.trim();
+        if (!Grade.isValidGradeIndex(trimmedGrade)) {
+            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
+        }
+        return new Grade(trimmedGrade);
+    }
+
+    /**
+     * Parses an {@code String lessonTime} into a {@code LessonTIme}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code lessonTime} is invalid.
+     */
+    public static LessonTime parseLessonTime(String lessonTime) throws ParseException {
+        requireNonNull(lessonTime);
+        String trimmedLessonTime = lessonTime.trim();
+        if (!LessonTime.isValidLessonTime(trimmedLessonTime)) {
+            throw new ParseException(LessonTime.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonTime(trimmedLessonTime);
+    }
+
+    /**
+     * Parses an {@code String education} into a {@code Education}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code education} is invalid.
+     */
+    public static Education parseEducation(String education) throws ParseException {
+        requireNonNull(education);
+        String trimmedEducation = education.trim();
+        if (!Education.isValidEducationLevel(trimmedEducation)) {
+            throw new ParseException(Education.MESSAGE_CONSTRAINTS);
+        }
+        return new Education(trimmedEducation);
+    }
+
+    /**
+     * Parses {@code oneBasedIndexes} into a list of {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static List<Index> parseIndexes(String oneBasedIndexes) throws ParseException {
+        String[] trimmedIndexes = oneBasedIndexes.trim().split(" ");
+
+        List<Index> indexes = new ArrayList<>();
+        for (String index : trimmedIndexes) {
+            if (!StringUtil.isNonZeroUnsignedInteger(index)) {
+                throw new ParseException(MESSAGE_INVALID_INDICES);
+            }
+            indexes.add(Index.fromOneBased(Integer.parseInt(index)));
+        }
+
+        if (indexes.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_EMPTY_INDICES);
+        }
+
+        return indexes;
     }
 }

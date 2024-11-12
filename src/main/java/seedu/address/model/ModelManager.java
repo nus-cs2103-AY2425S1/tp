@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -101,7 +102,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredPersonList(PREDICATE_SHOW_UNARCHIVED_PERSONS);
     }
 
     @Override
@@ -109,6 +110,42 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public Person personFromName(Name name) {
+        return addressBook.personFromName(name);
+    }
+
+    @Override
+    public void pinPerson(Person person) {
+        person.setPinned(true);
+    }
+
+    @Override
+    public void unpinPerson(Person person) {
+        person.setPinned(false);
+    }
+
+    @Override
+    public void sortByPin() {
+        addressBook.sortByPin();
+    }
+
+    @Override
+    public void sortByName() {
+        addressBook.sortByName();
+    }
+
+    // Archive related Methods
+    @Override
+    public void archivePerson(Person person) {
+        addressBook.archivePerson(person);
+    }
+
+    @Override
+    public void unarchivePerson(Person person) {
+        addressBook.unarchivePerson(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -126,6 +163,11 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public Predicate<Person> getFilteredPersonListPredicate() {
+        return (Predicate<Person>) filteredPersons.getPredicate();
     }
 
     @Override

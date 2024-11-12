@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant "emd:EditPersonDescriptor" as EditPersonDescriptor LOGIC_COLOR
+participant "e:EditCommand" as EditCommand LOGIC_COLOR
+end box
+
+[-> EditCommandParser : parse("edit 1 n/John Doe")
+activate EditCommandParser
+
+create EditPersonDescriptor
+EditCommandParser -> EditPersonDescriptor
+activate EditPersonDescriptor
+
+EditPersonDescriptor --> EditCommandParser : emd
+deactivate EditPersonDescriptor
+
+EditCommandParser -> EditPersonDescriptor : set edited fields
+activate EditPersonDescriptor
+
+EditPersonDescriptor --> EditCommandParser
+deactivate EditPersonDescriptor
+
+create EditCommand
+EditCommandParser -> EditCommand : new EditCommand(1, emd)
+activate EditCommand
+
+EditCommand --> EditCommandParser : e
+deactivate EditCommand
+
+[<-- EditCommandParser : e
+deactivate EditCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+[<-[hidden]- EditCommandParser
+destroy EditCommandParser
+
+@enduml

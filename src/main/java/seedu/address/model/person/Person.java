@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
 
     // Identity fields
     private final Name name;
@@ -24,9 +24,12 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private boolean isPinned;
+    private boolean isArchived;
 
     /**
      * Every field must be present and not null.
+     * Persons initialised with this constructor will have isPinned set to false by default
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -35,11 +38,31 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.isPinned = false;
+        this.isArchived = false;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean isPinned,
+                  boolean isArchived) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.isPinned = isPinned;
+        this.isArchived = isArchived;
     }
 
     public Name getName() {
         return name;
     }
+
+    public String getFullName() {
+        return name.fullName;
+    };
 
     public Phone getPhone() {
         return phone;
@@ -53,12 +76,29 @@ public class Person {
         return address;
     }
 
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public boolean isPinned() {
+        return isPinned;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void setPinned(boolean pinned) {
+        isPinned = pinned;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
     }
 
     /**
@@ -100,7 +140,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, isPinned, isArchived);
     }
 
     @Override
@@ -111,7 +151,26 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("isPinned", String.valueOf(isPinned))
+                .add("isArchived", String.valueOf(isArchived))
                 .toString();
+    }
+
+    /**
+     * Returns a string describing this person in the format used by {@code Messages}.
+     */
+    public String toMessageString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append("; Phone: ")
+                .append(getPhone())
+                .append("; Email: ")
+                .append(getEmail())
+                .append("; Address: ")
+                .append(getAddress())
+                .append("; Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
     }
 
 }

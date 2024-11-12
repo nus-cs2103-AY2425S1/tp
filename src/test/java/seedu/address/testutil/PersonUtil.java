@@ -1,16 +1,20 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddParentCommand;
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Parent;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,23 +23,47 @@ import seedu.address.model.tag.Tag;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code Student}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCommand(Student student) {
+        return AddStudentCommand.COMMAND_WORD + " " + getStudentDetails(student);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns an add command string for adding the {@code Parent}.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getAddCommand(Parent parent) {
+        return AddParentCommand.COMMAND_WORD + " " + getParentDetails(parent);
+    }
+
+    /**
+     * Returns the part of command string for the given {@code Student}'s details.
+     */
+    public static String getStudentDetails(Student student) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        sb.append(PREFIX_NAME + student.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + student.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + student.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + student.getAddress().value + " ");
+        sb.append(PREFIX_LESSON_TIME + student.getLessonTime().value + " ");
+        sb.append(PREFIX_EDUCATION + student.getEducation().educationLevel + " ");
+        student.getTags().stream().forEach(
+                s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        );
+        return sb.toString();
+    }
+
+    /**
+     * Returns the part of command string for the given {@code Parent}'s details.
+     */
+    public static String getParentDetails(Parent parent) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_NAME + parent.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + parent.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + parent.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + parent.getAddress().value + " ");
+        parent.getTags().stream().forEach(
+                s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
     }

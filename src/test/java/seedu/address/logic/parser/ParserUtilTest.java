@@ -18,6 +18,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Education;
+import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -25,12 +27,16 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_GRADE = "blah";
+    private static final String INVALID_EDUCATION = "";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_GRADE = "1";
+    private static final String VALID_EDUCATION = "Primary";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -192,5 +198,51 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseGrade_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGrade((String) null));
+    }
+
+    @Test
+    public void parseGrade_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGrade(INVALID_GRADE));
+    }
+
+    @Test
+    public void parseGrade_validValueWithoutWhitespace_returnsEducation() throws Exception {
+        Grade expectedGrade = new Grade(VALID_GRADE);
+        assertEquals(expectedGrade, ParserUtil.parseGrade(VALID_GRADE));
+    }
+
+    @Test
+    public void parseGrade_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+        String gradeWithWhitespace = WHITESPACE + VALID_GRADE + WHITESPACE;
+        Grade expectedGrade = new Grade(VALID_GRADE);
+        assertEquals(expectedGrade, ParserUtil.parseGrade(gradeWithWhitespace));
+    }
+
+    @Test
+    public void parseEducation_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEducation((String) null));
+    }
+
+    @Test
+    public void parseEducation_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEducation(INVALID_EDUCATION));
+    }
+
+    @Test
+    public void parseEducation_validValueWithoutWhitespace_returnsEducation() throws Exception {
+        Education expectedEducation = new Education(VALID_EDUCATION);
+        assertEquals(expectedEducation, ParserUtil.parseEducation(VALID_EDUCATION));
+    }
+
+    @Test
+    public void parseEducation_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+        String educationWithWhitespace = WHITESPACE + VALID_EDUCATION + WHITESPACE;
+        Education expectedEducation = new Education(VALID_EDUCATION);
+        assertEquals(expectedEducation, ParserUtil.parseEducation(educationWithWhitespace));
     }
 }

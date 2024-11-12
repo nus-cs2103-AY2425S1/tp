@@ -1,0 +1,60 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box "Logic Layer" LOGIC_COLOR_T1
+    participant "e:DeleteCommand" as DeleteCommand LOGIC_COLOR
+    participant "result:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box "Model Layer" MODEL_COLOR_T1
+    participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> DeleteCommand : execute(model)
+activate DeleteCommand
+
+DeleteCommand -> Model : requireNonNull(model)
+DeleteCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> DeleteCommand : lastShownList
+deactivate Model
+
+loop For each target index
+    DeleteCommand -> Model : get(index)
+    activate Model
+    Model --> DeleteCommand : personToDelete
+    deactivate Model
+end
+
+loop For each person to delete
+    DeleteCommand -> Model : deletePerson(person)
+    activate Model
+    Model --> DeleteCommand
+    deactivate Model
+
+end
+
+loop For each person to delete
+    DeleteCommand -> DeleteCommand : removeLinks(person, model)
+
+end
+
+
+alt Single result message
+    DeleteCommand -> CommandResult
+    activate CommandResult
+    CommandResult --> DeleteCommand : result
+    deactivate CommandResult
+else Multiple result messages
+    DeleteCommand -> CommandResult
+    activate CommandResult
+    CommandResult --> DeleteCommand : result
+    deactivate CommandResult
+end
+
+
+[<-- DeleteCommand : result
+deactivate DeleteCommand
+
+@enduml
