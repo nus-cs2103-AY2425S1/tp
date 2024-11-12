@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ArrowColor blue
+group sd Importing
+    participant ":JsonImporter" as Importer STORAGE_COLOR
+    participant ":JsonUtil" as Util #grey
+    participant "j:jsonSerializableAddressBook" as addressBook STORAGE_COLOR
+    participant "model:Model" as model MODEL_COLOR
+
+    [-> Importer : importAllJsonFiles(model)
+    activate Importer
+
+    loop Until all json files imported
+        Importer -> Importer:importJsonFile(jsonFile, model)
+        activate Importer
+        Importer -> Util : readJsonFile(filePath, JsonSerializableAddressBook.class)
+        activate Util
+        create addressBook
+        Util --> addressBook
+        activate addressBook
+        addressBook ---> Util
+        deactivate addressBook
+        Util ---> Importer:j
+
+
+        Importer -> addressBook: j.toModelType()
+        activate addressBook
+        addressBook --> Importer:jsonAddressBook
+        deactivate addressBook
+        Importer -> model : addAllPersons(addressBook)
+        model --> Importer: newModel
+        Importer -> Importer: newModel
+        deactivate Importer
+        'Hidden arrow to format loop box better.
+        Importer -[hidden]-> Importer
+
+
+
+    end
+        Importer -->[: newModel
+        deactivate Importer
+end
+
+
+
+@enduml

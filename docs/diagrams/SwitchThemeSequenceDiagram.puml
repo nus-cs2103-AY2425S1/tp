@@ -49,7 +49,7 @@ destroy SwitchThemeCommandParser
 AddressBookParser --> LogicManager : s
 deactivate AddressBookParser
 
-LogicManager -> SwitchThemeCommand : execute(m)
+LogicManager -> SwitchThemeCommand : execute(model)
 activate SwitchThemeCommand
 
 SwitchThemeCommand -> ThemeController : switchTheme("dark")
