@@ -14,7 +14,8 @@
 ## **Acknowledgements**
 
 - Codebase adapted from [AddressBook3](https://se-education.org/addressbook-level3/)
-- Solution for Undo/Redo function adapted from [AddressBook3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature)
+- Solution for Undo/Redo function adapted
+  from [AddressBook3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature)
 - Libraries
   used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
@@ -99,7 +100,8 @@ The `UI` component,
 - executes user commands using the `Logic` component.
 - listens for changes to `Model` data so that the UI can be updated with the modified data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Student`, `Group` and `Task` objects residing in the `Model`.
+- depends on some classes in the `Model` component, as it displays `Student`, `Group` and `Task` objects residing in the
+  `Model`.
 
 <div style="page-break-after: always;"></div>
 
@@ -129,7 +131,8 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
    a parser that matches the command (e.g., `DeleteGroupCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteGroupCommand`) which
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteGroupCommand`)
+   which
    is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
@@ -245,9 +248,11 @@ The following shows the activity diagram when the user executes the `add_s` comm
 
 #### Implementation details
 
-1. The user executes `as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu` to add the student with student number `A0123456K`, name `Bob Smith`, and email `bobsmith@u.nus.edu`.
+1. The user executes `as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu` to add the student with student number
+   `A0123456K`, name `Bob Smith`, and email `bobsmith@u.nus.edu`.
    The command is parsed in the `AddressBookParser`.
-2. `AddStudentCommandParser` is created and gets the student number, name and email to create a Student object. The Student object is
+2. `AddStudentCommandParser` is created and gets the student number, name and email to create a Student object. The
+   Student object is
    then used to construct an `AddStudentCommand` object.
 3. The `AddStudentCommand` object then calls `addPerson(student)` in the `ModelManager` with the specified student
    to be added. This method adds the specified `Student` in the model.
@@ -259,7 +264,8 @@ This feature will also check if there already exists a Student with the same stu
 
 **Sequence Diagram:** The following sequence diagram shows how the above steps for add student works:
 
-For readability, `as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu` has been replaced with `command` and `sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu` with `args`.
+For readability, `as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu` has been replaced with `command` and
+`sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu` with `args`.
 <puml src="diagrams/AddStudentSequenceDiagram.puml" alt="AddStudentCommandSD"/>
 
 <box type="info" seamless>
@@ -370,7 +376,8 @@ The following sequence diagram shows how the above steps for delete group works:
 
 <box type="info" seamless>
 
-**Note:** The lifelines for `DeleteGroupCommandParser`, `DeleteGroupCommand` and `CommandResult` should end at the destroy marker (X) but due to a limitation of
+**Note:** The lifelines for `DeleteGroupCommandParser`, `DeleteGroupCommand` and `CommandResult` should end at the
+destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
 </box>
 
@@ -394,7 +401,8 @@ PlantUML, the lifeline continues till the end of diagram.
 
 ### Edit Task for Group feature
 
-The `Edit Task for Group` feature allows users to edit the properties of a specific task within a group, given the group's name and the task index in
+The `Edit Task for Group` feature allows users to edit the properties of a specific task within a group, given the
+group's name and the task index in
 the specified group's task list.
 
 The following shows the activity diagram when the user executes the `edit_t_g` command:
@@ -409,11 +417,15 @@ The following shows the activity diagram when the user executes the `edit_t_g` c
 #### Implementation details
 
 1. User has the application launched with at least 1 group added and at least 1 task added to that group.
-2. User executes `lt gn/GROUP_NAME` to view the group's task list. For this example, the user wishes to edit the first task for `CS2103-F12-2`.
-3. The user executes `edit_t_g gn/CS2103-F12-2 i/1 td/2024-12-12 1800` to edit the task's deadline to `2024-12-12 1800`. The command is parsed in the `AddressBookParser`.
-4. `EditTaskCommandParser` is created and gets the group name and task index of the task to be edited. The group name and task index is used to
+2. User executes `lt gn/GROUP_NAME` to view the group's task list. For this example, the user wishes to edit the first
+   task for `CS2103-F12-2`.
+3. The user executes `edit_t_g gn/CS2103-F12-2 i/1 td/2024-12-12 1800` to edit the task's deadline to `2024-12-12 1800`.
+   The command is parsed in the `AddressBookParser`.
+4. `EditTaskCommandParser` is created and gets the group name and task index of the task to be edited. The group name
+   and task index is used to
    construct a `EditTaskCommand` object.
-5. The `EditTaskCommand` object then calls `model.setTask(taskToEdit, editedTask, group)` in the `ModelManager` with the specified group's name, task to be
+5. The `EditTaskCommand` object then calls `model.setTask(taskToEdit, editedTask, group)` in the `ModelManager` with the
+   specified group's name, task to be
    edited, and the edited task. This method edits the specified `Task` in the model.
 6. Finally, the `EditTaskCommand` returns the `CommandResult`.
 
@@ -424,7 +436,8 @@ The following sequence diagram shows how the above steps for delete group works:
 
 <box type="info" seamless>
 
-**Note:** The lifelines for `EditTaskCommandParser`, `CommandResult`, and `EditTaskCommand` should end at the destroy marker (X) but due to a limitation of
+**Note:** The lifelines for `EditTaskCommandParser`, `CommandResult`, and `EditTaskCommand` should end at the destroy
+marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
 </box>
 
@@ -858,7 +871,6 @@ Use case ends.
 
       Use case ends.
 
-
 **Use case: Sort Groups**
 
 **MSS**
@@ -888,7 +900,7 @@ Use case ends.
 **Extensions**
 
 - 1a. The list is empty.
-  
+
   Use case ends.
 
 **Use case: Add Task to Group**
@@ -1722,7 +1734,8 @@ Currently, the behaviour for handling extraneous parameters is unclear and incon
 
 #### Enhancement
 
-We plan to make the behaviour more consistent and improve the parameter matching such that warnings will be given to the user.
+We plan to make the behaviour more consistent and improve the parameter matching such that warnings will be given to the
+user.
 
 ### 7. Enhance Undo/Redo
 
@@ -1730,10 +1743,12 @@ Currently, our system brings users to the `list_s` panel whenever the commands a
 
 #### Enhancement
 
-We plan to improve the versionHistory system to remember what command was ran such that when either commands were ran, the user is informed of what was the action that was last carried out.
+We plan to improve the versionHistory system to remember what command was ran such that when either commands were ran,
+the user is informed of what was the action that was last carried out.
 
 The user will also be redirected to the respective panel of said action.
 
-i.e. if user undoes a `add_g` command, the user will be and informed that they are undoing a `add_g` command and will be redirected to the `list_g` panel.
+i.e. if user undoes a `add_g` command, the user will be and informed that they are undoing a `add_g` command and will be
+redirected to the `list_g` panel.
 
 Similarly, if the user then runs `redo`, they will be informed that they are redoing the `add_g` command.
