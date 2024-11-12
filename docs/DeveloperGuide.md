@@ -331,8 +331,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC01 - Adding a student**
 
 **MSS**
-1. User enters command to create new student entry.
-1. UGTeach displays success message and command line is cleared.
+1. User enters command to create a new student entry.
+1. UGTeach displays success message and the command line is cleared.
 
    Use case ends.
 
@@ -678,7 +678,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `add N/Teaching Assistant p/90908767 e/getaboveAtobeaTA123@hotmail.com a/21 Lower Kent Ridge Drive r/40.00 t/Thursday-1130-1330 s/Economics Paid/12.00`
 
-   2. Expected: A new contact with the corresponding information will be added to the end of the current list.
+   2. Expected: A new contact with the corresponding information will be added to the end of the current list. Whether there is a warning message on the schedule or not depends on your current data.
 
 <div style="page-break-after: always;"></div>
 
