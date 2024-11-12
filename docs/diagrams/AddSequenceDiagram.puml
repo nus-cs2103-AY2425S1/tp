@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "c:AddCommand" as AddCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("add n/John Doe \n p/+65 98765432 \n e/johnd@example.com \n r/01-1008 \n a/John street t/Floor 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add n/John Doe \n p/+65 98765432 \n e/johnd@example.com \n r/01-1008 \n a/John street t/Floor 1")
+activate AddressBookParser
+
+AddressBookParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> AddressBookParser
+deactivate AddCommandParser
+
+AddressBookParser -> AddCommandParser: parse("n/John Doe \n p/+65 98765432 \n e/johnd@example.com \n r/01-1008 \n a/John street t/Floor 1")
+activate AddCommandParser
+
+create AddCommand
+AddCommandParser -> AddCommand
+activate AddCommand
+
+AddCommand --> AddCommandParser : c
+deactivate AddCommand
+
+AddCommandParser --> AddressBookParser : c
+deactivate AddCommandParser
+
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+
+
+LogicManager -> AddCommand : execute(m)
+activate AddCommand
+
+AddCommand -> Model : addPerson(p)
+activate Model
+Model --> AddCommand
+deactivate Model
+
+AddCommand --> LogicManager : result
+deactivate AddCommand
+AddCommand -[hidden]-> LogicManager : result
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
