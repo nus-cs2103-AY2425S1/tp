@@ -42,6 +42,7 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COMPANY);
+
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -49,6 +50,7 @@ public class AddSupplierCommandParser implements Parser<AddSupplierCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Product> productList = ParserUtil.parseProducts(argMultimap.getAllValues(PREFIX_PRODUCT));
         SupplierStatus status = new SupplierStatus("active");
+
         Supplier supplier = new Supplier(name, phone, email, company, tagList, productList, status);
 
         return new AddSupplierCommand(supplier);
