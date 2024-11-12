@@ -794,7 +794,7 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
-The AgentAssist project is a specialized Customer Relationship Management (CRM) system for credit card sales. This required domain-specific changes to the architecture, guided by Object-Oriented Programming (OOP) principles and design patterns.
+AgentAssist is a specialized Customer Relationship Management (CRM) system for credit card sales. This required domain-specific changes to the architecture, guided by Object-Oriented Programming (OOP) principles and design patterns.
 
 For example, we added a custom `help` window with an image-based command layout, enhancing user experience beyond a generic user guide. The `view` and `close` commands also enabled a split-pane view, allowing truncated client details on cards and displaying full details in a separate pane.
 ### Other Challenging Features 
