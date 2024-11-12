@@ -316,7 +316,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: StudentManagerPro is open.**
+**Preconditions:**
+* StudentManagerPro is open.
 
 **Guarantees:**
 * If successful, the student's name is added to the system and can be used to track their academic progress.
@@ -349,7 +350,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
- StudentManagerPro is open.
+* StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -386,7 +387,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
- StudentManagerPro is open.
+* StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -420,7 +421,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
- StudentManagerPro is open.
+* StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -454,7 +455,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
- StudentManagerPro is open.
+* StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -488,7 +489,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
- StudentManagerPro is open.
+* StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -526,7 +527,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
- StudentManagerPro is open.
+* StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -560,7 +561,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
- StudentManagerPro is open.
+* StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -594,7 +595,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
- StudentManagerPro is open.
+* StudentManagerPro is open.
 * Student profile has been created through the <u>addition of the student name(UC01).</u>
 
 **Guarantees:**
@@ -628,7 +629,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Actor: User**
 
 **Preconditions:**
- StudentManagerPro is open.
+* StudentManagerPro is open.
 * Student to be removed exists in the system.
 
 **Guarantees:**
@@ -647,16 +648,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User enters invalid characters.
-    * 2a1. System displays an error message to ask for a valid name command format, with no
-      special characters.<br>
+    * 2a1. System displays an error message to ask for a valid index command format.<br>
       Use case ends.
 
-* 3a. User leaves the name field empty.
-    * 3a1. System displays an error message to ask for a valid name.<br>
+* 3a. User leaves the index field empty.
+    * 3a1. System displays an error message to ask for a valid index.<br>
       Use case ends.
 
-* 3b. User enters a name that does not exist in the system.
-    * 3b1. System displays an error message to ask for a valid name of a student in the system.<br>
+* 3b. User enters an index that does not exist in the system.
+    * 3b1. System displays an error message to ask for a valid index of a student in the system.<br>
       Use case ends.
 
 **System: StudentManagerPro**
@@ -665,7 +665,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: StudentManagerPro is open.**
+**Preconditions:**
+* StudentManagerPro is open.
+* Student is already added in the system.
 
 **Guarantees:**
 * If successful, the attendance record for the student is added to the system and can be used to track their attendance history.
@@ -716,7 +718,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: StudentManagerPro is open.**
+**Preconditions:**
+* StudentManagerPro is open.
+* Existing students in the system to add exams for.
 
 **Guarantees:**
 * If successful, the exam is added for all students currently in the system with a score of "NIL".
@@ -745,7 +749,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: User**
 
-**Preconditions: StudentManagerPro is open.**
+**Preconditions:**
+* StudentManagerPro is open.
+* Student is already added in the system.
+* Exam already added for student.
 
 **Guarantees:**
 * If successful, the student's exam score is added to the specified exam in the student's profile and saved in the system.
@@ -782,11 +789,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System: StudentManagerPro**
 
-**Use case: UC14 Add a Submission**
+**Use case: UC14 Delete an Exam**
 
 **Actor: User**
 
-**Preconditions: StudentManagerPro is open.**
+**Preconditions:**
+* StudentManagerPro is open.
+* Exam exists in the system for students.
+
+Guarantees:
+* If successful, the exam is deleted from all students currently in the system.
+* If an invalid exam name is given as input, an error message is displayed.
+
+MSS
+1. User gives the command to delete exam in StudentManagerPro.
+2. System validates the input's format.
+3. System validates the exam data.
+4. System deletes the exam from every student currently in the system.
+5. System confirms the success by displaying a success message.<br>
+   Use case ends.
+
+**Extensions**
+* 2a. User enters invalid characters in the exam name.
+    * 2a1. System displays an error message asking for valid exam name format, with only alphanumeric characters and spaces.<br>
+      Use case ends.
+* 3a. User tries to delete a exam that does not exist in the system.
+    * 3a1. System displays an error message telling the user that the exam does not exist.<br>
+      Use case ends.
+
+**System: StudentManagerPro**
+
+**Use case: UC15 Add a Submission**
+
+**Actor: User**
+
+**Preconditions:**
+* StudentManagerPro is open.
+* Existing students in the system to add exams for.
 
 **Guarantees:**
 * If successful, the submission is added for all students currently in the system with a status of "NIL".
@@ -811,11 +850,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System: StudentManagerPro**
 
-**Use case: UC15 Add a Student's Submission Status**
+**Use case: UC16 Add a Student's Submission Status**
 
 **Actor: User**
 
-**Preconditions: StudentManagerPro is open.**
+**Preconditions:**
+* StudentManagerPro is open.
+* Student is already added in the system.
+* Submission already added for student.
 
 **Guarantees:**
 * If successful, the student's submission status is added to the specified submission in the student's profile and saved in the system.
@@ -852,11 +894,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System: StudentManagerPro**
 
-**Use case: UC16 Delete a Submission**
+**Use case: UC17 Delete a Submission**
 
 **Actor: User**
 
-**Preconditions: StudentManagerPro is open.**
+**Preconditions:**
+* StudentManagerPro is open.
+* Submission exists in the system for students.
 
 **Guarantees:**
 * If successful, the submission is deleted from all students currently in the system.
@@ -881,11 +925,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System: StudentManagerPro**
 
-**Use case: UC17 Sort Students**
+**Use case: UC18 Sort Students**
 
 **Actor: User**
 
-**Preconditions: StudentManagerPro is open.**
+**Preconditions:**
+* StudentManagerPro is open.
 
 **Guarantees:**
 * If successful, student list displayed will be sorted.
@@ -906,11 +951,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System: StudentManagerPro**
 
-**Use case: UC18 Filter Students**
+**Use case: UC19 Filter Students**
 
 **Actor: User**
 
-**Preconditions: StudentManagerPro is open.**
+**Preconditions:**
+* StudentManagerPro is open.
 
 **Guarantees:**
 * If successful, student list displayed will be filtered according to the predicate provided.
