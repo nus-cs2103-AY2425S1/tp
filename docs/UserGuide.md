@@ -319,7 +319,7 @@ Finds students whose names contain any of the given keywords *and* their schedul
 
 Records the tuition fee that the student is unable to pay immediately after the lesson. 
 
-When he/she pays the outstanding fees at a later time, you should use the [`settle` command](#settling-outstanding-fees-from-a-student-settle) to settle the tuition fee owed by the student 
+When he/she pays the outstanding fees at a later time, you should use the [`settle` command](#settling-outstanding-fees-from-a-student-settle) to settle the tuition fee owed by the student. 
 
 **Format:** `owe INDEX hr/HOURS_OWED`
 
@@ -417,7 +417,7 @@ Shows the total amount of tuition fee that you have been paid, as well as the to
 **Examples:**
 * Entering `income` when all entries are listed gives the total tuition fee paid, as well as the total amount that is owed.
 * Entering `find n/Alex` followed by `income` shows total tuition fee paid, as well as the total amount that is owed, from
-  students whose name contains Alex
+  students whose name contains Alex.
 
 **Output:**
 ![result for `income` when all entries listed](images/incomeResult.png)
