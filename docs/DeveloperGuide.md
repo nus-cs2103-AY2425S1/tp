@@ -737,14 +737,47 @@ testers are expected to do more *exploratory* testing.
        Expected: The app should create a new `contactcs.json` file filled with sample data.
 
 ### Undo/Redo
+1. Testing how undone states are purged after committing
+   1. Add Alice using `add n/Alice p/11111111` command.
+   1. Add Bob using `add n/Bob p/22222222` command.
+   1. Undo the previous command.
+   1. Add Catherine using `add n/Catherine p/33333333` command.
+   1. Undo the previous command. Now only Alice is in the list.
+   1. Then, perform a redo.
+   Expected: Catherine is added back. Bob is lost forever.
 
+### Finding contacts
+1. Testing mixture of fields specified in a single `find`
+   1. Prerequisites
+      1. Clear the list using the `clear` command.
+      2. Run `add n/Alice p/11111111 r/CS1101S t/tag1`
+      2. Run `add n/Bob p/22222222 r/MA1521 t/tag2`
+      2. Run `add n/Catherine p/33333333 r/CS2103T t/tag3`
+   1. Run `find n/Alice n/Bob r/CS1101S`. <br>
+   Expected: Only Alice is shown in the list.<br>
+   Reason: The `find` command finds all persons with (name Alice **or** Bob) **and** role CS1101S.
+   2. Run `find r/CS1101S r/MA1521 t/tag1 t/tag3` <br>
+   Expected: Only Alice is shown in the list.<br>
+   Reason: The `find` command finds all persons with (module role CS1101S **or** MA1521) **and** (tag1 **or** tag 3).
 
-### Find contacts
+### Editing module roles
+1. Editing module roles of a person
+   1. Prerequisites
+      1. Clear the list using the `clear` command.
+      2. Run `add n/Alice p/11111111 r/CS1101S t/tag1`
+   1. Run `edit 1 r/CS2103T` <br>
+   Expected: The role of Alice is changed to CS2103T. The status message shows the change.
 
+### Adding a person with module roles
+1. Using role acronyms
+   1. Run `add n/Alice p/11111111 r/CS1101S-Prof r/CS2103T-TA` <br>
+   Expected: Alice is added module roles CS1101S-Professor and CS2103T-Tutor. <br>
+   Note that `TA` is short for `Tutor` and `Prof` is short for `Professor`. You can also specify the full role name.
 
-### Edit module roles
-
-### 
+1. Not specifying the role
+   1. Run `add n/Alice p/11111111 r/MA1521` <br>
+   Expected: Alice is added with module role MA1521-Student. <br>
+   Reason: If the role is not specified, the default role is Student.
 
 ## **Appendix: Planned Enhancements**
 **Team size**: 5
