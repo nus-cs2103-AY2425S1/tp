@@ -6,7 +6,7 @@
 
 # UniLink User Guide
 
-UniLink is a desktop app that allows NUS students to manage their contacts. With UniLink, students can categorise
+UniLink is a desktop app that allows National University of Singapore (NUS) students to manage their contacts. With UniLink, students can categorise
 their contacts into 'work', 'personal' and 'school' contacts to better manage their lives!
 
 --------------------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 * Certain fields used in commands have specific constraints (e.g., format, length). For a full list of field requirements, please refer to the [Field Constraints](#field-constraints) section.
 
 * Words in `UPPER_CASE` need to be provided by you.<br>
-    * e.g. in `add n/NAME`: if you want to add someone named John Doe, you'd type `add n/John Doe`.
+    * e.g. in `add n/NAME`: if you want to add someone named John Doe, you would type `add n/John Doe`.
 
 * Items in [Square Brackets] are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -101,7 +101,7 @@ Format: `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/M
 
 **Note:** 
 * You can add multiple tags (or none at all).
-* To avoid duplicate entries, ensure each contact has a unique Telegram handle, phone number, or email address. You can add multiple contacts with the same name, as long as their contact details (Telegram handle, phone number, or email) are different.
+* To avoid duplicate entries, ensure each contact has a unique Telegram Handle, phone number, or email address. You can add multiple contacts with the same name, as long as their contact details (Telegram Handle, phone number, or email) are different.
 </box>
 
 Examples:
@@ -129,7 +129,7 @@ Format: `edit INDEX [n/NAME] [ct/CONTACT_TYPE] [h/TELEGRAM_HANDLE] [p/PHONE] [e/
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower h/@betsyyy t/` Edits the name and telegram handle of the 2nd person to be `Betsy Crower` and `@betsyyy` respectively and clears all existing tags.
+*  `edit 2 n/Betsy Crower h/@betsyyy t/` Edits the name and Telegram Handle of the 2nd person to be `Betsy Crower` and `@betsyyy` respectively and clears all existing tags.
 
 ### Finding persons by name : `find`
 
@@ -151,9 +151,9 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`
   ![result for 'find alex david'](images/findAlexDavid.png)
 
-### Finding persons by telegram handle : `findtele`
+### Finding persons by Telegram Handle : `findtele`
 
-Finds persons whose **telegram handles** contain any of the specified keywords.
+Finds persons whose **Telegram Handles** contain any of the specified keywords.
 
 Format: <br>
 `findtele TELEGRAM_HANDLE [MORE_TELEGRAM_HANDLE_KEYWORDS]`<br>
@@ -161,7 +161,7 @@ Format: <br>
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Partial matches are allowed, and the '@' symbol may be omitted, meaning searching part of a telegram handle will still return contacts with the full telegram handle e.g. `Hans` will match `@Hansgruber`
+* Partial matches are allowed, and the '@' symbol may be omitted, meaning searching part of a Telegram Handle will still return contacts with the full Telegram Handle e.g. `Hans` will match `@Hansgruber`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -258,9 +258,11 @@ Format: `import`
 **Tip:** You can import multiple contact spreadsheets at a time if you put them all in the Import folder!
 </box>
 
-* If the program comes across a contact that has an empty or invalid contact info, the contact information will stay blank after importing
-* Take note that the same constraints apply as when trying to add new contacts using the add command
-* For more information on making a .csv file to use with the import command, please refer to the section: [Preparing a .csv file](#preparing-a-csv-file-)
+**Note:**
+* If the program comes across a contact with an empty or invalid optional field (e.g., `remark` or `address`), the contact will still be imported, but those specific fields will remain blank after importing.
+* Take note that the same constraints apply as when trying to add new contacts using the `add` command.
+* Contacts with critical issues such as missing required fields (e.g., `contactType`) or invalid formats will be skipped during the import process, and no feedback will currently be provided for skipped entries. Additionally, if a contact already exists and a new import contains the same contact with more fields, it will be skipped as a duplicate without notification.
+* For more information on making a `.csv` file to use with the `import` command, please refer to the section: [Preparing a .csv file](#preparing-a-csv-file-)
 
 ### Exiting the program : `exit`
 
@@ -284,25 +286,25 @@ Furthermore, certain edits can cause the UniLink to behave in unexpected ways (e
 </box>
 
 ---
-## Preparing a .csv file 
+## Preparing a `.csv` file 
 
-A .csv file is simply one of the ways that you can save a spreadsheet file. Common ways to edit or prepare a spreadsheet and save it as a .csv file include [Google Sheets](https://www.supportyourtech.com/google/sheets/how-to-save-as-a-csv-from-google-sheets-step-by-step-guide/), and [Microsoft Sheets](https://www.exceldemy.com/save-excel-file-as-csv/). UniLink uses spreadsheets and .csv files to help you easily compile, and distribute a large number of contacts quickly. Once you prepare one .csv file or spreadsheet, you can send it out so that many people can import contacts to their own copy of UniLink.
+A `.csv` file is simply one of the ways that you can save a spreadsheet file. Common ways to edit or prepare a spreadsheet and save it as a `.csv` file include [Google Sheets](https://www.supportyourtech.com/google/sheets/how-to-save-as-a-csv-from-google-sheets-step-by-step-guide/), and [Microsoft Sheets](https://www.exceldemy.com/save-excel-file-as-csv/). UniLink uses spreadsheets and `.csv` files to help you easily compile, and distribute a large number of contacts quickly. Once you prepare one `.csv` file or spreadsheet, you can send it out so that many people can import contacts to their own copy of UniLink.
 
-For this guide, we'll be giving you a sample spreadsheet to easily convert into a .csv file, as well as some things to note when preparing your spreadsheet!
+For this guide, we'll be giving you a sample spreadsheet to easily convert into a `.csv` file, as well as some things to note when preparing your spreadsheet!
 
 To start, here is a [sample spreadsheet](https://docs.google.com/spreadsheets/d/1hWybja47YMeKs3-mmOts-QkJANj2WcHPVLlYJ-lfUro/edit?usp=sharing) for you to copy! There is already some sample data inside the sheet, feel free to edit that.
 
 ### Constraints
 Do take note of the following when preparing your contacts,
-1. Do not try to import a .csv file that is empty.
+1. Do not try to import a `.csv` file that is empty.
 2. Do not change the capitalisation of the sections at the top, if you do, UniLink will not be able to import your data correctly.
 3. Note that the contact type can only be either Work, Personal or School. If that contact contains any other contact type, or no contact type, it will fail to import. 
-4. UniLink requires at least one of the following fields to be filled for it to import your contact: Email, Phone, or Telegram Handle.
+4. UniLink requires at least one of the following fields to be filled for it to import your contact: Email, Phone Number or Telegram Handle.
 5. All the information needs to follow the constraints laid out in the [Field Constraints section](#field-constraints), if you do not fill in the information as per the constraints, UniLink will not be able to import the contact at all!
-6. UniLink will skip over duplicate contacts! Contacts are considered duplicate when they share the same name AND they have the same Phone number, Email or Telegram Handle
+6. UniLink will skip over duplicate contacts! Contacts are considered duplicate when they share the same name AND they have the same email, phone number or Telegram Handle
    1. Example: If I have a contact called Amy, whose Telegram Handle is @Amy, and I try to import another contact, Amy, whose Telegram Handle is @Amy1, this will work.
    2. Similarly, trying to add Ben with Telegram Handle @Amy will  not work.
-   3. This is the case with Phones, Emails and Telegram handles
+   3. This is the case with emails, phone numbers and Telegram Handles
 7. Do not import contacts from any other source (E.g Google contacts)
 
 --------------------------------------------------------------------------------------------------------------------
