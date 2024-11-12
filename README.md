@@ -13,5 +13,5 @@
 
 ## More about it
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * For user and developer documentation**, head over to **[DocTrack Documentation](https://ay2425s1-cs2103t-w10-2.github.io/tp/)**.
+  * For user and developer documentation, head over to **[DocTrack Documentation](https://ay2425s1-cs2103t-w10-2.github.io/tp/)**.
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)
