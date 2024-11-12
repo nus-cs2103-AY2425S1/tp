@@ -108,7 +108,7 @@ public class AddressBookParser {
         }
     }
 
-    private Command parseAddCommand(String arguments) throws ParseException {
+    private AddCommand parseAddCommand(String arguments) throws ParseException {
         if (arguments.trim().startsWith("-s")) {
             return new AddSupplierCommandParser().parse(arguments.trim().substring(2));
         } else if (arguments.trim().startsWith("-d")) {
@@ -119,7 +119,7 @@ public class AddressBookParser {
         }
     }
 
-    private Command parseDeleteCommand(String trimmedArguments) throws ParseException {
+    private DeleteCommand parseDeleteCommand(String trimmedArguments) throws ParseException {
         if (trimmedArguments.startsWith("-s")) {
             return new DeleteSupplierCommandParser().parse(trimmedArguments);
         } else if (trimmedArguments.startsWith("-d")) {
@@ -130,7 +130,7 @@ public class AddressBookParser {
         }
     }
 
-    private Command parseFindCommand(String trimmedArguments) throws ParseException {
+    private FindCommand parseFindCommand(String trimmedArguments) throws ParseException {
         if (trimmedArguments.startsWith("-s")) {
             return new FindSupplierCommandParser().parse(trimmedArguments.substring(2));
         } else if (trimmedArguments.startsWith("-d")) {
@@ -141,7 +141,7 @@ public class AddressBookParser {
         }
     }
 
-    private Command parseListCommand(String trimmedArguments) throws ParseException {
+    private ListCommand parseListCommand(String trimmedArguments) throws ParseException {
         if (trimmedArguments.equals("-s")) {
             return new ListSupplierCommand();
         } else if (trimmedArguments.equals("-d")) {
@@ -153,7 +153,7 @@ public class AddressBookParser {
         }
     }
 
-    private Command parseMarkCommand(String trimmedArguments) throws ParseException {
+    private MarkCommand parseMarkCommand(String trimmedArguments) throws ParseException {
         if (trimmedArguments.startsWith("-s")) {
             return new MarkSupplierCommandParser().parse(trimmedArguments);
         } else if (trimmedArguments.startsWith("-d")) {
@@ -164,7 +164,7 @@ public class AddressBookParser {
         }
     }
 
-    private Command parseSortCommand(String trimmedArguments) throws ParseException {
+    private SortCommand parseSortCommand(String trimmedArguments) throws ParseException {
         if (trimmedArguments.startsWith(PREFIX_DELIVERY.getPrefix())) {
             return new SortDeliveryCommandParser().parse(trimmedArguments);
         } else if (trimmedArguments.startsWith(PREFIX_SUPPLIER.getPrefix())) {
@@ -175,7 +175,7 @@ public class AddressBookParser {
         }
     }
 
-    private Command parseUpcomingCommand(String arguments) throws ParseException {
+    private UpcomingCommand parseUpcomingCommand(String arguments) throws ParseException {
         if (arguments.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpcomingCommand.MESSAGE_USAGE));
         }
