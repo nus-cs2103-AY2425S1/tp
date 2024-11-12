@@ -4,12 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.model.addresses.PublicAddressesComposition.MESSAGE_DUPLICATE_PUBLIC_ADDRESS;
 import static seedu.address.testutil.TypicalPersons.JOE;
+import static seedu.address.testutil.TypicalPersons.MOE;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN;
-import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_SUB;
-import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_SUB_STRING;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_MAIN;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_SUB;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_SUB_STRING;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_SOL_MAIN;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +23,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.addresses.BtcAddress;
+import seedu.address.model.addresses.EthAddress;
 import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -41,7 +42,7 @@ public class EditPublicAddressCommandTest {
     @Test
     public void execute_validIndexValidPublicAddress_success() {
         PublicAddress updatedPublicAddress =
-            new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_SUB_STRING, VALID_PUBLIC_ADDRESS_BTC_SUB.getLabel());
+            new EthAddress(VALID_PUBLIC_ADDRESS_ETH_SUB_STRING, VALID_PUBLIC_ADDRESS_ETH_MAIN.getLabel());
         EditPublicAddressCommand editCommand =
             new EditPublicAddressCommand(Index.fromOneBased(1), updatedPublicAddress);
 
@@ -60,8 +61,8 @@ public class EditPublicAddressCommandTest {
     @Test
     public void execute_validIndexValidPublicAddressDifferentCaseLabel_success() {
         PublicAddress updatedPublicAddress =
-            new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_SUB_STRING,
-                VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel().toUpperCase());
+            new EthAddress(VALID_PUBLIC_ADDRESS_ETH_SUB_STRING,
+                VALID_PUBLIC_ADDRESS_ETH_MAIN.getLabel().toUpperCase());
         EditPublicAddressCommand editCommand =
             new EditPublicAddressCommand(Index.fromOneBased(1), updatedPublicAddress);
 
@@ -113,6 +114,20 @@ public class EditPublicAddressCommandTest {
         assertCommandFailure(editCommand, model, String.format(
             EditPublicAddressCommand.MESSAGE_NON_MATCHING_LABEL, VALID_PUBLIC_ADDRESS_SOL_MAIN.getNetwork(),
             JOE.getName()));
+    }
+
+    @Test
+    public void execute_duplicatePublicAddress_throwsCommandException() {
+        model.addPerson(new PersonBuilder(MOE).build());
+
+        // Attempt to edit the same public address to another person
+        PublicAddress duplicatePublicAddress = JOE.getPublicAddressesComposition().getOnePublicAddress();
+        EditPublicAddressCommand editCommand = new EditPublicAddressCommand(Index.fromOneBased(2),
+            duplicatePublicAddress);
+
+        assertCommandFailure(editCommand, model, String.format(
+                MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
+                duplicatePublicAddress.getPublicAddressString()));
     }
 
     @Test

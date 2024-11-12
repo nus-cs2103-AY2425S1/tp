@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
+import static seedu.address.model.addresses.PublicAddressesComposition.MESSAGE_DUPLICATE_PUBLIC_ADDRESS;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -67,6 +68,21 @@ public class EditPublicAddressCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Person personToEdit = getPersonToEdit(model);
+
+        String paToAdd = publicAddress.getPublicAddressString();
+
+        List<String> allPAs = model.getAddressBook().getPersonList().stream()
+                .flatMap(person -> person.getPublicAddressesComposition()
+                        .getAllPublicAddresses()
+                        .stream())
+                .map(PublicAddress::getPublicAddressString)
+                .toList();
+
+        for (String pa : allPAs) {
+            if (paToAdd.equals(pa)) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_PUBLIC_ADDRESS, paToAdd));
+            }
+        }
 
         if (!personToEdit.hasPublicAddressWithLabelWithinNetwork(publicAddress.getNetwork(), publicAddress.label)) {
             logger.warning(String.format(
