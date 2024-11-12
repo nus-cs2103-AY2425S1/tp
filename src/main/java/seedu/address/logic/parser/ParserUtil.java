@@ -116,6 +116,9 @@ public class ParserUtil {
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             format.setLenient(false);
+            if (!date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                throw new ParseException("Invalid date-time format. Expected format: yyyy-MM-dd");
+            }
             return format.parse(date);
         } catch (java.text.ParseException e) {
             throw new ParseException(TutDate.MESSAGE_CONSTRAINTS);

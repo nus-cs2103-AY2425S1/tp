@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Represents an abstract TutorialId.
+ * Represents a Student's Tutorial ID in the address book
  * A TutorialId can either be an existing class with a specific class code or a "None" type.
  */
 public abstract class TutorialId {
