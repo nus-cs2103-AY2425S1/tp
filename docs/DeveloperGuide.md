@@ -984,7 +984,7 @@ to keep the information concise and ensure ease of navigation. Although there is
 let users view the full student details, we plan to improve the UI to include more essential information such as NRIC or student photo better 
 to reduce ambiguity when navigating through the contact lists.
 
-10. **Make the error message of the 'detail' command more specific:** Currently, when the user enters the detail command 
+10. **Make the error message of commands more specific:** Currently, when the user enters commands 
 with a StudentID that has an invalid format, the error message is too general. We plan to make it more specific by making it clearer  
 to the user that the failed execution was due to an error in the StudentID, and state what the expected format should be. This can help to reduce 
 ambiguity and help with troubleshooting. 
