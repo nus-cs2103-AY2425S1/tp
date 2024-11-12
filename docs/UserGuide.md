@@ -326,8 +326,9 @@ Filters and lists persons whose fields match the specified keywords.
     - `filter p/91234567` returns the person with phone number `91234567`.
     - `filter n/John r/vendor` returns persons with names containing `John` or with role `vendor`.
     - `filter e/john@gmail.com a/Jurong` returns persons with emails containing "john@gmail.com" or address containing "Jurong".
-      ![Multi-field filter results](images/filter_persons_by_multiple_fields.png)<br>
-      *`filter e/alex@gmail.com r/florist` Example of filtering results showing matched persons, weddings remain empty/unfiltered*
+
+![Multi-field filter results](images/filter_persons_by_multiple_fields.png)<br>
+*`filter e/alex@gmail.com r/florist` Example of filtering results showing matched persons, weddings remain empty/unfiltered*
 
 [↥ Back to Top](#bridal-boss-user-guide)
 
@@ -353,6 +354,7 @@ Adds a new wedding to the address book.
         - Adds a wedding named "Beach Wedding" for the client at index 1.
     - `addw n/Garden Wedding c/John Doe v/Botanical Gardens`
         - Adds a wedding for "John Doe" if there's only one match.<br>
+
 ![Adding a wedding example](images/addw_example.png)<br>
 *Example of successfully adding a new wedding with all fields specified*
 
@@ -611,7 +613,9 @@ Advanced users can edit the data file directly to modify the address book data.
       - Can only contain alphabets, spaces, apostrophes (') and hyphens (-)
 - **Date**:
     - Must be in `YYYY-MM-DD` format
-    - Must be a valid calendar date
+    - Must be a valid calendar date 
+    - Optional field - only validated when v/ prefix is provided
+
 - **Venue**:
     - Optional field - only validated when v/ prefix is provided
     - When provided, cannot be blank or consist only of whitespace
