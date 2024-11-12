@@ -665,12 +665,12 @@ Use case ends.
   * 2a2. System prompt admin to key in information again.
   * 2a3. Admin inputs information again.
 
-    Repeat 3a1 to 3a3 until Admin inputs the right information.
+    Repeat 2a1 to 2a3 until Admin inputs the right information.
   * 2a4. System adds the student and displays success status
 
   Use case ends.
 
-* 3a. Payment of the student has already being marked.
+* 3a. Payment of the student has already been marked.
   * 3a1. System returns a message on payment of student being marked already.
   * 3a2. System returns a fail status.
 
@@ -755,12 +755,12 @@ Use case ends.
   Use case ends.
 
 
-* 2b. Admin inputs student or tutorial that do not exist.
+* 2b. Admin inputs student and/or tutorial that does not exist.
   * 2b1. System displays errors status.
   * 2b2. System prompts admin to key in information again.
   * 2b3. Admin inputs information again.
     
-    Repeat 2b1 to 2b3 until Admin inputs student and/or tutorial that exist.
+    Repeat 2b1 to 2b3 until Admin inputs student and tutorial that exist.
   * 2b4. System enrolls the student and displays success status.
   
   Use case ends.
