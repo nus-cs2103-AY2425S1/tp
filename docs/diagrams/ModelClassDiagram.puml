@@ -28,6 +28,7 @@ Class Wedding
 Class Date
 Class Venue
 Class WeddingName
+Class Participants
 
 Class I #FFFFFF
 }
@@ -67,6 +68,7 @@ UniqueWeddingList --> "~* all" Wedding
 Wedding *--> WeddingName
 Wedding *--> Date
 Wedding *---> Venue
+Wedding *--> "*" Participants
 
 ModelManager --> "~* filtered" Person
 
