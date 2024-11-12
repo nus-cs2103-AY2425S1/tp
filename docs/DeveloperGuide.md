@@ -159,10 +159,12 @@ The Mass Reject feature follows the sequence diagram here:
 <puml src="diagrams/MassRejectSequenceDiagram.puml" width="550" />
 
 ### Delete feature
-The Delete feature has 2 types of sequence. 
-
 Deleting by index follows this sequence diagram:
-<puml src="diagrams/DeletePredicateSequenceDiagram.puml" width="550" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" width="550" />
+
+### Sort feature
+The Sort feature follows the sequence diagram here:
+<puml src="diagrams/SortSequenceDiagram.puml" width="550" />
 
 ### Statistics feature
 The Statistics feature follows the sequence diagram here:
