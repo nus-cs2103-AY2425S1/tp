@@ -44,6 +44,7 @@ public class RetrievePublicAddressCommandTest {
         model.addPerson(new PersonBuilder(IDA).build());
     }
 
+    // EP: Empty network, empty name
     @Test
     public void execute_validArgsAnyNetworkAnyName_success() {
         RetrievePublicAddressCommand retrieveCommand =
@@ -61,6 +62,7 @@ public class RetrievePublicAddressCommandTest {
         assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
+    // EP: Empty network
     @Test
     public void execute_validArgsAnyNetworkSpecifiedName_success() {
         RetrievePublicAddressCommand retrieveCommand =
@@ -77,6 +79,7 @@ public class RetrievePublicAddressCommandTest {
         assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
+    // EP: Empty name
     @Test
     public void execute_validArgsSpecifiedNetworkAnyName_success() {
         RetrievePublicAddressCommand retrieveCommand =
@@ -84,7 +87,6 @@ public class RetrievePublicAddressCommandTest {
 
         List<String> personsDetails =
             Stream.of(createPersonDetails(JOE, VALID_PUBLIC_ADDRESS_BTC_MAIN))
-                .sorted()
                 .toList();
         String expecedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
             personsDetails.size(), String.join("\n", personsDetails));
@@ -92,6 +94,7 @@ public class RetrievePublicAddressCommandTest {
         assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
+    // EP: Valid fields
     @Test
     public void execute_validArgsSpecifiedNetworkAndName_success() {
         RetrievePublicAddressCommand retrieveCommand =
@@ -106,6 +109,7 @@ public class RetrievePublicAddressCommandTest {
         assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
+    // EP: Partial label
     @Test
     public void execute_validArgsPartialLabel_success() {
         RetrievePublicAddressCommand retrieveCommand =
@@ -123,6 +127,7 @@ public class RetrievePublicAddressCommandTest {
         assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
+    // EP: Different case label
     @Test
     public void execute_validArgsDifferentCaseLabel_success() {
         RetrievePublicAddressCommand retrieveCommand =
@@ -140,6 +145,7 @@ public class RetrievePublicAddressCommandTest {
         assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
+    // EP: Partial name
     @Test
     public void execute_validArgsPartialName_success() {
         RetrievePublicAddressCommand retrieveCommand =
@@ -157,6 +163,7 @@ public class RetrievePublicAddressCommandTest {
         assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
+    // EP: Different case name
     @Test
     public void execute_validArgsDifferentCaseName_success() {
         RetrievePublicAddressCommand retrieveCommand =
@@ -174,6 +181,7 @@ public class RetrievePublicAddressCommandTest {
         assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
+    // EP: Non-matching label
     @Test
     public void execute_validArgsNoMatchingLabel_success() {
         RetrievePublicAddressCommand retrieveCommand =
@@ -186,6 +194,7 @@ public class RetrievePublicAddressCommandTest {
         assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
+    // EP: Non-matching name
     @Test
     public void execute_validArgsNoMatchingName_success() {
         RetrievePublicAddressCommand retrieveCommand =
@@ -198,6 +207,7 @@ public class RetrievePublicAddressCommandTest {
         assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
+    // EP: Non-matching network
     @Test
     public void execute_validArgsNoMatchingNetwork_success() {
         RetrievePublicAddressCommand retrieveCommand =
@@ -211,6 +221,7 @@ public class RetrievePublicAddressCommandTest {
         assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
+    // EP: All non-matching
     @Test
     public void execute_validArgsNoPublicAddresses_success() {
         RetrievePublicAddressCommand retrieveCommand =
@@ -223,7 +234,7 @@ public class RetrievePublicAddressCommandTest {
         assertCommandSuccess(retrieveCommand, model, expecedMessage, model);
     }
 
-
+    // EP: Same object
     @Test
     public void equals_sameObject_returnsTrue() {
         RetrievePublicAddressCommand command = new RetrievePublicAddressCommand(
@@ -231,6 +242,7 @@ public class RetrievePublicAddressCommandTest {
         assertEquals(command, command);
     }
 
+    // EP: Same values
     @Test
     public void equals_sameValues_returnsTrue() {
         RetrievePublicAddressCommand command1 = new RetrievePublicAddressCommand(
@@ -240,6 +252,7 @@ public class RetrievePublicAddressCommandTest {
         assertEquals(command1, command2);
     }
 
+    // EP: Different labels
     @Test
     public void equals_differentLabel_returnsFalse() {
         RetrievePublicAddressCommand command1 = new RetrievePublicAddressCommand(
@@ -249,6 +262,7 @@ public class RetrievePublicAddressCommandTest {
         assertNotEquals(command1, command2);
     }
 
+    // EP: Different names casing
     @Test
     public void equals_differentName_returnsFalse() {
         RetrievePublicAddressCommand command1 = new RetrievePublicAddressCommand(
@@ -258,6 +272,7 @@ public class RetrievePublicAddressCommandTest {
         assertNotEquals(command1, command2);
     }
 
+    // EP: Different networks
     @Test
     public void equals_differentNetwork_returnsFalse() {
         RetrievePublicAddressCommand command1 = new RetrievePublicAddressCommand(
@@ -267,6 +282,7 @@ public class RetrievePublicAddressCommandTest {
         assertNotEquals(command1, command2);
     }
 
+    // EP: null
     @Test
     public void equals_nullObject_returnsFalse() {
         RetrievePublicAddressCommand command = new RetrievePublicAddressCommand(
@@ -274,6 +290,7 @@ public class RetrievePublicAddressCommandTest {
         assertNotEquals(null, command);
     }
 
+    // EP: Different type
     @Test
     public void equals_differentClass_returnsFalse() {
         RetrievePublicAddressCommand command = new RetrievePublicAddressCommand(
