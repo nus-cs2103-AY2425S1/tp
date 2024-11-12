@@ -36,6 +36,7 @@ import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
 import seedu.address.logic.commands.event.commands.ClearEventCommand;
 import seedu.address.logic.commands.event.commands.DeleteEventCommand;
 import seedu.address.logic.commands.event.commands.EventAddAllCommand;
+import seedu.address.logic.commands.event.commands.FindEventCommand;
 import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
 import seedu.address.logic.commands.searchmode.CheckExcludedCommand;
 import seedu.address.logic.commands.searchmode.ClearExcludedCommand;
@@ -100,6 +101,16 @@ public class AddressBookParserTest {
         FindNameCommand command = (FindNameCommand) parser.parseCommand(
                 FindNameCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findEvent() throws Exception {
+        int eventNumber = 1;
+
+        Index index = Index.fromOneBased(eventNumber);
+        FindEventCommand command = (FindEventCommand) parser.parseCommand(
+                FindEventCommand.COMMAND_WORD + " " + eventNumber);
+        assertEquals(new FindEventCommand(Index.fromOneBased(eventNumber)), command);
     }
 
     @Test
