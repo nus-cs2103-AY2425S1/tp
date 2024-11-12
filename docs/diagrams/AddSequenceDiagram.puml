@@ -59,6 +59,7 @@ activate Model
 
 Model --> LogicManager
 deactivate Model
+
 AddCommand -[hidden]-> LogicManager : result
 
 
