@@ -577,9 +577,9 @@ Advanced users can edit the data file directly to modify the address book data. 
     - Cannot start or end with a special character
     - Example: `user.name`, `john.doe-123`, `user+tag`
 - **Domain Rules**:
-    - Must include a top-level domain (e.g., `.com`, `.org`, `.edu`, `.sg`)
     - Domain labels (parts between dots) must:
-        - Start and end with alphanumeric characters
+        - Start with an alphanumeric character 
+        - End with at least 2 alphanumeric characters
         - Can contain hyphens between alphanumeric characters
         - Each label must contain at least one character
     - Examples of valid domains:
