@@ -291,8 +291,8 @@ All event organizers will be able to:
 without having to dig through paperwork / NUSync.
 - View how participants are grouped by membership (e.g. faculty sports team)
 without having to dig through paperwork / NUSync.
-- Track the particular participant’s involvement in the event’s sub-events
-(e.g. IFG has multiple sub-events that stakeholders can take part in)
+- Track the particular participant’s involvement in the event
+(e.g. IFG has multiple events that stakeholders can take part in)
 without having to dig through paperwork / NUSync.
 
 
@@ -307,17 +307,17 @@ Priorities: High (must have) - `HIGH`, Medium (nice to have) - `MED`, Low (unlik
 | `HIGH`   | first-time user | add a new participant                                                             | start building my participant list from scratch                             |
 | `HIGH`   | first-time user | view a summary of all participants grouped by their sport categories              | get an overview of participant distribution                                 |
 | `HIGH`   | first-time user | search for participants by name, phone number or email                            | locate details of participants without having to go through the entire list |
-| `HIGH`   | first-time user | view a list of participants for a specific sub-event                              | understand how participants are scheduled and grouped                       |
+| `HIGH`   | first-time user | view a list of participants for a specific event                                  | understand how participants are scheduled and grouped                       |
 | `HIGH`   | first-time user | save the current participant list and details to a file                           | back up my participant records and access them later                        |
 | `HIGH`   | familiar user   | update a participant's details                                                    | keep participant records current and accurate                               |
-| `HIGH`   | familiar user   | assign participants to specific sub-events                                        | track their involvement and ensure proper scheduling                        |
+| `HIGH`   | familiar user   | assign participants to specific event                                             | track their involvement and ensure proper scheduling                        |
 | `HIGH`   | familiar user   | group participants by their faculty membership                                    | manage and organize participants according to faculty membership            |
 | `HIGH`   | familiar user   | delete a participant                                                              | remove outdated or incorrect participant records                            |
 | `MED`    | first-time user | view detailed information about a participant on a separate tab from main search  | ensure I have accurate and complete information on a participant            |
 | `MED`    | first-time user | view a sample event schedule with participants' relevant details shown            | understand how to manage and track participants' involvement                |
 | `MED`    | first-time user | access help documentation directly from the CLI                                   | get assistance with using various features of the application               |
 | `MED`    | familiar user   | search for participants based on multiple criteria                                | find specific groups of participants efficiently                            |
-| `MED`    | familiar user   | view a summary of a participant’s involvement in past sub-events                  | understand their history and performance in previous events                 |
+| `MED`    | familiar user   | view a summary of a participant’s involvement in past event                       | understand their history and performance in previous events                 |
 | `MED`    | familiar user   | import participant details from a CSV file                                        | quickly add multiple participants                                           |
 | `MED`    | expert user     | create custom participant fields specific to different types of events            | tailor the application to various event requirements                        |
 | `MED`    | expert user     | customize CLI command shortcuts and aliases for frequently used actions           | enhance productivity and streamline workflows                               |
@@ -327,7 +327,7 @@ Priorities: High (must have) - `HIGH`, Medium (nice to have) - `MED`, Low (unlik
 | `LOW`    | familiar user   | view edit history of participant details                                          | track updates and maintain data integrity                                   |
 | `LOW`    | expert user     | bulk import participant details from multiple CSV files                           | streamline data entry for large-scale events                                |
 | `LOW`    | expert user     | set up automated notifications for participants based on their roles              | keep them informed without manual follow-up                                 |
-| `LOW`    | expert user     | bulk update participant details or sub-event assignments                          | efficiently manage changes for large numbers of participants                |
+| `LOW`    | expert user     | bulk update participant details or event assignments                              | efficiently manage changes for large numbers of participants                |
 | `LOW`    | expert user     | generate complex, customized reports combining multiple data points               | gain detailed insights into event management                                |
 | `LOW`    | expert user     | schedule regular backups of participant database                                  | ensure data is protected and recoverable in case of issues                  |
 
@@ -394,25 +394,7 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-**Use case: UC4 - View a list of participants for a specific sub-event**\
-**Actor: User**\
-**Guarantee: MSS → The list of participants for the specified sub-event will be displayed**
-
-MSS:
-1. User requests to view list of participants for sub-event
-2. System displays list of participants for sub-event
-
-Extensions:\
-1a. System detects an error in the entered data.\
-1a1. System prompts user to re-enter data\
-1a2. User enters new data\
-Steps 1a1-1a2 are repeated until the data entered is correct.
-Use case resumes from step 2
-
-<hr>
-
-**System: EventfulNUS**\
-**Use case: UC5 - Update participant’s details**\
+**Use case: UC4 - Update participant’s details**\
 **Actor: User**\
 **Guarantee: MSS → The specified participant’s details will be updated to match the provided details**
 
@@ -436,13 +418,13 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-**Use case: UC6 - Assign participants to specific sub-events**\
+**Use case: UC5 - Assign participants to specific events**\
 **Actor: User**\
-**Guarantee: MSS → The specified participant will be assigned to a specified sub-event**\
+**Guarantee: MSS → The specified participant will be assigned to a specified event**\
 
 MSS:
-1. User requests to assign a participant to a sub-event
-2. System updates and displays the specified participant’s sub-event
+1. User requests to assign a participant to a event
+2. System updates and displays the specified participant’s event
 
 Extensions:\
 1a. System detects an error in the entered data.\
@@ -460,7 +442,7 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-**Use case: UC7 - Delete person**\
+**Use case: UC6 - Delete person**\
 **Actor: User**\
 **Guarantee: MSS → The person at the specified index will not be present in the system after the command is entered**
 
@@ -484,7 +466,7 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-**Use case: UC8 - Delete event**\
+**Use case: UC7 - Delete event**\
 **Actor: User**\
 **Guarantee: MSS → The event at the specified index will not be present in the system after the command is entered**
 
