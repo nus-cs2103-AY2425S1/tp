@@ -343,6 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2c. The event does not exist.
   * 2c1. PlanPal displays an error message indicating the event is invalid.
 
+    Use case ends.
 **UC07: Search for contacts using multiple filters**
 
 **MSS**
@@ -391,6 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. The event does not exist.
   * 2b1. PlanPal displays an error message indicating the event is invalid.
 
+    Use case ends.
 
 **UC10: Clear all events**
 
