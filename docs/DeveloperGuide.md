@@ -448,6 +448,8 @@ and the **Actor** is the `user`, unless specified otherwise)
 7.  Should store data in a local human editable file. 
 8.  The GUI should be fully functional across commonly used screen resolutions.
 
+### Glossary
+
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 --------------------------------------------------------------------------------------------------------------------
 
