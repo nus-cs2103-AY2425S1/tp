@@ -234,11 +234,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. GAB displays all vendors.
    <br> Use case ends.
 
-**Extensions:**
-* 1a. The list is empty. 
-    * 1a1. GAB populate the list with vendors.
-      <br> Use case resumes at step 2.
-
 ---
 
 **Use Case:** UC3 - Search by vendor name
