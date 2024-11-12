@@ -41,8 +41,13 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    private static List<Person> personList;
     private static FilteredList<Person> filteredPersonList;
     private static FilteredList<Event> filteredEventList;
+
+    public static void setPersonList(List<Person> personList) {
+        ParserUtil.personList = personList;
+    }
 
     public static void setFilteredPersonList(FilteredList<Person> filteredPersonList) {
         ParserUtil.filteredPersonList = filteredPersonList;
@@ -333,15 +338,19 @@ public class ParserUtil {
         PersonContainsKeywordsPredicate predicate =
                 new PersonContainsKeywordsPredicate(List.of(trimmedParticipantName));
 
-        if (filteredPersonList.filtered(predicate).isEmpty()) {
-            throw new ParseException("Participant " + trimmedParticipantName + " does not exist in the app.");
-        } else if (filteredPersonList.filtered(predicate).size() > 1) {
+        List<Person> matchingPersons = personList.stream()
+                .filter(predicate)
+                .toList();
+
+        if (matchingPersons.isEmpty()) {
+            throw new ParseException("Participant " + trimmedParticipantName + " does not exist in the address book.");
+        } else if (matchingPersons.size() > 1) {
             throw new ParseException("Multiple participants found with name " + trimmedParticipantName + ".\n"
                     + "Please specify a more specific participant "
                     + "with their name, phone, email, or roles if necessary.");
         }
 
-        return filteredPersonList.filtered(predicate).get(0);
+        return matchingPersons.get(0);
     }
 
     /**

@@ -44,6 +44,7 @@ public class EventBuilder {
         dateTime = DEFAULT_DATE_TIME;
         participants = new HashSet<>();
         ParserUtil.setFilteredPersonList(new FilteredList<>(FXCollections.observableArrayList(getTypicalPersons())));
+        ParserUtil.setPersonList(new FilteredList<>(FXCollections.observableArrayList(getTypicalPersons())));
     }
 
     /**

@@ -1,10 +1,18 @@
----
-layout: page
-title: Developer Guide
----
 * Table of Contents
-{:toc}
-
+1. [Acknowledgements](#acknowledgements)
+2. [Setting Up, Getting Started](#setting-up-getting-started)
+3. [Design](#design)
+   1. [Architecture](#architecture)
+   2. [UI Component](#ui-component)
+   3. [Logic Component](#logic-component)
+   4. [Model Component](#model-component)
+   5. [Storage Component](#storage-component)
+   6. [Common Classes](#common-classes)
+4. [Implementation](#implementation)
+   1. [Proposed - Undo/Redo feature](#proposed-undoredo-feature)
+   2. [Proposed - Data archiving](#proposed-data-archiving)
+5. [Other Helpful Resources](#other-helpful-resources)
+6. [Appendix](#appendix)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -14,7 +22,7 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting Up, Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -67,7 +75,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -84,7 +92,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` and `Event` objects residing in the `Model`.
 
-### Logic component
+### Logic Component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -118,8 +126,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+### Model Component
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/src/main/java/seedu/eventfulnus/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -131,14 +139,18 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+### Role Component
+**API** : [`Role.java`](https://github.com/AY2425S1-CS2103T-W14-4/tp/blob/master/src/main/java/seedu/eventfulnus/model/person/role/Role.java)
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/RoleClassDiagram.png" width="550" />
 
-</div>
+The `Role` component,
+
+* helps to keep track of the different roles that a person can have in the application.
 
 
-### Storage component
+
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -250,7 +262,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Other Helpful Resources**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -259,8 +271,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
-
-## **Appendix: Requirements**
+# Appendix
+## **Requirements**
 
 ### Product Scope
 
@@ -283,8 +295,8 @@ All event organizers will be able to:
 without having to dig through paperwork / NUSync.
 - View how participants are grouped by membership (e.g. faculty sports team)
 without having to dig through paperwork / NUSync.
-- Track the particular participant’s involvement in the event’s sub-events
-(e.g. IFG has multiple sub-events that stakeholders can take part in)
+- Track the particular participant’s involvement in the event
+(e.g. IFG has multiple events that stakeholders can take part in)
 without having to dig through paperwork / NUSync.
 
 
@@ -299,17 +311,17 @@ Priorities: High (must have) - `HIGH`, Medium (nice to have) - `MED`, Low (unlik
 | `HIGH`   | first-time user | add a new participant                                                             | start building my participant list from scratch                             |
 | `HIGH`   | first-time user | view a summary of all participants grouped by their sport categories              | get an overview of participant distribution                                 |
 | `HIGH`   | first-time user | search for participants by name, phone number or email                            | locate details of participants without having to go through the entire list |
-| `HIGH`   | first-time user | view a list of participants for a specific sub-event                              | understand how participants are scheduled and grouped                       |
+| `HIGH`   | first-time user | view a list of participants for a specific event                                  | understand how participants are scheduled and grouped                       |
 | `HIGH`   | first-time user | save the current participant list and details to a file                           | back up my participant records and access them later                        |
 | `HIGH`   | familiar user   | update a participant's details                                                    | keep participant records current and accurate                               |
-| `HIGH`   | familiar user   | assign participants to specific sub-events                                        | track their involvement and ensure proper scheduling                        |
+| `HIGH`   | familiar user   | assign participants to specific event                                             | track their involvement and ensure proper scheduling                        |
 | `HIGH`   | familiar user   | group participants by their faculty membership                                    | manage and organize participants according to faculty membership            |
 | `HIGH`   | familiar user   | delete a participant                                                              | remove outdated or incorrect participant records                            |
 | `MED`    | first-time user | view detailed information about a participant on a separate tab from main search  | ensure I have accurate and complete information on a participant            |
 | `MED`    | first-time user | view a sample event schedule with participants' relevant details shown            | understand how to manage and track participants' involvement                |
 | `MED`    | first-time user | access help documentation directly from the CLI                                   | get assistance with using various features of the application               |
 | `MED`    | familiar user   | search for participants based on multiple criteria                                | find specific groups of participants efficiently                            |
-| `MED`    | familiar user   | view a summary of a participant’s involvement in past sub-events                  | understand their history and performance in previous events                 |
+| `MED`    | familiar user   | view a summary of a participant’s involvement in past event                       | understand their history and performance in previous events                 |
 | `MED`    | familiar user   | import participant details from a CSV file                                        | quickly add multiple participants                                           |
 | `MED`    | expert user     | create custom participant fields specific to different types of events            | tailor the application to various event requirements                        |
 | `MED`    | expert user     | customize CLI command shortcuts and aliases for frequently used actions           | enhance productivity and streamline workflows                               |
@@ -319,7 +331,7 @@ Priorities: High (must have) - `HIGH`, Medium (nice to have) - `MED`, Low (unlik
 | `LOW`    | familiar user   | view edit history of participant details                                          | track updates and maintain data integrity                                   |
 | `LOW`    | expert user     | bulk import participant details from multiple CSV files                           | streamline data entry for large-scale events                                |
 | `LOW`    | expert user     | set up automated notifications for participants based on their roles              | keep them informed without manual follow-up                                 |
-| `LOW`    | expert user     | bulk update participant details or sub-event assignments                          | efficiently manage changes for large numbers of participants                |
+| `LOW`    | expert user     | bulk update participant details or event assignments                              | efficiently manage changes for large numbers of participants                |
 | `LOW`    | expert user     | generate complex, customized reports combining multiple data points               | gain detailed insights into event management                                |
 | `LOW`    | expert user     | schedule regular backups of participant database                                  | ensure data is protected and recoverable in case of issues                  |
 
@@ -386,25 +398,7 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-**Use case: UC4 - View a list of participants for a specific sub-event**\
-**Actor: User**\
-**Guarantee: MSS → The list of participants for the specified sub-event will be displayed**
-
-MSS:
-1. User requests to view list of participants for sub-event
-2. System displays list of participants for sub-event
-
-Extensions:\
-1a. System detects an error in the entered data.\
-1a1. System prompts user to re-enter data\
-1a2. User enters new data\
-Steps 1a1-1a2 are repeated until the data entered is correct.
-Use case resumes from step 2
-
-<hr>
-
-**System: EventfulNUS**\
-**Use case: UC5 - Update participant’s details**\
+**Use case: UC4 - Update participant’s details**\
 **Actor: User**\
 **Guarantee: MSS → The specified participant’s details will be updated to match the provided details**
 
@@ -428,13 +422,13 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-**Use case: UC6 - Assign participants to specific sub-events**\
+**Use case: UC5 - Assign participants to specific events**\
 **Actor: User**\
-**Guarantee: MSS → The specified participant will be assigned to a specified sub-event**\
+**Guarantee: MSS → The specified participant will be assigned to a specified event**\
 
 MSS:
-1. User requests to assign a participant to a sub-event
-2. System updates and displays the specified participant’s sub-event
+1. User requests to assign a participant to a event
+2. System updates and displays the specified participant’s event
 
 Extensions:\
 1a. System detects an error in the entered data.\
@@ -452,13 +446,13 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-**Use case: UC7 - Delete participant**\
+**Use case: UC6 - Delete person**\
 **Actor: User**\
-**Guarantee: MSS → The participant at the specified index will not be present in the system after the command is entered**
+**Guarantee: MSS → The person at the specified index will not be present in the system after the command is entered**
 
 MSS:
-1. User requests to delete a participant
-2. System deletes the participant and displays a message indicating no errors.
+1. User requests to delete a person
+2. System deletes the person and displays a message indicating no errors.
 
 Extensions:\
 1a. System detects an error in the entered data.\
@@ -467,7 +461,7 @@ Extensions:\
 Steps 1a1-1a2 are repeated until the data entered is correct.\
 Use case resumes from step 2.
 
-1b. System does not find specified participant in the system.\
+1b. System does not find specified person in the system.\
 1b1. System prompts user to re-enter data.\
 1b2. User enters new data.\
 Steps 1b1-1b2 are repeated until the data entered is correct.\
@@ -476,7 +470,7 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-**Use case: UC8 - Delete event**\
+**Use case: UC7 - Delete event**\
 **Actor: User**\
 **Guarantee: MSS → The event at the specified index will not be present in the system after the command is entered**
 
@@ -545,7 +539,7 @@ Use case resumes from step 2.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -569,7 +563,32 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+1. _{ more test cases …​ }
+
+
+### Adding a person
+
+1. Adding a person with all fields
+
+   1. Prerequisites: No persons in the list.
+
+      1. Test case: `add n/Alice p/91234567 e/alice@mail.com r/
+         Expected: A person with the given details is added to the list. Details of new contact shown in the status message. Timestamp in the status bar is updated.
+      1. Test case: `add n/Bob p/98765432
+         Expected: No person is added. Error details shown in the status message. Status bar remains the same.
+
 1. _{ more test cases …​ }_
+
+### Editing a person
+
+1. Editing a person with all fields
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `edit 1 n/Alice Paul p/91234567
+      Expected: First contact is updated with the new details. Details of the updated contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `edit 0 n/Bob Paul
+      Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
 
 ### Deleting a person
 
@@ -587,6 +606,49 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Adding an event
+
+1. Adding an event with all fields
+
+   1. Prerequisites: No events in the list.
+
+   1. Test case: `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC`
+      Expected: An event with the given details is added to the list. Details of new event shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `addevent sp/Chess t/COM v/usc`
+      Expected: No event is added. Error details shown in the status message. Status bar remains the same.
+
+2. _{ more test cases …​ }_
+
+### Editing an event
+
+1. Editing an event with all fields
+
+   1. Prerequisites: List all events using the `listevent` command. Multiple events in the list.
+
+   1. Test case: `editevent 1 sp/Chess d/2024 12 12 1800 v/USC`
+      Expected: First event is updated with the new details. Details of the updated event shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `editevent 0 sp/Chess t/COM v/usc`
+      Expected: No event is updated. Error details shown in the status message. Status bar remains the same.
+
+2. _{ more test cases …​ }_
+
+### Deleting an event
+
+1. Deleting an event while all events are being shown
+
+   1. Prerequisites: List all events using the `listevent` command. Multiple events in the list.
+
+   1. Test case: `deleteevent 1`<br>
+      Expected: First event is deleted from the list. Details of the deleted event shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `deleteevent 0`<br>
+      Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `deleteevent`, `deleteevent x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+2. { more test cases …​ }_
 
 ### Saving data
 
