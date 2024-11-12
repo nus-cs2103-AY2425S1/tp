@@ -42,19 +42,6 @@ public class Wedding {
         this.date = date;
         this.venue = venue;
     }
-    public void setIsOwnWedding(boolean isOwnWedding) {
-        this.isOwnWedding = isOwnWedding;
-    }
-
-    public boolean isOwnWedding() {
-        return isOwnWedding;
-    }
-    public void setClient(Person person) {
-        this.client = new Client(person);
-        if (person.getOwnWedding() == null || person.getOwnWedding() != this) {
-            person.setOwnWedding(this);
-        }
-    }
 
     public Name getName() {
         return name;
@@ -72,12 +59,27 @@ public class Wedding {
         return venue;
     }
 
+    public boolean isOwnWedding() {
+        return isOwnWedding;
+    }
+
+    public void setClient(Person person) {
+        this.client = new Client(person);
+        if (person.getOwnWedding() == null || person.getOwnWedding() != this) {
+            person.setOwnWedding(this);
+        }
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }
 
     public void setVenue(Venue venue) {
         this.venue = venue;
+    }
+
+    public void setIsOwnWedding(boolean isOwnWedding) {
+        this.isOwnWedding = isOwnWedding;
     }
 
     /**

@@ -35,6 +35,7 @@ public class DeleteCommandParserTest {
 
         DeleteCommand expectedDeleteCommand =
                 new DeleteCommand(null, new NameMatchesKeywordPredicate(Arrays.asList("Alice", "Bob")), null);
+
         assertParseSuccess(parser, "Alice Bob", expectedDeleteCommand);
 
         assertParseSuccess(parser, " \n Alice Bob  \t", expectedDeleteCommand);
@@ -59,6 +60,7 @@ public class DeleteCommandParserTest {
         // Test for wedding prefix
         String weddingInput = "1w/1";
         ParseException pe = assertThrows(ParseException.class, () -> parser.parse(weddingInput));
+
         assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE),
                 pe.getMessage());
     }

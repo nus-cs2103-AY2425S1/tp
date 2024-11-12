@@ -80,7 +80,7 @@ public class AddwCommandTest {
         assertEquals(Arrays.asList(weddingToAdd), modelStub.weddingsAdded);
     }
 
-    //duplicate wedding check name, client, date and venue
+    // Duplicate wedding checks for name, client, date and venue
     @Test
     public void execute_duplicateWedding_throwsCommandException() {
         Person tobeClient = modelStub.getAddressBook().getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -176,7 +176,7 @@ public class AddwCommandTest {
     // =========== Stubs ============================================================================================
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override

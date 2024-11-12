@@ -78,27 +78,27 @@ Here are some common scenarios to help you understand how to use Bridal Boss:
    [↗ See vieww command details](#viewing-wedding-details-vieww)
 
 #### 2. Managing Vendors for a Wedding
-1. Add vendors as contacts:
-   `add n/John Doe p/91234567 e/john@photo.com a/456 River Valley r/photographer`
+1. Add vendors as contacts:<br>
+   `add n/John Doe p/91234567 e/john@photo.com a/456 River Valley r/photographer`<br>
    `add n/Mary Tan p/82345678 e/mary@flowers.com a/789 Garden Road r/florist`
 
-2. Assign them to a wedding (use `list` first to see indices):
-   `assign John Doe w/1`
-   `assign Mary Tan w/1`
+2. Assign them to a wedding (use `list` first to see indices):<br>
+   `assign John Doe w/1`<br>
+   `assign Mary Tan w/1`<br>
    [↗ See assign command details](#assigning-a-person-assign)
 
 3. Check wedding assignments:
    `vieww 1`
 
 #### 3. Making Changes to Existing Entries
-1. Update contact details:
-   `edit John Doe p/91234599       # Update phone number`
-   `edit Mary Tan a/100 New Road   # Update address`
+1. Update contact details:<br>
+   `edit John Doe p/91234599       # Update phone number`<br>
+   `edit Mary Tan a/100 New Road   # Update address`<br>
    [↗ See edit command details](#editing-a-person-edit)
 
-2. Modify wedding details:
-   `editw w/1 d/2024-12-31         # Change date`
-   `editw w/1 v/New Venue          # Change venue`
+2. Modify wedding details:<br>
+   `editw w/1 d/2024-12-31         # Change date`<br>
+   `editw w/1 v/New Venue          # Change venue`<br>
    [↗ See editw command details](#editing-a-wedding-editw)
 
 #### 4. Finding and Filtering Contacts
@@ -106,9 +106,9 @@ Here are some common scenarios to help you understand how to use Bridal Boss:
    `find john                      # Finds "John" or "John Doe"`
    [↗ See find command details](#finding-persons-by-name-find)
 
-2. Filter by multiple criteria:
-   `filter r/photographer          # All photographers`
-   `filter n/John r/photographer   # Johns or photographers`
+2. Filter by multiple criteria:<br>
+   `filter r/photographer          # All photographers`<br>
+   `filter n/John r/photographer   # Johns or photographers`<br>
    [↗ See filter command details](#filtering-persons-filter)
 
 ### Common Mistakes to Avoid
@@ -116,15 +116,15 @@ Here are some common scenarios to help you understand how to use Bridal Boss:
 1. ❌ Creating a wedding without adding the client first
    `addw n/Beach Wedding c/John Doe   # Fails if John isn't a contact`
 
-   ✅ Correct approach:
-   `add n/John Doe p/91234567 e/john@example.com a/123 Main St`
+   ✅ Correct approach:<br>
+   `add n/John Doe p/91234567 e/john@example.com a/123 Main St`<br>
    `addw n/Beach Wedding c/John Doe`
 
 2. ❌ Trying to delete a client who has a wedding
    `delete John   # Fails if John has an active wedding`
 
-   ✅ Correct approach:
-   `deletew 1     # Delete the wedding first`
+   ✅ Correct approach:<br>
+   `deletew 1     # Delete the wedding first`<br>
    `delete John   # Then delete the contact`
 
 3. ❌ Assigning a client to their own wedding as vendor
@@ -325,9 +325,11 @@ Filters and lists persons whose fields match the specified keywords.
     - `filter e/john@gmail.com` returns persons with emails containing `john@gmail.com`.
     - `filter p/91234567` returns the person with phone number `91234567`.
     - `filter n/John r/vendor` returns persons with names containing `John` or with role `vendor`.
-    - `filter e/john@gmail.com a/Jurong` returns persons with emails containing "john@gmail.com" or address containing "Jurong".
-      ![Multi-field filter results](images/filter_persons_by_multiple_fields.png)<br>
-      *`filter e/alex@gmail.com r/florist` Example of filtering results showing matched persons, weddings remain empty/unfiltered*
+    - `filter e/john@gmail.com a/Jurong` returns persons with emails containing "john@gmail.com" or address containing "Jurong".<br>
+
+Visual Example:
+![Multi-field filter results](images/filter_persons_by_multiple_fields.png)<br>
+*`filter e/alex@gmail.com r/florist` Example of filtering results showing matched persons, weddings remain empty/unfiltered*
 
 [↥ Back to Top](#bridal-boss-user-guide)
 
@@ -353,6 +355,8 @@ Adds a new wedding to the address book.
         - Adds a wedding named "Beach Wedding" for the client at index 1.
     - `addw n/Garden Wedding c/John Doe v/Botanical Gardens`
         - Adds a wedding for "John Doe" if there's only one match.<br>
+
+Visual Example:
 ![Adding a wedding example](images/addw_example.png)<br>
 *Example of successfully adding a new wedding with all fields specified*
 
@@ -444,7 +448,9 @@ Assigns a role and/or weddings to a person.
       - Removes the role of person at index 1.
     -  `assign John Doe r/photographer w/2`
         - If there's only one match for "John Doe", assigns them the role "photographer" and to wedding at index 2.<br>
-          **Error Examples**:<br>
+
+Visual Examples:<br>
+**Error Example**:<br>
 ![Assignment error example](images/error_example_assign.png)<br>
 *Example of error when trying to assign a client to their own wedding*
 
@@ -475,7 +481,7 @@ Exits the application.
 
 #### Editing the Data File
 
-Advanced users can edit the data file directly to modify the address book data.
+Advanced users can edit the data file directly to modify the address book data. However, exercise caution when doing so.
 
 - **File Location**:
     - `[JAR file location]/data/addressbook.json`
@@ -484,7 +490,8 @@ Advanced users can edit the data file directly to modify the address book data.
         - Make a copy of the data file before editing.
     - **Validity**:
         - Incorrect file formats or invalid data can cause the application to discard all data and start with an empty data file upon the next run.
-        - Certain edits can cause the application to behave unexpectedly (e.g., entering values outside acceptable ranges).
+          - Changing ownWedding field of a person to 0 will only result in wedding having no client and would not corrupt the file.
+          - However, changing the hashcode of the `weddingJobs` to an incorrect value will result in a corrupted file and restart the application with an empty data file.
 - **Recommendation**:
     - Edit the data file only if you are confident in updating it correctly.
 
@@ -497,7 +504,8 @@ Advanced users can edit the data file directly to modify the address book data.
 - **Error Messages**:
     - The application provides specific error messages to guide users in correcting their commands.
 - **Case Sensitivity**:
-    - Commands are generally case-insensitive, but parameters (especially for exact matches) may be case-sensitive as per the validation rules.
+  - Commands must be **lowercase** (`add, addw, edit, editw etc.`)
+  - Parameters prefixes (`n/..., e/...` ) are **case-sensitive**.
 
 [↥ Back to Top](#bridal-boss-user-guide)
 
@@ -563,15 +571,15 @@ Advanced users can edit the data file directly to modify the address book data.
 #### Email Addresses
 
 - **Format**:
-    - Must be in the form `local-part@domain.toplevel`
+    - Must be in the form `local-part@domain`
 - **Local-part Rules**:
     - Can contain alphanumeric characters and `+`, `_`, `.`, `-`
     - Cannot start or end with a special character
     - Example: `user.name`, `john.doe-123`, `user+tag`
 - **Domain Rules**:
-    - Must include a top-level domain (e.g., `.com`, `.org`, `.edu`, `.sg`)
     - Domain labels (parts between dots) must:
-        - Start and end with alphanumeric characters
+        - Start with an alphanumeric character 
+        - End with at least 2 alphanumeric characters
         - Can contain hyphens between alphanumeric characters
         - Each label must contain at least one character
     - Examples of valid domains:
@@ -586,11 +594,10 @@ Advanced users can edit the data file directly to modify the address book data.
     - `user.name+tag@my-company.com`
     - `sales@company-name.com.sg`
 - **Invalid Examples**:
-    - `user@domain` (missing top-level domain)
-    - `user@e-a` (missing top-level domain)
+    - `user@e-a` (does not end with 2 alphanumeric characters)
     - `user@-domain.com` (domain label starts with hyphen)
     - `user@domain-.com` (domain label ends with hyphen)
-    - `user@.com` (empty domain label)
+    - `user@.com` (domain label must contain at least one alphanumeric character)
 #### Roles
 
 - **Format**:
@@ -610,7 +617,9 @@ Advanced users can edit the data file directly to modify the address book data.
       - Can only contain alphabets, spaces, apostrophes (') and hyphens (-)
 - **Date**:
     - Must be in `YYYY-MM-DD` format
-    - Must be a valid calendar date
+    - Must be a valid calendar date 
+    - Optional field - only validated when v/ prefix is provided
+
 - **Venue**:
     - Optional field - only validated when v/ prefix is provided
     - When provided, cannot be blank or consist only of whitespace

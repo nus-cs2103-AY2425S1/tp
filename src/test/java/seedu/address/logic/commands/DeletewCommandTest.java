@@ -179,8 +179,7 @@ public class DeletewCommandTest {
         String expected = DeletewCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deletewCommand.toString());
 
-        String targetKeyword = VALID_NAME_ALICEWEDDING;
-        NameMatchesWeddingPredicate predicate = preparePredicate(targetKeyword);
+        NameMatchesWeddingPredicate predicate = preparePredicate(VALID_NAME_ALICEWEDDING);
         deletewCommand = new DeletewCommand(null, predicate);
         expected = DeletewCommand.class.getCanonicalName() + "{targetKeywords=" + predicate.toString() + "}";
         assertEquals(expected, deletewCommand.toString());

@@ -11,8 +11,11 @@ public class Client {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Client can take any names or index in the address book, and it should not be blank.";
+
+    // Only contains digits 0-9
     public static final String INDEX_VALIDATION_REGEX = "^\\d+$";
     public static final String NAME_VALIDATION_REGEX = Name.VALIDATION_REGEX;
+
     private final Person person;
 
     /**
@@ -33,10 +36,23 @@ public class Client {
         return this.person.getName();
     }
 
+    /**
+     * Returns true if a given string is a valid client name.
+     *
+     * @param test string to be tested
+     * @return whether the string is a valid client name.
+     */
     public static boolean isValidClientName(String test) {
         return test.matches(NAME_VALIDATION_REGEX);
     }
 
+
+    /**
+     * Returns true if a given string is a valid index.
+     *
+     * @param test string to be tested
+     * @return whether the string is a valid index.
+     */
     public static boolean isValidClientIndex(String test) {
         return test.matches(INDEX_VALIDATION_REGEX);
     }

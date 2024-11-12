@@ -9,6 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Venue {
 
     public static final String MESSAGE_CONSTRAINTS = "Venues can take any values, and it should not be blank.";
+
+    // Any non empty string
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
     private String fullVenue;
