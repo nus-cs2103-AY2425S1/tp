@@ -483,8 +483,27 @@ Use case resumes from step 2.
 
 <hr>
 
+<hr>
+
 **System: EventfulNUS**\
-**Use case: UC8 - Delete event**\
+**Use case: UC8 - Add event**\
+**Actor: User**
+
+MSS:
+1. User requests to add an event
+2. System adds the event and displays a message indicating no errors.
+
+Extensions:
+1a. System detects an error in the entered data.
+1a1. System prompts user to re-enter data.
+1a2. User enters new data.
+Steps 1a1-1a2 are repeated until the data entered is valid.
+Use case resumes from step 2.
+
+<hr>
+
+**System: EventfulNUS**\
+**Use case: UC9 - Delete event**\
 **Actor: User**\
 **Guarantee: MSS → The event at the specified index will not be present in the system after the command is entered**
 
