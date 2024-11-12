@@ -63,13 +63,16 @@ public class FilterByNetworkCommand extends Command {
                         : null)
                 .toList();
 
-        int numOfPersonWithSpecifiedNetwork = personsWithSpecifiedNetwork.stream()
+        int numOfPersonWithSpecifiedNetwork = personsWithSpecifiedNetwork
+                .stream()
                 .filter(Objects::nonNull)
                 .toList()
                 .size();
 
         if (personsWithSpecifiedNetwork.stream().allMatch(Objects::isNull)) {
-            throw new CommandException(String.format(MESSAGE_FILTER_FAIL, this.specifiedNetwork));
+            throw new CommandException(String.format(
+                    MESSAGE_FILTER_FAIL,
+                    this.specifiedNetwork));
         }
 
         StringBuilder result = new StringBuilder();
@@ -82,7 +85,8 @@ public class FilterByNetworkCommand extends Command {
         }
         String personsListString = result.toString().trim();
 
-        return new CommandResult(String.format(MESSAGE_FILTER_SUCCESS,
+        return new CommandResult(String.format(
+                MESSAGE_FILTER_SUCCESS,
                 numOfPersonWithSpecifiedNetwork,
                 this.specifiedNetwork,
                 personsListString));

@@ -301,6 +301,34 @@ Person#hasPublicAddressStringAmongAllNetworks(String publicAddressString).
 
 <puml src="diagrams/SearchPublicAddressSequenceDiagram.puml" />
 
+### Filter by Network feature
+
+The `filter` command is a feature that allows users to filter the address book based on the specified network. 
+An example is `filter n/BTC`.
+
+#### Implementation
+
+The `filter` command is facilitated by `FilterByNetworkCommand` and `FilterByNetworkCommandParser`. 
+It uses `Model#getFilteredPersonList()` to get the list of filtered persons currently displayed and filters each 
+of the persons for the presence of the specified network using `Person#getPublicAddressesComposition()
+.getPublicAddresses().containsKey(Network network)`.
+
+#### How to execute the command
+
+1. The `filter` command is executed by typing `filter` followed by the network to be filtered by.
+2. The `AddressBookParser` class creates a new `FilterByNetworkCommandParser` object.
+3. If there is no network entered or more than one network entered, a `ParseException` will be thrown.
+4. The `FilterByNetworkCommandParser` class creates a new `FilterByNetworkCommand` object with the parsed network.
+5. The `FilterByNetworkCommand` object then calls the `Model#getFilteredPersonList()` method to get the list of 
+filtered persons currently displayed.
+6. The `FilterByNetworkCommand` object then filters each of the persons for the presence of the specified network using 
+`Person#getPublicAddressesComposition().getPublicAddresses().containsKey(Network network)`.
+7. The boolean value returned from `Person#getPublicAddressesComposition().getPublicAddresses()
+.containsKey(Network network)` is then used to create a `List<Person>` object that have the specified network in the 
+`FilterByNetworkCommand` object.
+8. The `FilterByNetworkCommand` object then calls the `FilterByNetworkCommand#generateResult(
+List<Person> personsWithSpecifiedNetwork)` to generate the success or error message.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -486,10 +514,15 @@ otherwise)
 1. User requests to filter persons by a specific network.
 2. DLTbook shows a list of persons with the specified network.
 
+Use case ends.
+
 **Extensions**
 
 - 2a. No persons have the specified network.
+
     - 2a1. DLTbook shows an error message.
+
+    Use case ends.
 
 **Use case: Delete a person**
 
