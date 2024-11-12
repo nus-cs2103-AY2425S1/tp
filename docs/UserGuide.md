@@ -6,7 +6,7 @@
 
 # SocialBook User Guide
 
-SocialBook is a **desktop app for managing contacts, optimized for use via a  Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SocialBook can get your contact management tasks done faster than traditional GUI apps.
+SocialBook is a **desktop app for managing contacts, optimized for use via a  Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a social worker based in Singapore and can type fast, SocialBook can get your contact management tasks (eg. locate/contact families) done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -303,8 +303,8 @@ _Details coming soon ..._
 
 ### Date of Last Visit
 * Dates of last visit are optional for contacts, and are denoted by the `d/` prefix.
-* Dates of last visit are confined to the `DD-MM-YYYY` format.
-* The date provided must be valid, and before the current date. This prevents accidental entering of future dates.
+* Dates of last visit are confined to the `dd-MM-yyyy` format and range of dates follows the [ISO-8601 calendar system](https://en.wikipedia.org/wiki/ISO_8601).
+* The date provided must be valid, i.e., either today's date or any date before today. This prevents accidental entering of future dates.
 * To indicate no date of last visit for a contact, you can `add` a contact without the `d/` prefix, or with a `d/` followed by whitespace.
 
 ### Emergency Contact

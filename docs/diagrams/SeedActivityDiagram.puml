@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:user executes seed command;
+
+repeat
+if () then ([model.hasPerson()])
+    :continue;
+else ([else])
+    :add person to model;
+endif
+repeat while () is ([else]) not ([all sample persons in model])
+stop
+
+@enduml
