@@ -335,15 +335,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2b. The contact does not have a role.
-    * 2b1. PlanPal prompts the user to assign a role to the contact before adding them to the event.
-    * 2b2. User assigns a role.
+* 2b. The contact does not have the role specified.
+    * 2b1. PlanPal displays an error message indicating that the contact does not have the specified role.
 
-      Use case resumes from step 2.
+      Use case ends
 
 * 2c. The event does not exist.
   * 2c1. PlanPal displays an error message indicating the event is invalid.
 
+    Use case ends.
 **UC07: Search for contacts using multiple filters**
 
 **MSS**
@@ -392,6 +392,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. The event does not exist.
   * 2b1. PlanPal displays an error message indicating the event is invalid.
 
+    Use case ends.
 
 **UC10: Clear all events**
 
