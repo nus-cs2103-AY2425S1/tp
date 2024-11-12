@@ -863,7 +863,7 @@ testers are expected to do more *exploratory* testing.
 
       Expected: Error message indicating valid statuses are 'present' or 'absent'.
 
-  ### Exit the application
+### Exit the application
 
 1. Exit the application
     1. Test case: `exit`
