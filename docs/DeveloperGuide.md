@@ -577,7 +577,7 @@ Given below are instructions to test the app manually.
     1. Test case: `contact list`<br>
        Expected: All contacts are shown.
 
-    1. Test case: `lesson list 0`<br>
+    1. Test case: `contact list 0`<br>
        Expected: All contacts are shown.
 
 ### Editing a contact
@@ -661,7 +661,7 @@ Given below are instructions to test the app manually.
 
    1. Prerequisite: At least one student exists in the contact list.
 
-   1. Test case: `lesson add sid/1 f/10 d/11-11-2024 12:00 h/1`<br>
+   1. Test case: `lesson add sid/1 f/10 d/12-11-2024 12:00 h/1`<br>
       Expected: A lesson is added to the student with index 1 in the filtered contact list. Details of the added lesson is shown in the status message.
 
 ### Listing all lessons
