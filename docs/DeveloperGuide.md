@@ -40,7 +40,7 @@ pageNav: 3
     - [Planned Enhancements](#appendix-planned-enhancements)
         - [1. Overly General Error Message for Duplicate Command Word](#1-overly-general-error-message-for-duplicate-command-word)
         - [2. Overly General Error Message for Duplicate IDs in Commands](#2-overly-general-error-message-for-duplicate-ids-in-commands)
-        - [3. Address help Command Popup Window Stability Issue](#3-address-help-command-popup-window-stability-issue)
+        - [3. Address Help Command Popup Window Stability Issue](#3-address-help-command-popup-window-stability-issue)
         - [4. StudentID as Duplicate Detection Mechanism](#4-studentid-as-duplicate-detection-mechanism)
         - [5. Support for Multiple Filter Conditions](#5-support-for-multiple-filter-conditions)
         - [6. Toggle for Partial vs Full Matching in Filter Command](#6-toggle-for-partial-vs-full-matching-in-filter-command)
