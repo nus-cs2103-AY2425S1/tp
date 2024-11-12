@@ -684,43 +684,100 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Open a terminal and `cd` into the folder with the jar file.
+
+    3. Run `java -jar contactcs.jar`. <br>
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by rerunning `java -jar contactcs.jar` in the terminal.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Deleting person(s)
 
-### Deleting a person
+1. Deleting person(s) while all persons are being shown
 
-1. Deleting a person while all persons are being shown
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1 3`<br>
+      Expected: First and third contacts are deleted from the list. Details of the deleted contacts shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete abc`<br>
+       Expected: Similar to previous.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Testing data persistence across sessions
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Add a new person using the `add` command.
 
-1. _{ more test cases …​ }_
+    1. Close the app.
+
+    1. Re-launch the app. <br>
+       Expected: The newly added person should still be present in the list.
+
+    1. You can try out other data changing commands such as `delete`, `edit`, `clear`.
+
+1. Dealing with missing data file
+
+    1. Exit the address book, if it is running.
+    2. delete the `contactcs.json` file inside the folder named `data`. It is located in the same folder as the jar file.
+    3. Relaunch the app. <br>
+       Expected: The app should create a new `contactcs.json` file filled with sample data.
+
+### Undo/Redo
+1. Testing how undone states are purged after committing
+   1. Add Alice using `add n/Alice p/11111111` command.
+   1. Add Bob using `add n/Bob p/22222222` command.
+   1. Undo the previous command.
+   1. Add Catherine using `add n/Catherine p/33333333` command.
+   1. Undo the previous command. Now only Alice is in the list.
+   1. Then, perform a redo.
+   Expected: Catherine is added back. Bob is lost forever.
+
+### Finding contacts
+1. Testing mixture of fields specified in a single `find`
+   1. Prerequisites
+      1. Clear the list using the `clear` command.
+      2. Run `add n/Alice p/11111111 r/CS1101S t/tag1`
+      2. Run `add n/Bob p/22222222 r/MA1521 t/tag2`
+      2. Run `add n/Catherine p/33333333 r/CS2103T t/tag3`
+   1. Run `find n/Alice n/Bob r/CS1101S`. <br>
+   Expected: Only Alice is shown in the list.<br>
+   Reason: The `find` command finds all persons with (name Alice **or** Bob) **and** role CS1101S.
+   2. Run `find r/CS1101S r/MA1521 t/tag1 t/tag3` <br>
+   Expected: Only Alice is shown in the list.<br>
+   Reason: The `find` command finds all persons with (module role CS1101S **or** MA1521) **and** (tag1 **or** tag 3).
+
+### Editing module roles
+1. Editing module roles of a person
+   1. Prerequisites
+      1. Clear the list using the `clear` command.
+      2. Run `add n/Alice p/11111111 r/CS1101S t/tag1`
+   1. Run `edit 1 r/CS2103T` <br>
+   Expected: The role of Alice is changed to CS2103T. The status message shows the change.
+
+### Adding a person with module roles
+1. Using role acronyms
+   1. Run `add n/Alice p/11111111 r/CS1101S-Prof r/CS2103T-TA` <br>
+   Expected: Alice is added module roles CS1101S-Professor and CS2103T-Tutor. <br>
+   Note that `TA` is short for `Tutor` and `Prof` is short for `Professor`. You can also specify the full role name.
+
+1. Not specifying the role
+   1. Run `add n/Alice p/11111111 r/MA1521` <br>
+   Expected: Alice is added with module role MA1521-Student. <br>
+   Reason: If the role is not specified, the default role is Student.
 
 ## **Appendix: Planned Enhancements**
 **Team size**: 5
