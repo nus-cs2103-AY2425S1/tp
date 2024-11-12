@@ -902,11 +902,6 @@ The following planned enhancements address known feature flaws identified during
     - **Proposed Fix**: Add sorting options to the event list, such as sorting by date, time, or location. Command example: `/e list sort/date`.
     - **Expected Outcome**: Improved usability for managing events.
 
-4. **Allow Find Command To Work With Previous Commands**
-   - **Feature Flaw**: Currently the find command will reset the display list and search for volunteers or events containing the keyword.
-   - **Proposed Solution**: Find should use the current display list as the basis for its search.
-   - **Expected Outcome**: Users should be able to search for a particular volunteer assigned to an event, by using `/e view` first and then `/v find` after.
-
 5. **Enhance Find Command Input Flexibility**
     - **Feature Flaw**: Currently the find command does not support searching for email or phone number.
     - **Proposed Fix**: Update the search functionality to allow for searching email and phone number. For example, searching for `93456` will return `David Ng`.
@@ -936,6 +931,11 @@ The following planned enhancements address known feature flaws identified during
     - **Feature Flaw**: Currently some success and error messages exceed the space available in one line and force the user to scroll the output box horizontally to read the full message.
     - **Proposed Solution**: The output message should wrap in the output text box.
     - **Expected Outcome**: Users should be able to read and understand error message with less trouble and confusion.
+
+11. **Improve Error Message Specificity**
+    - **Feature Flaw**: Currently assignment errors are not specific.
+    - **Proposed Solution**: Error message should indicate if assignment fails due to overlapping event assignment or due to the volunteer not being free on the day of the event.
+    - **Expected Outcome**: Users should be able to read and instantly understand the reason their assignment command failed so that they can rectify the error without needing to check the possible causes one by one.
 
    
 
