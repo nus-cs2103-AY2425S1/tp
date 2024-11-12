@@ -378,12 +378,12 @@ ___
       Use case ends.
 
 - **1b.** VV detects that one or more parameters are missing or invalid.
-    - **1b1.** VV displays an error message.  
+    - **1b1.** VV displays an error message.
       Use case ends.
 
 - **1c.** VV detects that the current status of the specified delivery is the same as the requested status.
     - **1c1.** VV displays an error message.
-      Use case ends.
+       Use case ends.
 
 ___
 **System**: VendorVault (VV)
