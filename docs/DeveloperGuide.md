@@ -41,6 +41,7 @@ title: Developer Guide
    6. [Increasing support to host more student information](#enhancement-6-increasing-support-to-host-more-student-information)
    7. [Increased filter options for students](#enhancement-7-increased-filter-options-for-students)
    8. [Support for precise student name searching](#enhancement-8-support-for-precise-student-name-searching)
+   
 ---
 
 ## **Acknowledgements**
