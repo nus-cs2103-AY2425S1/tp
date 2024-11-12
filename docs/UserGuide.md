@@ -32,7 +32,7 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 
 3. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F08-3/tp/releases/).
 
-    Scroll to the very bottom of the page to find the latest release. Under the `Assets` section, download the `.jar` file by clicking on it.
+    The latest release can be found at the top of the page. Under the `Assets` section, download the `.jar` file by clicking on it.
 
 4. Copy the file to the folder you want to use as the _home folder_ for your FindingbrUdders app. This can be any folder on your computer, it can also be an empty folder.
 
@@ -61,7 +61,7 @@ You will _**never forget**_ the meaningful connections you make or the meetings 
 
 <box type="warning">
 
-**IMPORTANT:** Take note that you should **not** edit the _JSON file_ in your directory directly while the app is running or before running.
+**IMPORTANT:** Take note that you should **never** edit the _JSON file_ in your directory directly.
 </box>
 
 <box type="tip">
@@ -190,14 +190,14 @@ Edits an existing Udder in the address book.
 </box>
 
 **Examples:**
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st Udder to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd Udder to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st Udder to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` edits the name of the 2nd Udder to be `Betsy Crower` and clears all existing tags.
 
 ### Scheduling a meeting with an Udder : `schedule` 🗓️
 
 Schedules a meeting with an Udder from the specified start time to end time, at the location as shown in the format below
 
-**Format:** `schedule UDDER_INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`
+**Format:** `schedule INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`
 
 * Automatically detects any clash in meetings with other Udders.
 * Please input valid meeting dates as inputting invalid ones (e.g. 30th February 2024, 29th February 2023, and 31st April 2024) may lead to unexpected behaviour!
@@ -229,8 +229,8 @@ Edits the specified meeting with an Udder from the meetings list.
 * Please input valid meeting dates as inputting invalid ones (e.g. 30th February 2024, 29th February 2023, and 31st April 2024) may lead to unexpected behaviour!
 
 **Examples:**
-*  `editm 1 st/09-10-2024 10:00` Edits the start time of the 1st meeting to be `09-10-2024 10:00`.
-*  `editm 2 n/Betsy Crower et/10-10-2024 11:00` Edits the name and end time of the 2nd meeting to be `Betsy Crower` and `10-10-2024 11:00` respectively.
+*  `editm 1 st/09-10-2024 10:00` edits the start time of the 1st meeting to be `09-10-2024 10:00`.
+*  `editm 2 n/Betsy Crower et/10-10-2024 11:00` edits the name and end time of the 2nd meeting to be `Betsy Crower` and `10-10-2024 11:00` respectively.
 
 ### Locating Udders by keywords: `find` 🔍
 
@@ -248,8 +248,8 @@ Finds Udders by specified keywords for each field.
 </box>
 
 **Examples:**
-* `find n/John` returns Udders: `John Mayer` and `John Nissins`<br>
-* `find t/friend` returns `Alex Yeoh` and `Bernice Yu`<br>
+* `find n/John` returns Udders: `John Mayer` and `John Nissins`<br>.
+* `find t/friend` returns `Alex Yeoh` and `Bernice Yu`<br>.
 
 ![result for 'find n/John'](images/findCommand4.png)
 
@@ -309,7 +309,7 @@ Udder data are saved in the hard disk automatically after any command that chang
 
 <box type="warning">
 
-Udder data are saved automatically as a JSON file `[JAR file location]/data/findingbrudders.json`. This JSON file is to not be edited directly by you.
+Udder data are saved automatically as a JSON file `[JAR file location]/data/findingbrUdders.json`. This JSON file is to not be edited directly by you.
 Changing this file directly can lead to undesirable behaviour of the app and should not be done.
 </box>
 
@@ -321,14 +321,14 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my Udder data to anudder(pun intended) Computer?<br>
-**A**: Install the app in the other computer as per the Quick Start guide. Copy the `findingbrudders.json` file from the previous computer to the new computer. Replace the empty `findingbrudders.json` file in new computer with the `findingbrudders.json` file from the previous computer. Your `findingbrudders.json` file is located in the `data` folder of the directory where the `findingbrudders.jar` file is located.
+**Q**: How do I transfer my Udder data to anudder (pun intended) Computer?<br>
+**A**: Install the app in the other computer as per the Quick Start guide. Copy the `findingbrUdders.json` file from the previous computer to the new computer. Replace the empty `findingbrUdders.json` file in new computer with the `findingbrUdders.json` file from the previous computer. Your `findingbrUdders.json` file is located in the `data` folder of the directory where the `findingbrUdders.jar` file is located.
 
 **Q**: Can I undo a command in FindingbrUdders?<br>
 **A**: Unfortunately, there is no undo feature available at this time. Please double-check your inputs before executing any commands, especially for irreversible actions like deleting a contact.
 
-**Q**: Can I change the location of the saved findingbrudders.json file?<br>
-**A**: The location of the findingbrudders.json file is automatically set to the folder where the .jar file is stored. If you wish to change it, you need to move the .jar file to the desired folder, as the data file will follow.
+**Q**: Can I change the location of the saved `findingbrUdders.json` file?<br>
+**A**: The location of the `findingbrUdders.json` file is automatically set to the folder where the `.jar` file is stored. If you wish to change it, you need to move the `.jar` file to the desired folder, as the data file will follow.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -344,17 +344,17 @@ Solution: manually restore the minimized Help Window.
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                                                                                        |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action              | Format, Examples                                                                                                                                                                  |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE m/MAJOR [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 m/cs r/brUdder t/friend` |
-| **Clear**           | `clear`                                                                                                                                                                                 |
-| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                     |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE] [m/MAJOR] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                         |
-| **Find**            | `find [n/KEYWORD] [p/KEYWORD] [e/KEYWORD] [a/KEYWORD] [r/KEYWORD] [m/KEYWORD] [t/KEYWORD]…​`<br> e.g., `find n/James Jake`                                                              |
-| **Schedule**        | `schedule UDDER_INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`                                                                                                               |
-| **List**            | `list`                                                                                                                                                                                  |
-| **Meetings**        | `meetings`                                                                                                                                                                              |
-| **Delete Meetings** | `deletem INDEX`<br> e.g., `deletem 1`                                                                                                                                                   |
-| **Edit Meetings**   | `editm INDEX [n/NAME] [st/DD-MM-YYYY HH:MM] [et/DD-MM-YYYY HH:MM] [l/LOCATION]`<br> e.g., `editm 1 l/The Deck st/09-10-2024 09:30`                                                      |
-| **Help**            | `help`                                                                                                                                                                                  |
+| **Clear**           | `clear`                                                                                                                                                                           |
+| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                               |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE] [m/MAJOR] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                   |
+| **Find**            | `find [n/KEYWORD] [p/KEYWORD] [e/KEYWORD] [a/KEYWORD] [r/KEYWORD] [m/KEYWORD] [t/KEYWORD]…​`<br> e.g., `find n/James Jake`                                                        |
+| **Schedule**        | `schedule INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`                                                                                                               |
+| **List**            | `list`                                                                                                                                                                            |
+| **Meetings**        | `meetings`                                                                                                                                                                        |
+| **Delete Meetings** | `deletem INDEX`<br> e.g., `deletem 1`                                                                                                                                             |
+| **Edit Meetings**   | `editm INDEX [n/NAME] [st/DD-MM-YYYY HH:MM] [et/DD-MM-YYYY HH:MM] [l/LOCATION]`<br> e.g., `editm 1 l/The Deck st/09-10-2024 09:30`                                                |
+| **Help**            | `help`                                                                                                                                                                            |
 
