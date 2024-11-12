@@ -545,9 +545,9 @@ _{more aspects and alternatives to be added}_
 
 **Target user profile**:
 
-This product is for admin at tuition centres and has to track a large number of student records. Besides requiring to manage a large number of records, the admin also:
+This product is for admins at tuition centres who have to track a large number of student records. Besides requiring to manage a large number of records, the admin also:
 
-* prefer desktop apps over other types
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
