@@ -26,7 +26,6 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
   * [`exit`: Exiting the program](#exiting-the-program--exit)
   * [Saving the data](#saving-the-data)
   * [Editing the data file](#editing-the-data-file)
-  * [Archiving data files `[coming in the future]`](#archiving-data-files-coming-in-the-future)
 * [Fields](#fields)
   * [NAME](#name)
   * [PHONE](#phone)
