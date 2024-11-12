@@ -12,7 +12,7 @@ public class Product {
             + "not start with a space and must be \nbetween 1 and 50 (inclusive) characters long.";
     public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]{0,49}$";
 
-    public final String productName;
+    private final String productName;
 
     /**
      * Constructs a {@code Product}.
@@ -23,6 +23,10 @@ public class Product {
         requireNonNull(productName);
         checkArgument(isValidProductName(productName), MESSAGE_CONSTRAINTS);
         this.productName = productName;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 
     /**

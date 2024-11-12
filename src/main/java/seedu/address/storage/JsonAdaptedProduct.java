@@ -25,7 +25,7 @@ class JsonAdaptedProduct {
      * Converts a given {@code Product} into this class for Jackson use.
      */
     public JsonAdaptedProduct(Product source) {
-        productName = source.productName;
+        productName = source.getProductName();
     }
 
     @JsonValue

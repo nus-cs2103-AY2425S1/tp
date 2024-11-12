@@ -52,18 +52,18 @@ public class SupplierCard extends UiPart<Region> {
         super(FXML);
         this.supplier = supplier;
         id.setText(displayedIndex + ". ");
-        name.setText(supplier.getName().fullName);
-        phone.setText(supplier.getPhone().value);
-        company.setText(supplier.getCompany().displayValue);
-        email.setText(supplier.getEmail().value);
+        name.setText(supplier.getName().getName());
+        phone.setText(supplier.getPhone().getPhone());
+        company.setText(supplier.getCompany().getDisplayCompanyName());
+        email.setText(supplier.getEmail().getEmail());
         supplier.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.getTagName()))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.getTagName())));
         supplier.getProducts().stream()
-                .sorted(Comparator.comparing(product -> product.productName))
-                .forEach(product -> products.getChildren().add(new Label(product.productName)));
-        setStatusStyle(supplier.getStatus().status);
-        status.setText(supplier.getStatus().status.toUpperCase());
+                .sorted(Comparator.comparing(product -> product.getProductName()))
+                .forEach(product -> products.getChildren().add(new Label(product.getProductName())));
+        setStatusStyle(supplier.getStatus().getStatus());
+        status.setText(supplier.getStatus().getStatus().toUpperCase());
     }
 
     private void setStatusStyle(String currentStatus) {

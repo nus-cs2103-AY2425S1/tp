@@ -46,7 +46,7 @@ public class JsonAdaptedDelivery {
      * Converts a given {@code Delivery} into this class for Jackson use.
      */
     public JsonAdaptedDelivery(Delivery source) {
-        this.product = source.getDeliveryProduct().productName;
+        this.product = source.getDeliveryProduct().getProductName();
         this.sender = new JsonAdaptedSupplier(source.getDeliverySender());
         this.status = source.getDeliveryStatus().toString();
         this.deliveryTime = source.getDeliveryDate().toString();

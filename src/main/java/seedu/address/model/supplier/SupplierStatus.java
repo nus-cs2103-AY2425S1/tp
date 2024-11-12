@@ -10,7 +10,7 @@ public class SupplierStatus {
     public static final String MESSAGE_CONSTRAINTS = "Status should be either active or inactive";
     public static final String VALIDATION_REGEX = "^(active|inactive)$";
     public static final String ACTIVE_STRING = "active";
-    public final String status;
+    private final String status;
 
     /**
      * Constructs a {@code SupplierStatus}.
@@ -20,6 +20,10 @@ public class SupplierStatus {
     public SupplierStatus(String status) {
         checkArgument(isValidStatus(status.trim()), MESSAGE_CONSTRAINTS);
         this.status = status.trim();
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     /**

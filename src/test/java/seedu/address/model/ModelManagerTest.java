@@ -195,7 +195,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        modelManager.updateFilteredSupplierList(new NameContainsKeywordPredicate(ALICE.getName().fullName));
+        modelManager.updateFilteredSupplierList(new NameContainsKeywordPredicate(ALICE.getName().toString()));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

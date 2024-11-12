@@ -12,8 +12,8 @@ public class SupplierSortNameComparator extends SupplierSortComparator {
 
     @Override
     public int compare(Supplier supplier1, Supplier supplier2) {
-        String supplier1Name = supplier1.getName().fullName.toLowerCase();
-        String supplier2Name = supplier2.getName().fullName.toLowerCase();
+        String supplier1Name = supplier1.getName().getName().toLowerCase();
+        String supplier2Name = supplier2.getName().getName().toLowerCase();
         if (super.getIsSortByAscending()) {
             return supplier1Name.compareTo(supplier2Name);
         } else {

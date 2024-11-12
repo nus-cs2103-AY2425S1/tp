@@ -12,7 +12,7 @@ public class Tag {
             + " a maximum of 50 characters.";
     public static final String VALIDATION_REGEX = "^[\\p{Alnum}]{1,50}$";
 
-    public final String tagName;
+    private final String tagName;
 
     /**
      * Constructs a {@code Tag}.
@@ -23,6 +23,10 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+    }
+
+    public String getTagName() {
+        return tagName;
     }
 
     /**
