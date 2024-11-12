@@ -645,12 +645,11 @@ Team size: 5
 1. HR staff can change their username and password to keep their account secure. 
 2. HR staff can track maternity leave of up to 6 months.
 3. Allow for the `count` command to count number of favorited employees.
-4. Enhance the GUI to make it more visually appealing.
+4. Allow for the `sort` command to sort by multiple tags instead of just one tag.
 5. Allow for the `sort` command to sort not only by tag but also by other fields.
 6. Allow for the `favorite` command to view only favorited employees.
-7. Implement Undo/Redo features for person details window to improve the user experience
+7. Implement Undo/Redo features for person details window to improve the user experience.
 8. Add a fix to make sure that certain duplicated information is not accepted by `add` command, such as phone number, 
    email etc.
 9. Fix invalid `add` command message.
 10. Improve commands such that all of them are not case-sensitive.
-

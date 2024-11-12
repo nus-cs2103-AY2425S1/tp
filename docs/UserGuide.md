@@ -335,8 +335,6 @@ Sorts the displayed employees based on specified tags.
 Format: `sort TAG`
 
 * Sorts the employees according to the specified tags.
-* You can specify multiple tags for sorting.
-* If no tags are specified, all employees will be displayed in their original order.
 
 <box type="tip" seamless>
 
@@ -345,7 +343,6 @@ Format: `sort TAG`
 
 Examples:
 * `sort friend` Sorts and displays all employees tagged as friend.
-* `sort friend family` Sorts and displays employees tagged as either friend or family.
 
 ![image](images/sort.png){width=1200}
 
