@@ -924,8 +924,8 @@ The following planned enhancements address known feature flaws identified during
 
 8. **Enhance String Validation For Names**
    - **Feature Flaw**: Currently same names with different spacing between parts of names are accepted as different names.
-   - **Proposed Solution**: The new volunteer command should automatically standardise all spaces in a volunteer's name.
-   - **Expected Outcome**: Users should be prevented from accidentally adding duplicate volunteers with different number of spaces within names.
+   - **Proposed Solution**: The new volunteer and new event commands should automatically standardise all spaces in a volunteer's or an event's name.
+   - **Expected Outcome**: Users should be prevented from accidentally adding duplicate volunteers or events with different number of spaces within names.
 
 9. **Enhance Output Message Alignment**
    - **Feature Flaw**: Currently some success and error messages exceed the space available in one line and force the user to scroll the output box horizontally to read the full message.
