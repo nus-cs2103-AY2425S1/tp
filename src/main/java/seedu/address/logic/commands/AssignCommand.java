@@ -13,7 +13,6 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Worker;
 import seedu.address.ui.InspectWindow;
@@ -36,6 +35,7 @@ public class AssignCommand extends Command {
     public static final String MESSAGE_NOT_EMPLOYEE = "Entered person is not an employee";
     public static final String MESSAGE_NOT_VALID_PERSON = "This person doesn't exist";
     public static final String MESSAGE_DUPLICATE_DELIVERY = "This delivery has already been assigned to this person";
+    public static final String MESSAGE_EMPLOYEE_DOES_NOT_EXIST = "The entered employee does not exist";
     private final Index index;
     private final Name toAssign;
 
@@ -54,12 +54,16 @@ public class AssignCommand extends Command {
             requireNonNull(model);
             Person inspectedPerson = InspectWindow.getInspectedPerson();
             List<Delivery> lastShownList = model.getFilteredDeliveryList();
-            String[] nameKeywords = toAssign.fullName.split("\\s+");
+            String nameKeyword = toAssign.fullName;
 
             validateIndex(lastShownList.size(), index);
 
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-            model.updateFilteredPersonList(new NameContainsKeywordsPredicate(List.of(nameKeywords)));
+            model.updateFilteredPersonList(toCheck -> toCheck.getName().equals(new Name(nameKeyword)));
+
+            if (model.getFilteredPersonList().isEmpty()) {
+                throw new CommandException(MESSAGE_EMPLOYEE_DOES_NOT_EXIST);
+            }
 
             if (model.getFilteredPersonList().isEmpty()) {
                 throw new CommandException(MESSAGE_NOT_VALID_PERSON);

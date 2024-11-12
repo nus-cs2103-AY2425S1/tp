@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "User Guide"
-  pageNav: 3
+    title: "User Guide"
+    pageNav: 3
 ---
 
 # LogiLink User Guide
@@ -11,27 +11,27 @@ Using only keyboard commands, you can easily add, edit, find, sort, and organize
 
 If you type fast, you can complete your contact and delivery management tasks faster with LogiLink than with mouse-based apps.
 
-Currently, LogiLink is targeted towards a Singaporean userbase, with international support planned for future iterations. 
+Currently, LogiLink is targeted towards a Singaporean userbase, with international support planned for future iterations.
 
 <!-- * Table of Contents -->
 * [Quick start](#quick-start)
 * [Features](#features)
-  * [Viewing help: `help`](#viewing-help-help)
-  * [Adding a contact or delivery: `add`](#adding-a-contact-or-delivery-add)
-  * [Listing all contacts: `list`](#listing-all-contacts-list)
-  * [Editing a contact or delivery: `edit`](#editing-a-contact-or-delivery-edit)
-  * [Locating contacts or deliveries by name: `find`](#locating-contacts-by-name-find)
-  * [Locating deliveries by item: `finddel`](#locating-deliveries-by-item-finddel)
-  * [Archiving a contact or delivery: `archive`](#archiving-a-contact-or-delivery-archive)
-  * [Unarchiving a contact or delivery: `unarchive`](#unarchive-a-contact-or-delivery-unarchive)
-  * [Sorting contacts or deliveries in ascending order: `asort`](#sorting-the-contacts-or-delivery-list-in-ascending-order-asort)
-  * [Sorting contacts or deliveries in descending order: `dsort`](#sorting-the-contacts-or-delivery-list-in-descending-order-dsort)
-  * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery-delete)
-  * [Inspecting a contact: `inspect`](#inspecting-a-contact-inspect)
-  * [Assigning a delivery to an employee: `assign`](#assigning-a-delivery-to-an-employee-assign)
-  * [Returning to the main window: `back`](#returning-to-the-main-window-back)
-  * [Clearing all entries: `clear`](#clearing-all-entries-clear)
-  * [Exiting the program: `exit`](#exiting-the-program-exit)
+    * [Viewing help: `help`](#viewing-help-help)
+    * [Adding a contact or delivery: `add`](#adding-a-contact-or-delivery-add)
+    * [Listing all contacts: `list`](#listing-all-contacts-list)
+    * [Editing a contact or delivery: `edit`](#editing-a-contact-or-delivery-edit)
+    * [Locating contacts or deliveries by name: `find`](#locating-contacts-by-name-find)
+    * [Locating deliveries by item: `finddel`](#locating-deliveries-by-item-finddel)
+    * [Archiving a contact or delivery: `archive`](#archiving-a-contact-or-delivery-archive)
+    * [Unarchiving a contact or delivery: `unarchive`](#unarchive-a-contact-or-delivery-unarchive)
+    * [Sorting contacts or deliveries in ascending order: `asort`](#sorting-the-contacts-or-delivery-list-in-ascending-order-asort)
+    * [Sorting contacts or deliveries in descending order: `dsort`](#sorting-the-contacts-or-delivery-list-in-descending-order-dsort)
+    * [Deleting a contact or delivery: `delete`](#deleting-a-contact-or-delivery-delete)
+    * [Inspecting a contact: `inspect`](#inspecting-a-contact-inspect)
+    * [Assigning a delivery to an employee: `assign`](#assigning-a-delivery-to-an-employee-assign)
+    * [Returning to the main window: `back`](#returning-to-the-main-window-back)
+    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+    * [Exiting the program: `exit`](#exiting-the-program-exit)
 * [FAQ](#faq)
 * [Known issues](#known-issues)
 * [Command summary](#command-summary)
@@ -43,31 +43,31 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
-   - If you do not, you can download the Java `17` installer from [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
+    - If you do not, you can download the Java `17` installer from [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-3/tp/releases).
 
 1. Copy the `.jar` file to the folder you want to use as the _home folder_ for LogiLink.
 
 1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar LogiLink.jar` to run LogiLink.<br>
-   - For example you select _LogiLink_ as your _home folder_. By right clicking in the empty space, you should see the dropdown below. Click on Open in Terminal.
-   <img src="images/openinterminal.png" alt="openinterminal" width="600">
- 
-   - A window similar to the diagram should appear, and the program should contain some sample data.<br>
-   <img src="images/Ui.png" alt="ui" width="600">
+    - For example you select _LogiLink_ as your _home folder_. By right clicking in the empty space, you should see the dropdown below. Click on Open in Terminal.<br>
+      <img src="images/openinterminal.png" alt="openinterminal" width="600">
+
+    - A window similar to the diagram should appear, and the program should contain some sample data.<br>
+      <img src="images/Ui.png" alt="ui" width="600">
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com r/Client a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the contacts list.
+    * `add n/John Doe p/98765432 e/johnd@example.com r/Client a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the contacts list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -79,32 +79,32 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 
 **Notes about the command format:**
 1. There are two windows in this program:
-  - **Main window**: the default window you see when opening LogiLink.
-    <img src="images/Ui.png" alt="ui" width="600"> 
+- **Main window**: the default window you see when opening LogiLink.
+  <img src="images/Ui.png" alt="ui" width="600">
 
 
-  - **Inspect window**: the window you see when inspecting a contact.
-    <img src="images/Ui2.png" alt="ui2" width="600">
-    <br></br>
+- **Inspect window**: the window you see when inspecting a contact.
+  <img src="images/Ui2.png" alt="ui2" width="600">
+  <br></br>
 
 2. Words in `UPPER_CASE` are parameters you need to provide.<br>
-   * Eg. `add n/NAME`, `NAME` is where you would enter a name, like `add n/John Doe`.
+    * Eg. `add n/NAME`, `NAME` is where you would enter a name, like `add n/John Doe`.
 
 1. Square brackets [ ] indicate the parameter is optional.<br>
-   * Eg. `n/NAME [t/TAG]` means you can enter either `n/John Doe t/friend` or `n/John Doe`.
+    * Eg. `n/NAME [t/TAG]` means you can enter either `n/John Doe t/friend` or `n/John Doe`.
 
 1. Ellipsis `...` means you can repeat the parameter multiple times, or leave it out completely.<br>
-   * Eg. `[t/TAG]…​`lets you add any number of tags like `t/friend` or `t/friend t/family`, or you can skip the tags altogether.
+    * Eg. `[t/TAG]…​`lets you add any number of tags like `t/friend` or `t/friend t/family`, or you can skip the tags altogether.
 
 1. You can enter parameters in any order.<br>
-   * Eg. If the command format is `n/NAME p/PHONE_NUMBER`, then entering parameters in the order `p/PHONE_NUMBER n/NAME` is also acceptable.
+    * Eg. If the command format is `n/NAME p/PHONE_NUMBER`, then entering parameters in the order `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 1. Commands that do not require parameters (`help`, `list`, `exit`, `clear`) will ignore anything extra you type.<br>
-   * Eg. If you enter `help 123`, it will simply run the `help` command and ignore the `123`.
+    * Eg. If you enter `help 123`, it will simply run the `help` command and ignore the `123`.
 
 1. If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines. Sometimes, the spaces around line-breaks may not copy correctly, which could cause issues when you paste them into
-the app.
-</box>
+   the app.
+   </box>
 
 ### Viewing help : `help`
 **<ins>When in the main or inspect window**
@@ -114,7 +114,7 @@ Shows a help window with a list of commonly used commands for the current window
 <box type="info" seamless>
 
 **Note:**
-Does not show an exhaustive list of all available commands, only the most helpful. 
+Does not show an exhaustive list of all available commands, only the most helpful.
 
 </box>
 
@@ -175,7 +175,7 @@ Format: `list [clients/employees]`
 
 **<ins>When in the inspect window**
 
-Shows a list of all deliveries added to a contact's delivery list. 
+Shows a list of all deliveries added to a contact's delivery list.
 
 Format: `list`
 
@@ -187,8 +187,8 @@ Edits an existing contact in the contacts list.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the contact at the specified `INDEX`.
-  - The index is the number displayed next to the contact's name in the list.
-  - The index **must be a positive number** (starting from 1).
+    - The index is the number displayed next to the contact's name in the list.
+    - The index **must be a positive number** (starting from 1).
 * You must provide at least one optional field (in [ ]). This means you need to update at least one of the following fields: name, phone, email, role, address, or tag.
 * Editing tags will replace **all** existing ones. If you simply want to remove all tags, type 't/' without specifying any tags after.
 
@@ -261,7 +261,7 @@ Format: `archive INDEXES...`
 * The index is the number displayed next to the contact's name in the list.
 * The indexes **must be positive numbers** (starting from 1).
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
-* `archive` works on archived and unarchived contact(s). 
+* `archive` works on archived and unarchived contact(s).
 
 Examples:
 * `archive 2 3` archives the 2nd and 3rd contact in the contact list.
@@ -304,7 +304,7 @@ Format: `unarchive INDEXES...`
 * The index is the number displayed next to the contact's name in the list.
 * The indexes **must be positive numbers** (starting from 1).
 * The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
-* `unarchive` works on archived and unarchived contact(s). 
+* `unarchive` works on archived and unarchived contact(s).
 
 Examples:
 * `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
@@ -412,7 +412,7 @@ Format: `assign INDEX n/EMPLOYEE_NAME`
 * The index is the number displayed at the top of a delivery in the delivery list of a contact.
 * The index **must be a positive number** (starting from 1).
 * The worker name should match an existing worker in the contact list.
-* This command works for both archived and unarchived delivery. 
+* This command works for both archived and unarchived delivery.
 
 Examples:
 * `assign 1 n/Betsy Crowe` assigns first delivery of the current contact to employee Betsy Crowe.
@@ -475,8 +475,8 @@ Certain changes you make to the file could cause LogiLink to behave unexpectedly
 ## Known issues
 
 1. **When using multiple screens**
- - If you are using multiple screens and move the app to a secondary screen, then later switch to using only the primary screen, the app might open off-screen. 
- - To fix this, simply delete the `preferences.json` file created by the app, then restart the app.
+- If you are using multiple screens and move the app to a secondary screen, then later switch to using only the primary screen, the app might open off-screen.
+- To fix this, simply delete the `preferences.json` file created by the app, then restart the app.
 
 --------------------------------------------------------------------------------------------------------------------
 

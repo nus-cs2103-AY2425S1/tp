@@ -205,7 +205,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same email
+     * Returns true if both persons have the same phone number
      */
     public boolean isSamePhone(Person otherPerson) {
         return otherPerson != null && otherPerson.getPhone().equals(getPhone());
