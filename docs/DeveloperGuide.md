@@ -21,9 +21,10 @@
 - [**Implementation**](#implementation)
    * [Find feature](#find-feature)
       + [Implementation details](#implementation-details)
-   * [Design Considerations](#design-considerations)
-   * [Detection of next lesson](#detection-of-next-lesson)
+      + [Design Considerations](#design-considerations)
    * [Display feature](#display-feature)
+      + [Implementation details](#implementation-details-1)
+   * [Detection of next lesson](#detection-of-next-lesson)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
    * [Product scope](#product-scope)
@@ -226,7 +227,7 @@ The diagram above shows how clashing lessons are detected,
 
 <box type="info" seamless>
 
-Note: As of `v1.5` clashing lessons are not allowed, hence when a `Person` is deleted, all of his/her lessons can be safely deleted as well. No other students will have the same lesson time. The team is considering allowing clashing lessons after warning users for a future release.
+Note: As of `v1.6` clashing lessons are not allowed, hence when a `Person` is deleted, all of his/her lessons can be safely deleted as well. No other students will have the same lesson time. The team is considering allowing clashing lessons after warning users for a future release.
 
 </box>
 
@@ -270,7 +271,7 @@ The following sequence diagram demonstrates the flow for the `find` command:
 **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-### Design Considerations
+#### Design Considerations
 
 Aspect: Search target differentiated by prefixes
 - Alternative 1 (Current choice): Prefixes (e.g., n/ for name) specify the field within the studet's details to search, followed by the desired search target (e.g. n/Alice)
@@ -283,6 +284,31 @@ Aspect: Search target differentiated by prefixes
         - More straightforward to type out
     - Cons:
         - May result in ambiguous commands, leading to incorrect or incomplete searches.
+
+
+### Display feature
+
+#### Implementation details
+The `DisplayCommand` allows users to display a specified student in Tuteez.
+
+It uses `DisplayCommandParser` to parse the user input and create an `DisplayCommand` object, which modifies the `lastViewedPerson` object in the `Model`.
+
+The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `DisplayCommand`, taking `execute("display 1")` API call as an example.
+
+<puml src="diagrams/DisplaySequenceDiagram.puml" alt="Interactions Inside the Logic Component when a display command is called" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+How this feature works:
+
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command `display` (i.e., `DisplayCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DisplayCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed.<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it takes several interactions (between the command object and the `Model`) to achieve.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 ### Detection of next lesson
 
@@ -300,24 +326,6 @@ How this feature works:
 1. `Person#nextLessonBasedOnCurrentTime` calls `Lesson#durationTillLesson` for all of student's lessons which returns `Duration` objects
 1. Then leverage `Duration#compareTo` to get the lesson with the shortest duration
 1. Return lesson with shortest duration or `null` if student has no lessons
-
-
-### Display feature
-The `DisplayCommand` allows users to display a specified person in the addressbook.
-It uses `DisplayCommandParser` to parse the user input and create an `DisplayCommand` object, which modifies the `lastViewedPerson` object in the `Model`.
-
-The following sequence diagram illustrates the interactions that take place within the `Logic` component when the user executes the `addRemarkCommand`, taking `execute("addremark 1 r/Good progress")` API call as an example.
-
-<puml src="diagrams/DisplaySequenceDiagram.puml" alt="Interactions Inside the Logic Component when a display command is called" />
-
-
-How this feature works:
-
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command `display` (i.e., `DisplayCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DisplayCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed.<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it takes several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 --------------------------------------------------------------------------------------------------------------------
 
