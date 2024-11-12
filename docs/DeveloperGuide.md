@@ -377,6 +377,65 @@ The following sequence diagram shows how a `import` command goes through the `Lo
     * Pros: Allow greater flexibility for user to import JSON files from any location of the device.
     * Cons: Significantly longer command for the user to type. Requires user to have prior knowledge of what the JSON's filepath is, increasing complexity.
 
+### Undo feature
+
+#### Implementation
+
+The undo mechanism is facilitated by the interface `Undoable`.
+It has the `undo()` method. The `undo()` method is called when the user executes the `undo` command.
+The `undo()` method reverses the effects of the command that was previously executed.
+The `undo()` method is implemented in the undoable command classes, such as `AddCommand`, `DeleteCommand`, `EditCommand`, etc.
+
+The `Model` component stores a history of executed undoable commands in a stack.
+When a command is executed successfully, the command is pushed onto the stack.
+When the user executes the `undo` command, the `Model` component pops the last command from the stack and calls the `undo()` method of the command.
+
+These operations are exposed in the `Model` interface as `Model#pushToUndoStack()` and `Model#undoAddressBook()`.
+
+Given below is an example usage scenario and how the undo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The undo stack is initialised as empty.
+
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command is pushed onto the undo stack.
+
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command is also pushed onto the undo stack.
+<br>
+
+> **Note:** If a command is not undoable or fails its execution, it will not be pushed onto the undo stack.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will pop the last command from the undo stack and call its `undo()` method. The `undo()` method of the command will then reverse the effects of the command.
+<br>
+
+> **Note:** If the undo stack is empty, then there are no commands to undo. The `undo` command checks if this is the case. If so, it will return an error to the user.
+
+The following sequence diagram shows how an undo operation goes through the `Logic` component:
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+<br>
+
+> **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+Similarly, how an undo operation goes through the `Model` component is shown below:
+
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will not be pushed to the undo stack. Thus, the undo stack remains unchanged.
+
+Step 6. The user executes `clear`, which is pushed to the undo stack.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/CommitActivityDiagram.puml" height="600" width="600"/>
+
+#### Design considerations:
+
+**Aspect: How undo executes:**
+
+* **Alternative 1:** Saves the entire address book.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2 (current implementation):** Individual command knows how to undo by itself.
+  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
 
 --------------------------------------------------------------------------------------------------------------------
 
