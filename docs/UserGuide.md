@@ -500,6 +500,19 @@ HR Helper data are saved automatically as a JSON file `[JAR file location]/data/
 Furthermore, certain edits can cause HR Helper to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+### 4.16 Importing/Exporting the data file
+
+HR Helper data can be exported as a csv.
+
+Format: `DRIVE:/PATH/TO/FILE.csv`
+
+Examples:
+C:/files/data/people.csv
+E:/fakefolder/hr.csv
+D:/data.csv
+
+![image](images/DataWindow.png){width=1200}
+
 {{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
