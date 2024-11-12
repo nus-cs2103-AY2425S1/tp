@@ -720,7 +720,7 @@ the data**. You don’t need to save manually!
 
 <box type="info" seamless>
 
-*This already makes us umambiguously superior to Microsoft Office (when saving locally).*
+*This already makes us unambiguously superior to Microsoft Office (when saving locally).*
 </box>
 
 #### Editing the data file
