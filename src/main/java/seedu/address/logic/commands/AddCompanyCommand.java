@@ -15,13 +15,13 @@ import seedu.address.model.Model;
 import seedu.address.model.person.company.Company;
 
 /**
- * Adds company to address book
+ * Adds company to contact list
  */
 public class AddCompanyCommand extends Command {
 
     public static final String COMMAND_WORD = "company";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a company to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a company to the contact list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_INDUSTRY + "INDUSTRY "
@@ -38,7 +38,7 @@ public class AddCompanyCommand extends Command {
             + PREFIX_TAG + "exchangeProgram";
 
     public static final String MESSAGE_SUCCESS = "New company added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This company already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This company already exists in the contact list";
 
     private final Company toAdd;
 
