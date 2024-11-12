@@ -349,6 +349,7 @@ Format: `addlog INDEX r/REMARK [d/DATE]`
   doing well`.
 * The date is optional and defaults to the current date and time if not provided.
 * The date must be in the format `yyyy-MM-dd HH:mm` e.g. `2022-12-12 14:00`.
+* The date must be a valid date and time. Dates in the future are not allowed.
 
 Examples:
 * `addlog 2 r/Client is doing well d/2022-12-12 14:00` adds a log entry to the 2nd client with the remark `Client is doing well` and the date `2022-12-12 14:00`.
