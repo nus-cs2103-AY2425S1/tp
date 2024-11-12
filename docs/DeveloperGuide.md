@@ -334,7 +334,7 @@ The following sequence diagram shows how a `export` command goes through the `Lo
 
 * **Alternative 2 (current implementation):** The time of the device's system at the moment of `export`.
     * Pros: Allows for pinpoint of exact save files as no two files can be exported at the same time.
-    * Cons: Takes longer to manually understand the name of the save file when trying to locate a specific one, especially when multiple `exports` happen within a short period of time. Also has no mention of contents of JSON file.
+    * Cons: Takes longer to manually understand the name of the save file when trying to locate a specific one, especially when multiple `exports` happen within a short peri            od of time. Also has no mention of contents of JSON file.
 
 * **Alternative 3:** A brief summary of the file such as `FIRST-Alex_Jones LENGTH-20`.
     * Pros: Easy for the user to know at first glance what the contents of each file are.
@@ -863,7 +863,7 @@ Given below are instructions to test the app manually.
 2. Exporting a contact list with zero contacts
    1. Prerequisites: There are no people in DorManagerPro
    2. Test case: `export` <br>
-      Expected: A json file is exported to the data folder of the application, with the name of the json file being the time of export. The contents of the json file is as follows: { "persons" : [ ] }
+      Expected: A json file is exported to the data folder of the application, with the name of the json file being the time of export. The contents of the json file is as follows: { "persons" : \[ \] }
 
 ### Importing data
 
