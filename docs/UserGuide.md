@@ -433,7 +433,7 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
     >**Workaround**: Avoid using absurdly large indexes when using the delete command, which is impossible to reach in the current context.
 
 9. **Random ordering for logs on the same day**    
-   When multiple logs are added on the same day, the logs will be displayed in a random order. This is due to the way logs are stored in the system.
+   When multiple logs are added on the same day, logs of same date will be displayed in a random order. This is due to the way logs are stored in the system.
     >**Workaround**: There is no workaround for this issue. We do not expect multiple logs to be added on the same day unless for error correction purposes.
 
 <div style="page-break-after: always;"></div>
