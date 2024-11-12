@@ -6,23 +6,21 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses user input to create a ExitCommand object.
- * <p>
- * This class implements the {@link Parser} interface and is responsible for
- * interpreting the user input specific to the exit command. It validates the
- * input format and ensures that it complies with the expected structure.
- * </p>
+ * Parses user input to create an {@code ExitCommand} object.
+ * The expected input is just the "exit" command without any additional arguments.
+ * If extra arguments are provided, a {@code ParseException} is thrown.
  */
 public class ExitCommandParser implements Parser<ExitCommand> {
+
     /**
-     * Parses user input to create a ExitCommand object.
-     * <p>
-     * This class implements the {@link Parser} interface and is responsible for
-     * interpreting the user input specific to exit command. It validates the
-     * input format and ensures that it complies with the expected structure.
-     * </p>
+     * Parses the given input arguments and creates an {@code ExitCommand} object.
+     * The input is expected to contain only the "exit" command without any additional arguments.
      *
-     * @author wnayar
+     * <p>If extra arguments are provided, a {@code ParseException} is thrown.</p>
+     *
+     * @param userInput The user input string containing the "exit" command.
+     * @return An {@code ExitCommand} object.
+     * @throws ParseException If extra arguments are provided or the input format is incorrect.
      */
     public ExitCommand parse(String userInput) throws ParseException {
         String[] words = userInput.trim().split(" ");

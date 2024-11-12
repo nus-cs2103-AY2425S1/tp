@@ -20,7 +20,7 @@ title: Developer Guide
     - **NICHOLAS TANG BOON KEAT:** 
       - No usage of AI tools.
     - **WILLIAM ALEXANDER DAVID NAYAR:**
-      - No usage of AI tools.
+        - **ChatGPT:** used for generation of javadocs. It Was used minimally in the generation of functional code. There are a total of 3 instances of using CHATGPT for functional code. 2 instances were for generating regex, and one instance was for simplifying an override equals method. Functional code done with the help of AI is written in comments near said parts.
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -13,9 +13,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given input arguments and creates a {@code DeleteCommand} object.
+     * The input is expected to contain a single index indicating which item to delete.
+     *
+     * <p>If the input is empty or the index format is invalid, a {@code ParseException} is thrown.</p>
+     *
+     * @param args The user input string containing the index to delete.
+     * @return A {@code DeleteCommand} object with the specified index.
+     * @throws ParseException If the input is empty or the index format is incorrect.
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {

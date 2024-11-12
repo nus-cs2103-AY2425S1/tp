@@ -15,14 +15,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ClearCommandParser implements Parser<ClearCommand> {
     /**
-     * Parses user input to create a clear Command object.
-     * <p>
-     * This class implements the {@link Parser} interface and is responsible for
-     * interpreting the user input specific to clear command. It validates the
-     * input format and ensures that it complies with the expected structure.
-     * </p>
+     * Parses the given user input and creates a {@code ClearCommand} object if the input is valid.
+     * The input is considered valid if it contains exactly one word (the command itself).
      *
-     * @author wnayar
+     * @param userInput The input string entered by the user.
+     * @return A {@code ClearCommand} object if the input is valid.
+     * @throws ParseException If the user input does not match the expected format.
      */
     public ClearCommand parse(String userInput) throws ParseException {
         String[] words = userInput.trim().split(" ");

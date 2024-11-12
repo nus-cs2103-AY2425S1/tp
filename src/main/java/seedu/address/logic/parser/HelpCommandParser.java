@@ -4,25 +4,22 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses user input to create a HelpCommand object.
- * <p>
- * This class implements the {@link Parser} interface and is responsible for
- * interpreting the user input specific to the help command. It validates the
- * input format and ensures that it complies with the expected structure.
- * </p>
+ * Parses user input to create a {@code HelpCommand} object.
+ * The input is expected to be the "help" command with no additional arguments.
+ * If extra arguments are provided, a {@code HelpCommand} object with a warning message is returned.
  */
 public class HelpCommandParser implements Parser<HelpCommand> {
     private static final String WARNING_PARAMETERS_SUPPLIED = "Additional parameters supplied have been ignored";
 
     /**
-     * Parses user input to create a HelpCommand object.
-     * <p>
-     * This class implements the {@link Parser} interface and is responsible for
-     * interpreting the user input specific to help command. It validates the
-     * input format and ensures that it complies with the expected structure.
-     * </p>
+     * Parses the given input arguments and creates a {@code HelpCommand} object.
+     * The input is expected to contain only the "help" command with no additional arguments.
      *
-     * @author wnayar
+     * <p>If extra arguments are provided, a {@code HelpCommand} object with a warning message is returned.</p>
+     *
+     * @param userInput The user input string containing the "help" command.
+     * @return A {@code HelpCommand} object, with a warning message if extra arguments are supplied.
+     * @throws ParseException If an error occurs while parsing the input, such as invalid format.
      */
     public HelpCommand parse(String userInput) throws ParseException {
         String[] words = userInput.trim().split(" ");

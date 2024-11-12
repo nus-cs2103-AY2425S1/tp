@@ -16,9 +16,13 @@ public class Comment {
     public final String value;
 
     /**
-     * Constructs an {@code Comment}.
+     * Constructs a {@code Comment} object with the specified comment value.
      *
-     * @param comment A valid comment.
+     * <p>The constructor ensures that the provided comment is not {@code null} and logs
+     * a message when a new comment is added.</p>
+     *
+     * @param comment The comment string to be assigned to the {@code Comment} object. Cannot be {@code null}.
+     * @throws NullPointerException If the provided comment is {@code null}.
      */
     public Comment(String comment) {
         requireNonNull(comment);
@@ -33,9 +37,8 @@ public class Comment {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Comment // instanceof handles nulls
-                && value.equals(((Comment) other).value)); // state check
+        // AI was used to write this equals method
+        return other == this || (other instanceof Comment && value.equals(((Comment) other).value));
     }
 
     @Override

@@ -29,9 +29,15 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Error: Index is not a single non-zero unsigned integer.";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * Parses the given one-based index string into an {@code Index} object.
+     * The index string is validated to ensure it represents a valid non-zero unsigned integer.
+     * Various checks are performed to ensure that the index is properly formatted.
+     * If any validation fails, a {@code ParseException} is thrown with an appropriate error message.
+     *
+     * @param oneBasedIndex The user input string representing the one-based index.
+     * @return An {@code Index} object representing the parsed index.
+     * @throws ParseException If the index is invalid due to reasons such as non-numeric characters,
+     *                        excessive leading zeros, integer overflow, or zero value.
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
