@@ -1723,3 +1723,17 @@ Currently, the behaviour for handling extraneous parameters is unclear and incon
 #### Enhancement
 
 We plan to make the behaviour more consistent and improve the parameter matching such that warnings will be given to the user.
+
+### 7. Enhance Undo/Redo
+
+Currently, our system brings users to the `list_s` panel whenever the commands are ran.
+
+#### Enhancement
+
+We plan to improve the versionHistory system to remember what command was ran such that when either commands were ran, the user is informed of what was the action that was last carried out.
+
+The user will also be redirected to the respective panel of said action.
+
+i.e. if user undoes a `add_g` command, the user will be and informed that they are undoing a `add_g` command and will be redirected to the `list_g` panel.
+
+Similarly, if the user then runs `redo`, they will be informed that they are redoing the `add_g` command.
