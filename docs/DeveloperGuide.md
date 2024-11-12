@@ -304,7 +304,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Wedding Planner | Add contact details                               | I can store contacts in my address book                                                        |
 | `* * *`  | Wedding Planner | Delete contacts                                   | I can remove contacts I no longer need                                                         |
 | `* * *`  | Wedding Planner | List all contacts                                 | I can view all my clients and wedding vendors                                                  |
-| `* *`    | Wedding Planner | Edit contact details                              | I can keep information as up-to-date and accurate as possible.                                 |
+| `* *`    | Wedding Planner | Edit contact details                              | I can keep information as up-to-date and accurate as possible                                  |
 | `* *`    | Wedding Planner | Filter contacts by name and/or job                | I can quickly find the contact(s) I need                                                       |
 | `* *`    | Wedding Planner | Create weddings                                   | I can manage all details specific to that wedding                                              |
 | `* *`    | Wedding Planner | Delete weddings                                   | I can remove weddings once they are over                                                       |
@@ -629,15 +629,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  The system should be able to hold up to 1000 persons without noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed (60 wpm) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using keyboard commands than using the mouse.
-4.  The system should return a response to commands that are input by the user within 3 seconds.
+3.  A user with an above-average typing speed (approximately 60 words per minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using keyboard commands than using the mouse.
+4.  The system should return a response to commands that the user inputs within 3 seconds.
 5.  The codebase should be compliant with KnottyPlanners architecture and logic to facilitate easier testing and debugging.
 6.  The system should be operational and responsive 24/7.
 
 ### Glossary
 
 * **Contact:** An individual or organization associated with wedding planning, such as a client or vendor.
-* **Job:** Role of a person during the weddings, e.g., caterers, florists, or photographer.
+* **Job:** Role of a person during the weddings, e.g., caterers, florists, or photographers.
 * **Tag:** Refers to a wedding tag, a label assigned to a contact to associate them with a specific wedding event, can be assigned to
 multiple contacts involved in the same wedding event.
 * **AddressBook:** The main data model that represents the collection of all 'Person' objects within KnottyPlanners.
@@ -665,7 +665,7 @@ testers are expected to do more *exploratory* testing using the User Guide.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder.
+   1. Download the jar file and copy it into an empty folder.
 
    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
