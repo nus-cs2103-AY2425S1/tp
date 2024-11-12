@@ -19,7 +19,7 @@ that is adapted from Manuel Moser's implementation [here](https://stackoverflow.
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## **Design**
 
@@ -72,6 +72,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W13-2/tp/blob/master/src/main/java/careconnect/ui/Ui.java)
@@ -94,6 +96,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always"></div>
 
 ### Logic component
 
@@ -126,10 +130,12 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W13-2/tp/blob/master/src/main/java/careconnect/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="500" />
 
 
 The `Model` component,
@@ -139,12 +145,15 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
+<div style="page-break-after: always"></div>
 
 ### Storage component
 
@@ -174,6 +183,8 @@ A `KeyEvent` listener is added to the `commandTextField` within the `CommandBox`
 The `LogicManager`, which is a concrete implementation of `Logic`, holds a reference to an `Autocompleter` instance, responsible for generating autocomplete suggestions. Additionally, `LogicManager` maintains a list of all valid command options. To handle the autocomplete request, `LogicManager` calls `Autocompleter#autocompleteWithLexicalPriority(String, List)`, which searches for the lexicographically smallest command suggestion among the available options that match the specified prefix.
 
 If a matching suggestion is found, `Autocompleter` returns it. If no match is found, `Autocompleter` throws an `AutocompleteException`. The result—either a valid suggestion or an exception—is then returned to `MainWindow`, where exception handling is managed. If a valid suggestion is provided, `MainWindow` updates the `commandTextField` with the suggested command, appending a space to facilitate further typing. If no suggestion is available (i.e., an exception occurs), feedback is displayed to inform the user that no matching options were found.
+
+<div style="page-break-after: always"></div>
 
 ### \[Proposed\] Undo/redo feature
 
@@ -230,6 +241,8 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 </div>
 
+<div style="page-break-after: always"></div>
+
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
@@ -265,15 +278,8 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
---------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -318,9 +324,7 @@ automatically selected, and any initially selected user is unselected after exec
 inconsistent behaviour from other commands that we aim to improve. 
 
 
-
---------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always"></div>
 
 ## **Appendix: Requirements**
 
@@ -353,7 +357,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* `    | user that prefers typing over mouse input | navigate the UI using keyboard           | use the app without moving to mouse                                    |
 | `* `    | user                                      | sort the client list by various fields   | so that I can scroll through and check for clients that I missed       |
 
-*{More to be added}*
+
+<div style="page-break-after: always"></div>
 
 ### Use cases
 
@@ -435,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+<div style="page-break-after: always"></div>
 
 ### Non-Functional Requirements
 
@@ -464,19 +469,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Semantic search**: A search technique that understands user intent by analyzing the meaning and context of terms, providing more relevant results than keyword-based search.
 
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always"></div>
 
 ## Appendix: Effort
-
-
 
 This project has achieved many of the extensions we have set to accomplish on top of 
 the functionalities provided by AB3.
 
 Here are some of the best features we are proud of achieving and the effort required to 
 implement them:
-
-
 
 1. Syntax highlighting:
    - Difficulty level: 2/5
@@ -511,7 +512,6 @@ implement them:
      meant that changes to the parent cannot be triggered by events like keystrokes and mouse 
      clicks on the children components.
    - Solved by: Using a custom key listener to listen for the shortcut keys in the parent component and executing the corresponding functions across different the children components.
---------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
@@ -692,6 +692,3 @@ Pauline.
   ]
 }
 ```
-
-<div style="page-break-after: always"></div>
-
