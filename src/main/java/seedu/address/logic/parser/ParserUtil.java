@@ -9,10 +9,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,7 +20,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index provided is invalid. Index must be"
+            + " a non-zero integer no greater than the list size!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -66,21 +67,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
-    }
-
-    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +106,34 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code RsvpStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static RsvpStatus parseRsvpStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        try {
+            return RsvpStatus.of(trimmedStatus);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(RsvpStatus.MESSAGE_CONSTRAINTS);
+        }
+
+    }
+
+    /**
+     * Parses {@code Collection<String> statuses} into a {@code Set<RsvpStatus>}.
+     */
+    public static Set<RsvpStatus> parseStatuses(Collection<String> statuses) throws ParseException {
+        requireNonNull(statuses);
+        final Set<RsvpStatus> statusSet = new HashSet<>();
+        for (String status : statuses) {
+            statusSet.add(parseRsvpStatus(status));
+        }
+        return statusSet;
     }
 }

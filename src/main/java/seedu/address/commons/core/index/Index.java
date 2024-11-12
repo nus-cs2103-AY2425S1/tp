@@ -11,6 +11,8 @@ import seedu.address.commons.util.ToStringBuilder;
  * convert it back to an int if the index will not be passed to a different component again.
  */
 public class Index {
+    public static final int MAX_INDEXES = 10;
+
     private int zeroBasedIndex;
 
     /**

@@ -1,0 +1,28 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 20
+skinparam ArrowFontSize 20
+title Activity: Create new tag
+start
+repeat :User inputs command and name of new tag;
+:System checks if input is valid;
+if () then ([invalid command format])
+    :System shows error and specifies command usage;
+else ([else])
+    :System extracts tag name from input;
+    :System checks if tag name is valid;
+    if () then ([invalid name])
+        :System shows error and specifies command usage;
+
+    else ([else])
+        :System checks if the tag is in tag list;
+        if () then ([in tag list])
+            :System notifies that the tag is already in tag list;
+            ->
+        else ([else])
+            :System adds the tag into the tag list;
+            :System notifies that the tag has been successfully created;
+            ->
+        endif
+stop
+@enduml

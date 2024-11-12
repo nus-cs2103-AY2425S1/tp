@@ -1,0 +1,34 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:Check arguments;
+
+:Check if index is valid;
+if () then ([index >= listSize])
+    :Throw CommandException for invalid index;
+    stop
+else ([else])
+    :Get the person to update;
+
+if (action == 1)
+    :Set RSVP Status to COMING;
+elseif (action == 2) then ()
+    :Set RSVP Status to NOT_COMING;
+elseif (action == 3) then ()
+    :Set RSVP Status to PENDING;
+else ([invalid action])
+    :Throw CommandException for invalid action;
+    stop
+endif
+
+
+:Update the person's RSVP status;
+:Create updated person object;
+:Update AddressBook state;
+
+:Return success message;
+stop
+@enduml
+@enduml

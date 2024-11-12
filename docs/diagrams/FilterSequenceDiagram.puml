@@ -1,0 +1,24 @@
+@startuml
+actor User
+
+participant FilterCommand
+participant Model
+
+User -> FilterCommand: execute(model)
+activate FilterCommand
+
+
+loop combine predicates
+
+    FilterCommand -> FilterCommand: predicate = predicate.and(predicateToAdd) (for each predicateToAdd in predicateSet)
+end
+
+FilterCommand -> Model: updateFilteredPersonList(predicate)
+activate Model
+Model --> FilterCommand:
+deactivate Model
+
+FilterCommand -> User: CommandResult
+
+deactivate FilterCommand
+@enduml

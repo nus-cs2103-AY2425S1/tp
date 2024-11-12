@@ -14,10 +14,13 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "Index provided is invalid. Index must be"
+            + " a positive integer no greater than the list size!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_TOO_MANY_INDEXES = "The number of target guests cannot exceed %d.";
+    private static final String MESSAGE_EMPTY_TAG_LIST_STRING = "None";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -41,10 +44,15 @@ public class Messages {
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        if (!person.getTags().isEmpty()) {
+            String tagsString = person.getTags().stream()
+                    .map(tag -> tag.toString())
+                    .collect(Collectors.joining(", "));
+            builder.append(tagsString);
+        } else {
+            builder.append(MESSAGE_EMPTY_TAG_LIST_STRING);
+        }
         return builder.toString();
     }
 

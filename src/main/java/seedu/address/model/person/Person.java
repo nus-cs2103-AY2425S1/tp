@@ -16,25 +16,31 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    // Strings for UI
+    private static final String NOT_YET_RSVPED_STATUS = "Pending RSVP";
+    private static final String RSVPED_STATUS = "RSVPed";
+
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final RsvpStatus rsvpStatus;
     private final Set<Tag> tags = new HashSet<>();
+
+
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, RsvpStatus rsvpStatus, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.tags.addAll(tags);
+        this.rsvpStatus = rsvpStatus;
     }
 
     public Name getName() {
@@ -49,8 +55,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public RsvpStatus getRsvpStatus() {
+        return rsvpStatus;
     }
 
     /**
@@ -59,6 +65,13 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns true if person is tagged with a certain {@code Tag} tag.
+     */
+    public boolean hasTag(Tag tag) {
+        return getTags().contains(tag);
     }
 
     /**
@@ -72,6 +85,15 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns the string to display the RSVP status on the UI.
+     *
+     */
+
+    public String getRsvpStatusCard() {
+        return rsvpStatus.getStatus();
     }
 
     /**
@@ -93,14 +115,13 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, tags);
     }
 
     @Override
@@ -109,7 +130,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("rsvp", rsvpStatus)
                 .add("tags", tags)
                 .toString();
     }

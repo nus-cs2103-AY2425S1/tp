@@ -9,10 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Maximum of 50 alphanumeric characters, spaces, parenthesis, "
+            + "and apostrophes per tag.\n";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum} '()]+";
+    public static final int MAX_CHARACTER_LENGTH = 50;
 
-    public final String tagName;
+    private String tagName;
 
     /**
      * Constructs a {@code Tag}.
@@ -29,7 +31,13 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX)
+                && test.length() <= MAX_CHARACTER_LENGTH
+                && test.length() > 0;
+    }
+
+    public void setTagName(String newTagName) {
+        this.tagName = newTagName;
     }
 
     @Override
@@ -59,4 +67,10 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    /**
+     * Returns the name of the tag object.
+     */
+    public String getTagName() {
+        return tagName;
+    }
 }

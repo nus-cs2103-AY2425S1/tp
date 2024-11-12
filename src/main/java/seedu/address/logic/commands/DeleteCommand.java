@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -26,6 +26,8 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final Index targetIndex;
+
+    private Person personToDelete;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -40,9 +42,14 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+    }
+
+    @Override
+    public void undo(Model model) {
+        model.addPerson(targetIndex.getZeroBased(), personToDelete);
     }
 
     @Override

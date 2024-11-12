@@ -12,12 +12,21 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NewTagCommand;
+import seedu.address.logic.commands.RenameTagCommand;
+import seedu.address.logic.commands.SetRsvpCommand;
+import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * Parses user input.
@@ -76,6 +85,30 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case TagCommand.COMMAND_WORD:
+            return new TagCommandParser().parse(arguments);
+
+        case NewTagCommand.COMMAND_WORD:
+            return new NewTagCommandParser().parse(arguments);
+
+        case SetRsvpCommand.COMMAND_WORD:
+            return new SetRsvpCommandParser().parse(arguments);
+
+        case DeleteTagCommand.COMMAND_WORD:
+            return new DeleteTagCommandParser().parse(arguments);
+
+        case RenameTagCommand.COMMAND_WORD:
+            return new RenameTagCommandParser().parse(arguments);
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
+
+        case UntagCommand.COMMAND_WORD:
+            return new UntagCommandParser().parse(arguments);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

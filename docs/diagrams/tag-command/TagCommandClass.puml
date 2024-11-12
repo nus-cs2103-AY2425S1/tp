@@ -5,15 +5,19 @@ skinparam classAttributeIconSize 0
 Class "{abstract}\nCommand" as Command {
   +execute(Model): CommandResult
 }
-Class RemarkCommand {
+Class TagCommand {
   +COMMAND_WORD: String
   +MESSAGE_USAGE: String
-  +MESSAGE_NOT_IMPLEMENTED_YET: String
+  +MESSAGE_TAG_PERSON_SUCCESS: String
+  +MESSAGE_TAG_NOT_CREATED: String
+  +MESSAGE_DUPLICATE_TAG: String
+  -targetIndex: Index
+  -tag: Tag
   +execute(Model): CommandResult
 }
 Class CommandException
 
-RemarkCommand -up-|> Command
+TagCommand -up-|> Command
 Command ..> CommandException: throws >
-RemarkCommand .right.> CommandException: throws >
+TagCommand .right.> CommandException: throws >
 @enduml

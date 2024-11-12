@@ -82,6 +82,21 @@ public class FindCommandTest {
         assertEquals(expected, findCommand.toString());
     }
 
+    @Test
+    public void execute_undoFindCommand_success() {
+        Model originalModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+
+        model.updatePreviousCommand(command);
+        UndoCommand undoCommand = new UndoCommand();
+        assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, originalModel);
+    }
+
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */

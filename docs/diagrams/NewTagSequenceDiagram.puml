@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":NewTagCommand" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":NewTagCommandParser" as NewTagCommandParser LOGIC_COLOR
+participant "d:NewTagCommand" as NewTagCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "a:AddressBook" as AddressBook MODEL_COLOR
+participant "t:TagList" as TagList MODEL_COLOR
+end box
+
+[-> LogicManager : execute("newtag t/friends")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("newtag t/friends")
+activate AddressBookParser
+
+create NewTagCommandParser
+AddressBookParser ->  NewTagCommandParser
+activate NewTagCommandParser
+
+NewTagCommandParser --> AddressBookParser
+deactivate NewTagCommandParser
+
+AddressBookParser -> NewTagCommandParser : parse(" t/friends")
+activate NewTagCommandParser
+
+create NewTagCommand
+NewTagCommandParser -> NewTagCommand
+activate NewTagCommand
+
+NewTagCommand --> NewTagCommandParser :
+deactivate NewTagCommand
+
+NewTagCommandParser --> AddressBookParser : n
+deactivate NewTagCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+NewTagCommandParser -[hidden]-> AddressBookParser
+destroy NewTagCommandParser
+
+AddressBookParser --> LogicManager : n
+deactivate AddressBookParser
+
+LogicManager -> NewTagCommand : execute(m)
+activate NewTagCommand
+
+NewTagCommand -> Model : add "friends" "tag
+activate Model
+
+Model -> AddressBook : add "friends" tag
+activate AddressBook
+
+AddressBook -> TagList : add "friends" tag
+activate TagList
+
+TagList --> AddressBook
+deactivate TagList
+
+AddressBook --> Model
+deactivate AddressBook
+
+Model --> NewTagCommand
+deactivate Model
+
+create CommandResult
+NewTagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> NewTagCommand
+deactivate CommandResult
+
+NewTagCommand --> LogicManager : r
+deactivate NewTagCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,6 +25,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RsvpStatus;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -85,7 +89,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -124,6 +128,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addPerson(int index, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -154,7 +163,130 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getFullPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Tag> getTagListAsObservableList() {
+            return null;
+        }
+
+        @Override
+        public void updateTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Set<Tag> getTagsInUse() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean addTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public Set<Tag> addTags(List<Tag> tags) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean deleteTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Set<Tag> deleteTags(List<Tag> tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean renameTag(Tag existingTag, String newName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Set<Person> removeTagFromPersons(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void editTagInPersons(Tag existingTag, String newTagName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkAcceptableTagListSize(int additionalTags) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updatePreviousCommand(Command nextCommand) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Command getPreviousCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<Person> getCurrentPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Tag> getTagFiltersList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<RsvpStatus> getStatusFiltersList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTagFilters(Set<Tag> tagFilters) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addStatusFilters(Set<RsvpStatus> statusFilters) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkStatusFilterAlreadyExists(RsvpStatus statusToCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkSpecificStatusFilterAlreadyExists(RsvpStatus statusToCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkTagFilterAlreadyExists(Tag tagToCheck) {
+            return false;
+        }
+
+        @Override
+        public void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearFilterSet() {
             throw new AssertionError("This method should not be called.");
         }
     }
