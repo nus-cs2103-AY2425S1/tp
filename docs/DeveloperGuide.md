@@ -257,8 +257,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 **Extensions:**
-* 2a PlanPal detects error in process to list user
-  * 2a1 PlanPal shows an error message that the command was called wrongly
+* 1a PlanPal detects error in process to list user
+  * 1a1 PlanPal shows an error message that the command was called wrongly
 
     Use case ends.
 
@@ -279,10 +279,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a.  PlanPal detects that the command given is invalid
-    * 3a1. PlanPal shows an error message
+* 2b.  PlanPal detects that the command given is invalid
+    * 2b1. PlanPal shows an error message
 
-      Use case resumes at step 2.
+      Use case ends.
 
 **UC04 List Contacts by Role**
 
@@ -318,7 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. PlanPal detects that the event name is missing or invalid.
     * 2a1. PlanPal shows an error message.
 
-      Use case ends
+      Use case ends.
 
 **UC06: Assign a contact to an event**
 
@@ -338,17 +338,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. The contact does not have the role specified.
     * 2b1. PlanPal displays an error message indicating that the contact does not have the specified role.
 
-      Use case ends
+      Use case ends.
+
 
 * 2c. The event does not exist.
   * 2c1. PlanPal displays an error message indicating the event is invalid.
 
-    Use case ends.
-**UC07: Search for contacts using multiple filters**
+      Use case ends.
+
+**UC07: Search for contacts using a filter**
 
 **MSS**
 1. User enters a command to search for contacts.
-2. User specifies one or more filters (e.g., name, role, phone number).
+2. User specifies a filter (e.g., name, role, event).
 3. PlanPal displays the filtered list of contacts.
 
    Use case ends.
@@ -377,20 +379,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **UC09: Remove a contact from an event**
 
 **MSS**
-1. User specifies the event they want to modify.
-2. User specifies the contact they wish to remove from the event.
-3. PlanPal removes the contact from the event and displays a success message.
+1. User specifies the event they want to modify and the contact they wish to remove from the event.
+2. PlanPal removes the contact from the event and displays a success message.
 
    Use case ends.
 
 **Extensions**
-* 2a. The specified contact is not part of the event.
-    * 2a1. PlanPal displays an error message indicating the contact was not found in the event.
+* 1a. The specified contact is not part of the event.
+    * 1a1. PlanPal displays an error message indicating the contact was not found in the event.
 
       Use case ends.
 
-* 2b. The event does not exist.
-  * 2b1. PlanPal displays an error message indicating the event is invalid.
+* 1b. The event does not exist.
+  * 1b1. PlanPal displays an error message indicating the event is invalid.
 
     Use case ends.
 
@@ -401,12 +402,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. PlanPal deletes all events and displays a success message.
 
    Use case ends.
-
-**Extensions**
-* 1a. There are no events to clear.
-    * 1a1. PlanPal displays a message indicating there are no events.
-
-      Use case ends.
 
 **UC11: Enter Search Mode**
 
@@ -458,15 +453,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User specifies an invalid or non-existent contact.
     * 2a1. PlanPal displays an error message indicating the contact is invalid.
 
-      Use case ends
+      Use case ends.
 
 **UC14: Clear currently excluded contacts in search mode**
+
 
 **Preconditions**: User is in search mode.
 
 **MSS**
 1. User clears the excluded contacts list.
-2. PlanPal clears all currently exclude contacts displays a success message.
+2. PlanPal clears all currently exclude contacts and displays a success message.
 3. Previously excluded contacts are now included in the search results.
 
    Use case ends.
@@ -479,7 +475,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **UC15: View excluded contacts**
 
-**Preconditions**: User is in search mode and has excluded at least one contact.
+**Preconditions**: User is in search mode.
 
 **MSS**
 1. User specifies the command to view excluded contacts.
@@ -502,7 +498,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. PlanPal exits search mode and returns to the default interface displaying the full contact list.
 
    Use case ends.
-
 
 
 ### Non-Functional Requirements
