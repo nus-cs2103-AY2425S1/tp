@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.io.File;
 import java.util.List;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.storage.CsvToJsonConverter;
@@ -31,7 +30,6 @@ public class ImportCommand extends Command {
      */
     public ImportCommand() {
         toImport = new File("Import");
-        //assert toImport.exists();
     }
 
     @Override
@@ -76,8 +74,10 @@ public class ImportCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("toImport", toImport.getName())
-                .toString();
+        return toImport.getName();
+    }
+
+    public File getToImport() {
+        return toImport;
     }
 }

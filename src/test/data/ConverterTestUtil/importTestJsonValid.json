@@ -1,0 +1,10 @@
+{
+  "persons" : [ {
+    "name" : "Akira",
+    "phone" : "97659965",
+    "email" : "akira1975@gmail.com",
+    "telegramHandle" : "@akira_ra",
+    "moduleName" : "CS2101",
+    "contactType" : "WORK"
+  } ]
+}

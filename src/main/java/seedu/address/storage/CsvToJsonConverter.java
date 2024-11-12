@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -48,10 +50,9 @@ public class CsvToJsonConverter {
      * @throws ConverterException When the provided path contains no .csv files to convert
      */
     public List<File> convertAllCsvFiles() throws ConverterException {
+        requireNonNull(this.directory);
         List<File> jsonFiles = new ArrayList<>();
-        if (directory.getName().endsWith(".csv")) {
-            jsonFiles.add(convertCsvFile(directory));
-        } else if (directory.isDirectory()) {
+        if (directory.isDirectory()) {
             try {
                 File[] files = findAllCsvFiles();
                 for (File csvFile: files) {
@@ -82,7 +83,7 @@ public class CsvToJsonConverter {
             addAllJSonObjects(br, objectMapper, headers, jsonArray);
             br.close();
         } catch (IOException ioe) {
-            throw new ConverterException("There has been a corrupted input", ioe);
+            throw new ConverterException(ioe.getMessage());
         }
         return writeToJson(objectMapper, jsonArray, getJsonName(csvFile));
     }
@@ -123,7 +124,7 @@ public class CsvToJsonConverter {
         String line = br.readLine();
 
         if (line == null) {
-            throw new IOException(".csv file is empty");
+            throw new IOException("The .csv file is empty");
         }
 
         return line.split(",");
@@ -169,5 +170,13 @@ public class CsvToJsonConverter {
         } else {
             throw new IllegalArgumentException("Filename must end with .csv");
         }
+    }
+
+    public File getDirectory() {
+        return directory;
+    }
+
+    public String[] getPersonFieldNames() {
+        return personFieldNames;
     }
 }
