@@ -700,7 +700,7 @@ testers are expected to do more *exploratory* testing.
 
 >**Prerequisite 1:** At least one student exists in the list. For example, a student at index 1.
 
->**Prerequisite 2:** Ensure that the tutorial T1001 exists in the system.
+>**Prerequisite 2:** Ensure that the tutorial T2001 exists in the system.
 
 >**Prerequisite 3:** Ensure that no student with student ID "A7654321X" exists in the system.
 
