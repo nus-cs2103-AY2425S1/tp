@@ -35,6 +35,14 @@
 - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
    * [Launch and shutdown](#launch-and-shutdown)
    * [Deleting a student](#deleting-a-student)
+   * [Adding a student](#adding-a-student)
+   * [Editing a student](#editing-a-student)
+   * [Adding a lesson to a student](#adding-a-lesson-to-a-student)
+   * [Deleting a lesson from a student](#deleting-a-lesson-from-a-student)
+   * [Adding a remark to a student](#adding-a-remark-to-a-student)
+   * [Deleting a remark from a student](#deleting-a-remark-from-a-student)
+   * [Displaying a student](#displaying-a-student)
+   * [Navigating through command history](#navigating-through-command-history)
    * [Saving data](#saving-data)
 
 <!-- TOC end -->
@@ -703,7 +711,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
-Group size: 5 memebers
+Group size: 5 members
 
 1. Student identification: 
    - Our app uniquely identifies students by name. In future updates, we plan to use a combination of name **and** phone number for unique identification.
@@ -732,6 +740,10 @@ Group size: 5 memebers
 1. Remarks deleted one at a time:
    - `delrmk` only allows users to delete one remark at a time.
    - In future updates, allow users to delete multiple.
+1.Right panel enhancement:
+   - Currently, the right panel automatically scrolls to the top each time the user edits any student details.
+   - In the future, we plan to refine this feature so that the panel scrolls directly to the section where the user made edits, providing a more seamless and user-friendly experience.
+
 
 ## **Appendix: Instructions for manual testing**
 
