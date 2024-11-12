@@ -1,0 +1,61 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "s:StudentCommandParser" as StudentCommandParser LOGIC_COLOR
+participant "s:StudentCommand" as StudentCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(student)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(student)
+activate AddressBookParser
+
+create StudentCommandParser
+AddressBookParser -> StudentCommandParser : parse(args)
+activate StudentCommandParser
+
+create StudentCommand
+StudentCommandParser -> StudentCommand
+activate StudentCommand
+
+StudentCommand --> StudentCommandParser
+deactivate StudentCommand
+
+StudentCommandParser --> AddressBookParser : s
+deactivate StudentCommandParser
+
+StudentCommandParser -[hidden]-> StudentCommandParser
+
+destroy StudentCommandParser
+AddressBookParser --> LogicManager : s
+deactivate AddressBookParser
+
+LogicManager -> StudentCommand : execute()
+activate StudentCommand
+
+StudentCommand -> Model : check for duplicates
+activate Model
+
+alt No duplicates
+    StudentCommand -> Model : addStudent(newStudent)
+    Model --> StudentCommand : success
+else Duplicate found
+    StudentCommand --> LogicManager : error (duplicate student)
+end
+deactivate Model
+
+StudentCommand --> LogicManager : CommandResult
+deactivate StudentCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

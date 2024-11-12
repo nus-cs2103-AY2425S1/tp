@@ -1,55 +1,53 @@
 [![CI Status](https://github.com/AY2425S1-CS2103T-T14-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T14-2/tp/actions)
 
-![Ui](docs/images/Ui.png)
+# AdmiNUS - Contact Management for NUS Clubs
+![Ui](./docs/images/viewContactUI.png)
 
-# AdmiNUS
+AdmiNUS is a desktop application for managing contact details of NUS club administrators. It is optimized for Command Line Interface (CLI) users who prefer efficient and fast contact management without sacrificing the convenience of a Graphical User Interface (GUI).
 
-AdmiNUS helps international students in NUS manage detail of their contacts. It is optimized for CLI users so that frequent tasks can be done faster by typing in commands.
+## Features
 
-# Features List:
+AdmiNUS allows you to:
 
-1. [Add contacts](#add-contacts)
-2. [View all contacts](#view-contacts)
-3. [Delete contacts](#delete-contacts)
-4. [Prepopulated contacts](#prepopulated-contacts)
+* Add, edit, delete, and search student and company contacts easily.
 
-## Add contacts
+* Track contacts by categories (e.g., students, companies) and tags.
 
-Purpose: Allows the user to add a new contact to their list.
+* Use both CLI and GUI for seamless interaction.
 
-Command format: `add NAME PHONE_NUMBER [EMAIL] [TAG]`
+* Import and export contact data via CSV files.
 
-Example commands:
+The application is designed for those who are constantly organizing events, managing multiple groups, and need a streamlined way to keep everything in order.
 
-- `add John Doe 98765432`
+## Why Use AdmiNUS?
 
-- `add Alice Lee 12345678 alicelee@example.com Friend`
+AdmiNUS makes contact management efficient by leveraging the speed of CLI commands alongside a simple, clear GUI. It's especially helpful for **NUS Club Admins** who need to organize contacts for events, vendors, and participants.
 
-## View all contacts
+### Example Use Case
 
-Purpose: Display all saved contacts in a single view.
+Suppose you are organizing an NUS event with over 200 participants, including student volunteers and vendors. With AdmiNUS, adding, editing, and filtering contacts is quick and straightforward. For example, to add a student:
 
-Command format: `list`
+```shell
+student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/123 Clementi Rd, #02-01 t/volunteer
+```
 
-For each parameter:
+This command adds John Doe instantly, tagged as a volunteer. You can then use commands like `filtertag volunteer` to find all volunteers, saving time compared to traditional methods.
 
-- No parameters.
+AdmiNUS helps you stay organized and efficient, letting you focus on running successful events.
 
-## Delete contacts
+## Getting Started
+* If you are interested in using AdmiNUS, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing AdmiNUS, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
-Purpose: Allows the user to delete an existing contact.
 
-Command format: `delete <INDEX>`
-Example commands:
+## Acknowledgements
 
-- `delete 1` (deletes the first contact in the list)
-- `delete 3` (deletes the third contact in the list)
+AdmiNUS incorporates various libraries and tools, including:
+- [JavaFX](https://openjfx.io/) for the GUI.
+- [Jackson](https://github.com/FasterXML/jackson) for data serialization
+- [JUnit5](https://github.com/junit-team/junit5) for testing
 
-## Prepopulated contacts
-
-Purpose: Assists international students by providing a prepopulated database of useful contacts. We believe that this feature would provide much value to international students especially.
-
-Command format: N/A
+AdmiNUS is your comprehensive solution for efficient contact management, designed to meet the unique needs of NUS club administrators and event organizers.
 
 # Credits
 

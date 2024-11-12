@@ -45,6 +45,7 @@ import seedu.address.model.person.company.Industry;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.CompanyBuilder;
 
+//@@author ruiming97
 public class AddCompanyCommandParserTest {
     private AddCompanyCommandParser parser = new AddCompanyCommandParser();
 

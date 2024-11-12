@@ -1,0 +1,46 @@
+@startuml
+title Import Activity Diagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+start
+
+:User initiates import command;
+:Validate file path;
+
+if () then ([File path invalid])
+    :Display error "Invalid file path";
+    stop
+else ([no])
+    :Open CSV file;
+    :Skip header row;
+    :Check next row;
+
+    while () is ([More rows to process])
+        :Read next row;
+        :Parse CSV row into fields;
+        :Check fields;
+
+        if () then ([Fields missing or invalid])
+            :Display error "File is corrupted or missing compulsory fields";
+            stop
+        else ([else])
+            if () then ([Category is 'student'])
+                :Create Student object;
+            else if () then ([Category is 'company'])
+                :Create Company object;
+            else([Error])
+                :Display error "File is corrupted or missing compulsory fields";
+                stop
+            endif
+            if () then ([Object already exists])
+                :Skip duplicate entry;
+            else ([else])
+                :Add entry to address book;
+            endif
+        endif
+    endwhile ([else])
+
+    :Display success message with import count;
+stop
+@enduml

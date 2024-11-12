@@ -26,6 +26,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.company.Company;
 import seedu.address.testutil.CompanyBuilder;
 
+//@@author ruiming97
 public class AddCompanyCommandTest {
 
     @Test

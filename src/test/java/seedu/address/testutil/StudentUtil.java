@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.model.person.student.Student;
 
+//@@author ruiming97
 /**
  * A utility class for Student.
  */

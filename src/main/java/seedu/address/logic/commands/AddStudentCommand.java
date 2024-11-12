@@ -14,14 +14,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.student.Student;
 
+//@@author ruiming97
 /**
- * Adds a student to the address book
+ * Adds a student to the contact list
  */
 public class AddStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "student";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the contact list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_STUDENTID + "STUDENT ID "
@@ -39,7 +40,7 @@ public class AddStudentCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the contact list";
 
     private final Student toAdd;
 

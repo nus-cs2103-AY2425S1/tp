@@ -277,10 +277,10 @@ New company added: (details of the company added)
 ```
 
 | Parameter Name   | Description                               | Constraint                                                                                                                                                                                                                                                                                                                                                                                           | Required   |
-| ---------------- |-------------------------------------------| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| ---------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | `n/NAME`         | Name of the company                       | Can include alphanumeric characters, spaces, and the `/` character but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`)                                                                                                                                                                                                                                            | Compulsory |
 | `i/INDUSTRY`     | Industry type (e.g., Security, Education) | Include only alphanumerical characters and spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                | Compulsory |
-| `p/PHONE_NUMBER` | Contact number                            | Must be only numbers and at least 3 digits long                                                                                                                                                                                                                                                                                                                                                                                 | Compulsory |
+| `p/PHONE_NUMBER` | Contact number                            | Must be only numbers and at least 3 digits long                                                                                                                                                                                                                                                                                                                                                      | Compulsory |
 | `e/EMAIL`        | Email address                             | In the format local-part@domain and must adhere to the following constraints: <br> 1) The local part should only contain alphanumeric characters and select special characters, but cannot start or end with them. <br> 2) The domain must consist of labels separated by periods, each ending with at least two letters and containing only alphanumeric characters or hyphens. (e.g., example.com) | Compulsory |
 | `a/ADDRESS`      | Physical address                          | Can take any value, but must not include [parameter-like sequences](#parameter-like-sequence) (e.g., `n/`))                                                                                                                                                                                                                                                                                          | Compulsory |
 | `t/TAG`          | [Tag](#tag) to categorise contact         | Must be alphanumeric characters and no spaces ([case-sensitive](#case-sensitive))                                                                                                                                                                                                                                                                                                                    | Optional   |
@@ -499,7 +499,7 @@ Finds contacts whose [tags](#tag) are the same as the specified keyword.
 - Only full words will be matched e.g. `partner` will not match `partners`.
 
 - Contacts matching at least one tag will be returned (i.e. `OR` search). <br>
-e.g. `filtertag paid year2` finds all contacts who have tags saved as `paid` or `year2`.
+  e.g. `filtertag paid year2` finds all contacts who have tags saved as `paid` or `year2`.
 
 </div>
 
@@ -546,7 +546,8 @@ Listed all persons under category: CATEGORY
 Adds additional specified tag(s) to the specified contact or all contacts in the list provided no duplicate tags(s) are found in all contacts without overwriting existing tags.
 
 **Format 1**: `tag INDEX t/TAG [t/MORE_TAG]…​`<br>
-Tagging operation applies to specified contact in the list
+
+Tagging operation applies to specified contact in the list.
 
 **Expected message**:
 
@@ -556,13 +557,12 @@ to Person: (details of the person)
 ```
 
 | Parameter Name | Description                                                       | Constraint                                                            | Required   |
-|----------------|-------------------------------------------------------------------|-----------------------------------------------------------------------|------------|
+| -------------- | ----------------------------------------------------------------- | --------------------------------------------------------------------- | ---------- |
 | `INDEX`        | Index number of the contact to tag from the displayed person list | Positive integer only (e.g. 1, 2, 3)                                  | Compulsory |
 | `t/TAG`        | [Tag](#tag) to add to the specified contact                       | Must be alphanumeric characters, non-empty, and cannot contain spaces | Compulsory |
 | `t/MORE_TAG`   | More tags to add                                                  | Must be alphanumeric characters, non-empty, and cannot contain spaces | Optional   |
 
 **Format 2**: `tag all t/TAG [t/MORE_TAG]…​`<br>
-Tagging operation applies to **all contacts currently shown in the list**, not all contacts in the database.
 
 **Expected message**:
 
@@ -579,13 +579,16 @@ Added tag(s): [TAG], [MORE_TAG(if present)] to all contacts.
 
 🔔 **Notes**: <br>
 
-* The index refers to the index number shown in the displayed contact list.
+- The index refers to the index number shown in the displayed contact list.
 
 * For both formats 1 and 2,
-  * The tag is **[case-insensitive](#case-insensitive)**. For example, `partner` will match `PartnEr`.
-  * Only full words will be matched e.g. `partner` will not match `partners`.
-  * The added tags are displayed on the contact in alphabetical order. <br>
+
+  - The tag is **[case-insensitive](#case-insensitive)**. For example, `partner` will match `PartnEr`.
+  - Only full words will be matched e.g. `partner` will not match `partners`.
+  - The added tags are displayed on the contact in alphabetical order. <br>
     e.g. `t/partner t/education` will display `education` before `partner`.
+
+* For format 2, tagging operation applies to all contacts currently shown in the list, not all contacts in the database.
 
 </div>
 
@@ -606,27 +609,27 @@ no duplicate tag(s) are found in all contacts.
   
 * To tag all students with the `paid` tag, simply use `track student` followed by `tag all t/paid`.
 
-* Tag labelled with `paid` will have green background:
-  * to indicate that a student has paid their membership fee, or
-  * to indicate that a company has paid the club sponsorship.
-  
+- `paid` tags are easily distinguishable! They will have a green background:
+  - to indicate that a student has paid their membership fee, or
+  - to indicate that a company has paid the club sponsorship.
+
 </div>
 
 **Expected outcome for the above tip on `tag all`:** <br>
 
-* `track student` <br>
+- `track student` <br>
 
   ![Track student](images/trackStudentBeforeTagAll.png)
 
-* `tag all t/paid` <br>
+- `tag all t/paid` <br>
 
   ![Tag all paid tag](images/tagAll.png)
 
-*Note: in this case, only all students are tagged with the paid tag.*
+  _Note: in this case, only all students are tagged with the paid tag._
 
 #### Deleting tag(s) from contact: `deletetag`
 
-Deletes the specified tag(s) from the specified contact.
+Deletes the specified tag(s) from the specified contact or from all the contacts in the list provided they all have the specified tag(s).
 
 **Format 1**: `deletetag INDEX t/TAG [t/MORE_TAG]…​`
 
@@ -666,7 +669,7 @@ Deleted the tag(s) (TAG [MORE_TAG]) from all contacts in the list.
 * `deletetag all t/TAG` only works when all contacts currently shown in the list have the tag `TAG`, otherwise an error message is shown.
 
 * For both formats 1 and 2,
-  - The tag is ([case-sensitive](#case-sensitive)). For example, `partner` will not match `PartnEr`.
+  - The tag is [case-sensitive](#case-sensitive). For example, `partner` will not match `PartnEr`.
   - Only full words will be matched e.g. `partner` will not match `partners`.
 
 </div>
@@ -718,10 +721,22 @@ The `import` command allows you to bring data from a CSV file into the applicati
 - Absolute: `import /home/user/data/hackers_2022.csv`
 - Relative: `import ./data/hackers_2022.csv`
 
+![](images/csv.png)
+
+- The contents of an example CSV file.
+
+![](images/import.png)
+
+- After executing the import command, the contents of the CSV file are being imported to AdmiNUS.
+
 **Troubleshooting**:
 
 - For errors such as "file not found," confirm the path type (absolute vs. relative) and the file’s existence.
 - Ensure the application has access rights to the specified directory.
+- If you receive an error message indicating that the file is "corrupted or missing compulsory fields," check the following:
+  - Ensure all required fields are present in each row of your CSV file (e.g., name, category, studentID or industry, phone, email, address).
+  - Confirm that each row follows the correct format, with entries for every compulsory field. Empty fields can trigger this error.
+  - Verify that the file is saved with a `.csv` extension and is structured as a valid CSV (comma-separated values), with columns corresponding to the required fields.
 
 ---
 
@@ -766,10 +781,16 @@ AdmiNUS data are saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-AdmiNUS data are saved automatically as a [JSON](#json) file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AdmiNUS data are saved automatically as a [JSON](#json) file
+
+```
+[JAR file location]/data/addressbook.json
+```
+
+Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file make its format invalid, AdmiNUS will discard all data and start with an empty data file at the next run. It is recommended to take a backup of the file before editing it.
+If your changes to the data file make its format invalid, AdmiNUS will discard all data and start with an empty data file at the next run. It is recommended to make a backup of the file before editing it.
 Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -777,8 +798,8 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 
 ## Glossary
 
+<a name="absolute-path"></a>
 
-  <a name="absolute-path"></a>
 - **_Absolute Path_**: A full path that specifies the exact location of a file or directory from the root of the file system.
   <a name="case-insensitive"></a>
 - **_Case-Insensitive_**: A term used to describe a system where uppercase and lowercase letters are treated as the same. For example, Apple, apple, and APPLE would be considered equivalent values.
@@ -805,11 +826,11 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
   <a name="tag"></a>
 - **_Tag_**: A keyword or label associated with a contact that allows for easy grouping and filtering.
 
-<div markdown="block" class="alert alert-info"> 
+<div markdown="block" class="alert alert-info">
 
 **Navigation Box** <br>
 [Back to Top](#why-choose-adminus) <br>
-[Back to Table of Content](#table-of-contents) <br>
+[Back to Table of Contents](#table-of-contents) <br>
 [Back to Basic commands](#basic-commands)<br>
 [Back to Contact management](#contact-management)<br>
 [Back to Advanced commands](#advanced-commands)<br>
@@ -825,7 +846,13 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 A: Install the app on the new computer, then replace its default data file with the data file from your previous AdmiNUS home folder. Alternatively, export your data to a CSV file from the original computer using the [export command](#exporting-csv-files-export) and import it on the new computer using the [import command](#importing-csv-files-import).
 
 **Q: How do I back up my AdmiNUS data?**  
-A: The data is saved automatically in a JSON file located in the `[JAR file location]/data/addressbook.json`. You can make a backup by copying this file to a safe location. Alternatively, you can export your data to a CSV file using the [export command](#exporting-csv-files-export).
+A: The data is saved automatically in a JSON file located in the
+
+```
+[JAR file location]/data/addressbook.json
+```
+
+You can make a backup by copying this file to a safe location. Alternatively, you can export your data to a CSV file using the [export command](#exporting-csv-files-export).
 
 **Q: Can I use AdmiNUS without Java installed on my computer?**  
 A: No, AdmiNUS requires Java 17 or above to run. You need to ensure that the correct version of Java is installed before using the application.
@@ -856,32 +883,32 @@ A: You can use the `delete INDEX [MORE_INDEX]…​` command to delete multiple 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **Entering [parameter-like sequences](#parameter-like-sequence) in input fields**: If a user enters text that resembles a parameter prefix (e.g., `n/`, `p/`, `e/`) within an input field like `Name` or `Address`, it may cause unexpected parsing errors or rejections. Ensure that parameter-like sequences are avoided within fields that do not expect them.
-4. **Case Sensitivity of the Industry Field**: The industry field is currently [case-sensitive](#case-sensitive). This means that entries with different capitalization (e.g., `University` and `UNiversity`) will be treated as separate and distinct values, even though they appear visually identical in the interface. This behavior can lead to unintended duplicates if users do not input industry names with consistent capitalization.
+4. **Case Sensitivity of the Industry Field**: The industry field is currently [case-sensitive](#case-sensitive). This means that entries with different capitalisation (e.g., `University` and `UNiversity`) will be treated as separate and distinct values, even though they appear visually identical in the interface. This behavior can lead to unintended duplicates if users do not input industry names with consistent capitalisation.
 
 ---
 
 ## Command summary
 
-| **Action**                      | **Format**                                                                                              | **Example**                                                                                                             |
-|---------------------------------|---------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **Viewing help**                | `help`                                                                                                  | `help`                                                                                                                  |
-| **Link to the user guide**      | `helpwindow`                                                                                            | `helpwindow`                                                                                                            |
-| **Listing all contacts**        | `list`                                                                                                  | `list`                                                                                                                  |
-| **Viewing a contact**           | `view INDEX`                                                                                            | `view 1`                                                                                                                |
-| **Clearing all entries**        | `clear`                                                                                                 | `clear`                                                                                                                 |
-| **Exiting the program**         | `exit`                                                                                                  | `exit`                                                                                                                  |
-| **Adding a student**            | `student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                                | `student n/James Ho id/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`      |
-| **Adding a company**            | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                                   | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison t/facility`        |
-| **Editing a contact**           | `edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`      | `edit 2 n/James Lee e/jameslee@example.com`                                                                             |
-| **Deleting contact(s)**         | `delete INDEX [MORE_INDEX]…​` <br> `delete all`                                                        | `delete 3` or `delete 2 4` or `delete all`                                                                              |
-| **Locating persons by name**    | `find KEYWORD [MORE_KEYWORDS]…​`                                                                        | `find James Jake`                                                                                                       |
-| **Filtering contacts by tag**   | `filtertag KEYWORD [MORE_KEYWORDS]…​`                                                                   | `filtertag bestie` or `filtertag bestie slay`                                                                           |
-| **Tracking contacts by category** | `track CATEGORY`                                                                                      | `track student`                                                                                                         |
-| **Adding tag(s) to contact**    | `tag INDEX t/TAG [t/MORE_TAG]…​` <br> `tag all t/TAG [t/MORE_TAG]…​`                                     | `tag 1 t/year2 t/computerScience` or `tag all t/year2 t/computerScience`                                                |
-| **Deleting tag(s) from contact** | `deletetag INDEX t/TAG [t/MORE_TAG]…​` <br> `deletetag all t/TAG [t/MORE_TAG]…​`                         | `deletetag 1 t/senior t/Y2` or `deletetag all t/senior t/Y2`                                                            |
-| **Importing CSV files**         | `import FILE_PATH`                                                                                      | `import C:\Users\user\data\File.csv` or `import data/File.csv`                                                          |
-| **Exporting CSV files**         | `export FILE_PATH`                                                                                      | `export C:\Users\user\data\File.csv` or `export data/File.csv`                                                          |
+| **Action**                        | **Format**                                                                                          | **Example**                                                                                                         |
+| --------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Viewing help**                  | `help`                                                                                              | `help`                                                                                                              |
+| **Link to the user guide**        | `helpwindow`                                                                                        | `helpwindow`                                                                                                        |
+| **Listing all contacts**          | `list`                                                                                              | `list`                                                                                                              |
+| **Viewing a contact**             | `view INDEX`                                                                                        | `view 1`                                                                                                            |
+| **Clearing all entries**          | `clear`                                                                                             | `clear`                                                                                                             |
+| **Exiting the program**           | `exit`                                                                                              | `exit`                                                                                                              |
+| **Adding a student**              | `student n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho id/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Adding a company**              | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                              | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison t/facility`    |
+| **Editing a contact**             | `edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                         |
+| **Deleting contact(s)**           | -`delete INDEX [MORE_INDEX]…​` <br> -`delete all`                                                   | `delete 3` or `delete 2 4` or `delete all`                                                                          |
+| **Locating persons by name**      | `find KEYWORD [MORE_KEYWORDS]…​`                                                                    | `find James Jake`                                                                                                   |
+| **Filtering contacts by tag**     | `filtertag KEYWORD [MORE_KEYWORDS]…​`                                                               | `filtertag bestie` or `filtertag bestie slay`                                                                       |
+| **Tracking contacts by category** | `track CATEGORY`                                                                                    | `track student`                                                                                                     |
+| **Adding tag(s) to contact**      | -`tag INDEX t/TAG [t/MORE_TAG]…​` <br> -`tag all t/TAG [t/MORE_TAG]…​`                              | `tag 1 t/year2 t/computerScience` or `tag all t/year2 t/computerScience`                                            |
+| **Deleting tag(s) from contact**  | -`deletetag INDEX t/TAG [t/MORE_TAG]…​` <br> -`deletetag all t/TAG [t/MORE_TAG]…​`                  | `deletetag 1 t/senior t/Y2` or `deletetag all t/senior t/Y2`                                                        |
+| **Importing CSV files**           | `import FILE_PATH`                                                                                  | `import C:\Users\user\data\File.csv` or `import data/File.csv`                                                      |
+| **Exporting CSV files**           | `export FILE_PATH`                                                                                  | `export C:\Users\user\data\File.csv` or `export data/File.csv`                                                      |
 
-[Back to the table of contents](#table-of-contents)
+[Back to Table of Contents](#table-of-contents)

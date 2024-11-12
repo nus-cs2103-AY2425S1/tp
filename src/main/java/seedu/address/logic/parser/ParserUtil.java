@@ -65,6 +65,7 @@ public class ParserUtil {
         return indices;
     }
 
+    //@@author ruiming97
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
@@ -109,7 +110,7 @@ public class ParserUtil {
         }
         return new Industry(trimmedIndustry);
     }
-
+    //@@author
     /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
