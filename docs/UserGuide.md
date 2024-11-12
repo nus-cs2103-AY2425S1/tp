@@ -140,7 +140,7 @@ Shows a message explaning how to access the help page.
 
 Adds a patient to the app.
 * **After using `add`, type `confirm` to complete the action**. You can also use `cancel` if you change your mind. 
-* Note that typing any other commands other than `confirm` or `cancel` will cancel this operation.
+* Note that confirmation will expire after 1 operation. Typing any other commands other than `confirm` or `cancel` will cancel this operation.
 
 **Format:** `add n/NAME i/IDENTITY_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS​`
 
@@ -217,6 +217,8 @@ Examples:
 
 Edits an existing patient in the app by patient's specified INDEX.
 * **After using `edit`, type `confirm` to complete the action**. You can also use `cancel` if you change your mind.
+* Confirmation will expire after 1 operation. If you do not input confirm or cancel, the operation will be cancelled by default.
+
 
 **Format:** `edit INDEX [n/NAME] [i/NRIC] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS]​`
 
@@ -263,6 +265,7 @@ Deletes the specified patient from the app.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * **After using `delete`, type `confirm` to complete the deletion**. You can also use `cancel` if you change your mind.
+* Confirmation will expire after 1 operation. If you do not input confirm or cancel, the operation will be cancelled by default.
 
 Examples:
 * `delete i/S1234567D` deletes the patient with NRIC S1234567D in the address book.
@@ -278,6 +281,7 @@ Clears all entries from MindMap **after confirming the action**.
 **Format:** `clear`
 
 * **After using `clear`, type `confirm` to proceed with the clearing of all entries**. You can also use `cancel` if you change your mind.
+* Confirmation will expire after 1 operation. If you do not input confirm or cancel, the operation will be cancelled by default.
 > **⚠️ Warning:** This deletes **ALL** of the patient contacts and their respective session logs. This action is non-reversible.
 <br>
 <br>
