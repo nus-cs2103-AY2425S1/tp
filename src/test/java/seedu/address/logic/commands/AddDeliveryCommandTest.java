@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalDeliveryWrappers.getNullWrapper;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -44,8 +45,7 @@ public class AddDeliveryCommandTest {
     public void execute_deliveryAcceptedByModel_addSuccessful() throws Exception {
         Supplier validSupplier = new SupplierBuilder().build();
         ModelStubAcceptingDeliveryAdded modelStub = new ModelStubAcceptingDeliveryAdded(validSupplier);
-        Delivery deliveryWithNullSender = new DeliveryBuilder().buildWithNullSender();
-        DeliveryWrapper wrapper = new DeliveryWrapper(deliveryWithNullSender, new SupplierIndex("1"));
+        DeliveryWrapper wrapper = getNullWrapper();
         CommandResult commandResult = new AddDeliveryCommand(wrapper).execute(modelStub);
         assertEquals(String.format(AddDeliveryCommand.MESSAGE_SUCCESS, Messages.format(wrapper.getDelivery())),
                 commandResult.getFeedbackToUser());
@@ -65,8 +65,7 @@ public class AddDeliveryCommandTest {
     public void execute_inactiveSupplier_throwsCommandException() {
         Supplier validSupplier = new SupplierBuilder().withStatus("inactive").build();
         ModelStubAcceptingDeliveryAdded modelStub = new ModelStubAcceptingDeliveryAdded(validSupplier);
-        Delivery deliveryWithNullSender = new DeliveryBuilder().buildWithNullSender();
-        DeliveryWrapper wrapper = new DeliveryWrapper(deliveryWithNullSender, new SupplierIndex("1"));
+        DeliveryWrapper wrapper = getNullWrapper();
         AddDeliveryCommand addDeliveryCommand = new AddDeliveryCommand(wrapper);
         assertThrows(CommandException.class, AddDeliveryCommand.MESSAGE_INACTIVE_SUPPLIER, () ->
                 addDeliveryCommand.execute(modelStub));
@@ -74,7 +73,7 @@ public class AddDeliveryCommandTest {
 
     @Test
     public void equals() {
-        DeliveryWrapper deliveryWrapperApple = TypicalDeliveryWrappers.getNullWrapper();
+        DeliveryWrapper deliveryWrapperApple = getNullWrapper();
         Delivery deliveryPear = new DeliveryBuilder().withProduct("Pear")
                 .withDeliveryTime("01-11-2024 12:30").withSender(null).build();
         DeliveryWrapper deliveryWrapperPear = new DeliveryWrapper(deliveryPear, new SupplierIndex("2"));
@@ -94,12 +93,12 @@ public class AddDeliveryCommandTest {
         // null -> returns false
         assertFalse(addAppleDeliveryCommand.equals(null));
 
-        // different delivery -> returns false
+        // different DeliveryWrappers -> returns false
         assertFalse(addAppleDeliveryCommand.equals(addPearDeliveryCommand));
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * Represents a default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -231,7 +230,7 @@ public class AddDeliveryCommandTest {
     }
 
     /**
-     * A Model stub that contains a single delivery.
+     * Represents a Model stub that contains a single delivery.
      */
     private class ModelStubWithDelivery extends ModelStub {
         private final Delivery delivery;
@@ -256,7 +255,7 @@ public class AddDeliveryCommandTest {
     }
 
     /**
-     * A Model stub that always accept the delivery being added.
+     * Represents a Model stub that always accept the delivery being added.
      */
     private class ModelStubAcceptingDeliveryAdded extends ModelStub {
         final ArrayList<Delivery> deliveriesAdded = new ArrayList<>();
@@ -291,5 +290,4 @@ public class AddDeliveryCommandTest {
             return new AddressBook();
         }
     }
-
 }

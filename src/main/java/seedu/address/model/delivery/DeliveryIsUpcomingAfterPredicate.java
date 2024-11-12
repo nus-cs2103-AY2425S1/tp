@@ -13,7 +13,7 @@ public class DeliveryIsUpcomingAfterPredicate implements Predicate<Delivery> {
 
     /**
      * Creates a Predicate that checks if Delivery has a specified status and occurs
-     * AFTER a specified date.
+     * after a specified date.
      *
      * @param completionDateTime Specified delivery date to check.
      * @param deliveryStatus Specified status.
@@ -22,7 +22,14 @@ public class DeliveryIsUpcomingAfterPredicate implements Predicate<Delivery> {
         this.completionDateTime = completionDateTime;
         this.deliveryStatus = deliveryStatus;
     }
-
+    /**
+     * Determines if predicate is true for a given input delivery by comparing the DateTime values
+     * and delivery status.
+     *
+     * @param delivery Delivery object to test.
+     * @return True if input has a DateTime value that is later than completionDateTime
+     *         and PENDING status.
+     */
     @Override
     public boolean test(Delivery delivery) {
         DateTimeAfterInputDatePredicate deliveryIsLaterPredicate =
@@ -34,7 +41,13 @@ public class DeliveryIsUpcomingAfterPredicate implements Predicate<Delivery> {
         boolean isUpcoming = hasPendingStatus && hasValidDeliveryDate;
         return isUpcoming;
     }
-
+    /**
+     * Returns true if DateTime object and Status of both objects are same.
+     *
+     * @param other Object to be compared with.
+     * @return True if object is an instance of DeliveryIsUpcomingAfterPredicate and both
+     *         DateTime objects and Status are equal.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -51,7 +64,9 @@ public class DeliveryIsUpcomingAfterPredicate implements Predicate<Delivery> {
         return completionDateTime.equals(otherDeliveryIsUpcomingAfterPredicate.completionDateTime)
                 && deliveryStatus.equals(otherDeliveryIsUpcomingAfterPredicate.deliveryStatus);
     }
-
+    /**
+     * Represents the String value of predicate.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

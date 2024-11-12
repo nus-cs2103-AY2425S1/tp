@@ -21,7 +21,7 @@ public class DateTime implements Comparable<DateTime> {
     private final LocalDateTime dateTime;
 
     /**
-     * Constructs a {@code Time}.
+     * Constructs a {@code DateTime}.
      *
      * @param dateTime A valid time following the format of dd-MM-yyyy HH:mm.
      */
@@ -75,10 +75,10 @@ public class DateTime implements Comparable<DateTime> {
     }
 
     /**
-     * Checks if instance of DateTime has LocalDateTime value that is earlier than input deliveryDateTime.
+     * Checks if delivery's DateTime object has LocalDateTime value that is earlier than input delivery DateTime.
      *
-     * @param deliveryDateTime Input deliveryDateTime to compare against.
-     * @return True if instance of DateTime is earlier thant input.
+     * @param deliveryDateTime Input delivery DateTime to compare against.
+     * @return True if delivery instance has DateTime earlier than input DateTime.
      */
     public boolean isEarlierThan(DateTime deliveryDateTime) {
         return this.dateTime.isBefore(deliveryDateTime.dateTime);

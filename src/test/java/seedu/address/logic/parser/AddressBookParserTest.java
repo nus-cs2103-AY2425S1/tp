@@ -15,6 +15,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 import static seedu.address.model.delivery.Status.DELIVERED;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.prepareAfterPredicate;
+import static seedu.address.testutil.TestUtil.prepareBeforePredicate;
 import static seedu.address.testutil.TypicalDeliveries.APPLE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DELIVERY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
@@ -43,7 +45,6 @@ import seedu.address.logic.commands.SortDeliveryCommand;
 import seedu.address.logic.commands.SortSupplierCommand;
 import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryIsUpcomingAfterPredicate;
 import seedu.address.model.delivery.DeliveryIsUpcomingBeforePredicate;
@@ -81,12 +82,8 @@ public class AddressBookParserTest {
     }
     @Test
     public void parseCommand_upcoming() throws Exception {
-        DateTime startTime = new DateTime(VALID_DATE_APPLE);
-        DateTime endTime = new DateTime(VALID_DATE_BREAD);
-        DeliveryIsUpcomingBeforePredicate predicateBefore = new DeliveryIsUpcomingBeforePredicate(endTime,
-                Status.PENDING);
-        DeliveryIsUpcomingAfterPredicate predicateAfter = new DeliveryIsUpcomingAfterPredicate(startTime,
-                Status.PENDING);
+        DeliveryIsUpcomingBeforePredicate predicateBefore = prepareBeforePredicate(VALID_DATE_BREAD, Status.PENDING);
+        DeliveryIsUpcomingAfterPredicate predicateAfter = prepareAfterPredicate(VALID_DATE_APPLE, Status.PENDING);
         List<Predicate<Delivery>> predicates = new ArrayList<>();
         predicates.add(predicateAfter);
         predicates.add(predicateBefore);

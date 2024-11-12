@@ -13,7 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Delivery;
 /**
- * Lists all pending deliveries that are completed before a specified date.
+ * Lists all pending deliveries based on specified date(s).
  */
 public class UpcomingCommand extends Command {
     public static final String COMMAND_WORD = "upcoming";
@@ -27,37 +27,38 @@ public class UpcomingCommand extends Command {
             + " " + PREFIX_END_DATE + "18-06-2023 17:00";
     public static final String MESSAGE_SUCCESS = Messages.MESSAGE_DELIVERIES_LISTED_OVERVIEW;
     private final List<Predicate<Delivery>> predicates;
-
     /**
      * Creates an UpcomingCommand to display the list of pending deliveries before the
      * specified date.
+     *
+     * @param predicates The list of predicates to filter the delivery list by.
      */
     public UpcomingCommand(List<Predicate<Delivery>> predicates) {
         requireNonNull(predicates);
         this.predicates = predicates;
     }
-
     /**
-     * Retrieves the list of deliveries that have completion date less than specified date.
+     * Executes the UpcomingCommand and returns the result message.
      *
-     * @param model {@code Model} which the command should operate on.
-     * @return Success message to inform user.
-     * @throws CommandException
+     * @param model {@code Model} which the UpcomingCommand should operate on.
+     * @return Feedback message of the UpcomingCommand result for display.
+     * @throws CommandException If an error occurs during UpcomingCommand execution.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Predicate<Delivery> upcomingDeliveryPredicate = predicates.stream().reduce(Predicate::and).orElse(x -> true);
         model.updateFilteredDeliveryList(upcomingDeliveryPredicate);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredDeliveryList().size()));
+        int numberOfUpcomingDeliveries = model.getFilteredDeliveryList().size();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, numberOfUpcomingDeliveries));
     }
 
     /**
-     * Returns true if completionDateTime object of both objects are same.
+     * Returns true if List of Predicates for both objects are the same.
      *
-     * @param other Object to be compared with
-     * @return True if object is an instance of UpcomingCommand and both
-     *          completionDateTime have the same value.
-     * */
+     * @param other Object to be compared with.
+     * @return True if object is an instance of UpcomingCommand and contains the same
+     *         Predicate objects in the list.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -74,7 +75,7 @@ public class UpcomingCommand extends Command {
     }
 
     /**
-     * Represents the String value of UpcomingCommand paired with the completionDateTime.
+     * Represents the String value of UpcomingCommand paired with the list of Predicates.
      */
     @Override
     public String toString() {

@@ -29,6 +29,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUPPLIER_INDEX_APPLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalDeliveryWrappers.getNullWrapper;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,17 +40,13 @@ import seedu.address.model.delivery.DeliveryWrapper;
 import seedu.address.model.delivery.Quantity;
 import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.product.Product;
-import seedu.address.testutil.DeliveryBuilder;
 
 public class AddDeliveryCommandParserTest {
     private AddDeliveryCommandParser parser = new AddDeliveryCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        DeliveryWrapper expectedDeliveryWrapper = new DeliveryWrapper(new DeliveryBuilder().withSender(null).build(),
-                new SupplierIndex("1"));
-        System.out.println(PREAMBLE_WHITESPACE + TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
-                + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + COST_DESC_APPLE);
+        DeliveryWrapper expectedDeliveryWrapper = getNullWrapper();
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
                 + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + COST_DESC_APPLE,
@@ -91,12 +88,14 @@ public class AddDeliveryCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse_invalidDateTimeValue_failure() {
         // invalid date
         assertParseFailure(parser, INVALID_DATE_APPLE + SUPPLIER_INDEX_DESC_APPLE
                 + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + COST_DESC_APPLE,
                 DateTime.MESSAGE_CONSTRAINTS);
-
+    }
+    @Test
+    public void parse_invalidSupplierIndexValue_failure() {
         // negative Supplier index
         assertParseFailure(parser, TIME_DESC_APPLE + INVALID_SUPPLIER_INDEX_APPLE_NEGATIVE
                 + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + COST_DESC_APPLE,
@@ -106,7 +105,10 @@ public class AddDeliveryCommandParserTest {
         assertParseFailure(parser, TIME_DESC_APPLE + INVALID_SUPPLIER_INDEX_APPLE_ZERO
                 + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + COST_DESC_APPLE,
                 SupplierIndex.MESSAGE_CONSTRAINTS);
+    }
 
+    @Test
+    public void parse_invalidProductValue_failure() {
         // non-alphanumeric product
         assertParseFailure(parser, TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
                 + INVALID_PRODUCT_APPLE + QUANTITY_DESC_APPLE + COST_DESC_APPLE,
@@ -116,22 +118,30 @@ public class AddDeliveryCommandParserTest {
         assertParseFailure(parser, TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
                 + INVALID_PRODUCT_APPLE_EMPTY_SPACE + QUANTITY_DESC_APPLE + COST_DESC_APPLE,
                 Product.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidQuantityValue_failure() {
         // Missing units quantitiy
         assertParseFailure(parser, TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
                 + PRODUCT_DESC_APPLE + INVALID_QUANTITY_APPLE_MISSING_UNITS + COST_DESC_APPLE,
                 Quantity.MESSAGE_CONSTRAINTS);
         //Not a number quantitiy
         assertParseFailure(parser, TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
-                        + PRODUCT_DESC_APPLE + INVALID_QUANTITY_APPLE_NAN + COST_DESC_APPLE,
+                + PRODUCT_DESC_APPLE + INVALID_QUANTITY_APPLE_NAN + COST_DESC_APPLE,
                 Quantity.MESSAGE_CONSTRAINTS);
         // Negative quantitiy
         assertParseFailure(parser, TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
-                        + PRODUCT_DESC_APPLE + INVALID_QUANTITY_APPLE_NEGATIVE + COST_DESC_APPLE,
+                + PRODUCT_DESC_APPLE + INVALID_QUANTITY_APPLE_NEGATIVE + COST_DESC_APPLE,
                 Quantity.MESSAGE_CONSTRAINTS);
         // zero quantitiy
         assertParseFailure(parser, TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
-                        + PRODUCT_DESC_APPLE + INVALID_QUANTITY_APPLE_ZERO + COST_DESC_APPLE,
+                + PRODUCT_DESC_APPLE + INVALID_QUANTITY_APPLE_ZERO + COST_DESC_APPLE,
                 Quantity.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidCostValue_failure() {
         // Negative cost
         assertParseFailure(parser, TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
                         + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + INVALID_COST_APPLE_NEGATIVE,
@@ -141,9 +151,6 @@ public class AddDeliveryCommandParserTest {
                         + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + INVALID_COST_APPLE_WRONG_DP,
                 Cost.MESSAGE_CONSTRAINTS);
         // Not a number cost
-        System.out.println(TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
-                + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + INVALID_COST_APPLE_NAN);
-        System.out.println(Cost.isValidCost(INVALID_COST_APPLE_NAN));
         assertParseFailure(parser, TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
                         + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + INVALID_COST_APPLE_NAN,
                 Cost.MESSAGE_CONSTRAINTS);
@@ -151,6 +158,10 @@ public class AddDeliveryCommandParserTest {
         assertParseFailure(parser, TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
                         + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + INVALID_COST_APPLE_ZERO,
                 Cost.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_invalidValues_failure() {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_DATE_APPLE + SUPPLIER_INDEX_DESC_APPLE
@@ -159,7 +170,7 @@ public class AddDeliveryCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + TIME_DESC_APPLE + SUPPLIER_INDEX_DESC_APPLE
-                        + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + COST_DESC_APPLE,
+                + PRODUCT_DESC_APPLE + QUANTITY_DESC_APPLE + COST_DESC_APPLE,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDeliveryCommand.MESSAGE_USAGE));
     }
 }

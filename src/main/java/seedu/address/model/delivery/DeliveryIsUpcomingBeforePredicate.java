@@ -22,7 +22,14 @@ public class DeliveryIsUpcomingBeforePredicate implements Predicate<Delivery> {
         this.completionDateTime = completionDateTime;
         this.deliveryStatus = deliveryStatus;
     }
-
+    /**
+     * Determines if predicate is true for a given input delivery by comparing the DateTime values
+     * and delivery status.
+     *
+     * @param delivery Delivery object to test.
+     * @return True if input has a DateTime value that is earlier than completionDateTime
+     *         and PENDING status.
+     */
     @Override
     public boolean test(Delivery delivery) {
         DateTimeBeforeInputDatePredicate deliveryIsEarlierPredicate =
@@ -34,7 +41,13 @@ public class DeliveryIsUpcomingBeforePredicate implements Predicate<Delivery> {
         boolean isUpcoming = hasPendingStatus && hasValidDeliveryDate;
         return isUpcoming;
     }
-
+    /**
+     * Returns true if DateTime object and Status of both objects are same.
+     *
+     * @param other Object to be compared with.
+     * @return True if object is an instance of DeliveryIsUpcomingBeforePredicate and both
+     *         DateTime objects and Status are equal.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -51,7 +64,9 @@ public class DeliveryIsUpcomingBeforePredicate implements Predicate<Delivery> {
         return completionDateTime.equals(otherDeliveryIsUpcomingBeforePredicate.completionDateTime)
                 && deliveryStatus.equals(otherDeliveryIsUpcomingBeforePredicate.deliveryStatus);
     }
-
+    /**
+     * Represents the String value of predicate.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

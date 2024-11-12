@@ -21,7 +21,7 @@ import seedu.address.model.supplier.Supplier;
 import seedu.address.model.supplier.SupplierStatus;
 
 /**
- * Adds a delivery to the address book.
+ * Adds a delivery to VendorVault.
  */
 public class AddDeliveryCommand extends AddCommand {
 
@@ -43,18 +43,31 @@ public class AddDeliveryCommand extends AddCommand {
     public static final String MESSAGE_DUPLICATE_DELIVERY = "Delivery is already added!!!";
     public static final String MESSAGE_INACTIVE_SUPPLIER = "Supplier is currently inactive!!!";
     private final DeliveryWrapper deliveryWrapper;
+
     /**
-     * Creates an AddDeliveryCommand to add the specified {@code deliveryToAdd}
+     * Creates an AddDeliveryCommand to add the specified delivery wrapped by {@code deliveryWrapper}.
+     *
+     * @param deliveryWrapper A wrapper class that contains the delivery to add and the SupplierIndex object.
      */
     public AddDeliveryCommand(DeliveryWrapper deliveryWrapper) {
         requireNonNull(deliveryWrapper);
         this.deliveryWrapper = deliveryWrapper;
     }
+
+    /**
+     * Executes the AddDeliveryCommand and returns the result message.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return Feedback message of the AddDeliveryCommand result for display.
+     * @throws CommandException If an error occurs during the AddDeliveryCommand execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Supplier sender = this.getSupplierBasedOnIndex(model);
-        if (sender.getStatus().equals(new SupplierStatus("inactive"))) {
+        assert sender != null;
+        SupplierStatus senderStatus = sender.getStatus();
+        if (senderStatus.equals(new SupplierStatus("inactive"))) {
             throw new CommandException(MESSAGE_INACTIVE_SUPPLIER);
         }
         deliveryWrapper.setDeliverySupplier(sender);
@@ -67,11 +80,12 @@ public class AddDeliveryCommand extends AddCommand {
     }
 
     /**
-     * Retrieves the supplier from addressbook corresponding to the specified supplier index.
+     * Retrieves the supplier from VendorVault displayed list corresponding to
+     * the specified supplier index.
      *
-     * @param model AddressBook model.
-     * @return Supplier that currently has index value equal to supplier index.
-     * @throws CommandException If supplier index is invalid.
+     * @param model VendorVault model.
+     * @return Supplier that currently has index value equal to SupplierIndex value wrapped in deliveryWrapper.
+     * @throws CommandException If SupplierIndex in deliveryWrapper is invalid.
      */
     public Supplier getSupplierBasedOnIndex(Model model) throws CommandException {
         List<Supplier> lastShownList = model.getModifiedSupplierList();
@@ -79,17 +93,17 @@ public class AddDeliveryCommand extends AddCommand {
         if (supplierIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);
         }
-        Supplier sender = lastShownList.get(supplierIndex.getZeroBased());
-        return sender;
+        Supplier deliverySupplier = lastShownList.get(supplierIndex.getZeroBased());
+        return deliverySupplier;
     }
 
     /**
-     * Returns true if deliveryToAdd object of both objects are same.
+     * Returns true if deliveryWrapper object of both objects are same.
      *
-     * @param other Object to be compared with
+     * @param other Object to be compared with.
      * @return True if object is an instance of AddDeliveryCommand and both
-     *          deliveries have the same identity and data fields.
-     * */
+     *         deliveryWrapper are equal.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -106,7 +120,7 @@ public class AddDeliveryCommand extends AddCommand {
     }
 
     /**
-     * Represents the String value of AddDeliveryCommand paired with the deliveryToAdd.
+     * Represents the String value of AddDeliveryCommand paired with the deliveryWrapper.
      */
     @Override
     public String toString() {

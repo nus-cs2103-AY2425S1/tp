@@ -22,7 +22,7 @@ public class Delivery {
     private final Quantity quantity;
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and must not be null apart from sender.
      */
     public Delivery(Product product, Supplier sender, Status status,
                     DateTime deliveryDateTime, Cost cost, Quantity quantity) {
@@ -62,7 +62,7 @@ public class Delivery {
     }
 
     /**
-     * Checks if current instance of delivery has an earlier due date than input date.
+     * Checks if current instance of delivery has an earlier completion date than input date.
      *
      * @param deliveryDateTime DateTime object to compare against.
      * @return True if current delivery is to be completed before input delivery time.
@@ -112,9 +112,6 @@ public class Delivery {
         if (otherDelivery == this) {
             return true;
         }
-
-        // what are the conditions on same deliveries (weaker equality)
-        // added the status check cos marking status needs to create a new delivery to replace the existing
         return otherDelivery != null
                 && otherDelivery.getDeliveryDate().equals(getDeliveryDate())
                 && otherDelivery.getDeliveryProduct().equals(getDeliveryProduct())
@@ -125,9 +122,8 @@ public class Delivery {
     }
 
     /**
-     * Returns true if both deliveries have the same identity and data fields.
+     * Returns true if both deliveries have the same data fields.
      */
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
