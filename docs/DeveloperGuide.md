@@ -441,7 +441,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: U1 - List all Clients**
 
-**MSS**
+**MSS:**
 
 1. User requests to see the entire list of clients.
 2. AgentAssist shows a list of all clients.
@@ -450,7 +450,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: U2 - Delete a Client**
 
-**MSS**
+**MSS:**
 
 1.  User performs <u>Filter for a Client (U4)</u> or <u>List all Clients (U1)</u>.
 2.  AgentAssist returns a list of clients.
@@ -461,7 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. The list is empty.
 
@@ -478,7 +478,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: U3 - Add a Client**
 
-**MSS**
+**MSS:**
 
 1.  User requests to add a client.
 2.  AgentAssist adds a client.
@@ -486,7 +486,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 1a. The given parameters are invalid.
     * 1a1. AgentAssist shows an invalid parameter error message.
@@ -495,7 +495,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: U4 - Filter for a Client**
 
-**MSS**
+**MSS:**
 
 1.  User requests to search for a client using an attribute like name to filter for the client.
 2.  AgentAssist returns a list of clients which match the filter set in step 1.
@@ -503,7 +503,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 1a. The given filter option is invalid.
     * 1a1. AgentAssist shows an invalid parameter error message.
@@ -516,7 +516,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: U5 - Edit a Client**
 
-**MSS**
+**MSS:**
 
 1. User performs <u>Filter for a Client (U4)</u> or <u>List all Clients (U1)</u>.
 2. AgentAssist returns a list of clients.
@@ -526,7 +526,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 3a. The provided client index is invalid.
   * 3a1. AgentAssist shows an invalid index error message.
@@ -550,7 +550,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: U6 - View a Client**
 
-**MSS**
+**MSS:**
 
 1.  User performs <u>Filter for a Client (U4)</u> or requests to <u>List all Clients (U1)</u>.
 2.  AgentAssist returns a list of clients, with the client of interest in it.
@@ -559,7 +559,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 3a. The provided client index is invalid.
   * 3a1. AgentAssist shows an invalid index error message.
@@ -568,7 +568,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: U7 - Close Detailed View**
 
-**MSS**
+**MSS:**
 
 1. User requests to close detailed view. 
 2. AgentAssist closes the detailed view.
@@ -577,7 +577,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: U8 - Clear Clients' Contacts**
 
-**MSS**
+**MSS:**
 
 1. User requests to clear the list of clients' contacts.
 2. AgentAssist prompts for confirmation from user.
@@ -586,7 +586,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 3a. User declines confirmation.
   * 3a1. AgentAssist shows cancellation message to user.
@@ -596,13 +596,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: U9 - Undo the Most Recent Change**
 
-**MSS**
+**MSS:**
 1. User requests to undo the last change made to the list of contacts.
 2. AgentAssist reverse the last change made, and displays the edited list and a success message.
 
     Use case ends.
 
-**Extensions**
+**Extensions:**
 
 * 2a. There was no recorded last change
   * 2a1. AgentAssist shows an error message to user.
@@ -612,7 +612,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: U10 - Exit**
 
-**MSS**
+**MSS:**
 
 1.  User requests to exit.
 2.  AgentAssist exits.
