@@ -17,24 +17,47 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
-    private final Email email;
+    protected final Name name;
+    protected final Role role;
+    protected final Phone phone;
+    protected final Email email;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    protected final Address address;
+    protected final Set<Tag> tags = new HashSet<>();
+
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Person} with the specified fields and role.
+     *
+     * @param name The person's name.
+     * @param role The person's role (e.g., VOLUNTEER, DONOR).
+     * @param phone The person's phone number.
+     * @param email The person's email.
+     * @param address The person's address.
+     * @param tags Tags associated with the person.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Role role, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
+        this.role = role;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructs a {@code Person} with the specified fields and a default role of {@code Role.PERSON}.
+     *
+     * @param name The person's name.
+     * @param phone The person's phone number.
+     * @param email The person's email.
+     * @param address The person's address.
+     * @param tags Tags associated with the person.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        this(name, Role.PERSON, phone, email, address, tags);
     }
 
     public Name getName() {
@@ -91,6 +114,7 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
+                && role.equals(otherPerson.role)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
@@ -99,8 +123,7 @@ public class Person {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, role, phone, email, address, tags);
     }
 
     @Override
@@ -114,4 +137,36 @@ public class Person {
                 .toString();
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    /**
+     * Returns the role as a lowercase string.
+     *
+     * @return the role name in lowercase format
+     */
+    public String getRoleAsLowerCaseString() {
+        return role.toLowerCaseString();
+    }
+
+    public boolean isRole(Role role) {
+        return getRole().equals(role);
+    }
+
+    /**
+     * Compares this person's name with another person's name lexicographically, ignoring case considerations.
+     *
+     * @param otherPerson The other person whose name is to be compared.
+     * @return A negative integer, zero, or a positive integer as this person's name
+     *         is less than, equal to, or greater than the specified person's name, ignoring case.
+     * @throws NullPointerException if {@code otherPerson} is null or if {@code otherPerson.name} is null.
+     */
+    public int compareNamesIgnorecase(Person otherPerson) {
+        return name.compareTo(otherPerson.name);
+    }
+
+    public boolean hasPhoneNumber(String phoneNumber) {
+        return this.phone.isSameValue(phoneNumber);
+    }
 }

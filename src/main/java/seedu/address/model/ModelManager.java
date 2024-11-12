@@ -4,14 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Group;
+import seedu.address.model.person.GroupList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.GroupNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +27,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SortedList<Person> sortedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        sortedPersons = new SortedList<>(filteredPersons);
     }
 
     public ModelManager() {
@@ -80,6 +87,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        logger.info("Address book data has been reset.");
     }
 
     @Override
@@ -107,25 +115,108 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        updateGroupsWithNewPerson(target, editedPerson);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void updateGroupsWithNewPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+        addressBook.updateGroupListWithEditedPerson(target, editedPerson);
+    }
+
+    @Override
+    public void addGroup(Group group) {
+        requireNonNull(group);
+        addressBook.addGroup(group);
+    }
+
+    @Override
+    public void removeGroup(String groupName) {
+        requireNonNull(groupName);
+        addressBook.removeGroup(groupName);
+    }
+
+    @Override
+    public void setGroup(Group oldGroup, Group newGroup) {
+        requireNonNull(oldGroup);
+        requireNonNull(newGroup);
+        addressBook.setGroup(oldGroup, newGroup);
+    }
+
+    @Override
+    public Group getGroup(String groupName) {
+        requireNonNull(groupName);
+        return addressBook.getGroup(groupName);
+    }
+
+    public String getGroupNames() {
+        return addressBook.getGroupNames();
+    }
+
+    //=========== Person List Accessors ======================================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
+     *
+     * The returned list is both sorted and filtered based on the current comparator and filter predicate
+     * applied.
+     *
+     * @return a filtered and sorted list of persons.
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Person> getPersonList() {
+        // sortedPersons observes changes in filteredPersons
+        return sortedPersons;
     }
+
+    @Override
+    public boolean hasPersonsOfType(Class<? extends Person> personType) {
+        requireNonNull(personType);
+        return filteredPersons.stream().anyMatch(personType::isInstance);
+    }
+
+    @Override
+    public boolean hasOnlyPersonsOfType(Class<? extends Person> personType) {
+        requireNonNull(personType);
+        return filteredPersons.stream().allMatch(personType::isInstance);
+    }
+
+    //=========== Filtered Person List Accessors =============================================================
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Group Accessors ===========================================================================
+
+    @Override
+    public void filterByGroup(String groupName) throws GroupNotFoundException {
+        Group group = addressBook.getGroup(groupName);
+        updateFilteredPersonList(group::containsExact);
+    }
+
+    @Override
+    public ObservableList<Group> getGroupList() {
+        GroupList groupList = addressBook.getGroupList();
+        return groupList.asUnmodifiableObservableList();
+    }
+
+    //=========== Sorted Person List Accessors =============================================================
+    @Override
+    public void updatePersonListSort(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        sortedPersons.setComparator(comparator);
+        logger.fine("Person list sorted with new comparator.");
+    }
+
+    @Override
+    public void clearPersonSort() {
+        sortedPersons.setComparator(null);
+        logger.fine("Cleared person list sort. Reset to default order.");
     }
 
     @Override
@@ -142,7 +233,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && sortedPersons.equals(otherModelManager.sortedPersons);
     }
-
 }

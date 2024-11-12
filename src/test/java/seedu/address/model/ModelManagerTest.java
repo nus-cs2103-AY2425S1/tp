@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.testdata.TypicalPersons.ALICE;
+import static seedu.address.testutil.testdata.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Volunteer;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -89,8 +90,31 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getPersonList().remove(0));
+    }
+
+    @Test
+    public void hasPersonsOfType_noVolunteers_returnsFalse() {
+        // No persons in the address book -> returns false
+        assertFalse(modelManager.hasPersonsOfType(Volunteer.class));
+    }
+
+    @Test
+    public void hasPersonsOfType_onlyNonMatchingPersons_returnsFalse() {
+        // Add persons of a different type (not Volunteer)
+        modelManager.addPerson(ALICE); // Assuming ALICE is not a Volunteer
+        assertFalse(modelManager.hasPersonsOfType(Volunteer.class));
+    }
+
+    @Test
+    public void hasOnlyPersonsOfType_noVolunteers_returnsFalse() {
+        // No volunteers in the address book -> returns true
+        assertTrue(modelManager.hasOnlyPersonsOfType(Volunteer.class));
+
+        // A non-Volunteer in the address book -> returns false
+        modelManager.addPerson(ALICE);
+        assertFalse(modelManager.hasOnlyPersonsOfType(Volunteer.class));
     }
 
     @Test

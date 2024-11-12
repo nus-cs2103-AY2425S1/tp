@@ -5,11 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.testdata.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -39,7 +41,8 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson.getRoleAsLowerCaseString(),
+                        Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -149,12 +152,70 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Person> getPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateGroupsWithNewPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeGroup(String groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Group getGroup(String groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Group> getGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGroup(Group target, Group newGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public String getGroupNames() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updatePersonListSort(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearPersonSort() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void filterByGroup(String groupName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonsOfType(Class<? extends Person> personType) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasOnlyPersonsOfType(Class<? extends Person> personType) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -200,5 +261,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }

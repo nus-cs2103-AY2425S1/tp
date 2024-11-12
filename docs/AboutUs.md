@@ -1,59 +1,60 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project team
 
-### John Doe
+### Seah Minlong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/seah-minlong.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/seah-minlong)]
 
-* Role: Project Advisor
+* Role: Developer
+* Responsibilities:
+  * Scheduling & tracking
+  * In charge of `Logic`
 
-### Jane Doe
+### Xan Ng
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/voldiemort.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/voldiemort)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Commons
 
-### Johnny Doe
+### Chua Chong Sun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chongsun2002.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/chongsun2002)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibility: Code quality and Integration
+  In charge of storage
 
-### James Doe
+### Justin Yeo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/justin-yeo.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/Justin-Yeo)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities:
+  * Deliverables and Deadlines
+  * In charge of 'Ui'
+
+### Zhanzhi Lou
+
+<img src="images/zzzlou.png" width="200px">
+
+[[github](http://github.com/zzzlou)]
+
+* Role: Developer
+* Responsibilities: Documentation and in charge of Model

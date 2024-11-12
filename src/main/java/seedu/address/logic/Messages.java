@@ -1,5 +1,8 @@
 package seedu.address.logic;
 
+
+import static seedu.address.model.person.PersonUtil.getRoleSpecificInfoString;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -14,10 +17,14 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "One or more indices provided are invalid";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d person(s) listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_COMMAND_FOR_PERSON_TYPE =
+            "This command cannot be used on this category of contacts!";
+    public static final String MEMBER_MESSAGE_CONSTRAINTS = "The members should be positive integer indices from "
+            + "the latest shown list, separated by spaces.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -45,7 +52,8 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        String roleSpecificInfo = getRoleSpecificInfoString(person);
+        builder.append(roleSpecificInfo);
         return builder.toString();
     }
-
 }
