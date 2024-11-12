@@ -238,8 +238,6 @@ In this section, you'll find detailed information about the parameters for each 
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 # Features
 
 <div markdown="block" class="alert alert-info">
