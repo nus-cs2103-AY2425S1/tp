@@ -25,7 +25,6 @@
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -108,7 +107,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1,2")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" width="725" />
 
 <box type="info" seamless>
 
@@ -173,7 +172,6 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Undo feature
 
-
 The undo mechanism is facilitated by `Command` and `LogicManager`. `LogicManager` stores previously executed commands using a `CommandHistory` object. `Command` has the following operation:
 
 * `Command#undo()` — To be overridden by commands that we determine to be action commands.
@@ -221,6 +219,7 @@ to handle both archiving and unarchiving actions. Instead of directly modifying 
 a new `Person` instance is created with the updated archive status.
 
 <puml src="diagrams/ArchiveSequenceDiagram.puml" width="650" />
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -248,11 +247,13 @@ a new `Person` instance is created with the updated archive status.
 
 **Value proposition**: streamlines the process of social workers contacting and assisting people
 
+<div style="page-break-after: always;"></div>
+
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​       | I can …​                                              | So that I can…​                                                   |
+| Priority | As a …        | I can …                                               | So that I can…                                                    |
 |----------|---------------|-------------------------------------------------------|-------------------------------------------------------------------|
 | `* * *`  | new user      | view the help manual                                  | familiarise myself with the functionalities of the app.           |
 | `* * *`  | social worker | add information of different people                   | keep track of people requiring assistance in one place.           |
@@ -268,6 +269,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | social worker | schedule appointments I have with these people        | view all my appointments in one place.                            |
 | `* *`    | social worker | determine which schemes a person is eligible for      | help this person apply for said schemes.                          |
 
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -304,7 +306,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
         Use case resumes from step 2.
 
-
 **Use case: UC02 - View information of all people**
 
 **MSS:**
@@ -314,6 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
 
 **Use case: UC03 - Delete information of different people**
 
@@ -342,7 +344,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-
 **Use case: UC04 - Display help window** 
 
 **MSS:**
@@ -361,6 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
 	
 **Use case: UC05 - Edit existing information of a person**
 
@@ -406,6 +408,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case resumes from step 2.
 
+<div style="page-break-after: always;"></div>
 
 **Use case: UC07 - Add a scheme to a person**
 
@@ -450,6 +453,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC09 - Delete schemes from a person**
 
 **MSS**
@@ -490,7 +495,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **API**: Application programming interfaces, which defines the standards and protocols that allow different software components to communicate with one another.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **CLI (Command Line Interface)**: A text-based interface that allows users to interact with software or operating systems by typing commands, offering precise control over tasks.
+
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -540,6 +547,8 @@ testers are expected to do more *exploratory* testing.
     5. Test case: `delete`<br>
        Expected: No person is deleted. Error details about invalid format shown in the display message.
 
+<div style="page-break-after: always;"></div>
+
 ### Adding a scheme to a person
 
 1. Adding a scheme to the specified person in the list
@@ -571,6 +580,8 @@ testers are expected to do more *exploratory* testing.
        Expected: No scheme is deleted from person. Error details about invalid format shown in the display message.
     6. Test case: `deletescheme`<br>
        Expected: No scheme is deleted from person. Error details about invalid format shown in the display message.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding an appointment to a person
 
@@ -605,6 +616,8 @@ testers are expected to do more *exploratory* testing.
        Expected: No appointment deleted. Error details about invalid format shown in the display message.
     4. Test case: `deleteappt`<br>
        Expected: No appointment deleted. Error details about invalid format shown in the display message.
+
+<div style="page-break-after: always;"></div>
 
 ### Archiving a person
 
@@ -650,6 +663,8 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `unarchive 1`<br>
        Expected: No change in the list. Error message is displayed indicating that the person is currently not archived.
 
+<div style="page-break-after: always;"></div>
+
 ### Saving data
 
 1. **All data is saved in two files**: `socialbook.json` for person data and `appointments.json` for appointment data.
@@ -674,37 +689,60 @@ testers are expected to do more *exploratory* testing.
         * Corrupting `appointments.json` will clear only the appointment data.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Planned Enhancements
+
 **Team Size: 5**
 
-### 1. **Adding appointments that span multiple days:**
+### 1. Adding appointments that span multiple days
+
 - **Current Implementation:** To add appointments that span multiple days, you can add multiple consecutive appointments for each day to cover the entire period. However, this process is tedious and time-consuming.
 - **Plan:** We will support adding of multi-day appointments when using the `addappt` command, so that users can add them in one step to save time and effort.
-### 2. **Imposing constraints on archived people:**
+
+### 2. Imposing constraints on archived people
+
 - **Current Implementation:** Archived people and their appointments can still be modified, and these appointments are still displayed in the appointment list and calendar.
 - **Plan:** We will restrict this by preventing modifications to archived people and hiding/showing their appointments only when required, similar to how `list` works. For example, to view archived people, you can currently do `list archive/`. `listappt` can be modified to follow this implementation too.
-### 3. **Enhancing duplicate detection:**
+
+### 3. Enhancing duplicate detection
+
 - **Current Implementation:** Duplicates are taken as persons with the exact same full name. However, it can be possible that two persons share the same full name.
 - **Plan:** We will enhance duplicate detection by disallowing other fields such as phone numbers and emails to be duplicated instead as these are always unique and should not be allowed to be repeated.
-### 4. **Enhancing validation checks:**
+
+### 4. Enhancing validation checks
+
 - **Current Implementation:** The validation checks for some fields are not very strict. For instance, the address can be anything that is not blank. This means the same address is treated as different if the user input differs by even 1 whitespace.
 - **Plan:** We will improve on validation checks for fields like this to minimise the possibilities of user errors like adding a single whitespace, and ensure standardization of the representation of these fields.
-### 5. **Viewing the details of the different schemes:**
+
+### 5. Viewing the details of the different schemes
+
 - **Current Implementation:** It is difficult for users to know what are the requirements for a person to be eligible for a scheme and to find out the exact details of the scheme such as the benefits.
 - **Plan:** We will allow the user to view these details about available schemes using the `scheme` command, so that the details are mentioned together with the results of which schemes a person is eligible for.
-### 6. **Adding images to a person:**
+
+### 6. Adding images to a person
+
 - **Current Implementation:** SocialBook only shows text based information about the persons added.
 - **Plan:** We will allow the user to attach a photo of the person which will be reflected in the UI to make identifying each person easier.
-### 7. **Make the command result box in UI bigger:**
+
+### 7. Making the command result box in UI bigger
+
 - **Current Implementation:** The result of an executed command is displayed in a box that may be too small for some results. For instance, executing the `statistics` command results in all statistics being displayed but to view all the results, the user has to scroll through, which can cause some minor inconvenience.
 - **Plan:** We will allow the user to resize this command result box so that they can make it bigger if they feel it is inconvenient to scroll for such command results.
-### 8. **Imposing constraints on extreme inputs:**
+
+### 8. Imposing constraints on extreme inputs
+
 - **Current Implementation:** When a user is adding/editing the details of a person, they are free to make the text inputs as long as possible or the numerical inputs as large as possible. For instance, a name of 1000 characters or an income of more than 1,000,000 can be added, which is unrealistic.
 - **Plan:** We will restrict these behaviours to a reasonable extent by imposing more realistic constraints on these inputs, such as limiting the maximum income to a more reasonable upper limit like 100,000.
-### 9. **Representing entire families:**
+
+<div style="page-break-after: always;"></div>
+
+### 9. Representing entire families
+
 - **Current Implementation:** A person represents a family that requires assistance and that person is regarded as the point of contact with that family.
 - **Plan:** We will allow the user to add all people that are part of a family in a way that everyone in the same family is represented together. For instance, each person could keep track of a family index and every person sharing the same index will belong to the same family. A UI change that could accompany this is showing a family view and then a separate view of the people that make up a family when that family is clicked on.
-### 10. **Modifying available schemes:**
+
+### 10. Modifying available schemes
+
 - **Current Implementation:** We have added two schemes that are available within SocialBook, which a person may be eligible for.
 - **Plan:** We will extend this feature by allowing the user to add or delete schemes, so that they can add new schemes that are introduced in future or delete outdated schemes.
