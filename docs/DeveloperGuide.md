@@ -244,7 +244,7 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 **Currently:** KnottyPlanners is optimised for keyboard usage, and direct copying of information from the GUI is not supported.
 
-**Plan:** To allow the users of KnottyPlanners to copy information directly from the contact or wedding cards, in order to facilitate mouse usage.
+**Plan:** To allow the users of KnottyPlanners to copy information directly from the contact or wedding cards, in order to facilitate mouse usage. We will also include a feature to export the information to a text file or csv file for easy sharing.
 
 **5. Support for Long Inputs**
 
@@ -256,7 +256,7 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 **Currently:** KnottyPlanner requires users to select the `Person` from their names in order to reduce ambiguity. However, this can result in inefficiency when handling extremely long names.
 
-**Plan:** To allow users to reference the contact or wedding based on their index in the list, ensuring that the efficiency of KnottyPlanners is maintained.
+**Plan:** To allow users to reference the contact or wedding based on their index in the list, in addition to our current implementation. This ensures that the efficiency of KnottyPlanners is maintained.
 
 **7. Further CLI Support**
 
@@ -268,7 +268,7 @@ Here is an example usage scenario and how `StaticContext` is used in KnottyPlann
 
 **Currently:** The address and wedding lists are in two separate views to help the wedding planner to be more focused and reduce cluttering of information. This can lead to an additional need to toggle between the wedding book and address book to recall the names of the wedding.
 
-**Plan:** To have an integrated view contains both the persons and weddings, allowing the association of persons to weddings to be done with less memory work.
+**Plan:** To have an integrated view that contains both the persons and weddings side by side, allowing the association of persons to weddings to be done with less memory work.
 
 **9. Comprehensive Language Support**
 
@@ -644,6 +644,7 @@ multiple contacts involved in the same wedding event.
 or could-have.
 * **Success/Failure Messages:** Feedback provided to the user indicating the outcome of a command
 (e.g., contact successfully added or an error message).
+* **Confirmation Prompt:** A message that asks the user to confirm an action before proceeding (e.g., deleting a contact).
 
 --------------------------------------------------------------------------------------------------------------------
 
