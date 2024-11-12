@@ -305,6 +305,211 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**UC05: Add a new event**
+
+**MSS**
+1. User specifies the command to create a new event.
+2. User specifies the name of the event.
+3. PlanPal creates the event and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+* 2a. PlanPal detects that the event name is missing or invalid.
+    * 2a1. PlanPal shows an error message.
+    * 2a2. User re-enters a valid event name.
+
+      Use case resumes from step 1.
+
+**UC06: Assign a contact to an event**
+
+**MSS**
+1. User specifies the event they wish to assign contacts to.
+2. User selects the contact(s) to assign and specifies their role in the event.
+3. PlanPal assigns the contact(s) to the event and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+* 2a. User specifies a contact that does not exist.
+    * 2a1. PlanPal displays an error message indicating the contact is invalid.
+
+      Use case ends.
+
+* 2b. The contact does not have a role.
+    * 2b1. PlanPal prompts the user to assign a role to the contact before adding them to the event.
+    * 2b2. User assigns a role.
+
+      Use case resumes from step 2.
+
+* 2c. The event does not exist.
+  * 2c1. PlanPal displays an error message indicating the event is invalid.
+
+**UC07: Search for contacts using multiple filters**
+
+**MSS**
+1. User enters a command to search for contacts.
+2. User specifies one or more filters (e.g., name, role, phone number).
+3. PlanPal displays the filtered list of contacts.
+
+   Use case ends.
+
+**Extensions**
+* 2a. No contacts match the search criteria.
+    * 2a1. PlanPal displays a message indicating no contacts were found.
+
+      Use case ends.
+
+**UC08: Edit contact details**
+
+**MSS**
+1. User specifies the contact they wish to edit.
+2. User specifies the updated information for the contact.
+3. PlanPal updates the contact and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+* 2a. User enters invalid information (e.g., telegram name longer than 32 characters).
+    * 2a1. PlanPal displays an error message.
+    * 2a2. User re-enters valid information.
+
+      Use case resumes from step 3.
+
+**UC09: Remove a contact from an event**
+
+**MSS**
+1. User specifies the event they want to modify.
+2. User specifies the contact they wish to remove from the event.
+3. PlanPal removes the contact from the event and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+* 2a. The specified contact is not part of the event.
+    * 2a1. PlanPal displays an error message indicating the contact was not found in the event.
+
+      Use case ends.
+
+* 2b. The event does not exist.
+  * 2b1. PlanPal displays an error message indicating the event is invalid.
+
+
+**UC10: Clear all events**
+
+**MSS**
+1. User specifies the command to clear all events.
+2. PlanPal deletes all events and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+* 1a. There are no events to clear.
+    * 1a1. PlanPal displays a message indicating there are no events.
+
+      Use case ends.
+
+**UC11: Enter Search Mode**
+
+**MSS**
+1. User specifies the command to enter search mode.
+2. PlanPal activates search mode.
+
+   Use case ends.
+
+**Extensions**
+* 1a. User is already in search mode.
+    * 1a1. PlanPal displays a message indicating the user is already in search mode.
+
+      Use case ends.
+
+**UC12: Perform a search in Search Mode**
+
+**Preconditions**: User is in search mode.
+
+**MSS**
+1. User specifies search criteria (e.g., name, role, email).
+2. PlanPal filters the list of contacts based on the criteria and displays the results.
+
+   Use case ends.
+
+**Extensions**
+* 1a. User provides invalid or incomplete search criteria.
+    * 1a1. PlanPal displays an error message and prompts the user to provide valid criteria.
+    * 1a2. User re-enters valid search criteria.
+
+      Use case resumes from step 2.
+
+* 2a. No contacts match the search criteria.
+    * 2a1. PlanPal displays a message indicating no matches were found.
+
+      Use case ends.
+
+**UC13: Add a contact to the excluded list**
+
+**Preconditions**: User is in search mode.
+
+**MSS**
+1. User specifies the command to exclude a contact.
+2. User selects a contact from the current search results.
+3. PlanPal adds the contact to the excluded list and removes it from the search results, displaying a success message.
+
+   Use case ends.
+
+**Extensions**
+* 2a. User specifies an invalid or non-existent contact.
+    * 2a1. PlanPal displays an error message indicating the contact is invalid.
+    * 2a2. User re-enters a valid contact.
+
+      Use case resumes from step 3.
+
+**UC14: Include an excluded contacts in search mode**
+
+**Preconditions**: User is in search mode.
+
+**MSS**
+1. User clears the excluded contacts list.
+2. PlanPal includes the contacts in future searches and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+* 2a. The excluded contacts list is empty.
+    * 2a1. PlanPal displays an error message indicating that there are no excluded contacts.
+
+      Use case ends.
+
+**UC15: View excluded contacts**
+
+**Preconditions**: User is in search mode and has excluded at least one contact.
+
+**MSS**
+1. User specifies the command to view excluded contacts.
+2. PlanPal displays a list of all excluded contacts.
+
+   Use case ends.
+
+**Extensions**
+* 2a. No contacts have been excluded.
+    * 2a1. PlanPal displays a message indicating no contacts are excluded.
+
+      Use case ends.
+
+**UC16: Exit Search Mode**
+
+**Preconditions**: User is in search mode.
+
+**MSS**
+1. User specifies the command to exit search mode.
+2. PlanPal exits search mode and returns to the default interface displaying the full contact list.
+
+   Use case ends.
+
+**Extensions**
+* 1a. User attempts to exit search mode but no search results were previously displayed.
+    * 1a1. PlanPal exits search mode with a warning that no search results were being used.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
