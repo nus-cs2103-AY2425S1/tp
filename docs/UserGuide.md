@@ -131,7 +131,7 @@ Format: `add n/NAME p/PHONE e/EMAIL j/JOB CODE t/TAG [r/REMARK]`
 
 * Only one interview stage tag will be attached to a person at any point of time.
 * If no remark is provided, or if user inputs uses `r/`, then remark is empty by default.
-**Tip:** Only one interview stage tag will be attached to a contact at any point of time.
+* **Tip:** Only one interview stage tag will be attached to a contact at any point of time.
 <box type="tip" seamless>
 
 Please refer to this table
@@ -359,6 +359,8 @@ for list of valid tags:
 
 ### REMARK
 - Must be at most 50 characters, excluding leading and trailing whitespaces.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
