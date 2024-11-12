@@ -5,7 +5,7 @@
 
 ### Project: SeeRee 2.0
 
-SeeRee 2.0 is a combination of desktop address book and a scheduler for meetings application. The user interacts with 
+SeeRee 2.0 is a combination of desktop address book and a scheduler for meetings application. The user interacts with
 it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
@@ -14,7 +14,7 @@ Given below are my contributions to the project.
   * What it does: allows user to filter and view contacts related to selected meetng.
 
 * **New Feature**: backup corrupted or broken save file
-  * What it does: allows automatic back up of corrupted or broken json save files for user to manually restore. 
+  * What it does: allows automatic back up of corrupted or broken json save files for user to manually restore.
   * Justification: previously any corrupted entries will cause entire save file to be overwritten by an empty save. This will provide a way for users to retrieve any broken save files.
 
 * **Enhancements to existing features**:

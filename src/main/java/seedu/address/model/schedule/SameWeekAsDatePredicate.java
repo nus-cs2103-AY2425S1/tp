@@ -26,7 +26,8 @@ public class SameWeekAsDatePredicate implements Predicate<Meeting> {
     @Override
     public boolean test(Meeting meeting) {
         return date.get(weekfields.weekOfWeekBasedYear())
-                == meeting.getMeetingDate().get(weekfields.weekOfWeekBasedYear());
+                == meeting.getMeetingDate().get(weekfields.weekOfWeekBasedYear())
+                && date.getYear() == meeting.getMeetingDate().getYear();
     }
 
     /**

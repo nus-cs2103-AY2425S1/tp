@@ -38,6 +38,10 @@ public class SameWeekAsDatePredicateTest {
         SameWeekAsDatePredicate differentPredicate = new SameWeekAsDatePredicate(LocalDate
                 .parse("2024-10-11"));
         assertFalse(firstPredicate.equals(differentPredicate));
+        // different year -> returns false
+        SameWeekAsDatePredicate differentYearPredicate = new SameWeekAsDatePredicate(LocalDate
+                .parse("2050-10-11"));
+        assertFalse(firstPredicate.equals(differentYearPredicate));
     }
 
     @Test

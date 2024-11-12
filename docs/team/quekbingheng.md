@@ -5,7 +5,7 @@
 
 ### Project: SeeRee 2.0
 
-SeeRee 2.0 is a combination of desktop address book and a scheduler for meetings application. The user interacts with 
+SeeRee 2.0 is a combination of desktop address book and a scheduler for meetings application. The user interacts with
 it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.

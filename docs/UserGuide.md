@@ -107,7 +107,10 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all contacts : `list`
+Notes:
+- We allow Users to create person of the same Name, Email Address and Phone Number, as long as not all details are the same.
+
+### Listing all persons : `list`
 
 Shows a list of all contacts in the address book.
 
@@ -204,6 +207,9 @@ Format: `see d/dd-MM-YYYY`
 Examples:
 - `see d/17-10-2024` shows all meetings within the week range of `13-10-2024` to `19-10-2024`
 
+Notes:
+- If the user inputs an invalid date like `29-02-2023`, our application corrects it to `28-02-2023`. This is to provide a smoother user experience.
+
 ### Add meetings to schedule : `add-schedule`
 
 Add meetings to user's schedule.
@@ -223,6 +229,10 @@ Example:
 - `add-schedule c/1 2 n/Dinner d/10-10-2024 t/1800`
 - **Before**: no Dinner event at 10-10-2024 1800.
 - **After**: Dinner event at 10-10-2024 1800 is added.
+
+Notes:
+- The user is allowed to schedule a meeting for past dates. This feature is in place as we expect Users to use this application to record their past meetings as well.
+- If the user inputs an invalid date like `29-02-2023`, our application corrects it to `28-02-2023`. This is to provide a smoother user experience.
 
 ### Delete meeting from schedule : `delete-schedule`
 
@@ -258,6 +268,7 @@ Notes:
 - You must always specify the `INDEX` of the schedule to be edited.
 - At least one other field (`n/NAME`, `d/DATE`, `t/TIME`, or `c/INDEX`) must be provided; otherwise, the command will not execute.
 - If a field (name, date, time, or contacts) is not specified, the existing value for that field remains unchanged.
+- If the user inputs an invalid date like `29-02-2023`, our application corrects it to `28-02-2023`. This is to provide a smoother user experience.
 
 This ensures flexibility by allowing you to only modify the fields you need while keeping the others intact.
 
@@ -305,10 +316,6 @@ If your changes to the data file makes its format invalid, SeeRee2.0 **may** dis
 Furthermore, certain edits can cause the SeeRee2.0 to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -320,6 +327,8 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When resizing the application to a smaller size or having multiple meetings in the same day**, the scrollbars of the schedule panel will cause a white box to appear in the UI. The remedy is to increase the size of the application if applicable. Proposed solution for this is discussed in planned enhancement of the DeveloperGuide. 
+4. **If you maximize the application** and then close and reopen the application, the application will not stay maximized. The remedy is to manually maximize the application again.
 
 --------------------------------------------------------------------------------------------------------------------
 
