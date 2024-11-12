@@ -94,11 +94,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<box type="info" seamless>
-
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-
-</box>
+> **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 
 How the `Logic` component works:
 
@@ -214,10 +210,8 @@ The following sequence diagram shows how an `edit` command goes through the `Log
 <puml src="diagrams/EditSequenceDiagram.puml" alt="EditSequenceDiagram" />
 <br>
 
->**Note:** There are no destroy markers (X) for `EditCommand` as it is preserved in the `undo` command stack.
-
-</box>
-
+> **Note:** There are no destroy markers (X) for `EditCommand` as it is preserved in the `undo` command stack.
+ 
 The following activity diagram summarizes what happens when a user executes a `edit` command:
 
 <puml src="diagrams/EditActivityDiagram.puml" height="800" width="900" />
@@ -268,11 +262,7 @@ The following sequence diagram shows how a `clean` command goes through the `Log
 
 <puml src="diagrams/CleanSequenceDiagram.puml" alt="CleanSequenceDiagram-Logic" />
 
-<box type="info" seamless>
-
-**Note:** There are no destroy markers (X) for `CleanCommand` and `GradYearPredicate` as they are preserved in the `undo` command stack.
-
-</box>
+>> **Note:** There are no destroy markers (X) for `CleanCommand` and `GradYearPredicate` as they are preserved in the `undo` command stack.
 
 The following activity diagram summarizes what happens when a user executes a `clean` command:
 
@@ -326,15 +316,13 @@ Step 1: The user executes the `export` command.
 
 Step 2: The `export` command exports all data currently contained by DorManagerPro to a JSON file in the data folder of the application.
 
-<box type="info" seamless>
-
-**Note:** The name of the JSON file is the time of export in the format MM-dd-yyyy-HHmmssPM.
-
-</box>
+>> **Note:** The name of the JSON file is the time of export in the format MM-dd-yyyy-HHmmssPM.
 
 The following sequence diagram shows how an `export` command goes through the `Logic` component:
 <puml src="diagrams/ExportSequenceDiagram.puml"
  alt="ExportSequenceDiagram" />
+
+> The lifeline for `ExportCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 The following activity diagram summarizes what happens when a user executes an `export` command:
 
@@ -369,22 +357,14 @@ Step 1. The user executes `import fp/./data/SaveFile3.json`
 
 Step 2. The `import` command locates the save file via the file path and reads the data in the save file into DorManagerPro if it is of the correct format and has valid data.
 
-<box type="info" seamless>
-
-**Note:** An error message is raised if the file path does not exist in the device or if the file itself cannot be read into DorManagerPro.
-
-</box>
+>> **Note:** An error message is raised if the file path does not exist in the device or if the file itself cannot be read into DorManagerPro.
 
 The following sequence diagram shows how an `import fp/./data/SaveFile3.json` command goes through the `Logic` component:
 <puml src="diagrams/ImportSequenceDiagram.puml"
 alt="ImportSequenceDiagram" />
 
-<box type="info" seamless>
-
-**Note:** There is no destroy marker (X) for `ImportCommand` as it is preserved in the `undo` command stack.
-
-</box>
-
+> **Note:** There is no destroy marker (X) for `ImportCommand` as it is preserved in the `undo` command stack. <br>
+> The lifeline for `ImportCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 The following activity diagram summarizes what happens when a user executes an `import` command:
 

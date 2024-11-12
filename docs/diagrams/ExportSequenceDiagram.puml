@@ -49,6 +49,7 @@ deactivate Storage
 
 ExportCommand --> LogicManager : result
 deactivate ExportCommand
+destroy ExportCommand
 
 [<--LogicManager
 deactivate LogicManager
