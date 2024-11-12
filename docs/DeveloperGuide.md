@@ -1129,6 +1129,11 @@ Team size: 5
 * **Sample Input:** User enters `... d/2024-05-12 25:61`
 * **Expected Output:** The result display box shows `Invalid time format. Please enter a valid time between 00:00 and 23:59.`
 
+6. **Update patient name in appointment when patient's name is edited**
+* **Flaw:** When users edit a `person` with an appointment, the appointment's patient name still refers to the old name.
+* **Enhancement:** During the EditPersonCommand, also edit any appointments with this patient to point to the new Person object.
+* **Sample Input:** Suppose there is a person indexed 1 named John. Enter `edit person 1 n/Jonathan`.
+* **Expected Output:** Any appointments with John should now refer to Jonathan.
 
 <br>
 
