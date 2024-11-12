@@ -27,6 +27,8 @@ title: Developer Guide
   - [Consistent Case-Insensitive Tag Handling](#2-consistent-case-insensitive-tag-handling)
   - [Modify Industry Field To Be Case Insensitive](#3-modify-industry-field-to-be-case-insensitive)
   - [Handling Prefix Collision In All Input Fields](#4-handling-prefix-collision-in-all-input-fields)
+  - [Specify Prefix for Tag Inputs In Filtertag](#5-specify-t-prefix-for-tag-inputs-in-filtertag)
+  - [More Specific Error Messages for Corrupted CSV Files In Import](#6-more-specific-error-messages-for-corrupted-csv-files-in-import)
   - [Make Error Message for View Command More Specific](#7-make-error-message-for-view-command-more-specific)
   - [`Deletetag all` command does not work as intended on an empty list](#8-deletetag-all-command-does-not-work-as-intended-on-an-empty-list)
   - [Restrict phone number field to 8 numbers](#9-restrict-phone-number-field-to-8-numbers)
