@@ -7,7 +7,7 @@
 # DorManagerPro Developer Guide
 
 <!-- * Table of Contents -->
-
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -193,7 +193,7 @@ The following sequence diagram shows how an `add` command goes through the `Logi
 
 The following activity diagram summarizes what happens when a user executes a `add` command:
 
-<puml src="diagrams/AddActivityDiagram.puml" height="800" width="1000" />
+<puml src="diagrams/AddActivityDiagram.puml" height="800" width="900" />
 
 ### Edit feature
 
@@ -227,7 +227,7 @@ The following sequence diagram shows how an `edit` command goes through the `Log
 
 The following activity diagram summarizes what happens when a user executes a `edit` command:
 
-<puml src="diagrams/EditActivityDiagram.puml" height="800" width="1000" />
+<puml src="diagrams/EditActivityDiagram.puml" height="800" width="900" />
 
 ### Undo feature
 
