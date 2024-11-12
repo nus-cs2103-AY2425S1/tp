@@ -15,11 +15,16 @@ import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.testutil.EditCourseDescriptorBuilder;
 
 public class CoursePersonEditCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), new UniqueCourseList(), null);
+    private Model model = new ModelManager(
+            new AddressBook(),
+            new UserPrefs(),
+            new UniqueCourseList(),
+            new StudentCourseAssociationList ());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -31,8 +36,12 @@ public class CoursePersonEditCommandTest {
         CourseEditCommand courseEditCommand = new CourseEditCommand(new CourseCode("CS1101S"), descriptor);
         String expectedMessage = String.format(CourseEditCommand.MESSAGE_EDIT_COURSE_SUCCESS, editedCourse);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new UserPrefs(), new UniqueCourseList(), null);
+        Model expectedModel = new ModelManager(
+                new AddressBook(model.getAddressBook()),
+                new UserPrefs(),
+                new UniqueCourseList(),
+                new StudentCourseAssociationList()); // Initialize expected model with empty SCA list
+
         Course editedCourseCopy = new Course(new CourseCode("CS1101S"), new CourseName("Programming Basics"));
         expectedModel.addCourse(editedCourseCopy);
 
@@ -49,8 +58,12 @@ public class CoursePersonEditCommandTest {
         CourseEditCommand courseEditCommand = new CourseEditCommand(new CourseCode("CS1101S"), descriptor);
         String expectedMessage = String.format(CourseEditCommand.MESSAGE_EDIT_COURSE_SUCCESS, currentCourse);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new UserPrefs(), new UniqueCourseList(), null);
+        Model expectedModel = new ModelManager(
+                new AddressBook(model.getAddressBook()),
+                new UserPrefs(),
+                new UniqueCourseList(),
+                new StudentCourseAssociationList()); // Initialize expected model with empty SCA list
+
         Course currentCourseCopy = new Course(new CourseCode("CS1101S"), new CourseName("Programming Methodology"));
         expectedModel.addCourse(currentCourseCopy);
 
