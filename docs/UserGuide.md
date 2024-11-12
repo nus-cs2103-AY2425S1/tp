@@ -481,7 +481,7 @@ Exits the application.
 
 #### Editing the Data File
 
-Advanced users can edit the data file directly to modify the address book data.
+Advanced users can edit the data file directly to modify the address book data. However, exercise caution when doing so.
 
 - **File Location**:
     - `[JAR file location]/data/addressbook.json`
@@ -490,7 +490,8 @@ Advanced users can edit the data file directly to modify the address book data.
         - Make a copy of the data file before editing.
     - **Validity**:
         - Incorrect file formats or invalid data can cause the application to discard all data and start with an empty data file upon the next run.
-        - Certain edits can cause the application to behave unexpectedly (e.g., entering values outside acceptable ranges).
+          - Changing ownWedding field of a person to 0 will only result in wedding having no client and would not corrupt the file.
+          - However, changing the hashcode of the `weddingJobs` to an invalid value will result in a corrupted file and restart the application with an empty data file.
 - **Recommendation**:
     - Edit the data file only if you are confident in updating it correctly.
 
@@ -504,7 +505,7 @@ Advanced users can edit the data file directly to modify the address book data.
     - The application provides specific error messages to guide users in correcting their commands.
 - **Case Sensitivity**:
   - Commands must be **lowercase** (`add, addw, edit, editw etc.`)
-  - Parameters (`n/..., e/...` ) are **case-insensitive** as per the validation rules.
+  - Parameters prefixes (`n/..., e/...` ) are **case-sensitive**.
 
 [↥ Back to Top](#bridal-boss-user-guide)
 
