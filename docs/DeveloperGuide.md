@@ -478,15 +478,27 @@ _{More to be added}_
 
 ## **Appendix: Planned Enhancements**
 
-In the current state, if a very long name is entered, the command box will be very long, text wrapping should be
-implemented.
+1. In the current state, if a very long name is entered, the command box will be very long, text wrapping should be
+   implemented.
 
-In the current state, for the searchpa command if users enter extraneous inputs according to user guide, Dltbook will
-serve a error message like but this error message does not accurately reflect the error caused by extraneous input.
-for example if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9 w/main" is entered but the prefix w/
-is not recognized globally, a error of "Public Address for length BTC/ETH/SOL should be less than 44 characters" occurs.
-of if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5sv n/s" is entered, the error message of "Public
-Address contains only alphanumeric characters" occurs
+2. In the current state, for the searchpa command if users enter extraneous inputs according to user guide, Dltbook will
+   serve a error message like but this error message does not accurately reflect the error caused by extraneous input.
+   for example if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9 w/main" is entered but the prefix
+   w/
+   is not recognized globally, a error of "Public Address for length BTC/ETH/SOL should be less than 44 characters"
+   occurs.
+   of if the command "searchpa pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5sv n/s" is entered, the error message of "Public
+   Address contains only alphanumeric characters" occurs.
+
+3. In the current state, for the add/edit command, only alphanumeric character names are allowed. We shall add support
+   for more with special characters in the future.
+
+4. In the current state, for the add/edit command, contacts in DLTbook have no support for phone numbers with symbols
+   such as "+"
+   and "-" in the phone number field which may be useful for saving international phone numbers
+
+5. In the current state, for the add/edit command, Duplicates allowed The email field of contacts in DLTbook have no
+   restrictions and can be duplicated across contacts.
 
 ## **Appendix: Instructions for manual testing**
 

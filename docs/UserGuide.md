@@ -270,6 +270,11 @@ We have labelled the various parts of DLTbook's GUI for your reference:
 
 ![GUI summary](images/GUISummary.png)
 
+Additionally, all DLT public addresses are displayed in lowercase format as it is easier to read and DLT public
+addresses are case-insensitive.
+
+
+
 <div style="text-align: left;">
   <a href="#table-of-contents" style="display: inline-block; padding: 2px 5px; font-size: 10px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Return to Table of Contents</a>
 </div>
