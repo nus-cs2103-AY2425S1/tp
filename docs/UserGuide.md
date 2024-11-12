@@ -206,7 +206,7 @@ Welcome a new volunteer to your team by adding their details to the database.
 Format: `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE`
 
 What you'll need:
-- Name: Alphanumeric and spaces only, 1-100 characters.
+- Name: Non-accented alphanumeric and spaces only, 1-100 characters.
 - Phone Number: Digits only, 3-15 characters.
 - Email: Must follow username@domain format.
 - Date: Format YYYY-MM-DD (e.g. 2024-01-01)
@@ -409,12 +409,12 @@ It will add an event to the database with the specified details.
 Format: `/e new n/EVENT_NAME l/LOCATION d/DATE s/START_TIME e/END_TIME [des/DESCRIPTION]`
 
 What you'll need:
-- Event Name: Alphanumeric characters and spaces only, 1-50 characters.
-- Location: Alphanumeric characters and spaces only, 1-100 characters.
+- Event Name: Non-accented alphanumeric characters and spaces only, 1-50 characters.
+- Location: Non-accented alphanumeric characters and spaces only, 1-100 characters.
 - Date: Format YYYY-MM-DD (e.g. 2024-01-01),
 - Start Time: 24-hour Format HH:mm (e.g., 12:00). Note that 24:00 is not a valid time.
 - End Time: 24-hour Format HH:mm (e.g., 15:00). Note that 24:00 is not a valid time. Start time must be before end time.
-- Description: Alphanumeric characters and spaces only, maximum of 100 characters. Optional; if blank, omit the des/ prefix.
+- Description: Non-accented alphanumeric characters and spaces only, maximum of 100 characters. Optional; if blank, omit the des/ prefix.
 
 <div class="alert alert-block alert-warning">
 :exclamation: <b>NOTE:</b><br>

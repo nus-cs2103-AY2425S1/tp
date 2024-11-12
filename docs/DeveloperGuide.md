@@ -902,40 +902,40 @@ The following planned enhancements address known feature flaws identified during
     - **Proposed Fix**: Add sorting options to the event list, such as sorting by date, time, or location. Command example: `/e list sort/date`.
     - **Expected Outcome**: Improved usability for managing events.
 
-4. **Allow Find Command To Work With Previous Commands**
-   - **Feature Flaw**: Currently the find command will reset the display list and search for volunteers or events containing the keyword.
-   - **Proposed Solution**: Find should use the current display list as the basis for its search.
-   - **Expected Outcome**: Users should be able to search for a particular volunteer assigned to an event, by using `/e view` first and then `/v find` after.
-
-5. **Enhance Find Command Input Flexibility**
+4. **Enhance Find Command Input Flexibility**
     - **Feature Flaw**: Currently the find command does not support searching for email or phone number.
     - **Proposed Fix**: Update the search functionality to allow for searching email and phone number. For example, searching for `93456` will return `David Ng`.
     - **Expected Outcome**: More flexible search results.
 
-6. **Dynamic UI Updates**
+5. **Dynamic UI Updates**
     - **Feature Flaw**: Unassign Volunteers from Events while viewing said event would still show volunteer is involved
     - **Proposed Fix**: UI would dynamically update the results it shows after every command is run.
     - **Expected Outcome**: UI would display accurate and the most updated information.
 
-7. **Multiple Error Tracking**
+6. **Multiple Error Tracking**
     - **Feature Flaw**: Currently exceptions are thrown at the first error encountered from a user command. 
     - **Proposed Fix**: The error message should show all detectable errors with the command (e.g volunteer is assigned to multiple events on day User is trying to unfree, Volunteer has multiple clashing events for an assign command, etc).
     - **Expected Outcome**: Users would be able to as many issues as possible before re-entering the command without needing to check it one by one.
 
-8. **Add Support For Leap Years**
+7. **Add Support For Leap Years**
     - **Feature Flaw**: Currently the date does not parse leap days accordingly
     - **Proposed Fix**: The program should output the specific error that the leap day is not valid.
     - **Expected Outcome**: Users would know that the invalid error is due to leap day.
 
-9. **Enhance String Validation For Names**
+8. **Enhance String Validation For Names**
    - **Feature Flaw**: Currently same names with different spacing between parts of names are accepted as different names.
    - **Proposed Solution**: The new volunteer command should automatically standardise all spaces in a volunteer's name.
    - **Expected Outcome**: Users should be prevented from accidentally adding duplicate volunteers with different number of spaces within names.
 
-10. **Enhance Output Message Alignment**
-    - **Feature Flaw**: Currently some success and error messages exceed the space available in one line and force the user to scroll the output box horizontally to read the full message.
-    - **Proposed Solution**: The output message should wrap in the output text box.
-    - **Expected Outcome**: Users should be able to read and understand error message with less trouble and confusion.
+9. **Enhance Output Message Alignment**
+   - **Feature Flaw**: Currently some success and error messages exceed the space available in one line and force the user to scroll the output box horizontally to read the full message.
+   - **Proposed Solution**: The output message should wrap in the output text box.
+   - **Expected Outcome**: Users should be able to read and understand error message with less trouble and confusion.
+
+10. **Improve Error Message Specificity**
+    - **Feature Flaw**: Currently assignment errors are not specific.
+    - **Proposed Solution**: Error message should indicate if assignment fails due to overlapping event assignment or due to the volunteer not being free on the day of the event.
+    - **Expected Outcome**: Users should be able to read and instantly understand the reason their assignment command failed so that they can rectify the error without needing to check the possible causes one by one.
 
    
 
