@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+AddressBook *-right-> "1" UniqueStudentList
+AddressBook *-right-> "1" AssignmentList
+AddressBook *-right-> "1" TutorialList
+UniqueStudentList "1" -right-> "*" Student
+Student "1" -up-> "1" Name
+Student "1" -up-> "1" StudentId
+Student "1" -up-> "1" TutorialClass
+AssignmentList "1" -- "*" Assignment
+TutorialList "1" -- "*" Tutorial
+Tutorial "1" -- "1" TutName
+Tutorial "1" -- "*" TutDate
+@enduml

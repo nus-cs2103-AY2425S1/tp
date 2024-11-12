@@ -1,0 +1,13 @@
+{
+  "students": [ {
+    "name": "Alice Pauline",
+    "studentId" : "A1111111U",
+    "tutorialId" : "T1001",
+    "tags": [ "friends" ]
+  }, {
+    "name": "Alice Pauline",
+    "studentId" : "A1111111U",
+    "tutorialId" : "T1001",
+    "tags": [ "friends" ]
+  } ]
+}

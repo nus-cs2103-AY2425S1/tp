@@ -2,18 +2,25 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.chrono.IsoChronology;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoField;
+import java.util.Date;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.StudentId;
+import seedu.address.model.student.TutorialId;
+import seedu.address.model.tut.TutDate;
+import seedu.address.model.tut.TutName;
+import seedu.address.model.tut.Tutorial;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -21,10 +28,12 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HHmm";
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -51,74 +60,94 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String tutName} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code tutName} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+    public static TutName parseTutName(String tutName) throws ParseException {
+        requireNonNull(tutName);
+        String trimmedName = tutName.trim();
+        if (!TutName.isValidTutName(trimmedName)) {
+            throw new ParseException(Tutorial.MESSAGE_NAME_CONSTRAINTS);
         }
-        return new Phone(trimmedPhone);
+        return new TutName(trimmedName);
+    }
+
+
+    /**
+     * Parses a {@code String studentId} into a {@code StudentId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentId} is invalid.
+     */
+    public static StudentId parseStudentId(String studentId) throws ParseException {
+        requireNonNull(studentId);
+        String trimmedStudentId = studentId.trim();
+        if (!StudentId.isValidStudentId(trimmedStudentId)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentId(trimmedStudentId);
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String tutorialId} into a {@code TutorialId}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code tutorialId} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static TutorialId parseTutorialId(String tutorialId) throws ParseException {
+        requireNonNull(tutorialId);
+        String trimmedTutorialId = tutorialId.trim();
+        if (!TutorialId.isValidTutorialId(trimmedTutorialId)) {
+            throw new ParseException(TutorialId.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return TutorialId.of(trimmedTutorialId);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a date string in the format "dd/MM/yyyy" and converts it to a {@link TutDate} object.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @param date The date string in the format "dd/MM/yyyy".
+     * @return A {@link Date} object representing the parsed date.
+     * @throws ParseException If the date string is not in the correct format or cannot be parsed.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static Date parseDate(String date) throws ParseException {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            format.setLenient(false);
+            if (!date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                throw new ParseException("Invalid date-time format. Expected format: yyyy-MM-dd");
+            }
+            return format.parse(date);
+        } catch (java.text.ParseException e) {
+            throw new ParseException(TutDate.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a due date string into a {@link LocalDateTime} object.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @param dueDateString String representing due date.
+     * @return {@link LocalDateTime} object with given due date.
+     * @throws ParseException if the given string is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static LocalDateTime parseDueDate(String dueDateString) throws ParseException {
+        requireNonNull(dueDateString);
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendPattern(DATE_TIME_FORMAT)
+                .parseDefaulting(ChronoField.ERA, 1)
+                .toFormatter()
+                .withChronology(IsoChronology.INSTANCE)
+                .withResolverStyle(ResolverStyle.STRICT);
+        if (!dueDateString.matches("\\d{4}-\\d{2}-\\d{2} \\d{4}")) {
+            throw new ParseException("Invalid date-time format. Expected format: yyyy-MM-dd HHmm");
         }
-        return new Tag(trimmedTag);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+        try {
+            return LocalDateTime.parse(dueDateString, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("The specified date and time does not exist, please check again!"
+                    + e.getMessage());
         }
-        return tagSet;
     }
 }

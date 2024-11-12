@@ -1,0 +1,32 @@
+@startuml
+
+|User|
+start
+:Enter add student command;
+|System|
+if () then ([invalid command format])
+    |User|
+    :Receive error message;
+else ([valid command format])
+    |System|
+    :Parse command parameters;
+    :Create Student object;
+    if () then ([duplicate student ID])
+        |User|
+        :Receive error message;
+    else ([unique student ID])
+        if () then ([tutorial exists])
+            :Add student to address book;
+            :Assign student to tutorial;
+            |User|
+            :Receive success message;
+        else ([tutorial not exists])
+            |User|
+            :Receive tutorial not found message;
+        endif
+    endif
+endif
+
+stop
+
+@enduml

@@ -1,62 +1,69 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.TutorialId;
 
 /**
- * Adds a person to the address book.
+ * Adds a student to the address book.
  */
 public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addStu";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the tutorial book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_STUDENTID + "STUDENT_ID "
+            + '['
+            + PREFIX_TUTORIALID + "TUTORIAL_CLASS] \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_NAME + "Samson "
+            + PREFIX_STUDENTID + "A1234567X "
+            + PREFIX_TUTORIALID + "T1001";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
+    public static final String MESSAGE_DUPLICATE_STUDENTID = "This student ID already exists in the address book: ";
+    public static final String MESSAGE_TUTORIAL_NOT_FOUND = "The tutorial ID provided doesn't exist! \nTutorial ID: ";
 
-    private final Person toAdd;
+    private final Student toAdd;
+    private final TutorialId tutorialId;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Student}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Student student, TutorialId tutorialId) {
+        requireNonNull(student);
+        toAdd = student;
+        this.tutorialId = tutorialId;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasStudentWithId(toAdd.getStudentId())) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENTID + toAdd.getStudentId());
         }
 
-        model.addPerson(toAdd);
+        if (!model.hasTutorial(tutorialId)) {
+            throw new CommandException(MESSAGE_TUTORIAL_NOT_FOUND + tutorialId);
+        }
+
+        model.addStudent(toAdd);
+
+        if (tutorialId != null) {
+            model.assignStudent(toAdd, tutorialId);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
@@ -67,12 +74,18 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddCommand otherAddCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        boolean haveTutorialId;
+        if (tutorialId != null) {
+            haveTutorialId = tutorialId.equals(otherAddCommand.tutorialId);
+        } else {
+            haveTutorialId = otherAddCommand.tutorialId == null;
+        }
+
+        return toAdd.equals(otherAddCommand.toAdd) && haveTutorialId;
     }
 
     @Override
