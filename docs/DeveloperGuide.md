@@ -1165,6 +1165,92 @@ testers are expected to do more *exploratory* testing.
    * **Test case:** `help efit`
    * **Expected:** An error message is shown to fix the command keyword typo.
 
+
+
+### Adding a Patient: `add`
+
+**Command:** `add`
+
+1. Adding a patient with valid fields
+
+    * **Prerequisites:**
+        * Launch the app.
+        * No patients in the app.
+    * **Test case:** `add n|Jane i|T0123456B p|90901282 s|F d|2002-10-10`
+    * **Expected:** A patient with the following fields is added to the system:
+        * Name: `Jane`
+        * NRIC: `T0123456B`
+        * Phone: `90901282`
+        * Sex: `F`
+        * BirthDate: `2002-10-10` <br>
+
+
+
+2. Adding a patient with invalid `Nric`
+
+    * **Prerequisites:**
+        * Launch the app.
+        * No patients in the app.
+    * **Test case (invalid `Nric` field):** `add n|Jane i|T012345X p|90901282 s|F d|2002-10-10`
+    * **Expected:** An error message is shown indicating that the `Nric` field is invalid and a prompt of what a valid `Nric` should be.
+
+### Adding a patient with all fields: `addf`
+
+**Command:** `addf`
+
+1. Adding a patient with all required and optional fields
+
+    * **Prerequisites:** No patients in the list
+    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27 p|98178571 e|jakejake@gmail.com a|Blk 555, Clementi Avenue, S123555 b|O+ nokn|Tio Wei Hsein nokp|91874918 al|Nuts al|Shellfish rl|LOW ec|High Blood Pressure no|Patient has anger management issues`
+    * **Expected:** A patient with the following fields is added to the system
+        * Name: `Jake Tio`
+        * NRIC: `T0171281N`
+        * Sex: `M`
+        * Date-of-Birth: `2001-10-27`
+        * Phone Number: `98178571`
+        * Email: `jakejake@gmail.com`
+        * Address: `Blk 555, Clementi Avenue, S123555`
+        * Blood Type: `O+`
+        * Next-of-Kin Name: `Tio Wei Hsein`
+        * Next-of-Kin Phone: `91874918`
+        * Allergies: `Nuts` & `Shellfish`
+        * Health Condition: `LOW`
+        * Existing Condition: `High Blood Pressure`
+        * Note: `Patient has anger management issues` <br>
+
+
+2. Adding a patient with only the required fields
+
+    * **Prerequisites:** No patients in the list
+    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27 p|98178571`
+    * **Expected:** A patient with the following fields is added to the system
+        * Name: `Jake Tio`
+        * NRIC: `T0171281N`
+        * Sex: `M`
+        * Date-of-Birth: `2001-10-27`
+        * Phone Number: `98178571` <br>
+
+
+3. Adding a patient with all the required fields and 1 optional field
+
+    * **Prerequisites:** No patients in the list
+    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27 p|98178571 e|jakejake@gmail.com`
+    * **Expected:** A patient with the following fields is added to the system
+        * Name: `Jake Tio`
+        * NRIC: `T0171281N`
+        * Sex: `M`
+        * Date-of-Birth: `2001-10-27`
+        * Phone Number: `98178571`
+        * Email: `jakejake@gmail.com` <br>
+
+
+4. Adding a patient with missing required fields
+
+    * **Prerequisites:** No patients in the list
+    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27`
+    * **Expected:** An error is shown stating `Invalid commmand format`
+
+
 ### Editing a Patient: `edit`
 
 **Command:** `edit`
@@ -1196,7 +1282,7 @@ testers are expected to do more *exploratory* testing.
 
 
 
-### Deleting a patient
+### Deleting a patient: `delete`
 
 **Command:** `delete`
 
@@ -1228,117 +1314,6 @@ testers are expected to do more *exploratory* testing.
    * **Test case:** `delete`.
    * **Expected:** No patient is deleted. Invalid command error details shown in the status message.
 
-### Adding a Patient: `add`
-
-**Command:** `add`
-
-1. Adding a patient with valid fields
-
-    * **Prerequisites:**
-      * Launch the app.
-      * No patients in the app.
-    * **Test case:** `add n|Jane i|T0123456B p|90901282 s|F d|2002-10-10`
-    * **Expected:** A patient with the following fields is added to the system:
-      * Name: `Jane`
-      * NRIC: `T0123456B`
-      * Phone: `90901282`
-      * Sex: `F`
-      * BirthDate: `2002-10-10` <br>
-
-
-
-2. Adding a patient with invalid `Nric`
-
-   * **Prerequisites:**
-       * Launch the app.
-       * No patients in the app.
-   * **Test case (invalid `Nric` field):** `add n|Jane i|T012345X p|90901282 s|F d|2002-10-10`
-   * **Expected:** An error message is shown indicating that the `Nric` field is invalid and a prompt of what a valid `Nric` should be.
-
-### Adding a patient with all fields
-
-**Command:** `addf`
-
-1. Adding a patient with all required and optional fields
-
-    * **Prerequisites:** No patients in the list
-    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27 p|98178571 e|jakejake@gmail.com a|Blk 555, Clementi Avenue, S123555 b|O+ nokn|Tio Wei Hsein nokp|91874918 al|Nuts al|Shellfish rl|LOW ec|High Blood Pressure no|Patient has anger management issues`
-    * **Expected:** A patient with the following fields is added to the system
-      * Name: `Jake Tio`
-      * NRIC: `T0171281N`
-      * Sex: `M`
-      * Date-of-Birth: `2001-10-27`
-      * Phone Number: `98178571`
-      * Email: `jakejake@gmail.com`
-      * Address: `Blk 555, Clementi Avenue, S123555`
-      * Blood Type: `O+`
-      * Next-of-Kin Name: `Tio Wei Hsein`
-      * Next-of-Kin Phone: `91874918`
-      * Allergies: `Nuts` & `Shellfish`
-      * Health Condition: `LOW`
-      * Existing Condition: `High Blood Pressure`
-      * Note: `Patient has anger management issues` <br>
-
-
-2. Adding a patient with only the required fields
-
-   * **Prerequisites:** No patients in the list
-   * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27 p|98178571`
-   * **Expected:** A patient with the following fields is added to the system
-     * Name: `Jake Tio`
-     * NRIC: `T0171281N`
-     * Sex: `M`
-     * Date-of-Birth: `2001-10-27`
-     * Phone Number: `98178571` <br>
-
-
-3. Adding a patient with all the required fields and 1 optional field
-
-    * **Prerequisites:** No patients in the list
-    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27 p|98178571 e|jakejake@gmail.com`
-    * **Expected:** A patient with the following fields is added to the system
-      * Name: `Jake Tio`
-      * NRIC: `T0171281N`
-      * Sex: `M`
-      * Date-of-Birth: `2001-10-27`
-      * Phone Number: `98178571`
-      * Email: `jakejake@gmail.com` <br>
-
-
-4. Adding a patient with missing required fields
-
-    * **Prerequisites:** No patients in the list
-    * **Test case:** `addf n|Jake Tio i|T0171281N s|M d|2001-10-27`
-    * **Expected:** An error is shown stating `Invalid commmand format`
-
-### Viewing detailed information on a patient
-
-**Command:** `view`
-
-1. Viewing detailed information on a patient with a valid NRIC found in the patient list.
-
-   * **Prerequisites:** The patient list contains a patient entry with the NRIC "T0123456A".
-   * **Test case:** `view T0123456A`
-   * **Expected:** Detailed information on the patient entry with the corresponding NRIC is shown. Command success message shown in the status message. <br>
-
-
-2. No patient with the corresponding valid NRIC found in the patient list when viewing detailed information on a patient.
-
-   * **Prerequisites:** The patient list contains no patient entries with the NRIC "S0000001X".
-   * **Test case:** `view S0000001X`
-   * **Expected:** Detailed information is not shown. Patient not found error details shown in the status message. <br>
-
-
-3. Keying in an invalid NRIC when viewing detailed information on a patient.
-
-   * **Test case:** `view T000001X`
-   * **Expected:** Detailed information is not shown. Invalid command error details shown in the status message. <br>
-
-
-4. No NRIC keyed in when viewing detailed information on a patient.
-
-   * **Test case:** `view`
-   * **Expected:** Detailed information is not shown. Invalid command error details shown in the status message.
 
 ### Booking an upcoming appointment: `bookappt`
 
@@ -1409,7 +1384,7 @@ testers are expected to do more *exploratory* testing.
     * **Test case:** `deleteappt T0123456A dt|2024-12-29 13:00 h|consult`
     * **Expected:** Error message is generated to show invalid prefix entered.
 
-### Filtering Appointments: `Filter`
+### Filtering Appointments: `filter`
 
 **Command:** `filter`
 
@@ -1425,6 +1400,38 @@ testers are expected to do more *exploratory* testing.
     * **Prerequisites:** Launch the app.
     * **Test case (invalid end date):** `filter ed|2027/10-10`
     * **Expected:** An error message saying that the date entered is invalid and should follow the format of YYYY-MM-DD.
+
+
+
+### Viewing detailed information on a patient: `view`
+
+**Command:** `view`
+
+1. Viewing detailed information on a patient with a valid NRIC found in the patient list.
+
+    * **Prerequisites:** The patient list contains a patient entry with the NRIC "T0123456A".
+    * **Test case:** `view T0123456A`
+    * **Expected:** Detailed information on the patient entry with the corresponding NRIC is shown. Command success message shown in the status message. <br>
+
+
+2. No patient with the corresponding valid NRIC found in the patient list when viewing detailed information on a patient.
+
+    * **Prerequisites:** The patient list contains no patient entries with the NRIC "S0000001X".
+    * **Test case:** `view S0000001X`
+    * **Expected:** Detailed information is not shown. Patient not found error details shown in the status message. <br>
+
+
+3. Keying in an invalid NRIC when viewing detailed information on a patient.
+
+    * **Test case:** `view T000001X`
+    * **Expected:** Detailed information is not shown. Invalid command error details shown in the status message. <br>
+
+
+4. No NRIC keyed in when viewing detailed information on a patient.
+
+    * **Test case:** `view`
+    * **Expected:** Detailed information is not shown. Invalid command error details shown in the status message.
+
 
 ---
 
