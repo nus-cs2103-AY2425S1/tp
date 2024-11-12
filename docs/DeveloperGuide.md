@@ -412,19 +412,39 @@ The feature is implemented through four main command classes:
 * `ImportCommand`: Imports student data from CSV
 * `ImportConsultCommand`: Imports consultation data from CSV
 
+Export File Handling:
+* Files are always saved in the `data` directory first as the primary storage location
+* The command then attempts to copy the file to the user's home directory as a backup 
+* If the home directory copy fails, the command still succeeds with only the data directory file 
+* The -f flag allows overwriting of existing files in both locations 
+* Filenames are restricted to alphanumeric characters to prevent path traversal attacks and ensure cross-platform compatibility
+
+Import File Resolution:
+
+The system searches for import files in this priority order to balance security and convenience:
+* Data directory (./data/) - primary application storage
+* Current directory - for convenience during testing/development
+* Home directory paths (with ~) - for user convenience
+* Absolute paths - for flexibility in file locations
+
 Each export command follows this workflow:
-1. Validates filename input
+1. Validates filename input (must be alphanumeric))
 2. Creates `data` directory if needed
 3. Writes data to CSV in `data` directory
-4. Copies file to home directory
-5. Handles file overwrite with force flag
+4. Copies file to home directory if possible
+5. Handles file overwrite with force flag (-f)
+6. Returns success with one or both file paths
 
 Each import command follows this workflow:
-1. Validates input file existence and format
-2. Parses CSV header
-3. Processes entries line by line
-4. Validates each entry
-5. Logs errors to `error.csv`
+1. Resolves file path using priority order:
+   - Data directory (./data/)
+   - Current directory
+   - Home directory paths (with ~)
+   - Absolute paths
+2. Validates file exists and is readable
+3. Parses CSV header
+4. Process entries line by line
+5. Logs invalid entries to `error.csv`
 
 Example sequences:
 ```
@@ -450,18 +470,18 @@ Date,Time,Students
 **Aspect: Error Handling**
 * **Alternative 1 (current choice)**: Log errors to separate file
     * Pros: Clear error reporting, allows partial imports
-    * Cons: Requires managing additional files
+    * Cons: Requires managing separate error log file
 * **Alternative 2**: Fail entire import on any error
     * Pros: Ensures data consistency
     * Cons: Less flexible, requires perfect input
 
-**Aspect: File Location**
-* **Alternative 1 (current choice)**: Both data and home directory
+**Aspect: Export File Location**
+* **Alternative 1 (current choice)**: Dual location with strict filenames
     * Pros: Convenient access, automatic backup
-    * Cons: Duplicate files, more complex implementation
-* **Alternative 2**: Single location
-    * Pros: Simpler implementation
-    * Cons: Less convenient for users
+    * Cons: More complex validation, potential sync issues
+* **Alternative 2**: Single location with flexible paths
+    * Pros: Simpler implementation, more user control
+    * Cons: Manual backup required
 
 
 --------------------------------------------------------------------------------------------------------------------
