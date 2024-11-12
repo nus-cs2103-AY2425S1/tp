@@ -23,9 +23,8 @@ Materials Science and Engineering Student.
 
 <img src="images/cth06-github.png" width="200px">
 
-[[Google](http://www.google.com.sg)]
 [[github](https://github.com/cth06-Github)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/cth06-github.md)]
 
 * Role: Project Helper
 

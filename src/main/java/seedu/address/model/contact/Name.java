@@ -26,7 +26,7 @@ public class Name {
                     + "name (at the end of the full name)";
 
     // @@author cth06-Github-reused
-    // Regex obtained mainly through chatGPT (see developer guide)
+    // Regex obtained mainly through chatGPT (see docs/team/cth06-github.md)
     public static final String VALIDATION_REGEX = "^([A-Za-z\\s]+)$";
     public static final String REGEX_OPEN_BRACKET = "\\" + OPEN_BRACKET; // to be compatible with regex
     // @@author
