@@ -416,19 +416,19 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
    When using the Tab key to navigate, individual items in lists (like the patient list) cannot be accessed.  
    > **Workaround**: Currently, there is no workaround for this.
  
-4. **New Line Handling in Log Entry**
+4. **New Line Handling in Log Entry**   
    Entering "\n" in `addlog` or `addentry` will be treated as a new line. This feature is intended to allow flexible log formatting.
     > **Workaround**: This feature is intended
 
-6. **Possible misleading error message when using invalid index**
+6. **Possible misleading error message when using invalid index**   
    Specifically, when entering `delete 0`, it will cause the system to display a invalid command format error, instead of a invalid index error.
     >**Workaround**: This is intended as stated in the command format, `INDEX` must be a positive integer and 0 is not a positive integer, therefore is not valid.
 
-7. **Possible misleading error message when entering invalid command**
+7. **Possible misleading error message when entering invalid command**    
    When entering an invalid command like: ` add n/John Doe i/S7783844I invalidStuff p/98765432 e/johnd@example.com a/311, Clementi s/NEW`, the system will display an invalid NRIC error. Due to how commands are parsed in MindMap, invalid input will be treated as part of their previous prefix component. (In this case, the invalid input is treated as part of `IDENTITY_NUMBER`)
     >**Workaround**: Check for possible invalid input near the parts indicated by the error.
 
-8. **Possible misleading error message when entering extremely large indexes into delete**
+8. **Possible misleading error message when entering extremely large indexes into delete**    
    When entering an invalid index like: `delete 100000000000`, the system will display an invalid command format error, instead of a invalid index error.
     >**Workaround**: Avoid using absurdly large indexes when using the delete command, which is impossible to reach in the current context.
 
@@ -530,23 +530,23 @@ New UI Arriving Soon!
 
 <div style="page-break-after: always;"></div>
 
-1. **Search by Sub-Strings**  
+1. **Search by Sub-Strings**    
 Currently, the `find` command only searches for exact matches. We plan to enhance this feature to allow you to search for sub-strings within names.
 
-2. **Force execution of commands that require confirmation**
+2. **Force execution of commands that require confirmation**     
 To bypass confirmation for commands like `add`, `edit`, `delete` and `clear`, we plan to add a flag that allows you to force the execution of these commands.
 
-3. **Individual session logs can be viewed in detail via a command**
+3. **Individual session logs can be viewed in detail via a command**     
 Currently, you have to either use your mouse to click on individual logs to view them in detail or hit the `tab` key multiple times with arrow key inputs. We aim to implement a command that enables you to view individual session logs in detail directly.
 
-4. **Better import and export features**
+4. **Better import and export features**     
 Currently we only support convenient import and export from our app. We plan to use CSV files for better compatibility with other software programs.
 
-5. **Removal of Appointment date**
+5. **Removal of Appointment date**     
 The appointment date field will be removed, as future commands will automatically tag session logs with the current date and time from the device, improving logging efficiency and eliminating the need for manual entry.
 
-6. **Implementation of Edit and Delete Log Commands**
+6. **Implementation of Edit and Delete Log Commands**     
 As we enhance the tracking of changes in session logs, our goal is to ensure full compliance with the code of conduct required by medical applications. We will only introduce edit and delete log commands once we are certain that they meet all necessary regulatory standards.
 
-7. **Support for special characters in names**
+7. **Support for special characters in names**     
 We plan to support special characters in names, such as hyphens, apostrophes and slashes, to ensure that all names are accurately represented in the application.
