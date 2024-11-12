@@ -239,11 +239,11 @@ Step 4. If user click `Ok` on the pop-up, model updates the filteredPersonList a
 
 The following sequence diagram shows how a `delete` command goes through the `Logic` component:
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions inside the Logic Component for the `delete 1` Command"/>
 
 The following activity diagram summarizes the delete pop-up mechanism:
 
-<puml src="diagrams/DeletePopupActivityDiagram.puml" alt="Popup interactions inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeletePopupActivityDiagram.puml" alt="Popup interactions inside the Logic Component for the `delete 1` Command"  height="500" width="800"/>
 
 
 ### Clean feature
@@ -276,9 +276,7 @@ The following sequence diagram shows how a `clean` command goes through the `Log
 The following activity diagram summarizes what happens when a user executes a `clean` command:
 
 
-<puml src="diagrams/CleanActivityDiagram.puml" width="250" />
-
-<puml src="diagrams/CleanActivityDiagram.puml" height="600" width="900" />
+<puml src="diagrams/CleanActivityDiagram.puml" height="500" width="800" />
 
 #### Design considerations:
 
@@ -311,7 +309,7 @@ Step 3. The `FindCommand` get executed and updates the filteredPersonList within
 
 results based on the specified criteria.
 
-<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
+<puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" height="900" width="1000"/>
 
 ### Export feature
 
@@ -369,8 +367,6 @@ The following sequence diagram shows how a `import` command goes through the `Lo
     * Pros: Allow greater flexibility for user to import JSON files from any location of the device.
     * Cons: Significantly longer command for the user to type. Requires user to have prior knowledge of what the JSON's filepath is, increasing complexity.
 
->>>>>>> master
-
 ### Undo feature
 
 #### Implementation
@@ -420,7 +416,7 @@ Step 6. The user executes `clear`, which is pushed to the undo stack.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" height="600" width="600"/>
+<puml src="diagrams/CommitActivityDiagram.puml" height="400" width="400"/>
 
 #### Design considerations:
 
