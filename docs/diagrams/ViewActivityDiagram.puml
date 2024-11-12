@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:user executes view command;
+if () then ([valid person's index])
+  :get person at index;
+  if () then ([person has full view toggled])
+      :Display full contact
+        card of person;
+    else ([else])
+      :Display abridged version
+                    of card;
+    endif
+else ([else])
+  :throw exception;
+endif
+
+stop
+
+@enduml
