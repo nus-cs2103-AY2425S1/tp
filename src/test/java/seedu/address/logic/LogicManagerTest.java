@@ -185,12 +185,7 @@ public class LogicManagerTest {
         expectedModel.addStudent(expectedStudent);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
-    //TODO: Resolve test case, fails for Ubuntu OS
-    //    @Test
-    //    public void getAddressBookFilePath_notNull() {
-    //        Path expectedPath = temporaryFolder.resolve("data").resolve("addressBook.json");
-    //        assertEquals(expectedPath, temporaryFolder.resolve(logic.getAddressBookFilePath()));
-    //    }
+
     @Test
     public void execute_storageThrowsIoExceptionOnSaveTutorials_throwsCommandException() {
         // Create a dummy IOException to be thrown when saving tutorials
@@ -232,8 +227,5 @@ public class LogicManagerTest {
         // Assert that the CommandException is thrown with the correct message
         assertCommandFailure(addCommand, ParseException.class,
                 String.format(dummyIoException.getMessage()), model);
-        //TODO: Change from model to expectedModel
     }
-
-
 }
