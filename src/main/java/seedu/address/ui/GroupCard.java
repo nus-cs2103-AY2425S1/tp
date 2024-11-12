@@ -39,18 +39,18 @@ public class GroupCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         groupName.setText(group.getName());
 
-        // Retrieve the list of members in the group
+        // Retrieve list of members in the group
         List<Person> members = group.asUnmodifiableObservableList();
         groupSize.setText(String.valueOf(members.size()));
         groupSize.getStyleClass().add("groupList");
 
-        // Display the first 3 members as a single comma-separated string
+        // Display first 3 members of the member list
         String membersDisplayText = members.stream()
                 .limit(3)
                 .map(member -> member.getName().fullName)
                 .collect(Collectors.joining(", "));
 
-        // If there are more than 3 members, add a "..." at the end
+        // If member list has more than 3ppl, we show first 3 then rest just "..."
         if (members.size() > 3) {
             membersDisplayText += ", ...";
         }

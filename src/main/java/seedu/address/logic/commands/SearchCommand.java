@@ -56,16 +56,16 @@ public class SearchCommand extends Command {
 
         Predicate<Person> finalPredicate = predicate;
 
-        // If a group name is provided, perform a group lookup and 1bine it with the existing predicate
+        // If a group name is provided, perform a group lookup and combine with the current predicate
         if (groupName != null && !groupName.isEmpty()) {
             // Fetch the GroupList
             GroupList groupList = model.getAddressBook().getGroupList();
             try {
-                // Retrieve the group by name
+                // Retrieve group via their name
                 Group group = groupList.get(groupName);
                 GroupContainsKeywordsPredicate groupPredicate = new GroupContainsKeywordsPredicate(group);
 
-                // Combine predicates
+                // Combine the predicates
                 finalPredicate = finalPredicate == null ? groupPredicate : finalPredicate.and(groupPredicate);
             } catch (GroupNotFoundException e) {
                 throw new CommandException(MESSAGE_NO_FOUND_GROUP);
