@@ -139,7 +139,7 @@ The sections below give more details of each component.]-->
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F11-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F11-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F11-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -260,7 +260,10 @@ A newly added `client` is added to the bottom of the `PersonListPanel`.
 Certain fields that the user can input in EZSTATES are allowed values that can exceed the UI's ability to fully
 display them. This design choice can be seen in fields such as the `client name`.
 <br>
-![OverflownText]()
+<br>
+<div style="text-align: center;">
+    <img src="images/img_16.png" alt="OverflownText" style="max-width:100%;">
+</div>
 <br>
 Our team has accounted for this as we do not wish to enforce arbitrary limits on the user. To account for this, we have 
 implemented proper UI/UX design to wrap the overflown text. Additionally, the `moreinfo` command allows users to view the 
@@ -682,11 +685,12 @@ The `editclient` command edits a `client`.
 1. User runs a `editclient` command with valid `INDEX` and valid prefixes.
 2. Command is parsed by `EzstatesParser` and a `EditClientCommandParser` is created to parse the `editclient` command which 
 creates `EditClientCommand`.
-3. `EditClientCommand` retrives the list of `Persons` from `Model` and attempts to set a new `Person` using
+3. `EditClientCommand` creates a new `EditPersonDescriptor` and uses it to create a new `Person`
+4. `EditClientCommand` retrieves the list of `Persons` from `Model` and attempts to set the newly created `Person` using
 `setPerson()`.
-4. `setPerson()` creates a new edited `Person` with the edited fields. If this new `Person` already exists, a `CommandException`
+5. `setPerson()` creates a new edited `Person` with the edited fields. If this new `Person` already exists, a `CommandException`
 is thrown, else it the original `Person` is removed from the `Model` and the new one is added.
-5. Finally, `EditClientCommand` returns a `CommandResult` with a corresponding successs message.
+6. Finally, `EditClientCommand` returns a `CommandResult` with a corresponding successs message.
 
 <div class="note" markdown="span"> 
 
@@ -852,6 +856,12 @@ The `listing` command adds a `listing` to EZSTATES.
 **Implementation**
 ![AddListingCommandSequence](images/dg/AddListingCommandSequence.png)
 
+1. User runs the `listing` command with the required property details (e.g., name, price, area, region, address, seller).
+2. The `EzstatesParser` parses this command and creates an `AddListingCommand` instance containing the provided details.
+3. `AddListingCommand` uses these details to create a new `Listing` object.
+4. `AddListingCommand` then calls the `Model` to add the newly created Listing to the system.
+5. If the addition is successful, a `CommandResult` is returned with a success message. If there are validation issues or missing required fields, a `CommandException` is thrown with an appropriate error message.
+
 
 #### Edit listing
 **Overview**
@@ -859,6 +869,13 @@ The `listing` command adds a `listing` to EZSTATES.
 The `editlisting` edits a `listing`.
 
 **Implementation**
+1. User runs a `editlisting` command with valid `INDEX` and valid prefixes.
+2. Command is parsed by `EzstatesParser`, and a `EditListingCommandParser` is created to parse the arguments which creates
+   an `EditListingCommand`.
+3. `EditListingCommand` creates a new `EditListingDescriptor` and uses it to create a new `Listing`
+4. `EditListingCommand` then retrieves the list of `Listings` from `Model` and attempts to set the newly created `Listing` using `setListing()`
+5. If the newly created `Listing` already exists, a `CommandException` is thrown. Else, the original `Listing` is removed and replaced with the new one.
+6. Finally, `EditListingCommand` returns a CommandResult with a corresponding success message.
 
 #### Add buyers to listing
 **Overview**
@@ -866,6 +883,14 @@ The `editlisting` edits a `listing`.
 The `addlistingbuyers` command adds buyers to a `listing`.
 
 **Implementation**
+1. User runs a `addlistingbuyers` command with valid `INDEX` and valid prefixes.
+2. Command is parsed by `EzstatesParser`, and a `AddBuyersToListingCommandParser` is created to parse the arguments which creates
+   an `AddBuyersToListingCommand`.
+3. `AddBuyersToListingCommand` retrieves the list of `Persons` from `Model` and checks for the validity of its arguments (check the validity of the Buyers that it receives).
+4. An updated `Listing` is created with the correct Buyers added to it.
+5. `AddBuyersToListingCommand` then retrieves the list of `Listings` from `Model` and attempts to set the newly created `Listing` using `setListing()`
+6. If the newly created `Listing` already exists, a `CommandException` is thrown. Else, the original `Listing` is removed and replaced with the new one.
+7. Finally, `AddBuyersToListingCommand` returns a CommandResult with a corresponding success message.
 
 #### Remove buyers from listing
 **Overview**
@@ -873,6 +898,14 @@ The `addlistingbuyers` command adds buyers to a `listing`.
 The `removelistingbuyers` command adds buyers to a `listing`.
 
 **Implementation**
+1. User runs a `removelistingbuyers` command with valid `INDEX` and valid prefixes.
+2. Command is parsed by `EzstatesParser`, and a `RemoveBuyersFromListingCommandParser` is created to parse the arguments which creates
+   an `RemoveBuyersFromListingCommand`.
+3. `RemoveBuyersFromListingCommand` retrieves the list of `Persons` from `Model` and checks for the validity of its arguments (check the validity of the Buyers that it receives).
+4. An updated `Listing` is created with the correct Buyers added to it.
+5. `RemoveBuyersFromListingCommand` then retrieves the list of `Listings` from `Model` and attempts to set the newly created `Listing` using `setListing()`
+6. If the newly created `Listing` already exists, a `CommandException` is thrown. Else, the original `Listing` is removed and replaced with the new one.
+7. Finally, `RemoveBuyersFromListingCommand` returns a CommandResult with a corresponding success message.
 
 #### Delete listing
 **Overview**
@@ -881,12 +914,25 @@ The `deletelistings` command deletes a `listing`.
 
 **Implementation**
 
+1. User runs the `deletelisting` command with the specific listing identifier or index.
+2. The `EzstatesParser` parses this command and creates a `DeleteListingCommand` instance with the provided identifier.
+3. `DeleteListingCommand` accesses the `Model` to retrieve the `Listing` associated with the identifier. If the listing is found, it proceeds to delete it.
+4. If the `Listing` is not found, a `CommandException` is thrown with an appropriate message.
+5. Upon successful deletion, a `CommandResult` is returned with a confirmation message indicating the listing has been deleted.
+
 #### Show listing
 **Overview**
 <br>
 The `showlistings` command shows all `listings`.
 
 **Implementation**
+![ShowListingsSequenceDiagram.png](images/dg/ShowListingsSequenceDiagram.png)
+
+1. User runs the `showlistings` command.
+2. The `EzstatesParser` parses this command and creates a `ShowListingsCommand` instance.
+3. `ShowListingsCommand` accesses the Model to retrieve the complete list of Listings.
+4. If there are no Listings available, a `CommandResult` is returned with a message indicating that no listings are available.
+5. If listings exist, a `CommandResult` is returned displaying the list of Listings along with a success message.
 
 #### Clear listing
 **Overview**
@@ -894,6 +940,26 @@ The `showlistings` command shows all `listings`.
 The `clearlisting` clears all `listings`.
 
 **Implementation**
+![ClearListingsSequenceDiagram.png](images/dg/ClearListingsSequenceDiagram.png)
+
+1. User runs the `clearlisting` command.
+2. The `EzstatesParser` parses this command and creates a `ClearListingsCommand` instance.
+3. `ClearListingsCommand` accesses the Model and calls the clearAllListings() method to delete all listings from the system.
+4. If there are no listings to clear, a `CommandResult` is returned with a message indicating that no listings were available to clear.
+5. If listings are successfully cleared, a `CommandResult` is returned with a success message confirming that all listings have been removed.
+
+#### Find Listing
+**Overview**
+<br>
+The `findlisting` command searches for and lists all `Listings` where the listing name contains any of the specified keywords.
+
+**Implementation**
+![FindListingSequenceDiagram.png](images/dg/FindListingSequenceDiagram.png)
+
+1. User runs the `findlisting` command with one or more keywords.
+2. The `EzstatesParser` parses this command and creates a `FindListingCommandParser` instance, which processes the keywords and creates a `FindListingCommand` with a `ListingNameContainsKeywordsPredicate` that contains the user’s keywords.
+3. `FindListingCommand` updates the Model with the given predicate to filter the list of `Listings` based on names that match any of the provided keywords.
+4. If listings matching the keywords are found, `FindListingCommand` returns a `CommandResult` with a success message and the filtered list. If no matches are found, it returns a message indicating no listings match the search criteria.
 
 ### Utility
 
@@ -1376,7 +1442,7 @@ testers are expected to do more *exploratory* testing.
 
 
 6. **Editing a Listing**  
-   **Use**: `d`  
+   **Use**: `editlisting 1 n/Eddie House`  
    **Expected output**: Listing is edited, and a success message is displayed.
 
 
@@ -1386,12 +1452,12 @@ testers are expected to do more *exploratory* testing.
 
 
 8. **Adding Buyers to Listing**  
-   **Use**: `addlistingbuyers 1 buy/2 buy/3`  
+   **Use**: `addlistingbuyers 1 buy/1 buy/3`  
    **Expected output**: Buyers are added to the listing, and a success message is displayed.
 
 
 9. **Removing Buyers from Listing**  
-   **Use**: `removelistingbuyers 1 buy/2`  
+   **Use**: `removelistingbuyers 1 buy/1`  
    **Expected output**: Buyers are removed from the listing, and a success message is displayed.
 
 
@@ -1447,9 +1513,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. _Delete the corrupted data files and run the jar file again. The data files should be automatically repopulated with data_
 
 ### Future Enhancements
 

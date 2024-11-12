@@ -14,7 +14,6 @@ Person <|-- Seller
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Property
 Person *--> Appointment
 Person *--> "0..*" Tag
 @enduml
