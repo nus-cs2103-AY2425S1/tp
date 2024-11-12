@@ -303,7 +303,7 @@ The system supports these consultation management commands:
 - `addconsult`: Creates new consultation sessions
 - `addtoconsult`: Adds students to existing consultations
 - `deleteconsult`: Removes consultation sessions
-- `removefromconsults`: Removes students from consultations
+- `removefromconsult`: Removes students from consultations
 
 Command examples:
 ```
