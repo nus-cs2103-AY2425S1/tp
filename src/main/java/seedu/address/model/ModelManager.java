@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +13,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddLogCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.log.Log;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,6 +30,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    // Dangerous, find a better way to implement this.
+    private Command savedCommand = null;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -33,7 +42,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());;
     }
 
     public ModelManager() {
@@ -114,6 +123,14 @@ public class ModelManager implements Model {
     //=========== Filtered Person List Accessors =============================================================
 
     /**
+     * Returns the full list of persons in the address book.
+     */
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return addressBook.getPersonList();
+    }
+
+    /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
      */
@@ -126,6 +143,81 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Session Log ================================================================================
+
+    @Override
+    public ObservableList<Log> getSessionLog(int personIndex) {
+        return addressBook.getSessionLog(personIndex);
+    }
+
+    @Override
+    public void addLog(Person personToUpdate, Log log) throws CommandException {
+        requireAllNonNull(personToUpdate, log);
+        // Create a new Set of logs that includes the new log
+        Set<Log> updatedLogs = new HashSet<>(personToUpdate.getLogs());
+
+        if (updatedLogs.contains(log)) {
+            throw new CommandException(AddLogCommand.MESSAGE_DUPLICATE_LOG);
+        }
+
+        updatedLogs.add(log);
+
+        // Create a new updated person with the additional log
+        Person updatedPerson = new Person(
+                personToUpdate.getName(),
+                personToUpdate.getIdentityNumber(),
+                personToUpdate.getPhone(),
+                personToUpdate.getEmail(),
+                personToUpdate.getAddress(),
+                personToUpdate.getStatus(),
+                updatedLogs // Updated logs set
+        );
+
+        // Update the model with the new person (with the added log)
+        this.setPerson(personToUpdate, updatedPerson);
+    }
+
+    //========== Util Methods ================================================================================
+
+
+    //===============Saved Commands=====================================================================================
+
+    /**
+     * Sets the saved command in the model.
+     *
+     * @param command The command to be saved.
+     */
+    @Override
+    public void setSavedCommand(Command command) {
+        this.savedCommand = command;
+    }
+
+    @Override
+    public boolean hasSavedCommand() {
+        return this.savedCommand != null;
+    }
+
+
+    @Override
+    public void clearSavedCommand() {
+        this.savedCommand = null;
+    }
+
+    @Override
+    public Command getSavedCommand() {
+        return this.savedCommand;
+    }
+
+    @Override
+    public CommandResult executeSavedCommand() throws CommandException {
+        if (!hasSavedCommand()) {
+            throw new CommandException("No command to confirm.");
+        }
+        CommandResult result = this.savedCommand.execute(this);
+        clearSavedCommand();
+        return result;
     }
 
     @Override

@@ -15,6 +15,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.log.Log;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -42,23 +43,48 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
     }
 
+    /**
+     * Executes the command and returns the result.
+     *
+     * @param commandText The command as entered by the user.
+     * @return the result of the command execution.
+     * @throws CommandException If an error occurs during command execution.
+     * @throws ParseException   If an error occurs during parsing.
+     */
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
-
-        CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
-
         try {
+            logger.info("----------------[USER COMMAND][" + commandText + "]");
+
+            CommandResult commandResult;
+            Command command = addressBookParser.parseCommand(commandText);
+            commandResult = command.execute(model);
+
+            if (!commandResult.hasPrompt()) {
+                model.clearSavedCommand();
+            }
             storage.saveAddressBook(model.getAddressBook());
+            return commandResult;
+
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        } catch (CommandException ce) {
+            String message = "";
+            if (model.hasSavedCommand()) {
+                message = "\nCancelled command: " + model.getSavedCommand().toString();
+                model.clearSavedCommand();
+            }
+            throw new CommandException(ce.getMessage() + message, ce);
+        } catch (ParseException pe) {
+            String message = "";
+            if (model.hasSavedCommand()) {
+                message = "\nCancelled command: " + model.getSavedCommand().toString();
+                model.clearSavedCommand();
+            }
+            throw new ParseException(pe.getMessage() + message, pe);
         }
-
-        return commandResult;
     }
 
     @Override
@@ -69,6 +95,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Log> getSessionLog(int personIndex) {
+        return model.getSessionLog(personIndex);
     }
 
     @Override

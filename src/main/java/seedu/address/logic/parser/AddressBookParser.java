@@ -9,15 +9,22 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddLogCommand;
+import seedu.address.logic.commands.AddLogEntryCommand;
+import seedu.address.logic.commands.CancelCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.ConfirmCommand;
+import seedu.address.logic.commands.ConfirmPrompt;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListLogsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
 
 /**
  * Parses user input.
@@ -54,16 +61,16 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new ConfirmPrompt(new AddCommandParser().parse(arguments));
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new ConfirmPrompt(new EditCommandParser().parse(arguments));
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new ConfirmPrompt(new DeleteCommandParser().parse(arguments));
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ConfirmPrompt(new ClearCommand());
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -76,6 +83,21 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ListLogsCommand.COMMAND_WORD:
+            return new ListLogsParser().parse(arguments);
+
+        case AddLogCommand.COMMAND_WORD:
+            return new AddLogCommandParser().parse(arguments);
+
+        case AddLogEntryCommand.COMMAND_WORD:
+            return new AddLogEntryCommandParser().parse(arguments);
+
+        case ConfirmCommand.COMMAND_WORD:
+            return new ConfirmCommand();
+
+        case CancelCommand.COMMAND_WORD:
+            return new CancelCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

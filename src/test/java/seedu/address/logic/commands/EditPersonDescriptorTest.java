@@ -9,7 +9,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
+
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,19 +57,22 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStatus(VALID_STATUS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getPhone().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+        String expected = Stream.of(
+                        editPersonDescriptor.getName().map(name -> "Name: " + name).orElse(null),
+                        editPersonDescriptor.getIdentityNumber().map(id -> "NRIC: " + id).orElse(null),
+                        editPersonDescriptor.getPhone().map(phone -> "Phone: " + phone).orElse(null),
+                        editPersonDescriptor.getEmail().map(email -> "Email: " + email).orElse(null),
+                        editPersonDescriptor.getAddress().map(address -> "Address: " + address).orElse(null),
+                        editPersonDescriptor.getStatus().map(status -> "Status: " + status).orElse(null)
+                ).filter(Objects::nonNull)
+                .collect(Collectors.joining(", "));
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

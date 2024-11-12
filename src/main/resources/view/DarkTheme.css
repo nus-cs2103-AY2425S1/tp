@@ -350,3 +350,27 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.status-label {
+    -fx-font-size: 12px; /* Set to a smaller font size */
+    -fx-padding: 0 6; /* Add padding around the text */
+    -fx-text-fill: white; /* White text color */
+    -fx-background-radius: 3; /* Rounded corners */
+}
+
+.status-low {
+    -fx-background-color: green;
+}
+
+.status-medium {
+    -fx-background-color: darkorange;
+}
+
+.status-high {
+    -fx-background-color: red;
+}
+
+.status-new {
+    -fx-background-color: CORNFLOWERBLUE;
+}
+

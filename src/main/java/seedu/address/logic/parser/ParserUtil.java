@@ -2,18 +2,16 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.log.AppointmentDate;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Status;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -48,6 +46,21 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String identityNumber} into a {@code identityNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code identityNumber} is invalid.
+     */
+    public static IdentityNumber parseIdentityNumber(String identityNumber) throws ParseException {
+        requireNonNull(identityNumber);
+        String trimmedIdentityNumber = identityNumber.trim().toUpperCase();
+        if (!IdentityNumber.isValidIdentityNumber(trimmedIdentityNumber)) {
+            throw new ParseException(IdentityNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new IdentityNumber(trimmedIdentityNumber);
     }
 
     /**
@@ -96,29 +109,41 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String status} into a {@code StatusType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code status} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toUpperCase();
+        if (!Status.isValidStatus(trimmedStatus)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Status(trimmedStatus);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String date} into an {@code AppointmentDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static AppointmentDate parseAppointmentDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!AppointmentDate.hasValidDay(date)) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+        if (!AppointmentDate.isValidDay(trimmedDate)) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS_INVALID_DATE);
+        }
+        if (!AppointmentDate.isValidDateString(trimmedDate)) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
+        }
+        if (!AppointmentDate.isValidDate(trimmedDate)) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS_INVALID_DATE);
+        }
+        return new AppointmentDate(trimmedDate);
     }
 }

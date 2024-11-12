@@ -18,6 +18,9 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_UNABLE_TO_EDIT_LOG = "Logs cannot be edited!";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "NRIC: %1$s not found in system, perhaps there was a typo.";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -37,14 +40,16 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
+                .append("; NRIC: ")
+                .append(person.getIdentityNumber())
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Status: ")
+                .append(person.getStatus());
         return builder.toString();
     }
 

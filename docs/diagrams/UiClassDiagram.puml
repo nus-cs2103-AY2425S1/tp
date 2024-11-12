@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
+skinparam linetype ortho
 
 package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
@@ -11,10 +12,14 @@ Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class CentralDisplay
+Class PersonListPanel
+Class PersonCard
+Class SessionLogPanel
+Class SessionLogCard
+Class AddLogPopup
 }
 
 package Model <<Rectangle>> {
@@ -28,15 +33,29 @@ Class HiddenLogic #FFFFFF
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Ui
 
+Class HiddenOutsideTwo #FFFFFF
+CentralDisplay -[hidden]up- HiddenOutsideTwo
+
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
+
+'Components for MainWindow'
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" CentralDisplay
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+MainWindow --> "0..1" AddLogPopup
 
+'Components for CentralDisplay'
+CentralDisplay *-down-> "1" PersonListPanel
+CentralDisplay *-down-> "1" SessionLogPanel
+
+'Components for PersonListPanel'
 PersonListPanel -down-> "*" PersonCard
+
+'Components for SessionLogPanel'
+SessionLogPanel -down-> "*" SessionLogCard
 
 MainWindow -left-|> UiPart
 
@@ -46,15 +65,27 @@ PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+PersonCard --|> UiPart
+SessionLogPanel --|> UiPart
+SessionLogCard --|> UiPart
+AddLogPopup --|> UiPart
 
 PersonCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+'Hidden for alignment of MainWindow'
+
+
+'Hidden -> Components for MainWindow'
+CentralDisplay -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+
+'Hidden for alignment of CentralDisplay'
+SessionLogPanel -[hidden]left- PersonListPanel
+SessionLogCard -[hidden]left- PersonCard
 
 MainWindow -[hidden]-|> UiPart
 @enduml

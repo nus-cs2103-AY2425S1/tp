@@ -5,7 +5,12 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.log.Log;
 import seedu.address.model.person.Person;
+
 
 /**
  * The API of the Model component.
@@ -18,6 +23,31 @@ public interface Model {
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+
+    /**
+     * clear the saved command.
+     */
+    void clearSavedCommand();
+
+    /**
+     * Sets the command to be saved.
+     */
+    void setSavedCommand(Command command);
+
+    /**
+     * Returns true if there is a saved command.
+     */
+    boolean hasSavedCommand();
+
+    /**
+     * Returns the saved command.
+     */
+    Command getSavedCommand();
+
+    /**
+     * Executes the saved command.
+     */
+    CommandResult executeSavedCommand() throws CommandException;
 
     /**
      * Returns the user prefs.
@@ -74,10 +104,22 @@ public interface Model {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setPerson(Person personToUpdate, Person editedPerson);
+
+    /**
+     * Adds the given log to the person.
+     * {@code target} must exist in the address book.
+     */
+    void addLog(Person target, Log log) throws CommandException;
+
+    /** Returns an unmodifiable view of the full person list */
+    ObservableList<Person> getPersonList();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered log list */
+    ObservableList<Log> getSessionLog(int personIndex);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

@@ -20,7 +20,7 @@ public class UiManager implements Ui {
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/MindMapLogo.png";
 
     private Logic logic;
     private MainWindow mainWindow;
@@ -30,6 +30,11 @@ public class UiManager implements Ui {
      */
     public UiManager(Logic logic) {
         this.logic = logic;
+    }
+
+    // Prompt users to enter log entry
+    public String promptForLogEntryInput() {
+        return mainWindow.displayAddLogPopup();
     }
 
     @Override

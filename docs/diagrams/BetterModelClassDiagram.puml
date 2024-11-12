@@ -5,17 +5,22 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+AddressBook *-right-> "1" UniqueLogList
+UniqueLogList -[hidden]down- UniquePersonList
+UniqueLogList -[hidden]down- UniquePersonList
 
-UniqueTagList -right-> "*" Tag
+UniqueLogList -right-> "*" Log
 UniquePersonList -right-> Person
 
-Person -up-> "*" Tag
+Person -up-> "*" Log
 
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> IdentityNumber
+Person *--> Status
+
+Log *-right-> AppointmentDate
+Log *--> LogEntry
 @enduml

@@ -1,59 +1,57 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-## Project team
+You can reach us at the email `cs2103t-w13-3@outlook.com`
 
-### John Doe
+## MindMap [W13-3]
 
-<img src="images/johndoe.png" width="200px">
+### Toh Leong Chuan
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/t-leongchuan.png" width="200px">
 
-* Role: Project Advisor
+[[github](https://github.com/t-leongchuan)]
 
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Ze Rui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/slidings.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/slidings)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Lee Zhi Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zhiyi12345.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/zhiyi12345)]
+
+* Role: Developer
+* Responsibilities: Data
+
+### Tan Jean Yang
+
+<img src="images/jeanyang04.jpg" width="200px">
+
+[[github](http://github.com/jeanyang04)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Ler Jun Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/junyi_image.jpg" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/junyi73)]
 
 * Role: Developer
 * Responsibilities: UI

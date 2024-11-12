@@ -2,45 +2,64 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
+    "identityNumber" : "S0211145D",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "status": "HIGH",
+    "logs" : [ ]
   }, {
     "name" : "Benson Meier",
+    "identityNumber" : "S6642654H",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "status": "LOW",
+    "logs": [
+      {
+        "appointmentDate" : "19 Oct 2024",
+        "entry" : "Doctor's Appointment"
+      }
+    ]
   }, {
     "name" : "Carl Kurz",
+    "identityNumber" : "S9844952C",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "status": "DISCHARGED",
+    "logs" : [ ]
   }, {
     "name" : "Daniel Meier",
+    "identityNumber" : "S6914918I",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "status": "DISCHARGED",
+    "logs" : [ ]
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "identityNumber" : "S5602975C",
+    "phone" : "94822241",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "status": "LOW",
+    "logs" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "identity number" : "S7761327G",
+    "phone" : "94824272",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "status": "HIGH",
+    "logs" : [ ]
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "identityNumber" : "S7468515C",
+    "phone" : "94824425",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
+    "status": "HIGH",
+    "logs" : [ ]
   } ]
 }

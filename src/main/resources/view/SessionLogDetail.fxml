@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="detailsPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      style="-fx-padding: 10;
+             -fx-spacing: 10;
+             -fx-background-color: #383838;
+             -fx-border-color: derive(#1d1d1d, 15%);
+             -fx-border-radius: 5;
+             -fx-border-width: 1;"
+      VBox.vgrow="ALWAYS">
+
+    <!-- Header Label for Appointment Date -->
+    <Label fx:id="detailDate" styleClass="label-bright"
+           style="-fx-font-size: 12pt; -fx-font-weight: bold; -fx-text-fill: #cccccc;" />
+
+    <!-- Session Entry TextArea for Detailed View -->
+    <TextArea fx:id="detailSessionEntry" wrapText="true"
+              style="-fx-font-size: 12pt; -fx-text-fill: white;
+                 -fx-background-color: transparent;
+                 -fx-control-inner-background: #2e2e2e;
+                 -fx-border-color: transparent;"
+              VBox.vgrow="ALWAYS" editable="false" />
+
+</VBox>
+

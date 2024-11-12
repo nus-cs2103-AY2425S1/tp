@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,11 +23,24 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.log.Log;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
+    @Test
+    public void validateInput() {
+        // valid input, no exception expected
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        assertDoesNotThrow(() -> addCommand.validateInput(modelStub));
 
+        // duplicate person, CommandException expected
+        ModelStub modelStubWithPerson = new ModelStubWithPerson(validPerson);
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand
+                .validateInput(modelStubWithPerson));
+    }
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -80,7 +94,7 @@ public class AddCommandTest {
     @Test
     public void toStringMethod() {
         AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        String expected = "Add person: " + ALICE.getConfirmationString();
         assertEquals(expected, addCommand.toString());
     }
 
@@ -149,12 +163,54 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addLog(Person target, Log log) {
+            throw new AssertionError("This method should not be called.");
+        }
+        /**
+         * Returns an unmodifiable view of the full person list
+         */
+        @Override
+        public ObservableList<Person> getPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Log> getSessionLog(int personIndex) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearSavedCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSavedCommand(Command command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSavedCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Command getSavedCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandResult executeSavedCommand() throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
     }
