@@ -626,7 +626,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 (For all use cases below, the **System** is the `ClinicConnect` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use case: UC01 - Add a patient
-**Guarantees:**<br>
+**Guarantee:**<br>
 A patient will be added to the system if the patient is not already in the system.
 
 **MSS:**
@@ -676,7 +676,7 @@ A patient will be added to the system if the patient is not already in the syste
       Use case resumes from step 2.
 
 #### Use case: UC02 - Add a patient with all fields
-**Guarantees:**<br>
+**Guarantee:**<br>
 A patient will be added to the system if the patient is not already in the system.
 
 **MSS:**
