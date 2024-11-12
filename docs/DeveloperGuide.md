@@ -101,7 +101,7 @@ The `UI` component,
 - executes user commands using the `Logic` component.
 - listens for changes to `Model` data so that the UI can be updated with the modified data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+- depends on some classes in the `Model` component, as it displays `Student`, `Group` and `Task` objects residing in the `Model`.
 
 ### Logic component
 
@@ -128,8 +128,8 @@ PlantUML, the lifeline continues till the end of diagram.
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
-   a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
+   a parser that matches the command (e.g., `DeleteGroupCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteGroupCommand`) which
    is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
@@ -184,6 +184,14 @@ needing their own `Tag` objects.<br>
 
 </box>
 
+#### Interaction between entities
+
+<puml src="diagrams/EntityClassDiagram.puml" width="300" />
+
+The interaction between our three entities - `Student`, `Group` and `Task` can be seen in the diagram above.
+
+The diagram has been simplified by omitting their attributes.
+
 ### Storage component
 
 **API** : [
@@ -203,14 +211,6 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
-
-### Interaction between entities
-
-<puml src="diagrams/EntityClassDiagram.puml" width="300" />
-
-The interaction between our three entities - `Student`, `Group` and `Task` can be seen in the diagram above.
-
-The diagram has been simplified by omitting their attributes.
 
 ---
 
@@ -258,6 +258,8 @@ The following shows the activity diagram when the user executes the `add_s` comm
 This feature will also check if there already exists a Student with the same student number or email.
 
 **Sequence Diagram:** The following sequence diagram shows how the above steps for add student works:
+
+For readability, `as sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu` has been replaced with `command` and `sno/A0123456K sn/Bob Smith e/bobsmith@u.nus.edu` with `args`.
 <puml src="diagrams/AddStudentSequenceDiagram.puml" alt="AddStudentCommandSD"/>
 
 <box type="info" seamless>
@@ -368,7 +370,7 @@ The following sequence diagram shows how the above steps for delete group works:
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteGroupCommandParser` should end at the destroy marker (X) but due to a limitation of
+**Note:** The lifelines for `DeleteGroupCommandParser`, `DeleteGroupCommand` and `CommandResult` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
 </box>
 
@@ -665,12 +667,6 @@ Use case ends.
 
       Use case ends.
 
-- 3a. No Student match the search criteria.
-
-    - 3a1. T_Assistant shows an error message.
-
-      Use case ends.
-
 **Use case: Sort Students**
 
 **MSS**
@@ -710,18 +706,6 @@ Use case ends.
 - 3b. The Group already exits.
 
     - 3b1. T_Assistant shows an error message.
-
-      Use case resumes at step 2.
-
-- 3c. The Group has hit max limit.
-
-    - 3c1. T_Assistant shows an error message.
-
-      Use case resumes at step 2.
-
-- 3d. Student is in another Group.
-
-    - 3d1. T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
@@ -812,12 +796,6 @@ Use case ends.
 
       Use case resumes at step 2.
 
-- 3b. The Student is already in a different Group.
-
-    - 3a1. T_Assistant shows an error message.
-
-      Use case resumes at step 2.
-
 - 3c. The Group has hit max limit.
 
     - 3c1. T_Assistant shows an error message.
@@ -847,12 +825,6 @@ Use case ends.
 
       Use case resumes at step 2.
 
-- 3b. The Student is already in a different Group.
-
-    - 3b1. T_Assistant shows an error message.
-
-      Use case resumes at step 2.
-
 **Use case: List all Groups**
 
 **MSS**
@@ -864,11 +836,9 @@ Use case ends.
 
 **Extensions**
 
-- 1a. There are currently no groups.
+- 1a. The list is empty.
 
-    - 1a1. T_Assistant shows an error message.
-
-      Use case ends.
+  Use case ends.
 
 **Use case: Find Group**
 
@@ -888,11 +858,6 @@ Use case ends.
 
       Use case ends.
 
-- 3a. No Group match the search criteria.
-
-    - 3a1. T_Assistant shows an error message.
-
-      Use case ends.
 
 **Use case: Sort Groups**
 
@@ -907,9 +872,9 @@ Use case ends.
 
 **Extensions**
 
-- 1a. There are currently no groups.
+- 1a. The list is empty.
 
-Use case ends.
+  Use case ends.
 
 **Use case: List all Tasks**
 
@@ -922,18 +887,18 @@ Use case ends.
 
 **Extensions**
 
-- 1a. There are currently no tasks.
-
-    - 1a1. T_Assistant shows an error message.
-
-      Use case ends.
+- 1a. The list is empty.
+  
+  Use case ends.
 
 **Use case: Add Task to Group**
 
 **MSS**
 
-1. User requests to a task to a specified group.
+1. User requests to list tasks of a specified group.
 2. T_Assistant displays all current tasks for the group.
+3. User requests to add task to group.
+4. T_Assistant adds task to group.
 
 Use case ends.
 
@@ -945,9 +910,13 @@ Use case ends.
 
       Use case ends.
 
-- 1b. A duplicate task is entered.
+- 1a. The list is empty.
 
-    - 1b1. T_Assistant informs user that the task already exists.
+  Use case ends.
+
+- 3b. A duplicate task is entered.
+
+    - 3b1. T_Assistant informs user that the task already exists.
 
       Use case resumes at step 2.
 
@@ -1042,22 +1011,22 @@ Use case ends.
 
 **MSS**
 
-1. User requests to mark task as complete.
-2. T_Assistant marks the task accordingly.
+1. User requests to list a group's tasks.
+2. T_Assistant shows a list of tasks.
+3. User requests to mark task.
+4. T_Assistant marks the task accordingly.
 
 Use case ends.
 
 **Extensions**
 
-- 1a. The Group/Task parameters are invalid.
+- 1a. The list is empty.
 
-    - 1a1. T_Assistant shows an error message.
+  Use case ends.
 
-      Use case ends.
+- 2a. The Group/Task parameters are invalid.
 
-- 1b. The user marks an already complete task.
-
-    - 1b1. T_Assistant shows an error message.
+    - 2a1. T_Assistant shows an error message.
 
       Use case ends.
 
@@ -1076,12 +1045,6 @@ Use case ends.
 - 1a. The input format is incorrect or missing keywords.
 
     - 1a1. T_Assistant shows an error message indicating the correct format.
-
-      Use case ends.
-
-- 3a. No Task match the search criteria.
-
-    - 3a1. T_Assistant shows an error message.
 
       Use case ends.
 
@@ -1113,9 +1076,11 @@ Use case ends.
 
 **Extensions**
 
-- 1a. There was no previously executed command.
+- 1a. There is nothing to undo.
 
-Use case ends.
+    - 1a1. T_Assistant shows an error message.
+
+      Use case ends.
 
 **Use case: Redo**
 
@@ -1146,8 +1111,6 @@ Use case ends.
 6. Should be able to store up to 100 version histories.
 7. Should not depend on any remote server.
 8. Should be packaged into a single JAR file
-
-_{More to be added}_
 
 ### Glossary
 
@@ -1750,3 +1713,11 @@ Currently, our system sorts `Students` by ASCII order.
 #### Enhancement
 
 We plan to update the sorting such that it sorts by alphabetical order instead.
+
+### 6. Better parameter mapping
+
+Currently, the behaviour for handling extraneous parameters is unclear and inconsistent.
+
+#### Enhancement
+
+We plan to improve the parameter matching such that warnings will be given to the user.
