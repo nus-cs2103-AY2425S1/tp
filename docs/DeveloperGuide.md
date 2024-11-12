@@ -788,13 +788,12 @@ This is unrealistic, as an individual is typically either a student or a profess
 (As shown in the screenshot, Royston is both a CS1101S professor and CS2100 student.)
 
 We plan to enforce stricter role assignment, ensuring that:
-* A contact can be designated as a Professor across multiple modules. 
+* A contact can be designated as a Professor across multiple modules.
 * Alternatively, a contact can be designated as either a Student or a Tutor across multiple modules.
 
 5. **Allows command navigation using up and down arrows.** Currently, the user has to type the command from scratch if he/she wants to execute a previous command again.
 This can be very troublesome if the user wants to execute the same command multiple times, or if the user wants to execute a similar command to the previous one.
 We plan to allow the user to navigate through the command history using the up and down arrows.
-
 7. **Reflect the true redo/undo states of the address book in the history command list.** Currently, the history command list only shows all data changing commands executed by the user and does not precisely reflect the current and history states of the address book.
 For example, if the user executes `delete 1`, then `delete 2`, then `undo`, then `delete 3`, the true history states are `[delete 1, delete 3]` since `delete 2` has been purged.
 However, the history command list will only show all data changing commands executed so far, (refer to the screenshot below) which is not accurate.

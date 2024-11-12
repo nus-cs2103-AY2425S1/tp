@@ -14,7 +14,7 @@ Given below are my contributions to the project.
 * **Project management**:
   * In charge of the module role search and user guide.
   * Authored release notes v1.4 v1.5 on GitHub.
-  * 
+
 * **New Feature**: Added the ability to add module roles using the `edit` command.
 
 * **New Feature**: Added the ability to find module roles.
