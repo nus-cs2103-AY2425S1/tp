@@ -20,8 +20,6 @@
 
 ---
 
-<div style="page-break-after: always;"></div>
-
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -102,6 +100,8 @@ The `UI` component,
 - listens for changes to `Model` data so that the UI can be updated with the modified data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 - depends on some classes in the `Model` component, as it displays `Student`, `Group` and `Task` objects residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -1650,6 +1650,8 @@ testers are expected to do more _exploratory_ testing.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Planned Enhancements**
 
 **Group size:** 4
@@ -1714,10 +1716,10 @@ Currently, our system sorts `Students` by ASCII order.
 
 We plan to update the sorting such that it sorts by alphabetical order instead.
 
-### 6. Better parameter mapping
+### 6. Better Parameter Mapping
 
 Currently, the behaviour for handling extraneous parameters is unclear and inconsistent.
 
 #### Enhancement
 
-We plan to improve the parameter matching such that warnings will be given to the user.
+We plan to make the behaviour more consistent and improve the parameter matching such that warnings will be given to the user.
