@@ -539,7 +539,7 @@ Github Actions utilises `.yaml` configuration files and can be found in the `.gi
 Github Actions operate in this manner: 
 <br>
 
-1. Trigger: Github Actions workflows are triggered but events such as `push` and `pull_request`.
+1. Trigger: Github Actions workflows are triggered but events such as `push` and `pull_request`.<br>
 2. Jobs and Runners: A workflow consists of one or more jobs, each containing a series of steps.
 Each job runs on a Github-hosted runner (a virtual machine or environment) to perform the defined tasks.<br>
 3. Steps: Within each job, steps are defined to execute certain tasks, such as installing dependencies, running tests, or 
