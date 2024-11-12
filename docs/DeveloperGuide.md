@@ -731,7 +731,7 @@ Similar to [<ins>UC14](#use-case-uc14search-for-contacts-by-name) except searchi
 * 2a. The wedding list is empty.
   Use case ends.
 
-* 3a. The contact is already assigned to the specifsied wedding.
+* 3a. The contact is already assigned to the specified wedding.
     * 3a1. System displays an error message.
 
       Use case resumes at step 2.
