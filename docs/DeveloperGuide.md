@@ -1,13 +1,12 @@
 ---
-
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
-  
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
 # VolunTier Developer Guide
 
+<!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -125,7 +124,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="650" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
@@ -139,7 +138,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="750" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -187,6 +186,10 @@ The Import mechanism is facilitated by `CsvImport` which is responsible for pars
 * Tracking Duplicates and Failures: The class maintains duplicates and failedRows lists to track any rows that fail due to duplicate entries or constraint violations.
 
 ### View Tutor Chart feature
+
+<puml src="diagrams/VTCSequenceDiagram.puml" width="550" />
+
+
 The View Tutor Chart (VTC) feature in [`ViewTutorChartCommand`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewTutorChartCommand.java)
 displays tutors in a bar chart, sorted by their tutoring hours in ascending order.
 
@@ -449,34 +452,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes at step 4.
 
-**Use case: UC5 - Import a list of persons**
-
-**MSS**
-
-1.  User requests to import a list of persons from a CSV file
-2.  VolunTier prompts the user to input the file path of the CSV file
-3.  User provides the file path
-4.  VolunTier reads the CSV file and imports the list of persons
-5.  VolunTier confirms that the persons have been successfully imported
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The file path is invalid.
-
-    * 2a1. VolunTier shows an error message.
-
-  Use case resumes at step 2.
-
-* 4a. The CSV file has invalid entries.
-
-    * 4a1. VolunTier shows an error message specifying the invalid entries and imports the valid entries.
-    * 4a2. VolunTier confirms that the valid entries have been successfully imported.
-    * 4a3. VolunTier shows an error message specifying the invalid entries.
-  
-  Use case resumes at step 2.
-
 
 **Use case: UC5 - Import a list of persons**
 
@@ -645,12 +620,17 @@ Team size: 5
 1. **Customizable Subject Management**
     - Allow users to add and manage subjects beyond the current options of Math, Science, and English. This feature would provide flexibility for organizations that tutor in other subjects or wish to customize subject names.
 
-2. **Improve `vtc` Tutor Hours Chart Rendering**
+1. **Improve `vtc` Tutor Hours Chart Rendering**
     - Enhance the tutor hours chart in `vtc` to address JavaFX’s limitation with duplicate names. Currently, random index numbers are added to each tutor entry to ensure uniqueness. In future updates, we aim to explore more effective solutions to clearly differentiate tutors with identical names, maintaining clarity in the chart.
 
-3.
+1. **Timetable Function for Adding Lessons**
+    - Enhance the addLesson feature to allow date and time scheduling, and display a timetable when a person is viewed. The timetable would be updated with lessons scheduled, enabling users to view available slots and assign lessons to specific times, ensuring efficient use of tutors’ and tutees’ time. The timetable could also display conflicts or availability to simplify the scheduling process and avoid overlaps. Introduce a timetable feature for each tutor and tutee, allowing for structured scheduling directly within the app. This feature would enable users to view available slots and assign lessons to specific times, ensuring efficient use of tutors’ and tutees’ time. The timetable could also display conflicts or availability to simplify the scheduling process and avoid overlaps.
 
-4. **Timetable Function for Adding Lessons**
-    - Enhance the addLesson feature to allow date and time scheduling, and display a timetable when a person is viewed. The timetable would be updated with lessons scheduled, enabling users to view available slots and assign lessons to specific times, ensuring efficient use of tutors’ and tutees’ time. The timetable could also display conflicts or availability to simplify the scheduling process and avoid overlaps.
+1. **Person with no subject check hours**
+    - When a new tutor or tutee is added, if there are no subjects hours must be 0, or else an error message “person with no subjects cannot start with more than 0 hours” will be shown.
 
-Introduce a timetable feature for each tutor and tutee, allowing for structured scheduling directly within the app. This feature would enable users to view available slots and assign lessons to specific times, ensuring efficient use of tutors’ and tutees’ time. The timetable could also display conflicts or availability to simplify the scheduling process and avoid overlaps.
+1. **UI to wrap long names**
+    - If any of the field in details are too long, it will be wrapped.
+
+
+
