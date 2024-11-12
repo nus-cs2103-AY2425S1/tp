@@ -303,7 +303,7 @@ Do take note of the following when preparing your contacts,
 5. All the information needs to follow the constraints laid out in the [Field Constraints section](#field-constraints), if you do not fill in the information as per the constraints, UniLink will not be able to import the contact at all!
 6. UniLink will skip over duplicate contacts! Contacts are considered duplicate when they share the same name AND they have the same email, phone number or Telegram Handle
    1. Example: If I have a contact called Amy, whose Telegram Handle is @Amy, and I try to import another contact, Amy, whose Telegram Handle is @Amy1, this will work.
-   2. Similarly, trying to add Ben with Telegram Handle @Amy will  not work.
+   2. Similarly, trying to add Ben with Telegram Handle @Amy will not work.
    3. This is the case with emails, phone numbers and Telegram Handles
 7. Do not import contacts from any other source (E.g Google contacts)
 
