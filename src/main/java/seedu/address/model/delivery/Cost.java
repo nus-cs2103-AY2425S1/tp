@@ -46,6 +46,8 @@ public class Cost {
     }
 
     public String getCost() {
+
+        assert value != null;
         return this.value;
     }
 

@@ -45,6 +45,8 @@ public class Quantity {
     }
 
     public String getQuantity() {
+
+        assert value != null;
         return value;
     }
 

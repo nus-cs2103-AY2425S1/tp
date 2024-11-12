@@ -92,6 +92,8 @@ public class DateTime {
     }
 
     public LocalDateTime getDateTime() {
+
+        assert dateTime != null;
         return this.dateTime;
     }
 
