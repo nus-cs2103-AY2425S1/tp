@@ -545,7 +545,7 @@ Use case ends.
 
       Use case resumes at step 2.
 
-- 3b. The Student already exits.
+- 3b. The Student already exists.
 
     - 3b1. T_Assistant shows an error message.
 
@@ -571,6 +571,12 @@ Use case ends.
 - 3a. The Student parameters are invalid.
 
     - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3b. The selected Student does not exist.
+
+    - 3b1. T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
@@ -612,9 +618,7 @@ Use case ends.
 **MSS**
 
 1. User inputs a command to find students with specific keywords.
-
 2. T_Assistant processes the input and searches for students matching the keywords.
-
 3. T_Assistant displays a list of students who match the search criteria.
 
 Use case ends.
@@ -669,21 +673,9 @@ Use case ends.
 
       Use case resumes at step 2.
 
-- 3b. The Group already exits.
+- 3b. The Group already exists.
 
     - 3b1. T_Assistant shows an error message.
-
-      Use case resumes at step 2.
-
-- 3c. The Group has hit max limit.
-
-    - 3c1. T_Assistant shows an error message.
-
-      Use case resumes at step 2.
-
-- 3d. Student is in another Group.
-
-    - 3d1. T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
@@ -707,6 +699,12 @@ Use case ends.
 - 3a. The Group parameters are invalid.
 
     - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3b. The selected Group does not exist.
+
+    - 3b1. T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
@@ -809,7 +807,7 @@ Use case ends.
 
       Use case resumes at step 2.
 
-- 3b. The Student is already in a different Group.
+- 3b. The selected Student does not exist.
 
     - 3b1. T_Assistant shows an error message.
 
@@ -894,8 +892,8 @@ Use case ends.
 
 **MSS**
 
-1. User adds a task to a specified group.
-2. T_Assistant displays all current tasks for the group.
+1. User requests to add a task to a specified group.
+2. T_Assistant adds tasks to the group and displays all current tasks for the group.
 
 Use case ends.
 
@@ -917,8 +915,8 @@ Use case ends.
 
 **MSS**
 
-1. User removes a task from a specified group.
-2. T_Assistant displays all current tasks for the group.
+1. User requests to remove a task from a specified group.
+2. T_Assistant removes a task from the group displays all current tasks for the group.
 
 Use case ends.
 
@@ -1004,7 +1002,7 @@ Use case ends.
 
 **MSS**
 
-1. User marks task as complete.
+1. User requests to mark task as complete.
 2. T_Assistant marks the task accordingly.
 
 Use case ends.
