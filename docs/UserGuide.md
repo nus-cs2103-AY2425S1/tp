@@ -59,7 +59,7 @@ With MindMap, therapists can quickly record and access detailed patient informat
 7. **Start MindMap**  
    Now, type the following line in the terminal to launch the app:
    ```bash
-   java -jar MindMap.jar
+   java -jar CS2103W13-3MindMap.jar
    ```
    This will open the MindMap app. You’re now ready to use it! If you see an error, double-check that Java is installed using **Step 1**.
 
