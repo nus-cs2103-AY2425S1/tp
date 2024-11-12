@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":Parser" as Parser LOGIC_COLOR
+participant ":HallPointerParser" as Parser LOGIC_COLOR
 participant ":DeleteMemberCommandParser" as DeleteMemberCommandParser LOGIC_COLOR
 participant "dmc:DeleteMemberCommand" as DeleteMemberCommand LOGIC_COLOR
 participant "result:CommandResult" as CommandResult LOGIC_COLOR
