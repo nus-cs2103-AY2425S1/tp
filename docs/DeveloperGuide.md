@@ -621,7 +621,7 @@ Similar to [<ins>UC09](#use-case-uc09-add-phone-number-to-contact) except duplic
 1. User <ins>lists all contacts [(UC01)](#use-case-uc01-list-all-contacts)</ins>.
 2. User <ins>lists all tags [(UC04)](#use-case-uc04-list-all-tags)</ins>.
 3. User requests to tag a contact with a specified tag.
-4. The system displays the updated contact with the new tag assigned to them, in the list of contacts.
+4. System displays the updated contact with the new tag assigned to them, in the list of contacts.
 
    Use case ends.
 
@@ -633,13 +633,49 @@ Similar to [<ins>UC09](#use-case-uc09-add-phone-number-to-contact) except duplic
 * 2a.The tag list is empty.
   Use case ends.
 
-* 3a. The provided tag name does not exist.
-    * 3a1. The system displays an error message.
+* 3a. The contact already has the specified tag assigned to them.
+    * 3a1. System displays an error message.
+  
+      Use case ends.
 
-      Use case resumes at step 1.
+* 3b. User specified to force the tagging of a contact.
+    * 3b1. System displays the newly added tag, in the tag list. 
+      
+      Use case resumes at step 4.
+
+* 3c. The specified tag name does not exist.
+    * 3c1. System displays an error message.
+
+      Use case resumes at step 2.
 
 ### **Use case: UC13 — Untag a Contact**
-Similar to [<ins>UC12](#use-case-uc12-tag-a-contact) except the tag is unassigned from the contact.
+
+**MSS**
+
+1. User <ins>lists all contacts [(UC01)](#use-case-uc01-list-all-contacts)</ins>.
+2. User <ins>lists all tags [(UC04)](#use-case-uc04-list-all-tags)</ins>.
+3. User requests to untag a contact with a specified tag.
+4. System displays the updated contact with the tag unassigned from them, in the list of contacts.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The contact list is empty.
+  Use case ends.
+
+* 2a.The tag list is empty.
+  Use case ends.
+
+* 3a. The specified tag name does not exist.
+    * 3a1. System displays an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The contact does not have the specified tag assigned to them.
+    * 3b1. System displays an error message.
+  
+      Use case resumes at step 2.
 
 ---
 
@@ -697,7 +733,7 @@ Similar to [<ins>UC14](#use-case-uc14-search-for-contacts-by-name) except search
   Use case ends.
 
 * 3a. A specified wedding does not exist.
-    * 3a1. The system displays an error message.
+    * 3a1. System displays an error message.
 
       Use case resumes at step 2.
 
@@ -705,7 +741,7 @@ Similar to [<ins>UC14](#use-case-uc14-search-for-contacts-by-name) except search
 Similar to [<ins>UC22](#use-case-uc22-assign-a-contact-to-one-or-more-weddings) except un-assigning a contact from Weddings and an additional extension.
 
 * 3b. A specified wedding not associated with the contact.
-    * 3a1. The system displays an error message.
+    * 3a1. System displays an error message.
 
       Use case resumes at step 2.
 
@@ -738,10 +774,37 @@ Similar to [<ins>UC22](#use-case-uc22-assign-a-contact-to-one-or-more-weddings) 
 
 
 ### **Use case: UC25 — Unassigning a Vendor**
-Similar to [<ins>UC24](#use-case-uc24assigning-a-vendor) except un-assigning a vendor and an alternate extension.
+
+**MSS**
+
+1. User <ins>lists all contacts [(UC01)](#use-case-uc01-list-all-contacts)</ins>.
+2. User requests to unassign the Vendor designation from a contact.
+3. System displays the contact as no longer being designated as a vendor, in the list of contacts.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The contact list is empty.
+  Use case ends.
+
+* 2a. The given index is invalid.
+    * 2a1. System shows an error message prompting the user to put in a valid index.
+
+      Use case resumes at step 1.
 
 * 2b. The contact specified is not a Vendor.
-    * 2b1. The system displays an error message.
+    * 2b1. System displays an error message.
+
+      Use case resumes at step 1.
+  
+* 2c. The user specified to force the unassigning of a Vendor.
+    * 2c1. System displays the contact as no longer being designated as a vendor and with no tasks assigned to them, in the list of contacts.
+
+      Use case ends.
+
+* 2d. The Vendor still has tasks assigned to them.
+    * 2d1. System displays an error message.
 
       Use case resumes at step 1.
 
@@ -771,7 +834,7 @@ Similar to [<ins>UC24](#use-case-uc24assigning-a-vendor) except un-assigning a v
       Use case resumes at step 1.
 
 * 2b. A specified task does not exist in the System.
-    * 2b1. The system displays an error message.
+    * 2b1. System displays an error message.
 
       Use case resumes at step 1.
 
@@ -779,7 +842,7 @@ Similar to [<ins>UC24](#use-case-uc24assigning-a-vendor) except un-assigning a v
 Similar to [<ins>UC26](#use-case-uc26assign-one-or-more-tasks-to-a-contact) except un-assigning tasks from a contact and an additional extension. 
 
 * 2b. A specified task is not assigned to the contact.
-    * 2b1. The system displays an error message.
+    * 2b1. System displays an error message.
 
       Use case resumes at step 1.
 
@@ -833,7 +896,17 @@ Similar to [<ins>UC30](#use-case-uc30delete-contact) except deleting wedding.
 Similar to [<ins>UC30](#use-case-uc30delete-contact) except deleting task.
 
 ### **Use case: UC33 — Delete Tag**
-Similar to [<ins>UC30](#use-case-uc30delete-contact) except deleting tag.
+Similar to [<ins>UC30](#use-case-uc30delete-contact) except deleting tag and two additional extensions.
+
+* 2b. User specified to force the deletion of the tag.
+    * 2b1. System displays an updated list of contacts with the specified tag absent from all contacts.
+
+      Use case resumes at step 3.
+
+* 2c. A specified tag is still assigned to one or more contacts.
+    * 2c1. System displays an error message.
+
+      Use case resumes at step 1.
 
 ---
 
@@ -843,7 +916,7 @@ Similar to [<ins>UC30](#use-case-uc30delete-contact) except deleting tag.
 
 1. User <ins>lists all contacts (UC01)</ins>.
 2. User requests to edit the details of a person and specifies what they want to change the details to.
-3. The system changes the existing details to the specified details and shows list of persons with new details.
+3. System changes the existing details to the specified details and shows list of persons with new details.
 
    Use case ends.
 
