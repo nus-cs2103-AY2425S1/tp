@@ -18,7 +18,7 @@
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 * We took references from [OpenCSV](https://opencsv.sourceforge.net/) for import and export commands.
 * ChatGPT was used to check for errors and generate some test cases.
-  * It was used to generate the first two test cases in RemoveGradeCommandParserTest.java
+  * It was used to generate the first two test cases in RemoveGradeCommandParserTest.java, MarkCommandParserTest.java & MarkCommandTest.java.
   * It was also used for the usage of `.getStyleClass()` & `.add()` methods in PersonCard.java to display the information clearly.
   * It was consulted to get a plan of how `PersonComparator` can be implemented.
   * It was consulted to fix and improve the UI.
@@ -74,7 +74,6 @@ Each of the four main components (also shown in the diagram above),
 - defines its _API_ in an `interface` with the same name as the Component.
 - implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
-{{ newPage }}
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -221,7 +220,49 @@ Note: While the diagram shows the lifeline of objects even after their deletion,
 2. KonTActs will create a contact of Tom with the given details before adding it to the contact list.
 3. The contact is then displayed in the UI, along with a success message.
 
+
+### MarkCommand
+
+<puml src="diagrams/MarkCommandActivityDiagram.puml" width="750" />
+
+
+* The `MarkCommand` is used by KonTActs to allow TAs to mark the attendance for a student.
+* It follows the activity diagram as shown above where it first checks if the person exists.
+* If the person exists, it will check if the weeksPresent contains the week to be marked.
+* If the weeksPresent does not contain the week to be marked yet, it will add it in and return a success message. Else it will throw a mark already success message to tell the TA that the attendance for the TA for that week has been marked.
+
+**Example Usage**
+1. User inputs the command "mark n/John Doe w/1".
+2. KonTActs will set the week 1 attendance for John Doe to be true.
+3. The update is then displayed in the UI, along with a success message.
+
 ---
+
+### Command History implementation
+**API** : [`CommandHistory.java`](https://github.com/AY2425S1-CS2103T-T11-2/tp/blob/master/src/main/java/seedu/address/storage/CommandHistory.java)
+
+The `CommandHistory` is used by KonTActs to allow users to navigate and retrieve previous inputted commands. It follows a singleton pattern where only a single instance can be created.
+
+- `CommandHistory` makes use of an `ArrayList` to store the commands of the current user session.
+- The `ArrayList` is destroyed at the end of the program and a new one will be created at the start of every session of KonTActs.
+- An `index` points to the current command displayed in the command box of the Graphical user interface (GUI).
+
+This is illustrated in the activity diagram below:
+<center>
+<puml src="diagrams/commandHistoryActivityDiagram.puml" width="550" />
+</center>
+
+When a user retrieves a command that was previously executed using <kbd>↑</kbd> or <kbd>↓</kbd>,
+- `CommandHistory` instance first checks if there are fields in the `ArrayList` of the `CommandHistory` instance.
+- `CommandHistory` instance then checks for the correct `index`. (i.e. The `index` is valid when it is between 0 and the size of the `ArrayList`).
+
+If both conditions are satisfied, the `ArrayList` is accessed with the `index` and the command string (that was previously entered) will be returned and displayed on the command box of the GUI.
+
+A visual representation is shown below of how a typical user might use the `CommandHistory`,
+
+<center>
+<puml src="diagrams/commandHistoryUserInteractionActivityDiagram.puml" width="700" />
+</center>
 
 {{ newPage }}
 
