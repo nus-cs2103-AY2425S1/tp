@@ -264,99 +264,6 @@ Step 1. The user launches the application, which is populated with a list of the
 
 Step 2. The user executes `grade 87654321 m/CS2103T g/A` command to assign an A `Grade` to Bernice's CS2103T `Module`. Bernice now has a CS2103T `Module` graded A in their list of modules.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" width="450"/>
-
-Step 2. The user executes `delete 12345678` command to delete the person with Student ID of `12345678` in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 12345678` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" width="450"/>
-
-Step 3. The user executes `add id/12345678 …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" width="450"/>
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" width="450"/>
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-<div style="page-break-after: always;"></div>
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -378,12 +285,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**:
 
-* Tertiary Teacher/Educator
-* has a need to manage a significant number of contacts
-* requires a tool to keep communication organised across large groups
-* requires support for efficient tracking of academic progress
+* Teachers in tertiary institutions.
+* Has a need to manage a significant number of contacts.
+* Requires a tool to keep communication organised across large groups.
+* Requires dedicated support for tracking of academic progress.
+* Prefers typing and is familiar with command-line interfaces.
 
-**Value proposition**: save important time through simplification of student-parent contact management, enhancement in communication tracking and integrated progress reports
+**Value proposition**: Provides teachers comfortable with CLI-based interfaces an efficient platform for contact management and student academic progress tracking.
 
 <br>
 
@@ -391,29 +299,27 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                   | So that I can…​                                                             |
-|----------|--------------------|------------------------------------------------|-----------------------------------------------------------------------------|
-| `* * *`  | new teacher        | add a contact                                  | keep track of them                                                          |
-| `* * *`  | teacher            | delete a contact                               | remove contacts that I no longer need                                       |
-| `* * *`  | teacher            | add a grade to a contact                       | keep track of a student's grades                                            |
-| `* * *`  | teacher            | add a student's details                        | keep track of the students under me                                         |
-| `* *`    | teacher            | edit a contact                                 | update contact information without having to delete it                      |
-| `* *`    | teacher            | search for a contact                           | find the contact I am looking for without having to scroll through the list |
-| `* *`    | frequent teacher   | add tags or labels to contacts                 | group the many contacts that are in the application by a commonality        |
-| `* *`    | frequent teacher   | filter contacts by labels or tags              | filter out irrelevant contacts                                              |
-| `* *`    | frequent teacher   | mass add contacts                              | add multiple contacts without having to do so one by one                    |
-| `* *`    | frequent teacher   | mass delete contacts                           | delete multiple contacts without having to do so one by one                 |
-| `* *`    | teacher            | add next of kins' contacts                     | contact the relevant individual in case of emergencies                      |
-| `*`      | frequent teacher   | do custom sorts for contacts                   | shift relevant contacts near the top of the list of contacts                |
-| `*`      | new teacher        | see guided tours and tooltips                  | familiarise myself with the application interface                           |
-| `*`      | long-time teacher  | archive contacts                               | reduce clutter in the application without permanently deleting the contact  |
-| `*`      | long-time teacher  | refactor tags or labels                        | mass edit tags or labels if necessary                                       |
-| `*`      | new teacher        | see the application populated with sample data | see what the application interface looks like                               |
-| `*`      | frequent teacher   | add descriptions to contacts                   | be reminded of various traits a particular individual might have            |
-| `*`      | frequent teacher   | undo previous action                           | undo a mistake without having to delete or edit any contacts                |
-| `*`      | long-time teacher  | export contact data                            | have a backup data file in case anything happens to the application         |
-| `*`      | long-time teacher  | import contact data                            | load data from a file to restore lost or missing data                       |
-| `*`      | long-time teacher  | access communication history                   | be well-prepared for upcoming meetings                                      |
+| Priority | As a …​                    | I want to …​                                                        | So that I can…​                                                                                        |
+|----------|----------------------------|---------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| `* * *`  | teacher                    | add a contact                                                       | have easy access to contacts                                                                           |
+| `* * *`  | teacher                    | delete a contact                                                    | remove contacts that I no longer need                                                                  |
+| `* * *`  | teacher                    | add contact details like email, address, phone number, modules etc. | keep track of my contacts' details                                                                     |
+| `* * *`  | teacher                    | assign a grade to a module that my student is taking                | keep track of a student's grades and academic progress                                                 |
+| `* * *`  | teacher                    | view contact information                                            | have a clear visual reference for contact information                                                  |
+| `* *`    | teacher                    | edit a contact                                                      | update contact information without having to delete it                                                 |
+| `* *`    | teacher                    | search for a contact                                                | find the contact I am looking for without having to scroll through the list                            |
+| `* *`    | teacher                    | add roles/tags to contacts                                          | group the many contacts that are in the application by their type (e.g. student, tutor etc.)           |
+| `* *`    | teacher                    | filter contacts by labels or tags                                   | have an easy visual reference with irrelevant contacts filtered out                                    |
+| `* *`    | new user                   | access a page that teaches me how to use the application            | familiarise myself with the application interface                                                      |
+| `* *`    | efficient CLI user         | navigate command history (like in other CLI-based applications)     | easily load previously entered commands without having to re-type commands from scratch (to save time) |
+| `*`      | new user                   | see the application populated with sample data                      | see what the application interface looks like                                                          |
+| `*`      | mistake-prone user         | undo previous action                                                | undo a mistake without having to delete or edit any contacts                                           |
+| `*`      | teacher with many contacts | perform mass operations on contacts                                 | perform operations (add, edit, delete etc.) on multiple contacts without having to do so one by one    |
+| `*`      | organised teacher          | archive contacts                                                    | reduce clutter in the application without permanently deleting the contact                             |
+| `*`      | careful teacher            | export contact data                                                 | have a backup data file in case anything happens to the application                                    |
+| `*`      | careful teacher            | import contact data                                                 | load data from a file to restore lost or missing data                                                  |
+
+
 
 <br>
 
@@ -421,26 +327,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `EduContacts` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add a student**
+---
+
+#### UC01 - Add a contact
 
 **MSS**
 
-1. User adds a student to the list of contacts.
+1. User adds a contact to the list of contacts.
 2. EduContacts updates the list of contacts.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. EduContacts detects an error in the given data.
+* 1a. EduContacts detects an error in the user input.
 
-    * 1a1. EduContacts shows an error message.
+    * 1a1. EduContacts provides an appropriate error message as feedback to user.
 
       Use case ends.
 
-**Use case: UC02 - Search for a student**
+---
 
-**Preconditions: The list of contacts is not empty**
+#### UC02 - Search for a student
+
+**Preconditions:** The list of contacts is not empty.
 
 **MSS**
 
@@ -451,20 +361,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. EduContacts detects an error in the given data.
+* 1a. EduContacts detects an error in the user input (command format, student does not exist etc.).
 
-    * 1a1. EduContacts shows an error message.
+    * 1a1. EduContacts provides an appropriate error message as feedback to user.
 
       Use case ends.
 
-* 2a. EduContacts is unable to locate the student.
+---
 
-  Use case ends.
-
-**Use case: UC03 - Add a grade for a student**
+#### UC03 - Add a module to a student**
 
 **MSS**
-1. User <u>searches for the student</u> (UC02) they wish to add a grade for.
+
+1. User <u>searches for the student (UC02)</u> they wish to add a module for.
+2. User adds a module to the student in the list.
+3. EduContacts updates the list of contacts.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. EduContacts detects an error in the user input (command format, student does not exist, duplicate module etc.).
+
+    * 1a1. EduContacts provides an appropriate error message as feedback to user.
+
+      Use case ends.
+
+---
+
+#### UC04 - Add a grade for a student
+
+**Preconditions:** The student has a <u>module already added (UC03)</u>.
+
+**MSS**
+1. User <u>searches for the student (UC02)</u>  they wish to add a grade for.
 2. User adds a grade for the student.
 3. EduContacts updates the list of contacts.
 
@@ -472,17 +402,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User is unable to locate the student.
+* 1a. EduContacts detects an error in the user input (command format, student or module does not exist etc.).
 
-  Use case ends.
-
-* 2a. EduContacts detects an error in the given data.
-
-    * 2a1. EduContacts shows an error message.
+    * 1a1. EduContacts provides an appropriate error message as feedback to user.
 
       Use case ends.
 
-**Use case: UC04 - Delete a student**
+
+* 2a. The module is already graded.
+
+    * 2a1. EduContacts overwrites the old grade with the new grade.
+
+      Use case ends.
+
+---
+
+#### Use case: UC05 - Delete a student
 
 **MSS**
 
@@ -494,17 +429,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User is unable to locate the student.
+* 1a. EduContacts detects an error in the user input (command format, student does not exist etc.).
 
-  Use case ends.
-
-* 2a. EduContacts detects an error in the given data.
-
-    * 2a1. EduContacts shows an error message.
+    * 1a1. EduContacts provides an appropriate error message as feedback to user.
 
       Use case ends.
 
-**Use case: UC05 - Edit a student's details**
+---
+
+#### Use case: UC06 - Edit a student's details
 
 **MSS**
 
@@ -516,91 +449,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User is unable to locate the student.
+* 1a. EduContacts detects an error in the user input (command format, student does not exist etc.).
 
-  Use case ends.
-
-* 2a. EduContacts detects an error in the given data.
-
-    * 2a1. EduContacts shows an error message.
+    * 1a1. EduContacts provides an appropriate error message as feedback to user.
 
       Use case ends.
 
-**Use case: UC06 - Add a module to a student**
+---
+
+#### UC07 - Filter contacts based on properties
 
 **MSS**
 
-1. User <u>searches for the student</u> (UC02) they wish to add a module for.
-2. User adds a module to the student in the list.
-3. EduContacts updates the list of contacts.
+1. User provides a set of contact-related conditions.
+2. EduContacts updates the list view to show contacts matching the provided conditions.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. User is unable to locate the student.
+* 1a. EduContacts detects an error in the user input (command format etc.).
 
-  Use case ends.
-
-* 2a. EduContacts detects an error in the given data.
-
-    * 2a1. EduContacts shows an error message.
-
-      Use case ends.
-
-* 2b. Student already has the module.
-
-    * 2b1. EduContacts shows an error message.
-
-      Use case ends.
-
-**Use case: UC07 - Grade a student**
-
-**MSS**
-
-1. User <u>searches for the student</u> (UC02) they wish to grade.
-2. User grades a module the student is taking.
-3. EduContacts updates the list of contacts.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User is unable to locate the student.
-
-  Use case ends.
-
-* 2a. EduContacts detects an error in the given data.
-
-    * 2a1. EduContacts shows an error message.
-
-      Use case ends.
-
-* 2b. The module is already graded.
-
-    * 2b1. EduContacts overwrites the old grade with the new grade.
-
-      Use case ends.
-
-**Use case: UC08 - Add contacts of next-of-kins of a student**
-
-**MSS**
-
-1. User <u>searches for the student</u> (UC02) they wish to add contacts of next-of-kins for.
-2. User adds contacts of next-of-kins of the student in the list.
-3. EduContacts updates the list of contacts.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. User is unable to locate the student.
-
-  Use case ends.
-
-* 2a. EduContacts detects an error in the given data.
-
-    * 2a1. EduContacts shows an error message.
+    * 1a1. EduContacts provides an appropriate error message as feedback to user.
 
       Use case ends.
 
@@ -684,71 +554,196 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+#### Initial launch
 
-    1. Download the jar file and copy into an empty folder.
+1. Ensure you have Java `17` or above installed in your computer.
+    [Download Java here](https://www.oracle.com/sg/java/technologies/downloads/) if you haven't already.
+    
+    Note that Mac users should use the specific Azul JDK 17 distribution specified in [this guide](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-    2. Double-click the jar file.<br>
-       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-2/tp/releases).
 
-2. Saving window preferences
+3. Copy the file to the folder you want to use as the home folder for your EduContacts.
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+4. To run EduContacts, open a command terminal.
 
-    2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   To navigate to the folder where you placed the `.jar` file, use the `cd` command. For example, if you placed the file in a folder named `EduContacts` on your desktop, you would enter:
+
+   ```bash
+   cd ~/Desktop/EduContacts
+   ```
+
+   and use the following command to run the application:
+
+   ```bash
+   java -jar educontacts.jar
+   ```
+
+   A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.<br>
+
+   ![Ui](images/Ui.png)
+
+---
+
+#### Saving window preferences
+
+1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+
+2. Re-launch the app by double-clicking the jar file.<br>
+   Expected: The most recent window size and location is retained.
 
 <br>
 
-### Deleting a person
+### Commands Testing
 
-1. Deleting a person while all persons are being shown
+#### Help Command
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. One person in the list has Student ID `12345678`.
+**Opening the help window**
+* **Test case:** `help`
+* **Expected:** The help window opens, displaying a comprehensive list of available commands and their usage.
 
-    2. Test case: `delete 12345678`<br>
-       Expected: Person with Student ID `12345678` is deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+**Using the help button**
+* **Test case:** Click the "Help" button in the application GUI.
+* **Expected:** The help window opens, displaying a comprehensive list of available commands and their usage.
 
-    3. Test case: `delete 1234 5678`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+#### Add Command
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is a Student ID that no student in the list has)<br>
-       Expected: Similar to previous.
+**Adding a valid person**
+* **Test case:** `add 12345678 n/John Doe p/91234567 e/johndoe@example.com a/123 Example Street c/Computer Science r/Student`
+* **Expected:** A new contact is added with the specified details. The list now includes the new contact, and a success message is shown.
 
-2. Deleting a person while only one person is being shown
+**Adding a duplicate person**
+* **Prerequisites:** The person to add already exists in the list with the same Student ID `12345678`.
+* **Test case:** `add 12345678 n/John Doe p/91234567 e/johndoe@example.com a/123 Example Street c/Computer Science r/Student`
+* **Expected:** The addition fails, and an error message about the duplicate Student ID is shown.
 
-    1. Prerequisites: Filter persons using the `filter` command until only one person remains. Multiple persons in the list. Person that remains has Student ID `12345678`. One person in the list has Student ID `11111111`
+---
 
-    2. Test case: `delete 12345678`<br>
-       Expected: Person with Student ID `12345678` is deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated. List of persons shown is now blank.
+#### Edit Command
 
-    3. Test case: `delete 11111111`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+**Editing an existing person**
+* **Prerequisites:** List contains a person with Student ID `12345678`.
+* **Test case:** `edit 12345678 p/98765432`
+* **Expected:** The contact's phone number is updated to `98765432`. The updated details are shown in the success message.
 
-3. Deleting a person while no persons are in the list
+**Editing a non-existing person**
+* **Prerequisites:** List does not contain a person with Student ID `00000000`
+* **Test case:** `edit 00000000 p/98765432`
+* **Expected:** The edit fails, and an error message about the non-existent Student ID is shown.
 
-    1. Prerequisites: Delete all persons in the list using the `clear` command.
+**Editing with invalid input**
+* **Test case:** `edit 12345678 p/invalidPhoneNumber`
+* **Expected:** The edit fails, and an error message about the invalid phone number format is shown.
 
-    2. Test case: `delete 12345678`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+---
+
+#### Filter Command
+
+**Filter by name**
+* **Test case:** `filter n/John`
+* **Expected:** The list shows all persons with "John" in their name. A success message is shown.
+
+**Filter by course**
+* **Test case:** `filter c/Computer Science`
+* **Expected:** The list shows all persons enrolled in "Computer Science." A success message is shown.
+
+**Filter by multiple attributes**
+* **Test case:** `filter n/John c/Computer Science`
+* **Expected:** An error message about invalid multiple filter conditions is shown.
+
+---
+
+#### Module Command
+
+**Adding a module to an existing person**
+* **Prerequisites:** List contains a person with Student ID `12345678`.
+* **Test case:** `module 12345678 m/CS2103T`
+* **Expected:** The module "CS2103T" is added to the person's module list. A success message is shown.
+
+**Adding a duplicate module**
+* **Prerequisites:** The person already has "CS2103T" as a module.
+* **Test case:** `module 12345678 m/CS2103T`
+* **Expected:** The addition fails, and an error message about the duplicate module is shown.
+
+---
+
+#### Grade Command
+
+**Adding a grade to a module**
+* **Prerequisites:** The person with Student ID `12345678` has "CS2103T" in their module list.
+* **Test case:** `grade 12345678 m/CS2103T g/A`
+* **Expected:** The grade "A" is assigned to "CS2103T." A success message is shown.
+
+**Adding a grade to a non-existent module**
+* **Test case:** `grade 12345678 m/CS9999 g/B`
+* **Expected:** The addition fails, and an error message about the non-existent module is shown.
+
+**Adding an invalid grade**
+* **Test case:** `grade 12345678 m/CS2103T g/Z`
+* **Expected:** The addition fails, and an error message about the invalid grade is shown.
+
+---
+
+#### Find Command
+
+**Finding an existing person**
+* **Test case:** `find 12345678`
+* **Expected:** The contact details of the person with Student ID `12345678` are shown in the result panel.
+
+**Finding a non-existing person**
+* **Test case:** `find 00000000`
+* **Expected:** An error message about the non-existent Student ID is shown.
+
+---
+
+#### Clear Command
+
+**Clearing all entries**
+* **Test case:** `clear`
+* **Expected:** All persons are removed from the list. A success message is shown.
+
+---
+
+#### Exit Command
+
+**Exiting the application**
+* **Test case:** `exit`
+* **Expected:** The application closes successfully without errors.
+
+---
+
+#### Navigating Command History
+**Navigating to previous commands**
+* **Test case:** Execute several successful commands (e.g., `list`, `add 12345678 n/John Doe p/91234567 e/johndoe@example.com a/123 Example Street c/Computer Science r/Student`, `filter n/John`). 
+Then, press the UP arrow key in the Command Box.
+* **Expected:** Each press of the UP arrow key navigates backward through the previously executed commands, displaying them in the Command Box.
+
+**Navigating to next commands**
+* **Prerequisites:** Use the UP arrow key to navigate to a previous command in the Command Box.
+* **Test case:** Press the DOWN arrow key.
+* **Expected:** Each press of the DOWN arrow key navigates forward through the command history until the most recent command is displayed. 
+If no newer commands exist, the Command Box becomes empty.
+
 
 <br>
 
 ### Saving data
 
-1. Dealing with missing data files
+#### Dealing with missing data files
 
-    1. To simulate a missing file, in the same folder as the jar file, navigate to the `data` folder and delete the `address.json` file in the folder.
+1. To simulate a missing file, in the same folder as the jar file, navigate to the `data` folder and delete the `address.json` file in the folder.
 
-    2. Launch EduContacts by double-clicking the jar file.<br>
-       Expected: EduContacts is populated by a set of default list of persons. A new `address.json` file will be created in the `data` folder after closing the app or executing a command.
+2. Launch EduContacts by double-clicking the jar file.<br>
+   Expected: EduContacts is populated by a set of default list of persons. A new `address.json` file will be created in the `data` folder after closing the app or executing a command.
 
-2. Dealing with corrupted data files
+---
 
-    1. To simulate a corrupted file, navigate to the `data` folder and remove a curly brace at the end of the file.
+#### Dealing with corrupted data files
 
-    2. Launch EduContacts by double-clicking the jar file.<br>
-       Expected: EduContacts has a blank list of persons. A new `address.json` file will be created in the `data` folder after closing the app or executing a command.
+1. To simulate a corrupted file, navigate to the `data` folder and remove a curly brace at the end of the file.
+
+2. Launch EduContacts by double-clicking the jar file.<br>
+   Expected: EduContacts has a blank list of persons. A new `address.json` file will be created in the `data` folder after closing the app or executing a command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -777,28 +772,211 @@ Our project requires a relative high level of understanding of the code base. Du
 
 ## **Appendix: Planned Enhancements**
 
-### Data archiving
+### **Known Issues**
 
-* Description: Allow users to move inactive or irrelevant entries to an archive.
-* Benefits:
+The following are current known issues with the application that have been identified. The implementation for the fixes
+for these issues have been deferred for future iterations due to certain considerations that will be elaborated
+in further detail for each issue.
+
+#### Fix `help` command popup window issue
+* **Known Issue:** On some platforms (especially MacOS), when using the application in full screen,
+running the `help` command and closing the popup window repeatedly in quick succession may cause the application
+to hang or crash.
+* **Enhancement:** 
+  * Improve the reliability and robustness of the help command by implementing 
+  better resource management and concurrency handling. 
+  * Note that the decision to move the help window away from being a popup and instead display it within the main window was
+    considered, but ultimately rejected as the team feels that the help page adds more value when it is outside of the
+    main application GUI, so that users can reference it easily.
+* **Benefits:**
+    * Enhances the overall user experience by preventing application crashes, ensuring smooth and 
+  uninterrupted usage of the application.
+    * Helps future iterations by laying the groundwork for robust window management, 
+  potentially benefiting other UI-related commands.
+* **Justification for Deferral:**
+    * The issue occurs only under specific conditions (repeated execution of the help command in quick succession 
+  while in full screen), making it a relatively low-priority bug compared to other critical 
+  functionalities of the application.
+    * Fixing this issue would require a significant amount of effort to implement comprehensive resource management and 
+  concurrency controls, potentially diverting time and resources away from higher-priority enhancements.
+    * The current implementation is sufficient for most standard use cases, and addressing this issue can be deferred 
+  to a future iteration when higher-priority tasks are completed.
+
+### **Current Feature Flaws**
+
+The following are current feature flaws related to the design of the application that have been identified. These 
+feature flaws are not critical to the usability of the application for its intended use case, but rather highlight
+potential mis-steps in the design process of the application by the development team. 
+
+The implementation for the planned enhancements required to improve these feature flaws have been deferred for future iterations as the 
+development team feels that the effort required to fix these feature flaws outweighs their value add 
+to the user at this current stage of development.
+
+More details are included for each feature flaw below.
+
+#### Overly general error message
+* **Feature Flaw:** Certain error messages provided as feedback to the user could be more specific or helpful. 
+Examples include (non-exhaustive):
+  * "Invalid command format" should not be used so extensively, and instead serve as a catch-all.
+    * `edit edit xxx` can have error message "Duplicate command word: `edit`".
+    * `find ID ID` can have error message "Duplicate `ID` detected, only one allowed".
+    * `filter c/Computer Science n/Crowe` can have error message "Only one filter condition allowed".
+  * "Unknown Command" can be more helpful.
+    * `test` can have error message "Unknown Command: `test`. Type `help` for list of commands.".
+* **Enhancement:** Introduce a more granular exception handling mechanism to differentiate error scenarios and 
+provide tailored error feedback. This includes categorizing command errors (e.g., syntax errors, duplicate arguments 
+etc.) and defining specific messages that clearly indicate the nature of the issue to users.
+* **Benefits:**
+  * Improves user experience by providing clearer and more actionable error messages, reducing user confusion 
+  and frustration when entering incorrect commands.
+  * Enhances usability for new users who may rely heavily on accurate feedback to 
+  learn the application’s command syntax, reducing the learning curve.
+* **Justification for Deferral:**
+  * Some of the error messages act as functional placeholders for future planned features that 
+  have yet to be implemented, (e.g. multiple filter conditions). 
+  * Since error messages are not necessarily "wrong", refining the current system can be safely deferred 
+  to a future iteration when more critical features and enhancements have been implemented.
+  * Developing a granular exception handling system requires substantial effort, including analyzing all commands, 
+  categorizing errors, and designing specific error messages. This would consume time better spent on higher-priority 
+  features. Additionally, implementing this enhancement when the application’s core feature set is more stable would 
+  ensure that the effort is more worthwhile, as it would reduce the need for constant repeated modifications to the 
+  error-handling system each time core features are tweaked.
+
+#### StudentID as duplicate detection mechanism
+* **Feature Flaw:** All contacts are currently identified by their StudentID (the development team only considers 
+  student teaching assistants as tutors for now).
+* **Enhancement:** Introduce a more robust identification mechanism outside of student ID, that distinguishes between students
+and other contact types.
+* **Benefits:**
+  * Enhances flexibility in the application, allowing it to accommodate a broader range of use cases, such as 
+  saving contacts of full-time staff, external collaborators, or other non-student roles.
+  * Eliminates the reliance on workarounds like dummy `StudentID`s, ensuring data integrity and reducing confusion 
+  for users who manage diverse types of contacts.
+  * Supports scalability by preparing the application for future features or expansions that require 
+  differentiation between contact roles.
+* **Justification for Deferral:**
+  * Implementing this enhancement requires a substantial refactoring of the `Model`, `Storage` and `Logic` components 
+  to introduce a more flexible contact identification and classification mechanism. This involves significant 
+  structural changes, including updating data representation and storage, parsing logic, as well as 
+  validation processes.
+  * The current system, while not ideal, provides sufficient functionality for managing students and student tutors,
+  which is the primary use case. Functionality for extended use cases are also possible with workarounds.
+
+#### `filter` command
+* **Feature Flaw:**
+  * `filter` command currently only supports one condition
+  * Partial/Full matching for `filter` command depends on the field to be filtered.
+* **Enhancement:**
+  * Implement filtering for multiple conditions, with toggle feature to choose between AND (strict search) vs OR (broad search) constraints.
+  * Implement toggle feature to filter based on partial or full matching.
+* **Benefits:**
+  * Allows users to perform more complex and precise searches, improving the overall utility of the filter command.
+  * The ability to toggle between AND and OR constraints enables users to adapt the search behavior based on their 
+  specific needs, such as finding contacts matching all conditions (strict search) or any condition (broad search).
+  * Introducing a toggle for partial vs full matching ensures uniformity and clarity in how the filter command operates, 
+  reducing user confusion and enhancing predictability.
+* **Justification for Deferral:**
+  * The current implementation of the filter command, while limited, provides sufficient functionality for 
+  basic searches, making this enhancement a lower-priority task.
+  * Implementing support for multiple conditions and toggle options would require significant non-trivial changes to the 
+  `Logic` and `Parser` components to handle advanced search constraints efficiently.
+  * The effort required to implement these enhancements outweighs the immediate benefit, especially when 
+  weighed against higher-priority improvements or bug fixes currently in scope.
+
+#### Index functionality
+* **Feature Flaw:** The current utility for indexing contacts is mostly as a visual aid. Commands like `edit` and `delete`
+could utilise contact indexes to perform operations, instead of just using ID. 
+* **Enhancement:** Implement index as an alternative form of contact referencing, apart from ID.
+* **Benefits:**
+  * Reduces the likelihood of errors caused by manually entering long or complex IDs, streamlining the execution of commands like edit and delete.
+  * Provides an alternative method for referencing contacts, allowing users to choose between index and ID based on convenience or preference.
+* **Justification for Deferral:** 
+  * Implementing index-based referencing requires substantial changes to the command format and `Logic` component, 
+  including updates to parsing and validation mechanisms to support both index and ID inputs seamlessly.
+  * The current ID-based referencing, while less flexible, is functional and sufficient for most use cases, 
+  making this enhancement a lower-priority task.
+
+#### Fixed role types
+* **Feature Flaw:** 
+  * Currently, only 2 role types are supported (`Student` and `Tutor`).
+  * Only one role is allowed per contact, causing ambiguity in the case where a student in one class is a tutor in another class.
+* **Enhancement:** 
+  * Update the role types supported to include specific roles such as `Colleague`, as well as general role types that 
+  are customizable by the user.
+  * Allow contacts to have multiple roles as long as it makes sense (e.g. `Student` and `Tutor` is possible with
+    part-time student teaching assistants, but not `Student` and `Colleague` etc.).
+* **Benefits:**
+  * Users can organize and manage contacts more effectively by categorizing them into specific roles, reducing ambiguity and making the contact list more intuitive.
+  * Supporting additional roles prepares the application for future enhancements, such as role-specific features (e.g., parent notifications or colleague collaboration tools).
+  * Allowing users to define a generic “Other” role provides them with the freedom to handle unique or unforeseen scenarios, increasing user satisfaction and engagement.
+* **Justification for Deferral:**
+  * Implementing support for multiple and customizable roles requires significant modifications to the 
+  `Model`, `Logic`, and `Storage` components, as well as updates to validation and command parsing.
+  * The current implementation meets the needs of the majority of users by supporting essential roles 
+  (`Student` and `Tutor`) and enabling basic role tagging functionality, making this a lower-priority enhancement.
+
+
+#### Fixed grading system
+* **Feature Flaw:** The application currently only supports a fixed, letter-based grading system. 
+* **Enhancement:** Introduce a customizable grading system, allowing users to define their own grading schemes 
+(e.g., Pass/Fail, numerical scores, or specific grading scales used in different institutions).
+* **Benefits:** Enables users to tailor the grading system to suit the requirements of different institutions, courses, or unique assessment systems.
+* **Justification for Deferral:**
+  * Implementing a customizable grading system involves significant changes across the `Model`, `Storage`, `UI` and `Logic` components to 
+    allow flexible input validation, data storage, and display formatting for grades.
+  * The current fixed grading system covers the majority of standard use cases and is sufficient for most users, 
+  making this a lower-priority enhancement compared to other core functionalities.
+
+#### Fixed `Module` utility
+* **Feature Flaw:** 
+  * `Module` utility only supports users tracking contacts from across various modules that they teach.
+  * This may not add value to a small subset of users who, for example, only teach a particular module. These users may 
+  instead want to use this feature as a way to track student assignment grades or class attendance.
+* **Enhancement:** 
+  * Expand the Module utility to allow customization based on user needs, such as tracking individual student 
+  assignment grades, attendance, or specific module-related details.
+  * Provide users with a flexible tagging or attribute system for modules to accommodate varying use cases.
+* **Benefits:** 
+  * Allows users to adapt the Module utility to suit specific workflows, such as managing assignment grades or monitoring attendance.
+  * Prepares the application for potential expansions, such as module-level analytics or reporting features.
+* **Justification for Deferral:**
+  * Implementing this enhancement would require significant modifications across the `Model`, `Storage`, `UI` and `Logic` components, 
+  including changes to data structures and input validation to accommodate the added flexibility.
+  * The current implementation, while less customizable, sufficiently covers the primary use case of 
+  tracking multiple modules and is functional for the majority of users, making this enhancement a lower-priority task.
+
+
+### **New Features**
+
+#### `Undo` command
+* **Description:** Allows users to revert the most recent change made to the application’s data.
+* **Benefits**
+  * Provides users with the flexibility to correct mistakes quickly without manually re-entering data or commands.
+  * Minimizes the impact of accidental commands (e.g., mistakenly deleting or editing a contact).
+  * Reduces frustration and saves time for users by eliminating the need to redo lengthy or complex data modifications.
+
+#### Data archiving
+
+* **Description:** Allow users to move inactive or irrelevant entries to an archive.
+* **Benefits:**
     * Reduces clutter in the main data set, making it easier to manage and navigate active records without losing historical data.
     * Lower the load on real-time data processing by isolating inactive records.
     * Retain archived data for historical records or compliance requirements.
     * Provide a safe way to store inactive data without risking deletion or loss.
 
-### Importing contact data
+#### Importing contact data
 
-* Description: Allow users to import contact data from multiple formats (e.g. CSV, vCard)
-* Benefits:
+* **Description:** Allow users to import contact data from multiple formats (e.g. CSV, vCard)
+* **Benefits:**
     * Saves time and effort by allowing users to easily populate the app with data, eliminating the need for manual data entry.
     * Maintain consistent contact records across different applications and devices.
     * Simplify the process for new users by letting them import contacts directly.
     * Enable users to restore contacts from external files in case of data loss.
 
-### Exporting contact data
+#### Exporting contact data
 
-* Description: Allow users to export contact data to multiple formats (e.g. CSV, vCard)
-* Benefits:
+* **Description:** Allow users to export contact data to multiple formats (e.g. CSV, vCard)
+* **Benefits:**
     * Allow users to easily transfer their contact information to other applications or storage solutions.
     * Provide users with the ability to create backups of their contact data.
     * Enable users to share their contact lists with others.
