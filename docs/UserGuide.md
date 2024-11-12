@@ -39,11 +39,17 @@ faster than traditional GUI apps.
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the sections below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Overview
+TalentConnect offers management of multiple entities that work together to better help our users. To facilitate this, the commands in app can be categorized into two types, entity specific and non-entity specific. For entity specific commands, it is required to supply an entity after the action in the command. e.g. `add contact ...` command has an entity `contact` after the action `add`. 
+
+The valid entities in the system are `contact`, `job`, `company` and `all`. The first three of those refers to a specific entity, while `all` is used in certain commands to refer to all three entities. Do note that not all commands/actions work on all valid entities, kindly refer to [Command Summary](#command-summary) for the summary of what entities are supported in each command/action.
+
+Entities `contact`, `job`, `company` are displayed in their corresponding lists, as shown below. 
+![Overview](images/Overview.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -74,7 +80,7 @@ faster than traditional GUI apps.
 </div>
 
 ## Contact Management
-Contacts represent candidates applying for job positions. Each contact can have details such as name, phone, email, and relevant skills, aiding in recruitment processes.
+Contacts represent candidates applying for job positions. Each contact can have details such as name, phone, email, and relevant skills, aiding in recruitment processes. A contact's role represents the job that they are applying for, and is used when screening contacts with a certain job. A contact is uniquely identified by their phone number and email, therefore no two contacts can share the same phone number or email. 
 
 * Add Contact: `add contact n/NAME p/PHONE e/EMAIL r/ROLE [s/SKILL]…​`
 * Edit Contact: `edit contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SKILL]…​`
@@ -87,9 +93,6 @@ Contacts represent candidates applying for job positions. Each contact can have 
 Adds a contact to the address book.
 
 Format: `add contact n/NAME p/PHONE e/EMAIL r/ROLE [s/SKILL]…​`
-
-* A contact's role represents the job that they are applying for,
-  and is used when screening contacts with a certain job.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A contact can have any number of skills (including 0)
@@ -160,7 +163,7 @@ Examples:
 
 
 ## Company Management 
-Companies are organizations that provide job positions. Each company can have attributes such as address, billing date, and contact details, facilitating job creation and matching.
+Companies are organizations that provide job positions. Each company can have attributes such as address, billing date, and contact details, facilitating job creation and matching. A company is uniquely identified by its name (case-insensitive). 
 
 * Add Company: `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE`
 * View Company: `view company INDEX`
@@ -173,8 +176,6 @@ Adds a company to the address book.
 
 Format: `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE`
 
-* The name of the company is case-insensitive when used to identify duplicates
-  and to associate jobs to companies.
 * The billing date is a number from 1 to 28 that signifies the day of the month
   (with reference to the start of the month) that a company will pay their
   employees' salaries.
@@ -232,14 +233,12 @@ Examples:
 * If the company at index 1 has a job attributed to it, `delete company 1` will also delete the job.
 
 ## Job Management
-Jobs are positions offered by companies that contacts can apply for. Jobs contain details like monthly salary, description, and requirements, enabling precise candidate matching.
+Jobs are positions offered by companies that contacts can apply for. Jobs contain details like monthly salary, description, and requirements, enabling precise candidate matching. A job is uniquely identified by its name and company. Multiple openings for the same job position at a company can be represented using a single job, hence duplicates are not allowed.
 
 * Add Job: `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
 * List Jobs: `list job`
 * Delete Job: `delete job INDEX`
 * Screen Contacts by Job: `screen job INDEX`
-* Match Contact to Job: `match CONTACT_INDEX JOB_INDEX`
-* Unmatch Contact from Job: `unmatch CONTACT_INDEX JOB_INDEX`
 
 ### Adding a job : `add job`
 
@@ -248,7 +247,6 @@ Adds a job to the address book.
 Format: `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​`
 
 * `COMPANY` must match the name of an existing company in the address book, ignoring case sensitivity.
-* Multiple openings for the same job position at a company can be represented using a single job, hence duplicates are not allowed.
 * A job with the same `NAME` and `COMPANY` as an existing job is considered a duplicate and cannot be added.
 * It is acceptable for a job to have the same `NAME` if it has a different `COMPANY` and vice versa.
 
@@ -285,7 +283,7 @@ Examples:
 
 ### Screening contacts by a job : `screen job`
 
-Screens the list of contacts in the address book with the job specified.
+Screens the list of contacts in the address book with the job specified.  
 
 Format: `screen job INDEX`
 
@@ -302,6 +300,17 @@ Examples:
   show a contact with role `Software Engineer`.
 * If the job at index 2 has name `Data Scientist`, `screen job 2` will
   show a contact with role `data scientist`.
+
+## Other Commands
+Additional commands offer general functionality to manage and analyze data across TalentConnect, including clearing data, generating statistics, and accessing help.
+
+* Match Contact to Job: `match CONTACT_INDEX JOB_INDEX`
+* Unmatch Contact from Job: `unmatch CONTACT_INDEX JOB_INDEX`
+* List All Entities: `list all`
+* View Statistics: `stats`
+* Clear Data: `clear`
+* Exit Application: `exit`
+* Help: `help`
 
 ### Matching a contact with a job : `match`
 
@@ -322,8 +331,6 @@ Examples:
 * `match 1 2` will match the contact at index 1 and job at index 2 together.
 * `match 2 3` will match the contact at index 2 and job at index 3 together.
 
-
-
 ### Undoing a matched contact and job : `unmatch`
 
 Undoes a matching between a contact and job.
@@ -342,15 +349,6 @@ Examples:
   the job at index 2 if they were matched beforehand.
 * If `match 1 2` was called previously, calling `unmatch 1 2` will undo the matching
   if the shown list was in the same condition as when the previous command was called.
-
-## Other Commands
-Additional commands offer general functionality to manage and analyze data across TalentConnect, including clearing data, generating statistics, and accessing help.
-
-* List All Entities: `list all`
-* View Statistics: `stats`
-* Clear Data: `clear`
-* Exit Application: `exit`
-* Help: `help`
 
 ### Listing all entities : `list all`
 
@@ -408,10 +406,6 @@ If your changes to the data file makes its format invalid, TalentConnect will di
 Furthermore, certain edits can cause the TalentConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -430,26 +424,21 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                                 |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Contact**    | `add contact n/NAME p/PHONE e/EMAIL r/ROLE [s/SKILL]…​` <br> e.g., `add contact n/James Ho p/22224444 e/jamesho@example.com r/copywriter s/MSWord`                               |
-| **Add Job**        | `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​` <br> e.g., `add job n/Software Engineer c/Google s/2000 d/Needs to know AI r/Python`                 |
-| **Add Company**    | `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE` <br> e.g., `add company n/Google a/70 Pasir Panjang Rd #03-71 Mapletree Business City II, Singapore 117371 b/5 p/65218000` |
-| **List Contacts**  | `list contact`                                                                                                                                                                   |
-| **List Jobs**      | `list job`                                                                                                                                                                       |
-| **List Companies** | `list company`                                                                                                                                                                   |
-| **List All**       | `list all`                                                                                                                                                                       |
-| **Clear**          | `clear`                                                                                                                                                                          |
-| **Delete Contact** | `delete contact INDEX`<br> e.g., `delete contact 3`                                                                                                                              |
-| **Delete Job**     | `delete job INDEX` <br> e.g., `delete job 2`                                                                                                                                     |
-| **Delete Company** | `delete company INDEX` <br> e.g., `delete company 2`                                                                                                                             |
-| **Screen Job**     | `screen job INDEX` <br> e.g., `screen job 1`                                                                                                                                     |
-| **Match**          | `match CONTACT_INDEX JOB_INDEX` <br> e.g., `match 1 2`                                                                                                                           |
-| **Unmatch**        | `unmatch CONTACT_INDEX JOB_INDEX` <br> e.g., `unmatch 3 2`                                                                                                                       |
-| **View Company**   | `view company INDEX` <br> e.g., `view company 1`                                                                                                                                 |
-| **Edit Contact**   | `edit contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SKILL]…​`<br> e.g.,`edit contact 2 n/James Lee e/jameslee@example.com`                                                       |
-| **Find Contact**   | `find contact KEYWORD [MORE_KEYWORDS]`<br> e.g., `find contact James Jake`                                                                                                       |
-| **Help**           | `help`                                                                                                                                                                           |
-| **Exit**           | `exit`                                                                                                                                                                           |
-| **Stats**          | `stats`                                                                                                                                                                          |
+| Action          | Format, Examples                                                                                                                                                                 |
+|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Contact** | `add contact n/NAME p/PHONE e/EMAIL r/ROLE [s/SKILL]…​` <br> e.g., `add contact n/James Ho p/22224444 e/jamesho@example.com r/copywriter s/MSWord`                               |
+| **Add Job**     | `add job n/NAME c/COMPANY s/MONTHLY_SALARY d/DESCRIPTION [r/REQUIREMENT]…​` <br> e.g., `add job n/Software Engineer c/Google s/2000 d/Needs to know AI r/Python`                 |
+| **Add Company** | `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE` <br> e.g., `add company n/Google a/70 Pasir Panjang Rd #03-71 Mapletree Business City II, Singapore 117371 b/5 p/65218000` |
+| **List**        | `list [contact/job/company/all]`                                                                                                                                                 |
+| **Clear**       | `clear`                                                                                                                                                                          |
+| **Delete**      | `delete [contact/job/company] INDEX`<br> e.g., `delete contact 3`, `delete job 2`, `delete company 2`                                                                            |
+| **Screen**      | `screen [job] INDEX` <br> e.g., `screen job 1`                                                                                                                                   |
+| **Match**       | `match CONTACT_INDEX JOB_INDEX` <br> e.g., `match 1 2`                                                                                                                           |
+| **Unmatch**     | `unmatch CONTACT_INDEX JOB_INDEX` <br> e.g., `unmatch 3 2`                                                                                                                       |
+| **View**        | `view [company] INDEX` <br> e.g., `view company 1`                                                                                                                               |
+| **Edit**        | `edit [contact] INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SKILL]…​`<br> e.g.,`edit contact 2 n/James Lee e/jameslee@example.com`                                                     |
+| **Find**        | `find [contact] KEYWORD [MORE_KEYWORDS]`<br> e.g., `find contact James Jake`                                                                                                     |
+| **Help**        | `help`                                                                                                                                                                           |
+| **Exit**        | `exit`                                                                                                                                                                           |
+| **Stats**       | `stats`                                                                                                                                                                          |
 
