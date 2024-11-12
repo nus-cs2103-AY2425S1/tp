@@ -197,6 +197,19 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### 4. Find command
+The `find` command is used to find contacts whose name match the specified keyword given by the user.
+
+To execute the `find` command, users must enter a valid `KEYWORD` parameter, by ensuring that the `KEYWORD` parameter is not empty.
+
+The sequence diagram below shows a high-level view of how the `find` operation works when the user inputs `find bob`.
+
+<img src="images/FindSequenceDiagram.png" width="750" />
+
+The activity diagram below shows the flow of the `find` operation.
+
+<img src="images/FindActivityDiagram.png" width="750" />
+
 ---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
