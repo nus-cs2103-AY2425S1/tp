@@ -78,27 +78,27 @@ Here are some common scenarios to help you understand how to use Bridal Boss:
    [↗ See vieww command details](#viewing-wedding-details-vieww)
 
 #### 2. Managing Vendors for a Wedding
-1. Add vendors as contacts:
-   `add n/John Doe p/91234567 e/john@photo.com a/456 River Valley r/photographer`
+1. Add vendors as contacts:<br>
+   `add n/John Doe p/91234567 e/john@photo.com a/456 River Valley r/photographer`<br>
    `add n/Mary Tan p/82345678 e/mary@flowers.com a/789 Garden Road r/florist`
 
-2. Assign them to a wedding (use `list` first to see indices):
-   `assign John Doe w/1`
-   `assign Mary Tan w/1`
+2. Assign them to a wedding (use `list` first to see indices):<br>
+   `assign John Doe w/1`<br>
+   `assign Mary Tan w/1`<br>
    [↗ See assign command details](#assigning-a-person-assign)
 
 3. Check wedding assignments:
    `vieww 1`
 
 #### 3. Making Changes to Existing Entries
-1. Update contact details:
-   `edit John Doe p/91234599       # Update phone number`
-   `edit Mary Tan a/100 New Road   # Update address`
+1. Update contact details:<br>
+   `edit John Doe p/91234599       # Update phone number`<br>
+   `edit Mary Tan a/100 New Road   # Update address`<br>
    [↗ See edit command details](#editing-a-person-edit)
 
-2. Modify wedding details:
-   `editw w/1 d/2024-12-31         # Change date`
-   `editw w/1 v/New Venue          # Change venue`
+2. Modify wedding details:<br>
+   `editw w/1 d/2024-12-31         # Change date`<br>
+   `editw w/1 v/New Venue          # Change venue`<br>
    [↗ See editw command details](#editing-a-wedding-editw)
 
 #### 4. Finding and Filtering Contacts
@@ -106,9 +106,9 @@ Here are some common scenarios to help you understand how to use Bridal Boss:
    `find john                      # Finds "John" or "John Doe"`
    [↗ See find command details](#finding-persons-by-name-find)
 
-2. Filter by multiple criteria:
-   `filter r/photographer          # All photographers`
-   `filter n/John r/photographer   # Johns or photographers`
+2. Filter by multiple criteria:<br>
+   `filter r/photographer          # All photographers`<br>
+   `filter n/John r/photographer   # Johns or photographers`<br>
    [↗ See filter command details](#filtering-persons-filter)
 
 ### Common Mistakes to Avoid
@@ -116,15 +116,15 @@ Here are some common scenarios to help you understand how to use Bridal Boss:
 1. ❌ Creating a wedding without adding the client first
    `addw n/Beach Wedding c/John Doe   # Fails if John isn't a contact`
 
-   ✅ Correct approach:
-   `add n/John Doe p/91234567 e/john@example.com a/123 Main St`
+   ✅ Correct approach:<br>
+   `add n/John Doe p/91234567 e/john@example.com a/123 Main St`<br>
    `addw n/Beach Wedding c/John Doe`
 
 2. ❌ Trying to delete a client who has a wedding
    `delete John   # Fails if John has an active wedding`
 
-   ✅ Correct approach:
-   `deletew 1     # Delete the wedding first`
+   ✅ Correct approach:<br>
+   `deletew 1     # Delete the wedding first`<br>
    `delete John   # Then delete the contact`
 
 3. ❌ Assigning a client to their own wedding as vendor
