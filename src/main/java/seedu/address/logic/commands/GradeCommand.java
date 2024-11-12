@@ -23,7 +23,8 @@ public class GradeCommand extends Command {
 
     public static final String COMMAND_WORD = "grade";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a course-specific grade to a student. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a course-specific grade to an existing "
+            + "module of the person identified.\n"
             + "Parameters: "
             + "ID "
             + PREFIX_MODULE + "MODULE "

@@ -749,7 +749,24 @@ If no newer commands exist, the Command Box becomes empty.
 
 ## **Appendix: Effort**
 
-_{to work on in the future}_
+### Achievements
+1. As EduContacts is a CLI-based application, we have added the ability for users to navigate through their previous commands using the up and down arrow keys. This helps users accomplish repetitive tasks, e.g. grading a module for multiple persons in EduContacts, way quicker than they would be able to without this functionality.<br><br>
+2. We have decided to use a person's student ID as a unique identifier for persons in EduContacts, instead of index like in AB3. The usage of student ID to perform tasks is more intuitive for teachers, our target user group. This therefore optimises EduContacts for teachers.<br><br>
+3. We have expanded on the original find command to filter based on course and modules, in addition to name. This command has been renamed to filter to better reflect the functionality of the command.<br><br>
+4. We have also refactored the original find command to instead display the full details of a person in EduContacts in a separate panel in the GUI. This allows us to be more selective with what information we display in the PersonCard. We can therefore only display information we believe teachers should be able to retrieve at a glance, e.g. names, student IDs, thus further optimising EduContacts for teachers.<br><br>
+5. We have also made various enhancements to the GUI:
+   - The first enhancement made was the help page. AB3's help page was simply a link to the User Guide, which is not user-friendly. We have therefore taken the liberty of changing the help page to instead contain a summary of the commands supported by EduContacts, including their formats and example usages.
+   - We then updated the GUI to include a separate panel to display student details when the find command is executed.
+
+### Effort Required
+We have put in a significant amount of effort in this project, with close to 2,000 commits over 15,000 lines of code contributed. We estimate that our effort for the project is about 50% of that spent on creating AB3.
+
+### Challenges Faced
+1. The first major roadblock in our project was storing modules in JSON format. Modules for a Person object is stored as a Collection, much like Tags in AB3. However, modules also have a Grade field, whereas Tags in AB3 do not have. This added a layer of complexity that we did not expect, and a longer amount of time had to be invested to work out the issue.<br><br>
+2. The second challenge we faced was using student ID as a unique identifier for persons in EduContacts instead of index. This task was more complicated that we initially anticipated, as there were many unforeseen use cases that we had to take into consideration. This includes duplicate student ID handling, handling cases where a person with a specified student ID exists in EduContacts but not in the currently displayed list, and so on. A lot of scrutinising and attention to detail was required to ensure our commands were bug-free and the command error messages displayed were correct. <br><br>
+
+### Difficulty Level
+Our project requires a relative high level of understanding of the code base. Due to the change to make student ID the unique identifier for persons in EduContacts, we needed a high level of understanding of how the various command parsers and argument tokenisers work in order to implement bug-free code.<br><br>Additionally, we had to have a good understanding of our JSON and the Jackson library worked in order to implement modules in our project.<br><br>Finally, we have also made numerous updates to the GUI, which was tough as we were all relatively new to JavaFX. We therefore rate the difficulty level of our project as medium to hard.
 
 --------------------------------------------------------------------------------------------------------------------
 

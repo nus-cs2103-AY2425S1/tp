@@ -21,11 +21,10 @@ public class ModuleCommand extends Command {
 
     public static final String COMMAND_WORD = "module";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to a student. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to a student.\n"
             + "Parameters: "
             + "ID "
-            + PREFIX_MODULE + "MODULE "
-            + "\n"
+            + PREFIX_MODULE + "MODULE\n"
             + "Example: " + COMMAND_WORD + " "
             + "12345678 "
             + PREFIX_MODULE + "CS2103T ";
