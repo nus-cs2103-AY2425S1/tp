@@ -699,8 +699,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 - **Application Status**:
     - **PENDING**: The internship application is currently in progress.
     - **REJECTED**: The user has rejected or been rejected from this internship application.
-    - **ACCEPTED**: The user has accepted the offer for this internship.
-
+    - **ACCEPTED**: The user has accepted the offer for this internship. <br></br>
 
 - **Action**: The task carried out by the HireMe application such as Add, Delete, Update entries.
 
@@ -1124,7 +1123,7 @@ on why the command is invalid. The error message could be more specific to state
    - Justification: By providing distinct error messages for each command, we improve the user experience by making error feedback more specific and actionable. Users will be able to identify errors related to each command easily, reducing potential confusion and enhancing usability. <br></br>
 
 7. **Improve chart UI**
-   <img src="images/chart-ui-bug.png" alt="chart-ui-bug">
+   <img src="images/chart-ui-bug.png" alt="chart-ui-bug"> <br></br>
    - Current behaviour: When there are multiple statuses with zero internship applications, not all status labels are shown. <br></br>
    - Planned enhancement: Remove chart labels for statuses with zero internship applications. <br></br>
    - Justification: This ensures a consistent and user-friendly chart view which makes it easier for users to interpret the chart. <br></br>
