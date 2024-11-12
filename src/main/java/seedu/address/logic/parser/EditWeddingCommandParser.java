@@ -12,7 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 
 /**
- * Edit Wedding command parser class
+ * Parses input arguments and creates a new EditWeddingCommand object.
  */
 public class EditWeddingCommandParser implements Parser<EditWeddingCommand> {
 
@@ -27,7 +27,6 @@ public class EditWeddingCommandParser implements Parser<EditWeddingCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE);
 
         Index index;
-
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {

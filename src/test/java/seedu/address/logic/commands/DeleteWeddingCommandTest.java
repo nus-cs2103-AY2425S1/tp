@@ -21,6 +21,10 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.wedding.Wedding;
 
+/**
+ * Contains tests for {@code DeleteWeddingCommand}.
+ */
+
 public class DeleteWeddingCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.Model;
 
 /**
- * Confirms whether user wants to clear the address book.
+ * Confirms whether the user wants to clear the address book.
  */
 public class ClearCommand extends Command {
 
