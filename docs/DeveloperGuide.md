@@ -686,16 +686,17 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open a terminal and `cd` into the folder with the jar file.
+
+   3. Run `java -jar contactcs.jar`. <br>
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by rerunning `java -jar contactcs.jar` in the terminal.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -709,18 +710,32 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete abc`<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Testing data persistence across sessions
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Add a new person using the `add` command.
 
-1. _{ more test cases …​ }_
+   1. Close the app.
+
+   1. Re-launch the app. <br>
+   Expected: The newly added person should still be present in the list.
+   
+   1. You can try out other data changing commands such as `delete`, `edit`, `clear`.
+
+1. Dealing with missing data file
+
+   1. Exit the address book, if it is running.
+   2. delete the `contactcs.json` file inside the folder named `data`. It is located in the same folder as the jar file.
+   3. Relaunch the app. <br>
+   Expected: The app should create a new `contactcs.json` file filled with sample data.
+
+### Undo/Redo
+
+1. 
 
 ## **Appendix: Planned Enhancements**
 **Team size**: 5
@@ -731,10 +746,10 @@ The current find command automatically assumes that user wants to search student
 Sometimes, user cannot remember the full module code, or wants to search over a wider range of modules, but the current implementation does not support that either,
 hence reducing the usefulness of this command.
 
-![point1 screenshot_1](images/Planned_Enhancements_Screenshots/Point1_1.png)
+![point1 screenshot_1](images/planned_ehancements_screenshots/Point1_1.png)
 (As shown in the screenshot, `find r/CS1101S` only matches contacts with role **CS1101S Student**, despite that there are 2 CS1101S professors in the sample data.)
 
-![point1 screenshot_2](images/Planned_Enhancements_Screenshots/Point1_2.png)
+![point1 screenshot_2](images/planned_ehancements_screenshots/Point1_2.png)
 (As shown in the screenshot, `find r/CS` results in error messages because construction of search query requires exact module code to work.)
 
 This limitation is due to our current system design which forces a role type to be assigned to an exact module code into the search query for the find command to execute,
@@ -742,10 +757,10 @@ we plan to adopt other ways of constructing the query to allow for more general 
 
 2. **Allow deletion of other optional data fields of a contact, using the current edit command approach.** Currently, only the description and tag fields can be deleted, by specifying the corresponding prefix followed by an empty string (For Example: `edit 9 t/` removes all tags, while `edit 9 d/` removes the description of the ninth contact in the current list). However, other optional fields such as the phone, email and address cannot be removed as of v1.6.
 
-![point2_screenshot_remove_description_example](images/Planned_Enhancements_Screenshots/Point2_RemoveDescriptionExample.png)
+![point2_screenshot_remove_description_example](images/planned_ehancements_screenshots/Point2_RemoveDescriptionExample.png)
 (As shown in the screenshot, `edit 9 d/` successfully removes description field from the ninth person in the current list.)
 
-![point2_screenshot_remove_email_example](images/Planned_Enhancements_Screenshots/Point2_RemoveEmailExample.png)
+![point2_screenshot_remove_email_example](images/planned_ehancements_screenshots/Point2_RemoveEmailExample.png)
 (As shown in the screenshot, `edit 9 e/` as an attempt to remove email from ninth person in the current list fails, because empty email field for edit command is not allowed.
 Similar issues happen when removing phone using `edit 9 p/` and removing address using `edit 9 a/`.)
 
@@ -760,7 +775,7 @@ For example, if the user attempts to execute `edit 1 d/For a/b testing`, the com
    - change the description of the first contact to `For`, and
    - add a new contact with description `b testing`. (refer to the screenshot below)
 
-![point3 screenshot](images/Planned_Enhancements_Screenshots/Point3.png)
+![point3 screenshot](images/planned_ehancements_screenshots/Point3.png)
 
 The current workaround is to add a non-whitespace character in front of the prefix (i.e. `edit 1 d/For 'a/b testing`), but this is not intuitive to the user.
 We plan to follow a more standard approach of using a backslash to escape the special prefixes.
@@ -769,7 +784,7 @@ More importantly, the parser will remove the backslash at the end of parsing, so
 4. **Enforce realistic role assignment for contacts.** Currently, a contact can have multiple roles, such as both "Professor" and "Student".
 This is unrealistic, as an individual is typically either a student or a professor, but not both.
 
-![point4_screenshot](images/Planned_Enhancements_Screenshots/Point4_ConflictingRoleExample.png)<br>
+![point4_screenshot](images/planned_ehancements_screenshots/Point4_ConflictingRoleExample.png)<br>
 (As shown in the screenshot, Royston is both a CS1101S professor and CS2100 student.)
 
 We plan to enforce stricter role assignment, ensuring that:
@@ -780,3 +795,8 @@ We plan to enforce stricter role assignment, ensuring that:
 This can be very troublesome if the user wants to execute the same command multiple times, or if the user wants to execute a similar command to the previous one.
 We plan to allow the user to navigate through the command history using the up and down arrows.
 
+7. **Reflect the true redo/undo states of the address book in the history command list.** Currently, the history command list only shows all data changing commands executed by the user and does not precisely reflect the current and history states of the address book.
+For example, if the user executes `delete 1`, then `delete 2`, then `undo`, then `delete 3`, the true history states are `[delete 1, delete 3]` since `delete 2` has been purged.
+However, the history command list will only show all data changing commands executed so far, (refer to the screenshot below) which is not accurate.
+Moreover, we plan to highlight the current state of the address book in the history command list, so that the user can easily identify the current state of the address book.
+![point7_screenshot](images/planned_ehancements_screenshots/Point7.png)
