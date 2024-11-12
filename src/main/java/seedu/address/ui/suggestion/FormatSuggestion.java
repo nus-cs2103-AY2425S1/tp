@@ -42,17 +42,17 @@ public class FormatSuggestion {
 
             StringBuilder remainingFormat = new StringBuilder();
 
-            // check if user type number for INDEX
+            // If user did not type a number for INDEX, there is no remaining format parts
             if (formatParts[0].equals("INDEX") && !typedParts[0].matches("\\d+")) {
                 return "";
             }
 
-            // check if user type alphabet for NAME
+            // If user did not type an alphabet for INDEX, there is no remaining format parts
             if (formatParts[0].equals("NAME") && !typedParts[0].matches("[a-zA-Z]+")) {
                 return "";
             }
 
-            // check if user type number or alphabet for INDEX/NAME
+            // If user did not type number or alphabet for INDEX/NAME, there is no remaining format parts
             if (formatParts[0].equals("INDEX/NAME") && !typedParts[0].matches("^[a-zA-Z0-9_.-]*$")) {
                 return "";
             }
@@ -61,7 +61,7 @@ public class FormatSuggestion {
             for (String formatPart : formatParts) {
                 boolean matched = false;
                 if (formatPart.equals("INDEX") || formatPart.equals("NAME") || formatPart.equals("INDEX/NAME")) {
-                    // Skip the INDEX and NAME part if a number has already been entered
+                    // Skip the INDEX or NAME part if a number has already been entered
                     continue;
                 }
 

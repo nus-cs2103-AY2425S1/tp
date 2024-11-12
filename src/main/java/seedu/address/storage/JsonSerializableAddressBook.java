@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -57,28 +56,27 @@ public class JsonSerializableAddressBook {
      * @throws IllegalValueException if wedding data integrity is violated.
      */
     private void validateWeddingIntegrity(List<Wedding> weddings) throws IllegalValueException {
-        List<Integer> validWeddings = weddings.stream().map(Wedding::hashCode).toList();
-        // Collect all valid ownWedding hashcodes
-        Set<Integer> validOwnWeddingHashes = new HashSet<>();
+        // Collect all valid wedding hash codes
+        Set<Integer> validWeddingHashCodes = weddings.stream()
+                .map(Wedding::hashCode)
+                .collect(Collectors.toSet());
+
         for (JsonAdaptedPerson person : persons) {
             int ownWeddingHash = person.getOwnWedding();
-            if (ownWeddingHash != 0) {
-                validOwnWeddingHashes.add(ownWeddingHash);
-            }
-        }
-        // Check all wedding hashcodes
-        for (Integer validOwnWeddingHash : validOwnWeddingHashes) {
-            if (!validWeddings.contains(validOwnWeddingHash)) {
+
+            // Check if own wedding hash is valid, ignore if 0 (unassigned)
+            boolean personIsClient = ownWeddingHash != 0;
+            boolean weddingHashCodeExists = validWeddingHashCodes.contains(ownWeddingHash);
+            if (personIsClient && !weddingHashCodeExists) {
                 throw new IllegalValueException(MESSAGE_CORRUPTED_WEDDING_DATA);
             }
-        }
 
-        // Check all weddingJobs hashcodes
-        for (JsonAdaptedPerson person : persons) {
+            // Validate each wedding job hash
             List<Integer> weddingJobs = person.getWeddingJobs();
-            if (weddingJobs != null && !weddingJobs.isEmpty()) {
+            if (weddingJobs != null) {
                 for (Integer weddingJobHash : weddingJobs) {
-                    if (!validOwnWeddingHashes.contains(weddingJobHash) || !validWeddings.contains(weddingJobHash)) {
+                    boolean weddingJobHashExists = validWeddingHashCodes.contains(weddingJobHash);
+                    if (!weddingJobHashExists) {
                         throw new IllegalValueException(MESSAGE_CORRUPTED_WEDDING_DATA);
                     }
                 }

@@ -70,7 +70,9 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         role = source.getRole().map(r -> r.roleName).orElse(null);
+        // If person is not a client, hashcode to represent own wedding is replaced by 0
         ownWedding = source.getOwnWedding() != null ? source.getOwnWedding().hashCode() : 0;
+        // Wedding jobs are stored as hashcodes
         weddingJobs.addAll(source.getWeddingJobs().stream()
                 .map(Wedding::hashCode)
                 .collect(Collectors.toList()));
@@ -123,8 +125,11 @@ class JsonAdaptedPerson {
             }
             modelRole = Optional.of(new Role(role));
         }
-
-        Wedding modelOwnWedding = ownWedding != 0 ? lookupWeddingByHashCode(ownWedding, weddingList) : null;
+        boolean modelHasOwnWedding = ownWedding != 0;
+        Wedding modelOwnWedding = null;
+        if (modelHasOwnWedding) {
+            modelOwnWedding = lookupWeddingByHashCode(ownWedding, weddingList);
+        }
         Set<Wedding> modelWeddingJobs = new HashSet<>();
         for (Integer weddingHashCode : weddingJobs) {
             Wedding wedding = lookupWeddingByHashCode(weddingHashCode, weddingList);
@@ -132,12 +137,16 @@ class JsonAdaptedPerson {
                 modelWeddingJobs.add(wedding);
             }
         }
-
         Person person = new Person(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelOwnWedding);
         person.getWeddingJobs().addAll(modelWeddingJobs);
         return person;
     }
 
+    /**
+     * Returns the {@code Wedding} corresponding to the hashcode
+     * @param hashCode hashcode to match Weddings to
+     * @param weddings List of {@code Wedding} to search search from
+     */
     private Wedding lookupWeddingByHashCode(int hashCode, List<Wedding> weddings) {
         for (Wedding wedding : weddings) {
             if (wedding.hashCode() == hashCode) {
