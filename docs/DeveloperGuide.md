@@ -447,8 +447,6 @@ Use case ends.
 5. The system should include comprehensive user and developer documentation, including instructions for installation, configuration, usage, and troubleshooting.
 6. The application must provide feedback to the user within 600 milliseconds for all interactive actions (e.g., executing a command, saving a record).
 
-*{More to be added}*
-
 ### Glossary
 
 * **NRIC**: National Registration Identity Card, a unique identifier for Singapore residents.
