@@ -48,7 +48,7 @@ MainWindow -left-|> UiPart
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
 CommandBox *--> "1" AutoSuggestionTextField
-AutoSuggestionTextField *-- "0..*" CommandTextFlow
+AutoSuggestionTextField *--> "0..*" CommandTextFlow
 PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
