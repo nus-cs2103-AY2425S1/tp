@@ -238,8 +238,8 @@ Team size: 5
 
 **Target user profile**:
 
-- HR professional of a tech company with many employees with different skill sets and roles
-- works in a team of HR professionals
+- Project managers of a tech company with many employees with different skill sets and roles
+- works in a team of other project managers
 - manages recruitment and manpower allocation for company projects
 - has a need to manage a significant number of contacts
 - prefer desktop apps over other types
@@ -249,7 +249,7 @@ Team size: 5
 
 **Value proposition**:
 
-HRConnect provides fast access to employee, project, and candidate contact details, optimized for HR professionals who prefer a CLI. It allows quick updates, talent pool organization, and candidate tracking, all through a streamlined, command-based interface designed for speed and efficiency. It also helps with assignment of HR staff to HR events and cases.
+HRConnect provides fast access to employee, project, and candidate contact details, optimized for project managers who prefer a CLI. It allows talent pool organization, project management, and manpower allocation, all through a streamlined, command-based interface designed for speed and efficiency.
 
 [Return to Top](#table-of-contents)
 
@@ -289,7 +289,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user in-charge of employee up-skilling                       | track employees' learning of new skills                                          | monitor employees' progress in learning new skills                                  |
 | `*`      | user in-charge many manpower allocations                     | assign multiple employees to different projects using batch commands             | manage manpower at scale                                                            |
 | `*`      | user returning after a long break                            | see recent changes made to the records                                           | get back up to speed quickly                                                        |
-| `*`      | HR team lead                                                 | delegate manpower allocation tasks to team members                               | manage the HR team efficiently                                                      |
+| `*`      | team lead                                                 | delegate manpower allocation tasks to other project managers                               | manage the team efficiently                                                      |
 
 [Return to Top](#table-of-contents)
 
@@ -304,8 +304,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list employees.
-2. HRConnect shows a list of employees with their ids.
-3. User requests to delete a specific employee in the list by their id.
+2. HRConnect shows a list of employees with their indices.
+3. User requests to delete a specific employee in the list by their index.
 4. HRConnect deletes the employee.
 
    Use case ends.
@@ -316,11 +316,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-- 3a. The given id is invalid.
+- 3a. The given index is invalid.
 
   - 3a1. HRConnect shows an error message.
 
-    Use case resumes at step 2.
+    Use case resumes at step 3.
 
 ---
 
@@ -329,8 +329,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to list projects.
-2. HRConnect shows a list of projects with their ids.
-3. User requests to delete a specific project in the list by its id.
+2. HRConnect shows a list of projects with their indices.
+3. User requests to delete a specific project in the list by its index.
 4. HRConnect deletes the project.
 
    Use case ends.
@@ -341,11 +341,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-- 3a. The given id is invalid.
+- 3a. The given index is invalid.
 
   - 3a1. HRConnect shows an error message.
 
-    Use case resumes at step 2.
+    Use case resumes at step 3.
 
 ---
 
@@ -376,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   - 5a1. HRConnect shows an error message.
 
-    HRConnect displays the list of projects if the project id is invalid and the list of employees if the employee id is invalid. Use case resumes at step 4.
+    Use case resumes at step 5.
 
 ---
 
@@ -386,7 +386,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list projects.
 2. HRConnect shows a list of projects with their ids.
-3. User selects a project by its id.
+3. User requests to see all members of a project by its project name.
 4. HRConnect shows a list of employees assigned to the project.
 5. User requests to un-assign a specific employee by their id from the selected project.
 6. HRConnect un-assigns the employee from the project.
@@ -407,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   - 5a1. HRConnect shows an error message.
 
-    Use case resumes at step 4.
+    Use case resumes at step 5.
 
 ---
 
@@ -415,25 +415,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list skills the employees in the company have.
-2. HRConnect shows a list of skills.
-3. User selects a few skills.
-4. User requests to list all employees with all the skills selected.
-5. HRConnect lists all employees with all the skills selected.
+1. User requests to list all employees with certain skills.
+2. HRConnect lists all employees with all the skills selected.
 
    Use case ends.
 
 **Extensions**
 
-- 2a. The list of skills is empty.
+- 1a. The list is empty.
 
   Use case ends.
-
-- 3a. User selects invalid skills.
-
-  - 3a1. HRConnect shows an error message.
-
-    Use case resumes at step 2.
 
 [Return to Top](#table-of-contents)
 
