@@ -31,7 +31,7 @@ public class RemoveGradeCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    // GPT was used to generate this test case
+    // GPT was used to generate this test case.
     @Test
     public void parse_notAllFieldSpecified_error() {
         String userInput = NAME_DESC_AMY;

@@ -18,7 +18,7 @@
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 * We took references from [OpenCSV](https://opencsv.sourceforge.net/) for import and export commands.
 * ChatGPT was used to check for errors and generate some test cases.
-  * It was used to generate the first two test cases in RemoveGradeCommandParserTest.java, MarkCommandParserTest.java & MarkCommandTest.java
+  * It was used to generate the first two test cases in RemoveGradeCommandParserTest.java, MarkCommandParserTest.java & MarkCommandTest.java.
   * It was also used for the usage of `.getStyleClass()` & `.add()` methods in PersonCard.java to display the information clearly.
 * We referred to our TA (Wu Xiaoyun) team's usage of "newPage" and "newPageBetween" [here](https://github.com/AY2324S2-CS2103T-F13-1/tp) to set our pagination for the User and Developer Guide.
 
