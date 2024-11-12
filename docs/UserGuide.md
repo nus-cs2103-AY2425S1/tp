@@ -636,8 +636,6 @@ to be 500 characters which should be enough for most users.
 3. **There is an unused space below the command history box**.
 ![unused space](images/UiUnusedSpace.png)<br>
 As shown in the screenshot above, marked by the red box.
-4. **When you add a duplicate contact with same phone number**, the app will allow it if the phone number is the same but with different country codes or descriptions.
-For example, adding a contact with the phone number `+65 6601 7878 (24 hrs)` and then adding another contact with the phone number `6601 7878` will be allowed as long as the emails are different.
 
 --------------------------------------------------------------------------------------------------------------------
 
