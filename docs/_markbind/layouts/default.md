@@ -22,7 +22,6 @@
 
 <div id="flex-body">
   <nav id="site-nav">
-    <ul class="dropdown-menu navbar-nav">
     <div class="site-nav-top">
       <div class="fw-bold mb-2" style="font-size: 1.25rem;">Site Map</div>
     </div>
@@ -55,7 +54,6 @@
 
     </site-nav>
   </div>
-  </ul>
   </nav>
   <div id="content-wrapper">
     {{ content }}
