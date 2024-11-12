@@ -110,6 +110,7 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
         scrollPane.setOnKeyPressed(this::handleKey);
+        root.setHeight(500);
     }
 
     /**
