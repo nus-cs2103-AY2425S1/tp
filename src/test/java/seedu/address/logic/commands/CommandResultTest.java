@@ -40,6 +40,26 @@ public class CommandResultTest {
         // different showConcertContacts value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback",
                 false, false, true)));
+
+        // different showFullPerson value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                true, false, false,
+                false, false, false)));
+
+        // different showFullConcertContact value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, false, true,
+                false, false, false)));
+
+        // different hideFullPerson value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, false, false,
+                true, false, false)));
+
+        // different hideFullConcertContact value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, false, false,
+                false, false, true)));
     }
 
     @Test

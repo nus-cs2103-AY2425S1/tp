@@ -144,7 +144,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && showConcertContacts == otherCommandResult.showConcertContacts;
+                && showConcertContacts == otherCommandResult.showConcertContacts
+                && showFullPerson == otherCommandResult.showFullPerson
+                && showFullConcert == otherCommandResult.showFullConcert
+                && showFullConcertContact == otherCommandResult.showFullConcertContact
+                && hideFullPerson == otherCommandResult.hideFullPerson
+                && hideFullConcert == otherCommandResult.hideFullConcert
+                && hideFullConcertContact == otherCommandResult.hideFullConcertContact;
     }
 
     @Override
