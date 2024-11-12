@@ -1207,3 +1207,46 @@ testers are expected to do more *exploratory* testing.
 - **Expected**:
   - Application initializes with an empty list or sample data if the file is missing.
   - If the file is corrupted, application should display an error message and create a new, clean data file.
+
+---
+
+## Appendix: Planned Enhancements
+
+### Planned Enhancements
+
+Team Size: 5
+
+In future versions of CareLink, the following enhancements are planned to improve functionality, user experience, and data consistency:
+
+1. **Retain Links During Edit Operations**
+
+   - **Current Issue**: Editing a person removes existing links between patients and caregivers, even if the changes are unrelated to roles or identifiers.
+   - **Current Workaround**: Users can relink the patients and the caregivers after editing the information.
+   - **Planned Enhancement**: Introduce a warning message if the user attempts to edit fields critical to links (e.g., roles). For non-critical changes (e.g., contact details or tags), links will remain intact.
+
+2. **Consistent NRIC Masting**
+
+   - **Current Issue**: NRICs are masked inconsistently in various parts of the application (e.g., some success messages show the full NRIC while others partially mask it).
+   - **Planned Enhancement**: Implement uniform NRIC masking throughout the application. Specific use cases (e.g., detailed logs) where full NRIC visibility is necessary will be carefully evaluated.
+
+3. **Confirmation or Archiving for Person Deletion**
+
+   - **Current Issue**: Deleting a person permanently removes their data without any additional confirmation or archiving.
+   - **Planned Enhancement**: Introduce a confirmation step when deleting a person. Alternatively, allow users to archive entries instead of deleting them, enabling recovery if needed.
+
+4. **Model Updates After `find` Command**
+
+   - **Current Issue**: The UI does not reflect changes made immediately after a `find` or `findapp` command.
+   - **Current Workaround**: The user can type the `list` command to refresh the model.
+   - **Planned Enhancement**: Automatically update the model after executing `find` or `findapp` commands to ensure the UI is updated dynamically.
+
+5. **Improved Handling of Long Tags**
+
+   - **Current Issue**: Long tags in the list view can obscure other data instead of wrapping or truncating neatly.
+   - **Planned Enhancement**: Truncate long tags in the list view while providing the ability to view the full tag in detailed search results or on hover.
+
+6. **Enhanced Phone Number Validation**
+   - **Current Issue**: Phone numbers are not validated currently, which can result in user accidentally typing the wrong phone number without realising. The field currently accepts a minimum of 3 digits, which is shorter than standard international phone numbers.
+   - **Planned Enhancement**: Validate phone numbers according to local and international standards, requiring a minimum of 7 digits and ensuring numbers are valid for practical use cases.
+
+---
