@@ -390,6 +390,8 @@ f/     | Price per hour
 d/     | Start date time of lesson
 h/     | Duration of lesson
 
+<div style="page-break-after: always;"></div>
+
 ## Glossary
 Term       | Meaning
 -----------|-------------
