@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.supplier.Supplier;
 
 /**
- * Adds a supplier to the address book.
+ * Adds a supplier to VendorVault.
  */
 public class AddSupplierCommand extends AddCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_SUPPLIER
