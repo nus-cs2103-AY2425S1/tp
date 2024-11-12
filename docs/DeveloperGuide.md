@@ -44,6 +44,7 @@
   - [Deleting a Contact](#deleting-a-contact)
   - [Editing a Contact](#editing-a-contact)
   - [Finding a Contact](#finding-a-contact)
+  - [Help Command](#help-command)
   - [Saving Data](#saving-data)
   - [GUI Components](#gui-components)
   - [Additional Notes](#additional-notes)
