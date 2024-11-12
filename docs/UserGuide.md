@@ -127,7 +127,7 @@ A person can have any number of tags (including 0)
 * Remark defaults to "No remarks added yet" if not specified
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com o/nus` 
+* `add n/John Doe p/98765432 e/johnd@example.com o/nus`
 * `add n/Betsy Crowe p/99423374 t/friend e/betsycrowe@example.com o/nus t/criminal`
 
 ### Listing all persons : `list` or `l`
@@ -202,7 +202,7 @@ Preference types: `default`, `high`, `low`, `distant`, `recent`
 * `default`: Persons are sorted in chronological order according to when they are added to NetBook.
 * Changes will only be reflected upon restarting NetBook.
 
-Examples: 
+Examples:
 * `save_sort high`
 * `svp default`
 
@@ -268,7 +268,7 @@ Format: `remind INDEX d/DATE des/DESCRIPTION`
 Examples:
 * `remind 1 d/21-11-2024 des/Meet up for lunch` will create a reminder with the date 21-11-2024, about meeting the
 person at index 1 for lunch
-* `remind 2 d/25-12-2024 des/Christmas Date` will create a reminder with the date 25-12-2024, about having a 
+* `remind 2 d/25-12-2024 des/Christmas Date` will create a reminder with the date 25-12-2024, about having a
 Christmas date with the person at index 2
 
 <div style="page-break-after: always;"></div>

@@ -168,6 +168,28 @@ The implementation is similar to the `Delete` command above, with a few addition
    3. Note that the sorting preference is finally stored in `UserPrefs` as a String
 4. **Result**: A `CommandResult` is generated and returned to the `LogicManager`, indicating either success or failure
 
+### Sort Command
+
+The `Sort` command allows users to change the ordering of the contacts based on priority and the last seen date.
+The feature works by leveraging the ObservableList class provided by the JavaFX library, similiar the the `Find` command.
+Where the `Find` command uses `FilteredList`, `Sort` uses `SortedList`.
+
+<img src="images/SortCommandSimpleSequence.png" width="600">
+
+The sequence diagram of the Sort Command is typical of other commands. 
+The notable aspect of the diagram is that the `SortedList` in the `model` is updated with a new comparator. 
+In the case of `sort high`, the comparator is `PriorityHighToLowComparator`.
+
+<img src="images/ContactDisplaySequencyDiagram.png" width="600">
+
+As shown above, the `UI` displays the list of contacts as contained in the `FilteredList` in the `Model`.
+
+To ensure the changes to the `SortedList` is visible to the `UI`, persons are initialised from the `AddressBook` into the `SortedList`. 
+The `SortedList` is used to populate the `FilteredList`. This way, any changes made to the `SortedList` is visible in the UI via the `FilteredList`.
+
+<img src="images/SortedPersonListRelationship.png">
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -612,15 +634,15 @@ demanded additional design consideration and testing.
 2. The UI design also required substantial effort. Unlike AB3, where data was primarily displayed as a list of persons, our project 
 needed to display multiple types of information (e.g., Persons, Reminders). Designing an intuitive UI that could handle these features
 without overwhelming the user took significant planning and iterative refinement.
-3. One key challenge was using JavaFX for the UI, as it was a new technology for our team. Despite we had briefly touched on JavaFX in 
-IP, we still had more to learn in TP. The steep learning curve of JavaFx added to the overall effort and required us to invest 
+3. One key challenge was using JavaFX for the UI, as it was a new technology for our team. Despite we had briefly touched on JavaFX in
+IP, we still had more to learn in TP. The steep learning curve of JavaFx added to the overall effort and required us to invest
 large amount of time learning it.
 4. A significant portion of effort was dedicated to implementing a variety of commands that allow users to perform tasks such as adding
 , editing, deleting, sorting, and finding persons, as well as adding and removing reminders. We had to ensure that these commands worked
 seamlessly together, along with proper error handling, and testing added to the overall complexity of the project.
    1. Fortunately, we were able to save efforts by leveraging on the underlying structure of AB3, such as the command patterns.
    The Reminder field was built using similar structure as the addressBookStorage implemented by the existing AB3.
-5. In terms of achievements, we successfully delivered a fully functional product that was close to what we had envision from 
+5. In terms of achievements, we successfully delivered a fully functional product that was close to what we had envision from
 the start, including complex features like the reminder feature that seemed daunting at first. We also gained valuable insights to Java,
 learning about new classes like the `ObservableList` class, which was essential for dynamically updating the UI when changes occured in the
 underlying data. Additionally, working with JavaFX expanded our understanding of building graphical user interfaces.
@@ -634,27 +656,27 @@ fails due to missing parameters,<br>
 add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL o/ORGANIZATION [d/LAST SEEN] [t/TAG]... [pr/PRIORITY] [r/REMARK]
 Example: add n/John Doe p/98765432 e/johnd@example.com o/NUS d/23-09-2024 t/friends t/owesMoney pr/low r/likes apple `<br>
 is used as the error message. This can be lengthy and too general. Instead, a more specific message that pinpoints the
-exact error can be used. For instance `add n/Joe p/82828282 e/Joe@gmail.com pr/high r/internship supervisor` does not work 
+exact error can be used. For instance `add n/Joe p/82828282 e/Joe@gmail.com pr/high r/internship supervisor` does not work
 because there is a missing `organisation` field, an error like `missing organisation field` can be shown instead.
 2. **Adding confirmation after clear command is used**: Currently NetBook allows users to clear all persons and reminders using either the
-command `clear` or `c`. However, as the command is relatively simple, it may lead to unintended deletion of all data in NetBook. 
+command `clear` or `c`. However, as the command is relatively simple, it may lead to unintended deletion of all data in NetBook.
 In future iterations, we plan to add a confirmation step after the `clear` command is executed to prevent accidental data loss. This
 extra step allow users to reconsider and avoid unintended deletion.
-3. **Include cascading delete of reminders that are tagged to a person**: Reminders are specific to a certain person in the contacts. 
-Currently, deleting a person does not remove all the reminders associated to the person, and NetBook users will have to use the `dr` 
-command to delete reminders 1 by 1. We plan to make NetBook automatically remove all reminders associated with that person when the person is 
+3. **Include cascading delete of reminders that are tagged to a person**: Reminders are specific to a certain person in the contacts.
+Currently, deleting a person does not remove all the reminders associated to the person, and NetBook users will have to use the `dr`
+command to delete reminders 1 by 1. We plan to make NetBook automatically remove all reminders associated with that person when the person is
 deleted.
-4. **Distinguish remark command to add additional remarks without overwriting**: Currently, both the 
-`edit` and `remark` commands perform the same function. To add unique functionality, we plan to modify the `remark` command so that it 
+4. **Distinguish remark command to add additional remarks without overwriting**: Currently, both the
+`edit` and `remark` commands perform the same function. To add unique functionality, we plan to modify the `remark` command so that it
 appends a new note without overwriting the existing remark. This enhancement aims to allow user to keep multiple remarks for a person, while
 the `edit` command will enable replacing a specified remark of a person.
 5. **Add edit reminder feature**: Currently, users of NetBook will have to delete a reminder and add a new reminder if they found
-a mistake in the original reminder they created. We plan to introduce an `edit reminder` feature, allowing users to modify the 
+a mistake in the original reminder they created. We plan to introduce an `edit reminder` feature, allowing users to modify the
 fields of the reminder directly. This helps to make managing reminders more efficient.
-6. **Enable partial matching in find command**: Currently, when using the `find` command, the search keyword must exactly match the 
+6. **Enable partial matching in find command**: Currently, when using the `find` command, the search keyword must exactly match the
 full name or organisation field to locate a person. We plan to enhance this by enabling partial matching, allowing users to find contacts even if they
 enter only part of the name or organisation. This helps make searching more flexible and user-friendly.
-7. **Make `date error` message more specific**: Currently, the error message for an invalid date input is `Date input is incorrect. 
+7. **Make `date error` message more specific**: Currently, the error message for an invalid date input is `Date input is incorrect.
 Please check if the date is valid and follows the DD-MM-YYYY format`. For example `remind 2 d/1-02-2025 des/interview at ABC corp` will result in an error because the day should be a 2-digit number, while
 `remind 2 d/30-02-2025 des/interview at ABC corp` triggers an error because 30th February 2025 does not exist. We plan to make the error more specific to pinpoint the exact error in the
 date, helping users identify and correct errors more easily.
