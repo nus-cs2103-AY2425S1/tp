@@ -358,34 +358,36 @@ Examples:
 
 Finds persons whose names, module-role pairs and tags contain any combination of the given keywords.
 
-Format: `find (n/KEYWORD | r/KEYWORD | t/KEYWORD)+`
+Format: `find [chained] (n/KEYWORD | r/KEYWORD | t/KEYWORD)+`
 
 * Persons matching at least one name keyword (if provided) AND at least one module-role keyword (if provided) AND at least one tag keyword (if provided) will be returned.
 
-Example:
-* `find n/Martin n/Boyd r/cs1101s-prof r/cs1231s-prof t/favorite` return all persons whose name are either `Martin` **or** `Boyd`, **and** assumes either `CS1101S Professor` **or** `CS1231S Professor`, **and** has the tag `favorite`.
+* If `chained` is specified, _chained find_ will be used.
 
-  ![result for 'find n/Martin n/Boyd r/cs1101s-prof r/cs1231s-prof t/favorite'](images/findCombinedConditionExample.png)
+<box type="info" seamless>
 
-<box type="tip" seamless>
-
-**Tip: Chained Find**
-The Chained Find feature allows you to narrow down previous search results by applying additional filters,
-making it easier to locate specific entries that meet multiple criteria.<br>
+  **Chained Find**
+  The Chained Find feature allows you to narrow down previous search results by applying additional filters,
+  making it easier to locate specific entries that meet multiple criteria.<br>
 
 **How to Use Chained Find**
 
 * Start with an Initial Search:
-  * Begin by using the find command with your first search criterion.
+    * Begin by using the find command with your first search criterion.
 
 * Apply Additional Filters with find chained:
-  * Use the find chained command immediately after the initial search to further filter the displayed results based on new criteria.
+    * Use the find chained command immediately after the initial search to further filter the displayed results based on new criteria.
 
 **Example**
 * Step 1: type `find n/John` and hit enter. You will see all entries with "John" in their names;
 * Step 2: type `find chained n/Doe` and hit enter. This time you will see only the entries that contain both "John" and "Doe" in their names.
 
 </box>
+
+Example:
+* `find n/Martin n/Boyd r/cs1101s-prof r/cs1231s-prof t/favorite` return all persons whose name are either `Martin` **or** `Boyd`, **and** assumes either `CS1101S Professor` **or** `CS1231S Professor`, **and** has the tag `favorite`.
+
+  ![result for 'find n/Martin n/Boyd r/cs1101s-prof r/cs1231s-prof t/favorite'](images/findCombinedConditionExample.png)
 
 ### Deleting persons: `delete`
 
