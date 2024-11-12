@@ -470,6 +470,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: Mark a person as favorite**
 
+**Preconditions**: HR staff is logged in.
+
 **MSS**
 
 1.  HR staff requests to mark a specific person in the list as a favorite.
@@ -490,6 +492,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 **Use case: Sort persons by tag**
+
+**Preconditions**: HR staff is logged in.
 
 **MSS**
 
@@ -538,6 +542,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 4a. HR Helper gives HR staff the option to view the given employee.
 
   Use case ends.
+
+**Use case: Import CSV data**
+
+**Preconditions**: HR staff is logged in.
+
+**MSS**
+
+1.  HR staff request to import data from CSV.
+2.  HR Helper adds all new data from CSV to existing data.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command format input does not follow the one prescribed.
+    * 1a1. An error message showing the correct command format is displayed.
+
+      Use case resumes at step 1.
+
+**Use case: Export CSV data**
+
+**Preconditions**: HR staff is logged in.
+
+**MSS**
+
+1.  HR staff request to export data from HR Helper.
+2.  HR Helper exports data to CSV at requested file path.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command format input does not follow the one prescribed.
+    * 1a1. An error message showing the correct command format is displayed.
+
+      Use case resumes at step 1.
+
 
 ### Non-Functional Requirements
 
@@ -608,3 +649,7 @@ Team size: 5
 5. Allow for the `sort` command to sort not only by tag but also by other fields.
 6. Allow for the `favorite` command to view only favorited employees.
 7. Implement Undo/Redo features for person details window to improve the user experience.
+8. Add a fix to make sure that certain duplicated information is not accepted by `add` command, such as phone number, 
+   email etc.
+9. Fix invalid `add` command message.
+10. Improve commands such that all of them are not case-sensitive.

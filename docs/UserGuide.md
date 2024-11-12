@@ -44,11 +44,11 @@ have.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-1/tp/releases/tag/v1.5).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-1/tp/releases/tag/v1.6).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your HR Helper.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HRHelper.v1.5.jar` command to run the application.
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HRHelper.v1.6.jar` command to run the application.
 
 1. A login window similar to the below should appear in a few seconds. Login to HR Helper.<br>
    ![image](images/authentication.png){width=1200}
@@ -496,6 +496,19 @@ HR Helper data are saved automatically as a JSON file `[JAR file location]/data/
 **Warning:** If your changes to the data file makes its format invalid, HR Helper will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause HR Helper to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+
+### 4.16 Importing/Exporting the data file
+
+HR Helper data can be exported as a csv.
+
+Format: `DRIVE:/PATH/TO/FILE.csv`
+
+Examples:
+C:/files/data/people.csv
+E:/fakefolder/hr.csv
+D:/data.csv
+
+![image](images/DataWindow.png){width=1200}
 
 {{ newPage }}
 
