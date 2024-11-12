@@ -547,6 +547,8 @@ Examples:
 
 ![Filter Success Message](images/filter.png)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 After filtering, you can use `list` command to return to the full list of students.
 </div>
@@ -559,8 +561,6 @@ will be displayed.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Filtering by year group followed by `tracksubject` allows you to see what subjects are taken by the students in the current year group.
 </div>
-
-<div style="page-break-after: always;"></div>
 
 ## Subject Management
 ### Adding subject(s) to a student : `addsubject`
