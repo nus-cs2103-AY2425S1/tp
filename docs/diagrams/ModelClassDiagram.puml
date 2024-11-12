@@ -21,6 +21,11 @@ Class Phone
 Class Event
 Class Role
 Class EventName
+Class Sport
+Class DateAndTime
+Class Venue
+Class Faculty
+
 
 Class I #FFFFFF
 }
@@ -43,11 +48,18 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> "*" Event
 Person *--> "*" Role
 
 UniqueEventList --> "~* all" Event
 Event *--> "1" EventName
+Event *--> "1" Sport
+Event *--> "1" DateAndTime
+Event *--> "1" Venue
+Event *--> "2" Faculty
+Event *--> "*" Person
+
+EventName ..> Sport
+EventName ..> Faculty
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
