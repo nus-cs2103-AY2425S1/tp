@@ -19,18 +19,25 @@ public class HelpCommand extends Command {
     private String message;
 
     /**
-     * Creates a HelpCommand .
+     * Creates a HelpCommand.
      */
     public HelpCommand() {
         this.message = "";
     }
 
     /**
-     * Creates a HelpCommand with an additional warning message to display to the user.
+     * Constructs a {@code HelpCommand} object with the specified message.
      *
-     * @param message Warning message to be displayed to the user
+     * <p>This constructor creates a {@code HelpCommand} with a custom message, which can be used to
+     * provide additional information or warnings when executing the command.
+     * The constructor uses an assertion to ensure that the provided message is not {@code null}.</p>
+     *
+     * @param message The message to be associated with this {@code HelpCommand}. Must not be {@code null}.
+     * @throws AssertionError If the provided message is {@code null}.
      */
     public HelpCommand(String message) {
+        assert message != null;
+
         this.message = message;
     }
     @Override

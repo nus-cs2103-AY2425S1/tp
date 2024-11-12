@@ -14,10 +14,14 @@ import seedu.address.model.person.Comment;
  * Parses input arguments and creates a new {@code CommentCommand} object
  */
 public class CommentCommandParser implements Parser<CommentCommand> {
+
     /**
-     * Parses the given {@code String} of arguments in the context of the {@code CommentCommand}
-     * and returns a {@code CommentCommand} object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given input arguments and creates a {@code CommentCommand} object.
+     * The input is expected to contain a valid index and a comment prefixed by {@code PREFIX_COMMENT}.
+     *
+     * @param args The user input string containing the index and comment.
+     * @return A {@code CommentCommand} object with the specified index and comment.
+     * @throws ParseException If the input format is incorrect or required prefixes are missing.
      */
     public CommentCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -36,8 +40,11 @@ public class CommentCommandParser implements Parser<CommentCommand> {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Checks if all the specified prefixes are present in the given {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap The {@code ArgumentMultimap} containing the parsed arguments.
+     * @param prefixes The prefixes to check for presence.
+     * @return {@code true} if all specified prefixes are present; {@code false} otherwise.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());

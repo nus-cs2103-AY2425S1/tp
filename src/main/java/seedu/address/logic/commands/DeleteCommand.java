@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
 
         assert lastShownList != null;
 
-        // validation check on list and index
+        // validates list and index
         if (lastShownList.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_DELETE_EMPTY_ERROR);
         }
