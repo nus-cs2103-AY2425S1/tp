@@ -42,6 +42,8 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_INVALID_CATEGORY = "Invalid category in CSV. Category must be either 'student' "
             + "or 'company'";
     public static final String MESSAGE_INVALID_CSV_FORMAT = "Invalid CSV format";
+    public static final String MESSAGE_CORRUPTED_CSV_FILE = "File has corrupted or missing compulsory fields\n"
+            + "Please ensure all compulsory fields are present and in correct format";
     public static final String MESSAGE_NON_CSV_FILE = "The file extension must be .csv";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports contacts from a CSV file.\n"
             + "Parameters: FILE_PATH\n"
@@ -100,6 +102,8 @@ public class ImportCommand extends Command {
 
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_FAILURE, filePath.toString()));
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(MESSAGE_CORRUPTED_CSV_FILE);
         }
     }
 
@@ -125,7 +129,7 @@ public class ImportCommand extends Command {
     /**
      * Processes a single line from the CSV file, attempting to add the contact to the model.
      */
-    private int processCsvLine(List<String> values, Model model) throws CommandException {
+    private int processCsvLine(List<String> values, Model model) throws IllegalArgumentException, CommandException {
         String category = values.get(1).trim().toLowerCase();
         switch (category) {
         case "student":
@@ -133,7 +137,7 @@ public class ImportCommand extends Command {
         case "company":
             return addCompany(values, model);
         default:
-            throw new CommandException(MESSAGE_INVALID_CATEGORY);
+            throw new IllegalArgumentException(MESSAGE_CORRUPTED_CSV_FILE);
         }
     }
 
@@ -145,10 +149,10 @@ public class ImportCommand extends Command {
      * @return 1 if the student contact is added successfully; 0 if it already exists.
      * @throws CommandException If the student ID is missing or invalid.
      */
-    private int addStudent(List<String> values, Model model) throws CommandException {
+    private int addStudent(List<String> values, Model model) throws IllegalArgumentException, CommandException {
         String studentId = values.get(2).trim();
         if (studentId.isEmpty()) {
-            throw new CommandException("Missing Student ID for student category");
+            throw new IllegalArgumentException(MESSAGE_CORRUPTED_CSV_FILE);
         }
         Student student = new Student(
                 new Name(values.get(0).trim()),
@@ -176,7 +180,7 @@ public class ImportCommand extends Command {
     private int addCompany(List<String> values, Model model) throws CommandException {
         String industry = values.get(2).trim();
         if (industry.isEmpty()) {
-            throw new CommandException("Missing Industry for company category");
+            throw new IllegalArgumentException(MESSAGE_CORRUPTED_CSV_FILE);
         }
         Company company = new Company(
                 new Name(values.get(0).trim()),

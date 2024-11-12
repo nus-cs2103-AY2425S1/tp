@@ -141,6 +141,7 @@ public class MainWindow extends UiPart<Stage> {
         logger.info("Setting up PersonListPanel...");
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanel.getPersonListView().setMouseTransparent(true);
         logger.info("PersonListPanel setup complete.");
     }
 
