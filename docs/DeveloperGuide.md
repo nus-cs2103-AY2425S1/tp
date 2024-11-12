@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # TrackMate Developer Guide
@@ -255,12 +255,12 @@ ID. This functionality ensures that student records remain accurate and up-to-da
 fields, meaning users can choose to update any combination of the student's attributes without affecting others.
 
 * **Benefit**: This descriptor pattern provides a clean and flexible way to handle optional edits. It encapsulates changes,
-making it straightforward to create a new Student object with updated values. It also promotes code reuse and maintainability by
-isolating the edit details from the command execution logic.
+  making it straightforward to create a new Student object with updated values. It also promotes code reuse and maintainability by
+  isolating the edit details from the command execution logic.
 
 * **Challenge**: Managing optional values and ensuring that the descriptor accurately represents the intended changes without introducing
-errors requires careful implementation. Ensuring that at least one field is edited and providing appropriate error messages when none are
-requires precise checks.
+  errors requires careful implementation. Ensuring that at least one field is edited and providing appropriate error messages when none are
+  requires precise checks.
 
 **Validation Checks in EditCommand**: Before applying edits, several validation checks are performed such that we can ensure that the edited student does not duplicate an
 existing student in the address book unless it's the same student. Besides, it also validates that the new student ID, if changed, does not
@@ -326,7 +326,7 @@ that outdated or incorrect records can be cleaned up, maintaining the integrity 
 #### Feature's Architecture Design
 
 1. **Centralized Parsing with DeleteCommandParser**: The parsing logic for delete commands is centralized in their respective parser classes (e.g., DeleteCommandParser, DeleteTutorialCommandParser, etc.). Each parser is responsible for interpreting
-the user's input, extracting necessary identifiers (like student index, tutorial ID, assignment title), and creating the appropriate delete command object.
+   the user's input, extracting necessary identifiers (like student index, tutorial ID, assignment title), and creating the appropriate delete command object.
 * Benefit: Centralizing parsing logic in dedicated parser classes promotes modularity and reusability. It ensures consistent input handling and reduces redundancy across different delete commands.
 * Challenge: Each parser must handle specific validation rules and error messages, requiring careful implementation to provide meaningful feedback to the user.
 
@@ -402,11 +402,32 @@ modify. Although there is some code duplication, the benefits of clarity and red
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Future Enhancements**
+Team size: 5 people
 
 1. In the current implementation of the attendance marking feature, the system does not validate the dates entered by users. This allows users to mark attendance
-for tutorial dates that have not yet occurred. In future updates, the system will include a date validity check to ensure attendance can only be marked for past or current dates.
+   for tutorial dates that have not yet occurred. In future updates, the system will include a date validity check to ensure attendance can only be marked for past or current dates.
 
 2. If you try to enter a name that contains `/` the application will show error message about invalid format for `NAME` but someone can have `/` in their legal name e.g `Prabhat S/O Radhe`, this limitation arises due to usage of `/` character for Internal use within the application. We plan to implement a stronger parser function in the future version to tackle with this legal name restriction on the character of  `/`.
+
+3. In the current UI implementation, when some fields get too long where they exceed the width of the panel/window, some expected behaviors occur. For example, `Name:` is replaced by `...` and the text is not wrapped properly. We plan to solve this issue by adding a sliding window in the future.
+
+4. For some commands, duplicated tags are not handled properly. For example, deleteTut and assignment-related commands have unexpected behavior when multiple tags are specified.
+   Example command:
+   `addAsg n/Assignment 1 d/2024-01-01 2359 d/2024-02-04 1200` ignores the first deadline tag and creates an assignment with deadline `2024-02-04 1200` only instead of alerting the user that multiple prefixes are provided. This behavior applies to other tags and some other commands as stated above.
+   We are planning to solve all of these unexpected behaviors in future versions by adding a layer of checking of prefixes.
+
+5. After editing student details in the student panel card on the right, the student card on the left will not display instantly. Users will need to re-click the student panel card to refresh the student card. In future implementations, we plan to make the student card instantly responsive to enhance user experience.
+
+6. Assignment title, student ID and tutorial ID are currently case-sensitive as we have the format for the user to follow. Assignment title, student ID and tutorial ID will be implemented as case-insensitive in the future version to enhance the flexibility of the application command.
+
+7. Currently, examples of tutorial names given in our application are misleading as we use different module codes even though it is only catered to one module. We plan to use clearer examples for tutorial names in the future by fixing it to the context of one module (e.g. CS2103T).
+
+8. The error output of certain commands when a compulsory field missing in current implementation is not specific enough. For example, the error output for `addStu s/A1234567X` will be better to be ‘name field is missing’. However, the current UI implementation will display the error message: “Invalid command format”, which may not be specific enough. This example applies to other commands that require a compulsory field or fields.
+
+9. Currently, the UI does not show the list of tutorials and assignments permanently. This causes some inconvenience to the users, as they have to constantly list assignments and tutorials. Hence, we plan to add the tutorial and assignment list display in future versions for the ease of usage.
+
+10. In current implementation, list commands for students, assignments and tutorials do not show specific messages when there is no student/assignment/tutorial in the list. For example, executing the command `list` when the student list is empty shows a successful message indicating that all students are listed. We plan to make it more specific by showing a message saying that there is no student in the list etc. Same applies to `listAsg` and `listTut`.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -515,7 +536,7 @@ Use case resumes at Step 3.
 #### Main Success Scenario (MSS)
 
 1. User requests to record attendance for a tutorial session.
-2. User inputs the student information. 
+2. User inputs the student information.
 3. TrackMate validates the input and confirms the attendance.
 4. Attendance data is successfully saved.
 
@@ -648,17 +669,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Prerequisite: Download the jar file and copy into an empty folder
+   * Prerequisite: Download the jar file and copy into an empty folder
 
-   2. Test case: Double-click the jar file
-      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   * Test case: Double-click the jar file
+   
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
-   1. Prerequisite: Resize the window to an optimum size. Move the window to a different location. Close the window.
+   * Prerequisite: Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Test case: Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
+   * Test case: Re-launch the app by double-clicking the jar file.<br>
+       
+   Expected: The most recent window size and location is retained.
 
 ### Adding a student
 
@@ -726,10 +749,10 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a student while all students are being shown
 
     1. Test case: `deleteStu 1`<br>
-     Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
     2. Test case: `deleteStu 0`<br>
-     Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
 2. Other incorrect delete commands to try: `deleteStu`, `deleteStu x`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
