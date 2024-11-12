@@ -556,11 +556,11 @@ The `filter` function can be useful for tracking the number of students, as the 
 will be displayed.
 </div>
 
-<div style="page-break-after: always;"></div>
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Filtering by year group followed by `tracksubject` allows you to see what subjects are taken by the students in the current year group.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ## Subject Management
 ### Adding subject(s) to a student : `addsubject`
