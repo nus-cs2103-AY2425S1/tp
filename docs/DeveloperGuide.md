@@ -347,11 +347,6 @@ AddressBookParser parses the input and generates a RecordBillingInfoCommand.
 - **Alternative Approach**: Store billing information in a separate log or table linked to the patient profile. <br>
     - **Pros**: Keeps patient profiles focused on medical information while allowing detailed billing history to be retrieved as needed. <br>
     - **Cons**: Adds complexity in managing a separate billing data structure. <br>
-
-
-
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -361,6 +356,34 @@ AddressBookParser parses the input and generates a RecordBillingInfoCommand.
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+_Team size: 5_
+
+1. **Ensure that the remarks field integrates well in the application.** Currently the `Edit` remark doesn't work for the remarks of a person and there is no command to delete remarks as well. It seems that there is no way for user to edit the remarks for now. We plan to include the remarks field for the edit command and also design a separate `delete remark` command.
+
+
+2. **Modify the `Find` and `Get` commands**. Currently both find and get commands are only able to search for one word. The commands are unable to differentiate between `Dr A` and `Dr B` as both entries have the same first word. For future changes, we are going to modify the `Find` and `Get` commands such that they will be responsive to an input of strings e.g. `Find Dr A`.
+
+
+3. **Improvement can be done to restrictive name format**. For the name field of a person, currently special characters are not allowed. Moving ahead, we would be showing a warning to the user but still allows for the inclusion of any special characters to a name.
+
+
+4. **Increase the command result box's size**. Currently the command box and command result box are relatively small and it will be very hard for users to view the result of the command that they have entered. Hence, to improve on this, we have planned to increase the size of the command result box and also make it more responsive for better readability.
+
+
+5. **UI improvements for long names, remarks and addresses**. When dealing with long names, remarks and addresses, the app now truncates the value. For future improvement, in order for users to view fully, we would make the UI responsive to long input values.
+
+
+6. **Make the `Find` and `Get` commands more distinct**. It seems that the `Find` and `Get` commands now are quite similar in their functionality. Both could be used to retrieve a person in the model. To improve on this, we will expand on each command.
+
+   E.g. For the `Find` command, the user could not only find based on a segment of names, but also based on phone, email, appointment etc.
+
+
+7. **Improve on the appointment field** Currently when adding an appointment to patient and doctor, only the starting appointment time is needed. However, in the real life, it would be better if the doctor/user could also specify the end time of the appointment to ensure better planning. Hence, we plan to allow the users to input the end time when adding appointment.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -418,7 +441,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  The user searches for the person in the list by name
 2.  MedDict displays all matching persons
 3.  The user selects the specific person profile to delete
-4.  The user requests to delete a specific person in the list
+4.  The user requests to delete a specific person in the list by entering the ID
 5.  MedDict deletes the person profile from the system and notifies the user that the profile has been successfully deleted
 
     Use case ends.
@@ -432,7 +455,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index or person selection is invalid.
 
-    * 3a1. MedDict shows an error message indicating that the selected person profile is invalid or does not exist
+    * 3a1. MedDict shows an error message indicating that the selected person ID is invalid or does not exist
 
       Use case resumes from step 2
 
@@ -444,7 +467,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to make a new appointment
 2.  MedDict displays the user's schedule
 3.  User selects a specific time slot
-4.  User searches for the patient by name or the ID
+4.  User searches for the patient by the ID
 5.  User requests to assign the time slot to a person
 6.  MedDict assigns the selected time slot to the chosen person and confirms the appointment
 
@@ -455,13 +478,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a: No available time slots.
 
     * 2a1. MedDict notifies the user that no time slots are available
-    * 2a2. The user chooses to wait for a cancellation or manually opens additional time slots
+    * 2a2. The user chooses to modify the time slot of the appointment
     * Use case ends
 
 * 4a. The selected person is not found in the system.
 
     * 4a1. MedDict informs the user that the person is not found
-    * 4a2. The user is given the option to create a new person profile or re-enter the person's name
+    * 4a2. The user could create a new person profile or re-enter the person's name
 
       Use case resumes from step 4
 
@@ -1044,7 +1067,28 @@ testers are expected to do more *exploratory* testing.
     2. Test case: Launch the application.  
     Expected: The application should detect the missing data file and offer to restore from the most recent backup. If the user agrees, the backup file is copied to `addressbook.json`, and the application starts with the restored data.
 
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
 
+### **Difficulty Level and Challenges**
+
+The project’s complexity far surpassed typical single-entity systems like AB3, as it dealt with multiple interrelated entities such as doctors, patients, and appointments. Each entity had distinct attributes, behaviors, and interactions, making data management and system design more complicated. One of the major challenges was ensuring consistency in handling various entity types, while maintaining an intuitive and responsive user experience. The increased complexity required more sophisticated logic for tasks like filtering, and linking entities, making debugging and testing far more intensive than in simpler systems.
+
+We also faced challenges when we want to test the different entities and commands when doing unit and integration testing as it gets more complicated to build stubs that contain entities in a correct format.
+
+### **Effort Required**
+
+Substantial effort was required to design and implement the core system architecture, which needed to handle the complex relationships between entities without becoming overly rigid or error-prone. A considerable amount of time was invested in designing an extensible data model that could accommodate future requirements and scalability.
+
+The development process involved careful coordination between different aspects of the project, including data storage, UI, and logic. Ensuring that these components interacted seamlessly required numerous iterations and thorough testing, further increasing the overall effort.
+
+### **Achievements**
+
+Despite the challenges, the project achieved several important milestones. We successfully built a robust system capable of managing and processing doctors' appointements efficiently. The user interface was designed to be simple and efficient while allowing for advanced operations like filtering through complex data sets.
+
+Additionally, we integrated external libraries like JUnit for our testing and JavaFx for our UI components.
+
+Overall, the project successfully provides a specialised one-stop-for-all platform for doctors to their patients, schedules, appointments and to prioritise speed when accessing and updating patients’ information and details on a regular basis.
 
 
 
