@@ -810,7 +810,8 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
 6. Incorrect error message shown when the number entered is too large.
 7. User may not be able to "unclick" after clicking on a field on the GUI.
 8. User may be able to add weddings that are in the past.
-9. Adjusting the window size may cause the GUI to display to hide wedding details <br>
+9. Adjusting the window size may cause the GUI to display to hide wedding details.<br>
+
 [↥ Back to Top](#bridal-boss-user-guide)
 
 --------------------------------------------------------------------------------------------------------------------
