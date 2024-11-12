@@ -2,8 +2,9 @@
 layout: page
 title: Developer Guide
 ---
+
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -52,7 +53,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `/e delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `/e del 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="544"  alt=""/>
 
@@ -98,11 +99,11 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="534" alt=""/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("del 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteVolunteerSequenceDiagram.png)
-![Supporting sd Frame](images/DeleteVolunteerSequenceDiagramSdFrame.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `VolunteerDeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+
 </div>
 
 How the `Logic` component works:
@@ -121,7 +122,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="668"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `EventCommandParser`) which uses the other classes shown above such as the ParserUtil to parse the user command and create a `XYZCommand` object (e.g., `EventNewCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `EventCommandParser`) which uses the other classes shown above such as the EventParserUtil to parse the user command and create a `XYZCommand` object (e.g., `EventNewCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `EventNewCommandParser`, `EventDeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 <div style="page-break-after: always;"></div>
@@ -802,6 +803,33 @@ testers are expected to do more *exploratory* testing.
 
     4. Other incorrect unassign commands to try: `unassign`, `unassign e/ 1`, `...`<br>
        Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
+
+### Adding available dates to volunteer
+1. Adding available date(s) to a volunteer
+   1. Prerequisites: List all volunteers uing the `list` command. Multiple volunteers should be shown in the list.
+
+   2. Test case: `/v free i/1 d/2023-10-28, 2023-10-29`<br>
+      Expected: The dates get added to the volunteer and are shown on the display. The status message should reflect the successful adding of dates to the volunteer as shown below.
+      ![Dates added to volunteer](images/DatesAddedToVolunteer.png)
+   3. Test case: `/v free i/1 d/[Available date already present]`<br>
+      Expected: As long as one of the dates entered is already present in the volunteer, the dates will not get added. The status message should reflect the existing of the same date as shown below.
+      ![Dates added unsuccessful](images/DatesAddedButPresentFailure.png)
+   4. Other incorrect free commands to try: `free`, `/v free d/`(missing index), `/v free i/[VALID_INDEX] d/[INVALID_DATE_FORMAT]`, `/v free i/[INVALID_INDEX] d/[VALID_DATE_FORMAT]`, `...`
+
+<div style="page-break-after: always;"></div>
+
+### Removing available dates from volunteer
+1. Removing available date(s) from a volunteer
+   1. Prerequisites: List all volunteers using the `list` command. Ensure at least one volunteer has available dates listed.
+   2. Test case: `/v unfree i/1 d/2023-10-28`<br>
+      Expected: The dates get removed from the volunteer and are no longer shown on the display. The status message should reflect the successful adding of dates to the volunteer as shown below.
+      ![Dates removed from volunteer](images/RemoveDateFromVolunteer.png)
+   3. Test case: `/v unfree i/1 d/[Available date not present]`<br>
+      Expected: As long as one of the dates entered missing from the volunteer, the dates will not get removed. The status message should reflect the missing of date as shown below.
+      ![Dates removed unsuccessful](images/RemoveDateFailure.png)
+   4. Other incorrect free commands to try: `unfree`, `/v unfree d/`(missing index), `/v unfree i/[VALID_INDEX] d/[INVALID_DATE_FORMAT]`, `/v unfree i/[INVALID_INDEX] d/[VALID_DATE_FORMAT]`, `...`
 
 <div style="page-break-after: always;"></div>
 
