@@ -44,6 +44,7 @@
   - [Deleting a Contact](#deleting-a-contact)
   - [Editing a Contact](#editing-a-contact)
   - [Finding a Contact](#finding-a-contact)
+  - [Help Command](#help-command)
   - [Saving Data](#saving-data)
   - [GUI Components](#gui-components)
   - [Additional Notes](#additional-notes)
@@ -888,6 +889,32 @@ Saving window preferences
 
    - Other incorrect find commands to try `find`, `find n/NAME_NOT_IN_LIST r/ROLE_NOT_IN_LIST`<br>
       Expected: If no contacts match, a message appears indicating no contacts found. If an invalid role is entered, an error message displays: "Error: Invalid role specified."
+
+---
+
+### Help Command
+
+1. Get the instruction of a command
+
+   1. Prerequisites: Application is running.
+
+   1. Test case: `help`<br>
+      Expected: Displays the instruction of `help` command and pops up a window which contains a link to the user guide.
+
+   1. Test case: `help list`<br>
+      Expected: Displays the instruction and example commands for `list`.
+
+   1. Test case: `help add`<br>
+      Expected: Displays the instruction and example commands for `add`.
+
+   1. Test case: `help edit`<br>
+      Expected: Displays the instruction and example commands for `edit`.
+
+   1. Test case: `help delete`<br>
+      Expected: Displays the instruction and example commands for `delete`.
+
+   1. Test case: `help find`<br>
+      Expected: Displays the instruction and example commands for `find`.
 
 ---
  
