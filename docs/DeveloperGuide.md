@@ -277,13 +277,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**: Celebrity Talent Managers
 
-* has a need to manage a significant number of contacts (talents, contractors, etc)
+* have a need to manage a significant number of contacts (talents, contractors, etc)
 * prefer desktop apps over other types
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* prefer typing to mouse interactions
+* are reasonably comfortable using CLI apps
 
-**Value proposition**: The address book offers celebrity managers a **secure, offline tool** to manage **various contacts and stakeholders, and schedule events** efficiently. With editable fields, it streamlines coordination while ensuring **privacy and data control** in a high-stakes environment.
+**Value proposition**: TalentHub offers celebrity managers a **secure, offline tool** to manage **various contacts and stakeholders, and schedule events** efficiently. With editable fields, it streamlines coordination while ensuring **privacy and data control** in a high-stakes environment.
 
 ### User stories
 
