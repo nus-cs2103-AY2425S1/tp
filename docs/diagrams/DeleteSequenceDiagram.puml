@@ -6,12 +6,12 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":Parser" as Parser LOGIC_COLOR
 participant ":DeleteMemberCommandParser" as DeleteMemberCommandParser LOGIC_COLOR
-participant "d:DeleteMemberCommand" as DeleteMemberCommand LOGIC_COLOR
-participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "dmc:DeleteMemberCommand" as DeleteMemberCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "m:Model" as Model MODEL_COLOR
+participant "model:Model" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete_member 1")
@@ -25,24 +25,28 @@ Parser -> DeleteMemberCommandParser
 activate DeleteMemberCommandParser
 
 DeleteMemberCommandParser --> Parser
+deactivate DeleteMemberCommandParser
 
 Parser -> DeleteMemberCommandParser : parse("1")
+activate DeleteMemberCommandParser
 
 create DeleteMemberCommand
 DeleteMemberCommandParser -> DeleteMemberCommand
+activate DeleteMemberCommand
 
-DeleteMemberCommand --> DeleteMemberCommandParser
+DeleteMemberCommand --> DeleteMemberCommandParser : dmc
+deactivate DeleteMemberCommand
 
-DeleteMemberCommandParser --> Parser
+DeleteMemberCommandParser --> Parser : dmc
 deactivate DeleteMemberCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 DeleteMemberCommandParser -[hidden]-> Parser
 destroy DeleteMemberCommandParser
 
-Parser --> LogicManager
+Parser --> LogicManager : dmc
 deactivate Parser
 
-LogicManager -> DeleteMemberCommand : execute(m)
+LogicManager -> DeleteMemberCommand : execute(model)
 activate DeleteMemberCommand
 
 DeleteMemberCommand -> Model : deleteMember(member)
@@ -55,10 +59,10 @@ create CommandResult
 DeleteMemberCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> DeleteMemberCommand
+CommandResult --> DeleteMemberCommand : result
 deactivate CommandResult
 
-DeleteMemberCommand --> LogicManager
+DeleteMemberCommand --> LogicManager : result
 deactivate DeleteMemberCommand
 
 [<-- LogicManager
