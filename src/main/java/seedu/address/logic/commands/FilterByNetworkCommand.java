@@ -56,7 +56,9 @@ public class FilterByNetworkCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         List<Person> personsWithSpecifiedNetwork = lastShownList.stream()
-                .map(person -> person.getPublicAddressesComposition().getPublicAddresses().containsKey(specifiedNetwork)
+                .map(person -> person.getPublicAddressesComposition()
+                        .getPublicAddresses()
+                        .containsKey(specifiedNetwork)
                         ? person
                         : null)
                 .toList();
