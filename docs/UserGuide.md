@@ -155,6 +155,8 @@ Example:
     * the next of kin whose name is Bob Doe
     * an emergency contact 8765 4321
 
+<div style="page-break-after: always;"></div>
+
 {: .alert .alert-secondary}
 > When a new student is added using the example command above, they will be displayed as shown below, with the following example success message:
 > 
