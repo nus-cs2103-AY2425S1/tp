@@ -440,10 +440,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. Contact does not exist in PlanPerfect
+* 1a. Contact does not exist in PlanPerfect
 
-    * 3a1. PlanPerfect shows an error message
+    * 1a1. PlanPerfect shows an error message
 
+      Use case ends.
+  
+* 1b. User wants to remove all tags from contact
+    * 1b1. User enters all in the untag command
+    * 1b2. PlanPerfect removes all tags from the specified contact. 
+      
       Use case ends.
 
 <br/><br/>
@@ -622,7 +628,50 @@ Use case ends.
 
       Use case ends.
 
+<br></br>
+**Use case: UC16 - Assign a contact to a wedding**
 
+**MSS**
+
+1. Wedding planner requests to assign a specific contact to a particular wedding.
+2. PlanPerfect assigns the contact to the wedding, adding the contact to the wedding contacts list. 
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The specified wedding index is invalid. 
+  * 1a1. PlanPerfect shows an error message. 
+
+    Use case ends. 
+
+* 1b. The specified contact index is invalid according to the current contacts list in the address book. 
+  * 1b1. PlanPerfect shows an error message. 
+
+    Use case ends. 
+
+* 1c. The specified contact has already been assigned to the wedding. 
+  * 1c1. PlanPerfect shows an error message. 
+
+    Use case ends.
+
+<br></br>
+
+**Use case: UC17 - Unassign a contact from a wedding**
+
+**MSS**
+
+1. Wedding planner is already viewing a wedding and requests to unassign a contact from that wedding. 
+2. PlanPerfect unassigns the contact from the wedding, removing the contact from the wedding contacts list. 
+
+   Use case ends. 
+
+**Extensions**
+
+* 1a. The specified contact index is invalid according to the current contacts list in the wedding. 
+  * 1a1. PlanPerfect shows an error message. 
+
+    Use case ends.
 
 
 <br/><br/>
