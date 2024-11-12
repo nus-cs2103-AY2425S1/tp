@@ -38,6 +38,7 @@ title: Developer Guide
    * [Appendix F: Instructions for manual testing](#appendix-f-instructions-for-manual-testing)
    * [Appendix G: Planned Enhancements](#appendix-g-planned-enhancements)
    * [Appendix H: Effort](#appendix-h-effort)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
