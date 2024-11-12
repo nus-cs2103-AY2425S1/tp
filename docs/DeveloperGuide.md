@@ -356,11 +356,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The command format is incorrect or one or more compulsory fields (name, phone number, email or address) are omitted.
 
-    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.<br></br>
 
 * 1b. One of the parameters are invalid.
 
-    * 1b1. NovaCare displays an error message specific to the invalid field entry.<br>Use Case ends.
+    * 1b1. NovaCare displays an error message specific to the invalid field entry.<br>Use Case ends.<br></br>
 
 * 1c. A patient with identical name and phone number already exists in the list.
 
@@ -380,11 +380,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The command format is incorrect.
 
-    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.<br></br>
 
 * 1b. One of the parameters are invalid.
 
-    * 1b1. NovaCare displays an error message specific to the invalid field entry.<br>Use Case ends.
+    * 1b1. NovaCare displays an error message specific to the invalid field entry.<br>Use Case ends.<br></br>
 
 * 1c. A patient with identical name and phone number already exists in the list.
 
@@ -404,7 +404,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The command format is incorrect or the index is missing.
 
-    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.<br></br>
 
 * 1b. The given index is invalid.
 
@@ -448,15 +448,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The command format is incorrect.
 
-    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.<br></br>
 
 * 1b. The given index is invalid.
 
-    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.<br></br>
 
 * 1c. At least one of the parameters (name and/ or phone number) are invalid.
 
-    * 1c1. NovaCare displays an error message specific to the invalid field entry.<br>Use Case ends.
+    * 1c1. NovaCare displays an error message specific to the invalid field entry.<br>Use Case ends.<br></br>
 
 * 1d. NovaCare detects that the patient already has a registered emergency contact.
 
@@ -476,11 +476,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The command format is incorrect.
 
-    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.<br></br>
 
 * 1b. The given index is invalid.
 
-    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
+    * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.<br></br>
 
 * 1d. NovaCare detects that the patient already does not have a registered emergency contact.
 
@@ -500,7 +500,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The command format is incorrect.
 
-    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.<br></br>
 
 * 1b. The given index is invalid.
 
@@ -532,7 +532,7 @@ Use Case ends.
 
 * 1a. The command format is incorrect or the description field is empty.
 
-    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.<br></br>
 
 * 1b. The given index is invalid.
 
@@ -552,7 +552,7 @@ Use Case ends.
 
 * 1a. The command format is incorrect.
 
-    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.<br></br>
 
 * 1b. The given index is invalid.
 
@@ -580,7 +580,7 @@ Use Case ends.
 
 * 1a. The command format is incorrect.
 
-    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.<br></br>
 
 * 1b. The given index is invalid.
 
@@ -600,7 +600,7 @@ Use Case ends.
 
 * 1a. The command format is incorrect.
 
-    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.<br></br>
 
 * 1b. The given index is invalid.
 
@@ -620,7 +620,7 @@ Use Case ends.
 
 * 1a. The command format is incorrect.
 
-    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
+    * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.<br></br>
 
 * 1b. The given index is invalid.
 
