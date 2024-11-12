@@ -44,7 +44,7 @@ You can reach us at the email `cs2103t-w13-3@outlook.com`
 
 ### Tan Jean Yang
 
-<img src="images/jeanyang04.png" width="200px">
+<img src="images/jeanyang04.jpg" width="200px">
 
 [[github](http://github.com/jeanyang04)]
 [[portfolio](team/johndoe.md)]
