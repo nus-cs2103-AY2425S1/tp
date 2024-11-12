@@ -103,6 +103,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteVolunteerSequenceDiagram.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `VolunteerDeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+
 </div>
 
 How the `Logic` component works:
@@ -807,6 +808,33 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
+### Adding available dates to volunteer
+1. Adding available date(s) to a volunteer
+   1. Prerequisites: List all volunteers uing the `list` command. Multiple volunteers should be shown in the list.
+
+   2. Test case: `/v free i/1 d/2023-10-28, 2023-10-29`<br>
+      Expected: The dates get added to the volunteer and are shown on the display. The status message should reflect the successful adding of dates to the volunteer as shown below.
+      ![Dates added to volunteer](images/DatesAddedToVolunteer.png)
+   3. Test case: `/v free i/1 d/[Available date already present]`<br>
+      Expected: As long as one of the dates entered is already present in the volunteer, the dates will not get added. The status message should reflect the existing of the same date as shown below.
+      ![Dates added unsuccessful](images/DatesAddedButPresentFailure.png)
+   4. Other incorrect free commands to try: `free`, `/v free d/`(missing index), `/v free i/[VALID_INDEX] d/[INVALID_DATE_FORMAT]`, `/v free i/[INVALID_INDEX] d/[VALID_DATE_FORMAT]`, `...`
+
+<div style="page-break-after: always;"></div>
+
+### Removing available dates from volunteer
+1. Removing available date(s) from a volunteer
+   1. Prerequisites: List all volunteers using the `list` command. Ensure at least one volunteer has available dates listed.
+   2. Test case: `/v unfree i/1 d/2023-10-28`<br>
+      Expected: The dates get removed from the volunteer and are no longer shown on the display. The status message should reflect the successful adding of dates to the volunteer as shown below.
+      ![Dates removed from volunteer](images/RemoveDateFromVolunteer.png)
+   3. Test case: `/v unfree i/1 d/[Available date not present]`<br>
+      Expected: As long as one of the dates entered missing from the volunteer, the dates will not get removed. The status message should reflect the missing of date as shown below.
+      ![Dates removed unsuccessful](images/RemoveDateFailure.png)
+   4. Other incorrect free commands to try: `unfree`, `/v unfree d/`(missing index), `/v unfree i/[VALID_INDEX] d/[INVALID_DATE_FORMAT]`, `/v unfree i/[INVALID_INDEX] d/[VALID_DATE_FORMAT]`, `...`
+
+<div style="page-break-after: always;"></div>
+
 ### Finding an event by keyword
 
 1. Finding event(s) with names containing a keyword
@@ -924,8 +952,8 @@ The following planned enhancements address known feature flaws identified during
 
 8. **Enhance String Validation For Names**
    - **Feature Flaw**: Currently same names with different spacing between parts of names are accepted as different names.
-   - **Proposed Solution**: The new volunteer command should automatically standardise all spaces in a volunteer's name.
-   - **Expected Outcome**: Users should be prevented from accidentally adding duplicate volunteers with different number of spaces within names.
+   - **Proposed Solution**: The new volunteer and new event commands should automatically standardise all spaces in a volunteer's or an event's name.
+   - **Expected Outcome**: Users should be prevented from accidentally adding duplicate volunteers or events with different number of spaces within names.
 
 9. **Enhance Output Message Alignment**
    - **Feature Flaw**: Currently some success and error messages exceed the space available in one line and force the user to scroll the output box horizontally to read the full message.
