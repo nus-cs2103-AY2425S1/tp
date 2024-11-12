@@ -309,8 +309,8 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 * 1a. User leaves the sort field empty.
     - 1a1. Cher detects error in user input and shows correct input format. <br>
       Use case ends.
-* 2a. User enters invalid field.
-    - 2a1. Cher detects error in user input and shows correct input format. <br>
+* 1b. User enters invalid field.
+    - 1b1. Cher detects error in user input and shows correct input format. <br>
       Use case ends.
 
 #### Use case: UC7 - Batch edit
