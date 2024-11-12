@@ -13,4 +13,17 @@ public interface Parser<T extends Command> {
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     T parse(String userInput) throws ParseException;
+
+    /**
+     * Returns true if at least one of the specified prefixes is present in the
+     * given ArgumentMultimap.
+     */
+    static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        for (Prefix prefix : prefixes) {
+            if (argumentMultimap.getValue(prefix).isPresent()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

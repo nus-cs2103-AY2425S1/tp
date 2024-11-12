@@ -6,10 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY1_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY2_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HIGH_RISK;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,19 +55,43 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HIGH_RISK).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different allergies -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAllergies(VALID_ALLERGY1_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
     @Test
     public void toStringMethod() {
+        // all null values
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+                + editPersonDescriptor.getAddress().orElse(null) + ", tag="
+                + editPersonDescriptor.getTag().orElse(null) + ", allergies="
+                + editPersonDescriptor.getAllergies().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
+
+        // normal values
+        EditPersonDescriptor editedBob = new EditPersonDescriptorBuilder(DESC_BOB)
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HIGH_RISK)
+                .withAllergies(VALID_ALLERGY1_BOB, VALID_ALLERGY2_BOB)
+                .build();
+        expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
+                + editedBob.getName().orElse(null) + ", phone="
+                + editedBob.getPhone().orElse(null) + ", email="
+                + editedBob.getEmail().orElse(null) + ", address="
+                + editedBob.getAddress().orElse(null) + ", tag="
+                + editedBob.getTag().orElse(null) + ", allergies="
+                + editedBob.getAllergies().orElse(null) + "}";
+        assertEquals(expected, editedBob.toString());
     }
 }

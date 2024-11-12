@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -23,18 +24,23 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Tag tag;
+    private final Set<Allergy> allergies = new HashSet<>();
+    private final Date date;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+
+    public Person(Name name, Phone phone, Email email, Address address, Tag tag, Set<Allergy> allergies, Date date) {
+        requireAllNonNull(name, phone, email, address, allergies, tag, date);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.tag = tag;
+        this.allergies.addAll(allergies);
+        this.date = date;
     }
 
     public Name getName() {
@@ -53,25 +59,58 @@ public class Person {
         return address;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Tag getTag() {
+        return tag;
+    }
+
+    public Set<Allergy> getAllergies() {
+        return Collections.unmodifiableSet(allergies);
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Checks if this person is considered the same as another person.
+     * <p>
+     * Two persons are considered the same if they have:
+     * <ul>
+     *   <li>Identical names and either identical phone numbers or identical email addresses.</li>
+     * </ul>
+     * This defines a weaker notion of equality based on commonly shared attributes,
+     * primarily useful for identifying potential duplicates.
+     *
+     * @param otherPerson The person to compare with.
+     * @return {@code true} if both persons have the same name and either the same phone number or email address.
+     *         {@code false} if {@code otherPerson} is null or if neither of these conditions hold.
      */
     public boolean isSamePerson(Person otherPerson) {
+        // Check if the otherPerson reference points to the same object instance as this one
         if (otherPerson == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        // Check if otherPerson is null before further checks
+        if (otherPerson == null) {
+            return false;
+        }
+
+        Name otherName = otherPerson.getName();
+        Phone otherPhone = otherPerson.getPhone();
+        Email otherEmail = otherPerson.getEmail();
+
+        // Define criteria for matching: names match and either phones match or emails match
+        boolean hasMatchingName = getName().equals(otherName);
+        boolean hasMatchingPhone = getPhone().equals(otherPhone);
+        boolean hasMatchingEmail = getEmail().equals(otherEmail);
+
+        // Check if names match and either phones or emails also match
+        return hasMatchingName && (hasMatchingPhone || hasMatchingEmail);
     }
 
     /**
@@ -94,23 +133,31 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tag.equals(otherPerson.tag)
+                && allergies.equals(otherPerson.allergies);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tag, allergies);
     }
 
     @Override
     public String toString() {
+        String allergiesString = allergies.stream()
+                .map(Allergy::toString)
+                .collect(Collectors.joining(", "));
+        allergiesString = "[" + allergiesString + "]";
+
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags)
+                .add("tag", tag)
+                .add("allergies", allergiesString)
+                .add("date", date)
                 .toString();
     }
 

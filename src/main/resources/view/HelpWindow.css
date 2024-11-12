@@ -1,9 +1,9 @@
 #copyButton, #helpMessage {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #copyButton {
-    -fx-background-color: dimgray;
+    -fx-background-color: white;
 }
 
 #copyButton:hover {
@@ -11,9 +11,9 @@
 }
 
 #copyButton:armed {
-    -fx-background-color: darkgray;
+    -fx-background-color: #e0d7d7;
 }
 
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: white;
 }

@@ -19,6 +19,8 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Allergy
+Class Date
 
 Class I #FFFFFF
 }
@@ -41,7 +43,9 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
+Person *--> "*" Allergy
+Person *--> Tag
+Person *--> Date
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

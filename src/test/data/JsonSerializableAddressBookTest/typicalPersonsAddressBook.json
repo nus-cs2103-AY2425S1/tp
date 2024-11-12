@@ -5,42 +5,56 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "tag" : "High Risk",
+    "allergies" : [ "Penicillin"],
+    "date" : "3/12/2024 1630"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "tag" : "High Risk",
+    "allergies" : [ "Fish","Soy"],
+    "date" : "3/12/2024 1430"
   }, {
     "name" : "Carl Kurz",
-    "phone" : "95352563",
+    "phone" : "94351253",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "tag" : "Low Risk",
+    "allergies" : [ "None" ],
+    "date" : ""
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "tag" : "Low Risk",
+    "allergies" : [ "Gluten" ],
+    "date" : ""
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822242",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "tags" : [ ]
+    "tag" : "Low Risk",
+    "allergies" : [ "Lactose" ],
+    "date" : ""
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94824272",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "tags" : [ ]
+    "tag" : "Low Risk",
+    "allergies" : [ "Soy","Eggs" ],
+    "date" : ""
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94824422",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tags" : [ ]
+    "tag" : "Low Risk",
+    "allergies" : [ "Peanuts" ],
+    "date" : ""
   } ]
 }

@@ -1,18 +1,23 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Allergy;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -24,6 +29,8 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
+    public static final String MESSAGE_MISSING_PARAMETERS = "Following parameters are missing : ";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -31,11 +38,50 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+              ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                    PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ALLERGY, PREFIX_DATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        //ensure no invalid prefixes are used
+        if (Parser.areAnyPrefixesPresent(argMultimap, PREFIX_DATE)) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        List<String> missingParams = new ArrayList<>();
+
+        if (!argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            missingParams.add("n/");
+        }
+        if (!argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            missingParams.add("p/");
+        }
+        if (!argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            missingParams.add("e/");
+        }
+        if (!argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            missingParams.add("a/");
+        }
+        if (!argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            missingParams.add("t/");
+        }
+        if (!argMultimap.getValue(PREFIX_ALLERGY).isPresent()) {
+            missingParams.add("m/");
+        }
+
+        // If there are any missing parameters, throw a ParseException with a more informative message
+        if (!missingParams.isEmpty()) {
+            StringBuilder missingParamsMessage = new StringBuilder();
+
+            // Use a for loop to append each missing parameter to the message
+            for (int i = 0; i < missingParams.size(); i++) {
+                missingParamsMessage.append(missingParams.get(i));
+                // Add a comma if it's not the last element
+                if (i < missingParams.size() - 1) {
+                    missingParamsMessage.append(", ");
+                }
+            }
+
+            throw new ParseException(MESSAGE_MISSING_PARAMETERS + missingParamsMessage + "\n"
+                    + AddCommand.MESSAGE_USAGE);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
@@ -43,19 +89,16 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
 
-        Person person = new Person(name, phone, email, address, tagList);
-
+        Set<Allergy> allergyList = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGY));
+        if (allergyList.stream().anyMatch(allergy -> allergy.toString().equalsIgnoreCase("none"))
+                && allergyList.size() > 1) {
+            throw new ParseException(Allergy.MESSAGE_CONSTRAINTS);
+        }
+        Date date = Date.NO_DATE; // add command does not allow adding an appointment date straight away
+        Person person = new Person(name, phone, email, address, tag, allergyList, date);
         return new AddCommand(person);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
