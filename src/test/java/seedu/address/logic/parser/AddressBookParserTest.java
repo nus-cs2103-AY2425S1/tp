@@ -31,7 +31,13 @@ import seedu.address.logic.commands.contact.commands.EditCommand.EditPersonDescr
 import seedu.address.logic.commands.contact.commands.FindNameCommand;
 import seedu.address.logic.commands.contact.commands.FindRoleCommand;
 import seedu.address.logic.commands.contact.commands.ListCommand;
-import seedu.address.logic.commands.event.commands.*;
+import seedu.address.logic.commands.event.commands.AddEventCommand;
+import seedu.address.logic.commands.event.commands.AddPersonToEventCommand;
+import seedu.address.logic.commands.event.commands.ClearEventCommand;
+import seedu.address.logic.commands.event.commands.DeleteEventCommand;
+import seedu.address.logic.commands.event.commands.EventAddAllCommand;
+import seedu.address.logic.commands.event.commands.FindEventCommand;
+import seedu.address.logic.commands.event.commands.RemovePersonFromEventCommand;
 import seedu.address.logic.commands.searchmode.CheckExcludedCommand;
 import seedu.address.logic.commands.searchmode.ClearExcludedCommand;
 import seedu.address.logic.commands.searchmode.ExitSearchModeCommand;
