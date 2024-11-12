@@ -5,6 +5,7 @@ skinparam ArrowFontStyle plain
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":VolunteerCommandParser" as VolunteerCommandParser LOGIC_COLOR
 participant ":VolunteerDeleteCommandParser" as VolunteerDeleteCommandParser LOGIC_COLOR
 participant "d:VolunteerDeleteCommand" as VolunteerDeleteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
@@ -22,7 +23,10 @@ activate AddressBookParser
 
 deactivate VolunteerDeleteCommandParser
 
-AddressBookParser -> VolunteerDeleteCommandParser : parse("del 1")
+AddressBookParser -> VolunteerCommandParser : parse("del 1")
+activate VolunteerCommandParser
+
+VolunteerCommandParser -> VolunteerDeleteCommandParser : parse("1")
 activate VolunteerDeleteCommandParser
 
 create VolunteerDeleteCommand
@@ -32,8 +36,13 @@ activate VolunteerDeleteCommand
 VolunteerDeleteCommand --> VolunteerDeleteCommandParser
 deactivate VolunteerDeleteCommand
 
-VolunteerDeleteCommandParser --> AddressBookParser : d
+VolunteerDeleteCommandParser --> VolunteerCommandParser : d
 deactivate VolunteerDeleteCommandParser
+destroy VolunteerDeleteCommandParser
+
+VolunteerCommandParser --> AddressBookParser : d
+deactivate VolunteerCommandParser
+destroy VolunteerCommandParser
 
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
