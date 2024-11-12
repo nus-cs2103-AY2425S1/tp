@@ -408,7 +408,7 @@ Examples:
 >
 > ![sort attendance command](images/sort_attendance.png)
 >
-> List sorted successfully.
+> _List sorted successfully._
 
 [Back to Table of Contents](#table-of-contents)
 
