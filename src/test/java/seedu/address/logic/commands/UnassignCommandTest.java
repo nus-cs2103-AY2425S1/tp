@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,11 +21,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.exceptions.DuplicateAssignException;
-import seedu.address.model.exceptions.OverlappingAssignException;
+import seedu.address.model.exceptions.NotAssignedException;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
-import seedu.address.model.exceptions.VolunteerNotAvailableException;
 import seedu.address.model.volunteer.UniqueVolunteerList;
 import seedu.address.model.volunteer.Volunteer;
 import seedu.address.testutil.EventBuilder;
@@ -35,7 +31,7 @@ import seedu.address.testutil.TypicalEvents;
 import seedu.address.testutil.TypicalVolunteers;
 import seedu.address.testutil.VolunteerBuilder;
 
-public class AssignCommandTest {
+public class UnassignCommandTest {
 
     private Index indexOne = Index.fromOneBased(1);
     private Index indexTwo = Index.fromOneBased(2); // Out of bounds index
@@ -47,17 +43,17 @@ public class AssignCommandTest {
 
     @Test
     public void equals_twoIdenticalCommands_returnTrue() {
-        AssignCommand assignCommand = new AssignCommand(indexOne, indexOne);
-        AssignCommand assignCommandCopy = new AssignCommand(indexOne, indexOne);
-        assertTrue(assignCommand.equals(assignCommand));
-        assertTrue(assignCommand.equals(assignCommandCopy));
+        UnassignCommand unassignCommand = new UnassignCommand(indexOne, indexOne);
+        UnassignCommand unassignCommandCopy = new UnassignCommand(indexOne, indexOne);
+        assertTrue(unassignCommand.equals(unassignCommand));
+        assertTrue(unassignCommand.equals(unassignCommandCopy));
     }
 
     @Test
     public void equals_twoDifferentCommands_returnFalse() {
-        AssignCommand assignCommand1 = new AssignCommand(indexOne, indexOne);
-        AssignCommand assignCommand2 = new AssignCommand(indexOne, indexTwo);
-        assertFalse(assignCommand1.equals(assignCommand2));
+        UnassignCommand unassignCommand1 = new UnassignCommand(indexOne, indexOne);
+        UnassignCommand unassignCommand2 = new UnassignCommand(indexOne, indexTwo);
+        assertFalse(unassignCommand1.equals(unassignCommand2));
     }
 
     @Test
@@ -68,59 +64,42 @@ public class AssignCommandTest {
     }
 
     @Test
-    public void execute_validAssignCommand_success() {
-        AssignCommand assignCommand = new AssignCommand(indexOne, indexOne);
-        assertDoesNotThrow(() -> assignCommand.execute(new ModelStubWithOneFreeVolunteerAndOneEvent()));
+    public void execute_validUnassignCommand_success() {
+        UnassignCommand unassignCommand = new UnassignCommand(indexOne, indexOne);
+        assertDoesNotThrow(() -> unassignCommand.execute(new ModelStubWithOneVolunteerAssignedToEvent()));
     }
 
     @Test
     public void execute_outOfBoundsIndex_failure() {
-        assertThrows(CommandException.class, () -> new AssignCommand(indexOne, indexTwo)
-                .execute(new ModelStubWithOneFreeVolunteerAndOneEvent()));
-        assertThrows(CommandException.class, () -> new AssignCommand(indexTwo, indexOne)
-                .execute(new ModelStubWithOneFreeVolunteerAndOneEvent()));
+        assertThrows(CommandException.class, () -> new UnassignCommand(indexOne, indexTwo)
+                .execute(new ModelStubWithOneVolunteerAssignedToEvent()));
+        assertThrows(CommandException.class, () -> new UnassignCommand(indexTwo, indexOne)
+                .execute(new ModelStubWithOneVolunteerAssignedToEvent()));
     }
 
     @Test
-    public void execute_volunteerAlreadyAssigned_failure() {
-        AssignCommand assignCommand = new AssignCommand(indexOne, indexOne);
-        assertThrows(Exception.class, () -> assignCommand.execute(new ModelStubWithOneVolunteerAssignedToEvent()));
-    }
-
-    @Test
-    public void execute_volunteerNotAvailable_failure() {
-        AssignCommand assignCommand = new AssignCommand(indexOne, indexOne);
-        assertThrows(CommandException.class, () -> assignCommand
-                .execute(new ModelStubWithOneNotFreeVolunteerAndOneEvent()));
+    public void execute_volunteerNotAssigned_failure() {
+        UnassignCommand unassignCommand = new UnassignCommand(indexOne, indexOne);
+        assertThrows(Exception.class, () -> unassignCommand.execute(new ModelStubWithVolunteerNotAssignedToEvent()));
     }
 
     @Test
     public void execute_noVolunteers_failure() {
-        AssignCommand assignCommand = new AssignCommand(indexOne, indexOne);
-        assertThrows(CommandException.class, () -> assignCommand.execute(new ModelStubWithOneEventOnly()));
+        UnassignCommand unassignCommand = new UnassignCommand(indexOne, indexOne);
+        assertThrows(CommandException.class, () -> unassignCommand.execute(new ModelStubWithOneEventOnly()));
     }
 
     @Test
     public void execute_noEvents_failure() {
-        AssignCommand assignCommand = new AssignCommand(indexOne, indexOne);
-        assertThrows(CommandException.class, () -> assignCommand.execute(new ModelStubWithOneVolunteerOnly()));
+        UnassignCommand unassignCommand = new UnassignCommand(indexOne, indexOne);
+        assertThrows(CommandException.class, () -> unassignCommand.execute(new ModelStubWithOneVolunteerOnly()));
     }
 
     @Test
     public void execute_noEventsAndVolunteers_failure() {
-        AssignCommand assignCommand = new AssignCommand(indexOne, indexOne);
-        assertThrows(CommandException.class, () -> assignCommand.execute(new ModelStubEmpty()));
+        UnassignCommand unassignCommand = new UnassignCommand(indexOne, indexOne);
+        assertThrows(CommandException.class, () -> unassignCommand.execute(new ModelStubEmpty()));
     }
-
-    @Test
-    public void execute_volunteerAssignedToOverlappingEvent_failure() {
-        AssignCommand assignCommand = new AssignCommand(indexOne, indexTwo);
-        assertThrows(CommandException.class, () -> assignCommand
-                .execute(new ModelStubVolunteerAssignedToOverlappingEvent()));
-    }
-
-
-
 
     /**
      * A default model stub that have all the methods failing.
@@ -283,31 +262,20 @@ public class AssignCommandTest {
         }
     }
 
-    private abstract class AssignTestModelStub extends ModelStub {
+    private abstract class UnassignTestModelStub extends ModelStub {
         protected final UniqueVolunteerList volunteers = new UniqueVolunteerList();
         protected final UniqueEventList events = new UniqueEventList();
 
         @Override
-        public void assignVolunteerToEvent(Volunteer volunteer, Event event)
-                throws DuplicateAssignException, VolunteerNotAvailableException {
-            LocalDate eventDate = LocalDate.parse(event.getDate().toParsableString());
-            if (volunteer.isInvolvedInEvent(event.getName().toString())) {
-                throw new DuplicateAssignException();
+        public void unassignVolunteerFromEvent(Volunteer volunteer, Event event) throws NotAssignedException {
+            if (!volunteer.isInvolvedInEvent(event.getName().toString())) {
+                throw new NotAssignedException();
             }
-            if (!volunteer.isFreeOn(eventDate)) {
-                throw new VolunteerNotAvailableException(event.getName().toString());
+            if (!event.hasVolunteer(volunteer.getName().toString())) {
+                throw new NotAssignedException();
             }
-            List<Event> volunteerEvents = events.asUnmodifiableObservableList()
-                    .stream()
-                    .filter(specificEvent -> volunteer.getEvents().contains(specificEvent.getName().toString()))
-                    .toList();
-            for (Event e : volunteerEvents) {
-                if (e.isOverlappingWith(event)) {
-                    throw new OverlappingAssignException(event.getName().toString());
-                }
-            }
-            volunteer.addEvent(event.getName().toString());
-            event.assignVolunteer(volunteer.getName().toString());
+            volunteer.removeEvent(event.getName().toString());
+            event.unassignVolunteer(volunteer.getName().toString());
         }
 
         @Override
@@ -321,9 +289,9 @@ public class AssignCommandTest {
         }
     }
 
-    private class ModelStubWithOneFreeVolunteerAndOneEvent extends AssignTestModelStub {
+    private class ModelStubWithVolunteerNotAssignedToEvent extends UnassignTestModelStub {
 
-        public ModelStubWithOneFreeVolunteerAndOneEvent() {
+        public ModelStubWithVolunteerNotAssignedToEvent() {
             Volunteer volunteer = new VolunteerBuilder()
                     .withAvailableDate(TypicalEvents.EVENT_A.getDate().toParsableString())
                     .build();
@@ -332,17 +300,7 @@ public class AssignCommandTest {
         }
     }
 
-    private class ModelStubWithOneNotFreeVolunteerAndOneEvent extends AssignTestModelStub {
-        public ModelStubWithOneNotFreeVolunteerAndOneEvent() {
-            Volunteer volunteer = new VolunteerBuilder()
-                    .withAvailableDate("2021-01-01") // a date that is not the date of EVENT_A
-                    .build();
-            volunteers.add(volunteer);
-            events.add(TypicalEvents.EVENT_A);
-        }
-    }
-
-    private class ModelStubWithOneVolunteerAssignedToEvent extends AssignTestModelStub {
+    private class ModelStubWithOneVolunteerAssignedToEvent extends UnassignTestModelStub {
         public ModelStubWithOneVolunteerAssignedToEvent() {
             Volunteer volunteer = new VolunteerBuilder()
                     .withAvailableDate(TypicalEvents.EVENT_A.getDate().toParsableString())
@@ -357,23 +315,23 @@ public class AssignCommandTest {
         }
     }
 
-    private class ModelStubWithOneVolunteerOnly extends AssignTestModelStub {
+    private class ModelStubWithOneVolunteerOnly extends UnassignTestModelStub {
         public ModelStubWithOneVolunteerOnly() {
             volunteers.add(TypicalVolunteers.ALICE);
         }
     }
 
-    private class ModelStubWithOneEventOnly extends AssignTestModelStub {
+    private class ModelStubWithOneEventOnly extends UnassignTestModelStub {
         public ModelStubWithOneEventOnly() {
             events.add(TypicalEvents.EVENT_A);
         }
     }
 
-    private class ModelStubEmpty extends AssignTestModelStub {
+    private class ModelStubEmpty extends UnassignTestModelStub {
 
     }
 
-    private class ModelStubVolunteerAssignedToOverlappingEvent extends AssignTestModelStub {
+    private class ModelStubVolunteerAssignedToOverlappingEvent extends UnassignTestModelStub {
         public ModelStubVolunteerAssignedToOverlappingEvent() {
             Volunteer volunteer = new VolunteerBuilder()
                     .withAvailableDate(TypicalEvents.EVENT_A.getDate().toParsableString())

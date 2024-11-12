@@ -57,24 +57,36 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void readAddressBook_invalidVolunteerAddressBook_throwDataLoadingException() {
-        assertDoesNotThrow(() -> readAddressBook("oneInvalidPersonAddressBook.json"));
+        //@@author {Fluffykan}-reused
+        // Reused from JsonAddressBookStorageTest of AB3 with minor modifications
+        assertDoesNotThrow(() -> readAddressBook("oneInvalidVolunteerAddressBook.json"));
+        //@@author
     }
 
 
     @Test
     public void readAddressBook_invalidAndValidVolunteerAddressBook_throwDataLoadingException() {
-        assertDoesNotThrow(() -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+        //@@author {Fluffykan}-reused
+        // Reused from JsonAddressBookStorageTest of AB3 with minor modifications
+        assertDoesNotThrow(() -> readAddressBook("invalidAndValidVolunteerAddressBook.json"));
+        //@@author
     }
 
 
     @Test
     public void readAddressBook_invalidEventAddressBook_throwDataLoadingException() {
+        //@@author {Fluffykan}-reused
+        // Reused from JsonAddressBookStorageTest of AB3 with minor modifications
         assertDoesNotThrow(() -> readAddressBook("oneInvalidEventAddressBook.json"));
+        //@@author
     }
 
     @Test
     public void readAddressBook_invalidAndValidEventAddressBook_throwDataLoadingException() {
+        //@@author {Fluffykan}-reused
+        // Reused from JsonAddressBookStorageTest of AB3 with minor modifications
         assertDoesNotThrow(() -> readAddressBook("invalidAndValidEventAddressBook.json"));
+        //@@author
     }
 
     @Test
@@ -84,7 +96,9 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void readAndSaveVolunteersAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+        //@@author {Fluffykan}-reused
+        // Reused from JsonAddressBookStorageTest of AB3 with minor modifications
+        Path filePath = testFolder.resolve("TempVolunteerAddressBook.json");
         AddressBook original = TypicalVolunteers.getTypicalAddressBook();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
@@ -105,16 +119,19 @@ public class JsonAddressBookStorageTest {
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new AddressBook(readBack));
-
+        //@@author
     }
 
     @Test
     public void readAndSaveEventsAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+        //@@author {Fluffykan}-reused
+        // Reused from JsonAddressBookStorageTest of AB3 with minor modifications
+        Path filePath = testFolder.resolve("TempEventAddressBook.json");
         AddressBook original = TypicalEvents.getTypicalAddressBook();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
         // Save in new file and read back
+
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));
@@ -131,7 +148,7 @@ public class JsonAddressBookStorageTest {
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new AddressBook(readBack));
-
+        //@@author
     }
 
     /**
