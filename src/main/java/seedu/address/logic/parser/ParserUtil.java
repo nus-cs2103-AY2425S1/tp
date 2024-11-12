@@ -104,7 +104,7 @@ public class ParserUtil {
      * Parses a {@code String client} into an {@code Client}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code name} and {@code index} are invalid.
      */
     public static String parseClient(String client) throws ParseException {
         requireNonNull(client);
@@ -155,7 +155,7 @@ public class ParserUtil {
 
 
     /**
-     * Parses a {@code String role} into a {@code Tag}.
+     * Parses a {@code String role} into a {@code Optional<Role>}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code role} is invalid.
@@ -174,6 +174,8 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> weddings} into a {@code Set<Index>}.
+     *
+     * @throws ParseException if any of the given {@code index} is invalid.
      */
     public static Set<Index> parseWeddingJobs(Collection<String> weddings) throws ParseException {
         requireNonNull(weddings);
@@ -187,4 +189,15 @@ public class ParserUtil {
         }
         return weddingSet;
     }
+
+    /**
+     * Checks if the given {@code String} is a numeric value.
+     *
+     * @param str The {@code String} to be checked.
+     * @return true if the {@code String} is numeric, false otherwise.
+     */
+    public static boolean isNumeric(String str) {
+        return str != null && str.matches("-?\\d+");
+    }
+
 }

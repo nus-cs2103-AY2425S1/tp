@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.logic.parser.ParserUtil.isNumeric;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -19,12 +20,13 @@ import seedu.address.model.wedding.Venue;
 import seedu.address.model.wedding.Wedding;
 
 /**
- * Parses input arguments and creates a new AddwCommand object
+ * Parses input arguments and creates a new {@code AddwCommand} object
  */
 public class AddwCommandParser implements Parser<AddwCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code AddwCommand}
+     * and returns an {@code AddwCommand} object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddwCommand parse(String args) throws ParseException {
@@ -63,14 +65,13 @@ public class AddwCommandParser implements Parser<AddwCommand> {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Checks if all specified prefixes are present in the provided {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap {@code ArgumentMultimap} containing the prefixes and their values.
+     * @param prefixes Array of {@code Prefix} objects to check for presence in {@code argumentMultimap}.
+     * @return true if all specified prefixes are present, false otherwise.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    private boolean isNumeric(String str) {
-        return str != null && str.matches("-?\\d+");
     }
 }

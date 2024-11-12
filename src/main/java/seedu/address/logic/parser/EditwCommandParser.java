@@ -12,14 +12,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 
 /**
- * Parses input arguments and creates a new EditwCommand object.
+ * Parses input arguments and creates a new {@code EditwCommand} object.
  */
 public class EditwCommandParser implements Parser<EditwCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditwCommand
-     * and returns an EditwCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format.
+     * Parses the given {@code String} of arguments in the context of the {@code EditwCommand}
+     * and returns an {@code EditwCommand} object for execution.
+     * @throws ParseException if the user input does not conform the expected format
      */
     public EditwCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

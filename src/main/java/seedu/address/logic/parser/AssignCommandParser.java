@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
+import static seedu.address.logic.parser.ParserUtil.isNumeric;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -14,13 +15,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
 
 /**
- * Parses input arguments and creates a new AssignCommand object
+ * Parses input arguments and creates a new {@code AssignCommand} object
  */
 public class AssignCommandParser implements Parser<AssignCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AssignCommand
-     * and returns a AssignCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code AssignCommand}
+     * and returns a {@code AssignCommand} object for execution.
      *
      * @throws ParseException if the user input does not conform to the expected format
      */
@@ -88,14 +89,5 @@ public class AssignCommandParser implements Parser<AssignCommand> {
             Set<Index> weddingIndices = ParserUtil.parseWeddingJobs(argMultimap.getAllValues(PREFIX_WEDDING));
             return new AssignCommand(personIndex, predicate, personWithRoleDescriptor, weddingIndices);
         }
-    }
-
-    /**
-     * Parses {@code Collection<String> roles} into a {@code Set<Role>} if {@code roles} is non-empty.
-     * If {@code roles} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Role>} containing zero roles.
-     */
-    private boolean isNumeric(String str) {
-        return str != null && str.matches("-?\\d+");
     }
 }

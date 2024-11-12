@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -305,6 +306,30 @@ public class ParserUtilTest {
         expectedSet.add(Index.fromOneBased(1));
         expectedSet.add(Index.fromOneBased(3));
         assertTrue(expectedSet.equals(ParserUtil.parseWeddingJobs(VALID_LIST_OF_JOBS_WITH_WHITESPACE)));
+    }
+
+    @Test
+    public void isNumeric() {
+        // null string
+        assertFalse(ParserUtil.isNumeric(null));
+
+        // blank string
+        assertFalse(ParserUtil.isNumeric("")); // empty string
+        assertFalse(ParserUtil.isNumeric(" ")); // spaces only
+
+        // valid string
+        assertTrue(ParserUtil.isNumeric("1"));
+        assertTrue(ParserUtil.isNumeric("0"));
+        assertTrue(ParserUtil.isNumeric("900"));
+        assertTrue(ParserUtil.isNumeric("2000"));
+        assertTrue(ParserUtil.isNumeric("-0"));
+        assertTrue(ParserUtil.isNumeric("-1"));
+        assertTrue(ParserUtil.isNumeric("-800"));
+
+        // invalid string
+        assertFalse(ParserUtil.isNumeric("s"));
+        assertFalse(ParserUtil.isNumeric("Alex Yeoh"));
+        assertFalse(ParserUtil.isNumeric("foo goo fun"));
     }
 
     public static void setUpInvalidListOfJobs() {
