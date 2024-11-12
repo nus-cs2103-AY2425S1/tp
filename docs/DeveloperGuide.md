@@ -371,9 +371,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 2a. User enters invalid information (e.g., telegram name longer than 32 characters).
     * 2a1. PlanPal displays an error message.
-    * 2a2. User re-enters valid information.
 
-      Use case resumes from step 3.
+      Use case ends.
 
 **UC09: Remove a contact from an event**
 
@@ -435,9 +434,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 1a. User provides invalid or incomplete search criteria.
     * 1a1. PlanPal displays an error message and prompts the user to provide valid criteria.
-    * 1a2. User re-enters valid search criteria.
 
-      Use case resumes from step 2.
+      Use case ends.
 
 * 2a. No contacts match the search criteria.
     * 2a1. PlanPal displays a message indicating no matches were found.
