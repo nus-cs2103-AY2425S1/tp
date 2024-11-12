@@ -1,7 +1,7 @@
 ---
   layout: default.md
   title: "User Guide"
-  pageNav: 3
+  pageNav: 4
 ---
 
 # ContactCS User Guide
@@ -70,7 +70,11 @@ Alerts you to potential issues or problems that may arise.
 
        **Caution:**
        Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\ContactCS`
-       </box>
+
+        To find the actual path to your folder: <br>
+     
+       Press the Windows key + S to open the search bar, type in the name of the file, and right-click the file that appears. Click on copy path.
+           </box>
 
      * For Mac users, type:
        ```
@@ -80,6 +84,13 @@ Alerts you to potential issues or problems that may arise.
 
        **Caution:**
        Replace path/to/your/folder with the actual path. e.g. `cd ~/Documents/ContactCS`
+
+       To find the actual path to your folder: <br>
+       1. Navigate to the file in the Finder and select it.
+       2. Right-click or Control-click on it and choose Get Info.
+       3. In the window that opens, look at the Where field.
+       4. Copy the path from the Where field.
+        
        </box>
    * Run the application with the following command:
      ```
@@ -105,7 +116,6 @@ Alerts you to potential issues or problems that may arise.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-
 <box type="info" seamless>
 
 **Info: Notes about the command format**<br>
@@ -116,7 +126,7 @@ Alerts you to potential issues or problems that may arise.
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items in square brackets and with `+` after them can be used zero or more times.<br>
+* Items in **square** brackets and with `+` after them can be used zero or more times.<br>
   e.g. `[t/TAG]+` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Items in **round** brackets and with `+` after them can be used one or more times.<br>
@@ -166,10 +176,10 @@ Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL | p/PHONE_NUMBER e/EMAIL) [r/MODUL
 The command accepts either one phone number, one email, or both.
 </box>
 
-* `NAME` can take any values and can not be blank.
-* `PHONE_NUMBER` is almost a free-form text field with minimal validation.
-* `MODULECODE` refers to a module code of a NUS module (e.g. CS1101S, MA1521)
-* `ROLETYPE` refers to one of the following: `student`, `ta`, `tutor`, `prof`, `professor`, if explicitly supplied.
+* `NAME` can take any values and can not be blank. Refer to the [input format section](#input-format) to find out more.
+* `PHONE_NUMBER` is almost a free-form text field with minimal validation. Refer to the [input format section](#input-format) to find out more.
+* ContactCS expects the ``MODULECODE`` to be formatted as valid NUS module codes such as 'CS2040S' or 'MA1521', without spaces or additional characters.
+* `ROLETYPE` refers to one of the following: `student`, `ta`, `tutor`, `prof`, `professor`.
 * The `r/MODULECODE[-ROLETYPE]` parameter means that the person has the role for this module (e.g. `r/CS1101S-student` means that the person is a student of CS1101S).
 * In `r/MODULECODE[-ROLETYPE]`, `[-ROLETYPE]` is optional. In such cases, this means that the person is a student of that module (e.g `r/MA1521` means that the person is a student of MA1521).
 * If the same module is added multiple times, then it is assumed to be an error in user input, because a person should not have multiple roles (student, tutor, professor) at the same time (e.g. `r/CS1101S-student r/CS1101S-prof` is not allowed).
@@ -239,6 +249,10 @@ The subsequent pairs should not have a `+` sign before them. i.e. `r/+CS1101S +M
 - You only need to specify one `r/`. i.e. `r/+CS1101S r/+MA1521-TA` is unnecessary and will cause an error.
 </box>
 
+<box type="warning" seamless>
+  Please note that the first + should be typed as is while the second + is the multiplicity syntax explained here.
+</box>
+
 ##### Deleting existing module-role pairs
 
 Format: `edit INDEX r/-(MODULECODE[-ROLETYPE])+`
@@ -261,7 +275,6 @@ Examples:
   - For adding roles, the role type is assumed to be `Student`.
   - For deleting roles, **any role associated with the module code** will be deleted, regardless of the role type.
 
-If you wish to delete a `Student` role specifically, you must specify `r/-MODULE_CODE-Student` explicitly.
 </box>
 
 #### Editing all other fields
@@ -473,7 +486,7 @@ _Details coming soon ..._
 
 ### `NAME` field
 
-In our application, we understand that everyone's names can have various characters and symbols, and of any length, thus we decided that as long as it is not a blank string, it is considered acceptable.
+In our application, we understand that everyone's names can have various characters and symbols, thus we decided that as long as it is not a blank string, it is considered acceptable.
 
 ### Concept of a phone number
 
@@ -572,6 +585,7 @@ to be 500 characters which should be enough for most users.
 As shown in the screenshot above, marked by the red box.
 4. **When you add a duplicate contact with same phone number**, the app will allow it if the phone number is the same but with different country codes or descriptions.
 For example, adding a contact with the phone number `+65 6601 7878 (24 hrs)` and then adding another contact with the phone number `6601 7878` will be allowed as long as the emails are different.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
