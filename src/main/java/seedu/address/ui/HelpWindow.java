@@ -1,12 +1,24 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.AddCommand.HELP_ADD_COMMAND;
+import static seedu.address.logic.commands.DeleteCommand.HELP_DELETE_COMMAND;
+import static seedu.address.logic.commands.EditCommand.HELP_EDIT_COMMAND;
+import static seedu.address.logic.commands.ExitCommand.HELP_EXIT_COMMAND;
+import static seedu.address.logic.commands.ExportCommand.HELP_EXPORT_COMMAND;
+import static seedu.address.logic.commands.FindCommand.HELP_FIND_COMMAND;
+import static seedu.address.logic.commands.FindTagCommand.HELP_FINDTAG_COMMAND;
+import static seedu.address.logic.commands.ListCommand.HELP_LIST_COMMAND;
+import static seedu.address.logic.commands.ListingAddCommand.HELP_LISTING_ADD_COMMAND;
+import static seedu.address.logic.commands.ListingDeleteCommand.HELP_LISTING_DELETE_COMMAND;
+import static seedu.address.logic.commands.RemarkCommand.HELP_REMARK_COMMAND;
+import static seedu.address.logic.commands.ShowCommand.HELP_SHOW_COMMAND;
+import static seedu.address.logic.commands.SortCommand.HELP_SORT_COMMAND;
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -15,17 +27,55 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    private static final String HELP_INTRO = "Below are some basic instructions to get started using PROperty!";
+
+    private static final String HELP_MORE_INFORMATION = "For more detailed information,"
+            + " visit the PROperty User Guide at: https://ay2425s1-cs2103t-f15-3.github.io/tp/UserGuide.html";
+
+
+    private static final String HELP_MESSAGE = HELP_INTRO
+            + "\n\n"
+            + HELP_ADD_COMMAND
+            + "\n\n"
+            + HELP_EDIT_COMMAND
+            + "\n\n"
+            + HELP_DELETE_COMMAND
+            + "\n\n"
+            + HELP_LIST_COMMAND
+            + "\n\n"
+            + HELP_FIND_COMMAND
+            + "\n\n"
+            + HELP_FINDTAG_COMMAND
+            + "\n\n"
+            + HELP_REMARK_COMMAND
+            + "\n\n"
+            + HELP_EXIT_COMMAND
+            + "\n\n"
+            + HELP_LISTING_ADD_COMMAND
+            + "\n\n"
+            + HELP_LISTING_DELETE_COMMAND
+            + "\n\n"
+            + HELP_SHOW_COMMAND
+            + "\n\n"
+            + HELP_SORT_COMMAND
+            + "\n\n"
+            + HELP_EXPORT_COMMAND
+            + "\n\n"
+            + HELP_MORE_INFORMATION;
+
+    private static final double DEFAULT_WIDTH = 800;
+    private static final double DEFAULT_HEIGHT = 650;
+    private static final double MIN_WIDTH = 800;
+    private static final double MIN_HEIGHT = 700;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Button copyButton;
+    private Text helpMessage;
 
     @FXML
-    private Label helpMessage;
+    private ScrollPane scrollPane;
 
     /**
      * Creates a new HelpWindow.
@@ -35,6 +85,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        setWindowDefaultSize(root);
     }
 
     /**
@@ -42,6 +93,16 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
+    }
+
+    /**
+     * Sets the default size of the window.
+     */
+    private void setWindowDefaultSize(Stage root) {
+        root.setWidth(DEFAULT_WIDTH);
+        root.setHeight(DEFAULT_HEIGHT);
+        root.setMinWidth(MIN_WIDTH);
+        root.setMinHeight(MIN_HEIGHT);
     }
 
     /**
@@ -87,16 +148,5 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
-    }
-
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        url.putString(USERGUIDE_URL);
-        clipboard.setContent(url);
     }
 }

@@ -288,8 +288,14 @@ table {
     text-align: center;
   }
   .site-header:before {
-    content: "AB-3";
+    content: "PROperty";
     font-size: 32px;
+  }
+  /**
+  * Add some utility classes in printing mode
+  */
+  .no-print {
+    display: none !important;
   }
 }
 

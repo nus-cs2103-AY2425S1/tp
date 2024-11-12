@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -24,6 +25,12 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
+     * Returns an immutable sorted list of commands registered and available.
+     * @return the list set of commands, sorted alphabetically
+     */
+    List<String> getCommandNames();
+
+    /**
      * Returns the AddressBook.
      *
      * @see seedu.address.model.Model#getAddressBook()
@@ -34,9 +41,14 @@ public interface Logic {
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' address book file path to save.
      */
-    Path getAddressBookFilePath();
+    Path getAddressBookSaveFilePath();
+
+    /**
+     * Returns the user prefs' address book file path to export.
+     */
+    Path getAddressBookExportFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -47,4 +59,15 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Gets the ID of the currently shown person
+     * @return ID of currently shown person
+     */
+    Person getCurrentlyShownPerson();
+
+    /**
+     * Sets the ID of the currently shown person
+     */
+    void setCurrentlyShownPerson(Person person);
 }

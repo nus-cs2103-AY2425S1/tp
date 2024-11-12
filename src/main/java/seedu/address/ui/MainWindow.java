@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -49,6 +51,11 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane personPanePlaceholder;
+
+    private PersonPane personPaneObject;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -116,11 +123,14 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookSaveFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::completeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        PersonPane personPane = new PersonPane();
+        personPanePlaceholder.getChildren().add(personPane.getRoot());
     }
 
     /**
@@ -167,6 +177,17 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    //@@author tayxuenye-reused
+    //Written by ChatGPT
+    public void setShowPerson(Person person) {
+        logic.setCurrentlyShownPerson(person);
+        // Create a new PersonPane with the selected person
+        personPaneObject = new PersonPane(person);
+        personPanePlaceholder.getChildren().clear(); // Clear existing content
+        // Add the new PersonPane to the placeholder
+        personPanePlaceholder.getChildren().add(personPaneObject.getRoot());
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -177,6 +198,24 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            // We should update the show panel ONLY if the current Person being shown has changed
+            // or of course, it is a show command
+
+            if (commandResult.isShowCommand()
+                    || (logic.getCurrentlyShownPerson() != null
+                            && logic.getCurrentlyShownPerson().equals(commandResult.getOriginalPerson()))) {
+                setShowPerson(commandResult.getPersonToShow());
+            }
+
+            if (logic.getCurrentlyShownPerson() != null && commandResult.isDeleteCommand()) {
+                if (commandResult.getOriginalPerson() == null
+                        || logic.getCurrentlyShownPerson().equals(commandResult.getOriginalPerson())
+                ) {
+                    personPaneObject.emptyPane();
+                }
+
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -192,5 +231,14 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Finds a command that starts with the given command text.
+     */
+    private Optional<String> completeCommand(String commandText) {
+        return logic.getCommandNames().stream()
+                .filter(cmdName -> cmdName.startsWith(commandText))
+                .findFirst();
     }
 }

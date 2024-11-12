@@ -32,19 +32,29 @@ public class FileUtil {
     }
 
     /**
-     * Creates a file if it does not exist along with its missing parent directories.
+     * Creates a .json save file if it does not exist along with its missing parent directories.
      * @throws IOException if the file or directory cannot be created.
      */
-    public static void createIfMissing(Path file) throws IOException {
+    public static void createSaveFileIfMissing(Path file) throws IOException {
         if (!isFileExists(file)) {
-            createFile(file);
+            createSaveFile(file);
         }
     }
 
     /**
-     * Creates a file if it does not exist along with its missing parent directories.
+     * Creates a .csv save file if it does not exist along with its missing parent directories.
+     * @throws IOException if the file or directory cannot be created.
      */
-    public static void createFile(Path file) throws IOException {
+    public static void createExportFileIfMissing(Path file) throws IOException {
+        if (!isFileExists(file)) {
+            createExportFile(file);
+        }
+    }
+
+    /**
+     * Creates a .json save file if it does not exist along with its missing parent directories.
+     */
+    public static void createSaveFile(Path file) throws IOException {
         if (Files.exists(file)) {
             return;
         }
@@ -52,6 +62,20 @@ public class FileUtil {
         createParentDirsOfFile(file);
 
         Files.createFile(file);
+    }
+
+    /**
+     * Creates a .csv save file if it does not exist along with its missing parent directories.
+     */
+    public static void createExportFile(Path file) throws IOException {
+        if (Files.exists(file)) {
+            return;
+        }
+
+        createParentDirsOfFile(file);
+
+        Files.createFile(file);
+
     }
 
     /**
@@ -76,7 +100,7 @@ public class FileUtil {
      * Writes given string to a file.
      * Will create the file if it does not exist yet.
      */
-    public static void writeToFile(Path file, String content) throws IOException {
+    public static void writeToSaveFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
     }
 

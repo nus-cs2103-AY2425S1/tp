@@ -16,10 +16,12 @@ Class StorageManager
 
 package "AddressBook Storage" #F4F6F6{
 Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
+Class MultiFormatAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+Class CsvSerializableAddressBook
+Class CsvAdaptedPerson
 }
 
 }
@@ -35,8 +37,10 @@ Storage -left-|> UserPrefsStorage
 Storage -right-|> AddressBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
+MultiFormatAddressBookStorage .up.|> AddressBookStorage
+MultiFormatAddressBookStorage ..> JsonSerializableAddressBook
+MultiFormatAddressBookStorage ..> CsvSerializableAddressBook
+CsvSerializableAddressBook --> "*" CsvAdaptedPerson
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 

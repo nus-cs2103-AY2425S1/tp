@@ -35,14 +35,24 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' address book file path to save.
      */
-    Path getAddressBookFilePath();
+    Path getAddressBookSaveFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' address book file path to save.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setAddressBookSaveFilePath(Path addressBookSaveFilePath);
+
+    /**
+     * Sets the user prefs' address book file path to export.
+     */
+    Path getAddressBookExportFilePath();
+
+    /**
+     * Sets the user prefs' address book file path to export.
+     */
+    void setAddressBookExportFilePath(Path addressBookExportFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -84,4 +94,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sorts the person list by name in alphabetical order.
+     */
+    void sortPersonListByName();
+
+    /**
+     * Sorts the person list by internalID in alphabetical order.
+     */
+    void sortPersonListByID();
 }

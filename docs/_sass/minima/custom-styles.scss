@@ -11,6 +11,15 @@ h2, h3, h4, h5, h6 {
   margin-bottom: $alert-margin-bottom;
   border: $alert-border-width solid transparent;
   border-radius : $alert-border-radius;
+  page-break-inside: avoid;
+}
+
+// Bootstrap style keyboard shortcuts
+kbd {
+  padding: $kbd-padding-y $kbd-padding-x;
+  color: $kbd-color;
+  background-color: $kbd-bg;
+  border-radius: $kbd-border-radius;
 }
 
 // Headings for larger alerts

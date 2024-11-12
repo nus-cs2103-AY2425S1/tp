@@ -65,14 +65,25 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getAddressBookSaveFilePath() {
+        return userPrefs.getAddressBookSaveFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setAddressBookSaveFilePath(Path addressBookSaveFilePath) {
+        requireNonNull(addressBookSaveFilePath);
+        userPrefs.setAddressBookSaveFilePath(addressBookSaveFilePath);
+    }
+
+    @Override
+    public Path getAddressBookExportFilePath() {
+        return userPrefs.getAddressBookExportFilePath();
+    }
+
+    @Override
+    public void setAddressBookExportFilePath(Path addressBookExportFilePath) {
+        requireNonNull(addressBookExportFilePath);
+        userPrefs.setAddressBookExportFilePath(addressBookExportFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -107,8 +118,17 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void sortPersonListByName() {
+        addressBook.sortByName();
+    }
+
+    @Override
+    public void sortPersonListByID() {
+        addressBook.sortByID();
     }
 
     //=========== Filtered Person List Accessors =============================================================

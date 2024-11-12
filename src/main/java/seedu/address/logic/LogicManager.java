@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -33,6 +34,8 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final AddressBookParser addressBookParser;
 
+    private Person currentlyShownPerson;
+
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
@@ -58,7 +61,24 @@ public class LogicManager implements Logic {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
 
+        if (commandResult.isExport()) {
+            try {
+                storage.exportAddressBook(model.getAddressBook());
+            } catch (AccessDeniedException e) {
+                throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+            } catch (IOException ioe) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+            }
+        }
+
+
+
         return commandResult;
+    }
+
+    @Override
+    public List<String> getCommandNames() {
+        return addressBookParser.getCommandNames().stream().sorted().toList();
     }
 
     @Override
@@ -72,8 +92,13 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getAddressBookSaveFilePath() {
+        return model.getAddressBookSaveFilePath();
+    }
+
+    @Override
+    public Path getAddressBookExportFilePath() {
+        return model.getAddressBookExportFilePath();
     }
 
     @Override
@@ -84,5 +109,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Person getCurrentlyShownPerson() {
+        return currentlyShownPerson;
+    }
+
+    @Override
+    public void setCurrentlyShownPerson(Person person) {
+        currentlyShownPerson = person;
     }
 }

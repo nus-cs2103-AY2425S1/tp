@@ -22,8 +22,11 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.ContainsGeneralKeywordsPredicate;
+import seedu.address.model.person.ContainsSpecificKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -70,10 +73,18 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        //Find command using general predicate
+        List<String> generalKeywords = Arrays.asList("foo", "bar", "baz");
+        FindCommand generalCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + generalKeywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new ContainsGeneralKeywordsPredicate(generalKeywords)), generalCommand);
+
+        //Find command using specific predicate
+        List<String> specificKeywords = Arrays.asList("foo bar baz");
+        FindCommand specificCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + FindCommand.SPECIFIC_FIND_PREFIX
+                        + specificKeywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new ContainsSpecificKeywordsPredicate(specificKeywords)), specificCommand);
     }
 
     @Test
@@ -98,4 +109,16 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
+    @Test
+    public void parseCommand_remark() throws Exception {
+        assertTrue(parser.parseCommand(RemarkCommand.COMMAND_WORD + " 1 r/ hello world!") instanceof RemarkCommand);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " 3") instanceof SortCommand);
+    }
+
 }

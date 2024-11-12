@@ -10,6 +10,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.PersonTag;
+import seedu.address.model.tag.PersonTagType;
+import seedu.address.model.tag.PropertyTag;
+import seedu.address.model.tag.PropertyTagType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,7 +40,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setTags(person.getTags());
+        descriptor.setAddTags(person.getTags());
     }
 
     /**
@@ -76,10 +80,22 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+        Set<Tag> tagSet = Stream.of(tags)
+                .map(tagName -> {
+                    if (PersonTagType.isValidPersonTag(tagName)) {
+                        return new PersonTag(tagName);
+                    } else if (PropertyTagType.isValidPropertyTag(tagName)) {
+                        return new PropertyTag(tagName);
+                    } else {
+                        return new Tag(tagName);
+                    }
+                })
+                .collect(Collectors.toSet());
+        descriptor.setAddTags(tagSet);
         return this;
     }
+
+
 
     public EditPersonDescriptor build() {
         return descriptor;
