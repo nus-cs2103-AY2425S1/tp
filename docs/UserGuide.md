@@ -603,7 +603,7 @@ When you are searching for lessons, you can search for lesson day and/or lesson 
 
 <div style="background-color: #D1F6FF; padding: 4px; border-radius: 4px;">
 
-ℹ️ **Info**: After using the find command, running another command may reset the left panel to default view. This will be resolved in future iterations.
+ℹ️ **Info**: After using the find command, running another command may reset the left panel to default view. This is a feature flaw that will be resolved in future iterations.
 </div>
 
 Examples:
