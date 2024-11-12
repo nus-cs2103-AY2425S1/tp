@@ -579,3 +579,5 @@ Team size: 5
    description to events when they create a new event e.g. new n/EVENT_NAME d/EVENT_DESCRIPTION so that they can add additional important details like the date and location of the event.
 8. **Make remove contact from event message more specific**: Currently, if user types "remove ei/1 ci/0", the app says "Invalid command format!
    remove ei/EVENT_INDEX ci/CONTACT_INDEX : Removes a contact from an event" which is not specific enough. We plan to make the error message say "Contact Index should be a positive integer" instead.
+9. **Implement more graceful handling of invalid JSON data** : Currently, manual editing of JSON data is allowed. However, if invalid data is entered, the event list or address list could be completely cleared or the app
+may fail unexpectedly. We plan to implement more graceful handling of invalid JSON data so that invalid data entries can be ignored, allowing for operation with the remaining valid data.
