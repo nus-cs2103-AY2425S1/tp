@@ -109,8 +109,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, the API call is passed to an `Parser` object, which in turn creates a parser that matches the command (e.g. `DeleteMemberCommandParser`) and uses it to parse the command.
-2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `DeleteCommand`) being created, which is then executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, the API call is passed to an `HallPointerParser` object, which in turn creates a parser that matches the command (e.g. `DeleteMemberCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `DeleteMemberCommand`) being created, which is then executed by the `LogicManager`.
 3. The `Command` communicates with the `Model` when it is executed (e.g. to delete a member).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is then returned by `Logic`.
