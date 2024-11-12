@@ -305,7 +305,7 @@ based on [uniqueness](#uniqueness-of-objects).
 The implementation of the Find feature follows closely with the general format provided in the Logic Component [above](#logic-component).
 ![FindSequenceDiagram-Logic](images/FindSequenceDiagram-Logic.png)
 
-Due to the complexity of the command, there is an extra helper class `PredicateFactory` when `AddressBookParser` calls `parse(n/Alex ...)`
+Due to the complexity of the command, there is an extra helper class `PredicateFactory` when `AddressBookParser` calls `parse("n/Alex ...")`
 ![FindCommandParseSequence](images/FindCommandParseSequence.png)
 
 The main steps for this execution are:
