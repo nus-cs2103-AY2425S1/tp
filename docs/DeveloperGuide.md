@@ -875,7 +875,7 @@ to the user at this current stage of development.
 
 ---
 
-#### 3. Address `help` Command Popup Window Stability Issue
+#### 3. Address help Command Popup Window Stability Issue
 
 **Known Issue:** On certain platforms (notably MacOS), running the `help` command and closing the popup window repeatedly in quick succession while in full screen can cause the application to hang or crash.
 
