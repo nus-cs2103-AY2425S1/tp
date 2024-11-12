@@ -24,6 +24,8 @@ public class MarkCommandTest {
 
     private Model model;
 
+    //@@author swaminathanViswa
+    //took inspiration from GPT regarding the use of BeforeEach and the writing of the first test case.
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new PredefinedAssignmentsData());

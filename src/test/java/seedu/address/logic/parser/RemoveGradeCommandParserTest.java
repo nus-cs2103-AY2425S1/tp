@@ -21,6 +21,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class RemoveGradeCommandParserTest {
     private final RemoveGradeCommandParser parser = new RemoveGradeCommandParser();
 
+    // GPT was used to generate this test case.
     @Test
     public void parse_allFieldsSpecified_success() throws ParseException {
         String userInput = NAME_DESC_AMY + ASSIGNMENT_DESC_ONE;
@@ -30,6 +31,7 @@ public class RemoveGradeCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    // GPT was used to generate this test case
     @Test
     public void parse_notAllFieldSpecified_error() {
         String userInput = NAME_DESC_AMY;
