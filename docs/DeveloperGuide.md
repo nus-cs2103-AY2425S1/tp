@@ -15,22 +15,32 @@ title: Developer Guide
    5. [Storage component](#storage-component)
    6. [Common classes](#common-classes)
 4. [Implementation](#implementation)
-   1. [Proposed Undo/redo feature](#proposed-undoredo-feature)
-      1. [Proposed Implementation](#proposed-implementation)
-      2. [Design considerations](#design-considerations)
-   2. [Proposed Data archiving](#proposed-data-archiving)
+  1. [Group feature](#group-feature)
+  2. [DeleteGroup feature](#delete-group-feature)
+  3. [Tag feature](#tag-feature)
+  4. [Proposed Undo/redo feature](#proposed-undoredo-feature)
+    1. [Proposed Implementation](#proposed-implementation)
+    2. [Design considerations](#design-considerations)
 5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 6. [Appendix: Requirements](#appendix-requirements)
-   1. [Product scope](#product-scope)
-   2. [User Stories](#user-stories)
-   3. [Use cases](#use-cases)
-   4. [Non-Functional Requirements](#non-functional-requirements)
-   5. [Glossary](#glossary)
+  1. [Product scope](#product-scope)
+  2. [User Stories](#user-stories)
+  3. [Use cases](#use-cases)
+  4. [Non-Functional Requirements](#non-functional-requirements)
+  5. [Glossary](#glossary)
 7. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-   1. [Launch and shutdown](#launch-and-shutdown)
-   2. [Deleting a person](#deleting-a-person)
-   3. [Saving data](#saving-data)
-
+  1. [Launch and shutdown](#launch-and-shutdown)
+  2. [Deleting a person](#deleting-a-person)
+  3. [Saving data](#saving-data)
+8. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
+  1. [Ability to export specific groups to CSV files](#enhancement-1-ability-to-export-explicit-groups-to-csv-files)
+  2. [Ability to change export filename or file path](#enhancement-2-ability-to-change-export-filename-or-file-path)
+  3. [Ability to import groups](#enhancement-3-ability-to-import-groups)
+  4. [Better student duplication handling](#enhancement-4-better-student-duplication-handling)
+  5. [Support for special characters in name and class fields](#enhancement-5-support-for-special-characters-in-name-and-class-fields)
+  6. [Increasing support to host more student information](#enhancement-6-increasing-support-to-host-more-student-information)
+  7. [Increased filter options for students](#enhancement-7-increased-filter-options-for-students)
+  8. [Support for precise student name searching](#enhancement-8-support-for-precise-student-name-searching)
 ---
 
 ## **Acknowledgements**
@@ -262,7 +272,7 @@ The `GroupCommand` will then call `excecute()`, which checks whether there is a 
 
 #### Sequence Diagram
 
-<img src="images/GroupSequenceDiagram.png" width="550" />
+<img src="images/GroupSequenceDiagram.png" width="780" />
 
 #### Design considerations:
 
@@ -346,17 +356,13 @@ Step 2. The user executes `export` command. The `ExportCommand` will then call `
 
 **Aspect: How export executes:**
 
-- **Alternative 1 (current choice):** Using the existing Storage interface and addressBook.json to directly convert 
-  into a csv file
+- **Alternative 1 (current choice):** Using the existing Storage interface and addressBook.json to directly convert into a csv file
 
     - Pros: Has already laid the foundation for our csv conversion method to build off from
-    - Cons: Has an added dependency on the json file, so if any issues were to occur to the json coverter, it 
-      would mean that the export function would no longer function
+    - Cons: Has an added dependency on the json file, so if any issues were to occur to the json coverter, it would mean that the export function would no longer function
 
-- **Alternative 2:** Directly exporting the data of the address book and converting it into a csv file without 
-  needing the dependency on the json file
-    - Pros: Will ensure that any bugs with the jsonAdaptablePersons and etc will not affect the functionality of the 
-      export function, since they would no longer be associated
+- **Alternative 2:** Directly exporting the data of the address book and converting it into a csv file without needing the dependency on the json file
+    - Pros: Will ensure that any bugs with the jsonAdaptablePersons and etc will not affect the functionality of the export function, since they would no longer be associated
     - Cons: Extremely hard to implement, and would not be worth the hassle
 
 ### Tag feature
@@ -365,8 +371,7 @@ The `TagCommand` allows educators to add custom tags to their students for quali
 
 #### Implementation Details
 
-The `TagCommand` is implemented by extending the base `Command` class. It uses only the prefix `/t` taking in a index as the other part of the command syntax, specifying
-required data fields `newTags` and `targetIndex`, respectively. Once the data fields are filled, new tags are added to a specified Person. It implements the following operations:
+The `TagCommand` is implemented by extending the base `Command` class. It uses only the prefix `/t` taking in a index as the other part of the command syntax, specifying required data fields `newTags` and `targetIndex`, respectively. Once the data fields are filled, new tags are added to a specified Person. It implements the following operations:
 
 * `execute(Model)` — Obtain a `List<Person>` using the `model.getFilteredPersonList`, and using the `targetIndex` to get the corresponding `Person` object to add the `newTags` to, by calling `model.addTag`
 * `targetIndex.getZeroBased` — Used to check if the given index is larger than the size of the filteredPersonList, and throws a `CommandException` if the index is larger than the index in filteredPersonList
@@ -978,7 +983,7 @@ testers are expected to do more *exploratory* testing.
 
 This section covers the enhancements we plan to implement in the future.
 
-### Enhancement 1:  Ability to export explicit groups to csv files
+### Enhancement 1: Ability to export explicit groups to csv files
 
 Feature flaw: <br>
 Currently, the `export` command will export all the data in the GoonBook out without discrimination and has no option to selectively certain data like one specific Group only
@@ -992,7 +997,7 @@ Providing the ability to export group data enhances data portability and enables
 Updated behaviours: <br>
 * Introduce an exportGroup command that exports the chosen groups to a CSV file.
 
-### Enhancement 2:  Ability to change export filename or file path
+### Enhancement 2: Ability to change export filename or file path
 
 Feature flaw: <br>
 Currently, the `export` command will export all the data in the GoonBook out to only the root path, and no where 
@@ -1008,7 +1013,7 @@ This gives users flexibility to organize their exported data according to their 
 Updated behaviours: <br>
 * Modify the export command to accept optional filename or file path parameters.
 
-### Enhancement 3:  Ability to import groups
+### Enhancement 3: Ability to import groups
 
 Feature flaw: <br>
 Currently, the `import` command will import all the data in a csv file indiscriminately, and is unable to discern 
@@ -1024,7 +1029,7 @@ Updated behaviours: <br>
 * Implement an importGroup command to import groups and their members from a CSV file.
 * Automatically add new students to the database when importing groups.
 
-### Enhancement 4:  Better student duplication handling
+### Enhancement 4: Better student duplication handling
 
 Feature flaw: <br>
 Currently, the `addCommand` does not allow for duplicate students, with the same name to be added into GoonBook, 
@@ -1040,7 +1045,7 @@ Updated behaviours: <br>
 * Introduce a unique identifier (e.g., student ID) for each student.
 * Update commands and data storage to use the new primary key.
 
-### Enhancement 5:  Support for special characters in name and class fields
+### Enhancement 5: Support for special characters in name and class fields
 
 Feature flaw: <br>
 Currently, the `addCommand` does not have support for student names with specifal characters, such as those with "s/o", since the "/" is a special character
@@ -1055,7 +1060,7 @@ representation of student information and improves the quality of life overall
 Updated behaviours: <br>
 * Modify input validation to allow special characters in names and class fields.
 
-### Enhancement 6:  Increasing support to host more student information
+### Enhancement 6: Increasing support to host more student information
 
 Feature flaw: <br>
 Currently, the `Person` object is limited in its attributes, unlike its real life counterpart, which has information such as their grades, attendance or parent's info
@@ -1071,7 +1076,7 @@ Updated behaviours: <br>
 * Add new fields to the Person class for grades, notes, and guardian information.
 * Update the UI to display the additional information.
 
-### Enhancement 7:  Increased filter options for students
+### Enhancement 7: Increased filter options for students
 
 Feature flaw: <br>
 Currently, the `FindCommand` and `FindGroupCommand`are limited in their capability to search to just the keywords in 
@@ -1086,7 +1091,7 @@ Advanced filtering helps users efficiently locate and manage students who meet c
 Updated behaviours: <br>
 * Add a filter command to search and sort via specific fields using different additional parameters for grades, attendance, and class.
 
-### Enhancement 8:  Support for precise student name searching
+### Enhancement 8: Support for precise student name searching
 
 Feature flaw: <br>
 Currently, the `FindCommand` does not have support for searching students with keywords containing white space in 
