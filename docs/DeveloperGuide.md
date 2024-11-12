@@ -757,13 +757,13 @@ We recognize the need for clarity around overlapping lesson scheduling. Options 
 * Allowing overlapping sessions for group lessons or pair lessons.
 * Enabling you to customize settings for overlap permissions based on the type of lesson.
 
-<div style="page-break-after: always;"></div>
-
 #### 3. **Enhanced Name Field Support**
 To accommodate a more diverse range of names, such as names with commas, accented characters, hyphens, etc., we plan to update the application to allow names with these characters.
 In the future, the system will support a wider variety of name formats, making it more inclusive and user-friendly.
 
 Additionally, if extra whitespace is accidentally added between names (e.g., double space between first and last name), the system will show a warning to alert you of potential duplicate entries due to spacing inconsistencies.
+
+<div style="page-break-after: always;"></div>
 
 #### 4. **Past Lesson Management**
 To enhance lesson organization, we plan to introduce features that clearly distinguish past lessons. This will include options to automatically hide completed lessons or display them in a different color for easy identification.
