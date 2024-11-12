@@ -332,6 +332,12 @@ Team Size: 5
    hidden content in the next line.
    <br/><br/>
 
+9. **Allow special characters**<br/>
+   Update text field inputs, such as name and notes to allow special characters and symbols.
+
+10. **Change of unique identifier**
+    Update the uniqueness of contacts to handphone number to allow for contacts of the same name.
+
 <div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
