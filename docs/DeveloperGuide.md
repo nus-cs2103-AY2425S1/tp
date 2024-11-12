@@ -541,24 +541,27 @@ Use case ends.
 ---
 ## **Appendix: Planned Enhancements**
 
+Our team size is 5 which allows for **10** planned enhancements.
+
 1. **Accept Special Characters in Names**:
-   - Remove strict alphanumeric checks for names to support special characters, such as periods, slashes (s/o, d/o), and other symbols that will appear in a person's legal name
-   - This will allow for more accurate and comprehensive name entries
+   - Extend current name field validations to support special characters, such as periods, slashes (s/o, d/o), and other symbols found in legal names.
+   - This enhancement will allow for more accurate and comprehensive name entries
 
 2. **Restrict Wedding Date to Five Years into the Future**:
-    - Implement a validation to ensure that the wedding date entered is within five years of the current date
+    - Add a validation to ensure that the wedding date entered is within five years of the current date
     - This will help maintain realistic and relevant wedding planning data
 
-3. **Allow Deletion of Wedding Data and Venue**:
-    - Introduce functionality to delete individual wedding data and associated venue information
-    - This will provide users with the ability to remove outdated or irrelevant wedding details from the system
+3. **Allow Deletion of Wedding Date and Venue**:
+    - Expand functionality of edit wedding feature to delete individual wedding date and associated venue information
+    - This will allow users to remove outdated or irrelevant wedding details from the system
 
 4. **Prevent Double-Booking of Vendors**:
-    - Implement a feature to check for and prevent vendors from being booked for multiple weddings on the same date
+    - Enhance the assign wedding feature to check for and prevent vendors from being assigned to multiple weddings on the same date
     - Display an appropriate error message if a user attempts to book a vendor who is already assigned to another wedding on the same date
 
 5. **Provide Vendor Conflict Information in Error Messages**:
-    - When a vendor is already assigned to another wedding, include the details of the conflicting wedding in the error message
+    - When a vendor is already assigned to another wedding, and users attempt to assign them to that same wedding, 
+        include the details of the conflicting wedding in the error message
     - This will help users quickly identify the source of the conflict and take appropriate action
 
 6. **Ensure Full Display of Long Fields in the GUI**:
@@ -569,7 +572,7 @@ Use case ends.
     - Enhance the error messaging displayed when a user enters a number that is too large for the system to handle
     - Provide clear and actionable guidance to the user on the appropriate range of values
 
-8. **Implement Functionality to "Unclick" Fields in the GUI**:
+8. **Allow Users to "Unclick" Fields in the GUI**:
     - Add the ability for users to "unclick" or deselect fields in the GUI after they have been clicked
     - This will improve the user experience and provide more flexibility when interacting with the application
 
