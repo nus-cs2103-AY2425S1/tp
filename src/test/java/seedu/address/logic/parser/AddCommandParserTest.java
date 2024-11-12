@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC1_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC2_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_NONE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -48,6 +49,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
+
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -163,7 +165,28 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_failure() {
+    public void parse_invalidAllergyNone_failure() {
+        Person expectedPerson = new PersonBuilder(BOB).withAllergies("None").build();
+        // Allergy list contains "none" and another allergy
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_HIGH_RISK + ALLERGY_DESC_NONE + ALLERGY_DESC1_BOB, Allergy.MESSAGE_CONSTRAINTS);
+
+        // Allergy list contains "none" and another allergy (in reverse order)
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_HIGH_RISK + ALLERGY_DESC1_BOB + ALLERGY_DESC_NONE, Allergy.MESSAGE_CONSTRAINTS);
+        // Allergy list contains "none" and multiple valid allergies (should fail)
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_HIGH_RISK + ALLERGY_DESC_NONE + ALLERGY_DESC1_BOB
+                + ALLERGY_DESC2_BOB, Allergy.MESSAGE_CONSTRAINTS);
+        // Allergy list with only valid allergies (size > 1, should succeed)
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + TAG_DESC_HIGH_RISK + ALLERGY_DESC_NONE, new AddCommand(expectedPerson));
+    }
+
+
+    @Test
+    public void parse_invalidAllergyValue_failure() {
 
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
