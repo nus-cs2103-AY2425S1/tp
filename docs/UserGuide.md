@@ -66,7 +66,7 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
    **Linux**:
        Open the folder where you placed the Talentcy.jar file.
        Right-click inside the folder and select "Open in Terminal" (or use the Ctrl + Alt + T shortcut to open the terminal, then navigate to the folder using the cd command).
-       In the terminal, type java -jar Talentcy.jar and press Enter.
+       In the terminal, type `java -jar Talentcy.jar` and press Enter.
 
 A GUI should appear in a few seconds. Shown below is the annotated GUI. Note how the app contains some sample data.<br>
 ![Ui](images/Annotated-GUI.jpg)
@@ -77,7 +77,7 @@ A GUI should appear in a few seconds. Shown below is the annotated GUI. Note how
 
     * `list` : Lists all persons.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/A r/good ethic` : Adds a person
+    * `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/A r/good ethic` : Adds a person.
     * named `John Doe` to the Address Book.
 
     * `delete 3` : Deletes the 3rd person shown in the current list.
@@ -289,12 +289,7 @@ Talentcy data are saved automatically as a JSON file `[JAR file location]/data/t
 
 **Caution:**
 If your changes to the data file makes its format invalid, Talentcy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the Talentcy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in the future]`
-
-_Details coming soon ..._
 
 -------------------------------------------------------------------------------------------------------------------- 
 

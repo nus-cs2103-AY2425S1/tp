@@ -13,7 +13,9 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This is **a software development project for CS2103**.<br>
+  This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -294,8 +296,8 @@ Team size: 4
 7. **Mass Actions Command**  
    At present, the `massReject` command allows only batch rejections. We plan to rename this command to `mass` and introduce a predicate/parameter option to enable mass deletions, edits, or rejections. This will streamline bulk actions, making management of large applicant pools more efficient.
 
-8. **Unique Listing with Job Predicate**  
-   The `list` command currently lacks options for filtering by unique attributes. We plan to enhance it by adding the `list [j/]` parameter to allow listing of unique items, such as distinct jobs or tags, providing users with a clearer overview.
+8. **Better Handling of Corrupted Data File**
+   At present, when data file is corrupted for just one person, all entry in the book is discarded. We plan to handle this better by discarding the persons whose data is corrupted and inform users about it.
 
 
 --------------------------------------------------------------------------------------------------------------------
