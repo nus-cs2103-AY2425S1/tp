@@ -23,7 +23,11 @@ public class ShowOrderHistoryCommand extends Command {
 
     private final Name name;
 
+    /**
+     * @param name of the customer
+     */
     public ShowOrderHistoryCommand(Name name) {
+        requireNonNull(name);
         this.name = name;
     }
 

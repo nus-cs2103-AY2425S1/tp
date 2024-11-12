@@ -23,7 +23,12 @@ public class DeleteOrderCommand extends Command {
 
     private final String toDelete;
 
+    /**
+     * Create a new DeleteOrderCommand object
+     * @param name of the order to be deleted
+     */
     public DeleteOrderCommand(String name) {
+        requireNonNull(name);
         this.toDelete = name;
     }
 

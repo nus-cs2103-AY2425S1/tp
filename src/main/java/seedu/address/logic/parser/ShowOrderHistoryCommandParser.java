@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.ShowOrderHistoryCommand;
@@ -19,6 +20,7 @@ public class ShowOrderHistoryCommandParser implements Parser<ShowOrderHistoryCom
      * @throws ParseException if the name of the customer is missing
      */
     public ShowOrderHistoryCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         args = args.trim();
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
 
