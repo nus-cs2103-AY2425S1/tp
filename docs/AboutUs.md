@@ -5,55 +5,43 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
-### John Doe
+### Tan Jia En
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jiaaaaen.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/jiaaaaen)]
+[[portfolio](team/jiaaaaen.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Created `socialMedia` and `renameTag` commands.
 
-### Jean Doe
+### Tan Yi Long
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yiiilonggg.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yiiilonggg)]
+[[portfolio](team/yiiilonggg.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: UI Changes; Addition of new `schedule` command. Assisted with `filter`, `add` command changes
+
+### Zon
+
+<img src="images/zlch.png" width="200px">
+
+[[github](http://github.com/zlch)]
+[[portfolio](team/Zon.md)]
+
+* Role: Developer
+* Responsibilities: Testing of application. Addition of commands: restore, backup
+
+### Liu Yujia
+
+<img src="images/liuyj2002.png" width="200px">
+
+[[github](https://github.com/LiuYJ2002)]
+[[portfolio](https://www.linkedin.com/in/liu-yujia-26b167203/)]
+
+* Role: Testing of application. Addition of `sort` and `search` command. Assisted with `filter` command and updating parameter requirements for `add` and `edit` commands.

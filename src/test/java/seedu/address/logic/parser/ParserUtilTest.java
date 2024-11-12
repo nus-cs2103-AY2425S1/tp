@@ -18,19 +18,28 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Schedule;
+import seedu.address.model.person.SocialMedia;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_SCHEDULE_NAME = "my-appointment";
+    private static final String INVALID_SCHEDULE_DATE = "2024-12";
+    private static final String INVALID_SCHEDULE_TIME = "12000";
+    private static final String INVALID_SOCIAL_MEDIA = "my@ismy@";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE = "12345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_SCHEDULE_NAME = "appointment";
+    private static final String VALID_SCHEDULE_DATE = "2024-10-22";
+    private static final String VALID_SCHEDULE_TIME = "10:00";
+    private static final String VALID_SOCIAL_MEDIA = "shiningBoots";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -108,11 +117,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
-    }
-
-    @Test
     public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
         Address expectedAddress = new Address(VALID_ADDRESS);
         assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
@@ -146,6 +150,86 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseScheduleName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSchedule(
+                INVALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME));
+    }
+
+    @Test
+    public void parseScheduleName_validValueWithoutWhitespace_returnsSchedule() throws Exception {
+        Schedule expectedSchedule = new Schedule(
+                VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME);
+        assertEquals(expectedSchedule, ParserUtil.parseSchedule(
+                VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME));
+    }
+
+    @Test
+    public void parseScheduleName_validValueWithWhitespace_returnsTrimmedSchedule() throws Exception {
+        String scheduleNameWithWhitespace = WHITESPACE + VALID_SCHEDULE_NAME + WHITESPACE;
+        Schedule expectedSchedule = new Schedule(
+                VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME);
+        assertEquals(expectedSchedule, ParserUtil.parseSchedule(
+                scheduleNameWithWhitespace, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME));
+    }
+
+    @Test
+    public void parseScheduleDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSchedule(
+                VALID_SCHEDULE_NAME, INVALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME));
+    }
+
+    @Test
+    public void parseScheduleDate_validValueWithoutWhitespace_returnsSchedule() throws Exception {
+        Schedule expectedSchedule = new Schedule(
+                VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME);
+        assertEquals(expectedSchedule, ParserUtil.parseSchedule(
+                VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME));
+    }
+
+    @Test
+    public void parseScheduleDate_validValueWithWhitespace_returnsTrimmedSchedule() throws Exception {
+        String scheduleDateWithWhitespace = WHITESPACE + VALID_SCHEDULE_DATE + WHITESPACE;
+        Schedule expectedSchedule = new Schedule(
+                VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME);
+        assertEquals(expectedSchedule, ParserUtil.parseSchedule(
+                VALID_SCHEDULE_NAME, scheduleDateWithWhitespace, VALID_SCHEDULE_TIME));
+    }
+
+    @Test
+    public void parseScheduleTime_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSchedule(
+                VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, INVALID_SCHEDULE_TIME));
+    }
+
+    @Test
+    public void parseScheduleTime_validValueWithoutWhitespace_returnsSchedule() throws Exception {
+        Schedule expectedSchedule = new Schedule(
+                VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME);
+        assertEquals(expectedSchedule, ParserUtil.parseSchedule(
+                VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME));
+    }
+
+    @Test
+    public void parseScheduleTime_validValueWithWhitespace_returnsTrimmedSchedule() throws Exception {
+        String scheduleTimeWithWhitespace = WHITESPACE + VALID_SCHEDULE_TIME + WHITESPACE;
+        Schedule expectedSchedule = new Schedule(
+                VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME);
+        assertEquals(expectedSchedule, ParserUtil.parseSchedule(
+                VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, scheduleTimeWithWhitespace));
+    }
+
+    @Test
+    public void parseSocialMedia_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSocialMedia(INVALID_SOCIAL_MEDIA));
+    }
+
+    @Test
+    public void parseSocialMedia_validValueWithoutWhitespace_returnsSchedule() throws Exception {
+        SocialMedia expectedSocialMedia = new SocialMedia(VALID_SOCIAL_MEDIA, SocialMedia.Platform.CAROUSELL);
+        assertEquals(expectedSocialMedia, ParserUtil.parseSocialMedia(VALID_SOCIAL_MEDIA));
     }
 
     @Test

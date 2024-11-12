@@ -3,9 +3,19 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEWTAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OLDTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -36,6 +46,19 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_OWES_MONEY = "owesMoney";
+    public static final String INEXISTENT_TAG_BESTFRIEND = "bestFriend";
+    public static final String INEXISTENT_TAG_COLLEAGUE = "colleague";
+    public static final String VALID_HANDLE = "username";
+    public static final String VALID_HANDLE_SC = "-u.se_HH0rname_";
+    public static final String VALID_SCHEDULE_NAME_AMY = "schedule";
+    public static final String VALID_SCHEDULE_DATE_AMY = "2024-10-21";
+    public static final String VALID_SCHEDULE_TIME_AMY = "16:00";
+    public static final String VALID_SCHEDULE_NAME_BOB = "appointment";
+    public static final String VALID_SCHEDULE_DATE_BOB = "2024-10-22";
+    public static final String VALID_SCHEDULE_TIME_BOB = "08:00";
+    public static final String VALID_DATETIME_BEGIN = "2024-10-10 00:00";
+    public static final String VALID_DATETIME_END = "2024-10-12 00:00";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,12 +70,46 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_OLD_TAG = " " + PREFIX_OLDTAG + VALID_TAG_FRIEND;
+    public static final String TAG_NEW_TAG = " " + PREFIX_NEWTAG + VALID_TAG_HUSBAND;
+    public static final String SOCIALMEDIA_IG = " " + PREFIX_IG + VALID_HANDLE;
+    public static final String SOCIALMEDIA_FB = " " + PREFIX_FB + VALID_HANDLE;
+    public static final String SOCIALMEDIA_CS = " " + PREFIX_CS + VALID_HANDLE;
+    public static final String SOCIALMEDIA_IG_SC = " " + PREFIX_IG + VALID_HANDLE_SC;
+    public static final String SOCIALMEDIA_FB_SC = " " + PREFIX_FB + VALID_HANDLE_SC;
+    public static final String SOCIALMEDIA_CS_SC = " " + PREFIX_CS + VALID_HANDLE_SC;
+    public static final String BEGIN_DATETIME_INPUT = " " + PREFIX_BEGIN + VALID_DATETIME_BEGIN;
+    public static final String END_DATETIME_INPUT = " " + PREFIX_END + VALID_DATETIME_END;
 
+    public static final String INVALID_BEGIN_DATETIME = "10-10-2024 00:00";
+    public static final String INVALID_END_DATETIME = "10-10-2024 01:00";
+    public static final String INVALID_END_EARLIER_DATETIME = "2024-10-08 00:00";
+    public static final String INVALID_BEGIN_INPUT = " " + PREFIX_BEGIN + INVALID_BEGIN_DATETIME;
+    public static final String INVALID_END_INPUT = " " + PREFIX_END + INVALID_END_DATETIME;
+    public static final String INVALID_END_EARLIER_INPUT = " " + PREFIX_BEGIN + VALID_DATETIME_BEGIN
+            + " " + PREFIX_END + INVALID_END_EARLIER_DATETIME;
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_LENGTH_NAME_DESC = " " + PREFIX_NAME
+            + "Maximiliano Alberto de la Cruz Gonzalez de la Torre y Mendoza"; // longer than 50 characters
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_LENGTH_LONG_PHONE_DESC = " " + PREFIX_PHONE
+            + "123456789123456789"; // longer than 15 digits
+    public static final String INVALID_LENGTH_SHORT_PHONE_DESC = " " + PREFIX_PHONE + "12"; // shorter than 3 digits
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_LENGTH_EMAIL_DESC = " " + PREFIX_EMAIL
+            + "john.doe.john.doe.john.doe.john.doe.john.doe.john.doe.john.doe."
+            + "john.doe.john.doe.john.doe.john.doe.john.doe.john.doe.john.doe."
+            + "john.doe.john.doe.john.doe.john.doe.john.doe.john.doe.john.doe."
+            + "john.doe.john.doe.john.doe.john.doe.john.doe.john.doe.john.doe."
+            + "john.doe.john.doe.john.doe.john.doe@example.com"; // longer than 254 characters
+    public static final String INVALID_SCHEDULE_NAME = " " + PREFIX_SCHEDULE_NAME + "appointment!";
+    public static final String INVALID_SCHEDULE_DATE = " " + PREFIX_SCHEDULE_DATE + "22-10-2024";
+    public static final String INVALID_SCHEDULE_TIME = " " + PREFIX_SCHEDULE_TIME + "4pm";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_NEW_TAG = " " + PREFIX_NEWTAG + "hubby*";
+    public static final String INVALID_SOCIALMEDIA = " " + PREFIX_IG + "USER$$";
+    public static final String INVALID_HANDLE_EXCEED = " " + PREFIX_IG + "12345678901234567890123456789012345";
+    public static final String INVALID_INDEX_EXCEED_MAXINT = "2147483648";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -75,7 +132,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -84,6 +141,7 @@ public class CommandTestUtil {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
+
 
     /**
      * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)}

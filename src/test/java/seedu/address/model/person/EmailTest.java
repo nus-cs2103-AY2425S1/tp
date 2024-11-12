@@ -14,18 +14,11 @@ public class EmailTest {
     }
 
     @Test
-    public void constructor_invalidEmail_throwsIllegalArgumentException() {
-        String invalidEmail = "";
-        assertThrows(IllegalArgumentException.class, () -> new Email(invalidEmail));
-    }
-
-    @Test
     public void isValidEmail() {
         // null email
         assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
 
         // blank email
-        assertFalse(Email.isValidEmail("")); // empty string
         assertFalse(Email.isValidEmail(" ")); // spaces only
 
         // missing parts
@@ -52,7 +45,15 @@ public class EmailTest {
         assertFalse(Email.isValidEmail("peterjack@example.com-")); // domain name ends with a hyphen
         assertFalse(Email.isValidEmail("peterjack@example.c")); // top level domain has less than two chars
 
+        //invalid length
+        assertFalse(Email.isValidEmail("john.doe.john.doe.john.doe.john.doe.john.doe.john.doe.john.doe."
+                + "john.doe.john.doe.john.doe.john.doe.john.doe.john.doe.john.doe."
+                + "john.doe.john.doe.john.doe.john.doe.john.doe.john.doe.john.doe."
+                + "john.doe.john.doe.john.doe.john.doe.john.doe.john.doe.john.doe."
+                + "john.doe.john.doe.john.doe.john.doe@example.com")); // longer than 254 characters
+
         // valid email
+        assertTrue(Email.isValidEmail("")); // empty string
         assertTrue(Email.isValidEmail("PeterJack_1190@example.com")); // underscore in local part
         assertTrue(Email.isValidEmail("PeterJack.1190@example.com")); // period in local part
         assertTrue(Email.isValidEmail("PeterJack+1190@example.com")); // '+' symbol in local part
@@ -64,6 +65,10 @@ public class EmailTest {
         assertTrue(Email.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
         assertTrue(Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu")); // more than one period in domain
+        assertTrue(Email.isValidEmail("testtest12testtest12testtest12testtest12testtest12"
+                + "testtest12testtest12testtest12testtest12testtest12testtest12testtest12testt"
+                + "est12testtest12testtest12testtest12testtest12testtest12testtest12testtest12"
+                + "testtest12testtest12testtest12testtest12te@example.com")); // exactly 254 characters
     }
 
     @Test

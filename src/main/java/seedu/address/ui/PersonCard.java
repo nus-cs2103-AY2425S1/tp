@@ -33,13 +33,17 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private FlowPane phone;
     @FXML
-    private Label address;
+    private FlowPane address;
     @FXML
-    private Label email;
+    private FlowPane email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane socialmedia;
+    @FXML
+    private FlowPane schedule;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,11 +53,23 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        if (!person.getPhone().toString().isEmpty()) {
+            phone.getChildren().add(new Label(person.getPhone().toString()));
+        }
+        if (!person.getEmail().toString().isEmpty()) {
+            email.getChildren().add(new Label(person.getEmail().toString()));
+        }
+        if (!person.getAddress().toString().isEmpty()) {
+            address.getChildren().add(new Label(person.getAddress().toString()));
+        }
+        if (!person.getSchedule().toString().isEmpty()) {
+            schedule.getChildren().add(new Label(person.getSchedule().toString()));
+        }
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .sorted(Comparator.comparing(tag -> tag.getTagName()))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.getTagName())));
+        if (!person.getSocialMedia().toString().equals(" ")) {
+            socialmedia.getChildren().add(new Label(person.getSocialMedia().toString()));
+        }
     }
 }
