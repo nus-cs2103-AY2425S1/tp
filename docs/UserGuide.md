@@ -239,6 +239,8 @@ Format: `tag INDEX t/TAG_NAME`
 Example:
 - `tag 1 t/urgent`
 
+<div style="page-break-after: always"></div>
+
 ### Untagging a client: `untag`
 
 Untags a client in the case management system.
@@ -414,7 +416,7 @@ This color-coded feedback helps users ensure their commands are correct and mini
 ### Easy keyboard navigation
 CareConnect offers convenient keyboard navigation. Press `Shift + Tab` to switch focus between the command box, log list, and person list. Use the `Up` and `Down` arrow keys to scroll through lists.
 
-
+<div style="page-break-after: always"></div>
 
 ### Editing the data file
 
