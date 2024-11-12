@@ -464,10 +464,10 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 3. Shutting down
-  1. Test case: `exit`<br>
-     Expected: The app shuts down and the window closes. A JSON file `clientell.json` is generated in the data file directory if there previously wasn't; otherwise, it updates with any new changes.
-  2. Test case: Click the `X` button on the window<br>
-     Expected: Identical to above.
+   1. Test case: `exit`<br>
+      Expected: The app shuts down and the window closes. A JSON file `clientell.json` is generated in the data file directory if there previously wasn't; otherwise, it updates with any new changes.
+   2. Test case: Click the `X` button on the window<br>
+      Expected: Identical to above.
 
 ### Deleting a client
 
@@ -617,29 +617,32 @@ testers are expected to do more *exploratory* testing.
    6. Test case: `summary s/11-2024 e/12-2024`<br>
       Expected: Error details informing of invalid month or incorrect format shown in the status message.
 
+
 ### Saving data
 
 1. Missing data file
 
-   1. Test case: Delete `clientell.json` from the data file directory. If there is no such file, do nothing.
+   1. Test case: Delete `clientell.json` from the data file directory. If there is no such file, do nothing.<br>
       Expected: The app launches correctly with a client list populated with sample clients.
 
 2. Corrupted data file
 
-  1. Test case: Add in irrelevant key-value pairs in `clientell.json`
-     Expected: The app populates data ignoring all irrelevant key-value pairs.
+   1. Test case: Add in irrelevant key-value pairs in `clientell.json`.<br>
+      Expected: The app populates data ignoring all irrelevant key-value pairs.
 
-  2. Test case: Add in duplicate key-value pairs in `clientell.json`
-     Expected: The app populates data ignoring all duplicates except the final pair.
+   2. Test case: Add in duplicate key-value pairs in `clientell.json`.<br>
+      Expected: The app populates data ignoring all duplicates except the final pair.
 
-  3. Test case: Modify an existing value to be illegal in `clientell.json`, such as `phone: (+1234)`
-     Expected: The app launches with an empty UI and no data.
+   3. Test case: Modify an existing value to be illegal in `clientell.json`, such as `phone: (+1234)`.<br>
+      Expected: The app launches with an empty UI and no data.
 
 3. Editing while app is active
 
    1. Prerequisite: The app is active
-   2. Test case: Make a legal edit anywhere in `clientell.json`, such as changing the first client's name to `name: "John"`. Then close the app.
+
+   2. Test case: Make a legal edit anywhere in `clientell.json`, such as changing the first client's name to `name: "John"`. Then close the app.<br>
       Expected: The legal edit is overwritten by the new data from the app's most recent session.
+
 
 
 
