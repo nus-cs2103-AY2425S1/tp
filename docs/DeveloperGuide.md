@@ -780,7 +780,11 @@ We plan to enforce stricter role assignment, ensuring that:
 This can be very troublesome if the user wants to execute the same command multiple times, or if the user wants to execute a similar command to the previous one.
 We plan to allow the user to navigate through the command history using the up and down arrows.
    <br><br>
-6. **Allow multi-word tags for contacts** Currently, tag field only allows alphanumeric inputs for tag creation, which means **spaces**, **underscores(_)** and **dashes(-)** are not
+6. **Allows sorting of contacts based on different fields.** Currently, the contacts are displayed in the order they are added to the address book. 
+This can make it challenging for users to locate a contact if they are unsure of specific search criteria.
+We plan to allow the user to view the contacts in a sorted order to find the contact he/she is looking for more easily.
+   <br><br>
+7. **Allow multi-word tags for contacts** Currently, tag field only allows alphanumeric inputs for tag creation, which means **spaces**, **underscores(_)** and **dashes(-)** are not
 allowed in the input, and as a result prevents user from creating multi-word tags for contacts. 
 <br><br>
     ![point6_tag_error_example](images/Planned_Enhancements_Screenshots/Point6_TagErrorExample.png)<br>
