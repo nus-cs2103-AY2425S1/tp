@@ -543,6 +543,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC10 - Filter**
 
 **MSS**
@@ -588,6 +590,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC12 - Adding subjects to students**
 
 **MSS**
@@ -631,6 +635,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should be able to hold up to 500 students including personal details, contact information, and emergency contacts, without a significant performance drop.
 2.  All data should be persistent, meaning it must be saved even after the application is closed, ensuring no data loss between sessions.
 
+<div style="page-break-after: always;"></div>
+
 #### Environment Requirements
 3.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
@@ -657,6 +663,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Accessibility
 13.  The system should provide keyboard shortcuts and other accessibility features to support users with disabilities.
+
+<div style="page-break-after: always;"></div>
 
 #### Extensibility
 14.  The system should have a modular design that allows for easy addition of new features and integrations in the future.
@@ -717,6 +725,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Relaunch the app by double-clicking the JAR file.<br>
        Expected: No help window appears. The most recent window size and location are retained.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a student 
 
