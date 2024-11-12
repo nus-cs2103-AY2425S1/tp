@@ -213,7 +213,7 @@ Format: `addEcName INDEX en/[ECNAME]`
 </box>
 <box type="tip" seamless>
 
-**Tip:** Note: EcName refers to `emergency contact name`
+**Note:** EcName refers to `emergency contact name`
 </box>
 
 * Adds the emergency contact's name `ECNAME` to the person at the specified `INDEX`
@@ -238,7 +238,7 @@ Format: `addEcNumber INDEX ep/[ECNUMBER]`
 </box>
 <box type="tip" seamless>
 
-**Tip:** Note: EcNumber refers to `emergency contact number`
+**Note:** EcNumber refers to `emergency contact number`
 </box>
 
 * Adds the emergency contact's number `ECNUMBER` to the person at the specified `INDEX`
