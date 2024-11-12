@@ -299,17 +299,18 @@ Team Size: 5
 
     We plan to prevent the addition of duplicate contacts by filtering out subjects that already exist in the contact's subject list.
 10. **Allow certain special characters in names**: The current implementation for adding a contact prevents the use of any special characters in names.
+    
     We plan to allow the incorporation of characters such as '/' and '-' in names to accommodate a wider range of names. 
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Effort**
 
-The main difficulty faced by the team was understanding the existing codebase and adapting it to the new requirements. The team had to spend a significant amount of time understanding the existing codebase and how the different components interacted with each other. This was a significant challenge as the team had no prior experience with the existing codebase and had to learn how the different components worked together.
-Fortunately the existing AB3 developer guide provided a good starting point for the team to understand the existing codebase and how the different components interacted with each other. The team was able to leverage the existing developer guide to understand the codebase and how the different components worked together. This helped the team to get up to speed quickly and start working on the new requirements.
-Through the developer guide, the team was able to abstract `Person` to `Student` and `Teacher` for example and implement the new requirements. The team was able to leverage the existing codebase to implement the new requirements and add new features to the app.
+
+The main difficulty faced by the team was understanding the existing codebase and adapting it to meet new requirements. The team had to dedicate a significant amount of time to comprehending the codebase and the interactions between its various components, which was a considerable challenge due to their lack of prior experience with it.
+Fortunately, the existing AB3 developer guide provided a solid starting point for tackling the new requirements. By leveraging the guide, the team was able to implement new features, such as abstracting `Person` into `Student` and `Teacher`.
 <br><br>
-The learning curve of JavaFX and the implementation of the GUI was another challenge in itself. The team had no prior knowledge of JavaFX beyond the basics learnt from their iP projects and thus had to learn JavaFX from scratch had to spend a significant amount of time learning JavaFX and implementing the GUI, which slowed down the development process.
-Additionally, significant changes had to be made to the json storage file which was another hurdle. The team had to understand how the json storage file worked and how to make changes to it without breaking the existing functionality. This was a significant challenge as the team had no prior experience with json storage files and had to learn how to make changes to it without breaking the existing functionality. 
+The learning curve associated with JavaFX and implementing the GUI presented another significant challenge for the team. With only basic knowledge gained from their iP projects, the team had to learn JavaFX from scratch, dedicating a substantial amount of time to mastering it and implementing the GUI, which in turn slowed down the development process.
+Additionally, making significant changes to the JSON storage file posed another hurdle. The team needed to understand how the JSON storage file functioned and how to modify it without disrupting existing functionality. This was particularly challenging due to the team’s lack of prior experience with JSON storage files, requiring them to learn how to make modifications without causing issues in the current system.
 
 --------------------------------------------------------------------------------------------------------------------
 
