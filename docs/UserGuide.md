@@ -172,7 +172,7 @@ Here's how to read this User Guide! We use these visual styles to help you navig
 4. Run the application by entering the following command: `java -jar tuteez.jar`<br>
    A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data for your reference.<br>
     <br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/Ui_userguide.png)
     <br>
 
 5. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.<br>
@@ -227,7 +227,7 @@ Make sure you have:
 ### Exploring the Application
 Upon launching the application, you should see a window similar to the one below:
 
-![Ui](images/Ui.png)
+![Ui](images/Ui_userguide.png)
 
 The *Left Panel* displays the list of students you have added. 
 Separated from the left panel by a divider is the *Right Panel* displays the details of the selected student.
