@@ -522,9 +522,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `delete i/S1234567A`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-   
-   2. Other incorrect delete commands to try: `delete i/S1234567A` (NRIC is invalid due to invalid checkstyle)
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
 ### Saving data
 
