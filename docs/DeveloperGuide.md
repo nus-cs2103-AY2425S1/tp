@@ -644,6 +644,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Use Case: Archive Contacts
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 **Main Success Scenario (MSS):**
@@ -667,6 +668,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Use Case: Load Archived Contacts
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 **Main Success Scenario (MSS):**
@@ -699,6 +701,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### Use Case: Delete Archive File
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 **Main Success Scenario (MSS):**
@@ -800,8 +803,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Test Coverage**: The percentage of the system's code that is covered by automated tests, ensuring that key features and functionality are reliably tested.
 
-
-
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Planned Enhancements**
 
@@ -809,21 +811,27 @@ Team size: 4
 
 The current version of MedConnect has its flaws so here are our plans for future enhancements to improve future versions of MedConnect.
 
-### Importing large number of contacts
+### Optimisations to handle large number of contacts
 
-Currently, depending on the limitations of the PC hardware that MedConnect is running on, importing a large number of contacts may cause an OutOfMemory error. Our planned enhancement is to change the import feature to import contacts in smaller batches of 25 contacts at a time rather than the entire `.json` file at once.
+Currently, depending on the limitations of the PC hardware that MedConnect is running on, a large number of contacts may cause an OutOfMemory error. Our planned enhancement is to optimise the data storage and retrieval process to handle a larger number of contacts without causing performance issues or memory errors, or implement a pagination feature to display contacts in smaller batches. We plan to also implement an import and export feature to allow users to import and export contacts in bulk to avoid the need to manually enter each contact.
 
 ### Duplicate detection
 
-Currently, MedConnect's duplicate person detection only works within each class. There is no duplicate person detection between a patient and a doctor. In reality, there should not be a case where a patient is also a doctor. We plan to implement duplicate person detection across classes to prevent a person from being both a patient and a doctor in the future.
+Currently, MedConnect's duplicate person detection only works within each class. There is no duplicate person detection between a patient and a doctor. In reality, there should likely not be a case where a patient is also a doctor. We plan to implement duplicate person detection across classes to prevent or display a warning message to prevent a person from being added as both a patient and a doctor, for instance, in the future.
 
 ### Whitespaces in names
 
 Currently, MedConnect is able to remove leading and trailing whitespaces from names. However, the functionality to remove whitespaces in between words in a name is not yet implemented. We plan to implement this in the future to prevent users from entering names with excessive whitespaces between words in the future as it may reduce readability.
 
+<div style="page-break-after: always;"></div>
+
+### Handling long fields
+
+Currently, MedConnect does not handle long fields well. For example, if a user enters a long name, the name may be cut off in the GUI. Our planned enhancement is to implement a feature that allows users to view the full details of each field by hovering over the field in the GUI or clicking to expand the details for the field in the card. This will allow users to view the full field (e.g. full name) should the field be too long to be displayed in the GUI.
+
 ### Multiple Language Support
 
-Currently, MedConnect is only available for usage in English. We recognise that our target users may not be able to read English proficiently as it may not be their first language. Our planned enhancement is to translate MedConnect into other languages such as Chinese, Malay and Tamil to accomodate for healthcare administrators who are more fluent in these languages.
+Currently, MedConnect is only available for usage in English. We recognise that our target users may not be able to read English proficiently or require non-English inputs (e.g. Chinese names). Our planned enhancement is to translate MedConnect into other languages, such as Chinese, Malay and Tamil to accommodate for healthcare administrators who are more fluent in these languages and require such languages to be supported in the application.
 
 ### Emergency Contact UI
 
@@ -831,11 +839,13 @@ Currently, clicking on a emergency contact card of a patient in the GUI, followe
 
 ### Autocomplete field suggestion
 
-Currently, the autocomplete feature does not suggest square brackets for optional fields, such as in the Edit command. Users would have to refer to the User Guide or error message to know which fields are optional. We plan to add the square brackets to optional parameters in the autocomplete feature in future iterations of MedConnect to minimise the need for users to continuously reference the User Guide.
+Currently, due to difficulties with parsing, the autocomplete feature does not suggest square brackets for optional fields, such as in the Edit command. Users would have to refer to the User Guide or error message to know which fields are optional. We plan to add the square brackets to clearly indicate optional parameters in the autocomplete feature in future iterations of MedConnect to minimise the need for users to continuously reference the User Guide.
 
-### Autocomplete visual errors
+<div style="page-break-after: always;"></div>
 
-Currently, the autocomplete feature has visual bugs if users enter a whitespace after command prefixes (e.g., `add n/    John`). To mitigate this issue, our temporary solution is to prevent users from typing whitespaces in the command box immediately after the slash of the command prefix. We plan to better resolve this issue by removing the autocomplete suggestion upon incorrect user input that does not follow the command syntax.
+### Autocomplete dynamic parsing
+
+Currently, the autocomplete feature does not dynamically parse the user's input for each parameter  as it is entered to provide the next suggestion. For example, the autocomplete feature would not function ideally if users enter a whitespace after command prefixes (e.g., `add n/    John` would continue to suggest `add n/    John (n/NAME)`). This also limits us to keep to the specified default order of parameters. We plan to implement dynamic parsing in the autocomplete feature to provide more accurate suggestions based on the user's input in future iterations of MedConnect, particularly for optional parameters. This would also improve the user experience by allowing us to carry out input validation for each parameter and provide feedback to the user in real-time without the need to submit the command.
 
 <div style="page-break-after: always;"></div>
 
