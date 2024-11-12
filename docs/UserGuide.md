@@ -378,6 +378,8 @@ Examples:
 
 ![Delete Success Message](images/delete.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a student : `edit`
 
 Edits an existing student's details in the system.
@@ -424,6 +426,8 @@ For example, if the student is taking English and Math and you use the command '
 only be taking Science.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all students : `list`
 
 Shows a list of all students in the system.
@@ -449,6 +453,8 @@ Examples:
   * Displays the details of the student with the ID S00001.
 
 ![Detail Success Message](images/detail.png)
+
+<div style="page-break-after: always;"></div>
 
 ## Searching and Sorting
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
