@@ -1230,7 +1230,6 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-## Planned Enhancement
 
 ### 1. Overview Panel Not Cleared
 
@@ -1349,6 +1348,8 @@ testers are expected to do more *exploratory* testing.
 
 **Current Workaround**: Users may need to manually search or scroll through the list to find candidates matching specific criteria.
 
+---
+
 ### 9. UI Layout Disorganization When Moving Between Monitors
 
 **Issue**: When moving the application window from one monitor to another, the UI layout becomes disorganized, resulting in significant blank spaces.
@@ -1363,6 +1364,7 @@ testers are expected to do more *exploratory* testing.
 2. **Adaptive Layout Constraints**: Modify the application to use anchor or percent-based layout constraints instead of absolute positioning, as these are more adaptable to different monitor configurations and can prevent layout inconsistencies.
 
 **Current Workaround**: Users can manually adjust the application window size after moving it to a new monitor to minimize the layout issues.
+
 
 
 ---
