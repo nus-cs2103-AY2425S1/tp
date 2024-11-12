@@ -357,6 +357,8 @@ for list of valid tags:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Context Menu Options
 
 Context menu options allow users to perform typical text actions, which are available in the command box and feedback box. To see the context menu options, click right on the command box or feedback box.
@@ -409,6 +411,8 @@ Select All
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 | Action       | Format, Examples                                                                                                                                                 
@@ -425,8 +429,7 @@ Select All
 | **Statistics**| `stats`                                                                                                                                                          
 | **Help**     | `help`                                                                                                                                                           
 
-
-                                                                                                                                               
+--------------------------------------------------------------------------------------------------------------------
      
 ## Glossary
 **Java**: A  programming language used to create applications that can run on many types of computers.
