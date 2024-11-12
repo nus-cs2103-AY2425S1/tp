@@ -191,7 +191,7 @@ The following sequence diagram shows how an `add` command goes through the `Logi
 
 The following activity diagram summarizes what happens when a user executes a `add` command:
 
-<puml src="diagrams/AddActivityDiagram.puml" height="600" width="900" />
+<puml src="diagrams/AddActivityDiagram.puml" height="700" width="1000" />
 
 ### Edit feature
 
@@ -225,7 +225,7 @@ The following sequence diagram shows how an `edit` command goes through the `Log
 
 The following activity diagram summarizes what happens when a user executes a `edit` command:
 
-<puml src="diagrams/EditActivityDiagram.puml" height="600" width="900" />
+<puml src="diagrams/EditActivityDiagram.puml" height="700" width="1000" />
 
 ### Undo feature
 
