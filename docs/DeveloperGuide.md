@@ -627,6 +627,12 @@ Use case ends.
 
       Use case resumes at step 2.
 
+- 3b. The selected Student does not exist.
+
+    - 3b1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
 **Use case: Edit a Student**
 
 **MSS**
@@ -665,9 +671,7 @@ Use case ends.
 **MSS**
 
 1. User requests to find students with specific keywords.
-
 2. T_Assistant processes the input and searches for students matching the keywords.
-
 3. T_Assistant displays a list of students who match the search criteria.
 
 Use case ends.
@@ -716,7 +720,7 @@ Use case ends.
 
       Use case resumes at step 2.
 
-- 3b. The Group already exits.
+- 3b. The Group already exists.
 
     - 3b1. T_Assistant shows an error message.
 
@@ -742,6 +746,12 @@ Use case ends.
 - 3a. The Group parameters are invalid.
 
     - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3b. The selected Group does not exist.
+
+    - 3b1. T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
@@ -835,6 +845,12 @@ Use case ends.
 - 3a. The Student/Group parameters are invalid.
 
     - 3a1. T_Assistant shows an error message.
+
+      Use case resumes at step 2.
+
+- 3b. The selected Student does not exist.
+
+    - 3b1. T_Assistant shows an error message.
 
       Use case resumes at step 2.
 
@@ -937,7 +953,7 @@ Use case ends.
 **MSS**
 
 1. User requests to remove a task from a specified group.
-2. T_Assistant displays all current tasks for the group.
+2. T_Assistant removes a task from the group displays all current tasks for the group.
 
 Use case ends.
 
