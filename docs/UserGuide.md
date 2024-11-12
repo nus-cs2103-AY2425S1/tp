@@ -155,7 +155,7 @@ If a duplicate email is used in an `add` or `edit` command, our app will display
 </div>
 
 * Email, gender and study group tags are **case-insensitive**.
-* Valid entries for names should only contain alphabet characters and spaces; numbers and special characters are not allowed. 
+* Valid entries for names should only contain alphabet characters and spaces; numbers and special characters are not allowed.
 * Each part of the name should be separated by exactly one space, with no consecutive spaces permitted.
 * Valid entries for email follow the format in this section: [email format](#information_source-misc---valid-email-field-format)
 * Valid entries for gender are M/m/F/f.
@@ -289,6 +289,10 @@ Format: `assign STUDY_GROUP [STUDY_GROUP …]`
 * Randomly assigns persons in the displayed list to the given `STUDY_GROUP`s.
 * No person in the displayed list can be tagged with any of the given study group name before assigning.
 * Input study group names must not have duplicates.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The `assign` command will randomly assign participants to study groups. However, to ensure true randomness, it cannot ensure an equal distribution of participants per group when provided with a small number of participants. For e.g., assigning 2 participants to 2 study groups can result in one group with 2 participants, and the other group with no participants. It is thus more ideal for large sample sizes.
+</div>
 
 Examples:
 * `list` followed by `assign P90-Placebo P90-Experimental` assigns every person in the address book to either `P90-Placebo` or `P90-Experimental` study group, but not both.<br>
