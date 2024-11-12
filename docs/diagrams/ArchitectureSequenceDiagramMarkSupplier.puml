@@ -1,7 +1,7 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
-skinparam defaultFontSize 9
+skinparam defaultFontSize 13
 
 Actor User as user USER_COLOR
 Participant ":UI" as ui UI_COLOR
