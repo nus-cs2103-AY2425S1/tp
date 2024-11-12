@@ -520,7 +520,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `delete i/S1234567A`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `delete i/S1234567A`(NRIC is invalid due to invalid checkstyle), `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Saving data
