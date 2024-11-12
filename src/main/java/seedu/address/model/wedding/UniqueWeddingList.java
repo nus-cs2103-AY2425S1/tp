@@ -15,8 +15,8 @@ import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
  * A list of wedding that enforces uniqueness between its elements and does not allow nulls.
  * A wedding is considered unique by comparing using {@code Wedding#isSameWedding(Wedding)}.
  * As such, adding and updating of persons uses Wedding#isSameWedding(Wedding) for equality
- * so as to ensure that the person being added or updated is unique in terms of identity in the UniquePersonList.
- * However, the removal of a person uses Wedding#isSameWedding(Object)
+ * so as to ensure that the wedding being added or updated is unique in terms of identity in the UniqueWeddingList.
+ * However, the removal of a wedding uses Wedding#isSameWedding(Object)
  * so as to ensure that the person with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -103,6 +103,9 @@ public class UniqueWeddingList implements Iterable<Wedding> {
         internalList.setAll(replacement.internalList);
     }
 
+    /**
+     * Sets all wedding in this list to not be ownWedding.
+     */
     public void setAllWeddingIsOwnFalse() {
         for (Wedding wedding : internalList) {
             wedding.setIsOwnWedding(false);
