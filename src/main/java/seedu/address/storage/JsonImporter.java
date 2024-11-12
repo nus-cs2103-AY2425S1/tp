@@ -28,6 +28,19 @@ public class JsonImporter {
         this.jsonFiles.addAll(jsonFiles);
     }
 
+    /**
+     * Imports all .json files converted by the CsvToJsonConverter
+     * @param model model which the .json files should be imported to
+     * @return The model after the .json files have been imported
+     * @throws ImporterException if there was any error during the execution of the importer
+     */
+    public final Model importAllJsonFiles(Model model) throws ImporterException {
+        for (File file: jsonFiles) {
+            importJsonFile(file, model);
+        }
+        return model;
+    }
+
     private Model importJsonFile(File jsonFile, Model model) throws ImporterException {
         requireNonNull(jsonFile);
 
@@ -50,19 +63,6 @@ public class JsonImporter {
         } catch (IllegalValueException ive) {
             throw new ImporterException(ive.getMessage());
         }
-    }
-
-    /**
-     * Imports all .json files converted by the CsvToJsonConverter
-     * @param model model which the .json files should be imported to
-     * @return The model after the .json files have been imported
-     * @throws ImporterException if there was any error during the execution of the importer
-     */
-    public final Model importAllJsonFiles(Model model) throws ImporterException {
-        for (File file: jsonFiles) {
-            importJsonFile(file, model);
-        }
-        return model;
     }
 
     /**

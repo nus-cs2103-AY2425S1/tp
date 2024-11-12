@@ -13,18 +13,24 @@ end box
 
 box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
-participant "p:Person" as Person MODEL_COLOR
 end box
 
 box STORAGE STORAGE_COLOR_T1
-participant ":JsonAddressBookStorage" as JsonAddressBookStorage STORAGE_COLOR
-participant "j:JsonSerializableAddressBook" as JsonSerializableAddressBook STORAGE_COLOR
+participant ":Storage" as JsonAddressBookStorage STORAGE_COLOR
 end box
 
 [-> LogicManager : execute("add n/John ct/work p/98765432")
+
+note left of LogicManager
+We'll henceforth refer to
+the parameter part
+ (i.e. "n/John ct/work p/98765432")
+ of the command as [parameters]
+end note
+
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("add n/John ct/work p/98765432")
+LogicManager -> AddressBookParser : parseCommand("add [parameters]")
 activate AddressBookParser
 
 create AddCommandParser
@@ -34,15 +40,14 @@ activate AddCommandParser
 AddCommandParser --> AddressBookParser
 deactivate AddCommandParser
 
-AddressBookParser -> AddCommandParser : parse("n/John ct/work p/98765432")
+AddressBookParser -> AddCommandParser : parse([parameters])
 activate AddCommandParser
 
-create Person
-AddCommandParser -> Person
-activate Person
+AddCommandParser -> Model
+activate Model
 
-Person --> AddCommandParser : p
-deactivate Person
+Model --> AddCommandParser : p
+deactivate Model
 
 create AddCommand
 AddCommandParser -> AddCommand : AddCommand(p)
@@ -60,7 +65,7 @@ destroy AddCommandParser
 AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
-LogicManager -> AddCommand : execute(m)
+LogicManager -> AddCommand : execute(model)
 activate AddCommand
 
 AddCommand -> Model : addPerson(person)
@@ -82,14 +87,7 @@ deactivate AddCommand
 LogicManager -> JsonAddressBookStorage : saveAddressBook(model.getAddressBook())
 activate JsonAddressBookStorage
 
-create JsonSerializableAddressBook
-JsonAddressBookStorage -> JsonSerializableAddressBook
-activate JsonSerializableAddressBook
-
-JsonSerializableAddressBook --> JsonAddressBookStorage : j
-deactivate JsonSerializableAddressBook
-
-JsonAddressBookStorage --> LogicManager : j
+JsonAddressBookStorage --> LogicManager
 deactivate JsonAddressBookStorage
 
 [<--LogicManager
