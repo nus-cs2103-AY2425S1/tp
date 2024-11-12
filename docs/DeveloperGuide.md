@@ -683,7 +683,7 @@ Team Size: 5
 
 11. **Fix UI bug regarding date of birth**
     1. Intended Behaviour: For months with less than 31 days, entering a date that is too large but below 32 will be automatically corrected. (e.g. 30-02-2024 will return 29-02-2024)
-    2. Current Behaviour: Entering a date that is too large but below 32 will not be automatically corrected in the UI. (e.g. 30-02-2024 will return 30-02-2024). But, the date stored correctly in storage, therefore restarting the app will show the corrected date.
+    2. Current Behaviour: Entering a date that is too large but below 32 will not be automatically corrected in the UI. (e.g. 30-02-2024 will return 30-02-2024). But, the date will be stored correctly in storage, hence restarting the app will show the corrected date.
     3. We plan to fix the UI to display the corrected date immediately after the user enters the date.
 
 12. **Add feature to update patient and doctor records `edit-patient` and `edit-doctor`**
