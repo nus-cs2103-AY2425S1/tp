@@ -197,10 +197,10 @@ This section describes some noteworthy details on how certain features are imple
 EduVault stores data in JSON file using the Jackson library.
 
 EduVault stores four types of objects:
-* Student (Person)
-* Tutorial
-* Participation
-* Attendance
+* `Student` (`Person`)
+* `Tutorial`
+* `Participation`
+* `Attendance`
 
 An overarching structure of the JSON file is as shown below:
 
@@ -214,7 +214,7 @@ An overarching structure of the JSON file is as shown below:
 
 <br>
 
-Within each of the different objects (Student, Tutorial, Participation), data is stored in the following format as shown below. Conditions for storage are also included.
+Within each of the different objects (`Student`, `Tutorial`, `Participation`), data is stored in the following format as shown below. Conditions for storage are also included.
 
 `Student`
 ```dtd
@@ -254,7 +254,7 @@ Two `Tutorials` are considered to be duplicates if they have matching `subject`.
     {
         "student" : "Alex Yeoh",
         "phone" : "87438807",
-        "tutorial" : "a",
+        "tutorial" : "Mathematics",
         "attendances" : [...]
     },
 ]
@@ -275,14 +275,18 @@ Two `Participations` are considered to be duplicates if the `Student` and `Tutor
 ]
 ```
 
-There is no enforcement of duplicate `Attendance` in storage.
+**Condition:** There may be no duplicate `Attendances`.
+1. Two `Attendances` are considered to be duplicates if the `attendanceDate` occurs in the same week of week-based-year.
+
+2. EduVault selects the first `Attendance` of duplicate `Attendance` entries as defined above to load from storage.
 
 ##### Uniqueness of objects
 For the purposes of storage into JSON format, EduVault defines two objects as distinct based on these factors:
 
 * Two `Students` are considered to be duplicates if they have matching `name` and `phone`.
 * Two `Tutorials` are considered to be duplicates if they have matching `subject`.
-* Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same.
+* Two `Participations` are considered to be duplicates if the `name`, `phone` and `subject` are the same (`Student` and `Tutorial` identifiers).
+* Two `Attendances` are considered to be duplicates if the `attendanceDate` occurs in the same week of week-based-year.
 
 ##### Loading Order
 The order which storage loads `Person`, `Tutorial` and `Participation` is shown below. 
@@ -301,7 +305,7 @@ based on [uniqueness](#uniqueness-of-objects).
 The implementation of the Find feature follows closely with the general format provided in the Logic Component [above](#logic-component).
 ![FindSequenceDiagram-Logic](images/FindSequenceDiagram-Logic.png)
 
-Due to the complexity of the command, there is an extra helper class `PredicateFactory` when `AddressBookParser` calls `parse(n/Alex ...)`
+Due to the complexity of the command, there is an extra helper class `PredicateFactory` when `AddressBookParser` calls `parse("n/Alex ...")`
 ![FindCommandParseSequence](images/FindCommandParseSequence.png)
 
 The main steps for this execution are:
@@ -338,8 +342,8 @@ Details of the Participation class are included [below](#participation-class).
 </div>
 
 <ol start="7">
-    <li>Once the enrollment is completed, EnrollCommand returns a **CommandResult** with a message indicating the successful enrollment.</li>
-    <li>The result then flows back through **LogicManager**.</li>
+    <li>Once the enrollment is completed, EnrollCommand returns a <b>CommandResult</b> with a message indicating the successful enrollment.</li>
+    <li>The result then flows back through <b>LogicManager</b>.</li>
 </ol>
 
 
@@ -541,9 +545,9 @@ _{more aspects and alternatives to be added}_
 
 **Target user profile**:
 
-This product is for admin at tuition centres and has to track a large number of student records. Besides requiring to manage a large number of records, the admin also:
+This product is for admins at tuition centres who have to track a large number of student records. Besides requiring to manage a large number of records, the admin also:
 
-* prefer desktop apps over other types
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
