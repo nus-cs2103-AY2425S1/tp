@@ -1,5 +1,5 @@
 ---
-  layout: default.md
+    layout: default.md
     title: "Developer Guide"
     pageNav: 3
 ---
@@ -25,7 +25,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 <b>Warning:</b>
 For CS2103T practical exam purpose, the filename of the jar file might be different from the file name given in UG, e.g.: [CS2103T-W08-1][TrackMate].jar
 <br>
-For MacOS and Linux users, use the command, `java -jar \[CS2103T-W08-1\]\[TrackMate\].jar` to execute the jar file during PE if necessary.
+For MacOS and Linux users, use the command, java -jar \[CS2103T-W08-1\]\[TrackMate\].jar to execute the jar file during PE if necessary.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
