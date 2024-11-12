@@ -539,5 +539,5 @@ Examples include to screen by skills of contacts and requirements for the job, o
 * **Enable support for `find company`**  
 * **Enable support for `edit job`**  
 * **Enable support for `edit company`**  
-* **Improve `help` functionality**: Display a basic list of commands without the need to visit the documentation website.
+* **Improve `help` functionality**: Display a list of commands together with the link to the documentation website.
 * **Improve `list` functionality**: Enable option to only show unmatched contacts and jobs who aren't filled yet (after quota)
