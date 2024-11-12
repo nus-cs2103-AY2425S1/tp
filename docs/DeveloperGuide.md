@@ -1023,7 +1023,7 @@ to add instructions for all other features to make it easier to familiarise them
 5. **Improve specificity of `import` error messages.** Currently, the error message for when the file exists on the device but is otherwise incompatible with DorManagerPro, whether this be because it is of the wrong file type, has a format incompatible with DorManagerPro or contains invalid data is as follows: <br>
 Could not read data from file FILE_PATH due to inability to find or access the file. <br>
 This error message could be more specific and our team plans to update this to the following error message: <br>
-DorManagerPro could not access the file at FILE_PATH. This could be because the file is of the wrong type, it has a format incompatible with DorManagerPro or it contains invalid data. Please check that the file path leads to a JSON file with valid data and formatting.
+DorManagerPro could not access the file at FILE_PATH. This could be because the file is of the wrong type, it has a format incompatible with DorManagerPro, or it contains invalid data. Please check that the file path leads to a JSON file with valid data and formatting.
 
 ## **Appendix: Effort**
 
