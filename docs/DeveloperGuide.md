@@ -670,11 +670,13 @@ Use case ends.
 
   Use case ends.
 
-* 3a. Payment of the student has already been marked.
-  * 3a1. System returns a message on payment of student being marked already.
-  * 3a2. System returns a fail status.
+* 2a. Payment of the student has already being marked.
+  * 2a1. System returns a message on payment of student being marked already.
+  * 2a2. System returns a fail status.
+
 
   Use case ends.
+
 
 <br><br>
 **UC04 - Delete student from system**
@@ -755,6 +757,7 @@ Use case ends.
   Use case ends.
 
 
+
 * 2b. Admin inputs student and/or tutorial that does not exist.
   * 2b1. System displays errors status.
   * 2b2. System prompts admin to key in information again.
@@ -765,6 +768,11 @@ Use case ends.
   
   Use case ends.
 
+* 2c. Admin tried to enroll student in a tutorial that the student is already enrolled in.
+  * 2c1. System displays error status.
+  * 2c2. System prompts admin to check information again.
+  
+  Use case ends.
 <br><br>
 
 **UC07 - Unenroll student from tutorial**
@@ -802,6 +810,9 @@ Use case ends.
   
   Use case ends.
 
+* 2c. Admin keys in student that is no enrolled in the tutorial.
+  * 2c1. System displays error message.
+  * 2c2. System prompts admin to check information again.
 <br><br>
 
 **UC08 - Edit student information**
