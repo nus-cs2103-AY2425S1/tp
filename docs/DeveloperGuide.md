@@ -323,7 +323,7 @@ results based on the specified criteria.
 
 ### Export feature
 
-## Implementation
+#### Implementation
 
 The `export` command extends `FileAccessCommand` and by extension, `Command`. The `export` command exports the contacts in DorManagerPro to a JSON file in the data folder of the app. 
 
@@ -373,7 +373,7 @@ The following activity diagram summarizes what happens when a user executes an `
 
 ### Import feature
 
-### Implementation
+#### Implementation
 
 The `import` command extends `FileAccessCommand` and by extension, `Command`. It also implements `Undoable`. `import` loads data from a save file into DorManagerPro, with the file path of the save file provided by the user. The `import` command is undoable.
 
@@ -406,7 +406,7 @@ The following activity diagram summarizes what happens when a user executes an `
 <puml src="diagrams/ImportActivityDiagram.puml" alt="ImportActivityDiagram" />
 <br>
 
-### Design considerations:
+#### Design considerations:
 
 **Aspect: The exact format of the `FILE_PATH` parameter**
 
