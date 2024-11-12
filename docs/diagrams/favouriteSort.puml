@@ -33,6 +33,9 @@ create FavouriteCommand
 FavouriteCommandParser -> FavouriteCommand
 activate FavouriteCommand
 
+FavouriteCommand --> FavouriteCommandParser
+deactivate FavouriteCommand
+
 FavouriteCommandParser --> AddressBookParser : f
 deactivate FavouriteCommandParser
 
@@ -43,6 +46,7 @@ AddressBookParser --> LogicManager
 deactivate AddressBookParser
 
 LogicManager -> FavouriteCommand : execute()
+activate FavouriteCommand
 FavouriteCommand -> Model : sortPersonsFavourite()
 activate Model
 Model --> FavouriteCommand
