@@ -546,19 +546,18 @@ Currently, names do not accept `.` and `/` and other special characters that mig
 
 We should remove strict alphanumeric checks for names to support special characters, allowing for more accurate entries.
 
-### Restriction on prefix usage in Guest/Vendor commands
+### Improve command parsing to handle common characters in fields
 
 **Feature Flaw in Current Implementation**
 
-Currently, the commands in BridalBuddy could mistakenly flag invalid prefixes that appear within fields such as address or company name.
-For example, in an input like `a/123 Main St W/T Building`, the system mistakenly interprets `W/` as a new prefix, even though `W/` does not represent a valid prefix but a part of the address. 
-This leads to unnecessary parsing errors, as the input is incorrectly split due to an unrecognized prefix.
+The current design of BridalBuddy's command parser does not accept certain characters, such as `/`, within input fields (e.g., addresses or company names).
+When users include these characters as part of standard text entries—such as `a/123 Main St/Suite 5`—the parser interprets `St/` as an unrecognized prefix, 
+resulting in unnecessary parsing errors and frustrating interruptions.
 
 **Proposed Enhancement**
 
-Enhance command parsing to distinguish between valid prefixes and text within fields like addresses or company names.
-clear error messages only when truly invalid prefixes are used outside recognized fields. 
-This will improve input accuracy and reduce user frustration.
+To address this design limitation, enhance the command parsing logic to allow `/` within fields without mistaking them for new prefixes. 
+By improving how BridalBuddy distinguishes between field content and actual command prefixes, users will experience fewer parsing errors and a smoother, more accurate input process.
 
 ### Enhance flexibility in phone number parameter input
 
