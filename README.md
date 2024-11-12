@@ -1,11 +1,11 @@
 [![CI Status](https://github.com/AY2425S1-CS2103T-T15-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T15-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T15-4/tp/graph/badge.svg?token=134QRO3UI3)](https://codecov.io/gh/AY2425S1-CS2103T-T15-4/tp)
 
-![Ui](docs/images/Ui.png)
+![Ui](docs/images/uiExample.png)
 
 # HRConnect
 
-HRConnect is a desktop application for HR professionals to manage employees and projects. It provides fast access to employee, contractor, and candidate contact details, optimized for HR professionals who prefer a CLI. It allows quick updates, talent pool organization, and candidate tracking, all through a streamlined, command-based interface designed for speed and efficiency. It also helps with assignment of HR staff to HR events and cases.
+HRConnect is a desktop application for project managers to manage employees and projects. It provides fast access to employee and project details, optimized for professionals who prefer a CLI. It allows talent pool organization, project management, and manpower allocation, all through a streamlined, command-based interface designed for speed and efficiency.
 
 # Credits
 

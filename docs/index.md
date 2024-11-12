@@ -3,12 +3,12 @@ layout: page
 title: HRConnect
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![CI Status](https://github.com/AY2425S1-CS2103T-T15-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T15-4/tp/actions)
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T15-4/tp/graph/badge.svg?token=134QRO3UI3)](https://codecov.io/gh/AY2425S1-CS2103T-T15-4/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/uiExample.png)
 
-**HRConnect is a desktop app for managing human resources in relation to projects.** While it has a graphical display, user interactions can be done by only typing.
+**HRConnect is a desktop app for managing human resources in relation to projects.** While it has a graphical display, user interactions are optimized for command line inputs.
 
 * If you are interested in using HRConnect, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
 * If you are interested about developing HRConnect, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
