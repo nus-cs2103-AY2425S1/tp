@@ -15,6 +15,12 @@ title: Developer Guide
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [Implementation](#implementation)
+  - [Student Command](#1-student-command)
+  - [Company Command](#2-company-command)
+- [Planned Enhancements](#planned-enhancements)
+  - [Disallow Duplicate Phone Number Across Contacts](#1-disallow-duplicate-phone-numbers-across-contacts)
+  - [Consistent Case-Insensitive Tag Handling](#2-consistent-case-insensitive-tag-handling)
+  - [Improve Error Priority for Edit Command](#10-improve-error-priority-for-edit-command)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
@@ -197,6 +203,140 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### 1. Student Command
+
+The student command in AdmiNUS is used to add a new student entry to the list of contacts. This command requires specific attributes such as student ID, name, phone number, email, address, and optional tags. The system will validate each input and check for duplicate entries to prevent the addition of a student with identical details.
+
+#### Current Implementation
+
+This is a high-level view of what occurs when the `student` command is executed:
+
+<img src="./images/StudentCommandSequenceDiagram.png">
+
+Student command performs the following checks in order:
+
+- **Flag Validation**: Ensures all mandatory flags (e.g., name, student ID, phone, email, address) are present, and no invalid flags are included.
+- **Value Validation**: Confirms that each provided value for specified flags adheres to the expected format.
+- **Duplicate Check**: Verifies that no existing student has the same student id.
+
+### 2. Company Command
+
+The `company` command is used to add a new company contact into the list. This command requires attributes such as the company name, phone number, email, address, industry, and optional tags. Similar to the student command, the system validates each input and checks for duplicates to ensure unique entries.
+
+#### Current Implementation
+
+This is a high-level view of what occurs when the `company` command is executed:
+
+<img src="./images/CompanyCommandSequenceDiagram.png">
+
+Company command performs the following checks in order:
+
+- **Flag Validation**: Ensures all mandatory flags (e.g., name, phone, email, address, industry) are present, and no invalid flags are used.
+- **Value Validation**: Confirms that each provided value for specified flags meets the required format.
+- **Duplicate Check**: Verifies that no existing company has the same combination of name and industry
+
+The following diagrams provides a high-level view of the logic flow for both `student` and `company` command:
+
+<img src="./images/StudentCompanyCommandActivityDiagram-Add_Student_Company_Activity_Diagram.png">
+
+_Note: The error messages will vary depending on which check fails._
+
+### 3. View Command
+
+The view command is used to view a specific contact on the contact display pane. Users specify the index of the contact to be viewed.
+
+#### Current implementation
+
+Here's an overview of what happens when the `view 1` command is being input by the user:
+![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+The activity diagram is as follows:
+![ViewActivityDiagram](images/ViewActivityDiagram.png)
+
+- **The View Command checks:**
+  - that the specified index is positive and within the bounds of the contacts list.
+
+### 4. Find command
+
+The `find` command is used to find contacts whose name match the specified keyword given by the user.
+
+#### Current implementation
+
+To execute the `find` command, users must enter a valid `KEYWORD` parameter, by ensuring that the `KEYWORD` parameter is not empty.
+
+The sequence diagram below shows a high-level view of how the `find` operation works when the user inputs `find bob`.
+
+<img src="images/FindSequenceDiagram.png" width="750" />
+
+The activity diagram below shows the flow of the `find` operation.
+
+<img src="images/FindActivityDiagram.png" width="750" />
+
+---
+
+## Planned Enhancements
+
+Group size: 5
+
+### 1. Disallow Duplicate Phone Numbers Across Contacts
+
+#### Current Issue:
+
+Currently, the app allows users to add multiple contacts (both students and companies) with the same phone number. This can lead to potential confusion or data inconsistency, as users may unintentionally add duplicate contacts with identical phone numbers. In real-world scenarios, it is highly unlikely that two different individuals or entities would share the same phone number, making this behavior unnecessary and potentially misleading.
+
+#### Proposed Enhancement:
+
+Implement a restriction that prevents users from adding new contacts with phone numbers that already exist in the app. This restriction will apply to both student and company contacts, ensuring that each phone number is unique within the contact list. This change aims to enhance data integrity and user experience by reducing redundancy and aligning with real-world expectations where phone numbers are unique identifiers.
+
+### 2. Consistent Case-Insensitive Tag Handling
+
+#### Current Issue:
+
+The current tag handling system in the app is inconsistent regarding case sensitivity across different commands. For example, when adding or deleting contacts, the `t/[TAG]` parameter is case-sensitive, meaning Paid and paid would be treated as separate tags. However, the `tag` command treats tags as case-insensitive, so attempting to add `paid` to a contact that already has the tag `Paid` will result in no action, as it recognises `paid` and `Paid` as the same tag. This inconsistency can lead to user confusion, as the system does not follow a unified approach to case sensitivity.
+
+#### Proposed Enhancement:
+
+Standardise the tag handling logic to be case-insensitive across all commands. This means that tags with the same letters but different capitalisations (e.g., `OwesMoney`, `owesmOney`, `OWESMONEY`) will be treated as identical tags in all scenarios, including adding contacts, adding tags, deleting tags and filtering tags. By making this adjustment, the program will align with standard user expectations of case-insensitivity, creating a more intuitive and consistent experience for users.
+
+### 7. Make Error Message for View Command More Specific
+
+#### Current Issue:
+
+The format for `view` command is `view INDEX`. The valid input for `INDEX` is a positive integer. The current error message to handle a non-integer input is `"Index must be a positive number!"`, which is too general. For example, if `view 3.5` is being input, the user will be confused as `3.5` is a positive number.
+
+#### Proposed Enhancement:
+
+We plan to change the error message into `"Index must be a positive integer!"`.
+
+### 8. `Deletetag all` command does not work as intended on an empty list.
+
+#### Current Issue:
+
+If the user manages to end up with an empty list, by entering the input `clear` for example, followed by the command `deletetag all t/TAG`, the user is shown a message `Deleted the tags TAG from all contacts in the list`, even though this did not actually happen. This could bring confusion to users.
+
+#### Proposed Enhancement:
+
+Instead, we plan to show an error message whenever the user tries to use the `deletetag all` command on an empty list. The error message will be similar to `Cannot delete tags from an empty list!`. This will give the user a clear idea and bring less confusion.
+
+### 9. Restrict phone number field to 8 numbers
+
+#### Current Issue:
+
+Currently, the phone number field accepts inputs as long as they are numbers and at least 3 digits long. However, given that our target audience is NUS club administrators, it would be appropriate for phone numbers to have at least 8 digits.
+
+#### Proposed Enhancement:
+
+Perform input check for phone numbers to at least make sure it has 8 digits.
+
+### 10. Improve Error Priority for Edit Command
+
+#### Current Issue:
+
+When attempting to edit fields restricted to specific contact types (such as `STUDENT_ID` and `INDUSTRY`), the application currently prioritises validating the input format before checking if the field is editable for the specified contact type. This results in a situation where users are first prompted to correct the format, even if they should ultimately be informed that the field cannot be edited for that contact type. For example, attempting to edit a student’s `INDUSTRY` field will first trigger a format error message rather than directly informing the user that the `INDUSTRY` field cannot be edited for students.
+
+#### Proposed Enhancement:
+
+Adjust the error-checking sequence in the edit command to prioritise checks on editability based on contact type before format validation. This means users will receive a direct message if they attempt to edit fields restricted for a contact type (e.g., "Industry field cannot be edited for a student contact"), reducing unnecessary steps and making the error feedback more user-friendly.
+
 ### View Command
 
 The view command is used to view a specific contact on the contact display pane.
@@ -261,8 +401,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | impatient user                               | manage up to 1000 contacts with fast response time                                 | ensure smooth usage even when managing a large contact list                        |
 | `*`      | busy user                                    | quickly import contacts from other platforms (e.g., phone, social media, email)    | avoid manually inputting every new contact into AdmiNUS                            |
 | `*`      | busy admin user                              | easily export the contact list                                                     | share or back up the contact list for other admin team members or departments      |
-
-_{More to be added}_
 
 ### Use cases
 
@@ -714,7 +852,7 @@ testers are expected to do more *exploratory* testing.
 ### Adding tag(s) to contact
 
 1. **Adding tags to an existing contact**
-   - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+   - **Prerequisites**: Ensure that AdmiNUS is running and at least one contact(s) are listed.
    - **Test case**: `tag 1 t/Y2 t/computerScience`  
      **Expected**: Tags added to the first contact currently shown in the list. Status message updates. Timestamp updated.
    - **Test case**: `tag 0 t/invalid`  
@@ -725,7 +863,7 @@ testers are expected to do more *exploratory* testing.
 ### Deleting tag(s) from contact
 
 1. **Deleting tags from an existing contact**
-   - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed, where all contacts have the tag `contacted`.
+   - **Prerequisites**: Ensure that AdmiNUS is running and at least one contact(s) are listed, where all contacts have the tag `contacted`.
    - **Test case**: `deletetag 1 t/Y2 t/computerScience`  
      **Expected**: Tags removed from the first contact currently shown in the list. Status message updates. Timestamp updated.
    - **Test case**: `deletetag 0 t/invalid`  

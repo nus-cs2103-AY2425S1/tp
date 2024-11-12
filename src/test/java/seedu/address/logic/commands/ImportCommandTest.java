@@ -3,7 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_CORRUPTED_CSV_FILE;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_FAILURE;
 import static seedu.address.logic.commands.ImportCommand.MESSAGE_INVALID_CSV_FORMAT;
+import static seedu.address.logic.commands.ImportCommand.MESSAGE_NON_CSV_FILE;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 
 import java.nio.file.Files;
@@ -55,7 +58,7 @@ public class ImportCommandTest {
         ImportCommand importCommand = new ImportCommand(tempFile.toString());
 
         CommandException exception = assertThrows(CommandException.class, () -> importCommand.execute(model));
-        assertEquals(ImportCommand.MESSAGE_INVALID_CATEGORY, exception.getMessage());
+        assertEquals(MESSAGE_CORRUPTED_CSV_FILE, exception.getMessage());
 
         Files.deleteIfExists(tempFile);
     }
@@ -89,24 +92,7 @@ public class ImportCommandTest {
         ImportCommand importCommand = new ImportCommand(tempFile.toString());
 
         CommandException exception = assertThrows(CommandException.class, () -> importCommand.execute(model));
-        assertEquals("Missing Student ID for student category", exception.getMessage());
-
-        Files.deleteIfExists(tempFile);
-    }
-
-    /**
-     * Tests that importing a company contact with a missing industry throws a CommandException.
-     */
-    @Test
-    public void execute_missingIndustry_throwsCommandException() throws Exception {
-        String missingIndustryCsvContent = "name,category,studentID/industry,phone,email,address,tags\n"
-                + "Alice Lee,company,,87654321,alice@example.com,456 Business Ave,colleagues\n"; // Missing industry
-
-        Path tempFile = createTempFile(missingIndustryCsvContent);
-        ImportCommand importCommand = new ImportCommand(tempFile.toString());
-
-        CommandException exception = assertThrows(CommandException.class, () -> importCommand.execute(model));
-        assertEquals("Missing Industry for company category", exception.getMessage());
+        assertEquals(MESSAGE_CORRUPTED_CSV_FILE, exception.getMessage());
 
         Files.deleteIfExists(tempFile);
     }
@@ -255,5 +241,63 @@ public class ImportCommandTest {
         Path tempFile = Files.createTempFile("test", ".csv");
         Files.write(tempFile, content.getBytes());
         return tempFile;
+    }
+
+    @Test
+    public void execute_emptyNameField_throwsCommandException() throws Exception {
+        String csvContent = "name,category,studentID/industry,phone,email,address,tags\n"
+                + ",student,A0123456X,98765432,student@example.com,123 Main St,friends\n";
+
+        Path tempFile = createTempFile(csvContent);
+        ImportCommand importCommand = new ImportCommand(tempFile.toString());
+
+        CommandException exception = assertThrows(CommandException.class, () -> importCommand.execute(model));
+        assertEquals(ImportCommand.MESSAGE_CORRUPTED_CSV_FILE, exception.getMessage());
+
+        Files.deleteIfExists(tempFile);
+    }
+
+    @Test
+    public void execute_emptyIndustryField_throwsCommandException() throws Exception {
+        String csvContent = "name,category,studentID/industry,phone,email,address,tags\n"
+                + "Company XYZ,company,,98765432,company@example.com,456 Industry Rd,business\n";
+
+        Path tempFile = createTempFile(csvContent);
+        ImportCommand importCommand = new ImportCommand(tempFile.toString());
+
+        CommandException exception = assertThrows(CommandException.class, () -> importCommand.execute(model));
+        assertEquals(ImportCommand.MESSAGE_CORRUPTED_CSV_FILE, exception.getMessage());
+
+        Files.deleteIfExists(tempFile);
+    }
+
+    @Test
+    public void execute_insufficientFields_throwsCommandException() throws Exception {
+        String csvContent = "name,category,studentID/industry,phone,email\n"
+                + "Incomplete User,student,A0123456X,98765432,student@example.com\n";
+
+        Path tempFile = createTempFile(csvContent);
+        ImportCommand importCommand = new ImportCommand(tempFile.toString());
+
+        CommandException exception = assertThrows(CommandException.class, () -> importCommand.execute(model));
+        assertEquals(ImportCommand.MESSAGE_INVALID_CSV_FORMAT, exception.getMessage());
+
+        Files.deleteIfExists(tempFile);
+    }
+
+    @Test
+    public void execute_nonCsvFile_throwsCommandException() throws Exception {
+        String nonCsvContent = "This is not a CSV content";
+
+        Path tempFile = Files.createTempFile("tempTxtFile", ".txt");
+        Files.writeString(tempFile, nonCsvContent);
+
+        ImportCommand importCommand = new ImportCommand(tempFile.toString());
+
+        CommandException exception = assertThrows(CommandException.class, () -> importCommand.execute(model));
+        assertEquals(String.format(MESSAGE_FAILURE, tempFile.toString()) + "\n" + MESSAGE_NON_CSV_FILE,
+                exception.getMessage());
+
+        Files.deleteIfExists(tempFile);
     }
 }
