@@ -612,12 +612,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. Manager requests to add customer
-2. AddressBook adds the person 
+2. NomNomNotifier adds the person 
 3. Use Case Ends
 
 **Extension**
 * 1a. Manager request/invalid/incomplete
-  * 1a1. AddressBook shows an error message
+  * 1a1. NomNomNotifier shows an error message
   * Use Case Ends
 
 * 1a. Manager tags customer using pre-assigned shortcut
@@ -635,23 +635,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extension**
 * 2a. List is empty
-  * 
+  * Use Case Ends
 * 3a. Manager request does not adhere to field's restrictions
   * 3a1. NomNomNotifier shows an error message
   * Use Case resumes at 3
+* 3b. Manager tags customers using pre-assigned shortcut
+  * 3b1. Abbreviation is mapped to pre-assigned tag name
+  * Use Case resumes at step 4
 
 **Use case: Search for a customer**
 
 **MSS**
 1. Manager requests to list the customers
-2. AddressBook shows a list of customers
+2. NomNomNotifier shows a list of customers
 3. Manager requests to search for customer by name/phone number
-4. AddressBook shows the customer
+4. NomNomNotifier shows the customer
 5. Use Case Ends
 
 **Extension**
 * 3a. Manager request/invalid/incomplete
-  * 3a1. AddressBook shows an error message.
+  * 3a1. NomNomNotifier shows an error message
   * Use Case Ends
 * 2a. The list is empty
   * User Case Ends
@@ -661,38 +664,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  Manager requests to list customers
-2.  AddressBook shows a list of customers
+2.  NomNomNotifier shows a list of customers
 3.  Manager requests to delete a specific customers in the list
-4.  AddressBook deletes the customers
-
-    Use case ends.
+4.  NomNomNotifier deletes the customers 
+5.  Use case ends
 
 **Extensions**
 
-* 2a. The list is empty.
-
-  Use case ends.
-
+* 2a. The list is empty. 
+  * 2a1. Use case ends.
 * 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
+    * 3a1. NomNomNotifier shows an error message. 
+    * Use case resumes at step 2.
 
 **Use Case: Creating a shortcut**
 
 **MSS**
 
 1. Manager requests to add shortcut
-2. AddressBook adds the shortcut with alias and tag name to UniqueShortcut list
-    Use Case ends
+2. NomNomNotifier adds the shortcut with alias and tag name 
+3. Use Case ends
 
 **Extension**
 * 1a. Shortcut format is invalid
-    * 1a1. AddressBook shows error message
+    * 1a1. NomNomNotifier shows error message
     * Use Case ends
-* 1b. Alias or tag name in shortcut already exists in AddressBook
-  * 1b1. AddressBook shows error message
+* 1b. Alias or tag name in shortcut already exists in NomNomNotifier
+  * 1b1. NomNomNotifier shows error message
   * Use Case ends
 
 **Use Case: Deleting a shortcut**
@@ -700,16 +698,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Manager requests to delete shortcut
-2. AddressBook deletes the shortcut with specified alias and tag name in UniqueShortCut list
-
-    Use Case ends
+2. NomNomNotifier deletes the shortcut with specified alias and tag name 
+3. Use Case ends
 
 **Extension**
 * 1a. Shortcut format is invalid
     * 1a1. AddressBook shows error message
     * Use Case ends
-* 1b. ShortCut does not exist in AddressBook
-    * 1b1. AddressBook shows error message
+* 1b. ShortCut with same alias and tag name does not exist in NomNomNotifier
+    * 1b1. NomNomNotifier shows error message
     * Use Case ends
 
 ### Planned Enhancements
@@ -725,7 +722,7 @@ Team Size: 5
 2. **Enforce Prefix Usage (`t/`) on Filter Command:**
     
     The current behaviour regarding the filter feature, involves the multiple keywords being parsed into `TagsContainKeywordPredicate` which uses the `contain` method against all current tags and filtering the people based on the keywords. As Tag Names are allowed to have spaces, possible tags could be "No Pork" and "Pork Lover". 
-    When using the filter feature for "Pork Lover" as input, the result would show people containing both tags as both contain the keyword: "Pork". This may limit the usage of this feature. As such, we plan to use prefix `t/` within the filter command so that the entire keyword "Pork Lover" can be parsed, with relevant customer details being listed. 
+    When using the filter feature for "Pork Lover" as input, the result would show people containing both tags as both contain the keyword: "Pork". This may limit the effectiveness of this feature. As such, we plan to use prefix `t/` within the filter command so that the entire keyword "Pork Lover" can be parsed, with relevant customer details being listed. 
 
 
 3. **Enhance the unique identifier of a `Person` to be both name and phone number**
@@ -733,15 +730,15 @@ Team Size: 5
     The current behaviour includes the unique identifier of a Person to the name attribute. However, we acknowledge that people can have the same name. As such, this enhancement would entail
     the name and phone number to be unique identifier for a `Person`. We understand that this may interfere with order put command. This would also entail the inclusion of a phone number field when using the `put` command. 
 
+
 4. **Being able to edit/delete order history of a customer**
 
    Add editHistory and deleteHistory command that allows order history of a customer to be modified
 
 
-5.**Being able to export customer order history into csv file**
+5. **Being able to export customer order history into csv file**
 
-* Add downloadOrderHistory to export all customer data alongside the order history
-
+    Add downloadOrderHistory to export all customer data alongside the order history
 
 ### Non-Functional Requirements
 
@@ -757,10 +754,10 @@ Team Size: 5
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * 	CLI (Command-Line Interface): A text-based interface where users can type commands to interact with the system
-* Customer: An individual whose details (e.g., name, phone number, email) are stored in the system for tracking purposes
-* Tag: A label or keyword that can be associated with a customer to categorize or describe them (e.g., “vegetarian”, “loyalty-programme”)
-* Parameter: Information provided by the user as part of a command, such as name, email, or phone number
-* CSV (Comma-Separated Values): A common format for storing and exchanging tabular data, where each row represents a record, and each field is separated by a comma
+* **Customer**: An individual whose details (e.g., name, phone number, email) are stored in the system for tracking purposes
+* **Tag**: A label or keyword that can be associated with a customer to categorize or describe them (e.g., “vegetarian”, “loyalty-programme”)
+* **Parameter**: Information provided by the user as part of a command, such as name, email, or phone number
+* **CSV** (Comma-Separated Values): A common format for storing and exchanging tabular data, where each row represents a record, and each field is separated by a comma
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -779,16 +776,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. cd into that empty folder and run the command : `java -jar NomNomNotifier.jar`
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by running the command: `java -jar NomNomNotifier.jar` .<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -805,14 +802,17 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Within the same directory of NomNomNotifier.jar, if the data file with `addressbook.json` is corrupted (eg. input restrictions for fields is breached), the next time NomNomNotifier is relaunched, an empty list will be displayed on the GUI.
+   2. If customers are added to that empty list, changes made to the empty list will overwrite the corrupted `addressbook.json` file
 
-1. _{ more test cases …​ }_
+1. Dealing with missing data file
+   2. Within the same directory of NomNomNotifier.jar, if the data file with `addressbook.json` is missing or deleted, the next time NomNomNotifier is relaunched, a sample list of customers will be showned.
+   3. When new data is stored or existing data is changed through existing commands (eg. add, edit, add shortcut, add order), a new `addressbook.json` file will be created
 
 
