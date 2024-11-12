@@ -1104,6 +1104,7 @@ testers are expected to do more *exploratory* testing.
    * **Expected:** Shows the GUI with a set of sample patients. The window size may not be optimal. <br>
 
 
+
 2. Saving window preferences.
 
    * **Prerequisites:**
@@ -1114,6 +1115,7 @@ testers are expected to do more *exploratory* testing.
 
    * **Test case:** Launch the app.
    * **Expected:** The most recent window size and location is retained. <br>
+
 
 
 3. Shutdown.
@@ -1128,6 +1130,7 @@ testers are expected to do more *exploratory* testing.
    * **Prerequisite:** The app is a clean state.
    * **Test case:** Launch and exit the app.
    * **Expected:** A new `data/ClinicConnect.json` file is created. This is the storage file. <br>
+
 
 
 2. Dealing with missing or corrupted data files.
@@ -1149,10 +1152,12 @@ testers are expected to do more *exploratory* testing.
    * **Expected:** A help window detailing a summary of the commands available and their functions is displayed. <br>
 
 
+
 2. Getting more information on specific commands.
 
    * **Test case:** `help edit`
    * **Expected:** A help window showing more information about `edit` is displayed. This includes description, parameters, usage and example of the command. <br>
+
 
 
 3. Entering wrong command keyword.
@@ -1171,6 +1176,7 @@ testers are expected to do more *exploratory* testing.
    * **Expected:** Patient with NRIC T0123456A details are updated with all the new values. <br>
 
 
+
 2. Editing a patient with repeated prefixes (except `al|` `rmal|`)
 
    * **Prerequisites:** Start with the provided sample data.
@@ -1181,11 +1187,14 @@ testers are expected to do more *exploratory* testing.
    * **Expected:** Similar to previous. <br>
 
 
+
 3. Editing a patient NRIC to an existing NRIC
 
    * **Prerequisites:** Start with the provided sample data.
    * **Test case:** `edit T0123456A i|S0123456B`
    * **Expected:** An error message is shown indicating that the patient already exists in the ClinicConnect system.
+
+
 
 ### Deleting a patient
 
@@ -1198,6 +1207,7 @@ testers are expected to do more *exploratory* testing.
    * **Expected:** The patient entry with the corresponding NRIC is deleted from the patient list. Details of the deleted contact shown in the status message. <br>
 
 
+
 2. No patient with the corresponding valid NRIC found in the patient list when deleting a patient.
 
    * **Prerequisites:** The patient list contains no patient entries with the NRIC "S0000001X".
@@ -1205,10 +1215,12 @@ testers are expected to do more *exploratory* testing.
    * **Expected:** No patient is deleted. Patient not found error details shown in the status message. <br>
 
 
+
 3. Keying in an invalid NRIC when deleting a patient.
 
    * **Test case:** `delete T000001X`.
    * **Expected:** No patient is deleted. Invalid command error details shown in the status message. <br>
+
 
 
 4. No NRIC keyed in when deleting a patient.
@@ -1232,6 +1244,7 @@ testers are expected to do more *exploratory* testing.
       * Phone: `90901282`
       * Sex: `F`
       * BirthDate: `2002-10-10` <br>
+
 
 
 2. Adding a patient with invalid `Nric`
@@ -1420,12 +1433,20 @@ testers are expected to do more *exploratory* testing.
 Team size: 5
 
 1. The current system does not accept special characters in names. We plan to widen the acceptance of special characters e.g. Yugan S/O Murali.
+* Currently, our prefixes use `\|` instead of `/`. Therefore, we can broaden the validity checks for names to include 3 special characters `/`, `-` and `,` due to our personal experience names which include these special characters.
 2. A more comprehensive NRIC validity check could be performed to ensure proper correspondence between birthdate and NRIC.
+* There are publicly available NRIC validity checking algorithms which may reduce the likelihood of invalid NRICs being inputted accidentally.
 3. Allowing NRIC to be parsed case-insensitively for all commands.
+* This would be a straightforward enhancement which increases the ease of the users.
 4. More specific error messages based on users' input.
+* By tailoring error messages based on their input, they can be prompted to change the erroneous parts of their input. The exceptions can be made to be thrown at various parts of the parsing of the input to give a more specific prompt.
 5. For `edit`, `ec` and `no`, prefixes can allow empty existing conditions and notes respectively to delete those fields.
+* The parsing can now allow `ec` and `no` to be empty instead of ensuring that all prefixes are non-empty. 
 6. For `add`, names should have a character limit.
+* This prevents the issue of the ClinicConnect app to throw an inaccurate error when a patient with a long name is being added. 
 7. For `al` and `rmal` prefixes, we plan to ensure that case-insensitive, singular and plural forms of the allergy are considered to be the same.
+* We can allow all allergies to be in lowercase to allow case-insensitive inputs to be parsed as the same. For allowing singular and plural forms of the allergy to be considered the same, libraries such as ![evo-inflector](https://github.com/atteo/evo-inflector) can be
+used to check if plural or singular versions of the allergies have already been added.
 
 ---
 
@@ -1445,4 +1466,5 @@ Adding so many fields to the Patient object required a lot of effort tracing thr
 
 ### Achievements
 
-Our group managed to implement all of our planned features, even though they were much harder to implement than previously thought. We also managed to properly identify and address many flaws and bugs in our implementation, such as changing the "/" symbol separating prefixes to "|" to ensure that people having the "/" symbol in their names and addresses are not inconvenienced. For a group of first time software developers, we think that we tried our best, learnt a lot from this project, and ultimately managed to produce a pretty good, stable product.
+Our group managed to implement all of our planned features, even though they were much harder to implement than previously thought.
+We also managed to properly identify and address many flaws and bugs in our implementation, such as changing the "/" symbol separating prefixes to "\|" to ensure that people having the "/" symbol in their names and addresses are not inconvenienced. For a group of first time software developers, we think that we tried our best, learnt a lot from this project, and ultimately managed to produce a pretty good, stable product.
