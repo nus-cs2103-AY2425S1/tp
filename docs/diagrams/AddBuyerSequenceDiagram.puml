@@ -1,0 +1,97 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+
+title Add Buyer Sequence Diagram
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant ":AddClientParser" as AddClientParser LOGIC_COLOR
+participant "b:AddBuyerProfile" as AddBuyerProfile LOGIC_COLOR
+participant "a:AddClientProfile" as AddClientProfile LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+note left of LogicManager
+cmd:
+"buyer n/Bob p/98765432 e/bob@mail"
+prefixes:
+"n/Bob p/98765432 e/bob@mail"
+end note
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(cmd)
+activate LogicManager
+
+LogicManager -> EzstatesParser : parseCommand(cmd)
+activate EzstatesParser
+
+create AddClientParser
+EzstatesParser -> AddClientParser
+activate AddClientParser
+
+AddClientParser --> EzstatesParser
+deactivate AddClientParser
+
+EzstatesParser -> AddClientParser : parse(prefixes)
+activate AddClientParser
+
+create AddBuyerProfile
+AddClientParser -> AddBuyerProfile
+activate AddBuyerProfile
+
+AddBuyerProfile --> AddClientParser
+deactivate AddBuyerProfile
+
+AddClientParser --> EzstatesParser : b
+deactivate AddClientParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddClientParser -[hidden]-> EzstatesParser
+destroy AddClientParser
+
+EzstatesParser --> LogicManager : b
+deactivate EzstatesParser
+
+LogicManager -> AddBuyerProfile : execute(m:Model)
+activate AddBuyerProfile
+
+AddBuyerProfile -> AddClientProfile : execute(m:Model)
+activate AddClientProfile
+
+AddClientProfile -> Model : hasPerson(Bob:Buyer)
+activate Model
+
+alt buyer exists
+    Model --> AddClientProfile : true
+    deactivate Model
+    AddClientProfile --> AddBuyerProfile
+    deactivate AddBuyerProfile
+else new buyer
+    Model --> AddClientProfile : false
+    deactivate Model
+    AddClientProfile -> Model : addPerson(Bob:Buyer)
+    activate Model
+    Model --> AddClientProfile
+    deactivate Model
+
+    create CommandResult
+    AddClientProfile -> CommandResult
+    activate CommandResult
+    CommandResult --> AddClientProfile
+    deactivate CommandResult
+
+    AddClientProfile --> AddBuyerProfile : r
+    deactivate AddClientProfile
+    AddBuyerProfile --> LogicManager : r
+    deactivate AddBuyerProfile
+end
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml

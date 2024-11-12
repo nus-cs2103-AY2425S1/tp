@@ -1,0 +1,19 @@
+@startuml
+title Person Class Diagram
+abstract class Person {
+    - name: Name
+    - phone: Phone
+    - email: Email
+    - appointment: Appointment
+    - tags: Set<Tag>
+    - remark: String
+    + getRole(): Role
+}
+
+Person *-- Name : Composition
+Person *-- Phone : Composition
+Person *-- Email : Composition
+Person *-- Appointment : Composition
+Person *-- Tag : Composition
+
+@enduml

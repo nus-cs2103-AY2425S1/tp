@@ -522,17 +522,147 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+## Continuous Integration (CI)
+
+Continuous Integration in this project is done through 4 means: 
+1. Unit testing
+2. Automated UI testing
+3. Automated Github testing
+4. Code coverage reports
+
+<div class="note" markdown="span"> 
+EZSTATES utilises **Github Actions** for the project's Continuous Integration and Continuous Deployment (CI/CD) workflow, 
+automating tasks such as testing, building and deployment with each code update on Github.
+<br><br> 
+Github Actions utilises `.yaml` configuration files and can be found in the `.github/workflows` folder.
+<br><br>
+Github Actions operate in this manner: 
+1. Trigger: Github Actions workflows are triggered but events such as `push` and `pull_request`
+2. Jobs and Runners: A workflow consists of one or more jobs, each containing a series of steps.
+Each job runs on a Github-hosted runner (a virtual machine or environment) to perform the defined tasks.
+3. Steps: Within each job, steps are defined to execute certain tasks, such as installing dependencies, running tests, or 
+building the application.
+4. Feedback: After a workflow completes, Github Actions provide feedback on the success or failure of each job.
+Developers receive notifications for failed workflows, allowing them to quickly address issues before merging or deploying code.
+5. Deployment: Once a workflow has succeeded, Github Actions can deploy the application, ensuring that only thoroughly tested
+code reaches users.
+
+By utilising Github Actions, EZSTATES maintains high code quality and reliability, facilitating efficient collaboration
+and timely deployment of updates.
+</div>
+
+### Unit testing
+Unit testing covers non-UI related components of EZSTATES, such as `model`, `storage`, `logic` and `utility` classes.
+
+The dependencies used for Unit Testing is [JUnit 5]().
+
+### Automated UI testing
+Automated UI testing helps to simulate user interactions, ensuring that the UI is working as intended.
+
+The dependencies used for automated UI testing is [JUnit 5]() and [TestFX]().
+
+### Automated Github testing
+
+Automated Github testing is trigged or every push and pull request made to the Github remote repository and is conducted
+on all 3 major OSes: MacOS, Windows and Ubuntu. 
+
+<span class="alert">
+Automated UI testing is disabled for Ubunutu on the Github Testing workflow due to the inability to create a virtual testin
+environment.
+</span>
+
+### Code coverage reports
+
+Code coverage reports are provided to developers in two methods: JaCoCoTest reports and CodeCov reports.
+
+JaCoCoTest reports are generated using `build.gradle` and CodeCov reports are generated on every Github Workflow.
+
+Usage: 
+1. JaCoCoTest reports
+- Configuration: The JaCoCo plugin is configured in `build.gradle`.
+- Running reports: To generate a JaCoCo report, run either of these commands in your terminal:
+<br>
+    ```.gradlew/ jacocoTestReport``` to run all unit tests and automated UI tests
+    <br>**OR**<br>
+    ```.graldew/ build ``` which runs all tests, incuding unit tests, autoamted UI tests and checkstyle tests.
+- Usage: JaCoCo reports offer a local overview of which classes and methods are covered. Developers are encouraged to review these reports after each
+set of tests, especially before merging any significant changes. The HTML report highlights area needing additional tests.
+
+2. CodeCov reports
+- Configuration: To configure CodeCov, a `.yaml` workflow file is set up within the `.github/workflows` directory of the repository.
+
+<div class="note" markdown="span"> 
+A CodeCov token is required to set up CodeCov reports on Github and it should be stored as a Github secret
+for authentication. 
+</div>
+
+- Running reports: CodeCov reports are automatically generated and uploaded with each push or pull_request event as configured in the GitHub Actions workflow. 
+After each run, the workflow will produce a detailed reporton CodeCov, accessible through links provided in the Github pull request page.
+- Usage: CodeCov reports provide information on whether coverage has improved or decreased and highlight specific lines or files affected by new or modified code.
+Additionally, CodeCov offers visualization tools for in-depth inspection of coverage across functions and classes, allowing developers to target untested areas in their testing efforts.
+
 ## Features and Implementation
 
 ### Client Management
-Sub features
+
+![PersonClassDiagram](images/dg/PersonClassDiagram.png)
+
+All clients are `Person` objects in EZSTATES. A `Person` is an abstract class which consists of 6 essential fields and 1
+essential abstract method `getRole()`.
+
+**Essential Fields**: 
+1. `name`: The name of a Person, defined by the `Name` class.
+2. `phone`: The phone number of a Person, defined by the `Phone` class.
+3. `email`: The email address of a Person, defined by the `Email` class.
+4. `appointment`: An expected appointment the user has with a Person, defined by the `Appointment` class.
+5. `tags`: A collection of short comments or descriptions of a Person, defined by a set of `Tags`.
+6. `remark`: A string which represents an additional remark about a Person. This field is used in the `MoreInfo` feature.
+
+**Essential Methods**:
+1. `getRole()`: Classes that represent clients must inherit the abstract `Person` class and are required to implement the `getRole()` method. 
+This ensures that all clients have a specified `role`. `Roles` help developers differentiate various tasks and associations
+with features such as `listings` and getRole()` is a basic getter to facilitate this logic.
+
+#### Add client
+
+As mentioned in the [`Logic`](#logic-component) segment, a command is passed to the `LogicManager` and then parsed in the
+`EzstatesParser` where the relevant `XYZCommandParser` is created and subsequently the `XYZCommand` is created. To facilitate
+the usage of `roles`, a centralized `AddClientParser` and `AddClientProfileCommand` is used when a client with any role is being
+created.
+
+1. #### Add buyer
+    **Overview**
+    <br> 
+    The `buyer` command adds a `Buyer` to EZSTATES. A `Buyer` 
+    ![AddBuyerSequenceDiagram](images/dg/AddBuyerSequenceDiagram.png)
+        
+   2. #### Add seller
+#### Edit client
+#### Find client
+#### Delete client
+#### Show client
+#### Clear 
+
 ### Appointment Management
-Sub features
+#### Add appointment
+#### Delete appointment
+#### Today
+
+### Listing Managmenet
+#### Add listing
+#### Edit listing
+#### Add buyers to listing
+#### Remove buyers from listing
+#### Delete listing
+#### Show listing
+#### Clear listing
+
 ### Utility
-Sub features
+#### Chat Window
+#### Help
+#### Exit
 
-**BELOW THIS IS KINDA JUST FOR REFERENCE**
-
+## Git Commit Script
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -620,12 +750,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
-
 ## Documentation, logging, testing, configuration, dev-ops
 
 * [Documentation guide](Documentation.md)
@@ -634,6 +758,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
+## Appendix
 
 ## Appendix: Requirements
 
@@ -644,6 +769,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * free-lance real estate agents
 * has to manage a large number of clients with varying details
 * has to make multiple appointments with various clients
+* has to manage multiple listings
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
@@ -788,10 +914,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The app should be intuitive and require no more than three user actions to perform any major task.
 5.  The codebase should adhere to clear coding principles to allow easy updates and bug fixes.
+6.  The application achieves at least 85% test coverage.
+7.  The user should not require an internet connection to use the application.
+8.  The user should not experience sluggish operations when using the application.
+9.  The user guide should be well-documentated and user friendly such that a new user can use the application efficiently.
 
 *{More to be added}*
-
-## Appendix
 
 ### Appendix: Instructions for manual testing
 
@@ -802,13 +930,13 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the `.jar` file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample clients. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -817,9 +945,13 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Clients
 
-### Deleting a person
+#### Adding a client
+
+#### Deleting a client
+
+#### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
@@ -834,14 +966,33 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+#### Editing a client
 
-### Saving data
+#### Finding a client
 
-1. Dealing with missing/corrupted data files
+#### Listing all clients
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+#### Clearing clients
 
-1. _{ more test cases …​ }_
+### Appointments
+
+#### Adding an appointment
+#### Deleting an appointment
+#### Today
+
+### Listings
+
+#### Adding a listing
+#### Editing a listing
+#### Finding a listing
+#### Listing all listings
+#### Clearing listings
+
+### Utility
+#### Help
+#### ChatWindow
+#### Exit
+
+### Appendix: Future enhancements
 
 ### Appendix: Known Bugs
