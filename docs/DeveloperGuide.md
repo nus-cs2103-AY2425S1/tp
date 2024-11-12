@@ -1467,6 +1467,9 @@ or adding an invalid object as outlined in [Storage feature](#storage-feature).
       - Expected: List of students, with name matching ‘Alex’, who is enrolled in ‘Math’ tutorial and has overdue payment.
 
 ---------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Effort**
 
 **Effort Report for Project**
@@ -1495,6 +1498,9 @@ expansions. We prioritized extensive testing and compliance with coding standard
 maintainability of our code. We went the extra mile for passion and our own learning.
 
 ---------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Planned Enhancements**
 
 Team size: 5
