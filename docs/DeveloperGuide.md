@@ -15,12 +15,12 @@
 
 ### AI Assistance
 Parts of the codebase were developed with the assistance of ChatGPT. The contributions from ChatGPT include:
-* Assisting in enhancing test cases for AddCommand and EditCommand
-* Assisting in enhancing tests for ClearCommand
-* Extensive help on implementing DetailPanel UI Component
-* LocalDateTime and DateTimeFormatter implementation for Meetings
-* Suggesting how test cases can be designed for FindCommand, DeleteMeetingCommand, EditMeetingCommand, FindCommandParser,  DeleteMeetingCommandParser, and EditMeetingCommandParser
-* Suggesting the usage of and helped with implementation of Observer pattern (i.e. SelectionListener and ModelClearObserver) for some UI components
+* Assisting in enhancing test cases for `AddCommand` and `EditCommand`
+* Assisting in enhancing tests for `ClearCommand`
+* Extensive help on implementing `DetailPanel` UI Component
+* `LocalDateTime` and `DateTimeFormatter` implementation for `Meetings`
+* Suggesting how test cases can be designed for `FindCommand`, `DeleteMeetingCommand`, `EditMeetingCommand`, `FindCommandParser`, `DeleteMeetingCommandParser`, and `EditMeetingCommandParser`
+* Suggesting the usage of and helped with implementation of Observer pattern (i.e. `SelectionListener` and `ModelClearObserver`) for some UI components
 
 --------------------------------------------------------------------------------------------------------------------
 
