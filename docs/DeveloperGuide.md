@@ -141,9 +141,6 @@ The `Model` component,
 
 
 ### Storage component
-
-**API** : [`Storage.java`]&#40;https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java&#41;
-
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
@@ -336,7 +333,7 @@ Step 2: The `export` command exports all data currently contained by DorManagerP
 
 The following sequence diagram shows how a `export` command goes through the `Logic` component:
 
-### Design considerations:
+#### Design considerations:
 
 **Aspect**: The name of the JSON file on `export`.
 
