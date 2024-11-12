@@ -608,3 +608,4 @@ Team size: 5
 5. Allow for the `sort` command to sort not only by tag but also by other fields.
 6. Allow for the `favorite` command to view only favorited employees.
 7. Implement Undo/Redo features for person details window to improve the user experience
+8. Allow for the `sort` command to sort by multiple tags instead of just one tag.
