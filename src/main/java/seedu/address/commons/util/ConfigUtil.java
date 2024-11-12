@@ -12,10 +12,16 @@ import seedu.address.commons.exceptions.DataLoadingException;
  */
 public class ConfigUtil {
 
+    /**
+     * Reads the config details from a JSON file.
+     */
     public static Optional<Config> readConfig(Path configFilePath) throws DataLoadingException {
         return JsonUtil.readJsonFile(configFilePath, Config.class);
     }
 
+    /**
+     * Saves the config details into a JSON file.
+     */
     public static void saveConfig(Config config, Path configFilePath) throws IOException {
         JsonUtil.saveJsonFile(config, configFilePath);
     }

@@ -7,16 +7,21 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents the result of a command execution.
+ * Represents the result of
+ * a command execution.
  */
 public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
+    /**
+     *  Help information should be shown to the user.
+     */
     private final boolean showHelp;
 
-    /** The application should exit. */
+    /**
+     * The application should exit.
+     */
     private final boolean exit;
 
     /**
@@ -29,21 +34,40 @@ public class CommandResult {
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
+     * Constructs a {@code CommandResult} with the
+     * specified {@code feedbackToUser},
+     * and other fields set to
+     * their default value.
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
     }
 
+    /**
+     * Retrieves the feedback message to be shown to the user.
+     *
+     * @return the feedback message as a {@code String}.
+     */
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
+    /**
+     * Indicates whether the help information should be shown to the user.
+     *
+     * @return {@code true} if the help information should be displayed,
+     *     {@code false} otherwise.
+     */
     public boolean isShowHelp() {
         return showHelp;
     }
 
+    /**
+     * Indicates whether the application should exit.
+     *
+     * @return {@code true} if the application should exit,
+     *     {@code false} otherwise.
+     */
     public boolean isExit() {
         return exit;
     }

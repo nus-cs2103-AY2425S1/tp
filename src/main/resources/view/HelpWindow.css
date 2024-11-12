@@ -1,19 +1,16 @@
-#copyButton, #helpMessage {
+#helpMessage {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
 }
 
-#copyButton {
-    -fx-background-color: dimgray;
-}
-
-#copyButton:hover {
-    -fx-background-color: gray;
-}
-
-#copyButton:armed {
-    -fx-background-color: darkgray;
-}
-
 #helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d2e28, 20%);
+}
+
+#userGuideUrl {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-style: italic;
+    -fx-text-fill: #57846a;
 }

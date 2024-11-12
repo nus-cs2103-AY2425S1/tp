@@ -1,46 +1,53 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "_comment" : "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
-    "phone" : "94351253",
     "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "gender" : "F",
+    "age" : "20",
+    "detail" : "To be assigned",
+    "study groups" : [ "1A" ]
   }, {
     "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "email" : "benson@example.com",
+    "gender" : "M",
+    "age" : "40",
+    "detail" : "Study completed",
+    "study groups" : [ "Control", "1A" ]
   }, {
     "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tags" : [ ]
+    "email" : "carl@example.com",
+    "gender" : "M",
+    "age" : "30",
+    "detail" : "To be assigned",
+    "study groups" : [ "1A" ]
   }, {
     "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tags" : [ "friends" ]
+    "email" : "daniel@example.com",
+    "gender" : "M",
+    "age" : "50",
+    "detail" : "To be assigned",
+    "study groups" : [ "1B" ]
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tags" : [ ]
+    "email" : "elle@example.com",
+    "gender" : "F",
+    "age" : "60",
+    "detail" : "",
+    "study groups" : [ "2A" ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tags" : [ ]
+    "email" : "fiona@example.com",
+    "gender" : "F",
+    "age" : "35",
+    "detail" : "To follow up",
+    "study groups" : [ ]
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tags" : [ ]
+    "email" : "george@example.com",
+    "gender" : "M",
+    "age" : "36",
+    "detail" : "",
+    "study groups" : [ ]
   } ]
 }

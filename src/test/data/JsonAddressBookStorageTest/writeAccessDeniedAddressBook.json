@@ -1,0 +1,17 @@
+{
+  "persons" : [ {
+    "name" : "Alice Goh",
+    "email" : "alice@gmail.com",
+    "gender" : "F",
+    "age" : "19",
+    "detail" : "To be assigned",
+    "study groups" : [ "1A" ]
+  }, {
+    "name" : "Max Tan",
+    "email" : "max@gmail.com",
+    "gender" : "M",
+    "age" : "21",
+    "detail" : "To be assigned",
+    "study groups" : [ "1B" ]
+  } ]
+}

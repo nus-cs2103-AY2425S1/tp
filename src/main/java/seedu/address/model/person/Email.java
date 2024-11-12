@@ -45,7 +45,9 @@ public class Email {
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns true if a given string is a valid email.
+     *
+     * @return true if valid, otherwise false.
      */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -68,7 +70,7 @@ public class Email {
         }
 
         Email otherEmail = (Email) other;
-        return value.equals(otherEmail.value);
+        return value.equalsIgnoreCase(otherEmail.value);
     }
 
     @Override
