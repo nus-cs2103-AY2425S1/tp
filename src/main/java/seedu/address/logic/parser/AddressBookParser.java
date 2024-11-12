@@ -94,7 +94,7 @@ public class AddressBookParser {
             return parseSortCommand(trimmedArguments);
 
         case UpcomingCommand.COMMAND_WORD:
-            return parseUpcomingCommand(trimmedArguments);
+            return parseUpcomingCommand(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
