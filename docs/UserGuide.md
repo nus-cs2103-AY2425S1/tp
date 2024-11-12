@@ -594,11 +594,10 @@ Advanced users can edit the data file directly to modify the address book data. 
     - `user.name+tag@my-company.com`
     - `sales@company-name.com.sg`
 - **Invalid Examples**:
-    - `user@domain` (missing top-level domain)
-    - `user@e-a` (missing top-level domain)
+    - `user@e-a` (does not end with 2 alphanumeric characters)
     - `user@-domain.com` (domain label starts with hyphen)
     - `user@domain-.com` (domain label ends with hyphen)
-    - `user@.com` (empty domain label)
+    - `user@.com` (domain label must contain at least one alphanumeric character)
 #### Roles
 
 - **Format**:
