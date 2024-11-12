@@ -716,7 +716,7 @@ Similar to [<ins>UC22](#use-case-uc22-assign-a-contact-to-one-or-more-weddings) 
 **MSS**
 
 1. User <ins>lists all contacts [(UC01)](#use-case-uc01-list-all-contacts)</ins>.
-2. User requests to assign a contact as a vendor.
+2. User requests to assign a contact as a Vendor.
 3. System displays the contact being designated as a vendor, in the list of contacts.
 
    Use case ends.
@@ -730,10 +730,15 @@ Similar to [<ins>UC22](#use-case-uc22-assign-a-contact-to-one-or-more-weddings) 
     * 2a1. System shows an error message prompting the user to put in a valid index.
 
       Use case resumes at step 1.
+  
+* 2b. The contact is already an assigned Vendor.
+    * 2a1. System displays an error message.
+
+      Use case resumes at step 1.
 
 
 ### **Use case: UC25 — Unassigning a Vendor**
-Similar to [<ins>UC24](#use-case-uc24assigning-a-vendor) except un-assigning a vendor and an additional extension.
+Similar to [<ins>UC24](#use-case-uc24assigning-a-vendor) except un-assigning a vendor and an alternate extension.
 
 * 2b. The contact specified is not a Vendor.
     * 2b1. The system displays an error message.
