@@ -55,6 +55,9 @@ public class DeliverySortBy {
      * Returns the corresponding comparator of {@code sortBy} which compares by the {@code sortOrder}.
      */
     public static DeliverySortComparator getDeliverySortComparator(SortOrder sortOrder, DeliverySortBy deliverySortBy) {
+        requireNonNull(sortOrder);
+        requireNonNull(deliverySortBy);
+        assert deliverySortBy.getSortBy() != null;
         switch (deliverySortBy.getSortBy()) {
         case C:
             return new DeliverySortCostComparator(sortOrder);

@@ -14,6 +14,7 @@ public class DeliverySortStatusComparator extends DeliverySortComparator {
      */
     public DeliverySortStatusComparator(SortOrder sortOrder) {
         super(sortOrder);
+        assert sortOrder != null;
     }
 
     /**
@@ -29,6 +30,8 @@ public class DeliverySortStatusComparator extends DeliverySortComparator {
     public int compare(Delivery delivery1, Delivery delivery2) {
         requireNonNull(delivery1);
         requireNonNull(delivery2);
+        assert delivery1.getDeliveryStatus() != null;
+        assert delivery2.getDeliveryStatus() != null;
         Status delivery1Status = delivery1.getDeliveryStatus();
         Status delivery2Status = delivery2.getDeliveryStatus();
         if (super.getIsSortByAscending()) {

@@ -17,6 +17,7 @@ public class DeliverySortDateTimeComparator extends DeliverySortComparator {
      */
     public DeliverySortDateTimeComparator(SortOrder sortOrder) {
         super(sortOrder);
+        assert sortOrder != null;
     }
 
     /**
@@ -32,6 +33,8 @@ public class DeliverySortDateTimeComparator extends DeliverySortComparator {
     public int compare(Delivery delivery1, Delivery delivery2) {
         requireNonNull(delivery1);
         requireNonNull(delivery2);
+        assert delivery1.getDeliveryDate() != null;
+        assert delivery2.getDeliveryDate() != null;
         LocalDateTime delivery1DateTime = delivery1.getDeliveryDate().time;
         LocalDateTime delivery2DateTime = delivery2.getDeliveryDate().time;
         if (super.getIsSortByAscending()) {

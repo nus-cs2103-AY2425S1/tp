@@ -14,6 +14,7 @@ public class DeliverySortCostComparator extends DeliverySortComparator {
      */
     public DeliverySortCostComparator(SortOrder sortOrder) {
         super(sortOrder);
+        assert sortOrder != null;
     }
 
     /**
@@ -29,6 +30,8 @@ public class DeliverySortCostComparator extends DeliverySortComparator {
     public int compare(Delivery delivery1, Delivery delivery2) {
         requireNonNull(delivery1);
         requireNonNull(delivery2);
+        assert delivery1.getDeliveryCost() != null;
+        assert delivery2.getDeliveryCost() != null;
         double delivery1Cost = Double.parseDouble(delivery1.getDeliveryCost().value);
         double delivery2Cost = Double.parseDouble(delivery2.getDeliveryCost().value);
         if (super.getIsSortByAscending()) {

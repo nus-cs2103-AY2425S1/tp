@@ -32,6 +32,7 @@ public class SortDeliveryCommand extends SortCommand {
      * Creates a SortDeliveryCommand to sort the deliveries by the specified {@code comparator}.
      */
     public SortDeliveryCommand(DeliverySortComparator comparator) {
+        requireNonNull(comparator);
         this.comparator = comparator;
     }
 
@@ -45,6 +46,7 @@ public class SortDeliveryCommand extends SortCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+        assert comparator != null;
         model.updateSortedDeliveryList(comparator);
         return new CommandResult(
                 String.format(Messages.MESSAGE_DELIVERY_SORTED_OVERVIEW,
