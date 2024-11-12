@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.lang.annotation.Documented;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -182,6 +183,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    @Override
     public void setAllPersonNotClient() {
         addressBook.setAllPersonNotClient();
     }
@@ -203,14 +205,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setAllWeddingNotOwnWedding() {
-        addressBook.setAllWeddingIsOwnFalse();
-    }
-
-    @Override
     public void updateFilteredWeddingListWithOwnWedding(Predicate<Wedding> predicate) {
         requireNonNull(predicate);
         filteredWeddings.setPredicate(predicate);
+    }
+
+    @Override
+    public void setAllWeddingNotOwnWedding() {
+        addressBook.setAllWeddingIsOwnFalse();
     }
 
     @Override

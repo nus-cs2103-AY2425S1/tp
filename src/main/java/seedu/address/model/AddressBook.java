@@ -163,6 +163,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         weddings.setWedding(target, editedWedding);
     }
 
+    /**
+     * Sets all wedding to not be own wedding.
+     */
     public void setAllWeddingIsOwnFalse() {
         weddings.setAllWeddingIsOwnFalse();
     }
