@@ -269,6 +269,8 @@ This section is a list of fixes that we propose to add in the near future, to im
 3. **Display contact and event lists concurrently**: Our app currently only displays one list at a time (either contact or event list). Users would need to use `list` / `list_events` to display the contact / event list. However, we understand that this might be inconvenient for users, especially when using the `assign` and `unassign` commands, where users need to remember the index of the contact / event to use these commands using indices. To improve user experience, we plan to display the contact and event lists side-by-side, so that users do not need to type `list` / `list_events` to display the contacts / events, and make it easier to use `assign` and `unassign` commands. In addition, this would also fix the current GUI issue that we have, which shows an empty box at the bottom of the screen for contact list, and right below the status message for event list.
 4. **Change EVENT_DESCRIPTION to be optional**: The current `add_event` command is designed such that the event's description is a compulsory field. However, we understand that not all events have a description to it. Some events' names are self-explanatory and do not require a description. To improve user experience, we plan to make the `EVENT_DESCRIPTION` field optional in the future to provide more convenience.
 5. **Edit Event Start or End Date Independently**: Currently, the EditEventCommand requires users to specify both the start and end dates when they want to edit an event's duration. This can be restrictive if a user only needs to change one of these dates. To improve user experience, we plan to modify the EditEventCommand to allow editing the start date or end date independently. This change will involve updating the command's logic to handle partial updates to the event's duration.
+6. **Display events assigned to each contact within contact details**: The current `assign` command does not cause any changes in the GUI with regard to the contact information of each person. This would make it difficult to see which events a person has been assigned to. To improve user experience, we plan to make the events that a person has been assigned to visible in the details of each contact in the GUI.
+7. **Modify `search` command**: The current `search` command will return all contacts whose specified field matches any one of the keywords entered. This would make it inconvenient for users who have many contacts, and would like to do a more specific search for contacts whose specified field matches all of the keywords entered. The current `search` command also only searches one field at a time. This would make it inconvenient for user who would like to search for contacts using multiple fields at the same time. To improve user experience, we plan to support searches that can match multiple fields at the same time, or return only contacts that match with all specified keywords.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -750,6 +752,50 @@ testers are expected to do more *exploratory* testing.
    1. Test case: mass_delete 
       Expected: No contacts are deleted. An error message is shown indicating that no valid contact indices were provided for deletion.
 
+### Searching for contacts
+1. Searching with zero keywords.
+
+    1. Test case: `search a/`  
+       Expected: All contacts will be listed.
+    2. Test case: `search e/`  
+       Expected: All contacts will be listed. 
+    3. Test case: `search n/`  
+       Expected: All contacts will be listed.
+    4. Test case: `search p/`  
+       Expected: All contacts will be listed.
+    5. Test case: `search t/`  
+       Expected: All contacts will be listed.
+
+2. Searching with one keyword.
+
+    1. Test case: `search a/street`  
+       Expected: Contacts with the substring street(case-insensitive) in their address will be listed.
+    2. Test case: `search e/example`  
+       Expected: Contacts with the substring `example` (case-insensitive) in their email address will be listed. 
+    3. Test case: `search n/John`  
+       Expected: Contacts with the substring `John` (case-insensitive) in their name will be listed. 
+    4. Test case: `search p/123`  
+       Expected: Contacts with the substring `123` in their phone number will be listed. 
+    5. Test case: `search t/friend`  
+       Expected: Contacts with the tag `friend` (case-insensitive) will be listed.
+
+3. Searching with multiple keywords.
+
+    1. Test case: `search a/street ave`  
+       Expected: Contacts with the substring street or ave(case-insensitive) in their address will be listed.
+    2. Test case: `search e/example domain`  
+       Expected: Contacts with the substring `example` or `domain` (case-insensitive) in their email address will be listed. 
+    3. Test case: `search n/John Doe`  
+       Expected: Contacts with the substring `John` or `Doe` (case-insensitive) in their name will be listed. 
+    4. Test case: `search p/123 456`  
+       Expected: Contacts with the substring `123` or `456` in their phone number will be listed. 
+    5. Test case: `search t/friend colleague`  
+       Expected: Contacts with the tag `friend` or `colleague` (case-insensitive) will be listed.
+
+4. Searching with keyword that yield no results.
+
+    1. Test case: `search a/gibberish`  
+       Expected: No person is found. Status message shows "0 persons listed."
 
 ### Adding an event
 
