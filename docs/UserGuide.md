@@ -157,7 +157,7 @@ By following these sections, you can quickly find the information you need and m
 
 The Command Box in MedConnect offers **suggestions** and **autocompletion** to assist users while typing commands. These features aim to enhance the command entry experience through reducing the need for memorising command formats and reducing the chance of errors.
 
-#### Suggestions
+### Suggestions
 
 Suggestions provide visible hints about the expected command format as the command is entered.
 
@@ -165,22 +165,33 @@ Suggestions provide visible hints about the expected command format as the comma
 
 * If an incorrect entry is detected (e.g., type `adding` instead of `add`), the suggestion will be hidden to indicate a problem with the format.
 
-**Examples**
-* Typing `add` will show the expected format for adding a patient: `add (n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ...)` where the words in brackets "()", are suggested by the system.
+**Examples** (words in brackets "()", are suggested by the system.)
+* Typing `add` will show the expected format for adding a patient: `add (n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ...)` 
+* Upon typing the slash commands (e.g. `n/` or `p/`), the suggestion only shows the parameter that needs to be filled or the next command once done. e.g `add n/(NAME)`, `add n/Saajid Shaik (p/PHONE)`
+  > Do note that while commands can be written in any order, the suggestion feature only follows the default way which analogous to how the contact details are displayed in the app. 
+  > <br><br>You may notice that suggestion and autocomplete features almost always work, even without default ordering, but this a feature-in-progress for future enhancement.
+  > <br><br>Additionally, suggestions for parameters will never be duplicated unless users manually deviates from autocomplete or suggestion by the system.
+* Inputs that are prefixes to more than 1 command, will result in full syntax suggestions for those commands to be displayed and appended with a `|`. e.g. `fi(nd KEYWORD MORE_KEYWORDS | finddoc KEYWORD MORE_KEYWORDS)`
 
 
-#### Autocompletion
+
+### Autocompletion
 
 Autocompletion helps to complete partially typed commands by pressing the `Control` key.
 
 ![Autocomplete demonstration](images/autocomplete.gif)
 
-* If an incorrect entry is detected (e.g., type `adding` instead of `add`), autocompletion will be disabled to indicate a problem with the format.
+* If an incorrect entry is detected (e.g., type `adding` or `ade` instead of `add`), autocompletion will be disabled to indicate a problem with the format.
 
 **Examples**:
 * Typing `ad` followed by pressing `Control` autocompletes the input to `add`.
 * Typing `add` followed by pressing `Control` autocompletes the input to `add n/`.
 * Typing `add n/Saajid Shaik` followed by pressing `Control` autocompletes the input to `add n/Saajid Shaik p/`.
+
+Since autocomplete can only work on fixed syntaxes, `INDEX`,`KEYWORD` and variable attribute (e.g. `NAME` in commands `n/NAME`) cannot be autocomplete. Should users try to autocomplete, the input text turns red, indicating users to fill in their information as needed.
+
+![red_error](images/red_autocomplete.png)
+
 
 [↑ Back to top](#table-of-contents)
 
@@ -519,6 +530,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 3. When typing commands in the CommandBox, inserting a space, e.g. `he lp` in between `he` and `lp`, will cause the suggestion and autocorrection to bug out and display incorrectly.
 
 4. MedConnect supports up to 2,147,483,647 patient contacts. Attempting to add or edit more than this number of contacts may result in unexpected behaviour.
+
+5. Adding a spaces after `/` for command identifiers such as `n/` or `p/` will cause suggestion to repeat. e.g. `add n/ hello world` (spacing between "/" and "h" will cause n/NAME to be suggested again)
 
 [↑ Back to top](#table-of-contents)
 
