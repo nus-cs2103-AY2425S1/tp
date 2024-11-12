@@ -291,8 +291,8 @@ All event organizers will be able to:
 without having to dig through paperwork / NUSync.
 - View how participants are grouped by membership (e.g. faculty sports team)
 without having to dig through paperwork / NUSync.
-- Track the particular participant’s involvement in the event’s sub-events
-(e.g. IFG has multiple sub-events that stakeholders can take part in)
+- Track the particular participant’s involvement in the event
+(e.g. IFG has multiple events that stakeholders can take part in)
 without having to dig through paperwork / NUSync.
 
 
@@ -302,8 +302,7 @@ Priorities: High (must have) - `HIGH`, Medium (nice to have) - `MED`, Low (unlik
 
 | Priority | As a …​         | I want to …​                                                                      | So that I can…​                                                             |
 |----------|-----------------|-----------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| `HIGH`   | first-time user | view a brief tutorial on using CLI commands                                       | understand the basic functions and navigation of the app                    |
-| `HIGH`   | first-time user | see a list of available commands and their descriptions                           | familiarize myself with the list of commands and app functions              |
+| `HIGH`   | first-time user | view a user guide to understand CLI commands                                      | understand the basic functions and navigation of the app                    |
 | `HIGH`   | first-time user | add a new participant                                                             | start building my participant list from scratch                             |
 | `HIGH`   | first-time user | view a summary of all participants grouped by their sport categories              | get an overview of participant distribution                                 |
 | `HIGH`   | first-time user | search for participants by name, phone number or email                            | locate details of participants without having to go through the entire list |
@@ -313,7 +312,6 @@ Priorities: High (must have) - `HIGH`, Medium (nice to have) - `MED`, Low (unlik
 | `HIGH`   | familiar user   | delete a participant                                                              | remove outdated or incorrect participant records                            |
 | `MED`    | first-time user | view detailed information about a participant on a separate tab from main search  | ensure I have accurate and complete information on a participant            |
 | `MED`    | first-time user | view a sample event schedule with participants' relevant details shown            | understand how to manage and track participants' involvement                |
-| `MED`    | first-time user | access help documentation directly from the CLI                                   | get assistance with using various features of the application               |
 | `MED`    | familiar user   | search for participants based on multiple criteria                                | find specific groups of participants efficiently                            |
 | `MED`    | familiar user   | view a summary of a participant’s involvement in past sub-events                  | understand their history and performance in previous events                 |
 | `MED`    | expert user     | create custom participant fields specific to different types of events            | tailor the application to various event requirements                        |
@@ -389,25 +387,7 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-**Use case: UC4 - View a list of participants for a specific sub-event**\
-**Actor: User**\
-**Guarantee: MSS → The list of participants for the specified sub-event will be displayed**
-
-MSS:
-1. User requests to view list of participants for sub-event
-2. System displays list of participants for sub-event
-
-Extensions:\
-1a. System detects an error in the entered data.\
-1a1. System prompts user to re-enter data\
-1a2. User enters new data\
-Steps 1a1-1a2 are repeated until the data entered is correct.
-Use case resumes from step 2
-
-<hr>
-
-**System: EventfulNUS**\
-**Use case: UC5 - Update participant’s details**\
+**Use case: UC4 - Update participant’s details**\
 **Actor: User**\
 **Guarantee: MSS → The specified participant’s details will be updated to match the provided details**
 
@@ -431,13 +411,13 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-**Use case: UC6 - Assign participants to specific sub-events**\
+**Use case: UC5 - Assign participants to specific events**\
 **Actor: User**\
-**Guarantee: MSS → The specified participant will be assigned to a specified sub-event**\
+**Guarantee: MSS → The specified participant will be assigned to a specified event**\
 
 MSS:
-1. User requests to assign a participant to a sub-event
-2. System updates and displays the specified participant’s sub-event
+1. User requests to assign a participant to a event
+2. System updates and displays the specified participant’s event
 
 Extensions:\
 1a. System detects an error in the entered data.\
@@ -455,7 +435,7 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
-**Use case: UC7 - Delete person**\
+**Use case: UC6 - Delete person**\
 **Actor: User**\
 **Guarantee: MSS → The person at the specified index will not be present in the system after the command is entered**
 
@@ -481,6 +461,7 @@ Use case resumes from step 2.
 <hr>
 
 **System: EventfulNUS**\
+<<<<<<< HEAD
 **Use case: UC8 - Add event**\
 **Actor: User**
 
@@ -499,6 +480,9 @@ Use case resumes from step 2.
 
 **System: EventfulNUS**\
 **Use case: UC9 - Delete event**\
+=======
+**Use case: UC7 - Delete event**\
+>>>>>>> ca6ec761df1e074f6fa10155fe88a3922053a1df
 **Actor: User**\
 **Guarantee: MSS → The event at the specified index will not be present in the system after the command is entered**
 
