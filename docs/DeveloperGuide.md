@@ -921,7 +921,17 @@ Similar to [<ins>UC28](#use-case-uc28mark-one-or-more-tasks-as-completed) except
       Use case resumes at step 1.
 
 ### **Use case: UC31 — Delete Wedding**
-Similar to [<ins>UC30](#use-case-uc30delete-contact) except deleting wedding.
+Similar to [<ins>UC30](#use-case-uc30delete-contact) except deleting wedding and two additional extensions.
+
+* 2b. User specified to force the deletion of the wedding.
+    * 2b1. System displays an updated list of contacts with the specified wedding not assigned to any contacts.
+
+      Use case resumes at step 3.
+  
+* 2c. There are one or more contacts still assigned to the specified wedding
+    * 2c1. System displays an error message.
+
+      Use case resumes at step 1.
 
 ### **Use case: UC32 — Delete Task**
 Similar to [<ins>UC30](#use-case-uc30delete-contact) except deleting task.
