@@ -391,7 +391,8 @@ We will be using the user input `deletem 1` as an example.
 ### Edit Meeting with an Udder Feature
 
 #### Command Feature
-`editm INDEX [n/NAME] [l/LOCATION] [st/START_TIME] [et/END_TIME]` where at least one optional field should be present.
+`editm INDEX [n/NAME] [l/LOCATION] [st/START_TIME] [et/END_TIME]` 
+where INDEX is required and at least one of the optional fields (such as location, start time, or end time) must also be specified.
 
 #### Command Feature Purpose
 The `editm` command allows users to edit the details of an existing `Meeting` in the `AddressBook`. The existing values will be overwritten by any given input values.
