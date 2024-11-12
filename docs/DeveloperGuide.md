@@ -295,6 +295,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+* 2b. The given list command has extraneous parameters.
+
+  * 2b1. SocialBook shows an error message.
+    
+    Use case ends.
+
 ##### **Use case: UC02 - Add a contact**
 
 **MSS**
