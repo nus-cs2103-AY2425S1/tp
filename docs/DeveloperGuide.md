@@ -596,10 +596,9 @@ Team size : 5
      We plan to allow users to search by job title and, making it easier to locate candidates with specific job positions
      and skills
 
-  4. Enhance the view command such that it can also use indexing to view a candidate's status: We plan
-     to make the view command format much simpler by adopting a similar command format from the delete command where
-     indexing was used instead of having to input both the candidate's name and the job position.(e.g. "view 1" instead
-     of "view n/John Doe j/Software Engineer)
+  4. Enhance the view/hire/reject command such that it can also use indexing: We plan to make the view/hire/reject command format 
+     much simpler by adopting a similar command format from the delete command where indexing was used instead of having 
+     to input both the candidate's name and the job position.(e.g. "view 1" instead of "view n/John Doe j/Software Engineer)
 
   5. Enhanced error messages: Some commands give a general error message even when there are multiple type of invalid inputs.
      As such, we will provide more specific error messages across the platform, guiding users with clear, actionable feedback when 
@@ -608,4 +607,3 @@ Team size : 5
   6. Enhanced Command Line Input: Based on user feedback, we will improve the command line input to automatically clear after each command execution. 
      This enhancement will provide a smoother user experience by eliminating the need for manual clearing and ensuring the input field is ready for the 
      next command.
-
