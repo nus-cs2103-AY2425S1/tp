@@ -18,4 +18,16 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> RoomNumber
+Person *--> EmergencyContact
+EmergencyContact *--> Name
+EmergencyContact *--> Phone
+Person *--> GradYear
+
+Name -[hidden]right-> Phone
+Phone -[hidden]right-> Address
+Address -[hidden]right-> Email
+Email -[hidden]right-> RoomNumber
+RoomNumber -[hidden]right-> GradYear
+
 @enduml
