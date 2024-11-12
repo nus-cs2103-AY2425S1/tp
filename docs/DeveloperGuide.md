@@ -1445,4 +1445,5 @@ Adding so many fields to the Patient object required a lot of effort tracing thr
 
 ### Achievements
 
-Our group managed to implement all of our planned features, even though they were much harder to implement than previously thought. We also managed to properly identify and address many flaws and bugs in our implementation, such as changing the "/" symbol separating prefixes to "|" to ensure that people having the "/" symbol in their names and addresses are not inconvenienced. For a group of first time software developers, we think that we tried our best, learnt a lot from this project, and ultimately managed to produce a pretty good, stable product.
+Our group managed to implement all of our planned features, even though they were much harder to implement than previously thought.
+We also managed to properly identify and address many flaws and bugs in our implementation, such as changing the "/" symbol separating prefixes to "\|" to ensure that people having the "/" symbol in their names and addresses are not inconvenienced. For a group of first time software developers, we think that we tried our best, learnt a lot from this project, and ultimately managed to produce a pretty good, stable product.
