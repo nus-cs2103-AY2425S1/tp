@@ -748,17 +748,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Marking a student's attendance for a tutorial session
 
-    1. Test case: `markAtt s/A1234567X t/T1001 d/2023-10-21`<br>
+    1. Test case: `markAtt s/A1234567X c/T1001 d/2023-10-21`<br>
        Expected: Attendance for student "A1234567X" on "2023-10-21" is marked as present in tutorial "T1001". Confirmation message is displayed.
 
 2. Marking attendance for a student not in the tutorial
 
-    1. Test case: `markAtt s/A1234567X t/T2001 d/2023-10-21`<br>
+    1. Test case: `markAtt s/A1234567X c/T2001 d/2023-10-21`<br>
        Expected: Error message indicating that the student is not enrolled in tutorial "T2001".
 
 3. Marking attendance with invalid date format
 
-    1. Test case: `markAtt s/A1234567X t/T1001 d/21-10-2023`<br>
+    1. Test case: `markAtt s/A1234567X c/T1001 d/21-10-2023`<br>
        Expected: Error message indicating that the date format is invalid. Correct format should be "YYYY-MM-DD".
 
 ### Marking/Unmarking assignment
