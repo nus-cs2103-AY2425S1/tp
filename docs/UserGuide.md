@@ -10,7 +10,6 @@ LogiLink is an all-in-one management tool designed for you, a logistics coordina
 Using only keyboard commands, you can easily add, edit, find, sort, and organize contacts, track delivery details and statuses, archive past transactions (— and much more!).
 <br><sup><small>1</small></sup> <small>"Contacts" referring to either employees or clients.</small>
 
-
 If you type fast, you can complete your contact and delivery management tasks faster with LogiLink than with mouse-based apps.
 
 Currently, LogiLink is targeted towards a Singaporean userbase, with international support planned for future iterations. 
@@ -52,7 +51,7 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 1. Copy the `.jar` file to the folder you want to use as the _home folder_ for LogiLink.
 
 1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar LogiLink.jar` to run LogiLink.<br>
-   - For example you select _LogiLink_ as your _home folder_. By right clicking in the empty space, you should see the dropdown below. Click on Open in Terminal.
+   - For example you select _LogiLink_ as your _home folder_. By right clicking in the empty space, you should see the dropdown below. Click on Open in Terminal.<br>
    ![openinterminal](images/openinterminal.png)
    - A window similar to the diagram should appear, and the program should contain some sample data.<br>
    ![Ui](images/Ui.png)
@@ -81,9 +80,17 @@ Currently, LogiLink is targeted towards a Singaporean userbase, with internation
 **Notes about the command format:**
 1. There are two windows in this program:
   - **Main window**: the default window you see when opening LogiLink.
+<<<<<<< HEAD
     ![main window](images/Ui.png)
   - **Inspect window**: the window you see when inspecting a contact.
     ![inspect window](images/Ui2.png)
+=======
+    <img src="images/Ui.png" alt="ui" width="600"> 
+
+
+  - **Inspect window**: the window you see when inspecting a contact.
+    <img src="images/Ui2.png" alt="ui2" width="600">
+>>>>>>> 055cf7dbc5a425da92707a59f05a1778f05743fa
     <br></br>
 
 2. Words in `UPPER_CASE` are parameters you need to provide.<br>
@@ -389,7 +396,11 @@ Format: `inspect INDEX`
 Examples:
 * `list` followed by `inspect 1` inspects the 1st contact in the contacts list.
 
+<<<<<<< HEAD
 ![inspect_window](images/Ui2.png)
+=======
+<img src="images/Ui2.png" alt="ui2" width="600">
+>>>>>>> 055cf7dbc5a425da92707a59f05a1778f05743fa
 
 **<ins>When in the inspect window**
 

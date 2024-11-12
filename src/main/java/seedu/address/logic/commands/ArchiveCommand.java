@@ -48,8 +48,8 @@ public class ArchiveCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Archives the delivery identified by the index number used in the displayed person list.\n"
+    public static final String MESSAGE_USAGE_PERSON = COMMAND_WORD
+            + ": Archives the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
