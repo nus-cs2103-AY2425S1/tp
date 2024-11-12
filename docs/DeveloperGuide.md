@@ -1,10 +1,8 @@
-<!--
 ---
   layout: default.md
   title: "Developer Guide"
   pageNav: 3
 ---
--->
     
 # EduLog Developer Guide
 <!-- * Table of Contents -->
@@ -15,7 +13,7 @@
 ## **Acknowledgements**
 
 As Edulog is a fork of [_AddressBook_](https://github.com/nus-cs2103-AY2425S1/tp), this developer guide builds upon the original.
-Our friend Lenzork, for his unsolicited contribution to our GitHub repository by providing a comprehensive list of gifts. 
+We thank [Lenzork](https://github.com/Lenzork),an external contributor, for his unsolicited contribution to our GitHub repository by providing a comprehensive list of gifts. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,7 +92,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" alt="Structure of the Logic Component"/>
-
+<box type="important" seamless> XYZCommand can also be structured as an abstract class to serve as a base for a set of related child commands that would be implemented individually as concrete classes.
+</box>
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 **This example can be used as a guide for all EduLog commands**.
 
@@ -136,6 +135,7 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
+e
 <b>Note:</b> An alternative (arguably, a more OOP) model is given below. It has a <code>Tag</code> list in the <code>EduLog</code>, which <code>Student</code> references. This allows <code>EduLog</code> to only require one <code>Tag</code> object per unique tag, instead of each <code>Student</code> needing their own <code>Tag</code> objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
@@ -195,7 +195,8 @@ Step 3. The user executes `add n/David …​` to add a new student. The `add` c
 <b>Note:</b> If a command fails its execution, it will not call `Model#commitEduLog()`, so the address book state will not be saved into the `eduLogStateList`.
 </box>
 
-<div markdown="span" class="alert alert-info">:information_source: <b>Note:</b> If a command fails its execution, it will not call `Model#commitEdulog()`, so the edulog state will not be saved into the `eduLogStateList`.
+<div markdown="span" class="alert alert-info">
+<b>Note:</b> If a command fails its execution, it will not call <code>Model#commitEdulog()</code>, so the edulog state will not be saved into the <code>eduLogStateList</code>.
 
 </div>
 
@@ -225,6 +226,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 The `redo` command does the opposite — it calls `Model#redoEduLog()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <box type="info" seamless>
+
 <b>Note:</b> If the `currentStatePointer` is at index `eduLogStateList.size() - 1`, pointing to the latest address book state, then there are no undone EduLog states to restore. The `redo` command uses `Model#canRedoEduLog()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
@@ -285,25 +287,29 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: Essential (must have), Novel (nice to have), Typical (unlikely to have)
 
-| Priority  | As a    | I want to                                                      | So that I can                                                |
-|:----------|:--------|:---------------------------------------------------------------|:-------------------------------------------------------------|
-| Essential | Teacher | add lessons                                                    | manage my weekly lesson schedule                             |
-| Essential | Teacher | delete lessons                                                 | keep my weekly lesson schedule updated                       |
-| Essential | Teacher | keep track of lesson start and end times                       | manage my weekly lesson timings                              |
-| Essential | Teacher | manage student address                                         | be able to mail the student things                           |
-| Essential | Teacher | manage student phone number                                    | know who to contact and how to contact                       |
-| Essential | Teacher | manage student email                                           | send email attachments                                       |
-| Essential | Teacher | tag students based on how much help they need                  | give each student the appropriate amount of help             |
-| Essential | Teacher | mark all students who have paid                                | quickly mark all my students who has paid                    |
-| Essential | Teacher | unmark all students, so that they are listed as 'has not paid' | quickly mark students as unpaid, when the new month comes in |
-| Essential | Teacher | manage how much each student pays in tuition fees              | remember how much to bill my student every month             |
-| Essential | Teacher | easily total how much money is paid or not paid yet            | easily see how much revenue I have earned or not earned      |
-| Novel     | Teacher | have ideas for gifts                                           | buy gifts for my students.                                   |
-*{More to be added}*
+| Priority  | As a    | I want to                                           | So that I can                                                |
+|:----------|:--------|:----------------------------------------------------|:-------------------------------------------------------------|
+| Essential | Teacher | add lessons                                         | manage my weekly lesson schedule                             |
+| Essential | Teacher | delete lessons                                      | keep my weekly lesson schedule updated                       |
+| Essential | Teacher | keep track of lesson start and end times            | manage my weekly lesson timings                              |
+| Essential | Teacher | manage student address                              | be able to mail the student things                           |
+| Essential | Teacher | manage student phone number                         | know who to contact and how to contact                       |
+| Essential | Teacher | manage student email                                | send email attachments                                       |
+| Essential | Teacher | tag students based on how much help they need       | give each student the appropriate amount of help             |
+| Essential | Teacher | mark a student as paid                              | keep track of which student has paid                         |
+| Essential | Teacher | marks a student as unpaid                           | keep track of which student has not paid                     |
+| Essential | Teacher | mark all students who have paid                     | quickly mark all my students who have paid                   |
+| Essential | Teacher | mark all students as unpaid                         | quickly mark students as unpaid, when the new month comes in |
+| Essential | Teacher | manage how much each student pays in tuition fees   | remember how much to bill my student every month             |
+| Essential | Teacher | easily total how much money is paid or not paid yet | easily see how much revenue I have earned or not earned      |
+| Essential | Teacher | delete all my students and lessons                  | easily start over in the new semester                        |
+| Novel     | Teacher | have ideas for gifts                                | buy gifts for my students.                                   |
+
 
 # Use cases
 
 (For all use cases below, the **System** is the `EduLog` and the **Actor** is the `Teacher`, unless specified otherwise)
+Also in the current version, as there is no authentication system, logged in would simply mean opening the app, with the proper data files.
 
 ## UC1: Add a lesson
 * Postcondition: A lesson, with at least a name, date, and time is created <br>
@@ -322,15 +328,17 @@ Use case ends.
 * **2a. Teacher wants to abort the ‘add lesson’ process**
 
     * 2a1. Teacher can clear fields and exit the procedure
+    Use case ends
 
 * **4a. Lesson with description already exists**
 
     * 4a1. System alerts the teacher that the lesson exists and displays its details
+    Use case ends
 
 * **4b. Invalid lesson details (see features)**
 
     * 4b1. System alerts the teacher and prompts them to correct the invalid information
-
+      Use case ends
 
 ## UC2: Delete a lesson
 
@@ -350,19 +358,20 @@ Use case ends.
 * **2a. Teacher wants to abort the ‘delete lesson’ process**
 
     * 2a1. Teacher can clear fields and exit the procedure
+      Use case ends
 
 * **4a. Lesson with description does not exist**
 
     * 4a1. System alerts the teacher that the lesson does not exist, and prompts user to check again
+      Use case ends
 
 * **4b. Invalid lesson details (see features)**
 
     * 4b1. System alerts the teacher and prompts them to correct the invalid information
+      Use case ends
 
 ## UC3: Add student
 
-**System**: EduLog
-**Actor**: Teacher 
 **Postcondition**: A student, with at least a name, is successfully enrolled in at least one lesson <br>
 
 **MSS:**
@@ -377,27 +386,30 @@ Use case ends.
 ### **Extension:**
 
 - **2a. Teacher wants to abort the ‘add student’ process**
-  Teacher can clear fields and exit the procedure.
+    * 2a1.Teacher can clear fields and exit the procedure.
+      Use case ends
 
 - **4a. Student with the same name already exists**
-  System alerts the teacher that the student exists and displays their details.
+    * 4a1.System alerts the teacher that the student exists and displays their details.
+      Use case ends
 
 - **4b. Invalid student details**
-  System alerts the teacher and prompts them to correct the invalid information.
+    * 4b1.System alerts the teacher and prompts them to correct the invalid information.
+      Use case ends
 
 - **4c. Subject does not exist**
-  System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
+    * 4c1.System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
+      Use case ends
 
 - **4d. Lesson does not exist**
-  System prompts the teacher to first create the lesson using <u>UC1: Add a Lesson</u>.
+    * 4d1.System prompts the teacher to first create the lesson using <u>UC1: Add a Lesson</u>.
+      Use case ends
 
 - **4e. Tag does not exist**
-  System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
+    * 4e1.System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
+      Use case ends
 
 ## UC4: Edit student
-
-**System**: EduLog <br>
-**Actor**: Teacher <br>
 
 **MSS:**
 1. Teacher initiates the process to edit an existing student in EduLog.
@@ -409,27 +421,28 @@ Use case ends.
 
 ### **Extension:**
 - **2a. Teacher wants to abort the ‘edit student’ process:**
-  Teacher can clear fields and exit the procedure.
+    * 2a1.Teacher can clear fields and exit the procedure.
+      Use case ends
 
 - **4a. Student with new name already exists**
-  System alerts the teacher that the student exists and displays their details.
+    * 4a1.System alerts the teacher that the student exists and displays their details.
+      Use case ends
 
 - **4b. Invalid student details (see features):**
-  System alerts the teacher and prompts them to correct the invalid information.
-
+    * 4b1.System alerts the teacher and prompts them to correct the invalid information.
+      Use case ends
 - **4c. Subject does not exist**
-  System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
+    * 4c1.System prompts the teacher to first create the tag using <u>UC7: Create a Subject</u>.
+      Use case ends
 
 - **4d. Lesson does not exist**
-  System prompts the teacher to first create the lesson using <u>UC1: Add a Lesson</u>.
-
+    * 4d1.System prompts the teacher to first create the lesson using <u>UC1: Add a Lesson</u>.
+      Use case ends
 - **4e. Tag does not exist**
-  System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
+    * 4e1.System prompts the teacher to first create the tag using <u>UC5: Create a Tag</u>.
+      Use case ends
 
 ## UC5: Create Tag
-
-**System**: EduLog <br>
-**Actor**: Teacher <br>
 
 **MSS:**
 1. Teacher initiates the process to create a new tag.
@@ -441,19 +454,19 @@ Use case ends.
 
 ### **Extension:**
 - **2a. Teacher wants to abort the ‘create tag’ process:**
-  Teacher clears the fields and exits the procedure without saving any data.
+    * 2a1.Teacher clears the fields and exits the procedure without saving any data.
+      Use case ends
 
 - **3a. Tag with the same name already exists**
-  System alerts the teacher that the tag exists and no new tag is created.
+    * 3a1.System alerts the teacher that the tag exists and no new tag is created.
+      Use case ends
 
 - **3b. Invalid tag details:**
-  System alerts the teacher if any of the entered details are invalid.
-  System prompts the teacher to correct the information before proceeding.
+    * 3b1.System alerts the teacher if any of the entered details are invalid.
+    * 3b2.System prompts the teacher to correct the information before proceeding.
+      Use case ends
 
 ## UC6: Edit tag
-
-**System**: EduLog <br>
-**Actor**: Teacher <br>
 
 **MSS:**
 1. Teacher initiates the process to edit an existing tag.
@@ -465,20 +478,19 @@ Use case ends.
 
 ### **Extension:**
 - **2a. Teacher wants to abort the ‘edit tag’ process:**
-  Teacher clears the fields and exits the procedure without saving any data.
-
+    * 2a1.Teacher clears the fields and exits the procedure without saving any data.
+      Use case ends
 - **3a. Tag with new name already exists**
-  System alerts the teacher that the tag exists.  
-  System requests to add another name.
+    * 3a1.System alerts the teacher that the tag exists.  
+    * 3a2.System requests to add another name.
+      Use case ends
 
 - **3b. Invalid tag details (see features):**
-  System alerts the teacher if any of the entered details are invalid.  
-  System prompts the teacher to correct the information before proceeding.
+    * 3b1.System alerts the teacher if any of the entered details are invalid.  
+    * 3b2.System prompts the teacher to correct the information before proceeding.
+      Use case ends
 
 ## UC7: Delete tag
-
-**System**: EduLog <br>
-**Actor**: Teacher <br>
 
 **MSS:**
 
@@ -490,15 +502,15 @@ Use case ends.
 ### **Extension:**
 
 - **1a. Tag does not exist**
-  System alerts the teacher that the tag does not exist and cannot be deleted.
+  * 1a1. System alerts the teacher that the tag does not exist and cannot be deleted.
+    Use case ends
 
 - **2a. Teacher wants to abort the ‘delete tag’ process:**
-  Teacher cancels the operation and exits the procedure without deleting the tag.
-
+  * 2a1. Teacher cancels the operation and exits the procedure without deleting the tag.
+    Use case ends
+  
 ## UC8: View students
 
-**System:** EduLog <br>
-**Actor:** Teacher <br>
 **Precondition:** The teacher is logged into the app. <br>
 
 **MSS:**
@@ -509,7 +521,7 @@ Use case ends.
 
 ### **Extension:**
 
-**1a.** **Teacher requested to view invalid student**
+**1a.** **Teacher requests to view invalid student**
 
 **1a1.** System notifies the teacher that the student is not present in her set of students.
 
@@ -519,10 +531,30 @@ Steps 1a1-1a2 are repeated until an existing student is selected.
 
 Use case resumes from Step 2.
 
-## UC9: Delete student
+## UC9: Find students
 
-**System:** EduLog <br>
-**Actor:** Teacher <br>
+**Precondition:** The teacher is logged into the app. <br>
+
+**MSS:**
+
+1. Teacher requests to see students enrolled under him/her whose name contains a specific set of keywords.
+2. System displays the students enrolled under him/her whose name contains the specific set of keywords.
+   Use case ends.
+
+### **Extension:**
+
+**1a.** **Teacher requests for a name which does not belong to any of his/her students**
+
+**1a1.** System notifies the teacher that there are no students with a matching name.
+
+**1a2.** System requests the teacher for the correct student name.
+
+Steps 1a1-1a2 are repeated until an existing student is selected.
+
+Use case resumes from Step 2
+
+## UC10: Delete student
+
 **Precondition:** The teacher is logged into the app, the student is present in the list of students enrolled under the teacher. <br>
 **Postcondition:** The student is removed from the teacher’s list of students. <br>
 
@@ -543,10 +575,31 @@ Use case resumes from Step 2.
 
 Use case ends.
 
-## UC10: Display gift
+## UC11: Reset EduLog
 
-**System:** EduLog <br>
-**Actor:** Teacher <br>
+**Precondition:** The teacher is logged into the app. <br>
+**Postcondition:** EduLog is reset. All students and lessons are cleared. <br>
+
+**MSS:**
+
+1. Teacher requests to reset EduLog.
+2. System confirms that all students and lessons have been removed.
+   Use case ends.
+
+### **Extension:**
+
+**1a.** **No students exist in the list of the teacher’s students:**
+
+**1a1.** System notifies the teacher that no students are present in her set of students.
+Use case ends.
+
+**1b.** **No lessons exist in the list of the teacher’s lessons:**
+
+**1b1.** System notifies the teacher that no lessons are present in her set of lessons.
+Use case ends.
+
+## UC12: Display gift
+
 **Precondition:** The teacher is logged into the app. <br>
 
 **MSS:**
@@ -555,10 +608,8 @@ Use case ends.
 2. System displays a suggested gift.
 Use case ends.
 
-## UC11: Mark Student
+## UC13: Mark Student
 
-**System:** EduLog <br>
-**Actor:** Teacher <br>
 **Precondition:** The teacher has the list of students. <br>
 
 **MSS:**
@@ -574,10 +625,8 @@ Use case ends.
 
 **2a1.** System notifies the teacher that the student is not present in his/her set of students.
 
-## UC12: Unmark Student
+## UC14: Unmark Student
 
-**System:** EduLog <br>
-**Actor:** Teacher <br>
 **Precondition:** The teacher has the list of students. <br>
 
 **MSS:**
@@ -592,10 +641,9 @@ Use case ends.
 **2a.** **Student no longer exists in the list of the teacher’s students:**
 
 **2a1.** System notifies the teacher that the student is not present in his/her set of students.
+Use case ends
 
-## UC 13: Mark all students
-**System:** EduLog <br>
-**Actor:** Teacher <br>
+## UC15: Mark all students
 
 **MSS:**
 
@@ -603,9 +651,7 @@ Use case ends.
 2. The system marks all students. 
 Use case ends.
 
-## UC 14: Unmark all students
-**System:** EduLog <br>
-**Actor:** Teacher <br>
+## UC16: Unmark all students
 
 **MSS:**
 
@@ -613,17 +659,15 @@ Use case ends.
 2. The system unmarks all students.
    Use case ends.
 
-## UC15: Calculate Revenue
+## UC17: Calculate Revenue
 
-**System:** Edulog <br>
-**Actor:** Teacher <br>
 **Precondition:** The teacher is logged into the app.
 
 **MSS:**
 
 1. Teacher chooses to search for revenue
 2. Teacher specifies the revenue type to be revenue paid
-3. Edulog retrieves and displays a list of students who have not paid their fee. 
+3. Edulog retrieves and displays a list of students who have paid their fee. 
 4. Edulog shows the total amount of the unpaid fees.  
 
 Use case ends.
