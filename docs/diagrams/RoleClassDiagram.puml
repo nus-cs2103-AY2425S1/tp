@@ -29,22 +29,25 @@ Class Person
 
 Role <|-- Athlete
 Role <|-- CommitteeMember
-CommitteeMember <|-- FacultySportCommitteeMember
+CommitteeMember <|-left- FacultySportCommitteeMember
 Role <|-- Volunteer
 Role <|-- Sponsor
 Role <|-- Referee
 
+Sponsor -[hidden]left- Volunteer
+
 
 Athlete --> "*" Sport
 Athlete --> "1" Faculty
-SportString --> "1" Sport
+SportString .up.> Sport
 Referee --> "*" Sport
 Referee --> "1" Faculty
 CommitteeMember --> "1" Branch
 CommitteeMember --> "1" Position
-PositionString ..> Position
+PositionString .up.> Position
 FacultySportCommitteeMember --> "1" Faculty
 Volunteer --> "1" VolunteerRole
-VolunteerRoleString ..> VolunteerRole
+VolunteerRoleString .up.> VolunteerRole
+
 Person *--> "*" Role
 @enduml
