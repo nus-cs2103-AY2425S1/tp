@@ -63,9 +63,10 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
-<div style="page-break-after: always;"></div>
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
@@ -153,11 +154,12 @@ The diagram below shows the newly added features for UniVerse.
 - **AB3 Features**: These are the original commands provided by AddressBook Level 3, which include basic CRUD (Create, Read, Update, Delete) operations, help, and navigation commands.
 - **New Features**: These extend the command capabilities in `UniVerse` to allow users to add specific details like interests and work experience, and search contacts based on university, major, interest, or work experience.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
-
 
 The `Model` component,
 
@@ -174,6 +176,7 @@ The `Model` component,
 
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
