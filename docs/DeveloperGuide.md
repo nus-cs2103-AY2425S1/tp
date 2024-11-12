@@ -1439,33 +1439,68 @@ applied to edited data, but specific expected results will differ. <br><br>
 ---
 <h3 class="features">Wedding Features</h3>
 
-### Creating Wedding
-##### ... if `John's Wedding` is not in the list of weddings
-1. Test case: `create-wedding w/John's Wedding`<br>
-   Expected: `John's Wedding` is added to list of weddings. Details of the added wedding are shown.
+#### Creating Wedding
 
-##### ... if `John's Wedding` is in the list of weddings
-1. Test case: `create-wedding w/John's Wedding`<br>
-   Expected: No weddings are added to list of weddings. Error details shown.
+1. **Creating a new `Wedding`**
+    
+    1. **Prerequisites**: List all weddings using the `list-weddings` command.
 
-### Deleting Wedding
-##### ... if `John's Wedding` is in the list of weddings
-1. Test case: `delete-wedding w/John's Wedding`<br>
-   Expected: `John's Wedding` is removed from list of weddings. Details of the removed wedding are shown.
+    2. **Test case**: `create-wedding w/John's Wedding`<br>
+       **Expected**: `John's Wedding` is added to the list of weddings. Details of the added wedding are shown in the status message.
 
-##### ... if `John's Wedding` is not in the list of weddings
-1. Test case: `delete-wedding w/John's Wedding`<br>
-   Expected: No weddings are removed from list of weddings. Error details shown.
+<br>
 
-### Editing Wedding
-##### ... if there is only 1 wedding in the list
-1. Test case: `edit-wedding 1 w/John's Wedding a/Address1 d/2024-12-31 `<br>
-   Expected: 1st wedding's date is set as `John's Wedding`, with address `Address1` and date `2024-12-31`. Details of edited wedding are shown.
+2. **Creating a `Wedding` already in the list of `Weddings`**
 
-1. Test case: `edit-wedding 2 w/John's Wedding a/Address1 d/2024-12-31 `<br>
-   Expected: No weddings are edited. Error details shown.
+    1. **Test case**: `create-wedding w/John's Wedding` (assuming `John's Wedding` is in the list of `Weddings` already) <br>
+       **Expected**: No weddings are added to list of weddings. Error details shown indicating that the `Wedding` already exists.
 
-### Assigning Wedding
+    2. **Test case**: `create-wedding w/JOHN'S WEDDING` (assuming `John's Wedding` is in the list of `Weddings` already) <br>
+       **Expected**: No weddings are added to list of weddings. Error details shown indicating that the `Wedding` already exists.
+
+<br>
+
+#### Deleting Wedding
+
+1. **Deleting a `Wedding` already in the list of `Weddings`**
+
+    1. **Test case**: `delete-wedding w/John's Wedding` (assuming `John's Wedding` is in the list of `Weddings` already and has **no people** assigned to it) <br>
+       **Expected**: `John's Wedding` is removed from the list of `Weddings`. Details of the removed wedding are shown in the status message.
+
+   2. **Test case**: `delete-wedding w/John's Wedding` (assuming `John's Wedding` is in the list of `Weddings` already and **does have people** assigned to it) <br>
+      **Expected**: No weddings are removed from list of weddings. Error details shown indicating that `John's Wedding` is still used.
+
+   3. **Test case**: `delete-wedding w/John's Wedding f/` (assuming `John's Wedding` is in the list of `Weddings` already and **does have people** assigned to it) <br>
+      **Expected**: `John's Wedding` is removed from the list of `Weddings`. Details of the removed wedding are shown in the status message.
+
+<br>
+
+2. **Deleting a `Wedding` not in the list of `Weddings`**
+
+    1. **Test case**: `delete-wedding w/Maddy's Wedding` (assuming `Maddy's Wedding` is not in the list of `Weddings`)
+       **Expected**: No weddings are removed from list of weddings. Error details shown indicating that the `Wedding` does not exist.
+
+<br>
+
+#### Editing Wedding
+
+1. **Editing a `Wedding` in the `Wedding` list**
+
+    1. **Prerequisites**: List all weddings using the `list-weddings` command. At least 2 weddings exist in the system.
+
+    2. **Test case**: `edit-wedding 1 w/John's Wedding a/Address1 d/2024-12-31 ` (assuming `John's Wedding` **does not exist** in the system) <br>
+       **Expected**: The first wedding's name is set to `John's Wedding`, with address `Address1` and date `2024-12-31`. The new details of the wedding are shown in the `Wedding` list.
+       Details of edited wedding are shown in the status message.
+
+    3.  **Test case**: `edit-wedding 2 w/John's Wedding a/Address1 d/2024-12-31 ` (assuming `John's Wedding` **exists** in the system) <br>
+        **Expected**: No weddings are altered in the list of weddings. Error details shown indicating that `John's Wedding` already exists.
+
+    4. **Test case**: `edit-wedding X w/Carla's Wedding` (where X is greater than the number of weddings in the `Wedding` list) <br>
+       **Expected**: No weddings are altered in the list of weddings. Error details shown indicating the wedding number is too high.
+   
+<br>
+
+#### Assigning Wedding
 ##### ... if `John's Wedding` is in the list and if the first contact is not already in John's Wedding
 1. Test case: `assign-wedding 1 w/John's Wedding`<br>
    Expected: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
@@ -1490,7 +1525,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 1. Test case: `assign-wedding 1 w/John's Wedding f/`<br>
    Expected: 1st contact is put in `John's Wedding`'s guest list and 1st contact has `John's Wedding` on its contact card.
 
-### Unassigning Wedding
+#### Unassigning Wedding
 ##### ... if first contact in `John's Wedding`
 1. Test case: `unassign-wedding 1 w/John's Wedding`<br>
    Expected: 1st contact is removed from `John's Wedding` and `John's Wedding` is removed from their contact card.
@@ -1502,7 +1537,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 ---
 <h3 class="features">Task Features</h3>
 
-### Creating Task
+#### Creating Task
 ##### ... if `Task1` is not in the list of tasks
 1. Test case: `create-task tk/Task1`<br>
    Expected: `Task1` is added to list of tasks. Details of the added task are shown.
@@ -1514,7 +1549,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 1. Test case: `create-task tk/task1`<br>
    Expected: No tasks are added to list of tasks. Error details shown.
 
-### Deleting Task
+#### Deleting Task
 ##### ... if there is only 1 task in the list
 1. Test case: `delete-task 1`<br>
    Expected: `Task1` is removed from list of tasks. Details of the removed task are shown.
@@ -1522,7 +1557,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 1. Test case: `delete-task 2`<br>
    Expected: No tasks are removed from list of tasks. Error details shown.
 
-### Assigning Task
+#### Assigning Task
 ##### ... if there's only 1 task and 1 vendor in WedLinker and vendor does not have that task assigned to them
 1. Test case: `assign-task 1 1`<br>
    Expected: 1st contact is put in `Task1`'s guest list and 1st contact has `Task1` on its contact card.
@@ -1541,7 +1576,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 1. Test case: `assign-task 1 1`<br>
    Expected: No tasks are assigned. Error details shown.
 
-### Unassigning Task
+#### Unassigning Task
 ##### ... if first contact has first task
 1. Test case: `unassign-task 1 1`<br>
    Expected: First task unassigned. Details of updated contact shown.
@@ -1550,7 +1585,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 1. Test case: `unassign-task 1 1`<br>
    Expected: No tasks are unassigned. Error details shown.
 
-### Marking Task
+#### Marking Task
 ##### ... if there's only 2 tasks
 1. Test case: `mark-task 1 2`<br>
    Expected: First two task marked. Details of updated tasks shown.
@@ -1558,7 +1593,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 1. Test case: `mark-task 1 2 3 4`<br>
    Expected: No tasks marked (besides those originally marked). Error details shown.
 
-### Unmarking Task
+#### Unmarking Task
 ##### ... if there's only 2 tasks
 1. Test case: `unmark-task 1`<br>
    Expected: First task unmarked. Details of updated tasks shown.
@@ -1570,7 +1605,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 ---
 <h3 class="features">Tag Features</h3>
 
-### Creating Tag
+#### Creating Tag
 ##### ... if `Tag1` is not in the list of tags
 1. Test case: `create-tag w/Tag1`<br>
    Expected: `Tag1` is added to list of tags. Details of the added tag are shown.
@@ -1582,7 +1617,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 1. Test case: `create-tag w/tag1`<br>
    Expected: No tags are added to list of tags. Error details shown.
 
-### Deleting Tag
+#### Deleting Tag
 ##### ... if `Tag1` is in the list of tags
 1. Test case: `delete-tag w/Tag1`<br>
    Expected: `Tag1` is removed from list of tags. Details of the removed tag are shown.
@@ -1591,7 +1626,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 1. Test case: `delete-tag w/Tag1`<br>
    Expected: No tags are removed from list of tags. Error details shown.
 
-### Tagging contact
+#### Tagging contact
 ##### ... if `Tag1` is in the list and if the first contact is not tagged with `Tag1`
 1. Test case: `tag 1 t/Tag1`<br>
    Expected: 1st contact is tagged with `Tag1`. Details of the updated contact are shown.
@@ -1607,7 +1642,7 @@ applied to edited data, but specific expected results will differ. <br><br>
 1. Test case: `tag 1 t/Tag1 f/`<br>
    Expected: 1st contact is tagged with newly created `Tag1`. Details of the updated contact are shown.
 
-### Untagging contact
+#### Untagging contact
 ##### ... if first contact is tagged with `Tag1`
 1. Test case: `untag 1 w/Tag1`<br>
    Expected: `Tag1` is removed from their contact card.
@@ -1617,6 +1652,8 @@ applied to edited data, but specific expected results will differ. <br><br>
    Expected: No contacts are untagged. Error details shown.
 
 ---
+
+<h3 class="features">General Features</h3>
 
 ### Saving data
 
