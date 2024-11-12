@@ -323,7 +323,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 
 **Extensions**
 * 1a. Cher detects error in user input.
-    - 2a1. Cher shows correct input format. <br>
+    - 1a1. Cher shows correct input format. <br>
       Use case ends.
 
 
