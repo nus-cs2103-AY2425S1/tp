@@ -656,13 +656,11 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 9. The application must include comprehensive logging and error handling to facilitate debugging and system maintenance.
 10. The system should be capable of running efficiently on devices with limited resources (e.g., 8GB RAM, 4-core CPU).
 
-11. *{More to be added}*
 
 ### Glossary
 
 * **Volunteer**: An individual who participates in a community event without monetary compensation.
 * **Event**: A planned activity organised by a community or non-profit organisation, requiring volunteer coordination.
-* **Recurring Events**: Events that occur repeatedly on a set schedule.
 * **CLI (Command-Line Interface)**: A text-based interface where users input commands to interact with the application.
 * **NFR (Non-Functional Requirement)**: System attributes like performance, scalability, and usability that don’t affect specific functional behaviors.
 * **Duplicate Handling**: A system feature that prevents the creation of identical entries.
