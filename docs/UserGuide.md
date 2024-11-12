@@ -351,6 +351,13 @@ Furthermore, certain edits can cause the SocialBook to behave in unexpected ways
 - The "remarks" field is meant for long form notes about a person. This is likely to be quite cumbersome to enter at the same time that a person is being added for the first time.
 - Users are recommended to first `add` the person to the address list, and then subsequently use the `edit` or `remark` commands to write remarks about a contact. 
 
+**Q3**: How does SocialBook determine a duplicate contact?
+- First of all, we consider a duplicate as a person having both identical name (case-insensitive) and phone number.
+- To understand this, we look at the following cases and explain why they should not be considered a duplicate.
+- Persons with the same name but different phone numbers are common, and are clearly not duplicates.
+- Persons with different names but the same phone number can exist in the field of social work, and should not be considered duplicates. If multiple beneficiaries live in the same shared rental flat, they may share the same phone number (on a landline). For the social worker to remember each person's contact separately, it makes sense to not mark these contacts as duplicates so that remarks and tags can be added to each person's contact.
+- Persons with different names and different phone numbers are definitely different people, and are thus not duplicates.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
