@@ -646,7 +646,7 @@ Use case resumes at step 3.
 * **JSON (JavaScript Object Notation)**: A lightweight data format used for data storage and transmission, typically for configuration or file storage.
 * **Parser**: A component that interprets user commands and converts them into actions or objects that the system can process.
 * **MSS (Main Success Scenario)**: The primary sequence of steps in a use case where everything proceeds as expected without any errors.
-* **JAR File**: Java Archive file; a package file format that bundles Java class files and associated metadata for distribution.
+* **JAR File**: Java ARchive file; a package file format that bundles Java class files and associated metadata for distribution.
 * **Prerequisite**: Compulsory requirements to fulfil before every manual testing action.
 
 --------------------------------------------------------------------------------------------------------------------
