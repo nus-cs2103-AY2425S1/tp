@@ -453,7 +453,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. User specifies an invalid or non-existent contact.
     * 2a1. PlanPal displays an error message indicating the contact is invalid.
 
-      Use case ends
+      Use case ends.
 
 **UC14: Clear currently excluded contacts in search mode**
 
