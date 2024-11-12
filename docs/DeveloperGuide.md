@@ -344,10 +344,15 @@ Step 2: The `export` command exports all data currently contained by DorManagerP
 </box>
 
 The following sequence diagram shows how an `export` command goes through the `Logic` component:
+
 <puml src="diagrams/ExportSequenceDiagram.puml"
  alt="ExportSequenceDiagram" />
 
-> The lifeline for `ExportCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<box type="info" seamless>
+
+**Note:** The lifeline for `ExportCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 The following activity diagram summarizes what happens when a user executes an `export` command:
 
