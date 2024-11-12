@@ -10,7 +10,7 @@
 
 <br>
 
-EduContacts is a **desktop app for educators in tertiary institutions to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). For expert users familiar with command-based tools, EduContacts can get your contact management tasks done faster than traditional GUI apps. For new users, EduContacts also includes user-friendly and intuitive features and guidance, making it user-friendly and accessible for all users.
+EduContacts is a **desktop app for educators in tertiary institutions in Singapore to manage contacts, optimized for use via a Command Line Interface<sup id="fn1">[1]</sup>** (CLI) while still having the benefits of a Graphical User Interface<sup id="fn2">[2]</sup> (GUI). For expert users familiar with command-based tools, EduContacts can get your contact management tasks done faster than traditional GUI apps. For new users, EduContacts also includes user-friendly and intuitive features and guidance, making it user-friendly and accessible for all users.
 
 <br>
 <!-- * Table of Contents -->
@@ -29,11 +29,27 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
     - [Finding a person: `find`](#finding-a-person-find)
     - [Clearing all entries : `clear`](#clearing-all-entries-clear)
     - [Exiting the program : `exit`](#exiting-the-program-exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
 4. [FAQ](#faq)
 5. [Known issues](#known-issues)
 6. [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<small>
+
+<p id="fn1"> 
+
+**1. Command Line Interface:** a software mechanism you use to interact with your operating system using your keyboard.</p>
+
+<p id="fn2"> 
+
+**2. Graphical User Interface:** a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.</p>
+
+</small>
+
+
 <div style="page-break-after: always;"></div>
 
 ## Guidance Icons Legend
@@ -103,12 +119,20 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
    ```bash
    delete 12345678
    ```
+   
    Deletes a person contact with student ID `12345678`.
 
    ```bash
    clear
    ```
    Deletes all contacts.
+
+  <box type="warning" seamless>
+
+  **Warning:**
+  The `clear` command will erase all contacts from the system. Please ensure that you have backed up any important information before proceeding. This action cannot be undone, so use this command with caution.
+
+  </box>
 
    ```bash
    exit
@@ -117,13 +141,29 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
 
 <box type="tip" seamless>
 
-**Tip:** Use the UP and DOWN arrow keys to scroll through previous commands in the Command Box. This feature helps you reuse recent commands without retyping, making it faster for you to correct or repeat commands!
+**Tip:** Use the UP and DOWN arrow keys to scroll through previous commands in the command box. This feature helps you reuse recent commands without retyping, making it faster for you to correct or repeat commands!
 </box>
 
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+
+## Summary of a `Person`
+
+This table will explain the fields that a `Person` in EduContacts possesses and its respective constraints. Each person
+in EduContacts is assumed to have a Singapore-based contact. No fields should be left blank when adding a `Person` to EduContacts, except for `Module`.
+
+Field      | Details
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**StudentID**   | The student ID that belongs to the `Person`. The input for this field can only contain digits and should be exactly 8 digits long. <br><br> This field also serves as the unique identifier for a `Person`.
+**Name**   | The name that belongs to the `Person`. The input for this field can only contain alphanumeric characters and whitespaces.
+**Course** | The course that the `Person` studies. The input for this field can only contain alphabetical characters and whitespaces.
+**Email**  | The email that belongs to the `Person`. The input for this field should be of the format local-part@domain. <br><br> The local-part should only contain alphanumeric characters and these special characters: `+ _ . -` The local-part may not start or end with any special characters. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. <br><br> The domain name must: <br> - End with a domain label at least 2 characters long <br> - Have each domain label start and end with alphanumeric characters <br> - Have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+**Address**   | The address that belongs to the `Person`. The first character for the input for this field can only contain alphanumeric characters and these special characters: `# , -`. <br><br> After the first character, any additional characters are allowed, including whitespace and further text.
+**Phone Number**  | The phone number that belongs to the `Person`. The input for this field can only contain digits and must at least be 8 digits long.
+**Module** | A module that the `Person` takes. A `Person` can have multiple modules. The input for this field can only contain alphanumeric characters. <br><br> A module can also be assigned a `Grade`, which must be one of the following: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`
+**Role**   | The role assigned to the `Person`. A person can either be a `Student` or `Tutor`.
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -163,8 +203,12 @@ help
 ```
 
 The help window will display the help message as shown in the screenshot below:
-![help message](images/helpMessage.png)
+
+<img src="images/helpMessage.png" alt="help message" width="500" height="auto">
+
 Alternatively, you can click the button on the top right hand corner as indicated here:
+
+
 ![alternative_help](images/alternativeHelp.png)
 
 <br>
@@ -177,6 +221,7 @@ Format:
 ```bash
 add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE
 ```
+When adding a Person to EduContacts, please refer to the [table above](#summary-of-a-person) for the constraints of each field.
 
 Examples:
 * `add 87654321 n/Betsy Crowe r/Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/12345678 c/Business Analytics` will add a person named `Betsy Crowe` with student ID of `87654321` to EduContacts.
@@ -185,7 +230,7 @@ Examples:
 
   ![result for 'add command result'](images/addCommandResult.png)
 
-<br>
+<div style="page-break-after: always;"></div>
 
 ### Listing all persons : `list`
 
@@ -213,29 +258,49 @@ Examples:
 * `module 12345678 m/GEA1000` will add a module `GEA1000` to a person with student ID of `12345678`.
 * `module 13131313 m/CS2103T` will add a module `CS2103T` to a person with student ID of `13131313` (the response message of this command is shown in the screenshot below).
 
-  ![result for 'add module result'](images/addModule.png)
+  ![result for 'add module result'](images/addModuleResult.png)
 
 <br>
 
 ### Editing a person : `edit`
 
-Edits a specified person in EduContacts.
+Edits a specified person details or module in EduContacts.
+Usages:
 
-Format:
+**1. Edit person details:**
+
+   Format:
+
 ```bash
 edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 ```
+  * Updates the details of the person identified by the student ID assigned to the corresponding student. 
+  * At least one of the optional fields must be provided: name, phone, email, address, course, role. Note that student ID cannot be edited as it is the person's identifier.
+  * Existing values will be overwritten by the input values.
 
+**2. Edit person's module:**
 
-* Edits a person's details according to the fields specified.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+  Format:
+```bash
+edit ID m/ OLD_MODULE NEW_MODULE
+```
+  * Updates a module of the person identified by the student ID.
+  * Existing module (`OLD_MODULE`) will be overwritten by the input module (`NEW_MODULE`).
+  * Editing of `NAME`, `PHONE`, `EMAIL`, `ADDRESS`, `COURSE` and `ROLE` using this format is not supported.
+
+<br>
 
 Examples:
+
 *  `edit 12345678 m/CS2103T CS2101` will edit a person with student ID of `12345678` by replacing the old module `CS2103T` with the new module `CS2101`.
 *  `edit 12121212 c/Computer Science` will edit a person with student ID of `12121212` by editing their course to `Computer Science` (the response message of this command is shown in the screenshot below).
 
    ![result for 'edit command result'](images/editCommandResult.png)
+
+
+<box type="tip" seamless>
+
+**Tip:**  Use the `find` command to view the full detail of the student first before proceeding with `edit`. This allows you to view the changes and verify the edit immediately.</box>
 
 <br>
 
@@ -260,30 +325,46 @@ Examples:
 
 ### Listing persons by certain attributes : `filter`
 
-Filters person contacts based on their names, courses and modules.
+Filters person contacts by name, course, or module.
+Usages:
+
+**1. Filter by name:**
 
 Format:
 ```bash
-filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
+filter n/KEYWORD [MORE_KEYWORDS]
 ```
 
-* **For filtering by names:**
-  * Use prefix `n/`.
+  * `n/` prefix is used.
   * Only full words will be matched e.g. `Han` will not match `Hans`
   * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
   * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+    e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+**2. Filter by Module:**
+
+Format:
+```bash
+filter m/KEYWORD
+```
 
 <!-- -->
 
-* **For filtering by Module:**
-  * Use prefix `m/`.
-  * Partial matching is supported, allowing users to input parts of module codes. e.g. `m/CS21` will match modules like "CS2103T" and "CS2101."
+  * `m/` prefix is used.
+  * Only full module codes will be matched, e.g. `m/CS2103T` will match the module `CS2103T`, and not `m/CS21`."
+
+<div style="page-break-after: always;"></div>
+
+**3. Filter by course:**
+
+Format:
+```bash
+filter c/KEYWORD
+```
 
 <!-- -->
 
-* **For filtering by Course:**
-  * Use prefix `c/`
+  * `c/` prefix is used. 
   * Partial matching is supported, but the first keyword must match the beginning of the course name.
     e.g `Engineer` will match courses like "Engineering" but not "Civil Engineering".
 
@@ -293,12 +374,12 @@ filter [KEYWORD_PREFIX] [MORE_KEYWORDS]
 </box>
 
 Examples:
-* `filter n/John` will return a list of all persons with `John` in their name e.g. `john` and `John Doe`.
+* `filter n/John` will return a list of all persons with `John` in their name e.g. `John Smith` and `John Doe`.
 * `filter m/CS2103T` will return a list of all persons with module `CS2103T`.
 * `filter c/Computer Science` will return a list of all persons with course `Computer Science`.
 * `filter n/alex david` will return a list of all persons with `alex` or `david` in their name e.g.  `Alex Yeoh`, `David Li` (the result of this command is shown in the screenshot below).
+  <img src="images/filterAlexDavidResult.png" alt="filter alex david" width="600" height="auto">
 
-  ![result for 'find alex david'](images/filterAlexDavidResult.png)
 <br>
 
 <box type="info" seamless>
@@ -313,7 +394,9 @@ To return to display the full list of persons, use the `list` command.
 
 Deletes the specified person/module from EduContacts. This command has 2 formats.
 
-Format 1:
+**1. Delete `Person` from EduContacts**
+
+Format:
 ```bash
 delete ID
 ```
@@ -321,23 +404,26 @@ delete ID
 * Deletes person with the specified student ID.
 
 Examples:
+
 * `delete 15151515` will delete a person with student ID of `15151515` from EduContacts.
 * `delete 71271222` will delete a person with student ID of `71271222` from EduContacts (the response message of this command is shown in the screenshot below).
 
   ![result for 'delete_71271222'](images/deleteCommandResult.png)
 
-Format 2:
+**2. Delete `Module` from `Person`**
+
+Format:
 ```bash
 delete ID m/MODULE
 ```
 
-* Deletes a module from the person with the specified student ID.
+* Deletes a module from the person with the specified studentId.
 
-Examples: 
+Example: 
 * `delete 13131313 m/CS2103T` will delete the module `CS2103T` from a person with student ID of `13131313` (the result of this command is shown in the screenshot below).
 
   ![result for 'delete_13131313'](images/deleteModuleResult.png)
-<div style="page-break-after: always;"></div>
+
 
 ### Finding a person : `find`
 
@@ -379,7 +465,6 @@ Format:
 exit
 ```
 
-<br>
 
 ### Saving the data
 
@@ -399,7 +484,7 @@ Furthermore, certain edits can cause the EduContacts to behave in unexpected way
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
+
 
 ## FAQ
 
@@ -420,22 +505,27 @@ Furthermore, certain edits can cause the EduContacts to behave in unexpected way
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **For `help` command:**
+   * If you minimise the Help Window and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window. 
+   * On some platforms (especially MacOS), when you use the application in full screen,
+   running the `help` command and closing the popup window repeatedly in quick succession may cause the application
+   to hang or crash. Users have to terminate the application by entering `CTRL` + `C` in the terminal used to run the application, and run the application again. **DATA MIGHT BE LOST**.
+   * The development team is working on a more permanent fix for this issue.
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student`
-**Clear**  | `clear`
-**Delete** | `delete ID`<br> e.g., `delete 12345678` <br> <br> `delete ID m/MODULE` <br> e.g., `delete 12345678 m/CS2103T`
-**Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
-**Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`
-**Add Module** | `module ID m/MODULE` <br> e.g., `add 12345678 m/CS2103T`
-**Filter**   | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`
-**Find**   | `find ID`<br> e.g., `find 12345678`
-**List**   | `list`
-
+| Action         | Format, Examples                                                                                                                                                                 |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**        | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student` |
+| **Clear**      | `clear`                                                                                                                                                                          |
+| **Delete**     | `delete ID`<br> e.g., `delete 12345678` <br> <br> `delete ID m/MODULE` <br> e.g., `delete 12345678 m/CS2103T`                                                                    |
+| **Edit**       | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`                                        |
+| **Add Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`                                                                                                             |
+| **Add Module** | `module ID m/MODULE` <br> e.g., `module 12345678 m/CS2103T`                                                                                                                      |
+| **Filter**     | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`                                                                                                          |
+| **Find**       | `find ID`<br> e.g., `find 12345678`                                                                                                                                              |
+| **List**       | `list`                                                                                                                                                                           |
+| **Help**       | `help` 
