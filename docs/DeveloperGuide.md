@@ -211,6 +211,24 @@ The activity diagram below shows the flow of the `find` operation.
 <img src="images/FindActivityDiagram.png" width="750" />
 
 ---
+## **Planned Enhancements**
+### 8. `Deletetag all` command does not work as intended on an empty list.
+
+#### Current Issue:
+If the user manages to end up with an empty list, by entering the input `clear` for example, followed by the command `deletetag all t/TAG`, the user is shown a message `Deleted the tags TAG from all contacts in the list`, even though this did not actually happen. This could bring confusion to users.
+
+#### Proposed Enhancement:
+Instead, we plan to show an error message whenever the user tries to use the `deletetag all` command on an empty list. The error message will be similar to `Cannot delete tags from an empty list!`. This will give the user a clear idea and bring less confusion.
+
+### 9. Restrict phone number field to 8 numbers
+
+#### Current Issue:
+Currently, the phone number field accepts inputs as long as they are numbers and at least 3 digits long. However, given that our target audience is NUS club administrators, it would be appropriate for phone numbers to have at least 8 digits.
+
+#### Proposed Enhancement:
+Perform input check for phone numbers to at least make sure it has 8 digits.
+
+---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 

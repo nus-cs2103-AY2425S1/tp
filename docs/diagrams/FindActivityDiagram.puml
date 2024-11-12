@@ -1,6 +1,5 @@
 @startuml
 title Find Activity Diagram
-skin rose
 skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
@@ -13,7 +12,7 @@ if () then ([keyword parameter is empty])
     :Show error message indicating
         invalid command format;
 else ([else])
-     :  for each keyword, find
+     :  For each keyword, find
      contacts in the list whose
      name match the keyword;
 endif
