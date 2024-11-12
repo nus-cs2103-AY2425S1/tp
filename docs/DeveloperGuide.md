@@ -349,6 +349,7 @@ AddressBookParser parses the input and generates a RecordBillingInfoCommand.
 - **Alternative Approach**: Store billing information in a separate log or table linked to the patient profile. <br>
     - **Pros**: Keeps patient profiles focused on medical information while allowing detailed billing history to be retrieved as needed. <br>
     - **Cons**: Adds complexity in managing a separate billing data structure. <br>
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
