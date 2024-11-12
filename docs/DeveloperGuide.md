@@ -800,4 +800,4 @@ on tag creation input to allow space for word separation, so that user can creat
    For example, if the user executes `delete 1`, then `delete 2`, then `undo`, then `delete 3`, the true history states are `[delete 1, delete 3]` since `delete 2` has been purged.
    However, the history command list will only show all data changing commands executed so far, (refer to the screenshot below) which is not accurate.
    Moreover, we plan to highlight the current state of the address book in the history command list, so that the user can easily identify the current state of the address book.
-   ![point7_screenshot](images/planned_enhancements_screenshots/Point8.png)
+   ![point8_screenshot](images/planned_enhancements_screenshots/Point8.png)
