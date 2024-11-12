@@ -1,0 +1,66 @@
+{
+  "_comment": "AddressBook save file which contains the same company values as in TypicalCompanies#getTypicalAddressBook()",
+  "companies": [ {
+    "name": "Apple",
+    "phone": "4089961010",
+    "email": "contact@apple.com",
+    "address": "1 Apple Park Way, Cupertino, CA",
+    "status": "INTERESTED",
+    "tags": [],
+    "applications": [],
+    "isFavourite": true
+  }, {
+    "name": "Amazon",
+    "phone": "2062661000",
+    "email": "contact@amazon.com",
+    "address": "410 Terry Ave N, Seattle, WA",
+    "status": "INTERESTED",
+    "tags": ["ecommerce", "cloud"],
+    "applications": [ {
+      "name": "Software Engineering Intern",
+      "description": "Requires: ReactJS and ExpressJS",
+      "status": "APPLIED"
+    }, {
+      "name": "Data Science Intern",
+      "description": "Requires: Python",
+      "status": "REJECTED"
+    } ],
+    "isFavourite": false
+  }, {
+    "name": "Facebook",
+    "phone": "6505434800",
+    "email": "contact@facebook.com",
+    "address": "1 Hacker Way, Menlo Park, CA",
+    "status": "INTERESTED",
+    "tags": [],
+    "applications": [],
+    "isFavourite": false
+  }, {
+    "name": "Tesla",
+    "phone": "6506815000",
+    "email": "contact@tesla.com",
+    "address": "3500 Deer Creek Road, Palo Alto, CA",
+    "status": "INTERESTED",
+    "tags": [],
+    "applications": [],
+    "isFavourite": false
+  }, {
+    "name": "Netflix",
+    "phone": "4085403700",
+    "email": "contact@netflix.com",
+    "address": "100 Winchester Circle, Los Gatos, CA",
+    "status": "INTERESTED",
+    "tags": [],
+    "applications": [],
+    "isFavourite": false
+  }, {
+    "name": "SAP",
+    "phone": "6503407500",
+    "email": "SAP@career.com",
+    "address": "3410 Hillview Ave, Palo Alto, CA",
+    "status": "CLOSED",
+    "tags": [],
+    "applications": [],
+    "isFavourite": false
+  } ]
+}

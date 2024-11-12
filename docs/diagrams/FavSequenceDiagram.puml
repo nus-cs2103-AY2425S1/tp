@@ -1,0 +1,91 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam DefaultFontSize 18
+skinparam ParticipantFontSize 20
+skinparam ArrowFontSize 18
+skinparam BoxFontSize 18
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":XXFavCommandParser" as XXFavCommandParser LOGIC_COLOR
+participant "f:XXFavCommand" as XXFavCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "editedCompany:Company" as Company LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("xxfav 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("xxfav 1")
+activate AddressBookParser
+
+create XXFavCommandParser
+AddressBookParser -> XXFavCommandParser
+activate XXFavCommandParser
+
+XXFavCommandParser --> AddressBookParser
+deactivate XXFavCommandParser
+
+AddressBookParser -> XXFavCommandParser : parse("1")
+activate XXFavCommandParser
+
+create XXFavCommand
+XXFavCommandParser -> XXFavCommand
+activate XXFavCommand
+
+XXFavCommand --> XXFavCommandParser :
+deactivate XXFavCommand
+
+XXFavCommandParser --> AddressBookParser : f
+deactivate XXFavCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+XXFavCommandParser -[hidden]-> AddressBookParser
+destroy XXFavCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> XXFavCommand : execute(m)
+activate XXFavCommand
+
+XXFavCommand -> Model : get companyToEdit
+activate Model
+
+Model --> XXFavCommand : companyToEdit
+deactivate Model
+
+create Company
+XXFavCommand -> Company : create (un)favourited Company
+activate Company
+
+Company --> XXFavCommand : editedCompany
+deactivate Company
+
+XXFavCommand -> Model : setCompany(companyToEdit, editedCompany)
+activate Model
+
+Model --> XXFavCommand
+deactivate Model
+
+create CommandResult
+XXFavCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> XXFavCommand
+deactivate CommandResult
+
+XXFavCommand --> LogicManager : r
+deactivate XXFavCommand
+
+XXFavCommand -[hidden]-> LogicManager
+destroy XXFavCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

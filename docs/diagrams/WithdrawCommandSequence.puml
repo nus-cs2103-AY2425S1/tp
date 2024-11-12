@@ -1,0 +1,97 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam DefaultFontSize 18
+skinparam ParticipantFontSize 20
+skinparam ArrowFontSize 18
+skinparam BoxFontSize 18
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":WithdrawCommandParser" as WithdrawCommandParser LOGIC_COLOR
+participant "w:WithdrawCommand" as WithdrawCommand LOGIC_COLOR
+participant "editedCompanyWithoutApplication:Company" as Company LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("withdraw 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("withdraw c/2 app/1")
+activate AddressBookParser
+
+create WithdrawCommandParser
+AddressBookParser -> WithdrawCommandParser
+activate WithdrawCommandParser
+
+WithdrawCommandParser --> AddressBookParser
+deactivate WithdrawCommandParser
+
+AddressBookParser -> WithdrawCommandParser : parse("c/2 app/1")
+activate WithdrawCommandParser
+
+create WithdrawCommand
+WithdrawCommandParser -> WithdrawCommand
+activate WithdrawCommand
+
+WithdrawCommand --> WithdrawCommandParser : w
+deactivate WithdrawCommand
+
+WithdrawCommandParser --> AddressBookParser : w
+deactivate WithdrawCommandParser
+
+WithdrawCommandParser -[hidden]-> AddressBookParser
+destroy WithdrawCommandParser
+
+AddressBookParser --> LogicManager : w
+deactivate AddressBookParser
+
+LogicManager -> WithdrawCommand : execute(m)
+activate WithdrawCommand
+
+WithdrawCommand -> Model : getCompany(companyIndex)
+activate Model
+
+Model --> WithdrawCommand : companyToWithdraw
+deactivate Model
+
+WithdrawCommand --> Model: getApplication(companyToWithdraw, applicationIndex)
+activate Model
+
+Model --> WithdrawCommand : applicationToWithdraw
+deactivate Model
+
+create Company
+WithdrawCommand -> Company : new Company(companyToWithdraw)
+activate Company
+
+Company --> WithdrawCommand : editedCompanyWithoutApplication
+deactivate Company
+
+WithdrawCommand -> Model : setCompany(companyToWithdraw, editedCompanyWithoutApplication)
+activate Model
+
+Model --> WithdrawCommand
+deactivate Model
+
+create CommandResult
+WithdrawCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> WithdrawCommand : r
+deactivate CommandResult
+
+WithdrawCommand --> LogicManager : r
+deactivate WithdrawCommand
+
+WithdrawCommand -[hidden]-> LogicManager
+destroy WithdrawCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

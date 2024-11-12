@@ -1,0 +1,29 @@
+@startuml
+skinparam {
+  backgroundColor white
+
+  ArrowColor black
+  ArrowThickness 2
+
+  ActivityBackgroundColor green
+  ActivityBorderColor #2980B9
+  ActivityFontColor white
+}
+
+start
+:User updates application\n(executes UpdateCommand);
+
+If () then ([Command is invalid])
+    :Displays message for invalid command format;
+
+    else ([else])
+
+        :Gets company by index;
+        :Gets application from the company by index;
+        :Updates application status;
+        :Display updated list of companies;
+
+        endif
+
+stop
+@enduml

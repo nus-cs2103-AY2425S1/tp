@@ -1,59 +1,62 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
+
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Jaymeson Koh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/blanklogic.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/blanklogic)]
+[[portfolio](team/blanklogic)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Integration, Testing, Code Quality
 
-### Johnny Doe
+### Varun Shukla
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shux347.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/Shux347)]
+[[portfolio](team/varun.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Project Manager
+* Responsibilities: Scheduling and tracking, Deliverables and deadlines
 
-### Jean Doe
+### Erwin Soh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/meerkatboy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/meerkatboy)]
+[[portfolio](team/erwin.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Testing Lead
+* Responsibilities: Testing, Code Quality, UI
 
-### James Doe
+### Simon Tong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/uniqly.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/uniqly)]
+[[portfolio](team/simon.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Documentation Lead
+* Responsibilities: Documentation, Testing, Code Quality
+
+### Ang Qi Jun
+
+<img src="images/realqijun.png" width="200px">
+
+[[github](http://github.com/realqijun)]
+[[portfolio](team/qijun.md)]
+
+* Role: UI Lead
+* Responsibilities: UI, Documentation

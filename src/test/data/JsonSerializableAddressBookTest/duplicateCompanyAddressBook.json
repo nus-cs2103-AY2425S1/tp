@@ -1,0 +1,18 @@
+{
+  "companies": [ {
+    "name": "Amazon",
+    "phone": "2062661000",
+    "email": "contact@amazon.com",
+    "address": "410 Terry Ave N, Seattle, WA",
+    "status": "INTERESTED",
+    "tags": ["ecommerce", "cloud"],
+    "isFavourite": false
+  }, {
+    "name": "Amazon",
+    "phone": "2062661000",
+    "email": "contact@amazon.com",
+    "address": "410 Terry Ave N, Seattle, WA",
+    "status": "INTERESTED",
+    "isFavourite": false
+  } ]
+}
