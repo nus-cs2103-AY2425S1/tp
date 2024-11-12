@@ -279,19 +279,20 @@ _{more aspects and alternatives to be added}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                           | I want to …​                        | So that I can…​                                                                          |
-|----------|-----------------------------------|-------------------------------------|------------------------------------------------------------------------------------------|
-| `* * *`  | administrator of a tuition centre | view all students' details          | easily consolidate all information in one place                                          |
-| `* * *`  | administrator of a tuition centre | add a new student                   | store details about newly enrolled students                                              |
-| `* * *`  | administrator of a tuition centre | delete a student                    | remove students that are no longer enrolled                                              |
-| `* * *`  | administrator of a tuition centre | find a student by name              | locate details of students without having to go through the entire list                  |
-| `* * *`  | administrator of a tuition centre | add subjects taken by student       | add student's subject details without creating a new entry                               |
-| `* *`    | administrator of a tuition centre | filter students based on a category | easily see all students that fall under that category                                    |
-| `* *`    | administrator of a tuition centre | sort students based on an order     | group students with similar needs, monitor their progress easily                         |
-| `* *`    | administrator of a tuition centre | edit student contact                | update student details when they are changed without needing to create a new entry       |
-| `* *`    | new user                          | see what commands are available     | refer to instructions when I forget how to use the app                                   |
-| `*`      | administrator of a tuition centre | clear all contacts                  | empty the address book for a new academic year instead of deleting entries one at a time |
-| `*`      | administrator of a tuition centre | track class size                    | see if classes are nearing capacity or undersubscribed                                   |
+| Priority | As a …​                           | I want to …​                                  | So that I can…​                                                                          |
+|----------|-----------------------------------|-----------------------------------------------|------------------------------------------------------------------------------------------|
+| `* * *`  | administrator of a tuition centre | view all students' details                    | easily consolidate all information in one place                                          |
+| `* * *`  | administrator of a tuition centre | add a new student                             | store details about newly enrolled students                                              |
+| `* * *`  | administrator of a tuition centre | delete a student                              | remove students that are no longer enrolled                                              |
+| `* * *`  | administrator of a tuition centre | find a student by name                        | locate details of students without having to go through the entire list                  |
+| `* * *`  | administrator of a tuition centre | add subjects taken by student                 | add student's subject details without creating a new entry                               |
+| `* *`    | administrator of a tuition centre | filter students based on a category           | easily see all students that fall under that category                                    |
+| `* *`    | administrator of a tuition centre | view the complete details of a single student | obtain all information related to said student                                           |
+| `* *`    | administrator of a tuition centre | sort students based on an order               | group students with similar needs, monitor their progress easily                         |
+| `* *`    | administrator of a tuition centre | edit student contact                          | update student details when they are changed without needing to create a new entry       |
+| `* *`    | new user                          | see what commands are available               | refer to instructions when I forget how to use the app                                   |
+| `*`      | administrator of a tuition centre | clear all contacts                            | empty the address book for a new academic year instead of deleting entries one at a time |
+| `*`      | administrator of a tuition centre | track class size                              | see if classes are nearing capacity or undersubscribed                                   |
 
 
 ### Use cases
@@ -621,32 +622,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 #### Environment Requirements
 3.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-4.   A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5.  AcademyAssist should be able to work offline
 
 #### Documentation
-5.  Comprehensive user guides and FAQs should be provided to guide users through installation, configuration, and typical use cases.
+6.  Comprehensive user guides and FAQs should be provided to guide users through installation, configuration, and typical use cases.
 
 #### Maintainability
-6.  Codebase should follow industry best practices for readability, including consistent naming conventions for easy maintenance.
-7.  The app should follow a modular design so that individual components can be updated without affecting the entire app.
+7.  Codebase should follow industry best practices for readability, including consistent naming conventions for easy maintenance.
+8.  The app should follow a modular design so that individual components can be updated without affecting the entire app.
 
 #### Robustness
-8.  The system should gracefully handle unexpected inputs, preventing crashes and allowing users to recover from errors.
+9.  The system should gracefully handle unexpected inputs, preventing crashes and allowing users to recover from errors.
 
 #### Testability
-9.  The system should include automated unit tests and integration tests to validate all major components.
+10.  The system should include automated unit tests and integration tests to validate all major components.
 
 #### Response Time
-10. The system should respond to user commands within 2 seconds, ensuring a smooth and efficient user experience.
+11. The system should respond to user commands within 2 seconds, ensuring a smooth and efficient user experience.
 
 #### Scalability
-11. The system should be able to handle up to 99999 student records without significant performance degradation, assuming we were to scale the product for use in bigger tuition centres.
+12.  The system should be able to handle up to 99999 student records without significant performance degradation, assuming we were to scale the product for use in bigger tuition centres.
 
 #### Accessibility
-12. The system should provide keyboard shortcuts and other accessibility features to support users with disabilities.
+13.  The system should provide keyboard shortcuts and other accessibility features to support users with disabilities.
 
 #### Extensibility
-13. The system should have a modular design that allows for easy addition of new features and integrations in the future.
+14.  The system should have a modular design that allows for easy addition of new features and integrations in the future.
 
 ### Glossary
 
