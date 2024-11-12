@@ -128,7 +128,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Buyer` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Buyer`, `MeetUp` or `Property` object residing in the `Model`.
 
 ### Logic component
 
@@ -161,7 +161,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AbcliParser` class creates a `BMPCommandParser` (`BMP` is a placeholder for the different mode of parsers, either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser`). The created BMPCommandParser then creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g. `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AbcliParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AbcliParser` class creates a `BMPCommandParser` (`BMP` is a placeholder for the different mode of parsers, either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser`). The created `BMPCommandParser` then creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g. `AddCommandParser`) which uses the other classes shown above to parse the user command and create an `XYZCommand` object (e.g., `AddCommand`) which the `AbcliParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g. during testing.
 * All `BMPCommandParser` classes (`BuyerCommandParser`, `MeetUpCommandParser`, and `PropertyCommandParser`) extends the `CommandParser` class so that all of them have access to general commands e.g. `HelpCommand`, `Exit Command`.
 
@@ -171,7 +171,7 @@ How the parsing works:
 
 <div markdown="span" class="alert alert-info">:information_source: **Note**: This model class diagram is simplified for readability. The implementation of the `Buyer`, `MeetUp` and `Property` models are given below.
 
-<img src="images/BuyerMeetupModelClassDiagram.png" width="600" />
+<img src="images/BuyerMeetupModelClassDiagram.png" width="600" />  
 
 <img src="images/PropertyModelClassDiagram.png" width="450" />
 </div>
@@ -199,7 +199,7 @@ The `Model` component,
 The `Storage` component,
 
 * can save buyer list data, meetup list data, property list data, and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `BuyerListStorage`, `MeetUpListStorage`, `PropertyListStorage`, and `UserPrefStorage`, which means it can be treated as either of them (if only the
+* inherits from `BuyerListStorage`, `MeetUpListStorage`, `PropertyListStorage`, and `UserPrefStorage`, which means it can be treated as any of them (if only the
   functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
@@ -218,12 +218,12 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-User inputs are parsed through `AbcliParser` to create executable `Command` objects. The parsing done by `AbcliParser` is determined by its mode of parsing, which is either the Buyer mode, MeetUp mode, or Property mode. For example, in the Buyer mode, AbcliParser will create a `BuyerCommandParser` object to parse the input, and create a command that is of type `Buyer`.
+User inputs are parsed through `AbcliParser` to create executable `Command` objects. The parsing done by `AbcliParser` is determined by its mode of parsing, which is either the Buyer mode, MeetUp mode, or Property mode. For example, in the Buyer mode, `AbcliParser` will create a `BuyerCommandParser` object to parse the input, and create a command that is of type `Buyer`.
 
 The mode of `AbcliParser` can be switched by executing a `SwitchParserModeCommand`. An example of switching to the MeetUp mode:
 1. User inputs `switch m`, which is then passed to the `AbcliParser` class.
-2. The `AbcliParser` class then creates either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser` according to its `currentMode`. (The default current mode is set to Buyer mode, and the type of `CommandParser` created here doesn't matter since all of them handle `SwitchParserModeCommand` the same way).
-3. The created CommandParser then creates a `SwitchParserModeCommandParser` and uses it to parse the command.
+2. The `AbcliParser` class then creates either a `BuyerCommandParser`, `MeetUpCommandParser`, or `PropertyCommandParser` according to its `currentMode`. (The default current mode is set to Buyer mode, and the type of `CommandParser` created here does not matter since all of them handle `SwitchParserModeCommand` the same way).
+3. The created `CommandParser` then creates a `SwitchParserModeCommandParser` and uses it to parse the command.
 4. This results in a `SwitchParserModeCommand` with the mode `ParserMode.MEETUP` which is executed by the `LogicManager`.
 5. The `SwitchParserModeCommand` then switches the `currentMode` of `AbcliParser` to `ParserMode.MEETUP` when executed. The `currentMode` will affect the type of `CommandParser` that will be created for future parses (in step 2).
 6. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -252,9 +252,9 @@ The diagram below shows the activity diagram for a user wanting to delete the fi
 A real estate agent who...
 
 * has a need to manage a significant number of client contacts
-* frequently needs to track client information, such as property preferences, deal statuses, and meetings
-* hopes to ensure smooth communication with clients by sending updates on listings, reminders for follow-ups, and
-  managing appointments
+* frequently needs to track client information such as their budget
+* hopes to schedule and manage appointments with the clients
+* hopes to ensure smooth communication with clients by sending updates on listings and appointment reminders
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
