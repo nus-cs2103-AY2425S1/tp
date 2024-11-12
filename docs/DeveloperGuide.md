@@ -293,6 +293,13 @@ We are also planning to improve the log scrolling experience. Currently, users m
 
 To address these issues, we plan to refine the scrolling behavior to ensure smooth navigation within individual logs, regardless of length, and to enable full visibility of the last log entry when selected.
 
+###  Improve User Experience with Edit Command 
+Currently, after successful execution of the `edit` command, the user edited is not 
+automatically selected, and any initially selected user is unselected after execution. This is an
+inconsistent behaviour from other commands that we aim to improve. 
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -433,6 +440,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Semantic search**: A search technique that understands user intent by analyzing the meaning and context of terms, providing more relevant results than keyword-based search.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
 
 --------------------------------------------------------------------------------------------------------------------
 
