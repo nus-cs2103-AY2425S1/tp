@@ -487,27 +487,29 @@ testers are expected to do more *exploratory* testing.
 ---
 ### **Planned Enhancements**
 Team size: 5
-1. **Clear Search Results in Searchmode**: Currently is no way to clear existing search conditions in `searchmode`.
-   This enhancement will allow users to clear the current search results and view all contacts again.
-2. **find-role search for users with no Roles**: Currently, the find-role command is unable to search for users with no roles.
+1. **Clear Search Results in Search Mode**: Currently there is no way to clear existing search conditions in `search-mode`.
+   This enhancement will add a command to allow users to clear the current search results and revert to the beginning of activating `search-mode` again.
+2. **find-role search for users with no Roles**: Currently, the `find-role` command is unable to search for users with no roles.
    This enhancement will allow search for users with no roles.
-3. **Better TLD input validation for emails**: Currently, it is possible to create emails of `x@xx` format, even though 
+3. **Top Level Domain (TLD) input validation for emails**: Currently, it is possible to create emails of `x@xx` format, even though 
    the domain part of the email should have at least 2 domain labels, the last one being the Top Level Domain (TLD) in
-   real life. We could have better input validation to enforce that there must be at least 2 domain labels.
-4. **Allow users to define roles for contacts**: Currently, contacts can only have attendee, sponsor, vendor and volunteer roles or have no roles, which may
+   real life (i.e. the minimal format should be `@xx.xx`). We could have better input validation to enforce that there must be at least 2 domain labels.
+4. **Allow users to define custom roles for contacts**: Currently, contacts can only have attendee, sponsor, vendor and volunteer roles or have no roles, which may
    be too restrictive. We could allow users to add additional roles to contacts such as "emcee", "performer", "VIP" etc so that 
-   they get a classification instead of being labelled as no roles just because they do not fit in one of the 4 pre-determined roles. 
-5. **Allow users to add contacts to events under more roles** Building on top of point 4, we could then allow users to add these contacts to events under these additional roles so that events are not limited
-   to just attendees, sponsors, vendors and volunteers.
-6. **Search within an event**: Currently, all searches are done on the general list of contacts. We could expand find-event to include a search for contacts within an event
+   they get a classification instead of being labelled as no roles just because they do not fit in one of the 4 pre-determined roles. These user defined roles
+   will continue to work the same way as the 4 pre-determined roles.
+5. **Search within an event**: Currently, all searches are done on the general list of contacts. We could expand `find-event` to include a search for contacts within an event
    e.g. find-event ei/1 n/john to find a contact with name "john" within event 1 so that users can find a contact for a specific event more quickly.
-7. **Add description to event**: Currently, users are only able to create events with an event name. We could allow users to add
+6. **Add description to event**: Currently, users are only able to create events with an event name. We could allow users to add
    description to events when they create a new event e.g. new n/EVENT_NAME d/EVENT_DESCRIPTION so that they can add additional important details like the date and location of the event.
-8. **Make remove contact from event message more specific**: Currently, if user types "remove ei/1 ci/0", the app says "Invalid command format!
+7. **Make remove contact from event message more specific**: Currently, if user types "remove ei/1 ci/0", the app says "Invalid command format!
    remove ei/EVENT_INDEX ci/CONTACT_INDEX : Removes a contact from an event" which is not specific enough. We plan to make the error message say "Contact Index should be a positive integer" instead.
-9. **Make event-add and add-all error message more specific and less misleading**: Currently, when "event-add" command or "add-all" command in search mode is called to add multiple contacts to an event at the same time, if one of the contacts to be added to event does not have the role that he or she is being added to,
+8. **Make event-add and add-all error message more specific and less misleading**: Currently, when "event-add" command or "add-all" command in search mode is called to add multiple contacts to an event at the same time, if one of the contacts to be added to event does not have the role that he or she is being added to,
    PlanPal shows an error message informing the user of the contact that does not have the role. However, some of the contacts may get added to the event. We plan to make the
    error message include which contacts got added to the event so that users know that certain contacts got added and which contacts did not get added to the event.
-10. **Implement more graceful handling of invalid JSON data** : Currently, manual editing of JSON data is allowed. However, if invalid data is entered, the event list or address list could be completely cleared or the app
-may fail unexpectedly. We plan to implement more graceful handling of invalid JSON data so that invalid data entries can be ignored, allowing for operation with the remaining valid data.
-
+9. **Implement more graceful handling of invalid JSON data**: Currently, manual editing of JSON data is allowed. However, if invalid data is entered, the event list or address list could be completely cleared or the app 
+   may fail unexpectedly. We plan to implement more graceful handling of invalid JSON data so that invalid data entries can be ignored, allowing for operation with the remaining valid data.
+10. **Allow input fields to have longer length limits**: Currently, we limit the lengths of all the input fields such as event name,
+    contact name, phone number, address and email to a reasonable limit such that they are visible within the UI. However, it is possible that there are rare cases where the
+    length of real life information exceeds the input length limits we have imposed. We could allow greater input lengths by making our UI more robust in viewing
+    inputs that are very lengthy.
