@@ -1,37 +1,35 @@
 ---
   layout: default.md
-  title: "John Doe's Project Portfolio Page"
+  title: "Winston Jin's Project Portfolio Page"
 ---
 
-### Project: AddressBook Level 3
+### Project: Data coNdUctorS
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Data coNdUctorS - is a desktop address book application for managing contact details of members in NUS Co-Curricular Activity (CCA) groups.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-    * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-    * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
-
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
-
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20&tabOpen=true&tabType=zoom&zA=WinstonJin&zR=AY2425S1-CS2103-F09-1%2Ftp%5Bmaster%5D&zACS=228.93682906688687&zS=2024-09-20&zFS=&zU=2024-11-12&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
 * **Project management**:
-    * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+    * Managed release `v1.5` (1 releases) on GitHub and wrote the release notes for it
+    * Helped distribute the workload for different milestones, and release notes
+    * Helped schedule Zoom calls and provided my own Zoom link for meetings
 
 * **Enhancements to existing features**:
-    * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-    * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+    * Added extra  `help` commands such as `help list`, `help add` etc as well as the HelpParserCommand (Pull request [\#165](https://github.com/AY2425S1-CS2103-F09-1/tp/pull/165))
+    * Changed `Phone Number` to `Telegram Handle` to support our aim of data coNdUctorS (Pull request [\#53](https://github.com/AY2425S1-CS2103-F09-1/tp/pull/53)
+    * Added preliminary changes to the `edit` command (Pull request [\#97](https://github.com/AY2425S1-CS2103-F09-1/tp/pull/97)
+    * Refined and added JUnit test cases to reach the CodeCov criteria of 75%
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `delete` and `find` [\#72]()
+        * Added `Table of Contents` (Pull requests [\#326](https://github.com/AY2425S1-CS2103-F09-1/tp/pull/326))
+        * Added `FAQs` and `Known Issues` (Pull request [\#362](https://github.com/AY2425S1-CS2103-F09-1/tp/pull/362)
         * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
     * Developer Guide:
-        * Added implementation details of the `delete` feature.
+        * Overhauled the DG and added `User Stories`, `Use Cases`, `Manual Testing` and `Planned Enhancements` (Pull request [\#317](https://github.com/AY2425S1-CS2103-F09-1/tp/pull/317)).
+        * Added `Glossary`, `Non-functional Requirements` and `Table of Contents` (Pull request [\#318](https://github.com/AY2425S1-CS2103-F09-1/tp/pull/318)
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
