@@ -113,7 +113,7 @@ public class Person {
      */
     public Boolean hasEmergencyContact(EmergencyContact emergencyContactToCheck) {
         for (EmergencyContact emergencyContact : emergencyContacts) {
-            if (emergencyContact.isSamePerson((emergencyContactToCheck))) {
+            if (emergencyContact.equals((emergencyContactToCheck))) {
                 return true;
             }
         }
