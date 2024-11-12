@@ -15,22 +15,29 @@
 
 ### AI Assistance
 Parts of the codebase were developed with the assistance of ChatGPT. The contributions from ChatGPT include:
-* Assisting in enhancing test cases for AddCommand and EditCommand
-* Assisting in enhancing tests for ClearCommand
-* Extensive help on implementing DetailPanel UI Component
-* LocalDateTime and DateTimeFormatter implementation for Meetings
-* Suggesting how test cases can be designed for FindCommand, DeleteMeetingCommand, EditMeetingCommand, FindCommandParser,  DeleteMeetingCommandParser, and EditMeetingCommandParser
-* Suggesting the usage of and helped with implementation of Observer pattern (i.e. SelectionListener and ModelClearObserver) for some UI components
+* Assisting in enhancing test cases for `AddCommand` and `EditCommand`
+* Assisting in enhancing tests for `ClearCommand`
+* Extensive help on implementing `DetailPanel` UI Component
+* `LocalDateTime` and `DateTimeFormatter` implementation for `Meetings`
+* Suggesting how test cases can be designed for `FindCommand`, `DeleteMeetingCommand`, `EditMeetingCommand`, `FindCommandParser`, `DeleteMeetingCommandParser`, and `EditMeetingCommandParser`
+* Suggesting the usage of and helped with implementation of Observer pattern (i.e. `SelectionListener` and `ModelClearObserver`) for some UI components
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting up and getting started_](https://ay2425s1-cs2103t-f08-3.github.io/tp/SettingUp.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
+
+**Note:** In this section, we reference specific class names such as `Person`, `AddressBook`, and other terminology
+that may differ from the terms used in other parts of this Developer Guide. The terms used here are intended
+specifically for Design discussions and might not directly correspond to the broader terms used elsewhere in the documentation.
+For clarification:
+* `Person` is generally referred to as an Udder in most other sections of this guide.
+* `AddressBook` refers to FindingbrUdders in other contexts within this guide.
 
 ### Architecture
 
@@ -110,7 +117,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed, such as to delete a person (Udder).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -158,103 +165,268 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+**Note:** In this section, we reference specific class names such as `Person`, `AddressBook`, and other terminology
+that may differ from the terms used in other parts of this Developer Guide. The terms used here are intended 
+specifically for code implementation discussions and might not directly correspond to the broader terms used elsewhere in the documentation.
+For clarification:
+* `Person` is generally referred to as an Udder in most other sections of this guide.
+* `AddressBook` refers to FindingbrUdders in other contexts within this guide. 
 
-#### Proposed Implementation
+Please note that Udder and `Person` as well as FindingbrUdders and `AddressBook` <u>will be used interchangably</u> in this section to maintain consistency with the 
+implementation-specific discussions. 
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+Additionally, for clarity regarding the UI components discussed in this section,
+a screenshot of the user interface - partially labeled with component names - is included below:
+<br>
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+![Ui_parts](images/Ui_parts.png)
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+### Add an Udder Feature
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+#### **Feature**
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+`add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS a/ADDRESS r/ROLE m/MAJOR [t/TAG]`,
+where tag is an optional field.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+#### **Feature Purpose**
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+The `add` command allows users to add a `Person` to the `AddressBook`.
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+#### Key Components
+- `AddCommand`: Executes the action of adding of a new Udder. It takes user input as parameters construct a `Person` object and add it to FindingbrUdders. 
+- `AddCommandParser`: Parses user input to create an `AddCommand` object.
+- `LogicManager`: Invokes the `AddCommand` to execute the adding of an Udder.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons (Udders).
+- `Person`: Represents an Udder in FindingbrUdders, encapsulating their personal information.
+- `AddressBookParser`: Creates an `AddCommand` object based on the user input.
 
 
-<box type="info" seamless>
+### **Sequence of action**
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+To help you understand how the `add` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-</box>
+We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/brUdder m/bza` as an example.
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+1. The user inputs the command `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/brUdder m/bza`, intending to add a `Person` with the specified details.
+2. The `AddCommandParser` interprets the input.
+3. An `AddCommand` object is created.
+4. The `LogicManager` invokes the execute method of AddCommand.
+5. The execute method of `AddCommand` invokes the `addPerson` method in `Model` property to create new contact with the new `Person` object.
+6. The execute method of `AddCommand` returns a `CommandResult` object which stores the data regarding the completion of the `AddCommand`.
+7. The UI reflects this new list with added `Person`.
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
-<box type="info" seamless>
+- At step 2, if the user does not have any arguments, an error will be shown on the screen and the `AddCommand` object will NOT be created!
+</div>
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+---
 
-</box>
+### Delete an Udder Feature
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+#### **Feature**
 
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
+`delete INDEX`
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+#### **Feature Purpose**
 
-<box type="info" seamless>
+The `delete` command allows users to delete a `Person` from the `AddressBook`.
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+#### Key Components
+- `DeleteCommand`: Executes the action of deleting an existing Udder based on user input. This command processes the input parameters to identify the `Person` object to be removed from FindingbrUdders.
+- `AddCommandParser`: Parses user input to create a `DeleteCommand` object.
+- `LogicManager`: Invokes the `DeleteCommand` to execute the deletion of an Udder.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons (Udders).
+- `Person`: Represents an Udder in FindingbrUdders, encapsulating their personal information.
+- `AddressBookParser`: Creates a `DeleteCommand` object based on the user input.
 
-</box>
+### **Sequence of action**
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+To help you understand how the `delete` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+We will be using the user input `delete 1` as an example.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+1. The user inputs the command `delete 1`, intending to delete a person (Udder) with index 1 in the contact list.
+2. The `DeleteCommandParser` interprets the input.
+3. A `DeleteCommand` object is created.
+4. The `LogicManager` invokes the execute method of DeleteCommand.
+5. The execute method of `DeleteCommand` invokes the `deletePerson` method in `Model` property to delete the specified `Person` object.
+6. The execute method of `DeleteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `DeleteCommand`.
+7. The UI reflects this new list without the deleted `Person`.
 
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
-The following activity diagram summarizes what happens when a user executes a new command:
+- At step 2, if input is detected as invalid, an error will be shown on the screen and the `DeleteCommand` object will NOT be created!
+</div>
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+---
+### Edit an Udder Feature
 
-#### Design considerations:
+#### **Feature**
 
-**Aspect: How undo & redo executes:**
+`edit INDEX [n/NAME] [p/PHONE NUMBER] [e/EMAIL ADDRESS] [a/ADDRESS] [r/ROLE] [m/MAJOR] [t/TAG]`,
+where INDEX is required and at least one of the optional fields (such as name, address, or any other listed field) must also be specified.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+#### **Feature Purpose**
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+The `edit` command allows users to edit the details of an existing `Person` in the `AddressBook`. 
 
-_{more aspects and alternatives to be added}_
+#### Key Components
+- `EditCommand`: Executes the action of editing an existing Udder based on user input. This command processes the input parameters to update the `Person` object's details within FindingbrUdders.
+- `EditCommandParser`: Parses user input to create an `EditCommand` object.
+- `LogicManager`: Invokes the `EditCommand` to execute the editing of an Udder.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons (Udders).
+- `Person`: Represents an Udder in FindingbrUdders, encapsulating their personal information.
+- `AddressBookParser`: Creates an `EditCommand` object based on the user input.
 
-### \[Proposed\] Data archiving
+### **Sequence of action**
 
-_{Explain here how the data archiving feature will be implemented}_
+To help you understand how the `edit` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
 
+We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St r/brUdder m/bza` as an example, whereby the original `Person` object has an address of `John street, block 123, #01-01`.
+
+1. The user executes the command `edit 1 n/John Doe p/98765432 e/johnd@example.com a/123 Main St r/brUdder m/bza`, intending to edit the details of the person (Udder) at index 1.
+2. The `EditCommandParser` interprets the input.
+3. An `EditCommand` object is created.
+4. The `LogicManager` invokes the execute method of `EditCommand`.
+5. The execute method of `EditCommand` invokes the `setPerson` method in the `Model` to update the details of the existing `Person` object with the new values.
+6. The execute method of `EditCommand` returns a `CommandResult` object which stores the data regarding the completion of the `EditCommand`.
+7. The UI reflects this updated list with the edited `Person`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
+
+- At step 2, if the input is detected as invalid (either index is invalid or no arguments provided other than index), an error will be shown on the screen and the `EditCommand` object will NOT be created!.
+</div>
+
+---
+
+### Schedule Meeting with an Udder Feature
+
+#### **Feature**
+
+`schedule UDDER_INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`
+
+#### **Feature Purpose**
+
+The `schedule` command adds a `Meeting` to the `AddressBook` and the `Person` we scheduled a meeting with.
+
+#### Key Components
+- `ScheduleCommand`: Executes the creation of a `Meeting` and adds it to both the `AddressBook` and the `Person`'s `Meetings`. It takes user input as parameters to construct a `Meeting` object linked to a specified `Person`.
+- `ScheduleCommandParser`: Parses user input to create a `ScheduleCommand` object.
+- `LogicManager`: Invokes the `ScheduleCommand` to execute the scheduling operations.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons (Udders) and meetings.
+- `Person`: Represents an Udder in FindingbrUdders and all information attached to it.
+- `Index`: Represents the index that refers to the target Udder of the `Meeting` to be created.
+- `Meeting`: Represents a scheduled meeting, containing details such as participants, location, start time, and end time.
+- `Meetings`: Represents an ArrayList that contains `Meeting` objects.
+- `AddressBookParser`: Creates a `ScheduleCommand` object based on the user input.
+
+### **Sequence of action**
+
+To help you understand how the `schedule` command works, here is a list of steps illustrating what occurs when [`LogicManager#execute()` is invoked](#logic-component):
+
+We will be using the user input `schedule 1 l/The Terrace st/09-10-2024 09:00 et/09-10-2024 10:00` as an example.
+
+1. The user inputs the command `schedule 1 l/The Terrace st/09-10-2024 09:00 et/09-10-2024 10:00`, intending to create a meeting with the `Person` at index 1 with the given details.
+2. The `ScheduleCommandParser` interprets the input.
+3. A `ScheduleCommand` object is created.
+4. The `LogicManager` invokes the execute method of `ScheduleCommand`.
+5. The execute method of `ScheduleCommand` identifies the `Person` associated with the given `Index`.
+6. The execute method of `ScheduleCommand` creates a new `Meeting` object with the information provided.
+7. The execute method of `ScheduleCommand` invokes the `addMeeting` method in `Model` to add the `Meeting` object to the `Meetings` in the `AddressBook` and the `Person` found earlier.
+8. The execute method of `ScheduleCommand` returns a `CommandResult` object which stores the data regarding the completion of the `ScheduleCommand`.
+9. The UI updates to reflect this newly scheduled `Meeting`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
+
+- At step 2, if any arguments are missing, an error will be shown on the screen and the `ScheduleCommand` object will NOT be created!
+
+</div>
+
+---
+
+
+### Delete Meeting with an Udder Feature
+
+#### Feature
+`deletem INDEX` where `INDEX` is the index of the meeting to be deleted.
+
+#### Feature Purpose
+The `deletem` command allows users to delete an existing `Meeting` from the `AddressBook`, impacting the schedule of the `Person` associated with the meeting.
+
+#### Key Components
+- `DeleteMeetingCommand`: Executes the deletion of a `Meeting` from both the `AddressBook` and the `Person`'s `Meetings` based on the user's input.
+- `DeleteMeetingCommandParser`: Parses user input to create a `DeleteMeetingCommand` object.
+- `LogicManager`: Invokes the `DeleteMeetingCommand` to execute the deletion operation.
+- `ModelManager`: Implements the `Model` interface and contains the internal list of persons (Udders) and meetings.
+- `Person`: Represents an Udder in FindingbrUdders, encapsulating their personal information including scheduled meetings.
+- `Index`: Represents the index that refers to the target Udder of the `Meeting` to be created.
+- `Meeting`: Represents a scheduled meeting, containing details such as participants, location, start time, and end time.
+- `Meetings`: Represents an ArrayList that contains `Meeting` objects.
+- `AddressBookParser`: Creates a `DeleteMeetingCommand` object based on the user input.
+
+### Sequence of Action
+To understand how the `deletem` command works, here is a list of steps illustrating what occurs when `LogicManager#execute()` is invoked:
+
+We will be using the user input `deletem 1` as an example.
+
+1. The user inputs the command `deletem 1`, intending to delete the meeting at index `1`.
+2. The `DeleteMeetingCommandParser` interprets the input.
+3. A `DeleteMeetingCommand` object is created.
+4. The `LogicManager` invokes the `execute` method of `DeleteMeetingCommand`.
+5. The `execute` method of `DeleteMeetingCommand` retrieves the existing `Meeting` object to be deleted from the `AddressBook` by `Index`.
+6. The `execute` method of `DeleteMeetingCommand` finds the `Person` object associated with the meeting being deleted.
+7. The `execute` method of `DeleteMeetingCommand` removes the `Meeting` from the `Meetings` in the `AddressBook` and the `Person` object found earlier.
+8. The `execute` method of `DeleteMeetingCommand` returns a `CommandResult` object which stores the data regarding the completion of the `DeleteMeetingCommand`.
+9. The UI updates to reflect this updated list of meetings in the DetailPanel of the Udder if the affected `Person` is being displayed.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
+
+- At step 2, if any arguments are missing, an error will be shown on the screen and the `DeleteMeetingCommand` object will NOT be created!
+
+</div>
+
+---
+
+### Edit Meeting with an Udder Feature
+
+#### Command Feature
+`editm INDEX [n/NAME] [l/LOCATION] [st/START_TIME] [et/END_TIME]` 
+where INDEX is required and at least one of the optional fields (such as location, start time, or end time) must also be specified.
+
+#### Command Feature Purpose
+The `editm` command allows users to edit the details of an existing `Meeting` in the `AddressBook`. The existing values will be overwritten by any given input values.
+
+#### Key Components
+- `EditMeetingCommand`: Executes the operation of editing a meeting based on the user's input. It updates the details of a Meeting object within the `AddressBook` and the `Person`'s `Meetings`.
+- `EditMeetingCommandParser`: Parses user input to create an `EditMeetingCommand` object.
+- `LogicManager`: Invokes the `EditMeetingCommand` to execute the editing operation.
+- `ModelManager`: Implements the `Model` interface and manages the internal list of persons (Udders) and meetings.
+- `Index`: Represents the index that refers to the target Udder of the `Meeting` to be created.
+- `Meeting`: Represents a scheduled meeting, containing details such as participants, location, start time, and end time.
+- `Meetings`: Represents an ArrayList that contains `Meeting` objects.
+- `AddressBookParser`: Creates an `EditMeetingCommand` object based on the user input.
+
+### Sequence of Action
+To understand how the `editm` command works, here is a list of steps illustrating what occurs when `LogicManager#execute()` is invoked:
+
+We will be using the user input `editm 1 l/Discussion Room 3 st/09-10-2024 13:00 et/09-10-2024 14:00` as an example.
+
+1. The user inputs the command `editm 1 l/Discussion Room 3 st/09-10-2024 13:00 et/09-10-2024 14:00`, aiming to edit the details of the meeting at index `1` with the specified details.
+2. The `EditMeetingCommandParser` interprets the input.
+3. An `EditMeetingCommand` object is created.
+4. The `LogicManager` invokes the `execute` method of `EditMeetingCommand`.
+5. The `execute` method of `EditMeetingCommand` retrieves the existing `Meeting` object to be edited from the `AddressBook` by `Index`.
+6. If the edited meeting has a new name, the `execute` method of `EditMeetingCommand` deletes the meeting being edited and creates a new `Meeting` object with the updated details.
+7. If the edited meeting has the same name, the `execute` method of `EditMeetingCommand` updates the existing `Meeting` object which already exists in the `Meetings` of the `AddressBook`.
+8. The `execute` method of `EditMeetingCommand` returns a `CommandResult` object which stores the data regarding the completion of the `EditMeetingCommand`.
+9. The UI updates to display the revised list of meetings in the DetailPanel of the Udder if the associated `Person` is currently displayed.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note**: 
+
+- At step 2, if any arguments are missing, an error will be shown on the screen and the `EditMeetingCommand` object will NOT be created!
+
+</div>``
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -274,12 +446,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* a sociable member of NUS School of Computing
-* either has reasonable experience in computing or in search of a contact who is
-* prefer desktop apps to keep track of their contacts
-* is reasonably comfortable using CLI apps
+* A sociable member of NUS School of Computing, known as an Udder, who values personal connections and seeks to cultivate relationships with peers and mentors.
+* Comprises brUdders (students seeking guidance or wishing to mentor peers) and mUdders (experienced mentors within the computing field).
+* Prefers desktop applications for managing contacts and is comfortable using CLI apps for efficient navigation and functionality.
 
-**Value proposition**: schedule meetings and manage contacts from NUS SoC easily
+**Value proposition**: <br>
+Has the academic challenge of CS at NUS become overwhelming? Are you looking for more authentic connections beyond Talent Connect, LinkedIn, or even NUSConfessIT? 
+Introducing FindingbrUdders—your go-to desktop application crafted specifically for students at the School of Computing (SoC). With FindingbrUdders, managing your contacts and scheduling meetings is seamless, ensuring you never lose track of the invaluable connections you make throughout your university journey. 
+Whether you're adding new Udders you meet, updating contact details, or organizing meetings with fellow brUdders and mUdders, our user-friendly Command Line Interface (CLI) makes navigation a breeze. Let FindingbrUdders help you transform stressful networking into meaningful relationships with ease and efficiency!
 
 <br>
 
@@ -290,22 +464,23 @@ _{Explain here how the data archiving feature will be implemented}_
 - Medium (nice to have) - `* *`
 - Low (unlikely to have) - `*`
 
-| Priority | As a…​                        | I want to…​                      | So that I can…​                                                        |
-|----------|-------------------------------|----------------------------------|------------------------------------------------------------------------|
-| `* * *`  | anUdder                       | add a new contact                |                                                                        |
-| `* * *`  | anUdder                       | edit an existing contact         | update the added contact with new information                          |
-| `* * *`  | lonely brUdder who seeks help | schedule a meeting               | remind myself of future meetings with another contact                  |
-| `* * *`  | curious anUdder               | view the details of a contact    | learn more about the contacts abilities                                |
-| `* * *`  | anUdder                       | list all contacts                |                                                                        |
-| `* * *`  | anUdder                       | list all meetings with a contact |                                                                        |
-| `* * *`  | anUdder                       | delete a contact                 | remove contacts that I no longer need                                  |
-| `* * *`  | anUdder                       | filter through my contacts       | locate details of persons without having to go through the entire list |
-| `* *`    | new anUdder                   | get help                         | refer to instructions when I forget how to use the App                 |
-| `* *`    | anUdder                       | edit details of a meeting        | update the meeting with new information                                |
-| `* *`    | anUdder                       | delete a meeting                 | remove meetings that no longer exists                                  |
-| `*`      | anUdder                       | favourite some of my contacts    | find my favourite contacts in an instant                               |
-| `*`      | anUdder                       | unfavourite some of my contacts  | remove them from my favourites list                                    |
-| `*`      | more social anUdder           | share my contacts with anUdder   |                                                                        |
+| Priority | As a…​                        | I want to…​                      | So that I can…​                                                         |
+|----------|-------------------------------|----------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | Udder                         | add a new contact                |                                                                         |
+| `* * *`  | Udder                         | edit an existing contact         | update the added contact with new information                           |
+| `* * *`  | lonely brUdder who seeks help | schedule a meeting               | remind myself of future meetings with another contact                   |
+| `* * *`  | curious Udder                 | view the details of a contact    | learn more about the contacts abilities                                 |
+| `* * *`  | Udder                         | list all contacts                |                                                                         |
+| `* * *`  | Udder                         | list all meetings with a contact |                                                                         |
+| `* * *`  | Udder                         | delete a contact                 | remove contacts that I no longer need                                   |
+| `* * *`  | Udder                         | filter through my contacts       | locate details of an Udder without having to go through the entire list |
+| `* *`    | new Udder                     | get help                         | refer to instructions when I forget how to use the App                  |
+| `* *`    | Udder                         | edit details of a meeting        | update the meeting with new information                                 |
+| `* *`    | Udder                         | delete a meeting                 | remove meetings that no longer exists                                   |
+| `*`      | Udder                         | favourite some of my contacts    | find my favourite contacts in an instant                                |
+| `*`      | Udder                         | unfavourite some of my contacts  | remove them from my favourites list                                     |
+
+**Update Note:** As of `v1.6` of FindingbrUdders, features with priority label `*` are **not** implemented.
 
 <br>
 
@@ -317,7 +492,29 @@ For all use cases below,
 
 <br>
 
-**Use case: Delete an Udder**
+**UC01: Add an Udder**
+
+**MSS**
+
+1. The user requests to add a new Udder by specifying necessary details (e.g., name, phone, email, and other contact information).
+2. FindingbrUdders validates the provided information.
+3. FindingbrUdders adds the new Udder to the system and confirms the addition to the user.
+4. FindingbrUdders displays the updated list of Udders with the newly added Udder.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The user provides incomplete or invalid details.
+
+    * 2a1. FindingbrUdders shows an error message indicating that the command format is invalid.
+    * 2a2. Use case resumes at step 1.
+
+      Use case resumes at step 2.
+
+<br>
+
+**UC02: Delete an Udder**
 
 **MSS**
 
@@ -337,7 +534,7 @@ For all use cases below,
 
 <br>
 
-**Use case: Schedule a meeting with a specific Udder**
+**UC03: Schedule a meeting with a specific Udder**
 
 **MSS**
 
@@ -360,10 +557,16 @@ For all use cases below,
     * 2b1. FindingbrUdders shows a error message.
 
       Use case resumes at step 2.
+  
+* 2c. The meeting end date/time is earlier than the meeting start date/time.
+
+    * 2c1. FindingbrUdders shows a error message.
+  
+      Use case resumes at step 2.
 
 <br>
 
-**Use case: View details of a specific Udder**
+**UC04: View details of a specific Udder**
 
 **MSS**
 
@@ -375,7 +578,7 @@ For all use cases below,
 
 <br>
 
-**Use case: Find Udders**
+**UC05: Find Udders**
 
 **MSS**
 
@@ -386,7 +589,7 @@ For all use cases below,
 
 <br>
 
-**Use case: List all Udders**
+**UC06: List all Udders**
 
 **MSS**
 
@@ -397,7 +600,7 @@ For all use cases below,
 
 <br>
 
-**Use case: List all meetings**
+**UC07: List all meetings**
 
 **MSS**
 
@@ -406,17 +609,9 @@ For all use cases below,
 
    Use case ends.
 
-**Extensions**
-
-* 2a. There are no meetings.
-
-    * 2a1. FindingbrUdders shows an error message in the command result panel.
-
-      Use case ends.
-
 <br>
 
-**Use case: Delete a meeting**
+**UC08: Delete a meeting**
 
 **MSS**
 
@@ -437,7 +632,7 @@ For all use cases below,
 <br>
 
 
-**Use case: Edit a meeting**
+**UC09: Edit a meeting**
 
 **MSS**
 
@@ -467,20 +662,20 @@ For all use cases below,
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 contacts without a noticeable sluggishness in performance for typical usage.
-3.  A anUdder with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3.  An Udder with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The app should not feel awkward when switching between clicking the screens and typing commands.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Mainstream OS**: Commonly used Operating Systems which include Windows, Linux, Unix, MacOS
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Favorites list:** A curated list within the application where users can store their favorite contacts for quicker and easier access.
 <br>
 
 * **Users**:
-  - anUdder (refers to any type of user described below)
-  - brUdders (refers to mentee users and/or those who wish to mentor as peers)
-  - mUdders (refers to mentor users)
+  - **Udder:** Refers to any type of user described below, which is either a mUdder or a brUdder.
+  - **mUdder:** Mentor users or connections who are more experienced in a relevant field.
+  - **brUdder:** Peers or connections who are experiencing similar things as you.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -653,3 +848,34 @@ testers are expected to do more *exploratory* testing.
 
     5. Other incorrect editm commands to try: `editm`, `editm x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+
+---
+
+## **Appendix: Planned Enhancements**
+
+**Team size:** 5
+
+1. **Command Consistency Improvements:**
+    * Standardize the behavior of the `delete` command to reset the Person List Panel post-execution, aligning with the current behavior of `add` and `edit` commands. This change will improve user experience by providing consistent feedback and list visibility.
+2. **Email Validation Enhancement:**
+    * Refine the email validity checks to include verification of the domain, ensuring that the email not only contains an '@' symbol followed by any alphanumeric characters, but also follows a valid format with a recognized domain. This enhancement aims to reduce incorrect/invalid email entries and improve data integrity.
+3. **Email Search Logic Enhancement:**
+    * Revamp the find functionality for the email field to accommodate searches without the typical formatting of a valid email address, thus broadening the search capabilities.
+4. **Duplicate Handling Improvements:**
+    * Revamp the duplicate detection logic to identify duplicates based on phone numbers and email addresses, ignoring whitespace variations. 
+    * Names will no longer be considered for duplicate checks due to the possibility of multiple individuals sharing the same name, thus mimicking real-world scenarios more accurately.
+5. **Cross-Platform UI Consistency:**
+    * Implement font packaging within the software to ensure UI consistency across different operating systems, particularly addressing layout issues on MacOS caused by missing font styles.
+6. **Detail Panel Behavior Correction:**
+    * Adjust the behavior of the Detail Panel to clear its contents when the last Udder in the Person List Panel is deleted, ensuring that no outdated information remains visible, thereby preventing user confusion.
+7. **UI Layout Improvements:**
+    * Allow the meeting list to be displayed in the Detail Panel instead of the Result Display Panel for enhanced readability.
+    * Provide options for users to choose which panel (Detail or Person List Panel) to expand, instead of defaulting to expanding only the Person List Panel.
+    * Increase the size of the Result Display Panel for improved user interaction and readability.
+8. **Enhanced Tag Management:**
+    * Improve the management and display of role tags in the Person List Panel to ensure they are not truncated or hidden, regardless of the length of the Udder's name. This will enhance visibility and accessibility of important categorizations within the user interface.
+9. **Meeting Deletion Streamlining:**
+    * Streamline the meeting deletion process (`deletem`) by allowing the Detail Panel to display the meetings list, facilitating easier and faster batch deletions without needing to repeatedly execute the meetings command to refresh the index.
+10. **Meeting Date Validation:**
+    * Change the validation logic for meeting dates to prevent the system from auto-correcting invalid dates to the nearest valid ones, which is the cause for our current app version's inconsistent behavior in its meeting date validation. 
+    * After the enhancement, if an entered date is invalid, the system will prompt an error, requiring the user to correct the input. 
