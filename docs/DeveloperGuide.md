@@ -338,7 +338,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. The contact does not have the role specified.
     * 2b1. PlanPal displays an error message indicating that the contact does not have the specified role.
 
-      Use case ends
+      Use case ends.
 
 
 * 2c. The event does not exist.
