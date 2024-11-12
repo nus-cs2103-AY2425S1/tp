@@ -89,6 +89,7 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 6. Refer to the [Features](#features) below for details of each command.
 
 <box type="info" seamless>
+
 **Notes:**<br> When you open the app, a GUI will appear with a few sample contacts already loaded, so you can immediately see the app in action.
 </box>
 
@@ -395,6 +396,7 @@ Context menu options allow users to perform typical text actions, which are avai
 
 </box>
 
+<box type="info" seamless>
 
 **Descriptions of each context menu option in feedback box:**<br>
 
@@ -404,6 +406,7 @@ Context menu options allow users to perform typical text actions, which are avai
 ### Select All
 - Highlights all text within the feedback box, making it easier to apply other actions like cut, copy, or delete.
 
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 

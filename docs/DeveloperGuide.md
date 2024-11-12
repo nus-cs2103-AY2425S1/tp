@@ -287,7 +287,7 @@ Team size: 4
    Currently, remarks can only be overwritten, not appended to. We plan to enhance the remark feature to support appending, so users can add additional notes without replacing existing remarks.
 
 6. **Advanced Statistics Filtering Options**  
-   To support more detailed insights, we plan to extend statistics functionality by offering additional predicate filters. This enhancement will allow users to specify criteria (e.g., `Stats [j/] [t/]`) for more targeted statistical analysis.
+   To support more detailed insights, we plan to extend statistics functionality by offering additional predicate filters. This enhancement will allow users to specify criteria (e.g., `stats [j/] [t/]`) for more targeted statistical analysis.
 
 7. **Mass Actions Command**  
    At present, the `massReject` command allows only batch rejections. We plan to rename this command to `mass` and introduce a predicate/parameter option to enable mass deletions, edits, or rejections. This will streamline bulk actions, making management of large applicant pools more efficient.
