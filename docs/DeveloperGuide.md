@@ -153,7 +153,7 @@ How the parsing works:
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="600" />
+<img src="images/ModelClassDiagram.png" />
 
 The `Model` component,
 
@@ -174,7 +174,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/StorageClassDiagram.png" />
 
 The `Storage` component,
 
@@ -212,6 +212,9 @@ Team size: 5
 2. **Improve UI design:** The current UI is functional but lacking in aesthetics. We plan to redesign the UI to improve contrast on important info, and add a light mode for users who require it. 
 2. **Clear all assignments feature:** A `clearassignments` command which allows users to delete all assignments.
 3. **Make sample data more relevant:** Some of the example commands and sample data contain information that are not relevant to human resource management tasks. (For instance, some employees are tagged as 'friends', 'family', etc.) We plan to replace these with more fitting examples.
+5. **Allow users to specify other fields in `listprojectmembers`:** Currently, users can only specify project name, but this could result in project members from multiple projects with the same name being shown. We plan to improve this command by allowing users to specify fields such as project ID instead, such as `listprojectmembers pid/1`. Since project IDs uniquely identify a project, users will be able to see only project members from that project specified.
+6. **Improved email validation:** Currently, users can enter emails without a top-level domain, such as `example@email`. We plan to validate emails to require that a top-level domain be specified. Thus, emails such as `john@email.com` will be allowed, but `john@email` will not be.
+6. **Update UI after `assign`:** Currently, when users execute `listprojectmembers` and then execute `assign`, the Assignments panel may still continue to show the filtered list of assignments. We plan to clear existing filters after each `assign` command, so users can see the full list of assignments.
 
 [Return to Top](#table-of-contents)
 
