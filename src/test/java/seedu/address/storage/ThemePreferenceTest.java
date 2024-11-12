@@ -37,10 +37,10 @@ class ThemePreferenceTest {
         if (Files.exists(parentDir)) {
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(parentDir)) {
                 for (Path entry : stream) {
-                    Files.delete(entry); // Delete each file in the directory
+                    Files.delete(entry);
                 }
             }
-            Files.delete(parentDir); // Now delete the empty directory
+            Files.delete(parentDir);
         }
     }
 
@@ -91,7 +91,6 @@ class ThemePreferenceTest {
 
     @Test
     void testDirectoryCreationFailure() throws IOException {
-        // Simulate directory creation failure
         Path parentDir = TEST_THEME_PREF_FILE_PATH.getParent();
         Files.deleteIfExists(parentDir); // Delete the parent directory to simulate failure
 
@@ -103,7 +102,7 @@ class ThemePreferenceTest {
         // Assert that the theme could still be changed to dark as it will create the file
         assertEquals("DARK", themePreference.getTheme());
 
-        // Verify that the parent directory still does not exist
+        // Verify that the parent directory exists
         assertTrue(Files.exists(parentDir));
     }
 
@@ -111,10 +110,10 @@ class ThemePreferenceTest {
     void testThemePreferenceNotSavedOnException() throws IOException {
         ThemePreference themePreference = new ThemePreference();
         try {
-            // This line simulates the behavior of the method and throws an exception
+            // This line simulates the behaviour of the method and throws an exception
             throw new IOException("Save failed");
         } catch (IOException e) {
-            // Handle the exception and do not change the theme
+            // do nothing
         }
 
         // Verify that the theme is still LIGHT as default
