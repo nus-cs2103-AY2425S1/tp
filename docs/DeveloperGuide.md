@@ -308,7 +308,6 @@ Priorities: High (must have) - `HIGH`, Medium (nice to have) - `MED`, Low (unlik
 | `HIGH`   | first-time user | view a summary of all participants grouped by their sport categories              | get an overview of participant distribution                                 |
 | `HIGH`   | first-time user | search for participants by name, phone number or email                            | locate details of participants without having to go through the entire list |
 | `HIGH`   | first-time user | view a list of participants for a specific sub-event                              | understand how participants are scheduled and grouped                       |
-| `HIGH`   | first-time user | save the current participant list and details to a file                           | back up my participant records and access them later                        |
 | `HIGH`   | familiar user   | update a participant's details                                                    | keep participant records current and accurate                               |
 | `HIGH`   | familiar user   | assign participants to specific sub-events                                        | track their involvement and ensure proper scheduling                        |
 | `HIGH`   | familiar user   | group participants by their faculty membership                                    | manage and organize participants according to faculty membership            |
