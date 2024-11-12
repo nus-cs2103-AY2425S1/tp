@@ -171,7 +171,7 @@ The `Model` component,
 The `Storage` component:
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AgentAssistStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 ### Common classes
 
@@ -723,15 +723,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder.
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Run the jar file using terminal.<br> 
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    2. Re-launch the app by running the jar file through terminal.<br>
        Expected: The most recent window size and location is retained.
 
 ### Adding a client
@@ -783,6 +784,7 @@ testers are expected to do more *exploratory* testing.
 ### Editing a client
 
 1. Editing a client while all clients are being shown
+
     1. Prerequisites: List all clients using the `list` command. At least one client in the list.
    
     2. Test case: `edit 1 n/ <NAME>`<br>
@@ -810,6 +812,7 @@ testers are expected to do more *exploratory* testing.
     2. Functions similar to above example except that the indexes to be used are based on the new list shown.
 
 ### Filter for clients
+
 1. Filtering for a client based on a criteria
 
    1. Test case: `filter n/ <NAME>`<br>
@@ -833,6 +836,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 ### Viewing a client
+
 1. Viewing a client while all clients are being shown
 
     1. Prerequisites: List all clients using the `list` command. At least one client in the list.
@@ -850,6 +854,7 @@ testers are expected to do more *exploratory* testing.
     2. Functions similar to above example except that the indexes to be used are based on the new list shown.
 
 ### Closing the detailed view of a client
+
 1. Closing the view of the currently viewed client
 
    1. Prerequisites: The detailed view of a client is currently open.
