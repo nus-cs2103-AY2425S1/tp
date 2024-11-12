@@ -1,0 +1,110 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ClinicConnectSystemParser" as ClinicConnectSystemParser LOGIC_COLOR
+participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant "<<class>>\nArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant "argMultimap:ArgumentMultiMap" as ArgumentMultiMap LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+participant "a:FilterCommand" as FilterCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "dateFilter:AppointmentDateFilter" as AppointmentDateFilter MODEL_COLOR
+end box
+[-> LogicManager : execute(...)
+activate LogicManager
+
+LogicManager -> ClinicConnectSystemParser : parseCommand(...)
+activate ClinicConnectSystemParser
+
+create FilterCommandParser
+ClinicConnectSystemParser -> FilterCommandParser
+activate FilterCommandParser
+
+FilterCommandParser --> ClinicConnectSystemParser
+deactivate FilterCommandParser
+
+ClinicConnectSystemParser -> FilterCommandParser : parse(...)
+activate FilterCommandParser
+
+FilterCommandParser -> ArgumentTokenizer : checkPrefixPresentAndValidPrefix(...)
+activate ArgumentTokenizer
+
+ArgumentTokenizer --> FilterCommandParser
+deactivate ArgumentTokenizer
+
+FilterCommandParser -> ArgumentTokenizer : tokenize(...)
+activate ArgumentTokenizer
+
+create ArgumentMultiMap
+ArgumentTokenizer -> ArgumentMultiMap
+activate ArgumentMultiMap
+
+ArgumentMultiMap --> ArgumentTokenizer
+deactivate ArgumentMultiMap
+
+ArgumentTokenizer --> FilterCommandParser
+deactivate ArgumentTokenizer
+
+FilterCommandParser -> FilterCommandParser : arePrefixesPresent(...)
+activate FilterCommandParser
+
+FilterCommandParser --> FilterCommandParser
+deactivate FilterCommandParser
+
+FilterCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(PREFIX_ENDDATE)
+activate ArgumentMultiMap
+
+ArgumentMultiMap --> FilterCommandParser
+deactivate ArgumentMultiMap
+
+<style>
+Reference {
+  BackgroundColor White
+}
+</style>
+ref over FilterCommandParser, ParserUtil : parse fields
+
+create AppointmentDateFilter
+FilterCommandParser -> AppointmentDateFilter
+activate AppointmentDateFilter
+
+AppointmentDateFilter --> FilterCommandParser
+deactivate AppointmentDateFilter
+
+create FilterCommand
+FilterCommandParser -> FilterCommand
+activate FilterCommand
+
+FilterCommand --> FilterCommandParser
+deactivate FilterCommand
+
+FilterCommandParser --> ClinicConnectSystemParser : a
+deactivate FilterCommandParser
+destroy FilterCommandParser
+destroy ArgumentMultiMap
+
+ClinicConnectSystemParser --> LogicManager : a
+deactivate ClinicConnectSystemParser
+
+LogicManager -> FilterCommand : execute()
+activate FilterCommand
+
+<style>
+Reference {
+  BackgroundColor White
+}
+</style>
+ref over FilterCommand, AppointmentDateFilter : filter all appointments and return result
+
+
+FilterCommand --> LogicManager : result
+deactivate FilterCommand
+destroy FilterCommand
+[<--LogicManager
+deactivate LogicManager
+@enduml

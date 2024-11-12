@@ -1,60 +1,93 @@
-@startuml
+@startuml UiClassDiagram
+
 !include style.puml
+top to bottom direction
 skinparam arrowThickness 1.1
-skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
+skinparam classAttributeIconSize 0
+skinparam CardFontColor White
+skinparam CardBackgroundColor UI_COLOR
+package "UI" <<Rectangle>> {
+    Class Ui <<interface>>
 
-package UI <<Rectangle>>{
-Class "<<interface>>\nUi" as Ui
-Class "{abstract}\nUiPart" as UiPart
-Class UiManager
-Class MainWindow
-Class HelpWindow
-Class ResultDisplay
-Class PersonListPanel
-Class PersonCard
-Class StatusBarFooter
-Class CommandBox
+    class UiManager {
+        <color:#FFFFFF>-Logic logic
+    }
+
+    class MainWindow {
+        <color:#FFFFFF>+handleHelpWindow()
+        <color:#FFFFFF>+showPatientInfo(Patient patient)
+        <color:#FFFFFF>+showAppts(TreeSet<FilteredAppointment> appts)
+    }
+
+    Class HelpWindow
+    Class HelpKeywordWindow
+    Class ResultDisplay
+    Class PatientListPanel
+    Class PatientCard
+
+    class StatusBarFooter {
+
+    }
+
+    class CommandBox {
+
+    }
+
+    class FilteredApptListPanel {
+
+    }
+
+    class FilteredAppointmentCard {
+
+    }
+
+    class PatientInfoPanel {
+
+    }
+
+    class "{abstract}\nUiPart" {
+
+    }
 }
 
-package Model <<Rectangle>> {
-Class HiddenModel #FFFFFF
+package Model <<Card>> {
 }
 
-package Logic <<Rectangle>> {
-Class HiddenLogic #FFFFFF
+package Logic <<Card>> {
+
+
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
+package ExternalComponents <<Card>> {
+}
 
-UiManager .left.|> Ui
-UiManager -down-> "1" MainWindow
-MainWindow *-down->  "1" CommandBox
-MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
-MainWindow *-down-> "1" StatusBarFooter
+
+ExternalComponents ..> Ui
+Ui <|-.- UiManager
+MainWindow --> Logic
+UiManager --> Logic
+UiManager --> "1" MainWindow
+MainWindow *--> "1" CommandBox
+MainWindow *--> "1" ResultDisplay
+MainWindow *--> "0..1" PatientListPanel
+MainWindow *--> "1" StatusBarFooter
+MainWindow *--> "0..1" FilteredApptListPanel
+MainWindow *--> "0..1" PatientInfoPanel
 MainWindow --> "0..1" HelpWindow
+MainWindow --> "0..1" HelpKeywordWindow
+FilteredApptListPanel -down-> "*" FilteredAppointmentCard
+PatientListPanel --> "*" PatientCard
+MainWindow -.-> Model
+PatientCard -.-> Model
+PatientInfoPanel -.-> Model
+FilteredAppointmentCard -.-> Model
+"{abstract}\nUiPart" <|-up- CommandBox
+"{abstract}\nUiPart" <|-up- ResultDisplay
+"{abstract}\nUiPart" <|-up- PatientListPanel
+"{abstract}\nUiPart" <|-up- StatusBarFooter
+"{abstract}\nUiPart" <|-up- FilteredApptListPanel
+"{abstract}\nUiPart" <|-up- PatientInfoPanel
+"{abstract}\nUiPart" <|-up- PatientCard
 
-PersonListPanel -down-> "*" PersonCard
-
-MainWindow -left-|> UiPart
-
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
-
-PersonCard ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
-
-PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
-CommandBox -[hidden]left- ResultDisplay
-ResultDisplay -[hidden]left- StatusBarFooter
-
-MainWindow -[hidden]-|> UiPart
 @enduml

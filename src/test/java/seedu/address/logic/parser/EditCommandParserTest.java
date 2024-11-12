@@ -3,206 +3,383 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGIES_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGIES_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ALLERGIES_TO_REMOVE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.BLOODTYPE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.BLOODTYPE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.EXISTINGCONDITION_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EXISTINGCONDITION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.HEALTHRISK_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.HEALTHRISK_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SEX_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NOKNAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NOKNAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NOKPHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NOKPHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGIES_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGIES_TO_REMOVE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BLOODTYPE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXISTINGCONDITION_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHRISK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOKNAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOKPHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_AMY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_NRIC_EMPTY;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXISTINGCONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKPHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.model.patient.Nric.MESSAGE_CONSTRAINTS;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
+import seedu.address.model.patient.Birthdate;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Sex;
+import seedu.address.testutil.EditPatientDescriptorBuilder;
+
 
 public class EditCommandParserTest {
+    private static final String MESSAGE_EMPTY_NRIC = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NRIC_EMPTY);
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
-
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+    private static final String MESSAGE_WRONG_NRIC_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_CONSTRAINTS);
 
     private EditCommandParser parser = new EditCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
-        // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        // no NRIC specified
+        assertParseFailure(parser, NAME_DESC_AMY + SEX_DESC_AMY + BIRTHDATE_DESC_AMY, MESSAGE_EMPTY_NRIC);
 
         // no field specified
-        assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
+        String expectedMessageForNoFields = "No valid prefixes found \n" + MESSAGE_USAGE;
+        assertParseFailure(parser, VALID_NRIC_AMY, expectedMessageForNoFields);
 
-        // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        // no NRIC and no field specified
+        String expectedMessageForNoNricAndNoFields = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
+        assertParseFailure(parser, "", expectedMessageForNoNricAndNoFields);
+
+        // field specified but no NRIC
+        assertParseFailure(parser, NRIC_DESC_AMY, MESSAGE_EMPTY_NRIC);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        // Invalid NRIC with lowercase
+        assertParseFailure(parser, INVALID_NRIC + NAME_DESC_AMY, MESSAGE_WRONG_NRIC_FORMAT);
 
-        // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        // Invalid NRIC with wrong number of characters
+        assertParseFailure(parser, "T012345R" + NAME_DESC_AMY, MESSAGE_WRONG_NRIC_FORMAT);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NRIC_AMY + " some random string" + NAME_DESC_AMY,
+                MESSAGE_WRONG_NRIC_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NRIC_AMY + " pn/ string" + NAME_DESC_AMY, MESSAGE_WRONG_NRIC_FORMAT);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, VALID_NRIC_AMY + INVALID_NAME_DESC,
+                Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, VALID_NRIC_AMY + INVALID_NRIC_DESC,
+                MESSAGE_CONSTRAINTS); // invalid nric
+        assertParseFailure(parser, VALID_NRIC_AMY + INVALID_SEX_DESC,
+                Sex.MESSAGE_CONSTRAINTS); // invalid sex
+        assertParseFailure(parser, VALID_NRIC_AMY + INVALID_BIRTHDATE_DESC,
+                Birthdate.MESSAGE_CONSTRAINTS); // invalid birthdate
 
-        // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
-
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NRIC_AMY + INVALID_NRIC_DESC + SEX_DESC_AMY,
+                MESSAGE_CONSTRAINTS); // invalid nric followed by valid sex
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NRIC_AMY + INVALID_NAME_DESC + INVALID_NRIC_DESC
+                        + BIRTHDATE_DESC_AMY + SEX_DESC_AMY, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        Nric targetNric = new Nric("T0123456A");
+        String userInput = targetNric + NAME_DESC_AMY + NRIC_DESC_AMY + SEX_DESC_AMY + BIRTHDATE_DESC_AMY
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + BLOODTYPE_DESC_AMY + NOKNAME_DESC_AMY + NOKPHONE_DESC_AMY + ALLERGIES_DESC_AMY + HEALTHRISK_DESC_AMY
+                + EXISTINGCONDITION_DESC_AMY + NOTE_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withNric(VALID_NRIC_AMY).withSex(VALID_SEX_AMY).withBirthDate(VALID_BIRTHDATE_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withBloodType(VALID_BLOODTYPE_AMY).withNokName(VALID_NOKNAME_AMY).withNokPhone(VALID_NOKPHONE_AMY)
+                .withAllergiesToAdd(VALID_ALLERGIES_AMY).withHealthRisk(VALID_HEALTHRISK_AMY)
+                .withExistingCondition(VALID_EXISTINGCONDITION_AMY).withNote(VALID_NOTE_AMY).build();
+        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
+        Nric targetNric = new Nric("T0123456A");
+        String userInput = targetNric + NRIC_DESC_BOB + SEX_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withNric(VALID_NRIC_BOB)
+                .withSex(VALID_SEX_AMY).build();
+        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_oneFieldSpecified_success() {
+        Nric targetNric = new Nric("T0123456A");
+
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        String userInput = targetNric + NAME_DESC_AMY;
+        EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // nric
+        userInput = targetNric + NRIC_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withNric(VALID_NRIC_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // sex
+        userInput = targetNric + SEX_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withSex(VALID_SEX_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // birthdate
+        userInput = targetNric + BIRTHDATE_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withBirthDate(VALID_BIRTHDATE_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        userInput = targetNric + PHONE_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        userInput = targetNric + EMAIL_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
-        userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        userInput = targetNric + ADDRESS_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        // blood type
+        userInput = targetNric + BLOODTYPE_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withBloodType(VALID_BLOODTYPE_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // next-of-kin name
+        userInput = targetNric + NOKNAME_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withNokName(VALID_NOKNAME_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // next-of-kin phone
+        userInput = targetNric + NOKPHONE_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withNokPhone(VALID_NOKPHONE_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // add allergies
+        userInput = targetNric + ALLERGIES_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withAllergiesToAdd(VALID_ALLERGIES_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // remove allergies
+        userInput = targetNric + ALLERGIES_TO_REMOVE_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withAllergiesToRemove(VALID_ALLERGIES_TO_REMOVE_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // health risk
+        userInput = targetNric + HEALTHRISK_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withHealthRisk(VALID_HEALTHRISK_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // existing condition
+        userInput = targetNric + EXISTINGCONDITION_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withExistingCondition(VALID_EXISTINGCONDITION_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // note
+        userInput = targetNric + NOTE_DESC_AMY;
+        descriptor = new EditPatientDescriptorBuilder().withNote(VALID_NOTE_AMY).build();
+        expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_multipleRepeatedFields_failure() {
         // More extensive testing of duplicate parameter detections is done in
-        // AddCommandParserTest#parse_repeatedNonTagValue_failure()
+        // AddCommandParserTest#parse_repeatedNonHealthServiceValue_failure()
+
+        Nric targetNric = new Nric("T0123456A");
 
         // valid followed by invalid
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
-
-        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
+        String userInput = targetNric + NRIC_DESC_BOB + INVALID_NRIC_DESC;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC));
 
         // invalid followed by valid
-        userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + INVALID_PHONE_DESC;
+        userInput = targetNric + INVALID_NRIC_DESC + NRIC_DESC_BOB;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC));
 
+        // mulltiple valid name fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NAME_DESC_AMY + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGIES_DESC_BOB + HEALTHRISK_DESC_BOB
+                + EXISTINGCONDITION_DESC_BOB + NOTE_DESC_BOB;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+
+        // multiple valid nric fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + NRIC_DESC_AMY + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGIES_DESC_BOB + HEALTHRISK_DESC_BOB
+                + EXISTINGCONDITION_DESC_BOB + NOTE_DESC_BOB;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC));
+
+        // multiple valid sex fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + SEX_DESC_AMY + BIRTHDATE_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGIES_DESC_BOB + HEALTHRISK_DESC_BOB
+                + EXISTINGCONDITION_DESC_BOB + NOTE_DESC_BOB;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SEX));
+
+        // multiple valid birthdate fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB + BIRTHDATE_DESC_AMY
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGIES_DESC_BOB + HEALTHRISK_DESC_BOB
+                + EXISTINGCONDITION_DESC_BOB + NOTE_DESC_BOB;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BIRTHDATE));
+
+        // multiple valid phone fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
+                + PHONE_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGIES_DESC_BOB + HEALTHRISK_DESC_BOB
+                + EXISTINGCONDITION_DESC_BOB + NOTE_DESC_BOB;
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+        // multiple valid email fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_BOB
+                + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGIES_DESC_BOB + HEALTHRISK_DESC_BOB
+                + EXISTINGCONDITION_DESC_BOB + NOTE_DESC_BOB;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
-        assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
+        // multiple valid address fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + ADDRESS_DESC_AMY
+                + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGIES_DESC_BOB + HEALTHRISK_DESC_BOB
+                + EXISTINGCONDITION_DESC_BOB + NOTE_DESC_BOB;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+
+        // multiple valid blood type fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BLOODTYPE_DESC_BOB + BLOODTYPE_DESC_AMY + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGIES_DESC_BOB
+                + HEALTHRISK_DESC_BOB + EXISTINGCONDITION_DESC_BOB + NOTE_DESC_BOB;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BLOODTYPE));
+
+        // multiple valid next-of-kin name fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKNAME_DESC_AMY + NOKPHONE_DESC_BOB + ALLERGIES_DESC_BOB
+                + HEALTHRISK_DESC_BOB + EXISTINGCONDITION_DESC_BOB + NOTE_DESC_BOB;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOKNAME));
+
+        // multiple valid next-of-kin phone fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + NOKPHONE_DESC_AMY + ALLERGIES_DESC_BOB
+                + HEALTHRISK_DESC_BOB + EXISTINGCONDITION_DESC_BOB + NOTE_DESC_BOB;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOKPHONE));
+
+        // multiple valid health risk fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGIES_DESC_BOB + HEALTHRISK_DESC_BOB
+                + HEALTHRISK_DESC_AMY + EXISTINGCONDITION_DESC_BOB + NOTE_DESC_BOB;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_HEALTHRISK));
+
+        // multiple valid existing condition fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGIES_DESC_BOB + HEALTHRISK_DESC_BOB
+                + EXISTINGCONDITION_DESC_BOB + EXISTINGCONDITION_DESC_AMY + NOTE_DESC_BOB;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EXISTINGCONDITION));
+
+        // multiple valid note fields repeated
+        userInput = targetNric + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + BLOODTYPE_DESC_BOB + NOKNAME_DESC_BOB + NOKPHONE_DESC_BOB + ALLERGIES_DESC_BOB + HEALTHRISK_DESC_BOB
+                + EXISTINGCONDITION_DESC_BOB + NOTE_DESC_BOB + NOTE_DESC_AMY;
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));
+
 
         // multiple invalid values
-        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
+        userInput = targetNric + INVALID_NRIC_DESC + INVALID_BIRTHDATE_DESC + INVALID_SEX_DESC
+                + INVALID_NRIC_DESC + INVALID_BIRTHDATE_DESC + INVALID_SEX_DESC;
 
-        assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
-    }
-
-    @Test
-    public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(
+                PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX));
     }
 }

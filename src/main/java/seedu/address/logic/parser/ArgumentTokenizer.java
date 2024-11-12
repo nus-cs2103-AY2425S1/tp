@@ -1,16 +1,23 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+
+
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
- *     e.g. {@code some preamble text t/ 11.00 t/12.00 k/ m/ July}  where prefixes are {@code t/ k/ m/}.<br>
- * 1. An argument's value can be an empty string e.g. the value of {@code k/} in the above example.<br>
+ *     e.g. {@code some preamble text t| 11.00 t|12.00 k| m| July}  where prefixes are {@code t| k| m|}.<br>
+ * 1. An argument's value can be an empty string e.g. the value of {@code k|} in the above example.<br>
  * 2. Leading and trailing whitespaces of an argument value will be discarded.<br>
- * 3. An argument may be repeated and all its values will be accumulated e.g. the value of {@code t/}
+ * 3. An argument may be repeated and all its values will be accumulated e.g. the value of {@code t|}
  *    in the above example.<br>
  */
 public class ArgumentTokenizer {
@@ -26,6 +33,74 @@ public class ArgumentTokenizer {
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
+    }
+
+    /**
+     * Checks an arguments string whether the prefixes provided are valid and there is at least a prefix present.
+     *
+     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * @param prefixes   Prefixes to tokenize the arguments string with
+     */
+    public static void checkPrefixPresentAndValidPrefix(String argsString, String messageUsage, Prefix... prefixes)
+            throws ParseException {
+        if (argsString.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage));
+        }
+        String[] splitArgs = argsString.split("\\|");
+
+        checkPrefixesPresent(splitArgs, messageUsage);
+        checkValidPrefix(splitArgs, prefixes);
+
+    }
+
+    /**
+     * Checks an arguments string whether there is at least a prefix present.
+     *
+     * @param splitArgs Array of String split by "|"
+     * @param messageUsage String to be returned if no valid prefixes are found
+     */
+    public static void checkPrefixesPresent(String[] splitArgs, String messageUsage) throws ParseException {
+        if (splitArgs.length == 1) {
+            throw new ParseException("No valid prefixes found \n" + messageUsage);
+        }
+    }
+
+    /**
+     * Checks an arguments string whether the prefixes provided are valid.
+     *
+     * @param splitArgs Array of String split by "|"
+     * @param prefixes   Prefixes to tokenize the arguments string with
+     */
+    public static void checkValidPrefix(String[] splitArgs, Prefix... prefixes) throws ParseException {
+        List<String> prefixesPresent = Arrays.stream(splitArgs, 0, splitArgs.length - 1)
+                .map(ArgumentTokenizer::getPrefix).toList();
+
+        for (String prefixString : prefixesPresent) {
+            checkEachPrefix(prefixString, prefixes);
+        }
+    }
+
+    public static String getPrefix(String arg) {
+        String[] splitSingleArg = arg.split(" ");
+        return splitSingleArg[splitSingleArg.length - 1];
+    }
+
+    /**
+     * Checks an arguments string whether a single prefix provided are valid.
+     *
+     * @param prefixString String representation of a prefix provided by user
+     * @param prefixes   Prefixes to tokenize the arguments string with
+     */
+    public static void checkEachPrefix(String prefixString, Prefix... prefixes) throws ParseException {
+
+        Stream<String> prefixStrings = Arrays.stream(prefixes).map(Prefix::getPrefix)
+                .map(prefix -> prefix.substring(0, prefix.length() - 1));
+
+        boolean isValid = prefixStrings.anyMatch(prefixString::equals);
+
+        if (!isValid) {
+            throw new ParseException("Prefix " + prefixString + " is invalid");
+        }
     }
 
     /**
@@ -63,10 +138,10 @@ public class ArgumentTokenizer {
      * is valid if there is a whitespace before {@code prefix}. Returns -1 if no
      * such occurrence can be found.
      *
-     * E.g if {@code argsString} = "e/hip/900", {@code prefix} = "p/" and
+     * E.g if {@code argsString} = "e|hip|900", {@code prefix} = "p|" and
      * {@code fromIndex} = 0, this method returns -1 as there are no valid
-     * occurrences of "p/" with whitespace before it. However, if
-     * {@code argsString} = "e/hi p/900", {@code prefix} = "p/" and
+     * occurrences of "p|" with whitespace before it. However, if
+     * {@code argsString} = "e|hi p|900", {@code prefix} = "p|" and
      * {@code fromIndex} = 0, this method returns 5.
      */
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {

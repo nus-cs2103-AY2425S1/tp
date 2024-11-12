@@ -1,4 +1,4 @@
-@startuml
+@startuml StorageClassDiagram
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
@@ -14,14 +14,18 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+package "ClinicConnectSystem Storage" #F4F6F6{
+Class "<<interface>>\nClinicConnectSystemStorage" as ClinicConnectSystemStorage
+Class JsonClinicConnectSystemStorage
+Class JsonSerializableClinicConnectSystem
+Class JsonAdaptedPatient
+Class JsonAdaptedAppt
+Class JsonAdaptedAllergy
 }
 
+}
+
+package Model as ModelPackage {
 }
 
 Class HiddenOutside #FFFFFF
@@ -29,15 +33,20 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" ClinicConnectSystemStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> ClinicConnectSystemStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonClinicConnectSystemStorage .up.|> ClinicConnectSystemStorage
+JsonClinicConnectSystemStorage ..> JsonSerializableClinicConnectSystem
+JsonSerializableClinicConnectSystem --> "*" JsonAdaptedPatient
+JsonAdaptedPatient --> "*" JsonAdaptedAppt
+JsonAdaptedPatient --> "*" JsonAdaptedAllergy
+
+JsonAdaptedPatient ..> ModelPackage
+JsonAdaptedAppt ..> ModelPackage
+JsonAdaptedAllergy ..> ModelPackage
 
 @enduml

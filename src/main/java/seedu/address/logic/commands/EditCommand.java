@@ -1,107 +1,180 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.ShowPatientInfoCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Allergy;
+import seedu.address.model.patient.AllergyList;
+import seedu.address.model.patient.ApptList;
+import seedu.address.model.patient.Birthdate;
+import seedu.address.model.patient.BloodType;
+import seedu.address.model.patient.Email;
+import seedu.address.model.patient.ExistingCondition;
+import seedu.address.model.patient.HealthRisk;
+import seedu.address.model.patient.Name;
+import seedu.address.model.patient.Note;
+import seedu.address.model.patient.Nric;
+import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
+import seedu.address.model.patient.Sex;
+import seedu.address.model.patient.exceptions.AllergyAlreadyExistsException;
+import seedu.address.model.patient.exceptions.AllergyNotFoundException;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing patient in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
-
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " usage: edit [NRIC] n|[NAME] i|[NRIC] s|[SEX] d|[DATE OF BIRTH] p|[PHONE NO.] e|[EMAIL] "
+            + "a|[ADDRESS] b|[BLOOD TYPE] nokn|[NEXT-OF-KIN NAME] nokp|[NEXT-OF-KIN PHONE NO.] "
+            + "al|[ALLERGIES TO BE ADDED ] rmal|[ALLERGIES TO BE REMOVED] rl|[HEALTH RISK LEVEL] "
+            + "ec|[EXISTING CONDITIONS] no|[ADDITIONAL NOTES]\n"
+            + "Input \"help " + COMMAND_WORD + "\" for detailed description and usage of this command";
+    public static final String MESSAGE_NRIC_EMPTY = "NRIC needed to identify patient to execute Edit Command.";
+    public static final String MESSAGE_EDIT_PATIENT_SUCCESS = "Edited Patient: %1$s\n"
+            + "Input \"home\" to return to home page";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the ClinicConnect system.";
 
-    private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final Nric nric;
+    private final EditPatientDescriptor editPatientDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param nric of the patient in the filtered patient list to edit
+     * @param editPatientDescriptor details to edit the patient with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+    public EditCommand(Nric nric, EditPatientDescriptor editPatientDescriptor) {
+        requireNonNull(nric);
+        requireNonNull(editPatientDescriptor);
 
-        this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.nric = nric;
+        this.editPatientDescriptor = new EditPatientDescriptor(editPatientDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Patient> lastShownList = model.getFilteredPatientList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Patient patientToEdit = lastShownList.stream()
+                .filter(patient -> patient.getNric().equals(nric))
+                .findFirst()
+                .orElse(null);
+
+        if (patientToEdit == null) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PATIENT_NRIC, nric));
+        }
+        Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
+
+        if (!patientToEdit.isSamePatient(editedPatient) && model.hasPatient(editedPatient)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        model.setPatient(patientToEdit, editedPatient);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
+        return new ShowPatientInfoCommandResult(String.format(MESSAGE_EDIT_PATIENT_SUCCESS, editedPatient.getName()),
+                editedPatient, true);
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Patient} with the details of {@code patientToEdit}
+     * edited with {@code editPatientDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Patient createEditedPatient(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor)
+            throws CommandException {
+        assert patientToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Name updatedName = editPatientDescriptor.getName().orElse(patientToEdit.getName());
+        Nric updatedNric = editPatientDescriptor.getNric().orElse(patientToEdit.getNric());
+        Birthdate updatedBirthDate = editPatientDescriptor.getBirthDate().orElse(patientToEdit.getBirthdate());
+        Sex updatedSex = editPatientDescriptor.getSex().orElse(patientToEdit.getSex());
+        Phone updatedPhone = editPatientDescriptor.getPhone().orElse(patientToEdit.getPhone());
+        Email updatedEmail = editPatientDescriptor.getEmail().orElse(patientToEdit.getEmail());
+        Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
+        AllergyList updatedAllergyList = getUpdatedAllergyList(patientToEdit, editPatientDescriptor);
+        BloodType updatedBloodType = editPatientDescriptor.getBloodType().orElse(patientToEdit.getBloodType());
+        HealthRisk updatedHealthRisk = editPatientDescriptor.getHealthRisk().orElse(patientToEdit.getHealthRisk());
+        ExistingCondition updatedExistingCondition = editPatientDescriptor.getExistingCondition()
+                .orElse(patientToEdit.getExistingCondition());
+        Note updatedNote = editPatientDescriptor.getNote().orElse(patientToEdit.getNote());
+        Name updatedNokName = editPatientDescriptor.getNokName().orElse(patientToEdit.getNokName());
+        Phone updatedNokPhone = editPatientDescriptor.getNokPhone().orElse(patientToEdit.getNokPhone());
+        ApptList updatedAppt = patientToEdit.getAppts();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Patient(updatedName, updatedNric, updatedBirthDate, updatedSex, updatedPhone,
+                updatedEmail, updatedAddress, updatedAllergyList, updatedBloodType, updatedHealthRisk,
+                updatedExistingCondition, updatedNote, updatedNokName, updatedNokPhone, updatedAppt);
+    }
+
+    /**
+     * Updates the allergies of a patient based on the given {@code EditPersonDescriptor}.
+     */
+    public static AllergyList getUpdatedAllergyList(Patient patientToEdit, EditPatientDescriptor editPatientDescriptor)
+            throws CommandException {
+        Optional<AllergyList> allergiesToAdd = editPatientDescriptor.getAllergiesToAdd();
+        Optional<AllergyList> allergiesToRemove = editPatientDescriptor.getAllergiesToRemove();
+        if (allergiesToAdd.isEmpty() && allergiesToRemove.isEmpty()) {
+            return new AllergyList(new LinkedHashSet<>(patientToEdit.getAllergies()));
+        }
+        if (allergiesToRemove.isPresent()) {
+            removeAllergies(patientToEdit, allergiesToRemove.get().getAllergies());
+        }
+        if (allergiesToAdd.isPresent()) {
+            addAllergies(patientToEdit, allergiesToAdd.get().getAllergies());
+        }
+        return new AllergyList(new LinkedHashSet<>(patientToEdit.getAllergies()));
+    }
+
+    /**
+     * Checks if all the specified allergies to be removed are present in the patient's list of allergies and
+     * removes specified allergies from patient's list of allergies.
+     */
+    private static void removeAllergies(Patient patientToEdit, List<Allergy> allergiesToRemove)
+            throws CommandException {
+        assert allergiesToRemove != null;
+        for (Allergy allergy : allergiesToRemove) {
+            try {
+                patientToEdit.checkAllergyPresentForRemoval(allergy);
+            } catch (AllergyNotFoundException e) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_ALLERGY_TO_DELETE, allergy));
+            }
+        }
+        for (Allergy allergy : allergiesToRemove) {
+            patientToEdit.deleteAllergy(allergy);
+        }
+    }
+
+    /**
+     * Checks if any of the specified allergies to be added already exists in the patient's list of allergies and
+     * adds specified allergies to patient's list of allergies.
+     */
+    public static void addAllergies(Patient patientToEdit, List<Allergy> allergiesToAdd) throws CommandException {
+        assert allergiesToAdd != null;
+        for (Allergy allergy : allergiesToAdd) {
+            try {
+                patientToEdit.checkAllergyAlreadyExists(allergy);
+            } catch (AllergyAlreadyExistsException e) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_ALLERGY_TO_ADD, allergy));
+            }
+        }
+        for (Allergy allergy : allergiesToAdd) {
+            patientToEdit.addAllergy(allergy);
+        }
     }
 
     @Override
@@ -116,54 +189,74 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        return nric.equals(otherEditCommand.nric)
+                && editPatientDescriptor.equals(otherEditCommand.editPatientDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("NRIC", nric)
+                .add("editPatientDescriptor", editPatientDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the patient with. Each non-empty field value will replace the
+     * corresponding field value of the patient.
      */
-    public static class EditPersonDescriptor {
+    public static class EditPatientDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
+        private Nric nric;
+        private Birthdate birthdate;
+        private Sex sex;
         private Address address;
-        private Set<Tag> tags;
+        private AllergyList allergiesToAdd;
+        private AllergyList allergiesToRemove;
+        private BloodType bloodType;
+        private HealthRisk healthRisk;
+        private ExistingCondition existingCondition;
+        private Note note;
+        private Name nokName;
+        private Phone nokPhone;
 
-        public EditPersonDescriptor() {}
+        public EditPatientDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of each field is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditPatientDescriptor(EditPatientDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setNric(toCopy.nric);
+            setBirthDate(toCopy.birthdate);
+            setSex(toCopy.sex);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setAllergiesToAdd(toCopy.allergiesToAdd);
+            setAllergiesToRemove(toCopy.allergiesToRemove);
+            setBloodType(toCopy.bloodType);
+            setHealthRisk(toCopy.healthRisk);
+            setExistingCondition(toCopy.existingCondition);
+            setNote(toCopy.note);
+            setNokName(toCopy.nokName);
+            setNokPhone(toCopy.nokPhone);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, nric, birthdate, sex, address, allergiesToAdd,
+                    allergiesToRemove, bloodType, healthRisk, existingCondition, note, nokName, nokPhone);
         }
 
         public void setName(Name name) {
             this.name = name;
         }
-
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
         }
@@ -171,7 +264,6 @@ public class EditCommand extends Command {
         public void setPhone(Phone phone) {
             this.phone = phone;
         }
-
         public Optional<Phone> getPhone() {
             return Optional.ofNullable(phone);
         }
@@ -179,34 +271,91 @@ public class EditCommand extends Command {
         public void setEmail(Email email) {
             this.email = email;
         }
-
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setNric(Nric nric) {
+            this.nric = nric;
+        }
+        public Optional<Nric> getNric() {
+            return Optional.ofNullable(nric);
+        }
+
+        public void setBirthDate(Birthdate birthdate) {
+            this.birthdate = birthdate;
+        }
+        public Optional<Birthdate> getBirthDate() {
+            return Optional.ofNullable(birthdate);
+        }
+
+        public void setSex(Sex sex) {
+            this.sex = sex;
+        }
+        public Optional<Sex> getSex() {
+            return Optional.ofNullable(sex);
         }
 
         public void setAddress(Address address) {
             this.address = address;
         }
-
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setAllergiesToAdd(AllergyList allergiesToAdd) {
+            this.allergiesToAdd = allergiesToAdd;
+        }
+        public Optional<AllergyList> getAllergiesToAdd() {
+            return Optional.ofNullable(allergiesToAdd);
+        }
+        public void setAllergiesToRemove(AllergyList allergiesToRemove) {
+            this.allergiesToRemove = allergiesToRemove;
+        }
+        public Optional<AllergyList> getAllergiesToRemove() {
+            return Optional.ofNullable(allergiesToRemove);
         }
 
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public void setBloodType(BloodType bloodtype) {
+            this.bloodType = bloodtype;
+        }
+        public Optional<BloodType> getBloodType() {
+            return Optional.ofNullable(bloodType);
+        }
+
+        public void setHealthRisk(HealthRisk healthRisk) {
+            this.healthRisk = healthRisk;
+        }
+        public Optional<HealthRisk> getHealthRisk() {
+            return Optional.ofNullable(healthRisk);
+        }
+
+        public void setExistingCondition(ExistingCondition existingCondition) {
+            this.existingCondition = existingCondition;
+        }
+        public Optional<ExistingCondition> getExistingCondition() {
+            return Optional.ofNullable(existingCondition);
+        }
+
+        public void setNote(Note note) {
+            this.note = note;
+        }
+        public Optional<Note> getNote() {
+            return Optional.ofNullable(note);
+        }
+
+        public void setNokName(Name nokName) {
+            this.nokName = nokName;
+        }
+        public Optional<Name> getNokName() {
+            return Optional.ofNullable(nokName);
+        }
+
+        public void setNokPhone(Phone nokPhone) {
+            this.nokPhone = nokPhone;
+        }
+        public Optional<Phone> getNokPhone() {
+            return Optional.ofNullable(nokPhone);
         }
 
         @Override
@@ -216,26 +365,22 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditPatientDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            EditPatientDescriptor otherEditPatientDescriptor = (EditPatientDescriptor) other;
+            return Objects.equals(nric, otherEditPatientDescriptor.nric);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("nric", nric)
+                    .add("sex", sex)
+                    .add("birthdate", birthdate)
                     .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
                     .toString();
         }
     }

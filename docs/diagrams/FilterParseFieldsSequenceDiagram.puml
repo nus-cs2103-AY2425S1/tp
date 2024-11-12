@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":FilterCommandParser" as FilterCommandParser LOGIC_COLOR
+participant "<<class>>\nArgumentTokenizer" as ArgumentTokenizer LOGIC_COLOR
+participant "argMultimap:ArgumentMultiMap" as ArgumentMultiMap LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+alt start date is present
+    FilterCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(PREFIX_STARTDATE)
+    activate ArgumentMultiMap
+
+    ArgumentMultiMap --> FilterCommandParser
+    deactivate ArgumentMultiMap
+
+    FilterCommandParser -> ParserUtil : parseDate(endDateString)
+    activate ParserUtil
+
+    ParserUtil --> FilterCommandParser
+    deactivate ParserUtil
+
+    FilterCommandParser -> ParserUtil: parseStartDateAndCheck(startDateString, endDate)
+    activate ParserUtil
+
+    ParserUtil --> FilterCommandParser
+    deactivate ParserUtil
+
+else no start date given
+    FilterCommandParser -> ParserUtil : parseEndDateAndCheck(endDateString)
+    activate ParserUtil
+
+    ParserUtil --> FilterCommandParser
+    deactivate ParserUtil
+
+end
+
+opt Health Service is present
+    FilterCommandParser -> ArgumentMultiMap : verifyNoDuplicatePrefixesFor(PREFIX_HEALTHSERVICE)
+    activate ArgumentMultiMap
+
+    ArgumentMultiMap --> FilterCommandParser
+    deactivate ArgumentMultiMap
+
+    FilterCommandParser -> ParserUtil : parseHealthService(...)
+    activate ParserUtil
+
+    ParserUtil --> FilterCommandParser
+    deactivate ParserUtil
+
+end
+
+@enduml

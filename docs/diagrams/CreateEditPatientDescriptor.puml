@@ -1,0 +1,162 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
+participant ":EditCommand.EditPatientDescriptor" as EditPatientDescriptor LOGIC_COLOR
+participant "<<class>>\nParserUtil" as ParserUtil LOGIC_COLOR
+end box
+
+[->EditCommandParser :createEditPersonDescriptor(argMultiMap)
+activate EditCommandParser
+
+create EditPatientDescriptor
+EditCommandParser -> EditPatientDescriptor
+activate EditPatientDescriptor
+
+EditPatientDescriptor --> EditCommandParser
+deactivate EditPatientDescriptor
+
+opt getValue(PREFIX_NAME).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setName(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseName(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_NRIC).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setNric(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseNric(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_BIRTHDATE).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setBirthDate(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseBirthDate(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_SEX).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setSex(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseSex(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_PHONE).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setPhone(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parsePhone(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_EMAIL).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setEmail(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseEmail(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_ADDRESS).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setAddress(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseAddress(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_BLOODTYPE).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setBloodType(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseBloodType(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_NOKNAME).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setNokName(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseNokName(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_NOKPHONE).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setNokPhone(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseNokPhone(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_ALLERGY).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setAllergiesToAdd(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseAllergies(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_REMOVEALLERGY).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setAllergiesToRemove(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseAllergies(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_HEALTHRISK).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setHealthRisk(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseHealthRisk(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_EXISTINGCONDITION).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setExistingCondition(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseExistingCondition(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt getValue(PREFIX_NOTE).isPresent()
+    EditCommandParser -> EditPatientDescriptor : setNote(...)
+    activate EditPatientDescriptor
+    EditPatientDescriptor -> ParserUtil : parseNote(...)
+    activate ParserUtil
+    deactivate ParserUtil
+    deactivate EditPatientDescriptor
+end
+
+opt !editPatientDescriptor.isAnyFieldEdited()
+end
+note left: If no field edited, throws ParseException: At least one field to edit must be provided.
+
+[<--EditCommandParser
+
+@enduml

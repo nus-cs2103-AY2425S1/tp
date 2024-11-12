@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.TreeSet;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -13,9 +14,11 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.commandresult.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.filteredappointment.FilteredAppointment;
+import seedu.address.model.patient.Patient;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -31,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private PatientListPanel patientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane guiPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -64,7 +67,6 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
         helpWindow = new HelpWindow();
     }
 
@@ -78,6 +80,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -110,13 +113,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        patientListPanel = new PatientListPanel(logic.getFilteredPatientList());
+        guiPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getClinicConnectSystemFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -139,12 +142,68 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleHelp() {
+    public void handleHelp(String keyword) {
+        if (keyword.isEmpty()) {
+            handleHelpWindow();
+        } else {
+            handleHelpKeywordWindow(keyword);
+        }
+    }
+
+    /**
+     * Checks if the specified keyword HelpKeywordWindow is open and focuses on it if it's already opened, else
+     * open a new HelpKeywordWindow.
+     */
+    private void handleHelpKeywordWindow(String keyword) {
+        if (HelpKeywordWindow.isOpen(keyword)) {
+            HelpKeywordWindow existingWindow = HelpKeywordWindow.getHelpKeywordWindow(keyword);
+            existingWindow.focus();
+        } else {
+            HelpKeywordWindow helpKeywordWindow = new HelpKeywordWindow(keyword);
+            helpKeywordWindow.show();
+        }
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleHelpWindow() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
             helpWindow.focus();
         }
+    }
+
+    /**
+     * Shows the Patient Info Panel.
+     */
+    @FXML
+    public void showPatientInfo(Patient patient) {
+        PatientInfoPanel patientInfoPanel = new PatientInfoPanel(patient);
+        guiPanelPlaceholder.getChildren().remove(0);
+        guiPanelPlaceholder.getChildren().add(patientInfoPanel.getRoot());
+    }
+
+    /**
+     * Shows the Filtered Appointments
+     */
+    @FXML
+    public void showAppts(TreeSet<FilteredAppointment> appts) {
+        FilteredApptListPanel apptListPanel = new FilteredApptListPanel(appts);
+        guiPanelPlaceholder.getChildren().remove(0);
+        guiPanelPlaceholder.getChildren().add(apptListPanel.getRoot());
+    }
+
+    /**
+     * Hides the Patient Info Panel.
+     */
+    @FXML
+    public void hidePatientInfo() {
+        guiPanelPlaceholder.getChildren().remove(0);
+        patientListPanel = new PatientListPanel(logic.getFilteredPatientList());
+        guiPanelPlaceholder.getChildren().add(patientListPanel.getRoot());
     }
 
     void show() {
@@ -160,11 +219,8 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        HelpKeywordWindow.closeAllWindows();
         primaryStage.hide();
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
     }
 
     /**
@@ -179,11 +235,23 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                handleHelp(commandResult.getKeyword());
             }
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowPatientInfo()) {
+                showPatientInfo(commandResult.getPatient());
+                logger.info("Showing patient info for: " + commandResult.getPatient().getName());
+            } else {
+                hidePatientInfo();
+                logger.info("Hiding patient info panel");
+            }
+
+            if (commandResult.isShowFilteredAppts()) {
+                showAppts(logic.getFilteredAppts());
             }
 
             return commandResult;

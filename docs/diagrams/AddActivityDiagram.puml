@@ -1,0 +1,14 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:AddCommand is executed;
+
+if () then ([patient is in model])
+    :Throw CommandException: Duplicate patient;
+else ([else])
+    :Add patient to the model;
+endif
+stop
+@enduml

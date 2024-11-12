@@ -2,16 +2,21 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.filteredappointment.FilteredAppointment.APPOINTMENT_COMPARATOR;
 
 import java.nio.file.Path;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
+import seedu.address.model.filteredappointment.FilteredAppointment;
+import seedu.address.model.patient.Patient;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -19,25 +24,27 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final ClinicConnectSystem clinicConnectSystem;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Patient> filteredPatients;
+    private final TreeSet<FilteredAppointment> filteredAppts;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given clinicConnectSystem and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyClinicConnectSystem clinicConnectSystem, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(clinicConnectSystem, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + clinicConnectSystem + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.clinicConnectSystem = new ClinicConnectSystem(clinicConnectSystem);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPatients = new FilteredList<>(this.clinicConnectSystem.getPatientList());
+        this.filteredAppts = new TreeSet<>(APPOINTMENT_COMPARATOR);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ClinicConnectSystem(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,67 +72,94 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getClinicConnectSystemFilePath() {
+        return userPrefs.getClinicConnectSystemFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setClinicConnectSystemFilePath(Path clinicConnectSystemFilePath) {
+        requireNonNull(clinicConnectSystemFilePath);
+        userPrefs.setClinicConnectSystemFilePath(clinicConnectSystemFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== ClinicConnectSystem ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setClinicConnectSystem(ReadOnlyClinicConnectSystem clinicConnectSystem) {
+        this.clinicConnectSystem.resetData(clinicConnectSystem);
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public ReadOnlyClinicConnectSystem getClinicConnectSystem() {
+        return clinicConnectSystem;
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasPatient(Patient patient) {
+        requireNonNull(patient);
+        return clinicConnectSystem.hasPatient(patient);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deletePatient(Patient target) {
+        clinicConnectSystem.removePatient(target);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void addPatient(Patient patient) {
+        clinicConnectSystem.addPatient(patient);
+        updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void setPatient(Patient target, Patient editedPatient) {
+        requireAllNonNull(target, editedPatient);
+
+        clinicConnectSystem.setPatient(target, editedPatient);
+    }
+
+    //=========== Filtered Patient List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Patient} backed by the internal list of
+     * {@code versionedClinicConnectSystem}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Patient> getFilteredPatientList() {
+        return filteredPatients;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPatientList(Predicate<Patient> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredPatients.setPredicate(predicate);
+    }
+
+    @Override
+    public void filterAppts(AppointmentDateFilter dateFilter) {
+        assert dateFilter != null;
+
+        TreeSet<FilteredAppointment> filteredAppts = filteredPatients.stream()
+                .flatMap(patient -> patient.getFilteredAppointments(dateFilter))
+                .collect(Collectors.toCollection(() -> new TreeSet<>(APPOINTMENT_COMPARATOR)));
+
+        this.setFilteredAppts(filteredAppts);
+    }
+
+    @Override
+    public void setFilteredAppts(TreeSet<FilteredAppointment> filteredAppointments) {
+        this.filteredAppts.clear();
+        this.filteredAppts.addAll(filteredAppointments);
+    }
+
+    @Override
+    public TreeSet<FilteredAppointment> getFilteredAppts() {
+        return this.filteredAppts;
+    }
+
+    @Override
+    public int getPatientSize() {
+        return this.filteredPatients.size();
     }
 
     @Override
@@ -140,9 +174,9 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return clinicConnectSystem.equals(otherModelManager.clinicConnectSystem)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPatients.equals(otherModelManager.filteredPatients)
+                && filteredAppts.equals(otherModelManager.filteredAppts);
     }
-
 }

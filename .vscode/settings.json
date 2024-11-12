@@ -1,0 +1,22 @@
+{
+    "editor.rulers": [
+
+        {"column": 110, "color": "#fff700"},
+        {"column": 120, "color": "#ff0000"}
+    ],
+    "cSpell.words": [
+        "BIRTHDATE",
+        "seedu",
+        "testutil",
+        "whitespaces"
+    ],
+    "cSpell.ignoreWords": [
+        "HOON",
+        "Kunz",
+        "Kurz",
+        "Prefs",
+        "michegan"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
+

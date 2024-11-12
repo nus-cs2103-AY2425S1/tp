@@ -1,0 +1,49 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant "a:FilterCommand" as FilterCommand LOGIC_COLOR
+participant "r:ShowFilteredApptsCommandResult" as ShowFilteredApptsCommandResult LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "p:Patient" as Patient MODEL_COLOR
+end box
+
+activate FilterCommand
+
+FilterCommand -> Model : filterAppts(...)
+activate Model
+
+Model -> Patient : getFilteredAppointment(...)
+activate Patient
+
+Patient --> Model:
+deactivate Patient
+
+Model -> Model: setFilteredAppts(...)
+activate Model
+
+deactivate Model
+
+deactivate Model
+
+FilterCommand -> Model: getPatientSize()
+activate Model
+
+Model --> FilterCommand
+deactivate Model
+
+create ShowFilteredApptsCommandResult
+FilterCommand -> ShowFilteredApptsCommandResult
+
+activate ShowFilteredApptsCommandResult
+ShowFilteredApptsCommandResult --> FilterCommand
+
+deactivate ShowFilteredApptsCommandResult
+
+deactivate FilterCommand
+@enduml

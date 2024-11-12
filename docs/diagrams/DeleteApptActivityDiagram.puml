@@ -1,0 +1,27 @@
+@startuml DeleteApptActivityDiagram
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:Parse input arguments;
+:Validate input arguments;
+if () then ([is a valid input])
+    :Execute DeleteApptCommand;
+    :Check if patient exists;
+    if () then ([patient exists])
+        :Check if appointment exists;
+        if () then ([appointment exists])
+            :Delete appointment of patient
+            successfully;
+        else ([appointment does not exist])
+            :Throw CommandException:
+            Appointment not found;
+        endif
+    else ([patient does not exist])
+        :Throw CommandException: Patient not found;
+    endif
+else ([not a valid input])
+    :Throw ParseException: Invalid input;
+endif
+stop
+@enduml

@@ -1,0 +1,35 @@
+{
+  "patients": [ {
+    "name" : "Alice Pauline",
+    "allergy" : [ ],
+    "bloodType" : "",
+    "healthRisk" : "",
+    "existingCondition" : "",
+    "note" : "",
+    "nokName" : "",
+    "nokPhone" : "",
+    "appts" : [ ],
+    "nric" : "T0181280Z",
+    "sex" : "F",
+    "birthDate" : "2001-12-02",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111"
+  }, {
+    "name" : "Alice Pauline",
+    "allergy" : [ ],
+    "bloodType" : "",
+    "healthRisk" : "",
+    "existingCondition" : "",
+    "note" : "",
+    "nokName" : "",
+    "nokPhone" : "",
+    "appts" : [ ],
+    "nric" : "T0181280Z",
+    "sex" : "F",
+    "birthDate" : "2001-12-02",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111"
+  } ]
+}

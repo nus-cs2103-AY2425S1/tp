@@ -1,0 +1,21 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes help command;
+:Parse user input;
+if () then ([keyword is empty])
+    :Execute Help Command;
+    :Display help window;
+else ([keyword is not empty])
+if () then ([keyword is valid])
+    :Display help window
+    according to keyword;
+else ([keyword is not valid])
+    :Throw CommandException: Fix command keyword typo;
+endif
+endif
+stop
+
+@enduml

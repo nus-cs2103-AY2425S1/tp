@@ -1,0 +1,31 @@
+@startuml BookApptActivityDiagram
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+:Parse input arguments;
+:Validate input arguments;
+if () then ([is a valid input])
+    :Execute BookApptCommand;
+    :Check if patient exists;
+    if () then ([patient exists])
+        :Check for duplicate appointment;
+        if () then ([is a duplicate appointment])
+            :Throw CommandException: Duplicate appointment;
+        else ([not a duplicate appointment])
+            :Check if appointment date and time
+            are in the past;
+            if () then ([are past date and time])
+                :Throw CommandException: Past date;
+            else ([not past date and time])
+                :Add appointment for patient
+                successfully;
+            endif
+        endif
+    else ([patient does not exist])
+        :Throw CommandException: Patient not found;
+    endif
+else ([is not a valid input])
+    :Throw ParseException: Invalid input;
+endif
+stop
+@enduml

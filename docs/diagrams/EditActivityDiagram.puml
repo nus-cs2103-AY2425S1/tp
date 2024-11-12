@@ -1,0 +1,23 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:EditCommand is executed;
+if () then ([patient to edit is in model])
+    :Create edited patient;
+    if () then ([edited patient is a duplicate in system])
+        :Throw CommandException:
+        Duplicate patient;
+    else ([else])
+        :Replace patient to edit
+        with edited patient;
+    endif
+else ([else])
+    :Throw CommandException:
+    NRIC does not exist in system;
+endif
+stop
+
+@enduml

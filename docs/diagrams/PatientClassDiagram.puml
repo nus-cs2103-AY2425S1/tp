@@ -1,0 +1,62 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+skinparam class {
+    AttributeFontColor white
+}
+
+Package "" as ModelPackage <<Rectangle>>{
+Class Patient
+Class Nric
+Class Name
+Class Sex
+Class BirthDate
+Class ApptList
+Class Phone
+Class Email
+Class Address
+Class AllergyList
+Class Allergy
+Class BloodType
+Class HealthRisk
+Class ExistingCondition
+Class Note
+Class Appt {
+    healthService: healthService
+}
+
+Class I #FFFFFF
+}
+
+Class "<<enumeration>>\nHealthService" as healthService {
+    1 BLOOD TEST
+    2 CANCER SCREENING
+    3 VACCINATION
+    4 CONSULT
+}
+
+Class HiddenOutside #FFFFFF
+
+Patient *-down-> "1" Name
+Patient *-down-> "1" Nric
+Patient *-down-> "1" Sex
+Patient *-down-> "1" BirthDate
+Patient *-down-> "1" Phone
+Patient *-down-> "1" ApptList
+Patient *-down-> "1" Email
+Patient *-down-> "1" Address
+Patient *-down-> "1" AllergyList
+Patient *-down-> "1" BloodType
+Patient *-down-> "1" HealthRisk
+Patient *-down-> "1" ExistingCondition
+Patient *-down-> "1" Note
+ApptList *-down-> "*" Appt
+Appt *-down-> "1" HealthService: healthService
+AllergyList *-down-> "*" Allergy
+
+HealthService -[hidden]right-> healthService
+
+show healthService members
+@enduml

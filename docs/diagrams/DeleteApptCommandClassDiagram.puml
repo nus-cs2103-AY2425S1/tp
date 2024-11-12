@@ -1,0 +1,21 @@
+@startuml DeleteApptCommandClassDiagram
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "{abstract}\nCommand" as Command {
+  +execute(Model): CommandResult
+}
+Class DeleteApptCommand {
+  +COMMAND_WORD: String
+  +MESSAGE_USAGE: String
+  +MESSAGE_DELETE_APPT_SUCCESS: String
+  -nric: Nric
+  -apptDateTime: LocalDateTime
+  +execute(Model): CommandResult
+}
+Class CommandException
+
+DeleteApptCommand -up-|> Command
+Command ..> CommandException: throws >
+DeleteApptCommand .right.> CommandException: throws >
+@enduml
