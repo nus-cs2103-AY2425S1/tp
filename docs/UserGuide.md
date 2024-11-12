@@ -10,8 +10,35 @@ Talentcy is a **desktop app for managing job applicant contacts and monitoring t
 
 The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by CS2103 team.
 
-<!-- * Table of Contents -->
-<page-nav-print />
+<!-- TOC -->
+* [Talentcy User Guide](#talentcy-user-guide)
+  * [Quick start](#quick-start)
+  * [Features](#features)
+    * [`help`: Viewing help](#viewing-help--help)
+    * [`add`: Adding a person](#adding-a-person-add)
+    * [`list`Listing all persons](#listing-all-persons--list)
+    * [`edit`: Editing a person](#editing-a-person--edit)
+    * [`find`: Locating persons by criteria given](#locating-persons-by-criteria-given-find)
+    * [`delete`: Deleting a person](#deleting-a-person--delete)
+    * [`stats`: Showing applicant statistics](#showing-applicant-statistics-stats)
+    * [`massreject`: Bulk reject persons by criteria](#bulk-reject-persons-by-criteria-massreject)
+    * [`sort`: Sorting persons by fields](#sorting-persons-by-fields-sort)
+    * [`clear`: Clearing all entries](#clearing-all-entries--clear)
+    * [`exit`: Exiting the program](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+    * [Archiving data files `[coming in the future]`](#archiving-data-files-coming-in-the-future)
+  * [Fields](#fields)
+    * [NAME](#name)
+    * [PHONE](#phone)
+    * [EMAIL](#email)
+    * [JOBCODE](#jobcode)
+    * [TAG](#tag)
+    * [REMARK](#remark)
+  * [FAQ](#faq)
+  * [Known issues](#known-issues)
+  * [Command summary](#command-summary)
+<!-- TOC -->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -26,15 +53,16 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 
 3. Copy the file to the folder you want to use as the _home folder_ for your Talentcy app.
 
-4. **Windows**:
-
+4. **Windows**:Navigate to the home folder and right-click within the area highlighted in green in the image below. Select "Open in Terminal" from the menu. When the terminal window opens, enter java -jar Talentcy.jar to start the application.
+   <p align="center">
+   <img src="images/Windows_open_terminal.jpg" alt="Windows_open_terminal" width="350"/>
+   </p>
 
    **MacOS**: 
        Right click on the homefolder. Then select "New terminal at Folder". A terminal will pop up. Type `java -jar Talentcy.jar` and press enter.
        <p align="center">
        <img src="images/Mac_open_terminal.png" alt="Mac_open_terminal" width="350"/>
        </p>
-        <p align="center"><em>Right-clicking the home folder and selecting "New Terminal at Folder" on MacOS</em></p>
 
    **Linux**:
        Open the folder where you placed the Talentcy.jar file.
@@ -83,7 +111,7 @@ When you open the app, a GUI will appear with a few sample contacts already load
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+</box>
 
 ### Viewing help : `help`
 
@@ -100,11 +128,10 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE e/EMAIL j/JOB CODE t/TAG [r/REMARK]`
 
-<box type="tip" seamless>
-
 * Only one interview stage tag will be attached to a person at any point of time.
-</box>
 * If no remark is provided, or if user inputs uses `r/`, then remark is empty by default.
+**Tip:** Only one interview stage tag will be attached to a contact at any point of time.
+<box type="tip" seamless>
 
 Please refer to this table
 for list of valid tags:
@@ -118,7 +145,7 @@ for list of valid tags:
 | BC | Behavioral Interview Confirmed | Behavioral interview has been scheduled for the applicant                   |
 | A| Accepted| Applicant has been accepted by the company                                  |
 | R | Rejected | Applicant has been rejected by the company                                  |
-
+</box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com j/XYZ1010 t/N`
@@ -332,7 +359,7 @@ for list of valid tags:
 
 ### REMARK
 - Must be at most 50 characters, excluding leading and trailing whitespaces.
-</box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Context Menu Options
@@ -367,7 +394,6 @@ Context menu options allow users to perform typical text actions, which are avai
 
 </box>
 
-<box type="info" seamless>
 
 **Descriptions of each context menu option in feedback box:**<br>
 
@@ -377,7 +403,6 @@ Context menu options allow users to perform typical text actions, which are avai
 ### Select All
 - Highlights all text within the feedback box, making it easier to apply other actions like cut, copy, or delete.
 
-</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
