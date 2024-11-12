@@ -6,6 +6,6 @@ package seedu.address.model.wedding.exceptions;
  */
 public class DuplicateWeddingException extends RuntimeException {
     public DuplicateWeddingException() {
-        super("Operation would result in duplicate persons");
+        super("Operation would result in duplicate weddings");
     }
 }
