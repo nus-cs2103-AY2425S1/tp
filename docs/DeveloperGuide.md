@@ -83,7 +83,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -310,6 +310,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                               | delete an entry                                            | remove entries that I no longer need                                    |
 | `* * *`  | private tutor                                      | view all my students' details                              | have an overview of how many student I am managing                      |
 | `* * *`  | tutor with many students                           | find a student by name                                     | locate details of students without having to go through the entire list |
+| `* * *`  | tutor with many students                           | be warned if the new added class clashes                   | better manage my teaching schedule and the number of students at the same time |
+| `* * *`  | busy undergraduate tutor                           | record students' payment status                            | how much students have paid or owe me |
+| `* * *`  | busy undergraduate tutor                           | record it when students settle the owed amount             | avoid mistakenly reminding him/her again |
 | `* *`    | busy undergraduate tutor                           | find students by day                                       | locate details of students that has tuition on a specific day           |
 | `* *`    | new user                                           | see sample entries                                         | understand how the interface will look like with entries added          |
 | `* *`    | user                                               | edit contact details                                       | keep my information up-to-date                                          |
@@ -333,8 +336,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC01 - Adding a student**
 
 **MSS**
-1. User enters command to create new student entry.
-1. UGTeach displays success message and command line is cleared.
+1. User enters command to create a new student entry.
+1. UGTeach displays success message and the command line is cleared.
 
    Use case ends.
 
@@ -680,7 +683,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `add N/Teaching Assistant p/90908767 e/getaboveAtobeaTA123@hotmail.com a/21 Lower Kent Ridge Drive r/40.00 t/Thursday-1130-1330 s/Economics Paid/12.00`
 
-   2. Expected: A new contact with the corresponding information will be added to the end of the current list.
+   1. Expected: A new contact with the corresponding information will be added to the end of the current list. Whether there is a warning message on the schedule or not depends on your current data.
 
 <div style="page-break-after: always;"></div>
 
@@ -708,8 +711,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `edit 1 r/0` <br/>
       Expected: An error message displayed reminds you that **RATE** must be from $0.01 to $1000.00.
 
-   1. Test case: `edit 1 n/ p/654321234` <br/>
-      Expected: An error message displayed reminds you that **NAME** must not be empty. <br/>Notice that both values of **NAME** and **PHONE_NUMBER** are invalid; however, the error message is shown in the order that the attributes shown in the app.
+   1. Test case: `edit 1 n/ p/65432123` <br/>
+         Expected: An error message displayed reminds you that **NAME** must not be empty and must contain only alphanumeric characters and space.
 
 
 ### Deleting a student
