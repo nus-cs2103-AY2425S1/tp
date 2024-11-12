@@ -172,4 +172,6 @@ public class UniquePersonListTest {
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
     }
+
+
 }

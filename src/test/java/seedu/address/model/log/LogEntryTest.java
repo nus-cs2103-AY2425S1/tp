@@ -1,5 +1,6 @@
 package seedu.address.model.log;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -51,5 +52,12 @@ public class LogEntryTest {
         LogEntry entry2 = new LogEntry("This is a different log entry.");
 
         assertNotEquals(entry1, entry2);
+    }
+
+    @Test
+    public void convertToStorageString_singleNewline_convertsToEscapedNewline() {
+        String testString = "This is a test log entry.\nThis is the second line.";
+        assertEquals("This is a test log entry.\\nThis is the second line.",
+                LogEntry.convertToStorageString(testString));
     }
 }

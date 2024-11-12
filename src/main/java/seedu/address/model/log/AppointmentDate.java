@@ -90,6 +90,50 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
         }
     }
 
+    /**
+     * Returns true if the given string is a valid day.
+     *
+     * @param dateString the string to validate
+     * @return true if valid, false otherwise
+     */
+    public static boolean isValidDay(String dateString) {
+        requireNonNull(dateString);
+        if (extractDay(dateString) > 99 || extractDay(dateString) < 0) {
+            return true;
+        }
+        if (extractDay(dateString) < 1 || extractDay(dateString) > 31) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if the given string has a valid day.
+     *
+     * @param dateString the string to validate
+     * @return true if valid, false otherwise
+     */
+    public static boolean hasValidDay(String dateString) {
+        try {
+            extractDay(dateString);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Extracts the day from the given date string.
+     *
+     * @param dateString the date string to extract the day from
+     * @return the day of the date
+     */
+    public static int extractDay(String dateString) {
+        requireNonNull(dateString);
+        String[] parts = dateString.split(" ");
+        return Integer.parseInt(parts[0]);
+    }
+
 
     @Override
     public int compareTo(AppointmentDate o) {

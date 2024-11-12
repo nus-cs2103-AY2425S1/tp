@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,7 +28,19 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
+    @Test
+    public void validateInput() {
+        // valid input, no exception expected
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        assertDoesNotThrow(() -> addCommand.validateInput(modelStub));
 
+        // duplicate person, CommandException expected
+        ModelStub modelStubWithPerson = new ModelStubWithPerson(validPerson);
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand
+                .validateInput(modelStubWithPerson));
+    }
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
@@ -153,12 +166,6 @@ public class AddCommandTest {
         public void addLog(Person target, Log log) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public boolean hasLog(Person person, Log log) {
-            throw new AssertionError("This method should not be called.");
-        }
-
         /**
          * Returns an unmodifiable view of the full person list
          */

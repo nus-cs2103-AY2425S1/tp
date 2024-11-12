@@ -25,16 +25,6 @@ public class LogEntry {
     }
 
     /**
-     * Constructs a {@code LogEntry}.
-     *
-     * @param formattedEntry Contains special next line that should be passed around in storageEntry form
-     */
-    public LogEntry formattedLogEntry(String formattedEntry) {
-        return new LogEntry(convertToStorageString(formattedEntry));
-    }
-
-
-    /**
      * Returns the log entry.
      */
     public String getEntry() {
@@ -97,7 +87,7 @@ public class LogEntry {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof LogEntry // instanceof handles nulls
-                && entry.equalsIgnoreCase(((LogEntry) other).entry)); // state check
+                && entry.equals(((LogEntry) other).entry)); // state check
     }
 
     /**
@@ -105,6 +95,6 @@ public class LogEntry {
      */
     @Override
     public int hashCode() {
-        return entry.toLowerCase().hashCode();
+        return entry.hashCode();
     }
 }

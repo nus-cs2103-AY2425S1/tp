@@ -19,8 +19,8 @@ public class AddLogEntryCommand extends Command {
     public static final String COMMAND_WORD = "addentry";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Opens a text box to input log entry "
             + "for a person identified by the "
-            + "NRIC. Parameters: i/NRIC d/DATE\n"
-            + "Example: " + COMMAND_WORD + " i/S1234567D d/01 Nov 2024";
+            + "NRIC. Parameters: NRIC, DATE\n"
+            + "Example: " + COMMAND_WORD + " i/S1234567D d/20 Nov 2024";
     public static final String MESSAGE_ADD_LOG_SUCCESS = "Added log for Person: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person with ID %1$s not found.";
     public static final String MESSAGE_INVALID_ID = "NRIC not found in system, perhaps there was a typo.";

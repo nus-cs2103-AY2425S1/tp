@@ -2,16 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.log.AppointmentDate;
-import seedu.address.model.log.Log;
-import seedu.address.model.log.LogEntry;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.IdentityNumber;
@@ -130,43 +124,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String logDetails} into a {@code Log}.
-     * Assumes that logDetails is in the format "date|details".
-     *
-     * @throws ParseException if the log string is invalid or cannot be parsed correctly.
-     */
-    public static Log parseLog(String logDetails) throws ParseException {
-        requireNonNull(logDetails);
-
-        String[] parts = logDetails.split("\\|", 2); // Split into two parts only
-        if (parts.length < 2) {
-            throw new ParseException(LogEntry.MESSAGE_CONSTRAINTS);
-        }
-
-        AppointmentDate appointmentDate = new AppointmentDate(parts[0].trim());
-
-        String details = parts[1].trim();
-        if (details.isEmpty()) {
-            throw new ParseException(LogEntry.MESSAGE_CONSTRAINTS);
-        }
-        LogEntry entryDetails = new LogEntry(details);
-
-        return new Log(appointmentDate, entryDetails);
-    }
-
-    /**
-     * Parses {@code Collection<String> logs} into a {@code Set<Log>}.
-     */
-    public static Set<Log> parseLogs(Collection<String> logs) throws ParseException {
-        requireNonNull(logs);
-        final Set<Log> logSet = new HashSet<>();
-        for (String logDetails : logs) {
-            logSet.add(parseLog(logDetails));
-        }
-        return logSet;
-    }
-
-    /**
      * Parses a {@code String date} into an {@code AppointmentDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -175,6 +132,12 @@ public class ParserUtil {
     public static AppointmentDate parseAppointmentDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
+        if (!AppointmentDate.hasValidDay(date)) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
+        }
+        if (!AppointmentDate.isValidDay(trimmedDate)) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS_INVALID_DATE);
+        }
         if (!AppointmentDate.isValidDateString(trimmedDate)) {
             throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
         }

@@ -30,10 +30,10 @@ public class AddCommand extends Command {
             + PREFIX_STATUS + "STATUS\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_IDENTITY_NUMBER + "S1234567D "
-            + PREFIX_PHONE + "82226688  "
-            + PREFIX_EMAIL + "bentan@gmail.com "
-            + PREFIX_ADDRESS + "Block 322 Jurong East Street 31, #01-01 "
+            + PREFIX_IDENTITY_NUMBER + "S7783844I "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_STATUS + "NEW";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
