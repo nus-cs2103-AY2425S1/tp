@@ -158,11 +158,15 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-**Note:** In this section, we reference specific class names such as `Person`, `AddressBook`, and many other class names
-which may differ from the terminologies used in other parts of our Developer Guide, such as Udders or FindingbrUdders. These names are used strictly within 
-the context of code implementation and may not directly correspond to the broader terms discussed elsewhere in the documentation.
+**Note:** In this section, we reference specific class names such as `Person`, `AddressBook`, and other terminology
+that may differ from the terms used in other parts of this Developer Guide. The names used here are intended 
+specifically for code implementation discussions and might not directly correspond to the broader terms used elsewhere in the documentation.
+For clarification:
+* `Person` is generally referred to as an Udder in most other sections of this guide.
+* `AddressBook` refers to FindingbrUdders in other contexts within this guide. 
 
-As a reference, for clarity in the discussions that follow, we have included a screenshot of the user interface labeled with component names below:
+Additionally, for clarity regarding the UI components discussed in this section,
+a screenshot of the user interface - labeled with component names - is included below:
 <br>
 
 ![Ui_parts](images/Ui_parts.png)
@@ -193,7 +197,7 @@ To help you understand how the `add` command works, here is a list of steps illu
 
 We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/brUdder m/bza` as an example.
 
-1. The user inputs the command `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/brUdder m/bza`, intending to add a person with the specified details.
+1. The user inputs the command `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/brUdder m/bza`, intending to add a `Person` with the specified details.
 2. The `AddCommandParser` interprets the input.
 3. An `AddCommand` object is created.
 4. The `LogicManager` invokes the execute method of AddCommand.
@@ -251,7 +255,7 @@ We will be using the user input `delete 1` as an example.
 #### **Feature**
 
 `edit INDEX [n/NAME] [p/PHONE NUMBER] [e/EMAIL ADDRESS] [a/ADDRESS] [r/ROLE] [m/MAJOR] [t/TAG]`,
-where all the fields are optional.
+where INDEX is required and at least one of the optional fields (such as name, address, or any other listed field) must also be specified.
 
 #### **Feature Purpose**
 
