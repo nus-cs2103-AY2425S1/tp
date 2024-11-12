@@ -684,5 +684,10 @@ This can be done through the use of delimiters (e.g. commas) to separate the key
 In events, such as swimming, relays, multiple faculties (i.e. more than 2) can compete against one another.
 Currently, this feature is not supported by out app, as an event is limited to two.
 In future versions, we plan to allow multiple faculties to compete in one event.
+5. Name Feature should accept multiple languages
+Currently, our app only accepts standard English names.
+We plan to allow the user to input names in multiple languages by making the name field less restrictive.
+6. Import/Export data from/to CSV file
+We plan to allow users to import/export their data from/to a CSV file for easy sharing and backup.
 
 
