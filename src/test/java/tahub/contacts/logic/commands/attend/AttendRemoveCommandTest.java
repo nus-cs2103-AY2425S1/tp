@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static tahub.contacts.logic.commands.attend.AttendCommandTestUtil.ModelStubWithScaList;
+import static tahub.contacts.logic.commands.attend.AttendRemoveCommand.MESSAGE_ATTENDANCE_NO_SESSIONS_TO_REMOVE;
+import static tahub.contacts.logic.commands.attend.AttendRemoveCommand.MESSAGE_NO_SCA_FOUND;
+import static tahub.contacts.logic.commands.attend.AttendRemoveCommand.MESSAGE_SUCCESS;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -38,10 +41,21 @@ public class AttendRemoveCommandTest {
 
         CommandResult commandResult = new AttendRemoveCommand(targetSca).execute(modelStub);
 
-        assertEquals(String.format(AttendRemoveCommand.MESSAGE_SUCCESS, Messages.format(targetSca)),
+        assertEquals(String.format(MESSAGE_SUCCESS, Messages.format(targetSca)),
                 commandResult.getFeedbackToUser());
         assertEquals(targetSca.getAttendance().getAttendanceAttendedCount(), 2);
         assertEquals(targetSca.getAttendance().getAttendanceTotalCount(), 3);
+    }
+
+    @Test
+    public void execute_emptyAttendance_throwsCommandException() {
+        StudentCourseAssociation targetSca = AttendCommandTestUtil.getNewScaToTestAttendance();
+        ModelStubWithScaList modelStub =
+                new ModelStubWithScaList(new AttendCommandTestUtil.ScaListWithMatch(targetSca));
+        AttendRemoveCommand attendRemoveCommand = new AttendRemoveCommand(targetSca);
+
+        Assert.assertThrows(CommandException.class,
+                MESSAGE_ATTENDANCE_NO_SESSIONS_TO_REMOVE, () -> attendRemoveCommand.execute(modelStub));
     }
 
     @Test
@@ -52,7 +66,7 @@ public class AttendRemoveCommandTest {
         AttendRemoveCommand attendRemoveCommand = new AttendRemoveCommand(targetSca);
 
         String expectedExceptionMessage = String.format(
-                AttendRemoveCommand.MESSAGE_NO_SCA_FOUND, Messages.format(targetSca));
+                MESSAGE_NO_SCA_FOUND, Messages.format(targetSca));
 
         Assert.assertThrows(CommandException.class,
                 expectedExceptionMessage, () -> attendRemoveCommand.execute(modelStub));
