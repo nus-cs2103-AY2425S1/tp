@@ -140,7 +140,7 @@ add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS u/UNIVERSITY m/MAJOR b/BIRTHDATE [w/
    ```
    **Expected output**:
    ```plaintext
-   New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Work Experience: Intern,Google,2023; Tags: [[friends]]; University: NUS; Major: Computer Science; Interests: [Swimming]
+   New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Work Experience: Intern,Google,2023; Tags: [[friends]]; University: NUS; Major: Computer Science; Interests: [Swimming]; Birthday: 13-12-2003
    ```
 
 2. Adding a person with minimal fields:
@@ -149,7 +149,7 @@ add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS u/UNIVERSITY m/MAJOR b/BIRTHDATE [w/
    ```
    **Expected output**:
    ```plaintext
-   New person added: Betsy Crowe; Phone: 98765431; Email: betsycrowe@example.com; Address: Bishan Street 22, #02-12; Work Experience: ; Tags: []; University: NTU; Major: Engineering; Interests: []
+   New person added: Betsy Crowe; Phone: 98765431; Email: betsycrowe@example.com; Address: Bishan Street 22, #02-12; Work Experience: ; Tags: []; University: NTU; Major: Engineering; Interests: []; Birthday: 01-01-2001
    ```
 
 <box type="warning" seamless>
@@ -326,7 +326,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INT
    ```
    **Expected output**:
    ```plaintext
-   Edited Person: Alex Yeoh; Phone: 91234547; Email: johndoe@example.com; Address: Blk 30 Geylang Street 29, #06-40; Work Experience: Engineer,Google,2023; Tags: [[friends]]; University: nus; Major: Business; Interests: [reading, cycling, Swimming]
+   Edited Person: Alex Yeoh; Phone: 91234547; Email: johndoe@example.com; Address: Blk 30 Geylang Street 29, #06-40; Work Experience: Engineer,Google,2023; Tags: [[friends]]; University: nus; Major: Business; Interests: [reading, cycling, Swimming]; Birthday: 08-07-2002
    ```
 
 2. Edit name and remove all tags:
@@ -335,7 +335,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INT
    ```
    **Expected output**:
    ```plaintext
-   Edited Person: Betsy Crower; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Work Experience: Engineer,Microsoft,2023; Tags: []; University: NTU; Major: engineering; Interests: [swimming]
+   Edited Person: Betsy Crower; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Work Experience: Engineer,Microsoft,2023; Tags: []; University: NTU; Major: engineering; Interests: [swimming]; Birthday: 08-07-2002
    ```
 
 3. Remove all interests from a contact:
@@ -344,7 +344,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INT
    ```
    **Expected output**:
    ```plaintext
-   Edited Person: Charlotte Oliveiro; Phone: 93210283; Email: charlotte@example.com; Address: Blk 11 Ang Mo Kio Street 74, #11-04; Work Experience: Manager,Amazon,2024; Tags: []; University: SMU; Major: Accounting; Interests: []
+   Edited Person: Bob Chen; Phone: 98765432; Email: bobchen@example.com; Address: Blk 45 Ang Mo Kio Ave 6, #02-01; Work Experience: Engineer,Siemens,2022; Tags: []; University: NTU; Major: Mechanical Engineering; Interests: []; Birthday: 08-06-1999
    ```
 
 4. Remove work experience:
@@ -353,7 +353,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDATE] [i/INT
    ```
    **Expected output**:
    ```plaintext
-   Edited Person: David Li; Phone: 91031282; Email: lidavid@example.com; Address: Blk 436 Serangoon Gardens Street 26, #16-43; Work Experience: ; Tags: [[family]]; University: NUS; Major: Law; Interests: [Reading, Traveling, Photography]
+   Edited Person: David Li; Phone: 91031282; Email: lidavid@example.com; Address: Blk 436 Serangoon Gardens Street 26, #16-43; Work Experience: ; Tags: [[family]]; University: NUS; Major: Law; Interests: [Reading, Traveling, Photography]; Birthday: 08-06-2003
    ```
    
 <br>
@@ -681,7 +681,7 @@ delete INDEX
    ```
    **Expected output**:
    ```plaintext
-   Deleted Person: Betsy Crower; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Work Experience: Intern,Johnson&Johnson,2024; Tags: []; University: NTU; Major: engineering; Interests: [Cycling, Swimming]
+   Deleted Person: Betsy Crower; Phone: 99272758; Email: berniceyu@example.com; Address: Blk 30 Lorong 3 Serangoon Gardens, #07-18; Work Experience: Intern,Johnson&Johnson,2024; Tags: []; University: NTU; Major: engineering; Interests: [Cycling, Swimming]; Birthday: 08-03-2004
    ```
 
 2. Delete the first person in search results for "Betsy":
@@ -691,7 +691,7 @@ delete INDEX
    ```
    **Expected output**:
    ```plaintext
-   Deleted Person: Betsy Crowe; Phone: 98765431; Email: betsycrowe@example.com; Address: Bishan Street 22, #02-12; Work Experience: ; Tags: []; University: NTU; Major: Engineering; Interests: []
+   Deleted Person: Betsy Crowe; Phone: 98765431; Email: betsycrowe@example.com; Address: Bishan Street 22, #02-12; Work Experience: ; Tags: []; University: NTU; Major: Engineering; Interests: []; Birthday: 08-03-2004
    ```
 
 <br>
