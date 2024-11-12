@@ -18,7 +18,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/arren11111.md)]
 
 * Role: Project Advisor
-* Responsibilities: Documentation, Integration, Scheduling
+* Responsibilities: Documentation, backend programming
 
 ### Dinesh
 
@@ -28,7 +28,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/dinesh.md)]
 
 * Role: Developer
-* Responsibilities: Something
+* Responsibilities: Software testing and backend programming
 
 ### Jolyn
 
@@ -37,7 +37,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/jolynleow2301)] [[portfolio](team/jolynleow.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Frontend Programmer
 
 ### Yuan Cheng
 
@@ -47,7 +47,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/yuanchengg.md)]
 
 * Role: Developer
-* Responsibilities: Check grammar
+* Responsibilities: Frontend Engineer
 
 ### Yugan
 
@@ -56,5 +56,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/yugan01)]
 [[portfolio](team/yugan01.md)]
 
-* Role: God Emperor
-* Responsibilities: MLOps + Quant Trading
+* Role: Developer
+* Responsibilities: Backend Programmer
