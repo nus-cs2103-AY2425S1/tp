@@ -790,7 +790,7 @@ Execute the following:
 ### Delete Command
 * We plan on adding a confirmation prompt before Cher deletes the contact.
 * If no matches are found, rather than returning an empty list, we plan on displaying the current list along with an error message indicating no users were found. 
-* We also plan on implementing deleting my multiple attributes rather than just one.
+* We also plan on implementing deleting by multiple attributes rather than just one.
 
 
 
