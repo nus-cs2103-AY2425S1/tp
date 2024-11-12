@@ -329,13 +329,13 @@ Additionally, certain command hints could benefit from more clarity on constrain
 2. The restriction on using `rn/` and `ra/` flags simultaneously is already documented in the user guide, and an error message is triggered if both flags are used together. This allows users to learn about the constraint through multiple avenues.
 
 ### 6. Relax Parsing Requirements for `income` and `email` Arguments in Filter Command
-**Current issue:** The parsing requirements for the Filter command are overly strict, particularly for the `income` and `email` fields. Specifically:
+**Current issue:** The parsing requirements for the `filter` command are overly strict, particularly for the `income` and `email` fields. Specifically:
 - `income` must be a full, valid Singapore personal phone number (8 digits, starting with 6, 8 or 9).
 - `email` must be in a valid email format (e.g., `username@domain`).
 
 These requirements can be restrictive for agents who may prefer more flexible filtering, such as searching by the first few digits of a phone number (useful when multiple contacts share a company extension) or by email domain alone.
 
-**Proposed Enhancement:** Relax parsing requirements for the `income` and `email` fields when used with the filter command, allowing any input and matching based on substrings rather than strict validation.
+**Proposed Enhancement:** Relax parsing requirements for the `income` and `email` fields when used with the `filter` command, allowing any input and matching based on substrings rather than strict validation.
 
 **Status:** Scheduled for future release due to current timeline priorities.
 
@@ -742,11 +742,11 @@ testers are expected to do more *exploratory* testing.
       Expected: The list will display all clients with names that include <NAME> and phones that match <PHONE>.
    3. Test case: `filter i/ =<INCOME>`<br>
       Expected: The list will display all clients with incomes that match <INCOME>.
-   4. Other correct filter commands to try: `filter n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
+   4. Other correct `filter` commands to try: `filter n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
       Expected: Similar to previous.
    5. Test case: `filter i/ x<INCOME>` (where x is an invalid income operator)<br>
       Expected: An error message is shown to the user. Error details shown in the status message.
-   6. Other incorrect filter commands to try:<br>
+   6. Other incorrect `filter` commands to try:<br>
       `filter f/<INVALID_VALUE>` (where f is a valid flag),<br>
       `edit 1 y/<VALUE>` (where y is an invalid flag) <br>
       Expected: Similar to previous.
@@ -778,3 +778,25 @@ testers are expected to do more *exploratory* testing.
    4. You may attempt to repair the old corrupted file, by cross-checking the old corrupted file against the new, uncorrupted file created when a new contact is added after step 3.
    5. Make sure to follow the constraints laid out in the user guide for each attribute of Client.
    6. If the data file is successfully repaired, running `agentassist.jar` should result in the old data being displayed back in the application.
+
+## **Appendix: Effort**
+
+The AgentAssist project is a specialized Customer Relationship Management (CRM) system for credit card sales. This required domain-specific changes to the architecture, guided by Object-Oriented Programming (OOP) principles and design patterns.
+
+For example, we added a custom `help` window with an image-based command layout, enhancing user experience beyond a generic user guide. The `view` and `close` commands also enabled a split-pane view, allowing truncated client details on cards and displaying full details in a separate pane.
+### Other Challenging Features 
+- Add and Edit Commands: Adding new flags (such as `Remark`, `Tier`, `Status`, and `Income`) was straightforward but required updates to several supporting classes, including `PersonBuilder` and `TypicalPersons`, to ensure seamless functionality. 
+
+
+- Error Messages for Invalid Arguments: To avoid increasing system coupling, we used a [`LinkedHashSet`]() to keep error messages ordered as per flag parsing. This data structure compiled errors into a single `ParserException` with a concatenated message for easy debugging.
+
+
+- `view` and `close` Commands: Implementing these commands with JavaFX’s split-pane required careful lifecycle management of UI components, handling divider positions and proportions. To maintain consistency between the list and detail views, we used a `ListChangeListener` class to track client list updates and handle cases such as clients being deleted, edited, or filtered out. This entailed intricate event handling and managing multiple change types to keep UI elements synchronized. 
+
+
+- Status Pie Chart: Implementing this feature involved tracking real-time status changes in the client list. We used an observer pattern to handle updates and ensured concurrent modifications ran safely by using `Platform.runLater()`. Extensive CSS customization supported dark theme compatibility, and the design featured color-coded status categories (`NA`, `NON_URGENT`, `URGENT`) with custom legends. Performance optimization was key, as frequent updates could impact UI performance. We employed efficient data structures to track status counts, minimizing redraws and maintaining smooth operation.
+
+Both the `view`/`close` commands and the `Status` Pie Chart required extensive testing to ensure they operated robustly under various conditions, with a clean code structure and separation of concerns.
+
+Overall, we estimate a 35% increase in base functionality from the AB3 system, due to additional features and the increased complexity of components such as `filter`, `view`/`close` commands, and `Status` Pie Chart. The `Parser` and `Predicate` classes also grew significantly in complexity to accommodate these enhancements.
+
