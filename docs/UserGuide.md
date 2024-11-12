@@ -417,7 +417,7 @@ https://www.healthprofessionals.gov.sg/docs/librariesprovider2/guidelines/2016-s
 
 7. **Possible misleading error message when entering invalid command**
    When entering an invalid command like: ` add n/John Doe i/S7783844I invalidStuff p/98765432 e/johnd@example.com a/311, Clementi s/NEW`, the system will display an invalid NRIC error. Due to how commands are parsed in MindMap, invalid input will be treated as part of their previous prefix component. (In this case, the invalid input is treated as part of `IDENTITY_NUMBER`)
-    >**Workaround**: Check for possible invalid input near the indicated parts of the command.
+    >**Workaround**: Check for possible invalid input near the parts indicated by the error.
 
 8. **Possible misleading error message when entering extremely large indexes into delete**
    When entering an invalid index like: `delete 100000000000`, the system will display an invalid command format error, instead of a invalid index error.
