@@ -9,7 +9,6 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 * ChatGPT - These AI tools were used by Dhruv to automate the creation of similar test cases with slight changes. 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -221,7 +220,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* `       | Student event planner managing a large contact list                                                    | See which contacts are currently excluded from search results                                                                             | easily verify which contacts have already been added to events and avoid adding them again by mistake                                              |
 | `* `       | Student event planner managing event contacts                                                          | Remove all contacts from the excluded list                                                                                                | have those contacts reappear in search results and add them to events if necessary, ensuring I can efficiently manage my contact list when needed  |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -322,7 +320,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 12. PlanPal should be packaged into a single JAR file
 13. JAR file should not be above 100MB
 
-*{More to be added}*
 
 ### Glossary
 
