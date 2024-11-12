@@ -383,11 +383,11 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    Use case ends. 
 
 **Extensions**
-* 2a. Cher detects an error in the input.
-   - 2a1. Cher shows the correct input format. <br>
+* 1a. Cher detects an error in the input.
+   - 1a1. Cher shows the correct input format. <br>
      Use case ends.
-* 2b. Cher detects that the specified contact is not a student.
-   - 2b1. Cher shows the error message that attendance for the specified contact cannot be marked. <br>
+* 1b. Cher detects that the specified contact is not a student.
+   - 1b1. Cher shows the error message that attendance for the specified contact cannot be marked. <br>
      Use case ends.
 
 #### Use case: UG12 - Unmark attendance
@@ -400,15 +400,16 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    User case ends.
 
 **Extensions**
-* 2a. Cher detects an error in the input.
-  - 2a1. Cher shows the correct inout format. <br>
+* 1a. Cher detects an error in the input.
+  - 1a1. Cher shows the correct inout format. <br>
     Use case ends. 
-* 2b. Cher detects that the specified contact is not a student.
-  - 2b1. Cher shows error message that the attendance of the specified contact cannot be unmarked. <br>
-    Use case ends. 
-* 2c. Cher detects that the attendance count of the specified contact is already at 0.
-  - 2c1. Cher shows error message that the attendance count is already at 0. <br>
+* 1b. Cher detects that the specified contact is not a student.
+  - 1b1. Cher shows error message that the attendance of the specified contact cannot be unmarked. <br>
     Use case ends.
+* 1c. Cher detects that the attendance count of the specified contact is already at 0.
+  - 1c1. Cher shows error message that the attendance count is already at 0. <br>
+    Use case ends. 
+
 
 #### Use case: UG13 - Reset attendance 
 **MSS**
@@ -420,8 +421,8 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    Use case ends.
 
 **Extensions**
-* 2a. Cher detects that there is no student in the list.
-  - 2a1. Cher shows error message that there is no student in the list. <br>
+* 1a. Cher detects that there is no student in the list.
+  - 1a1. Cher shows error message that there is no student in the list. <br>
     Use case ends.
 
 #### Use case: UG14 - Mark group attendance
@@ -434,8 +435,8 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    Use case ends.
 
 **Extensions**
-* 2a. Cher detects that there is no student in the list.
-  - 2a1. Cher shows error message that there is no student in the list. <br>
+* 1a. Cher detects that there is no student in the list.
+  - 1a1. Cher shows error message that there is no student in the list. <br>
     Use case ends.
 
 #### Use case: UG15 - Unmark group attendance
@@ -447,7 +448,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
    Use case ends.
 
 **Extensions**
-* 2a. Cher detects that there is no student in the list.
+* 1a. Cher detects that there is no student in the list.
   - 1a1. Cher shows error message that there is no student in the list. <br>
     Use case ends. 
 
@@ -810,4 +811,7 @@ Execute the following:
 * If no matches are found, rather than returning an empty list, we plan on displaying the current list along with an error message indicating no users were found. 
 * We also plan on implementing deleting by multiple attributes rather than just one.
 
-
+### Attendance Commands
+* Currently, after executing the attendance commands, the list of all contacts is shown. This may be inconvenient if the user would like to continue working on a filtered list.
+* In the future, we plan to make it such that the filtered list is shown instead of the full contact list. 
+* We also plan to add a confirmation prompt for `reset-att`.
