@@ -755,7 +755,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: A student with ID S00001 exists in the system.
    
-    2. Test case: `edit s00001 p\91234567 a\18 Tampines Road`<br>
+    2. Test case: `edit S00001 p\91234567 a\18 Tampines Road`<br>
         Expected: Student with ID S00001 is updated with phone number "91234567" and address "18 Tampines Road". 
         Success message is shown in the message box.
    
@@ -763,7 +763,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: Student with ID S00999 does not exist in the system.
    
-   2. Test case: `edit s00999 p\84754243 a\25 Orchard Road`<br>
+   2. Test case: `edit S00999 p\84754243 a\25 Orchard Road`<br>
        Expected: Error message indicating that no student is found with the provided student ID. 
    
 3. Editing a student's NRIC to match an existing student's NRIC.
@@ -772,7 +772,7 @@ testers are expected to do more *exploratory* testing.
        * Student with ID S00001 exists in the system.
        * Another student with NRIC S2684225J exists in the system.<br>
       
-   2. Test case: `edit s00001 i\S2684225J`<br>
+   2. Test case: `edit S00001 i\S2684225J`<br>
        Expected: Error message indicating that another student with the same NRIC already exists in the system.
 
 ### Adding subject(s) to a student
@@ -788,7 +788,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: Student with ID s00001 exists in the system.
    
-    2. Test case: `addsubject S00001 s\History s\Chinese`
+    2. Test case: `addsubject S00001 s\History s\Chinese`<br>
         Expected: Student with ID S00001 is added to subjects History and Chinese. The existing subjects remained unchanged.
 
 ### Deleting a student
@@ -912,13 +912,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: Storage file exits (default location: ./data/academyassist.json)
    
-   2. Test case: Edit the file into an invalid JSON format (e.g., deleting a `:`)
+   2. Test case: Edit the file into an invalid JSON format (e.g., deleting a `:`)<br>
        Expected: AcademyAssist erases all existing data and start with a blank data file.
    
-   3. Test case: Duplicate a student's entries
+   3. Test case: Duplicate a student's entries<br>
       Expected: AcademyAssist erases all existing data and start with a blank data file.
    
-   4. Test case: Set `idGeneratedCount` to a value greater than 99999
+   4. Test case: Set `idGeneratedCount` to a value greater than 99999<br>
       Expected: AcademyAssist erases all existing data and start with a blank data file.
 
 --------------------------------------------------------------------------------------------------------------------
