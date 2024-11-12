@@ -1141,6 +1141,11 @@ Team size: 5
 * **Sample Input:** `edit appt 1 s/ m/`
 * **Expected Output:** Appointment indexed 1 should have sickness and medicine shown as null.
 
+8. **Error messages should specify time format**
+* **Flaw:** When inputing an invalid time such as 25:00, it would be helpful if the error message shows that invalid format for time has been provided incase some people are unfamiliar with 24-hour time. 
+* **Enhancement:** Change the error message for cases where time format is incorrect.
+* **Sample Input:** `edit appt 3 d/2024-12-05 25:00`
+* **Expected Output:** Invalid date-time format. Expected format: yyyy-MM-dd HH:mm for example 2024-04-24 13:00 is 24th March 2024, 1:00 PM.
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
