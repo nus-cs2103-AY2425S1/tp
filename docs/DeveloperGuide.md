@@ -347,7 +347,7 @@ The following activity diagram summarizes what happens when a user executes an `
 
 <puml src="diagrams/ExportActivityDiagram.puml" alt="ExportActivityDiagram" />
 
-### Design considerations:
+#### Design considerations:
 
 **Aspect**: The name of the JSON file on `export`.
 
@@ -365,7 +365,7 @@ The following activity diagram summarizes what happens when a user executes an `
 
 ### Import feature
 
-### Implementation
+#### Implementation
 
 The `import` command extends `FileAccessCommand` and by extension, `Command`. It also implements `Undoable`. `import` loads data from a save file into DorManagerPro, with the file path of the save file provided by the user. The `import` command is undoable.
 
@@ -396,7 +396,7 @@ The following activity diagram summarizes what happens when a user executes an `
 
 <puml src="diagrams/ImportActivityDiagram.puml" alt="ImportActivityDiagram" />
 
-### Design considerations:
+#### Design considerations:
 
 **Aspect: The exact format of the `FILE_PATH` parameter**
 
