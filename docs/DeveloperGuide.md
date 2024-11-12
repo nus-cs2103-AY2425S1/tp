@@ -805,6 +805,22 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
+### Future Enhancements
+
+1. **Customizable Command Aliases**: Allow users to define their own aliases for commands, making it easier to personalize the command-line experience and speed up common tasks.
+
+2. **AI-Driven Insights**: Introduce AI-driven analytics accessible through CLI commands to help agents identify property trends, set optimal pricing, and predict client needs. This would turn EZSTATES into a strategic assistant, offering data insights directly within the app.
+
+3. **Command Auto-Completion**: Add an auto-completion feature that suggests commands and arguments as users type, reducing typing time and minimizing errors.
+
+4. **Automated Follow-Up Reminders**: Implement a feature to set reminders for client follow-ups. Agents could schedule reminders directly within the CLI to stay on top of leads without needing separate reminders.
+
+5. **Dual Role for Clients**: Allow a client to be designated as both a buyer and a seller. This would enable agents to manage clients with multiple roles within a single profile, simplifying interactions and reducing redundancy.
+
+6. **Calendar Integration**: Provide a command to sync appointments with external calendar apps (e.g., Google Calendar), so agents can manage schedules within EZSTATES while keeping appointments visible across platforms.
+
+7. **In-App Reporting Tools**: Develop simple CLI commands to generate reports on client activities, property listings, and market insights. Reports would be displayed within the CLI, offering agents a quick overview of key metrics without leaving the app.
+
 
 ### Appendix: Known Bugs
 
