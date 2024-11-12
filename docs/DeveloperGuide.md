@@ -1101,7 +1101,7 @@ testers are expected to do more *exploratory* testing.
      1. Download the jar file and copy into an empty folder.
      2. Open Terminal and type the following:
      `java -jar ClinicConnect.jar`
-   * **Expected:** Shows the GUI with a set of sample patients. The window size may not be optimal.
+   * **Expected:** Shows the GUI with a set of sample patients. The window size may not be optimal. <br>
 
 
 2. Saving window preferences.
@@ -1113,7 +1113,7 @@ testers are expected to do more *exploratory* testing.
      * Close the app.
 
    * **Test case:** Launch the app.
-   * **Expected:** The most recent window size and location is retained.
+   * **Expected:** The most recent window size and location is retained. <br>
 
 
 3. Shutdown.
@@ -1127,7 +1127,7 @@ testers are expected to do more *exploratory* testing.
 
    * **Prerequisite:** The app is a clean state.
    * **Test case:** Launch and exit the app.
-   * **Expected:** A new `data/ClinicConnect.json` file is created. This is the storage file.
+   * **Expected:** A new `data/ClinicConnect.json` file is created. This is the storage file. <br>
 
 
 2. Dealing with missing or corrupted data files.
@@ -1146,13 +1146,13 @@ testers are expected to do more *exploratory* testing.
 1. Getting more information on the commands ClinicConnect provide.
 
    * **Test case:** `help`
-   * **Expected:** A help window detailing a summary of the commands available and their functions is displayed.
+   * **Expected:** A help window detailing a summary of the commands available and their functions is displayed. <br>
 
 
 2. Getting more information on specific commands.
 
    * **Test case:** `help edit`
-   * **Expected:** A help window showing more information about `edit` is displayed. This includes description, parameters, usage and example of the command.
+   * **Expected:** A help window showing more information about `edit` is displayed. This includes description, parameters, usage and example of the command. <br>
 
 
 3. Entering wrong command keyword.
@@ -1168,7 +1168,7 @@ testers are expected to do more *exploratory* testing.
 
    * **Prerequisites:** Start with the provided sample data.
    * **Test case:** `edit T0123456A n|Linda Tan i|T0987654Y s|F d|2009-10-10 p|87496969 e|lindatan@email.com a|Potong Pasir b|O+ nokn|Lincoln Tan nokp|97989999 al|wheat al|eggs rl|LOW ec|diabetes, cholesterol no|Patient is a fall risk`
-   * **Expected:** Patient with NRIC T0123456A details are updated with all the new values.
+   * **Expected:** Patient with NRIC T0123456A details are updated with all the new values. <br>
 
 
 2. Editing a patient with repeated prefixes (except `al|` `rmal|`)
@@ -1178,7 +1178,7 @@ testers are expected to do more *exploratory* testing.
    * **Expected:** An error message is shown indicating that multiple values specified for `n|`.
 
    * **Other incorrect `edit` commands to try:** Commands with repeated `i|`, `s|`, `d|`, `p|`, `e|`, `a|`, `b|`, `nokn|`, `nokp|`, `rl|`, `ec|`, `no|`
-   * **Expected:** Similar to previous.
+   * **Expected:** Similar to previous. <br>
 
 
 3. Editing a patient NRIC to an existing NRIC
@@ -1195,20 +1195,20 @@ testers are expected to do more *exploratory* testing.
 
    * **Prerequisites:** The patient list contains a patient entry with the NRIC "T0123456A".
    * **Test case:** `delete T0123456A`.
-   * **Expected:** The patient entry with the corresponding NRIC is deleted from the patient list. Details of the deleted contact shown in the status message.
+   * **Expected:** The patient entry with the corresponding NRIC is deleted from the patient list. Details of the deleted contact shown in the status message. <br>
 
 
 2. No patient with the corresponding valid NRIC found in the patient list when deleting a patient.
 
    * **Prerequisites:** The patient list contains no patient entries with the NRIC "S0000001X".
    * **Test case:** `delete S0000001X`.
-   * **Expected:** No patient is deleted. Patient not found error details shown in the status message.
+   * **Expected:** No patient is deleted. Patient not found error details shown in the status message. <br>
 
 
 3. Keying in an invalid NRIC when deleting a patient.
 
    * **Test case:** `delete T000001X`.
-   * **Expected:** No patient is deleted. Invalid command error details shown in the status message.
+   * **Expected:** No patient is deleted. Invalid command error details shown in the status message. <br>
 
 
 4. No NRIC keyed in when deleting a patient.
@@ -1231,7 +1231,7 @@ testers are expected to do more *exploratory* testing.
       * NRIC: `T0123456B`
       * Phone: `90901282`
       * Sex: `F`
-      * BirthDate: `2002-10-10`
+      * BirthDate: `2002-10-10` <br>
 
 
 2. Adding a patient with invalid `Nric`
@@ -1264,7 +1264,7 @@ testers are expected to do more *exploratory* testing.
       * Allergies: `Nuts` & `Shellfish`
       * Health Condition: `LOW`
       * Existing Condition: `High Blood Pressure`
-      * Note: `Patient has anger management issues`
+      * Note: `Patient has anger management issues` <br>
 
 
 2. Adding a patient with only the required fields
@@ -1276,7 +1276,7 @@ testers are expected to do more *exploratory* testing.
      * NRIC: `T0171281N`
      * Sex: `M`
      * Date-of-Birth: `2001-10-27`
-     * Phone Number: `98178571`
+     * Phone Number: `98178571` <br>
 
 
 3. Adding a patient with all the required fields and 1 optional field
@@ -1289,7 +1289,7 @@ testers are expected to do more *exploratory* testing.
       * Sex: `M`
       * Date-of-Birth: `2001-10-27`
       * Phone Number: `98178571`
-      * Email: `jakejake@gmail.com`
+      * Email: `jakejake@gmail.com` <br>
 
 
 4. Adding a patient with missing required fields
@@ -1306,20 +1306,20 @@ testers are expected to do more *exploratory* testing.
 
    * **Prerequisites:** The patient list contains a patient entry with the NRIC "T0123456A".
    * **Test case:** `view T0123456A`
-   * **Expected:** Detailed information on the patient entry with the corresponding NRIC is shown. Command success message shown in the status message.
+   * **Expected:** Detailed information on the patient entry with the corresponding NRIC is shown. Command success message shown in the status message. <br>
 
 
 2. No patient with the corresponding valid NRIC found in the patient list when viewing detailed information on a patient.
 
    * **Prerequisites:** The patient list contains no patient entries with the NRIC "S0000001X".
    * **Test case:** `view S0000001X`
-   * **Expected:** Detailed information is not shown. Patient not found error details shown in the status message.
+   * **Expected:** Detailed information is not shown. Patient not found error details shown in the status message. <br>
 
 
 3. Keying in an invalid NRIC when viewing detailed information on a patient.
 
    * **Test case:** `view T000001X`
-   * **Expected:** Detailed information is not shown. Invalid command error details shown in the status message.
+   * **Expected:** Detailed information is not shown. Invalid command error details shown in the status message. <br>
 
 
 4. No NRIC keyed in when viewing detailed information on a patient.
@@ -1335,28 +1335,28 @@ testers are expected to do more *exploratory* testing.
 
     * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. Appointment date and time entered must be valid.
     * **Test case:** `bookappt T0123456A dt|2024-12-29 13:00 h|Consult`
-    * **Expected:** Success message is generated and the valid appointment is added to the patient with NRIC T0123456A.
+    * **Expected:** Success message is generated and the valid appointment is added to the patient with NRIC T0123456A. <br>
 
 
 2. Booking an appointment with an invalid NRIC.
 
     * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system.
     * **Test case:** `bookappt T01234567A dt|2024-12-29 13:00 h|Consult`
-    * **Expected:** Error message is generated to show invalid NRIC format.
+    * **Expected:** Error message is generated to show invalid NRIC format. <br>
 
 
 3. Booking an appointment with an invalid date and time.
 
     * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. The health service entered must be valid.
     * **Test case:** `bookappt T0123456A dt|2024-12-32 13:00 h|Consult`
-    * **Expected:** Error message is generated to show invalid date and time format.
+    * **Expected:** Error message is generated to show invalid date and time format. <br>
 
 
 4. Booking an appointment with an invalid health service.
 
     * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. The appointment date and time entered must be valid.
     * **Test case:** `bookappt T0123456A dt|2024-12-29 13:00 h|Con`
-    * **Expected:** Error message is generated to show invalid health service.
+    * **Expected:** Error message is generated to show invalid health service. <br>
 
 
 5. Booking an appointment with no parameters.
@@ -1373,21 +1373,21 @@ testers are expected to do more *exploratory* testing.
 
     * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system. The appointment to be deleted must be an existing appointment of the patient.
     * **Test case:** `deleteappt T0123456A dt|2024-12-29 13:00`
-    * **Expected:** Success message is generated and the valid appointment is deleted for the patient with NRIC T0123456A.
+    * **Expected:** Success message is generated and the valid appointment is deleted for the patient with NRIC T0123456A. <br>
 
 
 2. Deleting an appointment with an invalid NRIC.
 
     * **Prerequisite:** The appointment to be deleted must be an existing appointment of the patient.
     * **Test case:** `deleteappt T01234567A dt|2024-12-29 13:00 h|Consult`
-    * **Expected:** Error message is generated to show invalid NRIC format.
+    * **Expected:** Error message is generated to show invalid NRIC format. <br>
 
 
 3. Deleting an appointment with an invalid date and time.
 
     * **Prerequisite:** Patient with the corresponding NRIC should already be registered in the system.
     * **Test case:** `deleteappt T0123456A dt|2024-12-32 13:00`
-    * **Expected:** Error message is generated to show invalid date and time format.
+    * **Expected:** Error message is generated to show invalid date and time format. <br>
 
 
 4. Deleting an appointment with an invalid prefix.
@@ -1404,7 +1404,7 @@ testers are expected to do more *exploratory* testing.
 
     * **Prerequisites:** Launch the app.
     * **Test case:** `filter ed|2002-10-10 sd|2002-11-10 h|Blood Test`
-    * **Expected:** Blood Test appointments from Oct 10 2002 to Nov 10 2002 inclusive are displayed.
+    * **Expected:** Blood Test appointments from Oct 10 2002 to Nov 10 2002 inclusive are displayed. <br>
 
 
 2. Filtering appointments with invalid end date
