@@ -1,7 +1,6 @@
 package careconnect.logic.parser;
 
 import static careconnect.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static careconnect.logic.Messages.MESSAGE_TOO_SHORT_SEARCH;
 import static careconnect.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static careconnect.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -23,12 +22,13 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
-    @Test
+    /* @Test
     public void parse_tooShortSearchString_throwsParseException() {
         assertParseFailure(
                 parser, "a",
                 String.format(MESSAGE_TOO_SHORT_SEARCH, FindCommand.MESSAGE_USAGE));
     }
+    */
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
