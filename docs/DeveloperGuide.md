@@ -521,7 +521,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to edit an existing event by providing the index of the event in the list and optionally providing new details such as an event name, event description, event duration (start and end must be provided together).
+1. User requests to edit an existing event by providing the index of the event in the list and optionally providing new details such as an event name, event description, event duration (start and end date must be provided together).
 2. App updates the event with the provided details.
    Use case ends.
 
