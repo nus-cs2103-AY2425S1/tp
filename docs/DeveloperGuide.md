@@ -345,19 +345,19 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                                       | So that I can…​                                         |
-|----------|-----------------------------|--------------------------------------------------------------------|---------------------------------------------------------|
-| `High`   | tech-savvy property agent   | have a place to store my client details                            | manage my large number of client details                |
-| `High`   | tech-savvy property agent   | create a new client profile                                        | store new clients                                       |
-| `High`   | tech-savvy property agent   | delete a client profile                                            | remove clients I no longer serve                        |
-| `High`   | tech-savvy property agent   | search for a client by name                                        | quickly access the profile of the client of interest    |
-| `High`   | tech-savvy property agent   | be able to add my client's phone number and email to their profile | know how to contact him/her                             |
-| `High`   | tech-savvy property agent   | create appointments with my clients                                | manage my appointments with my clients                  |
-| `High`   | tech-savvy property agent   | delete appointments                                                | remove appointments I have already cleared              |
-| `Medium` | tech-savvy property agent   | assign a status to a client                                        | easily categorise clients by priority                   |
-| `Medium` | tech-savvy property agent   | search by appointments                                             | pinpoint which client I am serving for that appointment |
-| `Medium` | tech-savvy property agent   | be able to keep track of all my appointments                       | plan out my schedule efficiently                        |
-| `Medium` | tech-savvy property agent   | be able to know what appointments I have for the day               | make immediate changes to my schedule                   |
+| Priority  | As a …​                     | I want to …​                                                       | So that I can…​                                         |
+|-----------|-----------------------------|--------------------------------------------------------------------|---------------------------------------------------------|
+| `* * *`   | tech-savvy property agent   | have a place to store my client details                            | manage my large number of client details                |
+| `* * *`   | tech-savvy property agent   | create a new client profile                                        | store new clients                                       |
+| `* * *`   | tech-savvy property agent   | delete a client profile                                            | remove clients I no longer serve                        |
+| `* * *`   | tech-savvy property agent   | search for a client by name                                        | quickly access the profile of the client of interest    |
+| `* * *`   | tech-savvy property agent   | be able to add my client's phone number and email to their profile | know how to contact him/her                             |
+| `* * *`   | tech-savvy property agent   | create appointments with my clients                                | manage my appointments with my clients                  |
+| `* * *`   | tech-savvy property agent   | delete appointments                                                | remove appointments I have already cleared              |
+| `* *`     | tech-savvy property agent   | assign a status to a client                                        | easily categorise clients by priority                   |
+| `* *`     | tech-savvy property agent   | search by appointments                                             | pinpoint which client I am serving for that appointment |
+| `* *`     | tech-savvy property agent   | be able to keep track of all my appointments                       | plan out my schedule efficiently                        |
+| `* *`     | tech-savvy property agent   | be able to know what appointments I have for the day               | make immediate changes to my schedule                   |
 
 
 *{More to be added}*
@@ -366,7 +366,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `EZSTATES` and the **Actor** is the `User`, unless specified otherwise)
 
----
 
 #### Use Case: Add Buyer
 
@@ -385,7 +384,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 3a1–3a2 are repeated until all data is valid.
     - Use case resumes from step 4.
 
----
 
 #### Use Case: Add Seller
 
@@ -404,7 +402,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 3a1–3a2 are repeated until all data is valid.
     - Use case resumes from step 4.
 
----
 
 #### Use Case: Edit Client Profile
 
@@ -423,7 +420,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 3a1–3a2 repeat until all data is valid.
     - Use case resumes from step 4.
 
----
 
 #### Use Case: Delete Client Profile
 
@@ -440,7 +436,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **2a1.** System aborts the deletion process.
     - Use case ends.
 
----
 
 #### Use Case: Add Appointment
 
@@ -458,7 +453,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **3a2.** User chooses a new date/time.
     - Use case resumes from step 3.
 
----
 
 #### Use Case: Delete Appointment
 
@@ -475,7 +469,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **2a1.** System stops the deletion process.
     - Use case ends.
 
----
 
 #### Use Case: List Clients
 
@@ -484,7 +477,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System retrieves and displays the client list.
     - Use case ends.
 
----
 
 #### Use Case: Find Client by Name
 
@@ -500,7 +492,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **4a1.** System displays a “No clients found” message.
     - Use case ends.
 
----
 
 #### Use Case: List Appointments
 
@@ -509,7 +500,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System retrieves and displays the list of appointments.
     - Use case ends.
 
----
 
 #### Use Case: Add Listing
 
@@ -528,7 +518,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 3a1–3a2 repeat until all data is valid.
     - Use case resumes from step 4.
 
----
 
 #### Use Case: Show Listings
 
@@ -537,7 +526,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System retrieves and displays the list of property listings.
     - Use case ends.
 
----
 
 #### Use Case: Find Listings
 
@@ -553,7 +541,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **4a1.** System displays a “No listings found” message.
     - Use case ends.
 
----
 
 #### Use Case: Edit Listing
 
@@ -572,7 +559,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Steps 3a1–3a2 repeat until all data is valid.
     - Use case resumes from step 4.
 
----
 
 #### Use Case: Add Buyers to Listing
 
@@ -590,7 +576,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **3a2.** User enters a valid index.
     - Use case resumes from step 4.
 
----
 
 #### Use Case: Remove Buyers from Listing
 
@@ -608,7 +593,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **3a2.** User enters a valid index.
     - Use case resumes from step 4.
 
----
 
 #### Use Case: Delete Listing
 
@@ -625,7 +609,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **2a1.** System stops the deletion process.
     - Use case ends.
 
----
 
 #### Use Case: Clear Listings
 
@@ -637,7 +620,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. System displays a success message.
     - Use case ends.
 
----
 
 #### Use Case: More Info
 
@@ -648,7 +630,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. System displays detailed information for the listing.
     - Use case ends.
 
----
 
 #### Use Case: Chat Window
 
@@ -658,7 +639,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User can interact with the chatbot for assistance with commands and inquiries.
     - Use case ends.
 
----
 
 #### Use Case: Help
 
@@ -667,7 +647,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. System displays general instructions for using the application.
     - Use case ends.
 
----
 
 #### Use Case: Exit Application
 
@@ -722,123 +701,103 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Command Summary
 
----
 
 1. **Adding a Buyer Profile**  
    **Use**: `buyer n/John Doe p/91234567 e/johndoe@example.com`  
    **Expected output**: Buyer profile is added, and a success message is displayed.
 
----
 
 2. **Adding a Seller Profile**  
    **Use**: `seller n/Jane Smith p/98765432 e/janesmith@example.com a/456 Oak Ave`  
    **Expected output**: Seller profile is added, and a success message is displayed.
 
----
 
 3. **Editing a Client Profile**  
    **Use**: `editclient 1 n/Jane Doe p/98765432`  
    **Expected output**: Client profile is edited, and a success message is displayed.
 
----
 
 4. **Deleting a Client Profile**  
    **Use**: `deleteclient 1`  
    **Expected output**: Client profile is deleted, and a success message is displayed.
 
----
 
 5. **Adding a Listing**  
    **Use**: `listing n/Greenwood House pr/500000 ar/1200 add/456 Elm St reg/central sel/3 buy/2`  
    **Expected output**: Listing is added, and a success message is displayed.
 
----
 
 6. **Editing a Listing**  
    **Use**: `d`  
    **Expected output**: Listing is edited, and a success message is displayed.
 
----
 
 7. **Deleting a Listing**  
    **Use**: `deletelisting 1`  
    **Expected output**: Listing is deleted, and a success message is displayed.
 
----
 
 8. **Adding Buyers to Listing**  
    **Use**: `addlistingbuyers 1 buy/2 buy/3`  
    **Expected output**: Buyers are added to the listing, and a success message is displayed.
 
----
 
 9. **Removing Buyers from Listing**  
    **Use**: `removelistingbuyers 1 buy/2`  
    **Expected output**: Buyers are removed from the listing, and a success message is displayed.
 
----
 
 10. **Listing All Clients**  
     **Use**: `showclients`  
     **Expected output**: All clients are displayed.
 
----
 
 11. **Listing All Listings**  
     **Use**: `showlistings`  
     **Expected output**: All listings are displayed.
 
----
 
 12. **Finding Clients by Name**  
     **Use**: `find David`  
     **Expected output**: All clients matching the specified name are displayed.
 
----
 
 13. **Finding Listings by Keyword**  
     **Use**: `findlisting Greenwood`  
     **Expected output**: All listings matching the specified keyword are displayed.
 
----
 
 14. **Getting More Information on a Listing**  
     **Use**: `moreinfo 1`  
     **Expected output**: Detailed information about the listing is displayed.
 
----
 
 15. **Clearing All Listings**  
     **Use**: `clearlistings`  
     **Expected output**: All listings are cleared, and a success message is displayed.
 
----
 
 16. **Clearing All Data**  
     **Use**: `clear`  
     **Expected output**: All data (clients, listings, etc.) is cleared, and a success message is displayed.
 
----
 
 17. **Help**  
     **Use**: `help`  
     **Expected output**: General instructions for using the application are displayed.
 
----
 
 18. **Opening the Chat Window**  
     **Use**: `chatbot`  
     **Expected output**: The chat window is opened, allowing interaction with the chatbot.
 
----
 
 19. **Exiting the Application**  
     **Use**: `exit`  
     **Expected output**: The application is closed.
 
----
 
 ### Saving data
 
@@ -846,6 +805,21 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
 
 ### Appendix: Known Bugs
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+2. **If you minimize the Help Window** and then run the `help` command (or use the Help menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+3. **For the n/ prefix**, users are not able to put slashes in their names (e.g., Kumar S/O Navareen). A temporary workaround is to input `son of` or `so` or `s o` until this issue has been rectified.
+
+4. **For the add/ prefix**, addresses are case-sensitive. As a result, `add/123 Clementi Ave` and `add/123 clementi ave` will be treated as distinct addresses, which may lead to unintentional duplicates.
+
+5. **For the Edit Listing command**, users can modify listings to assign a buyer as the seller of a listing.
+
+6. **For the Add Buyers to Listing command**, the Result Display displays an incorrect error message.
+
+7. **For the MoreInfo command**, the `Output` for User Error #2 has a missing `parameters` line where the CLIENT_INDEX should be. Refer to the Special Comments section under More Info for more clarification.
+
+8. **For the Chatbot**, the text input field appears in black, which does not contrast well with its gray background.
