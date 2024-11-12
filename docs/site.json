@@ -1,0 +1,29 @@
+{
+  "baseUrl": "https://ay2425s1-cs2103-f12-4.github.io",
+  "titlePrefix": "StudentManagerPro",
+  "titleSuffix": "",
+  "faviconPath": "images/SMPLogo.png",
+  "style": {
+    "codeTheme": "light"
+  },
+  "ignore": [
+    "_markbind/layouts/*",
+    "_markbind/logs/*",
+    "_site/*",
+    "site.json",
+    "*.md",
+    "*.njk",
+    ".git/*",
+    "node_modules/*"
+  ],
+  "pagesExclude": ["node_modules/*"],
+  "pages": [
+    {
+      "glob": ["**/index.md", "**/*.md"]
+    }
+  ],
+  "deploy": {
+    "message": "Site Update."
+  },
+  "timeZone": "Asia/Singapore"
+}

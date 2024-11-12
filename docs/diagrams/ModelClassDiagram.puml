@@ -19,6 +19,15 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class StudentClass
+Class RegisterNumber
+Class Sex
+Class EcName
+Class EcNumber
+Class AbsentDate
+Class AbsentReason
+Class Exam
+Class Submission
 
 Class I #FFFFFF
 }
@@ -42,6 +51,15 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> StudentClass
+Person *--> RegisterNumber
+Person *--> Sex
+Person *--> EcName
+Person *--> EcNumber
+Person *--> "*" AbsentReason
+Person *--> "*" AbsentDate
+Person *--> "*" Exam
+Person *--> "*" Submission
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

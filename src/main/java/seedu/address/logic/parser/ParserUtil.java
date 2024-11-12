@@ -9,10 +9,19 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.exam.Exam;
+import seedu.address.model.person.AbsentDate;
+import seedu.address.model.person.AbsentReason;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EcName;
+import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RegisterNumber;
+import seedu.address.model.person.Sex;
+import seedu.address.model.person.StudentClass;
+import seedu.address.model.submission.Submission;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,6 +105,141 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String registerNumber} into an {@code RegisterNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code registerNumber} is invalid.
+     */
+    public static RegisterNumber parseRegisterNumber(String registerNumber) throws ParseException {
+        requireNonNull(registerNumber);
+        String trimmedRegisterNumber = registerNumber.trim();
+        if (!RegisterNumber.isValidRegisterNumber(trimmedRegisterNumber)) {
+            throw new ParseException(RegisterNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new RegisterNumber(trimmedRegisterNumber);
+    }
+
+    /**
+     * Parses a {@code String sex} into an {@code Sex}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sex} is invalid.
+     */
+    public static Sex parseSex(String sex) throws ParseException {
+        requireNonNull(sex);
+        String trimmedSex = sex.trim();
+        if (!Sex.isValidSex(trimmedSex)) {
+            throw new ParseException(Sex.MESSAGE_CONSTRAINTS);
+        }
+        return new Sex(trimmedSex);
+    }
+
+    /**
+     * Parses a {@code String studentClass} into an {@code Class}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentClass} is invalid.
+     */
+    public static StudentClass parseStudentClass(String studentClass) throws ParseException {
+        requireNonNull(studentClass);
+        String trimmedStudentClass = studentClass.trim();
+        if (!StudentClass.isValidStudentClass(trimmedStudentClass)) {
+            throw new ParseException(StudentClass.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentClass(trimmedStudentClass);
+    }
+
+    /**
+     * Parses a {@code String ecName} into a {@code EcName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code ecName} is invalid.
+     */
+    public static EcName parseEcName(String ecName) throws ParseException {
+        requireNonNull(ecName);
+        String trimmedEcName = ecName.trim();
+        if (!EcName.isValidEcName(trimmedEcName)) {
+            throw new ParseException(EcName.MESSAGE_CONSTRAINTS);
+        }
+        return new EcName(trimmedEcName);
+    }
+
+    /**
+     * Parses a {@code String ecNumber} into a {@code EcNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code EcNumber} is invalid.
+     */
+    public static EcNumber parseEcNumber(String ecNumber) throws ParseException {
+        requireNonNull(ecNumber);
+        String trimmedEmergencyPhone = ecNumber.trim();
+        if (!EcNumber.isValidEcNumber(trimmedEmergencyPhone)) {
+            throw new ParseException(EcNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new EcNumber(trimmedEmergencyPhone);
+    }
+
+    /**
+     * Parses a {@code String submission} into a {@code Submission}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code submission} is invalid.
+     */
+    public static Submission parseSubmission(String submission) throws ParseException {
+        requireNonNull(submission);
+        String trimmedSubmission = submission.trim();
+        if (!Submission.isValidSubmissionName(trimmedSubmission)) {
+            throw new ParseException(Submission.NAME_MESSAGE_CONSTRAINTS);
+        }
+        return new Submission(trimmedSubmission);
+    }
+
+    /**
+     * Parses a {@code String submissionStatus} into a {@code String submissionStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code submissionStatus} is invalid.
+     */
+    public static String parseSubmissionStatus(String submissionStatus) throws ParseException {
+        requireNonNull(submissionStatus);
+        String trimmedSubmissionStatus = submissionStatus.trim();
+        if (!Submission.isValidSubmissionStatus(trimmedSubmissionStatus)) {
+            throw new ParseException(Submission.STATUS_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedSubmissionStatus;
+    }
+
+    /**
+     * Parses a {@code String exam} into a {@code Exam}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code exam} is invalid.
+     */
+    public static Exam parseExam(String exam) throws ParseException {
+        requireNonNull(exam);
+        String trimmedExam = exam.trim();
+        if (!Exam.isValidExamName(trimmedExam)) {
+            throw new ParseException(Exam.NAME_MESSAGE_CONSTRAINTS);
+        }
+        return new Exam(trimmedExam);
+    }
+
+    /**
+     * Parses a {@code String examScore} into a {@code String examScore}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code examScore} is invalid.
+     */
+    public static String parseExamScore(String examScore) throws ParseException {
+        requireNonNull(examScore);
+        String trimmedExamScore = examScore.trim();
+        if (!Exam.isValidExamScore(trimmedExamScore)) {
+            throw new ParseException(Exam.SCORE_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedExamScore;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +264,83 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String absentDate} into a {@code AbsentDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code absentDate} is invalid.
+     */
+    public static AbsentDate parseAbsentDate(String absentDate) throws ParseException {
+        requireNonNull(absentDate);
+        String trimmedAbsentDate = absentDate.trim();
+        if (!AbsentDate.isValidAbsentDate(trimmedAbsentDate)) {
+            throw new ParseException(AbsentDate.MESSAGE_CONSTRAINTS);
+        }
+        return new AbsentDate(trimmedAbsentDate);
+    }
+
+    /**
+     * Parses a {@code String absentReason} into a {@code AbsentReason}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code absentReason} is invalid.
+     */
+    public static AbsentReason parseAbsentReason(String absentReason) throws ParseException {
+        requireNonNull(absentReason);
+        String trimmedAbsentReason = absentReason.trim().replaceAll("\\s+", " ");
+        if (!AbsentReason.isValidAbsentReason(trimmedAbsentReason)) {
+            throw new ParseException(AbsentReason.MESSAGE_CONSTRAINTS);
+        }
+        return new AbsentReason(trimmedAbsentReason);
+    }
+
+
+    /**
+     * Parse {@code String attribute} into a {@code SortAttribute}.
+     * All whitespaces will be trimmed
+     *
+     * @throws ParseException if the given {@code SortAttribute} is invalid.
+     */
+    public static SortAttribute parseSortAttribute(String attribute) throws ParseException {
+        requireNonNull(attribute);
+        String trimmedAttribute = attribute.replaceAll("\\s+", "");
+        String upperCaseAttribute = trimmedAttribute.toUpperCase();
+        SortAttribute sortAttribute;
+        try {
+            sortAttribute = SortAttribute.valueOf(upperCaseAttribute);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(SortAttribute.MESSAGE_CONSTRAINTS);
+        }
+        return sortAttribute;
+    }
+
+    /**
+     * Enum to encapsulate all the possible attributes to sort the list by.
+     */
+    public enum SortAttribute {
+        NAME("name"),
+        PHONE("phone"),
+        EMAIL("email"),
+        ADDRESS("address"),
+        REGISTERNUMBER("register number"),
+        SEX("sex"),
+        STUDENTCLASS("student class"),
+        EMERGENCYCONTACTNAME("emergency contact name"),
+        EMERGENCYCONTACTNUMBER("emergency contact number"),
+        NONE("none");
+
+        public static final String MESSAGE_CONSTRAINTS = "Sorting attribute is invalid";
+
+        private final String attribute;
+        SortAttribute(String attribute) {
+            this.attribute = attribute;
+        }
+
+        @Override
+        public String toString() {
+            return this.attribute;
+        }
     }
 }
