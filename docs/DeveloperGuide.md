@@ -266,7 +266,7 @@ _{more aspects and alternatives to be added}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* people who work in management/administration of tuition centres in **Singapore**
+* people who work in management/administration of tuition centres for primary and secondary schools in **Singapore**
 * manages a tuition centre of **small to medium size (roughly a few hundred students)**
 
 **Value proposition**: Centralizes contact details, tracks student data and offers functions that improve administrative efficiency and organization for a tuition centre.
@@ -889,24 +889,46 @@ of the work we have accomplished together.
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Planned Enhancement**
 Team size: 5
-### 1. Delete subject feature
-Currently, subjects must be manually deleted using 
 
-### 2. Add subject feature
-Currently, Subjects are implemented using an Enum with a list of common subjects offered by tuition centers in Singapore. 
+1. **Allowing more subjects to be added with the addsubject feature:** Currently, Subjects are implemented using an enum with a list of common subjects offered by tuition centers in Singapore. 
 Acknowledging that there might be niche subjects not included, we plan to enhance this feature to allow administrators to 
 define verified subjects in the system that are offered under the tuition center, such that they can enrol students into 
 those subjects as well without losing the benefit of validation and duplication checks. 
 
-### 3. Enhance Subject Tracking with list sorted alphabetically or by enrolment
-Currently, the subject list shown when using the subject tracking feature is not sorted. We plan to include the options
+2. **Enhance Subject Tracking with list sorted alphabetically or by enrolment:** Currently, the subject list shown when using the subject tracking feature is not sorted. We plan to include the options
 to sort by alphabetical order or by enrolment numbers in the future to support easier accessing and allocation of resources.
 
-### 4. Allowing additional special characters in names 
-Currently, only the special characters 
+3. **Enhance UI for scrolling and viewing:** Currently, the UI (e.g. scrollbar) can experience some errors when the app first launches, 
+and pop-up windows may require users to manually resize in order to view all the data. In the future, we plan to improve the UI responsiveness 
+to work across various window sizes and different computer settings. 
 
-### 5. Improved verification of address
-In the future, we plan to improve the verification of the address field of the add functionality, such that we can check 
-that necessary fields are present, e.g. post code, country, street name etc., to ensure that addresses saved are valid addresses. 
+4. **Allowing additional special characters in names:** Currently, only the special characters (-/') are allowed in names. In the future, we plan to improve our validation checks 
+to include more special characters such as '.' and ',', and allowing names to end with some of the special characters (e.g. Robert Downey Jr.). 
+
+5. **Accepting consecutive spaces in names:** Currently, consecutive spaces in names are not allowed. We plan to improve the validation checks of names to treat  
+multiple spaces in names, which arise likely due to mistakes in entry, as just one space (e.g. treating Jane     Tan as Jane Tan). 
+
+6. **Improved verification of address:** Currently, any String is accepted as an address. In the future, we plan to improve the verification of the address field of 
+the add functionality, such that we can check that necessary fields are present, e.g. post code, country, street name etc., 
+to ensure that addresses saved are valid addresses.
+
+7. **Allowing Help window to be closed by keyboard shortcut:** Currently, the help window can only be closed by clicking on 
+the cross on the window. To improve convenience to the user, we plan to enable the help window to be closed by a keyboard shortcut 
+in the future. 
+
+8. **Automatically refresh tracksubject window:** Currently, whenever the user uses a command such as filter or find that 
+changes the student contacts listed, the user has to manually run the tracksubject command again to view updated enrolment 
+data according to the newly filtered student list. In the future, we plan to enhance the tracksubject method such that 
+the enrolment data will be refreshed automatically whenever the student list is changed. 
+
+9. **Display more information on a student's contact:** Currently, only a few fields of a student's contact is displayed 
+to keep the information concise and ensure ease of navigation. Although there is a workaround method (detail) provided to 
+let users view the full student details, we plan to improve the UI to include more essential information such as NRIC or student photo better 
+to reduce ambiguity when navigating through the contact lists.
+
+10. **Make the error message of the 'detail' command more specific:** Currently, when the user enters the detail command 
+with a StudentID that has an invalid format, the error message is too general. We plan to make it more specific by making it clearer  
+to the user that the failed execution was due to an error in the StudentID, and state what the expected format should be. This can help to reduce 
+ambiguity and help with troubleshooting. 
 
 --------------------------------------------------------------------------------------------------------------------
