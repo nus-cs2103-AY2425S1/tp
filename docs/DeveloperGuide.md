@@ -68,6 +68,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W11-3/tp/blob/master/src/main/java/seedu/academyassist/ui/Ui.java).
@@ -278,7 +280,6 @@ _{more aspects and alternatives to be added}_
 
 
 
-
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -344,6 +345,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. System informs user that the student has been successfully deleted
 
    Use case ends
+
+<div style="page-break-after: always;"></div>
 
    **Extensions**
 
