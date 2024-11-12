@@ -61,6 +61,8 @@ public class PersonCard extends UiPart<Region> {
             github.setText("GitHub username unspecified");
         }
 
+        //@@author swaminathanViswa
+        // Inspiration from GPT on the usage of .add() and .getStyleClass() methods.
         Label labelOfWeek = new Label("Weeks attended: ");
         if (!person.getWeeksPresent().isEmpty()) {
             labelOfWeek.getStyleClass().add("information-label");

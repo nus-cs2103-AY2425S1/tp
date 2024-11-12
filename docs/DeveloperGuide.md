@@ -18,7 +18,7 @@
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 * We took references from [OpenCSV](https://opencsv.sourceforge.net/) for import and export commands.
 * ChatGPT was used to check for errors and generate some test cases.
-  * It was used to generate the first two test cases in RemoveGradeCommandParserTest.java
+  * It was used to generate the first two test cases in RemoveGradeCommandParserTest.java, MarkCommandParserTest.java & MarkCommandTest.java.
   * It was also used for the usage of `.getStyleClass()` & `.add()` methods in PersonCard.java to display the information clearly.
   * It was consulted to get a plan of how `PersonComparator` can be implemented.
   * It was consulted to fix and improve the UI.
