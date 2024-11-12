@@ -220,7 +220,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 
-- `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/patient`
+- `add n/John Doe nric/S6483749D p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/patient`
 
 Here’s how to add a patient to the address book:
 ![add Patient Command](images/addPatient.png)
