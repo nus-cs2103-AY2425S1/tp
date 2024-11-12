@@ -29,7 +29,10 @@ ChatGPT was used by the following team members:
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+---
+<br>
+<br>
+<br>
 
 ## **Design**
 
@@ -56,6 +59,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
@@ -73,6 +78,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -89,6 +96,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -124,6 +133,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -137,6 +148,8 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -147,6 +160,8 @@ The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+<div style="page-break-after: always;"></div>
 
 ### Common classes
 
@@ -232,6 +247,8 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
@@ -276,6 +293,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Value proposition**: manage patients faster than a typical mouse/GUI driven app
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -376,6 +394,8 @@ Use case ends.
 
       Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: U03 Add Session Log**
 
 **MSS**
@@ -404,6 +424,8 @@ Use case ends.
     * 3a1. System display an error message.
 
       Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: U04 Edit Patient Detail**
 
@@ -440,7 +462,9 @@ Use case ends.
     * 4a1. System display a message indicating that the edit was canceled.
 
       Use case ends.
-  
+
+<div style="page-break-after: always;"></div>
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -449,6 +473,8 @@ Use case ends.
 4. The application must be able to recover gracefully from unexpected failures or errors, such as improper input, without crashing or losing data.
 5. The system should include comprehensive user and developer documentation, including instructions for installation, configuration, usage, and troubleshooting.
 6. The application must provide feedback to the user within 600 milliseconds for all interactive actions (e.g., executing a command, saving a record).
+
+<div style="page-break-after: always;"></div>
 
 ### Glossary
 
@@ -462,12 +488,12 @@ Use case ends.
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
-
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Launch and shutdown
 
@@ -527,6 +553,7 @@ testers are expected to do more *exploratory* testing.
    2. Navigate to the ./data folder created under the same directory of the program and corrupt the addressbook.json file by adding a random character to it.<br>
       Expected: The app loads up with an empty address book.
 
+<div style="page-break-after: always;"></div>
 
 ## Reference
 
