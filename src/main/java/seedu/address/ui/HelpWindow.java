@@ -140,7 +140,7 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandSummary("Clear", "clear"),
                 new CommandSummary("Delete", "delete INDEX / delete NAME\ne.g., delete 3, delete Alex Yeoh"),
                 new CommandSummary("Edit", "edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] "
-                        + "[ap/APPOINTMENT] [t/TAG]\ne.g., edit John Doe n/Betsy Crower t/ ap/"),
+                        + "[ap/FUTURE APPOINTMENT] [t/TAG]\ne.g., edit John Doe n/Betsy Crower t/ ap/"),
                 new CommandSummary("Exit", "exit"),
                 new CommandSummary("Filter", "filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND]"
                         + " [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...\n"
@@ -149,7 +149,7 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandSummary("Help", "help"),
                 new CommandSummary("Import", "import FILENAME.json"),
                 new CommandSummary("List", "list\nlist*"),
-                new CommandSummary("Note", "note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]\n"
+                new CommandSummary("Note", "note NAME [ap/PREVIOUS APPOINTMENT] [m/MEDICATION] [r/REMARK]\n"
                         + "e.g., note John Doe m/10mg Ibuprofen"),
                 new CommandSummary("Sort", "sort \ne.g., sort"),
                 new CommandSummary("Star", "star INDEX / star NAME\ne.g., star 3, star Alex Yeoh"),
