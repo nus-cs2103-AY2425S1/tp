@@ -925,6 +925,7 @@ The `clearlisting` clears all `listings`.
 The `findlisting` command searches for and lists all `Listings` where the listing name contains any of the specified keywords.
 
 **Implementation**
+![FindListingSequenceDiagram.png](images/dg/FindListingSequenceDiagram.png)
 
 1. User runs the `findlisting` command with one or more keywords.
 2. The `EzstatesParser` parses this command and creates a `FindListingCommandParser` instance, which processes the keywords and creates a `FindListingCommand` with a `ListingNameContainsKeywordsPredicate` that contains the user’s keywords.

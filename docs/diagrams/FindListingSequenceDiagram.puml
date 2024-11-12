@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+title Find Listing Sequence Diagram
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant ":FindListingCommandParser" as FindListingCommandParser LOGIC_COLOR
+participant "f:FindListingCommand" as FindListingCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+note left of LogicManager
+cmd:
+"findlisting mansion villa"
+keywords:
+"mansion villa"
+end note
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(cmd)
+activate LogicManager
+
+LogicManager -> EzstatesParser : parseCommand(cmd)
+activate EzstatesParser
+
+create FindListingCommandParser
+EzstatesParser -> FindListingCommandParser
+activate FindListingCommandParser
+
+FindListingCommandParser --> EzstatesParser
+deactivate FindListingCommandParser
+
+EzstatesParser -> FindListingCommandParser : parse(keywords)
+activate FindListingCommandParser
+
+create FindListingCommand
+FindListingCommandParser -> FindListingCommand :
+activate FindListingCommand
+FindListingCommand --> FindListingCommandParser
+deactivate FindListingCommand
+
+FindListingCommandParser --> EzstatesParser : f
+deactivate FindListingCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindListingCommandParser -[hidden]-> EzstatesParser
+destroy FindListingCommandParser
+
+EzstatesParser --> LogicManager : f
+deactivate EzstatesParser
+
+LogicManager -> FindListingCommand : execute(m:Model)
+activate FindListingCommand
+
+FindListingCommand -> Model : updateFilteredListingList(predicate)
+activate Model
+Model --> FindListingCommand
+deactivate Model
+
+create CommandResult
+FindListingCommand -> CommandResult
+activate CommandResult
+CommandResult --> FindListingCommand
+deactivate CommandResult
+
+FindListingCommand --> LogicManager : r
+deactivate FindListingCommand
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml
