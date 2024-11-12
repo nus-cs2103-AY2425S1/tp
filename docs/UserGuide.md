@@ -534,6 +534,7 @@ Furthermore, certain edits can cause BizBook to behave in unexpected ways (e.g.,
 8. **Notes are alphanumeric**, similar to contact name, the notes do not allow special characters.
 9. **Once selected, a person can't be unselected**, from either the contact list or pinned panel.
 10. **Notes with very long content will trail off with `...`**, instead of wrapping the text and displaying the hidden content on the next line.
+11. **Scrollbar in contact details appears when window is too small**, despite there being no selected contact.
 
 ---
 
@@ -542,8 +543,8 @@ Furthermore, certain edits can cause BizBook to behave in unexpected ways (e.g.,
 ## Command summary
 
 | Action              | Format, Examples                                                                                                                                                      |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| ------------------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **List**            | `list`                                                                                                                                                                |
 | **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
