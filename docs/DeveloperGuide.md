@@ -660,6 +660,7 @@ Execute the following:
 
 
 ### Batch deleting a group of people
+
 1. Deleting a group of people.
    
    1. Prerequisites: <br>
@@ -680,6 +681,7 @@ Execute the following:
       previous test case `iii`. Feedback box will show detail of deleted person.
 
 ### Batch editing a group of people's tag
+
 1. Changing a common tag among group of people.
     1. Prerequisites: <br>
        Execute the following:
@@ -777,4 +779,18 @@ Execute the following:
       4. Other incorrect find commands to try: `find`, `find x`, `...` (where x is larger than the list size)<br>
          Expected: List of persons shown remains unchanged.
          Feedback box shows error details regarding incorrect input format.
+
+
+## **Appendix: Planned Enhancements**
+
+### Find Command
+* We plan on adding functionality for partial matches for phone number, address, and email, following the same format as the current partial name search.
+* In the future, we will also implement finding by multiple attributes rather than just one.
+
+### Delete Command
+* We plan on adding a confirmation prompt before Cher deletes the contact.
+* If no matches are found, rather than returning an empty list, we plan on displaying the current list along with an error message indicating no users were found. 
+* We also plan on implementing deleting my multiple attributes rather than just one.
+
+
 
