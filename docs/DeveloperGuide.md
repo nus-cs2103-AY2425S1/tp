@@ -314,15 +314,18 @@ of the social workers, allowing them to focus more on delivering high-quality ca
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                   | I want to …​                       | So that I can…​                                                        |
-|----------|-------------------------------------------|------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                  | see usage instructions             | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                      | add a new beneficiary              |                                                                        |
-| `* * *`  | user                                      | delete a beneficiary               | remove entries that I no longer need                                   |
-| `* * *`  | user                                      | find a beneficiary by name         | locate details of persons without having to go through the entire list |
-| `* * *`   | user                                      | update a beneficiary's information | keep their records up to date                                          |
-| `* *`    | user                                      | hide private contact details       | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the CareConnect | sort persons by name               | locate a person easily                                                 |
+| Priority | As a …​                                   | I want to …​                             | So that I can…​                                                        |
+|---------|-------------------------------------------|------------------------------------------|------------------------------------------------------------------------|
+| `* * *` | new user                                  | see usage instructions                   | refer to instructions when I forget how to use the App                 |
+| `* * *` | user                                      | add a new client                         | add new clients that I'm serving.                                      |
+| `* * *` | user                                      | delete a beneficiary                     | remove entries that I no longer need                                   |
+| `* * *` | user                                      | find a beneficiary by name               | locate details of persons without having to go through the entire list |
+| `* * *` | user                                      | filter beneficiaries with varoius fields | quickly find beneficiaries based on address and tags                   |
+| `* * *` | user                                      | update a beneficiary's information       | keep their records up to date                                          |
+| `* * *`  | user with many clients                    | tag clients                              | categorize and organize them for easy filtering                        |
+| `* * `  | user                                      | view a log of all actions taken on cases | audit user activity.                                                   |
+| `* `    | user that prefers typing over mouse input | navigate the UI using keyboard           | use the app without moving to mouse                                    |
+| `* `    | user                                      | sort the client list by various fields   | so that I can scroll through and check for clients that I missed       |
 
 *{More to be added}*
 
