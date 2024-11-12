@@ -211,6 +211,7 @@ Clients with **NA** status (no follow-up required) have no status label on the U
 [↑ Return to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 # 4. Glossary
 This section contains a list of terms used in this user guide. Feel free to refer back to this section if you are unsure of what a term means!
@@ -409,15 +410,17 @@ Some initial commands to try:
 
 The GUI will dynamically update to show the results of your commands, making it easy to see the impact of your actions in real time.
 
-**Note:** The order of flags does not matter. For example, `edit 1 n/ john p/ 92223333` is the same as `edit 1 p/ 92223333 n/ john`.
+**Note:** The order of flags is flexible. For instance, edit 1 n/ john p/ 92223333 is equivalent to edit 1 p/ 92223333 n/ john.
 
 Refer to the [Commands Section](#6-commands) for more comprehensive details of each command.
 
 > 💡 **Pro Tip:**
 >
-> Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.
+> - The order of flags within commands is flexible. For instance, `edit 1 n/ john p/ 92223333` is equivalent to `edit 1 p/ 92223333 n/ john`. Use whatever order feels most natural!
+> 
+> - Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.
 >
-> For example, use `filter j/ doctor` to display all doctors, then `edit 2 a/ 321 New Address` to update the address for the second listed doctor.
+>   - For example, use `filter j/ doctor` to display all doctors, then `edit 2 a/ 321 New Address` to update the address for the second listed doctor.
 
 [↑ Return to Table of Contents](#table-of-contents)
 
@@ -852,11 +855,11 @@ view <INDEX>
     - The images below show the GUI before and after using `view 1`:
         <div style="display: flex; gap: 10px;">
             <figure markdown>
-                <img src="images/UIBeforeView.png" alt="UI Before View" style="width: 100%;">
+                <img src="images/UIBeforeView.png" alt="UI Before View" style="width: 300;">
                 <figcaption>Before View</figcaption>
             </figure>
             <figure markdown>
-                <img src="images/UIAfterView.png" alt="UI After View" style="width: 100%;">
+                <img src="images/UIAfterView.png" alt="UI After View" style="width: 300;">
                 <figcaption>After View</figcaption>
             </figure>
         </div>
@@ -895,11 +898,11 @@ close
     - The images below show the GUI before and after using `close`:
       <div style="display: flex; gap: 10px;">
           <figure markdown>
-              <img src="images/UIAfterView.png" alt="UI Before View" style="width: 100%;">
+              <img src="images/UIAfterView.png" alt="UI Before View" style="width: 300;">
               <figcaption>Before Close</figcaption>
           </figure>
           <figure markdown>
-              <img src="images/UIAfterClose.png" alt="UI After View" style="width: 100%;">
+              <img src="images/UIAfterClose.png" alt="UI After View" style="width: 300;">
               <figcaption>After Close</figcaption>
           </figure>
       </div>
