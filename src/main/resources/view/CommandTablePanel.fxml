@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <TableView fx:id="commandTable" layoutX="5.0" layoutY="5.0" prefHeight="400.0" prefWidth="600.0" >
+     <columns>
+        <TableColumn fx:id="actionColumn" text="Command"/>
+        <TableColumn fx:id="formatColumn" text="Usage"/>
+    </columns>
+    </TableView>
+</AnchorPane>

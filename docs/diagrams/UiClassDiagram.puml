@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
 skinparam classBackgroundColor UI_COLOR
+scale 2
 
 package UI <<Rectangle>>{
 Class "<<interface>>\nUi" as Ui
@@ -13,8 +14,12 @@ Class HelpWindow
 Class ResultDisplay
 Class PersonListPanel
 Class PersonCard
+Class ContactDetails
 Class StatusBarFooter
 Class CommandBox
+Class SearchBox
+Class PinnedPersonListPanel
+Class PinnedPersonCard
 }
 
 package Model <<Rectangle>> {
@@ -30,31 +35,44 @@ HiddenOutside ..> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
+
 MainWindow *-down->  "1" CommandBox
+MainWindow *-down->  "1" SearchBox
 MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" PinnedPersonListPanel
 MainWindow *-down-> "1" StatusBarFooter
-MainWindow --> "0..1" HelpWindow
+MainWindow -down-> "0..1" HelpWindow
+MainWindow *-down-> "0..1" ContactDetails
 
 PersonListPanel -down-> "*" PersonCard
+PinnedPersonListPanel -down-> "*" PinnedPersonCard
 
 MainWindow -left-|> UiPart
+ContactDetails -down-|> UiPart
 
-ResultDisplay --|> UiPart
-CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
-StatusBarFooter --|> UiPart
-HelpWindow --|> UiPart
+ResultDisplay -down-|> UiPart
+CommandBox -down-|> UiPart
+SearchBox -down-|> UiPart
+PersonListPanel -down-|> UiPart
+PersonCard -down-|> UiPart
+PinnedPersonListPanel -down-|> UiPart
+PinnedPersonCard -down-|> UiPart
+StatusBarFooter -down-|> UiPart
+HelpWindow -down-|> UiPart
 
-PersonCard ..> Model
+PersonCard .down.> Model
+PinnedPersonCard .down.> Model
+ContactDetails .down.> Model
+
 UiManager -right-> Logic
-MainWindow -left-> Logic
+MainWindow -right-> Logic
 
 PersonListPanel -[hidden]left- HelpWindow
-HelpWindow -[hidden]left- CommandBox
+HelpWindow -[hidden]left- SearchBox
+SearchBox -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
 
-MainWindow -[hidden]-|> UiPart
+MainWindow -[hidden]down-|> UiPart
 @enduml

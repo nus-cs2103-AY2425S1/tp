@@ -6,7 +6,7 @@ plugins {
     id 'jacoco'
 }
 
-mainClassName = 'seedu.address.Main'
+mainClassName = 'bizbook.Main'
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
@@ -41,7 +41,7 @@ task coverage(type: JacocoReport) {
 }
 
 dependencies {
-    String jUnitVersion = '5.4.0'
+    String jUnitVersion = '5.10.0'
     String javaFxVersion = '17.0.7'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
@@ -57,16 +57,23 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
-    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
+    implementation 'com.googlecode.ez-vcard:ez-vcard:0.12.1'
+
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.0'
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.18.0'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
+    testImplementation 'org.mockito:mockito-core:4.8.0' // Mockito core
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'bizbook.jar'
 }
 
 defaultTasks 'clean', 'test'
+
+run {
+    enableAssertions = true
+}

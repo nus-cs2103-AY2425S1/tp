@@ -6,7 +6,7 @@ skinparam ClassBackgroundColor #FFFFAA
 
 title After command "clear"
 
-package States <<rectangle>> {
+package UndoStateList <<rectangle>> {
     class State1 as "<u>ab0:AddressBook</u>"
     class State2 as "<u>ab1:AddressBook</u>"
     class State3 as "<u>ab3:AddressBook</u>"
@@ -18,5 +18,5 @@ State2 -[hidden]right-> State3
 class Pointer as "Current State" #FFFFFF
 
 Pointer -up-> State3
-note right on link: State ab2 deleted.
+note right on link: RedoStateList will be cleared.
 @end
