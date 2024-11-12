@@ -855,15 +855,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. Prerequisite: You have not edited the `preferences.json` file. There is a folder named `data` in the same directory as the jar file, and there is a `ugteach.json` file in the `data` folder.
+    1. Prerequisite: UGTeach application is closed. You have not edited the `preferences.json` file. There is a folder named `data` in the same directory as the jar file, and there is a `ugteach.json` file in the `data` folder.
 
-    1. Test case: Delete the `ugteach.json` file.<br>
+    1. Test case: Delete the `ugteach.json` file, then start the application.<br>
        Expected: UGTeach should create a new `ugteach.json` file with default data.
 
-    1. Test case: Delete the `data` folder together with the `ugteach.json` file.<br>
+    1. Test case: Delete the `data` folder together with the `ugteach.json` file, then start the application.<br>
        Expected: Similar to previous.
 
-    1. Test case: Corrupt the `ugteach.json` file by changing its contents to invalid format.<br>
+    1. Test case: Corrupt the `ugteach.json` file by changing its contents to invalid format, then start the application.<br>
        e.g. add a non-alphanumeric character to one of the student's name.<br>
        Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.
 
