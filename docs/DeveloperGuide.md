@@ -366,7 +366,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1c1. NovaCare displays an error message specifying the existence of a duplicate patient.<br>Use Case ends.
 
-**Use Case: UC02 - Edit Patient**
+**Use Case: UC02 - Edit Patient**<br><br>
 **Preconditions: Patient list is not empty**
 
 **MSS**
@@ -390,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1c1. NovaCare displays an error message specifying the existence of a duplicate patient.<br>Use Case ends.
 
-**Use Case: UC03 - Delete Patient**
+**Use Case: UC03 - Delete Patient**<br><br>
 **Preconditions: Patient list is not empty**
 
 **MSS**
@@ -434,7 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. NovaCare displays an error message for incorrect command format.<br>Use Case ends.
 
-**Use Case: UC06 - Add Emergency contact**
+**Use Case: UC06 - Add Emergency contact**<br><br>
 **Preconditions: Patient list is not empty**
 
 **MSS**
@@ -462,7 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1d1. NovaCare displays an error message that the patient already has a registered emergency contact.<br>Use Case ends.
 
-**Use Case: UC07 - Delete Emergency contact**
+**Use Case: UC07 - Delete Emergency contact**<br><br>
 **Preconditions: Patient list is not empty**
 
 **MSS**
@@ -486,7 +486,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1d1. NovaCare displays an error message that the patient already does not have a registered emergency contact.<br>Use Case ends.
 
-**Use Case: UC08 - Add Priority**
+**Use Case: UC08 - Add Priority**<br><br>
 **Preconditions: Patient list is not empty**
 
 **MSS**
@@ -516,7 +516,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use Case ends.
 
 
-**Use Case: UC10 - Add Task**
+**Use Case: UC10 - Add Task**<br><br>
 **Preconditions: Patient list is not empty**
 
 **MSS**
@@ -538,7 +538,7 @@ Use Case ends.
 
     * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
 
-**Use Case: UC11 - Delete Task**
+**Use Case: UC11 - Delete Task**<br><br>
 **Preconditions: Patient list and task list is not empty**
 
 **MSS**
@@ -586,7 +586,7 @@ Use Case ends.
 
     * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
 
-**Use Case: UC14 - Mark Task**
+**Use Case: UC14 - Mark Task**<br><br>
 **Preconditions: Patient list and task list is not empty**
 
 **MSS**
@@ -606,7 +606,7 @@ Use Case ends.
 
     * 1b1. NovaCare displays an error message specific to the invalid index.<br>Use Case ends.
 
-**Use Case: UC15 - Unmark Task**
+**Use Case: UC15 - Unmark Task**<br><br>
 **Preconditions: Patient list and task list is not empty**
 
 **MSS**
