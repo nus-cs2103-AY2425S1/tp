@@ -1,3 +1,8 @@
+---
+layout: page
+title: Developer Guide
+---
+
 * Table of Contents
 1. [Acknowledgements](#acknowledgements)
 2. [Setting Up, Getting Started](#setting-up-getting-started)
@@ -138,6 +143,8 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+Please note that a Person contains multiple Roles and an Event can contain multiple persons. The upper '*', lying on the Person-Role arrow, is for the Event-Person association.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -672,3 +679,18 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Planned Enhancements
+Team size: 5
+1. Allow differentiation between Team 1 and Team 2 in AddEvent Command. 
+For future versions, we plan to allow the user to specify Team 2 before Team 1.
+2. Allow user to edit participant list without having to replace the entire list.
+Currently, if a user edits the participant list, the entire list is replaced. We plan on fixing this.
+3. Multi-word search
+
+4. 
+
+
