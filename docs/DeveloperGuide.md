@@ -863,7 +863,7 @@ Expected: Appropriate error messages are displayed indicating missing or invalid
         * View all suppliers using the `view_supplier` command.
         * Ensure that there are multiple suppliers in the list.
 
-    2. Test case 1: `delete_supplier n/Supplier Name`<br>
+    2. Test case 1: `delete_supplier su/Supplier Name`<br>
         * Description: Delete a supplier using a valid unique name.
         * Expected:
             * The specified supplier is deleted from the supplier list.
@@ -871,13 +871,13 @@ Expected: Appropriate error messages are displayed indicating missing or invalid
             * Use the `view_product` command to verify that products that were assigned the deleted supplier now have no assigned supplier
             * Details of the deleted supplier are shown in the success message.
 
-    3. Test case 2: `delete_supplier n/R@chel`<br>
+    3. Test case 2: `delete_supplier su/R@chel`<br>
         * Description: Attempt to delete a supplier with an invalid name format containing special characters.
         * Expected:
             * No supplier is deleted.
             * An error message is displayed indicating the invalid supplier name format.
 
-    4. Test case 3: `delete_supplier n/NonexistentSupplier`<br>
+    4. Test case 3: `delete_supplier su/NonexistentSupplier`<br>
         * Description: Attempt to delete a supplier that does not exist in the system.
         * Expected:
             * No supplier is deleted.
