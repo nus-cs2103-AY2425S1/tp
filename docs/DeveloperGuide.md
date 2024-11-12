@@ -642,7 +642,7 @@ testers are expected to do more *exploratory* testing.
    
 ### Adding a person
 
-1. Add a person by to KonTActs
+1. Add a person to KonTActs
 
    1. Test case: `add name/John Doe email/johndoe@test.com telegram/@johndoe github/johndoe` <br>
       Expected: Contact with name `John Doe` is added to the list. Details of the added contact shown in the status message.
