@@ -1139,7 +1139,7 @@ Team size: 5
 * **Flaw:** When users edit an `appointment` such that sickness or medicine is null, the GUI invalidates this input even though these fields are optional.
 * **Enhancement:** Change input validation for sickness and medicine to allow for null values.
 * **Sample Input:** `edit appt 1 s/ m/`
-* **Expected Output:** Appointment indexed 1 should have sickness and medicine shown as null
+* **Expected Output:** Appointment indexed 1 should have sickness and medicine shown as null.
 
 <br>
 
