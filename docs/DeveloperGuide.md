@@ -637,7 +637,7 @@ Preconditions: There is some student data available
 
 1. The system should not require users to amend or modify the data file in any way for it to function.
 2. The system works on Linux, Mac and Windows.
-3. The system should be able to store up to 100 students without a noticeable drop in performance under normal load conditions (ie. should perform the same as when 10 students are stored in the system)
+3. The system should be able to store up to 100 students without a noticeable drop in performance under normal load conditions (i.e. should perform the same as when 10 students are stored in the system)
 4. The system shall respond to user queries within 2 seconds under normal load conditions.
 
 ### Glossary
