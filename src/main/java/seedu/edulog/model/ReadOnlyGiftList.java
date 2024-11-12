@@ -1,6 +1,7 @@
 package seedu.edulog.model;
 
-import javafx.collections.ObservableList;
+import java.util.List;
+
 import seedu.edulog.model.gift.Gift;
 
 /**
@@ -11,7 +12,7 @@ public interface ReadOnlyGiftList {
     /**
      * Returns an unmodifiable view of the gifts list.
      */
-    ObservableList<Gift> getGiftList();
+    List<Gift> getGiftList();
 
     /**
      * Gets a random gift from the gift list.

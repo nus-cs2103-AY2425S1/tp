@@ -718,4 +718,31 @@ testers are expected to do more <b>exploratory</b> testing.
    1. Prequisites: Invalid data. For example, create edit a existing student json file with a invalid phone number by adding `@`
    2. Launch the jar file. Expected behaviour is that EduLog is now completely empty, with no students and lessons.
 
+--------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Planned enhancements**
+
+Team size: 5
+
+1. **No warning for data-removing commands**: Destructive commands like `delete`, `deletec`, and `clear` will remove
+data - this may be undesirable for users due to typos in commands that my cause them to remove data unexpectedly.
+The team plans to add the `undo` command for future iterations.
+
+2. **Lesson clarity: specify end day**: Lessons currently have their start day, start time, and end time displayed.
+For lessons that span midnight, e.g. Monday 2200-0100, it could be helpful for the user if the day at the
+end of the lesson can be described as well: Monday 2200-Tuesday 0100. The team will provide this Quality of Life
+feature in future iterations.
+
+3. **Delete lessons by index**: Lessons currently must be deleted by their descriptions only. This is done with the
+expectation that lessons are created much less frequently than students and are important not to delete without backup.
+However, the team sees value in providing a Quality of Life change to delete these lessons by index once the deletion
+commands have been rail-guarded by the `undo` command in future iterations.
+
+4. **Markall/unmarkall based on current view**: Presently, marking / unmarking of every student's paid status works
+regardless of the current filtered student list. For future iterations, we shall work on developing a variant of
+the `markall` / `unmarkall` commands only marks / unmarks all students in the current view.
+
+5. **Keep student filter when editing**: Presently, after the student list has been filtered, the editing of a 
+student's details in that list will cause the filter to reset. To prevent annoyance for users who may wish to
+continue work on the filtered student list without resets, our team will be pursuing this quality of life change
+in future iterations.
