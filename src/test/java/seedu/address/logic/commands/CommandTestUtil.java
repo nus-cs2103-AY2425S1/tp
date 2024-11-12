@@ -98,14 +98,14 @@ public class CommandTestUtil {
     public static final String JOB_COMPANY_DESC_BARISTA = " " + PREFIX_COMPANY + VALID_JOB_COMPANY_BARISTA;
     public static final String JOB_SALARY_DESC_BARISTA = " " + PREFIX_SALARY + VALID_JOB_SALARY_BARISTA;
     public static final String JOB_REQUIREMENTS_DESC_BARISTA =
-            " " + PREFIX_REQUIREMENTS + VALID_JOB_REQUIREMENTS_BARISTA;
+            " " + PREFIX_REQUIREMENTS + "Strong " + PREFIX_REQUIREMENTS + "Pleasant";
     public static final String JOB_DESCRIPTION_DESC_BARISTA = " " + PREFIX_DESCRIPTION + VALID_JOB_DESCRIPTION_BARISTA;
 
     public static final String INVALID_JOB_NAME_DESC = " " + PREFIX_NAME + "!val!d"; // '!' not allowed in name
     public static final String INVALID_JOB_COMPANY_DESC = " " + PREFIX_COMPANY + "!val!d"; // '!' not allowed in name
     public static final String INVALID_JOB_SALARY_DESC = " " + PREFIX_SALARY + "$100/day"; // only numbers are allowed
     public static final String INVALID_JOB_REQUIREMENTS_DESC = " " + PREFIX_REQUIREMENTS + "!val!d"; // '!' not allowed
-    public static final String INVALID_JOB_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "!val!d"; //'!' not allowed
+    public static final String INVALID_JOB_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "!va/l!d"; //'!' not allowed
 
     // test data for companies
     public static final String VALID_COMPANY_NAME_GOOGLE = "Google LLC";
