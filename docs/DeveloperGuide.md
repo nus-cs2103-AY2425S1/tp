@@ -722,11 +722,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (futu
 ### Non-Functional Requirements
 
 1. **Performance**: The application should respond to user actions within **two seconds**.
-2. **Scalability**: The application should handle **at least 500 internship applications** without any performance issues (e.g., lag or slowness).
-3. **Cross-Platform Compatibility**: The application should run on any operating system that has **Java 17** installed.
-4. **User Accessibility**: The system should be usable by a **novice** with no prior experience using a CLI application, without much difficulty.
-5. **Data Persistence**: The application should ensure that data **persists** after the user closes the application.
-6. **Data Integrity**: Upon reopening the application, the **loaded data** should be identical to the **last saved state** and should not be volatile.
+2. **Reliability**: The application should be able to **perform effectively** over time without errors or failures.
+3. **Scalability**: The application should handle **at least 500 internship applications** without any performance issues (e.g., lag or slowness).
+4. **Cross-Platform Compatibility**: The application should run on any operating system that has **Java 17** installed.
+5. **User Accessibility**: The application should be usable by a **novice** with no prior experience using a CLI application, without much difficulty.
+6. **Maintainability**: The application should log useful information together with any errors that occur. The logs should be **easily accessible** to enable easier debugging and monitoring.
+7. **Data Persistence**: The application should ensure that data **persists** after the user closes the application.
+8. **Data Integrity**: Upon reopening the application, the **loaded data** should be identical to the **last saved state** and should not be volatile.
+9. **Efficiency**: The application **should not use too much memory** to prevent the user's computer from slowing down when using our application
+10. **Documentation**: The application should be **well documented** for users, which include command-line operations usages, as well as support for installing and troubleshooting. The code base should be well documented for future developers, allowing them to maintain, debug, test, and scale the system easily.
+11. **Testability**: The application's core features should be covered by **integration and unit tests**. Instructions should be included on how to conduct **manual testing**.
+12. **Stability**: The application should be able to **recover from errors**. It should not be crashing or losing data.
 
 <br></br>
 
