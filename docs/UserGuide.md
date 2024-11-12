@@ -186,6 +186,8 @@ addi in/INDEX i/INTEREST...
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 <box type="warning" seamless>
 
 **Caution**:
@@ -252,6 +254,8 @@ Adding work experience to a contact with an existing entry will overwrite the ol
    ```plaintext
    addw in/1 w/Engineer,Google,2023
    ```
+   <div style="page-break-after: always;"></div>
+
    **Expected output**:
    ```plaintext
    Alex Yeoh work experience replaced to: Engineer,Google,2023
@@ -444,9 +448,20 @@ findi i/INTEREST
    ```
    **Expected output**:
    ```plaintext
-   Found 3 people that have similar interest
+   Found 3 people that have a similar interest
    ```
-  
+
+<box type="warning" seamless>
+
+**Error Message for Incorrect Format**:
+If an incorrect format is used, the application will show:
+```plaintext
+Invalid command format! 
+findi: Finds all persons whose interests contain the specified keyword (case-insensitive) and displays them as a list with index numbers. 
+Parameters: i/INTEREST 
+Example: findi i/reading
+```
+</box>
 
 <box type="warning" seamless>
 
@@ -464,7 +479,9 @@ findi i/reading, swimming
 ```
 </box>
 
+
 <br>
+<div style="page-break-after: always;"></div>
 
 
 #### Finding Contacts by Work Experience: `findw`
@@ -546,7 +563,7 @@ The `findu` command searches within the **current list of displayed contacts**. 
 **Example Workflow**:
 1. Type `list` to display all contacts.
 2. Use `findu u/NUS` to filter and show only contacts from NUS.
-</box>
+   </box>
 
 **Examples**:
 
@@ -568,7 +585,23 @@ The `findu` command searches within the **current list of displayed contacts**. 
    Found 1 person in SUT
    ```
 
+<box type="warning" seamless>
 
+**Error Message for Incorrect Format**:
+
+If an incorrect format is used, the application will show:
+
+```plaintext
+Invalid command format! 
+findu: Finds all persons whose universities contain the specified keyword (case-insensitive) and displays them as a list. 
+Parameters: u/KEYWORD 
+Example: findu u/NUS
+```
+
+</box>
+
+
+<div style="page-break-after: always;"></div>
 
 <br>
 
@@ -604,12 +637,25 @@ findm m/MAJOR
    ```plaintext
    Found 3 people that are taking Comp
    ```
-   Display people taking `Computer Engineering` and `Computer Science`.
+   Displays people taking `Computer Engineering` and `Computer Science`.
 
-<img src="images/findPplCS.png" alt="result for 'findm m/Computer Science'" style="width: 70%;">
-
+   <img src="images/findPplCS.png" alt="result for 'findm m/Computer Science'" style="width: 60%;">
 
 <br>
+
+<box type="warning" seamless>
+
+**Error Message for Incorrect Format**:
+If an incorrect format is used, the application will show:
+```plaintext
+Invalid command format! 
+findm: Finds all persons whose major or course contains the specified keyword (case-insensitive) and displays them as a list with index numbers. 
+Parameters: KEYWORD 
+Example: findm m/Computer Science
+```
+</box>
+
+
 <br>
 
 
@@ -757,16 +803,43 @@ If you minimize the Help Window and then run the `help` command (or use the `Hel
    - **Current Behaviour**: Users can add interests that exceed 20 characters using the `addi` command, but the UI may truncate or cut off interests that are longer, potentially causing some interests to be partially displayed or hidden.
    - **Limitation**: The application does not enforce a character limit for interests in the `addi` command, resulting in display issues for longer entries.
    - **Planned Solution**: Introduce validation to limit interests to 20 characters in the `addi` command, or  ensure that all displayed interests fit within the UI without truncation.
-9. **Missing Birthday Field in Confirmation Message**
-   - **Current Behavior**: When a new contact is added, deleted, or edited, the birthday field is omitted from the confirmation message.
-      - Example output:
-      ```plaintext
-      New person added: John Doe; Phone: 98735432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Work Experience: Intern,Google,2024; Tags: [[owesMoney], [friends]]; University: NUS; Major: Computer Science; Interests: [swimming, reading]
-      ```
-   - **Limitation**: This makes it unclear if the birthday field has been correctly saved.
-   - **Planned Solution**: Update the confirmation message to include the birthday field for consistency.
-   
----
+9. **Error Messages for `findi`, `findu`, and `findm` Commands**
+   - **Current Behaviour**: The error messages for `findi`, `findu`, and `findm` display the parameter label as `KEYWORD`, which is too generic.
+      - **findi**: `"Invalid command format! findi: Finds all persons whose interests contain the specified keyword (case-insensitive) and displays them as a list with index numbers. Parameters: i/KEYWORD Example: findi i/reading"`
+      - **findu**: `"Invalid command format! findu: Finds all persons whose universities contain the specified keyword (case-insensitive) and displays them as a list. Parameters: u/KEYWORD Example: findu u/NUS"`
+      - **findm**: `"Invalid command format! findm: Finds all persons whose major or course contains the specified keyword (case-insensitive) and displays them as a list with index numbers. Parameters: KEYWORD Example: findm m/Computer Science"`
+   - **Limitation**: The use of `KEYWORD` in parameter descriptions can be unclear, as it doesn’t specify the expected input type (e.g., `INTEREST` for `findi`, `UNIVERSITY` for `findu`, etc.).
+   - **Planned Solution**: Update error messages to display specific parameter names, as in the `add` command:
+      - **findi**: `"Invalid command format! findi: Finds all persons whose interests contain the specified keyword (case-insensitive) and displays them as a list with index numbers. Parameters: i/INTEREST Example: findi i/reading"`
+      - **findu**: `"Invalid command format! findu: Finds all persons whose universities contain the specified keyword (case-insensitive) and displays them as a list. Parameters: u/UNIVERSITY Example: findu u/NUS"`
+      - **findm**: `"Invalid command format! findm: Finds all persons whose major or course contains the specified keyword (case-insensitive) and displays them as a list with index numbers. Parameters: m/MAJOR Example: findm m/Computer Science"`
+
+   This change will ensure that error messages are more precise, helping users understand the expected input for each command.
+10. **Stricter Input Validation for `find` Commands**
+
+   - **Current Behaviour**:
+     - The `findu`, `findm`, and `findw` commands currently allow multiple inputs for the same parameter (e.g., `findu u/NUS u/SMU`, `findm m/Computer m/Accounting`, `findw w/Google w/Facebook`). While these commands are accepted without any error, they yield "0 persons listed!" because the application does not currently support searches across multiple values for these fields.
+  - **Limitation**:
+     - Users may expect the commands to return contacts matching any of the specified values. For instance:
+        - `findu u/NUS u/SMU` may be expected to return contacts from either "NUS" or "SMU".
+        - `findm m/Computer Science m/Accounting` may be expected to return contacts taking double majors in "Computer Science" and "Accounting".
+        - `findw w/Google w/Facebook` may be expected to return contacts who have worked at either "Google" or "Facebook".
+     - This lack of functionality limits the flexibility of the search and may lead to user confusion if they try to search across multiple values without understanding the limitation.
+  - **Planned Solution**:
+     - **Enhance Input Validation**: Implement stricter validation to ensure that only one instance of each parameter (`u/`, `m/`, `w/`) is accepted per command. If multiple instances are provided, the application should return an error message indicating that only one value per parameter is allowed.
+     - **Extend Search Functionality**:
+        - **Find by Multiple Universities**: Update the `findu` command to support multiple universities as input, allowing users to retrieve contacts from any specified universities. For example, `findu u/NUS u/SMU` would return contacts from both "NUS" and "SMU". This could be useful for students looking to expand their network across different universities.
+        - **Find by Multiple Majors**: Update the `findm` command to support multiple majors, enabling users to find contacts from a range of academic fields. This enhancement would be particularly valuable in cases where students pursue double majors or dual degrees, which are increasingly common in real-world university programs. For example, `findm m/Computer Science m/Accounting` would return contacts majoring in both "Computer Science" and "Accounting".
+        - **Find by Multiple Work Experiences**: Update the `findw` command to support searches by multiple companies, allowing users to find contacts with experience at more than one organisation. This feature could be useful for users trying to connect with contacts who have experience in similar industries or have worked for companies of interest. For example, `findw w/Google w/Facebook` would return contacts who have worked at either "Google" or "Facebook".
+
+   <box type="info" seamless>
+
+   **Real-Life Use Cases**:
+   - A student interested in networking with peers from both "NUS" and "SMU" could use `findu u/NUS u/SMU` to find contacts from either university. 
+   - A student considering a double major in "Computer Science" and "Accounting" might use `findm m/Computer Science m/Accounting` to connect with others in both majors. 
+   - A recent graduate interested in working for tech giants might use `findw w/Google w/Facebook` to reach out to contacts who have interned or worked at these companies.
+  </box>
+
 <div style="page-break-after: always;"></div>
 
 ## Glossary

@@ -405,10 +405,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Use case ends.
 
 **Extensions**:
+- **1a**: User enters an improperly formatted `findu` command.
+  - **1a1**: UniVerse shows an "Invalid command format" error.
+  - **1a2**: User re-enters the command with corrected input.
+  - **1a3**: Use case resumes at step 1.
 - **3a**: No matches found.
   - **3a1**: UniVerse displays a "0 persons listed!" message.
   - **3a2**: Use case ends.
-  
+
+<box type="info" seamless>
+
+**Notes**:
+- The **UNIVERSITY** field is case-sensitive.
+- Partial matches are supported, allowing users to find contacts with university names that contain the specified keyword.
+</box>
+
 <br>
   
 #### **Use Case: Search for Contacts by Major**
@@ -423,9 +434,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Use case ends.
 
 **Extensions**:
+- **1a**: User enters an improperly formatted `findm` command.
+  - **1a1**: UniVerse shows an "Invalid command format" error.
+  - **1a2**: User re-enters the command with corrected input.
+  - **1a3**: Use case resumes at step 1.
 - **3a**: No matches found.
   - **3a1**: UniVerse displays a "0 persons listed!" message.
   - **3a2**: Use case ends.
+
+<box type="info" seamless>
+
+**Notes**:
+- Partial matches are allowed. `findm m/comp` will return contacts studying `Computer Science` and `Computer Engineering`etc.
+- The search is case-insensitive.
+  </box>
 
 <br>
 
@@ -502,7 +524,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**:
 - **1a**: User enters an incomplete or improperly formatted `findw` command.
-  - **1a1**: UniVerse displays an error message indicating the proper format (e.g., "Invalid command format! Use: findw w/[ROLE]COMPANY[,YEAR]").
+  - **1a1**: UniVerse shows an "Invalid command format" error.
   - **1a2**: User re-enters the command with corrected input.
   - **1a3**: Use case resumes at step 1.
 - **2a**: No contacts match the specified work experience.
@@ -520,7 +542,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-#### **Use Case: Search for Contacts by Interest**  
+#### **Use Case: Search for Contacts by Interest**
 **System**: UniVerse  
 **Actor**: User  
 **Use Case ID**: UC08 - Search for Contacts by Interest
@@ -531,18 +553,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. UniVerse displays all contacts with the specified interest.
 4. Use case ends.
 
-
 **Extensions**:
-- **1a**: No contacts match the specified interest.
-  - **1a1**: UniVerse displays a "0 persons listed!" message.
-  - **1a2**: Use case ends.
+- **1a**: User enters an improperly formatted `findi` command.
+  - **1a1**: UniVerse shows an "Invalid command format" error.
+  - **1a2**: User re-enters the command with corrected input.
+  - **1a3**: Use case resumes at step 1.
+
+- **2a**: No contacts match the specified interest.
+  - **2a1**: UniVerse displays a "0 persons listed!" message.
+  - **2a2**: Use case ends.
 
 <box type="info" seamless>
 
 **Notes**:
-Only one-word interests are supported; partial matches and case insensitivity apply.
-</box>
-
+- Only single-word interests are supported.
+- Partial matches and case insensitivity apply to interest searches.
+  </box>
 <br>
 
 #### **Use Case: Edit a Contact**
@@ -562,7 +588,7 @@ Only one-word interests are supported; partial matches and case insensitivity ap
   - **1a1**: UniVerse displays an error message.
   - **1a2**: Use case resumes at step 1.
 - **2a**: One or more fields have an invalid format (e.g., incorrect date format in `b/BIRTHDATE`).
-  - **2a1**: UniVerse displays an error message for the invalid fields.
+  - **2a1**: UniVerse shows an "Invalid command format" error.
   - **2a2**: User re-enters valid fields and resumes the command.
 
 <br>
@@ -889,16 +915,28 @@ Our goal was to enhance AB3 by introducing new commands and improving functional
 
 ---
 
-### 3. Support Multiple Interests in `findi` Command
+### 3. Expanded Multi-Value Search Capability with Stricter Input Validation for `find` Commands
 
 - **Current Behavior**:  
-  The `findi` command only accepts a single interest at a time (e.g., `findi i/swimming`).
+  The `find` commands (`findi`, `findu`, `findm`, and `findw`) exhibit inconsistencies in handling multiple values:
+  - The `findi` command only allows users to specify a single interest at a time (e.g., `findi i/swimming`), limiting users' ability to search for contacts with multiple shared interests.
+  - The `findu`, `findm`, and `findw` commands allow multiple inputs for the same parameter (e.g., `findu u/NUS u/SMU`), but currently, this results in a "0 persons listed!" message because the application does not support searches across multiple values for these fields.
 
-- **Limitation**:  
-  Users cannot search for contacts who share multiple interests, limiting the usefulness of the search.
+- **Limitation**:
+  - **Single Interest Restriction in `findi`**: Users cannot perform more refined searches by specifying multiple interests (e.g., finding contacts with both "swimming" and "reading" interests).
+  - **Multi-Value Inconsistency for `findu`, `findm`, and `findw`**: Users may expect to retrieve contacts matching any of the specified values, but the current functionality does not support such multi-value searches. This can lead to confusion. For example:
+    - `findu u/NUS u/SMU` might reasonably be expected to show contacts from either "NUS" or "SMU."
+    - `findm m/Computer Science m/Accounting` could logically display contacts studying either "Computer Science" or "Accounting," which is particularly useful for double major programs.
+    - `findw w/Google w/Facebook` may be expected to return contacts with work experience at either "Google" or "Facebook."
 
-- **Planned Enhancement**:  
-  Allow multiple interests in `findi` (e.g., `findi i/swimming i/reading`), returning contacts who have **all** specified interests, enabling more specific and refined searches.
+- **Planned Enhancement**:
+  - **Enhance Input Validation**: Implement stricter validation to ensure that only one instance of each parameter (`i/`, `u/`, `m/`, `w/`) is accepted per command. If multiple instances are provided, an error message should guide the user to use only one value per parameter, until multi-value support is fully implemented.
+
+  - **Extend Search Functionality for Multi-Value Support**:
+    - **Multiple Interests in `findi`**: Enable `findi` to accept multiple interests (e.g., `findi i/swimming i/reading`). This would allow users to find contacts who have **all** specified interests, improving the specificity of searches.
+    - **Multiple Universities in `findu`**: Allow `findu` to support multiple universities, enabling users to search across several institutions (e.g., `findu u/NUS u/SMU` to find contacts from both "NUS" and "SMU"). This feature could be especially valuable for students networking across multiple universities.
+    - **Multiple Majors in `findm`**: Update `findm` to support multiple majors, useful for cases where students have double majors or where users wish to connect with contacts across various academic fields (e.g., `findm m/Computer Science m/Accounting`).
+    - **Multiple Work Experiences in `findw`**: Extend `findw` to allow multiple companies in a single search, helping users find contacts with experience at any specified company (e.g., `findw w/Google w/Facebook` to find contacts who have worked at either company).
 
 ---
 
@@ -977,3 +1015,64 @@ Our goal was to enhance AB3 by introducing new commands and improving functional
 
 - **Planned Enhancement**:  
   Restrict the `interest` field to a maximum of 20 characters, ensuring all entries display clearly in the UI and improving readability.
+
+---
+
+### 10. Improved Error Messages for `findi`, `findu`, and `findm` Commands
+
+- **Current Behavior**:  
+  The error messages for `findi`, `findu`, and `findm` display the parameter label generically as `KEYWORD`, which lacks specificity.
+
+  - **Example Error Messages**:
+    - **findi**:
+      ```plaintext
+      Invalid command format! 
+      findi: Finds all persons whose interests contain the specified keyword (case-insensitive) and displays them as a list with index numbers. 
+      Parameters: i/KEYWORD 
+      Example: findi i/reading
+      ```
+    - **findu**:
+      ```plaintext
+      Invalid command format! 
+      findu: Finds all persons whose universities contain the specified keyword (case-insensitive) and displays them as a list. 
+      Parameters: u/KEYWORD 
+      Example: findu u/NUS
+      ```
+    - **findm**:
+      ```plaintext
+      Invalid command format! 
+      findm: Finds all persons whose major or course contains the specified keyword (case-insensitive) and displays them as a list with index numbers. 
+      Parameters: KEYWORD 
+      Example: findm m/Computer Science
+      ```
+
+- **Limitation**:  
+  The use of `KEYWORD` in parameter descriptions is ambiguous and does not clarify the specific input type required (e.g., `INTEREST` for `findi`, `UNIVERSITY` for `findu`, `MAJOR` for `findm`). This lack of clarity may lead to user confusion about what input is expected.
+
+<div style="page-break-after: always;"></div>
+
+- **Planned Enhancement**:  
+  Update error messages to display specific parameter names, similar to the formatting used in the `add` command. This change will provide users with clearer guidance on the expected input for each command.
+
+  - **Updated Error Messages**:
+    - **findi**:
+      ```plaintext
+      Invalid command format! 
+      findi: Finds all persons whose interests contain the specified keyword (case-insensitive) and displays them as a list with index numbers. 
+      Parameters: i/INTEREST 
+      Example: findi i/reading
+      ```
+    - **findu**:
+      ```plaintext
+      Invalid command format! 
+      findu: Finds all persons whose universities contain the specified keyword (case-insensitive) and displays them as a list. 
+      Parameters: u/UNIVERSITY 
+      Example: findu u/NUS
+      ```
+    - **findm**:
+      ```plaintext
+      Invalid command format! 
+      findm: Finds all persons whose major or course contains the specified keyword (case-insensitive) and displays them as a list with index numbers. 
+      Parameters: m/MAJOR 
+      Example: findm m/Computer Science
+      ```
