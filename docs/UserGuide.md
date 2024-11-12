@@ -585,7 +585,7 @@ The `correct as of` timestamp at the top right corner of the `view` window shows
 
 <box type="info" seamless>
 
-**Workaround:** Should certain details in the `view window` be obstructed due to unusually large number of `issues`, users can close the window and reopen it using the `view` command to fix the issue. This issue is a planned enhancement in a future version of MATER.
+**Workaround:** Should certain details in the `view window` be obstructed due to excessively large number of `issues`, users can close the window and reopen it using the `view` command to fix the issue. This issue is a planned enhancement in a future version of MATER.
 
 </box>
 
