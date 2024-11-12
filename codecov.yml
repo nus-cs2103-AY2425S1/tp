@@ -1,0 +1,4 @@
+ignore:
+  - "src/main/java/careconnect/ui/PersonDetailCard.java"
+  - "src/main/java/careconnect/ui/**/*.java" # ignore ui testing for now
+  - "main/java/careconnect/ui/PersonDetailCard.java"

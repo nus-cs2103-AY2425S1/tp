@@ -49,6 +49,7 @@ skinparam Class {
 }
 
 skinparam Actor {
+    BackgroundColor #abdbe3
     BorderColor USER_COLOR
     Color USER_COLOR
     FontName Arial

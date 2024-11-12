@@ -1,0 +1,335 @@
+@import url("theme.css");
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #555555;
+    -fx-opacity: 0.9;
+}
+
+.label-bright {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: -fx-text;
+    -fx-opacity: 1;
+}
+
+.label-header {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: -fx-text;
+    -fx-opacity: 1;
+}
+
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.tab-pane {
+    -fx-padding: 0 0 0 1;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0 0 0 0;
+    -fx-min-height: 0;
+    -fx-max-height: 0;
+}
+
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: #1d1d1d;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent derive(-fx-base, 80%) transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: -fx-text;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-primary;
+}
+
+.split-pane:horizontal .split-pane-divider {
+    -fx-background-color: derive(-fx-bg, -15%);
+    -fx-padding: 0;
+}
+
+.split-pane:horizontal .split-pane-divider:hover {
+    -fx-background-color: -fx-primary;
+    -fx-padding: 2;
+}
+
+.split-pane {
+    -fx-border-radius: 1;
+    -fx-border-width: 1;
+    -fx-background-color: -fx-bg;
+}
+
+/* Styles background of the list view */
+.list-view {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: derive(#FFFFFF, 20%);
+}
+
+/* Style when the ListView is focused */
+.list-view:focused {
+    -fx-effect: innershadow(one-pass-box, -fx-focus, 5, 1, 0, 0);
+}
+
+/* Styles the contact info cell */
+.list-cell {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap: 0;
+    -fx-padding: 0 0 0 0;
+}
+
+.list-cell:filled:even {
+    -fx-background-color: -fx-secondary;
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: -fx-secondary-bg;
+}
+
+.list-cell:filled:even:hover {
+    -fx-background-color: derive(-fx-secondary, -5%);
+}
+
+.list-cell:filled:odd:hover {
+    -fx-background-color: derive(-fx-secondary-bg, -5%);
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: -fx-primary !important;
+    -fx-border-color: derive(-fx-primary, -20%);
+    -fx-border-width: 1;
+}
+
+.list-cell .label {
+    -fx-text-fill: black;
+}
+
+.label-title {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-text;
+    -fx-font-weight: bold;
+}
+
+.label-content {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-text;
+}
+
+.link {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-link;
+}
+
+.link:hover {
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.cell_big_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #010504;
+}
+
+.cell_small_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #010504;
+}
+
+.pane {
+    -fx-background-color: -fx-bg;
+}
+
+.pane-with-border {
+    -fx-background-color: -fx-bg;
+    -fx-border-color: derive(-fx-bg, -15%);
+    -fx-border-top-width: 1px;
+}
+
+.result-display {
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: -fx-text;
+}
+
+.result-display .label {
+    -fx-text-fill: -fx-text !important;
+}
+
+/* Styles local storage path bar */
+.status-bar {
+    -fx-background-color: -fx-bg;
+}
+
+.status-bar .label {
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: -fx-text;
+    -fx-padding: 4px;
+    -fx-pref-height: 30px;
+}
+
+.status-bar-with-border {
+    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-border-color: derive(#1d1d1d, 25%);
+    -fx-border-width: 1px;
+}
+
+.status-bar-with-border .label {
+    -fx-text-fill: -fx-text;
+}
+
+/* Styles back drop of drop down menu for Menu Bar */
+.context-menu {
+    -fx-background-color: -fx-bg;
+}
+
+.context-menu .label {
+    -fx-text-fill: -fx-text;
+}
+
+/* Styles File and Help buttons */
+.menu {
+    -fx-background-color: transparent;
+}
+
+.menu:hover {
+    -fx-background-color: -fx-primary;
+    -fx-cursor: hand;
+}
+
+.menu-bar {
+    -fx-background-color: derive(-fx-bg, -5%);
+    -fx-border-color: derive(-fx-bg, -20%);
+    -fx-border-width: 1;
+}
+
+/* Styles File and Help dropdown menu */
+.menu-bar .label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: -fx-text;
+    -fx-padding: 2pt;
+    -fx-background-color: transparent;
+}
+
+.menu-item {
+    -fx-background-color: transparent;
+}
+
+.menu-item:hover {
+    -fx-background-color: -fx-primary;
+    -fx-cursor: hand;
+}
+
+.scroll-bar {
+    -fx-background-color: derive(-fx-bg, -5%);
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: derive(-fx-bg, -20%);
+    -fx-background-insets: 3;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: derive(-fx-bg, -30%);
+    -fx-background-insets: 3;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 8 1 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 1 8 1;
+}
+
+#cardPane {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+#commandTypeLabel {
+    -fx-font-size: 11px;
+    -fx-text-fill: -fx-error;
+}
+
+#commandTextField {
+    -fx-background-color: -fx-secondary-bg;
+    -fx-background-insets: 0;
+    -fx-border-color: derive(-fx-bg, -15%);
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: -fx-text;
+}
+
+#commandTextField:focused {
+    -fx-border-color: -fx-focus
+}
+
+#filterField, #personListPanel, #personWebpage {
+    -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
+}
+
+#resultDisplay .content {
+    -fx-background-color: -fx-secondary-bg;
+    -fx-background-insets: 0;
+    -fx-border-color: derive(-fx-bg, -15%);
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+}
+
+#tags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#tags .label {
+    -fx-text-fill: white;
+    -fx-background-color: derive(-fx-primary, -40%);
+    -fx-padding: 2 4 2 4;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-font-size: 12;
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" id="cardPane" fx:id="cardPane"
+      xmlns="http://javafx.com/javafx/17" VBox.vgrow="ALWAYS">
+    <GridPane HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150"/>
+        </columnConstraints>
+        <VBox VBox.vgrow="ALWAYS">
+            <VBox alignment="CENTER_LEFT" minHeight="225" spacing="12" GridPane.columnIndex="0" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets bottom="5.0" left="15.0" right="15.0" top="5.0"/>
+                </padding>
+                <Label fx:id="name" styleClass="label-header" text="\$first"/>
+                <FlowPane fx:id="tags"/>
+                <VBox>
+                    <Label styleClass="label-title" text="Next Appointment"/>
+                    <Label fx:id="appointmentDate" styleClass="label-content" text="\$appointmentDate"/>
+                </VBox>
+                <HBox spacing="24.0">
+                    <VBox>
+                        <Label styleClass="label-title" text="Phone"/>
+                        <Label fx:id="phone" styleClass="label-content" text="\$phone"/>
+                    </VBox>
+                    <VBox>
+                        <Label styleClass="label-title" text="Email"/>
+                        <Label fx:id="email" styleClass="label-content" text="\$email"/>
+                    </VBox>
+                </HBox>
+                <VBox>
+                    <Label styleClass="label-title" text="Home Address"/>
+                    <HBox spacing="4" VBox.vgrow="ALWAYS">
+                        <TextFlow VBox.vgrow="ALWAYS">
+                            <Text fx:id="address" styleClass="label-content" text="\$address"/>
+                        </TextFlow>
+                    </HBox>
+                </VBox>
+                <VBox fx:id="logsList" minWidth="380" styleClass="pane" VBox.vgrow="ALWAYS">
+                    <padding>
+                        <Insets top="10.0"/>
+                    </padding>
+                    <StackPane fx:id="logsListPanelPlaceHolder" styleClass="pane"
+                               VBox.vgrow="ALWAYS"/>
+                </VBox>
+            </VBox>
+        </VBox>
+        <rowConstraints>
+            <RowConstraints vgrow="ALWAYS"/>
+        </rowConstraints>
+    </GridPane>
+</HBox>

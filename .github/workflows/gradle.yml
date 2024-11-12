@@ -37,7 +37,19 @@ jobs:
           java-package: jdk+fx
 
       - name: Build and check with Gradle
-        run: ./gradlew check coverage
+        run: ./gradlew check coverage --info
+
+      - name: Upload tests artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'test-report-${{ matrix.platform }}'
+          path: 'build/reports/tests/test'
+
+      - name: Upload checkstyle artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'checkstyle-report-${{ matrix.platform }}'
+          path: 'build/reports/checkstyle'
 
       - name: Upload coverage reports to Codecov
         if: runner.os == 'Linux'
