@@ -732,15 +732,46 @@ Similar to [<ins>UC14](#use-case-uc14search-for-contacts-by-name) except searchi
 * 2a. The wedding list is empty.
   Use case ends.
 
+* 3a. User specified to force the assigning of a contact to a wedding
+  * 3a1. System displays the specified Wedding, in the Wedding list.
+
+    Use case resumes at step 4.
+
+* 3b. A specified wedding does not exist.
+    * 3b1. System displays an error message.
+
+      Use case resumes at step 2.
+
+* 3c. The contact is already assigned to the specified wedding.
+    * 3c1. System displays an error message.
+
+      Use case resumes at step 2.
+
+### **Use case: UC23 — Unassign a Contact from one or more Weddings**
+
+**MSS**
+
+1. User <ins>lists all contacts [(UC01)](#use-case-uc01list-all-contacts)</ins>.
+2. User <ins>lists all weddings [(UC02)](#use-case-uc02list-all-weddings)</ins>.
+3. User requests to unassign a contact from a wedding.
+4. System displays the contact no longer being associated with the specified wedding, in the list of contacts.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The contact list is empty.
+  Use case ends.
+
+* 2a. The wedding list is empty.
+  Use case ends.
+
 * 3a. A specified wedding does not exist.
     * 3a1. System displays an error message.
 
       Use case resumes at step 2.
 
-### **Use case: UC23 — Unassign a Contact from one or more Weddings**
-Similar to [<ins>UC22](#use-case-uc22assign-a-contact-to-one-or-more-weddings) except un-assigning a contact from Weddings and an additional extension.
-
-* 3b. A specified wedding not associated with the contact.
+* 3b. The contact is not assigned to the specified wedding.
     * 3a1. System displays an error message.
 
       Use case resumes at step 2.
@@ -799,9 +830,9 @@ Similar to [<ins>UC22](#use-case-uc22assign-a-contact-to-one-or-more-weddings) e
       Use case resumes at step 1.
   
 * 2c. The user specified to force the unassigning of a Vendor.
-    * 2c1. System displays the contact as no longer being designated as a Vendor and with no tasks assigned to them, in the list of contacts.
+    * 2c1. System displays the contact with no tasks assigned to them, in the list of contacts.
 
-      Use case ends.
+      Use case resumes at step 3.
 
 * 2d. The Vendor still has tasks assigned to them.
     * 2d1. System displays an error message.
