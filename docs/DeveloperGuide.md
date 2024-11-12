@@ -189,7 +189,7 @@ Moreover, using enums for `Tier` simplifies updates to the list of predefined se
 When updating the `Tier` `enum`, ensure that related CSS files (`ClientDetailPanel.css` and `ClientListCard.css`) are also updated. These files specify color settings for each tier, and you may need to rename the CSS classes to align with the new enum values. 
 - Below is an example of a CSS update after renaming an enum value to `TEST`:
     ![img_1.png](images/CssFileSetting.png)  
-- This is the result in the UI after update the CSS:  
+- This is the result in the UI after updating the CSS:  
     ![img_2.png](images/UIChangeAfterCSSFileChange.png)
 
 Similarly, `Status` is implemented using `enum` values to define a set of predefined client statuses. Each status has a corresponding color in the UI, offering agents visual cues to prioritize their follow-ups effectively:
