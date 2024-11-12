@@ -19,12 +19,12 @@ public class CommandStackTest {
     public void pushCommand() {
         // EP: command is an UndoCommand
         Command command = new UndoCommand();
-        commandStack.pushCommand(command);
+        CommandStack.pushCommand(command);
         assertTrue(commandStack.isEmpty());
 
         // EP: command is not an UndoCommand
         command = new ListCommand();
-        commandStack.pushCommand(command);
+        CommandStack.pushCommand(command);
         assertEquals(commandStack.peek(), command);
         commandStack.clear();
     }
@@ -32,11 +32,11 @@ public class CommandStackTest {
     @Test
     public void popCommand() {
         // EP: command stack is empty
-        assertEquals(commandStack.popCommand(), null);
+        assertEquals(CommandStack.popCommand(), null);
 
         // EP: command stack is not empty
         Command command = new ListCommand();
-        commandStack.pushCommand(command);
-        assertEquals(commandStack.popCommand(), command);
+        CommandStack.pushCommand(command);
+        assertEquals(CommandStack.popCommand(), command);
     }
 }
