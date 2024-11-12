@@ -5,22 +5,31 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.STUDENT_BENSON;
+import static seedu.address.testutil.TypicalPersons.TEACHER_ALICE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 public class ModelManagerTest {
-
     private ModelManager modelManager = new ModelManager();
+    private ModelManager expectedModelManager = new ModelManager();
+
+    @BeforeEach
+    public void setUp() {
+        modelManager = new ModelManager();
+        expectedModelManager = new ModelManager();
+    }
 
     @Test
     public void constructor() {
@@ -79,13 +88,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+        assertFalse(modelManager.hasPerson(TEACHER_ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+        modelManager.addPerson(TEACHER_ALICE);
+        assertTrue(modelManager.hasPerson(TEACHER_ALICE));
     }
 
     @Test
@@ -94,8 +103,24 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void undoAddressBook_noPreviousState_throwsCommandException() {
+        assertThrows(CommandException.class, () -> modelManager.undoAddressBook());
+    }
+
+    @Test
+    public void undoAddressBook_withPreviousState_success() throws CommandException {
+        modelManager.addPerson(TypicalPersons.TEACHER_ALICE);
+        modelManager.commitAddressBook();
+
+        modelManager.undoAddressBook();
+
+        assertEquals(modelManager.getAddressBook(), expectedModelManager.getAddressBook());
+        assertEquals(modelManager.getFilteredPersonList(), expectedModelManager.getFilteredPersonList());
+    }
+
+    @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(TEACHER_ALICE).withPerson(STUDENT_BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -117,7 +142,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = TEACHER_ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

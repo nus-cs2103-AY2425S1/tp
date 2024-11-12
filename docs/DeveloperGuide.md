@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+EduConnect was developed based on the project codebase of Address Book 3 (AB3). This project builds upon the foundational architecture and core functionalities established in AB3, while introducing new features and customizations tailored for managing student and teacher data.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -68,13 +68,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F12-2/tp/blob/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -85,7 +85,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -125,7 +125,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -136,14 +136,14 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F12-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 ### Common classes
 
@@ -155,11 +155,43 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Command History
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The command history functionality is implemented in three main components:
+
+1. `CommandHistory`: This class maintains a list of past commands and `currentIndex` to track the current position within the list. It includes methods for adding new commands and retrieving the previous or next command:
+
+* `add(command)` — Adds a command to the history and resets the pointer to the most recent position.
+* `getPreviousCommand()` — Moves the pointer to the previous command and returns it.
+* `getNextCommand()` — Moves the pointer to the next command and returns it.
+
+2. `LogicManager`: The `LogicManager` component integrates the `CommandHistory` to store each command upon execution. It provides access to the history for other components like the UI.
+
+
+3. `CommandBox` UI Component: This component captures key events when the user presses the up or down arrow keys. Based on these key events, it retrieves commands from `CommandHistory` via `LogicManager` and displays them in the command input field.
+
+#### Sequence Diagram
+
+The following sequence diagram illustrates the flow when a user presses the up arrow key to access the previous command in history:
+
+![CommandHistorySequence](images/CommandHistorySequenceDiagram.png)
+
+1. The user presses the up arrow key.
+2. `CommandBox` calls `LogicManager#getPreviousCommand()`.
+3. `LogicManager` delegates this request to `CommandHistory#getPrevious()`.
+4. `CommandHistory` retrieves the previous command and returns it to `LogicManager`.
+5. `LogicManager` then passes the command back to `CommandBox`.
+6. `CommandBox` displays the previous command in the input field.
+
+This streamlined structure keeps the history management isolated within CommandHistory, simplifying logic in other components. The result is an intuitive user experience that enhances the command-line interface.
+
+### Undo/redo feature
+
+#### Implementation
+
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. It also stores a `predicateStateList` for the Predicates used for each state. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -173,11 +205,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `executeCommand` method in the Command class calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `student /name David …​` to add a new person. The `executeCommand` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -189,8 +221,7 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command indirectly uses `VersionedAddressBook#undo()` which checks if the `currentStatePointer` is at index 0. If so, it will return an error to the user rather than attempting to perform the undo.
 
 </div>
 
@@ -208,40 +239,21 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command indirectly uses `VersionedAddressBook#redo()` to check if `currentStatePointer` is at index `addressBookStateList.size() - 1`. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `help`. Commands that do not modify the address book, such as `help`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `student /name David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -255,78 +267,362 @@ _{Explain here how the data archiving feature will be implemented}_
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned Enhancements**
+
+Team Size: 5
+
+1. **Update `student` and `teacher` success message**: The current success message for adding a student or teacher without any tags ends with `; Tags:`, i.e. it attempts to display the tags but since none were added, it ends off abruptly. 
+
+    We plan to make the success message only mention the Tags _if_ there are tags to be listed, e.g. either `... Next of Kin: Bob Doe; Emergency Contact: 87654321;` (i.e. no tags) or `... Next of Kin: Bob Doe; Emergency Contact: 87654321; Tags: [friend]` (i.e. at least one tag to be displayed).
+2. **Enhance `mark` command's implementation**: The current implementation of `mark` can only mark the attendance of all students together. This prevents users from easily marking the attendance of individual students. The current workaround is to either `mark` and `unmark` all other students or to `delete` and add the student back into EduConnect with the incremented attendance field. 
+
+    We plan to introduce optional index parameters for the `mark` command, allowing users to specify which indexes to specifically mark the attendance of. This implementation will be similar to the `unmark` command. E.g. `mark` will still mark the attendance of all students but `mark 1 2` will only mark the attendance of the 1st and 2nd index persons (assuming they are students).
+3. **Use shorter command aliases**: Currently, EduConnect requires users to use longer parameters such as `/name` when entering commands.
+
+   We plan to introduce shorter command aliases, such as `/n` for `/name`, to make input faster and more convenient for users.
+4. **Prevent `edit` command from accepting `/nok`, `/attendance` and `/emergency` prefix for `teacher`**: The current implementation of the `edit` command allows for the use of `/nok`, `/attendance` and `/emergency` prefixes for `teacher` contacts. This is not necessary as these fields are not applicable to teachers. 
+
+    We plan to prevent the use of these prefixes for `teacher` contacts, ensuring that only the relevant fields can be edited for teachers.
+5. **Relax restrictions on phone number to allow international phone numbers**: The current implementation of the `add` command restricts phone numbers to be 8 digits long. This is not suitable for international phone numbers, which can be longer than 8 digits. 
+
+    We plan to relax the restrictions on phone numbers to allow for international phone numbers, which can be longer than 8 digits. This will allow for a wider range of phone numbers to be added to EduConnect.
+6. **Make `gender` parameter case-insensitive**: The current parameter of `gender` requires the user to input strictly `male` or `female`. This is not user-friendly as users may input `Male` or `Female` instead. 
+
+    We plan to make the `gender` parameter case-insensitive and accept both `male` and `female` and also `m` and `f` in any case as valid inputs to allow for a more user-friendly experience.
+7. **Ability to edit attendance for students**: The current `edit` command does not support editing the attendance parameter.
+
+    We plan to enhance the `edit` command to include the ability to directly modify the student's attendance field to a specified value, provided it adheres to the required constraints of the attendance parameter. The command format will be `edit INDEX [/attendance ATTENDANCE]`.
+8. **Update `find` command to support partial matching**: The current `find` command only supports exact matches for search parameters, which limits its flexibility.
+
+   We plan to enhance the `find` command to allow partial matches, enabling users to search for entries using incomplete information. For instance, entering `find /name han` would return results such as "Hans Gruber" and "Johanna Smith.".
+9. **Prevent duplicate subjects to be added**: The current implementation for adding a contact allows for duplicate subjects to be added for a contact.
+
+    We plan to prevent the addition of duplicate contacts by filtering out subjects that already exist in the contact's subject list.
+10. **Allow certain special characters in names**: The current implementation for adding a contact prevents the use of any special characters in names.
+    
+    We plan to allow the incorporation of characters such as '/' and '-' in names to accommodate a wider range of names. 
+
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
+
+
+The main difficulty faced by the team was understanding the existing codebase and adapting it to meet new requirements. The team had to dedicate a significant amount of time to comprehending the codebase and the interactions between its various components, which was a considerable challenge due to their lack of prior experience with it.
+Fortunately, the existing AB3 developer guide provided a solid starting point for tackling the new requirements. By leveraging the guide, the team was able to implement new features, such as abstracting `Person` into `Student` and `Teacher`.
+<br><br>
+The learning curve associated with JavaFX and implementing the GUI presented another significant challenge for the team. With only basic knowledge gained from their iP projects, the team had to learn JavaFX from scratch, dedicating a substantial amount of time to mastering it and implementing the GUI, which in turn slowed down the development process.
+Additionally, making significant changes to the JSON storage file posed another hurdle. The team needed to understand how the JSON storage file functioned and how to modify it without disrupting existing functionality. This was particularly challenging due to the team’s lack of prior experience with JSON storage files, requiring them to learn how to make modifications without causing issues in the current system.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Requirements**
 
 ### Product scope
 
 **Target user profile**:
-
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+School teachers looking to manage the details of both students and other teachers.
+* needs to keep track of many students at a time
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* prefers to type in a command line interface
+* uses a small set of commands
+* makes frequent typos but hates to backtrack with backspace
+* likes to have an autocomplete suggestion
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: EduConnect will provide a faster and more convenient way to manage details of students and teachers than other apps.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority​ | As a …​                   | I want to …​                                                                                                  | So that I can…​                                                                  |
+|-----------|---------------------------|---------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`   | new user                  | see usage instructions                                                                                        | refer to instructions when I forget how to use the App                           |
+| `* * *`   | teacher                   | add a new student and their details                                                                           | keep track of student information efficiently and manage their data in one place |
+| `* * *`   | teacher                   | remove/delete a student from the app                                                                          | remove entries that I no longer need                                             |
+| `* * *`   | teacher                   | add a new teacher and their details                                                                           | find information on other teachers if need be                                    |
+| `* * *`   | teacher                   | remove/delete a teacher from the app                                                                          | remove entries that I no longer need                                             |
+| `* * *`   | teacher                   | edit or update information of a student                                                                       | keep the data stored accurate and up to date                                     |
+| `* *`     | teacher                   | clear all student/class data from the previous semester/year                                                  | reset the app for the new semester/year                                          |
+| `* *`     | teacher                   | search for students by some partial information                                                               | quickly find a list of students without recalling specific details               |
+| `* *`     | teacher                   | tag and filter students based on specific attributes                                                          | access relevant groups without manually searching every time                     |
+| `*`       | teacher new to EduConnect | see a sample version of how the app will look with sample data                                                | better visualise the workflow or how the app will work or look                   |
+| `*`       | teacher who makes typos   | have flexibility in typos for the commands                                                                    | continue writing commands without needing to rewrite or backspace                |
+| `*`       | teacher familiar with CLI | use shortcuts or linux-like commands                                                                          | enter commands faster and more familiar to me                                    |
+| `*`       | teacher                   | export student list and contact information to various formats                                                | share and archive data easily for administrative purposes                        |
+| `*`       | teacher                   | switch between different classes using keybinds                                                               | navigate between different groups of students efficiently                        |
+| `*`       | teacher                   | have an undo/redo command for recent actions                                                                  | quickly correct mistakes or revert changes                                       |
+| `*`       | teacher                   | create custom command aliases for frequently used commands                                                    | streamline my workflow and reduce the number of keystrokes needed                |
+| `*`       | teacher                   | have built-in calendar integration that links student info with important dates (e.g. parent meetings, exams) | easily access all relevant student data when preparing for key events            |
+| `*`       | teacher                   | quickly generate printable class rosters with selected details (e.g. names, contact info, emergency contacts) | have a physical copy for field trips or offline use                              |
+| `*`       | teacher                   | have a dark mode or customizable themes for the interface                                                     | reduce eye strain while managing student data at night                           |
+| `*`       | teacher                   | use natural language input for commands (e.g. "add student John Doe to class 5a")                             | enter commands more intuitively without memorising specific syntax               |
+| `*`       | teacher                   | group students based on customizable criteria (e.g. performance level, participation)                         | easily view and manage students with similar needs                               |
+| `*`       | teacher                   | get the contact details of a frequently searched contact                                                      | quickly use it to contact a student                                              |
+| `*`       | teacher                   | systematically add the contact details of twins who share similar details                                     | have a smaller chance of having errors                                           |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the System is EduConnect and the Actor is a Teacher (User), unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Add a student**
+
+**Preconditions**
+* User has the student’s details, i.e. name, gender, contact, classes, subject, email, address, attendance, next of kin and emergency contact.
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. Teacher enters the add student command.
+2. EduConnect verifies the command inputs.
+3. EduConnect adds the student’s contact details to the address book.
+4. EduConnect displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Required parameter(s) missing in command format.
+  * 2a1. EduConnect displays an error message.
 
-  Use case ends.
+    Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. Invalid/Unsupported parameter tag used.
+  * 2b1. EduConnect displays an error message.
 
-    * 3a1. AddressBook shows an error message.
+    Use case ends.
 
-      Use case resumes at step 2.
+* 2c. Invalid argument for a parameter given.
+  * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”.
 
-*{More to be added}*
+    Use case ends.
+
+* 2d. Existing contact or email given.
+  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”.
+
+    Use case ends.
+
+**Use case: UC02 - Add a teacher**
+
+**Preconditions**
+* User has the teacher’s details, i.e. name, gender, contact, classes, subject, email and address.
+
+**MSS**
+1. Teacher enters the add teacher command.
+2. EduConnect verifies the command inputs.
+3. EduConnect adds the teacher’s contact details to the address book.
+4. EduConnect displays a success message.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Required parameter(s) missing in command format.
+  * 2a1. EduConnect displays an error message.
+
+    Use case ends.
+
+* 2b. Invalid/Unsupported parameter tag used.
+  * 2b1. EduConnect displays an error message.
+
+    Use case ends.
+
+* 2c. Invalid argument for a parameter given.
+  * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”.
+
+    Use case ends.
+
+* 2d. Existing contact or email given.
+  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”.
+
+    Use case ends.
+
+**Use case: UC-03 Delete a contact**
+
+**Preconditions**
+* The address book contains at least one contact.
+* User knows the index of the contact to be deleted.
+
+**MSS**
+1. Teacher enters the delete contact command.
+2. EduConnect verifies the index validity.
+3. EduConnect deletes the contact from the address book.
+4. EduConnect displays a success message.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Invalid index provided.
+  * 2a1. EduConnect displays an error message, e.g. “The person index provided is invalid: 2”.
+
+    Use case ends.
+
+**Use case: UC-04 List contacts**
+
+**MSS**
+1. Teacher enters the list command.
+2. EduConnect displays a list of all contacts in the address book.
+
+    Use case ends.
+
+**Use case: UC-05 Edit a contact**
+
+**Preconditions**
+* The address book contains at least one contact.
+* User knows the index of the contact to be edited.
+
+**MSS**
+1. Teacher enters the edit command.
+2. EduConnect verifies the command inputs.
+3. EduConnect edits the specified contact in the address book.
+4. EduConnect displays a success message.
+
+    Use case ends.
+
+**Extensions**
+* 2a. Invalid index provided.
+  * 2a1. EduConnect displays an error message.
+
+    Use case ends.
+
+* 2b. Invalid/Unsupported parameter tag used.
+  * 2b1. EduConnect displays an error message.
+
+    Use case ends.
+
+* 2c. Invalid new argument for a parameter given.
+  * 2c1. EduConnect displays an error message, e.g. "Names should only contain alphanumeric characters and spaces, and it should not be blank".
+
+    Use case ends.
+
+* 2d. Duplicate contact or email provided.
+  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”.
+
+    Use case ends.
+
+**Use case: UC-06 Clear**
+
+**Preconditions**
+* User may optionally specify tags to filter which contacts are cleared.
+
+**MSS**
+1. Teacher enters the clear command.
+2. EduConnect clears all contacts in the address book.
+3. EduConnect displays a success message.
+
+    Use case ends.
+
+**Extensions**
+* 1a. Teacher specifies a tag to clear.
+  * 1a1. EduConnect clears all contacts with that tag value in the address book.
+
+    Use case ends.
+
+* 1b. Teacher specifies an invalid tag.
+  * 1b1. EduConnect displays an error message.
+
+    Use case ends.
+
+* 1c. Teacher specifies a tag with no matching contacts.
+  * 1c1. EduConnect displays an error, e.g. “No possible entries in EduConnect to clear!”.
+
+    Use case ends.
+
+**Use case: UC-07 Find**
+
+**MSS**
+1. Teacher enters the find command with some specific criteria.
+2. EduConnect displays a list of all persons that fit that criteria in the address book.
+
+   Use case ends.
+
+**Extensions**
+* 1a. Teacher doesn't specify any criteria.
+    * 1b1. EduConnect displays an error message.
+
+      Use case ends.
+
+* 1b. Teacher uses invalid tags to filter.
+    * 1b1. EduConnect displays an error message.
+
+      Use case ends.
+
+**Use case: UC-08 Sort**
+
+**MSS**
+1. Teacher enters the sort command with some criteria.
+2. EduConnect sorts the list of all persons by that criteria.
+3. EduConnect displays the list of all persons in the address book.
+
+   Use case ends.
+
+**Extensions**
+* 1a. Teacher doesn't specify any criteria.
+  * 1a1. EduConnect displays an error message.
+
+    Use case ends.
+* 1b. Teacher specifies invalid criteria.
+  * 1b1. EduConnect displays an error message.
+
+    Use case ends.
+
+**Use case: UC-09 Mark Attendance**
+
+**MSS**
+1. Teacher enters the mark command.
+2. EdUConnect marks all the students attendance, incrementing it by 1.
+
+    Use case ends.
+
+**Use case: UC-10 Unmark Attendance**
+
+**MSS**
+1. Teacher enters the unmark command with the index(es) of the student(s) to unmark.
+2. EduConnect unmarks the specified student(s) attendance, decrementing it by 1.
+
+    Use case ends.
+
+**Extensions**
+* 1a. Teacher doesn't specify any indexes.
+  * 1a1. EduConnect displays an error message.
+
+    Use case ends.
+* 1b. Teacher specifies an invalid index.
+  * 1b1. EduConnect displays an error message.
+
+    Use case ends.
+* 1c. Teacher specifies an index of a Student with 0 days attendance.
+  * 1c1. EduConnect displays an error message, e.g. "Only students who have attended at least one day can be unmarked".
+
+    Use case ends.
+
+**Use case: UC-11 Reset attendance**
+
+**MSS**
+1. Teacher enters the resetAttendance command.
+2. EduConnect resets the attendance of all students in the address book.
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  The system should handle errors gracefully, providing clear error messages for invalid inputs or operations.
+5.  The system should be platform-independent and capable of running on any operating system that supports Java, ensuring that users across different platforms can use the program.
+6.  The code should be well-documented, enabling developers to maintain and upgrade the system efficiently.
+7.  The system should be modular, allowing for easy extension in the future (e.g., adding new fields for contacts or new types of commands).
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Subject**: The subject the student / teacher is taking.
+* **Class**: The class the student / teacher is taking.
+* **Command Line Interface (CLI)**: Text-based user interface that allows the user to input.
+* **Next-of-Kin**: The contact of the closest relative of the current contact.
+* **Database**: An organized collection of structured information or data, typically stored electronically.
+* **GUI (Graphical User Interface)**: A visual user interface that allows users to interact with an application through graphical elements like buttons, icons, and menus, instead of typing commands.
+* **Encryption**: The process of converting plain text data into a coded format to prevent unauthorized access.
+* **Version Control**: A system that records changes to a file or set of files over time, allowing developers to track and manage revisions.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -340,43 +636,195 @@ testers are expected to do more *exploratory* testing.
 </div>
 
 ### Launch and shutdown
-
 1. Initial launch
+   1. Download the jar file and copy into an empty folder.
+   2. Open the “Command Prompt” (for Windows) or “Terminal” (for Mac/Linux).
+   3. Type `cd` followed by the folder location where you saved the EduConnect file.
+   4. Type and enter the command `java -jar educonnect.jar`.
 
-   1. Download the jar file and copy into an empty folder
+        Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
-
+2. Saving window preferences
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by following the instructions from 1ii onwards.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a Student
+1. Adding a Student
+   1. Prerequisites: There is no existing person (student or teacher) in EduConnect with the same contact or email as the student we're adding.
+   2. Test case: `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321` <br>
+      **Expected**: A student is added to EduConnect with the specified details. A new blue colored card is added to the GUI with the student's details.
+   3. Test case: `student` (missing required fields like name, contact, etc. ) <br>
+      **Expected**: No student is added. An error is thrown indicating the command given has an invalid format.
+   4. Other incorrect `student` commands to try:
+      - `student /name John Doe` (missing other required fields)
+      - `student /name John Doe /contact 12345 ...` (invalid phone format) <br>
+      **Expected**: Similar to previous case. No student is added. If all required fields are provided but an invalid format was used, specific error details for that will be given. For example, "Phone numbers should only contain numbers, and it should be exactly 8 digits long".
+
+### Adding a Teacher
+1. Adding a Teacher
+   1. Prerequisites: There is no existing person (student or teacher) in EduConnect with the same contact or email as the teacher we're adding.
+   2. Test case: `teacher /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B` <br>
+      **Expected**: A teacher is added to EduConnect with the specified details. A new green colored card is added to the GUI with the teacher's details.
+   3. Test case: `teacher` (missing required fields like name, contact, etc. ) <br>
+      **Expected**: No teacher is added. An error is thrown indicating the command given has an invalid format.
+   4. Other incorrect `teacher` commands to try:
+      - `teacher /name John Doe` (missing other required fields)
+      - `teacher /name John Doe /contact 12345 ...` (invalid phone format) <br>
+      **Expected**: Similar to previous case. No teacher is added. If all required fields are provided but an invalid format was used, specific error details for that will be given. For example, "Phone numbers should only contain numbers, and it should be exactly 8 digits long".
 
 ### Deleting a person
-
 1. Deleting a person while all persons are being shown
-
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `delete 1`<br>
+      **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+   3. Test case: `delete 0`<br>
+      **Expected**: No person is deleted. Error details shown in the status message.
+   4. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, negative or a non-integer)<br>
+      **Expected**: Similar to previous.
+   5. Test case: `delete 1 2`<br>
+      **Expected**: First and second contact is deleted from the list. Details of the deleted contacts are shown in the status message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+2. Deleting a person while only some persons are shown
+   1. Prerequisites: Possibly only some persons are shown, using the `find` command. Not all persons may be shown.
+   2. Test case: `delete 1`<br>
+      **Expected**: First contact in the filtered list is deleted from EduConnect. Details of the deleted contact shown in the status message.
+   3. Similar test cases as before, but now relative to the current filtered shown list.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Editing a person
+1. Editing a person while all persons are shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `edit 1 /name Bob`<br>
+      **Expected**: First contact's name is edited to "Bob". Details of the edited contact shown in the status message.
+   3. Test case: `edit 3 /name Bob /contact 12345678`<br>
+      **Expected**: Third contact's name is edited to "Bob" and contact number is edited to 12345678. Details of the edited contact shown in the status message.
+   4. Test case: `edit 0 /name Bob`<br>
+      **Expected**: No person is edited. Error details shown in the status message.
+   5. Other incorrect edit commands to try: `edit`, `edit x` (where x is larger than the list size, negative or non-integer), `edit 1 /contact 111` (invalid phone format)<br>
+      **Expected**: Similar to previous case. No person is edited. If an invalid format was used, specific error details for that will be given. For example, "Phone numbers should only contain numbers, and it should be exactly 8 digits long".
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+### Clearing EduConnect
+1. Clearing data from EduConnect with at least one person
+   1. Prerequisites: There exists at least one person in EduConnect.
+   2. Test case: `clear`<br>
+      **Expected**: All contacts are cleared from EduConnect.
+   3. Test case: `clear /name John`<br>
+      **Expected**: All contacts that have "John" in their name will be cleared from EduConnect. If there are no existing contacts with "John" in their name, an error will be thrown.
+   4. Test case: `clear /name John Doe`<br>
+      **Expected**: All contacts that have _either_ "John" _or_ "Doe" in their name will be cleared from EduConnect. As before, if there are no existing contacts that fit that criteria, an error will be thrown.
+   5. Test case: `clear /name John /subject Physics`<br>
+      **Expected**: All contacts that either have "John" in their name or "Physics" in their subjects will be cleared from EduConnect. As before, if there are no existing contacts that fit that criteria, an error will be thrown.
+   6. Test case: `clear /x` (where x is an invalid TAG)<br>
+      **Expected**: No contacts are deleted. Error details shown in the status message.
 
-1. _{ more test cases …​ }_
+### Listing
+1. Listing all persons in EduConnect
+   1. Test case: `list`<br>
+      **Expected**: All persons in EduConnect are listed out in the GUI.
+   2. Test case: `list x` (where x is some other random input)<br>
+      **Expected**: Same as case before. Random input `x` is ignored.
 
-### Saving data
+### Sorting
+1. Sorting EduConnect while all persons are shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `sort name`<br>
+      **Expected**: All the persons in EduConnect are sorted by their name in alphabetical order.
+   3. Test case: `sort subject`<br>
+      **Expected**: All the persons in EduConnect are sorted by their first subject in their list in alphabetical order.
+   4. Test case: `sort class`<br>
+      **Expected**: All the persons in EduConnect are sorted by their first class in their list in alphabetical order.
+   5. Test case: `sort attendance`<br>
+      **Expected**: All the persons in EduConnect are sorted by their attendance in descending order. Teachers (who don't have attendance) are pushed to the end.
+   6. Test case: `sort x` (where x is some random input that isn't any of the earlier test cases)<br>
+      **Expected**: EduConnect is not sorted. Error details shown in the status message.
 
-1. Dealing with missing/corrupted data files
+2. Sorting EduConnect while only some persons are shown
+   1. Prerequisites: Possibly only some persons are shown, using the `find` command. Not all persons may be shown.
+   2. Similar test cases as before but only the filtered persons are sorted and shown in the GUI.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Finding people in EduConnect
+1. Finding people in EduConnect while all persons are shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `find /name John`<br>
+      **Expected**: All persons who have "John" in their name are shown in the GUI and the rest are hidden.
+   3. Test case: `find /name John Doe`<br>
+      **Expected**: All persons who have either John or Doe in their name are shown in the GUI and the rest are hidden.
+   4. Test case: `find /name John /subject Physics`<br>
+      **Expected**: All persons who have either John in their name or Physics among their subjects are shown in the GUI and the rest are hidden.
+   5. Test case: `find`<br>
+      **Expected**: EduConnect remains the same. Error details shown in the status message.
+   6. Other incorrect `find` commands to try:
+      - `find John` (where the command is missing a TAG to find with) <br>
+      **Expected**: Similar to previous case. EduConnect remains the same. Error details shown in the status message.
 
-1. _{ more test cases …​ }_
+2. Finding people in EduConnect while only some persons are shown
+   1. Prerequisites: Possibly only some persons are shown, using the `find` command. Not all persons may be shown.
+   2. Similar test cases as before. `find` does not take into account the current state of EduConnect, i.e. if a person isn't currently displayed on the GUI but fits the next `find` command's criteria, it will still be displayed.
+
+### Undoing
+1. Undoing a previous command
+   1. Prerequisites: At least one undo-able command has been executed in EduConnect.
+   2. Test case: `undo` <br>
+      **Expected**: The previous command is undone and EduConnect returns to its previous state.
+   3. Test case: `undo x` (where x is some random input)<br>
+      **Expected**: Similar to previous case. The random input x is ignored.
+
+### Redoing
+1. Redoing a previously undone command
+   1. Prerequisites: At least one command has been undone in EduConnect.
+   2. Test case: `redo`<br>
+      **Expected**: The previously undone command is redone and EduConnect returns to its previously original state.
+   3. Test case: `redo x` (where x is some random input)<br>
+      **Expected**: Similar to previous case. The random input x is ignored.
+
+### Marking Attendance
+1. Marking attendance in EduConnect
+   1. Prerequisites: None.
+   2. Test case: `mark`<br>
+      **Expected**: All students in EduConnect have their attendance incremented by 1.
+   3. Test case: `mark x` (where x is some random input)<br>
+      **Expected**: Similar to previous case. The random input x is ignored.
+
+### Unmarking Attendance
+1. Unmarking attendance while all persons are shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `unmark 1`<br>
+      **Expected**: The student at index 1 has their attendance decremented by 1.
+   3. Test case: `unmark 0` <br>
+      **Expected**: No students' attendance are affected. Error details shown in the status message.
+   4. Other incorrect `unmark` commands to try:
+      - `unmark`, `unmark x` (where x is larger than the list size, negative or a non-integer) <br>
+      **Expected**: Similar to previous case. Error details shown in the status message.
+   5. Test case: `unmark 1` (where index 1 is a teacher) <br>
+      **Expected**: Similar to previous case. Error details shown in the status message.
+
+2. Unmarking attendance while only some persons are shown
+   1. Prerequisites: Possibly only some persons are shown, using the find command. Not all persons may be shown.
+   2. Similar test cases as before, but now relative to the current filtered shown list.
+
+### Resetting Attendance
+1. Resetting attendance while all persons are shown
+   1. Prerequisites: List all persons using the list command. Multiple persons in the list.
+   2. Test case: `resetAttendance`<br>
+      **Expected**: All students' attendance are reset to 0.
+   3. Test case: `resetAttendance x` (where x is some random input)<br>
+      **Expected**: Similar to previous case. The random input x is ignored.
+2. Resetting attendance while only some persons are shown
+   1. Prerequisites: Possibly only some persons are shown, using the find command. Not all persons may be shown.
+   2. Similar test cases as before. `resetAttendance` does not take into account the current state of EduConnect, i.e. if a student isn't currently displayed on the GUI and `resetAttendance` is executed, their attendance is also reset to 0.
+
+### Help
+1. Executing the `help` command
+   1. Prerequisites: None.
+   2. Test case: `help`<br>
+      **Expected**: A separate window is opened with a URL to the user guide. Users can click "Copy URL" to copy the URL to their clipboard.
+   3. Test case: `help x` (where x is some random input)<br>
+      **Expected**: Similar to previous case. The random input x is ignored.
+
+### Exiting EduConnect
+1. Executing the `exit` command
+    1. Prerequisites: None.
+    2. Test case: `exit`<br>
+       **Expected**: The current EduConnect window is closed.
+    3. Test case: `exit x` (where x is some random input)<br>
+       **Expected**: Similar to previous case. The random input x is ignored.

@@ -28,7 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE = "12345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
@@ -192,5 +192,20 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseSubject_emptyValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject(""));
+    }
+
+    @Test
+    public void parseSubjects_emptyList_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubjects(Collections.emptyList()));
+    }
+
+    @Test
+    public void parseClasses_emptyValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseClasses(" "));
     }
 }

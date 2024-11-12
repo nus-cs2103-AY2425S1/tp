@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,4 +86,31 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void setFilteredPersonList(List<Person> sortedList);
+
+    /**
+     * marks the attendance of the student.
+     */
+    void markAttendance();
+
+    /**
+     * Unmarks the attendance of a particular student.
+     */
+    void unmarkAttendance(Person targetIndex) throws CommandException;
+
+    /**
+     * Resets the attendance of all students.
+     */
+    void resetAttendance();
+
+    void commitAddressBook();
+
+    void undoAddressBook() throws CommandException;
+
+    void redoAddressBook() throws CommandException;
 }

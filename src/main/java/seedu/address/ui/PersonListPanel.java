@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 
 /**
  * Panel containing the list of persons.
@@ -38,12 +39,24 @@ public class PersonListPanel extends UiPart<Region> {
             super.updateItem(person, empty);
 
             if (empty || person == null) {
+                // Clear the cell if it's empty
                 setGraphic(null);
                 setText(null);
+                getStyleClass().removeAll("student-card", "teacher-card"); // Clear any previous styles
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                // Set the PersonCard as the graphic for the ListCell
+                try {
+                    PersonCard personCard = PersonCard.createPersonCard(person, getIndex() + 1);
+                    setGraphic(personCard.getRoot());
+                } catch (InvalidPersonTypeException e) {
+                    logger.warning("Invalid person type encountered: " + person.getName());
+                }
+
+                // Remove any previous styles applied to the cell
+                getStyleClass().removeAll("student-card", "teacher-card");
             }
         }
+
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -15,7 +16,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniquePersonList<Person> persons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,7 +26,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniquePersonList<>();
     }
 
     public AddressBook() {}
@@ -126,5 +127,34 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    /**
+     * Marks the attendance of all students in the address book.
+     */
+    public void markAttendance() {
+        for (Person person : persons) {
+            Person updatedPerson = person.withIncrementedAttendance();
+            setPerson(person, updatedPerson);
+        }
+    }
+
+    /**
+     * Unmarks the attendance of a particular student.
+     */
+    public void unmarkAttendance(Person personToUnmark) throws CommandException {
+        requireNonNull(personToUnmark);
+        Person updatedPerson = personToUnmark.withDecrementedAttendance();
+        setPerson(personToUnmark, updatedPerson);
+    }
+
+    /**
+     * Resets the attendance of all students in the address book.
+     */
+    public void resetAttendance() {
+        for (Person person : persons) {
+            Person updatedPerson = person.withResetAttendance();
+            setPerson(person, updatedPerson);
+        }
     }
 }

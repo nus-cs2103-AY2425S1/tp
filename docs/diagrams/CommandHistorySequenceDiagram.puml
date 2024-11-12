@@ -1,0 +1,13 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User as U
+U -> CommandBox : pressUpKey()
+CommandBox -> LogicManager : getPreviousCommand()
+LogicManager -> CommandHistory : getPrevious()
+CommandHistory --> LogicManager : return previousCommand
+LogicManager --> CommandBox : return previousCommand
+CommandBox -> CommandBox : setCommandText(previousCommand)
+U <-- CommandBox : displays previousCommand
+
+@enduml

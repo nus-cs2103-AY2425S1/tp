@@ -4,13 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,7 +22,8 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final VersionedAddressBook addressBook;
+
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
@@ -31,9 +35,10 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     public ModelManager() {
@@ -107,8 +112,59 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setFilteredPersonList(List<Person> persons) {
+        requireAllNonNull(persons);
+        addressBook.setPersons(persons);
+    }
+
+    @Override
+    public void markAttendance() {
+        logger.info("Marking attendance");
+        addressBook.markAttendance();
+    }
+
+    @Override
+    public void unmarkAttendance(Person personToUnmark) throws CommandException {
+        logger.info("Unmarking attendance for person: " + personToUnmark);
+        addressBook.unmarkAttendance(personToUnmark);
+    }
+
+    @Override
+    public void resetAttendance() {
+        logger.info("Resetting attendance");
+        addressBook.resetAttendance();
+    }
+
+    @Override
+    public void commitAddressBook() {
+        logger.info("Committing address book state");
+        assert addressBook != null : "Address book cannot be null";
+        assert filteredPersons.getPredicate() != null : "Predicate cannot be null";
+
+        addressBook.commit(addressBook, filteredPersons.getPredicate());
+    }
+
+    @Override
+    public void undoAddressBook() throws CommandException {
+        logger.info("Attempting to undo address book state");
+
+        ReadOnlyAddressBook prevAddressBook = addressBook.undo();
+        assert prevAddressBook != null : "Address book cannot be null";
+        setAddressBook(prevAddressBook);
+        filteredPersons.setPredicate(addressBook.getCurrentPredicate());
+
+        logger.info("Undo successful");
+    }
+
+    @Override
+    public void redoAddressBook() throws CommandException {
+        ReadOnlyAddressBook nextAddressBook = addressBook.redo();
+        setAddressBook(nextAddressBook);
+        filteredPersons.setPredicate(addressBook.getCurrentPredicate());
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -119,7 +175,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return FXCollections.unmodifiableObservableList(filteredPersons);
     }
 
     @Override

@@ -9,16 +9,24 @@ Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
 Class "<<interface>>\nModel" as Model
 Class AddressBook
+Class VersionedAddressBook
 Class ModelManager
 Class UserPrefs
 
 Class UniquePersonList
-Class Person
+abstract Class Person
 Class Address
 Class Email
 Class Name
 Class Phone
 Class Tag
+Class Gender
+Class Subject
+Class Class
+Class DaysAttended
+
+Class Student
+Class Teacher
 
 Class I #FFFFFF
 }
@@ -27,11 +35,12 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
+VersionedAddressBook -left-|> AddressBook
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" VersionedAddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
@@ -41,14 +50,28 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
+Person *--> Gender
+Person *--> Subject
+Person *--> Tag
+Person *--> Class
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
-Name -[hidden]right-> Phone
+Name -[hidden]right-> Gender
+Gender -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> Tag
+Tag -[hidden]right-> Subject
+Subject -[hidden]right-> Class
+
+Person <|-l- Student
+Person <|-r- Teacher
+
+Student *-l-> DaysAttended
+Student *--> Name
+Student *--> Phone
 
 ModelManager --> "~* filtered" Person
 @enduml

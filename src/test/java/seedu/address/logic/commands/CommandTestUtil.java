@@ -3,9 +3,15 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -37,9 +43,21 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final int VALID_ATTENDANCE_AMY = 10;
+    public static final int VALID_ATTENDANCE_BOB = 10;
+
+    public static final String VALID_SUBJECT_AMY = "Mathematics";
+    public static final String VALID_SUBJECT_BOB = "Physics";
+    public static final String VALID_CLASSES_AMY = "8H";
+    public static final String VALID_CLASSES_BOB = "7A";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
+    public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + "female";
+    public static final String VALID_GENDER_AMY = "female";
+    public static final String VALID_GENDER_BOB = "male";
+    public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_BOB;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
@@ -47,12 +65,75 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT + VALID_SUBJECT_AMY;
+    public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
+    public static final String CLASS_DESC_AMY = " " + PREFIX_CLASSES + VALID_CLASSES_AMY;
+    public static final String CLASS_DESC_BOB = " " + PREFIX_CLASSES + VALID_CLASSES_BOB;
+    public static final String ATTENDANCE_DESC_AMY = " " + PREFIX_ATTENDANCE + VALID_ATTENDANCE_AMY;
+    public static final String ATTENDANCE_DESC_BOB = " " + PREFIX_ATTENDANCE + VALID_ATTENDANCE_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "unknown"; // 'unknown' is not a valid gender
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "*"; // '*' is not a valid subject
+    public static final String INVALID_CLASSES_DESC = " " + PREFIX_CLASSES + "*"; // '*' is not a valid class
+    public static final String INVALID_ATTENDANCE_DESC =
+            " " + PREFIX_ATTENDANCE + "-1"; // negative attendance not allowed
+
+    public static final String VALID_NAME_MICHAEL = "Michael Tan";
+    public static final String VALID_GENDER_MICHAEL = "male";
+    public static final String VALID_PHONE_MICHAEL = "98765432";
+    public static final String VALID_EMAIL_MICHAEL = "michael@example.com";
+    public static final String VALID_ADDRESS_MICHAEL = "311, Clementi Ave 2, #02-25";
+    public static final String VALID_SUBJECT_MICHAEL = "Physics";
+    public static final String VALID_CLASSES_MICHAEL = "7A";
+    public static final String VALID_TAG_HARDWORKING = "hardworking";
+    public static final String VALID_TAG_ATHLETE = "athlete";
+    public static final int VALID_ATTENDANCE_MICHAEL = 10;
+    public static final String VALID_NEXT_OF_KIN_MICHAEL = "John Tan";
+    public static final String VALID_EMERGENCY_CONTACT_MICHAEL = "98765432";
+
+    // Constants for Chris
+    public static final String VALID_NAME_CHRIS = "Chris Lim";
+    public static final String VALID_GENDER_CHRIS = "male";
+    public static final String VALID_PHONE_CHRIS = "98192727";
+    public static final String VALID_EMAIL_CHRIS = "chris@example.com";
+    public static final String VALID_ADDRESS_CHRIS = "311, Lorong Ave 2, #02-25";
+    public static final String VALID_SUBJECT_CHRIS = "Math";
+    public static final String VALID_CLASSES_CHRIS = "7B";
+    public static final String VALID_ATTENDANCE_CHRIS = "10";
+    public static final String VALID_NEXT_OF_KIN_CHRIS = "John Lim";
+    public static final String VALID_EMERGENCY_CONTACT_CHRIS = "98192727";
+
+    // Descriptions for fields for Michael
+    public static final String NAME_DESC_MICHAEL = " " + PREFIX_NAME + VALID_NAME_MICHAEL;
+    public static final String GENDER_DESC_MICHAEL = " " + PREFIX_GENDER + VALID_GENDER_MICHAEL;
+    public static final String PHONE_DESC_MICHAEL = " " + PREFIX_PHONE + VALID_PHONE_MICHAEL;
+    public static final String EMAIL_DESC_MICHAEL = " " + PREFIX_EMAIL + VALID_EMAIL_MICHAEL;
+    public static final String ADDRESS_DESC_MICHAEL = " " + PREFIX_ADDRESS + VALID_ADDRESS_MICHAEL;
+    public static final String SUBJECT_DESC_MICHAEL = " " + PREFIX_SUBJECT + VALID_SUBJECT_MICHAEL;
+    public static final String CLASSES_DESC_MICHAEL = " " + PREFIX_CLASSES + VALID_CLASSES_MICHAEL;
+    public static final String TAG_DESC_HARDWORKING = " " + PREFIX_TAG + VALID_TAG_HARDWORKING;
+    public static final String TAG_DESC_ATHLETE = " " + PREFIX_TAG + VALID_TAG_ATHLETE;
+    public static final String ATTENDANCE_DESC_MICHAEL = " " + PREFIX_ATTENDANCE + VALID_ATTENDANCE_MICHAEL;
+    public static final String NOK_DESC_MICHAEL = " " + PREFIX_NEXT_OF_KIN + VALID_NEXT_OF_KIN_MICHAEL;
+    public static final String EMERGENCY_DESC_MICHAEL = " " + PREFIX_EMERGENCY_CONTACT
+            + VALID_EMERGENCY_CONTACT_MICHAEL;
+    public static final String INVALID_ATTENDANCE_DESC_MICHAEL = " " + PREFIX_ATTENDANCE + "-1";
+
+    // Descriptions for fields for Chris
+    public static final String NAME_DESC_CHRIS = " " + PREFIX_NAME + VALID_NAME_CHRIS;
+    public static final String PHONE_DESC_CHRIS = " " + PREFIX_PHONE + VALID_PHONE_CHRIS;
+    public static final String EMAIL_DESC_CHRIS = " " + PREFIX_EMAIL + VALID_EMAIL_CHRIS;
+    public static final String ADDRESS_DESC_CHRIS = " " + PREFIX_ADDRESS + VALID_ADDRESS_CHRIS;
+    public static final String SUBJECT_DESC_CHRIS = " " + PREFIX_SUBJECT + VALID_SUBJECT_CHRIS;
+    public static final String CLASSES_DESC_CHRIS = " " + PREFIX_CLASSES + VALID_CLASSES_CHRIS;
+    public static final String ATTENDANCE_DESC_CHRIS = " " + PREFIX_ATTENDANCE + VALID_ATTENDANCE_CHRIS;
+
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -77,7 +158,7 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
             Model expectedModel) {
         try {
-            CommandResult result = command.execute(actualModel);
+            CommandResult result = command.executeCommand(actualModel);
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -107,7 +188,7 @@ public class CommandTestUtil {
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
-        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertThrows(CommandException.class, expectedMessage, () -> command.executeCommand(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }

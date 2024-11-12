@@ -1,7 +1,9 @@
 package seedu.address.ui;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -162,6 +164,33 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow.hide();
         primaryStage.hide();
     }
+
+    /**
+     * Changes the theme from Dark Mode to Light Mode and vice-versa
+     */
+    @FXML
+    private void handleChangeTheme() {
+        // Get the current stylesheets
+        ObservableList<String> stylesheets = getPrimaryStage().getScene().getStylesheets();
+
+        // Define the paths for the Light and Dark theme CSS files
+        String darkTheme = Objects.requireNonNull(getClass()
+                .getResource("/view/DarkTheme.css")).toExternalForm();
+        String lightTheme = Objects.requireNonNull(getClass()
+                .getResource("/view/LightTheme.css")).toExternalForm();
+
+        // Toggle between themes
+        if (stylesheets.contains(darkTheme)) {
+            // If dark theme is applied, switch to light theme
+            stylesheets.remove(darkTheme);
+            stylesheets.add(lightTheme);
+        } else {
+            // Otherwise, switch to dark theme
+            stylesheets.remove(lightTheme);
+            stylesheets.add(darkTheme);
+        }
+    }
+
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
