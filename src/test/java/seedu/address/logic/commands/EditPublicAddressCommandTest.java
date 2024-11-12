@@ -7,10 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.addresses.PublicAddressesComposition.MESSAGE_DUPLICATE_PUBLIC_ADDRESS;
 import static seedu.address.testutil.TypicalPersons.JOE;
 import static seedu.address.testutil.TypicalPersons.MOE;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_MAIN;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_SUB;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_SUB_STRING;
-import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_MAIN;
-import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_SOL_MAIN;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -118,16 +118,16 @@ public class EditPublicAddressCommandTest {
 
     @Test
     public void execute_duplicatePublicAddress_throwsCommandException() {
-    model.addPerson(new PersonBuilder(MOE).build());
+        model.addPerson(new PersonBuilder(MOE).build());
 
-    // Attempt to add the same public address to another person
-    PublicAddress duplicatePublicAddress = JOE.getPublicAddressesComposition().getOnePublicAddress();
-    EditPublicAddressCommand editCommand = new EditPublicAddressCommand(Index.fromOneBased(2),
+        // Attempt to edit the same public address to another person
+        PublicAddress duplicatePublicAddress = JOE.getPublicAddressesComposition().getOnePublicAddress();
+        EditPublicAddressCommand editCommand = new EditPublicAddressCommand(Index.fromOneBased(2),
             duplicatePublicAddress);
 
-    assertCommandFailure(editCommand, model, String.format(
-            MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
-            duplicatePublicAddress.getPublicAddressString()));
+        assertCommandFailure(editCommand, model, String.format(
+                MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
+                duplicatePublicAddress.getPublicAddressString()));
     }
 
     @Test
