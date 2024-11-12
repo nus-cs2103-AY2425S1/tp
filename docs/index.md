@@ -3,8 +3,10 @@ layout: page
 title: AdmiNUS
 ---
 
+
 [![CI Status](https://github.com/AY2425S1-CS2103T-t14-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-t14-2/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425s1-CS2103t-t14-2/tp/branch/master/graph/badge.svg)](https://app.codecov.io/gh/AY2425s1-CS2103t-t14-2/tp)
+
 
 # AdmiNUS - Contact Management for NUS Clubs
 ![Ui](images/viewContactUI.png)
