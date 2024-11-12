@@ -730,7 +730,7 @@ We plan to allow the user to navigate through the command history using the up a
 This can make it challenging for users to locate a contact if they are unsure of specific search criteria.
 We plan to allow the user to view the contacts in a sorted order to find the contact he/she is looking for more easily.
    <br><br>
-7. **Allow multi-word tags for contacts** Currently, tag field only allows alphanumeric inputs for tag creation, which means **spaces**, **underscores(_)** and **dashes(-)** are not
+7. **Allow multi-word tags for contacts.** Currently, tag field only allows alphanumeric inputs for tag creation, which means **spaces**, **underscores(_)** and **dashes(-)** are not
 allowed in the input, and as a result prevents user from creating multi-word tags for contacts. 
 <br><br>
     ![point6_tag_error_example](images/planned_enhancements_screenshots/Point6_TagErrorExample.png)<br>
@@ -746,4 +746,19 @@ on tag creation input to allow space for word separation, so that user can creat
    For example, if the user executes `delete 1`, then `delete 2`, then `undo`, then `delete 3`, the true history states are `[delete 1, delete 3]` since `delete 2` has been purged.
    However, the history command list will only show all data changing commands executed so far, (refer to the screenshot below) which is not accurate.
    Moreover, we plan to highlight the current state of the address book in the history command list, so that the user can easily identify the current state of the address book.
-   ![point8_screenshot](images/planned_enhancements_screenshots/Point8.png)
+   <br><br>
+   <img src="images/planned_enhancements_screenshots/Point8.png" alt="point8_screenshot" width="50%"/><br><br>
+<br>
+9. **Standardize Phone Number Format for Duplicate Detection.** Currently, the application allows adding multiple contacts with phone numbers that may look different but essentially represent the same number.
+For example, `+65 12345678 (24 hr)` and `12345678` are treated as distinct, leading to potential duplicates and inconsistencies.
+We plan to implement a standardization process to recognize and handle variations in phone number formatting. Specifically:
+* Strip country codes (like "+65") when detecting duplicates, assuming that the default region can be inferred.
+* Ignore any additional annotations (e.g., "(24 hr)"), focusing only on the numeric phone number for duplicate checks.
+* Ensure that both +65 12345678 and 12345678 are considered the same number to prevent duplicate entries.
+<br>
+
+10. **Allow simultaneous adding and deleting module roles in a single `edit` command.**
+Currently, it requires 2 separate `edit` commands if the user wants to replace existing module roles for a contact.
+We plan to allow the user to add and delete multiple module roles in a single `edit` command at the same time.
+For example, the user can execute `edit 1 r/-CS1101S-Student r/+CS2103T-TA` to replace the existing module role CS1101S-Student with CS2103T-TA for the first contact in the list.
+
