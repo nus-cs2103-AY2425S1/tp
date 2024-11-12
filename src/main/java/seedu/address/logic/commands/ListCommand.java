@@ -23,6 +23,6 @@ public class ListCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS,
                 false, false, false,
-                true, true, true);
+                true, true, false);
     }
 }
