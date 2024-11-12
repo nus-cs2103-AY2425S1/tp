@@ -291,7 +291,7 @@ Format: `assign STUDY_GROUP [STUDY_GROUP …]`
 * Input study group names must not have duplicates.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-The `assign` command will randomly assign participants to study groups. However, it cannot ensure an equal distribution of participants when provided with a small number or participants. For e.g., assigning 2 participants to 2 study groups can result in one group with 2 participants, and the other group with no participants.
+The `assign` command will randomly assign participants to study groups. However, to ensure true randomness, it cannot ensure an equal distribution of participants per group when provided with a small number of participants. For e.g., assigning 2 participants to 2 study groups can result in one group with 2 participants, and the other group with no participants. It is thus ideal for large sample sizes.
 </div>
 
 Examples:
