@@ -145,9 +145,28 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ``This section describes some noteworthy details on how certain features are implemented.``
 
-* Implementation details are yet to be added and will be released in v1.6
+### Save Sort Preference
 
+<img src="images/SaveSortPreferenceSequenceDiagram.png" width="550" />
 
+The "Save Sort Preference" feature allows users to save their preferred sorting method for NetBook so that the next time
+they open the application, their contacts are displayed in the saved order. This feature consists of multiple components working
+together, including the Logic and Model component.
+The implementation is similar to the `Delete` command above, with a few additional details 
+
+#### Flow of Save Sort Preference
+1. **User Command**: The process begins with users entering the command `svp high` or other valid save sort command.
+2. *Command Parsing*:
+   1. The `AddressBookParser` parses the command and identifies the `SaveSortPreferenceCommandParser` which is the parser
+    responsible for handling this specific command.
+   2. The `SaveSortPreferenceCommandParser` then calls the class method `ParserUtil::parseSortPreference`. The job of `ParserUtil::parseSortPreference`
+   is to validate and process the input passed by the NetBook user. Note that the validity of the saveSortPreference input is then handled by
+   the class method `SortPreference::isValidSortPreference` that is present in the model component. 
+3. **Saving the Preference**
+   1. The parsed `SortPreference` object will be passed to the `SaveSortPreferenceCommand` class, which executes the saving operation
+   2. The `Model` class stored the user's sorting preference persistently
+   3. Note that the sorting preference is finally stored in `UserPrefs` as a String
+4. **Result**: A `CommandResult` is generated and returned to the `LogicManager`, indicating either success or failure
 
 --------------------------------------------------------------------------------------------------------------------
 
