@@ -15,13 +15,13 @@ HiredFiredPro is a desktop app to help hiring managers like you **streamline you
   * [Commonly Used Parameters](#commonly-used-parameters)
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * [Viewing help: ](#viewing-help--help)`help`
+  * [Viewing help: ](#viewing-help-help)`help`
   * [Adding a candidate: ](#adding-a-candidate-add)`add`
   * [Listing all candidates: ](#listing-all-candidates-list)`list`
   * [Editing a candidate: ](#editing-a-candidate-edit)`edit`
   * [Hiring a candidate: ](#hiring-a-candidate-hire)`hire`
   * [Rejecting a candidate: ](#rejecting-a-candidate-reject)`reject`
-  * [View a candidate's status: ](#view-a-candidates-status-view)`view`
+  * [Viewing candidate status: ](#viewing-candidate-status-view)`view`
   * [Locating candidates by name: ](#locating-candidates-by-name-find)`find`
   * [Deleting a candidate: ](#deleting-a-candidate-delete)`delete`
   * [Sorting candidates by interview score: ](#sorting-candidates-by-interview-scores-sort)`sort`
@@ -135,7 +135,7 @@ Parameter     | Notes
 
 ## Features
 <br><br>
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a table summarising the commands in HiredFiredPro and a link to the user guide.
 
@@ -245,7 +245,7 @@ Format: `reject n/NAME j/JOB`
 </box>
 <br><br>
 
-### View a candidate's status: `view`
+### Viewing candidate status: `view`
 
 Shows a candidate's status and details in HiredFiredPro.
 
