@@ -191,6 +191,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### MarkCommand
+
+<puml src="diagrams/MarkCommandActivityDiagram.puml" width="750" />
+
+
+* The `MarkCommand` is used by KonTActs to allow TAs to mark the attendance for a student. 
+* It follows the activity diagram as shown above where it first checks if the person exists.
+* If the person exists, it will check if the weeksPresent contains the week to be marked.
+* If the weeksPresent does not contain the week to be marked yet, it will add it in and return a success message. Else it will throw a mark already success message to tell the TA that the attendance for the TA for that week has been marked.
+
 ---
 
 {{ newPage }}
