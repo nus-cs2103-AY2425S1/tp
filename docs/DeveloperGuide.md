@@ -19,6 +19,7 @@ title: Developer Guide
   - [Product scope](#product-scope)
   - [User Stories](#user-stories)
   - [Use Cases](#use-cases)
+- [Planned Enhancements](#planned-enhancements)
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 --------------------------------------------------------------------------------------------------------------------
