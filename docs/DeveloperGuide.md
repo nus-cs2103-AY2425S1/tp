@@ -326,8 +326,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | Y1 CS student who is unaware of the various opportunities provided by nus and soc                            | find the contact emails and main pages for the opportunities such as SEP, NOC, UROP + ReX, summer school, winter school etc |                                                                                      |
 | `*`      | User who performed action wrongly when using the app                                                         | redo/undo current actions                                                                                                   | perform multiple actions efficiently without wasting time on correcting the mistakes |
 
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `ContactCS` and the **Actor** is the `CS freshman`, unless specified otherwise)
@@ -336,18 +334,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a new contact by providing the relevant contact details (name, email, phone number, module code, etc.)
-2. ContactCS adds the contact under the specified module
+1. User requests to add a new contact by providing the relevant contact details.
+2. ContactCS adds the contact to the contact list.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Necessary input such as name is missing.
+* 1a. Necessary input is missing.
 
   * 1a1. ContactCS requests the user to provide the required information
   * 1a2. User enters new data
-  * Steps 1a1 - 1a2 are repeated until the data entered are correct
+  * Steps 1a1 - 1a2 are repeated until the data entered contain all the necessary fields
 
     Use case resumes from step 2.
 
@@ -373,10 +371,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to search for contact(s) by providing one or more of the following:
      * The name of the contact,
-     * The module code (optionally including the role), or
-     * A combination of both
+     * The module code (optionally including the role),
+     * Tag
+     * A combination of above
 
-2. ContactCS shows a list of matching contacts
+2. ContactCS shows a list of matching contacts 
 
     Use case ends.
 
@@ -414,13 +413,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-**Extensions**
-
-* 1a. The list is empty.
-    * 1a1. ContactCS displays a message to the user saying that the list is empty
-
-      Use case ends.
-
 **Use case: UC04 Delete a person**
 
 **MSS**
@@ -433,20 +425,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The given index is invalid.
+* 2a. The given index/indices is/are invalid.
 
-    * 2a1. ContactCS requests the user to provide the correct index
-    * 2a2. User enters new index
-    * Steps 2a1 - 2a2 are repeated until the index entered are correct
+    * 2a1. ContactCS requests the user to provide the correct index/indices
+    * 2a2. User enters new index/indices
+    * Steps 2a1 - 2a2 are repeated until the index/indices entered is/are valid
 
       Use case resumes from step 3.
 
-**Use case: UC05 Update contact information**
+**Use case: UC05 Edit contact information**
 
 **MSS**
 
 1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for contact(s)
-2. User requests to update contact information for a specific person in the list, providing the new contact details
+2. User requests to edit contact information for a specific person in the list, providing the new contact details
 3. ContactCS updates the contact details based on the information provided by the user
 
     Use case ends.
@@ -457,7 +449,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. ContactCS requests the user to provide the correct index
     * 2a2. User enters new index
-    * Steps 2a1 - 2a2 are repeated until the index entered are correct
+    * Steps 2a1 - 2a2 are repeated until the index entered is correct
 
       Use case resumes from step 3.
 
@@ -465,91 +457,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2b1. ContactCS requests the user to provide the correct format and shows the valid command format
     * 2b2. User enters new input
-    * Steps 2b1 - 2b2 are repeated until the format for the entered input is correct
+    * Steps 2b1 - 2b2 are repeated until the format for the entered input is valid
 
       Use case resumes from step 3.
 
-**Use case: UC06 Mark frequently used contacts**
-
-**MSS**
-
-1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for contact(s)
-2. User requests to mark certain contacts as frequently accessed
-3. ContactCS marks these contacts for quick access
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The given index is invalid.
-
-    * 2a1. ContactCS requests the user to provide the correct index
-    * 2a2. User enters new index
-    * Steps 2a1 - 2a2 are repeated until the index entered are correct
-
-      Use case resumes from step 3.
-
-* 2b. The given format is invalid.
-
-    * 2b1. ContactCS requests the user to provide the correct format and shows the valid command format
-    * 2b2. User enters new input
-    * Steps 2b1 - 2b2 are repeated until the format for the entered input is correct
-
-      Use case resumes from step 3.
-
-**Use case: UC07 Unmark frequently used contacts**
-
-**MSS**
-
-1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for contact(s)
-2. User requests to unmark certain contacts as frequently accessed
-3. ContactCS removes the marking from these contacts for quick access
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The given index is invalid.
-
-    * 2a1. ContactCS requests the user to provide the correct index
-    * 2a2. User enters new index
-    * Steps 2a1 - 2a2 are repeated until the index entered are correct
-
-      Use case resumes from step 3.
-
-* 2b. The given format is invalid.
-
-    * 2b1. ContactCS requests the user to provide the correct format and shows the valid command format
-    * 2b2. User enters new input
-    * Steps 2b1 - 2b2 are repeated until the format for the entered input is correct
-
-      Use case resumes from step 3.
-
-**Use case: UC08 Access frequently used contacts**
-
-**MSS**
-
-1.  User requests to access frequently used contacts
-2.  ContactCS shows a list of matching contacts
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The list for frequently used contacts is empty.
-  * 1a1. ContactCS displays a message to the user saying that there is no frequently used contact
-
-    Use case ends.
-
-* 1b. The given format is invalid.
-
-    * 1b1. ContactCS requests the user to provide the correct format and shows the valid command format
-    * 1b2. User enters new input
-    * Steps 1b1 - 1b2 are repeated until the format for the entered input is correct
-
-      Use case resumes from step 2.
-
-**Use case: UC09 View usage instructions**
+**Use case: UC06 View usage instructions**
 
 **MSS**
 
@@ -568,37 +480,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC10 View app with sample data**
+**Use case: UC07 Undo actions**
 
 **MSS**
 
-1.  User requests to view app with sample data
-2.  ContactCS populates the interface with sample data for demonstration purposes
+1. User requests to undo the last action that modified contact list data
+2. ContactCS reverts to the previous state
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given format is invalid.
-
-    * 1a1. ContactCS requests the user to provide the correct format and shows the valid command format
-    * 1a2. User enters new input
-    * Steps 1a1 - 1a2 are repeated until the format for the entered input is correct
-
-      Use case resumes from step 2.
-
-**Use case: UC11 Undo actions**
-
-**MSS**
-
-1. User requests to undo the last action
-2. ContactCS reverts to the state before the last action
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. No action has been performed yet.
+* 1a. No modification of contact list data has been performed yet.
     * 1a1. ContactCS shows an error message indicating that there is no action to undo
 
       Use case ends.
@@ -611,7 +504,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-**Use case: UC12 Redo actions**
+**Use case: UC08 Redo actions**
 
 **MSS**
 
@@ -635,22 +528,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes from step 2.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
-1. The AddressBook should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. The AddressBook should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+1. The application should work on any _mainstream OS_ as long as it has Java `17` installed.
+2. The application should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The UI should not lag or freeze anytime during normal usage.
 5. All usage of data related to NUS should abide by NUS regulations.
-6. The AddressBook should remain backwards compatible, namely all data generated in previous versions should be usable in newer versions.
-7. The AddressBook should be easily usable by NUS year 1 Computer Science students with any skill level.
+6. The application should remain backwards compatible, namely all data generated in previous versions should be usable in newer versions.
+7. The application should be easily usable by NUS year 1 Computer Science students with any skill level.
 8. Managing contacts will remain as the core feature in all iterations.
-9. The AddressBook should not crash for any input given by the user.
-10. The AddressBook will remain as a CLI based application.
-
-*{More to be added}*
+9. The application should not crash for any input given by the user.
+10. The application will remain as a CLI based application.
 
 ### Glossary
 * **Architecture Diagram**: A visual representation of all the elements that make up part, or all, of a system
