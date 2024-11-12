@@ -280,12 +280,13 @@ Two `Participations` are considered to be duplicates if the `Student` and `Tutor
 
 2. EduVault selects the first `Attendance` of duplicate `Attendance` entries as defined above to load from storage.
 
-##### Uniqueness of objects
+##### Uniqueness of objects summary
 For the purposes of storage into JSON format, EduVault defines two objects as distinct based on these factors:
 
 * Two `Students` are considered to be duplicates if they have matching `name` and `phone`.
 * Two `Tutorials` are considered to be duplicates if they have matching `subject`.
 * Two `Participations` are considered to be duplicates if the `name`, `phone` and `subject` are the same (`Student` and `Tutorial` identifiers).
+* Two `Attendances` are considered to be duplicates if the `attendanceDate` occurs in the same week of week-based-year.
 
 ##### Loading Order
 The order which storage loads `Person`, `Tutorial` and `Participation` is shown below. 
