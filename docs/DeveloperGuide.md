@@ -271,9 +271,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Team Size: 5
 
-1. Update student and teacher success message (basically, when no tag added, it just says Tag: at the end)
-2. Update mark command's implementation (either have it work on filtered list or add optional indexes)
-3. Save theme preference on exit
+1. **Update `student` and `teacher` success message**: The current success message for adding a student or teacher without any tags ends with `; Tags:`, i.e. it attempts to display the tags but since none were added, it ends off abruptly. 
+
+    We plan to make the success message only mention the Tags _if_ there are tags to be listed, e.g. either `... Next of Kin: Bob Doe; Emergency Contact: 87654321;` (i.e. no tags) or `... Next of Kin: Bob Doe; Emergency Contact: 87654321; Tags: [friend]` (i.e. at least one tag to be displayed)
+2. **Enhance `mark` command's implementation**: The current implementation of `mark` can only mark the attendance of all students together. This prevents users from easily marking the attendance of individual students. The current workaround is to either `mark` and `unmark` all other students or to `delete` and add the student back into EduConnect with the incremented attendance field. 
+
+    We plan to introduce optional index parameters for the `mark` command, allowing users to specify which indexes to specifically mark the attendance of. This implementation will be similar to the `unmark` command. E.g. `mark` will still mark the attendance of all students but `mark 1 2` will only mark the attendance of the 1st and 2nd index persons (assuming they are students)
+3. **Save theme preference upon exit**: Currently, if a user changes themes to light mode and exits EduConnect, that theme preference is not saved. That means when they reopen the app, it will use the dark mode theme (despite closing on light mode).
+
+    We plan to rework the app such that it actually saves the theme preference upon exit, meaning that whatever theme a user exits with is the theme that is used automatically upon reopening the app.
 4. Prevent teacher command from accepting "/nok", "/attendance" and "/emergency" prefix
 5. Relax restrictions on phone number to allow international phone numbers
 6. Make gender keyword case-insensitive
