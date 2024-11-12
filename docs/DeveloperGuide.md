@@ -7,9 +7,11 @@
 # InvenTrack Developer Guide
 
 <!-- * Table of Contents -->
-<page-nav-print />
 
 ## Table of contents
+
+<page-nav-print />
+
 1. [Acknowledgements](#acknowledgements)
 2. [Setting up, getting started](#setting-up-getting-started)
 3. [Design](#design)
@@ -179,7 +181,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Assign product to supplier feature
+#### Assign product to supplier feature
+
+The AssignProductCommand is responsible for assigning a specified product to a specified supplier in the inventory management application. This command involves several steps, primarily focused on validating input, checking assignment status, and updating the Model to reflect the new association between the product and supplier.
+
+The AssignProductCommand follows these main steps when executed:
+1. Find Product and Supplier
+2. Check Assignment Status
+3. Update Product and Supplier
+
+<puml src="diagrams/AssignSequenceDiagram.puml" width="550" />
 
 #### Proposed Implementation
 
@@ -310,16 +321,16 @@ The three main aspects of this product are:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new supplier             |                                                                        |
-| `* * *`  | user                                       | delete a supplier              | remove entries that I no longer need                                   |
+| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                       |
+|----------|--------------------------------------------|------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                |
+| `* * *`  | user                                       | add a new supplier             |                                                                       |
+| `* * *`  | user                                       | delete a supplier              | remove entries that I no longer need                                  |
 | `* * *`  | user                                       | find a supplier by name        | locate details of suppliers without having to go through the entire list |
-| `* * *`  | user                                       | find a supplier by tags        | see only the details of suppliers with similar tags |
-| `*`      | user with many suppliers in the address book | sort suppliers by name         | locate a supplier easily                                                 |
-| `* * *`  | inventory manager                          | add a new product           |                                                                        |
-| `* * *`  | inventory manager                          | assign products to suppliers  | collectively manage products which corresponding suppliers supply                |
+| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident               |
+| `*`      | user with many suppliers in the address book | sort suppliers by name         | locate a supplier easily                                                |
+| `* * *`  | inventory manager                          | add a new product           |                                                                       |
+| `* * *`  | inventory manager                          | assign products to suppliers  | collectively manage products which corresponding suppliers supply               |
 | `* * `  | inventory manager                          | remove suppliers/products              | prune obsolete data   |
 | `* * `  | inventory manager                          | find products by name              | locate details of products without having to go through the entire list   |
 | `* * `  | inventory manager                          | find products by tags              | see only the details of products with similar tags   |
@@ -343,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | experienced inventory manager             | create macros/shortcuts for frequently used commands | save time |
 | `*`      | experienced inventory manager             | be able to see most used commands | make common processes faster |
 | `* `     | inventory manager             | update supplier information        | organize data based on my needs      |
-| `*`      | inventory manager             | be able to generate insights on supplier performance based on past interactions (e.g., delivery timeliness, order accuracy)  | make informed decisions about ongoing supplier relationships.  |
+| `*`      | inventory manager             | be able to generate insights on supplier performance based on past interactions (e.g., delivery timeliness, order accuracy)  | make informed decisions about ongoing supplier relationships  |
 
 ### Use cases
 
@@ -1038,9 +1049,3 @@ Expected: Similar to previous; no product is deleted, and appropriate error mess
         * Expected:
             * The application starts with an empty data file.
             * A message may be displayed indicating that the data file is corrupted and a new one has been created.
-
-
-
-
-
-
