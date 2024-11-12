@@ -14,8 +14,15 @@ UniquePersonList -right-> Person
 
 Person -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Person *--> "1" Name
+Person *--> "0..1" Phone
+Person *--> "0..1" Email
+Person *--> "0..1" TelegramHandle
+Person *--> "1" ContactType
+Person *--> "0..1" ModuleName
+Person *--> "0..1" Remark
+
+note right of Person
+    A person must have at least one of Phone, Email or TelegramHandle
+end note
 @enduml

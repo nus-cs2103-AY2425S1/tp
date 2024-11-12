@@ -14,9 +14,14 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterContactTypeCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindTagCommand;
+import seedu.address.logic.commands.FindTelegramHandleCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SwitchThemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -76,6 +81,22 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case FilterContactTypeCommand.COMMAND_WORD:
+            return new FilterContactTypeCommandParser().parse(arguments);
+
+        case FindTagCommand.COMMAND_WORD:
+            return new FindTagCommandParser().parse(arguments);
+
+        case FindTelegramHandleCommand.COMMAND_WORD:
+            return new FindTelegramHandleCommandParser().parse(arguments);
+
+        case SwitchThemeCommand.COMMAND_WORD:
+            return new SwitchThemeCommandParser().parse(arguments);
+
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommand();
+
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

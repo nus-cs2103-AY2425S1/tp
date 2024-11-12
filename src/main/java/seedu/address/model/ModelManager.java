@@ -104,6 +104,10 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    public void addAllPersons(AddressBook addressBook) {
+        this.addressBook.addAllPersons(addressBook);
+    }
+
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);

@@ -7,7 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.TelegramHandle;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -31,13 +36,19 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label contactType;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label telegramHandle;
     @FXML
     private Label email;
+    @FXML
+    private Label moduleName;
+    @FXML
+    private Label remark;
     @FXML
     private FlowPane tags;
 
@@ -49,9 +60,13 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        phone.setText(person.getPhone().map(Phone::toString).orElse(" "));
+        email.setText(person.getEmail().map(Email::toString).orElse(" "));
+        telegramHandle.setText(person.getTelegramHandle().map(TelegramHandle::toString).orElse(" "));
+        moduleName.setText(person.getModuleName().map(ModuleName::toString).orElse(" "));
+        String contactTypeStr = person.getContactType().value.toString().toLowerCase();
+        remark.setText(person.getRemark().map(Remark::toString).orElse(" "));
+        contactType.setText(contactTypeStr);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

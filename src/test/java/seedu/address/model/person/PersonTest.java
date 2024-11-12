@@ -3,11 +3,14 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACTTYPE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODNAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEHANDLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -32,10 +35,10 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
+        // same name, all other attributes different -> returns false
         Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+                .withTelegramHandle(VALID_TELEHANDLE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
@@ -81,8 +84,20 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        // different telegram handle -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTelegramHandle(VALID_TELEHANDLE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different contact type -> returns false
+        editedAlice = new PersonBuilder(ALICE).withContactType(VALID_CONTACTTYPE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different module name -> returns false
+        editedAlice = new PersonBuilder(ALICE).withModuleName(VALID_MODNAME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different remark -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRemark(VALID_REMARK_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
@@ -92,8 +107,13 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+        String expected = Person.class.getCanonicalName() + "{contactType=" + ALICE.getContactType() + ", name="
+                + ALICE.getName() + ", phone=" + ALICE.getPhone().map(Phone::toString).orElse(" ")
+                + ", email=" + ALICE.getEmail().map(Email::toString).orElse(" ")
+                + ", telegramHandle=" + ALICE.getTelegramHandle().map(TelegramHandle::toString).orElse(" ")
+                + ", moduleName=" + ALICE.getModuleName().map(ModuleName::toString).orElse(" ")
+                + ", remark=" + ALICE.getRemark().map(Remark::toString).orElse(" ")
+                + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

@@ -65,4 +65,46 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Converts a string into its camel case version
+     * @param input a String with at least one uppercase letter
+     * @return the camel case version of the string
+     */
+    public static String toCamelCase(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+
+        StringBuilder camelCaseString = new StringBuilder();
+        boolean firstCapitalFound = false;
+
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+
+            if (Character.isUpperCase(c) && !firstCapitalFound) {
+                camelCaseString.append(Character.toLowerCase(c));
+                firstCapitalFound = true;
+            } else {
+                camelCaseString.append(c);
+            }
+        }
+
+        return camelCaseString.toString();
+    }
+
+    /**
+     * Checks if a string is contained within the enum class.
+     * @param value String to be checked for
+     * @param enumClass enumClass (comprised of Strings) that is being checked
+     * @return true if enumClass contains String, false if not
+     */
+    public static <E extends Enum<E>> boolean isStringInEnumIgnoreCase(String value, Class<E> enumClass) {
+        for (E enumValue : enumClass.getEnumConstants()) {
+            if (enumValue.name().equalsIgnoreCase(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

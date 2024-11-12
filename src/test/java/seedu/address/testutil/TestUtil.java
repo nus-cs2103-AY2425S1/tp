@@ -1,9 +1,13 @@
 package seedu.address.testutil;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
@@ -51,5 +55,21 @@ public class TestUtil {
      */
     public static Person getPerson(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());
+    }
+
+    /**
+     * checks if the content of two .json files are the same
+     * @param file1 the first .json file to be compared
+     * @param file2 the second .json file to be compared
+     * @return true if the files are the same
+     * @throws IOException
+     */
+    public static boolean areJsonFilesEqual(File file1, File file2) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        JsonNode jsonNode1 = objectMapper.readTree(file1);
+        JsonNode jsonNode2 = objectMapper.readTree(file2);
+
+        return jsonNode1.equals(jsonNode2);
     }
 }

@@ -9,10 +9,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.ContactType;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,6 +24,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_THEME = "There is only light and dark theme.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -33,6 +37,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String contactType} into a {@code ContactType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code contactType} is invalid.
+     */
+    public static ContactType parseContactType(String contactType) throws ParseException {
+        requireNonNull(contactType);
+        String trimmedContactType = contactType.trim();
+        if (!ContactType.isValidContactType(trimmedContactType)) {
+            throw new ParseException(ContactType.MESSAGE_CONSTRAINTS);
+        }
+        return new ContactType(trimmedContactType);
     }
 
     /**
@@ -51,6 +70,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String telegramHandle} into a {@code TelegramHandle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static TelegramHandle parseTelegramHandle(String telegramHandle) throws ParseException {
+        requireNonNull(telegramHandle);
+        String trimmedTelegramHandle = telegramHandle.trim();
+        if (!TelegramHandle.isValidTelegramHandle(trimmedTelegramHandle)) {
+            throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
+        }
+        return new TelegramHandle(trimmedTelegramHandle);
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -63,21 +97,6 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
-    }
-
-    /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
-     */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
-        }
-        return new Address(trimmedAddress);
     }
 
     /**
@@ -120,5 +139,55 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String moduleName} into an {@code ModuleName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleName} is invalid.
+     */
+    public static ModuleName parseModuleName(String moduleName) throws ParseException {
+        requireNonNull(moduleName);
+        String trimmedModuleName = moduleName.trim();
+        if (!ModuleName.isValidModName(trimmedModuleName)) {
+            throw new ParseException(ModuleName.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleName(trimmedModuleName);
+    }
+
+    /**
+     * Parses a {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String newTheme} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code newTheme} is invalid.
+     */
+    public static String parseTheme(String newTheme) throws ParseException {
+        requireNonNull(newTheme);
+        String theme = newTheme.trim().toUpperCase();
+        String[] validThemes = {"LIGHT", "DARK"};
+
+        for (String validTheme : validThemes) {
+            if (validTheme.equals(theme)) {
+                return theme;
+            }
+        }
+
+        throw new ParseException(MESSAGE_INVALID_THEME);
     }
 }

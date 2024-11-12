@@ -3,12 +3,18 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "telegramHandle": "@alicepauline",
+    "moduleName" : "CS2100",
+    "remark": "hello",
+    "tags": [ "friends" ],
+    "contactType": "PERSONAL"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
+    "telegramHandle": "@alicepauline",
+    "moduleName": "CS2100",
+    "remark": "hello",
+    "contactType": "PERSONAL"
   } ]
 }

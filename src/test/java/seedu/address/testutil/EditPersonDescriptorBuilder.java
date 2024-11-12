@@ -5,11 +5,14 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.ContactType;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,9 +36,12 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
+        descriptor.setPhone(person.getPhone().isPresent() ? person.getPhone().get() : null);
+        descriptor.setEmail(person.getEmail().isPresent() ? person.getEmail().get() : null);
+        descriptor.setTelegramHandle(person.getTelegramHandle().isPresent() ? person.getTelegramHandle().get() : null);
+        descriptor.setContactType(person.getContactType());
+        descriptor.setModuleName(person.getModuleName().isPresent() ? person.getModuleName().get() : null);
+        descriptor.setRemark(person.getRemark().isPresent() ? person.getRemark().get() : null);
         descriptor.setTags(person.getTags());
     }
 
@@ -64,10 +70,34 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code TelegramHandle} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+    public EditPersonDescriptorBuilder withTelegramHandle(String telegramHandle) {
+        descriptor.setTelegramHandle(new TelegramHandle(telegramHandle));
+        return this;
+    }
+
+    /**
+     * Sets the {@code ContactType} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withContactType(String contactType) {
+        descriptor.setContactType(new ContactType(contactType));
+        return this;
+    }
+
+    /**
+     * Sets the {@code ModuleName} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withModuleName(String moduleName) {
+        descriptor.setModuleName(new ModuleName(moduleName));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRemark(String remark) {
+        descriptor.setRemark(new Remark(remark));
         return this;
     }
 

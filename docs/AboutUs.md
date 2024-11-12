@@ -1,59 +1,58 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-## Project team
+You can reach us at the email `E1120956@u.nus.edu`
 
-### John Doe
 
-<img src="images/johndoe.png" width="200px">
+### Jeremy Too
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/jtooya.png" width="200px">
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/jtooya)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Git Expert
 
-### Johnny Doe
+### Kimberly
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/kimberlytmq.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/kimberlytmq)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Deadlines and Deliverables, Scheduling and Tracking
+* Responsibilities: Ensure that everyone is aware of the tasks and their respective deadlines
 
-### Jean Doe
+### Amelia Chow
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/achl1012.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/achl1012)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role: Code Quality
+* Responsibilities: Ensuring code quality
 
-### James Doe
+### Wen Kang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/slothycat.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/SlothyCat)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Documentation Expert
+* Responsibilities: Ensures Documentation is consistent and up to standards
+
+### Zien Xu
+
+<img src="images/zienxu.png" width="200px">
+
+[[github](http://github.com/zienxu)]
+
+* Role: Tester
+* Responsibilities: Ensures the testing of the project is done properly and on time.
+
+

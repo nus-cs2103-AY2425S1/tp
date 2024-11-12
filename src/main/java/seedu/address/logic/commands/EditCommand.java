@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACTTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEHANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -21,11 +24,14 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
+import seedu.address.model.person.ContactType;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleName;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,10 +48,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_TELEHANDLE + "TELEGRAM HANDLE] "
+            + "[" + PREFIX_CONTACTTYPE + "CONTACT TYPE] "
+            + "[" + PREFIX_MOD + "MODULE NAME] "
+            + "[" + PREFIX_REMARK + "REMARK]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
+            + PREFIX_TELEHANDLE + "@johndoe "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -94,14 +103,20 @@ public class EditCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
+        assert editPersonDescriptor != null;
 
+        ContactType updatedContactType = editPersonDescriptor.getContactType().orElse(personToEdit.getContactType());
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Optional<Phone> updatedPhone = editPersonDescriptor.getPhone().or(() -> personToEdit.getPhone());
+        Optional<Email> updatedEmail = editPersonDescriptor.getEmail().or(() -> personToEdit.getEmail());
+        Optional<TelegramHandle> updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
+                .or(() -> personToEdit.getTelegramHandle());
+        Optional<ModuleName> updatedModuleName = editPersonDescriptor.getModuleName()
+                .or(() -> personToEdit.getModuleName());
+        Optional<Remark> updatedRemark = editPersonDescriptor.getRemark().or(() -> personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedContactType, updatedName, updatedPhone, updatedEmail, updatedTelegramHandle,
+                updatedModuleName, updatedRemark, updatedTags);
     }
 
     @Override
@@ -136,7 +151,10 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
+        private TelegramHandle telegramHandle;
+        private ContactType contactType;
+        private ModuleName moduleName;
+        private Remark remark;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -149,7 +167,10 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setTelegramHandle(toCopy.telegramHandle);
+            setContactType(toCopy.contactType);
+            setModuleName(toCopy.moduleName);
+            setRemark(toCopy.remark);
             setTags(toCopy.tags);
         }
 
@@ -157,7 +178,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, telegramHandle, contactType, moduleName,
+                    remark, tags);
         }
 
         public void setName(Name name) {
@@ -184,12 +206,36 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setTelegramHandle(TelegramHandle telegramHandle) {
+            this.telegramHandle = telegramHandle;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<TelegramHandle> getTelegramHandle() {
+            return Optional.ofNullable(telegramHandle);
+        }
+
+        public void setContactType(ContactType contactType) {
+            this.contactType = contactType;
+        }
+
+        public Optional<ContactType> getContactType() {
+            return Optional.ofNullable(contactType);
+        }
+
+        public void setModuleName(ModuleName moduleName) {
+            this.moduleName = moduleName;
+        }
+
+        public Optional<ModuleName> getModuleName() {
+            return Optional.ofNullable(moduleName);
+        }
+
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
         }
 
         /**
@@ -224,7 +270,10 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(telegramHandle, otherEditPersonDescriptor.telegramHandle)
+                    && Objects.equals(contactType, otherEditPersonDescriptor.contactType)
+                    && Objects.equals(moduleName, otherEditPersonDescriptor.moduleName)
+                    && Objects.equals(remark, otherEditPersonDescriptor.remark)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -234,7 +283,9 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", address)
+                    .add("telegramHandle", telegramHandle)
+                    .add("contactType", contactType)
+                    .add("moduleName", moduleName)
                     .add("tags", tags)
                     .toString();
         }
