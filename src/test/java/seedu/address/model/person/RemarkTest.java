@@ -39,7 +39,7 @@ public class RemarkTest {
 
     @Test
     public void equals() {
-        Remark Remark = new Remark("likes cats");
+        Remark remark = new Remark("likes cats");
 
         // same values -> returns true
         assertTrue(Remark.equals(new Remark("likes cats")));
