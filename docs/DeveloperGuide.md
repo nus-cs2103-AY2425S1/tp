@@ -57,6 +57,7 @@ title: Developer Guide
 
 * [`OpenCSV`](https://mvnrepository.com/artifact/com.opencsv/opencsv/5.7.1) is used in this project for Goods related features.
 * This project is based on the [Address-Book-Level3 (AB3)](https://github.com/se-edu/addressbook-level3) project.
+* `GitHub Copilot` was used by teammate, Leong Soon Mun Stephane, as a troubleshooting and auto-complete tool for coding, testing, and documentation for this project.
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -25,16 +25,19 @@ import seedu.address.model.person.Name;
  */
 public class GoodsReceipt {
 
+    // Solution below inspired by https://stackoverflow.com/questions/77623097
     @CsvCustomBindByName(column = "Goods", converter = GoodsConverter.class, required = true)
     private final Goods goods;
 
     @CsvCustomBindByName(column = "Supplier Name", converter = PersonNameConverter.class, required = true)
     private final Name supplierName;
 
+    // Solution below inspired by https://stackoverflow.com/questions/51155224
     @CsvCustomBindByName(column = "Procurement Date", converter = GoodsDateConverter.class, required = true)
     @CsvDate(value = "yyyy-MM-dd HH:mm")
     private final Date procurementDate;
 
+    // Solution below inspired by https://stackoverflow.com/questions/51155224
     @CsvCustomBindByName(column = "Arrival Date", converter = GoodsDateConverter.class, required = true)
     @CsvDate(value = "yyyy-MM-dd HH:mm")
     private final Date arrivalDate;

@@ -65,6 +65,7 @@ public class CsvGoodsStorage implements GoodsStorage {
         ReceiptLog receiptLog = new ReceiptLog();
 
         CsvToBeanFilter filter = new CsvToBeanFilter() {
+            // Solution below inspired by https://stackoverflow.com/questions/34981490
             private final HashSet<String> seenReceipts = new HashSet<>();
 
             private boolean isValidRecord(String[] trimmedLine) {
