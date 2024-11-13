@@ -13,7 +13,7 @@ public class ContactRecordList extends ArrayList<ContactRecord> {
         super();
     }
 
-    //@@ author Zenkoh1
+    //@@author Zenkoh1
     /**
      * Creates a ContactRecordList with the given ContactRecords.
      * @param contactRecordsToAdd
