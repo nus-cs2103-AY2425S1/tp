@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -15,6 +16,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.contactrecord.ContactRecord;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -46,6 +48,9 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
+        // Add command text to history, whether it is a valid command or not
+        addCommandTextToHistory(commandText);
+
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
@@ -67,8 +72,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public SortedList<Person> getSortedFilteredPersonList() {
+        return model.getSortedFilteredPersonList();
     }
 
     @Override
@@ -84,5 +89,30 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ObservableList<ContactRecord> getDisplayedCallHistory() {
+        return model.getDisplayedCallHistory();
+    }
+
+    @Override
+    public void addCommandTextToHistory(String commandText) {
+        model.addCommandTextToHistory(commandText);
+    }
+
+    @Override
+    public String getNextCommandTextFromHistory() {
+        return model.getNextCommandTextFromHistory();
+    }
+
+    @Override
+    public Person getPersonToDisplay() {
+        return model.getPersonToDisplay();
+    }
+
+    @Override
+    public String getPreviousCommandTextFromHistory() {
+        return model.getPreviousCommandTextFromHistory();
     }
 }

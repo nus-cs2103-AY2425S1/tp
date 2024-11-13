@@ -307,6 +307,22 @@
     -fx-padding: 8 1 8 1;
 }
 
+.profile-pane {
+    -fx-border-width: 0;
+}
+
+.profile-big-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.profile-small-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;

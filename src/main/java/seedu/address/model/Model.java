@@ -4,7 +4,11 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.contactrecord.ContactRecord;
+import seedu.address.model.contactrecord.ContactRecordList;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -58,6 +62,38 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with similar identity as {@code person} exists in the address book.
+     * The conditions for similarity are defined in {@code Person::isSimilarPerson}.
+     *
+     * @param person Person to check
+     * @return True if a similar person exists, false otherwise
+     */
+    boolean hasSimilarPerson(Person person);
+
+    /**
+     * Returns true if a person with similar identity as {@code person} exists in the address book,
+     * possibly excluding one person from the check.
+     * The conditions for similarity are defined in {@code Person::isSimilarPerson}.
+     *
+     * @param person Person to check
+     * @param exclude Person to exclude from the check (can be null)
+     * @return True if a similar person exists, false otherwise
+     */
+    boolean hasSimilarPerson(Person person, Person exclude);
+
+    /**
+     * Returns true if the current view is the history view.
+     */
+    boolean isHistoryView();
+
+    /**
+     * Sets the current view to the history view.
+     *
+     * @param historyView True if the current view is the history view, false otherwise
+     */
+    void setHistoryView(boolean historyView);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -76,12 +112,63 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /**
+     * Marks the given person as contacted.
+     * The person must exist in the address book.
+     */
+    void markAsContacted(Person target, ContactRecord contactRecord);
+
+    /**
+     * Returns the call history of the given person in the address book.
+     * The person must exist in the address book.
+     */
+    ContactRecordList getCallHistory(Person target);
+
+    /**
+     * Updates the displayed list to show the call history of the given person.
+     * The call history must not be empty.
+     */
+    void updateDisplayedList(ContactRecordList callHistory);
+
+    /**
+     * Returns the displayed call history.
+     */
+    ObservableList<ContactRecord> getDisplayedCallHistory();
+
+    /**
+     * Returns the person in the address book with the given Nric.
+     */
+    Person getPersonByNric(Nric nric);
+
+    /**
+     * Returns an unmodifiable view of the sorted and filtered person list
+     */
+    SortedList<Person> getSortedFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Adds a command text to the command history.
+     * @param commandText The command text to be added to the history.
+     */
+    void addCommandTextToHistory(String commandText);
+
+    /**
+     * Returns the previous command text from the command history.
+     */
+    String getPreviousCommandTextFromHistory();
+
+    /**
+     * Returns the next command text from the command history.
+     */
+    String getNextCommandTextFromHistory();
+
+    /**
+     * Returns the person to display.
+     */
+    Person getPersonToDisplay();
 }

@@ -1,6 +1,8 @@
 @startuml
 !include style.puml
 skinparam ArrowFontStyle plain
+skinparam dpi 300
+skinparam DefaultFontSize 23
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
@@ -17,7 +19,7 @@ end box
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand(\n"delete 1")
 activate AddressBookParser
 
 create DeleteCommandParser
@@ -49,7 +51,7 @@ deactivate AddressBookParser
 LogicManager -> DeleteCommand : execute(m)
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : deletePerson(person)
 activate Model
 
 Model --> DeleteCommand

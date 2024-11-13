@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -22,6 +23,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.contactrecord.ContactRecord;
+import seedu.address.model.contactrecord.ContactRecordList;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -51,6 +55,19 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_personAcceptedByModelWithWarning_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        new AddCommand(ALICE).execute(modelStub);
+
+        Person alice2 = new PersonBuilder().withName(ALICE.getName().fullName).build();
+        CommandResult commandResult = new AddCommand(alice2).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS_WITH_WARNING, Messages.format(alice2)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(ALICE, alice2), modelStub.personsAdded);
     }
 
     @Test
@@ -139,6 +156,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasSimilarPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSimilarPerson(Person person, Person exclude) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -149,12 +176,67 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public SortedList<Person> getSortedFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markAsContacted(Person target, ContactRecord notes) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPersonByNric(Nric nric) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateDisplayedList(ContactRecordList callHistory) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ContactRecord> getDisplayedCallHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ContactRecordList getCallHistory(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isHistoryView() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setHistoryView(boolean historyView) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCommandTextToHistory(String commandText) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getNextCommandTextFromHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getPreviousCommandTextFromHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPersonToDisplay() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -190,6 +272,12 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasSimilarPerson(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSimilarPerson);
+        }
+
+        @Override
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
@@ -200,5 +288,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }

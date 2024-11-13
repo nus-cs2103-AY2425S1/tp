@@ -7,10 +7,15 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.contactrecord.ContactRecord;
+import seedu.address.model.contactrecord.ContactRecordList;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +27,10 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ObservableList<ContactRecord> displayedCallHistory;
+    private final CommandTextHistory commandTextHistory;
+    private boolean historyView = false;
+    private Person targetPerson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +43,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.displayedCallHistory = FXCollections.observableArrayList();
+        this.commandTextHistory = new CommandTextHistory();
     }
 
     public ModelManager() {
@@ -94,6 +105,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasSimilarPerson(Person person) {
+        requireNonNull(person);
+        return addressBook.hasSimilarPerson(person);
+    }
+
+    @Override
+    public boolean hasSimilarPerson(Person person, Person exclude) {
+        requireAllNonNull(person, exclude);
+        return addressBook.hasSimilarPerson(person, exclude);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -107,8 +130,23 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void markAsContacted(Person target, ContactRecord contactRecord) {
+        requireNonNull(target);
+        target.markAsContacted(contactRecord);
+    }
+
+    @Override
+    public Person getPersonByNric(Nric nric) {
+        for (Person person : filteredPersons) {
+            if (person.getNric().equals(nric)) {
+                return person;
+            }
+        }
+        return null;
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -118,14 +156,56 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public SortedList<Person> getSortedFilteredPersonList() {
+        return new SortedList<>(filteredPersons).sorted();
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+        setHistoryView(false);
+    }
+
+    //=========== Call History ================================================================================
+    @Override
+    public ContactRecordList getCallHistory(Person target) {
+        requireNonNull(target);
+        this.targetPerson = target;
+        return target.getContactRecords();
+    }
+
+    @Override
+    public void updateDisplayedList(ContactRecordList callHistory) {
+        requireNonNull(callHistory);
+        displayedCallHistory.clear();
+        for (int i = callHistory.size() - 1; i >= 0; i--) {
+            displayedCallHistory.add(callHistory.get(i));
+        }
+        setHistoryView(true);
+    }
+
+    @Override
+    public boolean isHistoryView() {
+        return historyView;
+    }
+
+    @Override
+    public void setHistoryView(boolean historyView) {
+        this.historyView = historyView;
+    }
+
+    @Override
+    public Person getPersonToDisplay() {
+        return targetPerson;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code ContactRecords}
+     */
+    @Override
+    public ObservableList<ContactRecord> getDisplayedCallHistory() {
+        return displayedCallHistory;
     }
 
     @Override
@@ -142,7 +222,24 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && displayedCallHistory.equals(otherModelManager.displayedCallHistory);
     }
 
+    //=========== CommandTextHistory =========================================================================
+
+    @Override
+    public void addCommandTextToHistory(String commandText) {
+        commandTextHistory.addCommandToHistory(commandText);
+    }
+
+    @Override
+    public String getPreviousCommandTextFromHistory() {
+        return commandTextHistory.getPreviousCommand();
+    }
+
+    @Override
+    public String getNextCommandTextFromHistory() {
+        return commandTextHistory.getNextCommand();
+    }
 }

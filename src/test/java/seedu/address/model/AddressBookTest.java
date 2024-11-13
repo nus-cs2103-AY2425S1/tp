@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -76,6 +77,56 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void hasSimilarPerson_nullPerson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasSimilarPerson(null));
+    }
+
+    @Test
+    public void hasSimilarPerson_personNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasSimilarPerson(ALICE));
+    }
+
+    @Test
+    public void hasSimilarPerson_personInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        assertTrue(addressBook.hasSimilarPerson(ALICE));
+    }
+
+    @Test
+    public void hasSimilarPerson_personInAddressBookWithExclude_returnsFalse() {
+        addressBook.addPerson(ALICE);
+        assertFalse(addressBook.hasSimilarPerson(ALICE, ALICE));
+    }
+
+    @Test
+    public void hasSimilarPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(addressBook.hasSimilarPerson(editedAlice));
+    }
+    @Test
+    public void hasSimilarPerson_newPersonWithSameName_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Person editedBob = new PersonBuilder(BOB).withName(ALICE.getName().fullName).build();
+        assertTrue(addressBook.hasSimilarPerson(editedBob));
+    }
+
+    @Test
+    public void hasSimilarPerson_newPersonWithSamePhoneNumber_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Person editedBob = new PersonBuilder(BOB).withPhone(ALICE.getPhone().value).build();
+        assertTrue(addressBook.hasSimilarPerson(editedBob));
+    }
+
+    @Test
+    public void hasSimilarPerson_newPersonWithSameEmail_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Person editedBob = new PersonBuilder(BOB).withEmail(ALICE.getEmail().value).build();
+        assertTrue(addressBook.hasSimilarPerson(editedBob));
     }
 
     @Test
