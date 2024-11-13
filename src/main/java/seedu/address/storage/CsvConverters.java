@@ -16,10 +16,12 @@ public class CsvConverters {
 
     /**
      * Custom converter for Date type for Goods.
+     * Solution below inspired by https://stackoverflow.com/questions/77623097
      */
     public static class GoodsDateConverter extends AbstractBeanField<Date, String> {
         @Override
         protected Object convert(String value) {
+            // Solution below adapted from https://stackoverflow.com/questions/33337487
             return new Date(value.replace("T", " "));
         }
     }

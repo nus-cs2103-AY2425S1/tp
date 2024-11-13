@@ -62,6 +62,8 @@ public class CsvUtil {
         logger.info("CSV file " + filePath + " found.");
 
         try (FileReader reader = new FileReader(filePath.toFile())) {
+            // Solution below adapted from
+            // https://medium.com/@chathumalsangeeth/csv-file-parsing-made-easy-with-opencsv-in-java-c0b73fdf9ccf
             List<T> beans = new CsvToBeanBuilder<T>(reader)
                     .withType(clazz)
                     .withFilter(filter)
@@ -88,6 +90,7 @@ public class CsvUtil {
         requireNonNull(beans);
 
         try (FileWriter writer = new FileWriter(filePath.toFile())) {
+            // Solution below adapted from https://www.geeksforgeeks.org/mapping-java-beans-to-csv-using-opencsv/
             StatefulBeanToCsv<T> beanToCsv = new StatefulBeanToCsvBuilder<T>(writer).build();
             beanToCsv.write(beans);
         } catch (CsvException e) {
