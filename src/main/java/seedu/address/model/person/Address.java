@@ -9,13 +9,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Address Format: [Block Number] [Street Name]#[Unit Level]-[Unit No.]"
+                    + " [Building Name] Singapore [Postal Code]";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * E.g. 125 Orchard Road #12-34 ABC Building Singapore 123456
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX =
+            "^\\d*\\s*+[A-Za-z0-9 ]+\\s*(#\\d+-\\d+)?\\s+[A-Za-z0-9 ]+\\s+Singapore\\s+\\d{6}$";
 
     public final String value;
 
@@ -31,7 +33,7 @@ public class Address {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid address.
      */
     public static boolean isValidAddress(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -49,11 +51,10 @@ public class Address {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Address)) {
+        if (!(other instanceof Address otherAddress)) {
             return false;
         }
 
-        Address otherAddress = (Address) other;
         return value.equals(otherAddress.value);
     }
 

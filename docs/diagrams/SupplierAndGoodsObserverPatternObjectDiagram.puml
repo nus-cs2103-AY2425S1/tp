@@ -1,0 +1,17 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+object "<u>personListPanel:PersonListPanel" as personListPanel
+object "<u>goodsListPanel:GoodsListPanel" as goodsListPanel
+object "<u>supplierList:ObservableList<Supplier>" as supplierList
+object "<u>goodsList:ObservableList<Goods>" as goodsList
+object "<u>model:Model" as model
+
+personListPanel --> supplierList : "observes"
+goodsListPanel --> goodsList : "observes"
+supplierList <-- model : "updates"
+goodsList <-- model : "updates"
+@enduml

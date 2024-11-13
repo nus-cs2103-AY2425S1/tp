@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -29,28 +31,28 @@ public class AddressTest {
         assertFalse(Address.isValidAddress(" ")); // spaces only
 
         // valid addresses
-        assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Address.isValidAddress("-")); // one character
-        assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Address.isValidAddress("123 Orchard Road #12-34 ABC Building Singapore 123456"));
+        assertTrue(Address.isValidAddress(
+                "123 Orchard long address Road #12-34 ABC Building Singapore 123456")); // long address
     }
 
     @Test
     public void equals() {
-        Address address = new Address("Valid Address");
+        Address address = new Address("123 Orchard Road #12-34 ABC Building Singapore 123456");
 
         // same values -> returns true
-        assertTrue(address.equals(new Address("Valid Address")));
+        assertEquals(address, new Address("123 Orchard Road #12-34 ABC Building Singapore 123456"));
 
         // same object -> returns true
-        assertTrue(address.equals(address));
+        assertEquals(address, address);
 
         // null -> returns false
-        assertFalse(address.equals(null));
+        assertNotEquals(null, address);
 
         // different types -> returns false
-        assertFalse(address.equals(5.0f));
+        assertNotEquals(5.0f, address);
 
         // different values -> returns false
-        assertFalse(address.equals(new Address("Other Valid Address")));
+        assertNotEquals(address, new Address("123 Other Road #12-34 ABC Building Singapore 123456"));
     }
 }

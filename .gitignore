@@ -2,6 +2,7 @@
 /.gradle/
 /build/
 src/main/resources/docs/
+/bin/
 
 # IDEA files
 /.idea/
@@ -21,3 +22,6 @@ src/test/data/sandbox/
 # MacOS custom attributes files created by Finder
 .DS_Store
 docs/_site/
+
+# Other Build files
+/bin

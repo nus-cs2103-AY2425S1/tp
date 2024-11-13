@@ -3,6 +3,9 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
+import java.util.stream.StreamSupport;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -15,7 +18,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
+    private final UniquePersonList persons = new UniquePersonList();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,9 +27,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
      */
-    {
-        persons = new UniquePersonList();
-    }
 
     public AddressBook() {}
 
@@ -115,16 +115,24 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof AddressBook otherAddressBook)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
         return persons.equals(otherAddressBook.persons);
     }
 
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    /**
+     * Find person given a predicate
+     */
+    public Optional<Person> findPerson(Predicate<Person> predicate) {
+        return StreamSupport
+                .stream(persons.spliterator(), false)
+                .filter(predicate).findAny();
     }
 }

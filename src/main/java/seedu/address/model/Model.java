@@ -1,10 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,6 +36,21 @@ public interface Model {
      * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * gets status of export
+     */
+    Boolean getExportFilterGoodsStatus();
+
+    /**
+     * Sets export to true
+     */
+    void setExportFilterGoodsToTrue();
+
+    /**
+     * Sets export to false
+     */
+    void setExportFilterGoodsToFalse();
 
     /**
      * Returns the user prefs' address book file path.
@@ -79,9 +97,79 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered person list with Goods Categories Tags Added **/
+    ObservableList<Person> getObservableFilteredPersonsWithGoodsCategoryTagsAdded();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns a person that satisfies the predicate.
+     */
+    Optional<Person> findPerson(Predicate<Person> predicate);
+
+    /**
+     * Returns a list of person
+     */
+    List<Person> getPersonList();
+
+    /**
+     * Replaces goods data with the data in {@code goodsReceipt}.
+     */
+    void setGoods(ReadOnlyReceiptLog goodsReceipts);
+
+    /**
+     * Returns the goods list.
+     */
+    ReadOnlyReceiptLog getGoods();
+
+    /**
+     * Returns the filtered goods list.
+     */
+    ReadOnlyReceiptLog getGoodsFiltered();
+
+    /**
+     * Adds the given goods.
+     * {@code goodsReceipt} must not already exist in the address book.
+     */
+    void addGoods(GoodsReceipt goodsReceipt);
+
+    /**
+     * Deletes the given good receipt.
+     */
+    void deleteGoods(GoodsReceipt goodsReceipt);
+
+    /**
+     * Finds a goods that satisfies the predicate.
+     */
+    Optional<GoodsReceipt> findGoodsReceipt(Predicate<GoodsReceipt> predicate);
+
+    /** Returns an unmodifiable view of the filtered goodsReceipt list */
+    ObservableList<GoodsReceipt> getFilteredReceiptsList();
+
+    /**
+     * Filters a list of goods by the given {@code predicate}.
+     */
+    public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate);
+
+    /**
+     * Updates the filter of the filtered goods receipts list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredReceiptsList(Predicate<GoodsReceipt> predicate);
+
+    List<GoodsReceipt> findGoodsReceipts(Predicate<GoodsReceipt> predicate);
+
+    /**
+     * Returns the total quantity of the filtered goods list.
+     */
+    public int getFilteredGoodsQuantityStatistics();
+
+    /**
+     * Returns the total cost of the filtered goods list.
+     */
+    public double getFilteredGoodsCostStatistics();
 }

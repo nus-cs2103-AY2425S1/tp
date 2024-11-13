@@ -15,6 +15,11 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path goodsFilePath = Paths.get("data", "goods.csv");
+
+    private Path filterGoodsFilePath = Paths.get("data", "filteredGoods.csv");
+
+    private Boolean exportFilterGoods = false;
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +41,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setGoodsFilePath(newUserPrefs.getGoodsFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -47,13 +53,42 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
+    public Boolean getExportFilterGoods() {
+        return exportFilterGoods;
+    }
+
+    public void setExportFilterGoodsToTrue() {
+        this.exportFilterGoods = true;
+    };
+
+    public void setExportFilterGoodsToFalse() {
+        this.exportFilterGoods = false;
+    };
+
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
+    }
+
+    public Path getGoodsFilePath() {
+        return goodsFilePath;
+    }
+
+    public Path getFilterGoodsFilePath() {
+        return filterGoodsFilePath;
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public void setFilterGoodsFilePath(Path goodsFilePath) {
+        requireNonNull(goodsFilePath);
+        this.goodsFilePath = goodsFilePath;
+    }
+    public void setGoodsFilePath(Path goodsFilePath) {
+        requireNonNull(goodsFilePath);
+        this.goodsFilePath = goodsFilePath;
     }
 
     @Override
@@ -63,11 +98,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UserPrefs)) {
+        if (!(other instanceof UserPrefs otherUserPrefs)) {
             return false;
         }
 
-        UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
                 && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
     }

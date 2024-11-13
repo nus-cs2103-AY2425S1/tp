@@ -1,19 +1,28 @@
+[![Java CI](https://github.com/AY2425S1-CS2103-F10-1/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103-F10-1/tp/actions/workflows/gradle.yml)
+
+![Ui](images/Readme-ui.png)
+
 ---
-layout: page
-title: AddressBook Level-3
----
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+## SupplyCentral
+`SupplyCentral` is a desktop app for business owners to manage their suppliers and goods.
 
-![Ui](images/Ui.png)
+Optimized for command-line-interface usage. Information is packaged nicely into a GUI interface, with colors! Also,
+compatible with world's most popular data sheet, Excel.
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+## Core features
+- Maintain a of list of suppliers and their contact information
+- Keep track of the goods that you have ordered from each supplier
+- Able to load supplier and goods information easily with **Excel**
+- Able to filter goods and save them to **Excel**
+- Able to save changes instantaneously to **Excel**
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+### Codebase and Documentation
+* Written with Functional Programming & Object-Oriented Programming
+* Written with test cases to ensure no uneventful mishaps
+* Documentation up to date with the latest changes
 
+For the detailed documentation of this project, see the **[SupplyCentral Product Website](https://ay2425s1-cs2103-f10-1.github.io/tp/)**.
 
-**Acknowledgements**
-
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+### Acknowledgements
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

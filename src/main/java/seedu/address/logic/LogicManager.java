@@ -15,6 +15,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -49,9 +50,13 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
-
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveGoods(model.getGoods());
+            if (model.getExportFilterGoodsStatus()) {
+                storage.saveFilteredGoods(model.getGoodsFiltered());
+                model.setExportFilterGoodsToFalse();
+            }
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -69,6 +74,16 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Person> getObservableFilteredPersonsWithGoodsCategoryTagsAdded() {
+        return model.getObservableFilteredPersonsWithGoodsCategoryTagsAdded();
+    }
+
+    @Override
+    public ObservableList<GoodsReceipt> getFilteredReceiptsList() {
+        return model.getFilteredReceiptsList();
     }
 
     @Override

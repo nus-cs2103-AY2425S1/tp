@@ -3,20 +3,20 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,54 +32,56 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_TAG);
 
-        Index index;
+        Name targetName = parseName(argMultimap);
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_ADDRESS);
+
+        EditPersonDescriptor editPersonDescriptor = parseEditPersonDescriptor(argMultimap);
+        return new EditCommand(targetName, editPersonDescriptor);
+    }
+
+    private static Name parseName(ArgumentMultimap argMultimap) throws ParseException {
+        Name targetName;
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            targetName = ParserUtil.parseName(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
+        return targetName;
+    }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+    private static EditPersonDescriptor parseEditPersonDescriptor(ArgumentMultimap argMultimap) throws ParseException {
+        // Get Args
+        Optional<String> nameArg = argMultimap.getValue(PREFIX_NAME);
+        Optional<String> phoneArg = argMultimap.getValue(PREFIX_PHONE);
+        Optional<String> addressArg = argMultimap.getValue(PREFIX_ADDRESS);
+        Optional<List<String>> tagArgs = argMultimap.getAllValues(PREFIX_TAG).isEmpty()
+                ? Optional.empty()
+                : Optional.of(argMultimap.getAllValues(PREFIX_TAG));
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        // Parse Args
+        Optional<Name> name = nameArg.isPresent()
+                ? Optional.of(ParserUtil.parseName(nameArg.get()))
+                : Optional.empty();
+        Optional<Phone> phone = phoneArg.isPresent()
+                ? Optional.of(ParserUtil.parsePhone(phoneArg.get()))
+                : Optional.empty();
+        Optional<Address> address = addressArg.isPresent()
+                ? Optional.of(ParserUtil.parseAddress(addressArg.get()))
+                : Optional.empty();
+        Optional<Set<Tag>> tags = tagArgs.isPresent()
+                ? Optional.of(ParserUtil.parseTags(
+                        tagArgs.get().stream().filter(s -> !s.isEmpty()).toList()))
+                : Optional.empty();
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        // Validate
+        if (name.isEmpty() && phone.isEmpty() && address.isEmpty() && tags.isEmpty()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditPersonDescriptor(name, phone, address, tags);
     }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
-     */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
-    }
-
 }

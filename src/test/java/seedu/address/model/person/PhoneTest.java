@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -31,30 +33,30 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Phone.isValidPhone("911")); // exactly 3 numbers
+        assertFalse(Phone.isValidPhone("124293842033123")); // long phone numbers
 
         // valid phone numbers
-        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
     }
 
     @Test
     public void equals() {
-        Phone phone = new Phone("999");
+        Phone phone = new Phone("99999999");
 
         // same values -> returns true
-        assertTrue(phone.equals(new Phone("999")));
+        assertEquals(phone, new Phone("99999999"));
 
         // same object -> returns true
-        assertTrue(phone.equals(phone));
+        assertEquals(phone, phone);
 
         // null -> returns false
-        assertFalse(phone.equals(null));
+        assertNotEquals(null, phone);
 
         // different types -> returns false
-        assertFalse(phone.equals(5.0f));
+        assertNotEquals(5.0f, phone);
 
         // different values -> returns false
-        assertFalse(phone.equals(new Phone("995")));
+        assertNotEquals(phone, new Phone("99999995"));
     }
 }

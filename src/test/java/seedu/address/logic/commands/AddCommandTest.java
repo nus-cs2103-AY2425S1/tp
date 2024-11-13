@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -21,7 +23,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyReceiptLog;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReceiptLog;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -80,7 +85,7 @@ public class AddCommandTest {
     @Test
     public void toStringMethod() {
         AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        String expected = AddCommand.class.getCanonicalName() + "{toAddPerson=" + ALICE + "}";
         assertEquals(expected, addCommand.toString());
     }
 
@@ -105,6 +110,21 @@ public class AddCommandTest {
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Boolean getExportFilterGoodsStatus() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setExportFilterGoodsToTrue() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setExportFilterGoodsToFalse() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -154,7 +174,81 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getObservableFilteredPersonsWithGoodsCategoryTagsAdded() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Person> findPerson(Predicate<Person> predicate) {
+            return Optional.empty();
+        }
+
+        @Override
+        public List<Person> getPersonList() {
+            return List.of();
+        }
+
+        @Override
+        public void setGoods(ReadOnlyReceiptLog goodsReceipts) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyReceiptLog getGoods() {
+            return new ReceiptLog();
+        }
+
+        @Override
+        public ReadOnlyReceiptLog getGoodsFiltered() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addGoods(GoodsReceipt goodsReceipt) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteGoods(GoodsReceipt goodsReceipt) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<GoodsReceipt> findGoodsReceipt(Predicate<GoodsReceipt> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<GoodsReceipt> getFilteredReceiptsList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredReceiptsList(Predicate<GoodsReceipt> gr) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<GoodsReceipt> findGoodsReceipts(Predicate<GoodsReceipt> predicate) {
+            return null;
+        }
+
+        @Override
+        public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getFilteredGoodsQuantityStatistics() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public double getFilteredGoodsCostStatistics() {
             throw new AssertionError("This method should not be called.");
         }
     }
