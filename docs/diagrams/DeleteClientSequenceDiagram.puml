@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PrudyParser" as PrudyParser LOGIC_COLOR
+participant ":DeleteClientCommandParser" as DeleteClientCommandParser LOGIC_COLOR
+participant "d:DeleteClientCommand" as DeleteClientCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete-client 1")
+activate LogicManager
+
+LogicManager -> PrudyParser : parseCommand("delete-client 1")
+activate PrudyParser
+
+create DeleteClientCommandParser
+PrudyParser -> DeleteClientCommandParser
+activate DeleteClientCommandParser
+
+DeleteClientCommandParser --> PrudyParser
+deactivate DeleteClientCommandParser
+
+PrudyParser -> DeleteClientCommandParser : parse("1")
+activate DeleteClientCommandParser
+
+create DeleteClientCommand
+DeleteClientCommandParser -> DeleteClientCommand
+activate DeleteClientCommand
+
+DeleteClientCommand --> DeleteClientCommandParser :
+deactivate DeleteClientCommand
+
+DeleteClientCommandParser --> PrudyParser : d
+deactivate DeleteClientCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteClientCommandParser -[hidden]-> PrudyParser
+destroy DeleteClientCommandParser
+
+PrudyParser --> LogicManager : d
+deactivate PrudyParser
+
+LogicManager -> DeleteClientCommand : execute(m)
+activate DeleteClientCommand
+
+DeleteClientCommand -> Model : deleteClient(1)
+activate Model
+
+Model --> DeleteClientCommand
+deactivate Model
+
+create CommandResult
+DeleteClientCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteClientCommand
+deactivate CommandResult
+
+DeleteClientCommand --> LogicManager : r
+deactivate DeleteClientCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
