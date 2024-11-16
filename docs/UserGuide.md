@@ -154,7 +154,7 @@ Find or create a folder on your computer where you want to store the AgentAssist
 
     <img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
 
-4. 🎉 **Congratulations! AgentAssist is now up and running!**  
+4. 🎉 **Congratulations! AgentAssist is now up and running!**
    You're all set to start using AgentAssist to manage your client contacts, track your sales, and boost your productivity.
 
 <div style="page-break-after: always;"></div>
@@ -196,7 +196,7 @@ Each client’s tier is represented with a color-coded label located beside thei
 <span style="color: #804a00; font-size: 16px;">⬤</span> Bronze Tier
 
 <span style="color: #5C0002; font-size: 16px;">⬤</span> Reject Tier
-    
+
 Clients that are not assigned to any tier (**NA** tier) will not display a tier label on the UI.
 
 ### Status Color Code of AgentAssist GUI:
@@ -224,7 +224,7 @@ This section contains a list of terms used in this user guide. Feel free to refe
 
 - **Contact:** A record in AgentAssist that contains client details.
 
-- **Commands:** Text entered into the command box to instruct the application to perform an action, usually starting with a command word. 
+- **Commands:** Text entered into the command box to instruct the application to perform an action, usually starting with a command word.
 
 - **Flag(s):** Modifier(s) in a command that specify the type of data being handled, typically represented by 1-2 letters followed by a backslash (e.g., n/ for "name").
 
@@ -325,7 +325,7 @@ Here’s a reference table of available flags and the type of data they correspo
 
 ## 5.4 Arguments
 
-Arguments are the values that are used in a command. 
+Arguments are the values that are used in a command.
 - Arguments typically follow after a corresponding flag, with the exception of `<INDEX>`.
 - **Arguments cannot be empty** and each must meet specific parsing and format requirements to ensure proper execution of the command.
 - When an argument is entered, any spaces before or after the argument are **ignored**. For example, `add n/ John Doe` and `add n/John Doe` are equivalent. Both pass the argument value of `John Doe`.
@@ -372,9 +372,9 @@ Refer to the table below for more details.
 | `<INDEX>`             | The index of the item to be edited. | Positive number.<br/> • Must be less than or equal to the total number of clients in the current list view.  |
 
 > 💡 **Pro Tip:**
-> 
+>
 > Indexes will change when the current list view changes!
-> 
+>
 > Ensure that the index supplied is accurate to the current view.
 
 **Note**: There is a known issue when the supplied index argument is too large. For more information, see [Known Issues in Section 8](#8-known-issues).
@@ -416,7 +416,7 @@ Refer to the [Commands Section](#6-commands) for more comprehensive details of e
 > 💡 **Pro Tip:**
 >
 > - The order of flags within commands is flexible. For instance, `edit 1 n/ john p/ 92223333` is equivalent to `edit 1 p/ 92223333 n/ john`. Use whatever order feels most natural!
-> 
+>
 > - Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.
 >
 >   - For example, use `filter j/ doctor` to display all doctors, then `edit 2 a/ 321 New Address` to update the address for the second listed doctor.
@@ -499,7 +499,7 @@ Refer to Sections [5.3 Flags](#53-flags) and [5.4 Arguments](#54-arguments), for
     <div>After Add</div>
     </div>
     </div>
-    
+
 - **On Error**
   - Error caused by missing mandatory fields
       - Message:
@@ -594,7 +594,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
       <div>After Edit</div>
       </div>
       </div>
-        
+
 - **On Error:**
     - Error caused by invalid index
         - Message:
@@ -752,7 +752,6 @@ For detailed explanations for the matching criteria of each flag and the accepta
   ```
   filter n/ Gordon Moore j/ doctor r/ award winner
   ```
-  
 
 **Matching Criteria & Filter Behavior:**
 
@@ -765,7 +764,7 @@ For detailed explanations for the matching criteria of each flag and the accepta
   - To filter by email address, enter a valid email in the required format (refer to [5.4 Arguments](#54-arguments)). This will return substring matches for the email provided. 
   - **Example:** Entering `emily@gmail` or `emily@gmail.co` will match `emily@gmail.com`, as partial matches within a valid email format are allowed. However, inputs like `emily` will be rejected, as they do not meet the full email format requirement.
 
-- **Phone Number (Exact Match)**: 
+- **Phone Number (Exact Match)**:
   - To filter by phone number, enter a complete and valid phone number (refer to [5.4 Arguments](#54-arguments)). This filter requires an exact match with the specified phone number.
   - **Example:** If a client’s phone number is `92601234`, only the exact format `92601234` will match. Variations such as `82601234` will not match, and inputs that are not valid phone numbers, like `9260`, `9260 1234`, or `12601234`, will not be accepted.
 
@@ -869,7 +868,7 @@ view <INDEX>
     - Error caused by invalid index
       - Message:
         ```
-        Invalid command format! 
+        Invalid command format!
         view: Views the client identified by the index number used in the displayed client list.
         Parameters: INDEX (must be a positive integer)
         Example: 'view 1'
@@ -975,8 +974,8 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 > ⚠️ **Danger:**
 > If the data file format becomes invalid, AgentAssist will **discard all data** and start with an empty file on the next run. It's strongly recommended to back up the file before any manual edits.
 >
-> Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given. 
-> 
+> Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given.
+>
 >**Only modify the data file if you're confident in doing so correctly.**
 
 ## 6.7 Modifying the Preferences File
@@ -984,10 +983,10 @@ The window size settings for AgentAssist is automatically saved as a [JSON](http
 - Note: The minimum window size for AgentAssist is fixed at 800x600.
 
 > ⚠️ **Danger:**
-> If the window size is set too large, the application will render incorrectly. 
-> 
+> If the window size is set too large, the application will render incorrectly.
+>
 > Incorrect preference modifications may also cause unexpected behavior. Do take note that no warnings will be given. 
->         
+>
 > **Only modify the preferences file if you're confident in doing so correctly.**
 
 [↑ Return to Table of Contents](#table-of-contents)
