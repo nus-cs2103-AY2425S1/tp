@@ -202,10 +202,10 @@ Using `enum` values for `Tier` aligns with a real-world banking scenario where a
 
 Moreover, using enums for `Tier` simplifies updates to the list of predefined services,allowing banks to customize offerings based on their unique product catalog.
 
-When updating the `Tier` `enum`, ensure that related CSS files (`ClientDetailPanel.css` and `ClientListCard.css`) are also updated. These files specify color settings for each tier, and you may need to rename the CSS classes to align with the new enum values. 
+When updating the `Tier` `enum`, ensure that related CSS files (`ClientDetailPanel.css` and `ClientListCard.css`) are also updated. These files specify color settings for each tier, and you may need to rename the CSS classes to align with the new enum values.
 - Below is an example of a CSS update after renaming an enum value to `TEST`:
     <img src="images/CssFileSetting.png" width="360">
-- This is the result in the UI after updating the CSS:  
+- This is the result in the UI after updating the CSS:
     <img src="images/UIChangeAfterCSSFileChange.png" width="240">
 
 Similarly, `Status` is implemented using `enum` values to define a set of predefined client statuses. Each status has a corresponding color in the UI, offering agents visual cues to prioritize their follow-ups effectively:
@@ -222,7 +222,7 @@ By assigning specific colors to each status, the UI helps agents prioritize thei
 The `add` command is used to add new clients into the existing list of clients. However, the command will prevent adding any clients who are considered 'duplicates' of existing clients.
 
 #### Current Implementation
-This is a high-level view of what occurs when the `add` command is executed: 
+This is a high-level view of what occurs when the `add` command is executed:
 ![AddSequenceDiagram.png](images%2FAddSequenceDiagram.png)
 
 Three checks are performed:
@@ -234,7 +234,7 @@ Three checks are performed:
 
 Note: The error messages shown will differ based on which check fails. The checks also occur in the same sequential order that they are listed in above.
 
-    
+
 ### 3. Edit Command
 The `edit` command is used to add a client's contact to the existing list of clients saved in AgentAssist.
 
@@ -340,7 +340,7 @@ Team Size: 5
 ![EditErrorNoIndex.png](images/EditErrorNoIndex.png)
 - Using `edit` with index only:
 ![EditErrorWithIndex.png](images/EditErrorWithIndex.png)
-- Using `edit` with index and `p/` flag without an argument: 
+- Using `edit` with index and `p/` flag without an argument:
 ![editErrorWithIndexAndPhone.png](images/EditErrorWithIndexAndPhone.png)
 
 These images illustrate varying error message formats of the `edit` command. 
@@ -547,7 +547,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. AgentAssist shows the error pertaining to the invalid field.
 
       Use case resumes at step 1.
-  
+
 * 1c. No clients in the existing data pass the filter.
 
     * 1c1. AgentAssist shows a blank list.
@@ -615,7 +615,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to close detailed view. 
+1. User requests to close detailed view.
 2. AgentAssist closes the detailed view.
 
     Use case ends.
@@ -725,7 +725,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder.
 
-    2. Run the jar file using terminal.<br> 
+    2. Run the jar file using terminal.<br>
        Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
@@ -745,10 +745,10 @@ testers are expected to do more *exploratory* testing.
        Expected: A client with the given details is added to the end of the list of clients. Details are shown in the results box and any details that are truncated can be seen by using the `view` command with the client's displayed index.
 
     3. Test case: `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> t/ <TIER> r/ <REMARK> s/ <STATUS>`<br>
-       Expected: A client with the given details, including the optional ones, is added to the end of the list of clients. Similar to previous. 
+       Expected: A client with the given details, including the optional ones, is added to the end of the list of clients. Similar to previous.
 
    4. Missing compulsory fields: `add n/ <NAME> p/ <PHONE>`, `add n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` <br>
-      Expected: An error message is shown to user. No client is added. Missing fields are shown in the error message. 
+      Expected: An error message is shown to user. No client is added. Missing fields are shown in the error message.
 
    5. Invalid command formats: `add`, `add n/ <NAME> p/ <INVALID_PHONE> e/ E/ <EMAIL>...`, `...` <br>
        Expected: An error message is shown to user. No client is added. Error details shown in the status message.
@@ -756,7 +756,7 @@ testers are expected to do more *exploratory* testing.
 2. Add an existing client
 
     1. Prerequisites: There exists a client in AddressBook which has the same name, phone number and email as the client to be added.
-   
+
     2. Test case: `add n/ <SAME_NAME> p/ <SAME_PHONE> e/ <SAME_EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME>` (where `<SAME_NAME>`, `<SAME_PHONE>` and `<SAME_EMAIL>` are the name, phone number and email of an existing client) <br>
        Expected: An error message indicating that the client already exists is shown to user. No client is added.
 
@@ -786,19 +786,19 @@ testers are expected to do more *exploratory* testing.
 1. Editing a client while all clients are being shown
 
     1. Prerequisites: List all clients using the `list` command. At least one client in the list.
-   
+
     2. Test case: `edit 1 n/ <NAME>`<br>
          Expected: The name of the client in index 1 will be changed to `<NAME>`.
-   
+
     3. Test case: `edit 1 n/ <NAME> p/ <PHONE>`<br>
          Expected: The name and the phone of the client in index 1 will be changed to `<NAME>` and `<PHONE>` respectively.
-   
+
    4. Other correct edit commands to try: `edit 1 n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
       Expected: Similar to previous.
-   
+
    5. Test case: `edit 0 n/ <NAME>`<br>
         Expected: An error message is shown to the user. No edits are made to client details. Error details shown in the status message.
-   
+
    6. Other incorrect edit commands to try:<br>
       `edit 1 f/ <INVALID_VALUE>` (where f is a valid flag),<br>
       `edit x n/ <NAME>` (where x is larger than list size),<br>
@@ -808,7 +808,7 @@ testers are expected to do more *exploratory* testing.
 2. Editing a client after having filtered based on a criteria
 
     1. Prerequisites: Use the `filter` command with a suitable flag. Multiple clients in the list.
-   
+
     2. Functions similar to above example except that the indexes to be used are based on the new list shown.
 
 ### Filter for clients
@@ -817,19 +817,19 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `filter n/ <NAME>`<br>
       Expected: The list will display all clients with names that include `<NAME>`.
-   
+
    2. Test case: `filter n/ <NAME> p/ <PHONE>`<br>
       Expected: The list will display all clients with names that include `<NAME>` and phones that match `<PHONE>`.
-   
+
    3. Test case: `filter i/ =<INCOME>`<br>
       Expected: The list will display all clients with incomes that match `<INCOME>`.
-   
+
    4. Other correct `filter` commands to try: `filter n/ <NAME> p/ <PHONE> e/ <EMAIL>`, `...` (for any number of valid flags and valid arguments)<br>
       Expected: Similar to previous.
-   
+
    5. Test case: `filter i/ x<INCOME>` (where x is an invalid income operator)<br>
       Expected: An error message is shown to the user. Error details shown in the status message.
-   
+
    6. Other incorrect `filter` commands to try:<br>
       `filter f/ <INVALID_VALUE>` (where f is a valid flag),<br>
       `edit 1 y/ <VALUE>` (where y is an invalid flag) <br>
@@ -840,10 +840,10 @@ testers are expected to do more *exploratory* testing.
 1. Viewing a client while all clients are being shown
 
     1. Prerequisites: List all clients using the `list` command. At least one client in the list.
-   
+
     2. Test case: `view 1`<br>
        Expected: The detailed view of the client in index 1 will be shown.
-   
+
     3. Test case: `view 0 n/ <NAME>`<br>
         Expected: An error message is shown to the user. No edits are made to client details. Error details shown in the status message.
 
@@ -858,7 +858,7 @@ testers are expected to do more *exploratory* testing.
 1. Closing the view of the currently viewed client
 
    1. Prerequisites: The detailed view of a client is currently open.
-   
+
    2. Test case: `close`<br>
       Expected: The detailed view closes.
 
@@ -867,15 +867,15 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
    1. Back up the existing `agentassist.json` file under the `data` directory.
-   
+
    2. Since the data file is corrupted, the application will show a blank list of clients' contacts.
-   
+
    3. Adding any new contacts now, will override the old file.
-   
+
    4. You may attempt to repair the old corrupted file, by cross-checking the old corrupted file against the new, uncorrupted file created when a new contact is added after step 3.
-   
+
    5. Make sure to follow the constraints laid out in the user guide for each attribute of Client.
-   
+
    6. If the data file is successfully repaired, running `agentassist.jar` should result in the old data being displayed back in the application.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -886,14 +886,14 @@ AgentAssist is a specialized Customer Relationship Management (CRM) system for c
 
 For example, we added a custom `help` window with an image-based command layout, enhancing user experience beyond a generic user guide.
 
-### Other Challenging Features 
-- Add and Edit Commands: Adding new flags (such as `Remark`, `Tier`, `Status`, and `Income`) was straightforward but required updates to several supporting classes, including `PersonBuilder` and `TypicalPersons`, to ensure seamless functionality. 
+### Other Challenging Features
+- Add and Edit Commands: Adding new flags (such as `Remark`, `Tier`, `Status`, and `Income`) was straightforward but required updates to several supporting classes, including `PersonBuilder` and `TypicalPersons`, to ensure seamless functionality.
 
 
 - Error Messages for Invalid Arguments: To avoid increasing system coupling, we used a [`LinkedHashSet`]() to keep error messages ordered as per flag parsing. This data structure compiled errors into a single `ParserException` with a concatenated message for easy debugging.
 
 
-- `view` and `close` Commands: Implementing these commands with JavaFX’s split-pane required careful lifecycle management of UI components, handling divider positions and proportions. To maintain consistency between the list and detail views, we used a `ListChangeListener` class to track client list updates and handle cases such as clients being deleted, edited, or filtered out. This entailed intricate event handling and managing multiple change types to keep UI elements synchronized. 
+- `view` and `close` Commands: Implementing these commands with JavaFX’s split-pane required careful lifecycle management of UI components, handling divider positions and proportions. To maintain consistency between the list and detail views, we used a `ListChangeListener` class to track client list updates and handle cases such as clients being deleted, edited, or filtered out. This entailed intricate event handling and managing multiple change types to keep UI elements synchronized.
 
 
 - `Status Pie Chart`: Implementing this feature involved tracking real-time status changes in the client list. We used an observer pattern to handle updates and ensured concurrent modifications ran safely by using `Platform.runLater()`. Extensive CSS customization supported dark theme compatibility, and the design featured color-coded status categories (`NA`, `NON_URGENT`, `URGENT`) with custom legends. Performance optimization was key, as frequent updates could impact UI performance. We employed efficient data structures to track status counts, minimizing redraws and maintaining smooth operation.
@@ -901,4 +901,3 @@ For example, we added a custom `help` window with an image-based command layout,
 Both the `view`/`close` commands and the `Status Pie Chart` required extensive testing to ensure they operated robustly under various conditions, with a clean code structure and separation of concerns.
 
 Overall, we estimate a 35% increase in base functionality from the AB3 system, due to additional features and the increased complexity of components such as `filter`, `view`/`close` commands, and `Status Pie Chart`. The `Parser` and `Predicate` classes also grew significantly in complexity to accommodate these enhancements.
-
