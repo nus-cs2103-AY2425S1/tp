@@ -14,6 +14,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -65,8 +67,34 @@ public class AttendanceWindow {
 
             Scene scene = new Scene(vbox);
             stage.setScene(scene);
+
+            // Get screen dimensions
+            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+            double screenWidth = screenBounds.getWidth();
+
+            // Preset dimensions
+            double maxAdaptiveWidth = calculateRequiredWidth(model); // Calculate required width dynamically
+
+            // Determine final width of the stage
+            double finalWidth = Math.min(maxAdaptiveWidth, screenWidth);
+
+            stage.setWidth(finalWidth);
+            if (finalWidth < screenWidth) {
+                stage.setX((screenWidth - finalWidth) / 2);
+            } else {
+                stage.setX(0);
+            }
+            stage.setY(100); // Optional: adjust Y position as needed
+
             stage.show();
         });
+    }
+
+    private double calculateRequiredWidth(Model model) {
+        double baseWidth = 275; // Base width for non-date columns (adjust as needed)
+        double dateColumnWidth = 100; // Example width per date column (adjust as needed)
+        int dateColumnCount = getAllAttendanceDates(model).size(); // Get number of date columns
+        return baseWidth + (dateColumnCount * dateColumnWidth); // Calculate required width
     }
 
     /**
