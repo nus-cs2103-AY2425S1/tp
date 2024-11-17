@@ -68,28 +68,36 @@ public class AttendanceWindow {
             Scene scene = new Scene(vbox);
             stage.setScene(scene);
 
-            // Get screen dimensions
-            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-            double screenWidth = screenBounds.getWidth();
-
-            // Preset dimensions
-            double maxAdaptiveWidth = calculateRequiredWidth(model); // Calculate required width dynamically
-
-            // Determine final width of the stage
-            double finalWidth = Math.min(maxAdaptiveWidth, screenWidth);
-
-            stage.setWidth(finalWidth);
-            if (finalWidth < screenWidth) {
-                stage.setX((screenWidth - finalWidth) / 2);
-            } else {
-                stage.setX(0);
-            }
-            stage.setY(100); // Optional: adjust Y position as needed
+            applyStageDimensions(stage, model);
 
             stage.show();
         });
     }
 
+    /**
+     * Applies the dimensions of the stage.
+     * @param stage the stage to apply the dimensions to
+     * @param model the model to get the data from
+     */
+    private void applyStageDimensions(Stage stage, Model model) {
+        // Get screen dimensions
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        double screenWidth = screenBounds.getWidth();
+
+        // Preset dimensions
+        double maxAdaptiveWidth = calculateRequiredWidth(model); // Calculate required width dynamically
+        double finalWidth = determineFinalWidth(maxAdaptiveWidth, screenWidth);
+
+        stage.setWidth(finalWidth);
+        stage.setX(calculateStageXPosition(finalWidth, screenWidth));
+        stage.setY(100); // Optional: adjust Y position as needed
+    }
+
+    /**
+     * Calculates the required width of the stage based on the number of columns.
+     * @param model the model to get the data from
+     * @return the required width of the stage
+     */
     private double calculateRequiredWidth(Model model) {
         double baseWidth = 275; // Base width for non-date columns (adjust as needed)
         double dateColumnWidth = 100; // Example width per date column (adjust as needed)
@@ -97,6 +105,17 @@ public class AttendanceWindow {
         return baseWidth + (dateColumnCount * dateColumnWidth); // Calculate required width
     }
 
+    private double determineFinalWidth(double maxAdaptiveWidth, double screenWidth) {
+        return Math.min(maxAdaptiveWidth, screenWidth);
+    }
+
+    private double calculateStageXPosition(double finalWidth, double screenWidth) {
+        if (finalWidth < screenWidth) {
+            return (screenWidth - finalWidth) / 2;
+        } else {
+            return 0;
+        }
+    }
     /**
      * Closes the attendance window.
      */
