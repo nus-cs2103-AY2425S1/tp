@@ -14,12 +14,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.address.model.Model;
 import seedu.address.model.attendance.AttendanceRecord;
@@ -65,8 +67,48 @@ public class AttendanceWindow {
 
             Scene scene = new Scene(vbox);
             stage.setScene(scene);
+
+            applyStageDimensions(stage, model);
+
             stage.show();
         });
+    }
+
+    /**
+     * Applies the dimensions of the stage.
+     * @param stage the stage to apply the dimensions to
+     * @param model the model to get the data from
+     */
+    private void applyStageDimensions(Stage stage, Model model) {
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        double screenWidth = screenBounds.getWidth();
+        double screenHeight = screenBounds.getHeight();
+
+        double maxAdaptiveWidth = calculateRequiredWidth(model);
+        double finalWidth = determineFinalWidth(maxAdaptiveWidth, screenWidth);
+        stage.setWidth(finalWidth);
+
+        stage.setX((screenWidth - finalWidth) / 2);
+        stage.setHeight(600);
+        double finalHeight = stage.getHeight();
+        stage.setY((screenHeight - finalHeight) / 2);
+    }
+
+
+    /**
+     * Calculates the required width of the stage based on the number of columns.
+     * @param model the model to get the data from
+     * @return the required width of the stage
+     */
+    private double calculateRequiredWidth(Model model) {
+        double baseWidth = 400;
+        double dateColumnWidth = 100;
+        int dateColumnCount = getAllAttendanceDates(model).size();
+        return baseWidth + (dateColumnCount * dateColumnWidth);
+    }
+
+    private double determineFinalWidth(double maxAdaptiveWidth, double screenWidth) {
+        return Math.min(maxAdaptiveWidth, screenWidth);
     }
 
     /**
