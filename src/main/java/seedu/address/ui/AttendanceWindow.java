@@ -83,15 +83,22 @@ public class AttendanceWindow {
         // Get screen dimensions
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
         double screenWidth = screenBounds.getWidth();
+        double screenHeight = screenBounds.getHeight();
 
         // Preset dimensions
         double maxAdaptiveWidth = calculateRequiredWidth(model); // Calculate required width dynamically
         double finalWidth = determineFinalWidth(maxAdaptiveWidth, screenWidth);
-
         stage.setWidth(finalWidth);
-        stage.setX(calculateStageXPosition(finalWidth, screenWidth));
-        stage.setY(100); // Optional: adjust Y position as needed
+
+        // Calculate and set X and Y positions to center the stage
+        stage.setX((screenWidth - finalWidth) / 2);
+
+        // Set a minimum height if needed and calculate Y-position to center
+        stage.setHeight(600); // Example minimum height, adjust if necessary
+        double finalHeight = stage.getHeight();
+        stage.setY((screenHeight - finalHeight) / 2);
     }
+
 
     /**
      * Calculates the required width of the stage based on the number of columns.
@@ -99,7 +106,7 @@ public class AttendanceWindow {
      * @return the required width of the stage
      */
     private double calculateRequiredWidth(Model model) {
-        double baseWidth = 275; // Base width for non-date columns (adjust as needed)
+        double baseWidth = 400; // Base width for non-date columns (adjust as needed)
         double dateColumnWidth = 100; // Example width per date column (adjust as needed)
         int dateColumnCount = getAllAttendanceDates(model).size(); // Get number of date columns
         return baseWidth + (dateColumnCount * dateColumnWidth); // Calculate required width
@@ -112,6 +119,14 @@ public class AttendanceWindow {
     private double calculateStageXPosition(double finalWidth, double screenWidth) {
         if (finalWidth < screenWidth) {
             return (screenWidth - finalWidth) / 2;
+        } else {
+            return 0;
+        }
+    }
+
+    private double calculateStageYPosition(double finalHeight, double screenHeight) {
+        if (finalHeight < screenHeight) {
+            return (screenHeight - finalHeight) / 2;
         } else {
             return 0;
         }
