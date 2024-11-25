@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+start
+:User wants to update the status of
+the internship application at index i (where i is an integer);
+
+switch ()
+case ( [User enters the command "/accept i"])
+    if () then ([Index is valid])
+        :Updates the internship
+        application status to
+        **ACCEPTED**;
+    else ([else])
+        :User receives
+        an error message;
+        stop
+    endif
+case (   [User enters the command "/reject i"])
+    if () then ([Index is valid])
+        :Updates the internship application
+        status to **REJECTED**;
+    else ([else])
+        :User receives
+        an error message;
+        stop
+    endif
+case ( [User enters the command "/pending i"])
+    if () then ([Index is valid])
+        :Updates the internship
+        application status to
+        **PENDING**;
+    else ([else])
+        :User receives
+        an error message;
+        stop
+    endif
+endswitch
+
+:User receives a success message;
+stop
+@enduml
+
