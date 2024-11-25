@@ -97,6 +97,9 @@ public class ChartWindow extends UiPart<Stage> {
         pieChart.layout();
 
         final double totalApplications = total;
+        /* Solution below adapted from
+           https://stackoverflow.com/questions/35479375/display-additional-values-in-pie-chart
+        */
         data.forEach(dataSegment -> {
                 String stringToBeBound = StringUtil.getPercentageString(dataSegment.getPieValue(),
                         totalApplications);
@@ -110,6 +113,9 @@ public class ChartWindow extends UiPart<Stage> {
      * @param stringToBeBound The string that needs to be bound to the data segment.
      */
     public void bindPieChartDataSegment(PieChart.Data dataSegment, String stringToBeBound) {
+        /* Solution below adapted from
+           https://stackoverflow.com/questions/35479375/display-additional-values-in-pie-chart
+        */
         StringExpression exp = Bindings.concat(dataSegment.getName(), "  ", stringToBeBound);
         dataSegment.nameProperty().bind(exp);
     }
