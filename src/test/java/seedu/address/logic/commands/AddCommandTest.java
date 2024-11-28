@@ -10,12 +10,14 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -23,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Property;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -85,7 +88,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -144,8 +147,28 @@ public class AddCommandTest {
         }
 
         @Override
+        public void pinPerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unpinPerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPersonListWithComparator(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPersonList() {
+            return;
         }
 
         @Override
@@ -154,7 +177,24 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getFilteredPhoneNumberList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addSellProperty(Index index, Property property) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasSellProperty(Index index, Property property) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void refreshStatistics() {
             throw new AssertionError("This method should not be called.");
         }
     }

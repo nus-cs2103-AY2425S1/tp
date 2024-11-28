@@ -3,9 +3,12 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -19,6 +22,17 @@ public class JsonSerializableAddressBookTest {
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.json");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
+
+    @BeforeAll
+    public static void setUp() throws IOException {
+        // Ensure that the test data folder exists
+        if (!Files.exists(TEST_DATA_FOLDER)) {
+            Files.createDirectories(TEST_DATA_FOLDER);
+        }
+        AddressBook typicalAddressBook = TypicalPersons.getTypicalAddressBook();
+        JsonSerializableAddressBook jsonSerializableAddressBook = new JsonSerializableAddressBook(typicalAddressBook);
+        JsonUtil.saveJsonFile(jsonSerializableAddressBook, TYPICAL_PERSONS_FILE);
+    }
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {

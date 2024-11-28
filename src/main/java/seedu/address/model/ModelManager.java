@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Property;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +39,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
+
+
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
@@ -94,6 +100,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasSellProperty(Index index, Property property) {
+        requireNonNull(property);
+        return addressBook.hasSellProperty(index, property);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -105,10 +117,28 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addSellProperty(Index index, Property property) {
+        requireNonNull(property);
+        addressBook.addSellProperty(property);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        addressBook.refreshStatistics(addressBook.getPersonList());
+    }
+
+    @Override
+    public void sortPersonListWithComparator(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        addressBook.setSortComparator(comparator);
+        addressBook.sortPersonList();
+    }
+
+    @Override
+    public void sortPersonList() {
+        addressBook.sortPersonList();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -126,6 +156,30 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Person> getFilteredPhoneNumberList() {
+        return filteredPersons;
+    }
+
+    @Override
+    public void pinPerson(Person target) {
+        requireNonNull(target);
+        target.pin();
+        addressBook.sortPersonList();
+    }
+
+    @Override
+    public void unpinPerson(Person target) {
+        requireNonNull(target);
+        target.unpin();
+        addressBook.sortPersonList();
+    }
+
+    @Override
+    public void refreshStatistics() {
+        this.addressBook.refreshStatistics();
     }
 
     @Override

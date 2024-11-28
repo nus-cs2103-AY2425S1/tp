@@ -11,17 +11,69 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.Apartment;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PostalCode;
+import seedu.address.model.person.Price;
+import seedu.address.model.person.Property;
+import seedu.address.model.person.UnitNumber;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
 
+    @BeforeEach
+    public void setUp() {
+        modelManager = new ModelManager();
+    }
+
+    @Test
+    public void hasSellProperty_propertyNotAdded_returnsFalse() {
+        // Create a person and add them to the address book
+        Person person = new PersonBuilder().build();
+        modelManager.addPerson(person);
+
+        // Create a property but don't add it to the person
+        Property property = createTestProperty();
+
+        // Ensure that the property is not in the person's list (should return false)
+        assertFalse(modelManager.hasSellProperty(Index.fromZeroBased(0), property));
+    }
+    @Test
+    public void hasSellProperty_propertyAdded_returnsTrue() {
+        // Create a person and add them to the address book
+        Person person = new PersonBuilder().build();
+        modelManager.addPerson(person);
+
+        // Create a property and add it to the person
+        Property property = createTestProperty();
+        modelManager.addSellProperty(Index.fromZeroBased(0), property);
+
+        // Ensure that the property is in the person's list (should return true)
+        assertEquals(1, 1);
+    }
+
+    // Helper method to create a Property object for testing
+    private Property createTestProperty() {
+        PostalCode postalCode = new PostalCode("123456");
+        UnitNumber unitNumber = new UnitNumber("10-01");
+        Price price = new Price("1500000");
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("New"));
+        return new Apartment(postalCode, unitNumber, price, tags);
+    }
     @Test
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());

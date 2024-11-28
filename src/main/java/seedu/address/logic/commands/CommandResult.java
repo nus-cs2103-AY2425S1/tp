@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.command.Commands;
+import seedu.address.model.statistics.AddressBookStatistics;
 
 /**
  * Represents the result of a command execution.
@@ -18,6 +20,9 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
+    private AddressBookStatistics addressBookStatistics;
+    private Commands commandList;
+    private boolean isStatisticsPresent = false;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -36,6 +41,35 @@ public class CommandResult {
         this(feedbackToUser, false, false);
     }
 
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code AddressBookStatistics}.
+     * CommandResult will thus be able to display statistics.
+     */
+    public CommandResult(String feedbackToUser, AddressBookStatistics addressBookStatistics) {
+        this(feedbackToUser, false, false);
+        this.isStatisticsPresent = true;
+        this.addressBookStatistics = addressBookStatistics;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with specifies {@code feedbackToUser} and {@code Commands}
+     * @param feedbackToUser The feedback to be displayed to the user
+     * @param commandList The list of commands which has to be displayed to the user
+     */
+    public CommandResult(String feedbackToUser, Commands commandList) {
+        this(feedbackToUser, false, false);
+        this.commandList = commandList;
+    }
+
+    /**
+     * Returns {@code addressBookStatistics}.
+     * This method should only be called when if overloaded constructor had initialised {@code addressBookStatistics}.
+     */
+    public AddressBookStatistics getAddressBookStatistics() {
+        assert addressBookStatistics != null : "addressBookStatistics should not be null";
+        return this.addressBookStatistics;
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
@@ -46,6 +80,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isStatisticsPresent() {
+        return isStatisticsPresent;
     }
 
     @Override

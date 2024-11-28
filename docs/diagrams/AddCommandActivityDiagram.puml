@@ -1,0 +1,23 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+repeat
+ repeat :User inputs add command;
+   :AddressBook parses
+   command;
+ repeat while () is ([invalid command
+ syntax])
+ ->[valid command
+ syntax];
+ :AddressBook checks if
+ contact already exists;
+ repeat while () is ([yes])
+  ->[no];
+  :AddressBook adds contact;
+ stop
+
+
+@enduml

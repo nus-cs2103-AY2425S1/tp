@@ -5,6 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,10 +16,9 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
  * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
+ * persons uses Person#isSamePerson(Person) for equality to ensure that the person being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
- *
+ * to ensure that the person with exactly the same fields will be removed.
  * Supports a minimal set of list operations.
  *
  * @see Person#isSamePerson(Person)
@@ -95,6 +96,26 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Returns a filtered list of persons based on the given predicate.
+     */
+    public List<Person> filtered(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        return internalList.stream().filter(predicate).collect(Collectors.toList());
+    }
+
+    /**
+     * Adds all persons from the given list to the internal list.
+     */
+    public void addAll(List<Person> personsToAdd) {
+        requireAllNonNull(personsToAdd);
+        for (Person person : personsToAdd) {
+            if (!contains(person)) {
+                internalList.add(person);
+            }
+        }
     }
 
     /**
