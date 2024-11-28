@@ -47,6 +47,8 @@ public class StatisticsPanel extends UiPart<Region> {
         logger.info("Updating Statistics View...");
         statisticsGridPane.getChildren().clear(); // Clear existing charts
 
+        // Use of ChatGPT to generate parts of the method, with suitable modifications.
+
         // Add initial bar chart with data
         BarChart<Number, String> propertiesBoughtAndSoldBarChart =
                 createPropertiesSoldAndBoughtBarChart("Properties Sold and Bought", addressBookStatistics);
@@ -75,6 +77,9 @@ public class StatisticsPanel extends UiPart<Region> {
      * @return {@code BarChart}
      */
     private BarChart<Number, String> createPropertiesSoldAndBoughtBarChart(String title, AddressBookStatistics stats) {
+
+        // Use of ChatGPT to generate parts of the method, with suitable modifications.
+
         CategoryAxis yAxis = new CategoryAxis();
         NumberAxis xAxis = new NumberAxis();
 
@@ -110,6 +115,9 @@ public class StatisticsPanel extends UiPart<Region> {
      * @return {@code BarChart}
      */
     private BarChart<Number, String> createRevenueAndExpensesBarChart(String title, AddressBookStatistics stats) {
+
+        // Use of ChatGPT to generate parts of the method, with suitable modifications.
+
         CategoryAxis yAxis = new CategoryAxis();
         NumberAxis xAxis = new NumberAxis();
 
@@ -145,6 +153,9 @@ public class StatisticsPanel extends UiPart<Region> {
      * @return {@code PieChart}
      */
     private PieChart createPropertiesBoughtAndSoldPieChart(String title, AddressBookStatistics stats) {
+
+        // Use of ChatGPT to generate parts of the method, with suitable modifications.
+
         PieChart pieChart = new PieChart();
         pieChart.setTitle(title);
         pieChart.setPrefWidth(500);
@@ -189,10 +200,12 @@ public class StatisticsPanel extends UiPart<Region> {
      * @return {@code PieChart}
      */
     private PieChart createRevenueAndExpensesPieChart(String title, AddressBookStatistics stats) {
+
+        // Use of ChatGPT to generate parts of the method, with suitable modifications.
+
         PieChart pieChart = new PieChart();
         pieChart.setTitle(title);
         pieChart.setPrefWidth(500);
-
 
         int salesRevenue = stats.getTotalSalesRevenue();
         int purchaseExpense = stats.getTotalPurchaseExpense();
