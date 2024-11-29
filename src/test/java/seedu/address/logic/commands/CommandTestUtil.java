@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +23,6 @@ import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.ContainsKeywordsPredicate;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
-//@@author
 /**
  * Contains helper methods for testing commands.
  */
