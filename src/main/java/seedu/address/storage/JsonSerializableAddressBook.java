@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.storage;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
-//@@author
+
 /**
  * An Immutable AddressBook that is serializable to JSON format.
  */
@@ -55,9 +56,11 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CONTACT);
             }
 
+            //@@author somethingfishyfishy
             if (addressBook.hasDuplicateFields(contact)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_FIELDS);
             }
+            //@@author
             addressBook.addContact(contact);
         }
         return addressBook;
