@@ -75,6 +75,8 @@ public class TypicalContacts {
             .withEmail(VALID_EMAIL_BOB).withStudentStatus(VALID_STUDENT_STATUS_BOB)
             .withRoles(VALID_ROLE_PRESIDENT, VALID_ROLE_ADMIN)
             .build();
+
+    //@@author somethingfishyfishy
     public static final Contact BOB_HASSAMETELE_ALICE = new ContactBuilder().withName(VALID_NAME_BOB + "ONE")
             .withTelegramHandle(ALICE_TELEGRAMHANDLE)
             .withEmail(VALID_EMAIL_BOB + "1").withStudentStatus(VALID_STUDENT_STATUS_BOB)
@@ -98,6 +100,7 @@ public class TypicalContacts {
             .withNickname(BOB_NICKNAME)
             .build();
 
+    //@@author
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalContacts() {} // prevents instantiation
