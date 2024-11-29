@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.model.contact;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,7 +20,6 @@ import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.testutil.ContactBuilder;
 
-//@@author
 public class UniqueContactListTest {
 
     private final UniqueContactList uniqueContactList = new UniqueContactList();
