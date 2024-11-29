@@ -97,6 +97,7 @@ public class Messages {
         return String.format(MESSAGE_DUPLICATE_PREFIXES_COMMAND, String.join(" ", duplicateFields));
     }
 
+    //@@author
     /**
      * Formats the {@code contact} for display to the user.
      */
