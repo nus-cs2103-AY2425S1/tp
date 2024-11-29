@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.storage;
 
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ import seedu.address.model.contact.Role;
 import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
 
-//@@author
 /**
  * Jackson-friendly version of {@link Contact}.
  */

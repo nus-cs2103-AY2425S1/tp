@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+//@@author wuzengfu
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.contact.Contact;
@@ -122,6 +123,7 @@ public class SampleDataUtil {
                 new Nickname(""))};
     }
 
+    //@@author
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Contact sampleContact : getSampleContacts()) {

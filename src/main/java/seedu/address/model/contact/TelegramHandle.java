@@ -1,3 +1,4 @@
+//@@author WinstonJin
 package seedu.address.model.contact;
 
 import static java.util.Objects.requireNonNull;

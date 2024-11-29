@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.testutil;
 
 import java.util.Set;
@@ -13,7 +14,6 @@ import seedu.address.model.contact.Role;
 import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
 
-//@@author
 /**
  * A utility class to help with building EditContactDescriptor objects.
  */
@@ -50,6 +50,7 @@ public class EditContactDescriptorBuilder {
         return this;
     }
 
+    //@@author WinstonJin
     /**
      * Sets the {@code TelegramHandle} of the {@code EditContactDescriptor} that we are building.
      */
@@ -66,6 +67,7 @@ public class EditContactDescriptorBuilder {
         return this;
     }
 
+    //@@author LowXiSi
     /**
      * Sets the {@code StudentStatus} of the {@code EditContactDescriptor} that we are building.
      */
@@ -74,6 +76,7 @@ public class EditContactDescriptorBuilder {
         return this;
     }
 
+    //@@author wuzengfu
     /**
      * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code EditContactDescriptor}
      * that we are building.
@@ -84,7 +87,7 @@ public class EditContactDescriptorBuilder {
         return this;
     }
 
-
+    //@@author
     /**
      * Sets the {@code Nickname} of the {@code EditContactDescriptor} that we are building.
      */

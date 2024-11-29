@@ -20,9 +20,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.ContactBuilder;
 
-//@@author
 public class ContactTest {
 
+    //@@author
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Contact contact = new ContactBuilder().build();
@@ -59,7 +59,7 @@ public class ContactTest {
         // DEBATABLE, CHANGED FROM FALSE TO TRUE
     }
 
-
+    //@@author somethingfishyfishy
     @Test
     public void hasSameFields() {
         // Summary of the below tests, testing Contacts where all the traits are different but
@@ -89,6 +89,7 @@ public class ContactTest {
         assertTrue(BOBNICK.hasSameFields(BOB_HASSAMENICK_BOBNICK));
     }
 
+    //@@author
     @Test
     public void equals() {
         // same values -> returns true
@@ -137,6 +138,7 @@ public class ContactTest {
         assertEquals(expected, ALICE.toString());
     }
 
+    //@@author WinstonJin
     @Test
     public void isHashCode() {
         assertTrue(ALICE.hashCode() < 0);

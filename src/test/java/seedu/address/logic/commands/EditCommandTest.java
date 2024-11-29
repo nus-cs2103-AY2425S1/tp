@@ -37,7 +37,6 @@ import seedu.address.model.contact.exceptions.DuplicateFieldException;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
-//@@author
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
@@ -45,6 +44,7 @@ public class EditCommandTest {
     private static final String NAME_NOT_IN_ADDRESS_BOOK = "R@chel Quek Tan Boba Qxtrnm";
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    //@@author
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Contact editedContact = new ContactBuilder().build();
@@ -123,6 +123,7 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    //@@author wuzengfu
     @Test
     public void execute_filteredListWithOnlyName_success() {
         showContactAtIndex(model, INDEX_FIRST_CONTACT);
@@ -164,6 +165,7 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    //@@author somethingfishyfishy
     @Test
     public void execute_nameToEditDoesNotExistInAddressBook_failure() {
         String userInput = NAME_NOT_IN_ADDRESS_BOOK;
@@ -197,6 +199,7 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    //@@author
     @Test
     public void execute_duplicateContactUnfilteredList_failure() {
         Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
@@ -227,7 +230,7 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
-
+    //@@author somethingfishyfishy
     @Test
     public void executeCallsScreenDuplicate_hasDuplicateFullName_failure() {
         // set firstContactInFilteredList to have the same full name as second contact
@@ -253,6 +256,7 @@ public class EditCommandTest {
                         EditCommand.COMMAND_WORD));
     }
 
+    //@@author
     /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
@@ -270,6 +274,7 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
+    //@@author wuzengfu
     @Test
     public void execute_duplicateNameFilteredList_throwCommandException() {
         Contact firstContact = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
@@ -330,6 +335,7 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CONTACT);
     }
 
+    //@@author
     @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_CONTACT, DESC_AMY);
@@ -355,6 +361,7 @@ public class EditCommandTest {
         assertNotEquals(standardCommand, new EditCommand(INDEX_FIRST_CONTACT, DESC_BOB));
     }
 
+    //@@author somethingfishyfishy
     @Test
     public void equals_isTrue_success() {
         // EditCommand constructed with (Index, descriptor) are equals
@@ -383,6 +390,7 @@ public class EditCommandTest {
         assertNotEquals(standardNameCommand, otherNameCommand);
     }
 
+    //@@author
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);

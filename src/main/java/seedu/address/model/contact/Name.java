@@ -113,7 +113,7 @@ public class Name {
                     + word.substring(2);
         }
 
-        // @@author cth06-Github-reuse
+        // @@author cth06-Github-reused
         // Idea to use Character.toUpperCase obtained from https://www.baeldung.com/java-string-to-camel-case
         return Character.toUpperCase(word.charAt(0)) + word.substring(1);
         // @@author

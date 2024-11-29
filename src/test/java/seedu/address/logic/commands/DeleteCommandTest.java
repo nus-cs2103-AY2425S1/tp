@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +23,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Name;
 
-//@@author
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteCommand}.
@@ -70,6 +70,7 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
+    //@@author somethingfishyfishy
     @Test
     public void execute_setTargetIndexSuccess_validIndexFilteredList() {
         showContactAtIndex(model, INDEX_FIRST_CONTACT);
@@ -97,6 +98,7 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
+    //@@author
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showContactAtIndex(model, INDEX_FIRST_CONTACT);
@@ -110,6 +112,7 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
+    //@@author somethingfishyfishy
     @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_CONTACT);
@@ -144,6 +147,7 @@ public class DeleteCommandTest {
         assertFalse(deleteNameCommand.equals(deleteOtherNameCommand));
     }
 
+    //@@author
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);

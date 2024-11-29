@@ -81,6 +81,7 @@ public class EditCommand extends Command {
     private final Name targetName;
     private final EditContactDescriptor editContactDescriptor;
 
+    //@@author somethingfishyfishy
     /**
      * @param targetIndex of the contact in the filtered contact list to edit
      * @param editContactDescriptor details to edit the contact with
@@ -110,9 +111,11 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        //@@author cth06-Github
         List<Contact> lastShownFilteredList = model.getFilteredContactList();
         List<Contact> allContactList = model.getAllContactList();
 
+        //@@author somethingfishyfishy
         if (targetIndex == null) {
             screenDuplicate(allContactList);
             setTargetIndex(lastShownFilteredList);
@@ -130,11 +133,13 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
+        //@@author wuzengfu
         if (contactToEdit.isSameContact(editedContact)
                 && model.hasDuplicateFieldsWithException(contactToEdit, editedContact)) {
             throw new CommandException(MESSAGE_DUPLICATE_FIELDS_CONTACT);
         }
 
+        //@@author
         try {
             model.setContact(contactToEdit, editedContact);
         } catch (DuplicateFieldException e) {
@@ -144,6 +149,7 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
     }
 
+    //@@author somethingfishyfishy
     private void setTargetIndex(List<Contact> lastShownList) throws CommandException {
         int temp = lastShownList.stream()
                 .filter(contact -> contact.getName().equalsIgnoreCase(targetName))
@@ -155,6 +161,7 @@ public class EditCommand extends Command {
         }
         this.targetIndex = Index.fromZeroBased(temp);
     }
+    //@@author
 
     /**
      * Creates and returns a {@code Contact} with the details of {@code contactToEdit}
@@ -181,6 +188,7 @@ public class EditCommand extends Command {
             return true;
         }
 
+        //@@author somethingfishyfishy
         // instanceof handles nulls
         if (!(other instanceof EditCommand otherEditCommand)) {
             return false;
@@ -197,6 +205,7 @@ public class EditCommand extends Command {
             }
             return false;
         }
+        //@@author
 
         return targetIndex.equals(otherEditCommand.targetIndex)
                 && editContactDescriptor.equals(otherEditCommand.editContactDescriptor);
@@ -211,7 +220,7 @@ public class EditCommand extends Command {
                 .toString();
     }
 
-
+    //@@author cth06-Github
     // DRY not adhered (compare to delete)
     private void screenDuplicate(List<Contact> lastShownList) throws CommandException {
         long nameCount = lastShownList.stream()
@@ -225,6 +234,7 @@ public class EditCommand extends Command {
                             COMMAND_WORD));
         }
     }
+    //@@author
 
     /**
      * Stores the details to edit the contact with. Each non-empty field value will replace the
@@ -296,12 +306,12 @@ public class EditCommand extends Command {
          * Sets {@code roles} to this object's {@code roles}.
          * A defensive copy of {@code roles} is used internally.
          */
-        // @@author cth06-Github-reused
+        //@@author cth06-Github-reused
         // Solution taken from https://stackoverflow.com/questions/17826854/creating-a-sorted-set
         public void setAndSortRoles(Set<Role> roles) {
             this.roles = (roles != null) ? new TreeSet<>(roles) : null;
         }
-        // @author
+        //@@author
 
         /**
          * Returns an unmodifiable roles set, which throws {@code UnsupportedOperationException}

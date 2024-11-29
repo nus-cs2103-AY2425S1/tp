@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.model;
 
 import java.nio.file.Path;
@@ -7,7 +8,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contact.Contact;
 
-//@@author
 /**
  * The API of the Model component.
  */

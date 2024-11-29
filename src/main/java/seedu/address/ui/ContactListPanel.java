@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.ui;
 
 import java.util.logging.Logger;
@@ -10,7 +11,6 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.contact.Contact;
 
-//@@author
 /**
  * Panel containing the list of contacts.
  */
@@ -30,7 +30,6 @@ public class ContactListPanel extends UiPart<Region> {
         contactListView.setCellFactory(listView -> new ContactListViewCell());
     }
 
-    //@@author
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Contact} using a {@code ContactCard}.
      */
@@ -43,6 +42,7 @@ public class ContactListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
+                //@@author wuzengfu
                 int displayedIndex = PaginationPanel.convertItemIndexToDisplayIndex(getIndex());
                 setGraphic(new ContactCard(contact, displayedIndex).getRoot());
             }

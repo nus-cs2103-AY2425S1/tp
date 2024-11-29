@@ -1,6 +1,5 @@
 package seedu.address.model.util;
 
-//@@author
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.util.SampleDataUtil.getRoleSet;
 
@@ -17,6 +16,7 @@ import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
 
 public class SampleDataUtilTest {
+    //@@author wuzengfu
     private Contact[] sampleContacts =
         new Contact[] {
             new Contact(new Name("Alexandra Haas"), new TelegramHandle("jason1185"),
@@ -120,6 +120,7 @@ public class SampleDataUtilTest {
                         getRoleSet("Events (internal)", "Admin"),
                         new Nickname(""))};
 
+    //@@author LowXiSi
     @Test
     public void getRoleSet_success() {
         Role[] roles = {new Role("Admin"), new Role("Vice President")};
@@ -129,6 +130,7 @@ public class SampleDataUtilTest {
         assertTrue(List.of(roles).containsAll(getRoleSet("Vice President", "Admin", "Admin")));
     }
 
+    //@@author wuzengfu
     @Test
     public void getSampleContacts_success() {
         assertTrue(List.of(sampleContacts).containsAll(List.of(SampleDataUtil.getSampleContacts())));
