@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.model.contact;
 
 import static java.util.Objects.requireNonNull;
@@ -12,7 +13,6 @@ import seedu.address.model.contact.exceptions.ContactNotFoundException;
 import seedu.address.model.contact.exceptions.DuplicateContactException;
 import seedu.address.model.contact.exceptions.DuplicateFieldException;
 
-//@@author
 /**
  * A list of contacts that enforces uniqueness between its elements and does not allow nulls.
  * A contact is considered unique by comparing using {@code Contact#isSameContact(Contact)}. As such, adding
@@ -33,6 +33,8 @@ public class UniqueContactList implements Iterable<Contact> {
     private final ObservableList<Contact> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList.sorted(new ComparatorName()));
     //@@author
+
+    //@@author
     /**
      * Returns true if the list contains an equivalent contact as the given argument.
      */
@@ -41,6 +43,7 @@ public class UniqueContactList implements Iterable<Contact> {
         return internalList.stream().anyMatch(toCheck::isSameContact);
     }
 
+    //@@author ernestycr
     /**
      * Returns true if the list contains any equivalent fields as the given argument.
      */
@@ -49,6 +52,7 @@ public class UniqueContactList implements Iterable<Contact> {
         return internalList.stream().anyMatch(toCheck::hasSameFields);
     }
 
+    //@@author wuzengfu
     /**
      * Returns true if a contact with the same fields as {@code contact} exists in the address book
      * with contactToExclude excluded.
@@ -62,6 +66,7 @@ public class UniqueContactList implements Iterable<Contact> {
         return internalList.stream().filter(p -> p != contactToExclude).anyMatch(contact::hasSameFields);
     }
 
+    //@@author
     /**
      * Adds a contact to the list.
      * The contact must not already exist in the list.
@@ -92,13 +97,16 @@ public class UniqueContactList implements Iterable<Contact> {
             throw new DuplicateContactException();
         }
 
+        //@@author wuzengfu
         if (!target.isSameContact(editedContact) && containsFieldsWithException(target, editedContact)) {
             throw new DuplicateFieldException();
         }
+        //@@author
 
         internalList.set(index, editedContact);
     }
 
+    //@@author
     /**
      * Removes the equivalent contact from the list.
      * The contact must exist in the list.
