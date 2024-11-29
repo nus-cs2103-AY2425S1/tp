@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +24,6 @@ import seedu.address.model.contact.exceptions.DuplicateFieldException;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ContactBuilder;
 
-//@@author
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
@@ -106,6 +106,7 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContactList().remove(0));
     }
 
+    //@@author wuzengfu
     @Test
     public void setContact_duplicateNickname_throwsDuplicateFieldException() {
         final String nickname = "Benson";
@@ -135,6 +136,7 @@ public class ModelManagerTest {
         assertThrows(DuplicateContactException.class, () -> modelManager.setContact(aliceContact, editedContact));
     }
 
+    //@@author
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withContact(ALICE).withContact(BENSON).build();
@@ -160,9 +162,11 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
+        //@@author LowXiSi
         modelManager.updateFilteredContactList(new ContainsKeywordsPredicate(
                 Arrays.asList(keywords), Collections.emptyList(), Collections.emptyList(),
                 Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
+        //@@author
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
