@@ -81,7 +81,7 @@ public class EditCommand extends Command {
     private final Name targetName;
     private final EditContactDescriptor editContactDescriptor;
 
-    //@@author ernestycr
+    //@@author somethingfishyfishy
     /**
      * @param targetIndex of the contact in the filtered contact list to edit
      * @param editContactDescriptor details to edit the contact with
@@ -115,7 +115,7 @@ public class EditCommand extends Command {
         List<Contact> lastShownFilteredList = model.getFilteredContactList();
         List<Contact> allContactList = model.getAllContactList();
 
-        //@@author ernestycr
+        //@@author somethingfishyfishy
         if (targetIndex == null) {
             screenDuplicate(allContactList);
             setTargetIndex(lastShownFilteredList);
@@ -149,7 +149,7 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
     }
 
-    //@@author ernestycr
+    //@@author somethingfishyfishy
     private void setTargetIndex(List<Contact> lastShownList) throws CommandException {
         int temp = lastShownList.stream()
                 .filter(contact -> contact.getName().equalsIgnoreCase(targetName))

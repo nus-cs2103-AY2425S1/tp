@@ -85,7 +85,7 @@ public class Contact {
                 && otherContact.getNickname().equals(getNickname());
     }
 
-    //@@author ernestycr
+    //@@author somethingfishyfishy
     /**
      * Returns true if both contacts have the same fields.
      * This defines a weaker notion of equality between two contacts.

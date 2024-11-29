@@ -1,4 +1,4 @@
-//@@author ernestycr
+//@@author somethingfishyfishy
 package seedu.address.model.contact.exceptions;
 
 /**

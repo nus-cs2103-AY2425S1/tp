@@ -32,7 +32,6 @@ public class UniqueContactList implements Iterable<Contact> {
     //@@author cth06-Github
     private final ObservableList<Contact> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList.sorted(new ComparatorName()));
-    //@@author
 
     //@@author
     /**
@@ -43,7 +42,7 @@ public class UniqueContactList implements Iterable<Contact> {
         return internalList.stream().anyMatch(toCheck::isSameContact);
     }
 
-    //@@author ernestycr
+    //@@author somethingfishyfishy
     /**
      * Returns true if the list contains any equivalent fields as the given argument.
      */
