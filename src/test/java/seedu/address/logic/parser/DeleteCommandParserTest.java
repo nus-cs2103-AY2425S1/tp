@@ -24,11 +24,13 @@ public class DeleteCommandParserTest {
 
     private DeleteCommandParser parser = new DeleteCommandParser();
 
+    //@@author
     @Test
     public void parse_validInteger_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_CONTACT));
     }
 
+    //@@author somethingfishyfishy
     @Test
     public void parse_validNameArgs_returnsDeleteCommand() {
         Name name = new Name(VALID_NAME_AMY);
@@ -37,6 +39,7 @@ public class DeleteCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    //@@author cth06-Github
     @Test
     public void parse_validNameArgsNoPrefix_returnsDeleteCommand() {
         // does not look if input matches address book
@@ -46,6 +49,7 @@ public class DeleteCommandParserTest {
         assertParseSuccess(parser, input, expectedCommand);
     }
 
+    //@@author somethingfishyfishy
     @Test
     public void parse_invalidNameArgs_throwsParseException() {
         assertParseFailure(parser, INVALID_NAME_DESC,
