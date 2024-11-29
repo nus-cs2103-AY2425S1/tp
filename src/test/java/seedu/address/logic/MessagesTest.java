@@ -1,3 +1,4 @@
+//@@author wuzengfu
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.contact.Contact;
 import seedu.address.testutil.ContactBuilder;
 
-//@@author
 public class MessagesTest {
     @Test
     public void format_withoutNicknameWithOneRole_success() {
