@@ -120,13 +120,19 @@
     -fx-text-fill: white;
 }
 
-.cell_big_label {
+.cell_big_label { /* Name */
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
 }
 
-.cell_small_label {
+/*@@author cth06-Github*/
+.cell_medium_label .label { /* Nickname */ /*@@author cth06-Github*/
+    -fx-font-size: 15px;
+}
+/*@@author*/
+
+.cell_small_label { /* Contact Details */
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
@@ -149,7 +155,7 @@
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
     -fx-text-fill: white;
 }
 
@@ -159,9 +165,10 @@
 
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-font-size: 16px;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
+    -fx-text-fill: white;
 }
 
 .status-bar-with-border {
@@ -171,6 +178,10 @@
 }
 
 .status-bar-with-border .label {
+    -fx-text-fill: white;
+}
+
+.pagination .label {
     -fx-text-fill: white;
 }
 
@@ -328,25 +339,60 @@
     -fx-text-fill: white;
 }
 
-#filterField, #personListPanel, #personWebpage {
+#filterField, #contactListPanel, #contactWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
+
 
 #resultDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
 }
 
-#tags {
+/*@@author wuzengfu*/
+#roles {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-#tags .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+#roles .label {
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#roles .label#president {
+    -fx-text-fill: black;
+    -fx-background-color: #e76f51;
+}
+
+#roles .label#vice-president {
+    -fx-text-fill: black;
+    -fx-background-color: #fb8500;
+}
+
+#roles .label#admin {
+    -fx-text-fill: black;
+    -fx-background-color: #2a9d8f;
+}
+
+#roles .label#marketing {
+    -fx-text-fill: black;
+    -fx-background-color: #ffb703;
+}
+
+#roles .label#events-internal {
+    -fx-text-fill: black;
+    -fx-background-color: #219ebc;
+}
+
+#roles .label#events-external {
+    -fx-text-fill: black;
+    -fx-background-color: #8ecae6;
+}
+
+#roles .label#external-relations {
+    -fx-text-fill: black;
+    -fx-background-color: #dad7cd;
 }

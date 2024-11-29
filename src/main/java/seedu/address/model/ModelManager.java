@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.contact.Contact;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +21,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final ObservableList<Contact> allContacts;
+    private final FilteredList<Contact> filteredContacts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +34,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        allContacts = this.addressBook.getContactList();
+        filteredContacts = new FilteredList<>(allContacts);
     }
 
     public ModelManager() {
@@ -88,44 +90,62 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasContact(Contact contact) {
+        requireNonNull(contact);
+        return addressBook.hasContact(contact);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasDuplicateFields(Contact contact) {
+        requireNonNull(contact);
+        return addressBook.hasDuplicateFields(contact);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public boolean hasDuplicateFieldsWithException(Contact contactToExclude, Contact contact) {
+        requireNonNull(contact);
+        return addressBook.hasDuplicateFieldsWithException(contactToExclude, contact);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void deleteContact(Contact target) {
+        addressBook.removeContact(target);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void addContact(Contact contact) {
+        addressBook.addContact(contact);
+        updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+    }
 
+    @Override
+    public void setContact(Contact target, Contact editedContact) {
+        requireAllNonNull(target, editedContact);
+        addressBook.setContact(target, editedContact);
+    }
+
+    //=========== Filtered Contact List Accessors =============================================================
+
+    //@@author cth06-Github
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Contact} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Contact> getAllContactList() {
+        return allContacts;
+    }
+    //@@author
+
+    @Override
+    public ObservableList<Contact> getFilteredContactList() {
+        return filteredContacts;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredContactList(Predicate<Contact> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredContacts.setPredicate(predicate);
     }
 
     @Override
@@ -142,7 +162,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredContacts.equals(otherModelManager.filteredContacts);
     }
 
 }

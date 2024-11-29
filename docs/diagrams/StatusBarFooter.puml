@@ -1,0 +1,12 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+class ModelManager {
+    - FilteredList<Contact> filteredContacts
+    - ObservableList<Contact> allContacts
+    + ObservableList<Contact> getFilteredContacts()
+    + ObservableList<Contact> getAllContacts()
+}
+@enduml

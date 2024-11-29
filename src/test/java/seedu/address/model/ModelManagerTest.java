@@ -1,22 +1,28 @@
+//@@author
 package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalContacts.ALICE;
+import static seedu.address.testutil.TypicalContacts.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.ContainsKeywordsPredicate;
+import seedu.address.model.contact.exceptions.DuplicateContactException;
+import seedu.address.model.contact.exceptions.DuplicateFieldException;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.ContactBuilder;
 
 public class ModelManagerTest {
 
@@ -73,29 +79,67 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasContact_nullContact_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasContact(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasContact_contactNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasContact(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasContact_contactInAddressBook_returnsTrue() {
+        modelManager.addContact(ALICE);
+        assertTrue(modelManager.hasContact(ALICE));
+    }
+
+    //@@author cth06-Github
+    @Test
+    public void getAllContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getAllContactList().remove(0));
+    }
+    //@@author
+
+    @Test
+    public void getFilteredContactList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredContactList().remove(0));
+    }
+
+    //@@author wuzengfu
+    @Test
+    public void setContact_duplicateNickname_throwsDuplicateFieldException() {
+        final String nickname = "Benson";
+        Contact aliceContact = new ContactBuilder(ALICE).build();
+        Contact bensonContact = new ContactBuilder(BENSON)
+                .withNickname(nickname)
+                .build();
+        AddressBook addressBook = new AddressBookBuilder()
+                .withContact(aliceContact)
+                .withContact(bensonContact)
+                .build();
+        ModelManager modelManager = new ModelManager(addressBook, new UserPrefs());
+        Contact editedContact = new ContactBuilder(ALICE).withNickname(nickname).build();
+        assertThrows(DuplicateFieldException.class, () -> modelManager.setContact(aliceContact, editedContact));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void setContact_duplicateNameAndNickname_throwsDuplicateContactException() {
+        Contact aliceContact = new ContactBuilder(ALICE).build();
+        Contact bensonContact = new ContactBuilder(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder()
+                .withContact(aliceContact)
+                .withContact(bensonContact)
+                .build();
+        ModelManager modelManager = new ModelManager(addressBook, new UserPrefs());
+        Contact editedContact = new ContactBuilder(ALICE).withName(BENSON.getName().fullName).build();
+        assertThrows(DuplicateContactException.class, () -> modelManager.setContact(aliceContact, editedContact));
     }
 
+    //@@author
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withContact(ALICE).withContact(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -118,11 +162,15 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        //@@author LowXiSi
+        modelManager.updateFilteredContactList(new ContainsKeywordsPredicate(
+                Arrays.asList(keywords), Collections.emptyList(), Collections.emptyList(),
+                Collections.emptyList(), Collections.emptyList(), Collections.emptyList()));
+        //@@author
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

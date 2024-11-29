@@ -1,59 +1,59 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We are a team based in the [National University of Singapore](http://www.nus.edu.sg) coming from varied and diverse backgrounds!
+You can reach us at the email `nowherenearyou[at]comp.nus.edu.sg`
+
 
 ## Project team
 
-### John Doe
+### Low Xi Si
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lowxisi.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/lowxisi)]
+[[portfolio](team/lowxisi.md)]
+
+### Chua Tse Hui
+Materials Science and Engineering Student.
+
+<img src="images/cth06-github.png" width="200px">
+
+[[github](https://github.com/cth06-Github)]
+[[portfolio](team/cth06-github.md)]
+
+* Role: Project Helper
+
+### Winston Jin
+
+<img src="images/winstonjin.png" width="200px">
+
+[[homepage](http://www.comp.nus.edu.sg/)]
+[[github](https://github.com/winstonjin)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Roll: out
 
-### Jane Doe
+### Wu Zengfu
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wuzengfu.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/wuzengfu)]
+[[portfolio](team/zengfu.md)]
+
+* Role: Deliverables and deadlines
+* Responsibilities: Model
+
+### Ernest Yu
+
+<img src="images/somethingfishyfishy.png" width="200px">
+
+[[github](http://github.com/somethingfishyfishy)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Supervisor, Developer
+* Responsibilities: Many

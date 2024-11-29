@@ -8,15 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import seedu.address.commons.core.LogsCenter;
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
-
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103-f09-1.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "Refer to full user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -64,6 +64,11 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
+        //@@author cth06-Github-reused
+        //Reused from https://stackoverflow.com/questions/8341305
+        // with minor modifications
+        getRoot().initStyle(StageStyle.UTILITY); // removes top bar with minimisation function
+        //@@author
         getRoot().show();
         getRoot().centerOnScreen();
     }

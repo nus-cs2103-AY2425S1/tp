@@ -13,6 +13,9 @@ if () then ([command commits AddressBook])
     :Save AddressBook to
     addressBookStateList;
 else ([else])
+    :Send error message;
+    :Redirect user to
+    Developer Guide;
 endif
 stop
 @enduml

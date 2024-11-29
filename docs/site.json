@@ -1,0 +1,32 @@
+{
+  "baseUrl": "/tp",
+  "titlePrefix": "data coNdUctorS",
+  "titleSuffix": "AddressBook Level-3",
+  "faviconPath": "images/SeEduLogo.png",
+  "style": {
+    "codeTheme": "light"
+  },
+  "styles": [
+    "main.css"
+  ],
+  "ignore": [
+    "_markbind/layouts/*",
+    "_markbind/logs/*",
+    "_site/*",
+    "site.json",
+    "*.md",
+    "*.njk",
+    ".git/*",
+    "node_modules/*"
+  ],
+  "pagesExclude": ["node_modules/*"],
+  "pages": [
+    {
+      "glob": ["**/index.md", "**/*.md"]
+    }
+  ],
+  "deploy": {
+    "message": "Site Update."
+  },
+  "timeZone": "Asia/Singapore"
+}

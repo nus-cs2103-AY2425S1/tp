@@ -1,0 +1,15 @@
+{
+  "contacts": [ {
+    "name": "Valid Contact",
+    "telegram": "9482424",
+    "email": "hans@example.com",
+    "studentStatus": "phd",
+    "nickname": ""
+  }, {
+    "name": "Contact With Invalid Telegram Field",
+    "telegram": "@948asdf2424",
+    "email": "hans@example.com",
+    "studentStatus": "phd",
+    "nickname": ""
+  } ]
+}

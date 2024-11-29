@@ -29,6 +29,10 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private static final int MAX_LENGTH = 1000;
+    public static final String MESSAGE_TOO_LONG = "The command inputted has more than "
+            + MAX_LENGTH
+            + " characters. Do not test me";
 
     /**
      * Parses user input into command for execution.
@@ -38,12 +42,19 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-        if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        if (hasExceededMaxLength(userInput)) {
+            throw new ParseException(MESSAGE_TOO_LONG);
         }
 
-        final String commandWord = matcher.group("commandWord");
+        assert(userInput.length() <= MAX_LENGTH);
+
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "\n"
+                            + HelpCommand.MESSAGE_USAGE));
+        }
+
+        final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
@@ -69,13 +80,13 @@ public class AddressBookParser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
@@ -83,4 +94,7 @@ public class AddressBookParser {
         }
     }
 
+    private boolean hasExceededMaxLength(String input) {
+        return input.length() > MAX_LENGTH;
+    }
 }
