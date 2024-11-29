@@ -13,7 +13,6 @@ import seedu.address.model.contact.StudentStatus;
 import seedu.address.model.contact.TelegramHandle;
 import seedu.address.model.util.SampleDataUtil;
 
-//@@author
 /**
  * A utility class to help with building Contact objects.
  */
@@ -48,6 +47,7 @@ public class ContactBuilder {
         nickname = new Nickname(DEFAULT_NICKNAME);
     }
 
+    //@@author
     /**
      * Initializes the ContactBuilder with the data of {@code contactToCopy}.
      */
@@ -76,6 +76,7 @@ public class ContactBuilder {
         return this;
     }
 
+    //@@author LowXiSi
     /**
      * Sets the {@code Address} of the {@code Contact} that we are building.
      */
@@ -84,6 +85,7 @@ public class ContactBuilder {
         return this;
     }
 
+    //@@author WinstonJin
     /**
      * Sets the {@code TelegramHandle} of the {@code Contact} that we are building.
      */
@@ -92,6 +94,7 @@ public class ContactBuilder {
         return this;
     }
 
+    //@@author
     /**
      * Sets the {@code Email} of the {@code Contact} that we are building.
      */
@@ -108,8 +111,8 @@ public class ContactBuilder {
         this.nickname = new Nickname(nickname);
         return this;
     }
-    //@@author
 
+    //@@author WinstonJin
     /**
      * Builds and returns a new {@code Contact} instance using the current values set
      * for name, telegramHandle, email, studentStatus, roles, and nickname.
@@ -117,6 +120,7 @@ public class ContactBuilder {
      * @return A new {@code Contact} object with the properties specified by
      *         the current state of the builder.
      */
+    //@@author
     public Contact build() {
         return new Contact(name, telegramHandle, email, studentStatus, roles, nickname);
     }
