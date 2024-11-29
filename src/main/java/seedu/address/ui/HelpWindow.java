@@ -64,7 +64,11 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
+        //@@author cth06-Github-reused
+        //Reused from https://stackoverflow.com/questions/8341305
+        // with minor modifications
         getRoot().initStyle(StageStyle.UTILITY); // removes top bar with minimisation function
+        //@@author
         getRoot().show();
         getRoot().centerOnScreen();
     }

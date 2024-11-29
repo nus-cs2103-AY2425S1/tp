@@ -103,7 +103,10 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
+            //@@author cth06-Github-reused
+            //Solution adapted from https://stackoverflow.com/questions/23503728
             helpWindow = new HelpWindow(); // create new HelpWindow to prevent IllegalStateException
+            //@@author
             helpWindow.show();
         } else {
             helpWindow.focus();
