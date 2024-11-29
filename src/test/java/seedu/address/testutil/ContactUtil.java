@@ -14,7 +14,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Role;
 
-//@@author
 /**
  * A utility class for Contact.
  */
