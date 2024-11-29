@@ -42,7 +42,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.contact.Name;
 import seedu.address.testutil.EditContactDescriptorBuilder;
 
-//@@author
 public class EditCommandParserTest {
     private static final String VALID_NAME_ALEX = "Alex Yeoh";
     private static final String ROLE_EMPTY = " " + PREFIX_ROLE;
@@ -88,6 +87,7 @@ public class EditCommandParserTest {
                 + VALID_TELEGRAM_HANDLE_AMY, ParserUtil.MESSAGE_INVALID_NAME_FIELD);
     }
 
+    //@@author somethingfishyfishy
     // command entered: edit Alex Yeoh n/Amy Bee ...}
     // Parsing with name
     @Test
@@ -119,6 +119,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput, EditCommand.MESSAGE_MISSING_PREFIX);
     }
 
+    //@@author
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_CONTACT;
@@ -147,6 +148,7 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    //@@author somethingfishyfishy
     @Test
     public void parse_attemptToEditByInvalidInt_throwsParseException() {
         // num too big
@@ -161,6 +163,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, EMAIL_DESC_AMY, EditCommand.MESSAGE_MISSING_INDEX_OR_FULL_NAME);
     }
 
+    //@@author
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
