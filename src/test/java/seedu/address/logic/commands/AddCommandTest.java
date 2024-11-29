@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -45,6 +46,7 @@ public class AddCommandTest {
         assertEquals(Arrays.asList(validContact), modelStub.contactsAdded);
     }
 
+    //@@author somethingfishyfishy
     @Test
     public void execute_duplicateFields_throwsCommandException() throws Exception {
         Contact validContact = new ContactBuilder().build();
@@ -87,6 +89,7 @@ public class AddCommandTest {
         assertThrows(CommandException.class, expected, () -> addCommand.execute(modelStub));
     }
 
+    //@@author
     @Test
     public void execute_duplicateContact_throwsCommandException() {
         Contact validContact = new ContactBuilder().build();
@@ -181,16 +184,19 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        //@@author somethingfishyfishy
         @Override
         public boolean hasDuplicateFields(Contact contact) {
             throw new AssertionError("This method should not be called.");
         }
 
+        //@@author wuzengfu
         @Override
         public boolean hasDuplicateFieldsWithException(Contact contactToExclude, Contact contact) {
             throw new AssertionError("This method should not be called.");
         }
 
+        //@@author
         @Override
         public void deleteContact(Contact target) {
             throw new AssertionError("This method should not be called.");
@@ -206,11 +212,13 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        //@@author cth06-Github
         @Override
         public ObservableList<Contact> getAllContactList() {
             throw new AssertionError("This method should not be called.");
         }
 
+        //@@author
         @Override
         public void updateFilteredContactList(Predicate<Contact> predicate) {
             throw new AssertionError("This method should not be called.");
@@ -247,12 +255,14 @@ public class AddCommandTest {
             return contactsAdded.stream().anyMatch(contact::isSameContact);
         }
 
+        //@@author somethingfishyfishy
         @Override
         public boolean hasDuplicateFields(Contact contact) {
             requireNonNull(contact);
             return contactsAdded.stream().anyMatch(contact::hasSameFields);
         }
 
+        //@@author
         @Override
         public void addContact(Contact contact) {
             requireNonNull(contact);
