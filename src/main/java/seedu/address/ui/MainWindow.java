@@ -70,17 +70,21 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        //@@author wuzengfu
         paginationPanel = new PaginationPanel(logic.getFilteredContactList());
         paginationContactPlaceholder.getChildren().add(paginationPanel);
 
+        //@@author
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        //@@author cth06-Github
         StatusBarFooter statusBarFooter =
                 new StatusBarFooter(logic.getAddressBookFilePath(), logic.getFilteredContactList(),
                         logic.getAllContactList());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
+        //@@author
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
