@@ -1,3 +1,4 @@
+//@@author
 package seedu.address.commons.core.index;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
