@@ -188,6 +188,7 @@ public class EditCommand extends Command {
             return true;
         }
 
+        //@@author somethingfishyfishy
         // instanceof handles nulls
         if (!(other instanceof EditCommand otherEditCommand)) {
             return false;
@@ -204,6 +205,7 @@ public class EditCommand extends Command {
             }
             return false;
         }
+        //@@author
 
         return targetIndex.equals(otherEditCommand.targetIndex)
                 && editContactDescriptor.equals(otherEditCommand.editContactDescriptor);
