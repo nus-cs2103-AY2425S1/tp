@@ -1,3 +1,4 @@
+//@@author LowXiSi
 package seedu.address.model.contact;
 
 import java.util.Arrays;
