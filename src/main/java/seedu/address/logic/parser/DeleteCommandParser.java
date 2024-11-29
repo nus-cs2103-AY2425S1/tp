@@ -43,7 +43,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             throw new ParseException(DeleteCommand.MESSAGE_MISSING_INDEX_OR_FULL_NAME);
         }
 
-        //@@author cth06-Github
+        //@@author cth06-Github-reused
         //Understand Regex from https://www3.ntu.edu.sg/home/ehchua/programming/howto/Regexe.html
         final String regexNumber = "^-*?[0-9]+$";
         //@@author
