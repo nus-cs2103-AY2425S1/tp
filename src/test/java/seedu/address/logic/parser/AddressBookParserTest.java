@@ -42,6 +42,7 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, MESSAGE_TOO_LONG, () -> parser.parseCommand(builder.toString()));
     }
 
+    //@@author
     @Test
     public void parseCommand_add() throws Exception {
         Contact contact = new ContactBuilder().build();
@@ -77,6 +78,7 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
+    //@@author LowXiSi
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
@@ -88,12 +90,15 @@ public class AddressBookParserTest {
                 command);
     }
 
+    //@@author
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
+        //@@author WinstonJin
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " list") instanceof HelpCommand);
     }
 
+    //@@author cth06-Github
     @Test
     public void parseCommand_listWithValidWords() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
@@ -106,6 +111,7 @@ public class AddressBookParserTest {
                 ListCommand.COMMAND_WORD + " " + "3"));
     }
 
+    //@@author
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() { //not too good a code
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
