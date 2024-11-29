@@ -116,6 +116,7 @@ public class DeleteCommand extends Command {
         }
     }
 
+    //@@author ernestycr
     private void setTargetIndex(List<Contact> lastShownList) throws CommandException {
         int temp = lastShownList.stream()
                 .filter(contact -> contact.getName().equalsIgnoreCase(targetName))
