@@ -46,6 +46,7 @@ public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
 
+    //@@author LowXiSi
     @Test
     public void parse_missingParts_throwsParseException() {
         // no arguments
@@ -130,23 +131,27 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    //@@author WinstonJin
     @Test
     public void parseName_emptyValue_returnsEmpty() throws Exception {
         assertThrows(seedu.address.logic.parser.exceptions.ParseException.class, () -> ParserUtil.parseName(""));
     }
 
+    //@@author LowXiSi
     @Test
     public void parse_invalidRoleValue_failure() {
         String userInput = INVALID_ROLE_QUERY;
         assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_ROLE_FIELD);
     }
 
+    //@@author somethingfishyfishy
     @Test
     public void parse_preamblePresent_throwsParseException() {
         String userInput = "abc" + NAME_QUERY;
         assertParseFailure(parser, userInput, FindCommand.MESSAGE_NOTHING_AFTER_COMMAND_AND_BEFORE_PREFIX);
     }
 
+    //@@author LowXiSi
     @Test
     public void parse_multipleRepeatedFields_failure() {
         // valid followed by empty
