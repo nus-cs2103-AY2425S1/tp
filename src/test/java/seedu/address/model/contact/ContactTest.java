@@ -89,7 +89,7 @@ public class ContactTest {
         assertTrue(BOBNICK.hasSameFields(BOB_HASSAMENICK_BOBNICK));
     }
 
-    //@@author somethingfishyfishy
+    //@@author
     @Test
     public void equals() {
         // same values -> returns true
@@ -129,7 +129,6 @@ public class ContactTest {
         assertFalse(ALICE.equals(editedAlice));
     }
 
-    //@@author
     @Test
     public void toStringMethod() {
         String expected = Contact.class.getCanonicalName() + "{name=" + ALICE.getName() + ", telegram handle="
