@@ -105,7 +105,6 @@ public class UniqueContactList implements Iterable<Contact> {
         internalList.set(index, editedContact);
     }
 
-    //@@author
     /**
      * Removes the equivalent contact from the list.
      * The contact must exist in the list.
