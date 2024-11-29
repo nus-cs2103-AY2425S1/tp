@@ -20,7 +20,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Role;
 
-//@@author
 /**
  * Parses input arguments and creates a new EditCommand object
  */
