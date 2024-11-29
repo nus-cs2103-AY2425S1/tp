@@ -85,6 +85,7 @@ public class Contact {
                 && otherContact.getNickname().equals(getNickname());
     }
 
+    //@@author ernestycr
     /**
      * Returns true if both contacts have the same fields.
      * This defines a weaker notion of equality between two contacts.
@@ -102,6 +103,7 @@ public class Contact {
             return false;
         }
 
+        //@@author cth06-Github
         Nickname otherContactNickname = otherContact.getNickname();
         Nickname currentContactNickname = this.getNickname();
         boolean hasSameTelegramHandle = otherContact.getTelegramHandle().equals(this.getTelegramHandle());
@@ -120,6 +122,7 @@ public class Contact {
                 .anyMatch(roleName -> roleName.equalsIgnoreCase(Role.PRESIDENT));
     }
 
+    //@@author
     /**
      * Returns true if both contacts have the same identity and data fields.
      * This defines a stronger notion of equality between two contacts.
@@ -135,6 +138,7 @@ public class Contact {
             return false;
         }
 
+        //@@author
         Contact otherContact = (Contact) other;
         return name.equals(otherContact.name)
                 && telegramHandle.equals(otherContact.telegramHandle)
