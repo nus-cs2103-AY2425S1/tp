@@ -1,15 +1,20 @@
 package seedu.address.testutil;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LogList;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Triage;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,8 +40,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setNric(person.getNric());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
+        descriptor.setLogEntries(person.getLogEntries());
     }
 
     /**
@@ -64,6 +71,14 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Nric} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNric(String nric) {
+        descriptor.setNric(new Nric(nric));
+        return this;
+    }
+
+    /**
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
@@ -81,7 +96,32 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Appointment} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withAppointment(String appointment) {
+        descriptor.setAppointment(new Appointment(appointment));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Triage} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withTriage(String triage) {
+        descriptor.setTriage(new Triage(triage));
+        return this;
+    }
+
+    /**
+     * Sets the {@code LogEntries} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withLogEntries(String... logEntries) {
+        descriptor.setLogEntries(new LogList(List.of(logEntries)));
+        return this;
+    }
+
     public EditPersonDescriptor build() {
         return descriptor;
     }
+
 }

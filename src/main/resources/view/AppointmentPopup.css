@@ -1,0 +1,20 @@
+#appointmentListContainer {
+    -fx-background-color: #333333;
+    -fx-padding: 10;
+}
+
+.appointment-details {
+    -fx-background-color: #333333;
+    -fx-padding: 10;
+    -fx-spacing: 5;
+}
+
+.name-label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+}
+
+.time-label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 12px;
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
+<fx:root resizable="false" title="View" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/address_book_32.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@DarkTheme.css" />
+            </stylesheets>
+
+            <VBox>
+                <StackPane VBox.vgrow="NEVER" styleClass="pane-with-border" fx:id="feedbackDisplayPlaceholder" alignment="CENTER_LEFT">
+                    <padding>
+                        <Insets top="5" right="10" bottom="5" left="10" />
+                    </padding>
+                    <Label fx:id="feedback" text="\$feedback" styleClass="label-header" />
+                </StackPane>
+
+                <VBox fx:id="personDisplay" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+                    <VBox>
+                        <Label fx:id="name" styleClass="label-bright" text="\$first"/>
+                        <FlowPane fx:id="tags" />
+                        <Label fx:id="phone" styleClass="label-bright" text="\$phone" />
+                        <Label fx:id="address" styleClass="label-bright" text="\$address" />
+                        <Label fx:id="email" styleClass="label-bright" text="\$email" />
+                        <Label fx:id="triage" styleClass="label-bright" text="\$triage" />
+                        <Label fx:id="appointment" styleClass="label-bright" text="\$appointment" />
+                        <Label fx:id="remark" styleClass="label-bright" text="\$remark" />
+                    </VBox>
+                </VBox>
+                <VBox styleClass="pane-with-border">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+                    <ScrollPane styleClass="dialog-pane" fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS" >
+                        <VBox fx:id="logListContainer" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                            <padding>
+                                <Insets top="10" right="10" bottom="10" left="10" />
+                            </padding>
+                        </VBox>
+                    </ScrollPane>
+                </VBox>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>

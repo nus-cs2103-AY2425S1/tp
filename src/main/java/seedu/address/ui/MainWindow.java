@@ -34,6 +34,8 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ViewWindow viewWindow;
+    private AppointmentPopup appointmentPopup;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -56,16 +58,15 @@ public class MainWindow extends UiPart<Stage> {
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
-        // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
 
-        // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
-
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        viewWindow = null;
+        appointmentPopup = null;
     }
 
     public Stage getPrimaryStage() {
@@ -84,19 +85,8 @@ public class MainWindow extends UiPart<Stage> {
         menuItem.setAccelerator(keyCombination);
 
         /*
-         * TODO: the code below can be removed once the bug reported here
+         * Workaround for handling function keys in certain text input controls
          * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -121,6 +111,22 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        handleAppointmentPopup();
+    }
+
+    /**
+     * Handles the popup for appointments today.
+     */
+    public void handleAppointmentPopup() {
+        if (appointmentPopup == null) {
+            appointmentPopup = new AppointmentPopup(logic.getFilteredPersonList());
+        }
+        if (!appointmentPopup.isShowing() && appointmentPopup.hasAppointmentsToday()) {
+            appointmentPopup.show();
+        } else {
+            appointmentPopup.hide();
+        }
     }
 
     /**
@@ -152,6 +158,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the view window to display patient details.
+     */
+    @FXML
+    public void handleView(String feedback) {
+        if (viewWindow != null && viewWindow.isShowing()) {
+            viewWindow.hide();
+        }
+
+        this.viewWindow = new ViewWindow(feedback, logic.getFilteredPersonList().get(0));
+        viewWindow.show();
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -159,6 +178,11 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+
+        if (viewWindow != null && viewWindow.isShowing()) {
+            viewWindow.hide();
+        }
+
         helpWindow.hide();
         primaryStage.hide();
     }
@@ -180,6 +204,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowView()) {
+                handleView(commandResult.getFeedbackToUser());
             }
 
             if (commandResult.isExit()) {

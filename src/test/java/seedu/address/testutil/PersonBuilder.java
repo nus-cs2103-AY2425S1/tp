@@ -1,13 +1,19 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LogList;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
+import seedu.address.model.person.Triage;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,13 +25,22 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_NRIC = "T1234567A";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_REMARK = "She likes Marvel movies";
+    public static final String DEFAULT_APPOINTMENT = "19-10-2021 12:34";
+    public static final String DEFAULT_TRIAGE = "1";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Nric nric;
     private Address address;
+    private Remark remark;
+    private Triage triage;
     private Set<Tag> tags;
+    private Appointment appointment;
+    private LogList logEntries;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -34,8 +49,13 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        nric = new Nric(DEFAULT_NRIC);
         address = new Address(DEFAULT_ADDRESS);
+        triage = new Triage(DEFAULT_TRIAGE);
+        remark = new Remark(DEFAULT_REMARK);
+        appointment = new Appointment(DEFAULT_APPOINTMENT);
         tags = new HashSet<>();
+        logEntries = new LogList();
     }
 
     /**
@@ -45,8 +65,13 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        nric = personToCopy.getNric();
         address = personToCopy.getAddress();
+        remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
+        appointment = personToCopy.getAppointment();
+        logEntries = personToCopy.getLogEntries();
+        triage = personToCopy.getTriage();
     }
 
     /**
@@ -89,8 +114,49 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Nric} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNric(String nric) {
+        this.nric = new Nric(nric);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointment(String appointment) {
+        this.appointment = new Appointment(appointment);
+        return this;
+    }
+
+    /**
+     * Sets the {@code LogList} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLogEntries(String ... logEntries) {
+        this.logEntries = new LogList(List.of(logEntries));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Triage} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTriage(String triage) {
+        this.triage = new Triage(triage);
+        return this;
+    }
+
+
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, nric, address, triage, remark, tags, null, logEntries);
     }
 
 }

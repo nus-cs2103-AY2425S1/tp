@@ -9,8 +9,19 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the [AddressBook Level 3](https://github.com/se-edu/addressbook-level3) project by SE-EDU.
+It includes reused and adapted ideas, code, and documentation from the AddressBook Level 3 project.
 
+
+* Reused/adapted components:
+    * UI component structure
+    * Command structure in Logic
+    * Storage management
+    * Project architecture and organization
+
+* Additional Tooling used:
+   * ChatGPT for help in understanding design patterns
+   * GitHub Copilot for coding assistance
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -51,14 +62,14 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete S1234567A`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -91,9 +102,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete S1234567A")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete S1234567A` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
@@ -117,7 +128,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -173,7 +184,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete S1234567A` command to delete the person with NRIC S1234567A in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete S1234567A` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
@@ -237,13 +248,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -259,45 +263,304 @@ _{Explain here how the data archiving feature will be implemented}_
 ## **Appendix: Requirements**
 
 ### Product scope
+**Product Name:** Murphy's List
 
-**Target user profile**:
+**Target user profile**: Administrative assistants for palliative care facilities
+* needs to manage a significant number of patient details
+* can type fast and prefers CLI to GUI
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: efficient text-based navigation and access to patient data, allowing quick retrieval and logging
+of patient information
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​              | I want to …​                                                         | So that I can…​                                                                           |
+|----------|----------------------|----------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | new user             | view a help page with a list of available commands                   | refer to instructions to understand how to use the app                                    |
+| `* * *`  | user                 | add the contact information of a patient                             | keep track of the patient base of the clinic                                              |
+| `* * *`  | user                 | delete a patient                                                     | remove their data from the patient list after they leave the facility                     |
+| `* * *`  | user                 | display a list of patients and their information                     |                                                                                           |
+| `* * *`  | user                 | search for a patient's information using a command/keyword           | access a patient's details quickly without delay                                          |
+| `* * *`  | user                 | add an appointment of a patient                                      | view the appointment activity of a patient                                                |
+| `* *`    | user                 | edit the information of a patient                                    | update a patient's condition and contact details if there are changes                     |
+| `* *`    | user                 | add notes to a patient                                               | be reminded of important updates, observations or instructions related to their care      |
+| `* *`    | user                 | log the patient's treatment progress over time                       | understand how a patient is responding to his/her respective treatment meth               |
+| `* *`    | user                 | edit the appointment of a patient                                    | reschedule an appointment for a patient easily                                            |
+| `* *`    | user                 | view appointments in the form of a schedule                          | easily see all appointments on a specific day                                             |
+| `* *`    | user                 | tag patients                                                         | categorise my patients based on keywords/conditions                                       |
+| `* *`    | user                 | search for a patient's information even if keyword matches partially | find patients quicker without having to type full details (eg. full name)                 |
+| `* *`    | user                 | sort list of patients                                                | view patient's details based on specified criteria                                        |
+| `* *`    | user                 | filter patients based on medical condition                           | view patients based on certain conditions or severity                                     |
+| `* *`    | user                 | see a popup alert on the day of a patient's appointment              | remind myself and prepare for a patient's appointment if needed                           |
+| `* `     | user                 | export a patient's information as a file (eg. PDF, CSV)              | store or share the information externally, especially for offline access                  |
+| `*`      | CLI experienced user | have access to command completion features                           | complete tasks faster without typing commands fully                                       |
+| `*`      | CLI experienced user | customize command shortcuts                                          | access these commands quickly and more comfortably                                        |
+| `*`      | user                 | import contact details from external sources                         | quickly populate the list without manually adding each patient                            |
+| `*`      | user                 | archive patient information                                          | have a back up record of their information, even after they are no longer in the facility |
+| `*`      | user                 | log when certain changes are made with a timestamp                   | revise my patient history with a reference to a time or date                              |
+| `*`      | user                 | set recurring appointment details for patients                       | avoid repetitive tasks                                                                    |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-**Use case: Delete a person**
+### **Use case: Add a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User enters appropriate command keyword to add a person.
+2.  User enters the person's details (name, phone number, email, address, etc.) with the appropriate prefixes (n/, p/, e/, etc.).
+3.  The system adds the person to the database.
+4.  The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not provide all required details.
+
+    * 2a1. The system shows an error message indicating missing fields.
+
+      Use case resumes at step 2.
+
+* 2b. User enters invalid information.
+
+    * 2b1. The system shows an error message indicating invalid input.
+
+      Use case resumes at step 2.
+
+* 2c. A patient with the user input NRIC already exists in the address book.
+
+    * 2c1. The system shows an error message indicating the existence of a duplicate patient.
+
+      Use case resumes at step 2.
+
+---
+
+### **Use case: Edit a person's information**
+
+**MSS**
+
+1. User enters appropriate command keyword to edit a person.
+2. User enters the NRIC of the person to be edited.
+3. User enters updated details for the person with the appropriate prefixes.
+4. The system updates the person's information.
+5. The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given NRIC is invalid.
+
+    * 2a1. The system shows an error message.
+
+      Use case ends.
+
+* 2b. The edited NRIC already exists in the address book.
+
+    * 2b1. The system shows an error message.
+
+      Use case ends.
+
+---
+
+### **Use case: Add appointment information**
+
+**MSS**
+
+1.  User enters appropriate command keyword to add appointment information to a person.
+2.  User enters the NRIC of the person for whom the appointment is being added.
+3.  User provides the appointment details.
+4.  The system adds the appointment information.
+5.  The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given NRIC is invalid.
+
+    * 2a1. The system shows an error message that no person with the given NRIC is found.
+
+      Use case ends.
+
+* 3a. User provides invalid appointment details (e.g., invalid date/time format).
+
+    * 3a1. The system shows an error message indicating invalid input.
+
+      Use case ends.
+
+* 4a. An appointment already exists on patient profile.
+
+    * 4a1. The system overwrites the existing appointment with the new appointment details.
+
+      Use case ends.
+
+---
+
+### **Use case: Add a remark to a patient's profile**
+
+**MSS**
+
+1.  User enters appropriate command keyword to add a remark to a patient's profile.
+2.  User enters the NRIC of the patient.
+3.  User provides the remark.
+4.  The system adds the remark to the patient's profile.
+5.  The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given NRIC is invalid.
+
+    * 2a1. The system shows an error message that no person with the given NRIC is found.
+
+      Use case ends.
+  
+* 3a. User provides an empty remark.
+
+    * 3a1. The system shows an error message indicating that the remark cannot be empty.
+
+      Use case ends.
+
+* 3b. User provides an invalid remark (containing non-alpha-numeric characters).
+
+    * 3b1. The system shows an error message indicating invalid input.
+
+      Use case ends.
+
+* 4a. The remark already exists on the patient's profile.
+
+    * 4a1. The system overwrites the existing remark with the new remark.
+
+      Use case ends.
+
+---
+
+### **Use case: Search for a patient**
+
+**MSS**
+
+1.  User enters appropriate command keyword to search for a patient.
+2.  User enters the name or tag of a patient.
+3.  The system displays all patients with a name that matches with the user's input.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given name does not match any patient.
+
+    * 2a1. The system shows an empty list.
+
+      Use case ends.
+
+* 2b. The given tag does not match any patient.
+
+    * 2b1. The system shows an empty list.
+
+      Use case ends.
+
+---
+
+### **Use case: Display a list of patients and information**
+
+**MSS**
+
+1.  User enters appropriate command keyword to request a list of patients.
+2.  The system displays a list of patients with relevant information (name, contact details, appointments).
+3.  The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+---
+
+### **Use case: Display a list of patients in a schedule by appointment dates**
+
+**MSS**
+
+1.  User enters appropriate command keyword to request a list of patients by appointment dates.
+2.  The system displays a list of patients with relevant information (name, contact details, appointments) sorted by appointment dates.
+3.  The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 2b. There are no appointments scheduled.
+
+    Use case ends.
+
+---
+
+### **Use case: Sort list of patients by name or appointment**
+
+**MSS**
+
+1.  User enters appropriate command keyword to sort the list of patients.
+2.  User specifies the criteria for sorting (e.g., name | appointment).
+3.  The system displays a list of patients sorted by the specified criteria.
+4.  The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User provides an invalid sorting criteria.
+*
+    * 2a1. The system shows an error message indicating invalid input.
+    
+       Use case ends.
+
+### **Use case: Log information to a patient's profile**
+
+**MSS**
+
+1. User enters appropriate command keyword to log information to a patient's profile.
+2. User enters the NRIC of the patient.
+3. User provides the date, time and information to be logged.
+4. The system logs the information to the patient's profile.
+5. The system shows a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given NRIC is invalid.
+
+    * 2a1. The system shows an error message that no person with given NRIC is found.
+
+      Use case ends.
+  
+* 3a. User provides invalid information (e.g., invalid date/time format, empty log message).
+
+    * 3a1. The system shows an error message indicating invalid input.
+
+      Use case ends.
+
+---
+
+### **Use case: Delete a person**
+
+**MSS**
+
+1.  User enters appropriate command keyword to delete a person.
+2.  User enters the NRIC of the person to be deleted.
+3.  The system deletes the person.
 
     Use case ends.
 
@@ -307,26 +570,100 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. The given NRIC is invalid.
 
     * 3a1. AddressBook shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
-*{More to be added}*
+---
+
+### **Use case: View a patient's full information**
+
+**MSS**
+
+1.  User enters appropriate command keyword to view a patient's full information.
+2.  User enters the NRIC of the patient.
+3.  The system opens a new window displaying the patient's full information.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The given NRIC is invalid.
+
+    * 2a1. The system shows an error message that no person with the given NRIC is found.
+
+      Use case ends.
+
+---
+
+### **Use case: Viewing the help page**
+
+**MSS**
+
+1.  User enters appropriate command keyword to view the help page.
+2.  The system opens a new window displaying a list of available commands and their descriptions.
+
+    Use case ends.
+
+---
+
+### **Use case: Appointment pop-up alert on app start-up**
+
+**MSS**
+
+1.  User launches the app.
+2.  The system displays a pop-up alert for the day's appointments.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. There are no appointments scheduled for the day, no pop-up alert.
+
+    Use case ends.
+
+---
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed. The app should hence not depend on any third-party software that is not available on all mainstream OS.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4. Data should be stored in a local file in a format that is easy to read and edit manually.
+5. The app should be able to recover from common errors (e.g. invalid user input) gracefully, without crashing.
+6. The app should avoid very high usage of system resources (CPU, memory) to ensure it can run efficiently even on systems with limited hardware capacity.
+7. The app should provide a consistent user interface experience across different screen sizes and resolutions.
+8. The application should be highly modular and well-documented to facilitate easy modification and maintenance from new developers.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Mainstream OS**: Windows, Linux, MacOS
+* **Medical record**: A collection of data about a patient’s health history
+* **Description**: A textual summary associated with a appointment or medical record
+* **Timestamp**: A record of the date and time an event occurred
+* **Tag**: A medical condition or status assigned to a piece of information (e.g., diabetes, G6PD) to describe or categorize it
+* **Command Line Interface**: A text-based interface for interacting with a computer program
+* **Graphical User Interface**: A visual interface for interacting with a computer program
+* **NRIC**: National Registration Identity Card, a unique identifier for Singapore residents
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. Ability to add appointment and remark to a patient's profile using the add command.
+2. Support whitespaces in tags. For example, `t/heart disease` should be a single valid tag.
+3. Patient should be able to have multiple upcoming appointments and multiple remarks.
+4. Ability to edit patient's remark in the edit command.
+5. View window should automatically update after editing patient's details or logging a new entry.
+6. Additional command shortcuts for `log` and `schedule` commands.
+7. Make commands case-insensitive. For example, `Add` should be treated the same as `add`.
+8. GUI for error messages should be more user-friendly as currently there is a need to scroll to see the full error message. For example, a pop-up window could be used to display the error message.
+9. Triage should indicate level of severity of patient's condition on the GUI for new users.
+10. Log success message should indicate that logged entries can be viewed using the`view` command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -345,38 +682,38 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Test case: `delete S1234567A`<br>
+      Expected: Existing patient with NRIC S1234567A is deleted from the list. Details of the deleted contact shown in the status message. Status bar updated.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
+   2. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is not an NRIC)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+    1. Simulating a Missing Data File
+       1. Locate the data file used by the application `data/addressbook.json`
+       2. Move or delete this file before launching the application<br>
+       Expected: The application should automatically create a new data file with default sample data loaded into the created file and app.
+    2. Simulating a Corrupted Data File
+       1. Open the data file `data/addressbook.json` in a text editor.
+       2. Introduce invalid JSON syntax into the file.
+       3. Save the corrupted file and launch the application.<br>
+       Expected: The application should automatically create a new empty data file with no contacts loaded into the app.

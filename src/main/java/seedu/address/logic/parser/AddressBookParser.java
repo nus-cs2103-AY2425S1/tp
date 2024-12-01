@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -17,6 +18,12 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LogCommand;
+import seedu.address.logic.commands.RemarkCommand;
+import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.TriageCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -53,29 +60,50 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD, AddCommand.COMMAND_WORD_SHORT:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_WORD, EditCommand.COMMAND_WORD_SHORT:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD_SHORT:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
+        case ClearCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD_SHORT:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case FindCommand.COMMAND_WORD, FindCommand.COMMAND_WORD_SHORT:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD, ListCommand.COMMAND_WORD_SHORT:
             return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
+        case ExitCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD_SHORT:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
+        case AppointmentCommand.COMMAND_WORD, AppointmentCommand.COMMAND_WORD_SHORT:
+            return new AppointmentCommandParser().parse(arguments);
+
+        case HelpCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD_SHORT:
             return new HelpCommand();
+
+        case RemarkCommand.COMMAND_WORD, RemarkCommand.COMMAND_WORD_SHORT:
+            return new RemarkCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD, ViewCommand.COMMAND_WORD_SHORT:
+            return new ViewCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD, SortCommand.COMMAND_WORD_SHORT:
+            return new SortCommandParser().parse(arguments);
+
+        case LogCommand.COMMAND_WORD:
+            return new LogCommandParser().parse(arguments);
+
+        case ScheduleCommand.COMMAND_WORD:
+            return new ScheduleCommand();
+
+        case TriageCommand.COMMAND_WORD, TriageCommand.COMMAND_WORD_SHORT:
+            return new TriageCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

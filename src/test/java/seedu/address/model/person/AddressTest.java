@@ -20,6 +20,20 @@ public class AddressTest {
     }
 
     @Test
+    public void isValidAddress_specialCharacters() {
+        // Addresses with special characters
+        assertTrue(Address.isValidAddress("123 Main St. #2B!"));
+        assertTrue(Address.isValidAddress("Apartment@456, Some-Place; City!"));
+    }
+
+    @Test
+    public void isValidAddress_longAddress() {
+        // Extremely long address (boundary test)
+        String longAddress = "A".repeat(1000); // A 1000-character string
+        assertTrue(Address.isValidAddress(longAddress)); // Assumes that the system allows very long addresses
+    }
+
+    @Test
     public void isValidAddress() {
         // null address
         assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));

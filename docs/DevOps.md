@@ -37,6 +37,7 @@ Given below are how to use Gradle for some important project tasks.
 ## Continuous integration (CI)
 
 This project uses GitHub Actions for CI. The project comes with the necessary GitHub Actions configurations files (in the `.github/workflows` folder). No further setting up required.
+If you wish to customize the CI process, you can modify these workflow files to add or remove jobs as needed.
 
 ### Code coverage
 
@@ -55,10 +56,14 @@ These checks are implemented as POSIX shell scripts, and thus can only be run on
 `./config/travis/run-checks.sh`
 
 Any warnings or errors will be printed out to the console.
+Make sure to address all warnings and errors promptly to maintain repository standards. Developers can also automate these checks to run before every commit using Git hooks.
+
+Consider using the pre-commit framework to integrate these checks seamlessly into your development workflow. This approach ensures that checks are run consistently without manual intervention, reducing the chances of violations getting into the main branch.
 
 **If adding new checks:**
 
 * Checks are implemented as executable `check-*` scripts within the `.github` directory. The `run-checks.sh` script will automatically pick up and run files named as such. That is, you can add more such files if you need and the CI will do the rest.
+*Ensure each check is well-documented to help other developers understand what it does and why it is needed.
 
 * Check scripts should print out errors in the format `SEVERITY:FILENAME:LINE: MESSAGE`
   * SEVERITY is either ERROR or WARN.
@@ -66,6 +71,9 @@ Any warnings or errors will be printed out to the console.
   * LINE is the line of the file where the error occurred and MESSAGE is the message explaining the error.
 
 * Check scripts must exit with a non-zero exit code if any errors occur.
+* It is also recommended to add appropriate comments to the script to help others understand its purpose and logic.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
