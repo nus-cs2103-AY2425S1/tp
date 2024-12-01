@@ -15,6 +15,8 @@ title: Developer Guide
 * Libraries used: JavaFX, Jackson, JUnit5
 * The undo and redo features were inspired by the proposed implementation found in [AB3's Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature).
 * The icons used were taken from [Flaticon](https://www.flaticon.com/).
+* Use of GPT for auto-complete tool feature (A0272009L Saajid)
+> Mutliple bugs and issues due to interaction between suggestion and autocompleting -> GPT generated code which broke down current code into multiple functions and structured for individual purposes. Thereafter, the code was modified to resolved more specific exepected outcomes to suit the needs of the app. (ChatGPT makes multiple serious mistakes, it CANNOT implement this feature AT ALL without substantial amount of human intervention)
 
 --------------------------------------------------------------------------------------------------------------------
 
