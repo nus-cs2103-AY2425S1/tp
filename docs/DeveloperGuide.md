@@ -436,6 +436,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+Not all commands use cases are included as commands, such as `clear` and `exit` are self-explanatory.
+
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
 #### Use Case: Add a New Contact
@@ -457,6 +459,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Emergency Contact Name
     - Emergency Contact Phone Number
     - Emergency Contact Relationship to Patient
+    - Tag(s) [Optional]
 3. User enters the required details.
 4. MedConnect validates the provided information.
 5. MedConnect successfully adds the new contact to the address book.
@@ -546,11 +549,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Main Success Scenario (MSS):**
 1. User requests to list all contacts.
 2. MedConnect retrieves and shows a list of all contacts.
-3. User requests to delete a specific contact by index.
+3. User requests to delete a specific contact by its index.
 4. MedConnect removes the contact from the database.
 
    **Use case ends.**
-
 
 **Extensions:**
 
@@ -613,7 +615,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use Case: Find Contacts
+#### Use Case: Delete an Emergency Contact
+
+**System:** MedConnect
+
+**Actor:** Healthcare Administrator
+
+
+**Main Success Scenario (MSS):**
+1. User requests to list all contacts.
+2. MedConnect retrieves and shows a list of all contacts.
+3. User requests to delete a specific emergency contact of a patient by its index.
+4. MedConnect removes the emergency contact from the database.
+
+   **Use case ends.**
+
+
+**Extensions:**
+
+**2a.** The contact list is empty.
+
+- **Use case ends.**
+
+
+**3a.** The given index is invalid (e.g., out of range).
+- **3a1.** MedConnect informs the user of the invalid index.
+
+  **Use case resumes from step 2.**
+
+**3b.** The specified patient only has 1 emergency contact.
+- **3b1.** MedConnect informs the user that they cannot delete a patient's only emergency contact.
+
+  **Use case ends.**
+
+---
+
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Find Contacts By Patient Name
 
 **System:** MedConnect
 
@@ -643,6 +682,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <div style="page-break-after: always;"></div>
 
+#### Use Case: Find Contacts By Doctor Name
+
+**System:** MedConnect
+
+**Actor:** Healthcare Administrator
+
+**Main Success Scenario (MSS):**
+1. User requests to find a patient by their assigned doctor's name.
+2. MedConnect prompts the user to provide a name to search for.
+3. User provides a name.
+4. MedConnect returns a list of patients whose assigned doctor matches the provided name.
+
+   **Use case ends.**
+
+**Extensions:**
+
+**3a.** User provides a blank name.
+- **3a1.** MedConnect notifies the user to provide a name.
+
+  **Use case resumes from step 3.**
+
+**4a.** There are no patients whose doctor matches the provided name.
+- **4a1.** MedConnect returns a list of 0 patients.
+
+  **Use case ends.**
+
+---
+
+<div style="page-break-after: always;"></div>
+
 #### Use Case: Archive Contacts
 
 **System:** MedConnect
@@ -662,6 +731,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **1a2.** User corrects the invalid description and resubmits.
 
   **Use case resumes from step 2.**
+
+---
+
+#### Use Case: List Archive Files
+
+**System:** MedConnect
+
+**Actor:** Healthcare Administrator
+
+**Main Success Scenario (MSS):**
+1. User requests to list all archived data files in the archive folder.
+2. MedConnect returns a list of all the archived data files in the archive folder.
+
+   **Use case ends.**
 
 ---
 
@@ -730,6 +813,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   **Use case resumes from step 4.**
 
 ---
+
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Undo Last Command
+
+**System:** MedConnect
+
+**Actor:** Healthcare Administrator
+
+**Main Success Scenario (MSS):**
+1. User performs an command that modifies the address book (e.g., adds or deletes a contact).
+2. User requests to undo the last command.
+3. MedConnect reverts to the state before the last command.
+
+    **Use case ends.**
+
+**Extensions:**
+
+**2a.** There is no previous command to undo.
+- **2a1.** MedConnect informs the user that there are no actions to undo.
+
+  **Use case ends.**
+
+---
+
+<div style="page-break-after: always;"></div>
+
+#### Use Case: Redo Last Undone Command
+
+**System: MedConnect**
+
+**Actor: Healthcare Administrator**
+
+**Main Success Scenario (MSS):**
+1. User performs an undo command.
+2. User requests to redo the last undone action.
+3. MedConnect restores the previously undone action.
+
+  **Use case ends.**
+
+**Extensions:**
+
+**2a.** There is no undone command to redo.
+- **2a1.** MedConnect informs the user that there are no actions to redo.
+
+  **Use case ends.**
+
+**2b.** User makes a new change after an undo command.
+- **2b1.** MedConnect restores the undo command that the user most recently executed.
+
+  **Use case ends.**
 
 <div style="page-break-after: always;"></div>
 
@@ -949,7 +1083,7 @@ testers are expected to do more *exploratory* testing.
    | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
        |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
    | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
-   | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
+   | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Deleted emergency contact: [PERSON DETAILS]      |
    | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
    | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
    | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
@@ -968,7 +1102,7 @@ testers are expected to do more *exploratory* testing.
    | Test case input                                      | Expected behaviour                                                       | Expected message                                 |
        |------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------|
    | `delete 1`                                           | First contact is deleted from the list.                                  | Deleted Person: [PERSON DETAILS]                 |
-   | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Added emergency contact: [PERSON DETAILS]        |
+   | `delete 1 ec/1`                                      | The first emergency contact of the first contact in the list is deleted. | Deleted emergency contact: [PERSON DETAILS]      |
    | `delete 0`                                           | Error message is shown.                                                  | Invalid command format! [CORRECT COMMAND FORMAT] |
    | `delete 2 ec/0`                                      | Error message is shown.                                                  | Index is not a non-zero unsigned integer.        |
    | `delete ec/1`                                        | Error message is shown                                                   | Invalid command format! [CORRECT COMMAND FORMAT] |
@@ -1005,12 +1139,21 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
-Developing MedConnect as a brownfield project from the upgrading of AB3 was challenging for us as a team of relatively junior software engineers who did not have much experience in a software engineering project. For some of our team members, the only prior software engineering experience we had was our Orbital project.
+Developing MedConnect as a brownfield project from the upgrading of AB3 was challenging for us as a team of relatively junior software engineers who did not have much experience in a software engineering project.
+For some of our team members, the only prior software engineering experience we had was our Orbital project.
 
-Initially, we faced many challenges in managing the Git workflow of creating issues, creating branches, merging branches and pull requests. This was because the process was new to most of the group and we carefully took the time to learn the proper workflow and avoid merge conflicts.
+Initially, we faced many challenges in managing the Git workflow of creating issues, creating branches, merging branches and pull requests.
+This was because the process was new to most of the group and we carefully took the time to learn the proper workflow and avoid merge conflicts.
 
-Another challenge we faced was implementing the autocomplete feature. Since MedConnect was directed to be used by fast typists, we brainstormed the idea of having an autocomplete feature to greatly benefit them. However, this idea was quite foreign to all of us and we took a great deal of time in figuring out how to tackle this problem. In due time, we managed to figure out a solution as a team and it is now implemented in the current version of MedConnect.
+Another challenge we faced was implementing the autocomplete feature. Since MedConnect was directed to be used by fast typists, we brainstormed the idea of having an autocomplete feature to greatly benefit them.
+However, this idea was quite foreign to all of us and we took a great deal of time in figuring out how to tackle this problem.
+In due time, we managed to figure out a solution as a team and it is now implemented in the current version of MedConnect.
 
-Finally, for the undo and redo feature, we adapted the proposed implementation provided in the developer guide of AB3. This greatly reduced the effort required for these features as there are many ways to implement them. A more complex solution would be for each command to have its own respective undo and redo implementation. However, we followed the proposed implementation of saving the AddressBook in states and having a pointer that points to the current state. The pointer would move between states upon execution of the undo and redo commands.
+Finally, for the undo and redo feature, we adapted the proposed implementation provided in the developer guide of AB3.
+This greatly reduced the effort required for these features as there are many ways to implement them.
+A more complex solution would be for each command to have its own respective undo and redo implementation.
+However, we followed the proposed implementation of saving the AddressBook in states and having a pointer that points to the current state.
+The pointer would move between states upon execution of the undo and redo commands.
 
-Overall, we faced many challenges as a team that we had to overcome over a short runway. We managed to stay afloat and tackle these challenges through constant communication and good teamwork between team members, helping each other out swiftly and decisively.
+Overall, we faced many challenges as a team that we had to overcome over a short runway.
+We managed to stay afloat and tackle these challenges through constant communication and good teamwork between team members, helping each other out swiftly and decisively.

@@ -60,9 +60,9 @@ By following these sections, you can quickly find the information you need and m
 4. For *Windows:* Open the home folder and right-click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.
 
     <img src="images/Quickstart-new-terminal.png" alt="New terminal on Windows">
-   
+
     <div style="page-break-after: always;"></div>
-   
+
     For *MacOS:* Right-click home folder. Hover over "Services". Select "New Terminal at folder". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.
 
     <img src="images/Quickstart-new-terminal-MacOS.png" alt="New terminal on MacOS"> <br><br>
@@ -166,7 +166,7 @@ Suggestions provide visible hints about the expected command format as the comma
 * If an incorrect entry is detected (e.g., type `adding` instead of `add`), the suggestion will be hidden to indicate a problem with the format.
 
 **Examples** (words in brackets "()", are suggested by the system.)
-* Typing `add` will show the expected format for adding a patient: `add (n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ...)` 
+* Typing `add` will show the expected format for adding a patient: `add (n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ...)`
 * Upon typing the slash commands (e.g. `n/` or `p/`), the suggestion only shows the parameter that needs to be filled or the next command once done. e.g `add n/(NAME)`, `add n/Saajid Shaik (p/PHONE)`
 * Inputs that are prefixes to more than 1 command, will result in full syntax suggestions for those commands to be displayed and separated with a `|`. e.g. `fi(nd KEYWORD MORE_KEYWORDS | finddoc KEYWORD MORE_KEYWORDS)`
 
@@ -257,11 +257,11 @@ Valid inputs for sort order parameter: `timeadded`, `timeadded asc`, `timeadded 
 </div>
 
 * If `SORT_ORDER` is not provided, the patients listed will be sorted in the order they were added. The patient who was added the most recently will be at the bottom of the list.
-* `timeadded`, `timeadded asc` and `timeadded desc` sets the patient list to be sorted according to the time they were added to Medconnect. 
-  * `timeadded` and `timeadded asc` sorts the patient list from least to most recently added. 
+* `timeadded`, `timeadded asc` and `timeadded desc` sets the patient list to be sorted according to the time they were added to Medconnect.
+  * `timeadded` and `timeadded asc` sorts the patient list from least to most recently added.
   * `timeadded desc` sorts the patient list from most to least recently added.
-* `name`, `name asc` and `name desc` sets the patient list to be sorted according to their name in alphabetical order. 
-  * `name` and `name asc` sorts by the patients' names from uppercase A to Z, followed by lowercase a to z. 
+* `name`, `name asc` and `name desc` sets the patient list to be sorted according to their name in alphabetical order.
+  * `name` and `name asc` sorts by the patients' names from uppercase A to Z, followed by lowercase a to z.
   * `name desc` sorts by the patients' names from lowercase z to a, followed by uppercase Z to A.
 
 **Examples**
@@ -570,7 +570,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 A person is uniquely identified by their `PHONE_NUMBER`. Persons with the same `PHONE_NUMBER` will be flagged as duplicates and cannot be added to the address book.
 
-An emergency contact is considered a duplicate if it has the same `EMERGENCY_CONTACT_PHONE` as another emergency contact. You should not edit an emergency contact to have the same phone number as another emergency contact of the same patient to prevent unexpected app behavior. If you edit an emergency contact to have the same name, phone and relationship as another emergency contact of the same patient, this is considered a duplicate emergency contact and will be automatically removed from the list.
+An emergency contact is considered a duplicate if it all of its fields are the same as another emergency contact. You should not edit an emergency contact to have the same fields as another emergency contact of the same patient to prevent unexpected app behavior. If you edit an emergency contact to have the same name, phone and relationship as another emergency contact of the same patient, this is considered a duplicate emergency contact and will be automatically removed from the list.
 
 | Parameter                                         | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Example                                                                                                                                                                                                                                                                                                                                                                    |
 |---------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
