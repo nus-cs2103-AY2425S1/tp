@@ -19,6 +19,9 @@ It includes reused and adapted ideas, code, and documentation from the AddressBo
     * Storage management
     * Project architecture and organization
 
+* Additional Tooling used:
+   * ChatGPT for help in understanding design patterns
+   * GitHub Copilot for coding assistance
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
