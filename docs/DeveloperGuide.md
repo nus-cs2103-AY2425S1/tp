@@ -15,6 +15,9 @@
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* The implementation description of the `add` command in this documentation was inspired by the documentation of the past project [NetworkBook](https://ay2324s1-cs2103t-t08-2.github.io/tp/DeveloperGuide.html#add-details).
+* The non-functional requirement related to the standard screen resolution was inspired by the documentation of the current year project [PlanPerfect](https://ay2425s1-cs2103t-t12-2.github.io/tp/DeveloperGuide.html).
+* The Quick start guide in the User Guide was adapted from the documentation of the current year project [VBook](https://ay2425s1-cs2103t-f14b-4.github.io/tp/UserGuide.html). 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -80,7 +83,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml).
 
 The `UI` component,
 
@@ -107,6 +110,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
+
+<div style="page-break-after: always;"></div>
 
 How the `Logic` component works:
 
@@ -305,6 +310,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                               | delete an entry                                            | remove entries that I no longer need                                    |
 | `* * *`  | private tutor                                      | view all my students' details                              | have an overview of how many student I am managing                      |
 | `* * *`  | tutor with many students                           | find a student by name                                     | locate details of students without having to go through the entire list |
+| `* * *`  | tutor with many students                           | be warned if the new added class clashes                   | better manage my teaching schedule and the number of students at the same time |
+| `* * *`  | busy undergraduate tutor                           | record students' payment status                            | how much students have paid or owe me |
+| `* * *`  | busy undergraduate tutor                           | record it when students settle the owed amount             | avoid mistakenly reminding him/her again |
 | `* *`    | busy undergraduate tutor                           | find students by day                                       | locate details of students that has tuition on a specific day           |
 | `* *`    | new user                                           | see sample entries                                         | understand how the interface will look like with entries added          |
 | `* *`    | user                                               | edit contact details                                       | keep my information up-to-date                                          |
@@ -328,8 +336,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC01 - Adding a student**
 
 **MSS**
-1. User enters command to create new student entry.
-1. UGTeach displays success message and command line is cleared.
+1. User enters command to create a new student entry.
+1. UGTeach displays success message and the command line is cleared.
 
    Use case ends.
 
@@ -509,10 +517,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. For any simple usage, the application should be able to respond within 2 seconds.
 
 **Accessibility**
+
+[//]: # (The non-functional requirements below were inspired by https://ay2425s1-cs2103t-t12-2.github.io/tp/DeveloperGuide.html)
+
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-[//]: # (The non-functional requirement below inspired by https://ay2425s1-cs2103t-t12-2.github.io/tp/DeveloperGuide.html)
-
 1. The user interface should work appear seamlessly for screens with standard resolutions (1920x1080) and higher.
 1. The user interface should be easy to navigate and intuitive, with clear labels, and large enough texts. 
 1. The application should provide clear help sections for users, explaining how to use its features.
@@ -675,7 +683,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `add N/Teaching Assistant p/90908767 e/getaboveAtobeaTA123@hotmail.com a/21 Lower Kent Ridge Drive r/40.00 t/Thursday-1130-1330 s/Economics Paid/12.00`
 
-   2. Expected: A new contact with the corresponding information will be added to the end of the current list.
+   1. Expected: A new contact with the corresponding information will be added to the end of the current list. Whether there is a warning message on the schedule or not depends on your current data.
 
 <div style="page-break-after: always;"></div>
 
@@ -703,13 +711,13 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `edit 1 r/0` <br/>
       Expected: An error message displayed reminds you that **RATE** must be from $0.01 to $1000.00.
 
-   1. Test case: `edit 1 n/ p/654321234` <br/>
-      Expected: An error message displayed reminds you that **NAME** must not be empty. <br/>Notice that both values of **NAME** and **PHONE_NUMBER** are invalid; however, the error message is shown in the order that the attributes shown in the app.
+   1. Test case: `edit 1 n/ p/65432123` <br/>
+         Expected: An error message displayed reminds you that **NAME** must not be empty and must contain only alphanumeric characters and space.
 
 
 ### Deleting a student
 
-1. Deleting a student while all students are being shown.
+1. Deleting a student while all students are being shown
 
    1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
 
@@ -722,7 +730,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. Deleting a student from a filtered list.
+1. Deleting a student from a filtered list
 
     1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
 
@@ -739,14 +747,14 @@ testers are expected to do more *exploratory* testing.
 
 ### Getting a reminder
 
-1. Getting a reminder when there are lessons scheduled for today.
+1. Getting a reminder when there are lessons scheduled for today
 
     1. Prerequisite: There should be **at least 1 lesson** scheduled for today.
 
     1. Test case: `remind`<br>
          Expected: UGTeach displays success message with details such as student's name, time of the lesson and the subject to be taught.
 
-1. Getting a reminder when there are no lessons scheduled for today.
+1. Getting a reminder when there are no lessons scheduled for today
 
     1. Prerequisite: There should be **no lessons** scheduled for today.
 
@@ -755,7 +763,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Using pay command
 
-1. Using pay command while all students are being shown.
+1. Using pay command while all students are being shown
 
     1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
 
@@ -768,7 +776,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `pay 0 hr/1`<br>
        Expected: No changes. UGTeach displays error message of invalid command format.
 
-1. Using pay command from a filtered list.
+1. Using pay command from a filtered list
 
     1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
 
@@ -783,7 +791,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Using owe command
 
-1. Using owe command while all students are being shown.
+1. Using owe command while all students are being shown
 
     1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
 
@@ -798,7 +806,7 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
-1. Using owe command from a filtered list.
+2. Using owe command from a filtered list
 
     1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
 
@@ -813,8 +821,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Using settle command
 
-1. Using settle command while all students are being shown.
-
+1. Using settle command while all students are being shown
     1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
 
     1. Test case: `settle 1 amount/10`<br>
@@ -830,7 +837,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No changes, assuming that the amount entered is more than the amount owed.
        UGTeach displays error message that entered amount is more than amount owed.
 
-1. Using settle command from a filtered list.
+1. Using settle command from a filtered list
 
     1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
 
@@ -847,15 +854,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. Prerequisite: You have not edited the `preferences.json` file. There is a folder named `data` in the same directory as the jar file, and there is a `ugteach.json` file in the `data` folder.
+    1. Prerequisite: UGTeach application is closed. You have not edited the `preferences.json` file. There is a folder named `data` in the same directory as the jar file, and there is a `ugteach.json` file in the `data` folder.
 
-    1. Test case: Delete the `ugteach.json` file.<br>
+    1. Test case: Delete the `ugteach.json` file, then start the application.<br>
        Expected: UGTeach should create a new `ugteach.json` file with default data.
 
-    1. Test case: Delete the `data` folder together with the `ugteach.json` file.<br>
+    1. Test case: Delete the `data` folder together with the `ugteach.json` file, then start the application.<br>
        Expected: Similar to previous.
 
-    1. Test case: Corrupt the `ugteach.json` file by changing its contents to invalid format.<br>
+    1. Test case: Corrupt the `ugteach.json` file by changing its contents to invalid format, then start the application.<br>
        e.g. add a non-alphanumeric character to one of the student's name.<br>
        Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.
 
@@ -918,10 +925,10 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
 
 
 1. **Allow negative HOURS_OWED for `owe`:** Currently, UGTeach only allow **positive multiples of 0.5** for the hours specified in the `owe command`. Hence, if users have used the `owe command` on mistake,
-   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount owed by the student is through remembering the previous amount owed, and edit the student's `owed` field using the `edit` command.
+   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount owed by the student is through remembering the previous amount owed, and edit the student's `owedAmount` field using the `edit command`.
    This might be inconvenient for the user, as the user might not remember the previous amount that was owed by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `owe command`. If users were to make a mistake in the `owe command`, he can enter the same `owe command`, but with the negative hours specified.
-   e.g. User typed `owe 1 hr/2` wrongly, when he wants to increase the owed amount by the student by 3 hours instead.
+   e.g. User typed `owe 1 hr/2` wrongly, when he wants to increase the owed amount of the student by 3 hours * `rate` instead.
    He can first type `owe 1 hr/-2` to 'undo' the previous owe command, and type `owe 1 hr/3` this time for the correct update.
    Special cases that we handle:
     * hr/0 will still not be accepted.
@@ -929,25 +936,31 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
       The main purpose for allowing negative hours for `owe command` is to allow user to 'undo' his mistakes made due to him specifying the wrong number of hours owed by the student.
       Hence, the resulting owed amount from the execution of the `owe command` should not be negative in any daily use case.<br><br>
 
+1. **Integrate `pay` and `settle` command to reduce user confusion:** In the current version, the `pay` command adds the student's payment to the paid amount, while the `settle` command subtracts the amount repaid from the owed amount and adds to the paid amount. Having two commands for the two similar use cases might confuse new users.
+    * In the future version, we plan to integrate the 2 commands into 1 command: `pay hr/HOURS_PAID | amount/AMOUNT`.
+        * To be specific, the new `pay` command accepts either `hr/HOURS_PAID` or `amount/AMOUNT` but not both and there must be exactly one argument given.
+        * `hr/HOURS_PAID` specifies number of hours the student **pays** for, and the amount of `HOURS_PAID * RATE` will be added to the paid amount.
+        * `amount/AMOUNT` specifies the amount the student **repays**, which will be subtracted from the owed amount then added to the paid amount.
+    * By integrating the 2 features into 1 command, the user can focus on reading the instructions of 1 command and choosing which option they want instead of trying one of them then finding out that it is not what they want. <br>
 
-1. **Allow negative HOURS_PAID for `pay`:** Currently, UGTeach only allow **positive multiples of 0.5** for the hours specified in the `pay command`. Hence, if users have used the `pay command` on mistake,
-   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount paid by the student is through remembering the previous amount paid, and edit the student's `paid` field using the `edit` command.
+1. **Allow negative HOURS_PAID and negative AMOUNT for the new `pay` command `pay hr/HOURS_PAID | amount/AMOUNT`:** Currently, UGTeach only allows **positive multiples of 0.5** for the hours specified in the `pay command`. Hence, if users have used the `pay command` on mistake,
+   e.g. keyed in the wrong number of hours, the only way for user to revert back to the previous amount paid by the student is through remembering the previous amount paid, and edit the student's `paidAmount` field using the `edit command`.
    This might be inconvenient for the user, as the user might not remember the previous amount that was paid by the student.
    Therefore, we plan to allow **negative multiples of 0.5** for the hours specified in the `pay` command. If users were to make a mistake in the `pay command`, he can enter the same `pay command`, but with the negative hours specified.
-   e.g. User typed `pay 1 hr/2` wrongly, when he wants to increase the paid amount by the student by 3 hours instead.
-   He can first type `pay 1 hr/-2` to 'undo' the previous `pay command`, and type `pay 1 hr/3` this time for the correct update.
+   e.g. User typed `pay 1 hr/2` wrongly, when he wants to increase the paid amount of the student by 3 hours * `rate` field of that student instead.
+   He can first type `pay 1 hr/-2` to "undo" the previous `pay command`, and type `pay 1 hr/3` this time for the correct update.
    Special cases that we handle:
-    * hr/0 will still not be accepted.
+    * `hr/0` will still not be accepted.
     * When the resulting paid amount of the student that user want to update is less than 0, the command will not be executed and an error message will be shown.
-      The main purpose for allowing negative hours for `pay command` is to allow user to 'undo' his mistakes made due to him specifying the wrong number of hours paid by the student.
-      Hence, the resulting paid amount from the execution of the `pay command` should not be negative in any daily use case.<br><br>
+     
+    Similarly, we plan to also allow a **negative number with at most 2 decimal places** as a valid AMOUNT when the user needs to "undo" the previous settlement of the owed amount.
+    Special cases that we handle:
+    * `amount/0` will still not be accepted.
+    *  When the resulting paid amount of the student that the user want to update is less than 0, the command will not be executed and an error message will be shown.
 
 
-1. **Allow Find command to search for partial word in name:** The current `find command` only allows exact full word matching for the KEYWORDS specified for the `n/` prefix.
-    e.g. typing `find n/Alex` will match the students named `Alex Yeoh`, `Alex Tan`, but will **not** match the students named `Alexander Yeoh` or `Alexa Tan`, etc.
-    This might be slightly inconvenient for the user, as the user might not remember full words in the students' name.
-    Therefore, we plan to improve the search functionality of the `find command` by allowing partial word matching for the KEYWORDS specified for the `n/` prefix.
-    e.g. In this enhancement for `find command`, typing `find n/Alex` will match the students named `Alex Yeoh`, `Alex Tan`, `Alexander Yeoh`, `Alexa Tan`, etc.
+    The main purpose for allowing negative hours and negative amount for the new `pay command` is to allow user to "undo" his mistakes made due to him specifying the wrong number of hours paid or the wrong amount settled by the student.
+    Hence, the resulting paid amount from the execution of the `pay command` should not be negative in any daily use case.
 
 
 1. **Enforce double confirmation for clear command:** The current `clear command` clears all the students in the list without any confirmation from the user.
@@ -957,7 +970,6 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     While this might be slightly inconvenient for the fast typists, as the user will have to type more to confirm the deletion of all students in the list, this will prevent accidental deletion of all students in the list, thereby reducing the risk of complete data loss.
     We believe that the benefits of preventing accidental deletion of all students in the list outweigh the slight inconvenience of having to type more to confirm the deletion of all students in the list.
 
-
 1. **Enhance storage component to save data in a backup file**: Assuming user have not changed the `preferences.json` file, the current storage component for UGTeach only saves data in the `ugteach.json` file. If the `ugteach.json` file is corrupted or deleted, **all** the data will be lost.
     This might be inconvenient for the user, as the user might accidentally delete the `ugteach.json` file or the file might be corrupted due to some reasons.
     Therefore, we plan to save data in a backup file named `ugteachbackup.json`. The `ugteachbackup.json` file will be updated whenever the `ugteach.json` file is updated.
@@ -966,6 +978,8 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     This will prevent accidental data loss due to the deletion or corruption of the `ugteach.json` file.<br>
     Example of the two files:<br>
     ![backupDataFile.png](images/backupData.png)
+
+    <div style="page-break-after: always;"></div>
 
     The following code snippet shows the planned enhancement for the storage component to save data in a backup file. Specifically, this will be the updated `saveAddressBook` method for `JsonAddressBookStorage` class.
     ```java
@@ -990,11 +1004,3 @@ Therefore, we plan to improve the UI by **adding a horizontal scroll bar** so th
     This code snippet will handle the case even when user have changed their `addressBookFilePath` in the `preferences.json` file. The backup file will be saved in the **same directory** as the primary file, with the same name as the primary file, but with `"backup"` before `".json"`.
     The user will be informed of the backup file location and be recommended to only edit the primary data file, and not the backup file.<br>
     While the amount of storage needed might be slightly larger due to the backup file, this will prevent accidental data loss due to the deletion or corruption of the primary data file. Also, for our standalone application, the amount of storage needed for the backup file will likely not be significant, as the data stored in the `ugteach.json` file is likely not large.
-
-
-1. **Integrate `pay` and `settle` command to reduce user confusion**: In the current version, the `pay` command adds the student's payment to the paid amount, while the `settle` command subtracts the amount repaid from the owed amount and adds to the paid amount. Having two commands for the two similar use cases might confuse new users. 
-   * In the future version, we plan to integrate the 2 commands into 1 command: `pay hr/HOURS_PAID | amount/AMOUNT`.
-       * To be specific, the new `pay` command accepts either `hr/HOURS_PAID` or `amount/AMOUNT` but not both and there must be exactly one argument given.
-       * `hr/HOURS_PAID` specifies the amount the student **pays**, and the amount of `HOURS_PAID * RATE` will be added to the paid amount.
-       * `amount/AMOUNT` specifies the amount the student **repays**, which will be subtracted from the owed amount then added to the paid amount.
-   * By integrating the 2 features into 1 command, the user can focus on reading the instructions of 1 command and choosing which option they want instead of trying one of them then finding out that it is not what they want.
