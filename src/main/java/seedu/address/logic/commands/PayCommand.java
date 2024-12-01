@@ -119,6 +119,8 @@ public class PayCommand extends Command {
         if (!PaidAmount.isValidPaidAmount(String.format("%.2f", paid))) {
             throw new CommandException(Messages.MESSAGE_LIMIT);
         }
+
+        // Solution below inspired by https://stackoverflow.com/a/28958124
         return BigDecimal.valueOf(paid)
                 .setScale(2, RoundingMode.HALF_UP)
                 .doubleValue();

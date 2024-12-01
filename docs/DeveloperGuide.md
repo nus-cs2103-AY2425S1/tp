@@ -16,8 +16,10 @@
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * The implementation description of the `add` command in this documentation was inspired by the documentation of the past project [NetworkBook](https://ay2324s1-cs2103t-t08-2.github.io/tp/DeveloperGuide.html#add-details).
+* The implementation description of the `owe` command in this documentation was inspired by the documentation of the past project [NetworkBook](https://ay2324s1-cs2103t-t08-2.github.io/tp/DeveloperGuide.html#add-details).
 * The non-functional requirement related to the standard screen resolution was inspired by the documentation of the current year project [PlanPerfect](https://ay2425s1-cs2103t-t12-2.github.io/tp/DeveloperGuide.html).
-* The Quick start guide in the User Guide was adapted from the documentation of the current year project [VBook](https://ay2425s1-cs2103t-f14b-4.github.io/tp/UserGuide.html). 
+* The Quick start guide in the User Guide was adapted from the documentation of the current year project [VBook](https://ay2425s1-cs2103t-f14b-4.github.io/tp/UserGuide.html).
+* ChatGPT used to generate some JavaDocs. Github Copilot used for code auto-completion in some parts of the code. Both tools used by [TY1Fan](https://github.com/TY1Fan).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -229,6 +231,8 @@ Similarly, how an AddCommand operation goes through the `Model` component is sho
 <div style="page-break-after: always;"></div>
 
 ### Owe tuition fees
+
+[//]: # (Lines 236 - 251 inspired by https://ay2324s1-cs2103t-t08-2.github.io/tp/DeveloperGuide.html#add-details)
 
 The owe command is part of UGTeach's payment tracking feature. It is used to track the amount of tuition fee owed by a student. The `OweCommandParser` is responsible for parsing the user input and creating an `OweCommand` object. The `OweCommand` object is then executed by the `Logic` component.
 
