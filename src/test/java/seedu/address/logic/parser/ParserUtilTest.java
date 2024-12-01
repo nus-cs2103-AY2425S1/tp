@@ -13,26 +13,33 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.filename.Filename;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relationship;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_FILENAME = "/";
+    private static final String INVALID_NAME = "R#chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_RELATIONSHIP = "@bs!~Ho)";
+    private static final String INVALID_RELATIONSHIP_TYPE = "Teacher";
 
+    private static final String VALID_FILENAME = "1st Quarter 2021";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_RELATIONSHIP = "Son";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -44,7 +51,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -57,8 +64,31 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseFilename_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFilename(null));
+    }
+
+    @Test
+    public void parseFilename_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFilename(INVALID_FILENAME));
+    }
+
+    @Test
+    public void parseFilename_validValueWithoutWhitespace_returnsFilename() throws Exception {
+        Filename expectedName = new Filename(VALID_FILENAME);
+        assertEquals(expectedName, ParserUtil.parseFilename(VALID_FILENAME));
+    }
+
+    @Test
+    public void parseFilename_validValueWithWhitespace_returnsTrimmedFilename() throws Exception {
+        String filenameWithWhitespace = WHITESPACE + VALID_FILENAME + WHITESPACE;
+        Filename expectedName = new Filename(VALID_FILENAME);
+        assertEquals(expectedName, ParserUtil.parseFilename(filenameWithWhitespace));
+    }
+
+    @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -81,7 +111,7 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone(null));
     }
 
     @Test
@@ -104,7 +134,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress(null));
     }
 
     @Test
@@ -127,7 +157,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(null));
     }
 
     @Test
@@ -146,6 +176,34 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseRelationship_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRelationship(null));
+    }
+
+    @Test
+    public void parseRelationship_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRelationship(INVALID_RELATIONSHIP));
+    }
+
+    @Test
+    public void parseRelationship_invalidRelationshipType_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRelationship(INVALID_RELATIONSHIP_TYPE));
+    }
+
+    @Test
+    public void parseRelationship_validValueWithoutWhitespace_returnsRelationship() throws Exception {
+        Relationship expectedRelationship = new Relationship(VALID_RELATIONSHIP);
+        assertEquals(expectedRelationship, ParserUtil.parseRelationship(VALID_RELATIONSHIP));
+    }
+
+    @Test
+    public void parseRelationship_validValueWithWhitespace_returnsTrimmedRelationship() throws Exception {
+        String relationshipWithWhitespace = WHITESPACE + VALID_RELATIONSHIP + WHITESPACE;
+        Relationship expectedRelationship = new Relationship(VALID_RELATIONSHIP);
+        assertEquals(expectedRelationship, ParserUtil.parseRelationship(relationshipWithWhitespace));
     }
 
     @Test
@@ -189,7 +247,7 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }

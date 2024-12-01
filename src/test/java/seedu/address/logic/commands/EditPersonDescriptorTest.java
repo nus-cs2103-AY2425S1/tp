@@ -64,7 +64,15 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", tags="
+                + editPersonDescriptor.getAddress().orElse(null) + ", index of emergency contact to edit="
+                + editPersonDescriptor.getIndexOfEmergencyContactToEdit().orElse(null) + ", emergency contact name="
+                + editPersonDescriptor.getEmergencyContactName().orElse(null) + ", emergency contact phone="
+                + editPersonDescriptor.getEmergencyContactPhone().orElse(null)
+                + ", emergency contact relationship="
+                + editPersonDescriptor.getEmergencyContactRelationship().orElse(null) + ", doctor name="
+                + editPersonDescriptor.getDoctorName().orElse(null) + ", doctor phone="
+                + editPersonDescriptor.getDoctorPhone().orElse(null) + ", doctor email="
+                + editPersonDescriptor.getDoctorEmail().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

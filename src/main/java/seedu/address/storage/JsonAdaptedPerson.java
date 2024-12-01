@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -28,6 +31,8 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final List<JsonAdaptedEmergencyContact> emergencyContacts = new ArrayList<>();
+    private final JsonAdaptedDoctor doctor;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -36,11 +41,17 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("emergencyContacts") List<JsonAdaptedEmergencyContact> emergencyContacts,
+            @JsonProperty("doctor") JsonAdaptedDoctor doctor,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        if (emergencyContacts != null) {
+            this.emergencyContacts.addAll(emergencyContacts);
+        }
+        this.doctor = doctor;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +65,10 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        emergencyContacts.addAll(source.getEmergencyContacts().stream()
+                .map(JsonAdaptedEmergencyContact::new)
+                .collect(Collectors.toList()));
+        doctor = new JsonAdaptedDoctor(source.getDoctor());
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -65,6 +80,11 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final List<EmergencyContact> personEmergencyContacts = new ArrayList<>();
+        for (JsonAdaptedEmergencyContact emergencyContact : emergencyContacts) {
+            personEmergencyContacts.add(emergencyContact.toModelType());
+        }
+
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
@@ -102,8 +122,20 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (emergencyContacts.isEmpty()) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EmergencyContact.class.getSimpleName()));
+        }
+        final Set<EmergencyContact> modelEmergencyContacts = new LinkedHashSet<>(personEmergencyContacts);
+
+        if (doctor == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Doctor"));
+        }
+        final Doctor modelDoctor = doctor.toModelType();
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelEmergencyContacts, modelDoctor,
+                            modelTags);
     }
 
 }

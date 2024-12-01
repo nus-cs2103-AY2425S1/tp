@@ -3,6 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ECNAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ECPHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ECRS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -24,6 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_TO_EDIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -204,5 +208,24 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_isEmergencyIndexProvided_failure() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String targetIndexString = String.valueOf(targetIndex.getOneBased());
+        String userInput = targetIndexString + ECNAME_DESC_AMY + ECPHONE_DESC_AMY + ECRS_DESC_AMY;
+
+        assertParseFailure(parser, userInput, EditCommand.MESSAGE_EMERGENCY_CONTACT_FIELDS_INVALID);
+    }
+
+    @Test
+    public void parse_isEmergencyContactFieldsProvided_failure() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String targetIndexString = String.valueOf(targetIndex.getOneBased());
+        String userInput = targetIndexString + " " + PREFIX_EMERGENCY_CONTACT_TO_EDIT
+                + targetIndexString;
+
+        assertParseFailure(parser, userInput, EditCommand.MESSAGE_EMERGENCY_CONTACT_NOT_EDITED);
     }
 }

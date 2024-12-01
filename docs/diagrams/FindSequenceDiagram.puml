@@ -1,0 +1,26 @@
+@startuml FindSequenceDiagram
+
+actor User
+participant FindCommand
+participant ModelManager
+
+User -> FindCommand: execute(Model)
+activate FindCommand
+
+FindCommand -> ModelManager: updateFilteredPersonList(Predicate)
+activate ModelManager
+
+ModelManager -> ModelManager: updateFilteredPersonList(Predicate)
+
+ModelManager -> ModelManager: setPredicate(Predicate)
+ModelManager --> FindCommand:
+
+FindCommand -> ModelManager: getFilteredPersonList()
+ModelManager -> ModelManager: size()
+ModelManager --> FindCommand: ObservableList<Person>
+deactivate ModelManager
+
+FindCommand --> User: CommandResult
+deactivate FindCommand
+
+@enduml

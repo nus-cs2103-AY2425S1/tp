@@ -6,13 +6,16 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.filename.Filename;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DoctorName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Relationship;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +28,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -33,6 +37,24 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code String filename} into a {@code Filename}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the specified filename is invalid.
+     */
+    public static Filename parseFilename(String filename) throws ParseException {
+        requireNonNull(filename);
+        String trimmedFilename = filename.trim();
+        if (trimmedFilename.isBlank()) {
+            throw new ParseException(Filename.MESSAGE_CONSTRAINTS_BLANK);
+        }
+        if (!Filename.isValidFilename(trimmedFilename)) {
+            throw new ParseException(Filename.MESSAGE_CONSTRAINTS);
+        }
+        return new Filename(trimmedFilename);
     }
 
     /**
@@ -48,6 +70,21 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String doctorName} into a {@code DoctorName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code doctorName} is invalid.
+     */
+    public static DoctorName parseDoctorName(String doctorName) throws ParseException {
+        requireNonNull(doctorName);
+        String trimmedName = doctorName.trim();
+        if (!DoctorName.isValidName(trimmedName)) {
+            throw new ParseException(DoctorName.MESSAGE_CONSTRAINTS);
+        }
+        return new DoctorName(trimmedName);
     }
 
     /**
@@ -93,6 +130,24 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String relationship} into a {@code Relationship}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code relationship} is invalid.
+     */
+    public static Relationship parseRelationship(String relationship) throws ParseException {
+        requireNonNull(relationship);
+        String trimmedRelationship = relationship.trim();
+        if (!Relationship.isAlphanumericRelationship(trimmedRelationship)) {
+            throw new ParseException(Relationship.ALPHANUMERIC_CONSTRAINTS);
+        }
+        if (!Relationship.isValidRelationship(trimmedRelationship)) {
+            throw new ParseException(Relationship.RELATIONSHIP_TYPE_CONSTRAINTS);
+        }
+        return new Relationship(trimmedRelationship);
     }
 
     /**

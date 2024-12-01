@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
 public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
-
+    private final EmergencyContactSelectionController emergencyContactSelectionController;
     @FXML
     private ListView<Person> personListView;
 
@@ -25,6 +25,7 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
+        emergencyContactSelectionController = new EmergencyContactSelectionController();
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
     }
@@ -33,15 +34,24 @@ public class PersonListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
+        private PersonCard personCard;
         @Override
         protected void updateItem(Person person, boolean empty) {
             super.updateItem(person, empty);
 
             if (empty || person == null) {
+                if (personCard != null) {
+                    emergencyContactSelectionController.removeEmergencyContactListView(
+                            personCard.getEmergencyContactListView());
+                }
                 setGraphic(null);
                 setText(null);
+                personCard = null;
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                personCard = new PersonCard(person, getIndex() + 1);
+                setGraphic(personCard.getRoot());
+                emergencyContactSelectionController.addEmergencyContactListView(
+                        personCard.getEmergencyContactListView());
             }
         }
     }

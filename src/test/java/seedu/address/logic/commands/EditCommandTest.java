@@ -5,6 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECPHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECPHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECRS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECRS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -24,6 +30,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -100,6 +107,32 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_editSecondEmergencyContact_success() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+
+        Model actualModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Person personInFilteredList = actualModel.getFilteredPersonList().get(0);
+        Person person = new PersonBuilder(personInFilteredList).addEmergencyContact(VALID_ECNAME_BOB, VALID_ECPHONE_BOB,
+                VALID_ECRS_BOB).build();
+        actualModel.setPerson(personInFilteredList, person);
+
+        Person editedPerson = new PersonBuilder(personInFilteredList).addEmergencyContact(VALID_ECNAME_AMY,
+                VALID_ECPHONE_AMY, VALID_ECRS_AMY).build();
+        Index index = Index.fromOneBased(2);
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptorBuilder().withEmergencyContactIndex(index)
+                .withEmergencyContactName(VALID_ECNAME_AMY).withEmergencyContactPhone(VALID_ECPHONE_AMY)
+                .withEmergencyContactRelationship(VALID_ECRS_AMY).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, editPersonDescriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(expectedModel.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandSuccess(editCommand, actualModel, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
@@ -118,6 +151,24 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder(personInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
+    public void execute_duplicateEmergencyContactFilteredList_failure() {
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        // edit person in filtered list into a duplicate in address book
+        Person personInList = expectedModel.getAddressBook().getPersonList().get(6);
+        assert personInList.getEmergencyContacts().size() > 1;
+        EmergencyContact emergencyContact = personInList.getFirstEmergencyContact();
+        EditPersonDescriptorBuilder editPersonDescriptorBuilder = new EditPersonDescriptorBuilder()
+                .withEmergencyContactIndex(INDEX_SECOND_PERSON)
+                .withEmergencyContactName(emergencyContact.getName().fullName)
+                .withEmergencyContactPhone(emergencyContact.getPhone().value)
+                .withEmergencyContactRelationship(emergencyContact.getRelationship().relationship);
+        EditCommand editCommand = new EditCommand(Index.fromOneBased(7),
+                editPersonDescriptorBuilder.build());
+
+        assertCommandFailure(editCommand, model, AddEmergencyContactCommand.MESSAGE_DUPLICATE_EMERGENCY_CONTACT);
     }
 
     @Test
@@ -144,6 +195,19 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidEmergencyContactIndexFilteredList_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        assertTrue(outOfBoundIndex.getOneBased() > model.getAddressBook().getPersonList().get(0)
+                .getEmergencyContacts().size());
+
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptorBuilder()
+                .withName(VALID_NAME_BOB).withEmergencyContactIndex(outOfBoundIndex).build());
+
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_EMERGENCY_CONTACT_DISPLAYED_INDEX);
     }
 
     @Test

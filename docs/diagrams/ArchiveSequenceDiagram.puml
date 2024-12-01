@@ -1,0 +1,20 @@
+@startuml
+actor User
+participant ArchiveCommand
+participant ModelManager
+participant FileUtil
+
+User -> ArchiveCommand: execute(Model)
+activate ArchiveCommand
+
+ArchiveCommand -> ModelManager: archiveAddressBook(Filename)
+activate ModelManager
+
+ModelManager -> FileUtil: Create archive directory if not exists
+ModelManager -> FileUtil: Copy current address book to archive directory
+ModelManager --> ArchiveCommand:
+deactivate ModelManager
+
+ArchiveCommand --> User: CommandResult(MESSAGE_SUCCESS)
+deactivate ArchiveCommand
+@enduml
