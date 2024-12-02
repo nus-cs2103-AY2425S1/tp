@@ -41,7 +41,7 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
-
+<!-- Guide on checking Java version and running the application in different operating systems below inspired from: https://ay2425s1-cs2103t-t13-1.github.io/tp/UserGuide.html#quick-start -->
 1. Ensure you have Java `17` or above installed in your Computer.
    - To check your Java version, you can follow the instructions [here](https://www.java.com/en/download/help/version_manual.html)
    .
