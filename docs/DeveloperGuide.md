@@ -541,6 +541,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. The application is assumed to be used locally without creating any user account.
 1. Data stored in human-editable files is assumed to be highly secured and not damaged.
 
+[//]: # (The non-functional requirements below, Maintainability Requirements and Logging, were inspired by ChatGPT with the prompt "Give relevant NFRs of a desktop application developed by OOP paradigm")
+
 **Maintainability Requirements**
 1. The codebase should be modular and well-documented (i.e. JavaDoc, following abstraction and cohesion) to ensure ease of maintenance and updates.
 1. The application must use a version control system to track changes and maintain multiple versions of the software.
