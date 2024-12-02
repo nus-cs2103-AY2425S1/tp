@@ -22,6 +22,11 @@ Parts of the codebase were developed with the assistance of ChatGPT. The contrib
 * Suggesting how test cases can be designed for `FindCommand`, `DeleteMeetingCommand`, `EditMeetingCommand`, `FindCommandParser`, `DeleteMeetingCommandParser`, and `EditMeetingCommandParser`
 * Suggesting the usage of and helped with implementation of Observer pattern (i.e. `SelectionListener` and `ModelClearObserver`) for some UI components
 
+### Reference to Other Work
+The **Implementation** section in this developer's guide was created with reference to the structure and content of the 
+[AY2425S1-CS2103T-T09-2 team’s Developer Guide](https://ay2425s1-cs2103t-t09-2.github.io/tp/DeveloperGuide.html#add-person-feature). 
+Their detailed explanation of the **Add Person Feature** served as a guide for elaborating the feature implementations in this document.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
