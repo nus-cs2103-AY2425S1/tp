@@ -7,10 +7,15 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.history.HistoryCommand;
+import seedu.address.model.history.HistoryCommandList;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,9 +24,10 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final HistoryCommandList historyCommandList;
+    private final VersionedAddressBook versionedAddressBook;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -31,9 +37,10 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        historyCommandList = new HistoryCommandList();
+        versionedAddressBook = new VersionedAddressBook(addressBook);
+        filteredPersons = new FilteredList<>(this.versionedAddressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -79,28 +86,79 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        this.versionedAddressBook.resetData(addressBook);
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return versionedAddressBook;
+    }
+
+    /**
+     * Gets the AddressBook in previous state at specific index for testing purpose.
+     */
+    @Override
+    public AddressBook getVersionedAddressBook(int index) {
+        return new AddressBook(versionedAddressBook.getAddressBookStateList().get(index));
+    }
+
+    /**
+     * Saves the getCurrentAddressBook() AddressBook state in the history.
+     */
+    @Override
+    public void commitAddressBook() {
+        versionedAddressBook.commitAddressBook();
+    }
+
+    /**
+     * Reverses the AddressBook to the previous state.
+     */
+    @Override
+    public void undoAddressBook() throws CommandException {
+        versionedAddressBook.undoAddressBook();
+    }
+
+    /**
+     * Reverses the AddressBook to the next state.
+     */
+    @Override
+    public void redoAddressBook() throws CommandException {
+        versionedAddressBook.redoAddressBook();
+    }
+
+    /**
+     * Discards the unsaved changes in the current state.
+     */
+    public void discardUnsavedChanges() {
+        versionedAddressBook.discardUnsavedChanges();
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return versionedAddressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPhone(Person person) {
+        requireNonNull(person);
+        return versionedAddressBook.hasPhone(person);
+    }
+
+    @Override
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return versionedAddressBook.hasEmail(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        versionedAddressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        versionedAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -108,7 +166,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        versionedAddressBook.setPerson(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -140,9 +198,28 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return versionedAddressBook.getCurrentAddressBook()
+                .equals(otherModelManager.versionedAddressBook.getCurrentAddressBook())
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
+    //=========== History Command List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Command} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<HistoryCommand> getHistoryCommandList() {
+        return FXCollections.unmodifiableObservableList(historyCommandList.getHistoryCommands());
+    }
+
+    /**
+     * Adds command to the history command list.
+     */
+    @Override
+    public void addHistoryCommand(Command toAdd, String originalCommandText) {
+        historyCommandList.add(toAdd, originalCommandText);
+    }
 }

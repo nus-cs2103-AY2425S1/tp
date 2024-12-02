@@ -1,0 +1,7 @@
+coverage:
+  status:
+    patch: off
+    project:
+      default:
+        threshold: 1%  # Allow 1% tolerance
+        target: 70%    # The minimum coverage required

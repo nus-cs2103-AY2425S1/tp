@@ -1,13 +1,19 @@
 package seedu.address.testutil;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleCode;
+import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RoleType;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -21,21 +27,34 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
+    public static final ModuleCode DEFAULT_MODULE_CODE = new ModuleCode("CS1101S");
+    public static final RoleType DEFAULT_ROLE_TYPE = RoleType.STUDENT;
+
+    // Default description for any new Person is empty
+    public static final String DEFAULT_DESCRIPTION = "";
+
     private Name name;
-    private Phone phone;
-    private Email email;
-    private Address address;
+    private Optional<Phone> phone;
+    private Optional<Email> email;
+    private Optional<Address> address;
     private Set<Tag> tags;
+    private ModuleRoleMap moduleRoleMap;
+    private Optional<Description> description;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        phone = Optional.of(new Phone(DEFAULT_PHONE));
+        email = Optional.of(new Email(DEFAULT_EMAIL));
+        address = Optional.of(new Address(DEFAULT_ADDRESS));
         tags = new HashSet<>();
+
+        HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
+        hashMap.put(DEFAULT_MODULE_CODE, DEFAULT_ROLE_TYPE);
+        moduleRoleMap = new ModuleRoleMap(hashMap);
+        description = Optional.of(new Description(DEFAULT_DESCRIPTION));
     }
 
     /**
@@ -47,6 +66,8 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        moduleRoleMap = personToCopy.getModuleRoleMap();
+        description = personToCopy.getDescription();
     }
 
     /**
@@ -66,18 +87,64 @@ public class PersonBuilder {
     }
 
     /**
+     * Parses the {@code ModuleRoleMap} into a {@code ModuleRoleMap} and set it to the {@code Person}
+     * that we are building.
+     */
+    public PersonBuilder withModuleRoleMap(ModuleCode moduleCode, RoleType roleType) {
+        HashMap<ModuleCode, RoleType> moduleRoleMap = new HashMap<>();
+        moduleRoleMap.put(moduleCode, roleType);
+        this.moduleRoleMap = new ModuleRoleMap(moduleRoleMap);
+        return this;
+    }
+
+    /**
+     * Parses the {@code ModuleRoleMap} into a {@code ModuleRoleMap} and set it to the {@code Person}
+     * that we are building.
+     */
+    public PersonBuilder withModuleRoleMap(ModuleCode[] moduleCodes, RoleType[] roleTypes) {
+        this.moduleRoleMap = new ModuleRoleMap(moduleCodes, roleTypes);
+        return this;
+    }
+
+    /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
     public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+        this.address = Optional.of(new Address(address));
         return this;
     }
+
+    /**
+     * Sets the {@code Address} of the {@code Person} that we are building to be null.
+     */
+    public PersonBuilder withEmptyAddress() {
+        this.address = Optional.empty();
+        return this;
+    }
+
+    /**
+     * Sets the {@code ModuleRoleMap} of the {@code Person} that we are building to be empty.
+     */
+    public PersonBuilder withEmptyModuleRoleMap() {
+        HashMap<ModuleCode, RoleType> map = new HashMap<>();
+        this.moduleRoleMap = new ModuleRoleMap(map);
+        return this;
+    }
+
 
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+        this.phone = Optional.of(new Phone(phone));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Phone} of the {@code Person} that we are building to be null.
+     */
+    public PersonBuilder withEmptyPhone() {
+        this.phone = Optional.empty();
         return this;
     }
 
@@ -85,12 +152,40 @@ public class PersonBuilder {
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+        this.email = Optional.of(new Email(email));
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building to be null.
+     */
+    public PersonBuilder withEmptyEmail() {
+        this.email = Optional.empty();
+        return this;
     }
 
+    /**
+     * Sets the {@code Description} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDescription(String description) {
+        this.description = Optional.of(new Description(description));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Description} of the {@code Person} that we are building to be null.
+     */
+    public PersonBuilder withEmptyDescription() {
+        this.description = Optional.empty();
+        return this;
+    }
+
+    //remember to check here
+
+    /**
+     * Builds the {@code Person} that we are testing.
+     */
+    public Person build() {
+        return new Person(name, phone, email, address, tags, moduleRoleMap, description);
+    }
 }

@@ -5,6 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.history.HistoryCommand;
 import seedu.address.model.person.Person;
 
 /**
@@ -53,9 +56,49 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Adds the given command that is executed without throwing exception.
+     */
+    void addHistoryCommand(Command command, String originalCommandText);
+
+    /**
+     * Returns an unmodifiable view of the history command list.
+     */
+    ObservableList<HistoryCommand> getHistoryCommandList();
+
+    /**
+     * Saves the current AddressBook state in the history.
+     */
+    void commitAddressBook();
+
+    /**
+     * Reverts the AddressBook to the previous state.
+     */
+    void undoAddressBook() throws CommandException;
+
+    /**
+     * Reverts the AddressBook to the next state.
+     */
+    void redoAddressBook() throws CommandException;
+
+    /**
+     * Gets the AddressBook in previous state at specific index for testing purpose.
+     */
+    AddressBook getVersionedAddressBook(int index);
+
+    /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Returns true if a person with the same phone number as {@code person} exists in the address book.
+     */
+    boolean hasPhone(Person person);
+
+    /**
+     * Returns true if a person with the same email as {@code person} exists in the address book.
+     */
+    boolean hasEmail(Person person);
 
     /**
      * Deletes the given person.
@@ -84,4 +127,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
 }

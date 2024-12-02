@@ -4,7 +4,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.edit.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -33,10 +35,11 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
+        descriptor.setPhone(person.getPhone().orElse(null));
+        descriptor.setEmail(person.getEmail().orElse(null));
+        descriptor.setAddress(person.getAddress().orElse(null));
         descriptor.setTags(person.getTags());
+        descriptor.setDescription(person.getDescription().orElse(null));
     }
 
     /**
@@ -78,6 +81,24 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code moduleRoleOperation} into a {@code EditModuleRoleOperation} and set it to the
+     * {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withModuleRoleOperations(String moduleRoleOperations) throws ParseException {
+        descriptor.setModuleRoleOperation(ParserUtil.parseEditModuleRoleOperation(moduleRoleOperations));
+        return this;
+    }
+
+    /**
+     * Parses the {@code description} into a {@code Description} and set it to the
+     * {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withDescription(String description) throws ParseException {
+        descriptor.setDescription(ParserUtil.parseDescription(description));
         return this;
     }
 

@@ -55,6 +55,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
+        logger.fine("Attempting to data from default file: " + addressBookStorage.getAddressBookFilePath());
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
 
@@ -66,6 +67,7 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        logger.fine("Attempting to save data to default file: " + addressBookStorage.getAddressBookFilePath());
         saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
     }
 

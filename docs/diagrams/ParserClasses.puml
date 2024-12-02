@@ -16,6 +16,7 @@ Class ParserUtil
 Class ArgumentMultimap
 Class ArgumentTokenizer
 Class Prefix
+note left of XYZCommandParser: XYZCommandParser = AddCommandParser, \nFindCommandParser, etc
 }
 
 Class HiddenOutside #FFFFFF
@@ -35,4 +36,7 @@ XYZCommandParser ..> ParserUtil
 ParserUtil .down.> Prefix
 ArgumentTokenizer .down.> Prefix
 XYZCommand -up-|> Command
+
+note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+
 @enduml

@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
@@ -11,8 +13,10 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "The `PHONE_NUMBER` field is defined as a string where, if split by spaces,"
+            + " at least one of the resulting tokens is a valid phone number, which is a"
+            + " string without spaces that has at least 2 digits, and no alphabets.";
+
     public final String value;
 
     /**
@@ -22,15 +26,38 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidPhoneField(phone), MESSAGE_CONSTRAINTS);
         value = phone;
     }
 
     /**
      * Returns true if a given string is a valid phone number.
+     * Our definition of a valid phone number is a string without spaces that has
+     * at least 2 digits, and no alphabets.
      */
-    public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+    static boolean isValidPhone(String test) {
+        // Assert that there should not be whitespaces in the string
+        assert test.chars().noneMatch(ch -> ch == ' ') : "Phone number itself should not contain space";
+
+        long digitCount = test.chars()
+            .filter(Character::isDigit)
+            .count();
+
+        long alphaCount = test.chars()
+            .filter(Character::isAlphabetic)
+            .count();
+
+        return digitCount >= 2 && alphaCount == 0;
+    }
+
+    /**
+     * Returns true if a given string is a valid `PHONE_NUMBER` field.
+     * The `PHONE_NUMBER` field is defined as a string where, if split by spaces,
+     * at least one of the resulting tokens is a valid phone number, as defined in isValidPhone.
+     */
+    public static boolean isValidPhoneField(String test) {
+        return Arrays.stream(test.split("\\s+"))
+                     .anyMatch(Phone::isValidPhone);
     }
 
     @Override

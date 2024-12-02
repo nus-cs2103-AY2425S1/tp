@@ -68,6 +68,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same phone number as {@code person} exists in the address book.
+     */
+    public boolean hasPhone(Person person) {
+        requireNonNull(person);
+        return persons.containsPhone(person);
+    }
+
+    /**
+     * Returns true if a person with the same email as {@code person} exists in the address book.
+     */
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return persons.containsEmail(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -120,7 +136,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        // changed from .persons to .getPersonList() for correct overridden behavior implemented in VersionedAddressBook
+        return getPersonList().equals(otherAddressBook.getPersonList());
     }
 
     @Override
