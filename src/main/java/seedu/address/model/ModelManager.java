@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -93,6 +94,27 @@ public class ModelManager implements Model {
         return addressBook.hasPerson(person);
     }
 
+
+    @Override
+    public boolean hasPersonAfterEdit(Person editedPerson) {
+        requireNonNull(editedPerson);
+
+        // Clone the current AddressBook to avoid altering the original one.
+        AddressBook tempAddressBook = new AddressBook(this.addressBook);
+        ModelManager tempModelManager = new ModelManager(tempAddressBook, this.userPrefs);
+
+        // Check if the edited person exists in the cloned address book before attempting to delete.
+        if (tempModelManager.hasPerson(editedPerson)) {
+            tempModelManager.deletePerson(editedPerson);
+        }
+
+        // Check if adding the edited person will result in a duplicate.
+        return tempModelManager.hasPerson(editedPerson);
+    }
+
+
+
+
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
@@ -129,6 +151,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortPersonList(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        this.addressBook.sort(comparator); // Call the sortPersonsDesc method from AddressBook
+        this.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Refresh the filtered list after sorting
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -143,6 +172,11 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    @Override
+    public boolean isListEmpty() {
+        return this.filteredPersons.isEmpty();
     }
 
 }

@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -58,6 +59,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book after edit command.
+     */
+    boolean hasPersonAfterEdit(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -84,4 +90,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    void sortPersonList(Comparator<Person> comparator);
+
+    boolean isListEmpty();
 }

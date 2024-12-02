@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,7 @@ public class ArgumentTokenizer {
 
         int prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), 0);
         while (prefixPosition != -1) {
+            //loop continuously calls for findPrefixPosition until it is not found
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, prefixPosition);
             positions.add(extendedPrefix);
             prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition);
@@ -70,11 +72,29 @@ public class ArgumentTokenizer {
      * {@code fromIndex} = 0, this method returns 5.
      */
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
-        int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
+        int prefixIndex = argsString.toLowerCase().indexOf(" " + prefix.toLowerCase(), fromIndex);
         return prefixIndex == -1 ? -1
                 : prefixIndex + 1; // +1 as offset for whitespace
     }
+    /**
+     * Returns the list of prefixes in the string argument
+     */
+    public static List<Prefix> extractPrefixes(String argsString, Prefix... prefixes) {
 
+        List<PrefixPosition> prefixPositions = findAllPrefixPositions(argsString, prefixes);
+
+        // Sort by start position
+        prefixPositions.sort(Comparator.comparingInt(PrefixPosition::getStartPosition));
+
+        // Map prefixes to their argument values (if any)
+        List<Prefix> prefixesList = new ArrayList<>();
+        for (int i = 0; i < prefixPositions.size(); i++) {
+            // Extract and store prefixes and their arguments
+            Prefix prefix = prefixPositions.get(i).getPrefix();
+            prefixesList.add(prefix);
+        }
+        return prefixesList;
+    }
     /**
      * Extracts prefixes and their argument values, and returns an {@code ArgumentMultimap} object that maps the
      * extracted prefixes to their respective arguments. Prefixes are extracted based on their zero-based positions in

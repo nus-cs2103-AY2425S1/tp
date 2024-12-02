@@ -17,6 +17,9 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MassRejectCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.StatisticsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -27,7 +30,8 @@ public class AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)",
+            Pattern.CASE_INSENSITIVE);
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
@@ -43,7 +47,7 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
@@ -62,20 +66,44 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case MassRejectCommand.COMMAND_WORD:
+            return new MassRejectCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
+            if (!arguments.isEmpty()) {
+                throw new ParseException("This command does not accept arguments");
+            }
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+            if (!arguments.isEmpty()) {
+                throw new ParseException("This command does not accept arguments");
+            }
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
+            if (!arguments.isEmpty()) {
+                throw new ParseException("This command does not accept arguments");
+            }
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+            if (!arguments.isEmpty()) {
+                throw new ParseException("This command does not accept arguments");
+            }
             return new HelpCommand();
+
+        case StatisticsCommand.COMMAND_WORD:
+            if (!arguments.isEmpty()) {
+                throw new ParseException("This command does not accept arguments");
+            }
+            return new StatisticsCommand();
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

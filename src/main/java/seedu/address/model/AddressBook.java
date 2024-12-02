@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -68,6 +69,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book after edit command.
+     */
+    public boolean hasPersonAfterEdit(Person person) {
+        requireNonNull(person);
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        uniquePersonList.setPersons(persons);
+        uniquePersonList.remove(person);
+        return uniquePersonList.contains(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -126,5 +138,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    public void sort(Comparator<Person> comparator) {
+        persons.sort(comparator);
     }
 }

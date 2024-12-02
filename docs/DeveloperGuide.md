@@ -1,15 +1,21 @@
 ---
-layout: page
-title: Developer Guide
+  layout: default.md
+  title: "Developer Guide"
+  pageNav: 3
 ---
-* Table of Contents
-{:toc}
+
+# Talentcy Developer Guide
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This is **a software development project for CS2103**.<br>
+  This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -19,16 +25,13 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Design**
-
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -53,7 +56,7 @@ The bulk of the app's work is done by the following four components:
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -62,7 +65,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
 
@@ -70,7 +73,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -89,14 +92,16 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
+<box type="info" seamless>
+
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
 
 How the `Logic` component works:
 
@@ -108,7 +113,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -117,7 +122,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
@@ -125,20 +130,14 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -154,6 +153,31 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Find feature
+The Find feature follows the sequence diagram here:
+<puml src="diagrams/FindSequenceDiagram.puml" width="550" />
+
+### Mass Reject feature
+The Mass Reject feature follows the sequence diagram here:
+<puml src="diagrams/MassRejectSequenceDiagram.puml" width="550" />
+
+### Delete feature
+The Delete feature follows this sequence diagram:
+<puml src="diagrams/DeleteSequenceDiagram.puml" width="550" />
+
+### Sort feature
+The Sort feature follows the sequence diagram here:
+<puml src="diagrams/SortSequenceDiagram.puml" width="550" />
+
+### Statistics feature
+The Statistics feature follows the sequence diagram here:
+<puml src="diagrams/StatisticsSequenceDiagram.puml" width="550" />
+
+Like `ListCommand`, it does not require the use of its own parser, as it only calls upon the FilteredList of the
+address book and processes it within the statistics feature.
+It uses a helper class called JobCodeStatistics that stores the number of applicants in each interview stage for that
+job code.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -171,58 +195,67 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<box type="info" seamless>
 
-</div>
+**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</box>
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
-</div>
+</box>
 
 The following sequence diagram shows how an undo operation goes through the `Logic` component:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<box type="info" seamless>
 
-</div>
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<box type="info" seamless>
 
-</div>
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</box>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
@@ -237,11 +270,34 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+--------------------------------------------------------------------------------------------------------------------
+## **Planned Enhancements**
+Team size: 4
 
-_{Explain here how the data archiving feature will be implemented}_
+1. **Enhanced Find Command with Multiple Keywords**  
+   The current `find` command supports only one keyword at a time for each field. We plan to extend this functionality to accept multiple keywords (e.g., `find n/Hans or n/Hera`), making it easier for users to locate multiple persons in a single search.
+
+2. **Extended Tagging Functionality**  
+   Presently, only a limited set of tags is supported. We plan to expand this feature to support additional types of tags, enabling more flexible categorization and better organization of persons.
+
+3. **Resizable Feedback Box**  
+   Users are currently unable to adjust the feedback box size. To improve usability, we plan to make the feedback box resizable, allowing users to expand or contract it based on their preferences and screen size.
+
+4. **Restrictive Phone Number Validation**  
+   The existing phone number validation allows entries as short as three digits. We plan to tighten validation criteria to ensure that phone numbers meet a more realistic length requirement, improving data accuracy and reliability.
+
+5. **Appendable Remarks**  
+   Currently, remarks can only be overwritten, not appended to. We plan to enhance the remark feature to support appending, so users can add additional notes without replacing existing remarks.
+
+6. **Advanced Statistics Filtering Options**  
+   To support more detailed insights, we plan to extend statistics functionality by offering additional predicate filters. This enhancement will allow users to specify criteria (e.g., `stats [j/] [t/]`) for more targeted statistical analysis.
+
+7. **Mass Actions Command**  
+   At present, the `massreject` command allows only batch rejections. We plan to rename this command to `mass` and introduce a predicate/parameter option to enable mass deletions, edits, or rejections. This will streamline bulk actions, making management of large applicant pools more efficient.
+
+8. **Better Handling of Corrupted Data File**
+   At present, when data file is corrupted for just one person, all entry in the book is discarded. We plan to handle this better by discarding the persons whose data is corrupted and inform users about it.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -262,71 +318,295 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* employees of a company's talent recruitment departments who need to manage contacts of job applicants.
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: This app streamlines the process of managing talent contact information by centralizing essential
+contact details, making it easier to organise, search, and update information on potential candidates.
+Its search and filtering capabilities help recruiters quickly find profiles based on specific criteria,
+improving efficiency and reducing time spent on administrative tasks.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                              | I want to …​                                                                 | So that I can…​                                                                                   |
+|----------|--------------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `* * *`  | user                                 | see the list of all contacts                                                 | see the contact details of every applicants                                                       |
+| `* * *`  | user                                 | add a new contact                                                            | keep track of applicant's contact details                                                         |
+| `* * *`  | user                                 | delete a contact                                                             | remove contact of applicants who is no longer in the recruitment process                          |
+| `* * *`  | user                                 | find a contact by his/her name                                               | see particular applicant's contact detail without having to go through the entire list            |
+| `* * *`  | user                                 | tag applicants based on their stage in the recruitment process               | track their progress and determine the next steps in the recruitment process.                     |
+| `* *`    | efficient user                       | filter contacts which fulfil several criteria                                | quickly access the list of contacts that matches my needs                                         |
+| `* *`    | user                                 | sort the contacts based on certain criteria                                  | quickly access the contacts that I need to prioritize                                             |
+| `* *`    | user with a high volume of applicants | batch update applicants stage in one action                                  | manage and progress multiple contacts efficiently without repetitive tasks                        |
+| `* *`    | user                                 | change any detail of a contact                                               | update the contact details when needed                                                            |
+| `* *`    | newbie user                          | get help on how to start using the program                                   | familiarize myself with how to use the program                                                    |
+| `* *`    | senior user                          | know proportion of contacts who pass/fail in different recruitment stages    | get insightful data to help me adjust how much more/less to accept in the next recruitment period |
+| `* *`    | user                                 | filter contacts with fuzzy match                                             | find relevant contacts easily without typing the exact keywords                                   |
+| `*`      | user                                 | highlight contact of applicant with criminal record or conflicts of interest | easily locate applicants who needs to be investigated further                                     |
+| `*`      | organized user                       | view visual timeline of each contact's recruitment stage                     | easily keep track of the position of each contact in the recruitment process                      |
+| `*`      | user | store applicant's resume                                                     | easily access and refer to their resume                                                           |
 
-*{More to be added}*
 
-### Use cases
+### Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `System` and the **Actor** is the `User`, unless specified otherwise.)
 
-**Use case: Delete a person**
+---
+
+#### **UC001: Add A Person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a new person by providing a name, phone number, email, job code, tag, and optional remark.
+2. System validates the provided input.
+3.  System checks if the person already exists by verifying the uniqueness of the phone number and email. 
+4. System adds the person to the system and displays a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The provided input is invalid (e.g., invalid phone number format, name too long).
 
-  Use case ends.
+    * 2a1. System shows an error message and prompts the user to correct the input.
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+* 3a. A duplicate person is found (same phone number or email).
 
-      Use case resumes at step 2.
+    * 3a1. System displays a duplicate person error message.
 
-*{More to be added}*
+      Use case ends.
+
+---
+
+#### **UC002: Delete A Person**
+
+**MSS**
+
+1. User requests to delete a specific person by providing a valid identifier, which can be one of the following:  
+    Index (positive integer), Name (n/NAME), Email (e/EMAIL), Phone (p/PHONE).
+2. System validates the provided input:
+Checks if the identifier matches the valid format (e.g., positive integer, name, email, or phone).
+
+3. System checks if the person exists (using the provided identifier, which could be a name, email, or phone number).
+
+4. System deletes the person and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The provided input is invalid (e.g., invalid phone number format, name too long, invalid command format).
+
+    - 2a1. System shows an error message indicating invalid command format or invalid parameter and prompts the user to correct the input.
+
+        Use case ends.
+
+- 3a. No person matches the provided identifier.
+
+    - 3a1. System shows an error message stating that no person matches the provided identifier and prompts the user to correct the input.
+
+        Use case ends.
+
+- 3b. Multiple persons with the same name are found, and the user has not provided a phone number or email.
+
+    - 3b1. System asks the user to provide other details (phone number or email) to specify the person to delete.  
+        Use case ends.
+
+---
+
+#### **UC003: List All Persons**
+
+**MSS**
+
+1. User requests to list all persons.
+2. System retrieves all stored persons from the system.
+3. System displays the list of persons.
+
+   Use case ends.
+
+---
+
+#### **UC004: Find Persons**
+
+**MSS**
+
+1. User requests to find persons by name, phone number, email, job code, tag, remark or a combination of some of them.
+2. System validates the find criteria.
+3. System retrieves and displays the persons matching the criteria.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The find criteria are invalid (e.g., tag not recognized).
+
+    * 2a1. System shows an error message.
+
+      Use case ends.
+
+---
+
+#### **UC005: Viewing Help**
+
+**MSS**
+
+1. User requests help to use the system.
+2. System displays a link to website containing more information (user guide).
+3. User goes to the provided link to see more information.
+
+   Use case ends.
+
+---
+
+#### **UC006: Showing Applicant Statistics**
+
+**MSS**
+
+1. User requests to view applicant statistics.
+2. System retrieves statistics data (e.g., counts of applicants by job code and tags).
+3. System displays the statistics in a summary view.
+
+   Use case ends.
+
+---
+
+#### **UC007: Bulk Rejecting Persons**
+
+**MSS**
+
+1. User requests to bulk reject contacts by providing a job code, tag, or both.
+2. System validates the input and checks if any contacts match the criteria.
+3. System updates the matching contacts' tags to `r` (rejected) and displays a confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The criteria are invalid (e.g., tag not recognized).
+
+    * 2a1. System shows an error message.
+
+      Use case ends.
+
+---
+
+#### **UC008: Sorting Persons**
+
+**MSS**
+
+1. User requests to sort persons by specifying zero or more sorting criteria (e.g., name, phone, email, job code, tag).
+2. System validates the sorting criteria.
+3. System sorts the persons based on the specified criteria in the given order.
+4. System displays the sorted list of persons.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The sorting criteria are invalid (e.g., unsupported field for sorting).
+
+    - 2a1. System shows an error message indicating invalid sorting criteria.
+
+      Use case ends.
+
+---
+
+#### **UC009: Clearing All Persons**
+
+**MSS**
+
+1. User requests to clear all persons from the address book.
+2. System deletes all persons and displays a confirmation message.
+
+   Use case ends.
+
+---
+
+#### **UC010: Exiting the Program**
+
+**MSS**
+
+1. User requests to exit the program.
+2. System terminates and closes the application.
+
+   Use case ends.
+
+---
+
+#### **UC011: Edit A Person**
+
+**MSS**
+
+1. User requests to edit a specific person by providing an index and one or more fields to update (name, phone number, email, job code, tag).
+2. System validates the provided input.
+3. System checks if the person exists at the specified index.
+4. System checks if the edited details causes duplicate.
+5. System updates the person’s details with the provided information and displays a confirmation message.
+
+   Use case ends.
+
+**Extensions**
+
+- 2a. The provided input is invalid (e.g. invalid phone number format).
+
+    - 2a1. System shows an error message indicating invalid input and prompts the user to correct it.
+
+      Use case ends.
+
+- 3a. No person is found at the specified index.
+
+    - 3a1. System shows an error message indicating that no person exists at the specified index.
+
+      Use case ends.
+
+- 4a. The edited details causes duplicate persons.
+
+    - 4a1. System shows an error message indicating that the person already exists.
+
+      Use case ends.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The system should work seamlessly across macOS, Windows, and Linux operating systems.
+2. The system should support both 32-bit and 64-bit environments.
+3. Should work on any mainstream OS as long as it has Java `17` or above installed.
+4. The system should execute commands (such as adding, deleting, or listing persons) within 1 second under normal loads (e.g., up to 1,000 persons).
+5. Should be able to hold up to 1,000 persons without noticeable sluggishness in performance for typical usage.
+6. A user with above-average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+7. The system must be user-friendly and usable by individuals with no prior experience with contact management systems. 
+8. Volatility: Transaction data should be stored persistently and remain available for a minimum of 10 years. 
+9. Complete user documentation, including installation and setup instructions, must be provided. 
+10. The system should be designed to allow for the addition of new modules without requiring a full redesign. 
+11. The system should gracefully handle incorrect or incomplete inputs by providing meaningful error messages without crashing.
 
-*{More to be added}*
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Applicant**: An individual who has submitted job application to the company. 
+* **Job Code** : A code that represents the company's specific job role. 
+* **Tag** : Interview stages that applicants will go through for a job before they could get hired. The following are the default tags and abbreviations in the address book:
+
+| Tag | Interview Stage                 | Definition                                                                  |
+|-----|---------------------------------|-----------------------------------------------------------------------------|
+| N   | New                             | New applicant                                                               |
+| TP  | Technical Interview in Progress | Technical interview is in the process of being scheduled for the applicant  |
+| TC | Technical Interview Confirmed | Technical interview has been schedule for the applicant                     |                                           
+| BP | Behavioral Interview in Progress | Behavioral interview is in the process of being scheduled for the applicant |
+| BC | Behavioral Interview Confirmed | Behavioral interview has been scheduled for the applicant                   |
+| A| Accepted| Applicant has been accepted by the company                                  |
+| R | Rejected | Applicant has been rejected by the company                                  |
+
+* **Person**: A single entry in Talency address book that contains information about a particular applicant such as name, phone number, email address, and any other relevant details.
+* **Command**: A specific text-based instruction given by the user to the system to perform a particular action (e.g., add NAME p/PHONE e/EMAIL j/JOB CODE t/TAG is a command to add a person to the address book).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -334,10 +614,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<box type="info" seamless>
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
+</box>
 
 ### Launch and shutdown
 
@@ -345,38 +627,108 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Talentcy.jar` command to run the application. <br>
+       Expected: Shows the GUI with a set of sample persons. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by opening command terminal in the folder containing the jar file, then use `java -jar Talentcy.jar`.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+
+### Adding a Person
+
+1. Adding a Person
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com j/SWE123 t/N r/Good skills`  
+       Expected: Assuming no duplicates, a new person named John Doe is added to the list. The status message displays details of the added person.
+    2. Test case: `add n/ p/ e/ j/ t/`  
+       Expected: No person is added. An error message displays in the status, indicating missing fields.
+    3. Other incorrect add commands to try: `add n/John`, `add p/98765432`, `add e/notemail`, `add t/Went to NUS`  
+       Expected: Error messages display for each incomplete command, and no person is added.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. At least one person in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First person is deleted from the list. Details of the deleted person is shown in the status message.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
+      Expected: Error messages displayed, and no person is deleted.
 
-1. _{ more test cases …​ }_
+2. Deleting a person based on its attribute
 
-### Saving data
+    1. Prerequisites: At least one person stored in the app.
 
-1. Dealing with missing/corrupted data files
+   2. Test case: `delete n/John Doe`
+        Expected: Assuming there are only one person with the name `John Doe` in the list, that person will be deleted from the list. Details of the deleted person is shown in status message.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   3. Test case: `delete p/80981234`
+        Expected: Assuming a person with phone number 80981234 exists in the list, that person will be deleted. Details of the deleted person is shown in status message.
+   4. Test case: `delete e/pu09com`
+        Expected: No person is deleted. Error message is shown in the status bar.
+   5. Other incorrect delete commands to try: `delete John Doe`, `delete p/x` (where a person with phone number x doesn't exist in the list).
+        Expected: No person is deleted. Error message is shown in the status bar.
 
-1. _{ more test cases …​ }_
+### Finding Persons by Criteria
+
+1. Finding Persons with Specific Criteria
+    1. Prerequisites: Ensure there are persons with various entry of fields.
+    2. Test case:`find n/John`  
+       Expected: Displays a list of person(s) with "John" in their names, case-insensitive. Empty list will be displayed if a person with that specific criteria(s) is not found.
+    3. Test case: `find t/TP n/Jane`  
+       Expected: Shows a list of person(s) with "Jane" in their name and tagged as `Technical Interview in Progress`. Empty list will be displayed if a person with that specific criteria(s) is not found. 
+    4. Incorrect add commands to try: `find`, `find John`, `find p/notphone`  
+       Expected: Error message is shown in the status bar. List of persons shown will remain the same.
+
+### Sorting Persons by Fields
+
+1. Sorting by Fields
+    1. Prerequisites: Ensure there are multiple persons with various entry of fields.
+    2. Test case: `sort n/`  
+       Expected: Sorts the persons alphabetically by name.
+    3. Test case: `sort t/ j/`  
+       Expected: Sorts first by tag, then by job code within each tag group.
+    4. Test case: `sort j/ n/`  
+       Expected: Sorts first by job code, then by name within each job code group.
+
+#### Bulk Rejecting by Criteria
+
+1. Bulk Rejecting Contacts
+    1. Prerequisites: Ensure there are persons with various job codes and tags, including the `Accepted` tag.
+    2. Test case: `massreject j/SWE2024 t/TP`  
+       Expected: Marks all persons with job code `SWE2024` and tag `TP` (if any) as rejected, displaying a confirmation status.
+    3. Test case: `massreject j/AWE2023`  
+       Expected: Marks all persons with job code `AWE2023` as rejected, except for the person(s) that has an `Accepted` tag.`.
+
+---
+
+#### Viewing Applicant Statistics
+
+1. Viewing Statistics
+    1. Prerequisites: Ensure there are multiple persons with diverse tags and job codes.
+    2. Test case: `stats`  
+       Expected: Displays the total number of applicants, the percentage of applicants in each interview stage, and the breakdown of applicants by job code.
+
+
+#### Saving Data with Missing/Corrupted Files
+
+1. Handling Missing or Corrupted Data Files**
+   1. Prerequisites: Ensure `talentcy.json` has multiple entries, and back up the file before testing.
+    2. Test Case: Invalid Data Format
+       Simulation: Edit one field from a person entry in the JSON file (e.g. change the phone field to non-numeric), then launch the app.
+       Expected: The app discards **all** data and starts with an empty list.
+
+   3. Test Case: Missing `talentcy.json` File
+      Simulation: Delete `talentcy.json`, then launch the app.
+      Expected: The app creates a new `talentcy.json`, the app starts on clean slate (i.e. with sample data only).
+
+      
+
