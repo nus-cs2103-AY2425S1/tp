@@ -16,7 +16,12 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.IncomeCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.OweCommand;
+import seedu.address.logic.commands.PayCommand;
+import seedu.address.logic.commands.RemindCommand;
+import seedu.address.logic.commands.SettleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -43,7 +48,7 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
@@ -76,6 +81,21 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case IncomeCommand.COMMAND_WORD:
+            return new IncomeCommand();
+
+        case SettleCommand.COMMAND_WORD:
+            return new SettleCommandParser().parse(arguments);
+
+        case PayCommand.COMMAND_WORD:
+            return new PayCommandParser().parse(arguments);
+
+        case OweCommand.COMMAND_WORD:
+            return new OweCommandParser().parse(arguments);
+
+        case RemindCommand.COMMAND_WORD:
+            return new RemindCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

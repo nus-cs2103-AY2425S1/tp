@@ -2,13 +2,13 @@ package seedu.address.logic.parser;
 
 /**
  * A prefix that marks the beginning of an argument in an arguments string.
- * E.g. 't/' in 'add James t/ friend'.
+ * E.g. 'n/' in 'edit 1 n/James'.
  */
 public class Prefix {
     private final String prefix;
 
     public Prefix(String prefix) {
-        this.prefix = prefix;
+        this.prefix = prefix.toLowerCase(); // prefix must be in lowercase
     }
 
     public String getPrefix() {
@@ -37,6 +37,6 @@ public class Prefix {
         }
 
         Prefix otherPrefix = (Prefix) other;
-        return prefix.equals(otherPrefix.prefix);
+        return prefix.equals(otherPrefix.prefix.toLowerCase());
     }
 }

@@ -53,15 +53,17 @@ public class ArgumentTokenizerTest {
         assertFalse(argMultimap.getValue(prefix).isPresent());
     }
 
+
     @Test
     public void tokenize_noPrefixes_allTakenAsPreamble() {
-        String argsString = "  some random string /t tag with leading and trailing spaces ";
+        String argsString = "  some random string /n name with leading and trailing spaces ";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString);
 
         // Same string expected as preamble, but leading/trailing spaces should be trimmed
         assertPreamblePresent(argMultimap, argsString.trim());
 
     }
+
 
     @Test
     public void tokenize_oneArgument() {

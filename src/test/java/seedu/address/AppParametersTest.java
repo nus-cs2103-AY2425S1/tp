@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class AppParametersTest {
 
     @Test
     public void parse_validConfigPath_success() {
+        // EP: parse valid config path
         parametersStub.namedParameters.put("config", "config.json");
         expected.setConfigPath(Paths.get("config.json"));
         assertEquals(expected, AppParameters.parse(parametersStub));
@@ -28,12 +30,14 @@ public class AppParametersTest {
 
     @Test
     public void parse_nullConfigPath_success() {
+        // EP: parse null config path
         parametersStub.namedParameters.put("config", null);
         assertEquals(expected, AppParameters.parse(parametersStub));
     }
 
     @Test
     public void parse_invalidConfigPath_success() {
+        // EP: parse invalid config path
         parametersStub.namedParameters.put("config", "a\0");
         expected.setConfigPath(null);
         assertEquals(expected, AppParameters.parse(parametersStub));
@@ -50,22 +54,36 @@ public class AppParametersTest {
     public void equals() {
         AppParameters appParameters = new AppParameters();
 
-        // same values -> returns true
+        // EP: same values -> returns true
         assertTrue(appParameters.equals(new AppParameters()));
 
-        // same object -> returns true
+        // EP: same object -> returns true
         assertTrue(appParameters.equals(appParameters));
 
-        // null -> returns false
+        // EP: null -> returns false
         assertFalse(appParameters.equals(null));
 
-        // different types -> returns false
+        // EP: different types -> returns false
         assertFalse(appParameters.equals(5.0f));
 
-        // different config path -> returns false
+        // EP: different config path -> returns false
         AppParameters otherAppParameters = new AppParameters();
         otherAppParameters.setConfigPath(Paths.get("configPath"));
         assertFalse(appParameters.equals(otherAppParameters));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        // EP: same values -> returns same hashcode
+        AppParameters appParameters = new AppParameters();
+        AppParameters sameAppParameters = new AppParameters();
+
+        Path configPath = Paths.get("config.json");
+
+        appParameters.setConfigPath(configPath);
+        sameAppParameters.setConfigPath(configPath);
+
+        assertEquals(appParameters.hashCode(), sameAppParameters.hashCode());
     }
 
     private static class ParametersStub extends Application.Parameters {
@@ -86,4 +104,5 @@ public class AppParametersTest {
             return Collections.unmodifiableMap(namedParameters);
         }
     }
+
 }
