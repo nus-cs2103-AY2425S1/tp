@@ -6,6 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Meeting;
+import seedu.address.model.person.Meetings;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -16,6 +19,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final Meetings meetings;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        meetings = new Meetings();
     }
 
     public AddressBook() {}
@@ -49,12 +54,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setMeetings(List<Meeting> meetings) {
+        this.meetings.setInternalList(meetings);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setMeetings(newData.getMeetingList());
     }
 
     //// person-level operations
@@ -80,7 +94,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Person target, Person editedPerson) throws CommandException {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
@@ -91,6 +105,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        deletePersonMeetings(key);
         persons.remove(key);
     }
 
@@ -106,6 +121,64 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    public void addMeeting(Meeting m) {
+        meetings.addMeeting(m);
+    }
+
+    public void deleteMeeting(Meeting m) {
+        meetings.deleteMeeting(m);
+    }
+
+    public Meeting getMeeting(int index) {
+        return meetings.getMeeting(index);
+    }
+
+    /**
+     * Deletes all meetings that contains (@code p).
+     */
+    public void deletePersonMeetings(Person p) {
+        Meetings personMeetings = p.getMeetings();
+        for (int i = 0; i < personMeetings.getMeetingsCount(); i++) {
+            Meeting m = personMeetings.getMeeting(i);
+            for (int j = 0; j < meetings.getMeetingsCount(); j++) {
+                if (m.equals(meetings.getMeeting(j))) {
+                    Meeting toDelete = meetings.getMeeting(j);
+                    deleteMeeting(toDelete);
+                }
+            }
+        }
+    }
+
+    /**
+     * Returns true if addressbook already contains (@code meeting).
+     */
+    public boolean hasMeeting(Meeting m) {
+        requireNonNull(m);
+        return meetings.contains(m);
+    }
+
+    /**
+     * Replaces the given meeting {@code target} in the list with {@code editedMeeting}.
+     * {@code target} must exist in the address book.
+     * The meeting identity of {@code editedMeeting} must not be the same as another existing meeting in address book.
+     */
+    public void setMeeting(Meeting target, Meeting editedMeeting) {
+        requireNonNull(editedMeeting);
+        meetings.setMeeting(target, editedMeeting);
+    }
+
+    public String listMeetings() {
+        return meetings.toString();
+    }
+
+    public int getMeetingSize() {
+        return meetings.getMeetingsCount();
+    }
+
+    public ObservableList<Meeting> getMeetingList() {
+        return meetings.getInternalList();
     }
 
     @Override

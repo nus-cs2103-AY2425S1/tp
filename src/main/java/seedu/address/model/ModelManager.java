@@ -11,7 +11,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
+import seedu.address.ui.ModelClearObserver;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +26,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ModelClearObserver observer;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -80,6 +86,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        notifyUddersListCleared();
     }
 
     @Override
@@ -105,10 +112,54 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Person target, Person editedPerson) throws CommandException {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void addMeeting(Person target, Meeting meeting) {
+        // Change in main meeting list first to check for any time clash exception in all meetings
+        addressBook.addMeeting(meeting);
+        target.getMeetings().addMeeting(meeting);
+    }
+
+    @Override
+    public void deleteMeeting(Person target, Meeting meeting) {
+        // Delete meeting for anUdder
+        target.getMeetings().deleteMeeting(meeting);
+        // Delete meeting for user
+        addressBook.deleteMeeting(meeting);
+    }
+
+    @Override
+    public Meeting getMeeting(int index) {
+        return addressBook.getMeeting(index);
+    }
+
+    @Override
+    public boolean hasMeeting(Meeting meeting) {
+        requireNonNull(meeting);
+        return addressBook.hasMeeting(meeting);
+    }
+
+    @Override
+    public void setMeeting(Person person, Meeting target, Meeting editedMeeting) {
+        // Change in main meeting list first to check for any time clash exception in all meetings
+        requireAllNonNull(person, target, editedMeeting);
+        addressBook.setMeeting(target, editedMeeting);
+        person.getMeetings().setMeeting(target, editedMeeting);
+    }
+
+    @Override
+    public String listMeetings() {
+        return addressBook.listMeetings();
+    }
+
+    @Override
+    public int getMeetingSize() {
+        return addressBook.getMeetingSize();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -127,6 +178,22 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+
+    //=========== Observer Logic ===============================================================================
+
+    @Override
+    public void addObserver(ModelClearObserver observer) {
+        assert observer != null;
+
+        this.observer = observer;
+    }
+
+    @Override
+    public void notifyUddersListCleared() {
+        observer.uddersCleared();
+    }
+
+    //================================================================================================================
 
     @Override
     public boolean equals(Object other) {

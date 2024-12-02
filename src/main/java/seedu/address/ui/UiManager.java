@@ -20,7 +20,7 @@ public class UiManager implements Ui {
     public static final String ALERT_DIALOG_PANE_FIELD_ID = "alertDialogPane";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/udder_icon.png";
 
     private Logic logic;
     private MainWindow mainWindow;
@@ -36,7 +36,7 @@ public class UiManager implements Ui {
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
 
-        //Set the application icon.
+        // Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
@@ -50,10 +50,23 @@ public class UiManager implements Ui {
         }
     }
 
+    /**
+     * Getter that returns the image object from the specified {@code imagePath}
+     * @param imagePath path to the image, relative from calling object's file path.
+     * @return An Image object loaded from the specified path.
+     */
     private Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
 
+    /**
+     * Displays an alert dialog and waits for the user to close it before returning.
+     *
+     * @param type The type of the alert, e.g., Information, Warning, Error.
+     * @param title The title of the alert dialog.
+     * @param headerText The header text for the alert. Can be null.
+     * @param contentText The main content text of the alert.
+     */
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
         showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
     }

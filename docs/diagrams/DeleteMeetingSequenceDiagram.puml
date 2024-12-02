@@ -1,0 +1,59 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "d:DeleteMeetingCommand" as DeleteMeetingCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "p:Person" as Person MODEL_COLOR
+end box
+
+[-> LogicManager : execute("deletem 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("deletem 1")
+activate AddressBookParser
+
+AddressBookParser -> DeleteMeetingCommand
+activate DeleteMeetingCommand
+
+DeleteMeetingCommand -> Model : getMeeting(targetIndex)
+activate Model
+
+Model --> DeleteMeetingCommand : toDelete
+deactivate Model
+
+DeleteMeetingCommand -> Model : deleteMeeting(personToDeleteMeeting, toDelete)
+activate Model
+
+Model -> Person : getMeetings().deleteMeeting(toDelete)
+activate Person
+
+Person --> Model
+deactivate Person
+
+Model -> Model : addressBook.deleteMeeting(toDelete)
+activate Model
+
+Model --> DeleteMeetingCommand
+deactivate Model
+
+create CommandResult
+DeleteMeetingCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteMeetingCommand
+deactivate CommandResult
+
+DeleteMeetingCommand --> LogicManager : r
+deactivate DeleteMeetingCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,8 +14,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Major;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,6 +102,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String role} into an {@code Role}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the give {@code role} is invalid.
+     */
+    public static Role parseRole(String role) throws ParseException {
+        requireNonNull(role);
+        String trimmedRole = role.trim();
+        if (!Role.isValidRole(trimmedRole)) {
+            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
+        return new Role(trimmedRole);
+    }
+
+    /**
+     *  Parses a {@code String major} into an {@code Major}.
+     *  Leading and trailing whitespaces will be trimmed.
+     *
+     *  @throws ParseException if the give {@code major} is invalid.
+     */
+    public static Major parseMajor(String major) throws ParseException {
+        requireNonNull(major);
+        String trimmedMajor = major.trim();
+        if (!Major.isValidMajor(trimmedMajor)) {
+            throw new ParseException(Major.MESSAGE_CONSTRAINTS);
+        }
+        return new Major(trimmedMajor);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +156,38 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     *  Parses a {@code String location} into an {@code String}.
+     *  Leading and trailing whitespaces will be trimmed.
+     *
+     *  @throws ParseException if the give {@code location} is invalid.
+     */
+    public static String parseLocation(String location) throws ParseException {
+        requireNonNull(location);
+        String trimmedLocation = location.trim();
+        if (!Meeting.isValidLocation(trimmedLocation)) {
+            throw new ParseException(Meeting.MESSAGE_CONSTRAINTS_LOCATION);
+        }
+        return trimmedLocation;
+    }
+
+    /**
+     *  Parses {@code String time} into {@code LocalDateTime time}.
+     *  Leading and trailing whitespaces will be trimmed.
+     *
+     *  @throws ParseException if {@code time} is invalid.
+     */
+    public static LocalDateTime parseMeetingTime(String timeString) throws ParseException {
+        requireNonNull(timeString);
+        String trimmedTimeString = timeString.trim();
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            LocalDateTime time = LocalDateTime.parse(trimmedTimeString, formatter);
+            return time;
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid time format. Please use the correct format: 'dd-MM-yyyy HH:mm'");
+        }
     }
 }
