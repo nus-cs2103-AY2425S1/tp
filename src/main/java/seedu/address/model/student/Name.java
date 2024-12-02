@@ -50,6 +50,7 @@ public class Name {
      * @param words Array of words to be formatted.
      * @return A formatted string with each word capitalized.
      */
+    // Solution below inspired by https://stackoverflow.com/q/44117788
     private static String formatWords(String[] words) {
         StringBuilder formattedWords = new StringBuilder();
 

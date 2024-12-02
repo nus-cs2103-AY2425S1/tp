@@ -125,6 +125,7 @@ public class Messages {
             return "Congratulations! You have no class for today!";
         }
 
+        // Solution below inspired by https://stackoverflow.com/a/4818783
         AtomicInteger index = new AtomicInteger(1); // Start the index at 1
 
         String studentList = Messages.listFormat(reminder, student ->
