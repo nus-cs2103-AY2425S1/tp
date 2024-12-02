@@ -17,6 +17,7 @@
 [original AB3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 During the development process of these two features, the codes are written by our own developers, based on the suggested
 architectural design and APIs mentioned in the above documentation.
+2. The `Overview of GUI` section under UserGuide is adpated from CS2103T-F12-3's [MediBase3](https://ay2425s1-cs2103t-f12-3.github.io/tp/UserGuide.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
