@@ -1,59 +1,64 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
+
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Nathan Loo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/natlv.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[homepage](https://nathan-loo.vercel.app)]
+[[github](https://github.com/natlv)]
+[[portfolio](team/natlv.md)]
 
-* Role: Project Advisor
+* Role:
+* Responsibilities:
 
-### Jane Doe
+### Jerrell Lee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jerrelllee.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/jerrelllee)]
+[[portfolio](team/jerrelllee.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role:
+* Responsibilities:
 
-### Johnny Doe
+### Wee Kean
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/edsel-tan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/edsel-tan)] [[portfolio](team/edsel-tan.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Senior Finance Manager
+* Responsibilities:
 
-### Jean Doe
+### Ansel Chong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ansel-ch.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/Ansel-Ch)]
+[[portfolio](team/ansel-ch.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Role:
+* Responsibilities:
 
-### James Doe
+### Hugh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/gnoossk.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/gnoossk)]
+[[portfolio](team/gnoossk.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Software Developer
+* Responsibilities: Attendance and Storage Manager
+
+

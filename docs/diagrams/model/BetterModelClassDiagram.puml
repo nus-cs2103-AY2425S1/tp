@@ -1,0 +1,17 @@
+@startuml
+!include ../style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+AddressBook *-right-> "1" UniqueStudentList
+
+UniqueStudentList -right-> Student
+
+Student *--> Name
+Student *--> Phone
+Student *--> TutorialGroup
+Student *--> StudentNumber
+Student *--> Assignment
+Student *--> AttendanceRecords
+@enduml

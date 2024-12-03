@@ -1,9 +1,13 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.HUGH;
+import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+
+import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +37,38 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showStudentAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ListCommand listFirstCommand = new ListCommand();
+        ListCommand listSecondCommand = new ListCommand();
+
+        // same object -> returns true
+        assert listFirstCommand.equals(listFirstCommand);
+
+        // same values -> returns true
+        assert listFirstCommand.equals(listSecondCommand);
+
+        // different types -> returns false
+        assert !listFirstCommand.equals(1);
+
+        // null -> returns false
+        assert !listFirstCommand.equals(null);
+
+        // different student -> returns false
+        assert !listFirstCommand.equals(new UndoCommand());
+    }
+
+    @Test
+    public void undo() {
+        ListCommand listCommand = new ListCommand();
+        showStudentAtIndex(model, INDEX_FIRST_PERSON);
+        assertCommandSuccess(listCommand, model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+
+        listCommand.undo(model);
+        assertEquals(Arrays.asList(HUGH), model.getFilteredStudentList());
     }
 }
