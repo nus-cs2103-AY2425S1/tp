@@ -9,6 +9,8 @@ Overview of key features:
 * Multi-level Filtering
 * Sort supplier contacts and delivery information
 
+Reuse acknowledgement: Section 1 and 2 of the User Guide are adapted from the User Guides of Team T14-2 from AY2324 Sem1 and Team F15-1 from AY2425 Sem1.
+
 --- {.thick-1}
 # Table of Contents
 <!-- * Table of Contents -->
