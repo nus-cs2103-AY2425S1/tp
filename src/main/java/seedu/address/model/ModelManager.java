@@ -4,14 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +24,13 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Supplier> filteredSuppliers;
+    private final FilteredList<Delivery> filteredDeliveries;
+    private final SortedList<Delivery> sortedDeliveries;
+    private final SortedList<Supplier> sortedSuppliers;
+    private boolean isViewingSupplierFilteredList = true;
+
+    private boolean isViewingDeliveryFilteredList = true;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +42,10 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
+        filteredDeliveries = new FilteredList<>(this.addressBook.getDeliveryList());
+        sortedDeliveries = new SortedList<>(this.addressBook.getDeliveryList());
+        sortedSuppliers = new SortedList<>(this.addressBook.getSupplierList());
     }
 
     public ModelManager() {
@@ -87,45 +99,136 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //=========== Supplier List Methods ==========================================================================
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasSupplier(Supplier supplier) {
+        requireNonNull(supplier);
+        return addressBook.hasSupplier(supplier);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteSupplier(Supplier target) {
+        addressBook.removeSupplier(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addSupplier(Supplier supplier) {
+        addressBook.addSupplier(supplier);
+        updateFilteredSupplierList(PREDICATE_SHOW_ALL_SUPPLIERS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setSupplier(Supplier target, Supplier editedSupplier) {
+        requireAllNonNull(target, editedSupplier);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setSupplier(target, editedSupplier);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public ObservableList<Supplier> getModifiedSupplierList() {
+        return isViewingSupplierFilteredList ? getFilteredSupplierList() : getSortedSupplierList();
+    }
+
+    //===========Sorted Supplier List Accessors  ====================================================================
+    @Override
+    public ObservableList<Supplier> getSortedSupplierList() {
+        return sortedSuppliers;
+    }
+    @Override
+    public void updateSortedSupplierList(Comparator<Supplier> comparator) {
+        requireNonNull(comparator);
+        isViewingSupplierFilteredList = false;
+        sortedSuppliers.setComparator(comparator);
+    }
+
+    //=========== Delivery List Methods ======================================================================
+    @Override
+    public boolean hasDelivery(Delivery delivery) {
+        requireNonNull(delivery);
+        return addressBook.hasDeliveryInAddressBook(delivery);
+    }
+
+    @Override
+    public void deleteDelivery(Delivery target) {
+        addressBook.removeDeliveryFromAddressBook(target);
+    }
+
+    @Override
+    public void addDelivery(Delivery target) {
+        addressBook.addDeliveryToAddressBook(target);
+        updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES); // Refresh the list after adding
+    }
+
+    @Override
+    public void setDelivery(Delivery target, Delivery updatedDelivery) {
+        requireNonNull(target);
+        requireNonNull(updatedDelivery);
+
+        addressBook.setDelivery(target, updatedDelivery);
+    }
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the filtered/sorted list of {@code Supplier} backed by the internal list of
+     * {@code versionedAddressBook} based on the last command executed.
+     */
+    @Override
+    public ObservableList<Delivery> getModifiedDeliveryList() {
+        return isViewingDeliveryFilteredList ? getFilteredDeliveryList() : getSortedDeliveryList();
+    }
+
+    //=========== Filtered Delivery List Accessors =============================================================
+    @Override
+    public ObservableList<Delivery> getFilteredDeliveryList() {
+        return filteredDeliveries;
+    }
+
+    @Override
+    public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
+        requireNonNull(predicate);
+        isViewingDeliveryFilteredList = true;
+        filteredDeliveries.setPredicate(predicate);
+    }
+
+    //=========== Sorted Delivery List Accessors ===============================================================
+
+    /**
+     * Returns an unmodifiable view of the sorted list of {@code Supplier} backed by the internal list of
+     * {@code versionedAddressBook}.
+     */
+    @Override
+    public ObservableList<Delivery> getSortedDeliveryList() {
+        return sortedDeliveries;
+    }
+
+    /**
+     * Updates the comparator of the sorted delivery list to sort by the given {@code comparator}.
+     *
+     * @param comparator The comparator to use to sort the delivery list.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    @Override
+    public void updateSortedDeliveryList(Comparator<Delivery> comparator) {
+        requireNonNull(comparator);
+        isViewingDeliveryFilteredList = false;
+        sortedDeliveries.setComparator(comparator);
+    }
+
+    //=========== Filtered Supplier List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Supplier} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Supplier> getFilteredSupplierList() {
+        return filteredSuppliers;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredSupplierList(Predicate<Supplier> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        isViewingSupplierFilteredList = true;
+        filteredSuppliers.setPredicate(predicate);
     }
 
     @Override
@@ -142,7 +245,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredSuppliers.equals(otherModelManager.filteredSuppliers);
     }
 
 }

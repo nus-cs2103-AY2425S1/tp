@@ -1,18 +1,21 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.supplier.Supplier;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Supplier> PREDICATE_SHOW_ALL_SUPPLIERS = unused -> true;
+    Predicate<Delivery> PREDICATE_SHOW_ALL_DELIVERIES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -53,35 +56,104 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a supplier with the same identity as {@code supplier} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasSupplier(Supplier supplier);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given supplier.
+     * The supplier must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deleteSupplier(Supplier target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given supplier.
+     * {@code supplier} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addSupplier(Supplier supplier);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given supplier {@code target} with {@code editedSupplier}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The supplier identity of {@code editedSupplier} must not
+     * be the same as another existing supplier in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setSupplier(Supplier target, Supplier editedSupplier);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered supplier list */
+    ObservableList<Supplier> getFilteredSupplierList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered supplier list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredSupplierList(Predicate<Supplier> predicate);
+
+    /**
+     * Returns true if a delivery with the same identity as {@code delivery} exists in the address book.
+     */
+    boolean hasDelivery(Delivery delivery);
+
+    /**
+     * Adds the given delivery.
+     * {@code delivery} must not already exist in the address book.
+     */
+    void addDelivery(Delivery delivery);
+
+    /**
+     * Deletes the given delivery.
+     * The delivery must exist in the address book.
+     */
+    void deleteDelivery(Delivery delivery);
+
+    /**
+     * Replaces the given delivery {@code target} with {@code editedDelivery}.
+     * {@code target} must exist in the address book.
+     * The delivery identity of {@code editedDelivery} must not be the same as
+     * another existing delivery in the address book.
+     */
+    void setDelivery(Delivery target, Delivery updatedDelivery);
+
+    /**
+     * Returns an unmodifiable view of the filtered delivery list
+     */
+    ObservableList<Delivery> getFilteredDeliveryList();
+
+    /**
+     * Updates the filter of the filtered delivery list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredDeliveryList(Predicate<Delivery> predicate);
+
+    /**
+     * Returns an unmodifiable view of the sorted delivery list.
+     */
+    ObservableList<Delivery> getSortedDeliveryList();
+
+    /**
+     * Updates the comparator of the sorted delivery list to sort by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void updateSortedDeliveryList(Comparator<Delivery> comparator);
+
+    /**
+     * Returns an unmodifiable view of the sorted/filtered delivery list based on the last command executed.
+     */
+    ObservableList<Delivery> getModifiedDeliveryList();
+
+    /**
+     * Returns an unmodifiable view of the modified supplier list.
+     */
+    ObservableList<Supplier> getModifiedSupplierList();
+    /**
+     * Returns an unmodifiable view of the sorted supplier list.
+     */
+    ObservableList<Supplier> getSortedSupplierList();
+    /**
+     * Updates the comparator of the sorted supplier list to sort by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void updateSortedSupplierList(Comparator<Supplier> comparator);
+
+
 }

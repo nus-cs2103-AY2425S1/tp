@@ -3,19 +3,23 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SUPPLIERS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalDeliveries.APPLE;
+import static seedu.address.testutil.TypicalDeliveries.BREAD;
+import static seedu.address.testutil.TypicalSuppliers.ALICE;
+import static seedu.address.testutil.TypicalSuppliers.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.Status;
+import seedu.address.model.delivery.exceptions.DeliveryNotFoundException;
+import seedu.address.model.supplier.predicates.NameContainsKeywordPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -73,29 +77,103 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasSupplier_nullSupplier_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasSupplier(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasSupplier_supplierNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasSupplier(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasSupplier_supplierInAddressBook_returnsTrue() {
+        modelManager.addSupplier(ALICE);
+        assertTrue(modelManager.hasSupplier(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void hasDelivery_nullDelivery_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasDelivery(null));
+    }
+
+    @Test
+    public void hasDeliveryNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasDelivery(APPLE));
+    }
+
+    @Test
+    public void hasDelivery_deliveryInAddressBook_returnsTrue() {
+        modelManager.addDelivery(BREAD);
+        assertTrue(modelManager.hasDelivery(BREAD));
+    }
+
+    @Test
+    public void deleteDelivery_nullDelivery_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteDelivery(null));
+    }
+
+    @Test
+    public void deleteDelivery_deliveryNotInAddressBook_throwsDeliveryNotFoundException() {
+        assertThrows(DeliveryNotFoundException.class, () -> modelManager.deleteDelivery(APPLE));
+    }
+
+    @Test
+    public void deleteDelivery_existingDelivery_removesSuccessfully() {
+        modelManager.addDelivery(BREAD);
+        modelManager.deleteDelivery(BREAD);
+        assertFalse(modelManager.hasDelivery(BREAD));
+    }
+
+    @Test
+    public void setDelivery_nullTarget_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setDelivery(null, APPLE));
+    }
+
+    @Test
+    public void setDelivery_nullUpdatedDelivery_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setDelivery(APPLE, null));
+    }
+
+    @Test
+    public void setDelivery_deliveryNotInAddressBook_throwsDeliveryNotFoundException() {
+        assertThrows(DeliveryNotFoundException.class, () -> modelManager.setDelivery(APPLE, BREAD));
+    }
+
+    @Test
+    public void setDelivery_existingDelivery_successfulUpdate() {
+        modelManager.addDelivery(BREAD);
+        Delivery updatedApple = new Delivery(
+                BREAD.getDeliveryProduct(),
+                BREAD.getDeliverySender(),
+                Status.CANCELLED,
+                BREAD.getDeliveryDate(),
+                BREAD.getDeliveryCost(),
+                BREAD.getDeliveryQuantity());
+
+        modelManager.setDelivery(BREAD, updatedApple);
+        assertTrue(modelManager.hasDelivery(updatedApple));
+        assertFalse(modelManager.hasDelivery(BREAD));
+    }
+
+    @Test
+    public void getFilteredDeliveryList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredDeliveryList().remove(0));
+    }
+
+    @Test
+    public void updateFilteredDeliveryList_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateFilteredDeliveryList(null));
+    }
+
+    @Test
+    public void getFilteredSupplierList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredSupplierList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withSupplier(ALICE).withSupplier(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -117,12 +195,11 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredSupplierList(new NameContainsKeywordPredicate(ALICE.getName().toString()));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredSupplierList(PREDICATE_SHOW_ALL_SUPPLIERS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

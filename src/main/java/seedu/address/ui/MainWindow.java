@@ -31,7 +31,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private SupplierListPanel supplierListPanel;
+    private DeliveryListPanel deliveryListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +43,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane supplierListPanelPlaceholder;
+
+    @FXML
+    private StackPane deliveryListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +114,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        supplierListPanel = new SupplierListPanel(logic.getModifiedSupplierList());
+        supplierListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
+
+        deliveryListPanel = new DeliveryListPanel(logic.getModifiedDeliveryList());
+        deliveryListPanelPlaceholder.getChildren().add(deliveryListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -163,8 +170,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public SupplierListPanel getSupplierListPanel() {
+        return supplierListPanel;
     }
 
     /**
@@ -177,6 +184,12 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            supplierListPanel = new SupplierListPanel(logic.getModifiedSupplierList());
+            supplierListPanelPlaceholder.getChildren().setAll(supplierListPanel.getRoot());
+
+            deliveryListPanel = new DeliveryListPanel(logic.getModifiedDeliveryList());
+            deliveryListPanelPlaceholder.getChildren().setAll(deliveryListPanel.getRoot());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
