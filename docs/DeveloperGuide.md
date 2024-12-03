@@ -70,7 +70,7 @@ title: Developer Guide
 
 Utilisation of ChatGPT by the following team members:
 
--Charlene : For code completion, debugging, javadocs and test cases. 
+- Charlene : For code completion, debugging, javadocs and test cases. 
 
 ---
 
