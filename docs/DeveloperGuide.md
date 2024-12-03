@@ -68,6 +68,10 @@ title: Developer Guide
 - Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson),
   [JUnit5](https://github.com/junit-team/junit5)
 
+Utilisation of ChatGPT by the following team members:
+
+-Charlene : For code completion, debugging, javadocs and test cases. 
+
 ---
 
 ## **Setting up, getting started**
