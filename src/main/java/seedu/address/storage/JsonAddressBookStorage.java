@@ -59,6 +59,25 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         }
     }
 
+    /**
+     * Similar to {@link #readAddressBook()}.
+     *
+     * @param jsonContent location of the data. Cannot be null.
+     * @throws DataLoadingException if loading the data from storage failed.
+     */
+    public ReadOnlyAddressBook readAddressBook(String jsonContent) throws DataLoadingException {
+        requireNonNull(jsonContent);
+
+        try {
+            JsonSerializableAddressBook jsonAddressBook = JsonUtil.fromJsonString(
+                    jsonContent, JsonSerializableAddressBook.class);
+            return jsonAddressBook.toModelType();
+        } catch (IOException | IllegalValueException e) {
+            logger.info("Invalid JSON content provided: " + e.getMessage());
+            throw new DataLoadingException(e);
+        }
+    }
+
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
         saveAddressBook(addressBook, filePath);

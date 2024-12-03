@@ -1,59 +1,58 @@
 ---
-layout: page
-title: About Us
+  layout: default.md
+  title: "About Us"
 ---
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+
 
 ## Project team
 
-### John Doe
+### Lynette Lee Si Ying
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lynetteleesiying.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+[[github](https://github.com/LynetteLeeSiYing)]
 
-### Jane Doe
 
-<img src="images/johndoe.png" width="200px">
+* Role: Testing
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+### Kelly Bong Jia Qi
 
-* Role: Team Lead
+<img src="images/bonzzz3.png" width="200px">
+
+[[github](http://github.com/Bonzzz3)]
+
+* Role: Code Quality
 * Responsibilities: UI
 
-### Johnny Doe
+### Otto Tan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ottotan.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/OttoTan)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Ritvi Agarwal
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ritvi12.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ritvi12)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Nasya Myrilla Wijaya
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/myrilla12.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/myrilla12)]
 
 * Role: Developer
 * Responsibilities: UI
+

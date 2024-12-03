@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,6 +19,7 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static boolean displayNote = false;
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -111,6 +113,20 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void viewNote(Person person) {
+        requireNonNull(person);
+        displayNote = true;
+        updateFilteredPersonList(person);
+        displayNote = false;
+    }
+
+    @Override
+    public boolean hasName(Name name) {
+        requireNonNull(name);
+        return addressBook.hasName(name);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -122,9 +138,50 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} sorted alphabetically and
+     * backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getSortedPersonList() {
+        addressBook.sortByName();
+        return filteredPersons;
+    }
+
+    @Override
+    public int sortFilteredPersons() {
+        logger.info("Sorting filtered person list by appointments.");
+        boolean hasAppointments = filteredPersons.stream()
+                .anyMatch(Person::hasAppointments);
+        if (!hasAppointments) {
+            return -1;
+        }
+        addressBook.sortByAppointments();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        assert !filteredPersons.isEmpty() : "Filtered person list should not be empty after sorting.";
+        return 1;
+    }
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        filteredPersons.setPredicate(predicate);
+    }
+
+    /**
+     * Updates the filter of the filtered person list to include only the specified target person.
+     *
+     * @param targetPerson given person.
+     * @throws NullPointerException if {@code targetPerson} is null.
+     */
+    public void updateFilteredPersonList(Person targetPerson) {
+        requireNonNull(targetPerson);
+        Predicate<Person> predicate = new Predicate<>() {
+            @Override
+            public boolean test(Person person) {
+                return person.equals(targetPerson);
+            }
+        };
         filteredPersons.setPredicate(predicate);
     }
 
@@ -143,6 +200,15 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    /**
+     * Returns the current display status of note.
+     *
+     * @return {@code true} if the note is set to be displayed; {@code false} otherwise.
+     */
+    public static boolean getDisplayNote() {
+        return displayNote;
     }
 
 }

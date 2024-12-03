@@ -348,5 +348,19 @@
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-font-size: 10;
+}
+
+#appointments {
+    -fx-hgap: 7;
+    -fx-vgap: 4;
+}
+
+#appointments .label {
+    -fx-text-fill: white;
+    -fx-background-color: #337d40;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 14;
 }

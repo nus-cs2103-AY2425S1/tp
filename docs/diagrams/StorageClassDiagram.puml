@@ -20,6 +20,8 @@ Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+Class JsonAdaptedAppointment
+Class JsonAdaptedNote
 }
 
 }
@@ -31,13 +33,16 @@ StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
 
-Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -left--|> UserPrefsStorage
+Storage -right--|> AddressBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonAdaptedPerson --> "1" JsonAdaptedNote
+JsonAdaptedPerson --> "*" JsonAdaptedAppointment
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedNote --> "*" JsonAdaptedAppointment
 
 @enduml

@@ -1,0 +1,22 @@
+@startuml
+start
+:User enters command filter;
+if () then ([PREFIX ap/,  b/, or t/ is present])
+    :Parse command arguments;
+    if () then ([All fields are valid])
+            :Generate new FilterCommand;
+            if () then ([Filtered List is not empty])
+                    :Display filtered list;
+                    :Generate success message;
+                else ([else])
+                :Generate error message;
+                endif
+        else ([else])
+        :Generate error message;
+        endif
+    else ([else])
+    :Generate error message;
+endif
+:Display result message to user;
+stop
+@enduml

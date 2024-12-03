@@ -19,6 +19,11 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Age
+Class Sex
+Class StarredStatus
+Class Appointment
+Class Note
 
 Class I #FFFFFF
 }
@@ -42,6 +47,11 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> Age
+Person *--> Sex
+Person *--> StarredStatus
+Person *--> "*" Appointment
+Person *--> Note
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
@@ -49,6 +59,12 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+Email -[hidden]right-> Tag
+Tag -[hidden]right-> Age
+Age -[hidden]right-> Sex
+Sex -[hidden]right-> StarredStatus
+StarredStatus -[hidden]right-> Appointment
+Appointment -[hidden]right-> Note
 
 ModelManager --> "~* filtered" Person
 @enduml

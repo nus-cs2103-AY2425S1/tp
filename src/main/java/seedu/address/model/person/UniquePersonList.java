@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,6 +38,15 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains an equivalent name as the given argument.
+     */
+    public boolean containsName(Name toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(
+                person -> person.getName().toString().equalsIgnoreCase(toCheck.toString()));
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -46,7 +56,16 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+        sort();
     }
+
+    /**
+     * Sorts list in alphabetical order
+     */
+    public void sort() {
+        internalList.sort(Comparator.comparing(p -> p.getName().toString().toUpperCase()));
+    }
+
 
     /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.
@@ -66,6 +85,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
+        sort();
     }
 
     /**
@@ -82,6 +102,7 @@ public class UniquePersonList implements Iterable<Person> {
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        sort();
     }
 
     /**
@@ -94,9 +115,18 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
 
+        persons.forEach(Person::handleDueAppointments);
         internalList.setAll(persons);
     }
 
+    /**
+     * Sorts the list of persons on the basis of appointment dates
+     */
+    public void sortByAppointment() {
+        internalList.sort(Comparator.comparing(Person::getEarliestAppointmentDate,
+                Comparator.nullsLast(Comparator.naturalOrder())));
+
+    }
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

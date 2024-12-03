@@ -15,6 +15,7 @@ Class PersonListPanel
 Class PersonCard
 Class StatusBarFooter
 Class CommandBox
+Class ConfirmationWindow
 }
 
 package Model <<Rectangle>> {
@@ -46,6 +47,8 @@ PersonListPanel --|> UiPart
 PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+ConfirmationWindow -|> UiPart
+Logic ..> ConfirmationWindow
 
 PersonCard ..> Model
 UiManager -right-> Logic
