@@ -17,6 +17,12 @@
 
 This project is based on the AddressBook-Level3 project created by the  [SE-EDU initiative](https://se-education.org)., whose resources and documentation provided a valuable foundation. We would like to express our gratitude to the SE-EDU team and contributors for their well-designed framework, which facilitated our extensions and customizations, allowing us to build on a robust foundation.
 
+We would also like to acknowledge the inspiration we received from other teams during the development of this project:
+1.	Team KonTacts (T11-2):
+We drew inspiration from their User Guide, particularly their use of icons and boxes for styling. While we did not reuse any code, their design influenced the way we structured our own User Guide.
+2.	Team Financial Assurance Revolutionary Telemarketer (F14b-4):
+Our implementation of the confirmation window was inspired by a specific [commit](https://github.com/AY2425S1-CS2103T-F14b-4/tp/commit/de8ef71a6e48fc2fce6bd93d3b12ec45c7623b02) in their project. We developed our own implementation and further refined it during v1.5 (Week 12) after learning about additional design patterns.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
