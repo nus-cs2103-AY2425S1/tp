@@ -9,11 +9,22 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<?import java.net.URL?>
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      HBox.hgrow="ALWAYS" >
+  <stylesheets>
+    <URL value="@PersonListCard.css" />
+    <URL value="@Extensions.css" />
+  </stylesheets>
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
+
+    <HBox GridPane.columnIndex="0" alignment="TOP_RIGHT" spacing="10" prefWidth="300">
+      <Label fx:id="role" styleClass="cell_small_label" text="\$role" />
+    </HBox>
+
     <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
@@ -27,7 +38,8 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <FlowPane fx:id="tags" />
+      <FlowPane fx:id="subjects" />
+
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />

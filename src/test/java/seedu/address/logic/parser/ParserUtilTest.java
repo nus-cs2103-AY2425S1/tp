@@ -1,14 +1,13 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -16,23 +15,28 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.person.Subject;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_HOURS = "five";
+    private static final String INVALID_SUBJECT = "Chinese";
+    private static final String INVALIED_FILEPATH = "C:\\Users\\user\\Desktop\\";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_PHONE = "123456";
-    private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_PHONE = "98123456";
+    private static final String VALID_ADDRESS = "123 Main Street #0505, 123456";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_HOURS = "5";
+    private static final String VALID_SUBJECT = "Math";
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "CsvImportTest");
+    private static final String VALID_FILEPATH = TEST_DATA_FOLDER.resolve("typicalPersonsCsv.csv").toString();
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -149,48 +153,104 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseHours_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseHours(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    public void parseHours_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseHours(INVALID_HOURS));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    public void parseHours_validValueWithoutWhitespace_returnsHours() throws Exception {
+        Hours expectedHours = new Hours(VALID_HOURS);
+        assertEquals(expectedHours, ParserUtil.parseHours(VALID_HOURS));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    public void parseHours_validValueWithWhitespace_returnsTrimmedHours() throws Exception {
+        String hoursWithWhitespace = WHITESPACE + VALID_HOURS + WHITESPACE;
+        Hours expectedHours = new Hours(VALID_HOURS);
+        assertEquals(expectedHours, ParserUtil.parseHours(hoursWithWhitespace));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+    public void parseSubject_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSubject(null));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void parseSubject_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject(INVALID_SUBJECT));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    public void parseSubject_validValueWithoutWhitespace_returnsSubject() throws Exception {
+        Subject expectedSubject = new Subject(VALID_SUBJECT);
+        assertEquals(expectedSubject, ParserUtil.parseSubject(VALID_SUBJECT));
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+    public void parseSubject_validValueWithWhitespace_returnsTrimmedSubject() throws Exception {
+        String subjectWithWhitespace = WHITESPACE + VALID_SUBJECT + WHITESPACE;
+        Subject expectedSubject = new Subject(VALID_SUBJECT);
+        assertEquals(expectedSubject, ParserUtil.parseSubject(subjectWithWhitespace));
+    }
 
-        assertEquals(expectedTagSet, actualTagSet);
+    @Test
+    public void parseSubjects_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSubjects(null));
+    }
+
+    @Test
+    public void parseSubjects_invalidValue_throwsParseException() {
+        Collection<String> expectedSet = Set.of("Math", "Chinese");
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubjects(expectedSet));
+    }
+
+    @Test
+    public void parseSubjects_validValueWithoutWhitespace_returnsSubjects() throws Exception {
+        Collection<Subject> expectedSet = Set.of(new Subject("Math"), new Subject("English"));
+        Collection<String> subjectsWithoutWhitespace = Set.of("Math", "English");
+        assertEquals(expectedSet, ParserUtil.parseSubjects(subjectsWithoutWhitespace));
+    }
+
+    @Test
+    public void parseSubjects_validValueWithWhitespace_returnsTrimmedSubjects() throws Exception {
+        Collection<Subject> expectedSet = Set.of(new Subject("Math"), new Subject("English"));
+        Collection<String> subjectsWithWhitespace = Set.of(WHITESPACE + "Math" + WHITESPACE,
+                WHITESPACE + "English" + WHITESPACE);
+        assertEquals(expectedSet, ParserUtil.parseSubjects(subjectsWithWhitespace));
+    }
+
+    @Test
+    public void parseSubjects_duplicateSubjects_returnsSubjects() throws Exception {
+        Collection<Subject> expectedSet = Set.of(new Subject("Math"));
+        Collection<String> subjectsWithWhitespace = Set.of("Math", "Math ");
+        assertEquals(expectedSet, ParserUtil.parseSubjects(subjectsWithWhitespace));
+    }
+
+    @Test
+    public void parseFilepath_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFilepath(null));
+    }
+
+    @Test
+    public void parseFilepath_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFilepath(INVALIED_FILEPATH));
+    }
+
+    @Test
+    public void parseFilepath_validValueWithoutWhitespace_returnsFilepath() throws Exception {
+        String replacedFilepath = VALID_FILEPATH.replaceFirst("~", System.getProperty("user.home"));
+        assertEquals(replacedFilepath, ParserUtil.parseFilepath(VALID_FILEPATH));
+    }
+
+    @Test
+    public void parseFilepath_validValueWithWhitespace_returnsTrimmedFilepath() throws Exception {
+        String replacedFilepath = VALID_FILEPATH.replaceFirst("~", System.getProperty("user.home"));
+        String filepathWithWhitespace = WHITESPACE + VALID_FILEPATH + WHITESPACE;
+        assertEquals(replacedFilepath, ParserUtil.parseFilepath(filepathWithWhitespace));
     }
 }

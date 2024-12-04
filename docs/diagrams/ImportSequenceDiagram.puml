@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+actor User as user USER_COLOR
+
+box Logic LOGIC_COLOR_T1
+participant ImportCommand as ImportCommand LOGIC_COLOR
+participant CsvImport as CsvImport LOGIC_COLOR
+participant Model as Model LOGIC_COLOR
+participant CommandResult as CommandResult LOGIC_COLOR
+end box
+
+User -> ImportCommand : execute(model, history)
+ImportCommand -> ImportCommand : requireNonNull(model)
+ImportCommand -> CsvImport : new CsvImport(importFilePath)
+ImportCommand -> CsvImport : readCsv(model)
+
+alt FileNotFoundException or ImproperFormatException
+    CsvImport -> ImportCommand : throw Exception
+    ImportCommand -> User : throw CommandException
+else personsAdded != 0
+    ImportCommand -> Model : commitAddressBook()
+end
+
+ImportCommand -> ImportCommand : returnMessage(personsAdded, importer)
+ImportCommand -> CommandResult : new CommandResult(message)
+
+return CommandResult
+@enduml

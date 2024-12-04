@@ -1,0 +1,69 @@
+@font-face {
+    font-family: "Poppins"; /* Font name */
+    src: url("/fonts/Poppins-Regular.ttf"); /* Path to the font */
+}
+
+.root {
+    -fx-background-color: #e7ebf0; /* Light background color similar to the screenshot */
+}
+
+.vbox {
+    -fx-background-color: #e7ebf0;
+}
+
+.header-label {
+    -fx-font-size: 55px;          /* Header font size */
+    -fx-font-family: Poppins;
+    -fx-text-fill: Black;         /* Header text color */
+    -fx-padding: 30 0 0 0;        /* Padding around the header */
+    -fx-alignment: center;        /* Center the text */
+}
+
+.menu-bar {
+    -fx-background-color: #e7ebf0;
+    -fx-selection-bar: #00509E ;
+    -fx-focused-text-base-color: white ;
+    -fx-border-color: transparent; /* Remove any borders */
+    -fx-padding: 0 20 0 20;
+}
+
+.menu-bar .menu {
+    -fx-text-fill: black;
+}
+
+.menu-bar .menu:hover {
+    -fx-background-color: #00509E; /* Blue when hovered */
+}
+
+.menu-bar .menu .menu-item {
+    -fx-text-fill: black;
+    -fx-background-color: transparent; /* Transparent background for menu items */
+}
+
+.menu-bar .menu .menu-item:hover {
+    -fx-background-color: #00509E; /* Blue background on hover */
+    -fx-text-fill: white; /* White text on hover */
+}
+
+.background {
+    -fx-background-color: derive(#004aad, 20%);
+    background-color: #e5eaf2; /* Used in the default.html file */
+}
+
+#personList {
+    -fx-background-color: #e7ebf0;
+}
+
+#tags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#tags .label {
+    -fx-text-fill: white;
+    -fx-background-color: #D2042D;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}

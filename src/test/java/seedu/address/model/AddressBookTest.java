@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CLARA;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -16,9 +18,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -46,8 +51,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
@@ -73,14 +77,58 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void hasLesson_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasLesson(null));
+    }
+
+    @Test
+    public void hasLesson_lessonNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasLesson(new Lesson(ALICE, DANIEL, new Subject("Math"))));
+    }
+
+    @Test
+    public void hasLesson_lessonInAddressBook_returnsTrue() {
+        addressBook.addLesson(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        assertTrue(addressBook.hasLesson(new Lesson(ALICE, DANIEL, new Subject("Math"))));
+    }
+
+    @Test
+    public void hasLesson_lessonWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addLesson(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        Lesson editedLesson = new Lesson(ALICE, DANIEL, new Subject("Math"));
+        assertTrue(addressBook.hasLesson(editedLesson));
+    }
+
+    @Test
+    public void getLessonList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getLessonList().remove(0));
+    }
+
+    @Test
+    public void removeAssociatedLessons() {
+        addressBook.addLesson(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        addressBook.addLesson(new Lesson(ALICE, CLARA, new Subject("English")));
+
+        addressBook.removeAssociatedLessons(ALICE);
+        assertFalse(addressBook.hasLesson(new Lesson(ALICE, DANIEL, new Subject("Math"))));
+        assertFalse(addressBook.hasLesson(new Lesson(ALICE, CLARA, new Subject("English"))));
+
+        addressBook.addLesson(new Lesson(ALICE, DANIEL, new Subject("Math")));
+        addressBook.addLesson(new Lesson(BENSON, DANIEL, new Subject("English")));
+
+        addressBook.removeAssociatedLessons(DANIEL);
+        assertFalse(addressBook.hasLesson(new Lesson(ALICE, DANIEL, new Subject("Math"))));
+        assertFalse(addressBook.hasLesson(new Lesson(BENSON, DANIEL, new Subject("English"))));
     }
 
     @Test
@@ -94,14 +142,30 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 
         @Override
+        public void addListener(InvalidationListener listener) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeListener(InvalidationListener listener) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Lesson> getLessonList() {
+            return lessons;
         }
     }
 

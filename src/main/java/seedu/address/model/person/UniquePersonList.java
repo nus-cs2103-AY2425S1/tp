@@ -37,6 +37,16 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a person with an equivalent id as the given argument.
+     */
+    public boolean contains(int idToCheck) {
+        if (idToCheck < 0) {
+            return false;
+        }
+        return internalList.stream().anyMatch(person -> person.getId() == idToCheck);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -46,6 +56,20 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Gets a person from the list based on id.
+     * The person must already exist in the list.
+     */
+    public Person get(int personId) {
+        if (personId < 0 || !contains(personId)) {
+            throw new PersonNotFoundException();
+        }
+        return internalList.stream()
+                .filter(person -> person.getId() == personId)
+                .findFirst()
+                .get();
     }
 
     /**

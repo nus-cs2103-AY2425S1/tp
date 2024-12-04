@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ChartWindow chartWindow;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +52,10 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane chartPlaceholder;
+
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +73,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -119,7 +127,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -163,6 +171,15 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Opens the chart window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleChart(Person[] chartData) {
+        chartWindow = new ChartWindow(chartData);
+        chartPlaceholder.getChildren().add(chartWindow.getRoot());
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -175,6 +192,10 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+            if (!commandResult.isShowChart()) {
+                logger.info("Clearing chart");
+                chartPlaceholder.getChildren().clear();
+            }
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
@@ -182,6 +203,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isShowChart()) {
+                handleChart(commandResult.getChartData());
+            }
             if (commandResult.isExit()) {
                 handleExit();
             }
