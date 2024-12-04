@@ -1,46 +1,96 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ {
-    "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
-  }, {
-    "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tags" : [ ]
-  }, {
-    "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tags" : [ ]
-  }, {
-    "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tags" : [ ]
-  }, {
-    "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tags" : [ ]
-  } ]
+  "_comment": "AddressBook save file containing typical persons from TypicalPersons#getTypicalAddressBook()",
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "remark": "",
+      "appointment": {
+        "date": { "value": "01-01-24" },
+        "from": { "value": "0800" },
+        "to": { "value": "0900" }
+      },
+      "tags": ["friends"],
+      "role": "buyer"
+    },
+    {
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "email": "benson@example.com",
+      "remark": "",
+      "appointment": {
+        "date": { "value": "14-12-20" },
+        "from": { "value": "1000" },
+        "to": { "value": "2330" }
+      },
+      "tags": ["owesMoney", "friends"],
+      "role": "seller"
+    },
+    {
+      "name": "Carl Kurz",
+      "phone": "95352563",
+      "email": "carl@example.com",
+      "remark": "",
+      "appointment": {
+        "date": { "value": "01-01-24" },
+        "from": { "value": "0800" },
+        "to": { "value": "0900" }
+      },
+      "tags": ["friends"],
+      "role": "seller"
+    },
+    {
+      "name": "Daniel Meier",
+      "phone": "87652533",
+      "email": "cornelia@example.com",
+      "remark": "",
+      "appointment": {
+        "date": { "value": "01-01-24" },
+        "from": { "value": "0800" },
+        "to": { "value": "0900" }
+      },
+      "tags": ["friends"],
+      "role": "seller"
+    },
+    {
+      "name": "Elle Meyer",
+      "phone": "9482224",
+      "email": "elle@example.com",
+      "remark": "",
+      "appointment": {
+        "date": { "value": "01-01-24" },
+        "from": { "value": "0800" },
+        "to": { "value": "0900" }
+      },
+      "tags": ["friends"],
+      "role": "seller"
+    },
+    {
+      "name": "Fiona Kunz",
+      "phone": "9482427",
+      "email": "fiona@example.com",
+      "remark": "",
+      "appointment": {
+        "date": { "value": "01-01-24" },
+        "from": { "value": "0800" },
+        "to": { "value": "0900" }
+      },
+      "tags": ["friends"],
+      "role": "buyer"
+    },
+    {
+      "name": "George Best",
+      "phone": "9482442",
+      "email": "anna@example.com",
+      "remark": "",
+      "appointment": {
+        "date": { "value": "01-01-24" },
+        "from": { "value": "0800" },
+        "to": { "value": "0900" }
+      },
+      "tags": ["friends"],
+      "role": "seller"
+    }
+  ]
 }

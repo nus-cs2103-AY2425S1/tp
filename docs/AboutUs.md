@@ -9,51 +9,50 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Lam Rong Yi
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lrongyi.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/lrongyi)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
+* Role: Developer
 * Responsibilities: UI
 
-### Johnny Doe
+### Sean Kevin Dias
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/seandias.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/seandias)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Tan Wen Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/e1121208.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/e1121208)]
+[[portfolio](team/e1121208.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Muhammad
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/muhdbhz.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Developer, Testing
+* Responsibilities: UI
+
+### Wang Haozhen
+
+<img src="images/wang-h-z.png" width="200px">
+
+[[github](http://github.com/wang-h-z)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer, Testing
 * Responsibilities: UI

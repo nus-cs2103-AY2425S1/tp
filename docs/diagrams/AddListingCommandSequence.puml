@@ -1,0 +1,84 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+title Add Listing Sequence Diagram
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant ":AddListingCommandParser" as AddListingCommandParser LOGIC_COLOR
+participant "l:AddListingCommand" as AddListingCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+note left of LogicManager
+cmd:
+"listing n/Warton House p/400000 a/1000 addr/123 PASIR RIS (S)123456 r/east s/2 b/1 b/3"
+prefixes:
+"n/Warton House p/400000 a/1000 addr/123 PASIR RIS (S)123456 r/east s/2 b/1 b/3"
+end note
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(cmd)
+activate LogicManager
+
+LogicManager -> EzstatesParser : parseCommand(cmd)
+activate EzstatesParser
+
+create AddListingCommandParser
+EzstatesParser -> AddListingCommandParser
+activate AddListingCommandParser
+
+AddListingCommandParser --> EzstatesParser
+deactivate AddListingCommandParser
+
+EzstatesParser -> AddListingCommandParser : parse(prefixes)
+activate AddListingCommandParser
+
+create AddListingCommand
+AddListingCommandParser -> AddListingCommand
+activate AddListingCommand
+
+AddListingCommand --> AddListingCommandParser
+deactivate AddListingCommand
+
+AddListingCommandParser --> EzstatesParser : l
+deactivate AddListingCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddListingCommandParser -[hidden]-> EzstatesParser
+destroy AddListingCommandParser
+
+EzstatesParser --> LogicManager : l
+deactivate EzstatesParser
+
+LogicManager -> AddListingCommand : execute(m:Model)
+activate AddListingCommand
+
+AddListingCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> AddListingCommand : lastShownPersonList
+deactivate Model
+
+AddListingCommand -> Model : addListing(new Listing)
+activate Model
+Model --> AddListingCommand
+deactivate Model
+
+create CommandResult
+AddListingCommand -> CommandResult
+activate CommandResult
+CommandResult --> AddListingCommand
+deactivate CommandResult
+
+AddListingCommand --> LogicManager : r
+deactivate AddListingCommand
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml
+

@@ -1,0 +1,97 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+
+title Add Buyer Sequence Diagram
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant ":AddClientProfileParser" as AddClientProfileParser LOGIC_COLOR
+participant "b:AddBuyerProfileCommand" as AddBuyerProfileCommand LOGIC_COLOR
+participant "a:AddClientProfileCommand" as AddClientProfileCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+note left of LogicManager
+cmd:
+"buyer n/Bob p/98765432 e/bob@mail"
+prefixes:
+"n/Bob p/98765432 e/bob@mail"
+end note
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute(cmd)
+activate LogicManager
+
+LogicManager -> EzstatesParser : parseCommand(cmd)
+activate EzstatesParser
+
+create AddClientProfileParser
+EzstatesParser -> AddClientProfileParser
+activate AddClientProfileParser
+
+AddClientProfileParser --> EzstatesParser
+deactivate AddClientProfileParser
+
+EzstatesParser -> AddClientProfileParser : parse(prefixes)
+activate AddClientProfileParser
+
+create AddBuyerProfileCommand
+AddClientProfileParser -> AddBuyerProfileCommand
+activate AddBuyerProfileCommand
+
+AddBuyerProfileCommand --> AddClientProfileParser
+deactivate AddBuyerProfileCommand
+
+AddClientProfileParser --> EzstatesParser : b
+deactivate AddClientProfileParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddClientProfileParser -[hidden]-> EzstatesParser
+destroy AddClientProfileParser
+
+EzstatesParser --> LogicManager : b
+deactivate EzstatesParser
+
+LogicManager -> AddBuyerProfileCommand : execute(m:Model)
+activate AddBuyerProfileCommand
+
+AddBuyerProfileCommand -> AddClientProfileCommand : execute(m:Model)
+activate AddClientProfileCommand
+
+AddClientProfileCommand -> Model : hasPerson(Bob:Buyer)
+activate Model
+
+alt buyer exists
+    Model --> AddClientProfileCommand : true
+    deactivate Model
+    AddClientProfileCommand --> AddBuyerProfileCommand
+    deactivate AddBuyerProfileCommand
+else new buyer
+    Model --> AddClientProfileCommand : false
+    deactivate Model
+    AddClientProfileCommand -> Model : addPerson(Bob:Buyer)
+    activate Model
+    Model --> AddClientProfileCommand
+    deactivate Model
+
+    create CommandResult
+    AddClientProfileCommand -> CommandResult
+    activate CommandResult
+    CommandResult --> AddClientProfileCommand
+    deactivate CommandResult
+
+    AddClientProfileCommand --> AddBuyerProfileCommand : r
+    deactivate AddClientProfileCommand
+    AddBuyerProfileCommand --> LogicManager : r
+    deactivate AddBuyerProfileCommand
+end
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml

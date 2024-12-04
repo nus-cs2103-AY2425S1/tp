@@ -1,0 +1,46 @@
+.confirmation-dialog {
+    -fx-padding: 30;
+    -fx-background-color: #1d1d1d;
+    -fx-border-color: #333;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-min-width: 400;
+    -fx-min-height: 200;
+}
+
+.header-label {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFD700;
+}
+
+.client-name-label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #FFD700;
+}
+
+.yes-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-transition: -fx-transform 0.2s;
+}
+
+.no-button {
+    -fx-background-color: #f44336;
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-transition: -fx-transform 0.2s;
+}
+
+.yes-button:focused, .yes-button:hover {
+    -fx-background-color: #388E3C;
+    -fx-scale-x: 1.25;
+    -fx-scale-y: 1.25;
+}
+
+.no-button:focused, .no-button:hover {
+    -fx-background-color: #C62828;
+    -fx-scale-x: 1.25;
+    -fx-scale-y: 1.25;
+}

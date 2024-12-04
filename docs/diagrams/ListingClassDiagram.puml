@@ -1,0 +1,50 @@
+@startuml
+title Listing Class Diagram
+
+class Listing {
+    - name: Name
+    - price: Price
+    - area: Area
+    - region: Region
+    - address: Address
+    - seller: Person
+    - buyers: Set<Person>
+}
+
+class Name {
+    - fullName: String
+}
+
+class Price {
+    - formattedValue: String
+}
+
+class Area {
+    - squareMeters:String
+}
+
+enum Region {
+    NORTH
+    SOUTH
+    EAST
+    WEST
+    NORTHEAST
+    NORTHWEST
+    SOUTHEAST
+    SOUTHWEST
+    CENTRAL
+ }
+
+class Address {
+    - value: String
+}
+
+Listing *--> "1" Name : Composition
+Listing *--> "1" Price : Composition
+Listing *--> "1" Area : Composition
+Listing *--> "1" Region : Composition
+Listing *--> "1" Address : Composition
+Listing *--> "1" Person : Seller
+Listing *--> "*" Person : Buyer
+
+@enduml

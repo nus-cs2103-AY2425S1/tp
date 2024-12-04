@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam ParticipantBackgroundColor LOGIC_COLOR
+
+title Add Appointment Sequence Diagram
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":EzstatesParser" as EzstatesParser LOGIC_COLOR
+participant ":AddAppointmentCommandParser" as AddAppointmentCommandParser LOGIC_COLOR
+participant "a:AddAppointmentCommand" as AddAppointmentCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+note left of LogicManager
+cmd:
+"apt 1 d/201224 fr/0800 to/1000"
+args:
+"d/201224 fr/0800 to/1000"
+end note
+
+[-> LogicManager : execute(cmd)
+activate LogicManager
+
+LogicManager -> EzstatesParser : parseCommand(cmd)
+activate EzstatesParser
+
+create AddAppointmentCommandParser
+EzstatesParser -> AddAppointmentCommandParser
+activate AddAppointmentCommandParser
+
+AddAppointmentCommandParser --> EzstatesParser
+deactivate AddAppointmentCommandParser
+
+EzstatesParser -> AddAppointmentCommandParser : parse(args)
+activate AddAppointmentCommandParser
+
+create AddAppointmentCommand
+AddAppointmentCommandParser -> AddAppointmentCommand
+activate AddAppointmentCommand
+AddAppointmentCommand --> AddAppointmentCommandParser
+deactivate AddAppointmentCommand
+
+AddAppointmentCommandParser --> EzstatesParser : a
+deactivate AddAppointmentCommandParser
+EzstatesParser --> LogicManager : a
+deactivate EzstatesParser
+
+LogicManager -> AddAppointmentCommand : execute(m:Model)
+activate AddAppointmentCommand
+
+AddAppointmentCommand -> Model : updatePersonWithAppointment(index, apt)
+activate Model
+Model --> AddAppointmentCommand
+deactivate Model
+
+create CommandResult
+AddAppointmentCommand -> CommandResult :
+activate CommandResult
+CommandResult --> AddAppointmentCommand
+deactivate CommandResult
+
+AddAppointmentCommand --> LogicManager : r
+deactivate AddAppointmentCommand
+
+[<-- LogicManager : r
+deactivate LogicManager
+@enduml

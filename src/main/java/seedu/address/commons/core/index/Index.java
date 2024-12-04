@@ -66,4 +66,17 @@ public class Index {
     public String toString() {
         return new ToStringBuilder(this).add("zeroBasedIndex", zeroBasedIndex).toString();
     }
+
+    public String toStringOneBased() {
+        return String.format("%d", getOneBased());
+    }
+
+    public String toStringZeroBased() {
+        return String.format("%d", getZeroBased());
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(zeroBasedIndex);
+    }
 }

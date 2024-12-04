@@ -10,11 +10,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.name.Name;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,23 +29,30 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final String address;
+    private final JsonAdaptedAppointment appointment;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String role;
+    private final String remark;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email,
+                             @JsonProperty("appointment") JsonAdaptedAppointment appointment,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("role") String role,
+                             @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.appointment = appointment;
+        this.role = role;
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.remark = remark;
     }
 
     /**
@@ -53,10 +62,12 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        appointment = new JsonAdaptedAppointment(source.getAppointment());
+        role = source instanceof Buyer ? "buyer" : "seller";
         tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+                  .map(JsonAdaptedTag::new)
+                   .collect(Collectors.toList()));
+        remark = source.getRemark();
     }
 
     /**
@@ -65,45 +76,64 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        handleExceptions();
+
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
 
+        final Name modelName = new Name(name);
+        final Phone modelPhone = new Phone(phone);
+        final Email modelEmail = new Email(email);
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Appointment modelAppointment = appointment.toModelType();
+
+        return createPerson(modelName, modelPhone, modelEmail, modelTags, modelAppointment, remark);
+    }
+
+    private Person createPerson(Name name, Phone phone,
+            Email email, Set<Tag> tags, Appointment appointment, String remark) {
+        if (role.equals("buyer")) {
+            return new Buyer(name, phone, email, tags, appointment, remark);
+        } else {
+            return new Seller(name, phone, email, tags, appointment, remark);
+        }
+    }
+
+    private void handleExceptions() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
+
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
+
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
+
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (appointment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Appointment.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "Remark"));
+        }
     }
-
 }
