@@ -391,6 +391,9 @@ Action     | Format, Examples
 
 --------------------------------------------------------------------------------------------------------------------
 
+> Inspired by the similarly named section from ClubMembersContacts, W15-3 of AY2324 Semester 1, found 
+[here](https://github.com/AY2324S1-CS2103T-W15-3/tp/blob/master/docs/UserGuide.md).
+
 ## Field constraints
 
 ### Name
