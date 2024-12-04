@@ -1,3 +1,8 @@
+<!--
+    This class was developed by @mingyang143 with assistance from ChatGPT.
+    ChatGPT provided guidance and suggestions for implementation.
+-->
+
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.ScrollPane?>

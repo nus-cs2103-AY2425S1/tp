@@ -14,6 +14,10 @@ import seedu.address.model.person.Person;
 /**
  * The ChartWindow. Provides the basic application layout containing
  * a bar chart that displays the hours of each person.
+ *
+ *
+ * This class was developed by @mingyang143 with assistance from ChatGPT.
+ * ChatGPT provided guidance and suggestions for implementation.
  */
 public class ChartWindow extends UiPart<Region> {
     private static final String FXML = "ChartWindow.fxml";
