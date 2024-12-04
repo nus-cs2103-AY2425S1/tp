@@ -8,9 +8,14 @@ package Logic as LogicPackage {
 
 package "Parser Classes" as ParserClasses{
 }
-Class XYZCommand
+Class A_Command
+Class B_Command
+Class ImportCommand
+Class ExportCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
+Class "<<interface>>\nUndoable" as Undoable
+Class "{abstract}\nFileAccessCommand" as FileAccessCommand
 
 
 Class "<<interface>>\nLogic" as Logic
@@ -29,17 +34,27 @@ HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
 LogicManager -right->"1" ParserClasses
-ParserClasses ..> XYZCommand : <<create>>
+ParserClasses ..> A_Command : <<create>>
+ParserClasses ..> B_Command : <<create>>
 
-XYZCommand -up-|> Command
+FileAccessCommand -up-|> Command
+A_Command .up.|> Undoable
+A_Command -up-|> Command
+B_Command -up-|> Command
+ExportCommand -up-|> FileAccessCommand
+ImportCommand -up-|> FileAccessCommand
+ImportCommand .up.|> Undoable
 LogicManager .left.> Command : <<call>>
 
 LogicManager --> Model
 LogicManager --> Storage
+FileAccessCommand .up.> Storage
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
-note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+Model ..> Undoable
+note bottom of A_Command: Commands that can be undone: \nAddCommand, DeleteCommand, etc.
+note right of B_Command: Commands that cannot be undone: \nListCommand, UndoCommand, etc.
 
 Logic ..> CommandResult
 LogicManager .down.> CommandResult

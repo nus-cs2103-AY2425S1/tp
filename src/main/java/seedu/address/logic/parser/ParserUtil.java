@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,16 +15,19 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.GradYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RoomNumber;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_FILE_PATH =
+            "File paths must correspond to an existing path on the system";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -44,8 +51,10 @@ public class ParserUtil {
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!Name.hasValidChars(trimmedName)) {
+            throw new ParseException(Name.CHAR_MESSAGE_CONSTRAINTS);
+        } else if (!Name.isValidLength(trimmedName)) {
+            throw new ParseException(Name.LENGTH_MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
     }
@@ -96,6 +105,37 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String roomNumber} into an {@code RoomNumber}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code roomNumber} is invalid.
+     */
+    public static RoomNumber parseRoomNumber(String roomNumber) throws ParseException {
+        requireNonNull(roomNumber);
+        String trimmedRoomNumber = roomNumber.trim();
+        if (!RoomNumber.isValidRoomNumber(trimmedRoomNumber)) {
+            throw new ParseException(RoomNumber.MESSAGE_CONSTRAINTS);
+        }
+        return new RoomNumber(trimmedRoomNumber);
+    }
+
+    /**
+     * Parses a {@code String gradYear} into an {@code GradYear}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code GradYear} is invalid.
+     */
+    public static GradYear parseGradYear(String gradYear) throws ParseException {
+        requireNonNull(gradYear);
+        String trimmedGradYear = gradYear.trim();
+        if (!GradYear.isValidGradYear(trimmedGradYear)) {
+            throw new ParseException(GradYear.MESSAGE_CONSTRAINTS);
+        }
+        return new GradYear(trimmedGradYear);
+    }
+
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -103,7 +143,7 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
+        String trimmedTag = tag.trim().replaceAll(" +", " ");
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
@@ -119,6 +159,39 @@ public class ParserUtil {
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
+        if (tagSet.size() > 10) {
+            throw new ParseException(Tag.MAX_TAGS_CONSTRAINTS);
+        }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String filePath} into an {@code Path}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code filePath} is invalid.
+     */
+    public static Path parseFilePath(String filePath) throws ParseException {
+        requireNonNull(filePath);
+        String trimmedFilePath = filePath.trim();
+        Path filePathObject;
+
+        if (filePath.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_FILE_PATH);
+        }
+
+        // Get the Path object, if the input is invalid throw an exception
+        try {
+            filePathObject = Paths.get(trimmedFilePath);
+        } catch (InvalidPathException ipe) {
+            throw new ParseException(MESSAGE_INVALID_FILE_PATH);
+        }
+
+        // Check if the file exists on the system
+        if (!Files.exists(filePathObject)) {
+            throw new ParseException(MESSAGE_INVALID_FILE_PATH);
+        }
+
+        return filePathObject;
     }
 }

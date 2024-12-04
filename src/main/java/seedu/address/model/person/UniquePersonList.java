@@ -8,19 +8,21 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.exceptions.DuplicateNameException;
+import seedu.address.model.person.exceptions.DuplicatePhoneException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A person is considered unique by comparing using {@code Person#isSameName(Person)}. As such, adding and updating of
+ * persons uses Person#isSameName(Person) for equality so as to ensure that the person being added or updated is
+ * unique in terms of name and hecne identity in the UniquePersonList. However, the removal of a person uses
+ * Person#equals(Object) so as to ensure that the person with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Person#isSameName(Person)
  */
 public class UniquePersonList implements Iterable<Person> {
 
@@ -29,29 +31,71 @@ public class UniquePersonList implements Iterable<Person> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains a person with the same name as the one in the given argument)
      */
-    public boolean contains(Person toCheck) {
+    public boolean containsName(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().anyMatch(toCheck::isSameName);
+    }
+
+    /**
+     * Returns true if the list contains a person with the same phone number as the one in the given argument.
+     */
+    public boolean containsPhone(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameNumber);
+    }
+
+    /**
+     * Returns true if the list contains a person with the same email as the one in the given argument.
+     */
+    public boolean containsEmail(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameEmail);
+    }
+
+    /**
+     * Returns true if the list contains a person with GradYear earlier than {@code year}.
+     */
+    public boolean containsGraduatedBefore(String year) {
+        requireNonNull(year);
+        return internalList.stream().anyMatch(new GradYearPredicate(new GradYear(year)));
     }
 
     /**
      * Adds a person to the list.
      * The person must not already exist in the list.
+     * Another person with the same number and/or name must not already exist in the list.
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+        if (containsName(toAdd)) {
+            throw new DuplicateNameException();
+        } else if (containsPhone(toAdd)) {
+            throw new DuplicatePhoneException();
         }
         internalList.add(toAdd);
     }
 
     /**
+     * Inserts a person to the list at the specified index.
+     * The person must not already exist in the list.
+     * Another person with the same number and/or name must not already exist in the list.
+     */
+    public void insert(Person toAdd, Index index) {
+        requireNonNull(toAdd);
+        if (containsName(toAdd)) {
+            throw new DuplicateNameException();
+        } else if (containsPhone(toAdd)) {
+            throw new DuplicatePhoneException();
+        }
+        internalList.add(index.getZeroBased(), toAdd);
+    }
+
+    /**
      * Replaces the person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The person name of {@code editedPerson} must not be the same as another existing name in the list.
      */
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
@@ -61,8 +105,8 @@ public class UniquePersonList implements Iterable<Person> {
             throw new PersonNotFoundException();
         }
 
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
-            throw new DuplicatePersonException();
+        if (!target.isSameName(editedPerson) && containsName(editedPerson)) {
+            throw new DuplicateNameException();
         }
 
         internalList.set(index, editedPerson);
@@ -86,12 +130,12 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * {@code persons} must not contain duplicate names.
      */
     public void setPersons(List<Person> persons) {
         requireAllNonNull(persons);
         if (!personsAreUnique(persons)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateNameException();
         }
 
         internalList.setAll(persons);
@@ -135,12 +179,12 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code persons} contains only unique person names.
      */
     private boolean personsAreUnique(List<Person> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
-                if (persons.get(i).isSamePerson(persons.get(j))) {
+                if (persons.get(i).isSameName(persons.get(j))) {
                     return false;
                 }
             }

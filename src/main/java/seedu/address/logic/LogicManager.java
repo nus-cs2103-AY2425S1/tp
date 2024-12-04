@@ -10,6 +10,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.FileAccessCommand;
+import seedu.address.logic.commands.Undoable;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -48,7 +50,19 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        if (command instanceof FileAccessCommand faCommand) {
+            commandResult = faCommand.execute(model, storage);
+        } else {
+            commandResult = command.execute(model);
+        }
+        assert command.isExecuted() : "Command should be executed.";
+        assert commandResult != null : "CommandResult should not be null.";
+
+        // Push the command to the undo stack if it is undoable and successfully executed
+        // No need to check for success as the command will exit through an exception if it fails
+        if (command instanceof Undoable) {
+            model.pushToUndoStack((Undoable) command);
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -85,4 +99,5 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
+
 }

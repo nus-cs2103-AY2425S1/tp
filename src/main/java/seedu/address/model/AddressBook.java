@@ -2,9 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -60,11 +63,34 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same name as {@code person} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
+    public boolean hasName(Person person) {
         requireNonNull(person);
-        return persons.contains(person);
+        return persons.containsName(person);
+    }
+
+    /**
+     * Returns true if a person with the same phone number as {@code person} exists in the address book.
+     */
+    public boolean hasPhone(Person person) {
+        requireNonNull(person);
+        return persons.containsPhone(person);
+    }
+
+    /**
+     * Returns true if a person with the same email as {@code person} exists in the address book.
+     */
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return persons.containsEmail(person);
+    }
+
+    /**
+     * Returns true if a person with GradYear earlier than {@code year} exists in the address book.
+     */
+    public boolean hasGraduatedPeople(String year) {
+        return persons.containsGraduatedBefore(year);
     }
 
     /**
@@ -73,6 +99,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /**
+     * Inserts a person to the address book at the specified index.
+     * The person must not already exist in the address book.
+     */
+    public void insertPerson(Person p, Index index) {
+        persons.insert(p, index);
     }
 
     /**
@@ -92,6 +126,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes {@code person} from this {@code AddressBook} if {@code person} fulfils the predicate test.
+     * @param predicate Predicate to test whether to remove the Person.
+     */
+    public void removePersonByPredicate(Predicate<Person> predicate) {
+        Iterator<Person> personIterator = persons.iterator();
+        while (personIterator.hasNext()) {
+            Person p = personIterator.next();
+            if (predicate.test(p)) {
+                personIterator.remove();
+            }
+        }
     }
 
     //// util methods

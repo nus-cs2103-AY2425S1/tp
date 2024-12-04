@@ -5,9 +5,12 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.GradYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RoomNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,11 +23,18 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_ROOM_NUMBER = "01-0123";
+    public static final String DEFAULT_EMERGENCY_NAME = "Bob Bee";
+    public static final String DEFAULT_EMERGENCY_PHONE = "98765432";
+    public static final String DEFAULT_GRAD_YEAR = "2027";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private RoomNumber roomNumber;
+    private EmergencyContact emergencyContact;
+    private GradYear gradYear;
     private Set<Tag> tags;
 
     /**
@@ -34,7 +44,11 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        roomNumber = new RoomNumber(DEFAULT_ROOM_NUMBER);
         address = new Address(DEFAULT_ADDRESS);
+        emergencyContact = null;
+        gradYear = null;
+
         tags = new HashSet<>();
     }
 
@@ -45,7 +59,10 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
+        roomNumber = personToCopy.getRoomNumber().orElse(null);
+        address = personToCopy.getAddress().orElse(null);
+        emergencyContact = personToCopy.getEmergencyContact().orElse(null);
+        gradYear = personToCopy.getGradYear().orElse(null);
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -89,8 +106,72 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Sets the {@code RoomNumber} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRoomNumber(String roomNumber) {
+        this.roomNumber = new RoomNumber(roomNumber);
+        return this;
     }
 
+    /**
+     * Sets the {@code RoomNumber} of the {@code Person} that we are building to null.
+     */
+    public PersonBuilder withNoRoomNumber() {
+        this.roomNumber = null;
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmergencyContact} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEmergencyContact(String name, String phone) {
+        this.emergencyContact = new EmergencyContact(new Name(name), new Phone(phone));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmergencyContact} of the {@code Person} that we are building to null.
+     */
+    public PersonBuilder withNoEmergencyContact() {
+        this.emergencyContact = null;
+        return this;
+    }
+
+    /**
+     * Sets the {@code GradYear} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withGradYear(String gradYear) {
+        this.gradYear = new GradYear(gradYear);
+        return this;
+    }
+
+    /**
+     * Sets the {@code GradYear} of the {@code Person} that we are building to null.
+     */
+    public PersonBuilder withNoGradYear() {
+        this.gradYear = null;
+        return this;
+    }
+
+    /**
+     * Builds a person with all non-null Optional fields.
+     */
+    public Person buildForEditCommand() {
+        if (this.emergencyContact == null) {
+            this.emergencyContact = new EmergencyContact(new Name(DEFAULT_EMERGENCY_NAME),
+                    new Phone(DEFAULT_EMERGENCY_PHONE));
+        }
+        if (this.gradYear == null) {
+            this.gradYear = new GradYear(DEFAULT_GRAD_YEAR);
+        }
+        return new Person(name, phone, email, roomNumber, address, emergencyContact, gradYear, tags);
+    }
+
+    /**
+     * Builds a person.
+     */
+    public Person build() {
+        return new Person(name, phone, email, roomNumber, address, emergencyContact, gradYear, tags);
+    }
 }

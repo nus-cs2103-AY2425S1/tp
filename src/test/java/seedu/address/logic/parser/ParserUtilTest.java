@@ -6,9 +6,11 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -26,6 +28,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG_2 = "4".repeat(101);
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +36,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TAG_EXCESS_WHITESPACE = "table      tennis";
+    private static final String VALID_TAG_REGULAR_WHITESPACE = "table tennis";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -159,6 +164,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseTag_invalidValueExceedCharLimit_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG_2));
+    }
+
+    @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
         Tag expectedTag = new Tag(VALID_TAG_1);
         assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
@@ -172,6 +182,13 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseTag_validValueWithExcessWhitespaceBetweenWords_returnsTrimmedTag() throws Exception {
+        String tagWithWhitespace = VALID_TAG_EXCESS_WHITESPACE;
+        Tag expectedTag = new Tag(VALID_TAG_REGULAR_WHITESPACE);
+        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    }
+
+    @Test
     public void parseTags_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
     }
@@ -179,6 +196,16 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    }
+
+    @Test
+    public void parseTags_collectionsWithMoreThanTenTags_throwsParseException() {
+        // Create a list of 11 valid tags
+        List<String> tagList = new ArrayList<String>();
+        for (int i = 0; i < 11; i++) {
+            tagList.add("i".repeat(i + 1));
+        }
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(tagList));
     }
 
     @Test

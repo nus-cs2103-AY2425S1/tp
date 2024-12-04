@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -50,7 +51,54 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_NAME, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicatePhone_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        Person validPersonWithDupePhone = new PersonBuilder()
+                .withName("Dummy")
+                .withPhone(validPerson.getPhone().toString())
+                .build();
+        AddCommand addCommand = new AddCommand(validPersonWithDupePhone);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PHONE, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateEmail_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        Person validPersonWithDupeEmail = new PersonBuilder()
+                .withName("Dummy")
+                .withPhone("+123 12345")
+                .withEmail(validPerson.getEmail().toString())
+                .build();
+        AddCommand addCommand = new AddCommand(validPersonWithDupeEmail);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_EMAIL, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void undo_commandExecuted_success() throws Exception {
+        ModelStubAddDelete modelStub = new ModelStubAddDelete();
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        CommandResult commandResult = addCommand.execute(modelStub);
+        CommandResult undoCommandResult = addCommand.undo(modelStub);
+        assertEquals(String.format(AddCommand.MESSAGE_UNDO_SUCCESS, Messages.format(validPerson)),
+                undoCommandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(), modelStub.personsAdded);
+    }
+
+    @Test
+    public void undo_commandNotExecuted_throwsAssertionError() {
+        ModelStubAddDelete modelStub = new ModelStubAddDelete();
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        assertThrows(AssertionError.class, Command.MESSAGE_NOT_EXECUTED_ERROR, () -> addCommand.undo(modelStub));
     }
 
     @Test
@@ -124,6 +172,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void insertPerson(Person person, Index index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -134,12 +187,32 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasName(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasGraduatedBefore(String year) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deletePerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePersonByPredicate(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -157,6 +230,21 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void pushToUndoStack(Undoable command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandResult undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearUndoStack() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -171,9 +259,21 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasName(Person person) {
             requireNonNull(person);
-            return this.person.isSamePerson(person);
+            return this.person.isSameName(person);
+        }
+
+        @Override
+        public boolean hasPhone(Person person) {
+            requireNonNull(person);
+            return this.person.isSameNumber(person);
+        }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            requireNonNull(person);
+            return this.person.isSameEmail(person);
         }
     }
 
@@ -184,9 +284,21 @@ public class AddCommandTest {
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasName(Person person) {
             requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+            return personsAdded.stream().anyMatch(person::isSameName);
+        }
+
+        @Override
+        public boolean hasPhone(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSameNumber);
+        }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSameEmail);
         }
 
         @Override
@@ -201,4 +313,45 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * A Model stub that allow addition and deletion of a person.
+     */
+    private class ModelStubAddDelete extends ModelStub {
+        final ArrayList<Person> personsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasName(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSameName);
+        }
+
+        @Override
+        public boolean hasPhone(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSameNumber);
+        }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSameEmail);
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            requireNonNull(person);
+            personsAdded.add(person);
+        }
+
+        @Override
+        public void deletePerson(Person person) {
+            requireNonNull(person);
+            personsAdded.remove(person);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
+    }
 }

@@ -12,13 +12,16 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -76,11 +79,21 @@ public class FindCommandTest {
 
     @Test
     public void toStringMethod() {
+        Predicate<Person> combinedPredicate = p -> true; // Base predicate
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindCommand findCommand = new FindCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        combinedPredicate = combinedPredicate.and(predicate); // Combined predicate
+
+        // Use the combinedPredicate for creating FindCommand if it's supposed to use the combined one
+        FindCommand findCommand = new FindCommand(combinedPredicate); // Assuming constructor accepts Predicate<Person>
+
+        // Use FindCommand instance for ToStringBuilder in expected generation to match the test's 'this' context
+        String expected = new ToStringBuilder(findCommand)
+                .add("find predicate", combinedPredicate)
+                .toString();
+
         assertEquals(expected, findCommand.toString());
     }
+
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.

@@ -5,6 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.Undoable;
 import seedu.address.model.person.Person;
 
 /**
@@ -55,7 +58,22 @@ public interface Model {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasName(Person person);
+
+    /**
+     * Returns true if a person with the same phone number as {@code person} exists in the address book.
+     */
+    boolean hasPhone(Person person);
+
+    /**
+     * Returns true if a person with the same email as {@code person} exists in the address book.
+     */
+    boolean hasEmail(Person person);
+
+    /**
+     * Returns true if a person with GradYear earlier than {@code year} exists in the address book.
+     */
+    boolean hasGraduatedBefore(String year);
 
     /**
      * Deletes the given person.
@@ -64,10 +82,22 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes the persons who fulfil the predicate's test.
+     * @param predicate Predicate to test whether to delete the person.
+     */
+    void deletePersonByPredicate(Predicate<Person> predicate);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Inserts the given person at the specified index.
+     * {@code person} must not already exist in the address book.
+     */
+    void insertPerson(Person person, Index index);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -84,4 +114,19 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Pushes an undoable command to the undo stack.
+     */
+    void pushToUndoStack(Undoable command);
+
+    /**
+     * Undoes the most recent undoable command.
+     */
+    CommandResult undoAddressBook();
+
+    /**
+     * Clears the undo stack.
+     */
+    void clearUndoStack();
 }

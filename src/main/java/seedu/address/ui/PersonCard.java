@@ -39,6 +39,14 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label roomNumber;
+    @FXML
+    private Label emergencyContactName;
+    @FXML
+    private Label emergencyContactPhone;
+    @FXML
+    private Label gradYear;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -50,8 +58,36 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        // display default text if address is not assigned
+        address.setText(
+                person.getAddress().map(address -> address.value)
+                        .orElse("Address not yet assigned")
+        );
+
+        // display default text if room number is not assigned
+        roomNumber.setText(
+                person.getRoomNumber().map(room -> "#" + room.value)
+                        .orElse("Room not yet assigned")
+        );
+
+        // display default text if emergency contact is not assigned
+        emergencyContactName.setText(
+                person.getEmergencyContactName().map(name -> name.fullName)
+                        .orElse("Emergency contact name not yet assigned")
+        );
+        emergencyContactPhone.setText(
+                person.getEmergencyContactPhone().map(phone -> phone.value)
+                        .orElse("Emergency contact phone not yet assigned")
+        );
+
+        // display default text if grad year is not assigned
+        gradYear.setText(
+                person.getGradYear().map(gradYear -> gradYear.value)
+                        .orElse("-")
+        );
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
