@@ -20,6 +20,7 @@ checkstyle {
     toolVersion = '10.2'
 }
 
+//Test automation workflow inspired by CS2103-T16-3
 test {
     jvmArgs += [
             '--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
