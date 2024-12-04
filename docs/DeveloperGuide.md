@@ -72,6 +72,7 @@ Utilisation of ChatGPT by the following team members:
 
 - Charlene : For code completion, debugging, javadocs and test cases.
 - Jia Yi: For code edits, debugging, javadocs, some test cases and DG edits.
+- Jeremy: For code completion, debugging, javadocs, some DG edits and test cases.
 
 ---
 
