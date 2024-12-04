@@ -14,6 +14,8 @@
 ## **Acknowledgements**
 
 - GitHub copilot was used by Li Yifeng as an auto-complete tool during most of the coding.
+- Field constraints section of the User Guide was inspired by the similarly named section from ClubMembersContacts, 
+W15-3 of AY2324 Semester 1 found [here](https://github.com/AY2324S1-CS2103T-W15-3/tp/blob/master/docs/UserGuide.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
