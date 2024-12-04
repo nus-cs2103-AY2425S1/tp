@@ -1,0 +1,16 @@
+@startuml
+title View Activity Diagram
+start
+:View command is being input;
+if () then ([Index provided is a positive integer])
+if () then ([Index provided is within bounds of contact list])
+    :Display contact details on ContactDisplay pane;
+else([else])
+: Show error message that index is invalid;
+endif
+                else ([else])
+                    :Show error message that the index must be a positive number;
+
+endif
+stop
+@enduml

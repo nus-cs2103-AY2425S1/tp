@@ -2,17 +2,22 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.company.Industry;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,21 +25,47 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index must be a positive integer!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
+    public static Index parseIndex(String oneBasedIndex) throws ParseException, CommandException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
+
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses {@code oneBasedIndices} into an {@code List<Index>} and returns it. Leading and trailing whitespaces
+     * will be trimmed.
+     *
+     * @throws ParseException if the indices are invalid (not non-zero unsigned integer)
+     */
+    public static List<Index> parseIndices(String oneBasedIndices) throws ParseException, CommandException {
+        String[] indicesString = oneBasedIndices.trim().split(" ");
+        System.out.println(indicesString[0]);
+        assert indicesString.length > 0;
+        List<Index> indices = new ArrayList<>();
+
+        for (String oneBasedIndex : indicesString) {
+            String trimmedIndex = oneBasedIndex.trim();
+            if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            indices.add(Index.fromOneBased(Integer.parseInt(trimmedIndex)));
+        }
+
+        indices.sort(Index::compareTo);
+        return indices;
+    }
+
+    //@@author ruiming97
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
@@ -50,6 +81,36 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static StudentId parseStudentID(String studentID) throws ParseException {
+        requireNonNull(studentID);
+        String trimmedID = studentID.trim();
+        if (!StudentId.isValidId(trimmedID)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentId(trimmedID);
+    }
+
+    /**
+     * Parses a {@code String industry} into a {@code Industry}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code industry} is invalid.
+     */
+    public static Industry parseIndustry(String industry) throws ParseException {
+        requireNonNull(industry);
+        String trimmedIndustry = industry.trim();
+        if (!Industry.isValidIndustry(trimmedIndustry)) {
+            throw new ParseException(Industry.MESSAGE_CONSTRAINTS);
+        }
+        return new Industry(trimmedIndustry);
+    }
+    //@@author
     /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.

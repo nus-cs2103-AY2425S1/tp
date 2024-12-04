@@ -7,12 +7,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+
 public class IndexTest {
 
     @Test
-    public void createOneBasedIndex() {
+    public void createOneBasedIndex() throws CommandException {
         // invalid index
-        assertThrows(IndexOutOfBoundsException.class, () -> Index.fromOneBased(0));
+        assertThrows(CommandException.class, () -> Index.fromOneBased(0));
 
         // check equality using the same base
         assertEquals(1, Index.fromOneBased(1).getOneBased());
@@ -24,9 +26,9 @@ public class IndexTest {
     }
 
     @Test
-    public void createZeroBasedIndex() {
+    public void createZeroBasedIndex() throws CommandException {
         // invalid index
-        assertThrows(IndexOutOfBoundsException.class, () -> Index.fromZeroBased(-1));
+        assertThrows(CommandException.class, () -> Index.fromZeroBased(-1));
 
         // check equality using the same base
         assertEquals(0, Index.fromZeroBased(0).getZeroBased());
@@ -38,7 +40,7 @@ public class IndexTest {
     }
 
     @Test
-    public void equals() {
+    public void equals() throws CommandException {
         final Index fifthPersonIndex = Index.fromOneBased(5);
 
         // same values -> returns true
@@ -59,7 +61,7 @@ public class IndexTest {
     }
 
     @Test
-    public void toStringMethod() {
+    public void toStringMethod() throws CommandException {
         Index index = Index.fromZeroBased(0);
         String expected = Index.class.getCanonicalName() + "{zeroBasedIndex=" + index.getZeroBased() + "}";
         assertEquals(expected, index.toString());

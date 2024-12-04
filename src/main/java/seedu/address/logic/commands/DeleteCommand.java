@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -19,31 +20,61 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the person identified by the index number used in the displayed person list, "
+            + "or deletes all contacts shown if 'all' is provided as the parameter.\n"
+            + "Parameters: INDEX (must be a positive integer) or 'all'\n"
+            + "Example: " + COMMAND_WORD + " 1\n"
+            + "Example: " + COMMAND_WORD + " all";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-
-    private final Index targetIndex;
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Contacts: %1$s";
+    public static final String MESSAGE_INVALID_INDEX_OR_STRING = "The person index provided is invalid. "
+            + "Index must either be:\n"
+            + "1. A positive integer within the size of the list\n"
+            + "2. 'all' if you want to delete all contacts in the list.";
+    public static final String MESSAGE_EMPTY_CONTACTS = "There is no contact to be deleted.";
+    private List<Index> targetIndices = null;
+    private boolean deleteAll = false;
 
     public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+        this.targetIndices = List.of(targetIndex);
+    }
+
+    public DeleteCommand(List<Index> targetIndices) {
+        this.targetIndices = targetIndices;
+    }
+
+    public DeleteCommand() {
+        deleteAll = true;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> deletedPersons = new ArrayList<>();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (deleteAll) {
+            List<Person> toDelete = new ArrayList<>(lastShownList);
+            if (toDelete.isEmpty()) {
+                throw new CommandException(MESSAGE_EMPTY_CONTACTS);
+            }
+            for (Person p : toDelete) {
+                model.deletePerson(p);
+                deletedPersons.add(p);
+            }
+        } else {
+            for (Index targetIndex : targetIndices) {
+                if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                    throw new CommandException(MESSAGE_INVALID_INDEX_OR_STRING);
+                }
+                Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+                model.deletePerson(personToDelete);
+                deletedPersons.add(personToDelete);
+            }
         }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(deletedPersons)));
     }
+
 
     @Override
     public boolean equals(Object other) {
@@ -57,13 +88,19 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+
+        if (targetIndices == null) {
+            return otherDeleteCommand.targetIndices == null;
+        }
+
+        return targetIndices.equals(otherDeleteCommand.targetIndices);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("targetIndices", targetIndices)
+                .add("deleteAll", deleteAll)
                 .toString();
     }
 }

@@ -1,10 +1,7 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
@@ -29,17 +26,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label nameLabel;
+    @FXML
+    private Label categoryLabel;
+    @FXML
+    private Label phoneLabel;
     @FXML
     private Label id;
-    @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -48,12 +41,21 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        nameLabel.setText(person.getName().fullName);
+        categoryLabel.setText(person.getCategoryDisplayName());
+        addCategoryColor(person.getCategoryDisplayName());
+        phoneLabel.setText("Phone: " + person.getPhone().value);
+    }
+
+    /**
+     * Adds background color for category.
+     * @param value The value of the category.
+     */
+    public void addCategoryColor(String value) {
+        if ("Student".equalsIgnoreCase(value.trim())) {
+            categoryLabel.getStyleClass().add("student-background");
+        } else if ("Company".equalsIgnoreCase(value.trim())) {
+            categoryLabel.getStyleClass().add("company-background");
+        }
     }
 }

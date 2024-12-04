@@ -1,14 +1,54 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2425S1-CS2103T-T14-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T14-2/tp/actions)
 
-![Ui](docs/images/Ui.png)
+# AdmiNUS - Contact Management for NUS Clubs
+![Ui](./docs/images/viewContactUI.png)
 
-* This is **a sample project for Software Engineering (SE) students**.<br>
-  Example usages:
-  * as a starting point of a course project (as opposed to writing everything from scratch)
-  * as a case study
-* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
-  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
-  * It comes with a **reasonable level of user and developer documentation**.
-* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
+AdmiNUS is a desktop application for managing contact details of NUS club administrators. It is optimized for Command Line Interface (CLI) users who prefer efficient and fast contact management without sacrificing the convenience of a Graphical User Interface (GUI).
+
+## Features
+
+AdmiNUS allows you to:
+
+* Add, edit, delete, and search student and company contacts easily.
+
+* Track contacts by categories (e.g., students, companies) and tags.
+
+* Use both CLI and GUI for seamless interaction.
+
+* Import and export contact data via CSV files.
+
+The application is designed for those who are constantly organizing events, managing multiple groups, and need a streamlined way to keep everything in order.
+
+## Why Use AdmiNUS?
+
+AdmiNUS makes contact management efficient by leveraging the speed of CLI commands alongside a simple, clear GUI. It's especially helpful for **NUS Club Admins** who need to organize contacts for events, vendors, and participants.
+
+### Example Use Case
+
+Suppose you are organizing an NUS event with over 200 participants, including student volunteers and vendors. With AdmiNUS, adding, editing, and filtering contacts is quick and straightforward. For example, to add a student:
+
+```shell
+student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/123 Clementi Rd, #02-01 t/volunteer
+```
+
+This command adds John Doe instantly, tagged as a volunteer. You can then use commands like `filtertag volunteer` to find all volunteers, saving time compared to traditional methods.
+
+AdmiNUS helps you stay organized and efficient, letting you focus on running successful events.
+
+## Getting Started
+* If you are interested in using AdmiNUS, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing AdmiNUS, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+
+
+## Acknowledgements
+
+AdmiNUS incorporates various libraries and tools, including:
+- [JavaFX](https://openjfx.io/) for the GUI.
+- [Jackson](https://github.com/FasterXML/jackson) for data serialization
+- [JUnit5](https://github.com/junit-team/junit5) for testing
+
+AdmiNUS is your comprehensive solution for efficient contact management, designed to meet the unique needs of NUS club administrators and event organizers.
+
+# Credits
+
+- This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).

@@ -1,0 +1,24 @@
+@startuml
+title Add Student Company Activity Diagram
+start
+:Student/Company command is being input;
+
+if () then ([All compulsory parameters are being input])
+    if () then ([No existing student with identical student ID,
+        or no existing company with identical name and industry])
+        if () then ([All parameters are valid])
+            :New contact with specified details is added;
+        else ([else])
+            :Show error message stating which parameters do
+        not meet the requirements;
+        endif
+
+    else ([else])
+        :Show error message about contact already exist;
+    endif
+else ([else])
+    :Show error message stating command format invalid;
+endif
+
+stop
+@enduml

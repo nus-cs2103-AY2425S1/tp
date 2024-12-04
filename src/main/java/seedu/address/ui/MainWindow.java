@@ -2,13 +2,20 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -16,6 +23,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -23,12 +31,17 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    private static final double PERSON_LIST_PANEL_SPLIT_POSITION = 0.55;
+    private static final double RESULT_DISPLAY_SPLIT_POSITION = 0.25;
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
+    private SplitPane splitPane;
+    private ContactDisplay contactDisplay;
+    private ScrollPane scrollableContactDisplay;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -110,17 +123,87 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        logger.info("Filling up the inner parts of the window...");
+        setupPersonListPanel();
+        setupCommandBox();
+        setupContactDisplay();
+        setupSplitPane();
+        setupResultDisplay();
+        setupStatusBarFooter();
+        addPersonSelectionListener();
+        addPersonListChangeListener();
+    }
+
+    /**
+     * Sets up the person list panel UI.
+     */
+    private void setupPersonListPanel() {
+        logger.info("Setting up PersonListPanel...");
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanel.getPersonListView().setMouseTransparent(true);
+        logger.info("PersonListPanel setup complete.");
+    }
 
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
+    /**
+     * Sets up the command box UI.
+     */
+    private void setupCommandBox() {
+        logger.info("Setting up CommandBox...");
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        logger.info("CommandBox setup complete.");
+    }
+
+    /**
+     * Sets up the contact display UI.
+     */
+    private void setupContactDisplay() {
+        logger.info("Setting up ContactDisplay...");
+        contactDisplay = new ContactDisplay();
+        contactDisplay.showHelpDisplay();
+        scrollableContactDisplay = contactDisplay.getScrollPane();
+        logger.info("ContactDisplay setup complete.");
+    }
+
+    /**
+     * Sets up the split pane for person list and contact display.
+     */
+    private void setupSplitPane() {
+        logger.info("Setting up SplitPane...");
+        splitPane = new SplitPane();
+        splitPane.getItems().addAll(personListPanel.getRoot(), contactDisplay.getRoot());
+        splitPane.setDividerPositions(PERSON_LIST_PANEL_SPLIT_POSITION);
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(splitPane);
+        logger.info("SplitPane setup complete.");
+    }
+
+    /**
+     * Sets up the result display pane.
+     */
+    private void setupResultDisplay() {
+        logger.info("Setting up ResultDisplay...");
+        SplitPane resultDisplaySplitPane = new SplitPane();
+        resultDisplaySplitPane.setOrientation(Orientation.VERTICAL);
+        resultDisplay = new ResultDisplay();
+        resultDisplaySplitPane.getItems().addAll(resultDisplay.getRoot(), splitPane);
+        resultDisplaySplitPane.setDividerPositions(RESULT_DISPLAY_SPLIT_POSITION);
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        VBox.setVgrow(resultDisplaySplitPane, Priority.ALWAYS);
+        VBox.setVgrow(splitPane, Priority.ALWAYS);
+        AnchorPane.setBottomAnchor(splitPane, 0.0);
+        logger.info("ResultDisplay setup complete.");
+    }
+
+    /**
+     * Sets up the status bar footer.
+     */
+    private void setupStatusBarFooter() {
+        logger.info("Setting up StatusBarFooter...");
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        logger.info("StatusBarFooter setup complete.");
     }
 
     /**
@@ -136,10 +219,63 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Checks if a person is being selected.
+     */
+    private void addPersonSelectionListener() {
+        logger.info("Adding Person selection listener...");
+        personListPanel.getPersonListView().getSelectionModel().selectedItemProperty()
+                .addListener((obs, oldSelection, newSelection) -> {
+                    if (newSelection != null) {
+                        logger.info("Person selected: " + newSelection);
+                        contactDisplay.updateContactDetails(newSelection);
+                    } else {
+                        logger.info("No person selected.");
+                        contactDisplay.clear();
+                    }
+                });
+    }
+
+    /**
+     * Checks for change in the person list.
+     */
+    private void addPersonListChangeListener() {
+        logger.info("Adding PersonList change listener...");
+        personListPanel.getPersonList().addListener((ListChangeListener<Person>) change -> {
+            while (change.next()) {
+                Person selectedPerson = personListPanel.getPersonListView()
+                        .getSelectionModel().getSelectedItem();
+                if (change.wasRemoved()) {
+                    logger.info("Person removed from list.");
+                    if (!personListPanel.getPersonList().contains(selectedPerson)) {
+                        contactDisplay.clear();
+                    }
+                }
+                if (change.wasUpdated() || change.wasReplaced()) {
+                    for (int i = change.getFrom(); i < change.getTo(); i++) {
+                        if (i < personListPanel.getPersonList().size()) {
+                            Person updatedPerson = personListPanel.getPersonList().get(i);
+                            logger.info("Updated person: " + updatedPerson);
+                            contactDisplay.updateContactDetails(updatedPerson);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * Shows the list of possible commands on the right.
      */
     @FXML
     public void handleHelp() {
+        contactDisplay.showHelpDisplay();
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.'
+     */
+    @FXML
+    public void handleHelpWindow() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
@@ -178,8 +314,16 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.getPersonToDisplay() != null) {
+                contactDisplay.updateContactDetails(commandResult.getPersonToDisplay());
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowHelpWindow()) {
+                handleHelpWindow();
             }
 
             if (commandResult.isExit()) {

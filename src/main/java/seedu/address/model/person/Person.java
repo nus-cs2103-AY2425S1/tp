@@ -8,13 +8,15 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.company.Industry;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
 
     // Identity fields
     private final Name name;
@@ -36,7 +38,6 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
     }
-
     public Name getName() {
         return name;
     }
@@ -53,25 +54,17 @@ public class Person {
         return address;
     }
 
+    public abstract String getCategoryDisplayName();
+    public abstract StudentId getStudentId();
+    public abstract Industry getIndustry();
+    public abstract boolean isSamePerson(Person otherPerson);
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
-    }
-
-    /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
-     */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
     }
 
     /**
