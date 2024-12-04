@@ -45,6 +45,7 @@ public class UpdateStockLevelCommand extends Command {
         this.newCurrentStockLevel = newCurrentStockLevel;
     }
 
+    //@@author T1duS-reused
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -77,6 +78,7 @@ public class UpdateStockLevelCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PRODUCT_SUCCESS,
                 Messages.format(editedProduct), newCurrentStockLevel));
     }
+    //@@author
 
     @Override
     public boolean equals(Object other) {
