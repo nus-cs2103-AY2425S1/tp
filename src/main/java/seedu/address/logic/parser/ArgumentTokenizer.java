@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.util.Pair;
+
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
  *     e.g. {@code some preamble text t/ 11.00 t/12.00 k/ m/ July}  where prefixes are {@code t/ k/ m/}.<br>
@@ -26,6 +28,26 @@ public class ArgumentTokenizer {
     public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
+    }
+
+    /**
+     * Extracts the last prefix or the entire string if no prefix is found.
+     *
+     * @param userInput the input string.
+     * @return a pair: the first element is the string and the second element is the prefix name if found,
+     *     null otherwise.
+     */
+    public static Pair<String, String> getRightmostArgument(String userInput) {
+        int lastSlashIndex = userInput.lastIndexOf('/');
+        // No prefix found, return the entire string, assumed to be a command
+        if (lastSlashIndex == -1) {
+            return new Pair<>(userInput, null);
+        }
+
+        int prefixNameStart = userInput.lastIndexOf(' ', lastSlashIndex) + 1; // 0 if no whitespace found
+
+        return new Pair<>(userInput.substring(lastSlashIndex + 1),
+            userInput.substring(prefixNameStart, lastSlashIndex + 1));
     }
 
     /**

@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title After "Delete Product Command" State
+
+package State {
+    class State1 as "<u>ab:AddressBook</u>"
+
+Class "<u>:Supplier</u> \n name : Hayley \n phone : 91836434 \n email : hay@gmail.com \n address : MBS \n tags : [ ] \n products : [ ]" as Supplier {
+
+}
+
+}
+Supplier -up-> State1
+@enduml

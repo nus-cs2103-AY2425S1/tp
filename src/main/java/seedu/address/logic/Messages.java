@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.person.Person;
+import seedu.address.model.product.Product;
+import seedu.address.model.supplier.Supplier;
+
 
 /**
  * Container for user visible messages.
@@ -13,9 +15,20 @@ import seedu.address.model.person.Person;
 public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
+    public static final String MESSAGE_UNEXPECTED_PREAMBLE = "Unexpected content before command arguments. \n%1$s";
+    public static final String MESSAGE_MISSING_REQUIRED_PREFIXES = "Missing required prefixes. \n%1$s";
+    public static final String MESSAGE_INVALID_SYNTAX = "Unexpected syntax found. \n"
+            + "Reason 1: An extra prefix has been used. Only the following prefixes are allowed: \n%1$s \n"
+            + "Reason 2: The character '/' is strictly reserved for prefixes and should not appear elsewhere "
+            + "in the command.\n "
+            + "Please remove any unnecessary prefixes and ensure that '/' is used only for valid prefixes.";
+
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX = "The supplier index provided is invalid";
+    public static final String MESSAGE_INVALID_STOCK_LEVEL = "Stock Level should be a non-negative integer.";
+    public static final String MESSAGE_SUPPLIERS_LISTED_OVERVIEW = "%1$d suppliers listed!";
+    public static final String MESSAGE_PRODUCTS_LISTED_OVERVIEW = "%1$d products listed!";
+
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -32,20 +45,28 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code supplier} for display to the user.
      */
-    public static String format(Person person) {
+    public static String format(Supplier supplier) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
+        builder.append(supplier.getName())
                 .append("; Phone: ")
-                .append(person.getPhone())
+                .append(supplier.getPhone())
                 .append("; Email: ")
-                .append(person.getEmail())
+                .append(supplier.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(supplier.getAddress())
                 .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+        supplier.getTags().forEach(builder::append);
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code supplier} for display to the user.
+     */
+    public static String format(Product product) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(product.getName());
+        return builder.toString();
+    }
 }
