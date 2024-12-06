@@ -1,12 +1,13 @@
 package seedu.address.testutil;
 
-import seedu.address.commons.core.index.Index;
-
 /**
  * A utility class containing a list of {@code Index} objects to be used in tests.
  */
 public class TypicalIndexes {
-    public static final Index INDEX_FIRST_PERSON = Index.fromOneBased(1);
-    public static final Index INDEX_SECOND_PERSON = Index.fromOneBased(2);
-    public static final Index INDEX_THIRD_PERSON = Index.fromOneBased(3);
+    public static final int INDEX_FIRST_PERSON = 0;
+    public static final int INDEX_SECOND_PERSON = 1;
+    public static final int INDEX_THIRD_PERSON = 2;
+    public static final int ID_FIRST_PERSON = 12;
+    public static final int ID_SECOND_PERSON = 14;
+    public static final int ID_THIRD_PERSON = 16;
 }

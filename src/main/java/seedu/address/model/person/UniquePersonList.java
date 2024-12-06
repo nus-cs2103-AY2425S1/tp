@@ -37,6 +37,15 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns the role of a person (patient or doctor or null if undefined)
+     */
+    public String getPersonRole(Person person) {
+        requireNonNull(person);
+        return internalList.stream().filter(person::isSamePerson)
+                .map(Person::getRole).findFirst().orElse(null);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

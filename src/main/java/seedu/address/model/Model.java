@@ -58,10 +58,16 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns the role of a person (patient or doctor)
+     */
+    String getPersonRole(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
+
 
     /**
      * Adds the given person.
@@ -78,6 +84,20 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    ObservableList<Person> getAllPersons();
+
+    /** Returns an unmodifiable view of the filtered person list by Id search*/
+    ObservableList<Person> getFilteredPersonById(int id);
+
+    /** Returns the person via id search*/
+    Person getFilteredPersonById(ObservableList<Person> allPersons, int id);
+
+    /** Returns the patient via id search*/
+    Person getFilteredPatientById(ObservableList<Person> allPersons, int id);
+
+    /** Returns the doctor via id search*/
+    Person getFilteredDoctorById(ObservableList<Person> allPersons, int id);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

@@ -16,8 +16,8 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "the specified keywords (case-insensitive).\n"
+            + COMMAND_WORD + " KEYWORDS \n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
@@ -30,6 +30,13 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        if (model.getFilteredPersonList().isEmpty()) {
+            return new CommandResult(Messages.MESSAGE_INVALID_NAME);
+        }
+        if (model.getFilteredPersonList().size() > 1) {
+            return new CommandResult(String.format(Messages.MESSAGE_MULTIPLE_PERSONS_WITH_THE_SAME_NAME,
+                    model.getFilteredPersonList().size()));
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

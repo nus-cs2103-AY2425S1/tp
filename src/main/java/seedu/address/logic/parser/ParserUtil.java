@@ -2,37 +2,36 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.exceptions.InvalidIdException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code id} into an {@code Id} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws InvalidIdException if the specified person id is invalid.
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+    public static int parsePersonId(String id) throws InvalidIdException {
+        requireNonNull(id);
+        String trimmedId = id.trim();
+        if (!Id.isValidId(trimmedId)) {
+            throw new InvalidIdException(Id.MESSAGE_CONSTRAINTS);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return Integer.parseInt(trimmedId);
     }
 
     /**
@@ -49,6 +48,65 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid or not in the expected format.
+     */
+    public static LocalDateTime parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim().replace("Optional[", "").replace("]", "");
+        LocalDateTime time;
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        try {
+            time = LocalDateTime.parse(trimmedDate, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date-time format, please use yyyy-MM-dd HH:mm.");
+        }
+
+        if (currentDateTime.isAfter(time)) {
+            throw new ParseException("Invalid time entered. The date and time can't be in the past!");
+        }
+        return time;
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid or not in the expected format.
+     */
+    public static LocalDateTime parseDateWithNoLimit(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim().replace("Optional[", "").replace("]", "");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        try {
+            return LocalDateTime.parse(trimmedDate, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date-time format, please use yyyy-MM-dd HH:mm.");
+        }
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid or not in the expected format.
+     */
+    public static LocalDate parseDayDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim().replace("Optional[", "").replace("]", "");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        try {
+            return LocalDate.parse(trimmedDate, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date-time format, please use yyyy-MM-dd");
+        }
+    }
+
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
@@ -95,30 +153,4 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
-    /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
-        }
-        return new Tag(trimmedTag);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
-    }
 }

@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ObservableList<Person> allPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +34,18 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.allPersons = this.addressBook.getPersonList(); // Unfiltered list of all persons
+        this.filteredPersons = new FilteredList<>(allPersons); // Filtered view based on allPersons
+        /*
+        for (Person person : filteredPersons) {
+            if (person.getRole().equals("PATIENT")) {
+                Doctor.addDoctors((Doctor) person);
+            }
+            if (person.getRole().equals("PATIENT")) {
+                Patient.addPatient(person);
+            }
+        }
+        */
     }
 
     public ModelManager() {
@@ -94,6 +106,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String getPersonRole(Person person) {
+        requireNonNull(person);
+        return addressBook.getPersonRole(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -120,6 +138,51 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    @Override
+    public ObservableList<Person> getFilteredPersonById(int id) {
+        return filteredPersons.filtered(person -> person.getId() == id);
+    }
+
+    @Override
+    public Person getFilteredPersonById(ObservableList<Person> allPersons, int id) {
+        Person person = null;
+        for (Person target : allPersons) {
+            if (target.getId() == id) {
+                person = target;
+                break;
+            }
+        }
+        return person;
+    }
+
+    @Override
+    public Person getFilteredPatientById(ObservableList<Person> allPersons, int id) {
+        Person patient = null;
+        for (Person person : allPersons) {
+            if (person.getId() == id) {
+                patient = person;
+                break;
+            }
+        }
+        return patient;
+    }
+
+    @Override
+    public Person getFilteredDoctorById(ObservableList<Person> allPersons, int id) {
+        Person doctor = null;
+        for (Person person : allPersons) {
+            if (person.getId() == id) {
+                doctor = person;
+                break;
+            }
+        }
+        return doctor;
+    }
+
+    public ObservableList<Person> getAllPersons() {
+        return allPersons;
     }
 
     @Override
