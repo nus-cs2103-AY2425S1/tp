@@ -20,11 +20,10 @@ import seedu.address.model.person.Remark;
 
 /**
  * Parses input arguments and creates a new CreateDoctorCommand object
- *
- * Adapted with minor modifications from work by @@author sandyk0105
  */
 public class CreateDoctorCommandParser implements Parser<CreateDoctorCommand> {
-
+    //@@author Nigeltzy-reused
+    //Reused from @@author sandyk0105's code with minor modifications
     /**
      * Parses the given {@code String} of arguments in the context of the CreatePatientCommand
      * and returns an CreatePatientCommand object for execution.
@@ -60,4 +59,5 @@ public class CreateDoctorCommandParser implements Parser<CreateDoctorCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+    //@@author
 }

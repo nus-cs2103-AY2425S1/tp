@@ -13,13 +13,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
-
 /**
  * Creates a new Doctor profile
- *
- * Code is adapted from @@author sandyk0105
  */
 public class CreateDoctorCommand extends Command {
+    //@author Nigeltzy-reused
+    //Reused from @@author sandyk0105's code with minor modifications
     public static final String COMMAND_WORD = "createD";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new doctor. \n"
@@ -92,5 +91,6 @@ public class CreateDoctorCommand extends Command {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(toAdd);
     }
+    //@@author
 
 }
