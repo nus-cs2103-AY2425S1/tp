@@ -66,18 +66,4 @@ public class AddReminderCommandParserTest {
 
         assertParseSuccess(parser, "1 d/" + today + DESCRIPTION_DESC, expectedCommand);
     }
-
-    /*
-    This test is currently not working as the hashcodes for the results are different
-    @Test
-    public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = "1" + DATE_DESC + DESCRIPTION_DESC;
-
-        AddReminderCommand expectedCommand = new AddReminderCommand(targetIndex, VALID_DATE,
-                VALID_DESCRIPTION);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-    */
 }
