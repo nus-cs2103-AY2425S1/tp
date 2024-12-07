@@ -35,7 +35,8 @@ public class PersonTest {
 
         // same email, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withLastSeen(VALID_LAST_SEEN_BOB).withTags(VALID_TAG_HUSBAND).withRemark(VALID_REMARK_HANDSOME).build();
+                .withLastSeen(VALID_LAST_SEEN_BOB).withTags(VALID_TAG_HUSBAND)
+                .withRemark(VALID_REMARK_HANDSOME).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different email, all other attributes same -> returns false
@@ -45,7 +46,6 @@ public class PersonTest {
         // email differs in case, all other attributes same -> returns false
         Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB.toUpperCase()).build();
         assertFalse(BOB.isSamePerson(editedBob));
-        
     }
 
     @Test
