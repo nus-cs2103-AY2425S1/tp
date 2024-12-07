@@ -34,31 +34,31 @@ public class TypicalPersons {
             .withPriority("low").withRemark("likes apple").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withRemark("likes apple")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("benson@example.com").withPhone("98765432")
             .withOrganisation("National University of Singapore")
             .withLastSeen("17-11-2024")
             .withTags("owesMoney", "friends")
             .withPriority("medium")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withOrganisation("National University of Singapore")
+            .withEmail("carl@example.com").withOrganisation("National University of Singapore")
             .withLastSeen("05-09-2022").withRemark("handsome").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withOrganisation("National University of Singapore")
+            .withEmail("daniel@example.com").withOrganisation("National University of Singapore")
             .withLastSeen("04-04-2023").withTags("friends").withRemark("handsome").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withOrganisation("National University of Singapore")
+            .withEmail("elle@example.com").withOrganisation("National University of Singapore")
             .withLastSeen("06-06-2024").withRemark("plays basketball").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withOrganisation("National University of Singapore")
+            .withEmail("fiona@example.com").withOrganisation("National University of Singapore")
             .withLastSeen("03-07-2024").withRemark("pretty").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withOrganisation("National University of Singapore")
+            .withEmail("george@example.com").withOrganisation("National University of Singapore")
             .withLastSeen("01-09-2024").withRemark("pretty").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
-            .withEmail("stefan@example.com").withOrganisation("National University of Singapore").build();
+            .withEmail("hoon@example.com").withOrganisation("National University of Singapore").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withOrganisation("National University of Singapore").build();
 

@@ -16,12 +16,6 @@ public class PriorityHighToLowComparator implements Comparator<Person> {
         }
 
         // If same priority, compare by name for tie-breaker
-        int nameResult = o1.getName().compareTo(o2.getName());
-
-        if (nameResult != 0) {
-            return nameResult;
-        }
-
         return o1.getEmail().compareTo(o2.getEmail());
     }
 
