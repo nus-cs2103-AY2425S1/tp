@@ -1,0 +1,64 @@
+{
+  "_comment": "HallPointer save file which contains the same Member values as in TypicalMembers#getTypicalHallPointer()",
+  "members" : [ {
+    "name" : "Alice Pauline",
+    "telegram" : "PauLice",
+    "room" : "6-3-20",
+    "tags" : [ "friends" ],
+    "sessions" : [ ]
+  }, {
+    "name" : "Benson Meier",
+    "telegram" : "benson_meier",
+    "room" : "6-10-95",
+    "tags" : [ "owesMoney", "friends" ],
+    "sessions" : [ ]
+  }, {
+    "name" : "Carl Kurz",
+    "telegram" : "kurZ0123",
+    "room" : "7-8-10",
+    "tags" : [ ],
+    "sessions" : [ ]
+  }, {
+    "name" : "Daniel Meier",
+    "telegram" : "whisperWhiz23",
+    "room" : "1-3-3",
+    "tags" : [ "friends" ],
+    "sessions" : [ ]
+  }, {
+    "name" : "Elle Meyer",
+    "telegram" : "meyer_for_lif3",
+    "room" : "4-5-55",
+    "tags" : [ ],
+    "sessions" : [ ]
+  }, {
+    "name" : "Fiona Kunz",
+    "telegram" : "FIONAKUNZ",
+    "room" : "8-10-300",
+    "tags" : [ ],
+    "sessions" : [ {
+      "sessionName" : "Meeting W1",
+      "date" : "03 Mar 2000",
+      "points" : {
+        "points" : "0"
+      }
+    } ]
+  }, {
+    "name" : "George Best",
+    "telegram" : "B357650463",
+    "room" : "90-2-8",
+    "tags" : [ ],
+    "sessions" : [ {
+      "sessionName" : "Rehearsal W1",
+      "date" : "28 Aug 2019",
+      "points" : {
+        "points" : "20"
+      }
+    }, {
+      "sessionName" : "Meeting W1",
+      "date" : "18 Feb 2020",
+      "points" : {
+        "points" : "1"
+      }
+    } ]
+  } ]
+}

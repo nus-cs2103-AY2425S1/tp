@@ -1,59 +1,63 @@
+<!--
+layout: default.md
+title: "About Us"
 ---
-layout: page
-title: About Us
----
+-->
 
-We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
+# About Us
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
+
+You can reach us at the email seer[at]comp.nus.edu.sg
 
 ## Project team
 
-### John Doe
+### Qin Haichen
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/qinhaichen12.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/QinHaichen12)]
+[[portfolio](team/qinhaichen12.md)]
 
-* Role: Project Advisor
+- Role: Developer
+- Responsibilities: Data, UI
 
-### Jane Doe
+### Yuvraj Aryan Singh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yuvrajaryan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/yuvrajaryan)]
+[[portfolio](team/yuvrajaryan.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+- Role: Developer
+- Responsibilities: Data, UI
 
-### Johnny Doe
+### Daniel Lai
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/starchypotatocode.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/starchypotatocode)]
 
-* Role: Developer
-* Responsibilities: Data
+- Role: Developer
+- Responsibilities: Testing, Integration
 
-### Jean Doe
 
-<img src="images/johndoe.png" width="200px">
+### Keith Ong
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/keithxun.png" width="200px">
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
+[[github](http://github.com/keithxun)]
+[[portfolio](team/keithxun.md)]
 
-### James Doe
+- Role: Developer
+- Responsibilities: UI
 
-<img src="images/johndoe.png" width="200px">
+### Tag Han
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+<img src="images/taggyhan.png" width="200px">
 
-* Role: Developer
-* Responsibilities: UI
+[[github](https://github.com/taggyhan)]
+[[portfolio](team/taggyhan.md)]
+
+- Role: Developer
+- Responsibilities: UI, Scheduling and tracking
