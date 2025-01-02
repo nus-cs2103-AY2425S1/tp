@@ -890,7 +890,7 @@ For example, we added a custom `help` window with an image-based command layout,
 - Add and Edit Commands: Adding new flags (such as `Remark`, `Tier`, `Status`, and `Income`) was straightforward but required updates to several supporting classes, including `PersonBuilder` and `TypicalPersons`, to ensure seamless functionality.
 
 
-- Error Messages for Invalid Arguments: To avoid increasing system coupling, we used a [`LinkedHashSet`]() to keep error messages ordered as per flag parsing. This data structure compiled errors into a single `ParserException` with a concatenated message for easy debugging.
+- Error Messages for Invalid Arguments: To avoid increasing system coupling, we used a [`LinkedHashSet`](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashSet.html) to keep error messages ordered as per flag parsing. This data structure compiled errors into a single `ParserException` with a concatenated message for easy debugging.
 
 
 - `view` and `close` Commands: Implementing these commands with JavaFX’s split-pane required careful lifecycle management of UI components, handling divider positions and proportions. To maintain consistency between the list and detail views, we used a `ListChangeListener` class to track client list updates and handle cases such as clients being deleted, edited, or filtered out. This entailed intricate event handling and managing multiple change types to keep UI elements synchronized.
