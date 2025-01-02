@@ -1,0 +1,21 @@
+@startuml
+title Delete Activity Diagram
+start
+:Delete command is given;
+if () then ([index within range and positive])
+    :User is prompted
+    for confirmation;
+    if () then ([User confirms])
+        :Delete contact
+        at specified index;
+    else ([else])
+        :Show command
+        cancelled message;
+    endif
+ else ([else])
+    :Show error message, either for non-positive index
+    or out of range index;
+ endif
+
+stop
+@enduml

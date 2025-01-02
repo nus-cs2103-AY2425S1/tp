@@ -16,6 +16,10 @@ repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
+run {
+    enableAssertions = true
+}
+
 checkstyle {
     toolVersion = '10.2'
 }
@@ -41,6 +45,7 @@ task coverage(type: JacocoReport) {
 }
 
 dependencies {
+//    classpath "com.github.johnrengelman.shadow:7.1.2"
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '17.0.7'
 
@@ -56,17 +61,31 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-media' , version:javaFxVersion, classifier: 'win'
 
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
 
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
+    implementation 'org.kordamp.ikonli:ikonli-core:12.3.0'
+    implementation group: 'org.kordamp.ikonli', name: 'ikonli-fontawesome5-pack', version: '12.3.1'
+    implementation 'org.kordamp.ikonli:ikonli-javafx:12.3.1'
 
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
 }
 
-shadowJar {
-    archiveFileName = 'addressbook.jar'
-}
 
+shadowJar {
+    archiveFileName = 'AgentAssist.jar'
+    zip64 = true
+    exclude('**/META-INF/*.SF', '**/META-INF/*.DSA', '**/META-INF/*.RSA')
+    exclude('**/*.md') // Markdown files
+    exclude('**/*.txt') // Text files
+    exclude('**/docs/**')
+    exclude('**/src/test/**')
+}
+task analyzeJar(type: Copy) {
+    from(zipTree(file('build/libs/AgentAssist.jar')))
+    into 'build/analyzedJar'
+}
 defaultTasks 'clean', 'test'

@@ -1,0 +1,21 @@
+{
+  "clients": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "job": "Student",
+    "income": "234",
+    "assignedTier": "BRONZE",
+    "remark" : "She is stingy"
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "job": "Quantitative Trader III",
+    "income": "123",
+    "assignedTier": "NA",
+    "remark" : "She is stingy"
+  } ]
+}

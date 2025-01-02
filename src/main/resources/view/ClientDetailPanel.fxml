@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+
+<ScrollPane fitToWidth="true" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@css/ClientDetailPanel.css" />
+    </stylesheets>
+
+    <VBox spacing="15" alignment="TOP_CENTER">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20" />
+        </padding>
+
+        <HBox spacing="20" alignment="CENTER_LEFT">
+            <ImageView fx:id="clientImage" fitWidth="100" fitHeight="100" preserveRatio="true">
+                <Image url="@/images/agent_assist_logo.png"/>
+            </ImageView>
+
+            <VBox spacing="10" HBox.hgrow="ALWAYS">
+                <Label fx:id="nameLabel" styleClass="name-label" wrapText="true" maxWidth="Infinity"/>
+                <HBox fx:id="tagsContainer" alignment="CENTER_LEFT">
+                    <HBox fx:id="tagsGroup" spacing="10" />
+                </HBox>
+            </VBox>
+        </HBox>
+
+        <VBox spacing="10">
+            <HBox spacing="10">
+                <Label text="Phone:" styleClass="field-label" minWidth="100" />
+                <Label fx:id="phoneLabel" styleClass="value-label" wrapText="true" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Address:" styleClass="field-label" minWidth="100" />
+                <Label fx:id="addressLabel" styleClass="value-label" wrapText="true" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Email:" styleClass="field-label" minWidth="100" />
+                <Label fx:id="emailLabel" styleClass="value-label" wrapText="true" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Job:" styleClass="field-label" minWidth="100" />
+                <Label fx:id="jobLabel" styleClass="value-label" wrapText="true" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <HBox spacing="10">
+                <Label text="Income:" styleClass="field-label" minWidth="100" />
+                <Label fx:id="incomeLabel" styleClass="value-label" wrapText="true" HBox.hgrow="ALWAYS" />
+            </HBox>
+
+            <HBox spacing="10" alignment="TOP_LEFT">
+                <Label text="Remark:" styleClass="field-label" minWidth="100" />
+                <Label fx:id="remarkLabel" styleClass="value-label" wrapText="true" HBox.hgrow="ALWAYS" />
+            </HBox>
+        </VBox>
+    </VBox>
+</ScrollPane>

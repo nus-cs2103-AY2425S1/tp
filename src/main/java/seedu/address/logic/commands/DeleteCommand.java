@@ -9,21 +9,25 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a client identified using it's displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the client identified by the index number used in the displayed client list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: '" + COMMAND_WORD + " 1'";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_CLIENT_SUCCESS = "Deleted Client: %1$s";
+    public static final String MESSAGE_DELETE_CONFIRMATION = "This will permanently delete this client's contact. "
+            + "Are you sure you want to execute this command? (y/n)";
+
+    private static final boolean requiresConfirmation = true;
 
     private final Index targetIndex;
 
@@ -34,15 +38,51 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Client> lastShownList = model.getFilteredClientList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Client clientToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteClient(clientToDelete);
+        String message = String.format(MESSAGE_DELETE_CLIENT_SUCCESS, Messages.format(clientToDelete));
+
+        // For test compatibility, use the old constructor format
+        return new CommandResult(message);
+    }
+
+    @Override
+    public CommandResult execute(Model model, Boolean confirmationReceived) throws CommandException {
+        if (confirmationReceived.equals(requiresConfirmation)) {
+            List<Client> lastShownList = model.getFilteredClientList();
+            Client clientToDelete = lastShownList.get(targetIndex.getZeroBased());
+            model.deleteClient(clientToDelete);
+
+            // Use the new constructor with deletion flags for the UI
+            return new CommandResult(
+                    String.format(MESSAGE_DELETE_CLIENT_SUCCESS, Messages.format(clientToDelete)),
+                    false,
+                    false,
+                    false,
+                    null,
+                    true,
+                    clientToDelete,
+                    false
+            );
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        if (targetIndex.getZeroBased() >= model.getFilteredClientList().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+        }
+
+        // For confirmation prompt
+        return new CommandResult(
+                MESSAGE_DELETE_CONFIRMATION,
+                false,
+                false,
+                false,
+                null,
+                false,
+                null,
+                true
+        );
     }
 
     @Override
@@ -51,7 +91,6 @@ public class DeleteCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof DeleteCommand)) {
             return false;
         }

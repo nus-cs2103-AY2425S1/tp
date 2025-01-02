@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import static seedu.address.logic.Messages.MESSAGE_COMMAND_CANCELLED;
+
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
@@ -11,11 +13,11 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.AgentAssistParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.ReadOnlyAgentAssist;
+import seedu.address.model.client.Client;
 import seedu.address.storage.Storage;
 
 /**
@@ -31,7 +33,11 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final AgentAssistParser agentAssistParser;
+
+    // Boolean to determine if user has confirmed they want to delete command
+    private boolean awaitingConfirmation = false;
+    private Command delayedCommand = null;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,7 +45,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        agentAssistParser = new AgentAssistParser();
     }
 
     @Override
@@ -47,11 +53,20 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        if (this.awaitingConfirmation) {
+            commandResult = handleConfirmation(commandText);
+        } else {
+            Command command = agentAssistParser.parseCommand(commandText);
+            commandResult = command.execute(model, this.awaitingConfirmation);
+
+            if (commandResult.isShowConfirmation() && !this.awaitingConfirmation) {
+                this.awaitingConfirmation = true;
+                this.delayedCommand = command;
+            }
+        }
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveAgentAssist(model.getAgentAssist());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -61,19 +76,38 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    /**
+     * Processes user input for command confirmation.
+     * Executes the delayed command if confirmed, or cancels it and returns a cancellation message.
+     *
+     * @param commandText The user's confirmation input.
+     * @return The result of the command if confirmed, or a cancellation message.
+     * @throws CommandException If an error occurs during command execution.
+     */
+    private CommandResult handleConfirmation(String commandText) throws CommandException {
+        CommandResult commandResult;
+        if (agentAssistParser.parseConfirmation(commandText)) {
+            commandResult = this.delayedCommand.execute(model, this.awaitingConfirmation);
+        } else {
+            commandResult = new CommandResult(MESSAGE_COMMAND_CANCELLED);
+        }
+        this.awaitingConfirmation = false;
+        return commandResult;
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ReadOnlyAgentAssist getAgentAssist() {
+        return model.getAgentAssist();
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public ObservableList<Client> getFilteredClientList() {
+        return model.getFilteredClientList();
+    }
+
+    @Override
+    public Path getAgentAssistFilePath() {
+        return model.getAgentAssistFilePath();
     }
 
     @Override

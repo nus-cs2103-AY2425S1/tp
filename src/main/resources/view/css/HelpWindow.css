@@ -1,0 +1,102 @@
+.help-window {
+    -fx-background-color: #3c3f41;
+}
+
+.help-window .help-title {
+    -fx-font-size: 24pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10 0 20 0;
+    -fx-alignment: center;
+}
+
+.help-window .table-view {
+    -fx-base: #3c3f41;
+    -fx-control-inner-background: #3c3f41;
+    -fx-background-color: #3c3f41;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.help-window .table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.help-window .table-view .column-header, .help-window .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent derive(#3c3f41, 80%) transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.help-window .table-view .column-header .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #e6e6e6;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.help-window .table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
+.help-window .table-row-cell {
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: #e6e6e6;
+}
+
+.help-window .table-row-cell:odd {
+    -fx-background-color: derive(#3c3f41, 5%);
+}
+
+.help-window .table-row-cell:selected {
+    -fx-background-color: #4b6eaf;
+}
+
+.help-window .table-cell {
+    -fx-padding: 5 5 5 5;
+    -fx-cell-size: -1;
+    -fx-text-fill: #e6e6e6;
+}
+
+.help-window .table-cell .text {
+    -fx-fill: #e6e6e6;
+}
+
+.help-window .button {
+    -fx-background-color: #4b6eaf;
+    -fx-text-fill: #e6e6e6;
+    -fx-font-size: 14pt;
+    -fx-pref-height: 40px;
+    -fx-max-width: Infinity;
+}
+
+.help-window .button:hover {
+    -fx-background-color: #5a82c7;
+}
+
+.help-window .help-message-container {
+    -fx-spacing: 10;
+    -fx-padding: 10 0 10 0;
+    -fx-alignment: center;
+}
+
+.more-info {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: derive(#1d1d1d, 25%);
+}
+
+.more-info .label {
+    -fx-font-size: 14pt;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+}
+
+.bracket-info .label {
+    -fx-font-size: 12pt;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+}

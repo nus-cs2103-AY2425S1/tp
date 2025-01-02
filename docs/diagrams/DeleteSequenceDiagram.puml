@@ -4,10 +4,12 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AgentAssistParser" as AgentAssistParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "r2:CommandResult" as SecondCommandResult LOGIC_COLOR
+
 end box
 
 box Model MODEL_COLOR_T1
@@ -17,17 +19,17 @@ end box
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
-activate AddressBookParser
+LogicManager -> AgentAssistParser : parseCommand("delete 1")
+activate AgentAssistParser
 
 create DeleteCommandParser
-AddressBookParser -> DeleteCommandParser
+AgentAssistParser -> DeleteCommandParser
 activate DeleteCommandParser
 
-DeleteCommandParser --> AddressBookParser
+DeleteCommandParser --> AgentAssistParser
 deactivate DeleteCommandParser
 
-AddressBookParser -> DeleteCommandParser : parse("1")
+AgentAssistParser -> DeleteCommandParser : parse("1")
 activate DeleteCommandParser
 
 create DeleteCommand
@@ -37,26 +39,20 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser :
 deactivate DeleteCommand
 
-DeleteCommandParser --> AddressBookParser : d
+DeleteCommandParser --> AgentAssistParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteCommandParser -[hidden]-> AddressBookParser
+DeleteCommandParser -[hidden]-> AgentAssistParser
 destroy DeleteCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+AgentAssistParser --> LogicManager : d
+deactivate AgentAssistParser
 
-LogicManager -> DeleteCommand : execute(m)
+LogicManager -> DeleteCommand : execute(m, confirmationReceived = false)
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
-activate Model
-
-Model --> DeleteCommand
-deactivate Model
-
 create CommandResult
-DeleteCommand -> CommandResult
+DeleteCommand -> CommandResult : create result to indicate confirmation prompt
 activate CommandResult
 
 CommandResult --> DeleteCommand
@@ -65,6 +61,36 @@ deactivate CommandResult
 DeleteCommand --> LogicManager : r
 deactivate DeleteCommand
 
-[<--LogicManager
+[<--LogicManager :
+deactivate LogicManager
+[-> LogicManager : execute("yes")
+activate LogicManager
+
+LogicManager ->  LogicManager : handleConfirmation("yes")
+activate LogicManager
+
+LogicManager --> LogicManager
+deactivate LogicManager
+
+LogicManager -> DeleteCommand : execute(m, true)
+activate DeleteCommand
+
+DeleteCommand -> Model : deleteClient(clientToDelete)
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+
+create SecondCommandResult
+DeleteCommand -> SecondCommandResult
+activate SecondCommandResult
+
+SecondCommandResult --> DeleteCommand : r2
+deactivate SecondCommandResult
+
+DeleteCommand --> LogicManager : r2
+deactivate DeleteCommand
+
+[<-- LogicManager :
 deactivate LogicManager
 @enduml

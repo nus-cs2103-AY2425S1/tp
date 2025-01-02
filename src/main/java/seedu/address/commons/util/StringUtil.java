@@ -5,37 +5,69 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
 
 /**
  * Helper functions for handling strings.
  */
 public class StringUtil {
+    private static final int TRUNCATED_LINE_NUMBER = 3;
+    private static final int TRUNCATED_STRING_LENGTH = 80;
 
     /**
-     * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, but a full word match is required.
+     * Returns true if the {@code sentence} contains the {@code substring}.
+     *   Ignores case, does not require full word match.
      *   <br>examples:<pre>
-     *       containsWordIgnoreCase("ABc def", "abc") == true
-     *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       containsSubstringIgnoreCase("ABc def", "abc") == true
+     *       containsSubstringIgnoreCase("ABc def", "DEF") == true
+     *       containsSubstringIgnoreCase("ABc def", "AB") == true
+     *       containsSubstringIgnoreCase("ABc def", "cde") == false // Sentence does not contain substring.
+     *       containsSubstringIgnoreCase("ABc def", "c de") == true
      *       </pre>
      * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
+     * @param substring cannot be null, cannot be empty
+     * @return true if the {@code sentence} contains the {@code substring}, ignoring case
      */
-    public static boolean containsWordIgnoreCase(String sentence, String word) {
+    public static boolean containsSubstringIgnoreCase(String sentence, String substring) {
         requireNonNull(sentence);
-        requireNonNull(word);
+        requireNonNull(substring);
 
-        String preppedWord = word.trim();
-        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        String preppedSubstring = substring.trim();
+        checkArgument(!preppedSubstring.isEmpty(), "Substring parameter cannot be empty");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        // Convert both sentence and substring to upper case to ignore case
+        String upperCaseSentence = sentence.toUpperCase();
+        String upperCaseSubstring = preppedSubstring.toUpperCase();
 
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+        return upperCaseSentence.contains(upperCaseSubstring);
+    }
+
+    /**
+     * Returns true if the {@code sentence} starts with {@code substring}
+     *   Ignores case, does not require full word match.
+     *   <br>examples:<pre>
+     *       startsWithSubstringIgnoreCase("ABc def", "abc") == true
+     *       startsWithSubstringIgnoreCase("ABc def", "DEF") == false // "DEF" is not at the start.
+     *       startsWithSubstringIgnoreCase("ABc def", "AB") == true
+     *       startsWithSubstringIgnoreCase("ABc def", "cde") == false // "cde" is not at the start.
+     *       startsWithSubstringIgnoreCase("ABc def", "ABc d") == true
+     *       startsWithSubstringIgnoreCase("ABc def", "bc") == false // "bc" is not at the start.
+     *       </pre>
+     * @param sentence cannot be null
+     * @param substring cannot be null, cannot be empty
+     * @return true if the {@code sentence} starts with the {@code substring}, ignoring case
+     */
+    public static boolean startsWithSubstringIgnoreCase(String sentence, String substring) {
+        requireNonNull(sentence);
+        requireNonNull(substring);
+
+        String preppedSubstring = substring.trim();
+        checkArgument(!preppedSubstring.isEmpty(), "Substring parameter cannot be empty");
+
+        // Convert both sentence and substring to upper case to ignore case
+        String upperCaseSentence = sentence.toUpperCase();
+        String upperCaseSubstring = preppedSubstring.toUpperCase();
+
+        return upperCaseSentence.startsWith(upperCaseSubstring);
     }
 
     /**
@@ -63,6 +95,39 @@ public class StringUtil {
             return value > 0 && !s.startsWith("+"); // "+1" is successfully parsed by Integer#parseInt(String)
         } catch (NumberFormatException nfe) {
             return false;
+        }
+    }
+
+    /**
+     * Returns a truncated string if {@code s} exceeds the TRUNCATED_STRING_LENGTH
+     * @param s cannot be null
+     * @return the truncated string if {@code s} exceeds TRUNCATED_STRING_LENGTH
+     */
+    public static String truncateText(String s) {
+        assert s != null;
+        // If text does not need to be truncated
+        if (s.length() < TRUNCATED_STRING_LENGTH && !s.contains("\n")) {
+            return s;
+        } else if (s.contains("\n")) {
+            StringBuilder ans = new StringBuilder();
+            int lineCount = 1;
+
+            // Text contains newlines
+            String[] lines = s.split("\n");
+            for (String line : lines) {
+                if (lineCount > TRUNCATED_LINE_NUMBER) {
+                    ans.append("...");
+                    break;
+                }
+                if (line.length() > TRUNCATED_STRING_LENGTH) {
+                    line = line.substring(0, TRUNCATED_STRING_LENGTH) + "...";
+                }
+                ans.append(line).append("\n");
+                lineCount++;
+            }
+            return ans.toString();
+        } else {
+            return s.substring(0, TRUNCATED_STRING_LENGTH) + "...";
         }
     }
 }

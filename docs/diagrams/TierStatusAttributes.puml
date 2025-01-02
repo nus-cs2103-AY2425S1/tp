@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+skinparam class {
+    BackgroundColor MODEL_COLOR
+    ArrowColor MODEL_COLOR
+    StereotypeFontColor White
+    AttributeFontColor White
+}
+
+Class Tier {
+    + {static} final String MESSAGE_CONSTRAINTS
+}
+show Tier fields
+Class "<<enum>>\nTierEnum" as TierEnum {
+    GOLD
+    SILVER
+    BRONZE
+    REJECT
+    NA
+}
+show TierEnum fields
+
+Class Status {
+    + {static} final MESSAGE_CONSTRAINTS
+}
+show Status fields
+
+class "<<enum>>\nStatusEnum" as StatusEnum {
+    URGENT
+    NON_URGENT
+    NA
+}
+show StatusEnum fields
+Class I #FFFFFF
+Class HiddenOutside #FFFFFF
+
+Tier   *--> "1" TierEnum
+Status *--> "1" StatusEnum
+
+
+@enduml

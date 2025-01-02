@@ -1,0 +1,34 @@
+@startuml
+sprite $rake [16x16/8] {
+0000000000000000
+0000000jj0000000
+0000000jj0000000
+0005555jj5555000
+000jjeejjeejj000
+000jj00jj00jj000
+000jj00jj00jj000
+0000000000000000
+}
+title Edit Activity Diagram
+start
+:Edit command is given;
+if () then ([Index provided is positive])
+    :Tokenize arguments;
+    if () then ([At least one flag is specified ])
+        if () then (['remark new' and 'remark append' flags
+        are not used simultaneously])
+            :Perform flag values check <$rake>;
+        else ([else])
+        :Show error message that 'remark new' and 'remark append'
+        flags cannot be used together;
+        endif
+     else ([else])
+     :Show error message that at least
+     one flag must be specified ;
+ endif
+else ([else])
+    :Show error message that the command
+    is of an invalid format;
+endif
+stop
+@enduml
